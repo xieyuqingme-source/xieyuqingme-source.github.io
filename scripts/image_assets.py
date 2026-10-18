@@ -8,7 +8,7 @@ import json
 from pathlib import Path
 import re
 import stat
-from urllib.parse import unquote, urlsplit
+from urllib.parse import quote, unquote, urlsplit
 
 try:
     from PIL import Image, ImageOps, features
@@ -22,7 +22,10 @@ except ImportError:
 
 
 ASSET_FOLDERS = ("images", "附属资料")
-MIN_SOURCE_BYTES = 5 * 1024 * 1024
+# Include ordinary camera photos well below the former 5 MiB cutoff.
+# This selection threshold is independent of the encoding policy, so lowering it
+# preserves existing derivative names and valid cached WebP files.
+MIN_SOURCE_BYTES = 256 * 1024
 WIDTHS = (960, 1920)
 POLICY = {"version": 2, "widths": list(WIDTHS), "quality": 90, "method": 6,
           "resample": "LANCZOS", "exif_transpose": True, "color": "ICC-to-sRGB",
@@ -307,8 +310,11 @@ class ResponsiveImages:
                     "srcset": ", ".join(f'{item["url"]} {item["width"]}w'
                                         for index, item in enumerate(variants)
                                         if index == 0 or item["width"] != variants[index - 1]["width"]),
-                    "sizes": "(max-width: 760px) calc(100vw - 40px), 760px",
+                    "sizes": "(max-width: 760px) calc(100vw - 76px), (max-width: 1000px) calc(100vw - 106px), 790px",
                     "width": str(variants[0]["width"]), "height": str(variants[0]["height"]),
+                    "data-original-src": self.base_path + quote(relative_name, safe="/"),
+                    "data-original-width": str(original_size[0]),
+                    "data-original-height": str(original_size[1]),
                 }
                 working["items"][relative_name] = {"source_sha256": source_hash, "source_bytes": count_bytes,
                                                        "original_width": original_size[0], "original_height": original_size[1],

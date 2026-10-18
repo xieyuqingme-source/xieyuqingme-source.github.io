@@ -89,7 +89,7 @@ def render_index(albums):
             cover = '<span>暂无公开照片</span>'
         description = f'<p class="album-description">{escape(album["description"])}</p>' if album["description"] else ""
         cards.append(f'''<article class="album-card"><a href="/photos/{album["id"]}/"><div class="album-cover">{cover}</div>
-<h2>{escape(album["title"])} <span aria-hidden="true">↗</span></h2></a>{description}
+<h2>{escape(album["title"])} <svg class="external-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true" focusable="false"><path d="M6 18 18 6M6 6h12v12"/></svg></h2></a>{description}
 {_facts(album["date"], location=album["location"])}<p class="photo-help">{len(photos)} 张照片</p></article>''')
     body = '<div class="album-grid">' + "\n".join(cards) + "</div>" if cards else '<p class="photos-empty">相册正在整理中。</p>'
     return '''<section class="photos-intro" aria-labelledby="photos-title"><p class="eyebrow"><span aria-hidden="true"></span> PHOTOGRAPHY · 摄影</p>

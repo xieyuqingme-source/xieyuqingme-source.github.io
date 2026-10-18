@@ -160,7 +160,9 @@
   title.addEventListener('blur',()=>{if(!title.value.trim()){title.value=state.title;message('标题不能为空，已恢复上次标题。');autosizeTitle();}});
   window.addEventListener('resize',autosizeTitle);
   function download(blob,name) {
-    const url=URL.createObjectURL(blob),anchor=node('a');anchor.href=url;anchor.download=name;document.body.append(anchor);anchor.click();anchor.remove();setTimeout(()=>URL.revokeObjectURL(url),60000);
+    const anchor=node('a');
+    if(typeof URL.createObjectURL!=='function'||!('download' in anchor))throw new Error('当前浏览器暂不支持文件下载，请使用支持下载的浏览器。榜单仍保留在此页面。');
+    const url=URL.createObjectURL(blob);anchor.href=url;anchor.download=name;document.body.append(anchor);anchor.click();anchor.remove();setTimeout(()=>URL.revokeObjectURL(url),60000);
   }
   function safeFilename(extension) {return (state.title.replace(/[<>:"/\\|?*\x00-\x1f]/g,'_').slice(0,60)||'我的排行')+'.'+extension;}
   $('png-export').addEventListener('click',async()=>{
@@ -210,7 +212,17 @@
     finally{setBusy(false);render();}
   });
   $('ranking-skin').addEventListener('change',()=>{if(!busy)run(()=>{M.setSkin(state,$('ranking-skin').value);changed('已切换排行皮肤，站点明暗主题不变。',{preserveUndo:true});});});
-  function presentation(enabled){lastTap=null;document.body.classList.toggle('presentation',enabled);$('presentation-toggle').textContent=enabled?'编辑 / 退出展示 · Esc':'展示模式';$('presentation-toggle').setAttribute('aria-pressed',String(enabled));autosizeTitle();view?.presentation(enabled);}
+  let touchSortEnabled=false;
+  function touchSort(enabled){
+    if(drag)endDrag(null,true);
+    touchSortEnabled=enabled;lastTap=null;
+    document.body.classList.toggle('touch-sort-enabled',enabled);
+    const button=$('touch-sort-toggle'),note=$('touch-sort-note');
+    if(button){button.setAttribute('aria-pressed',String(enabled));button.textContent=enabled?'结束拖动':'拖动排序';}
+    if(note)note.textContent=enabled?'拖动已开启；点「结束拖动」即可恢复滑动浏览。':'滑动浏览；开启「拖动排序」后可移动卡片。';
+  }
+  $('touch-sort-toggle')?.addEventListener('click',()=>touchSort(!touchSortEnabled));
+  function presentation(enabled){if(!enabled)touchSort(false);lastTap=null;document.body.classList.toggle('presentation',enabled);$('presentation-toggle').textContent=enabled?'制作我的榜单':'展示模式';$('presentation-toggle').setAttribute('aria-label',enabled?'制作我的榜单，退出展示并进入编辑模式':'进入展示模式，隐藏编辑控件');$('presentation-toggle').title=enabled?'制作我的榜单，也可按 Esc 进入编辑':'进入展示模式';$('presentation-toggle').setAttribute('aria-pressed',String(enabled));autosizeTitle();view?.presentation(enabled);}
   $('presentation-toggle').addEventListener('click',()=>presentation(!document.body.classList.contains('presentation')));
   document.addEventListener('keydown',event=>{if(event.key==='Escape'&&!$('item-dialog').open&&!$('row-dialog').open)presentation(false);});
   async function importFiles(files,target='pool'){
@@ -236,7 +248,7 @@
   document.addEventListener('dragover',event=>{if(!isFileDrag(event))return;event.preventDefault();event.dataTransfer.dropEffect=busy?'none':'copy';clearFileDrop();document.body.classList.add('external-file-drag');externalZone(event.target)?.classList.add('external-drop-zone');});
   document.addEventListener('drop',event=>{if(!isFileDrag(event))return;event.preventDefault();const zone=externalZone(event.target);const files=Array.from(event.dataTransfer.files||[]);clearFileDrop();if(!busy)importFiles(files,zone?.dataset.zone||'pool').catch(failure);});
   document.addEventListener('dragleave',event=>{if(!event.relatedTarget)clearFileDrop();});window.addEventListener('dragend',clearFileDrop);
-  // Presentation drags from the whole card; editing uses a touch grip so the page can scroll.
+  // Touch presentation scrolls until explicitly enabled; editing keeps its touch grip. Mouse dragging is unchanged.
   let drag=null,ghost=null,drop=null,raf=0,lastPoint=null;
   function clearDrop(){document.querySelectorAll('.drop-active,.drop-before,.drop-after').forEach(el=>el.classList.remove('drop-active','drop-before','drop-after'));}
   function findDrop(x,y){
@@ -258,11 +270,12 @@
   app.addEventListener('pointerdown',event=>{
     if(busy||event.button!==0||drag||event.target.closest('.card-remove'))return;const cardElement=event.target.closest('.rank-card');if(!cardElement)return;
     if(event.pointerType==='touch'&&!isPresentation()&&!event.target.closest('.drag-handle'))return;
-    drag={id:cardElement.dataset.itemId,element:cardElement,pointerId:event.pointerId,pointerType:event.pointerType,x:event.clientX,y:event.clientY,active:false};
+    drag={id:cardElement.dataset.itemId,element:cardElement,pointerId:event.pointerId,pointerType:event.pointerType,x:event.clientX,y:event.clientY,active:false,scrollOnly:event.pointerType==='touch'&&isPresentation()&&!touchSortEnabled};
     // Capture only once a drag starts; preserving the original target keeps click/keyboard editing native.
   });
   document.addEventListener('pointermove',event=>{
     if(!drag||event.pointerId!==drag.pointerId)return;
+    if(drag.scrollOnly){if(Math.hypot(event.clientX-drag.x,event.clientY-drag.y)>7)lastTap=null;return;}
     if(!drag.active&&Math.hypot(event.clientX-drag.x,event.clientY-drag.y)>7){
       lastTap=null;drag.active=true;drag.element.setPointerCapture(event.pointerId);suppressClick=true;drag.element.classList.add('is-dragging');document.body.classList.add('dragging');
       ghost=drag.element.cloneNode(true);ghost.classList.remove('is-dragging');ghost.classList.add('drag-ghost');ghost.style.width='82px';ghost.setAttribute('aria-hidden','true');ghost.removeAttribute('data-item-id');document.body.append(ghost);

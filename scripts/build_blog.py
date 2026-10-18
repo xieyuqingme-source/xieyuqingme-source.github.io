@@ -30,6 +30,7 @@ INTERACTION_DIR = ROOT / "blog"
 FOLDERS = {"中文文章": ("zh-CN", "中文文章", "chinese.html"),
            "English Articles": ("en", "English Articles", "english.html")}
 ASSETS = ("images", "附属资料")
+ARROW_ICON = '<svg class="link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6 18 18 6M6 6h12v12"/></svg>'
 
 
 def read_waline_config(path: Path) -> dict:
@@ -274,14 +275,14 @@ class Blog:
     def document(self, title: str, body: str, destination: str, language="zh-CN", active="", description="") -> str:
         description = description or self.config["description"]
         nav = []
-        for label, target in [("个人主页", "/"), ("文章首页", "index.html"),
+        for label, target in [("个人主页", "/"), ('文章 <span lang="en">Articles</span>', "index.html"),
                               ('作品 <span lang="en">Projects</span>', "/projects/"),
                               ('摄影 <span lang="en">Photos</span>', "/photos/"),
                               ('足迹 <span lang="en">Map</span>', "/map/"),
                               ('小游戏 <span lang="en">Games</span>', "/game/"),
-                              ("中文文章", "chinese.html"), ("English", "english.html"), ("关于我", "/about/")]:
-            current = ' aria-current="page"' if target == active else ""
-            address = target if target in {"/", "/projects/", "/photos/", "/map/", "/game/", "/about/"} else self.href(target)
+                              ('关于我 <span lang="en">About</span>', "/about/")]:
+            current = ' aria-current="page"' if target == active or target == "index.html" else ""
+            address = target if target in {"/", "/projects/", "/photos/", "/map/", "/game/", "/about/"} else self.base_path
             link_language = ' lang="en"' if target == "english.html" else ""
             nav.append(f'<a href="{escape(address)}"{current}{link_language}>{label}</a>')
         return f'''<!doctype html>
@@ -297,6 +298,11 @@ class Blog:
   <meta property="og:title" content="{escape(title)}">
   <meta property="og:description" content="{escape(description)}">
   <meta property="og:url" content="{escape(self.canonical(destination))}">
+  <meta property="og:image" content="{escape(urlunsplit((*urlsplit(self.site_url)[:2], '/assets/share-cover.png', '', '')))}">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="谢雨卿 · Carl — 文章、作品与生活足迹">
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
   <script>(() => {{ let theme = "light", saved; try {{ saved = localStorage.getItem("xieyuqing-blog-theme"); }} catch (_) {{}} if (saved === "light" || saved === "dark") theme = saved; else try {{ if (window.matchMedia("(prefers-color-scheme: dark)").matches) theme = "dark"; }} catch (_) {{}} document.documentElement.dataset.theme = theme; }})();</script>
   <link rel="stylesheet" href="{escape(self.href('assets/style.css'))}">
   <link rel="alternate" type="application/rss+xml" title="{escape(self.config['title'])}" href="{escape(self.href('feed.xml'))}">
@@ -306,7 +312,7 @@ class Blog:
 <body id="top">
   <a class="skip-link" href="#main" lang="zh-CN">跳转到正文 / <span lang="en">Skip to content</span></a>
   <header class="site-header container" lang="zh-CN">
-    <a class="brand" href="{escape(self.href('index.html'))}"><span class="brand-mark" aria-hidden="true">卿</span><span>{escape(self.config['title'])}<small lang="en">XIE YUQING · CARL</small></span></a>
+    <a class="brand" href="/" aria-label="谢雨卿个人主页"><span class="brand-mark" aria-hidden="true">谢</span><span>谢雨卿<small lang="en">XIE YUQING · CARL</small></span></a>
     <div class="header-actions"><nav class="site-nav" aria-label="导航 / Navigation">{''.join(nav)}</nav>
     <button class="theme-toggle" id="theme-toggle" type="button" aria-label="切换到深色模式" title="切换到深色模式" hidden><span class="theme-icon" aria-hidden="true">◐</span><span class="theme-label">深色</span></button></div>
   </header>
@@ -314,7 +320,7 @@ class Blog:
   <footer class="site-footer container" lang="zh-CN">
     <div><strong>{escape(self.config['title'])}</strong><span>生活、学习与社会的观察和思考。</span></div>
     <p>© {date.today().year} {escape(self.config['author'])}</p>
-    <div class="footer-links"><a href="{escape(self.href('feed.xml'))}">RSS 订阅</a><a href="{escape(self.config['repository_url'])}" lang="en">GitHub ↗</a></div>
+    <div class="footer-links"><a href="{escape(self.href('feed.xml'))}">RSS 订阅</a><a href="{escape(self.config['repository_url'])}" lang="en">GitHub {ARROW_ICON}</a></div>
   </footer>
 </body>
 </html>
@@ -353,16 +359,37 @@ class Blog:
         return (f'<section class="article-comments" id="article-comments" data-article-path="{escape(self.href(article.destination))}" aria-labelledby="comments-heading" lang="zh-CN" hidden>'
                 '<h2 id="comments-heading">留言</h2><p class="comment-policy">无需注册；昵称必填，邮箱选填。提交成功后直接公开，无需人工预审。</p>'
                 '<p class="comment-privacy">评论和昵称会公开；邮箱为选填且不公开。评论、昵称、可选邮箱及请求中的IP和浏览器信息会由所选Waline后端及其托管商处理；评论区显示IP属地，不公开完整IP；不显示浏览器和操作系统标签。'
-                + self.provider_notice() + '</p><div id="waline"></div></section>')
+                + self.provider_notice() + '</p><label class="sr-only" for="wl-edit">留言内容</label><div id="waline"></div></section>')
 
     def excerpt(self, article: Article) -> str:
         tokens = self.parser.parse(article.markdown)
+        candidates = []
+        question = False
+        answer = False
         for index, token in enumerate(tokens):
             if token.type == "paragraph_open" and tokens[index + 1].type == "inline":
-                content = plain_inline(tokens[index + 1])
-                if content:
-                    return content[:150] + ("…" if len(content) > 150 else "")
-        return ""
+                # Links/emphasis are already tokenized. Ignore image-only paragraphs
+                # and clean unmatched formatting delimiters without changing the body.
+                content = "".join(child.content if child.type != "softbreak" else " "
+                                  for child in (tokens[index + 1].children or [])
+                                  if child.type in {"text", "code_inline", "softbreak"})
+                content = re.sub(r"\s+", " ", re.sub(r"\*{2,}|_{2,}|~{2,}|`+", "", content)).strip()
+                if re.fullmatch(r"问曰[：:]?", content):
+                    question = True
+                    continue
+                if re.fullmatch(r"对曰[：:]?", content):
+                    question = False
+                    answer = True
+                    continue
+                if content and not question:
+                    candidates.append(content)
+                    excerpt = " ".join(candidates)
+                    # A brief answer preamble can refer only to the prior question.
+                    # Include the next existing paragraph so the excerpt has substance.
+                    if not answer or len(excerpt) >= 60:
+                        return excerpt[:150] + ("…" if len(excerpt) > 150 else "")
+        excerpt = " ".join(candidates)
+        return excerpt[:150] + ("…" if len(excerpt) > 150 else "")
 
     def topic(self, article: Article) -> str:
         """Navigation labels inferred from public writing, never source metadata."""
@@ -399,7 +426,7 @@ class Blog:
 <p class="article-meta"><span class="topic-tag">{escape(topic)}</span>{self.publication(article)}<span>{article.category}</span>{self.metrics(article)}</p>
 <h2 class="article-title"><a href="{escape(self.href(article.destination))}" lang="{article.language}">{escape(article.title)}</a></h2>
 <p class="article-excerpt" lang="{article.language}">{escape(excerpt)}</p>
-<p class="article-read"><span>约 {self.reading_minutes(article)} 分钟阅读</span><a href="{escape(self.href(article.destination))}" aria-label="阅读：{escape(article.title)}">阅读全文 <span aria-hidden="true">↗</span></a></p>
+<p class="article-read"><span>约 {self.reading_minutes(article)} 分钟阅读</span><a href="{escape(self.href(article.destination))}" aria-label="阅读：{escape(article.title)}">阅读全文 {ARROW_ICON}</a></p>
 </div>
 </li>''')
         return '<ul class="article-list">' + "\n".join(cards) + '</ul>' if cards else '<p class="empty-state">文章即将更新。</p>'
@@ -418,6 +445,7 @@ class Blog:
             year_options += '<option value="unknown">时间待确认</option>'
         return f'''<section class="archive" id="archive" aria-labelledby="archive-heading">
 <div class="section-heading"><div><p class="eyebrow">~/writing · 文章</p><h2 id="archive-heading">{escape(title)}</h2><p>{escape(subtitle)}</p></div><span class="archive-total">{len(articles):02d} <small>篇文章</small></span></div>
+<nav class="language-filters" aria-label="按文章语言浏览"><a href="{escape(self.href('index.html'))}#archive"{' aria-current="page"' if len({a.language for a in articles}) != 1 else ''}>全部文章</a><a href="{escape(self.href('chinese.html'))}#archive"{' aria-current="page"' if articles and all(a.language == 'zh-CN' for a in articles) else ''}>中文</a><a href="{escape(self.href('english.html'))}#archive" lang="en"{' aria-current="page"' if articles and all(a.language == 'en' for a in articles) else ''}>English</a></nav>
 <div class="archive-controls" hidden>
 <div class="topic-filters" role="group" aria-label="按主题筛选">{''.join(filters)}</div>
 <div class="archive-query"><label class="year-filter"><span class="sr-only">按发表年份筛选</span><select id="article-year" aria-label="按发表年份筛选"><option value="all">全部年份</option>{year_options}</select></label>
@@ -533,10 +561,10 @@ class Blog:
         featured = ""
         if self.articles:
             latest = self.articles[0]
-            featured = f'''<aside class="featured-article"><div class="feature-top"><p class="eyebrow">LATEST ESSAY · 最新一篇</p><span aria-hidden="true">↗</span></div><div><p class="featured-meta">{escape(self.topic(latest))} <span> / </span>{self.publication(latest)}</p><h2><a href="{escape(self.href(latest.destination))}" lang="{latest.language}">{escape(latest.title)}</a></h2><p class="featured-excerpt" lang="{latest.language}">{escape(self.excerpt(latest))}</p></div><a class="featured-link" href="{escape(self.href(latest.destination))}">读这篇文章 <span aria-hidden="true">→</span></a></aside>'''
+            featured = f'''<aside class="featured-article"><div class="feature-top"><p class="eyebrow">LATEST ESSAY · 最新一篇</p>{ARROW_ICON}</div><div><p class="featured-meta">{escape(self.topic(latest))} <span> / </span>{self.publication(latest)}</p><h2><a href="{escape(self.href(latest.destination))}" lang="{latest.language}">{escape(latest.title)}</a></h2><p class="featured-excerpt" lang="{latest.language}">{escape(self.excerpt(latest))}</p></div><a class="featured-link" href="{escape(self.href(latest.destination))}">读这篇文章 <span aria-hidden="true">→</span></a></aside>'''
         chinese_heading, separator, english_heading = self.config['article_heading'].partition(' ')
         article_heading = escape(chinese_heading) + (f' <span>{escape(english_heading)}</span>' if separator else '')
-        intro = f'''<section class="home-intro" aria-labelledby="home-heading"><div class="intro-copy"><p class="eyebrow"><span class="eyebrow-line" aria-hidden="true"></span> ~/essays · 个人写作</p><h1 id="home-heading">{article_heading}</h1><p class="intro-description">{escape(self.config['article_description'])}</p><p class="intro-english" lang="en">{escape(self.config['article_english_description'])}</p><div class="intro-actions"><a class="primary-link" href="#archive">浏览文章 <span aria-hidden="true">↓</span></a><a class="quiet-link" href="/about/">认识作者 ↗</a></div></div>{featured}</section>
+        intro = f'''<section class="home-intro" aria-labelledby="home-heading"><div class="intro-copy"><p class="eyebrow"><span class="eyebrow-line" aria-hidden="true"></span> ~/essays · 个人写作</p><h1 id="home-heading">{article_heading}</h1><p class="intro-description">{escape(self.config['article_description'])}</p><p class="intro-english" lang="en">{escape(self.config['article_english_description'])}</p><div class="intro-actions"><a class="primary-link" href="#archive">浏览文章 <span aria-hidden="true">↓</span></a><a class="quiet-link" href="/about/">认识作者 {ARROW_ICON}</a></div></div>{featured}</section>
 <div class="archive-banner"><p>写作，是观察世界的另一种方式。</p><div><span><strong>{chinese:02d}</strong> 中文文章</span><span><strong>{english:02d}</strong> English</span><span><strong>{len({self.topic(a) for a in self.articles}):02d}</strong> 写作主题</span></div></div>'''
         self.write("index.html", self.document("文章", intro + self.archive(self.articles), "index.html", active="index.html", description=self.config["article_description"]))
         for folder, (language, category, destination) in FOLDERS.items():
@@ -556,7 +584,7 @@ class Blog:
             for neighbour, label in ((index - 1, "较新一篇"), (index + 1, "较早一篇")):
                 if 0 <= neighbour < len(self.articles):
                     next_article = self.articles[neighbour]
-                    related.append(f'<a href="{escape(self.href(next_article.destination))}"><span>{label}</span><strong lang="{next_article.language}">{escape(next_article.title)}</strong><small>{next_article.published} <span aria-hidden="true">↗</span></small></a>')
+                    related.append(f'<a href="{escape(self.href(next_article.destination))}"><span>{label}</span><strong lang="{next_article.language}">{escape(next_article.title)}</strong><small>{next_article.published} {ARROW_ICON}</small></a>')
             next_reading = '<nav class="next-reading" aria-label="继续阅读" lang="zh-CN">' + ''.join(related) + '</nav>' if related else ''
             body = f'''<div class="reading-progress" aria-hidden="true"><span></span></div><article class="reading-page"><header class="article-header">
 <a class="back-link" href="{escape(self.href(article.listing))}" lang="{article.language}">← {article.category}</a>
@@ -567,7 +595,8 @@ class Blog:
 <div {layout}><div class="reading-content">
 <div class="article-body" id="article-content">{rendered}</div>
 {self.comments(article)}
-<div class="article-end" lang="zh-CN"><span aria-hidden="true">◆</span><p>谢谢你读到这里。</p><a href="{escape(self.href('index.html'))}#archive">返回文章归档 →</a></div>{next_reading}</div>{directory}</div></article>'''
+<div class="article-end" lang="zh-CN"><span aria-hidden="true">◆</span><p>谢谢你读到这里。</p><a href="{escape(self.href('index.html'))}#archive">返回文章归档 →</a></div>{next_reading}</div>{directory}</div></article>
+<dialog class="article-image-viewer" id="article-image-viewer" aria-label="文章图片大图" lang="zh-CN"><div class="image-viewer-actions"><a href="#" target="_blank" rel="noopener">查看原图 {ARROW_ICON}</a><button type="button">关闭</button></div><img alt=""><p></p></dialog>'''
             self.write(article.destination, self.document(article.title, body, article.destination, article.language, article.listing, self.excerpt(article)))
         sitemap = Element("urlset", xmlns="http://www.sitemaps.org/schemas/sitemap/0.9")
         for destination in ["index.html", "chinese.html", "english.html", *[a.destination for a in self.articles]]:
@@ -603,11 +632,13 @@ class Blog:
                     continue
                 # These exact root destinations belong to the unified-site builder.
                 # Do not exempt arbitrary root paths from this article-site check.
-                if parsed.path in {"/", "/projects/", "/photos/", "/map/", "/game/", "/about/"}:
+                if parsed.path in {"/", "/projects/", "/photos/", "/map/", "/game/", "/about/", "/assets/favicon.svg"}:
                     root_links += 1
                     continue
                 if not parsed.path.startswith(self.base_path):
                     raise ValueError(f"Link misses site base path: {url}")
+                if parsed.path == self.base_path:
+                    parsed = parsed._replace(path=self.base_path + "index.html")
                 target = (self.output / unquote(parsed.path[len(self.base_path):])).resolve()
                 if not target.is_relative_to(self.output) or not target.is_file():
                     raise ValueError(f"Broken generated link in {source.relative_to(self.output)}: {url}")

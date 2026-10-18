@@ -61,5 +61,20 @@
     "selection": "6144x3072 retains more actual source detail than4096x2048 while avoiding8192x4096 default decodedRGBA128MiB and6.0-6.7MiB JPEG payload. Selected JPEG4.021MiB; original source retained locally.",
     "limits": "Actual rendered detail depends on the current viewport, browser sampling and output pixel dimensions. This remains small-scale illustrative terrain, not satellite imagery, street navigation or new elevation measurements. HighDPI does not add source detail. Decoded memory excludes browser surfaces, dataURL strings, SVG copies and video encoder buffers.",
     "localMeasurementSummary": "Same-geographic-region comparisons against the original TIFF at original-region resolution: Himalaya RGB mean absolute error10.4174->5.4187, EastAsia4.9512->3.0098 (old->chosen;0-255 range). Single local Pillow decode trials185-198ms->410-415ms; indicative only, not a device-independent benchmark."
+  },
+  "webDerivative": {
+    "asset": "home/assets/map-terrain.webp",
+    "format": "WebP RGB lossy",
+    "width": 6144,
+    "height": 3072,
+    "bytes": 2888776,
+    "sha256": "58e92abfd74c2b36cb17c1ccf27a2b9a80395a565f538fc91c94e9f93b9752c3",
+    "derivedFromSHA256": "b0a73730c01da8fff85ed073f3bf7ee65b6e1beb0249a572a249f153f0c53729",
+    "processing": "Decoded existing 6144x3072 JPEG as RGB; Pillow WebP quality=90, method=6. Dimensions, extent, orientation, color and geographic content retained; no resizing, crop, sharpening or geography edits. Original JPEG unchanged and retained as a decoder/network fallback.",
+    "qualityCheck": {
+      "meanAbsoluteRGBDifferenceFromJPEG": 1.7007016252588343,
+      "range": "0-255; complete RGB pixel mean, not a claim of lossless encoding"
+    },
+    "loading": "The browser first requests only WebP. JPEG is requested only if fetching, signature validation or WebP decoding fails. SVG embeds the selected same-origin data URL for standalone PNG/video export."
   }
 }

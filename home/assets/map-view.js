@@ -118,6 +118,9 @@
     }
     function down(event) {
       if (disposed || !enabled() || (event.button !== undefined && event.button !== 0) || !finite(event.clientX) || !finite(event.clientY)) return;
+      // Inline touch maps can yield to native page scrolling. Keep taps on
+      // city markers available; only the explicit expanded map captures touch.
+      if (event.pointerType === "touch" && o.isTouchEnabled && !o.isTouchEnabled()) { suppressUntil = 0; pickSuppressUntil = now() + 700; return; }
       if (!points.size) { suppressUntil = 0; start = previous = client(event); dragged = pinching = false; }
       points.set(event.pointerId, client(event));
       if (points.size >= 2) { pinching = dragged = true; previous = midAndDistance(); for (const id of points.keys()) capture(id); if (event.cancelable) event.preventDefault(); }

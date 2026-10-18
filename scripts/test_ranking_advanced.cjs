@@ -19,7 +19,7 @@ for (const candidate of [process.env.PLAYWRIGHT_MODULE, 'playwright', path.join(
 if (!playwright) throw new Error('Provide the optional Playwright QA runtime through PLAYWRIGHT_MODULE.');
 const chrome = process.env.CHROME_PATH || (process.platform === 'win32' ? 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe' : undefined);
 const mime = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.css': 'text/css; charset=utf-8', '.svg': 'image/svg+xml', '.png': 'image/png', '.jpg': 'image/jpeg', '.webp': 'image/webp', '.json': 'application/json' };
-const report = { startedAt: new Date().toISOString(), checks: [], screenshots: [], downloads: [], pageErrors: [], consoleErrors: [], externalRequests: [], notes: [] };
+const report = { startedAt: new Date().toISOString(), checks: [], screenshots: [], downloads: [], pageErrors: [], consoleErrors: [], expectedDiagnostics: [], externalRequests: [], mockedCommentReads: [], notes: [] };
 const defaultFoodKeys = ['sichuan-hotpot', 'mianyang-rice-noodles', 'jiaxing-zongzi', 'dongpo-pork', 'sea-intestine-rice', 'eight-treasure-tofu', 'zhejiang-dry-noodles', 'pea-mince-noodles', 'handmade-dumplings', 'burger', 'japanese-ramen', 'vietnamese-chicken-noodles', 'pad-krapow-rice', 'lamb-shumai', 'donkey-burger', 'smoked-pork-flatbread', 'chicken', 'houttuynia', 'frozen-dumplings', 'egg-noodles', 'barbecue', 'sushi', 'douzhi', 'bak-kut-teh', 'beijing-zhajiang-noodles', 'west-lake-vinegar-fish', 'pizza', 'cake', 'tea', 'loofah-noodles', 'mooncake', 'egg-tart', 'bread', 'lanzhou-noodles'];
 const sportKeys = ['walking', 'hiking', 'running', 'weight-training', 'swimming', 'badminton', 'cycling', 'football', 'tennis', 'table-tennis', 'combat-training', 'tree-climbing', 'skydiving', 'rock-climbing', 'diving', 'golf', 'gaming'];
 const sportRows = [
@@ -118,6 +118,17 @@ async function run() {
         try { return route.fulfill(resource(url)); } catch { return route.fulfill({ status: 404, body: 'Not found' }); }
       }
       if (/^(data|blob):/.test(url)) return route.continue();
+      // Theme checks visit real article/list pages. Supply only their read-only
+      // counters and empty comment lists locally; all writes stay blocked.
+      const parsed = new URL(url), method = route.request().method();
+      if (parsed.origin === 'https://yuliao-comments.vercel.app' && method === 'GET' &&
+          (parsed.pathname === '/api/article' || parsed.pathname === '/api/comment')) {
+        const paths = (parsed.searchParams.get(parsed.pathname === '/api/article' ? 'path' : 'url') || '').split(',');
+        const data = parsed.pathname === '/api/article' ? paths.map(() => ({ time: 0 })) :
+          parsed.searchParams.get('type') === 'count' ? paths.map(() => 0) : { data: [], count: 0, totalPages: 0, page: 1, pageSize: 10 };
+        report.mockedCommentReads.push({ method, path: parsed.pathname, batchSize: paths.length });
+        return route.fulfill({ status: 200, contentType: 'application/json', headers: { 'access-control-allow-origin': '*' }, body: JSON.stringify({ errno: 0, data }) });
+      }
       report.externalRequests.push(url); return route.abort();
     });
     value.on('page', page => {
@@ -129,7 +140,14 @@ async function run() {
         return accept ? dialog.accept() : dialog.dismiss();
       });
       page.on('pageerror', error => report.pageErrors.push(error.message));
-      page.on('console', message => { if (message.type() === 'error') report.consoleErrors.push(message.text()); });
+      page.on('console', message => {
+        if (message.type() !== 'error') return;
+        const text = message.text();
+        // The vendored comment widget logs the exact exception this context
+        // deliberately injects. Preserve it separately, without masking errors.
+        if (blockThemeStorage && text === 'SecurityError: QA blocked storage') report.expectedDiagnostics.push({ text, location: message.location() });
+        else report.consoleErrors.push(text);
+      });
     });
     return value;
   }
@@ -180,7 +198,7 @@ async function run() {
   }
   async function openItem(page, id = 'crop-image', tap = false) {
     const button = page.locator(`.rank-card[data-item-id="${id}"] .card-main`); await button.scrollIntoViewIfNeeded();
-    if (tap) await button.tap(); else await button.click();
+    if (tap) { const box=await button.boundingBox(); await page.touchscreen.tap(box.x+box.width/2,box.y+box.height/2); } else await button.click();
     await page.locator('#item-dialog').waitFor({ state: 'visible' });
     await page.waitForFunction(() => document.querySelector('#crop-preview').getAttribute('aria-busy') !== 'true' && !document.querySelector('#item-save').disabled);
   }
@@ -271,6 +289,8 @@ async function run() {
     const nativeDownloads = path.join(output, 'native-downloads'); fs.mkdirSync(nativeDownloads, { recursive: true });
     browser = await playwright.chromium.launch({ headless: true, downloadsPath: nativeDownloads, ...(chrome ? { executablePath: chrome } : {}) });
     report.browserVersion = browser.version();
+    report.notes.push('The blocked-storage fixture retains only its exact injected SecurityError: QA blocked storage console diagnostic separately; all other errors remain failures.');
+    report.notes.push('Cross-page theme checks mock only configured Waline article-time, comment-count and comment-list GET responses with empty local data. No production comment request, submission or data write is allowed.');
     report.notes.push(process.env.RANKING_REAL_HTTP ? 'Isolated headless Chromium used a temporary real loopback server and native downloads. No user browser or visible window was used.' : 'Static responses were fulfilled from generated local files. Native browser downloads were still required.');
     const desktopContext = await context(), page = await ready(desktopContext);
     await check('all default built-in food photos load locally and image edits remain a cancellable draft', async () => {
@@ -318,9 +338,11 @@ async function run() {
       await page.waitForFunction(() => !document.querySelector('#item-save').disabled && document.querySelector('#crop-preview').getAttribute('aria-busy') !== 'true'); await page.locator('#item-save').click(); await waitSaved(page); const sport = await state(page, 'sport-custom-draft');
       assert(sport.items['sport-walking'].image.startsWith('data:image/')); assert.equal(sport.items['sport-walking'].art, null);
       await chooseTemplate(page, 'food'); await edit(page); assert.deepEqual(await state(page, 'food-draft-returned'), food);
-      await page.reload({ waitUntil: 'networkidle' }); await page.locator('#ranking-app').waitFor({ state: 'visible' }); await edit(page); assert.equal(await page.locator('#ranking-template').inputValue(), 'food'); assert.deepEqual(await state(page, 'food-draft-after-reload'), food);
+      // Reload only after the debounced IndexedDB save has confirmed completion.
+      await waitSaved(page); await page.reload({ waitUntil: 'networkidle' }); await page.locator('#ranking-app').waitFor({ state: 'visible' }); await edit(page); assert.equal(await page.locator('#ranking-template').inputValue(), 'food'); assert.deepEqual(await state(page, 'food-draft-after-reload'), food);
       await chooseTemplate(page, 'sport'); await edit(page); assert.deepEqual(await state(page, 'sport-draft-returned'), sport);
-      await page.reload({ waitUntil: 'networkidle' }); await page.locator('#ranking-app').waitFor({ state: 'visible' }); await edit(page); assert.equal(await page.locator('#ranking-template').inputValue(), 'sport'); assert.deepEqual(await state(page, 'sport-draft-after-reload'), sport);
+      // Reload only after the debounced IndexedDB save has confirmed completion.
+      await waitSaved(page); await page.reload({ waitUntil: 'networkidle' }); await page.locator('#ranking-app').waitFor({ state: 'visible' }); await edit(page); assert.equal(await page.locator('#ranking-template').inputValue(), 'sport'); assert.deepEqual(await state(page, 'sport-draft-after-reload'), sport);
       assert.match(await page.locator('#reset-ranking').textContent(), /恢复默认运动排行/); const theme = await page.locator('html').getAttribute('data-theme'); await page.locator('#reset-ranking').click(); await edit(page); const reset = await state(page, 'sport-default-restored');
       assert.equal(reset.templateId, 'sport'); assert.equal(reset.title, '运动从夯到拉'); assert.equal(reset.skin, sport.skin); assert.equal(await page.locator('html').getAttribute('data-theme'), theme); assert.deepEqual(reset.rows.map(row => ({ name: row.name, color: row.color, names: row.itemIds.map(id => reset.items[id].name) })), sportRows);
       await page.locator('#undo-clear').click(); assert.deepEqual(await state(page, 'sport-default-restore-undone'), sport);
@@ -613,7 +635,7 @@ async function run() {
     });
     await check('mobile internal touch dragging still moves a card without losing items', async () => {
       // Presentation has no drag icon; touch dragging starts from the whole card.
-      await mobile.locator('#presentation-toggle').tap(); const handle = mobile.locator('.rank-card[data-item-id="pool-a"] .card-main'); await handle.scrollIntoViewIfNeeded();
+      await mobile.locator('#presentation-toggle').tap(); await mobile.locator('#touch-sort-toggle').tap(); const handle = mobile.locator('.rank-card[data-item-id="pool-a"] .card-main'); await handle.scrollIntoViewIfNeeded();
       const from = await handle.boundingBox(), target = await mobile.locator('.tier-row[data-row-id="test-b"] .item-list').boundingBox();
       await touchDrag(mobileContext, mobile, { x: from.x + from.width / 2, y: from.y + from.height / 2 }, { x: target.x + 40, y: Math.max(70, Math.min(760, target.y + 35)) });
       assert.equal(await mobile.locator('.tier-row[data-row-id="test-b"] .rank-card[data-item-id="pool-a"]').count(), 1); assert.equal(await mobile.locator('.rank-card').count(), 4);
@@ -689,7 +711,7 @@ async function run() {
         await themeSample(fallback, route, 'unavailable-system-api');
       }
     });
-    await check('advanced flows produce no script errors, console errors, or external requests', async () => {
+    await check('advanced flows produce no script errors, console errors, or unexpected external requests', async () => {
       assert.deepEqual(report.pageErrors, []); assert.deepEqual(report.consoleErrors, []); assert.deepEqual(report.externalRequests, []);
     });
   } finally {

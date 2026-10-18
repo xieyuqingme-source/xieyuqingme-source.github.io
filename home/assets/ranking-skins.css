@@ -214,3 +214,12 @@ body[data-ranking-skin="tech"] #display-title { color: var(--ink); }
     width: calc((100% - 20px) / 3);
   }
 }
+
+@media (any-pointer: coarse) {
+  body.ranking-page .ranking-main select,
+  body.ranking-page #text-name,
+  body.ranking-page .game-dialog input:not(.file-input),
+  body.ranking-page .game-dialog select { font-size: 16px; }
+  body.ranking-page .drag-handle { background: transparent; }
+  body.ranking-page .drag-handle::before { background: var(--classic-handle, #fffef9dd); }
+}

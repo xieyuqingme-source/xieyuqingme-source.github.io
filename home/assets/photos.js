@@ -88,8 +88,35 @@
       if (open(Number(link.dataset.photoIndex), link)) event.preventDefault();
     }));
     closeButton.addEventListener("click", requestClose);
-    previous.addEventListener("click", () => move(-1));
-    next.addEventListener("click", () => move(1));
+    function navigationButton(button, step) {
+      let touch = null, handledAt = 0;
+      button.addEventListener("pointerdown", (event) => {
+        handledAt = 0;
+        touch = event.pointerType === "touch" && event.isPrimary
+          ? { id: event.pointerId, x: event.clientX, y: event.clientY } : null;
+      });
+      button.addEventListener("pointercancel", () => { touch = null; });
+      button.addEventListener("pointerup", (event) => {
+        if (!touch || event.pointerType !== "touch" || !event.isPrimary || event.pointerId !== touch.id) return;
+        const start = touch; touch = null;
+        const bounds = button.getBoundingClientRect();
+        if (Math.hypot(event.clientX - start.x, event.clientY - start.y) > 12 ||
+            event.clientX < bounds.left || event.clientX > bounds.right ||
+            event.clientY < bounds.top || event.clientY > bounds.bottom) return;
+        // A completed touch tap can arrive without a compatibility click after
+        // a swipe in Chrome. Act once on release and ignore its optional click.
+        handledAt = Date.now();
+        move(step);
+      });
+      button.addEventListener("click", (event) => {
+        const touchClick = event.pointerType === "touch" || event.sourceCapabilities?.firesTouchEvents ||
+          (event.pointerType === undefined && event.detail > 0);
+        if (touchClick && Date.now() - handledAt < 700) return;
+        move(step);
+      });
+    }
+    navigationButton(previous, -1);
+    navigationButton(next, 1);
     dialog.addEventListener("cancel", (event) => { event.preventDefault(); requestClose(); });
     dialog.addEventListener("close", () => { if (opened) requestClose(); });
     dialog.addEventListener("click", (event) => {

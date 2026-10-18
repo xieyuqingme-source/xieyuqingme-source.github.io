@@ -8,7 +8,13 @@
   <link rel="canonical" href="{{site_url}}/game/ranking/">
   <meta property="og:type" content="website">
   <meta property="og:title" content="从夯到拉 · 谢雨卿的小游戏">
+  <meta property="og:description" content="先浏览美食与运动示例，再制作自己的从夯到拉排行榜。拖动排序、本地保存，并下载清晰 PNG。">
   <meta property="og:url" content="{{site_url}}/game/ranking/">
+  <meta property="og:image" content="{{site_url}}/assets/share-cover.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="谢雨卿 · Carl，文章、作品与足迹">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
   <script>(() => { let theme = "light", saved; try { saved = localStorage.getItem("xieyuqing-blog-theme"); } catch (_) {} if (saved === "light" || saved === "dark") theme = saved; else try { if (window.matchMedia("(prefers-color-scheme: dark)").matches) theme = "dark"; } catch (_) {} document.documentElement.dataset.theme = theme; })();</script>
   <link rel="stylesheet" href="/assets/portal.css">
   <link rel="stylesheet" href="/assets/game.css">
@@ -37,20 +43,22 @@
     <noscript><p class="game-notice">此工具需要 JavaScript 才能编辑和导出；所有图片仅在你的浏览器中处理。</p></noscript>
     <div id="ranking-app" hidden>
       <div class="tool-toolbar">
+        <a class="ranking-return" href="/game/"><svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true" focusable="false"><path d="m7 3-5 5 5 5M2 8h12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>返回小游戏</a>
         <div class="toolbar-group editor-only"><button class="game-button primary" id="png-export" type="button">下载 PNG <span aria-hidden="true">↓</span></button><label class="scale-label">清晰度 <select id="export-scale"><option value="1">标准 1×</option><option value="2" selected>高清 2×</option></select></label><label class="skin-control" for="ranking-skin">排行皮肤 <select id="ranking-skin"><option value="classic">经典款</option><option value="tech">科技版</option></select></label><button class="game-button danger" id="clear-items" type="button">清空全部项目</button></div>
-        <div class="toolbar-group"><label class="skin-control template-control" for="ranking-template">模板 <select id="ranking-template" aria-label="选择排行模板"></select></label><button class="game-button" id="reset-ranking" type="button">恢复默认美食排行</button><button class="game-button" id="undo-clear" type="button" hidden>撤销清空</button><button class="game-button" id="presentation-toggle" type="button" aria-pressed="true">编辑 / 退出展示 · Esc</button><span id="save-status" class="save-status" role="status">正在恢复本地存档…</span></div>
+        <div class="toolbar-group"><label class="skin-control template-control" for="ranking-template">模板 <select id="ranking-template" aria-label="选择排行模板"></select></label><button class="game-button" id="reset-ranking" type="button">恢复默认美食排行</button><button class="game-button" id="undo-clear" type="button" hidden>撤销清空</button><button class="game-button" id="presentation-toggle" type="button" aria-pressed="true" aria-label="制作我的榜单，退出展示并进入编辑模式" title="制作我的榜单，也可按 Esc 进入编辑">制作我的榜单</button><span id="save-status" class="save-status" role="status">正在恢复本地存档…</span></div>
       </div>
       <div class="view-toolbar" role="group" aria-label="排行榜查看大小与全屏">
         <div class="view-zoom-controls"><button class="game-button" id="view-zoom-out" type="button" aria-label="缩小排行榜">−</button><output id="view-zoom-value" aria-live="polite">100%</output><button class="game-button" id="view-zoom-in" type="button" aria-label="放大排行榜">＋</button><button class="game-button" id="view-zoom-reset" type="button">还原</button><button class="game-button" id="view-fit-width" type="button">适应宽度</button></div>
-        <div class="view-mode-controls"><button class="game-button" id="view-board-only" type="button" aria-pressed="false">仅看榜单</button><button class="game-button" id="view-fullscreen" type="button" aria-pressed="false">全屏查看</button></div>
+        <div class="view-mode-controls"><button class="game-button touch-sort-control" id="touch-sort-toggle" type="button" aria-pressed="false" aria-describedby="touch-sort-note">拖动排序</button><button class="game-button" id="view-board-only" type="button" aria-pressed="false">仅看榜单</button><button class="game-button" id="view-fullscreen" type="button" aria-pressed="false">全屏查看</button></div>
       </div>
+      <p id="touch-sort-note" class="view-note touch-sort-note" role="status">滑动浏览；开启「拖动排序」后可移动卡片。</p>
       <p id="view-status" class="view-note" role="status" hidden></p><p id="view-pool-note" class="view-note" role="status" hidden></p>
       <p class="skin-explainer editor-only">经典款为清晰表格，科技款为现代卡片，两款都随站点明暗变化。图片可从电脑直接拖到等级或待选区，点开项目可换图、缩放和裁切。</p>
       <p id="tool-message" class="game-message" role="status" aria-live="polite" hidden></p>
       <div class="ranking-workspace">
         <div id="board-viewport" class="board-viewport" tabindex="0" aria-label="排行榜滚动查看区域"><div id="board-scale-wrap" class="board-scale-wrap"><section id="ranking-canvas" class="board-section" aria-label="排行榜">
           <div class="board-heading"><label class="title-label editor-only" for="ranking-title">排行榜标题 · 点击修改</label><textarea id="ranking-title" rows="1" maxlength="100" aria-label="排行榜标题">美食从夯到拉</textarea><h2 id="display-title" hidden>美食从夯到拉</h2></div>
-          <p class="operation-hint editor-only">展示时双击卡片编辑、整卡拖动排序；编辑时单击卡片选级或改图。放大后可在榜单区域滚动，触屏可从等级标签或空白处滑动。电脑图片可直接拖入等级。每行「设置」可改名、换色和排序。</p>
+          <p class="operation-hint editor-only">展示时双击卡片编辑；手机默认滑动浏览，开启「拖动排序」后可整卡移动。编辑时单击卡片选级或改图，也可用拖动柄排序。放大后可在榜单区域横向或纵向滑动。电脑图片可直接拖入等级。每行「设置」可改名、换色和排序。</p>
           <div id="ranking-board" class="ranking-board"></div>
           <button id="add-row" class="add-row editor-only" type="button">＋ 添加等级</button>
         </section></div></div>
@@ -65,7 +73,7 @@
           <p id="template-note" class="pool-footnote">示例仅供个人演示，不代表权威评价。</p>
         </aside>
       </div>
-      <details class="backup-panel editor-only"><summary>备份与使用说明</summary><div class="backup-content"><p>美食和运动模板分别保留内容；切换前确认，恢复默认只作用于当前模板。修改自动保存在当前浏览器中。清理网站数据或更换设备会丢失本地存档，重要排行请导出 JSON 备份。多标签页以最后保存为准。</p><div class="toolbar-group"><button class="game-button" id="json-export" type="button">导出 JSON</button><label class="game-button" for="json-file">导入 JSON</label><input class="file-input" id="json-file" type="file" accept="application/json,.json"></div><p>键盘：Tab 选中卡片，Enter 或空格打开编辑，选择等级后保存；也可用「向前 / 向后」调整同级顺序。展示时：双击或双点卡片编辑，按住整张卡片拖动；非卡片区域仍可滚动页面。编辑时：单击卡片编辑，触屏按右上角拖动柄移动。默认进入展示模式，点「编辑 / 退出展示」或按 Esc 进入完整编辑。</p><p>PNG 只导出标题、所有等级和已归级项目，不包含待选区与编辑按钮；长名称与长列表自动换行。特别长的榜单会自动降低输出倍率，超过安全尺寸会提示拆分。</p></div></details>
+      <details class="backup-panel editor-only"><summary>备份与使用说明</summary><div class="backup-content"><p>美食和运动模板分别保留内容；切换前确认，恢复默认只作用于当前模板。修改自动保存在当前浏览器中。清理网站数据或更换设备会丢失本地存档，重要排行请导出 JSON 备份。多标签页以最后保存为准。</p><div class="toolbar-group"><button class="game-button" id="json-export" type="button">导出 JSON</button><label class="game-button" for="json-file">导入 JSON</label><input class="file-input" id="json-file" type="file" accept="application/json,.json"></div><p>键盘：Tab 选中卡片，Enter 或空格打开编辑，选择等级后保存；也可用「向前 / 向后」调整同级顺序。展示时：双击或双点卡片编辑；手机默认滑动浏览，开启「拖动排序」后可整卡移动，再点「结束拖动」恢复滚动。电脑可直接拖动整张卡片。编辑时：单击卡片编辑，触屏按右上角拖动柄移动。默认进入展示模式，点「制作我的榜单」或按 Esc 进入完整编辑；「返回小游戏」可回到入口页。</p><p>PNG 只导出标题、所有等级和已归级项目，不包含待选区与编辑按钮；长名称与长列表自动换行。特别长的榜单会自动降低输出倍率，超过安全尺寸会提示拆分。</p></div></details>
     </div>
   </main>
   <footer class="site-footer container"><p>谢雨卿 · Carl</p><div><a href="/articles/">文章</a><a href="/projects/">作品</a><a href="/photos/">摄影 <span lang="en">Photos</span></a><a href="/map/">足迹 <span lang="en">Map</span></a><a href="/game/">小游戏</a><a href="/about/">关于我</a></div></footer>

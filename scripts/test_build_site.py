@@ -105,7 +105,8 @@ class PublicProjectTests(unittest.TestCase):
         project["summary"] = '</p><script>alert(1)</script><p>'
         html = render_projects([project])
         elements = Elements(html).elements
-        self.assertFalse(any(tag in {"script", "img", "iframe"} for tag, _ in elements))
+        self.assertFalse(any(tag in {"script", "iframe"} for tag, _ in elements))
+        self.assertEqual(sum(tag == "img" for tag, _ in elements), 1)
         self.assertFalse(any(key.lower().startswith("on") for _, attrs in elements for key in attrs))
         self.assertIn("&lt;img src=x onerror=&quot;alert(1)&quot;&gt; &amp; Example", html)
         self.assertIn("&lt;/p&gt;&lt;script&gt;", html)
@@ -132,7 +133,7 @@ class PublicProjectTests(unittest.TestCase):
         samples = [[], {}, [self.projects[0], self.projects[0]]]
         bad = deepcopy(self.projects[0]); bad["id"] = 'bad" id'
         samples.append([bad])
-        bad = deepcopy(self.projects[0]); bad["icon"] = "https://example.com/private-screenshot.png"
+        bad = deepcopy(self.projects[0]); bad["screenshot"] = "https://example.com/private-screenshot.png"
         samples.append([bad])
         bad = deepcopy(self.projects[0]); del bad["usage"]
         samples.append([bad])
@@ -140,26 +141,37 @@ class PublicProjectTests(unittest.TestCase):
             with self.subTest(items=items), self.assertRaises(ValueError):
                 validate_projects({"projects": items})
 
-    def test_accessible_native_visuals_and_real_buttons_have_no_online_claims(self):
+    def test_real_screenshots_and_confirmed_browser_routes_are_accessible(self):
         html = render_projects(self.projects)
         elements = Elements(html).elements
         ids = {attrs["id"] for _, attrs in elements if "id" in attrs}
         cards = [attrs for tag, attrs in elements if tag == "article"]
-        self.assertEqual(len(cards), len(self.projects))
+        self.assertEqual(len(cards), 5)
         self.assertTrue(all(card["aria-labelledby"] in ids for card in cards))
-        svgs = [attrs for tag, attrs in elements if tag == "svg"]
-        self.assertEqual(len(svgs), len(self.projects))
-        self.assertTrue(all(svg.get("aria-hidden") == "true" and svg.get("viewbox") == "0 0 360 180"
-                            for svg in svgs))
-        self.assertFalse(any(tag in {"img", "image", "foreignobject"} for tag, _ in elements))
-        published = sum(item.get("link_status") != "pending" for item in self.projects)
-        self.assertEqual(html.count("查看 GitHub"), published)
-        default_guides = sum(item.get("link_status") != "pending" and "guide_label" not in item for item in self.projects)
-        self.assertEqual(html.count("下载与使用说明"), default_guides)
-        self.assertNotIn("在线体验", html)
+        images = [attrs for tag, attrs in elements if tag == "img"]
+        self.assertEqual(len(images), len(self.projects))
+        self.assertEqual({image["src"] for image in images}, {item["screenshot"] for item in self.projects})
+        self.assertTrue(all(image.get("alt") and int(image["width"]) >= 200 and int(image["height"]) >= 200
+                            and image.get("loading") == "lazy" for image in images))
+        self.assertEqual(html.count("从这里开始"), len(self.projects))
+        self.assertEqual(html.count("来源与许可"), len(self.projects))
+        self.assertEqual(html.count("查看 GitHub"), len(self.projects))
+        self.assertEqual(html.count("打开体验"), 2)
         links = {attrs["href"] for tag, attrs in elements if tag == "a"}
         self.assertEqual(links, {item[key] for item in self.projects for key in
-                                ("source_url", "guide_url", "download_url") if key in item})
+                                ("source_url", "guide_url", "download_url", "demo_url") if key in item})
+        for bad in ("https://example.com/demo", "/unverified/", "//example.com", "/game/ranking/?token=x"):
+            item = deepcopy(self.projects[0]); item["demo_url"] = bad
+            with self.subTest(demo=bad), self.assertRaisesRegex(ValueError, "confirmed site route"):
+                validate_projects({"projects": [item]})
+
+    def test_project_screenshots_preflight_rejects_missing_or_linked_files(self):
+        missing = ROOT / "home/assets/projects" / Path(self.projects[0]["screenshot"]).name
+        with patch.object(Path, "is_file", autospec=True, side_effect=lambda path: path != missing), \
+             self.assertRaisesRegex(ValueError, "Missing or linked"):
+            build_site.project_asset_sources(self.projects)
+        with patch.object(Path, "is_symlink", return_value=True), self.assertRaisesRegex(ValueError, "links"):
+            build_site.project_asset_sources(self.projects)
 
     def test_project_data_never_follows_a_symlink(self):
         with patch.object(Path, "is_symlink", return_value=True), self.assertRaisesRegex(ValueError, "symlinks"):
@@ -207,7 +219,7 @@ class PublicProjectTests(unittest.TestCase):
         html = render_projects([published])
         self.assertIn('&lt;script&gt;download&lt;/script&gt;', html)
         self.assertFalse(any(tag == "script" for tag, _ in Elements(html).elements))
-        self.assertFalse(any(tag == "img" for tag, _ in Elements(html).elements))
+        self.assertEqual(sum(tag == "img" for tag, _ in Elements(html).elements), 1)
         self.assertIn('href="' + self.projects[0]["source_url"] + '"', html)
 
     def test_page_viewport_and_responsive_card_structure_do_not_hide_overflow(self):
@@ -263,7 +275,7 @@ class ProjectPublicationTests(unittest.TestCase):
             with patch.object(build_site, "ROOT", root), patch.object(build_site, "OUTPUT", output), \
                  patch.object(build_site, "Blog", side_effect=self.fake_blog):
                 report = publish_site("https://xieyuqing.me")
-                self.assertEqual((report["articles"], report["projects"]), (1, 3))
+                self.assertEqual((report["articles"], report["projects"]), (1, 5))
                 self.assertEqual(report["article_root"], "https://xieyuqing.me/articles/")
                 self.assertTrue(report["success"])
                 home = (output / "index.html").read_text(encoding="utf-8")
@@ -303,6 +315,18 @@ class ProjectPublicationTests(unittest.TestCase):
                 self.assertEqual((output / "assets/wechat-qrcode.jpg").read_bytes(),
                                  (root / "home/assets/wechat-qrcode.jpg").read_bytes())
                 self.assertNotIn("wechat-qrcode", home)
+                self.assertIn('class="home-game-link home-map-link" href="/map/"', home)
+                for item in load_projects():
+                    asset = item["screenshot"].lstrip("/")
+                    self.assertEqual((output / asset).read_bytes(), (root / "home" / asset).read_bytes())
+                for filename in build_site.BRAND_ASSETS:
+                    self.assertEqual((output / "assets" / filename).read_bytes(), (root / "home/assets" / filename).read_bytes())
+                for page in (home, projects, about):
+                    elements = Elements(page).elements
+                    self.assertTrue(any(tag == "meta" and attrs.get("property") == "og:image"
+                                        and attrs.get("content") == "https://xieyuqing.me/assets/share-cover.png" for tag, attrs in elements))
+                    self.assertTrue(any(tag == "link" and attrs.get("rel") == "icon"
+                                        and attrs.get("href") == "/assets/favicon.svg" for tag, attrs in elements))
                 # About content is independent from repository README text.
                 (root / "README.md").write_text("Private folder guide; must never appear on /about/.", encoding="utf-8")
                 before = {path.relative_to(output / "articles"): path.read_bytes()
@@ -317,6 +341,26 @@ class ProjectPublicationTests(unittest.TestCase):
                 self.assertIn("A revised public project description.",
                               (output / "projects/index.html").read_text(encoding="utf-8"))
                 self.assertFalse((output / "projects.json").exists())
+
+    def test_cache_only_owned_output_can_rebuild_without_deleting_cached_files(self):
+        with TemporaryDirectory(prefix="yuliao-site-cache-", dir=ROOT) as temporary:
+            root = Path(temporary)
+            shutil.copytree(ROOT / "home", root / "home")
+            shutil.copytree(ROOT / "map", root / "map")
+            output = root / "_site_unified"
+            cached = output / "articles/assets/responsive-images"
+            cached.mkdir(parents=True)
+            (output / ".generated-by-unified-site").write_text("Generated unified website.\n", encoding="utf-8")
+            (output / "articles/.generated-by-blog").write_text("Generated blog.\n", encoding="utf-8")
+            sentinel = cached / "synthetic-cache-fixture.webp"
+            sentinel.write_bytes(b"Synthetic cache fixture; not an image source.")
+            with patch.object(build_site, "ROOT", root), patch.object(build_site, "OUTPUT", output), \
+                 patch.object(build_site, "Blog", side_effect=self.fake_blog):
+                result = publish_site("https://xieyuqing.me")
+            self.assertTrue(result["success"])
+            self.assertEqual(sentinel.read_bytes(), b"Synthetic cache fixture; not an image source.")
+            self.assertTrue((output / "index.html").is_file())
+            self.assertTrue((output / "projects/index.html").is_file())
 
     def test_invalid_private_project_data_stops_before_output_is_written(self):
         with TemporaryDirectory(prefix="yuliao-site-private-", dir=ROOT) as temporary:

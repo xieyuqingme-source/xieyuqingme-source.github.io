@@ -6,6 +6,8 @@
   <meta name="description" content="以城市和时间记录人生的停留，也可以在浏览器中制作自己的足迹地图。">
   <meta name="author" content="Xie Yuqing (Carl)"><link rel="canonical" href="{{site_url}}/map/">
   <meta property="og:type" content="website"><meta property="og:title" content="地图与足迹 · 谢雨卿"><meta property="og:url" content="{{site_url}}/map/">
+  <meta property="og:description" content="以城市和时间记录旅行与停留，也可以在浏览器中制作、保存和导出自己的足迹地图。"><meta property="og:image" content="{{site_url}}/assets/share-cover.png"><meta property="og:image:alt" content="谢雨卿 · 文章、作品与生活记录"><meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
   <script>(()=>{let t="light";try{const s=localStorage.getItem("xieyuqing-blog-theme");t=s==="light"||s==="dark"?s:matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";}catch(_){}document.documentElement.dataset.theme=t;})();</script>
   <link rel="stylesheet" href="/assets/portal.css"><link rel="stylesheet" href="/assets/map.css">
   <script src="/assets/portal.js" defer></script><script src="/assets/map-model.js" defer></script><script src="/assets/map-playback.js" defer></script><script src="/assets/map-avatar.js" defer></script><script src="/assets/map-journey.js" defer></script><script src="/assets/map-view.js" defer></script><script src="/assets/map-labels.js" defer></script><script src="/assets/map-video.js" defer></script><script src="/assets/map.js" defer></script><script src="/assets/map-video-ui.js" defer></script>
@@ -24,9 +26,10 @@
     <p id="map-status" class="map-status" role="status" aria-live="polite"></p>
     <section class="map-workspace" aria-label="足迹地图与时间轴">
       <div class="map-canvas-panel">
-        <div class="map-toolbar"><div><h2 id="map-title">我的足迹</h2><p id="map-summary"></p></div><button id="map-expanded-close" type="button" hidden>退出大图 ×</button></div>
-        <div id="map-canvas" class="map-canvas"><svg id="footprints-map" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 600" role="group" aria-labelledby="map-svg-title map-svg-description"><title id="map-svg-title">城市足迹示意图</title><desc id="map-svg-description">本地自然地形底图，无国界或行政边界。点表示城市中心；点击或用 Tab 选中城市后按回车查看各段经历。不是导航地图。</desc></svg></div>
-        <div class="map-below-tools">
+        <div class="map-toolbar"><div><h2 id="map-title">我的足迹</h2><p id="map-summary"></p></div><button id="map-expanded-tools" type="button" hidden>工具与导出</button><button id="map-expanded-close" type="button" hidden>退出大图 ×</button></div>
+        <div id="map-canvas" class="map-canvas"><svg id="footprints-map" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 600" role="group" aria-labelledby="map-svg-title map-svg-description" aria-describedby="map-interaction-note"><title id="map-svg-title">城市足迹示意图</title><desc id="map-svg-description">本地自然地形底图，无国界或行政边界。点表示城市中心；点击或用 Tab 选中城市后按回车查看各段经历。不是导航地图。</desc></svg></div>
+        <div id="map-below-tools" class="map-below-tools">
+          <p id="map-interaction-note" class="map-interaction-note">拖动平移，滚轮或双指缩放；双击空白处添加经历。键盘可用方向键与 ＋ / −。</p>
     <div class="map-mode" role="group" aria-label="地图内容"><button id="mode-mine" type="button" aria-pressed="true">我的足迹</button><button id="mode-visitor" type="button" aria-pressed="false">制作你的地图</button></div>
     <section id="visitor-tools" class="visitor-tools" aria-label="制作你的地图" hidden>
       <div class="editor-heading"><h2>你的停留，你来记录</h2><div class="draft-actions"><button id="undo-data" type="button" disabled>撤销</button><button id="clear-data" type="button">一键清空</button><button id="add-record" type="button" class="map-primary">＋ 添加经历</button></div></div>
@@ -54,7 +57,7 @@
       </div>
       <aside class="timeline-panel" aria-label="停留时间轴"><div class="timeline-heading"><h2 id="timeline-title">停留时间轴</h2><button id="clear-city" type="button" hidden>显示全部</button></div><ol id="timeline-list" class="timeline-list"></ol><p id="empty-state" class="empty-state" hidden>还没有可显示的经历。添加一段停留，或导入自己的足迹文档。</p></aside>
     </section>
-    <details class="map-help"><summary>使用帮助</summary><p>拖动平移，滚轮或双指缩放；方向键平移，＋／−缩放。悬停查看地名，点按地点查看经历，双击空白处添加到访客草稿，也可使用“添加经历”。</p><p>同一城市可以记录多次停留。日期可精确到年、月或日，未知留空；约略日期请选择“约略”。手填地点需核对城市、国家或地区及城市中心坐标。</p><p>访客草稿只在浏览器中处理，默认不自动保存。JSON 和 Markdown 可恢复数据；图片只保存画面。撤销和一键清空仅操作访客草稿，个人时间表不变。</p><p>连线仅表示时间顺序；返回长期生活地的画面不补造返回日期。视频生成时请保持页面在前台。</p></details>
+    <details class="map-help"><summary>使用帮助</summary><p>桌面拖动平移，滚轮缩放；方向键平移，＋／−缩放。手机在内嵌地图上单指滑动可滚动页面，也可使用浏览器双指缩放页面；点下方“操作地图 · 展开”后，单指拖动、双指缩放地图。大图右上角可直接退出，或跳至仍在地图下方的工具与导出。点按地点查看经历；桌面双击空白处可添加访客草稿，手机也可直接点“添加经历”。</p><p>同一城市可以记录多次停留。日期可精确到年、月或日，未知留空；约略日期请选择“约略”。手填地点需核对城市、国家或地区及城市中心坐标。</p><p>访客草稿只在浏览器中处理，默认不自动保存。JSON 和 Markdown 可恢复数据；图片只保存画面。撤销和一键清空仅操作访客草稿，个人时间表不变。</p><p>连线仅表示时间顺序；返回长期生活地的画面不补造返回日期。视频生成时请保持页面在前台。</p></details>
   </main>
   <dialog id="record-dialog" class="map-dialog" aria-labelledby="record-dialog-title"><div class="dialog-heading"><h2 id="record-dialog-title">添加经历</h2><button id="record-close" type="button" class="dialog-close" aria-label="关闭编辑，不保存">×</button></div><form id="record-form">
     <input id="record-id" type="hidden">

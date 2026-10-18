@@ -48,6 +48,23 @@ class ResponsiveImageTests(unittest.TestCase):
         self.assertEqual(generator.attributes("/articles/images/测试%20图.png"), {})
         self.assertEqual(source.read_bytes(), before)
 
+    def test_default_policy_includes_camera_photos_below_five_mib(self):
+        source = self.root / "images" / "historical-photo.jpg"
+        Image.effect_noise((2200, 1200), 80).convert("RGB").save(source, quality=90)
+        before = source.read_bytes()
+        self.assertGreater(len(before), MIN_SOURCE_BYTES)
+        self.assertLess(len(before), 5 * 1024 * 1024)
+        generator = ResponsiveImages(self.root, self.output, "/articles/")
+        report = generator.prepare()
+        self.assertEqual(report["source_count"], 1)
+        self.assertEqual(report["derivative_files"], 2)
+        attrs = generator.attributes("/articles/images/historical-photo.jpg")
+        self.assertIn(" 960w", attrs["srcset"])
+        self.assertIn(" 1920w", attrs["srcset"])
+        self.assertEqual(attrs["data-original-src"], "/articles/images/historical-photo.jpg")
+        self.assertEqual((attrs["data-original-width"], attrs["data-original-height"]), ("2200", "1200"))
+        self.assertEqual(source.read_bytes(), before)
+
     def test_only_jpg_png_eligible_and_derivatives_keep_source_unchanged(self):
         source = self.source()
         self.source("small.png", size=(1, 1))
@@ -95,6 +112,20 @@ class ResponsiveImageTests(unittest.TestCase):
         self.assertEqual(state, {path.name: (path.read_bytes(), path.stat().st_mtime_ns)
                                  for path in second.directory.glob("*.webp")})
         self.assertEqual(first.report()["derivative_bytes"], second.report()["derivative_bytes"])
+
+    def test_changed_photo_does_not_reencode_unchanged_photo(self):
+        self.source("unchanged.png")
+        changed = self.source("changed.png", size=(2000, 1000))
+        first = self.prepare()
+        unchanged = first.attributes("/articles/images/unchanged.png")
+        paths = [first.output / candidate.strip().split(" ")[0].removeprefix("/articles/")
+                 for candidate in unchanged["srcset"].split(",")]
+        state = {path.name: (path.read_bytes(), path.stat().st_mtime_ns) for path in paths}
+        Image.new("RGB", (2000, 1000), (200, 20, 80)).save(changed)
+        second = self.prepare()
+        self.assertEqual(second.report()["cache_reused_files"], 2)
+        self.assertEqual(state, {path.name: (path.read_bytes(), path.stat().st_mtime_ns) for path in paths})
+        self.assertEqual(second.report()["derivative_files"], 4)
 
     def test_corrupted_owned_derivative_is_regenerated(self):
         self.source()

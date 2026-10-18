@@ -36,6 +36,11 @@
   }
   function rebuild() {
     if (busy) return;
+    if (!context) {
+      plan = null; $("video-generate").disabled = true;
+      $("video-capability").textContent = "此浏览器未提供视频画布，无法生成视频。可继续下载 SVG 图片；PNG 取决于浏览器画布支持。";
+      $("video-estimate").textContent = ""; return;
+    }
     const records = A.records();
     // Confirmed baseReturn metadata remains authoritative. Visitor data is never
     // given the author's city and unconfirmed multi-city bases stay unresolved.

@@ -60,7 +60,7 @@ TABLE_PLACES = {
     "马六甲": ("马六甲", "马六甲", "马来西亚", 2.1896, 102.2501),
 }
 PRIVATE_PATH = re.compile(r"(?<![A-Za-z0-9])[A-Za-z]:[\\/]|\\\\[^\s\\]+[\\/]|/(?:Users|home|mnt)/", re.I)
-ASSETS = ("map.css", "map-model.js", "map-playback.js", "map-avatar.js", "map-journey.js", "map-view.js", "map-labels.js", "map-terrain.jpg",
+ASSETS = ("map.css", "map-model.js", "map-playback.js", "map-avatar.js", "map-journey.js", "map-view.js", "map-labels.js", "map-terrain.webp", "map-terrain.jpg",
           "map-video.js", "map-video-ui.js", "map.js",
           "map-land.json", "map-avatar-default.png")
 LIMIT = 1024 * 1024

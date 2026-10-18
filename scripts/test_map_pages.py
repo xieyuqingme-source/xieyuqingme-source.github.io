@@ -404,6 +404,31 @@ class MapRenderingTests(unittest.TestCase):
         actual = hashlib.sha256((ROOT / "home/assets/map-land.json").read_bytes()).hexdigest()
         self.assertIn(actual, json.dumps(metadata))
 
+    def test_terrain_webp_keeps_full_resolution_and_unchanged_jpeg_fallback(self):
+        metadata = json.loads((ROOT / "map/map-terrain.metadata.json").read_text(encoding="utf-8"))
+        jpeg = (ROOT / metadata["asset"]).read_bytes()
+        derivative = metadata["webDerivative"]
+        webp = (ROOT / derivative["asset"]).read_bytes()
+        self.assertEqual(hashlib.sha256(jpeg).hexdigest(), metadata["sha256"])
+        self.assertEqual(hashlib.sha256(webp).hexdigest(), derivative["sha256"])
+        self.assertEqual(webp[:4], b"RIFF"); self.assertEqual(webp[8:12], b"WEBP")
+        self.assertEqual(struct.unpack("<I", webp[4:8])[0] + 8, len(webp))
+        self.assertEqual(webp[12:16], b"VP8 "); self.assertEqual(webp[23:26], b"\x9d\x01\x2a")
+        dimensions = tuple(value & 0x3fff for value in struct.unpack("<HH", webp[26:30]))
+        self.assertEqual(dimensions, (derivative["width"], derivative["height"]))
+        self.assertLess(len(webp), len(jpeg) * .75)
+        self.assertEqual((derivative["width"], derivative["height"]), (metadata["width"], metadata["height"]))
+        self.assertEqual((derivative["width"], derivative["height"]), (6144, 3072))
+        self.assertIn("map-terrain.webp", ASSETS); self.assertIn("map-terrain.jpg", ASSETS)
+
+    def test_map_metadata_and_interaction_hint_are_explicit(self):
+        html = (ROOT / "home/map.template.html").read_text(encoding="utf-8")
+        self.assertIn('property="og:description"', html)
+        self.assertIn('property="og:image" content="{{site_url}}/assets/share-cover.png"', html)
+        self.assertIn('rel="icon" type="image/svg+xml" href="/assets/favicon.svg"', html)
+        self.assertLess(html.index('id="map-canvas"'), html.index('id="map-interaction-note"'))
+        self.assertLess(html.index('id="map-canvas"'), html.index('class="map-view-tools"'))
+
     def test_default_avatar_is_a_small_png_without_private_metadata(self):
         data = (ROOT / "home/assets/map-avatar-default.png").read_bytes()
         self.assertEqual(data[:8], b"\x89PNG\r\n\x1a\n")

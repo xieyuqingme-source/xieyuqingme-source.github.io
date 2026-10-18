@@ -187,7 +187,7 @@
       const positionKey = "xieyuqing-toc-position";
       const positions = new Set(["left", "right", "hidden"]);
       const buttons = [...controls.querySelectorAll("[data-toc-position]")];
-      const mobile = window.matchMedia("(max-width: 760px)");
+      const mobile = window.matchMedia("(max-width: 1000px)");
       let position = "right";
       try {
         const saved = localStorage.getItem(positionKey);
@@ -237,6 +237,67 @@
       table.tabIndex = 0;
       table.setAttribute("aria-label", "文章表格，可横向滚动查看");
     });
+
+    const viewer = document.querySelector("#article-image-viewer");
+    if (viewer) {
+      const preview = viewer.querySelector("img");
+      const originalLink = viewer.querySelector("a");
+      const caption = viewer.querySelector("p");
+      let opener = null;
+      let oldRootOverflow = "", oldBodyOverflow = "";
+      let oldScrollX = 0, oldScrollY = 0;
+      viewer.querySelector("button").addEventListener("click", () => viewer.close());
+      viewer.addEventListener("click", (event) => {
+        if (event.target !== viewer) return;
+        const box = viewer.getBoundingClientRect();
+        if (event.clientX < box.left || event.clientX > box.right || event.clientY < box.top || event.clientY > box.bottom) viewer.close();
+      });
+      viewer.addEventListener("close", () => {
+        document.documentElement.style.overflow = oldRootOverflow;
+        document.body.style.overflow = oldBodyOverflow;
+        preview.removeAttribute("src");
+        if (opener) opener.focus({ preventScroll: true });
+        window.scrollTo({ left: oldScrollX, top: oldScrollY, behavior: "instant" });
+      });
+      content.querySelectorAll("img").forEach((image) => {
+        const original = image.dataset.originalSrc || image.src;
+        const fallback = () => {
+          if (!image.dataset.originalSrc || image.dataset.originalFallback) return;
+          image.dataset.originalFallback = "true";
+          image.removeAttribute("srcset");
+          image.src = original;
+          if (image.dataset.originalWidth) image.width = Number(image.dataset.originalWidth);
+          if (image.dataset.originalHeight) image.height = Number(image.dataset.originalHeight);
+        };
+        image.addEventListener("error", fallback);
+        if (image.complete && image.naturalWidth === 0) fallback();
+        // Preserve authored linked images. Ordinary images gain a native link
+        // so keyboard users and browsers without <dialog> can reach the original.
+        if (image.closest("a")) return;
+        const link = document.createElement("a");
+        link.className = "article-image-link";
+        link.href = original;
+        link.setAttribute("aria-label", `查看大图：${image.alt || "文章图片"}`);
+        image.replaceWith(link);
+        link.append(image);
+        link.addEventListener("click", (event) => {
+          if (event.defaultPrevented || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey || event.button > 0 || typeof viewer.showModal !== "function") return;
+          event.preventDefault();
+          opener = link;
+          // Use the largest optimized variant in the viewer; the full original
+          // remains an explicit link instead of another automatic multi-MB load.
+          preview.src = image.srcset ? image.srcset.split(",").pop().trim().split(/\s+/)[0] : image.src;
+          preview.alt = image.alt;
+          originalLink.href = original;
+          caption.textContent = image.alt || "文章图片";
+          oldScrollX = window.scrollX; oldScrollY = window.scrollY;
+          viewer.showModal();
+          oldRootOverflow = document.documentElement.style.overflow;
+          oldBodyOverflow = document.body.style.overflow;
+          document.documentElement.style.overflow = document.body.style.overflow = "hidden";
+        });
+      });
+    }
 
     let scheduled = false;
     function updateReading() {

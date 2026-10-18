@@ -128,6 +128,13 @@ function fixture() {
   return { version: 3, templateId: 'food', title: '缩放拖拽坐标验收', skin: 'classic', rows: [{ id: 'view-a', name: '夯', color: '#f28b82', itemIds: ['view-one', 'view-two'] }, { id: 'view-b', name: '顶级', color: '#f6b26b', itemIds: [] }], pool: [], items: Object.fromEntries([['view-one', '缩放一'], ['view-two', '缩放二']].map(([id, name]) => [id, { id, name, image: null, crop: null, art: null }])) };
 }
 async function dragAtZoom(page, zoom, ctx) {
+  let touchInput;
+  if (ctx) {
+    touchInput=await ctx.newCDPSession(page); await touchInput.send('Emulation.setTouchEmulationEnabled',{enabled:true,maxTouchPoints:1});
+    await page.waitForFunction(()=>navigator.maxTouchPoints>0&&matchMedia('(any-pointer: coarse)').matches);
+    report.touchInputCapabilities ||= []; report.touchInputCapabilities.push(await page.evaluate(() => ({ coarse: matchMedia('(any-pointer: coarse)').matches, primaryCoarse: matchMedia('(pointer: coarse)').matches, maxTouchPoints: navigator.maxTouchPoints, body: document.body.className })));
+  }
+  if (ctx && await page.locator('#touch-sort-toggle').getAttribute('aria-pressed') !== 'true') await page.locator('#touch-sort-toggle').tap();
   await setZoom(page, zoom); await page.evaluate(() => { const e = document.querySelector('.board-viewport'); e.scrollTop = 0; e.scrollLeft = 0; }); await frame(page);
   const card = page.locator('[data-item-id="view-one"] .card-main'), target = page.locator('[data-row-id="view-b"] .item-list');
   const from = await card.boundingBox(), to = await target.boundingBox(), vp = await page.locator('.board-viewport').boundingBox(); assert(from && to && vp);
@@ -149,6 +156,7 @@ async function dragAtZoom(page, zoom, ctx) {
     finally { await session.detach(); }
   } else await card.dblclick();
   await page.locator('#item-dialog[open]').waitFor(); assert.equal(await page.locator('#item-name').inputValue(), '缩放一'); await page.locator('#item-cancel').click();
+  if(touchInput)await touchInput.detach();
   return { zoom, start, end };
 }
 async function controlsAccessible(page) {

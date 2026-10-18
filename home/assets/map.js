@@ -23,8 +23,9 @@
   ];
   const blank = () => ({ version: 1, title: "我的足迹地图", records: [] });
   let mine = blank(), guest = blank(), mode = "mine", land = null, selectedCity = null, detailId = null, landFailed = false;
-  let avatar = null, avatarBusy = true, activeTimeline = null, activeMarker = null, frameLabel = "", playbackProjection = null, renderedAvatarSource = null, zoom = 1, expanded = false, previousBodyOverflow = "";
+  let avatar = null, avatarBusy = true, activeTimeline = null, activeMarker = null, frameLabel = "", playbackProjection = null, renderedAvatarSource = null, zoom = 1, expanded = false, previousBodyOverflow = "", previousMapScroll = { x: 0, y: 0 };
   let pan = { lon: 0, lat: 0 }, terrainData = "", terrainPromise = null, gestures = null, editContext = null, pickedPoint = null, resizeObserver = null, resizeFrame = null, pendingResize = false;
+  const touchQuery = window.matchMedia("(any-pointer: coarse)");
   const labelMeasure = document.createElement("canvas").getContext("2d");
   let labelSignature = "";
   const undoStack = [];
@@ -63,13 +64,28 @@
   function redrawViewport() {
     pausePlayback(); frameLabel = ""; renderMap(); renderSummary(); updateZoomTools();
   }
+  function syncTouchNavigation() {
+    $("footprints-map").style.touchAction = touchQuery.matches && !expanded ? "pan-y pinch-zoom" : "none";
+    $("map-expand").textContent = touchQuery.matches ? "操作地图 · 展开" : "展开大图";
+    $("map-expand").setAttribute("aria-label", touchQuery.matches ? "展开大图以拖动和双指缩放地图" : "展开大图");
+    $("map-interaction-note").textContent = touchQuery.matches ? expanded ? "单指拖动，双指缩放；右上角可退出大图，或点“工具与导出”查看下方操作。" : "在地图上单指滑动可滚动页面；点“操作地图 · 展开”后拖动或双指缩放。下方按钮可直接添加经历。" : "拖动平移，滚轮或双指缩放；双击空白处添加经历。键盘可用方向键与 ＋ / −。";
+  }
   function expandMap(value) {
-    if (recording && value) return; pausePlayback(); if (gestures) gestures.reset(); expanded = value;
+    if (recording && value) return;
+    if (value && !expanded) previousMapScroll = { x: window.scrollX, y: window.scrollY };
+    pausePlayback(); if (gestures) gestures.reset(); expanded = value;
     const panel = document.querySelector(".map-canvas-panel"); panel.classList.toggle("is-expanded", value);
-    $("map-expand").setAttribute("aria-expanded", String(value)); $("map-expanded-close").hidden = !value;
+    $("map-expand").setAttribute("aria-expanded", String(value)); $("map-expanded-close").hidden = !value; $("map-expanded-tools").hidden = !value;
+    syncTouchNavigation();
     if (value) { previousBodyOverflow = document.body.style.overflow; document.body.style.overflow = "hidden"; panel.setAttribute("role", "dialog"); panel.setAttribute("aria-modal", "true"); panel.setAttribute("aria-label", "足迹地图大图；按 Escape 退出"); $("map-expanded-close").focus({ preventScroll: true }); panel.scrollTop = 0; }
     else { document.body.style.overflow = previousBodyOverflow; panel.removeAttribute("role"); panel.removeAttribute("aria-modal"); panel.removeAttribute("aria-label"); $("map-expand").focus({ preventScroll: true }); }
     renderMap();
+    if (!value) {
+      // A fixed panel can shrink the document and clamp its background scroll.
+      // Restore the exact entry point after returning the map to normal flow.
+      const style = document.documentElement.style, previous = style.scrollBehavior;
+      style.scrollBehavior = "auto"; window.scrollTo(previousMapScroll.x, previousMapScroll.y); style.scrollBehavior = previous;
+    }
   }
   function showPlaybackState(value) {
     const panel = $("playback-panel"); panel.dataset.state = value.state;
@@ -279,8 +295,8 @@
       li.append(element("p", M.range(item), "timeline-date"), element("span", `${item.city} · ${item.country}`, "timeline-place"));
       if (item.certainty === "approximate") li.append(element("span", "约略", "certainty-badge"));
       const heading = element("h3"), open = element("button", item.title, "timeline-open"); open.type = "button"; open.addEventListener("click", () => openDetail(item.id)); heading.append(open); li.append(heading);
-      const description = item.description.length > 100 ? item.description.slice(0, 100) + "…" : item.description;
-      if (description) li.append(element("p", description, "timeline-description"));
+      // Keep the complete original text, but do not repeat a title used as its own description.
+      if (item.description && item.description !== item.title) li.append(element("p", item.description, "timeline-description"));
       list.append(li);
     }
     $("empty-state").hidden = items.length > 0;
@@ -301,6 +317,7 @@
     detailId = id; $("detail-title").textContent = item.title;
     $("detail-meta").textContent = `${M.range(item)}${item.certainty === "approximate" ? " · 约略" : " · 已证实"}\n${[item.city, item.region, item.country].filter((value, index, values) => value && values.indexOf(value) === index).join(" · ")}`;
     $("detail-description").textContent = item.description || "这段经历尚未填写说明。";
+    $("detail-description").hidden = !!item.description && item.description === item.title;
     $("detail-album").hidden = !item.album; if (item.album) $("detail-album").setAttribute("href", item.album); else $("detail-album").removeAttribute("href");
     $("detail-edit-tools").hidden = mode !== "visitor"; $("detail-dialog").showModal();
   }
@@ -336,7 +353,7 @@
     copy.querySelectorAll("[tabindex], [role='button']").forEach(node => { node.removeAttribute("tabindex"); node.removeAttribute("role"); });
     copy.querySelectorAll(".map-svg-note, .map-svg-label, .map-hover-label").forEach(node => node.remove());
     if (backgroundOnly) copy.querySelectorAll(".map-marker, #map-label-layer, #playback-avatar, #journey-route").forEach(node => node.remove());
-    copy.querySelectorAll("image").forEach(node => { const href = node.getAttribute("href") || ""; if (!/^data:image\/png;base64,/.test(href) && !(node.id === "map-terrain-image" && /^data:image\/jpeg;base64,/.test(href))) node.remove(); });
+    copy.querySelectorAll("image").forEach(node => { const href = node.getAttribute("href") || ""; if (!/^data:image\/png;base64,/.test(href) && !(node.id === "map-terrain-image" && /^data:image\/(?:jpeg|webp);base64,/.test(href))) node.remove(); });
     const sheet = svg("style", {}, `.map-water{fill:${colors.soft}}.map-land{fill:${colors.line};stroke:${colors.surface};stroke-width:.6}.map-graticule{fill:none;stroke:${colors.muted};stroke-opacity:.17;stroke-width:.7}.map-order{fill:none;stroke:${colors.accent};stroke-width:1.6;stroke-dasharray:5 5;opacity:.7}.map-marker .map-dot{fill:${colors.accent};stroke:${colors.surface};stroke-width:1.5}.map-marker .map-hit{fill:transparent;stroke:none}.map-playback-avatar .avatar-ring{fill:${colors.surface};stroke:${colors.accent};stroke-width:2.5}.map-playback-avatar .avatar-fallback{fill:${colors.accent}}.map-city-label{pointer-events:none;user-select:none;-webkit-user-select:none}.map-city-label text{fill:${colors.ink};font:14px sans-serif;paint-order:stroke fill;stroke:${colors.surface};stroke-opacity:.82;stroke-width:1.5;stroke-linejoin:round;pointer-events:none}.export-caption{fill:${colors.ink};font:20px sans-serif}.export-caption-date{fill:${colors.accent};font:20px sans-serif}.export-caption-city{fill:${colors.ink};font:bold 26px sans-serif}`);
     copy.insertBefore(sheet, copy.firstChild);
     const item = videoFrame.state !== "idle" ? videoFrame.record : current().records.find(record => record.id === detailId);
@@ -393,11 +410,20 @@
   async function loadTerrain() {
     if (terrainData) return; if (terrainPromise) return terrainPromise;
     terrainPromise = (async () => {
-      const response = await fetch("/assets/map-terrain.jpg", { credentials: "same-origin" }); if (!response.ok) throw new Error("本地地形资源无法读取。");
-      const blob = await response.blob(); if (blob.size > 8 * 1024 * 1024) throw new Error("地形资源过大。");
-      const bytes = new Uint8Array(await blob.arrayBuffer()); if (bytes[0] !== 255 || bytes[1] !== 216 || bytes[2] !== 255) throw new Error("地形资源不是有效 JPEG。");
-      const data = await new Promise((resolve, reject) => { const reader = new FileReader(); reader.onload = () => resolve(reader.result); reader.onerror = () => reject(new Error("无法读取地形图像。")); reader.readAsDataURL(new Blob([bytes], { type: "image/jpeg" })); });
-      const image = new Image(); image.src = data; await image.decode(); terrainData = data;
+      // Both files retain the same 6144 × 3072 geographic pixels. The smaller
+      // WebP is preferred; a missing/unsupported derivative falls back to JPEG.
+      for (const format of ["webp", "jpg"]) {
+        try {
+          const response = await fetch(`/assets/map-terrain.${format}`, { credentials: "same-origin" }); if (!response.ok) throw new Error("本地地形资源无法读取。");
+          const blob = await response.blob(); if (blob.size > 8 * 1024 * 1024) throw new Error("地形资源过大。");
+          const bytes = new Uint8Array(await blob.arrayBuffer());
+          const valid = format === "webp" ? String.fromCharCode(...bytes.slice(0, 4)) === "RIFF" && String.fromCharCode(...bytes.slice(8, 12)) === "WEBP" : bytes[0] === 255 && bytes[1] === 216 && bytes[2] === 255;
+          if (!valid) throw new Error("地形资源格式无效。");
+          const type = format === "webp" ? "image/webp" : "image/jpeg";
+          const data = await new Promise((resolve, reject) => { const reader = new FileReader(); reader.onload = () => resolve(reader.result); reader.onerror = () => reject(new Error("无法读取地形图像。")); reader.readAsDataURL(new Blob([bytes], { type })); });
+          const image = new Image(); image.src = data; await image.decode(); terrainData = data; return;
+        } catch (error) { if (format === "jpg") throw error; }
+      }
     })().finally(() => { terrainPromise = null; }); return terrainPromise;
   }
   try {
@@ -413,6 +439,11 @@
   $("map-zoom-out").addEventListener("click", () => zoomCamera(.5));
   $("map-zoom-reset").addEventListener("click", () => { zoom = 1; pan = { lon: 0, lat: 0 }; redrawViewport(); });
   $("map-expand").addEventListener("click", () => expandMap(true)); $("map-expanded-close").addEventListener("click", () => expandMap(false));
+  $("map-expanded-tools").addEventListener("click", () => {
+    const panel = document.querySelector(".map-canvas-panel"), tools = $("map-below-tools"), header = panel.querySelector(".map-toolbar");
+    panel.scrollTop += tools.getBoundingClientRect().top - panel.getBoundingClientRect().top - header.getBoundingClientRect().height - 12;
+    $("map-add-here").focus({ preventScroll: true });
+  });
   $("map-download-image").addEventListener("click", () => imageExport("png"));
   document.addEventListener("keydown", event => {
     if (!expanded || document.querySelector("dialog[open]")) return;
@@ -515,7 +546,9 @@
     renderMap(); window.dispatchEvent(new Event("footprints:labels"));
   });
   $("map-layer").addEventListener("change", async () => { pausePlayback(); try { localStorage.setItem("xieyuqing-footprints-layer-v1", $("map-layer").value); } catch (_) {} try { if ($("map-layer").value === "terrain") { status("正在读取本地自然地形图…"); window.dispatchEvent(new Event("footprints:assets")); await loadTerrain(); } redrawViewport(); status(""); } catch (error) { $("map-layer").value = "simple"; redrawViewport(); status(error.message + " 已保留简洁底图，可重试。", true); } finally { window.dispatchEvent(new Event("footprints:assets")); } });
-  gestures = V.installGestures({ element: $("footprints-map"), toMapPoint: event => projection().unproject(V.localPoint($("footprints-map"), event), false), onPan: delta => moveCamera({ lon: pan.lon + delta.lon, lat: pan.lat + delta.lat }), onZoom: (factor, anchor) => zoomCamera(factor, anchor), onPick: pickPlace, isMarker: target => !!target.closest(".map-marker"), isEnabled: () => !recording && !document.querySelector("dialog[open]") });
+  gestures = V.installGestures({ element: $("footprints-map"), toMapPoint: event => projection().unproject(V.localPoint($("footprints-map"), event), false), onPan: delta => moveCamera({ lon: pan.lon + delta.lon, lat: pan.lat + delta.lat }), onZoom: (factor, anchor) => zoomCamera(factor, anchor), onPick: pickPlace, isMarker: target => !!target.closest(".map-marker"), isTouchEnabled: () => expanded, isEnabled: () => !recording && !document.querySelector("dialog[open]") });
+  syncTouchNavigation();
+  if (touchQuery.addEventListener) touchQuery.addEventListener("change", syncTouchNavigation);
   $("footprints-map").setAttribute("tabindex", "0");
   $("footprints-map").addEventListener("keydown", event => {
     if (recording || event.target !== $("footprints-map")) return;

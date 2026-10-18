@@ -233,6 +233,7 @@
         });
         context.stroke();
       }
+      if (typeof canvas.toBlob !== 'function') throw new Error('当前浏览器暂不支持 PNG 编码。请先导出 JSON 备份，或使用更新的浏览器。');
       const blob = await timeout(new Promise((resolve, reject) => {
         try { canvas.toBlob(value => value ? resolve(value) : reject(new Error('PNG 编码失败，请降低清晰度后重试。')), 'image/png'); }
         catch (_) { reject(new Error('PNG 导出失败，图片可能无法被浏览器读取。请重新导入图片或导出 JSON 备份。')); }

@@ -109,6 +109,46 @@ class MarkdownRenderingTests(unittest.TestCase):
         self.assertIn(article.title, searchable[0])
         self.assertIn('" 引号', searchable[0])
 
+    def test_excerpt_uses_answer_and_cleans_markdown_without_editing_body(self):
+        body = '**问曰：**\n\n为什么？\n\n**对曰：**\n\n已有**正文观点**，保留`术语`和[来源](https://example.com)。'
+        article = Article(self.source, "中文文章/example.html", "问题", "2026-01-01", "zh-CN",
+                          "中文文章", "chinese.html", body)
+        self.assertEqual(self.blog.excerpt(article), "已有正文观点，保留术语和来源。")
+        self.assertEqual(article.markdown, body)
+        article.markdown = '![图片说明](../images/example.png)\n\n哈佛大学**《演讲》**（内容），介绍**理论**。'
+        self.assertEqual(self.blog.excerpt(article), '哈佛大学《演讲》（内容），介绍理论。')
+
+    def test_public_problem_excerpts_are_substantive_and_article_urls_stay_unique(self):
+        self.blog.collect()
+        self.assertEqual(len({a.destination for a in self.blog.articles}), len(self.blog.articles))
+        problems = [a for a in self.blog.articles if a.markdown.startswith('**问曰：**')]
+        self.assertEqual(len(problems), 5)
+        for article in problems:
+            excerpt = self.blog.excerpt(article)
+            self.assertGreater(len(excerpt), 35, article.title)
+            self.assertNotIn('**', excerpt)
+            self.assertNotIn('问曰', excerpt)
+            self.assertNotIn('对曰', excerpt)
+        happiness = next(a for a in self.blog.articles if '合成幸福' in a.title)
+        self.assertNotIn('**', self.blog.excerpt(happiness))
+
+    def test_article_navigation_brand_language_filters_and_share_metadata(self):
+        page = self.blog.document('测试', self.blog.archive([]), 'example.html', active='chinese.html')
+        elements = Elements(page).elements
+        self.assertIn('aria-label="谢雨卿个人主页"', page)
+        self.assertIn('>谢</span><span>谢雨卿', page)
+        primary = page.split('<nav class="site-nav"', 1)[1].split('</nav>', 1)[0]
+        self.assertEqual(primary.count('<a '), 7)
+        self.assertNotIn('chinese.html', primary)
+        self.assertNotIn('english.html', primary)
+        self.assertIn('class="language-filters"', page)
+        self.assertTrue(any(tag == 'meta' and attrs.get('property') == 'og:image'
+                            and attrs.get('content') == 'https://example.com/assets/share-cover.png'
+                            for tag, attrs in elements))
+        self.assertTrue(any(tag == 'link' and attrs.get('rel') == 'icon'
+                            and attrs.get('href') == '/assets/favicon.svg' for tag, attrs in elements))
+        self.assertNotIn('↗', page)
+
     def test_publication_preserves_month_precision_and_marks_unknown(self):
         article = Article(self.source, "中文文章/example.html", "测试", "2024-09",
                           "zh-CN", "中文文章", "chinese.html", "正文")
@@ -195,6 +235,8 @@ class MarkdownRenderingTests(unittest.TestCase):
         self.assertTrue(all("hidden" in a for _, a in metric if "data-counter" in a))
         self.assertTrue(any(a.get("id") == "article-comments" and "hidden" in a for _, a in widget))
         self.assertNotIn(">0<", self.blog.metrics(article))
+        self.assertTrue(any(tag == 'label' and attrs.get('for') == 'wl-edit'
+                            for tag, attrs in widget))
 
     def test_waline_public_settings_cannot_break_out_of_json_script(self):
         self.blog.waline = {"enabled": True, "serverURL": "https://comments.test",
@@ -210,8 +252,9 @@ class MarkdownRenderingTests(unittest.TestCase):
         links = [attrs for tag, attrs in Elements(page).elements if tag == "a"]
         self.assertEqual(sum(attrs.get("href") == "/projects/" for attrs in links), 1)
         self.assertNotIn("/articles/projects/", page)
-        self.assertTrue(any(attrs.get("href") == "/articles/english.html"
-                            and attrs.get("lang") == "en" for attrs in links))
+        archive_links = [attrs for tag, attrs in Elements(self.blog.archive([])).elements if tag == "a"]
+        self.assertTrue(any(attrs.get("href") == "/articles/english.html#archive"
+                            and attrs.get("lang") == "en" for attrs in archive_links))
 
     def test_about_navigation_uses_root_route_without_article_prefix(self):
         page = self.blog.document("Example", "<p>Body</p>", "example.html", "en")

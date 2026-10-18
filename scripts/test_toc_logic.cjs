@@ -24,7 +24,7 @@ class Element {
   removeAttribute(name) { delete this.attributes[name]; }
   focus(options) { this.focusCount += 1; this.focusOptions = options; }
 }
-function setup({ narrow = false, stored = new Map(), storageGetThrows = false, storageSetThrows = false,
+function setup({ narrow = false, stored = new Map(), storageGetThrows = false, storageSetThrows = false, withImage = false,
   hasToc = true, count = 2, hasContent = true, legacyMedia = false } = {}) {
   const headings = Array.from({ length: count }, (_, i) => {
     const heading = new Element(); heading.id = i ? 'section-two' : '第一章'; heading.top = i ? 250 : 60;
@@ -40,15 +40,26 @@ function setup({ narrow = false, stored = new Map(), storageGetThrows = false, s
   const buttons = ['left', 'right', 'hidden'].map(position => { const button = new Element(); button.dataset.tocPosition = position; return button; });
   controls.querySelectorAll = selector => selector === '[data-toc-position]' ? buttons : [];
   const table = new Element(), content = new Element(), progress = new Element();
-  content.querySelectorAll = selector => selector.startsWith('h2') ? headings : selector === 'table' ? [table] : [];
+  const image = new Element(); image.src = '/articles/assets/responsive-images/example-960.webp'; image.alt = '图片说明';
+  image.srcset = '/articles/assets/responsive-images/example-960.webp 960w, /articles/assets/responsive-images/example-1920.webp 1920w';
+  image.dataset = { originalSrc: '/articles/images/original.jpg', originalWidth: '4000', originalHeight: '3000' };
+  image.closest = () => null; image.replaceWith = link => { image.link = link; };
+  const viewer = new Element(), preview = new Element(), original = new Element(), caption = new Element(), close = new Element();
+  viewer.querySelector = selector => ({ img: preview, a: original, p: caption, button: close })[selector];
+  viewer.showModal = () => { viewer.open = true; }; viewer.close = () => { viewer.open = false; viewer.emit('close'); };
+  viewer.getBoundingClientRect = () => ({ left: 5, top: 5, right: 95, bottom: 95 });
+  content.querySelectorAll = selector => selector.startsWith('h2') ? headings : selector === 'table' ? [table] : selector === 'img' && withImage ? [image] : [];
   content.offsetHeight = 1200; content.getBoundingClientRect = () => ({ top: 0 });
-  const document = { documentElement: { dataset: {} },
+  const document = { documentElement: { dataset: {}, style: { overflow: 'auto' } }, body: { style: { overflow: 'scroll' } },
     querySelector(selector) { return ({ '#article-content': hasContent ? content : null, '.article-toc': hasToc ? toc : null,
-      '.reading-layout': layout, '.toc-controls': hasToc ? controls : null, '.reading-progress span': progress })[selector] || null; } };
+      '.reading-layout': layout, '.toc-controls': hasToc ? controls : null, '.reading-progress span': progress,
+      '#article-image-viewer': withImage ? viewer : null })[selector] || null; },
+    createElement() { const link = new Element(); link.append = () => {}; return link; } };
   const media = new Element(); media.matches = narrow;
   if (legacyMedia) { media.addListener = fn => Element.prototype.addEventListener.call(media, 'change', fn); media.addEventListener = undefined; }
-  const window = new Element(); window.scrollY = 0; window.innerHeight = 800;
-  window.matchMedia = query => { assert.equal(query, '(max-width: 760px)'); return media; };
+  const window = new Element(); window.scrollX = 0; window.scrollY = 0; window.innerHeight = 800;
+  window.scrollTo = value => { window.scrollX = value.left; window.scrollY = value.top; };
+  window.matchMedia = query => { assert.equal(query, '(max-width: 1000px)'); return media; };
   window.requestAnimationFrame = fn => fn();
   window.location = new URL('https://xieyuqing.me/articles/posts/example.html');
   let historyCalls = 0;
@@ -56,7 +67,7 @@ function setup({ narrow = false, stored = new Map(), storageGetThrows = false, s
   const localStorage = { getItem(key) { if (storageGetThrows) throw new Error('blocked storage'); return stored.get(key); },
     setItem(key, value) { if (storageSetThrows) throw new Error('quota'); stored.set(key, value); } };
   vm.runInNewContext(script, { document, window, localStorage, URL, URLSearchParams });
-  return { headings, links, summary, details, toc, layout, controls, buttons, table, progress, window, stored,
+  return { document, headings, links, summary, details, toc, layout, controls, buttons, table, progress, window, stored, image, viewer, preview, original, caption, close,
     historyCalls: () => historyCalls,
     select(position) { buttons.find(button => button.dataset.tocPosition === position).emit('click'); },
     resize(isNarrow) { media.matches = isNarrow; media.emit('change'); window.emit('resize'); } };
@@ -144,8 +155,28 @@ check('malformed fragment does not break scrolling or close the mobile TOC', () 
 check('CSS supplies mobile, left, hidden, no-TOC and reduced-motion fallbacks', () => {
   assert(css.includes('.reading-layout[data-toc-position="left"]'));
   assert(css.includes('.reading-layout[data-toc-position="hidden"] .article-toc { display: none; }'));
-  assert(css.includes('.reading-layout-no-toc')); assert(css.includes('@media (max-width: 760px)'));
+  assert(css.includes('.reading-layout-no-toc')); assert(css.includes('@media (max-width: 1000px)'));
   assert(css.includes('.toc-controls { display: none; }')); assert(css.includes('minmax(0, 1fr)')); assert(css.includes('prefers-reduced-motion'));
   assert(!/wechat/i.test(css));
+});
+check('article lightbox opens the largest WebP and only links to the full original', () => {
+  const ui = setup({ withImage: true }); let prevented = false;
+  assert.equal(ui.image.link.getAttribute('aria-label'), '查看大图：图片说明');
+  assert.equal(ui.image.link.href, '/articles/images/original.jpg');
+  ui.image.link.emit('click', { preventDefault() { prevented = true; } });
+  assert(prevented); assert.equal(ui.viewer.open, true);
+  assert.equal(ui.document.documentElement.style.overflow, 'hidden'); assert.equal(ui.document.body.style.overflow, 'hidden');
+  assert.equal(ui.preview.src, '/articles/assets/responsive-images/example-1920.webp');
+  assert.equal(ui.original.href, '/articles/images/original.jpg'); assert.equal(ui.caption.textContent, '图片说明');
+  ui.close.emit('click'); assert.equal(ui.viewer.open, false); assert.equal(ui.image.link.focusCount, 1);
+  assert.equal(ui.document.documentElement.style.overflow, 'auto'); assert.equal(ui.document.body.style.overflow, 'scroll');
+});
+check('modified image clicks retain native links and unsupported WebP falls back once', () => {
+  const ui = setup({ withImage: true }); let prevented = false;
+  ui.image.link.emit('click', { ctrlKey: true, preventDefault() { prevented = true; } });
+  assert.equal(prevented, false); assert.notEqual(ui.viewer.open, true);
+  ui.image.emit('error'); assert.equal(ui.image.src, '/articles/images/original.jpg');
+  assert.equal(ui.image.width, 4000); assert.equal(ui.image.height, 3000);
+  ui.image.src = 'sentinel'; ui.image.emit('error'); assert.equal(ui.image.src, 'sentinel');
 });
 console.log(`PASS ${checks.length} TOC interaction and CSS checks; VM DOM simulation, real browser and phone layout untested`);

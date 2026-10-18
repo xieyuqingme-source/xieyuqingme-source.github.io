@@ -164,7 +164,13 @@ async function run() {
   async function assertPresentation(page) {
     assert(await page.locator('body').evaluate(body => body.classList.contains('presentation')));
     assert.equal(await page.locator('#presentation-toggle').getAttribute('aria-pressed'), 'true');
-    assert.match(await page.locator('#presentation-toggle').textContent(), /编辑.*退出展示.*Esc/);
+    assert.equal(await page.locator('#presentation-toggle').textContent(), '制作我的榜单');
+    assert.match(await page.locator('#presentation-toggle').getAttribute('aria-label'), /退出展示.*编辑/);
+    assert.equal(await page.locator('.ranking-return').getAttribute('href'), '/game/');
+    assert(await page.locator('.ranking-return').isVisible());
+    for (const selector of ['.drag-handle', '.card-remove', '.row-settings']) {
+      assert(await page.locator(selector).evaluateAll(elements => elements.every(element => getComputedStyle(element).display === 'none')), 'Presentation must keep editing icons hidden: ' + selector);
+    }
     assert.equal(await page.locator('.site-header').isVisible(), false);
     assert.equal(await page.locator('#text-name').isVisible(), false);
     assert.equal(await page.locator('#tool-message').isVisible(), false);
@@ -202,6 +208,32 @@ async function run() {
         const status = await page.evaluate(async route => (await fetch(route)).status, route); assert.equal(status, 200, `${route} must be a usable static route`);
       }
       await shot(page, 'desktop-default-presentation.png');
+    });
+    await check('make-my-ranking and return entries stay accessible without page overflow at 320, 390, 768 and 1180px', async () => {
+      const layouts = [];
+      for (const width of [320, 390, 768, 1180]) {
+        await page.setViewportSize({ width, height: 900 });
+        for (const enabled of [true, false]) {
+          const current = await page.locator('body').evaluate(body => body.classList.contains('presentation'));
+          if (current !== enabled) await page.locator('#presentation-toggle').click();
+          await page.waitForTimeout(60);
+          const layout = await page.evaluate(() => {
+            const geometry = selector => { const box = document.querySelector(selector).getBoundingClientRect(); return { left: box.left, right: box.right, width: box.width }; };
+            return { width: innerWidth, page: document.documentElement.scrollWidth, body: document.body.scrollWidth, presentation: document.body.classList.contains('presentation'), entry: geometry('#presentation-toggle'), back: geometry('.ranking-return') };
+          });
+          assert(layout.page <= width + 2 && layout.body <= width + 2, JSON.stringify(layout));
+          for (const box of [layout.entry, layout.back]) assert(box.width > 0 && box.left >= -1 && box.right <= width + 1, JSON.stringify(layout));
+          await page.locator('#presentation-toggle').focus();
+          assert(await page.locator('#presentation-toggle').evaluate(button => document.activeElement === button));
+          await page.locator('.ranking-return').focus();
+          assert(await page.locator('.ranking-return').evaluate(link => document.activeElement === link));
+          if (!enabled) assert.equal(await page.locator('.site-nav a').count(), 7);
+          layouts.push(layout); await shot(page, `entry-${width}-${enabled ? 'presentation' : 'editor'}.png`);
+        }
+      }
+      await page.setViewportSize({ width: 1440, height: 1000 });
+      await page.locator('#presentation-toggle').click(); await assertPresentation(page);
+      return { layouts };
     });
     const defaultTitle = expectedDefault.title;
     const defaultCount = expectedDefault.rows.reduce((count, row) => count + row.items.length, 0);
@@ -514,7 +546,7 @@ async function run() {
     await check('mobile touch click movement, light/dark layout, and no horizontal overflow', async () => {
       const item = await firstId(mobile);
       const targetId = await mobile.locator('.tier-row').first().getAttribute('data-row-id');
-      await mobile.locator(`.rank-card[data-item-id="${item}"] .card-main`).tap();
+      const mobileCard=mobile.locator(`.rank-card[data-item-id="${item}"] .card-main`); await mobileCard.scrollIntoViewIfNeeded(); const mobileCardBox=await mobileCard.boundingBox(); await mobile.touchscreen.tap(mobileCardBox.x+mobileCardBox.width/2,mobileCardBox.y+mobileCardBox.height/2);
       await mobile.locator('#item-target').selectOption(targetId); await mobile.locator('#item-save').tap();
       assert.deepEqual(await cardIds(mobile, targetId), [item]);
       assert((await mobile.evaluate(() => document.documentElement.scrollWidth - innerWidth)) <= 1);
@@ -523,7 +555,7 @@ async function run() {
       await mobile.locator('#theme-toggle').tap(); await shot(mobile, 'mobile-dark.png');
     });
     await check('mobile touch pointer drag in presentation view', async () => {
-      await mobile.locator('#presentation-toggle').tap();
+      await mobile.locator('#presentation-toggle').tap(); await mobile.locator('#touch-sort-toggle').tap();
       // CDP sends touch input to this isolated test page; this does not operate a
       // user browser. Physical devices still need a manual feel/accessibility check.
       const id = await firstId(mobile);

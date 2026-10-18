@@ -51,6 +51,7 @@ function resource(url) {
   return { status: 200, contentType: mime[path.extname(target)] || 'application/octet-stream', body };
 }
 async function check(name, action) {
+  if (process.env.QA_FILTER && !name.includes(process.env.QA_FILTER)) return;
   const started = Date.now();
   try { const detail = await action(); report.checks.push({ name, passed: true, ms: Date.now() - started, ...(detail ? { detail } : {}) }); console.log('PASS ' + name); }
   catch (error) { report.checks.push({ name, passed: false, ms: Date.now() - started, error: error.stack || String(error) }); console.error('FAIL ' + name + ': ' + (error.stack || error.message)); }
@@ -165,7 +166,7 @@ async function run() {
   fs.mkdirSync(output, { recursive: true });
   assert(fs.existsSync(path.join(site, 'map', 'index.html')), 'Build /map/ before running the browser checks');
   report.fileHashes = {};
-  for (const relative of ['map/index.html', 'assets/map-model.js', 'assets/map.js', 'assets/map.css', 'assets/map-view.js', 'assets/map-land.json', 'assets/map-terrain.jpg']) report.fileHashes[relative] = crypto.createHash('sha256').update(fs.readFileSync(path.join(site, relative))).digest('hex');
+  for (const relative of ['map/index.html', 'assets/map-model.js', 'assets/map.js', 'assets/map.css', 'assets/map-view.js', 'assets/map-land.json', 'assets/map-terrain.webp', 'assets/map-terrain.jpg']) report.fileHashes[relative] = crypto.createHash('sha256').update(fs.readFileSync(path.join(site, relative))).digest('hex');
   const downloadsPath = path.join(output, 'downloads'); fs.mkdirSync(downloadsPath, { recursive: true });
   browser = await playwright.chromium.launch({ headless: true, executablePath: chrome, downloadsPath }); report.browserVersion = browser.version();
   const backgrounds = {};
@@ -176,7 +177,7 @@ async function run() {
       await visit(page); assert.equal(await page.locator('html').getAttribute('data-theme'), theme); await importSeed(page);
       assert.equal(await page.locator('#timeline-list li').count(), 3); assert.equal(await page.locator('.map-marker').count(), 2, 'One London marker groups two distinct stays');
       assert.equal(await page.locator('#map-layer').inputValue(), 'terrain', 'Fresh maps default to natural terrain');
-      assert((await page.locator('#map-terrain-image').getAttribute('href')).startsWith('data:image/jpeg;base64,'), 'Bundled terrain is embedded locally');
+      assert((await page.locator('#map-terrain-image').getAttribute('href')).startsWith('data:image/webp;base64,'), 'Bundled terrain is embedded locally');
       await page.locator('#map-layer').selectOption('simple'); assert(await page.locator('#footprints-map .map-land').count() > 100, 'The alternate simple physical-land layer is usable'); await page.locator('#map-layer').selectOption('terrain'); await page.waitForFunction(() => FootprintsMap.assetsReady() && !!document.querySelector('#map-terrain-image'));
       assert.match(await page.locator('.map-attribution').textContent(), /Natural Earth.*Public Domain/);
       assert.equal(await page.locator('.map-svg-note,.map-svg-label').count(), 0);
@@ -200,7 +201,7 @@ async function run() {
       await visitor(page); await noSilentChanges(page, before);
       await page.locator('#map-view').selectOption('asia'); assert.equal(await page.locator('#timeline-list li').count(), 3); assert.equal(await page.locator('.map-marker').count(), 1); await noOverflow(page);
       await page.locator('#map-view').selectOption('world'); await page.locator('#map-route').check(); assert.equal(await page.locator('.map-order').count(), 1); assert.equal(await page.locator('.map-order').getAttribute('d'), '', 'Unplayed video must not reveal future route segments'); assert.equal(await page.locator('.map-order').getAttribute('display'), 'inline');
-      assert.match(await page.locator('.route-option').textContent(), /时间顺序/); assert.match(await page.locator('.map-help').textContent(), /仅表示时间顺序/);
+      assert.match(await page.locator('.route-option').filter({ has: page.locator('#map-route') }).textContent(), /时间顺序/); assert.match(await page.locator('.map-help').textContent(), /仅表示时间顺序/);
       await page.locator('#map-route').uncheck(); assert.equal(await page.locator('.map-order').getAttribute('display'), 'none'); await noSilentChanges(page, before);
       const london = page.locator('.map-marker[aria-label*="London"]'); assert.equal(await london.count(), 1); assert.match(await london.textContent(), /≈/);
       await press(page, london.locator('.map-hit')); await page.locator('#city-dialog[open]').waitFor(); assert.equal(await page.locator('#city-options section').count(), 2); assert.equal(await page.locator('#timeline-list li').count(), 3, 'A city click opens its stays without filtering the timeline');
@@ -284,20 +285,78 @@ async function run() {
     const dates = await page.locator('#timeline-list .timeline-date').allTextContents(); assert(dates.some(text => text.includes('2020'))); assert(dates.every(text => !/2020-01|至今|现在|present|ongoing/i.test(text)));
     assert.equal(await page.locator('#timeline-list li').first().getAttribute('data-record-id'), 'qa-year');
   });
+  await check('map gestures: actual drag, wheel, keyboard, double-click cancel and city labels preserve data', async () => {
+    await visit(page); await importSeed(page); await page.locator('#map-view').selectOption('world');
+    await page.locator('#map-zoom-in').click();
+    const before = await exported(page), initial = await page.evaluate(() => FootprintsMap.camera());
+    await page.locator('#footprints-map').scrollIntoViewIfNeeded();
+    const box = await page.locator('#footprints-map').boundingBox(), x = box.x + box.width * .45, y = box.y + box.height * .65;
+    await page.mouse.move(x, y); await page.mouse.down(); await page.mouse.move(x + 90, y + 35, { steps: 8 }); await page.mouse.up();
+    const dragged = await page.evaluate(() => FootprintsMap.camera()); assert.notDeepEqual(dragged.pan, initial.pan); assert.equal(await page.locator('#record-dialog').isVisible(), false);
+    await page.mouse.move(x, y); await page.mouse.wheel(0, -120); await page.waitForFunction(zoom => FootprintsMap.camera().zoom > zoom, dragged.zoom);
+    await page.locator('#footprints-map').focus(); const wheel = await page.evaluate(() => FootprintsMap.camera());
+    await page.keyboard.press('ArrowRight'); assert.notDeepEqual((await page.evaluate(() => FootprintsMap.camera())).pan, wheel.pan);
+    await page.keyboard.press('+'); assert((await page.evaluate(() => FootprintsMap.camera())).zoom > wheel.zoom);
+    await page.locator('#map-zoom-reset').click();
+    await page.locator('#map-labels').check(); assert((await page.locator('#map-label-layer .map-city-label').count()) > 0);
+    await page.locator('#map-labels').uncheck(); assert.equal(await page.locator('#map-label-layer .map-city-label').count(), 0);
+    await page.locator('#footprints-map').scrollIntoViewIfNeeded(); await page.waitForTimeout(750);
+    const blank = await page.locator('#footprints-map').boundingBox();
+    await page.mouse.dblclick(blank.x + 20, blank.y + 20); await page.locator('#record-dialog[open]').waitFor();
+    assert(Number.isFinite(Number(await page.locator('#record-lat').inputValue()))); assert(Number.isFinite(Number(await page.locator('#record-lon').inputValue())));
+    await page.locator('#record-cancel').click(); await closed(page, '#record-dialog'); await noSilentChanges(page, before);
+    return { initial, dragged, wheel };
+  });
+  await check('320px and 768px map layouts keep tools below the canvas without overflow', async () => {
+    const layouts = [];
+    for (const width of [320, 768]) {
+      const narrow = await context({ viewport: { width, height: 900 }, isMobile: width === 320, hasTouch: width === 320 });
+      const sample = await narrow.newPage(); await visit(sample); await noOverflow(sample);
+      const layout = await sample.evaluate(() => ({ canvas: document.querySelector('#map-canvas').getBoundingClientRect().toJSON(), tools: document.querySelector('.map-below-tools').getBoundingClientRect().toJSON(), timeline: document.querySelector('.timeline-panel').getBoundingClientRect().toJSON() }));
+      assert(layout.tools.y >= layout.canvas.bottom - 1); assert(layout.timeline.y >= layout.canvas.bottom);
+      layouts.push({ width, ...layout }); await shot(sample, `width-${width}-map.png`);
+      await narrow.close();
+    }
+    return layouts;
+  });
+  await check('terrain loads only the full-resolution WebP normally and falls back to JPEG after decode failure', async () => {
+    assert(!report.requests.some(request => request.path === '/assets/map-terrain.jpg'), 'Healthy WebP requests never download JPEG');
+    await visit(page); assert.match(await page.locator('#map-terrain-image').getAttribute('href'), /^data:image\/webp;base64,/);
+    const fallback = await context();
+    await fallback.route('**/assets/map-terrain.webp', route => route.fulfill({ contentType: 'image/webp', body: Buffer.from('RIFF0000WEBPinvalid-image') }));
+    const sample = await fallback.newPage(); await visit(sample);
+    const href = await sample.locator('#map-terrain-image').getAttribute('href'); assert.match(href, /^data:image\/jpeg;base64,/);
+    assert(report.requests.some(request => request.path === '/assets/map-terrain.jpg'), 'Compatibility fallback loads the original JPEG');
+    const dimensions = await sample.evaluate(async data => { const image = new Image(); image.src = data; await image.decode(); return { width: image.naturalWidth, height: image.naturalHeight }; }, href);
+    assert.deepEqual(dimensions, { width: 6144, height: 3072 }); await fallback.close(); return dimensions;
+  });
+  await check('timeline renders identical title/description once and preserves complete different text', async () => {
+    await visit(page); await visitor(page);
+    const same = record({ id: 'qa-same', title: 'Same original description', description: 'Same original description' });
+    const different = record({ id: 'qa-different', start: '2019', end: '2019', title: 'A distinct title', description: longStory });
+    await importText(page, JSON.stringify(dataset([same, different])));
+    const sameRow = page.locator('#timeline-list li[data-record-id="qa-same"]');
+    assert.equal(await sameRow.locator('.timeline-open').textContent(), same.title);
+    assert.equal(await sameRow.locator('.timeline-description').count(), 0);
+    assert.equal(await page.locator('#timeline-list li[data-record-id="qa-different"] .timeline-description').textContent(), longStory);
+    await openDetail(page, same.title); assert.equal(await page.locator('#detail-description').isVisible(), false); await page.locator('#detail-close').click();
+    await openDetail(page, different.title); await verifyCompleteDescription(page, longStory); await page.locator('#detail-close').click();
+    assert.equal(canonical(await exported(page)), canonical(dataset([same, different])));
+  });
   await check('description/title markup is escaped as text with no executable nodes', async () => {
     await visit(page); await visitor(page); const unsafe = record({ id: 'qa-xss', title: 'Synthetic <img src=x onerror="window.__footprintXss=4">', city: 'City <img src=x onerror="window.__footprintXss=6">', description: injection });
     await importText(page, JSON.stringify({ ...dataset([unsafe]), title: 'Synthetic <script>window.__footprintXss=5</script>' })); assert.equal((await exported(page)).records.length, 1); await openDetail(page, unsafe.title);
     assert.equal(await page.locator('#detail-description').textContent(), injection); assert.equal(await page.locator('#detail-dialog script,#detail-dialog img,#detail-dialog svg').count(), 0); assert.equal(await page.evaluate(() => window.__footprintXss), 0);
     await page.locator('#detail-close').click(); assert.equal(await page.locator('#timeline-list script,#timeline-list img,#timeline-list svg').count(), 0);
     const svg = (await download(page, '#export-svg', 'footprints.svg')).toString('utf8');
-    const info = await page.evaluate(source => { const doc = new DOMParser().parseFromString(source, 'image/svg+xml'); return { error: !!doc.querySelector('parsererror'), executable: !!doc.querySelector('script,foreignObject'), unsafeImages: [...doc.querySelectorAll('image')].some(node => !/^data:image\/(png|jpeg);base64,/.test(node.getAttribute('href') || '')), handlers: [...doc.querySelectorAll('*')].some(node => [...node.attributes].some(attribute => /^on/i.test(attribute.name))), description: [...doc.querySelectorAll('.export-caption')].map(node => node.textContent).join('') }; }, svg);
+    const info = await page.evaluate(source => { const doc = new DOMParser().parseFromString(source, 'image/svg+xml'); return { error: !!doc.querySelector('parsererror'), executable: !!doc.querySelector('script,foreignObject'), unsafeImages: [...doc.querySelectorAll('image')].some(node => !/^data:image\/(png|jpeg|webp);base64,/.test(node.getAttribute('href') || '')), handlers: [...doc.querySelectorAll('*')].some(node => [...node.attributes].some(attribute => /^on/i.test(attribute.name))), description: [...doc.querySelectorAll('.export-caption')].map(node => node.textContent).join('') }; }, svg);
     assert.deepEqual({ error: info.error, executable: info.executable, unsafeImages: info.unsafeImages, handlers: info.handlers }, { error: false, executable: false, unsafeImages: false, handlers: false }); assert.equal(info.description, injection); assert.equal(await page.evaluate(() => window.__footprintXss), 0);
   });
   await check('standalone SVG and PNG exports decode and preserve view; fine print stays on the page', async () => {
     await visit(page); await importSeed(page); await page.locator('#map-view').selectOption('world'); await page.locator('#map-route').check();
     const svg = await download(page, '#export-svg', 'footprints.svg', 'synthetic-footprints.svg');
     const svgInfo = await page.evaluate(source => { const doc = new DOMParser().parseFromString(source, 'image/svg+xml'), root = doc.documentElement; return { error: !!doc.querySelector('parsererror'), name: root.localName, width: root.getAttribute('width'), height: root.getAttribute('height'), attribution: [...doc.querySelectorAll('.map-svg-note')].map(node => node.textContent).join(' '), styles: doc.querySelectorAll('style').length, externalResources: [...doc.querySelectorAll('[href],[src]')].map(node => node.getAttribute('href') || node.getAttribute('src')).filter(href => href && !href.startsWith('#')) }; }, svg.toString('utf8'));
-    assert.equal(svgInfo.error, false); assert.equal(svgInfo.name, 'svg'); assert.equal(svgInfo.attribution, ''); assert(svgInfo.styles > 0); assert(svgInfo.externalResources.every(href => /^data:image\/(png|jpeg);base64,/.test(href))); assert.match(await page.locator('.map-attribution').textContent(), /Natural Earth.*Public Domain/); assert(!svg.toString('utf8').includes('Natural Earth'));
+    assert.equal(svgInfo.error, false); assert.equal(svgInfo.name, 'svg'); assert.equal(svgInfo.attribution, ''); assert(svgInfo.styles > 0); assert(svgInfo.externalResources.every(href => /^data:image\/(png|jpeg|webp);base64,/.test(href))); assert.match(await page.locator('.map-attribution').textContent(), /Natural Earth.*Public Domain/); assert(!svg.toString('utf8').includes('Natural Earth'));
     const png = await download(page, '#export-png', 'footprints.png', 'synthetic-footprints.png'); assert.deepEqual([...png.subarray(0, 8)], [137, 80, 78, 71, 13, 10, 26, 10]);
     const width = png.readUInt32BE(16), height = png.readUInt32BE(20); assert(width >= 1000 && height >= 600);
     const decoded = await page.evaluate(async encoded => { const image = new Image(); image.src = 'data:image/png;base64,' + encoded; await image.decode(); return { width: image.naturalWidth, height: image.naturalHeight }; }, png.toString('base64')); assert.deepEqual(decoded, { width, height });

@@ -8,6 +8,10 @@
 .tool-description { max-width: 54em; margin: 16px 0 0; color: var(--muted); font-size: .84rem; line-height: 1.8; }
 .tool-toolbar, .toolbar-group { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
 .tool-toolbar { justify-content: space-between; margin-bottom: 24px; gap: 14px; }
+.ranking-return { display: inline-flex; align-items: center; gap: 6px; min-height: 40px; margin-right: auto; color: var(--muted); font-size: .75rem; text-decoration: none; }
+.ranking-return:hover { color: var(--accent); text-decoration: underline; }
+.ranking-return svg { flex: 0 0 auto; }
+.tool-toolbar > .toolbar-group { min-width: 0; max-width: 100%; }
 .game-button, .upload-button { display: inline-flex; align-items: center; justify-content: center; gap: 18px; min-height: 40px; padding: 7px 13px; border: 1px solid var(--line); border-radius: 6px; background: var(--surface); color: var(--ink); font: 500 .8rem/1.6 var(--sans); cursor: pointer; text-decoration: none; }
 .game-button:hover, .upload-button:hover { border-color: var(--accent); }
 .game-button.primary { color: var(--paper); background: var(--accent); border-color: var(--accent); }
@@ -121,7 +125,8 @@ body.ranking-page.view-large.presentation .ranking-main { width: calc(100% - 32p
 body.dragging { user-select: none; cursor: grabbing; }
 .presentation .site-header, .presentation .site-footer, .presentation .editor-only { display: none !important; }
 .presentation .ranking-main { padding-block: 16px 32px; }
-.presentation .tool-toolbar { justify-content: flex-end; margin-bottom: 4px; }
+.presentation .tool-toolbar { justify-content: space-between; margin-bottom: 4px; }
+.presentation #presentation-toggle { background: var(--accent); color: var(--paper); border-color: var(--accent); }
 .presentation .board-heading { padding-top: 0; }
 .presentation #display-title { display: block !important; margin: 0; font-size: clamp(1.5rem,3vw,2.5rem); line-height: 1.4; overflow-wrap: anywhere; }
 .presentation #ranking-title { display: none; }
@@ -161,3 +166,29 @@ body.dragging { user-select: none; cursor: grabbing; }
 .item-error { font-size: .8rem; overflow-wrap: anywhere; }
 .image-item-dialog .dialog-actions { position: sticky; bottom: -24px; padding-bottom: 12px; background: var(--surface); }
 @media(max-width:430px) { .image-item-dialog { padding: 16px; }.image-item-dialog .dialog-actions { bottom: -16px; gap: 7px; }.image-item-dialog .dialog-actions .game-button { font-size: .74rem; padding-inline: 9px; } }
+
+/* Phone viewing keeps scrolling native; sorting is an explicit temporary mode. */
+.touch-sort-control, .touch-sort-note { display: none; }
+@media (any-pointer: coarse) {
+  .presentation .touch-sort-control { display: inline-flex; }
+  .presentation .touch-sort-note { display: block; }
+  .ranking-page .board-viewport { overscroll-behavior-y: auto; }
+  .ranking-page.view-large .board-viewport { overscroll-behavior-y: contain; }
+  .presentation:not(.touch-sort-enabled) .rank-card,
+  .presentation:not(.touch-sort-enabled) .card-main,
+  .ranking-page:not(.presentation) .card-main { touch-action: pan-x pan-y pinch-zoom; }
+  .presentation.touch-sort-enabled .rank-card,
+  .presentation.touch-sort-enabled .card-main { touch-action: none; }
+  .ranking-page .game-button, .ranking-page .upload-button, .ranking-page .ranking-return,
+  .ranking-page .row-settings, .ranking-page .close-button { min-height: 44px; min-width: 44px; }
+  .ranking-page .backup-panel summary { min-height: 44px; padding-block: 10px; }
+  .ranking-page .close-button { display: inline-flex; align-items: center; justify-content: center; }
+  .ranking-page .drag-handle { width: 44px; height: 44px; top: 0; right: 0; isolation: isolate; }
+  .ranking-page .drag-handle::before { content: ''; position: absolute; inset: 9px; z-index: -1; border-radius: 4px; background: #fffef9dd; }
+  .ranking-page .card-remove { display: none; }
+  .ranking-page #crop-zoom { min-height: 44px; }
+  .ranking-page .ranking-main select { min-height: 44px; }
+  .ranking-page .game-dialog { max-height: calc(100dvh - 40px); }
+  body.ranking-page.view-large.presentation .ranking-main { padding-top: max(10px, env(safe-area-inset-top, 0px)); padding-bottom: max(20px, env(safe-area-inset-bottom, 0px)); }
+  .view-large .view-toolbar { top: env(safe-area-inset-top, 0px); }
+}

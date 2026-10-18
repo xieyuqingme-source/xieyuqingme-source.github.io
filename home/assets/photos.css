@@ -28,7 +28,7 @@
 .photo-item .photo-facts { margin-top: 8px; gap: 4px 12px; font-size: .73rem; }
 .photos-empty { padding: 40px 0; border-block: 1px solid var(--line); color: var(--muted); }
 .photo-help { margin: 28px 0 0; color: var(--muted); font-size: .75rem; }
-.photo-viewer { width: min(1180px, calc(100vw - 32px)); max-width: none; max-height: calc(100dvh - 32px); padding: 0; border: 1px solid var(--line); border-radius: 10px; color: var(--ink); background: var(--surface); overflow: auto; overscroll-behavior: contain; }
+.photo-viewer { width: min(1180px, calc(100vw - max(16px, env(safe-area-inset-left)) - max(16px, env(safe-area-inset-right)))); max-width: none; max-height: calc(100dvh - max(16px, env(safe-area-inset-top)) - max(16px, env(safe-area-inset-bottom))); padding: 0; border: 1px solid var(--line); border-radius: 10px; color: var(--ink); background: var(--surface); overflow: auto; overscroll-behavior: contain; }
 .photo-viewer::backdrop { background: rgb(0 0 0 / .86); }
 .photo-viewer-head { position: sticky; top: 0; z-index: 2; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 16px; background: var(--surface); }
 .photo-position { margin: 0; color: var(--muted); font-size: .78rem; }
@@ -56,13 +56,18 @@
   .photo-open img { aspect-ratio: 1 / 1; }
   .photo-item h2 { font-size: .85rem; }
   .photo-item figcaption { font-size: .75rem; }
-  .photo-viewer { width: calc(100vw - 12px); max-height: calc(100dvh - 12px); border-radius: 6px; }
+  .photo-viewer { width: calc(100vw - max(6px, env(safe-area-inset-left)) - max(6px, env(safe-area-inset-right))); max-height: calc(100dvh - max(6px, env(safe-area-inset-top)) - max(6px, env(safe-area-inset-bottom))); border-radius: 6px; }
   .photo-large { max-height: calc(100dvh - 250px); }
   .photo-viewer-head { padding: 6px 10px; }
   .photo-viewer-copy { padding: 14px 16px 18px; }
   .photo-previous { left: 6px; }
   .photo-next { right: 6px; }
 }
+@media (orientation: landscape) and (max-height: 500px) {
+  .photo-stage { min-height: 0; }
+  .photo-large { max-height: calc(100dvh - 104px); }
+}
 @media (prefers-reduced-motion: reduce) {
   .album-cover img, .photo-open img { transition: none; }
+  .album-card > a:hover img { transform: none; }
 }

@@ -16,10 +16,10 @@ function element() {
     }
   };
 }
-function gesture() {
+function gesture(options = {}) {
   const node = element(), log = [], document = element(); node.ownerDocument = document;
   let active = true;
-  const handle = V.installGestures({ element: node, toMapPoint: event => ({ lon: event.clientX / 10, lat: -event.clientY / 10 }), isEnabled: () => active, isMarker: target => target.marker, onPan: value => log.push(["pan", value]), onZoom: (factor, anchor) => log.push(["zoom", factor, anchor]), onPick: point => log.push(["pick", point]) });
+  const handle = V.installGestures({ element: node, toMapPoint: event => ({ lon: event.clientX / 10, lat: -event.clientY / 10 }), isEnabled: () => active, isMarker: target => target.marker, onPan: value => log.push(["pan", value]), onZoom: (factor, anchor) => log.push(["zoom", factor, anchor]), onPick: point => log.push(["pick", point]), ...options });
   return { node, document, handle, log, disable() { active = false; } };
 }
 test("geographic camera clamps without wrapping and preserves source bounds", () => {
@@ -223,4 +223,17 @@ test("pointer cancellation, nonprimary buttons and invalid coordinates do not ad
 test("closing, cancelling and disposal keep gestures inert without leaked listeners", () => {
   const t = gesture(); t.node.fire("pointerdown"); t.document.fire("pointermove", { clientX: 120 }); t.handle.reset(); t.document.fire("pointerup"); assert.equal(t.log.length, 1); assert.equal(t.node.captures.size, 0);
   t.handle.dispose(); t.handle.dispose(); t.node.fire("wheel", { deltaY: 100 }); t.node.fire("pointerdown"); t.document.fire("pointerup"); t.node.fire("dblclick", { detail: 2 }); assert.equal(t.log.length, 1); assert.equal(t.node.style.touchAction, "auto"); assert.ok([...t.node.handlers.values(), ...t.document.handlers.values()].every(items => items.length === 0));
+});
+
+test("inline touch scrolling yields native gestures and city taps until operation mode is enabled", () => {
+  let interactive = false; const t = gesture({ isTouchEnabled: () => interactive });
+  const down = t.node.fire("pointerdown", { pointerType: "touch" });
+  const move = t.document.fire("pointermove", { pointerType: "touch", clientY: 50 });
+  t.document.fire("pointerup", { pointerType: "touch", clientY: 50 });
+  assert.equal(down.prevented, undefined); assert.equal(move.prevented, undefined); assert.equal(t.log.length, 0); assert.equal(t.node.captures.size, 0);
+  assert.equal(t.node.fire("click", { target: { marker: true } }).stopped, undefined);
+  t.node.fire("dblclick", { detail: 2 }); assert.equal(t.log.length, 0);
+  interactive = true; t.handle.reset();
+  t.node.fire("pointerdown", { pointerType: "touch" }); t.document.fire("pointermove", { pointerType: "touch", clientY: 70 }); t.document.fire("pointerup", { pointerType: "touch", clientY: 70 });
+  assert.equal(t.log[0][0], "pan"); assert.equal(t.node.captures.size, 0);
 });

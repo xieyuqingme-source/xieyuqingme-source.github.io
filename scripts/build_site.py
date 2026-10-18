@@ -10,6 +10,8 @@ import ipaddress
 import re
 import shutil
 
+from PIL import Image
+
 from build_blog import Blog, ROOT
 from photo_pages import build_photos
 from map_pages import load_map, build_map
@@ -34,42 +36,13 @@ GAME_SPORT_ASSETS = ("walking.webp", "hiking.webp", "running.webp", "weight-trai
                      "skydiving.webp", "rock-climbing.webp", "diving.webp", "golf.webp", "gaming.webp")
 
 PROJECT_FIELDS = {"id", "title", "english_title", "kind", "summary", "problem", "features",
-                  "contribution", "usage", "icon", "source_url", "guide_url"}
-PROJECT_OPTIONAL_FIELDS = {"download_url", "download_label", "guide_label", "link_status"}
+                  "contribution", "usage", "license", "screenshot", "screenshot_alt", "screenshot_caption", "source_url", "guide_url"}
+PROJECT_OPTIONAL_FIELDS = {"download_url", "download_label", "guide_label", "link_status", "demo_url"}
+PROJECT_DEMO_ROUTES = {"/map/", "/game/ranking/"}
+BRAND_ASSETS = ("share-cover.png", "favicon.svg")
 ABOUT_FIELDS = {"name", "english_name", "chinese_bio", "english_bio", "wechat", "email"}
 PRIVATE_PATH = re.compile(r"(?<![A-Za-z0-9])[A-Za-z]:[\\/]|\\\\[^\s\\]+[\\/]|/(?:Users|home|mnt)/", re.I)
-PROJECT_ICONS = {
-    "editor": '''<svg viewBox="0 0 360 180" role="presentation" aria-hidden="true" focusable="false">
-  <rect x="42" y="24" width="124" height="132" rx="10" class="visual-panel"/>
-  <path d="M61 46h46M61 62h82M61 74h70M61 86h77M61 98h68" class="visual-line"/>
-  <rect x="61" y="112" width="44" height="25" rx="3" class="visual-image"/>
-  <path d="m66 131 11-10 9 7 7-5 8 8" class="visual-line"/>
-  <path d="M183 90h22m-7-6 7 6-7 6" class="visual-arrow"/>
-  <rect x="222" y="18" width="96" height="144" rx="14" class="visual-panel"/>
-  <path d="M255 29h30M237 48h49M237 61h66M237 71h57M237 81h63" class="visual-line"/>
-  <rect x="237" y="94" width="66" height="31" rx="3" class="visual-image"/>
-  <path d="M237 137h66M237 144h48" class="visual-line"/>
-</svg>''',
-    "workflow": '''<svg viewBox="0 0 360 180" role="presentation" aria-hidden="true" focusable="false">
-  <rect x="25" y="59" width="54" height="62" rx="8" class="visual-panel"/>
-  <path d="M38 77h25M38 88h22M38 99h25" class="visual-line"/>
-  <path d="M84 90h17m-6-6 6 6-6 6" class="visual-arrow"/>
-  <rect x="109" y="63" width="62" height="54" rx="8" class="visual-panel"/>
-  <path d="m130 78-9 12 9 12m20-24 9 12-9 12m-6-26-8 28" class="visual-line"/>
-  <path d="M177 90h17m-6-6 6 6-6 6" class="visual-arrow"/>
-  <rect x="202" y="63" width="62" height="54" rx="8" class="visual-panel"/>
-  <path d="M218 78h30M218 90h23M218 102h30" class="visual-line"/>
-  <path d="M270 90h17m-6-6 6 6-6 6" class="visual-arrow"/>
-  <rect x="295" y="53" width="42" height="74" rx="8" class="visual-panel"/>
-  <path d="M305 72h22M305 84h22M305 96h22M305 108h14" class="visual-line"/>
-</svg>''',
-    "wallpaper": '''<svg viewBox="0 0 360 180" role="presentation" aria-hidden="true" focusable="false">
-  <rect x="36" y="22" width="288" height="126" rx="9" class="visual-panel"/>
-  <circle cx="249" cy="62" r="15" class="visual-image"/>
-  <path d="m55 130 62-67 46 48 32-29 57 48m-57-48 14-20 56 68" class="visual-line"/>
-  <path d="M164 148v15m32-15v15m-48 0h64" class="visual-line"/>
-</svg>''',
-}
+EXTERNAL_ICON = '''<svg class="external-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 17 17 7M7 7h10v10"/></svg>'''
 
 
 def project_url(value):
@@ -108,19 +81,21 @@ def validate_projects(data):
         status = item.get("link_status", "published")
         if not isinstance(status, str) or status not in {"pending", "published"}:
             raise ValueError("Project link status must be pending or published.")
-        if status == "pending" and any(name in item for name in ("source_url", "guide_url", "guide_label", "download_url", "download_label")):
+        if status == "pending" and any(name in item for name in ("source_url", "guide_url", "guide_label", "download_url", "download_label", "demo_url")):
             raise ValueError("Pending projects must not contain unconfirmed publication links.")
         if "download_label" in item and "download_url" not in item:
             raise ValueError("A download label requires a confirmed download URL.")
         for name, value in item.items():
             if (not isinstance(value, str) or not value.strip() or len(value) > 2000
-                    or PRIVATE_PATH.search(value) or any(ord(c) < 32 for c in value)):
+                    or (name not in {"source_url", "guide_url", "download_url"} and PRIVATE_PATH.search(value)) or any(ord(c) < 32 for c in value)):
                 raise ValueError(f"Invalid public project field: {name}.")
         if not re.fullmatch(r"[a-z][a-z0-9-]{1,63}", item["id"]) or item["id"] in seen:
             raise ValueError("Project IDs must be unique lowercase slugs.")
         seen.add(item["id"])
-        if item["icon"] not in PROJECT_ICONS:
-            raise ValueError("Project visuals must use a built-in icon.")
+        if not re.fullmatch(r"/assets/projects/[a-z][a-z0-9-]*\.webp", item["screenshot"]):
+            raise ValueError("Project screenshots must use an explicit local WebP asset.")
+        if "demo_url" in item and item["demo_url"] not in PROJECT_DEMO_ROUTES:
+            raise ValueError("Project browser demos must use a confirmed site route.")
         for name in ("source_url", "guide_url", "download_url"):
             if name in item:
                 project_url(item[name])
@@ -179,29 +154,52 @@ def render_about(data):
 </article>'''
 
 
+def project_asset_sources(projects):
+    """Only copy reviewed screenshots, never a tool's private exports or asset folder."""
+    sources = []
+    folder = ROOT / "home/assets/projects"
+    for parent in (ROOT / "home", ROOT / "home/assets", folder):
+        if linked_directory(parent):
+            raise ValueError("Project screenshot directory links are not supported.")
+    for item in projects:
+        source = folder / Path(item["screenshot"]).name
+        if linked_directory(source) or not source.is_file():
+            raise ValueError(f"Missing or linked project screenshot: {source.name}")
+        with Image.open(source) as image:
+            if image.format != "WEBP" or min(image.size) < 200:
+                raise ValueError(f"Project screenshot must be a readable WebP: {source.name}")
+        sources.append(source)
+    return sources
+
+
 def render_projects(projects):
     projects = validate_projects({"projects": projects})
     cards = []
     for item in projects:
         text = {name: escape(value, quote=True) for name, value in item.items()}
+        with Image.open(ROOT / "home" / item["screenshot"].lstrip("/")) as image:
+            width, height = image.size
         facts = "".join(f'<div><dt>{label}</dt><dd>{text[name]}</dd></div>' for label, name in (
             ("解决的问题", "problem"), ("主要功能", "features"),
-            ("实际贡献", "contribution"), ("使用方式", "usage")))
+            ("实际贡献", "contribution"), ("来源与许可", "license")))
         download_label = text.get("download_label", "下载工作流")
         guide_label = text.get("guide_label", "下载与使用说明")
-        download = (f'<a class="project-guide" href="{text["download_url"]}">{download_label} <span lang="en">Download</span></a>'
+        download = (f'<a class="project-guide" href="{text["download_url"]}">{download_label}</a>'
                     if "download_url" in text else "")
+        demo = (f'<a class="project-demo" href="{text["demo_url"]}">打开体验 <span aria-hidden="true">→</span></a>'
+                if "demo_url" in text else "")
         actions = ('<span class="project-pending">发布链接待确认</span>'
                    if item.get("link_status") == "pending" else
-                   f'<a class="project-source" href="{text["source_url"]}">查看 GitHub <span lang="en">Source</span></a>'
-                   f'<a class="project-guide" href="{text["guide_url"]}">{guide_label} <span lang="en">Guide</span></a>{download}')
+                   demo + f'<a class="project-source" href="{text["source_url"]}">查看 GitHub {EXTERNAL_ICON}</a>'
+                   f'<a class="project-guide" href="{text["guide_url"]}">{guide_label}</a>{download}')
         cards.append(f'''<article class="project-card" aria-labelledby="project-{text["id"]}">
-  <div class="project-visual">{PROJECT_ICONS[item["icon"]]}</div>
+  <figure class="project-visual"><img src="{text["screenshot"]}" width="{width}" height="{height}" alt="{text["screenshot_alt"]}" loading="lazy" decoding="async"><figcaption>{text["screenshot_caption"]}</figcaption></figure>
   <div class="project-body">
     <p class="project-kind">{text["kind"]}</p>
     <h2 id="project-{text["id"]}">{text["title"]}<span class="project-english" lang="en">{text["english_title"]}</span></h2>
     <p class="project-summary">{text["summary"]}</p>
-    <dl class="project-facts">{facts}</dl>
+    <div class="project-usage"><strong>从这里开始</strong><p>{text["usage"]}</p></div>
+    <details class="project-details"><summary>功能、贡献与来源</summary><dl class="project-facts">{facts}</dl></details>
     <div class="project-actions">{actions}</div>
   </div>
 </article>''')
@@ -399,6 +397,7 @@ def build_site(address, map_preview_source=None):
     about_data = load_about()
     # Every template's complete photo set must pass before any output is generated.
     photo_sets = (("foods", "food", game_food_sources()), ("sports", "sport", game_sport_sources()))
+    project_sources = project_asset_sources(projects)
     map_data = load_map(ROOT, map_preview_source)
     expected_output = "_site_map_preview" if map_preview_source else "_site_unified"
     if OUTPUT.is_symlink() or OUTPUT.resolve() != ROOT.resolve() / expected_output:
@@ -420,7 +419,7 @@ def build_site(address, map_preview_source=None):
         published = (f'<time datetime="{escape(article.published)}">{escape(article.published)}</time>'
                      if article.published else '<time>发表时间待确认</time>')
         topic = blog.topic(article) if article.language == "zh-CN" else "English"
-        recent.append(f'        <li><div class="article-meta">{published}<span>{escape(topic)}</span></div><h3 lang="{article.language}"><a href="{escape(blog.href(article.destination))}">{escape(article.title)}<span aria-hidden="true">↗</span></a></h3></li>')
+        recent.append(f'        <li><div class="article-meta">{published}<span>{escape(topic)}</span></div><h3 lang="{article.language}"><a href="{escape(blog.href(article.destination))}">{escape(article.title)}{EXTERNAL_ICON}</a></h3></li>')
     values = {"article_total": str(len(blog.articles)), "chinese_total": str(sum(a.language == "zh-CN" for a in blog.articles)),
               "english_total": str(sum(a.language != "zh-CN" for a in blog.articles)), "recent_articles": "\n".join(recent), "site_url": escape(address, quote=True),
               "project_total": str(len(projects)),
@@ -456,10 +455,19 @@ def build_site(address, map_preview_source=None):
         destination.mkdir(parents=True, exist_ok=True)
         (destination / "index.html").write_text(page, encoding="utf-8")
     (OUTPUT / "assets").mkdir(exist_ok=True)
-    for name in ("portal.css", "portal.js", "wechat-qrcode.jpg", *GAME_ASSETS):
+    for name in ("portal.css", "portal.js", "wechat-qrcode.jpg", *BRAND_ASSETS, *GAME_ASSETS):
         source = ROOT / "home/assets" / name
         if source.is_symlink(): raise ValueError("Home asset symlinks are not supported.")
         shutil.copy2(source, OUTPUT / "assets" / name)
+    project_output = OUTPUT / "assets/projects"
+    if linked_directory(project_output):
+        raise ValueError("Generated project screenshot directory links are not supported.")
+    project_output.mkdir(exist_ok=True)
+    for source in project_sources:
+        destination = project_output / source.name
+        if linked_directory(destination) or (destination.exists() and not destination.is_file()):
+            raise ValueError("Generated project screenshot destination must be a regular file.")
+        shutil.copy2(source, destination)
     copy_game_photo_assets(photo_sets)
     (OUTPUT / ".nojekyll").write_text("", encoding="utf-8")
     sitemap = ET.Element("urlset", xmlns="http://www.sitemaps.org/schemas/sitemap/0.9")

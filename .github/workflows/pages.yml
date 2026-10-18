@@ -67,6 +67,18 @@ jobs:
         run: node scripts/test_waline_logic.mjs
       - name: Check reading table of contents
         run: node scripts/test_toc_logic.cjs
+      - name: Restore validated responsive image cache
+        uses: actions/cache@v5
+        with:
+          # Both generator ownership markers are required for a cache-only output.
+          # Do not cache original photos, HTML, local drafts or the rest of the site.
+          path: |
+            _site_unified/.generated-by-unified-site
+            _site_unified/articles/.generated-by-blog
+            _site_unified/articles/assets/responsive-images
+          key: ${{ runner.os }}-responsive-images-v1-${{ hashFiles('scripts/image_assets.py', 'blog/requirements.txt') }}-${{ hashFiles('images/**', '附属资料/**') }}
+          restore-keys: |
+            ${{ runner.os }}-responsive-images-v1-${{ hashFiles('scripts/image_assets.py', 'blog/requirements.txt') }}-
       - name: Build and check personal site
         env:
           BLOG_SITE_URL: ${{ steps.pages.outputs.base_url }}

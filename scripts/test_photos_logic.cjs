@@ -86,6 +86,39 @@ test("keyboard and buttons wrap through the album; Esc closes, restores focus an
   assert.equal(f.document.body.style.overflow, "scroll");
 });
 
+test("a primary touch release navigates without click and a later compatibility click cannot navigate twice", () => {
+  const f = fixture(); f.links[0].dispatch("click");
+  const button = f.nodes[".photo-next"];
+  const touch = { pointerType: "touch", isPrimary: true, pointerId: 7, clientX: 50, clientY: 50 };
+  button.dispatch("pointerdown", touch); button.dispatch("pointerup", touch);
+  assert.equal(f.controller.getState().index, 1);
+  button.dispatch("click", { pointerType: "touch", detail: 1 });
+  assert.equal(f.controller.getState().index, 1);
+  button.dispatch("pointerdown", { ...touch, pointerId: 8 });
+  button.dispatch("pointerup", { ...touch, pointerId: 8 });
+  button.dispatch("click", { detail: 1 });
+  assert.equal(f.controller.getState().index, 2, "Legacy compatibility click also stays single-step");
+  button.dispatch("pointerdown", { pointerType: "mouse" });
+  button.dispatch("click", { detail: 1 });
+  assert.equal(f.controller.getState().index, 0, "Mouse clicks remain usable immediately after touch");
+  button.dispatch("click", { detail: 0 });
+  assert.equal(f.controller.getState().index, 1, "Keyboard activation remains usable");
+});
+
+test("navigation touch movement, cancellation, another pointer and secondary touch do not activate a button", () => {
+  const f = fixture(); f.links[0].dispatch("click");
+  const button = f.nodes[".photo-next"];
+  const touch = { pointerType: "touch", isPrimary: true, pointerId: 7, clientX: 50, clientY: 50 };
+  button.dispatch("pointerdown", touch); button.dispatch("pointerup", { ...touch, clientX: 70 });
+  assert.equal(f.controller.getState().index, 0);
+  button.dispatch("pointerdown", touch); button.dispatch("pointercancel"); button.dispatch("pointerup", touch);
+  assert.equal(f.controller.getState().index, 0);
+  button.dispatch("pointerdown", touch); button.dispatch("pointerup", { ...touch, pointerId: 8 });
+  assert.equal(f.controller.getState().index, 0);
+  button.dispatch("pointerdown", { ...touch, isPrimary: false }); button.dispatch("pointerup", { ...touch, isPrimary: false });
+  assert.equal(f.controller.getState().index, 0);
+});
+
 test("browser Back closes the viewer without an extra Back and a later close works normally", () => {
   const f = fixture();
   f.links[1].dispatch("click");
