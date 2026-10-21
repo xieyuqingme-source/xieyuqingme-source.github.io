@@ -282,6 +282,7 @@ class ProjectPublicationTests(unittest.TestCase):
             root = Path(temporary)
             shutil.copytree(ROOT / "home", root / "home")
             shutil.copytree(ROOT / "map", root / "map")
+            shutil.copytree(ROOT / "anthology", root / "anthology")
             output = root / "_site_unified"
             with patch.object(build_site, "ROOT", root), patch.object(build_site, "OUTPUT", output), \
                  patch.object(build_site, "Blog", side_effect=self.fake_blog):
@@ -310,6 +311,7 @@ class ProjectPublicationTests(unittest.TestCase):
                 sitemap = [node.text for node in ET.parse(output / "sitemap.xml").findall(".//{*}loc")]
                 self.assertEqual(sitemap, ["https://xieyuqing.me/", "https://xieyuqing.me/projects/", "https://xieyuqing.me/about/",
                                            "https://xieyuqing.me/map/",
+                                           *["https://xieyuqing.me" + route for route in report["anthology"]["routes"]],
                                            "https://xieyuqing.me/en/", "https://xieyuqing.me/en/about/",
                                            "https://xieyuqing.me/en/projects/", "https://xieyuqing.me/en/articles/",
                                            "https://xieyuqing.me/game/", "https://xieyuqing.me/game/ranking/",
@@ -360,6 +362,7 @@ class ProjectPublicationTests(unittest.TestCase):
             root = Path(temporary)
             shutil.copytree(ROOT / "home", root / "home")
             shutil.copytree(ROOT / "map", root / "map")
+            shutil.copytree(ROOT / "anthology", root / "anthology")
             output = root / "_site_unified"
             cached = output / "articles/assets/responsive-images"
             cached.mkdir(parents=True)

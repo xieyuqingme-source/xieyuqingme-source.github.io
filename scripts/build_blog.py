@@ -296,8 +296,9 @@ class Blog:
         if not switch_href:
             switch_href = "/articles/" if english else "/en/articles/"
         nav = []
-        nav_items = [("Home", "/en/"), ("Articles", "/en/articles/"), ("Projects", "/en/projects/"),
+        nav_items = [("Home", "/en/"), ("Articles", "/en/articles/"), ("Anthology (original languages)", "/anthology/"), ("Projects", "/en/projects/"),
                      ("Photos", "/photos/"), ("Map", "/map/"), ("Games", "/game/"), ("About", "/en/about/")] if english else [("个人主页", "/"), ('文章 <span lang="en">Articles</span>', "index.html"),
+                              ('雨聊文选 <span lang="en">Anthology</span>', "/anthology/"),
                               ('作品 <span lang="en">Projects</span>', "/projects/"),
                               ('摄影 <span lang="en">Photos</span>', "/photos/"),
                               ('足迹 <span lang="en">Map</span>', "/map/"),
@@ -709,7 +710,7 @@ class Blog:
                 from english_site import english_article_url
                 english_routes = {"/en/", "/en/about/", "/en/projects/", "/en/articles/",
                                   *[english_article_url(self, a) for a in self.translations.values()]}
-                if parsed.path in {"/", "/projects/", "/photos/", "/map/", "/game/", "/about/", "/assets/favicon.svg", *english_routes}:
+                if parsed.path in {"/", "/anthology/", "/projects/", "/photos/", "/map/", "/game/", "/about/", "/assets/favicon.svg", *english_routes}:
                     root_links += 1
                     continue
                 if not parsed.path.startswith(self.base_path):

@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "works": {
+    "teng-wang-ge-xu": [
+      {"term":"潦水","context":"潦水尽而寒潭清","explanation":"这里指雨后积存的水。句中说积水退去，深潭便显得清澈。","source":"教育部《重編國語辭典修訂本》“潦”条，lǎo 音名词义","source_url":"https://dict.revised.moe.edu.tw/dictView.jsp?ID=3297&la=0&powerMode=0","edition":"臺灣學術網路第六版","checked_on":"2026-10-21","verification":"verified"},
+      {"term":"凝","context":"烟光凝而暮山紫","explanation":"这里是聚拢、凝聚的意思，描写傍晚山间烟霭聚集的景象。","source":"教育部《重編國語辭典修訂本》“凝”条，动词义项2（引本篇为例）","source_url":"https://dict.revised.moe.edu.tw/dictView.jsp?ID=3125&la=0&powerMode=0","edition":"臺灣學術網路第六版","checked_on":"2026-10-21","verification":"verified"},
+      {"term":"舛","context":"命途多舛","explanation":"这里指困厄、不顺。“命途多舛”是说人生道路屡遇挫折。","source":"教育部《重編國語辭典修訂本》“舛”条，形容词义项1（引本篇为例）","source_url":"https://dict.revised.moe.edu.tw/dictView.jsp?ID=8648&la=0&powerMode=0","edition":"臺灣學術網路第六版","checked_on":"2026-10-21","verification":"verified"}
+    ],
+    "yu-zhu-yuan-si-shu": [
+      {"term":"经纶","context":"经纶世务者","explanation":"这里指筹划、治理事务。“经纶世务者”说的是忙于处理世间事务的人。","source":"教育部《重編國語辭典修訂本》“經綸”条，引申义","source_url":"https://dict.revised.moe.edu.tw/dictView.jsp?ID=95745&la=0&powerMode=0","edition":"臺灣學術網路第六版","checked_on":"2026-10-21","verification":"verified"},
+      {"term":"泠泠","context":"泉水激石，泠泠作响","explanation":"这里用来摹写泉水撞击石头时清亮悦耳的声音，取声音义，不取清凉义。","source":"教育部《重編國語辭典修訂本》“泠泠”条，义项1","source_url":"https://dict.revised.moe.edu.tw/dictView.jsp?ID=65372&la=0&powerMode=0","edition":"臺灣學術網路第六版","checked_on":"2026-10-21","verification":"verified"}
+    ],
+    "wu-liu-xian-sheng-zhuan": [
+      {"term":"环堵","context":"环堵萧然","explanation":"指四面土墙围成的简陋小屋。这里借居室的空落简陋表现生活贫困。","source":"教育部《重編國語辭典修訂本》“環堵”条","source_url":"https://dict.revised.moe.edu.tw/dictView.jsp?ID=85657&la=0&powerMode=0","edition":"臺灣學術網路第六版","checked_on":"2026-10-21","verification":"verified"},
+      {"term":"短褐","context":"短褐穿结","explanation":"指贫寒者穿的粗布衣服。句中衣服已经破损，进一步写出生活困窘。","source":"教育部《重編國語辭典修訂本》“短褐”条","source_url":"https://dict.revised.moe.edu.tw/dictView.jsp?ID=48326&la=0&powerMode=0","edition":"臺灣學術網路第六版","checked_on":"2026-10-21","verification":"verified"},
+      {"term":"晏如","context":"晏如也","explanation":"这里指安适自得的样子，写他虽然衣食不足，心境仍然从容。","source":"教育部《重編國語辭典修訂本》“晏如”条，义项2","source_url":"https://dict.revised.moe.edu.tw/dictView.jsp?ID=155899&la=0&powerMode=0","edition":"臺灣學術網路第六版","checked_on":"2026-10-21","verification":"verified"}
+    ]
+  }
+}

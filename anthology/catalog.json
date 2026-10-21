@@ -1,0 +1,97 @@
+{
+  "version": 1,
+  "collections": [
+    {
+      "file": "中国古代诗词曲.md",
+      "category": "中国古代诗词曲",
+      "language": "zh-CN",
+      "sha256_lf": "4083db93820a2e19754d37009d2ea7ae2a7db09a1f74c79b85f78fed092ec0eb",
+      "works": [
+        {
+          "title": "上邪",
+          "slug": "shang-ye"
+        },
+        {
+          "title": "西塞山怀古",
+          "slug": "xi-sai-shan-huai-gu"
+        },
+        {
+          "title": "贺新郎·送胡邦衡待制",
+          "slug": "he-xin-lang-song-hu"
+        },
+        {
+          "title": "桃花扇·哀江南",
+          "slug": "tao-hua-shan-ai-jiang-nan"
+        }
+      ]
+    },
+    {
+      "file": "中国古代散文.md",
+      "category": "中国古代散文",
+      "language": "zh-CN",
+      "sha256_lf": "066f5fbec41665446ed4d5658f301d133b52e6828c61e4b6dd6ba5a9ba845f73",
+      "works": [
+        {
+          "title": "与吴质书",
+          "slug": "yu-wu-zhi-shu"
+        },
+        {
+          "title": "典论·论文",
+          "slug": "dian-lun-lun-wen"
+        },
+        {
+          "title": "诫子书",
+          "slug": "jie-zi-shu"
+        },
+        {
+          "title": "五柳先生传",
+          "slug": "wu-liu-xian-sheng-zhuan"
+        },
+        {
+          "title": "原毁",
+          "slug": "yuan-hui"
+        }
+      ]
+    },
+    {
+      "file": "中国古代骈文.md",
+      "category": "中国古代骈文",
+      "language": "zh-CN",
+      "sha256_lf": "7415b50228ffa17692ec496ab5a4c61bb1b1411c6d8fd13c6cdabdd8cd3e9846",
+      "works": [
+        {
+          "title": "滕王阁序",
+          "slug": "teng-wang-ge-xu"
+        },
+        {
+          "title": "与朱元思书",
+          "slug": "yu-zhu-yuan-si-shu"
+        }
+      ]
+    },
+    {
+      "file": "英语文学作品.md",
+      "category": "英语文学作品",
+      "language": "en",
+      "sha256_lf": "007e817adb3ba0a8e9a8447066101773e979a7f190b3e8db460fa0e46b68e2b1",
+      "works": [
+        {
+          "title": "Gettysburg Address",
+          "slug": "gettysburg-address"
+        }
+      ]
+    },
+    {
+      "file": "法语文学作品.md",
+      "category": "法语文学作品",
+      "language": "fr",
+      "sha256_lf": "42b4817d55349cfc6a233d187dcdb18a57ddae6ea5c4fd9d9048f9f463251755",
+      "works": [
+        {
+          "title": "La Marseillaise",
+          "slug": "la-marseillaise"
+        }
+      ]
+    }
+  ]
+}

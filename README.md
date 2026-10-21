@@ -207,3 +207,7 @@ English essays and writing practice will be added here.
 欢迎交流，也欢迎指出事实或表达上的问题。
 
 Feedback and corrections are welcome.
+
+## 雨聊文选 · Anthology
+
+独立的中外文学原文选读入口：[/anthology/](https://xieyuqing.me/anthology/)。内容、分类与维护流程见[雨聊文选维护](blog/雨聊文选维护.md)。本地新增入口须完成发布后才可在线访问。

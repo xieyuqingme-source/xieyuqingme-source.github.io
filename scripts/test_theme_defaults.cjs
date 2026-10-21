@@ -92,7 +92,7 @@ for (const file of ['home/assets/portal.js', 'blog/site.js']) {
 
 for (const file of [
   'home/index.template.html', 'home/about.template.html', 'home/projects.template.html',
-  'home/game.template.html', 'home/ranking.template.html', 'scripts/build_blog.py'
+  'home/game.template.html', 'home/ranking.template.html', 'home/anthology.template.html', 'scripts/build_blog.py'
 ]) {
   test(`${file}: light HTML plus early saved/system bootstrap before CSS`, () => {
     const html = read(file).replaceAll('{{', '{').replaceAll('}}', '}');

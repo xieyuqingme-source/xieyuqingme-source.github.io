@@ -15,6 +15,7 @@ from PIL import Image
 from build_blog import Blog, ROOT
 from photo_pages import build_photos
 from map_pages import load_map, build_map
+from anthology_pages import load_anthology, load_glossary, build_anthology
 
 OUTPUT = ROOT / "_site_unified"
 GAME_PAGES = (("game.template.html", "game"), ("ranking.template.html", "game/ranking"))
@@ -406,6 +407,8 @@ def build_site(address, map_preview_source=None):
     photo_sets = (("foods", "food", game_food_sources()), ("sports", "sport", game_sport_sources()))
     project_sources = project_asset_sources(projects)
     map_data = load_map(ROOT, map_preview_source)
+    anthology_works = load_anthology(ROOT)  # Validate reviewed content before writing outputs.
+    load_glossary(ROOT, anthology_works)
     expected_output = "_site_map_preview" if map_preview_source else "_site_unified"
     if OUTPUT.is_symlink() or OUTPUT.resolve() != ROOT.resolve() / expected_output:
         raise ValueError("Unsafe unified output path.")
@@ -429,7 +432,7 @@ def build_site(address, map_preview_source=None):
         recent.append(f'        <li><div class="article-meta">{published}<span>{escape(topic)}</span></div><h3 lang="{article.language}"><a href="{escape(blog.href(article.destination))}">{escape(article.title)}{EXTERNAL_ICON}</a></h3></li>')
     values = {"article_total": str(len(blog.articles)), "chinese_total": str(sum(a.language == "zh-CN" for a in blog.articles)),
               "english_total": str(sum(a.language != "zh-CN" for a in blog.articles)), "recent_articles": "\n".join(recent), "site_url": escape(address, quote=True),
-              "project_total": str(len(projects)),
+              "project_total": str(len(projects)), "anthology_total": str(len(anthology_works)),
               "photo_album_total": str(photo_report["albums"]),
               "photo_total": str(photo_report["photos"])}
     for name, value in values.items(): home = home.replace("{{" + name + "}}", value)
@@ -451,6 +454,7 @@ def build_site(address, map_preview_source=None):
         raise ValueError("Unresolved about template placeholder.")
     (OUTPUT / "about").mkdir(exist_ok=True)
     (OUTPUT / "about/index.html").write_text(about_page, encoding="utf-8")
+    anthology_report = build_anthology(ROOT, OUTPUT, address)
     from english_site import build_english_site
     english_report = build_english_site(blog, OUTPUT, address, projects, about_data, values)
     for template, route in GAME_PAGES:
@@ -484,6 +488,8 @@ def build_site(address, map_preview_source=None):
     ET.SubElement(ET.SubElement(sitemap, "url"), "loc").text = address + "/projects/"
     ET.SubElement(ET.SubElement(sitemap, "url"), "loc").text = address + "/about/"
     ET.SubElement(ET.SubElement(sitemap, "url"), "loc").text = address + "/map/"
+    for route in anthology_report["routes"]:
+        ET.SubElement(ET.SubElement(sitemap, "url"), "loc").text = address + route
     for route in english_report["routes"]:
         ET.SubElement(ET.SubElement(sitemap, "url"), "loc").text = address + route
     for _, route in GAME_PAGES:
@@ -502,6 +508,7 @@ def build_site(address, map_preview_source=None):
     report["photography"] = photo_report
     report["footprints"] = map_report
     report["english"] = english_report
+    report["anthology"] = anthology_report
     responsive = getattr(blog, "responsive_images", None)
     if responsive is not None:
         report["responsive_images"] = responsive.report()

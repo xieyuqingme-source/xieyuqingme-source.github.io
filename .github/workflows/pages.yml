@@ -59,6 +59,11 @@ jobs:
           node scripts/test_map_video.cjs
       - name: Check unified site rules
         run: python scripts/test_build_site.py
+      - name: Check anthology content and static routes
+        run: |
+          python scripts/test_anthology_pages.py
+          node --check home/assets/anthology-selection.js
+          node scripts/test_anthology_selection.cjs
       - name: Check local about routes
         run: python scripts/test_about_routes.py
       - name: Check local game routes and navigation

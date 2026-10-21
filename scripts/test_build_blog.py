@@ -138,7 +138,8 @@ class MarkdownRenderingTests(unittest.TestCase):
         self.assertIn('aria-label="谢雨卿个人主页"', page)
         self.assertIn('>谢</span><span>谢雨卿', page)
         primary = page.split('<nav class="site-nav"', 1)[1].split('</nav>', 1)[0]
-        self.assertEqual(primary.count('<a '), 8)
+        self.assertEqual(primary.count('<a '), 9)
+        self.assertIn('href="/anthology/"', primary)
         self.assertIn('class="site-language-switch"', primary)
         self.assertIn('href="/en/articles/"', primary)
         self.assertNotIn('chinese.html', primary)
