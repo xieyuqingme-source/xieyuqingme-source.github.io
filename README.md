@@ -1,4 +1,4 @@
-# 谢雨卿的文章 · Essays by Xie Yuqing (Carl)
+# 谢雨卿的个人网站 · Xie Yuqing (Carl)
 
 本科毕业于社科大，目前在马来西亚城市大学读MBA。
 
@@ -11,6 +11,51 @@
 邮箱：[xieyuqing.me@gmail.com](mailto:xieyuqing.me@gmail.com)
 
 I’m Xie Yuqing (Carl), an MBA student in Malaysia. Here I share my original Chinese essays and English writing practice, exploring everyday life, learning, and society.
+
+## 网站与应用
+
+本仓库维护个人网站 **[xieyuqing.me](https://xieyuqing.me/)** 的源码、公开内容和站内应用，包括主页、中英文文章、作品展示、摄影相册、足迹地图、小游戏及关于页。文章是网站的一个栏目；作品页同时展示本仓库内的应用和在独立仓库维护的工具。
+
+This repository contains the source and public content for my personal website, including articles, projects, photography, an interactive footprints map, and a browser-based tier ranking tool.
+
+| 栏目或应用 | 网站入口 | 本仓库中的来源 |
+| --- | --- | --- |
+| 个人主页 | [首页](https://xieyuqing.me/) | `home/index.template.html`；最近文章与数量由构建器生成 |
+| 中英文文章 | [文章](https://xieyuqing.me/articles/) | `中文文章/`、`English Articles/`、`blog/` |
+| 作品展示 | [作品](https://xieyuqing.me/projects/) | `home/projects.json`、`home/projects.template.html` |
+| 摄影相册 | [摄影](https://xieyuqing.me/photos/) | `photos/catalog.json`、`photos/images/`；只使用已选定的公开导出 |
+| 足迹地图 | [地图与足迹](https://xieyuqing.me/map/) | `map/catalog.json`、`home/map.template.html`、`home/assets/map*.js` |
+| 小游戏与排行工具 | [小游戏](https://xieyuqing.me/game/)、[从夯到拉排行](https://xieyuqing.me/game/ranking/) | `home/game.template.html`、`home/ranking.template.html`、`home/assets/ranking*.js` |
+| 关于我 | [关于页](https://xieyuqing.me/about/) | `home/about.json`、`home/about.template.html`；不从 README 生成 |
+
+### 本仓库内的应用与独立工具
+
+- **足迹地图**：查看城市足迹与时间轴，制作自己的经历记录，导入或导出 JSON / Markdown，并生成图片或视频。访客草稿在浏览器处理，主动保存后才写入当前站点的浏览器存储；不上传至网站后台。
+- **从夯到拉排行**：美食与运动示例、自定义图片、等级与排序编辑、展示模式、PNG 导出及 JSON 备份。榜单与图片保存在当前浏览器的 IndexedDB 中，不提供跨设备同步；清理浏览器数据前请导出备份。当前小游戏入口提供这一款排行工具。
+- **独立仓库工具**：作品页中的[雨聊公众号排版](https://github.com/xieyuqingme-source/yuliao-wechat-editor)、[Coze 论文速记工作流](https://github.com/xieyuqingme-source/coze-paper-quick-reference)和[雨聊壁纸](https://github.com/xieyuqingme-source/yuliao-wallpaper)分别在各自仓库维护。本仓库保存其展示资料、截图与链接，不包含这些工具的完整源码，也不代表它们都能在本站在线运行。公众号排版为本地工具，Coze 工作流需导入平台配置，壁纸为 Windows 测试版；具体使用方法和限制以各项目说明为准。
+
+### 阅读、使用与维护
+
+- 访问者可直接从上表打开网站。地图使用见[地图说明](blog/足迹地图维护.md)，排行使用见[小游戏与排行说明](home/GAME_MAINTENANCE.md)。
+- 维护者先读[网站使用说明](blog/使用说明.md)，再按任务查阅[网站与作品维护](blog/网站与作品维护.md)、[摄影相册维护](blog/摄影相册维护.md)或[Waline 接入说明](blog/Waline接入说明.md)。[单仓库迁移与回滚](blog/单仓库迁移与回滚.md)是历史记录，无需重复迁移。
+- 站点使用 Python 构建静态页面，交互由本地 JavaScript 资源提供。Node.js 用于相关检查；GitHub Actions 统一构建并发布 `_site_unified/`。
+
+在仓库根目录、使用 Python 3.10+ 和已安装所需依赖的解释器运行：
+
+```powershell
+python -m pip install -r blog/requirements.txt
+python scripts/build_site.py --site-url https://xieyuqing.me
+python scripts/check_site.py --site-url https://xieyuqing.me
+python scripts/preview_site.py
+```
+
+打开 <http://127.0.0.1:8767/>，按 `Ctrl+C` 停止本机预览。构建和预览不会提交或发布；用户审阅后推送 `main` 才会触发已有的 `Publish personal site` 工作流。不要直接修改生成目录。完整检查与环境说明见[网站与作品维护](blog/网站与作品维护.md)。
+
+### 公开内容与隐私
+
+普通网站构建只读取本仓库的公开稿和公开相册、地图数据，不扫描私人 Obsidian 资料库。相册导出和地图更新是单独的本机维护流程；运行前须核对所选来源和公开范围。`.photos-local.json`、`.map-local.json`、`.photo-cache/` 与 `.local-checks/` 均被忽略，不应提交。
+
+地图和排行的访客编辑在浏览器本地进行；这不代表整个网站没有外部服务。文章评论及浏览统计接入独立 Waline 后端，相关数据处理和已核实的展示范围见[Waline 接入说明](blog/Waline接入说明.md)。公开的文章原图、附件、相册说明、足迹时间与地点也都属于发布内容，应逐项审阅；忽略规则不能替代检查。第三方地图与图片来源分别见 [Natural Earth 来源说明](map/THIRD_PARTY_NOTICES.md)、[作品截图来源](home/assets/projects/SOURCES.md)及相关资源目录中的来源文件；仓库公开不等于所有内容均可自由使用。
 
 ## 文章索引 · Article Index
 
@@ -150,6 +195,14 @@ English essays and writing practice will be added here.
 | `English Articles/` | 英文文章与写作练习 · English essays and writing practice |
 | `images/` | 文章配图 · Article images |
 | `附属资料/` | 与文章相关的补充资料 · Supporting materials |
+| `home/` | 主页、作品、关于、地图、相册与游戏的模板和前端资源 |
+| `blog/` | 文章配置、样式、交互、依赖及全站维护文档 |
+| `photos/` | 可公开的相册目录与压缩图片，不是私人摄影原图库 |
+| `map/` | 可公开的足迹目录、格式示例及底图来源说明 |
+| `scripts/` | 全站构建、校验、预览、相册导出、地图更新与测试 |
+| `.github/workflows/pages.yml` | `main` 推送后的统一构建与 GitHub Pages 发布流程 |
+
+`_site_unified/` 是当前生成目录；旧 `_site/`、地图草稿 `_site_map_preview/`、本地依赖与检查记录不作为源码提交。
 
 欢迎交流，也欢迎指出事实或表达上的问题。
 
