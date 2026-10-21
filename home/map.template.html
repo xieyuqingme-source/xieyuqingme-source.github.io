@@ -41,7 +41,7 @@
         <label class="route-option"><input id="map-labels" type="checkbox"> 显示城市名称</label>
         <label class="route-option"><input id="map-route" type="checkbox" checked> 时间顺序连线</label>
         <section id="playback-panel" class="playback-panel" aria-label="足迹视频" data-state="idle">
-          <div class="playback-controls"><button id="video-generate" type="button" class="map-primary">生成足迹视频</button><button id="video-cancel" type="button" hidden>取消生成</button><label for="video-pace">节奏 <select id="video-pace"><option value="normal" selected>舒适</option><option value="brisk">轻快</option><option value="relaxed">从容</option></select></label><a id="video-download" class="video-download" hidden download>下载视频</a></div>
+          <div class="playback-controls"><button id="video-generate" type="button" class="map-primary">生成足迹视频</button><button id="video-cancel" type="button" hidden>取消生成</button><label for="video-pace">节奏 <select id="video-pace"><option value="normal" selected>舒适</option><option value="brisk">轻快</option><option value="relaxed">从容</option></select></label><label for="video-camera">镜头 <select id="video-camera"><option value="follow" selected>平滑跟随</option><option value="fixed">固定当前视角</option></select></label><a id="video-download" class="video-download" hidden download>下载视频</a></div>
           <p id="video-capability" class="playback-note"></p><p id="video-estimate" class="playback-note"></p>
           <div id="journey-options" class="journey-options" hidden></div><p id="journey-warnings" class="playback-note"></p>
           <progress id="video-progress" max="1" value="0" hidden aria-label="视频生成进度"></progress><p id="playback-progress" role="status" aria-live="polite"></p>

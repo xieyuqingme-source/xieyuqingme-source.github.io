@@ -7,6 +7,7 @@ export async function startWaline(deps = {}) {
   const doc = deps.document || document;
   const current = deps.location || window.location;
   const request = deps.fetch || fetch;
+  const lang = (doc.documentElement?.lang || '').toLowerCase().startsWith('en') ? 'en' : 'zh-CN';
   const settingsNode = doc.querySelector('#waline-settings');
   if (!settingsNode) return;
   let settings;
@@ -54,8 +55,8 @@ export async function startWaline(deps = {}) {
   async function getCounts(batch, kind) {
     try {
       const values = kind === 'views'
-        ? await api('article', { path: batch.join(','), type: 'time', lang: 'zh-CN' })
-        : await api('comment', { type: 'count', url: batch.join(','), lang: 'zh-CN' });
+        ? await api('article', { path: batch.join(','), type: 'time', lang })
+        : await api('comment', { type: 'count', url: batch.join(','), lang });
       if (!Array.isArray(values) || values.length !== batch.length) return;
       batch.forEach((path, i) => render(path, kind, kind === 'views' ? values[i]?.time : values[i]));
     } catch (_) { /* Missing counts stay hidden; an outage never becomes a false zero. */ }
@@ -66,7 +67,7 @@ export async function startWaline(deps = {}) {
     let incremented = false;
     if (articlePath && current.origin === settings.siteOrigin) {
       try {
-        const values = await api('article', { lang: 'zh-CN' }, { path: articlePath, type: 'time', action: 'inc' });
+        const values = await api('article', { lang }, { path: articlePath, type: 'time', action: 'inc' });
         if (Array.isArray(values) && values.length === 1 && Number.isSafeInteger(values[0]?.time) && values[0].time >= 0) {
           render(articlePath, 'views', values[0].time);
           incremented = true;
@@ -97,17 +98,17 @@ export async function startWaline(deps = {}) {
     if (!comments) return;
     try {
       // Check the public comment endpoint before revealing the widget.
-      const list = await api('comment', { path: articlePath, page: '1', pageSize: '10', sortBy: 'insertedAt_desc', lang: 'zh-CN' });
+      const list = await api('comment', { path: articlePath, page: '1', pageSize: '10', sortBy: 'insertedAt_desc', lang });
       if (!list || !Array.isArray(list.data)) return;
       const [client] = await Promise.all([
         deps.loadClient ? deps.loadClient(settings.clientJS) : import(settings.clientJS), loadStyle()
       ]);
       client.init({
         el: '#waline', serverURL: server.href.replace(/\/$/, ''), path: articlePath,
-        lang: 'zh-CN', dark: 'html[data-theme="dark"]', meta: ['nick', 'mail'], requiredMeta: ['nick'],
+        lang, dark: 'html[data-theme="dark"]', meta: ['nick', 'mail'], requiredMeta: ['nick'],
         login: 'disable', imageUploader: false, search: false, emoji: false, reaction: false,
         texRenderer: false, highlighter: false, comment: false, pageview: false, noRss: true,
-        locale: { placeholder: '欢迎留言。昵称必填，邮箱选填；提交成功后直接公开，无需人工预审。' }
+        locale: { placeholder: lang === 'en' ? 'Leave a comment. A nickname is required; email is optional. Successful submissions appear publicly without manual pre-moderation.' : '欢迎留言。昵称必填，邮箱选填；提交成功后直接公开，无需人工预审。' }
       });
       comments.hidden = false;
     } catch (_) { comments.hidden = true; }

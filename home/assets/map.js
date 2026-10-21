@@ -560,7 +560,8 @@
     records: playbackItems, document: current, projection, exportSvg, status, labelStyle: cityLabelStyle,
     setFrame(value) { videoFrame = { ...value, speed: 1, state: value.state || "paused" }; showPlaybackState(videoFrame); drawPlaybackFrame(videoFrame); },
     setRecording(value) { recording = value; $("main").dataset.recording = String(value); updateDraftTools(); if (!value && pendingResize) { pendingResize = false; resizeMap(); } },
-    avatarSource: () => avatar && avatar.getDataUrl(),
+      avatarSource: () => avatar && avatar.getDataUrl(),
+      videoAssets: () => ({ layer: $("map-layer").value, terrain: terrainData, land }),
     assetsReady: () => !avatarBusy && !!(avatar && avatar.getDataUrl()) && ($("map-layer").value === "terrain" ? !!terrainData : !!land),
     camera: () => ({ zoom, pan: { ...pan }, bounds: projection().bounds }),
     resetFrame() { player.reset(playbackItems()); }

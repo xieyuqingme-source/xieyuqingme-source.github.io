@@ -1,5 +1,6 @@
 (() => {
   "use strict";
+  const english = (document.documentElement.lang || "").toLowerCase().startsWith("en");
 
   const themeButton = document.querySelector("#theme-toggle");
   const themeKey = "xieyuqing-blog-theme";
@@ -15,8 +16,8 @@
   function applyTheme(theme) {
     document.documentElement.dataset.theme = theme;
     if (themeButton) {
-      const nextLabel = theme === "dark" ? "浅色" : "深色";
-      const label = `切换到${nextLabel}模式`;
+      const nextLabel = english ? (theme === "dark" ? "Light" : "Dark") : (theme === "dark" ? "浅色" : "深色");
+      const label = english ? `Switch to ${nextLabel.toLowerCase()} mode` : `切换到${nextLabel}模式`;
       themeButton.querySelector(".theme-label").textContent = nextLabel;
       themeButton.setAttribute("aria-label", label);
       themeButton.setAttribute("title", label);
@@ -44,9 +45,11 @@
     const search = archive.querySelector("#article-search");
     const year = archive.querySelector("#article-year");
     const filters = [...archive.querySelectorAll("[data-filter]")];
+    const languageFilters = [...archive.querySelectorAll("[data-language-filter]")];
     const entries = [...archive.querySelectorAll(".article-card-content")].map((content) => ({
       card: content.closest(".article-card"),
       topic: content.dataset.topic,
+      language: content.dataset.language || "original",
       year: content.dataset.year || "unknown",
       text: content.dataset.search.toLocaleLowerCase()
     }));
@@ -62,6 +65,7 @@
     const jumpMessage = pagination.querySelector("#page-jump-message");
     const pageSize = 12;
     let topic = "all";
+    let articleLanguage = "all";
     let page = 1;
     let totalPages = 0;
 
@@ -76,6 +80,8 @@
       search.value = params.get("q") || "";
       const requestedTopic = params.get("topic") || "all";
       topic = filters.some((button) => button.dataset.filter === requestedTopic) ? requestedTopic : "all";
+      const requestedLanguage = params.get("language") || "all";
+      articleLanguage = languageFilters.some((button) => button.dataset.languageFilter === requestedLanguage) ? requestedLanguage : "all";
       const requestedYear = params.get("year") || "all";
       year.value = [...year.options].some((option) => option.value === requestedYear) ? requestedYear : "all";
       page = Math.max(1, Number.parseInt(params.get("page"), 10) || 1);
@@ -85,6 +91,7 @@
       if (resetPage) page = 1;
       const terms = search.value.trim().toLocaleLowerCase().split(/\s+/).filter(Boolean);
       const matched = entries.filter((entry) => (topic === "all" || entry.topic === topic) &&
+        (articleLanguage === "all" || entry.language === articleLanguage) &&
         (year.value === "all" || entry.year === year.value) && terms.every((term) => entry.text.includes(term)));
       const count = matched.length;
       totalPages = Math.ceil(count / pageSize);
@@ -98,11 +105,12 @@
         button.classList.toggle("active", active);
         button.setAttribute("aria-pressed", String(active));
       });
+      languageFilters.forEach((button) => button.setAttribute("aria-pressed", String(button.dataset.languageFilter === articleLanguage)));
       status.hidden = false;
-      status.textContent = count ? `显示第 ${start + 1}–${Math.min(start + pageSize, count)} 篇，共 ${count} 篇${topic === "all" ? "" : ` · ${topic}`}${year.value === "all" ? "" : ` · ${year.value === "unknown" ? "时间待确认" : year.value + " 年"}`}` : "找到 0 篇文章";
+      status.textContent = english ? (count ? `Showing ${start + 1}–${Math.min(start + pageSize, count)} of ${count}${topic === "all" ? "" : ` · ${topic}`}${year.value === "all" ? "" : ` · ${year.value === "unknown" ? "Date unconfirmed" : year.value}`}` : "No matching articles") : (count ? `显示第 ${start + 1}–${Math.min(start + pageSize, count)} 篇，共 ${count} 篇${topic === "all" ? "" : ` · ${topic}`}${year.value === "all" ? "" : ` · ${year.value === "unknown" ? "时间待确认" : year.value + " 年"}`}` : "找到 0 篇文章");
       empty.hidden = count !== 0 || entries.length === 0;
       pagination.hidden = pages <= 1;
-      position.textContent = `${page} / ${pages} 页`;
+      position.textContent = english ? `Page ${page} / ${pages}` : `${page} / ${pages} 页`;
       previous.disabled = page === 1;
       next.disabled = page === pages;
       jumpInput.value = count ? String(page) : "";
@@ -110,9 +118,10 @@
       clearJumpMessage();
       if (persist) {
         const url = new URL(window.location.href);
-        ["q", "topic", "year", "page"].forEach((name) => url.searchParams.delete(name));
+        ["q", "topic", "year", "page", "language"].forEach((name) => url.searchParams.delete(name));
         if (search.value.trim()) url.searchParams.set("q", search.value.trim());
         if (topic !== "all") url.searchParams.set("topic", topic);
+        if (articleLanguage !== "all") url.searchParams.set("language", articleLanguage);
         if (year.value !== "all") url.searchParams.set("year", year.value);
         if (page !== 1) url.searchParams.set("page", String(page));
         try { window.history.replaceState(null, "", url); } catch (_) { /* Filtering still works without URL persistence. */ }
@@ -127,8 +136,13 @@
       topic = button.dataset.filter;
       update(true);
     }));
+    languageFilters.forEach((button) => button.addEventListener("click", () => {
+      articleLanguage = button.dataset.languageFilter;
+      update(true);
+    }));
     archive.querySelector(".reset-search").addEventListener("click", () => {
       topic = "all";
+      articleLanguage = "all";
       search.value = "";
       year.value = "all";
       update(true);
@@ -148,7 +162,7 @@
       const value = jumpInput.value.trim();
       const requested = Number(value);
       if (!/^\d+$/.test(value) || !Number.isSafeInteger(requested) || requested < 1 || requested > totalPages) {
-        jumpMessage.textContent = `请输入 1–${totalPages} 的整数页码。`;
+        jumpMessage.textContent = english ? `Enter a whole page number from 1 to ${totalPages}.` : `请输入 1–${totalPages} 的整数页码。`;
         jumpMessage.hidden = false;
         jumpInput.setAttribute("aria-invalid", "true");
         jumpInput.focus();
@@ -235,7 +249,7 @@
 
     content.querySelectorAll("table").forEach((table) => {
       table.tabIndex = 0;
-      table.setAttribute("aria-label", "文章表格，可横向滚动查看");
+      table.setAttribute("aria-label", english ? "Article table; scroll horizontally to read" : "文章表格，可横向滚动查看");
     });
 
     const viewer = document.querySelector("#article-image-viewer");
@@ -277,7 +291,7 @@
         const link = document.createElement("a");
         link.className = "article-image-link";
         link.href = original;
-        link.setAttribute("aria-label", `查看大图：${image.alt || "文章图片"}`);
+        link.setAttribute("aria-label", english ? `Enlarge image: ${image.alt || "Article image"}` : `查看大图：${image.alt || "文章图片"}`);
         image.replaceWith(link);
         link.append(image);
         link.addEventListener("click", (event) => {
@@ -289,7 +303,7 @@
           preview.src = image.srcset ? image.srcset.split(",").pop().trim().split(/\s+/)[0] : image.src;
           preview.alt = image.alt;
           originalLink.href = original;
-          caption.textContent = image.alt || "文章图片";
+          caption.textContent = image.alt || (english ? "Article image" : "文章图片");
           oldScrollX = window.scrollX; oldScrollY = window.scrollY;
           viewer.showModal();
           oldRootOverflow = document.documentElement.style.overflow;

@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Projects · Xie Yuqing</title>
+  <meta name="description" content="{{project_total}} public projects by Xie Yuqing: browser maps and rankings, a WeChat editor, a paper workflow and a wallpaper beta. See screenshots, uses, guides and licensing.">
+  <meta name="author" content="Xie Yuqing (Carl)">
+  <link rel="canonical" href="{{site_url}}/en/projects/">
+  <link rel="alternate" hreflang="zh-CN" href="{{site_url}}/projects/">
+  <link rel="alternate" hreflang="en" href="{{site_url}}/en/projects/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Projects · Xie Yuqing">
+  <meta property="og:description" content="Screenshots, practical uses and starting points for browser tools, local applications and a paper workflow.">
+  <meta property="og:url" content="{{site_url}}/en/projects/">
+  <meta property="og:image" content="{{site_url}}/assets/share-cover.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Xie Yuqing · Carl — Writing, projects, photos and places">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <script>(() => { let theme = "light", saved; try { saved = localStorage.getItem("xieyuqing-blog-theme"); } catch (_) {} if (saved === "light" || saved === "dark") theme = saved; else try { if (window.matchMedia("(prefers-color-scheme: dark)").matches) theme = "dark"; } catch (_) {} document.documentElement.dataset.theme = theme; })();</script>
+  <link rel="stylesheet" href="/assets/portal.css">
+  <script src="/assets/portal.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header container">
+    <a class="brand" href="/en/" aria-label="Xie Yuqing personal home"><span class="brand-mark" aria-hidden="true">谢</span><span>Xie Yuqing <small>XIE YUQING · CARL</small></span></a>
+    <nav class="site-nav" aria-label="Main navigation"><a href="/en/">Home</a><a href="/en/articles/">Articles</a><a href="/en/projects/" aria-current="page">Projects</a><a href="/photos/">Photos</a><a href="/map/">Map</a><a href="/game/">Games</a><a href="/en/about/">About</a><a class="site-language-switch" href="/projects/" lang="zh-CN" aria-label="Switch site language to Chinese">中文</a></nav>
+    <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to dark mode" hidden><span class="theme-label">Dark</span></button>
+  </header>
+  <main id="main" class="container projects-main">
+    <section class="projects-intro" aria-labelledby="projects-page-title">
+      <p class="eyebrow"><span aria-hidden="true"></span> SELECTED PROJECTS</p>
+      <h1 id="projects-page-title">Projects</h1>
+      <p class="projects-description">Practical tools inspired by writing, reading, travel and everyday life.</p>
+      <p class="projects-note">{{project_total}} public projects. The map and tier list run in your browser; the others run locally or in Coze. The tools and linked guides may use Chinese interfaces.</p>
+    </section>
+    <section class="project-grid" aria-label="Public projects">
+{{project_cards}}
+    </section>
+    <p class="projects-footer-note">Project source is maintained in the linked repositories. See each project for usage, feedback, contributions, sources and licensing.</p>
+  </main>
+  <footer class="site-footer container"><p>Xie Yuqing · Carl</p><div><a href="/en/articles/">Articles</a><a href="/en/projects/" aria-current="page">Projects</a><a href="/photos/">Photos</a><a href="/map/">Map</a><a href="/game/">Games</a><a href="/en/about/">About</a><a href="/articles/feed.xml">RSS</a></div></footer>
+</body>
+</html>

@@ -14,13 +14,13 @@ test("birth and first base use source text and do not acquire a synthetic earlie
   assert.equal(derived(result).length, 0); assert.equal(JSON.stringify(items), before);
 });
 
-test("one multi-stop table row returns once after its final city with no fabricated date or description", () => {
+test("one multi-stop table row returns once after its final city with its recorded end precision and no fabricated description", () => {
   const items = [base(), record("a", "2021-07", "2021-08", { groupId: "tour", sequence: 1 }), record("b", "2021-07", "2021-08", { groupId: "tour", sequence: 2, lon: 120 })]; items[0].sequence = 0;
   const result = J.build(items), returns = derived(result);
   assert.deepEqual(result.scenes.map(item => item.sourceId), ["base", "a", "b", "base"]);
-  assert.equal(returns.length, 1); assert.equal(returns[0].start, ""); assert.equal(returns[0].end, "");
-  assert.equal(returns[0].description, ""); assert.equal(returns[0].dateLabel, "返回日期未指定");
-  assert.equal(returns[0].frameworkLabel, "返回长期居住地（演示）"); assert.equal(returns[0].baseGroupId, "base");
+  assert.equal(returns.length, 1); assert.equal(returns[0].start, "2021-08"); assert.equal(returns[0].end, "2021-08");
+  assert.equal(returns[0].description, ""); assert.equal(returns[0].dateLabel, "2021-08");
+  assert.equal(returns[0].frameworkLabel, "返回base"); assert.equal(returns[0].baseGroupId, "base");
   assert.equal(items.length, 3); assert.equal(items[0].description, "用户原文：base");
 });
 
@@ -53,17 +53,18 @@ test("a one-day unrecorded gap suppresses a speculative return without merging s
   assert.equal(derived(longerGap).length, 2); assert.equal(longerGap.warnings.length, 0);
 });
 
-test("explicit returnAfter splits adjacent rows and overrides continuous-group and short-gap inference", () => {
+test("legacy returnAfter cannot insert detours into continuous dates or explicitly joined groups", () => {
   const items = [base(), record("sichuan-jan", "2021-01-04", "2021-01-09", { returnAfter: true }), record("beijing", "2021-01-10", "2021-01-16"), record("wuhan", "2021-02-11", "2021-02-12", { returnAfter: true }), record("sichuan-feb", "2021-02-13", "2021-02-25", { returnAfter: true }), record("chongqing", "2021-02-27", "2021-03-03")];
   const result = J.build(items, { continuousGroups: [["sichuan-jan", "beijing"], ["wuhan", "sichuan-feb", "chongqing"]] });
-  assert.deepEqual(result.scenes.map(item => item.sourceId), ["base", "sichuan-jan", "base", "beijing", "base", "wuhan", "base", "sichuan-feb", "base", "chongqing", "base"]);
+  assert.deepEqual(result.scenes.map(item => item.sourceId), ["base", "sichuan-jan", "beijing", "base", "wuhan", "sichuan-feb", "chongqing", "base"]);
   assert.equal(result.warnings.length, 0);
-  assert.ok(derived(result).every(item => item.start === "" && item.end === "" && item.dateLabel === "返回日期未指定" && item.description === ""));
+  assert.deepEqual(derived(result).map(item => item.dateLabel), ["2021-01-16", "2021-03-03"]);
+  assert.ok(derived(result).every(item => item.start === item.end && item.dateLabel === item.end && item.description === ""));
 });
 
-test("returnAfter on a multi-city group produces one return after its final city", () => {
+test("multi-city legacy returnAfter does not split a following next-day stop", () => {
   const result = J.build([base(), record("sichuan-one", "2021-01-04", "2021-01-09", { groupId: "sichuan", sequence: 1, returnAfter: true }), record("sichuan-two", "2021-01-04", "2021-01-09", { groupId: "sichuan", sequence: 2, returnAfter: true }), record("beijing", "2021-01-10", "2021-01-16", { sequence: 3 })].map((item, index) => Object.assign({ sequence: index }, item)));
-  assert.deepEqual(result.scenes.map(item => item.sourceId), ["base", "sichuan-one", "sichuan-two", "base", "beijing", "base"]);
+  assert.deepEqual(result.scenes.map(item => item.sourceId), ["base", "sichuan-one", "sichuan-two", "beijing", "base"]);
 });
 
 test("multi-city base requires an explicit record ID and never silently guesses a return city", () => {
@@ -207,4 +208,60 @@ test("same-city movement stays fixed and dateline interpolation takes the shorte
   assert.deepEqual(J.interpolate({ lon: 10, lat: 20 }, { lon: 10, lat: 20 }, 0.5), { lon: 10, lat: 20 });
   assert.equal(J.interpolate({ lon: 179, lat: 0 }, { lon: -179, lat: 0 }, 0.25).lon, 179.5);
   assert.equal(J.interpolate({ lon: 179, lat: 0 }, { lon: -179, lat: 0 }, 0.75).lon, -179.5);
+});
+
+
+test("same-day handoff and next day join; a normal separated holiday still returns twice", () => {
+  const result = J.build([base(), record("one", "2021-01-01", "2021-01-03", { returnAfter: true }), record("two", "2021-01-03", "2021-01-05"), record("three", "2021-01-06", "2021-01-07"), record("later", "2021-02-01", "2021-02-03")]);
+  assert.deepEqual(result.scenes.map(x => x.sourceId), ["base", "one", "two", "three", "base", "later", "base"]);
+  assert.deepEqual(derived(result).map(x => x.end), ["2021-01-07", "2021-02-03"]);
+});
+
+test("manual return-city experiences survive unchanged, and an ending home visit is not duplicated", () => {
+  const home = base("东莞"), manual = record("manual-home", "2021-02-13", "2021-02-13", { city: "东莞", title: "返回东莞", description: "本人明确记录的返程", sequence: 2 });
+  const items = [{ ...home, sequence: 0 }, record("武汉", "2021-02-11", "2021-02-12", { sequence: 1 }), manual];
+  const before = JSON.stringify(items), result = J.build(items);
+  assert.equal(result.scenes[2].sourceId, manual.id); assert.equal(result.scenes[2].title, manual.title); assert.equal(result.scenes[2].description, manual.description);
+  assert.equal(derived(result).length, 0); assert.equal(JSON.stringify(items), before);
+});
+
+test("missing next dates do not prove a return or a continuous trip; overlapping ends keep their precision", () => {
+  const result = J.build([base(), record("known", "2021-01-01", "2021-01-03"), record("unknown", "2021-02", "")]);
+  assert.equal(derived(result).length, 0); assert(result.warnings.some(x => x.code === "unknown-next-date"));
+  const overlapping = J.build([{ ...base(), sequence: 0 }, record("long", "2021-01-01", "2021-01-20", { sequence: 1 }), record("inner", "2021-01-05", "2021-01-10", { sequence: 2 })]);
+  assert.deepEqual(overlapping.scenes.filter(x => !x.derived).map(x => x.id), ["base", "long", "inner"]);
+  assert.equal(derived(overlapping)[0].end, "2021-01-20");
+});
+
+test("published Wuhan, Sichuan and Chongqing rows retain source dates and have no intermediate Dongguan", () => {
+  const fs = require("node:fs"), path = require("node:path"), items = JSON.parse(fs.readFileSync(path.join(__dirname, "../map/catalog.json"), "utf8")).records;
+  const before = JSON.stringify(items), result = J.build(items), at = result.scenes.findIndex(x => !x.derived && x.city === "武汉" && x.start === "2026-02-11");
+  assert(at > 0);
+  assert.deepEqual(result.scenes.slice(at - 1, at + 6).map(x => x.city), ["东莞", "武汉", "西充", "绵阳", "成都", "重庆", "东莞"]);
+  assert.equal(result.scenes[at + 5].derived, true); assert.equal(result.scenes[at + 5].frameworkLabel, "返回东莞"); assert.equal(result.scenes[at + 5].end, "2026-03-03");
+  assert.equal(result.scenes[at + 4].start, "2026-02-27"); assert.equal(JSON.stringify(items), before);
+  assert(result.warnings.some(x => x.code === "short-gap"));
+});
+
+test("export camera follows smoothly, seeks deterministically and ends on the complete route", () => {
+  const items = [record("东莞", "2026-02-10", "2026-02-10", { lon: 113.75, lat: 23.02 }), record("武汉", "2026-02-11", "2026-02-12", { lon: 114.3, lat: 30.59 }), record("成都", "2026-02-13", "2026-02-25", { lon: 104.07, lat: 30.57 })];
+  const p = J.plan(items, { introMs: 1400, minStayMs: 2600, movementMs: 1500, outroMs: 6200, outroZoomMs: 3600 }), track = J.cameraTrack(items, { bounds: [45, -15, 155, 65] });
+  const travel = p.segments.find(x => x.phase === "travel"), bounds = t => J.cameraAt(track, J.frameAt(p, t), items, "follow");
+  for (const boundary of [travel.startMs, travel.endMs]) assert(bounds(boundary).every((v, i) => Math.abs(v - bounds(boundary - .001)[i]) < .001));
+  const midpoint = bounds(travel.startMs + travel.durationMs / 2); bounds(0); bounds(p.durationMs); assert.deepEqual(bounds(travel.startMs + travel.durationMs / 2), midpoint);
+  assert.deepEqual(bounds(p.durationMs), track.overview); assert.equal(J.frameAt(p, p.durationMs).phase, "outro");
+  const outro = p.segments.at(-1); assert.equal(outro.durationMs, 6200); assert.deepEqual(bounds(outro.startMs + 3600), bounds(p.durationMs));
+  for (const item of items) assert(item.lon > track.overview[0] && item.lon < track.overview[2] && item.lat > track.overview[1] && item.lat < track.overview[3]);
+  assert.deepEqual(J.cameraAt(track, J.frameAt(p, 3000), items, "fixed"), track.fixed);
+  const next = J.frameAt(p, travel.endMs); assert.equal(next.point.lon, items[1].lon); assert.equal(J.unlocked(p.scenes, next).size, 2);
+});
+
+
+test("Longhai month-only row preserves all four stops in order with no intermediate base return", () => {
+  const fs = require("node:fs"), path = require("node:path"), data = JSON.parse(fs.readFileSync(path.join(__dirname,"../map/catalog.json"),"utf8"));
+  const originals = data.records.filter(x => x.start === "2021-05");
+  assert.deepEqual(originals.map(x => x.city), ["开封","民权","徐州","连云港"]);
+  assert.equal(new Set(originals.map(x=>x.groupId)).size,1); assert(originals.every(x=>x.end==="2021-05"&&x.stayType==="visit"));
+  const scenes=J.build(data.records).scenes, at=scenes.findIndex(x=>x.id===originals[0].id);
+  assert.deepEqual(scenes.slice(at,at+4).map(x=>x.id),originals.map(x=>x.id)); assert(scenes.slice(at,at+4).every(x=>!x.derived));
 });

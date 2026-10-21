@@ -172,14 +172,15 @@ def project_asset_sources(projects):
     return sources
 
 
-def render_projects(projects):
+def render_projects(projects, language="zh-CN"):
     projects = validate_projects({"projects": projects})
     cards = []
     for item in projects:
         text = {name: escape(value, quote=True) for name, value in item.items()}
         with Image.open(ROOT / "home" / item["screenshot"].lstrip("/")) as image:
             width, height = image.size
-        facts = "".join(f'<div><dt>{label}</dt><dd>{text[name]}</dd></div>' for label, name in (
+        labels = {"解决的问题": "Problem", "主要功能": "Features", "实际贡献": "My contribution", "来源与许可": "Sources & licensing"}
+        facts = "".join(f'<div><dt>{escape(labels[label] if language == "en" else label)}</dt><dd>{text[name]}</dd></div>' for label, name in (
             ("解决的问题", "problem"), ("主要功能", "features"),
             ("实际贡献", "contribution"), ("来源与许可", "license")))
         download_label = text.get("download_label", "下载工作流")
@@ -196,14 +197,20 @@ def render_projects(projects):
   <figure class="project-visual"><img src="{text["screenshot"]}" width="{width}" height="{height}" alt="{text["screenshot_alt"]}" loading="lazy" decoding="async"><figcaption>{text["screenshot_caption"]}</figcaption></figure>
   <div class="project-body">
     <p class="project-kind">{text["kind"]}</p>
-    <h2 id="project-{text["id"]}">{text["title"]}<span class="project-english" lang="en">{text["english_title"]}</span></h2>
+    <h2 id="project-{text["id"]}">{text["title"]}{'' if language == 'en' else '<span class="project-english" lang="en">' + text['english_title'] + '</span>'}</h2>
     <p class="project-summary">{text["summary"]}</p>
     <div class="project-usage"><strong>从这里开始</strong><p>{text["usage"]}</p></div>
     <details class="project-details"><summary>功能、贡献与来源</summary><dl class="project-facts">{facts}</dl></details>
     <div class="project-actions">{actions}</div>
   </div>
 </article>''')
-    return "\n".join(cards)
+    result = "\n".join(cards)
+    if language == "en":
+        for chinese, english in {"从这里开始": "Start here", "功能、贡献与来源": "Features, contribution & sources",
+                                  "发布链接待确认": "Publication link pending", "打开体验": "Open tool (Chinese interface)",
+                                  "查看 GitHub": "View GitHub", "下载工作流": "Download workflow", "下载与使用说明": "Download & usage guide"}.items():
+            result = result.replace(chinese, english)
+    return result
 
 
 def site_root(address):
@@ -444,6 +451,8 @@ def build_site(address, map_preview_source=None):
         raise ValueError("Unresolved about template placeholder.")
     (OUTPUT / "about").mkdir(exist_ok=True)
     (OUTPUT / "about/index.html").write_text(about_page, encoding="utf-8")
+    from english_site import build_english_site
+    english_report = build_english_site(blog, OUTPUT, address, projects, about_data, values)
     for template, route in GAME_PAGES:
         source = ROOT / "home" / template
         if source.is_symlink():
@@ -475,6 +484,8 @@ def build_site(address, map_preview_source=None):
     ET.SubElement(ET.SubElement(sitemap, "url"), "loc").text = address + "/projects/"
     ET.SubElement(ET.SubElement(sitemap, "url"), "loc").text = address + "/about/"
     ET.SubElement(ET.SubElement(sitemap, "url"), "loc").text = address + "/map/"
+    for route in english_report["routes"]:
+        ET.SubElement(ET.SubElement(sitemap, "url"), "loc").text = address + route
     for _, route in GAME_PAGES:
         ET.SubElement(ET.SubElement(sitemap, "url"), "loc").text = address + "/" + route + "/"
     for route in photo_report["routes"]:
@@ -486,8 +497,11 @@ def build_site(address, map_preview_source=None):
     (OUTPUT / "robots.txt").write_text(f"User-agent: *\nAllow: /\nSitemap: {address}/sitemap.xml\n", encoding="utf-8")
     report = check_site(address)
     report["metadata"] = check_publication_metadata(address)
+    from english_site import check_english_publication
+    english_report.update(check_english_publication(blog, OUTPUT, address))
     report["photography"] = photo_report
     report["footprints"] = map_report
+    report["english"] = english_report
     responsive = getattr(blog, "responsive_images", None)
     if responsive is not None:
         report["responsive_images"] = responsive.report()

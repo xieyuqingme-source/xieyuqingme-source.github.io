@@ -148,6 +148,11 @@ main { padding-block: 68px 74px; }
 .about-wechat-qr img { display: block; width: 100%; height: auto; background: #fff; }
 .about-wechat-qr figcaption { max-width: 440px; margin-top: 10px; color: var(--muted); font-size: .8rem; line-height: 1.8; }
 .about-english p { margin: 0; color: var(--muted); line-height: 1.9; }
+.site-language-switch { font-weight: 650; white-space: nowrap; }
+html[lang="en"] .brand { font-size: 1rem; }
+html[lang="en"] .intro h1 { overflow-wrap: anywhere; font-size: clamp(2.5rem, 7vw, 4.8rem); }
+html[lang="en"] .about-contact dl { grid-template-columns: minmax(0, 155px) minmax(0, 1fr); }
+@media (max-width: 520px) { html[lang="en"] .about-contact dl { grid-template-columns: 1fr; gap: 6px; } html[lang="en"] .about-contact dd { margin-bottom: 16px; } }
 .site-footer { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 18px; padding-block: 28px calc(35px + env(safe-area-inset-bottom, 0px)); border-top: 1px solid var(--line); color: var(--muted); font-size: .72rem; }
 .site-footer p { margin: 0; font-family: var(--serif); }
 .site-footer > div { display: flex; flex-wrap: wrap; gap: 23px; }

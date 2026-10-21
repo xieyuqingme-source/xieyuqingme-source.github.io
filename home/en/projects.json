@@ -1,0 +1,81 @@
+{
+  "projects": [
+    {
+      "id": "yuliao-wechat-editor",
+      "title": "Yuliao WeChat Editor",
+      "english_title": "Yuliao WeChat Editor",
+      "kind": "Local Markdown editor",
+      "summary": "Turn Markdown notes and local images into WeChat articles, preview their styles, then copy or export them.",
+      "problem": "Local images, attachment paths and WeChat article formatting otherwise need repeated manual handling.",
+      "features": "Matches local images in Obsidian Markdown; previews Chinese typography and reading widths; organises related articles; copies rich text and exports HTML with images.",
+      "contribution": "Adapted ideas and implementation from the open-source Raphael project for Obsidian image matching, Chinese style previews, related articles and local drafts. Uses markdown-it and retains source and licence notices.",
+      "usage": "Download the source and follow its README to start locally. Import Markdown and an image folder, then copy rich text or export HTML with images. There is no hosted online version.",
+      "license": "References Raphael and uses markdown-it. See the project LICENSE, THIRD_PARTY_NOTICES.md and bundled component licences for sources, attribution and permissions.",
+      "screenshot_alt": "Screenshot of the actual local Yuliao WeChat Editor interface",
+      "screenshot_caption": "Actual local interface · Synthetic sample article and attachments",
+      "guide_label": "Setup & usage guide"
+    },
+    {
+      "id": "coze-paper-quick-reference",
+      "title": "Coze Paper Quick Reference",
+      "english_title": "Coze Paper Quick Reference",
+      "kind": "Coze workflow",
+      "summary": "Turn PDF or Word papers into quick-reference cards and send them to Feishu cloud documents.",
+      "problem": "Extracting key points, structuring reading notes and archiving documents is otherwise spread across several tools.",
+      "features": "PDF/Word paper input → link-reading plugin → Doubao model → paper reference card → Feishu document.",
+      "contribution": "Connected paper input, a link-reading plugin, the Doubao model and Feishu document output using existing platforms and components. Provides a downloadable workflow and configuration guide.",
+      "usage": "Download and import into Coze, then configure the model, link-reading plugin and Feishu document settings as described in the README.",
+      "license": "Integrates Coze, a link-reading plugin, Doubao and Feishu documents. The public repository declares no project licence; unrestricted reuse should not be assumed. Follow its documentation and the relevant platform and component licences.",
+      "screenshot_alt": "Public documentation screenshot for the Coze paper workflow, not a running interface",
+      "screenshot_caption": "Project documentation screenshot · Not a running interface",
+      "guide_label": "Configuration guide",
+      "download_label": "Download workflow"
+    },
+    {
+      "id": "yuliao-wallpaper",
+      "title": "Yuliao Wallpaper",
+      "english_title": "Yuliao Wallpaper",
+      "kind": "Windows desktop tool · v0.2.0 beta",
+      "summary": "Organise and rotate local Windows wallpapers, with curated Commons images. Version 0.2.0 is a beta supporting one active display.",
+      "problem": "Local and online wallpapers need a shared place for selection, sorting, favourites and timed rotation, with a way to restore the original wallpaper.",
+      "features": "Local imports; curated Commons images; eight selectable themes including science, technology and space; batch targets up to 30 images; rotation intervals of at least five minutes; sorting; recoverable removal; export; favourites; restoring the original static wallpaper; and official image-source links.",
+      "contribution": "Combined batch collection, sorting, favourites and rotation for local wallpapers and Commons selection, with original wallpaper restoration and source links.",
+      "usage": "Download the Windows beta and follow the release notes and README. Automatic rotation picks images randomly; batches may contain fewer than 30. The real interface, wallpaper application and restoration still await manual acceptance testing.",
+      "license": "The project uses the MIT licence. Commons images retain their individual source licences and attribution requirements; see the repository and image-source pages.",
+      "screenshot_alt": "Public documentation screenshot for Yuliao Wallpaper v0.2.0, not a running interface",
+      "screenshot_caption": "Project documentation screenshot · Not a running interface",
+      "guide_label": "Usage guide",
+      "download_label": "Download Windows beta"
+    },
+    {
+      "id": "footprints-map",
+      "title": "Footprints Map",
+      "english_title": "Footprints Map",
+      "kind": "Browser map tool · Chinese interface",
+      "summary": "Revisit city footprints and a timeline on a terrain map, or create your own travel record.",
+      "problem": "Places, dates and travel records can be difficult to connect on a single map.",
+      "features": "City footprints, natural terrain, a timeline, double-click additions, label controls, and image and video export.",
+      "contribution": "Built an interactive map, timeline, local editing and export workflow around personal travel records.",
+      "usage": "Open the map to explore. Choose “制作你的地图” (Make your map) and double-click the map to add your records. Drafts are processed in your browser; export JSON to keep and restore them.",
+      "license": "Terrain and land data come from Natural Earth (public domain). See the repository for the permitted use of code and other assets.",
+      "screenshot_alt": "Actual terrain map and city markers in the Footprints Map",
+      "screenshot_caption": "Actual site interface · Natural terrain view",
+      "guide_label": "Map usage & maintenance"
+    },
+    {
+      "id": "tier-ranking",
+      "title": "Tier Ranking",
+      "english_title": "Tier Ranking",
+      "kind": "Browser tier-list tool · Chinese interface",
+      "summary": "Rank foods, sports or your own items for sharing, livestreams or image export.",
+      "problem": "Showing personal preferences clearly needs both editing controls and a clean presentation view.",
+      "features": "Food and sports examples, custom images, drag-and-drop and keyboard ordering, presentation mode, skins and PNG export.",
+      "contribution": "Implemented local tier-list editing, image management, presentation mode and export, and prepared the built-in examples.",
+      "usage": "Open the ranking to view an example, then choose “制作我的榜单” (Make my tier list) to edit. Switch to presentation mode or export an image when finished.",
+      "license": "Implemented on this site. Built-in food and sports images were generated with AI for this project, with source notes retained in the code. See the repository for code-use terms.",
+      "screenshot_alt": "Actual default food tier list in the Tier Ranking tool",
+      "screenshot_caption": "Actual site interface · Default presentation mode",
+      "guide_label": "Ranking usage & maintenance"
+    }
+  ]
+}

@@ -19,7 +19,7 @@
     return { min: utc(year, month || 1, day || 1), max: utc(year, month || 12, day || lastDay), exact: parts.length === 3 };
   }
   function dateLabel(record) {
-    if (record.derived) return record.dateLabel || "返回日期未指定";
+    if (record.derived) return record.dateLabel || record.end || "";
     if (!record.start && !record.end) return "日期待确认";
     if (record.ongoing) return `${record.start || "开始未知"} — 至今`;
     if (record.start === record.end) return record.start;
@@ -59,7 +59,6 @@
   function contains(base, visit) { return base && visit && Number.isFinite(visit.end.max) && base.start.max <= visit.start.min && visit.end.max <= base.end.min; }
   function overlaps(a, b) { return a && b && a.start.min <= b.end.max && b.start.min <= a.end.max; }
   function explicitJoined(a, b, continuousGroups) { return continuousGroups.some(ids => Array.isArray(ids) && ids.includes(a.id) && ids.includes(b.id)); }
-  function returnAfter(group) { return group.records.some(item => item.returnAfter === true); }
   function autoJoined(groups, next) {
     const before = extent(groups), after = next.interval;
     if (!before || !after) return false;
@@ -78,7 +77,12 @@
       const group = groups[index];
       if (group.type === "base") { group.records.forEach(original); continue; }
       const outings = [group];
-      while (!returnAfter(outings[outings.length - 1]) && index + 1 < groups.length && groups[index + 1].type === "visit" && (explicitJoined(outings[outings.length - 1], groups[index + 1], continuousGroups) || autoJoined(outings, groups[index + 1]))) outings.push(groups[++index]);
+      // Date continuity takes precedence over legacy returnAfter metadata.
+      // Keep that metadata in source exports, never turn it into a detour.
+      while (index + 1 < groups.length && groups[index + 1].type === "visit" && (explicitJoined(outings[outings.length - 1], groups[index + 1], continuousGroups) || autoJoined(outings, groups[index + 1]))) outings.push(groups[++index]);
+      if (outings.some((item, position) => position && overlaps(outings[position - 1].interval, item.interval) && item.interval.start.min < outings[position - 1].interval.end.max)) {
+        warning("overlapping-visits", outings.map(item => item.id), "这些外出的日期范围重叠，按原记录顺序展示，未推断中途返回；这不代表已确认逐日行程。");
+      }
       outings.forEach(item => item.records.forEach(original));
       const trip = extent(outings), earlierBases = groups.slice(0, groups.indexOf(outings[0])).filter(item => item.type === "base");
       const candidates = earlierBases.filter(item => contains(item.interval, trip));
@@ -90,14 +94,17 @@
       const base = candidates[0], next = groups[index + 1];
       // A single unrecorded day between outings is not evidence of a home visit.
       // Keep the source rows separate instead of asserting either a return or one continuous trip.
-      if (!returnAfter(outings[outings.length - 1]) && next && next.type === "visit" && next.interval && next.interval.start.exact && trip.end.min === trip.end.max) {
+      if (next && next.type === "visit" && !next.interval) {
+        warning("unknown-next-date", outings.map(item => item.id).concat(next.id), "下一段外出日期不完整，未假定中间返回；原经历顺序和日期保持不变。"); continue;
+      }
+      if (next && next.type === "visit" && next.interval && next.interval.start.exact && trip.end.min === trip.end.max) {
         const gap = next.interval.start.min - trip.end.max;
         if (gap > DAY && gap <= 2 * DAY) {
           warning("short-gap", outings.map(item => item.id).concat(next.id), "相邻外出之间只有一天未记录，未假定期间返回基地；原经历仍分别保留。"); continue;
         }
       }
       // A new base at the end of an outing is a move, not evidence of a return to the old base.
-      if (next && next.type === "base" && next.interval && next.interval.start.min <= trip.end.max + DAY) {
+      if (next && next.type === "base" && (!next.interval || next.interval.start.min <= trip.end.max + DAY)) {
         warning("base-change", outings.map(item => item.id), "外出结束处衔接新的长期居住地，未补入返回原基地的节点。"); continue;
       }
       let destination;
@@ -112,11 +119,17 @@
       }
       const last = outings[outings.length - 1].records.at(-1);
       if (cityEqual(destination, last)) continue;
+      // Reuse a recorded end verbatim, including year/month precision. For
+      // overlapping rows use the latest recorded end, not a made-up day.
+      const ended = outings.flatMap(item => item.records).filter(item => dateBounds(item.end));
+      ended.sort((a, b) => dateBounds(b.end).max - dateBounds(a.end).max);
+      const returnDate = ended[0]?.end;
+      if (!returnDate) continue;
       scenes.push(Object.assign({}, destination, {
         id: `return-${last.id}-${destination.id}`, sourceId: destination.id, baseGroupId: base.id,
         afterGroupId: outings[outings.length - 1].id, derived: true, kind: "base-return",
-        start: "", end: "", ongoing: false, certainty: "approximate", description: "", album: "",
-        dateLabel: "返回日期未指定", frameworkLabel: "返回长期居住地（演示）"
+        start: returnDate, end: returnDate, ongoing: false, certainty: "approximate", description: "", album: "",
+        dateLabel: returnDate, frameworkLabel: `返回${destination.city}`
       }));
     }
     return { scenes, warnings };
@@ -154,15 +167,19 @@
       const pages = typeof o.textPaginator === "function" ? o.textPaginator(record.description || "", record) : paginate(record.description, o.maxPageChars, o.maxPageLines);
       if (!Array.isArray(pages) || !pages.length || pages.some(text => typeof text !== "string") || pages.join("") !== (record.description || "")) throw new TypeError("视频文字分页必须完整保留原始描述。");
       pages.forEach((text, pageIndex) => {
-        const duration = Math.round(readingDuration(text) * factor);
+        const duration = Math.round(Math.max(readingDuration(text), Number(o.minStayMs) || 0) * factor);
         segments.push({ startMs: durationMs, endMs: durationMs + duration, durationMs: duration, index, phase: "stay", pageText: text, pageIndex, pageCount: pages.length }); durationMs += duration;
       });
       if (index < scenes.length - 1) {
-        const duration = Math.round(800 * factor);
+        const from = record, to = scenes[index + 1], distance = Math.hypot(Math.min(Math.abs(to.lon - from.lon), 360 - Math.abs(to.lon - from.lon)), to.lat - from.lat);
+        const duration = Math.round(((Number(o.movementMs) || 800) + Math.min(800, distance * (Number(o.distanceMs) || 0))) * factor);
         segments.push({ startMs: durationMs, endMs: durationMs + duration, durationMs: duration, index, phase: "travel", pageText: pages.at(-1), pageIndex: pages.length - 1, pageCount: pages.length }); durationMs += duration;
       }
     });
-    return { scenes, segments, durationMs, introMs, pace, movementMs: Math.round(800 * factor) };
+    const outroMs = scenes.length ? Math.max(0, Math.round(Number(o.outroMs) || 0)) : 0;
+    const outroZoomMs = Math.min(outroMs, Math.max(1, Math.round(Number(o.outroZoomMs) || outroMs * .58)));
+    if (outroMs) { segments.push({ startMs: durationMs, endMs: durationMs + outroMs, durationMs: outroMs, index: scenes.length - 1, phase: "outro", pageText: "", pageIndex: 0, pageCount: 0 }); durationMs += outroMs; }
+    return { scenes, segments, durationMs, introMs, outroMs, outroZoomMs, pace, movementMs: Math.round((Number(o.movementMs) || 800) * factor) };
   }
   function ease(progress) { const value = Math.min(1, Math.max(0, Number(progress) || 0)); return value * value * (3 - 2 * value); }
   function interpolate(from, to, progress) {
@@ -194,7 +211,7 @@
     const segment = segments[low], index = segment.index;
     if (segment.phase === "intro") return { index: -1, record: null, next: null, phase: "intro", progress: ease(elapsed / segment.durationMs), rawProgress: elapsed / segment.durationMs, elapsed, total: p.durationMs, count: scenes.length, pageText: "", pageIndex: 0, pageCount: 0, point: null, cumulativePath: [], ended: false };
     const record = scenes[index], next = segment.phase === "travel" ? scenes[index + 1] : null;
-    const rawProgress = next ? Math.min(1, Math.max(0, (elapsed - segment.startMs) / segment.durationMs)) : 0, progress = ease(rawProgress);
+    const rawProgress = next || segment.phase === "outro" ? Math.min(1, Math.max(0, (elapsed - segment.startMs) / (segment.phase === "outro" ? p.outroZoomMs : segment.durationMs))) : 0, progress = ease(rawProgress);
     return {
       index, record, next, phase: segment.phase, progress, rawProgress, elapsed, total: p.durationMs, count: scenes.length,
       pageText: segment.pageText, pageIndex: segment.pageIndex, pageCount: segment.pageCount,
@@ -202,5 +219,40 @@
       cumulativePath: cumulativePoints(scenes, index, next ? progress : 0), ended: elapsed >= p.durationMs
     };
   }
-  return { PACES, dateBounds, dateLabel, build, paginate, plan, ease, interpolate, cumulativePoints, cityKey, unlocked, frameAt };
+  // Export-only cameras. No mutable page state, frame-history dependency or
+  // geographic data edits: seeking and repeated exports give identical views.
+  function cameraBounds(center, width, aspect) {
+    width = Math.max(1, Math.min(360, width)); let height = width / aspect;
+    if (height > 180) { height = 180; width = height * aspect; }
+    const lon = Math.max(-180 + width / 2, Math.min(180 - width / 2, center.lon));
+    const lat = Math.max(-90 + height / 2, Math.min(90 - height / 2, center.lat));
+    return [lon - width / 2, lat - height / 2, lon + width / 2, lat + height / 2];
+  }
+  function cameraTrack(scenes, options) {
+    const o = options || {}, aspect = Number(o.aspect) > 0 ? Number(o.aspect) : 1280 / 684;
+    const points = (scenes || []).filter(item => Number.isFinite(item.lon) && Number.isFinite(item.lat));
+    const span = Math.max(20, Math.min(48, Number(o.followSpan) || 32));
+    if (!points.length) return { aspect, span, overview: [-180, -90, 180, 90], fixed: o.bounds || [-180, -90, 180, 90] };
+    const west = Math.min(...points.map(p => p.lon)), east = Math.max(...points.map(p => p.lon));
+    const south = Math.min(...points.map(p => p.lat)), north = Math.max(...points.map(p => p.lat));
+    const width = east - west > 180 ? 360 : Math.max(20, (east - west) * 1.28 + 5, ((north - south) * 1.28 + 5) * aspect);
+    return { aspect, span, overview: cameraBounds({ lon: (west + east) / 2, lat: (south + north) / 2 }, width, aspect), fixed: Array.isArray(o.bounds) ? o.bounds.slice() : cameraBounds(points[0], span, aspect) };
+  }
+  function mixCamera(a, b, t) { return a.map((v, i) => v + (b[i] - v) * t); }
+  function cameraAt(track, frame, scenes, mode) {
+    if (mode === "fixed") return track.fixed.slice();
+    const first = scenes[0], point = frame.point || first;
+    if (!point) return track.overview.slice();
+    const close = cameraBounds(point, track.span, track.aspect);
+    if (frame.phase === "intro") return mixCamera(track.overview, cameraBounds(first, track.span, track.aspect), frame.progress);
+    if (frame.phase === "outro") return mixCamera(close, track.overview, frame.progress);
+    let width = track.span;
+    if (frame.next) {
+      const distance = Math.hypot(Math.min(Math.abs(frame.next.lon - frame.record.lon), 360 - Math.abs(frame.next.lon - frame.record.lon)), frame.next.lat - frame.record.lat);
+      const wider = Math.min(78, Math.max(width, distance * 1.3 + 12));
+      width += (wider - width) * Math.sin(Math.PI * frame.rawProgress) ** 2;
+    }
+    return cameraBounds(point, width, track.aspect);
+  }
+  return { PACES, dateBounds, dateLabel, build, paginate, plan, ease, interpolate, cumulativePoints, cityKey, unlocked, frameAt, cameraTrack, cameraAt };
 });

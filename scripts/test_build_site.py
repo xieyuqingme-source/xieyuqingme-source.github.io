@@ -240,16 +240,27 @@ class PublicProjectTests(unittest.TestCase):
 class ProjectPublicationTests(unittest.TestCase):
     """Exercise actual unified output and navigation without copying private article fixtures."""
     def fake_blog(self, address, output):
+        from build_blog import Blog, Article
         folder = Path(output)
-        articles = [SimpleNamespace(title="Synthetic article", published="2026-01-01", language="en",
-                                    destination="synthetic.html")]
+        blog = Blog(address, output=folder)
+        blog.source_root = build_site.ROOT
+        articles = [Article(blog.source_root / "English Articles/2026-01-01-synthetic.md", "synthetic.html", "Synthetic article",
+                            "2026-01-01", "en", "English Articles", "english.html", "Synthetic public fixture.")]
+        blog.articles = articles
+        blog.waline = {"enabled": False}
 
         def build(clean=False):
             self.assertFalse(clean, "The existing article build must keep its original clean=False policy.")
             folder.mkdir(parents=True, exist_ok=True)
+            (folder / "assets").mkdir(exist_ok=True)
+            for asset in ("style.css", "site.js"):
+                shutil.copy2(ROOT / "blog" / asset, folder / "assets" / asset)
             for name in ("index.html", "synthetic.html"):
                 url = address + "/" + name
-                (folder / name).write_text('<html><head><link rel="canonical" href="' + url
+                language = "zh-CN" if name == "index.html" else "en"
+                alternates = ('<link rel="alternate" hreflang="zh-CN" href="' + address + '/">'
+                              '<link rel="alternate" hreflang="en" href="' + address.removesuffix('/articles') + '/en/articles/">') if name == "index.html" else ''
+                (folder / name).write_text('<html lang="' + language + '"><head>' + alternates + '<link rel="canonical" href="' + url
                     + '"><meta property="og:url" content="' + url
                     + '"></head><body id="main">Synthetic public fixture</body></html>', encoding="utf-8")
             url = address.removesuffix("/articles") + "/about/"
@@ -263,8 +274,8 @@ class ProjectPublicationTests(unittest.TestCase):
                 '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>'
                 + address + '/index.html</loc></url><url><loc>'
                 + address + '/synthetic.html</loc></url></urlset>', encoding="utf-8")
-        return SimpleNamespace(articles=articles, build=build, waline={"enabled": False},
-                               href=lambda path: "/articles/" + path)
+        blog.build = build
+        return blog
 
     def test_projects_build_has_canonical_sitemap_and_preserves_article_outputs(self):
         with TemporaryDirectory(prefix="yuliao-site-projects-", dir=ROOT) as temporary:
@@ -299,6 +310,8 @@ class ProjectPublicationTests(unittest.TestCase):
                 sitemap = [node.text for node in ET.parse(output / "sitemap.xml").findall(".//{*}loc")]
                 self.assertEqual(sitemap, ["https://xieyuqing.me/", "https://xieyuqing.me/projects/", "https://xieyuqing.me/about/",
                                            "https://xieyuqing.me/map/",
+                                           "https://xieyuqing.me/en/", "https://xieyuqing.me/en/about/",
+                                           "https://xieyuqing.me/en/projects/", "https://xieyuqing.me/en/articles/",
                                            "https://xieyuqing.me/game/", "https://xieyuqing.me/game/ranking/",
                                            "https://xieyuqing.me/photos/",
                                            "https://xieyuqing.me/articles/index.html",

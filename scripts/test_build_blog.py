@@ -138,7 +138,9 @@ class MarkdownRenderingTests(unittest.TestCase):
         self.assertIn('aria-label="谢雨卿个人主页"', page)
         self.assertIn('>谢</span><span>谢雨卿', page)
         primary = page.split('<nav class="site-nav"', 1)[1].split('</nav>', 1)[0]
-        self.assertEqual(primary.count('<a '), 7)
+        self.assertEqual(primary.count('<a '), 8)
+        self.assertIn('class="site-language-switch"', primary)
+        self.assertIn('href="/en/articles/"', primary)
         self.assertNotIn('chinese.html', primary)
         self.assertNotIn('english.html', primary)
         self.assertIn('class="language-filters"', page)
@@ -250,7 +252,7 @@ class MarkdownRenderingTests(unittest.TestCase):
     def test_projects_navigation_uses_exact_site_root(self):
         page = self.blog.document("Example", "<p>Body</p>", "example.html", "en")
         links = [attrs for tag, attrs in Elements(page).elements if tag == "a"]
-        self.assertEqual(sum(attrs.get("href") == "/projects/" for attrs in links), 1)
+        self.assertEqual(sum(attrs.get("href") == "/en/projects/" for attrs in links), 1)
         self.assertNotIn("/articles/projects/", page)
         archive_links = [attrs for tag, attrs in Elements(self.blog.archive([])).elements if tag == "a"]
         self.assertTrue(any(attrs.get("href") == "/articles/english.html#archive"
@@ -259,7 +261,7 @@ class MarkdownRenderingTests(unittest.TestCase):
     def test_about_navigation_uses_root_route_without_article_prefix(self):
         page = self.blog.document("Example", "<p>Body</p>", "example.html", "en")
         links = [attrs for tag, attrs in Elements(page).elements if tag == "a"]
-        self.assertEqual(sum(attrs.get("href") == "/about/" for attrs in links), 1)
+        self.assertEqual(sum(attrs.get("href") == "/en/about/" for attrs in links), 1)
         self.assertNotIn('/articles/about.html', page)
         self.assertNotIn('/articles/about/', page)
 
@@ -408,14 +410,17 @@ class MarkdownRenderingTests(unittest.TestCase):
         self.assertNotIn('id="article-toc"', short)
         self.assertIn('class="reading-layout reading-layout-no-toc"', short)
 
-    def test_english_document_marks_chinese_interface_and_keeps_body_language(self):
+    def test_english_document_translates_interface_and_keeps_body_language(self):
         page = self.blog.document("Example", "<p>English body</p>", "example.html", "en")
         elements = Elements(page).elements
         self.assertTrue(any(tag == "html" and attrs.get("lang") == "en" for tag, attrs in elements))
         for tag, css_class in (("header", "site-header container"), ("footer", "site-footer container")):
             self.assertTrue(any(element == tag and attrs.get("class") == css_class
-                                and attrs.get("lang") == "zh-CN" for element, attrs in elements))
+                                and attrs.get("lang") == "en" for element, attrs in elements))
         self.assertTrue(any(tag == "small" and attrs.get("lang") == "en" for tag, attrs in elements))
+        self.assertIn("Skip to content", page)
+        self.assertIn("Switch to dark mode", page)
+        self.assertIn('href="/en/projects/"', page)
         headings = self.blog.toc(self.blog.render("## English heading", self.source), "en")
         self.assertTrue(any(tag == "a" and attrs.get("href") == "#english-heading"
                             and attrs.get("lang") == "en" for tag, attrs in Elements(headings).elements))

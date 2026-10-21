@@ -61,6 +61,7 @@ class Article:
     category: str
     listing: str
     markdown: str
+    original: Article | None = None
 
 
 def plain_inline(token) -> str:
@@ -81,6 +82,7 @@ def safe_line_break(state, silent: bool) -> bool:
 
 class Blog:
     def __init__(self, site_url: str, output: Path | None = None):
+        self.source_root = ROOT
         self.output = Path(output) if output is not None else OUTPUT
         self.config = json.loads((ROOT / "blog/config.json").read_text(encoding="utf-8"))
         self.waline = read_waline_config(INTERACTION_DIR / "waline.json")
@@ -93,6 +95,8 @@ class Blog:
         self.parser.use(footnote_plugin)
         self.parser.inline.ruler.before("html_inline", "safe_line_break", safe_line_break)
         self.articles: list[Article] = []
+        self.translations = {}
+        self.translation_states = {}
         self.pages = {(ROOT / "README.md").resolve(): "/about/"}
         dates_file = ROOT / "blog/publication-dates.json"
         self.publication_dates = json.loads(dates_file.read_text(encoding="utf-8")) if dates_file.exists() else {}
@@ -123,6 +127,7 @@ class Blog:
 <p><a href="/about/">前往关于我 · About</a></p></body></html>'''
 
     def collect(self):
+        self.source_root = ROOT
         for folder, (language, category, listing) in FOLDERS.items():
             for source in sorted((ROOT / folder).rglob("*.md")):
                 relative = source.relative_to(ROOT)
@@ -150,11 +155,20 @@ class Blog:
                 self.articles.append(Article(source, destination, title, published,
                                              language, category, listing, body))
         self.articles.sort(key=lambda article: (article.published or article.source.name[:10], article.destination), reverse=True)
+        from english_site import collect_translations
+        self.translations, self.translation_states = collect_translations(self)
 
-    def publication(self, article: Article) -> str:
+    def publication(self, article: Article, language="zh-CN") -> str:
+        if language == "en":
+            if not article.published:
+                return '<span class="publication-date">Publication date unconfirmed</span>'
+            metadata = self.publication_dates.get(article.source.relative_to(self.source_root).as_posix(), {})
+            label = "Reprinted" if metadata.get("label") == "转载于" else "Published"
+            qualifier = ' (first publication date unconfirmed)' if metadata.get("first_publication_unknown") else ''
+            return f'<span class="publication-date">{label} <time datetime="{article.published}">{article.published}</time>{qualifier}</span>'
         if not article.published:
             return '<span class="publication-date">发表时间待确认</span>'
-        metadata = self.publication_dates.get(article.source.relative_to(ROOT).as_posix(), {})
+        metadata = self.publication_dates.get(article.source.relative_to(self.source_root).as_posix(), {})
         label = escape(metadata.get("label", "发表于"))
         qualifier = '（首发时间待确认）' if metadata.get("first_publication_unknown") else ''
         return f'<span class="publication-date">{label} <time datetime="{article.published}">{article.published}</time>{qualifier}</span>'
@@ -272,28 +286,39 @@ class Blog:
         return self.parser.renderer.render(tokens, self.parser.options, {})
 
 
-    def document(self, title: str, body: str, destination: str, language="zh-CN", active="", description="") -> str:
-        description = description or self.config["description"]
+    def document(self, title: str, body: str, destination: str, language="zh-CN", active="", description="", alternates="", switch_href="") -> str:
+        english = language == "en"
+        description = description or self.config["english_description" if english else "description"]
+        from english_site import alternate_links, site_origin
+        origin = site_origin(self)
+        if destination == "index.html" and not alternates:
+            alternates = alternate_links(origin, "/articles/", "/en/articles/")
+        if not switch_href:
+            switch_href = "/articles/" if english else "/en/articles/"
         nav = []
-        for label, target in [("个人主页", "/"), ('文章 <span lang="en">Articles</span>', "index.html"),
+        nav_items = [("Home", "/en/"), ("Articles", "/en/articles/"), ("Projects", "/en/projects/"),
+                     ("Photos", "/photos/"), ("Map", "/map/"), ("Games", "/game/"), ("About", "/en/about/")] if english else [("个人主页", "/"), ('文章 <span lang="en">Articles</span>', "index.html"),
                               ('作品 <span lang="en">Projects</span>', "/projects/"),
                               ('摄影 <span lang="en">Photos</span>', "/photos/"),
                               ('足迹 <span lang="en">Map</span>', "/map/"),
                               ('小游戏 <span lang="en">Games</span>', "/game/"),
-                              ('关于我 <span lang="en">About</span>', "/about/")]:
-            current = ' aria-current="page"' if target == active or target == "index.html" else ""
-            address = target if target in {"/", "/projects/", "/photos/", "/map/", "/game/", "/about/"} else self.base_path
+                              ('关于我 <span lang="en">About</span>', "/about/")]
+        for label, target in nav_items:
+            current = ' aria-current="page"' if target == active or target in {"index.html", "/en/articles/"} else ""
+            address = target if target.startswith("/") else self.base_path
             link_language = ' lang="en"' if target == "english.html" else ""
             nav.append(f'<a href="{escape(address)}"{current}{link_language}>{label}</a>')
+        nav.append(f'<a class="site-language-switch" href="{escape(switch_href)}" lang="{"zh-CN" if english else "en"}" aria-label="{"Switch site language to Chinese" if english else "切换网站语言为英语"}">{"中文" if english else "EN"}</a>')
         return f'''<!doctype html>
 <html lang="{language}" data-theme="light">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{escape(title)} · {escape(self.config['title'])}</title>
+  <title>{escape(title)} · {escape('Xie Yuqing · Carl' if english else self.config['title'])}</title>
   <meta name="description" content="{escape(description)}">
   <meta name="author" content="{escape(self.config['author'])}">
   <link rel="canonical" href="{escape(self.canonical(destination))}">
+  {alternates}
   <meta property="og:type" content="{'article' if destination not in {'index.html', 'chinese.html', 'english.html', 'about.html'} else 'website'}">
   <meta property="og:title" content="{escape(title)}">
   <meta property="og:description" content="{escape(description)}">
@@ -301,7 +326,7 @@ class Blog:
   <meta property="og:image" content="{escape(urlunsplit((*urlsplit(self.site_url)[:2], '/assets/share-cover.png', '', '')))}">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="谢雨卿 · Carl — 文章、作品与生活足迹">
+  <meta property="og:image:alt" content="{'Xie Yuqing · Carl — Writing, projects and places' if english else '谢雨卿 · Carl — 文章、作品与生活足迹'}">
   <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
   <script>(() => {{ let theme = "light", saved; try {{ saved = localStorage.getItem("xieyuqing-blog-theme"); }} catch (_) {{}} if (saved === "light" || saved === "dark") theme = saved; else try {{ if (window.matchMedia("(prefers-color-scheme: dark)").matches) theme = "dark"; }} catch (_) {{}} document.documentElement.dataset.theme = theme; }})();</script>
   <link rel="stylesheet" href="{escape(self.href('assets/style.css'))}">
@@ -310,17 +335,17 @@ class Blog:
   {self.waline_head(destination)}
 </head>
 <body id="top">
-  <a class="skip-link" href="#main" lang="zh-CN">跳转到正文 / <span lang="en">Skip to content</span></a>
-  <header class="site-header container" lang="zh-CN">
-    <a class="brand" href="/" aria-label="谢雨卿个人主页"><span class="brand-mark" aria-hidden="true">谢</span><span>谢雨卿<small lang="en">XIE YUQING · CARL</small></span></a>
+  <a class="skip-link" href="#main">{'Skip to content' if english else '跳转到正文 / Skip to content'}</a>
+  <header class="site-header container" lang="{language}">
+    <a class="brand" href="{'/en/' if english else '/'}" aria-label="{'Xie Yuqing personal home' if english else '谢雨卿个人主页'}"><span class="brand-mark" aria-hidden="true">谢</span><span>{'Xie Yuqing' if english else '谢雨卿'}<small lang="en">XIE YUQING · CARL</small></span></a>
     <div class="header-actions"><nav class="site-nav" aria-label="导航 / Navigation">{''.join(nav)}</nav>
-    <button class="theme-toggle" id="theme-toggle" type="button" aria-label="切换到深色模式" title="切换到深色模式" hidden><span class="theme-icon" aria-hidden="true">◐</span><span class="theme-label">深色</span></button></div>
+    <button class="theme-toggle" id="theme-toggle" type="button" aria-label="{'Switch to dark mode' if english else '切换到深色模式'}" title="{'Switch to dark mode' if english else '切换到深色模式'}" hidden><span class="theme-icon" aria-hidden="true">◐</span><span class="theme-label">{'Dark' if english else '深色'}</span></button></div>
   </header>
   <main id="main" class="container">{body}</main>
-  <footer class="site-footer container" lang="zh-CN">
-    <div><strong>{escape(self.config['title'])}</strong><span>生活、学习与社会的观察和思考。</span></div>
+  <footer class="site-footer container" lang="{language}">
+    <div><strong>{escape('Xie Yuqing · Carl' if english else self.config['title'])}</strong><span>{'Observations on life, learning and society.' if english else '生活、学习与社会的观察和思考。'}</span></div>
     <p>© {date.today().year} {escape(self.config['author'])}</p>
-    <div class="footer-links"><a href="{escape(self.href('feed.xml'))}">RSS 订阅</a><a href="{escape(self.config['repository_url'])}" lang="en">GitHub {ARROW_ICON}</a></div>
+    <div class="footer-links"><a href="{escape(self.href('feed.xml'))}">{'RSS · original articles' if english else 'RSS 订阅'}</a><a href="{escape(self.config['repository_url'])}" lang="en">GitHub {ARROW_ICON}</a></div>
   </footer>
 </body>
 </html>
@@ -337,26 +362,39 @@ class Blog:
                 f'<script type="application/json" id="waline-settings">{encoded}</script>'
                 f'<script type="module" src="{escape(self.href("assets/waline-integration.js"))}"></script>')
 
-    def metrics(self, article: Article) -> str:
+    def original_href(self, article: Article) -> str:
+        return self.href((article.original or article).destination)
+
+    def metrics(self, article: Article, language="zh-CN") -> str:
         if not self.waline["enabled"]:
             return ""
-        return (f'<span class="article-stat" data-stats-path="{escape(self.href(article.destination))}" lang="zh-CN" hidden>'
-                '<span data-counter="views" hidden>浏览 <b></b></span>'
-                '<span data-counter="comments" hidden>评论 <b></b></span></span>')
+        return (f'<span class="article-stat" data-stats-path="{escape(self.original_href(article))}" lang="{language}" hidden>'
+                f'<span data-counter="views" hidden>{"Views" if language == "en" else "浏览"} <b></b></span>'
+                f'<span data-counter="comments" hidden>{"Comments" if language == "en" else "评论"} <b></b></span></span>')
 
-    def provider_notice(self) -> str:
+    def provider_notice(self, language="zh-CN") -> str:
+        if language == "en":
+            return f'Hosting: {escape(self.waline["hostingProvider"])}; database: {escape(self.waline["databaseProvider"])}.'
         return f'服务托管：{escape(self.waline["hostingProvider"])}；数据库：{escape(self.waline["databaseProvider"])}。'
 
-    def statistics_notice(self) -> str:
+    def statistics_notice(self, language="zh-CN") -> str:
         if not self.waline["enabled"]:
             return ""
+        if language == "en":
+            return ('<p class="statistics-notice">View and comment counts send IP and browser information to the selected Waline backend and its hosting provider. '
+                    + self.provider_notice(language) + '</p>')
         return ('<p class="statistics-notice" lang="zh-CN">浏览与评论统计请求会向所选Waline后端及其托管商发送IP和浏览器信息。'
                 + self.provider_notice() + '</p>')
 
     def comments(self, article: Article) -> str:
         if not self.waline["enabled"]:
             return ""
-        return (f'<section class="article-comments" id="article-comments" data-article-path="{escape(self.href(article.destination))}" aria-labelledby="comments-heading" lang="zh-CN" hidden>'
+        if article.language == "en":
+            return (f'<section class="article-comments" id="article-comments" data-article-path="{escape(self.original_href(article))}" aria-labelledby="comments-heading" lang="en" hidden>'
+                    '<h2 id="comments-heading">Comments</h2><p class="comment-policy">No account needed. A nickname is required; email is optional. Successful submissions appear publicly without manual pre-moderation.</p>'
+                    '<p class="comment-privacy">Comments and nicknames are public. Optional email addresses are not displayed. The selected Waline backend and its hosting provider process comments, nicknames, optional email, IP and browser information. Comments show IP region, without the full IP address or browser and operating system labels. '
+                    + self.provider_notice('en') + '</p><label class="sr-only" for="wl-edit">Your comment</label><div id="waline"></div></section>')
+        return (f'<section class="article-comments" id="article-comments" data-article-path="{escape(self.original_href(article))}" aria-labelledby="comments-heading" lang="zh-CN" hidden>'
                 '<h2 id="comments-heading">留言</h2><p class="comment-policy">无需注册；昵称必填，邮箱选填。提交成功后直接公开，无需人工预审。</p>'
                 '<p class="comment-privacy">评论和昵称会公开；邮箱为选填且不公开。评论、昵称、可选邮箱及请求中的IP和浏览器信息会由所选Waline后端及其托管商处理；评论区显示IP属地，不公开完整IP；不显示浏览器和操作系统标签。'
                 + self.provider_notice() + '</p><label class="sr-only" for="wl-edit">留言内容</label><div id="waline"></div></section>')
@@ -393,7 +431,7 @@ class Blog:
 
     def topic(self, article: Article) -> str:
         """Navigation labels inferred from public writing, never source metadata."""
-        title = article.title.lower()
+        title = (article.original or article).title.lower()
         if any(word in title for word in ("中学生", "教育", "学校")):
             return "学习与思考"
         if any(word in title for word in ("markdown", "word", "geo", "生成式", "ai", "人工智能", "论文", "youtube", "扣子", "公众号", "写作", "创作", "互联网", "网站")):
@@ -483,13 +521,69 @@ class Blog:
             return ""
         links = ''.join(f'<li class="toc-{tag}"><a href="#{escape(slug)}" lang="{language}">{escape(label)}</a></li>'
                         for tag, slug, label in headings.items)
-        return f'''<aside class="article-toc" id="article-toc" lang="zh-CN"><details open><summary aria-controls="article-toc-links" aria-expanded="true"><span>文章目录</span><span class="toc-toggle" aria-hidden="true">+</span></summary><nav id="article-toc-links" aria-label="文章目录"><ol>{links}</ol></nav></details><a class="toc-top" href="#top">↑ 回到顶部</a></aside>'''
+        title = "Contents" if language == "en" else "文章目录"
+        return f'''<aside class="article-toc" id="article-toc" lang="{language}"><details open><summary aria-controls="article-toc-links" aria-expanded="true"><span>{title}</span><span class="toc-toggle" aria-hidden="true">+</span></summary><nav id="article-toc-links" aria-label="{title}"><ol>{links}</ol></nav></details><a class="toc-top" href="#top">↑ {"Back to top" if language == "en" else "回到顶部"}</a></aside>'''
 
-    def toc_controls(self) -> str:
+    def toc_controls(self, language="zh-CN") -> str:
+        if language == "en":
+            return '''<div class="toc-controls" role="group" aria-label="Desktop contents position" lang="en" hidden>
+<span>Contents position</span><button type="button" data-toc-position="left" aria-controls="article-toc" aria-pressed="false">Left</button>
+<button type="button" data-toc-position="right" aria-controls="article-toc" aria-pressed="true">Right</button>
+<button type="button" data-toc-position="hidden" aria-controls="article-toc" aria-pressed="false">Hide</button></div>'''
         return '''<div class="toc-controls" role="group" aria-label="电脑端目录位置" lang="zh-CN" hidden>
 <span>目录位置</span><button type="button" data-toc-position="left" aria-controls="article-toc" aria-pressed="false">左侧</button>
 <button type="button" data-toc-position="right" aria-controls="article-toc" aria-pressed="true">右侧</button>
 <button type="button" data-toc-position="hidden" aria-controls="article-toc" aria-pressed="false">隐藏</button></div>'''
+
+    def article_document(self, article: Article, entries: list[Article]) -> str:
+        from english_site import TOPICS, alternate_links, english_article_url, site_origin, translated_render
+        english = article.language == "en"
+        language = article.language
+        rendered = translated_render(self, article)
+        directory = self.toc(rendered, language)
+        controls = self.toc_controls(language) if directory else ""
+        layout = ('class="reading-layout" data-toc-position="right"' if directory
+                  else 'class="reading-layout reading-layout-no-toc"')
+        origin = site_origin(self)
+        original = article.original or article
+        original_url = self.original_href(article)
+        key = original.source.relative_to(self.source_root).as_posix()
+        translated = self.translations.get(key)
+        alternates = ""
+        switch_href = "/articles/" if english else "/en/articles/"
+        if translated is not None:
+            translated_url = english_article_url(self, original)
+            alternates = alternate_links(origin, original_url, translated_url)
+            switch_href = original_url if english else translated_url
+        if article.original:
+            translation_note = (f'<p class="translation-note">AI-assisted English translation. <a class="article-original" href="{escape(original_url)}" lang="zh-CN">Original / 中文原文</a></p>')
+        elif article.language == "zh-CN" and translated:
+            translation_note = f'<p class="translation-note"><a class="article-translation" href="{escape(english_article_url(self, article))}" lang="en">Read in English →</a><span> AI 辅助全文翻译</span></p>'
+        elif article.language == "zh-CN":
+            status = "英文翻译待更新" if self.translation_states.get(key) == "stale" else "英文翻译待完成"
+            translation_note = f'<p class="translation-note" data-translation-status="{self.translation_states.get(key, "pending")}">{status} · <a href="/en/articles/" lang="en">English directory</a></p>'
+        elif english:
+            translation_note = '<p class="translation-note">Originally written in English.</p>'
+        else:
+            translation_note = ""
+        index = entries.index(article)
+        related = []
+        for neighbour, label in ((index - 1, "Newer article" if english else "较新一篇"), (index + 1, "Older article" if english else "较早一篇")):
+            if 0 <= neighbour < len(entries):
+                other = entries[neighbour]
+                related.append(f'<a href="{escape(self.href(other.destination))}"><span>{label}</span><strong lang="{other.language}">{escape(other.title)}</strong><small>{other.published} {ARROW_ICON}</small></a>')
+        next_reading = f'<nav class="next-reading" aria-label="{"Continue reading" if english else "继续阅读"}" lang="{language}">' + ''.join(related) + '</nav>' if related else ''
+        topic = TOPICS[self.topic(article)] if english else self.topic(article)
+        back_url = "/en/articles/" if english else self.href(article.listing)
+        body = f'''<div class="reading-progress" aria-hidden="true"><span></span></div><article class="reading-page"><header class="article-header">
+<a class="back-link" href="{escape(back_url)}">← {"Articles" if english else article.category}</a>
+<p class="eyebrow">{escape(topic)}</p><h1>{escape(article.title)}</h1>
+<p class="article-meta">{self.publication(article, language)}<span>{escape(self.config['author'])}</span><span>{str(self.reading_minutes(article)) + " min read" if english else "约 " + str(self.reading_minutes(article)) + " 分钟阅读"}</span>{self.metrics(article, language)}</p>{translation_note}</header>
+{self.statistics_notice(language)}{controls}<div {layout}><div class="reading-content"><div class="article-body" id="article-content">{rendered}</div>
+{self.comments(article)}<div class="article-end"><span aria-hidden="true">◆</span><p>{"Thanks for reading." if english else "谢谢你读到这里。"}</p><a href="{escape(back_url)}#archive">{"Back to articles" if english else "返回文章归档"} →</a></div>{next_reading}</div>{directory}</div></article>
+<dialog class="article-image-viewer" id="article-image-viewer" aria-label="{"Article image" if english else "文章图片大图"}"><div class="image-viewer-actions"><a href="#" target="_blank" rel="noopener">{"View original image" if english else "查看原图"} {ARROW_ICON}</a><button type="button">{"Close" if english else "关闭"}</button></div><img alt=""><p></p></dialog>'''
+        return self.document(article.title, body, article.destination, language, article.listing,
+                             self.excerpt(article), alternates=alternates, switch_href=switch_href)
 
     def feed(self):
         rss = Element("rss", version="2.0")
@@ -513,6 +607,7 @@ class Blog:
         target.write_text(html, encoding="utf-8")
 
     def build(self, clean=True):
+        self.source_root = ROOT
         self.collect()
         # Only remove this generator's own output, after checking its exact path.
         if self.output.is_symlink() or self.output.resolve() not in {
@@ -574,30 +669,9 @@ class Blog:
             heading = f'<section class="page-intro"><p class="eyebrow">{label}</p><h1>{category}</h1><p>{description}</p></section>'
             self.write(destination, self.document(category, heading + self.archive(entries, "全部文章", "按写作日期排列，最新文章在前。"), destination, active=destination))
         self.write("about.html", self.about_redirect())
-        for index, article in enumerate(self.articles):
-            rendered = self.render(article.markdown, article.source)
-            directory = self.toc(rendered, article.language)
-            controls = self.toc_controls() if directory else ""
-            layout = ('class="reading-layout" data-toc-position="right"' if directory
-                      else 'class="reading-layout reading-layout-no-toc"')
-            related = []
-            for neighbour, label in ((index - 1, "较新一篇"), (index + 1, "较早一篇")):
-                if 0 <= neighbour < len(self.articles):
-                    next_article = self.articles[neighbour]
-                    related.append(f'<a href="{escape(self.href(next_article.destination))}"><span>{label}</span><strong lang="{next_article.language}">{escape(next_article.title)}</strong><small>{next_article.published} {ARROW_ICON}</small></a>')
-            next_reading = '<nav class="next-reading" aria-label="继续阅读" lang="zh-CN">' + ''.join(related) + '</nav>' if related else ''
-            body = f'''<div class="reading-progress" aria-hidden="true"><span></span></div><article class="reading-page"><header class="article-header">
-<a class="back-link" href="{escape(self.href(article.listing))}" lang="{article.language}">← {article.category}</a>
-<p class="eyebrow" lang="zh-CN">{escape(self.topic(article))}</p><h1>{escape(article.title)}</h1>
-<p class="article-meta" lang="zh-CN">{self.publication(article)}<span>{escape(self.config['author'])}</span><span>约 {self.reading_minutes(article)} 分钟阅读</span>{self.metrics(article)}</p></header>
-{self.statistics_notice()}
-{controls}
-<div {layout}><div class="reading-content">
-<div class="article-body" id="article-content">{rendered}</div>
-{self.comments(article)}
-<div class="article-end" lang="zh-CN"><span aria-hidden="true">◆</span><p>谢谢你读到这里。</p><a href="{escape(self.href('index.html'))}#archive">返回文章归档 →</a></div>{next_reading}</div>{directory}</div></article>
-<dialog class="article-image-viewer" id="article-image-viewer" aria-label="文章图片大图" lang="zh-CN"><div class="image-viewer-actions"><a href="#" target="_blank" rel="noopener">查看原图 {ARROW_ICON}</a><button type="button">关闭</button></div><img alt=""><p></p></dialog>'''
-            self.write(article.destination, self.document(article.title, body, article.destination, article.language, article.listing, self.excerpt(article)))
+        for article in self.articles:
+            entries = [a for a in self.articles if a.language == "en"] if article.language == "en" else self.articles
+            self.write(article.destination, self.article_document(article, entries))
         sitemap = Element("urlset", xmlns="http://www.sitemaps.org/schemas/sitemap/0.9")
         for destination in ["index.html", "chinese.html", "english.html", *[a.destination for a in self.articles]]:
             SubElement(SubElement(sitemap, "url"), "loc").text = self.canonical(destination)
@@ -632,7 +706,10 @@ class Blog:
                     continue
                 # These exact root destinations belong to the unified-site builder.
                 # Do not exempt arbitrary root paths from this article-site check.
-                if parsed.path in {"/", "/projects/", "/photos/", "/map/", "/game/", "/about/", "/assets/favicon.svg"}:
+                from english_site import english_article_url
+                english_routes = {"/en/", "/en/about/", "/en/projects/", "/en/articles/",
+                                  *[english_article_url(self, a) for a in self.translations.values()]}
+                if parsed.path in {"/", "/projects/", "/photos/", "/map/", "/game/", "/about/", "/assets/favicon.svg", *english_routes}:
                     root_links += 1
                     continue
                 if not parsed.path.startswith(self.base_path):

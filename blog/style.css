@@ -134,6 +134,16 @@ h1, h2 { font-family: var(--serif); }
 .language-filters { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; margin: 0 0 22px; font-size: .78rem; }
 .language-filters a { padding: 6px 12px; border: 1px solid var(--line); border-radius: 4px; color: var(--muted); text-decoration: none; }
 .language-filters a:hover, .language-filters a[aria-current="page"] { border-color: var(--accent); color: var(--accent); background: var(--soft); }
+.language-filters button { min-height: 44px; padding: 6px 12px; border: 1px solid var(--line); border-radius: 4px; color: var(--muted); background: transparent; font: inherit; }
+.language-filters button:hover, .language-filters button[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); background: var(--soft); }
+.site-language-switch { font-weight: 650; white-space: nowrap; }
+.translation-note { margin: 20px 0 0; color: var(--muted); font-size: .82rem; line-height: 1.8; overflow-wrap: anywhere; }
+.translation-note a { display: inline-flex; align-items: center; min-height: 44px; color: var(--accent); }
+.translation-status { font-size: .72rem; }
+.translation-coverage { color: var(--muted); font-size: .82rem; }
+.translation-anchor { display: block; scroll-margin-top: 80px; }
+html[lang="en"] .brand { font-size: 1rem; }
+html[lang="en"] .article-body { line-height: 1.85; }
 .filter-button { display: flex; align-items: center; gap: 9px; padding: 8px 13px; border: 1px solid transparent; border-radius: 3px; color: var(--muted); background: transparent; font-size: .76rem; line-height: 1.6; }
 .filter-button span { font-size: .62rem; opacity: .75; }
 .filter-button:hover { color: var(--accent); background: var(--soft); }

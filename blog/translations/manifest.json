@@ -1,0 +1,1023 @@
+{
+  "version": 1,
+  "translations": {
+    "中文文章/2024-09-13-范仲淹没见过岳阳楼，李白也没去过天姥山.md": {
+      "file": "blog/translations/en/2024-09-13-范仲淹没见过岳阳楼，李白也没去过天姥山.md",
+      "source_sha256": "6c58a61929d2d31b08146088dddd3bb3149c2beede5827c6a441ed070e3b6bb7",
+      "title": "Fan Zhongyan Had Never Seen Yueyang Tower, and Li Bai Had Never Visited Mount Tianmu",
+      "status": "complete",
+      "method": "AI-assisted translation",
+      "notes": [
+        "原文第一次诗题作《梦游天姥吟游别》，后文作《梦游天姥吟留别》；译文均按同一首诗的英文描述呈现，未添加史实纠正。"
+      ]
+    },
+    "中文文章/2024-09-14-工资就是吃饭钱.md": {
+      "file": "blog/translations/en/2024-09-14-工资就是吃饭钱.md",
+      "source_sha256": "c2b70c253a02677b3f4ccc7828f1f1908827ce51b95abdd71e251b2cdde6d2bc",
+      "title": "Wages Are Just Money for Food",
+      "status": "complete",
+      "method": "AI-assisted translation"
+    },
+    "中文文章/2024-09-15-越是要保护的东西，越是没有生命力。有生命力的东西都在野蛮生长。.md": {
+      "file": "blog/translations/en/2024-09-15-越是要保护的东西，越是没有生命力。有生命力的东西都在野蛮生长。.md",
+      "source_sha256": "94a82345409466633cbe2b9f33bebc24e9a9e08a94fa79e68447537c93e757f2",
+      "title": "The More Something Needs Protection, the Less Vitality It Has. Things with Vitality Are Growing Wild.",
+      "status": "complete",
+      "method": "AI-assisted translation"
+    },
+    "中文文章/2024-09-16-永远不要指望自己明天会读书——关于读书的一些经验和感想.md": {
+      "file": "blog/translations/en/2024-09-16-永远不要指望自己明天会读书——关于读书的一些经验和感想.md",
+      "source_sha256": "4bb5d9e0582944039f2396477c7dbc66deb6eb180b9ba869e3f126d5069dbcef",
+      "title": "Never Count on Reading Tomorrow: Some Experiences and Thoughts About Reading",
+      "status": "complete",
+      "method": "AI-assisted translation",
+      "notes": [
+        "保留读者曾接触免费电子书的合法性自述；未加入新判断。末尾古文全文翻译，未摘要。"
+      ]
+    },
+    "中文文章/2024-09-17-诸葛亮早年都有哪些社会关系？（上）四个大爹.md": {
+      "file": "blog/translations/en/2024-09-17-诸葛亮早年都有哪些社会关系？（上）四个大爹.md",
+      "source_sha256": "145e97c2c37a9b672f8201bb7c29ba9776b6cda5013be1c07505d61a73697589",
+      "title": "What Social Connections Did Zhuge Liang Have in His Early Years? (Part One): Four Powerful Dads",
+      "status": "complete",
+      "method": "AI-assisted translation",
+      "notes": [
+        "The first quotation repeats Huang Chengyan in the source; the repetition is retained."
+      ]
+    },
+    "中文文章/2024-09-18-诸葛亮早年都有哪些社会关系？（下）荆州抵抗派与刘备集团的合流.md": {
+      "file": "blog/translations/en/2024-09-18-诸葛亮早年都有哪些社会关系？（下）荆州抵抗派与刘备集团的合流.md",
+      "source_sha256": "55cde1eeeba16cdf915000c8f97488de64a08c7be1129486c857840703943837",
+      "title": "What Social Connections Did Zhuge Liang Have in His Early Years? (Part Two): The Alliance Between Jingzhou's Resistance Faction and Liu Bei's Group",
+      "status": "complete",
+      "method": "AI-assisted translation",
+      "notes": [
+        "The source pairs the sixteenth year of Jian'an with 201 CE, inconsistent with its other era-year conversions. Both source values are retained without correction.",
+        "Different Chinese personal names in the source may share the romanization Cui Jun; no identities or family relationships have been changed."
+      ]
+    },
+    "中文文章/2024-09-19-有些执念和担忧，你把它当成屁，它就真的变成屁了.md": {
+      "file": "blog/translations/en/2024-09-19-有些执念和担忧，你把它当成屁，它就真的变成屁了.md",
+      "source_sha256": "d98e321d741510ffd20d5bfa7e6def0b08b68eacbc3b3b476c30a2a18c13fc84",
+      "title": "Some Obsessions and Worries Really Do Become a Fart When You Treat Them as One",
+      "status": "complete",
+      "method": "AI-assisted translation"
+    },
+    "中文文章/2024-09-20-读书报告：《边水往事》.md": {
+      "file": "blog/translations/en/2024-09-20-读书报告：《边水往事》.md",
+      "source_sha256": "69a63ed5aef9f137e86dacea2c42065a6df6d24fd247521cdafc6b3233abd042",
+      "title": "Reading Report: Bianshui Wangshi",
+      "status": "complete",
+      "method": "AI-assisted translation",
+      "notes": [
+        "书中缅邦、金边坡等地名按原文音译 Mianbang/Jinbianpo，不擅自归为现实国家或城市。回复关键词“边水往事”保留，以免改变公众号功能。"
+      ]
+    },
+    "中文文章/2024-09-21-人行通州，月明中秋.md": {
+      "file": "blog/translations/en/2024-09-21-人行通州，月明中秋.md",
+      "source_sha256": "62042e07b64b9ee9df7eb7d4cf117f2c8469372bb039c24eb30d4d8c967e4b50",
+      "title": "Walking Through Tongzhou Beneath the Mid-Autumn Moon",
+      "status": "complete",
+      "method": "AI-assisted translation"
+    },
+    "中文文章/2024-09-23-读书报告：《我不是废柴》（电视剧《凡人歌》原著）.md": {
+      "file": "blog/translations/en/2024-09-23-读书报告：《我不是废柴》（电视剧《凡人歌》原著）.md",
+      "source_sha256": "71eaa787c17ddc1bdac3b687412e2618c53004387e1ca52adf8019d4e384bf7f",
+      "title": "Book Report: I Am Not a Loser, the Novel Behind the TV Drama Born to Be the One",
+      "status": "complete",
+      "method": "AI-assisted translation",
+      "notes": [
+        "Source uses 凡人传 in the career chronology, whereas the heading and surrounding discussion use 凡人歌; this inconsistency is retained rather than silently reconciled."
+      ]
+    },
+    "中文文章/2024-09-24-完成和完美，哪个更重要？.md": {
+      "file": "blog/translations/en/2024-09-24-完成和完美，哪个更重要？.md",
+      "source_sha256": "b7fbe5a8a7abbf63e37e3da753087e919270fe6c84c30e7a12c0ca5238a3f8ef",
+      "title": "Which Matters More: Getting It Done or Making It Perfect?",
+      "status": "complete",
+      "method": "AI-assisted translation"
+    },
+    "中文文章/2024-09-26-读书报告：《史记·货殖列传》.md": {
+      "file": "blog/translations/en/2024-09-26-读书报告：《史记·货殖列传》.md",
+      "source_sha256": "075efa0e0805363b91f832546c5e6427e10393a2f5371fbccfbf50df9faf02cd",
+      "title": "Reading Report: \"The Biographies of the Money-Makers\" in the Records of the Grand Historian",
+      "status": "complete",
+      "method": "AI-assisted translation"
+    },
+    "中文文章/2024-09-29-《资本论》问对录：序言和跋.md": {
+      "file": "blog/translations/en/2024-09-29-《资本论》问对录：序言和跋.md",
+      "source_sha256": "2da047fb43696335c1409c87764e0951e8f9f7dfba7814aa1f0882a268acf6cb",
+      "title": "Questions and Answers on Capital: Prefaces and Afterwords",
+      "status": "complete",
+      "method": "AI-assisted translation",
+      "notes": [
+        "原文含已发表版本/历史身份等论断，按原文翻译，未作史实纠正。",
+        "QA曾发现普通编号段落被识别为Markdown有序列表，现已恢复为三个普通编号段落并通过复核。"
+      ]
+    },
+    "中文文章/2024-10-04-《资本论》问对录1.1：第一篇都有哪些章节？主要讲了什么？.md": {
+      "file": "blog/translations/en/2024-10-04-《资本论》问对录1.1：第一篇都有哪些章节？主要讲了什么？.md",
+      "source_sha256": "4318e15a7a50e19d740803480a39a84376c0dc6c94f627d5b0aa1ab14a566e24",
+      "title": "Questions and Answers on Capital 1.1: What Chapters Are in Part One, and What Do They Cover?",
+      "status": "complete",
+      "method": "AI-assisted translation"
+    },
+    "中文文章/2024-10-05-毛泽东与阅读.md": {
+      "file": "blog/translations/en/2024-10-05-毛泽东与阅读.md",
+      "source_sha256": "35df397e2e630e45ac55790e21da25fd5f3698214da98fe067973484f59a66f5",
+      "title": "Mao Zedong and Reading",
+      "status": "complete",
+      "method": "AI-assisted translation",
+      "notes": [
+        "保留原文重复的“二”章节编号。",
+        "原文1929年文化书社和1951年斯大林著作等日期疑点未改写。古籍书目含1926年版，与童年叙述时间不合，仍按原文保留。",
+        "诗作和引文完整翻译；图片内中文未重绘。"
+      ]
+    },
+    "中文文章/2024-10-06-《资本论》问对录1.5：如何理解商品的使用价值？.md": {
+      "file": "blog/translations/en/2024-10-06-《资本论》问对录1.5：如何理解商品的使用价值？.md",
+      "source_sha256": "0a788dc8f5b48bc740c103c4beb0c897be90f4b46cf9624bb41399ff94153e15",
+      "title": "Questions and Answers on Capital 1.5: How Should We Understand a Commodity's Use-Value?",
+      "status": "complete",
+      "method": "AI-assisted translation"
+    },
+    "中文文章/2024-10-08-《资本论》问对录1.6：如何理解商品的交换价值？如何理解商品的价值？这两者之间的关系是什么？.md": {
+      "file": "blog/translations/en/2024-10-08-《资本论》问对录1.6：如何理解商品的交换价值？如何理解商品的价值？这两者之间的关系是什么？.md",
+      "source_sha256": "57f8b1e5aa0334cbd18506abe3251a16f39ff396c69b69af65c91c8a4dd67ec2",
+      "title": "Questions and Answers on Capital 1.6: How Should We Understand a Commodity's Exchange-Value and Value, and Their Relationship?",
+      "status": "complete",
+      "method": "AI-assisted translation"
+    },
+    "中文文章/2024-10-09-《资本论》问对录1.7：如何理解劳动的二重性？什么是有用劳动、具体劳动、抽象劳动？.md": {
+      "file": "blog/translations/en/2024-10-09-《资本论》问对录1.7：如何理解劳动的二重性？什么是有用劳动、具体劳动、抽象劳动？.md",
+      "source_sha256": "04b6b1cad09f058f40a292f6ecc056dfc113b9c2225fe21e20769dbf7f5bbbaf",
+      "title": "Questions and Answers on Capital 1.7: How Should We Understand the Dual Character of Labor? What Are Useful Labor, Concrete Labor, and Abstract Labor?",
+      "status": "complete",
+      "method": "AI-assisted translation"
+    },
+    "中文文章/2024-10-10-《资本论》问对录1.8：如何理解社会必要劳动时间和劳动生产力？.md": {
+      "file": "blog/translations/en/2024-10-10-《资本论》问对录1.8：如何理解社会必要劳动时间和劳动生产力？.md",
+      "source_sha256": "b8c51ffaf063ea458080facfb64b35bd3ca338abc7fba47dd9da190cb8ed68d8",
+      "title": "Questions and Answers on Capital 1.8: How Should We Understand Socially Necessary Labor Time and the Productive Power of Labor?",
+      "status": "complete",
+      "method": "AI-assisted translation"
+    },
+    "中文文章/2024-10-11-如何理解简单劳动和复杂劳动？.md": {
+      "file": "blog/translations/en/2024-10-11-如何理解简单劳动和复杂劳动？.md",
+      "source_sha256": "dc38de765261a4a8ae5437b47322421424dc4ed8ba80f8cecb8ea70e5a063ef7",
+      "title": "How Should We Understand Simple Labor and Complex Labor?",
+      "status": "complete",
+      "method": "AI-assisted translation"
+    },
+    "中文文章/2024-10-12-《资本论》问对录1.10：如何理解第一章第三节“价值形式或交换价值”？.md": {
+      "file": "blog/translations/en/2024-10-12-《资本论》问对录1.10：如何理解第一章第三节“价值形式或交换价值”？.md",
+      "source_sha256": "0286889b695eec0378fba41fab1e5ef27a1b3f6d4b2efc2711fcf05790ec7c39",
+      "title": "Questions and Answers on Capital 1.10: How Should We Understand Chapter One, Section Three, “The Form of Value, or Exchange Value”?",
+      "status": "complete",
+      "method": "AI-assisted translation"
+    },
+    "中文文章/2024-10-13-《资本论》问对录1.11：如何理解第一种价值形式？.md": {
+      "file": "blog/translations/en/2024-10-13-《资本论》问对录1.11：如何理解第一种价值形式？.md",
+      "source_sha256": "875baf5ad33ad0e00e0fa996d190a95f896ed7960e7d782d234b2652e62f2bb4",
+      "title": "Questions and Answers on Capital 1.11: How Should We Understand the First Form of Value?",
+      "status": "complete",
+      "method": "AI-assisted translation",
+      "notes": [
+        "原文xA=yB只是普通正文公式而非代码；英语仅调整普通排版空格，未改变数学变量或关系。"
+      ]
+    },
+    "中文文章/2024-10-14-如何理解第二种价值形式：B总和的或扩大的价值形式？.md": {
+      "file": "blog/translations/en/2024-10-14-如何理解第二种价值形式：B总和的或扩大的价值形式？.md",
+      "source_sha256": "38cf6e7b8cff605ecdaea907c1222829fda789ded8425f07225e425b7e979426",
+      "title": "How Should We Understand the Second Form of Value: B. The Total or Expanded Form of Value?",
+      "status": "complete",
+      "method": "AI-assisted translation"
+    },
+    "中文文章/2024-10-15-青岛地图分享以及关于青岛的10个冷知识.md": {
+      "file": "blog/translations/en/2024-10-15-青岛地图分享以及关于青岛的10个冷知识.md",
+      "source_sha256": "1f7a8d6e8d5c8ff8225ab39b378d4fe6954ec02ce15c5e50a612a3083a13b335",
+      "title": "Maps of Qingdao and 10 Little-Known Facts About the City",
+      "status": "complete",
+      "method": "AI-assisted translation",
+      "notes": [
+        "原文第1项为‘崂山朱峰’，译作 Zhu Peak，未擅改成‘主峰’。",
+        "原文第6项并列‘汉高祖4年（前206年）’，年代对应疑点原样保留。",
+        "原文说点击‘阅读原文’可跳转，但 Markdown 内没有相应超链接；未补造链接。"
+      ]
+    },
+    "中文文章/2024-10-16-《资本论》问对录1.15：如何理解商品的拜物教性质？.md": {
+      "file": "blog/translations/en/2024-10-16-《资本论》问对录1.15：如何理解商品的拜物教性质？.md",
+      "source_sha256": "db51d016e95c63b23a30ba1e24f6b6851df1ff2e913bfed91039df5ccf1960ac",
+      "title": "Capital Q&A 1.15: How Should We Understand the Fetishistic Character of Commodities?",
+      "status": "complete",
+      "method": "AI-assisted translation",
+      "notes": [
+        "The final citation has no closing parenthesis in the source; it remains unclosed."
+      ]
+    },
+    "中文文章/2024-10-17-什么是山西？.md": {
+      "file": "blog/translations/en/2024-10-17-什么是山西？.md",
+      "source_sha256": "c5ab392be10e2325e066ac64d01057311ec8c339d4e8fbccba48309d4d225b90",
+      "title": "What Is Shanxi?",
+      "status": "complete",
+      "method": "AI-assisted translation",
+      "notes": [
+        "The source mining-job list includes 周采; retained as zhou mining without substituting an inferred job name."
+      ]
+    },
+    "中文文章/2024-10-20-如何评价京东客服骂人？.md": {
+      "file": "blog/translations/en/2024-10-20-如何评价京东客服骂人？.md",
+      "source_sha256": "012d0cb02e97964c8097d4868d0716d2452799979fa4f96a7b36ef093c406626",
+      "title": "What Should We Make of JD Customer Service Staff Insulting Customers?",
+      "status": "complete",
+      "method": "AI-assisted translation",
+      "notes": [
+        "Source numbered paragraphs use Chinese punctuation rather than Markdown list markers. English numeric labels escape the period to preserve the source paragraph structure."
+      ]
+    },
+    "中文文章/2024-10-21-从杨笠脱口秀看男女之间的思维差异.md": {
+      "file": "blog/translations/en/2024-10-21-从杨笠脱口秀看男女之间的思维差异.md",
+      "source_sha256": "b9ef5b3b6bda2004fefa16b5e39753629e2de31e35274a2b1882b04b771bb4e8",
+      "title": "Differences in How Men and Women Think, Seen Through Yang Li’s Stand-up",
+      "status": "complete",
+      "method": "AI-assisted translation",
+      "notes": [
+        "完整保留杨笠五段引文、原作者的性别观点和评价，未作事实或理论审订。原文唯一链接目标逐字保留。"
+      ]
+    },
+    "中文文章/2024-10-22-关于互联网，我的十点思考.md": {
+      "file": "blog/translations/en/2024-10-22-关于互联网，我的十点思考.md",
+      "source_sha256": "9821b5c56440c1b46e3a7bf65ae879c039afc4ab73726dd2fdb4626dcb04bf05",
+      "title": "Ten Thoughts on the Internet",
+      "status": "complete",
+      "method": "AI-assisted translation"
+    },
+    "中文文章/2024-10-23-近体诗已经死了.md": {
+      "file": "blog/translations/en/2024-10-23-近体诗已经死了.md",
+      "source_sha256": "e4b7f5e3e1ce23d88beed6486226d442835d107e809ee71548a04b8f5252337e",
+      "title": "Regulated Verse Is Dead",
+      "status": "complete",
+      "method": "AI-assisted translation"
+    },
+    "中文文章/2024-11-02-向庞统学习情商.md": {
+      "file": "blog/translations/en/2024-11-02-向庞统学习情商.md",
+      "source_sha256": "334503f83f8d1200e69aa0201416a683f3da0c5c1998d6cc00e69f534ceeccec",
+      "title": "Learning Emotional Intelligence from Pang Tong",
+      "status": "complete",
+      "method": "AI-assisted translation"
+    },
+    "中文文章/2024-11-03-刘晓庆的阅读史.md": {
+      "file": "blog/translations/en/2024-11-03-刘晓庆的阅读史.md",
+      "source_sha256": "c62973ce9e0816cba40f334b6b572359dd104ba5a51832e7a19ce60d89e74d7b",
+      "title": "Liu Xiaoqing's Reading History",
+      "status": "complete",
+      "method": "AI-assisted translation",
+      "notes": [
+        "The source's film title Sea Eagle and its dates are retained as written.",
+        "The title Tianya Dixia in the source is rendered literally as Under the Sky; no alternate book identity has been supplied."
+      ]
+    },
+    "中文文章/2024-11-04-从姜萍事件中，普通人能够学到什么？.md": {
+      "file": "blog/translations/en/2024-11-04-从姜萍事件中，普通人能够学到什么？.md",
+      "source_sha256": "1362f084c4a31c0dafd57f1cbab6b4152e846da64ccdc5446e335b903763c4e9",
+      "title": "What Can Ordinary People Learn from the Jiang Ping Incident?",
+      "status": "complete",
+      "method": "AI-assisted translation"
+    },
+    "中文文章/2024-11-06-司马迁为什么能够写出《史记》？.md": {
+      "file": "blog/translations/en/2024-11-06-司马迁为什么能够写出《史记》？.md",
+      "source_sha256": "186cf4e76857e56873e1edfe37aa6b991fed8ad43648753df24ccf304b9d8c02",
+      "title": "How Was Sima Qian Able to Write the Records of the Grand Historian?",
+      "status": "complete",
+      "method": "AI-assisted translation",
+      "notes": [
+        "The source locates the former home of Confucius in Linzi, Shandong; the location is retained as written rather than replaced."
+      ]
+    },
+    "中文文章/2024-11-07-中国官方的失业率是怎么统计出来的？参考价值有多大？.md": {
+      "file": "blog/translations/en/2024-11-07-中国官方的失业率是怎么统计出来的？参考价值有多大？.md",
+      "source_sha256": "5b28f0346a254ddefe6efa50d7dc1060fb34b93d15fa7d6897269b294279f892",
+      "title": "How Is China’s Official Unemployment Rate Calculated, and How Useful Is It?",
+      "status": "complete",
+      "method": "AI-assisted translation"
+    },
+    "中文文章/2024-11-08-当前的就业形势究竟如何？基于国家统计局的数据.md": {
+      "file": "blog/translations/en/2024-11-08-当前的就业形势究竟如何？基于国家统计局的数据.md",
+      "source_sha256": "1177d94c86ea74bd8970377c469c574fa21bdc1220fdc7381c9fb520e1f07f8c",
+      "title": "What Is the Employment Situation Really Like? A Look at National Bureau of Statistics Data",
+      "status": "complete",
+      "method": "AI-assisted translation"
+    },
+    "中文文章/2024-11-09-当前的就业形势究竟如何？基于百度指数平台的视角.md": {
+      "file": "blog/translations/en/2024-11-09-当前的就业形势究竟如何？基于百度指数平台的视角.md",
+      "source_sha256": "0423a30e3da3e2120385fa03ee33f9c6b36b27b311fec052c9e01e7bb30e4b06",
+      "title": "What Is the Current Employment Situation Really Like? A View from Baidu Index",
+      "status": "complete",
+      "method": "AI-assisted translation",
+      "notes": [
+        "The source identifies February 23, 2023 as the fourth day of the Lunar New Year and calls 2021-2022 pre-pandemic in one passage despite its earlier pandemic timeline. These source inconsistencies are retained.",
+        "The source compares annual peaks to other months in one numbered point; that wording is retained."
+      ]
+    },
+    "中文文章/2024-11-10-不要低估一只松鼠的力量.md": {
+      "file": "blog/translations/en/2024-11-10-不要低估一只松鼠的力量.md",
+      "source_sha256": "006a4a7bd54f2da1733635c1eedb14520caf8ff23e5d57ad5b93a91f8d8925b2",
+      "title": "Never Underestimate the Power of a Squirrel",
+      "status": "complete",
+      "method": "AI-assisted translation"
+    },
+    "中文文章/2024-11-22-考据：美国的识字率真的只有79%吗？.md": {
+      "file": "blog/translations/en/2024-11-22-考据：美国的识字率真的只有79%吗？.md",
+      "source_sha256": "9d152695b351bdcef98e3e0d2fc2544e8d39ddcdaefb89cd87ba3f831e0b610b",
+      "title": "An Investigation: Is the US Literacy Rate Really Only 79%?",
+      "status": "complete",
+      "method": "AI-assisted translation",
+      "notes": [
+        "The source uses both 10% or more and greater than 10% for the medicine example; both formulations are preserved. The source equates its quoted language/cognitive/physical exclusion category with disability in the following commentary; this reasoning is translated without alteration."
+      ]
+    },
+    "中文文章/2024-11-28-我为什么放弃了研究文学？.md": {
+      "file": "blog/translations/en/2024-11-28-我为什么放弃了研究文学？.md",
+      "source_sha256": "def8b92fa0797ceb0f17c31e45deed7c8e4b3413cc20765d986f762a09ec4d15",
+      "title": "Why Did I Give Up Studying Literature?",
+      "status": "complete",
+      "method": "AI-assisted translation"
+    },
+    "中文文章/2024-11-30-什么是社会主义？.md": {
+      "file": "blog/translations/en/2024-11-30-什么是社会主义？.md",
+      "source_sha256": "5551dd02ad0a612a46567c6b6d877cf7c16014e0ab0a8c3f8bc7d8a9321662b2",
+      "title": "What Is Socialism?",
+      "status": "complete",
+      "method": "AI-assisted translation"
+    },
+    "中文文章/2024-12-11-生产方式问题是社会科学的核心问题.md": {
+      "file": "blog/translations/en/2024-12-11-生产方式问题是社会科学的核心问题.md",
+      "source_sha256": "6d42b830a4b845fbd15e47bdd7ddbaa7eb601c2b24352aff60800fbbebd7cd64",
+      "title": "The Mode of Production Is the Central Question of Social Science",
+      "status": "complete",
+      "method": "AI-assisted translation"
+    },
+    "中文文章/2024-12-16-谈谈科学和信仰：内心强大的人都是自洽的.md": {
+      "file": "blog/translations/en/2024-12-16-谈谈科学和信仰：内心强大的人都是自洽的.md",
+      "source_sha256": "7704990292b69c68b6062b8d34a68b94b82a254131a3e131394131b04beb7d10",
+      "title": "On Science and Belief: Inner Strength Comes from Consistency",
+      "status": "complete",
+      "method": "AI-assisted translation"
+    },
+    "中文文章/2024-12-17-怎样拒绝熟人向自己借钱？.md": {
+      "file": "blog/translations/en/2024-12-17-怎样拒绝熟人向自己借钱？.md",
+      "source_sha256": "13dea27e2462065027f579b31914ffbd249fc14e795d9db61ea5bfc2090e39f8",
+      "title": "How Do You Turn Down an Acquaintance Who Asks to Borrow Money?",
+      "status": "complete",
+      "method": "AI-assisted translation"
+    },
+    "中文文章/2024-12-19-那一夜，我对重男轻女有了更深切的感受.md": {
+      "file": "blog/translations/en/2024-12-19-那一夜，我对重男轻女有了更深切的感受.md",
+      "source_sha256": "037410202f4bd2029a5854a8ef42686053368951c42ce89e34c11f1fa100aa17",
+      "title": "That Night, I Felt the Preference for Sons Over Daughters More Deeply",
+      "status": "complete",
+      "method": "AI-assisted translation"
+    },
+    "中文文章/2024-12-20-苏轼学佛又吃肉，他是如何做到不内耗的？.md": {
+      "file": "blog/translations/en/2024-12-20-苏轼学佛又吃肉，他是如何做到不内耗的？.md",
+      "source_sha256": "77340c4f21034784f7eed6eb4fa9fed6db1ea3ffceb11499816efd2d408d9252",
+      "title": "Su Shi Studied Buddhism Yet Ate Meat: How Did He Avoid Being Torn by Inner Conflict?",
+      "status": "complete",
+      "method": "AI-assisted translation",
+      "notes": [
+        "The source contains wordplay on the repeated Chinese syllable su in its sentence about Su Shi and vegetarian food; the meaning and the parenthetical note are translated, but the sound-based wordplay cannot carry over literally."
+      ]
+    },
+    "中文文章/2024-12-21-命由我作，福自己求——读书报告：《了凡四训》.md": {
+      "file": "blog/translations/en/2024-12-21-命由我作，福自己求——读书报告：《了凡四训》.md",
+      "source_sha256": "61ef94af9ad69d47ae105b98246bc55b51ca5d4063fa6bdc4dc649d671610102",
+      "title": "We Shape Our Own Fate and Seek Our Own Blessings: Reading Liaofan’s Four Lessons",
+      "status": "complete",
+      "method": "AI-assisted translation",
+      "notes": [
+        "原文“首先要改正已有的措施”疑将“错误”误写为“措施”，按改过主题译作 existing faults；在notes明示。",
+        "原文功过格内容只在图片内，保留原图/译alt，不补造图内全文。"
+      ]
+    },
+    "中文文章/2024-12-22-人世几回伤往事，山形依旧枕寒流——诗歌赏析《西塞山怀古》.md": {
+      "file": "blog/translations/en/2024-12-22-人世几回伤往事，山形依旧枕寒流——诗歌赏析《西塞山怀古》.md",
+      "source_sha256": "3ffdd1e4581f9dd69d54e81a85b12572e2ef248d105f4217dd0040ccfcb39378",
+      "title": "How Often Has the World Grieved for the Past? The Mountain Still Rests Beside the Cold River—Reading “Meditating on the Past at Mount Xisai”",
+      "status": "complete",
+      "method": "AI-assisted translation",
+      "notes": [
+        "Source says 西普 in the Wang Jun paragraph; rendered literally as Western Pu without supplying an inferred correction.",
+        "The standalone figure-location parenthetical is preserved even though it is not a Markdown image reference."
+      ]
+    },
+    "中文文章/2024-12-23-做人，一定要谨言慎行.md": {
+      "file": "blog/translations/en/2024-12-23-做人，一定要谨言慎行.md",
+      "source_sha256": "65972d475bb527f54629f8838f72d125ecb89bb61ac32a342451b56d8dcbce86",
+      "title": "In Life, Be Careful with Your Words and Actions",
+      "status": "complete",
+      "method": "AI-assisted translation"
+    },
+    "中文文章/2024-12-24-谈一谈我是如何找书的.md": {
+      "file": "blog/translations/en/2024-12-24-谈一谈我是如何找书的.md",
+      "source_sha256": "b06590d98758a1d27b510fc375773c43567a04e21f16a1183fcc61d07a015982",
+      "title": "How I Find Books",
+      "status": "complete",
+      "method": "AI-assisted translation",
+      "notes": [
+        "原文关于 Z-Library 可访问性与合法性的判断按作者原话翻译，未作事实或法律校正；此任务仅为全文翻译。"
+      ]
+    },
+    "中文文章/2024-12-25-读文学类书籍有很多好处，但…….md": {
+      "file": "blog/translations/en/2024-12-25-读文学类书籍有很多好处，但…….md",
+      "source_sha256": "e9f9a33920dd61dac24fea3e2f70c22df39b75a49e395f47ac66bcb2efe19676",
+      "title": "Reading Literature Has Many Benefits, but…",
+      "status": "complete",
+      "method": "AI-assisted translation",
+      "notes": [
+        "保留作者原有对文学、多媒体及自身公众号的评价、夸张与重复。"
+      ]
+    },
+    "中文文章/2024-12-26-2024年公众号创作报告：没有经验，全是教训.md": {
+      "file": "blog/translations/en/2024-12-26-2024年公众号创作报告：没有经验，全是教训.md",
+      "source_sha256": "39e0a9d6edcc7724007e0d86487f54de294b0f8640feeea8bc6a20b34226e716",
+      "title": "My 2024 WeChat Writing Report: No Wisdom, Just Lessons Learned",
+      "status": "complete",
+      "method": "AI-assisted translation"
+    },
+    "中文文章/2024-12-27-算命先生其实都是彻底的唯物主义者.md": {
+      "file": "blog/translations/en/2024-12-27-算命先生其实都是彻底的唯物主义者.md",
+      "source_sha256": "77abba41e9a7211d7124f015e52a5a1047a2f046fdb33d68be67ed3bfde07b50",
+      "title": "Fortune-tellers Are Actually Thoroughgoing Materialists",
+      "status": "complete",
+      "method": "AI-assisted translation",
+      "notes": [
+        "术语口诀本身是作者明确说明的黑话，英文逐行保留其晦涩/字面性质，后接原作者全部解释；不补造理论或新技巧。",
+        "保留原文“副标题”段落、时代信息与材料中的命理叙述，不将其改成事实核查文章。"
+      ]
+    },
+    "中文文章/2024-12-28-小姐、情妇和女演员——煤老板的生活烦恼.md": {
+      "file": "blog/translations/en/2024-12-28-小姐、情妇和女演员——煤老板的生活烦恼.md",
+      "source_sha256": "9f1549dbe9d897b272b8e0da2b272f0c84556f0e6aa287e877a2bde793d8716a",
+      "title": "Sex Workers, Mistresses, and Actresses: The Personal Troubles of Coal Bosses",
+      "status": "complete",
+      "method": "AI-assisted translation",
+      "notes": [
+        "The source has the apparent typo “付先前”; translated in context as paying upfront. Quoted medical assertions are retained as source statements, without factual correction."
+      ]
+    },
+    "中文文章/2024-12-29-苦一苦老二吧，为了家族！——谈谈日本家督继承制度及其影响.md": {
+      "file": "blog/translations/en/2024-12-29-苦一苦老二吧，为了家族！——谈谈日本家督继承制度及其影响.md",
+      "source_sha256": "4f04c96f05d549f65093a916d6ebac2d1fbbf6075678dc5843c7b01a6456fefc",
+      "title": "Let the Second Son Suffer, for the Family's Sake! Japan's Household Headship Inheritance System and Its Effects",
+      "status": "complete",
+      "method": "AI-assisted translation",
+      "notes": [
+        "The source spells a personal name as Jiuzuo Gongmen; Kyusaku Komon is a transliteration rather than an attempted correction.",
+        "The Japanese expression for dividing fields is retained in its original Japanese script alongside the source romanization."
+      ]
+    },
+    "中文文章/2024-12-31-不能抱以太高期望——读《从零开始的女性主义》.md": {
+      "file": "blog/translations/en/2024-12-31-不能抱以太高期望——读《从零开始的女性主义》.md",
+      "source_sha256": "3e2717cba16336a40cafc7876435c4ddb518b341be7021a0372a96f54cc2d859",
+      "title": "We Should Not Expect Too Much: Reading Feminism from Scratch",
+      "status": "complete",
+      "method": "AI-assisted translation",
+      "notes": [
+        "原文两处书名作《家庭、私有制和人类的起源》，译文保留 Humanity，未改为常见书名中的 State。",
+        "原文漫画引文后一句‘通过上面的引文…’仍带 >，译文保留该引用结构。",
+        "原文宗教类比一处使用‘伊斯兰主义者’而后说‘穆斯林’，译文保留 Islamist / Muslim 的原有区别。",
+        "独立语义抽查后，将五处马恩文集引文明确标注Chinese edition，原文卷页码均保持不变，避免误认英文版页码。"
+      ]
+    },
+    "中文文章/2025-01-01-2025年写作计划.md": {
+      "file": "blog/translations/en/2025-01-01-2025年写作计划.md",
+      "source_sha256": "4f5ffa76e197cc88683fdb7d75c9b22811c891d6760b34966a3a1219b59794d9",
+      "title": "My Writing Plan for 2025",
+      "status": "complete",
+      "method": "AI-assisted translation"
+    },
+    "中文文章/2025-01-02-有钱人的烦恼：读《煤老板自述三十年》.md": {
+      "file": "blog/translations/en/2025-01-02-有钱人的烦恼：读《煤老板自述三十年》.md",
+      "source_sha256": "bd19e3f49b4d2bfc53ba2dcf806e10c7dbd27e8ba36dff42c217efaf7d08e116",
+      "title": "The Troubles of the Rich: Reading Thirty Years in a Coal Boss's Own Words",
+      "status": "complete",
+      "method": "AI-assisted translation"
+    },
+    "中文文章/2025-01-07-在古代，86.39%的男性注定在267年后断子绝孙.md": {
+      "file": "blog/translations/en/2025-01-07-在古代，86.39%的男性注定在267年后断子绝孙.md",
+      "source_sha256": "16b07ffb0add222936cdd07f27daa1239a334ced53914151ab9dbbc875e82498",
+      "title": "In Ancient China, 86.39% of Men Were Destined to Have No Male-Line Descendants After 267 Years",
+      "status": "complete",
+      "method": "AI-assisted translation",
+      "notes": [
+        "原文标题强调267年，正文也使用200多年和近40%等不同概数；全部按原文保留，未统一或改算。",
+        "参考文献第1–35项仅在原图内；保留原图与英文 alt，未凭空转录不可见于正文的文献。"
+      ]
+    },
+    "中文文章/2025-01-15-分享图片.md": {
+      "file": "blog/translations/en/2025-01-15-分享图片.md",
+      "source_sha256": "97b7997bfa941ee249d346a2c3ee5aa3d78f386f3eb7800416c6f23c1646146e",
+      "title": "Sharing Some Pictures",
+      "status": "complete",
+      "method": "AI-assisted translation",
+      "notes": [
+        "原图中万字/万次换为英文十进制数量，112/4/23/73/126000/63000/703/42等数值含义保留；不重绘原图。"
+      ]
+    },
+    "中文文章/2025-01-23-用牛顿第一定律开车，平稳又省油.md": {
+      "file": "blog/translations/en/2025-01-23-用牛顿第一定律开车，平稳又省油.md",
+      "source_sha256": "b3f0a3a01fabf547a13e4c5bbd836c40b993d4bcc1e6460a29c1d3f2e08361df",
+      "title": "Drive with Newton's First Law for a Smoother, More Fuel-Efficient Ride",
+      "status": "complete",
+      "method": "AI-assisted translation"
+    },
+    "中文文章/2025-01-25-满足需求和尊重价值——处理人际关系的核心.md": {
+      "file": "blog/translations/en/2025-01-25-满足需求和尊重价值——处理人际关系的核心.md",
+      "source_sha256": "5417905335aebb1b449dd14ccdbbeccb9e3e928763ffe9f283d19a0eef850521",
+      "title": "Meeting Needs and Respecting Worth: The Heart of Interpersonal Relationships",
+      "status": "complete",
+      "method": "AI-assisted translation"
+    },
+    "中文文章/2025-01-28-酒精的作用：抑制人的抑制功能.md": {
+      "file": "blog/translations/en/2025-01-28-酒精的作用：抑制人的抑制功能.md",
+      "source_sha256": "930d26ef660091e22eb358c257c076e45ba3a09f8ca71ee9c172b35563962f4b",
+      "title": "What Alcohol Does: Inhibiting Our Inhibitions",
+      "status": "complete",
+      "method": "AI-assisted translation"
+    },
+    "中文文章/2025-01-29-拿不出手的四川话.md": {
+      "file": "blog/translations/en/2025-01-29-拿不出手的四川话.md",
+      "source_sha256": "fad4c81bb94b396560e53a12c58aba83dcb4c45b82c981dcc9e0ce2830f0098f",
+      "title": "My Embarrassingly Poor Sichuanese",
+      "status": "complete",
+      "method": "AI-assisted translation"
+    },
+    "中文文章/2025-05-04-外卖，是穷人吃得多还是富人吃得多？.md": {
+      "file": "blog/translations/en/2025-05-04-外卖，是穷人吃得多还是富人吃得多？.md",
+      "source_sha256": "2004c403168d142d3bc12ab26cebc639493231902a44a01dbe1e597d9204d898",
+      "title": "Who Orders More Takeaway: The Poor or the Rich?",
+      "status": "complete",
+      "method": "AI-assisted translation"
+    },
+    "中文文章/2025-05-05-鸡声一怒，社稷俱亡：斗鸡在中国历史上的故事.md": {
+      "file": "blog/translations/en/2025-05-05-鸡声一怒，社稷俱亡：斗鸡在中国历史上的故事.md",
+      "source_sha256": "7dbca483f6252175204436b691efaf2878a335005be405c7c700850f9b1c6369",
+      "title": "A Rooster's Cry of Rage, a State Brought Down: Cockfighting Stories from Chinese History",
+      "status": "complete",
+      "method": "AI-assisted translation",
+      "notes": [
+        "The source has an awkward or corrupted phrase “可提供许多任务作机会” in the Wright quotation; translated according to its contextual meaning without adding information. The source splits a sentence about employment across two paragraphs; that division is retained."
+      ]
+    },
+    "中文文章/2025-05-06-鸡你太美：关于鸡的10个冷知识（人文版）.md": {
+      "file": "blog/translations/en/2025-05-06-鸡你太美：关于鸡的10个冷知识（人文版）.md",
+      "source_sha256": "5abeff93e861ef07d935be3ecd048a2d9e951473a12023bca7adba004234ac3e",
+      "title": "Chicken, You're So Beautiful: Ten Little-Known Facts About Chickens, the Humanities Edition",
+      "status": "complete",
+      "method": "AI-assisted translation",
+      "notes": [
+        "The source labels Zhang Heng as Western Han; that attribution is retained. Existing English wording and apparent errors, including Man and the Nature World and usually served food, are retained."
+      ]
+    },
+    "中文文章/2025-05-07-信息时代，每个人都要做好被开盒的准备.md": {
+      "file": "blog/translations/en/2025-05-07-信息时代，每个人都要做好被开盒的准备.md",
+      "source_sha256": "27a2d084db54a620ef9d7791bb7c534da88ed3a9784359c337e266c99fbb0f91",
+      "title": "In the Information Age, Everyone Should Be Prepared to Be Doxxed",
+      "status": "complete",
+      "method": "AI-assisted translation"
+    },
+    "中文文章/2025-05-08-我亲历的痔疮手术：网上找不到的真话（吃饭慎入）.md": {
+      "file": "blog/translations/en/2025-05-08-我亲历的痔疮手术：网上找不到的真话（吃饭慎入）.md",
+      "source_sha256": "67c802b34e08b92a858291e3a99b8a7ceedf3c54bdd5c3cd84725dee7ed26981",
+      "title": "My Hemorrhoid Surgery: Candid Details You Won't Find Online (Avoid Reading While Eating)",
+      "status": "complete",
+      "method": "AI-assisted translation",
+      "notes": [
+        "The exact Chinese account reply keyword “痔疮日记” is retained alongside its English meaning so the instruction remains usable. The personal medical account and its recommendations are translated as written."
+      ]
+    },
+    "中文文章/2025-05-09-“中女时代”，是玄学，还是现实？.md": {
+      "file": "blog/translations/en/2025-05-09-“中女时代”，是玄学，还是现实？.md",
+      "source_sha256": "1ac55aa0c8de7abf20fe843ceef079bceb98b49587b3e3248c530dc6fa5599a5",
+      "title": "The “Age of Middle Women”: Mysticism or Reality?",
+      "status": "complete",
+      "method": "AI-assisted translation",
+      "notes": [
+        "The first quotation starts with escaped asterisks in the source; these literal characters are retained."
+      ]
+    },
+    "中文文章/2025-05-10-乾隆要你共情皇后之死，你能共情吗？.md": {
+      "file": "blog/translations/en/2025-05-10-乾隆要你共情皇后之死，你能共情吗？.md",
+      "source_sha256": "f2cf610bcbea668060133627c62354401499d0f9bc1a6e6006f999b361ba5c1e",
+      "title": "If Qianlong Asked You to Empathize with His Empress's Death, Could You?",
+      "status": "complete",
+      "method": "AI-assisted translation",
+      "notes": [
+        "The source's typographical expression for the third imperial son is rendered as third son, following its named individual and immediate context; no historical facts have been independently revised."
+      ]
+    },
+    "中文文章/2025-05-11-赵匡胤与涿州.md": {
+      "file": "blog/translations/en/2025-05-11-赵匡胤与涿州.md",
+      "source_sha256": "7634e71558b4273a3e58187ede036f0e7129d6f10d3cf610c281c895548c6280",
+      "title": "Zhao Kuangyin and Zhuozhou",
+      "status": "complete",
+      "method": "AI-assisted translation"
+    },
+    "中文文章/2025-05-13-京南游记（上）：琉璃河博物馆关门了，但历史还开着.md": {
+      "file": "blog/translations/en/2025-05-13-京南游记（上）：琉璃河博物馆关门了，但历史还开着.md",
+      "source_sha256": "30f408a4723c39e2a2c37678152675dc98ddf42d243ec3776928f4e748919844",
+      "title": "Travels South of Beijing, Part One: Liulihe Museum Is Closed, but History Is Still Open",
+      "status": "complete",
+      "method": "AI-assisted translation",
+      "notes": [
+        "The source bibliography has no publication year; none is supplied in the translation."
+      ]
+    },
+    "中文文章/2025-05-14-京南游记（下）：涿州.md": {
+      "file": "blog/translations/en/2025-05-14-京南游记（下）：涿州.md",
+      "source_sha256": "220343aa1b1428f6f53275b7ad70a9510981ff2708489f1559db87aedc3afc78",
+      "title": "Travels South of Beijing, Part Two: Zhuozhou",
+      "status": "complete",
+      "method": "AI-assisted translation"
+    },
+    "中文文章/2025-05-15-人生就是一场游戏：主线、支线与剧本的选择.md": {
+      "file": "blog/translations/en/2025-05-15-人生就是一场游戏：主线、支线与剧本的选择.md",
+      "source_sha256": "0ae0392493d30b51b57dee43d371fc228044189fe799e7b31120e6121d859ae0",
+      "title": "Life Is a Game: Choosing Your Main Quests, Side Quests, and Storyline",
+      "status": "complete",
+      "method": "AI-assisted translation",
+      "notes": [
+        "原文将《三国志13》属性称为六维、并提及族群婚姻与高考加分政策；译文保留作者表述，未作事实或政策校正。"
+      ]
+    },
+    "中文文章/2025-05-20-汉朝的分封制：中央集权加强的见证者.md": {
+      "file": "blog/translations/en/2025-05-20-汉朝的分封制：中央集权加强的见证者.md",
+      "source_sha256": "5271fa3f5cf6899136087f52abae54c5dc7f92e3f610cf34038023c5e620c49e",
+      "title": "Han Dynasty Enfeoffment: A Witness to Growing Centralization",
+      "status": "complete",
+      "method": "AI-assisted translation"
+    },
+    "中文文章/2025-05-23-厚葬的尽头，是盗墓和博物馆——大葆台汉墓游记.md": {
+      "file": "blog/translations/en/2025-05-23-厚葬的尽头，是盗墓和博物馆——大葆台汉墓游记.md",
+      "source_sha256": "b88226408ae189c5791c584ff1d4bffc764df247110edd415e0149314f939f75",
+      "title": "Lavish Burials End in Tomb Robbery and Museums: A Visit to the Dabaotai Han Tombs",
+      "status": "complete",
+      "method": "AI-assisted translation",
+      "notes": [
+        "The source begins its numbered section headings at 二; this is preserved as II. The source calls its Qin king list “five” but prints “惠文、武、昭、严襄”; the count and the printed grouping are retained without supplying a missing separator or name. The source typo “一号木墓主” is understood in context as the occupant of Tomb One. Source numbered paragraphs are not Markdown lists; English numeric labels escape the period to preserve this structure."
+      ]
+    },
+    "中文文章/2025-05-25-绵阳试行4.5天弹性工作制？来龙去脉和我的看法.md": {
+      "file": "blog/translations/en/2025-05-25-绵阳试行4.5天弹性工作制？来龙去脉和我的看法.md",
+      "source_sha256": "67486b97df242d7ce560fe9f4b139fa68f3a7df8011814b8be83a2cc5e3f58cd",
+      "title": "Is Mianyang Piloting a Flexible 4.5-Day Workweek? The Background and My View",
+      "status": "complete",
+      "method": "AI-assisted translation",
+      "notes": [
+        "An extraneous Latin c precedes the working-people clause in point 7 of the source; it is retained before working people in the translation."
+      ]
+    },
+    "中文文章/2025-05-26-男人30岁前别谈恋爱，这是我交过最贵的学费.md": {
+      "file": "blog/translations/en/2025-05-26-男人30岁前别谈恋爱，这是我交过最贵的学费.md",
+      "source_sha256": "a418340f20b0600ee1294f3df2dbc50c3ef7fe1235cc2919acc28cf10b043cad",
+      "title": "Men Should Not Date Before Thirty: The Most Expensive Lesson I Have Learned",
+      "status": "complete",
+      "method": "AI-assisted translation",
+      "notes": [
+        "The available source ends immediately after the first numbered section heading. All available text is translated; no absent continuation is invented."
+      ]
+    },
+    "中文文章/2025-05-27-AI拒绝关机，背后真相远比你想的无聊.md": {
+      "file": "blog/translations/en/2025-05-27-AI拒绝关机，背后真相远比你想的无聊.md",
+      "source_sha256": "5288254da2039b88e09fa2ba39c1b4c55586b2b7a23593730e5ebef6718cacfe",
+      "title": "AI Refuses to Shut Down: The Truth Is Far More Boring Than You Think",
+      "status": "complete",
+      "method": "AI-assisted translation"
+    },
+    "中文文章/2025-06-22-北京的现在和未来，八年前的这份规划早已写好.md": {
+      "file": "blog/translations/en/2025-06-22-北京的现在和未来，八年前的这份规划早已写好.md",
+      "source_sha256": "bcb3810c844e74b0af2b387811a914261b17e70bff193840f5c16e6de91b88ed",
+      "title": "Beijing's Present and Future Were Already Set Out in This Plan Eight Years Ago",
+      "status": "complete",
+      "method": "AI-assisted translation"
+    },
+    "中文文章/2025-06-23-房山线的现状和未来.md": {
+      "file": "blog/translations/en/2025-06-23-房山线的现状和未来.md",
+      "source_sha256": "2f8a4044c6b7def5b8d9c2f7d58ab5e977e0e4cfd9f39e662cf0dd3132569bd6",
+      "title": "The Fangshan Line: Its Present and Future",
+      "status": "complete",
+      "method": "AI-assisted translation"
+    },
+    "中文文章/2025-06-28-北京燕房线支线项目暂停，未来还有希望吗？.md": {
+      "file": "blog/translations/en/2025-06-28-北京燕房线支线项目暂停，未来还有希望吗？.md",
+      "source_sha256": "86b3c790e7b6e2f3a428410ef6db5d9f758606cc4de9fe45d3713aba787618df",
+      "title": "Beijing's Yanfang Line Branch Project Is on Hold: Is There Still Hope for Its Future?",
+      "status": "complete",
+      "method": "AI-assisted translation"
+    },
+    "中文文章/2025-07-25-泰国与柬埔寨在两国边境地区发生交火，背后有哪些原因？目前情况如何？.md": {
+      "file": "blog/translations/en/2025-07-25-泰国与柬埔寨在两国边境地区发生交火，背后有哪些原因？目前情况如何？.md",
+      "source_sha256": "b069c14889dfc03a6865a597eb044a689f0999298112c3c423399c1f45cd92f7",
+      "title": "Thailand and Cambodia Have Exchanged Fire Along Their Border: What Is Behind It, and What Is the Current Situation?",
+      "status": "complete",
+      "method": "AI-assisted translation",
+      "notes": [
+        "The source contains bare Wikipedia citation numbers such as [55], [56], and [17] without corresponding bibliography definitions. They are retained exactly and no references are invented. Source numbered paragraphs are not Markdown lists; English numeric labels escape the period to preserve this structure."
+      ]
+    },
+    "中文文章/2025-08-14-究竟谁是邺城的继承者？河南安阳还是河北临漳？谁才是真正的邺城？.md": {
+      "file": "blog/translations/en/2025-08-14-究竟谁是邺城的继承者？河南安阳还是河北临漳？谁才是真正的邺城？.md",
+      "source_sha256": "fc5ea6a5ae9c55c8ee1cde1638284176c05e4a4511d9030b9f88cd8d6e3fd479",
+      "title": "Who Is Ye City's Successor—Anyang in Henan or Linzhang in Hebei? Which Is the Real Ye City?",
+      "status": "complete",
+      "method": "AI-assisted translation",
+      "notes": [
+        "The source province-area list repeats Anyang; the repetition is preserved.",
+        "The final strategic-succession sentence uses 一般 for Anyang and 一半 for Handan. The first is rendered as a share without silently asserting a corrected half."
+      ]
+    },
+    "中文文章/2025-08-16-四川人第一次在保定吃驴肉火烧，被狠狠惊艳了.md": {
+      "file": "blog/translations/en/2025-08-16-四川人第一次在保定吃驴肉火烧，被狠狠惊艳了.md",
+      "source_sha256": "7bd385b5f05a2861019ab6ab4816cc37b834fb4d4bf2bac8c92fa8fab6af95ae",
+      "title": "A Sichuan Native's First Donkey-Meat Huoshao in Baoding Left Me Amazed",
+      "status": "complete",
+      "method": "AI-assisted translation"
+    },
+    "中文文章/2025-08-22-古地图里的直隶省：咸丰九年的24幅彩绘地图分享.md": {
+      "file": "blog/translations/en/2025-08-22-古地图里的直隶省：咸丰九年的24幅彩绘地图分享.md",
+      "source_sha256": "97d327110c674a4aef3a77bff0c2b00c5143ad1f016815d2596c71c0d5dfbdf1",
+      "title": "Zhili Province in Old Maps: Sharing 24 Hand-Colored Maps from the Ninth Year of Xianfeng",
+      "status": "complete",
+      "method": "AI-assisted translation",
+      "notes": [
+        "The source has the apparent directional typo “左东又西”; translated in context as east left and west right. The exact Chinese account reply keyword “直隶省地图” is retained alongside its English meaning."
+      ]
+    },
+    "中文文章/2025-09-01-9月1日社保新规对普通人有什么影响？.md": {
+      "file": "blog/translations/en/2025-09-01-9月1日社保新规对普通人有什么影响？.md",
+      "source_sha256": "9d20c6147da14263c8d5046b645e072e7262c1b61c0411c565af382506e0ade0",
+      "title": "How Do the September 1 Social Insurance Rules Affect Ordinary People?",
+      "status": "complete",
+      "method": "AI-assisted translation"
+    },
+    "中文文章/2025-09-07-1978–2024：中国出生人口趋势.md": {
+      "file": "blog/translations/en/2025-09-07-1978–2024：中国出生人口趋势.md",
+      "source_sha256": "4a48b8786c15bd82ebd8bfcee835a711045d80c5a8cdc716a39b7b8095d7b460",
+      "title": "1978–2024: Trends in China's Births",
+      "status": "complete",
+      "method": "AI-assisted translation",
+      "notes": [
+        "The source says births never rose after 2016 in point 3, while point 7 reports a rebound in 2024. Both source statements and all numerical claims are preserved without attempting to reconcile them."
+      ]
+    },
+    "中文文章/2025-09-08-三国演义中的“十倍算数学”.md": {
+      "file": "blog/translations/en/2025-09-08-三国演义中的“十倍算数学”.md",
+      "source_sha256": "edd6cc29b40c5c6d4f4b0d250eab3347607f61d91545100bfe1c636c53328b7e",
+      "title": "\"Tenfold Arithmetic\" in Romance of the Three Kingdoms",
+      "status": "complete",
+      "method": "AI-assisted translation"
+    },
+    "中文文章/2025-09-09-昨天晚上，公众号成精了.md": {
+      "file": "blog/translations/en/2025-09-09-昨天晚上，公众号成精了.md",
+      "source_sha256": "3f3d1d7dda18cdef461a8e25f3ae4188a5d26eb6a8d122de5952238fa80e299e",
+      "title": "Last Night, My WeChat Official Account Came to Life",
+      "status": "complete",
+      "method": "AI-assisted translation"
+    },
+    "中文文章/2025-10-25-南下随记：从北京到东莞.md": {
+      "file": "blog/translations/en/2025-10-25-南下随记：从北京到东莞.md",
+      "source_sha256": "b24f1907e4992321ac88dee2e1d15489af0f4f05f1a61e9c5efd5986f07fcbb0",
+      "title": "Notes from a Southbound Journey: Beijing to Dongguan",
+      "status": "complete",
+      "method": "AI-assisted translation",
+      "notes": [
+        "The heading identifies a Tianjin University law student, while the body describes an anonymized finance graduate; both are retained. The carriage description repeats hard-seat cars for the remaining carriages; the inconsistency is retained."
+      ]
+    },
+    "中文文章/2025-12-30-有钱人的烦恼——卢总的年会演讲治好了我的精神内耗.md": {
+      "file": "blog/translations/en/2025-12-30-有钱人的烦恼——卢总的年会演讲治好了我的精神内耗.md",
+      "source_sha256": "ce41675075526d3caf134c6c4260cc158556a52bd3464e0fdef6cbd98a075c73",
+      "title": "Rich People's Troubles: How Mr. Lu's Annual Meeting Speech Cured My Inner Turmoil",
+      "status": "complete",
+      "method": "AI-assisted translation"
+    },
+    "中文文章/2026-07-27-气候对一个人的身体影响能有多大？.md": {
+      "file": "blog/translations/en/2026-07-27-气候对一个人的身体影响能有多大？.md",
+      "source_sha256": "2b9f7483ca96e172a7a0a652ddabaf82a718dfdca8b0445a8705a7be011fa051",
+      "title": "How Much Can Climate Affect a Person’s Body?",
+      "status": "complete",
+      "method": "AI-assisted translation",
+      "notes": [
+        "原文身体变化、鼻炎、热带代谢及寿命等均按作者经验和转述翻译；未增补医学判断。",
+        "体重原单位‘斤’保留为 jin，未改变数值或添加换算。"
+      ]
+    },
+    "中文文章/2026-07-29-乳糖不耐受者更应该多喝牛奶.md": {
+      "file": "blog/translations/en/2026-07-29-乳糖不耐受者更应该多喝牛奶.md",
+      "source_sha256": "fe54f968001ed97af628f178a7750753ed237507e7812dcacb51648c24380362",
+      "title": "People with Lactose Intolerance Have Even More Reason to Drink Milk",
+      "status": "complete",
+      "method": "AI-assisted translation",
+      "notes": [
+        "The source calls butyric acid the main source for large-intestinal epithelial cells without specifying a source of what. The translation retains that incomplete formulation rather than supplying an omitted claim.",
+        "The source's percentages, metabolic claims, dietary recommendations, and calorie calculations are translated as written, without independent factual revision."
+      ]
+    },
+    "中文文章/2026-09-06-关于新闻学的一些思考：真实性不是新闻本身的特点，而是学界业界的一种要求和追求.md": {
+      "file": "blog/translations/en/2026-09-06-关于新闻学的一些思考：真实性不是新闻本身的特点，而是学界业界的一种要求和追求.md",
+      "source_sha256": "05c1fc8c0359ec447616c6745b454ac5aae6b8b51d6bf2c6b0d8aa0a876a4ace",
+      "title": "Some Thoughts on Journalism: Truthfulness Is Not an Inherent Feature of News, but a Standard and Aspiration in Academia and the Industry",
+      "status": "complete",
+      "method": "AI-assisted translation",
+      "notes": [
+        "保留文首转载说明、文末2023年8月15日署时及-END-；文件发表日期与正文写作日期不混同。"
+      ]
+    },
+    "中文文章/2026-09-09-从大马华人到新加坡的“母语陷阱”：降级英语主科地位，真的不可接受吗？.md": {
+      "file": "blog/translations/en/2026-09-09-从大马华人到新加坡的“母语陷阱”：降级英语主科地位，真的不可接受吗？.md",
+      "source_sha256": "727ff86849284b028a5d6a9dfb40446dd27048a8f0acc3227e4cad8d4a42693b",
+      "title": "From Malaysian Chinese to Singapore's “Mother-Tongue Trap”: Is Downgrading English as a Core Subject Really Unacceptable?",
+      "status": "complete",
+      "method": "AI-assisted translation"
+    },
+    "中文文章/2026-09-12-本人的大五人格测试结果和分析.md": {
+      "file": "blog/translations/en/2026-09-12-本人的大五人格测试结果和分析.md",
+      "source_sha256": "fa022fa568fe61e3b1aea27919d164865e1ca8b732be54446ea53adb72f35a9e",
+      "title": "My Big Five Personality Test Results and Analysis",
+      "status": "complete",
+      "method": "AI-assisted translation"
+    },
+    "中文文章/2026-09-13-把房出租的经验.md": {
+      "file": "blog/translations/en/2026-09-13-把房出租的经验.md",
+      "source_sha256": "79dc3c58434421c461257255d4330bd2dbefc6fcc70d6d5ba4e0fc212996d9ba",
+      "title": "What I Have Learned from Renting Out Rooms",
+      "status": "complete",
+      "method": "AI-assisted translation"
+    },
+    "中文文章/2026-09-14-工作效率最高的温度区间：21-24度.md": {
+      "file": "blog/translations/en/2026-09-14-工作效率最高的温度区间：21-24度.md",
+      "source_sha256": "f56a7ccbff33d3f94c662e564df81f60e1615b1ce82e40a5ebadd801997ccebb",
+      "title": "The Most Productive Temperature Range for Work: 21–24 Degrees",
+      "status": "complete",
+      "method": "AI-assisted translation"
+    },
+    "中文文章/2026-09-15-脑科学的重要知识点汇总.md": {
+      "file": "blog/translations/en/2026-09-15-脑科学的重要知识点汇总.md",
+      "source_sha256": "873940a115bbe35e7abf856608b0ec2d7f840efa5b36684436e4075de786c1fb",
+      "title": "A Summary of Key Concepts in Brain Science",
+      "status": "complete",
+      "method": "AI-assisted translation",
+      "notes": [
+        "忠实保留原文的脑区、神经递质、年龄峰值等断言，未将翻译任务扩展为医学事实审订。图中的中文标签未重绘，alt明确提示中文标签。"
+      ]
+    },
+    "中文文章/2026-09-18-YouTube英语学习法，以及用扣子工作流进行改善.md": {
+      "file": "blog/translations/en/2026-09-18-YouTube英语学习法，以及用扣子工作流进行改善.md",
+      "source_sha256": "cca83f50752c969afe60940a91a1eeca0f1ab11065a1417b4c3ba1225ae57720",
+      "title": "Learning English with YouTube—and Improving the Method with a Coze Workflow",
+      "status": "complete",
+      "method": "AI-assisted translation",
+      "notes": [
+        "The fenced system prompt has several visibly truncated lines and incomplete markup. It is retained verbatim, without completion or execution; Chinese inside that code block is intentionally preserved."
+      ]
+    },
+    "中文文章/2026-09-19-用微信读书看英文原著.md": {
+      "file": "blog/translations/en/2026-09-19-用微信读书看英文原著.md",
+      "source_sha256": "4d53ed7abf57236b89f67b6b07f9c0fca5606be825e92d6354e127feacc12e1b",
+      "title": "Reading English Originals with WeChat Read",
+      "status": "complete",
+      "method": "AI-assisted translation"
+    },
+    "中文文章/2026-09-21-马来人的名字研究.md": {
+      "file": "blog/translations/en/2026-09-21-马来人的名字研究.md",
+      "source_sha256": "bb33846506d89e16ab251e2467875276c9801d90079e2fa10f98403870a0c352",
+      "title": "An Exploration of Malay Names",
+      "status": "complete",
+      "method": "AI-assisted translation",
+      "notes": [
+        "The source calls mixed-case name examples lowercase; its wording and examples are retained."
+      ]
+    },
+    "中文文章/2026-09-22-中国的年代和外国的世代.md": {
+      "file": "blog/translations/en/2026-09-22-中国的年代和外国的世代.md",
+      "source_sha256": "aaec08f360e0fb10ab34fb4aaf293a15d2bd1a7ae69f5a0c7a519ddf1e50f1ff",
+      "title": "China's Birth Decades and Generations Abroad",
+      "status": "complete",
+      "method": "AI-assisted translation"
+    },
+    "中文文章/2026-09-24-英语的千和汉语的万.md": {
+      "file": "blog/translations/en/2026-09-24-英语的千和汉语的万.md",
+      "source_sha256": "c451ebac64fb563f0836de30f3ad6f2f5bcfcb70a122ed4359162748c4511361",
+      "title": "Thousands in English and Ten Thousands in Chinese",
+      "status": "complete",
+      "method": "AI-assisted translation",
+      "notes": [
+        "原文数值、历史论断及作者不确定图表正确性的说明均保留。",
+        "两条原本已是英文的期刊参考文献逐字保留；中文书目译名为直译。",
+        "中文数字单位用拼音 wan/yi/zhao 等保留其区别；原 Wikipedia URL 中‘汉语数字’保持不变。"
+      ]
+    },
+    "中文文章/2026-09-26-合成幸福理论及其启示.md": {
+      "file": "blog/translations/en/2026-09-26-合成幸福理论及其启示.md",
+      "source_sha256": "de8f1763e5810a57d12f8c9520951d4dd114e308d9c418a8a2d4cba8270b48ee",
+      "title": "Synthetic Happiness and Its Implications",
+      "status": "complete",
+      "method": "AI-assisted translation"
+    },
+    "中文文章/2026-09-27-markdown和word：数字时代的写作方式革命.md": {
+      "file": "blog/translations/en/2026-09-27-markdown和word：数字时代的写作方式革命.md",
+      "source_sha256": "38a4c6b46a46f4303e5fa3115b16d91b1c67d08cbe70cd37d4973375ea73db6c",
+      "title": "Markdown and Word: A Revolution in Writing for the Digital Age",
+      "status": "complete",
+      "method": "AI-assisted translation"
+    },
+    "中文文章/2026-09-28-GEO：生成式引擎优化介绍及启示.md": {
+      "file": "blog/translations/en/2026-09-28-GEO：生成式引擎优化介绍及启示.md",
+      "source_sha256": "5a38b49cd0e8430aff172983bd9206ceefdebda7acc591e366b4e5a7f66b2611",
+      "title": "GEO: An Introduction to Generative Engine Optimization and Its Implications",
+      "status": "complete",
+      "method": "AI-assisted translation",
+      "notes": [
+        "The source method name 添加引言 is translated literally as adding introductions; no different method name is substituted."
+      ]
+    },
+    "中文文章/2026-09-29-吉隆坡地铁分析.md": {
+      "file": "blog/translations/en/2026-09-29-吉隆坡地铁分析.md",
+      "source_sha256": "31b3f111a9b1d8d5cde48ea3f70b97ce08393acd7827a18b111461e57d556377",
+      "title": "An Analysis of Kuala Lumpur’s Rail Transit",
+      "status": "complete",
+      "method": "AI-assisted translation",
+      "notes": [
+        "原文将五号线在不同位置称为桃红线/红线，译文保留 Pink / Red 区别。",
+        "原文ERL中文公司标签为‘告诉铁路有限公司’，疑为文字错字；译文沿用原文已有的 English 名 Express Rail Link 并展开有限公司，不添加新公司身份。",
+        "所有线路、站名、时间、票价、乘坐建议按原文保留，未作为当前交通信息重新核实。"
+      ]
+    },
+    "中文文章/2026-10-01-时区问题研究.md": {
+      "file": "blog/translations/en/2026-10-01-时区问题研究.md",
+      "source_sha256": "630b6c3a18de96303213caaf19eafb2b9c5e89beace98c9d1586b537a4d1a5d8",
+      "title": "An Investigation of Time Zones",
+      "status": "complete",
+      "method": "AI-assisted translation",
+      "notes": [
+        "Bibliographic entries in the source have no URLs; none have been fabricated."
+      ]
+    },
+    "中文文章/2026-10-02-新马华人的姓名拼写规律及人物名单.md": {
+      "file": "blog/translations/en/2026-10-02-新马华人的姓名拼写规律及人物名单.md",
+      "source_sha256": "66be3d0c15d450d83df334322b4b3729f5abf465fd7f31a548c2a1a38cc98da4",
+      "title": "Spelling Patterns in Singaporean and Malaysian Chinese Names, with Lists of Notable Figures",
+      "status": "complete",
+      "method": "AI-assisted translation",
+      "notes": [
+        "Chinese-character personal names and quoted surname characters are the objects of comparison in this article and are deliberately preserved as source data, alongside every existing English spelling. Table headers, origin/dialect descriptions, and all biographical introductions are translated.",
+        "Both name tables preserve all data rows and their order: 58 in Table One and 206 in Table Two. The source bibliographic lines immediately follow the last table without a blank line; that source layout is retained, including its production-parser behavior.",
+        "Source biographical claims and unusual names, including Jilizi (Pee), are preserved without independent correction."
+      ]
+    },
+    "中文文章/2026-10-03-AI时代的论文整理方案.md": {
+      "file": "blog/translations/en/2026-10-03-AI时代的论文整理方案.md",
+      "source_sha256": "a354d1d2f6d1cf6b1252a57d1114e88d918c624a4658b77928baf6403a3e1c90",
+      "title": "A System for Organizing Research Papers in the AI Era",
+      "status": "complete",
+      "method": "AI-assisted translation",
+      "notes": [
+        "The final bibliography item is incomplete in the source; no missing publication information is supplied."
+      ]
+    },
+    "中文文章/2026-10-04-快乐的马来西亚中学生.md": {
+      "file": "blog/translations/en/2026-10-04-快乐的马来西亚中学生.md",
+      "source_sha256": "0e23ce70c4dba6458518554106e740bbe48b63a6151727247c9668a526d4f30a",
+      "title": "Happy Secondary School Students in Malaysia",
+      "status": "complete",
+      "method": "AI-assisted translation"
+    },
+    "中文文章/2026-10-05-吉隆坡的天气分析.md": {
+      "file": "blog/translations/en/2026-10-05-吉隆坡的天气分析.md",
+      "source_sha256": "8f356f1804602e4849bbfa63a018a606d872d69c486800e69f4db27a5aaa8f5b",
+      "title": "An Analysis of Kuala Lumpur's Weather",
+      "status": "complete",
+      "method": "AI-assisted translation"
+    },
+    "中文文章/2026-10-09-可供查阅的明朝皇帝-大事件表.md": {
+      "file": "blog/translations/en/2026-10-09-可供查阅的明朝皇帝-大事件表.md",
+      "source_sha256": "58ce2a5da7e73cd43ce11e0d3b33ee7b9482fb194f1fe31bb7d287423a94875c",
+      "title": "A Reference Table of Ming Emperors and Major Events",
+      "status": "complete",
+      "method": "AI-assisted translation",
+      "notes": [
+        "All 119 event IDs and their explanatory paragraphs are retained; the overview repeats the same translated event titles. All 94 source footnote identifiers, references, and URL targets are preserved. The personal name 朱载坖 is retained in Chinese rather than assigning an uncertain romanization; its source variant 朱载垕 is retained in the spelling note and source label. Chinese characters within source URLs and footnote IDs remain as written."
+      ]
+    },
+    "中文文章/2026-10-11-论大走理论（The Great Walk Theory）.md": {
+      "file": "blog/translations/en/2026-10-11-论大走理论（The Great Walk Theory）.md",
+      "source_sha256": "01d46650a13ee810052307445119eddd5064e4bab47e4dcd6a098a5e0a3a2643",
+      "title": "On the Great Walk Theory",
+      "status": "complete",
+      "method": "AI-assisted translation",
+      "notes": [
+        "The source phrase 只会codex干活 appears to contain a homophonic typo; it is understood in context as directing Codex to work. No new factual claim or action is added."
+      ]
+    }
+  }
+}
