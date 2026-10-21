@@ -579,8 +579,8 @@ class Blog:
 <a class="back-link" href="{escape(back_url)}">← {"Articles" if english else article.category}</a>
 <p class="eyebrow">{escape(topic)}</p><h1>{escape(article.title)}</h1>
 <p class="article-meta">{self.publication(article, language)}<span>{escape(self.config['author'])}</span><span>{str(self.reading_minutes(article)) + " min read" if english else "约 " + str(self.reading_minutes(article)) + " 分钟阅读"}</span>{self.metrics(article, language)}</p>{translation_note}</header>
-{self.statistics_notice(language)}{controls}<div {layout}><div class="reading-content"><div class="article-body" id="article-content">{rendered}</div>
-{self.comments(article)}<div class="article-end"><span aria-hidden="true">◆</span><p>{"Thanks for reading." if english else "谢谢你读到这里。"}</p><a href="{escape(back_url)}#archive">{"Back to articles" if english else "返回文章归档"} →</a></div>{next_reading}</div>{directory}</div></article>
+{controls}<div {layout}><div class="reading-content"><div class="article-body" id="article-content">{rendered}</div>
+{self.statistics_notice(language)}{self.comments(article)}<div class="article-end"><span aria-hidden="true">◆</span><p>{"Thanks for reading." if english else "谢谢你读到这里。"}</p><a href="{escape(back_url)}#archive">{"Back to articles" if english else "返回文章归档"} →</a></div>{next_reading}</div>{directory}</div></article>
 <dialog class="article-image-viewer" id="article-image-viewer" aria-label="{"Article image" if english else "文章图片大图"}"><div class="image-viewer-actions"><a href="#" target="_blank" rel="noopener">{"View original image" if english else "查看原图"} {ARROW_ICON}</a><button type="button">{"Close" if english else "关闭"}</button></div><img alt=""><p></p></dialog>'''
         return self.document(article.title, body, article.destination, language, article.listing,
                              self.excerpt(article), alternates=alternates, switch_href=switch_href)

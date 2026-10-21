@@ -19,6 +19,16 @@ TOPICS = {"学习与思考": "Learning & reflection", "科技与写作": "Techno
           "城市生活": "City life", "生活与思考": "Life & reflection"}
 
 
+def source_sha256(source: Path) -> str:
+    """Hash source content consistently across Git LF and Windows CRLF checkouts.
+
+    Only CRLF line endings are normalized. All other bytes, including whitespace,
+    a final newline and any BOM, still participate in freshness checks. Never
+    rewrite the original source file to calculate its digest.
+    """
+    return sha256(source.read_bytes().replace(b"\r\n", b"\n")).hexdigest()
+
+
 def site_origin(blog):
     return urlunsplit((*urlsplit(blog.site_url)[:2], "", "", ""))
 
@@ -97,7 +107,7 @@ def collect_translations(blog):
         digest = entry["source_sha256"]
         if not re.fullmatch(r"[0-9a-f]{64}", digest):
             raise ValueError(f"Invalid translation source hash: {key}")
-        if digest != sha256(source.source.read_bytes()).hexdigest():
+        if digest != source_sha256(source.source):
             states[key] = "stale"
             continue
         path = root / entry["file"]

@@ -15,7 +15,7 @@ import build_blog
 import build_site
 from build_blog import Blog
 from english_site import (build_english_site, check_english_publication, collect_translations,
-                          english_archive, english_article_url, translation_report)
+                          english_archive, english_article_url, source_sha256, translation_report)
 from PIL import Image
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -104,7 +104,7 @@ class EnglishPublicationTests(unittest.TestCase):
         self.translation = self.root / "blog/translations/en" / self.source.name
         self.translation.parent.mkdir(parents=True)
         self.translation.write_text(ENGLISH, encoding="utf-8")
-        self.entry = {"file": self.translation.relative_to(self.root).as_posix(), "source_sha256": sha256(self.source.read_bytes()).hexdigest(),
+        self.entry = {"file": self.translation.relative_to(self.root).as_posix(), "source_sha256": source_sha256(self.source),
                       "title": ENGLISH.splitlines()[0][2:], "status": "complete", "method": "AI-assisted translation"}
         self.manifest = self.root / "blog/translations/manifest.json"
         self.write_manifest(self.entry)
@@ -142,6 +142,41 @@ class EnglishPublicationTests(unittest.TestCase):
         self.assertEqual(translation_report(blog)["pending"], 1)
         with self.assertRaisesRegex(ValueError, "coverage is incomplete"):
             translation_report(blog, require_complete=True)
+
+    def test_lf_and_crlf_checkouts_share_one_fresh_translation_without_source_writes(self):
+        lf = CHINESE.encode("utf-8")
+        canonical = sha256(lf).hexdigest()
+        self.write_manifest({**self.entry, "source_sha256": canonical})
+        for raw in (lf, lf.replace(b"\n", b"\r\n"), lf):
+            with self.subTest(crlf=b"\r\n" in raw):
+                self.source.write_bytes(raw)
+                self.assertEqual(source_sha256(self.source), canonical)
+                blog = self.blog()
+                self.assertEqual(blog.translation_states[self.key], "complete")
+                self.assertIn(self.key, blog.translations)
+                self.assertEqual(self.source.read_bytes(), raw)
+
+    def test_real_text_changes_still_invalidate_both_line_endings(self):
+        lf = CHINESE.encode("utf-8")
+        self.write_manifest({**self.entry, "source_sha256": sha256(lf).hexdigest()})
+        changed = CHINESE.replace("这是完整的第一段", "这是修改后的第一段").encode("utf-8")
+        self.assertNotEqual(changed, lf)
+        for raw in (changed, changed.replace(b"\n", b"\r\n")):
+            with self.subTest(crlf=b"\r\n" in raw):
+                self.source.write_bytes(raw)
+                blog = self.blog()
+                self.assertEqual(blog.translation_states[self.key], "stale")
+                self.assertNotIn(self.key, blog.translations)
+                self.assertEqual(self.source.read_bytes(), raw)
+
+    def test_hash_keeps_whitespace_and_final_newline_changes_significant(self):
+        lf = CHINESE.encode("utf-8")
+        self.write_manifest({**self.entry, "source_sha256": sha256(lf).hexdigest()})
+        for raw in (lf + b" ", lf.rstrip(b"\n")):
+            with self.subTest(raw=raw[-30:]):
+                self.source.write_bytes(raw)
+                self.assertNotEqual(source_sha256(self.source), self.entry["source_sha256"])
+                self.assertEqual(self.blog().translation_states[self.key], "stale")
 
     def test_source_change_is_stale_and_never_published_as_english(self):
         self.source.write_text(CHINESE + "\n新增加的段落。\n", encoding="utf-8")
@@ -220,6 +255,29 @@ class EnglishPublicationTests(unittest.TestCase):
         self.assertEqual(report["language_metadata_pages"], 10)
         self.assertEqual(ET.parse(self.output / 'articles/feed.xml').findall('./channel/item').__len__(), 3)
         self.assertNotIn('/en/', (self.output / 'articles/feed.xml').read_text(encoding="utf-8"))
+
+    def test_article_statistics_notice_follows_body_before_comments_in_both_languages(self):
+        blog = self.build_fixture()
+        translated = blog.translations[self.key]
+        original = translated.original
+        english_original = next(a for a in blog.articles if a.language == "en")
+        pages = ((self.output / "articles" / original.destination, "浏览与评论统计请求"),
+                 (self.output / "en/articles" / translated.destination, "View and comment counts"),
+                 (self.output / "articles" / english_original.destination, "View and comment counts"))
+        for page, label in pages:
+            with self.subTest(page=page.name):
+                text = page.read_text(encoding="utf-8")
+                notice = text.index('<p class="statistics-notice"')
+                body = text.index('<div class="article-body" id="article-content">')
+                comments = text.index('<section class="article-comments"')
+                self.assertEqual(text.count('<p class="statistics-notice"'), 1)
+                self.assertGreater(notice, body)
+                self.assertLess(notice, comments)
+                self.assertEqual(text[notice - len("</div>\n"):notice], "</div>\n")
+                self.assertIn(label, text[notice:comments])
+                self.assertIn("Test host", text[notice:comments])
+                self.assertIn("Test database", text[notice:comments])
+                self.assertNotIn('class="statistics-notice"', text[:body])
 
     def test_existing_english_original_has_english_ui_at_only_its_old_url(self):
         blog = self.build_fixture()

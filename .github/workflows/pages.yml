@@ -35,6 +35,12 @@ jobs:
         run: python -m pip install -r blog/requirements.txt
       - name: Check Markdown compatibility
         run: python scripts/test_build_blog.py
+      - name: Check English publication and translation freshness
+        run: |
+          python scripts/test_english_site.py
+          node scripts/test_english_archive.cjs
+          node scripts/test_english_waline.mjs
+          python scripts/check_translations.py
       - name: Check responsive image generation
         run: python scripts/test_image_assets.py
       - name: Check photography export and public pages

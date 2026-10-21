@@ -67,8 +67,12 @@ class GamePublicationTests(unittest.TestCase):
         origin = "https://preview.example"
         output, report = self.build_fixture(origin)
         self.assertTrue(report["success"])
-        self.assertEqual(report["metadata"]["canonical_pages"], 9)
+        self.assertEqual(report["metadata"]["canonical_pages"], 13)
         sitemap = [node.text for node in ET.parse(output / "sitemap.xml").findall(".//{*}loc")]
+        english_routes = {"/en/", "/en/about/", "/en/projects/", "/en/articles/"}
+        self.assertEqual(set(report["english"]["routes"]), english_routes)
+        self.assertEqual({url for url in sitemap if url.startswith(origin + "/en/")},
+                         {origin + route for route in english_routes})
         for route in ("game", "game/ranking"):
             with self.subTest(route=route):
                 html = (output / route / "index.html").read_text(encoding="utf-8")
