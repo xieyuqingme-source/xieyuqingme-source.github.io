@@ -341,7 +341,7 @@ class ProjectPublicationTests(unittest.TestCase):
                     self.assertTrue(any(tag == "meta" and attrs.get("property") == "og:image"
                                         and attrs.get("content") == "https://xieyuqing.me/assets/share-cover.png" for tag, attrs in elements))
                     self.assertTrue(any(tag == "link" and attrs.get("rel") == "icon"
-                                        and attrs.get("href") == "/assets/favicon.svg" for tag, attrs in elements))
+                                        and attrs.get("href", "").partition("?")[0] == "/assets/favicon.svg" for tag, attrs in elements))
                 # About content is independent from repository README text.
                 (root / "README.md").write_text("Private folder guide; must never appear on /about/.", encoding="utf-8")
                 before = {path.relative_to(output / "articles"): path.read_bytes()

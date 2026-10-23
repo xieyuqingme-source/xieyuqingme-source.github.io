@@ -25,7 +25,6 @@ button { font: inherit; cursor: pointer; }
 .skip-link:focus { top: 10px; }
 .site-header { display: flex; flex-wrap: wrap; align-items: center; gap: 20px; padding-block: 28px; border-bottom: 1px solid var(--line); }
 .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; font: 600 1.12rem var(--serif); }
-.brand-mark { display: grid; place-items: center; width: 42px; height: 42px; border: 1px solid var(--line); border-radius: 50%; color: var(--accent); font-size: 1.5rem; }
 .brand small { display: block; margin-top: 7px; color: var(--muted); font: .57rem/1.4 var(--sans); letter-spacing: .16em; }
 .site-nav { display: flex; flex-wrap: wrap; gap: 16px; margin-left: auto; font-size: .83rem; color: var(--muted); }
 .site-nav a, .site-footer a { text-decoration: none; }
@@ -149,7 +148,6 @@ main { padding-block: 68px 74px; }
 .about-wechat-qr figcaption { max-width: 440px; margin-top: 10px; color: var(--muted); font-size: .8rem; line-height: 1.8; }
 .about-english p { margin: 0; color: var(--muted); line-height: 1.9; }
 .site-language-switch { font-weight: 650; white-space: nowrap; }
-html[lang="en"] .brand { font-size: 1rem; }
 html[lang="en"] .intro h1 { overflow-wrap: anywhere; font-size: clamp(2.5rem, 7vw, 4.8rem); }
 html[lang="en"] .about-contact dl { grid-template-columns: minmax(0, 155px) minmax(0, 1fr); }
 @media (max-width: 520px) { html[lang="en"] .about-contact dl { grid-template-columns: 1fr; gap: 6px; } html[lang="en"] .about-contact dd { margin-bottom: 16px; } }

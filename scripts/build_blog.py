@@ -331,7 +331,7 @@ class Blog:
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="{'Xie Yuqing · Carl — Writing, projects and places' if english else '谢雨卿 · Carl — 文章、作品与生活足迹'}">
-  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg?v=yuliao-cat-1">
   <script>(() => {{ let theme = "light", saved; try {{ saved = localStorage.getItem("xieyuqing-blog-theme"); }} catch (_) {{}} if (saved === "light" || saved === "dark") theme = saved; else try {{ if (window.matchMedia("(prefers-color-scheme: dark)").matches) theme = "dark"; }} catch (_) {{}} document.documentElement.dataset.theme = theme; }})();</script>
   <link rel="stylesheet" href="{escape(self.href('assets/style.css'))}">
   <link rel="alternate" type="application/rss+xml" title="{escape(self.config['title'])}" href="{escape(self.href('feed.xml'))}">
@@ -341,7 +341,7 @@ class Blog:
 <body id="top">
   <a class="skip-link" href="#main">{'Skip to content' if english else '跳转到正文 / Skip to content'}</a>
   <header class="site-header container" lang="{language}">
-    <a class="brand" href="{'/en/' if english else '/'}" aria-label="{'Xie Yuqing personal home' if english else '谢雨卿个人主页'}"><span class="brand-mark" aria-hidden="true">谢</span><span>{'Xie Yuqing' if english else '谢雨卿'}<small lang="en">XIE YUQING · CARL</small></span></a>
+    <a class="brand" href="{'/en/' if english else '/'}" aria-label="{'Xie Yuqing personal home' if english else '谢雨卿个人主页'}"><span><span lang="zh-CN">谢雨卿</span><small lang="en">Xie Yuqing · Carl</small></span></a>
     <div class="header-actions"><nav class="site-nav" aria-label="导航 / Navigation">{''.join(nav)}</nav>
     <button class="theme-toggle" id="theme-toggle" type="button" aria-label="{'Switch to dark mode' if english else '切换到深色模式'}" title="{'Switch to dark mode' if english else '切换到深色模式'}" hidden><span class="theme-icon" aria-hidden="true">◐</span><span class="theme-label">{'Dark' if english else '深色'}</span></button></div>
   </header>

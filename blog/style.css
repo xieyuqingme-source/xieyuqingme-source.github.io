@@ -64,7 +64,6 @@ button:disabled { opacity: .6; cursor: wait; }
 .skip-link:focus { position: fixed; top: 12px; left: 18px; z-index: 20; padding: 10px 16px; background: var(--white); }
 .site-header { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding-block: 28px; border-bottom: 1px solid var(--line); }
 .brand { display: flex; flex-shrink: 0; align-items: center; gap: 12px; color: var(--ink); font: 600 1.12rem/1.5 var(--serif); text-decoration: none; }
-.brand-mark { display: grid; place-items: center; width: 42px; height: 42px; border: 1px solid var(--line); border-radius: 50%; color: var(--accent); font-size: 1.5rem; }
 .header-actions { display: flex; min-width: 0; align-items: center; justify-content: flex-end; gap: 20px; }
 .theme-toggle { display: inline-flex; align-items: center; justify-content: center; gap: 6px; min-height: 34px; padding: 7px 11px; border: 1px solid var(--line); border-radius: 18px; background: var(--surface); color: var(--muted); font-size: .7rem; line-height: 1.5; white-space: nowrap; }
 .theme-toggle:hover { color: var(--accent); border-color: var(--accent); }
@@ -142,7 +141,6 @@ h1, h2 { font-family: var(--serif); }
 .translation-status { font-size: .72rem; }
 .translation-coverage { color: var(--muted); font-size: .82rem; }
 .translation-anchor { display: block; scroll-margin-top: 80px; }
-html[lang="en"] .brand { font-size: 1rem; }
 html[lang="en"] .article-body { line-height: 1.85; }
 .filter-button { display: flex; align-items: center; gap: 9px; padding: 8px 13px; border: 1px solid transparent; border-radius: 3px; color: var(--muted); background: transparent; font-size: .76rem; line-height: 1.6; }
 .filter-button span { font-size: .62rem; opacity: .75; }
@@ -300,7 +298,6 @@ html[lang="en"] .article-body { line-height: 1.85; }
   .container { width: calc(100% - 40px); }
   .site-header { gap: 16px; padding-block: 21px; }
   .brand { gap: 9px; font-size: .88rem; }
-  .brand-mark { width: 36px; height: 36px; font-size: 22px; }
   .brand small { font-size: .54rem; letter-spacing: .13em; }
   .site-nav { gap: 16px; font-size: .77rem; }
   .header-actions { gap: 14px; }

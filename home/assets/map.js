@@ -219,14 +219,16 @@
     const keys = allowed ? [...allowed] : null, signature = JSON.stringify([$("map-labels").checked, keys, activeKey]);
     if (signature === labelSignature) return; labelSignature = signature;
     layer.replaceChildren(); layer.dataset.count = "0";
+    for (const marker of markerNodes.values()) marker.classList.remove("has-city-label");
     if (!$("map-labels").checked || !L || !labelMeasure) return;
-    const project = playbackProjection || projection(), labelStyle = cityLabelStyle(); labelMeasure.font = `${labelStyle.fontSize}px sans-serif`;
+    const project = playbackProjection || projection(), labelStyle = cityLabelStyle(); labelMeasure.font = `600 ${labelStyle.fontSize}px sans-serif`;
     const candidates = groups(current().records).filter(group => project.contains(group.item)).map(group => { const point = project.point(group.item.lon, group.item.lat); return { key: group.key, name: shown(group.item).city, x: point[0], y: point[1], priority: group.key === activeKey ? 1 : 0, markerRadius: group.key === activeKey ? 22 : 4 }; });
     const labels = L.layout(candidates, { width: project.width, height: project.height, visibleSet: allowed || undefined, ...labelStyle, measure: text => labelMeasure.measureText(text).width });
     for (const label of labels) {
       const group = svg("g", { class: "map-city-label", "data-city-key": label.key });
-      group.append(svg("text", { x: label.x, y: label.y, style: `font:${labelStyle.fontSize}px sans-serif` }, label.text));
+      group.append(svg("text", { x: label.x, y: label.y, style: `font:600 ${labelStyle.fontSize}px sans-serif` }, label.text));
       layer.append(group);
+      markerNodes.get(label.key)?.classList.add("has-city-label");
     }
     layer.dataset.count = String(labels.length);
   }
@@ -257,8 +259,8 @@
     const hitRadius = 22 / screenScale();
     for (const city of visibleCities) {
       const item = shown(city.item), point = project.point(item.lon, item.lat), approximate = city.records.some(record => record.certainty === "approximate");
-      const marker = svg("g", { class: "map-marker", "data-city-key": city.key, transform: `translate(${point})`, tabindex: "0", role: "button", "aria-label": I("map.main.s022", {p0:(item.city),p1:(item.country),p2:(city.records.length)}, "{p0}，{p1}，{p2} 段经历，查看说明") });
-      marker.append(svg("title", {}, `${item.city} · ${item.country}`), svg("circle", { class: "map-hit", r: hitRadius }), svg("circle", { class: "map-dot", r: 3.2 }));
+      const marker = svg("g", { class: "map-marker", "data-city-key": city.key, transform: `translate(${point})`, tabindex: "0", role: "button", "aria-label": I("map.main.s022", {p0:(item.city),p1:(item.country),p2:(city.records.length)}, "{p0}，{p1}，{p2} 段经历，查看说明"), "data-export-title": `${item.city} · ${item.country}` });
+      marker.append(svg("circle", { class: "map-hit", r: hitRadius }), svg("circle", { class: "map-dot", r: 3.2 }));
       const onRight = point[0] > project.left + project.width - 160;
       marker.append(svg("text", { class: "map-hover-label", x: onRight ? -10 : 10, y: -10, "text-anchor": onRight ? "end" : "start" }, item.city + (approximate ? " ≈" : "")));
       markerNodes.set(city.key, marker);
@@ -361,11 +363,14 @@
     const copy = $("footprints-map").cloneNode(true), style = getComputedStyle(document.documentElement), backgroundOnly = options && options.backgroundOnly, mapHeight = projection().height;
     const colors = Object.fromEntries(["paper", "surface", "ink", "muted", "accent", "line", "soft"].map(key => [key, style.getPropertyValue("--" + key).trim()]));
     copy.setAttribute("xmlns", NS); copy.setAttribute("width", "1600"); copy.setAttribute("height", String(Math.round(mapHeight * 1.6)));
+    // Native marker titles are export metadata only; live markers use aria-label
+    // and the collision-aware custom hover/focus label.
+    copy.querySelectorAll(".map-marker").forEach(marker => { marker.classList.remove("has-city-label"); marker.prepend(svg("title", {}, marker.getAttribute("data-export-title") || "")); marker.removeAttribute("data-export-title"); });
     copy.querySelectorAll("[tabindex], [role='button']").forEach(node => { node.removeAttribute("tabindex"); node.removeAttribute("role"); });
     copy.querySelectorAll(".map-svg-note, .map-svg-label, .map-hover-label").forEach(node => node.remove());
     if (backgroundOnly) copy.querySelectorAll(".map-marker, #map-label-layer, #playback-avatar, #journey-route").forEach(node => node.remove());
     copy.querySelectorAll("image").forEach(node => { const href = node.getAttribute("href") || ""; if (!/^data:image\/png;base64,/.test(href) && !(node.id === "map-terrain-image" && /^data:image\/(?:jpeg|webp);base64,/.test(href))) node.remove(); });
-    const sheet = svg("style", {}, `.map-water{fill:${colors.soft}}.map-land{fill:${colors.line};stroke:${colors.surface};stroke-width:.6}.map-graticule{fill:none;stroke:${colors.muted};stroke-opacity:.17;stroke-width:.7}.map-order{fill:none;stroke:${colors.accent};stroke-width:1.6;stroke-dasharray:5 5;opacity:.7}.map-marker .map-dot{fill:${colors.accent};stroke:${colors.surface};stroke-width:1.5}.map-marker .map-hit{fill:transparent;stroke:none}.map-playback-avatar .avatar-ring{fill:${colors.surface};stroke:${colors.accent};stroke-width:2.5}.map-playback-avatar .avatar-fallback{fill:${colors.accent}}.map-city-label{pointer-events:none;user-select:none;-webkit-user-select:none}.map-city-label text{fill:${colors.ink};font:14px sans-serif;paint-order:stroke fill;stroke:${colors.surface};stroke-opacity:.82;stroke-width:1.5;stroke-linejoin:round;pointer-events:none}.export-caption{fill:${colors.ink};font:20px sans-serif}.export-caption-date{fill:${colors.accent};font:20px sans-serif}.export-caption-city{fill:${colors.ink};font:bold 26px sans-serif}`);
+    const sheet = svg("style", {}, `.map-water{fill:${colors.soft}}.map-land{fill:${colors.line};stroke:${colors.surface};stroke-width:.6}.map-graticule{fill:none;stroke:${colors.muted};stroke-opacity:.17;stroke-width:.7}.map-order{fill:none;stroke:${colors.accent};stroke-width:1.6;stroke-dasharray:5 5;opacity:.7}.map-marker .map-dot{fill:${colors.accent};stroke:${colors.surface};stroke-width:1.5}.map-marker .map-hit{fill:transparent;stroke:none}.map-playback-avatar .avatar-ring{fill:${colors.surface};stroke:${colors.accent};stroke-width:2.5}.map-playback-avatar .avatar-fallback{fill:${colors.accent}}.map-city-label{pointer-events:none;user-select:none;-webkit-user-select:none}.map-city-label text{fill:${colors.ink};font:600 14px sans-serif;paint-order:stroke fill;stroke:${colors.surface};stroke-opacity:.82;stroke-width:1.5;stroke-linejoin:round;pointer-events:none}.export-caption{fill:${colors.ink};font:20px sans-serif}.export-caption-date{fill:${colors.accent};font:20px sans-serif}.export-caption-city{fill:${colors.ink};font:bold 26px sans-serif}`);
     copy.insertBefore(sheet, copy.firstChild);
     const item = shown(videoFrame.state !== "idle" ? videoFrame.record : current().records.find(record => record.id === detailId));
     if (!backgroundOnly && item) {

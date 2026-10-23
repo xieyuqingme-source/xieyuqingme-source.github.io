@@ -173,7 +173,8 @@ class MarkdownRenderingTests(unittest.TestCase):
                         "The home link needs a readable accessible name.")
         self.assertIn("谢雨卿", brand["attrs"]["aria-label"])
         self.assertIn("谢雨卿", "".join(brand["text"]))
-        self.assertEqual(["".join(icon).strip() for icon in brand["icons"]], ["谢"])
+        self.assertEqual(brand["icons"], [])
+        self.assertEqual("".join(brand["text"]).count("谢雨卿"), 1)
         primary = page.split('<nav class="site-nav"', 1)[1].split('</nav>', 1)[0]
         self.assertEqual(primary.count('<a '), 9)
         self.assertIn('href="/anthology/"', primary)
@@ -186,7 +187,7 @@ class MarkdownRenderingTests(unittest.TestCase):
                             and attrs.get('content') == 'https://example.com/assets/share-cover.png'
                             for tag, attrs in elements))
         self.assertTrue(any(tag == 'link' and attrs.get('rel') == 'icon'
-                            and attrs.get('href') == '/assets/favicon.svg' for tag, attrs in elements))
+                            and attrs.get('href', '').partition('?')[0] == '/assets/favicon.svg' for tag, attrs in elements))
         self.assertNotIn('↗', page)
 
     def test_publication_preserves_month_precision_and_marks_unknown(self):

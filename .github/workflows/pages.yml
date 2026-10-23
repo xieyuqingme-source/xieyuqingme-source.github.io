@@ -64,7 +64,9 @@ jobs:
           node scripts/test_map_video.cjs
           node scripts/test_map_video_layout.cjs
       - name: Check unified site rules
-        run: python scripts/test_build_site.py
+        run: |
+          python scripts/test_build_site.py
+          python scripts/test_branding.py
       - name: Check anthology content and static routes
         run: |
           python scripts/test_anthology_pages.py

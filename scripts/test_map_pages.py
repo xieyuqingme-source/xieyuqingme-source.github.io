@@ -427,7 +427,7 @@ class MapRenderingTests(unittest.TestCase):
         html = (ROOT / "home/map.template.html").read_text(encoding="utf-8")
         self.assertIn('property="og:description"', html)
         self.assertIn('property="og:image" content="{{site_url}}/assets/share-cover.png"', html)
-        self.assertIn('rel="icon" type="image/svg+xml" href="/assets/favicon.svg"', html)
+        self.assertRegex(html, r'rel="icon" type="image/svg\+xml" href="/assets/favicon\.svg(?:\?[^"]+)?"')
         self.assertLess(html.index('id="map-canvas"'), html.index('id="map-interaction-note"'))
         self.assertLess(html.index('id="map-canvas"'), html.index('class="map-view-tools"'))
 
