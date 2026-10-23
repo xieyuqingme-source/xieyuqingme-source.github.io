@@ -2,6 +2,7 @@
   "use strict";
   const english = (document.documentElement.lang || "").toLowerCase().startsWith("en");
 
+  if (!window.SiteTheme) {
   const themeButton = document.querySelector("#theme-toggle");
   const themeKey = "xieyuqing-blog-theme";
   let preferredTheme = null;
@@ -39,6 +40,7 @@
     try { localStorage.setItem(themeKey, theme); } catch (_) { /* Keep the switch usable without storage. */ }
   });
 
+  }
   const archive = document.querySelector(".archive");
   if (archive) {
     const controls = archive.querySelector(".archive-controls");

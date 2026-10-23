@@ -159,7 +159,7 @@
     if (page.switchMode !== "history" || !paired) {
       if (target) {
         try { window.localStorage.setItem(preferenceKey, language); } catch (_) {}
-        window.location.assign(target);
+        if (window.SiteNavigation) void window.SiteNavigation.visit(target); else window.location.assign(target);
       }
       return false;
     }
@@ -174,7 +174,14 @@
     catch (error) { console.error("Invalid site language data", error); }
   }
   window.SiteI18n = Object.freeze({ lang: () => current, t, register, apply, localizedPath, setLanguage,
-    onChange(callback) { subscribers.add(callback); return () => subscribers.delete(callback); } });
+    page: () => page,
+    loadPage(data, language) {
+      for (const lang of languages) for (const key of Object.keys(catalogues[lang])) delete catalogues[lang][key];
+      register(data); page = data.page || {}; current = language === "en" ? "en" : "zh-CN";
+      document.documentElement.lang = current; apply();
+      for (const fn of subscribers) fn(current, {source: "navigation"});
+    },
+    onChange(callback, options = {}) { subscribers.add(callback); const remove = () => subscribers.delete(callback); if (!options.persistent) window.SiteNavigation?.own(remove); return remove; } });
 
   document.addEventListener("click", (event) => {
     if (event.defaultPrevented || event.button !== 0 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;

@@ -127,8 +127,11 @@ class GamePublicationTests(unittest.TestCase):
                 self.assertTrue(all(resource.startswith("/assets/") for resource in resources if resource))
         for name in build_site.GAME_ASSETS:
             with self.subTest(asset=name):
-                self.assertEqual((output / "assets" / name).read_bytes(),
-                                 (ROOT / "home/assets" / name).read_bytes())
+                published = (output / "assets" / name).read_bytes()
+                if name.endswith(".js"):
+                    from site_navigation import original_page_script
+                    published = original_page_script(published.decode("utf-8")).encode("utf-8")
+                self.assertEqual(published, (ROOT / "home/assets" / name).read_bytes())
                 if name.endswith(".js"):
                     source = (output / "assets" / name).read_text(encoding="utf-8")
                     imports = re.findall(r'(?:from\s*|import\s*)["\'](\./[^"\']+)["\']', source)

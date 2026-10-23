@@ -488,7 +488,7 @@ def build_site(address, map_preview_source=None):
         source = ROOT / "home/assets" / name
         if source.is_symlink(): raise ValueError("Home asset symlinks are not supported.")
         shutil.copy2(source, OUTPUT / "assets" / name)
-    for name in ("site-music.js", "site-music.css"):
+    for name in ("site-music.js", "site-music.css", "site-navigation.js"):
         source = ROOT / "home/assets" / name
         if source.is_file():
             if source.is_symlink(): raise ValueError("Music asset symlinks are not supported.")
@@ -530,7 +530,10 @@ def build_site(address, map_preview_source=None):
         ET.SubElement(ET.SubElement(sitemap, "url"), "loc").text = loc.text
     (OUTPUT / "sitemap.xml").write_bytes(ET.tostring(sitemap, encoding="utf-8", xml_declaration=True))
     (OUTPUT / "robots.txt").write_text(f"User-agent: *\nAllow: /\nSitemap: {address}/sitemap.xml\n", encoding="utf-8")
+    from site_navigation import wrap_page_scripts
+    navigation_report = wrap_page_scripts(OUTPUT)
     report = check_site(address)
+    report["navigation"] = navigation_report
     report["metadata"] = check_publication_metadata(address)
     from english_site import check_english_publication
     english_report.update(check_english_publication(blog, OUTPUT, address))

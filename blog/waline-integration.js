@@ -103,13 +103,15 @@ export async function startWaline(deps = {}) {
       const [client] = await Promise.all([
         deps.loadClient ? deps.loadClient(settings.clientJS) : import(settings.clientJS), loadStyle()
       ]);
-      client.init({
+      if (typeof window !== "undefined" && window.SiteNavigation && !doc.querySelector("#article-comments")?.isConnected) return;
+      const widget = client.init({
         el: '#waline', serverURL: server.href.replace(/\/$/, ''), path: articlePath,
         lang, dark: 'html[data-theme="dark"]', meta: ['nick', 'mail'], requiredMeta: ['nick'],
         login: 'disable', imageUploader: false, search: false, emoji: false, reaction: false,
         texRenderer: false, highlighter: false, comment: false, pageview: false, noRss: true,
         locale: { placeholder: lang === 'en' ? 'Leave a comment. A nickname is required; email is optional. Successful submissions appear publicly without manual pre-moderation.' : '欢迎留言。昵称必填，邮箱选填；提交成功后直接公开，无需人工预审。' }
       });
+      if (typeof window !== "undefined") window.SiteNavigation?.own(() => widget?.destroy?.());
       comments.hidden = false;
     } catch (_) { comments.hidden = true; }
   }

@@ -44,33 +44,49 @@
   const cap = V.capabilities();
   $("video-capability").textContent = cap.supported ? "" : I("map.video-ui.s001", {p0:(cap.reason || I("map.video-ui.s002", {}, "此浏览器不能生成视频。"))}, "{p0} 可继续下载 PNG / SVG 图片；建议使用新版 Chrome 或 Edge。");
   const musicText = (key, values = {}) => window.SiteI18n?.t(key, values, key) || key;
-  let musicPrefs = {track: "gentle", volume: .6}, musicSession = null;
-  try { const saved = JSON.parse(localStorage.getItem("xieyuqing-video-music-v1") || "null"); if (saved) { musicPrefs.track = ["none", "gentle", "travel"].includes(saved.track) ? saved.track : "gentle"; musicPrefs.volume = Math.max(0, Math.min(1, Number.isFinite(saved.volume) ? saved.volume : .6)); } } catch (_) {}
-  const musicControls = document.createElement("div"); musicControls.className = "video-music-options";
-  musicControls.innerHTML = '<label><span id="video-music-label"></span><select id="video-music"><option value="none"></option><option value="gentle"></option><option value="travel"></option></select></label><label><span id="video-music-volume-label"></span><input id="video-music-volume" type="range" min="0" max="100" step="5"><output id="video-music-volume-value"></output></label><button id="video-music-preview" type="button"></button><p id="video-music-note" role="status" aria-live="polite"></p>';
-  document.querySelector(".playback-controls").after(musicControls);
+  let musicPrefs = {track: "travel", volume: .6}, musicSession = null, fileError = null, importing = false, importRevision = 0;
+  try { const saved = JSON.parse(localStorage.getItem("xieyuqing-video-music-v2") || "null"); if (saved) { musicPrefs.track = ["none", "gentle", "travel", "custom"].includes(saved.track) ? saved.track : "travel"; musicPrefs.volume = Math.max(0, Math.min(1, Number.isFinite(saved.volume) ? saved.volume : .6)); } } catch (_) {}
+  if (musicPrefs.track === "custom" && !window.SiteMusic?.state().custom) fileError = "music.customMissing";
+  const musicControls = document.createElement("section"); musicControls.className = "video-music-options";
+  musicControls.innerHTML = '<label><span id="video-music-label"></span><select id="video-music"><option value="travel"></option><option value="gentle"></option><option value="none"></option><option value="custom"></option></select></label><label><span id="video-music-volume-label"></span><input id="video-music-volume" type="range" min="0" max="100" step="5"><output id="video-music-volume-value"></output></label><button id="video-music-preview" type="button"></button><label><span id="video-music-file-label"></span><input id="video-music-file" type="file" accept="audio/*,.wav,.mp3,.m4a,.aac,.ogg,.oga,.flac,.webm"></label><button id="video-music-clear" type="button"></button><p id="video-music-note" role="status" aria-live="polite"></p><p class="music-file-hint" id="video-music-file-hint"></p>';
+  document.querySelector(".map-toolbar").after(musicControls);
   if (!window.SiteMusic?.supported()) musicPrefs.track = "none";
   $("video-music").value = musicPrefs.track; $("video-music-volume").value = Math.round(musicPrefs.volume * 100);
   const effectiveMusic = () => musicPrefs.volume > 0 ? musicPrefs.track : "none";
   function refreshMusic() {
-    const supported = !!window.SiteMusic?.supported(), previewing = window.SiteMusic?.state().owner === "preview", audioCap = effectiveMusic() === "none" || V.capabilities({audio: true}).supported;
-    $("video-music-label").textContent = musicText("music.soundtrack");
-    for (const [index, key] of ["music.none", "music.recommended", "music.travel"].entries()) $("video-music").options[index].textContent = musicText(key);
-    $("video-music").disabled = busy || !supported; $("video-music-volume").disabled = busy || !supported;
+    const state = window.SiteMusic?.state(), supported = !!window.SiteMusic?.supported(), previewing = state?.owner === "map", audioCap = effectiveMusic() === "none" || V.capabilities({audio: true}).supported;
+    $("video-music-label").textContent = musicText("music.soundtrack"); musicControls.setAttribute("aria-label", musicText("music.soundtrack"));
+    for (const [index, key] of ["music.recommended", "music.gentle", "music.none", "music.custom"].entries()) $("video-music").options[index].textContent = musicText(key);
+    $("video-music").options[3].disabled = !state?.custom;
+    $("video-music").disabled = busy || importing || !supported; $("video-music-volume").disabled = busy || !supported;
     $("video-music-volume-label").textContent = musicText("music.volume"); $("video-music-volume-value").textContent = $("video-music-volume").value + "%";
     $("video-music-volume").setAttribute("aria-label", musicText("music.videoVolume")); $("video-music-volume").setAttribute("aria-valuetext", $("video-music-volume").value + "%");
-    $("video-music-preview").textContent = musicText(previewing ? "music.stopPreview" : "music.preview"); $("video-music-preview").disabled = busy || !supported || (effectiveMusic() === "none" && !previewing);
-    $("video-music-note").textContent = musicText(!supported ? "music.noAudioSupport" : !audioCap ? "music.noRecordingSupport" : musicPrefs.volume === 0 && musicPrefs.track !== "none" ? "music.zero" : previewing ? "music.previewing" : "music.exportHint");
-    if (!busy && !audioCap) $("video-generate").disabled = true;
+    $("video-music-preview").textContent = musicText(previewing ? "music.mapPause" : "music.mapPlay"); $("video-music-preview").disabled = busy || importing || !supported || (effectiveMusic() === "none" && !previewing); $("video-music-preview").setAttribute("aria-pressed", String(previewing));
+    $("video-music-file-label").textContent = musicText("music.addFile"); $("video-music-file").disabled = busy || !supported;
+    $("video-music-clear").textContent = musicText("music.clearFile"); $("video-music-clear").hidden = !state?.custom && !importing; $("video-music-clear").disabled = busy;
+    $("video-music-file-hint").textContent = musicText("music.fileHint");
+    $("video-music-note").textContent = fileError ? musicText(fileError) : importing ? musicText("music.fileLoading") : musicText(!supported ? "music.noAudioSupport" : !audioCap ? "music.noRecordingSupport" : musicPrefs.volume === 0 && musicPrefs.track !== "none" ? "music.zero" : previewing ? "music.playing" : "music.exportHint");
+    if (state?.custom && musicPrefs.track === "custom" && !importing && !fileError) $("video-music-note").textContent += " " + musicText("music.fileReady", {name: state.custom.name, seconds: state.custom.duration.toFixed(1)});
+    if (!busy && (!audioCap || importing || (musicPrefs.track === "custom" && !state?.custom))) $("video-generate").disabled = true;
   }
-  function saveMusic() { try { localStorage.setItem("xieyuqing-video-music-v1", JSON.stringify(musicPrefs)); } catch (_) {} }
-  $("video-music").addEventListener("change", () => { musicPrefs.track = $("video-music").value; void window.SiteMusic?.stopPreview(); saveMusic(); clearResult(); rebuild(); refreshMusic(); });
-  $("video-music-volume").addEventListener("input", () => { musicPrefs.volume = Number($("video-music-volume").value) / 100; window.SiteMusic?.setVolume("preview", musicPrefs.volume); saveMusic(); clearResult(); rebuild(); refreshMusic(); });
-  $("video-music-preview").addEventListener("click", async () => {
-    try { if (window.SiteMusic?.state().owner === "preview") await window.SiteMusic.stopPreview(); else await window.SiteMusic?.preview(musicPrefs.track, musicPrefs.volume); }
-    catch (error) { if (error.name !== "AbortError") $("video-music-note").textContent = musicText(error.code || "music.loadError"); return; }
+  function saveMusic() { try { localStorage.setItem("xieyuqing-video-music-v2", JSON.stringify(musicPrefs)); } catch (_) {} }
+  function changed() { saveMusic(); clearResult(); rebuild(); refreshMusic(); }
+  $("video-music").addEventListener("change", () => { musicPrefs.track = $("video-music").value; fileError = null; if (window.SiteMusic?.state().owner === "map") void window.SiteMusic.stop(); changed(); });
+  $("video-music-volume").addEventListener("input", () => { musicPrefs.volume = Number($("video-music-volume").value) / 100; window.SiteMusic?.setVolume("map", musicPrefs.volume); changed(); });
+  async function playMapMusic() {
+    try { fileError = null; if (window.SiteMusic?.state().owner === "map") await window.SiteMusic.stop(); else if (effectiveMusic() !== "none") await window.SiteMusic?.playMap(musicPrefs.track, musicPrefs.volume); }
+    catch (error) { if (error.name !== "AbortError") fileError = error.code || "music.loadError"; }
     refreshMusic();
+  }
+  $("video-music-preview").addEventListener("click", playMapMusic);
+  $("video-music-file").addEventListener("change", async () => {
+    const file = $("video-music-file").files[0]; if (!file) return;
+    const ticket = ++importRevision; importing = true; fileError = null; refreshMusic();
+    try { await window.SiteMusic.importCustom(file); musicPrefs.track = "custom"; $("video-music").value = "custom"; }
+    catch (error) { if (error.name !== "AbortError") fileError = error.code || "music.fileDecode"; }
+    finally { if (ticket === importRevision) { importing = false; $("video-music-file").value = ""; changed(); } }
   });
+  $("video-music-clear").addEventListener("click", async () => { importRevision++; await window.SiteMusic?.clearCustom(); importing = false; fileError = null; musicPrefs.track = "travel"; $("video-music").value = "travel"; changed(); });
   window.SiteMusic?.onChange(refreshMusic);
   preview.addEventListener("play", () => { if (window.SiteMusic?.state().locked) { preview.pause(); return; } window.SiteMusic?.claim("video-player"); });
   window.addEventListener("site:audio:claim", event => { if (event.detail?.owner !== "video-player") preview.pause(); });
@@ -241,7 +257,9 @@
       $("video-canvas").dataset.camera = JSON.stringify(project.bounds);
     };
   }
-  async function generate() {
+  let activeGeneration = null;
+  function generate() { if (activeGeneration) return activeGeneration; activeGeneration = generateVideo().finally(() => { activeGeneration = null; }); return activeGeneration; }
+  async function generateVideo() {
     if (busy || $("video-generate").disabled || !plan) return;
     clearResult(); const frozenPlan = plan; controller = new AbortController(); setBusy(true); $("video-canvas").hidden = false; $("video-progress").value = 0; lastProgress = "";
     try {
@@ -260,7 +278,7 @@
       resultUrl = URL.createObjectURL(result.blob); previewPlan = frozenPlan; preview.src = resultUrl; preview.muted = !result.hasAudio; preview.dataset.hasAudio = String(result.hasAudio); preview.hidden = false;
       const link = $("video-download"); link.href = resultUrl; link.download = `${window.FootprintsI18n ? window.FootprintsI18n.text("map.video.filename", {}, "足迹地图", frozenPlan.language) : "footprints"}.${result.extension}`; link.textContent = I("map.video-ui.s018", {p0:(result.extension.toUpperCase()),p1:((result.blob.size / 1048576).toFixed(1))}, "↓ 下载 {p0} 视频（{p1} MB）"); link.hidden = false;
       $("playback-progress").textContent = I("map.video-ui.s019", {p0:(result.extension.toUpperCase()),p1:(seconds(result.durationMs))}, "已生成 {p0} · {p1}。可预览、定位并下载。");
-      if (result.hasAudio) $("playback-progress").textContent += " " + musicText("music.written", {track: musicText("music." + musicPrefs.track)});
+      if (result.hasAudio) $("playback-progress").textContent += " " + musicText("music.written", {track: window.SiteMusic.label(musicPrefs.track)});
       A.status(I("map.video-ui.s020", {}, "视频已在本机生成。点击下载保存；视频文件不会自动保存到浏览器草稿。"));
     } catch (error) {
       $("playback-progress").textContent = error.name === "AbortError" ? I("map.video-ui.s021", {}, "已取消生成，未保留半成品。可重新生成。") : I("map.video-ui.s022", {p0:(error.message || I("map.video-ui.s023", {}, "视频生成失败"))}, "{p0} 可重试，或下载 PNG / SVG 图片。");
@@ -276,6 +294,7 @@
   window.addEventListener("footprints:labels", () => { if (!busy) { clearResult(); rebuild(); } });
   window.addEventListener("footprints:avatar", () => { if (!busy) { clearResult(); rebuild(); } });
   window.addEventListener("pagehide", () => { cancel(); clearResult(); });
+  window.SiteNavigation?.onLeave(async () => { cancel(); await activeGeneration; clearResult(); importRevision++; window.SiteMusic?.cancelImport(); });
   window.addEventListener("footprints:language", () => {
     const currentCapability = V.capabilities();
     $("video-capability").textContent = currentCapability.supported ? "" : I("map.video-ui.s001", {p0:currentCapability.reason || I("map.video-ui.s002", {}, "此浏览器不能生成视频。")}, "{p0} 可继续下载 PNG / SVG 图片；建议使用新版 Chrome 或 Edge。");

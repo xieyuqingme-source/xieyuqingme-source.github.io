@@ -249,6 +249,9 @@ def localize_page(page, root, address, route, language="zh-CN", modules=(), titl
     bootstrap_html = f'{metadata}<script id="site-i18n-data" type="application/json">{encoded}</script>\n<script src="/assets/site-i18n.js"></script>\n'
     if (Path(root) / "home/assets/site-music.js").is_file() and "music.open" in catalogues[language]:
         bootstrap_html += '<link rel="stylesheet" href="/assets/site-music.css"><script src="/assets/site-music.js" defer></script>\n'
+    if (Path(root) / "home/assets/site-navigation.js").is_file():
+        page = re.sub(r'<script\b[^>]*\bsrc=["\']/assets/portal\.js["\'][^>]*>\s*</script>\s*', "", page, flags=re.I)
+        bootstrap_html += '<script src="/assets/portal.js" defer></script>\n<script src="/assets/site-navigation.js" defer></script>\n'
     # Synchronous shared runtime must precede all module and deferred UI scripts.
     if re.search(r'<meta\b[^>]*charset\s*=', page, re.I):
         return re.sub(r'<meta\b[^>]*charset\s*=[^>]*>', lambda match: match.group(0) + "\n" + bootstrap_html, page, count=1, flags=re.I)

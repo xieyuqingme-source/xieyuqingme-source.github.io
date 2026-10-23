@@ -1,5 +1,6 @@
 (() => {
   "use strict";
+  if (window.SiteTheme) { window.SiteTheme.apply(); return; }
   const key = "xieyuqing-blog-theme";
   const button = document.querySelector("#theme-toggle");
   let preferredTheme = null;
@@ -21,7 +22,8 @@
     button.hidden = false;
   }
   apply();
-  window.SiteI18n?.onChange(apply);
+  window.SiteI18n?.onChange(apply, {persistent: true});
+  window.SiteTheme = Object.freeze({apply});
   const followSystem = (event) => {
     if (preferredTheme) return;
     theme = event.matches ? "dark" : "light";

@@ -50,6 +50,7 @@
       if (current === revision) { M.uiText(saveStatus,'自动保存失败 · 请导出 JSON'); saveStatus.dataset.failed = 'true'; failure(error); }
     }
   }
+  window.SiteNavigation?.onLeave(() => { clearTimeout(saveTimer); return persist(); });
   function scheduleSave() { revision++; clearTimeout(saveTimer); M.uiText(saveStatus,'正在保存…'); saveTimer=setTimeout(persist,350); }
   document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden'){clearTimeout(saveTimer);persist();}});
   function invalidateClearUndo() { undoSnapshot=null;undoKind=null;$('undo-clear').hidden=true; }
