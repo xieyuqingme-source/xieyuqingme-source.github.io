@@ -1,0 +1,22 @@
+{
+  "gentle": {
+    "duration_seconds": 26.666666666666668,
+    "channels": 2,
+    "sample_rate": 24000,
+    "peak": 0.636941753867913,
+    "rms": 0.12999999999999828,
+    "loop_edge_step": 0.008462482636992261,
+    "wav_sha256": "52e34039f3a5dfc63a48f428acc490deb54412e90455670cd682ef629fad8691",
+    "generator_version": "1.0"
+  },
+  "travel": {
+    "duration_seconds": 20.0,
+    "channels": 2,
+    "sample_rate": 24000,
+    "peak": 0.5746534019619188,
+    "rms": 0.1299999999999995,
+    "loop_edge_step": 0.005700806544389322,
+    "wav_sha256": "fa19edf2aed762ce0715a1f9e5746916c0002d3b8272f0ea11abce6e6f1d34aa",
+    "generator_version": "1.0"
+  }
+}

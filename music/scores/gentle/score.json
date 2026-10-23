@@ -1,0 +1,783 @@
+{
+  "id": "gentle",
+  "title_zh": "温柔回忆",
+  "title_en": "Gentle Memories",
+  "version": "1.0",
+  "tempo_bpm": 72,
+  "meter": "4/4",
+  "bars": 8,
+  "key": "C major / A minor",
+  "sample_rate": 24000,
+  "loop_beats": 32,
+  "attribution": "AI-assisted arrangement by OpenAI Codex, 2026-10-23; program synthesis, no third-party recordings or quoted score; not attributed as the website owner's composition.",
+  "events": [
+    {
+      "beat": 0.0,
+      "midi": 48,
+      "duration": 4.2,
+      "voice": "pad",
+      "velocity": 0.16,
+      "pan": -0.42000000000000004
+    },
+    {
+      "beat": 0.035,
+      "midi": 55,
+      "duration": 4.2,
+      "voice": "pad",
+      "velocity": 0.16,
+      "pan": -0.14
+    },
+    {
+      "beat": 0.07,
+      "midi": 59,
+      "duration": 4.2,
+      "voice": "pad",
+      "velocity": 0.16,
+      "pan": 0.14
+    },
+    {
+      "beat": 0.10500000000000001,
+      "midi": 64,
+      "duration": 4.2,
+      "voice": "pad",
+      "velocity": 0.16,
+      "pan": 0.42000000000000004
+    },
+    {
+      "beat": 0,
+      "midi": 36,
+      "duration": 2.8,
+      "voice": "bass",
+      "velocity": 0.27,
+      "pan": -0.08
+    },
+    {
+      "beat": 0.15,
+      "midi": 67,
+      "duration": 1.8,
+      "voice": "keys",
+      "velocity": 0.18,
+      "pan": -0.2
+    },
+    {
+      "beat": 1.05,
+      "midi": 71,
+      "duration": 1.8,
+      "voice": "keys",
+      "velocity": 0.15,
+      "pan": 0.2
+    },
+    {
+      "beat": 1.95,
+      "midi": 64,
+      "duration": 1.8,
+      "voice": "keys",
+      "velocity": 0.15,
+      "pan": -0.2
+    },
+    {
+      "beat": 2.85,
+      "midi": 67,
+      "duration": 1.8,
+      "voice": "keys",
+      "velocity": 0.15,
+      "pan": 0.2
+    },
+    {
+      "beat": 0.55,
+      "midi": 64,
+      "duration": 1.7,
+      "voice": "keys",
+      "velocity": 0.36,
+      "pan": -0.12
+    },
+    {
+      "beat": 1.8,
+      "midi": 67,
+      "duration": 1.7,
+      "voice": "keys",
+      "velocity": 0.3,
+      "pan": 0.0
+    },
+    {
+      "beat": 2.9,
+      "midi": 69,
+      "duration": 2.2,
+      "voice": "keys",
+      "velocity": 0.3,
+      "pan": 0.12
+    },
+    {
+      "beat": 4.0,
+      "midi": 45,
+      "duration": 4.2,
+      "voice": "pad",
+      "velocity": 0.16,
+      "pan": -0.42000000000000004
+    },
+    {
+      "beat": 4.035,
+      "midi": 52,
+      "duration": 4.2,
+      "voice": "pad",
+      "velocity": 0.16,
+      "pan": -0.14
+    },
+    {
+      "beat": 4.07,
+      "midi": 55,
+      "duration": 4.2,
+      "voice": "pad",
+      "velocity": 0.16,
+      "pan": 0.14
+    },
+    {
+      "beat": 4.105,
+      "midi": 60,
+      "duration": 4.2,
+      "voice": "pad",
+      "velocity": 0.16,
+      "pan": 0.42000000000000004
+    },
+    {
+      "beat": 4,
+      "midi": 33,
+      "duration": 2.8,
+      "voice": "bass",
+      "velocity": 0.27,
+      "pan": -0.08
+    },
+    {
+      "beat": 4.15,
+      "midi": 64,
+      "duration": 1.8,
+      "voice": "keys",
+      "velocity": 0.18,
+      "pan": -0.2
+    },
+    {
+      "beat": 5.050000000000001,
+      "midi": 67,
+      "duration": 1.8,
+      "voice": "keys",
+      "velocity": 0.15,
+      "pan": 0.2
+    },
+    {
+      "beat": 5.95,
+      "midi": 60,
+      "duration": 1.8,
+      "voice": "keys",
+      "velocity": 0.15,
+      "pan": -0.2
+    },
+    {
+      "beat": 6.8500000000000005,
+      "midi": 64,
+      "duration": 1.8,
+      "voice": "keys",
+      "velocity": 0.15,
+      "pan": 0.2
+    },
+    {
+      "beat": 4.55,
+      "midi": 67,
+      "duration": 1.7,
+      "voice": "keys",
+      "velocity": 0.36,
+      "pan": -0.12
+    },
+    {
+      "beat": 5.8,
+      "midi": 64,
+      "duration": 1.7,
+      "voice": "keys",
+      "velocity": 0.3,
+      "pan": 0.0
+    },
+    {
+      "beat": 6.9,
+      "midi": 62,
+      "duration": 2.2,
+      "voice": "keys",
+      "velocity": 0.3,
+      "pan": 0.12
+    },
+    {
+      "beat": 8.0,
+      "midi": 41,
+      "duration": 4.2,
+      "voice": "pad",
+      "velocity": 0.16,
+      "pan": -0.42000000000000004
+    },
+    {
+      "beat": 8.035,
+      "midi": 48,
+      "duration": 4.2,
+      "voice": "pad",
+      "velocity": 0.16,
+      "pan": -0.14
+    },
+    {
+      "beat": 8.07,
+      "midi": 52,
+      "duration": 4.2,
+      "voice": "pad",
+      "velocity": 0.16,
+      "pan": 0.14
+    },
+    {
+      "beat": 8.105,
+      "midi": 57,
+      "duration": 4.2,
+      "voice": "pad",
+      "velocity": 0.16,
+      "pan": 0.42000000000000004
+    },
+    {
+      "beat": 8,
+      "midi": 29,
+      "duration": 2.8,
+      "voice": "bass",
+      "velocity": 0.27,
+      "pan": -0.08
+    },
+    {
+      "beat": 8.15,
+      "midi": 60,
+      "duration": 1.8,
+      "voice": "keys",
+      "velocity": 0.18,
+      "pan": -0.2
+    },
+    {
+      "beat": 9.05,
+      "midi": 64,
+      "duration": 1.8,
+      "voice": "keys",
+      "velocity": 0.15,
+      "pan": 0.2
+    },
+    {
+      "beat": 9.950000000000001,
+      "midi": 57,
+      "duration": 1.8,
+      "voice": "keys",
+      "velocity": 0.15,
+      "pan": -0.2
+    },
+    {
+      "beat": 10.850000000000001,
+      "midi": 60,
+      "duration": 1.8,
+      "voice": "keys",
+      "velocity": 0.15,
+      "pan": 0.2
+    },
+    {
+      "beat": 8.55,
+      "midi": 60,
+      "duration": 1.7,
+      "voice": "keys",
+      "velocity": 0.36,
+      "pan": -0.12
+    },
+    {
+      "beat": 9.8,
+      "midi": 64,
+      "duration": 1.7,
+      "voice": "keys",
+      "velocity": 0.3,
+      "pan": 0.0
+    },
+    {
+      "beat": 10.9,
+      "midi": 65,
+      "duration": 2.2,
+      "voice": "keys",
+      "velocity": 0.3,
+      "pan": 0.12
+    },
+    {
+      "beat": 12.0,
+      "midi": 43,
+      "duration": 4.2,
+      "voice": "pad",
+      "velocity": 0.16,
+      "pan": -0.42000000000000004
+    },
+    {
+      "beat": 12.035,
+      "midi": 50,
+      "duration": 4.2,
+      "voice": "pad",
+      "velocity": 0.16,
+      "pan": -0.14
+    },
+    {
+      "beat": 12.07,
+      "midi": 55,
+      "duration": 4.2,
+      "voice": "pad",
+      "velocity": 0.16,
+      "pan": 0.14
+    },
+    {
+      "beat": 12.105,
+      "midi": 60,
+      "duration": 4.2,
+      "voice": "pad",
+      "velocity": 0.16,
+      "pan": 0.42000000000000004
+    },
+    {
+      "beat": 12,
+      "midi": 31,
+      "duration": 2.8,
+      "voice": "bass",
+      "velocity": 0.27,
+      "pan": -0.08
+    },
+    {
+      "beat": 12.15,
+      "midi": 62,
+      "duration": 1.8,
+      "voice": "keys",
+      "velocity": 0.18,
+      "pan": -0.2
+    },
+    {
+      "beat": 13.05,
+      "midi": 67,
+      "duration": 1.8,
+      "voice": "keys",
+      "velocity": 0.15,
+      "pan": 0.2
+    },
+    {
+      "beat": 13.950000000000001,
+      "midi": 60,
+      "duration": 1.8,
+      "voice": "keys",
+      "velocity": 0.15,
+      "pan": -0.2
+    },
+    {
+      "beat": 14.850000000000001,
+      "midi": 62,
+      "duration": 1.8,
+      "voice": "keys",
+      "velocity": 0.15,
+      "pan": 0.2
+    },
+    {
+      "beat": 12.55,
+      "midi": 62,
+      "duration": 1.7,
+      "voice": "keys",
+      "velocity": 0.36,
+      "pan": -0.12
+    },
+    {
+      "beat": 13.8,
+      "midi": 67,
+      "duration": 1.7,
+      "voice": "keys",
+      "velocity": 0.3,
+      "pan": 0.0
+    },
+    {
+      "beat": 14.9,
+      "midi": 65,
+      "duration": 2.2,
+      "voice": "keys",
+      "velocity": 0.3,
+      "pan": 0.12
+    },
+    {
+      "beat": 16.0,
+      "midi": 48,
+      "duration": 4.2,
+      "voice": "pad",
+      "velocity": 0.16,
+      "pan": -0.42000000000000004
+    },
+    {
+      "beat": 16.035,
+      "midi": 55,
+      "duration": 4.2,
+      "voice": "pad",
+      "velocity": 0.16,
+      "pan": -0.14
+    },
+    {
+      "beat": 16.07,
+      "midi": 59,
+      "duration": 4.2,
+      "voice": "pad",
+      "velocity": 0.16,
+      "pan": 0.14
+    },
+    {
+      "beat": 16.105,
+      "midi": 64,
+      "duration": 4.2,
+      "voice": "pad",
+      "velocity": 0.16,
+      "pan": 0.42000000000000004
+    },
+    {
+      "beat": 16,
+      "midi": 36,
+      "duration": 2.8,
+      "voice": "bass",
+      "velocity": 0.27,
+      "pan": -0.08
+    },
+    {
+      "beat": 16.15,
+      "midi": 67,
+      "duration": 1.8,
+      "voice": "keys",
+      "velocity": 0.18,
+      "pan": -0.2
+    },
+    {
+      "beat": 17.049999999999997,
+      "midi": 71,
+      "duration": 1.8,
+      "voice": "keys",
+      "velocity": 0.15,
+      "pan": 0.2
+    },
+    {
+      "beat": 17.95,
+      "midi": 64,
+      "duration": 1.8,
+      "voice": "keys",
+      "velocity": 0.15,
+      "pan": -0.2
+    },
+    {
+      "beat": 18.849999999999998,
+      "midi": 67,
+      "duration": 1.8,
+      "voice": "keys",
+      "velocity": 0.15,
+      "pan": 0.2
+    },
+    {
+      "beat": 16.55,
+      "midi": 64,
+      "duration": 1.7,
+      "voice": "keys",
+      "velocity": 0.36,
+      "pan": -0.12
+    },
+    {
+      "beat": 17.8,
+      "midi": 71,
+      "duration": 1.7,
+      "voice": "keys",
+      "velocity": 0.3,
+      "pan": 0.0
+    },
+    {
+      "beat": 18.9,
+      "midi": 69,
+      "duration": 2.2,
+      "voice": "keys",
+      "velocity": 0.3,
+      "pan": 0.12
+    },
+    {
+      "beat": 20.0,
+      "midi": 45,
+      "duration": 4.2,
+      "voice": "pad",
+      "velocity": 0.16,
+      "pan": -0.42000000000000004
+    },
+    {
+      "beat": 20.035,
+      "midi": 52,
+      "duration": 4.2,
+      "voice": "pad",
+      "velocity": 0.16,
+      "pan": -0.14
+    },
+    {
+      "beat": 20.07,
+      "midi": 55,
+      "duration": 4.2,
+      "voice": "pad",
+      "velocity": 0.16,
+      "pan": 0.14
+    },
+    {
+      "beat": 20.105,
+      "midi": 60,
+      "duration": 4.2,
+      "voice": "pad",
+      "velocity": 0.16,
+      "pan": 0.42000000000000004
+    },
+    {
+      "beat": 20,
+      "midi": 33,
+      "duration": 2.8,
+      "voice": "bass",
+      "velocity": 0.27,
+      "pan": -0.08
+    },
+    {
+      "beat": 20.15,
+      "midi": 64,
+      "duration": 1.8,
+      "voice": "keys",
+      "velocity": 0.18,
+      "pan": -0.2
+    },
+    {
+      "beat": 21.049999999999997,
+      "midi": 67,
+      "duration": 1.8,
+      "voice": "keys",
+      "velocity": 0.15,
+      "pan": 0.2
+    },
+    {
+      "beat": 21.95,
+      "midi": 60,
+      "duration": 1.8,
+      "voice": "keys",
+      "velocity": 0.15,
+      "pan": -0.2
+    },
+    {
+      "beat": 22.849999999999998,
+      "midi": 64,
+      "duration": 1.8,
+      "voice": "keys",
+      "velocity": 0.15,
+      "pan": 0.2
+    },
+    {
+      "beat": 20.55,
+      "midi": 67,
+      "duration": 1.7,
+      "voice": "keys",
+      "velocity": 0.36,
+      "pan": -0.12
+    },
+    {
+      "beat": 21.8,
+      "midi": 64,
+      "duration": 1.7,
+      "voice": "keys",
+      "velocity": 0.3,
+      "pan": 0.0
+    },
+    {
+      "beat": 22.9,
+      "midi": 60,
+      "duration": 2.2,
+      "voice": "keys",
+      "velocity": 0.3,
+      "pan": 0.12
+    },
+    {
+      "beat": 24.0,
+      "midi": 50,
+      "duration": 4.2,
+      "voice": "pad",
+      "velocity": 0.16,
+      "pan": -0.42000000000000004
+    },
+    {
+      "beat": 24.035,
+      "midi": 57,
+      "duration": 4.2,
+      "voice": "pad",
+      "velocity": 0.16,
+      "pan": -0.14
+    },
+    {
+      "beat": 24.07,
+      "midi": 60,
+      "duration": 4.2,
+      "voice": "pad",
+      "velocity": 0.16,
+      "pan": 0.14
+    },
+    {
+      "beat": 24.105,
+      "midi": 65,
+      "duration": 4.2,
+      "voice": "pad",
+      "velocity": 0.16,
+      "pan": 0.42000000000000004
+    },
+    {
+      "beat": 24,
+      "midi": 38,
+      "duration": 2.8,
+      "voice": "bass",
+      "velocity": 0.27,
+      "pan": -0.08
+    },
+    {
+      "beat": 24.15,
+      "midi": 69,
+      "duration": 1.8,
+      "voice": "keys",
+      "velocity": 0.18,
+      "pan": -0.2
+    },
+    {
+      "beat": 25.049999999999997,
+      "midi": 72,
+      "duration": 1.8,
+      "voice": "keys",
+      "velocity": 0.15,
+      "pan": 0.2
+    },
+    {
+      "beat": 25.95,
+      "midi": 65,
+      "duration": 1.8,
+      "voice": "keys",
+      "velocity": 0.15,
+      "pan": -0.2
+    },
+    {
+      "beat": 26.849999999999998,
+      "midi": 69,
+      "duration": 1.8,
+      "voice": "keys",
+      "velocity": 0.15,
+      "pan": 0.2
+    },
+    {
+      "beat": 24.55,
+      "midi": 65,
+      "duration": 1.7,
+      "voice": "keys",
+      "velocity": 0.36,
+      "pan": -0.12
+    },
+    {
+      "beat": 25.8,
+      "midi": 69,
+      "duration": 1.7,
+      "voice": "keys",
+      "velocity": 0.3,
+      "pan": 0.0
+    },
+    {
+      "beat": 26.9,
+      "midi": 67,
+      "duration": 2.2,
+      "voice": "keys",
+      "velocity": 0.3,
+      "pan": 0.12
+    },
+    {
+      "beat": 28.0,
+      "midi": 43,
+      "duration": 4.2,
+      "voice": "pad",
+      "velocity": 0.16,
+      "pan": -0.42000000000000004
+    },
+    {
+      "beat": 28.035,
+      "midi": 50,
+      "duration": 4.2,
+      "voice": "pad",
+      "velocity": 0.16,
+      "pan": -0.14
+    },
+    {
+      "beat": 28.07,
+      "midi": 53,
+      "duration": 4.2,
+      "voice": "pad",
+      "velocity": 0.16,
+      "pan": 0.14
+    },
+    {
+      "beat": 28.105,
+      "midi": 59,
+      "duration": 4.2,
+      "voice": "pad",
+      "velocity": 0.16,
+      "pan": 0.42000000000000004
+    },
+    {
+      "beat": 28,
+      "midi": 31,
+      "duration": 2.8,
+      "voice": "bass",
+      "velocity": 0.27,
+      "pan": -0.08
+    },
+    {
+      "beat": 28.15,
+      "midi": 62,
+      "duration": 1.8,
+      "voice": "keys",
+      "velocity": 0.18,
+      "pan": -0.2
+    },
+    {
+      "beat": 29.049999999999997,
+      "midi": 65,
+      "duration": 1.8,
+      "voice": "keys",
+      "velocity": 0.15,
+      "pan": 0.2
+    },
+    {
+      "beat": 29.95,
+      "midi": 59,
+      "duration": 1.8,
+      "voice": "keys",
+      "velocity": 0.15,
+      "pan": -0.2
+    },
+    {
+      "beat": 30.849999999999998,
+      "midi": 62,
+      "duration": 1.8,
+      "voice": "keys",
+      "velocity": 0.15,
+      "pan": 0.2
+    },
+    {
+      "beat": 28.55,
+      "midi": 65,
+      "duration": 1.7,
+      "voice": "keys",
+      "velocity": 0.36,
+      "pan": -0.12
+    },
+    {
+      "beat": 29.8,
+      "midi": 62,
+      "duration": 1.7,
+      "voice": "keys",
+      "velocity": 0.3,
+      "pan": 0.0
+    },
+    {
+      "beat": 30.9,
+      "midi": 59,
+      "duration": 2.2,
+      "voice": "keys",
+      "velocity": 0.3,
+      "pan": 0.12
+    }
+  ]
+}

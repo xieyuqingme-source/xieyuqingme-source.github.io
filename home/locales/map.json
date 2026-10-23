@@ -376,7 +376,9 @@
     "map.preview.notice": "本地待核对预览：这些经历尚未批准公开，来源与私人备注不包含在网页中。",
     "map.html.svgtitle": "城市足迹示意图",
     "map.recording.locale": "本次视频使用开始生成时选择的语言；页面语言可独立切换。",
-    "map.video.filename": "足迹地图"
+    "map.video.filename": "足迹地图",
+    "map.video.s028": "配乐音轨未准备好，请重试或选择无配乐。",
+    "map.video.s029": "配乐音轨已中断，未保留不完整的视频。请重试或选择无配乐。"
   },
   "en": {
     "map.avatar.s001": "Invalid image dimensions. Choose another PNG, JPEG, or WebP image.",
@@ -755,6 +757,8 @@
     "map.preview.notice": "Local review preview: these experiences are not approved for publication. Sources and private notes are not included.",
     "map.html.svgtitle": "City footprints map",
     "map.recording.locale": "This video uses the language selected when generation began; the page language can change independently.",
-    "map.video.filename": "footprints"
+    "map.video.filename": "footprints",
+    "map.video.s028": "The soundtrack is not ready. Retry or choose None.",
+    "map.video.s029": "The soundtrack was interrupted. The incomplete video was discarded. Retry or choose None."
   }
 }

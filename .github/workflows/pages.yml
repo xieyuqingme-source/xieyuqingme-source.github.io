@@ -62,6 +62,8 @@ jobs:
           node scripts/test_map_avatar.cjs
           node scripts/test_map_playback.cjs
           node scripts/test_map_video.cjs
+          node scripts/test_music.cjs
+          python scripts/test_music_assets.py
           node scripts/test_map_video_layout.cjs
       - name: Check unified site rules
         run: |

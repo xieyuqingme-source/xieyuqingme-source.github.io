@@ -43,6 +43,40 @@
   let plan = null, controller = null, busy = false, resultUrl = null, previewPlan = null, lock = [], lastProgress = "";
   const cap = V.capabilities();
   $("video-capability").textContent = cap.supported ? "" : I("map.video-ui.s001", {p0:(cap.reason || I("map.video-ui.s002", {}, "此浏览器不能生成视频。"))}, "{p0} 可继续下载 PNG / SVG 图片；建议使用新版 Chrome 或 Edge。");
+  const musicText = (key, values = {}) => window.SiteI18n?.t(key, values, key) || key;
+  let musicPrefs = {track: "gentle", volume: .6}, musicSession = null;
+  try { const saved = JSON.parse(localStorage.getItem("xieyuqing-video-music-v1") || "null"); if (saved) { musicPrefs.track = ["none", "gentle", "travel"].includes(saved.track) ? saved.track : "gentle"; musicPrefs.volume = Math.max(0, Math.min(1, Number.isFinite(saved.volume) ? saved.volume : .6)); } } catch (_) {}
+  const musicControls = document.createElement("div"); musicControls.className = "video-music-options";
+  musicControls.innerHTML = '<label><span id="video-music-label"></span><select id="video-music"><option value="none"></option><option value="gentle"></option><option value="travel"></option></select></label><label><span id="video-music-volume-label"></span><input id="video-music-volume" type="range" min="0" max="100" step="5"><output id="video-music-volume-value"></output></label><button id="video-music-preview" type="button"></button><p id="video-music-note" role="status" aria-live="polite"></p>';
+  document.querySelector(".playback-controls").after(musicControls);
+  if (!window.SiteMusic?.supported()) musicPrefs.track = "none";
+  $("video-music").value = musicPrefs.track; $("video-music-volume").value = Math.round(musicPrefs.volume * 100);
+  const effectiveMusic = () => musicPrefs.volume > 0 ? musicPrefs.track : "none";
+  function refreshMusic() {
+    const supported = !!window.SiteMusic?.supported(), previewing = window.SiteMusic?.state().owner === "preview", audioCap = effectiveMusic() === "none" || V.capabilities({audio: true}).supported;
+    $("video-music-label").textContent = musicText("music.soundtrack");
+    for (const [index, key] of ["music.none", "music.recommended", "music.travel"].entries()) $("video-music").options[index].textContent = musicText(key);
+    $("video-music").disabled = busy || !supported; $("video-music-volume").disabled = busy || !supported;
+    $("video-music-volume-label").textContent = musicText("music.volume"); $("video-music-volume-value").textContent = $("video-music-volume").value + "%";
+    $("video-music-volume").setAttribute("aria-label", musicText("music.videoVolume")); $("video-music-volume").setAttribute("aria-valuetext", $("video-music-volume").value + "%");
+    $("video-music-preview").textContent = musicText(previewing ? "music.stopPreview" : "music.preview"); $("video-music-preview").disabled = busy || !supported || (effectiveMusic() === "none" && !previewing);
+    $("video-music-note").textContent = musicText(!supported ? "music.noAudioSupport" : !audioCap ? "music.noRecordingSupport" : musicPrefs.volume === 0 && musicPrefs.track !== "none" ? "music.zero" : previewing ? "music.previewing" : "music.exportHint");
+    if (!busy && !audioCap) $("video-generate").disabled = true;
+  }
+  function saveMusic() { try { localStorage.setItem("xieyuqing-video-music-v1", JSON.stringify(musicPrefs)); } catch (_) {} }
+  $("video-music").addEventListener("change", () => { musicPrefs.track = $("video-music").value; void window.SiteMusic?.stopPreview(); saveMusic(); clearResult(); rebuild(); refreshMusic(); });
+  $("video-music-volume").addEventListener("input", () => { musicPrefs.volume = Number($("video-music-volume").value) / 100; window.SiteMusic?.setVolume("preview", musicPrefs.volume); saveMusic(); clearResult(); rebuild(); refreshMusic(); });
+  $("video-music-preview").addEventListener("click", async () => {
+    try { if (window.SiteMusic?.state().owner === "preview") await window.SiteMusic.stopPreview(); else await window.SiteMusic?.preview(musicPrefs.track, musicPrefs.volume); }
+    catch (error) { if (error.name !== "AbortError") $("video-music-note").textContent = musicText(error.code || "music.loadError"); return; }
+    refreshMusic();
+  });
+  window.SiteMusic?.onChange(refreshMusic);
+  preview.addEventListener("play", () => { if (window.SiteMusic?.state().locked) { preview.pause(); return; } window.SiteMusic?.claim("video-player"); });
+  window.addEventListener("site:audio:claim", event => { if (event.detail?.owner !== "video-player") preview.pause(); });
+  window.addEventListener("footprints:language", refreshMusic);
+  refreshMusic();
+
   function seconds(ms) { const value = Math.ceil(ms / 1000); return I("map.video-ui.s003", {p0:(Math.floor(value / 60)),p1:(String(value % 60).padStart(2, "0"))}, "{p0} 分 {p1} 秒"); }
   function wrapped(text, width, font) {
     context.font = font; const lines = []; let line = "";
@@ -88,6 +122,7 @@
     $("journey-warnings").textContent = [...new Set(journey.warnings.map(value => typeof value === "string" ? value : value.message || "").filter(Boolean))].join("；");
     $("video-estimate").textContent = I("map.video-ui.s005", {p0:(seconds(plan.durationMs))}, "预计 {p0}");
     $("video-generate").disabled = !cap.supported || !context || !plan.scenes.length || !A.assetsReady();
+    refreshMusic();
     $("video-generate").title = !A.assetsReady() ? I("map.video-ui.s006", {}, "请等待本地底图与头像加载；加载失败时请重选头像或刷新。") : "";
   }
   function clearResult() {
@@ -104,7 +139,7 @@
     } else { for (const [node, disabled] of lock) node.disabled = disabled; lock = []; }
     // Snapshot ordinary draft controls before the map applies its recording
     // state, then let that state refresh undo/clear after the snapshot restores.
-    A.setRecording(value);
+    A.setRecording(value); refreshMusic();
     if (!value) rebuild();
   }
   function palette() { const style = getComputedStyle(document.documentElement); return Object.fromEntries(["paper", "surface", "ink", "muted", "accent", "line", "soft"].map(key => [key, style.getPropertyValue("--" + key).trim()])); }
@@ -211,21 +246,26 @@
     clearResult(); const frozenPlan = plan; controller = new AbortController(); setBusy(true); $("video-canvas").hidden = false; $("video-progress").value = 0; lastProgress = "";
     try {
       $("playback-progress").textContent = I("map.video-ui.s014", {}, "正在准备本地地图画面…");
+      // Reserve the audio context within the original user click. No autoplay.
+      const audioPreparation = window.SiteMusic?.prepareExport(effectiveMusic(), musicPrefs.volume, frozenPlan.durationMs, controller.signal);
+      musicSession = audioPreparation ? await audioPreparation : null;
+      if (!musicSession && effectiveMusic() !== "none") throw new Error(musicText("music.noAudioSupport"));
       const renderFrame = await makeRenderer(frozenPlan);
       if (controller.signal.aborted) throw new DOMException(I("map.video-ui.s015", {}, "已取消生成。"), "AbortError");
-      const result = await V.record({ canvas, durationMs: frozenPlan.durationMs, renderFrame, signal: controller.signal, fps: 30, onProgress(value) {
+      const result = await V.record({ canvas, durationMs: frozenPlan.durationMs, audioTrack: musicSession?.audioTrack || null, startAudio: () => musicSession?.start(), renderFrame, signal: controller.signal, fps: 30, onProgress(value) {
         $("video-progress").value = value.progress;
         const label = value.state === "finalizing" ? I("map.video-ui.s016", {}, "正在封装视频…") : I("map.video-ui.s017", {p0:(Math.floor(value.progress * 100)),p1:(seconds(value.elapsedMs)),p2:(seconds(value.durationMs))}, "生成中 {p0}% · {p1} / {p2}");
         if (label !== lastProgress) { lastProgress = label; $("playback-progress").textContent = label; }
       } });
-      resultUrl = URL.createObjectURL(result.blob); previewPlan = frozenPlan; preview.src = resultUrl; preview.hidden = false;
+      resultUrl = URL.createObjectURL(result.blob); previewPlan = frozenPlan; preview.src = resultUrl; preview.muted = !result.hasAudio; preview.dataset.hasAudio = String(result.hasAudio); preview.hidden = false;
       const link = $("video-download"); link.href = resultUrl; link.download = `${window.FootprintsI18n ? window.FootprintsI18n.text("map.video.filename", {}, "足迹地图", frozenPlan.language) : "footprints"}.${result.extension}`; link.textContent = I("map.video-ui.s018", {p0:(result.extension.toUpperCase()),p1:((result.blob.size / 1048576).toFixed(1))}, "↓ 下载 {p0} 视频（{p1} MB）"); link.hidden = false;
       $("playback-progress").textContent = I("map.video-ui.s019", {p0:(result.extension.toUpperCase()),p1:(seconds(result.durationMs))}, "已生成 {p0} · {p1}。可预览、定位并下载。");
+      if (result.hasAudio) $("playback-progress").textContent += " " + musicText("music.written", {track: musicText("music." + musicPrefs.track)});
       A.status(I("map.video-ui.s020", {}, "视频已在本机生成。点击下载保存；视频文件不会自动保存到浏览器草稿。"));
     } catch (error) {
       $("playback-progress").textContent = error.name === "AbortError" ? I("map.video-ui.s021", {}, "已取消生成，未保留半成品。可重新生成。") : I("map.video-ui.s022", {p0:(error.message || I("map.video-ui.s023", {}, "视频生成失败"))}, "{p0} 可重试，或下载 PNG / SVG 图片。");
       if (error.name !== "AbortError") A.status($("playback-progress").textContent, true);
-    } finally { controller = null; setBusy(false); $("video-canvas").hidden = true; $("video-generate").focus({ preventScroll: true }); }
+    } finally { if (musicSession) await musicSession.close(); musicSession = null; controller = null; setBusy(false); $("video-canvas").hidden = true; $("video-generate").focus({ preventScroll: true }); }
   }
   function cancel() { if (controller) controller.abort(); }
   $("video-generate").addEventListener("click", generate); $("video-cancel").addEventListener("click", cancel);

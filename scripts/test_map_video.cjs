@@ -22,7 +22,7 @@ function harness(options = {}) {
     if (options.captureError) throw options.captureError;
     const track = new Events(); track.kind = "video"; track.stopped = false; track.stop = () => { track.stopped = true; track.emit("ended"); }; tracks.push(track);
     const all = options.extraTrack ? [track, { kind: "audio", stop() {} }] : [track];
-    return { fps, getTracks: () => all, getVideoTracks: () => [track] };
+    return { fps, getTracks: () => all, getVideoTracks: () => [track], addTrack: item => all.push(item), getAudioTracks: () => all.filter(item => item.kind === "audio") };
   } };
   const environment = { MediaRecorder: Recorder, Blob, document, window, now: () => time, requestFrame(callback) { pending.set(++id, callback); return id; }, cancelFrame(key) { pending.delete(key); }, setTimeout(callback, delay) { timers.set(++timerId, { at: time + delay, callback }); return timerId; }, clearTimeout(key) { timers.delete(key); } };
   const config = { canvas, environment, durationMs: 200, renderFrame: at => paints.push(at), onProgress: p => progress.push(p) };
@@ -119,3 +119,8 @@ test("malformed or non-WebM media is returned intact by duration helper", async 
   const empty = new Blob([], { type: "video/webm" }), invalid = new Blob([new Uint8Array([0, 1, 2, 3])], { type: "video/webm" }), mp4 = new Blob(["mp4"], { type: "video/mp4" });
   assert.equal(await V.withWebmDuration(empty, 100), empty); assert.equal(await V.withWebmDuration(invalid, 100), invalid); assert.equal(await V.withWebmDuration(mp4, 100), mp4);
 });
+
+function soundtrack(){const a=new Events();a.kind="audio";a.readyState="live";a.stop=()=>{a.readyState="ended";a.emit("ended");};return a;}
+test("explicit soundtrack is muxed, started once and stopped on completion",async()=>{const h=harness({formats:["video/webm;codecs=vp9,opus"]}),a=soundtrack();let starts=0;const p=V.record({...h.config,audioTrack:a,startAudio(){starts++;}});assert.equal(starts,1);assert.equal(h.instances[0].stream.getTracks().length,2);h.tick(200);h.advance(60);assert.equal((await p).hasAudio,true);assert.equal(a.readyState,"ended");assert.equal(a.count(),0);h.assertClean();});
+test("soundtrack interruption discards output and cleans both tracks",async()=>{const h=harness({formats:["video/webm;codecs=vp9,opus"]}),a=soundtrack();const p=V.record({...h.config,audioTrack:a,startAudio(){}});a.stop();await assert.rejects(p,{name:"EncodingError"});assert.equal(a.count(),0);h.assertClean();});
+test("soundtrack codec support is explicit and never silently drops audio",async()=>{const h=harness(),a=soundtrack();assert.equal(V.capabilities({...h.environment,canvas:h.canvas,audio:true}).supported,false);await assert.rejects(V.record({...h.config,audioTrack:a,startAudio(){}}),{name:"NotSupportedError"});assert.equal(h.tracks.length,0);});

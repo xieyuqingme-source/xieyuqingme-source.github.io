@@ -488,6 +488,21 @@ def build_site(address, map_preview_source=None):
         source = ROOT / "home/assets" / name
         if source.is_symlink(): raise ValueError("Home asset symlinks are not supported.")
         shutil.copy2(source, OUTPUT / "assets" / name)
+    for name in ("site-music.js", "site-music.css"):
+        source = ROOT / "home/assets" / name
+        if source.is_file():
+            if source.is_symlink(): raise ValueError("Music asset symlinks are not supported.")
+            shutil.copy2(source, OUTPUT / "assets" / name)
+    music_source = ROOT / "home/assets/music"
+    if music_source.is_dir():
+        if linked_directory(music_source): raise ValueError("Music directory links are not supported.")
+        music_output = OUTPUT / "assets/music"
+        if linked_directory(music_output): raise ValueError("Music output directory links are not supported.")
+        music_output.mkdir(exist_ok=True)
+        for name in ("gentle.wav", "travel.wav", "credits.txt"):
+            source = music_source / name
+            if source.is_symlink(): raise ValueError("Music file links are not supported.")
+            shutil.copy2(source, music_output / name)
     project_output = OUTPUT / "assets/projects"
     if linked_directory(project_output):
         raise ValueError("Generated project screenshot directory links are not supported.")

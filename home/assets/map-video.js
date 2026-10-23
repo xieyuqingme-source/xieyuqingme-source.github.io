@@ -8,7 +8,8 @@
   "use strict";
   const I = (key, values, fallback) => globalThis.FootprintsI18n ? globalThis.FootprintsI18n.text(key, values, fallback) : fallback.replace(/\{(\w+)\}/g, (match, name) => Object.hasOwn(values, name) ? String(values[name]) : match);
   // Capture only the supplied canvas. This module never asks for screen, camera,
-  // microphone, network access, or an audio track. Recording runs in real time.
+  // microphone or system audio. Only an explicitly prepared original soundtrack
+  // can be supplied. Recording runs in real time.
   const FORMATS = [
     { mimeType: "video/webm;codecs=vp9", extension: "webm" },
     { mimeType: "video/webm;codecs=vp8", extension: "webm" },
@@ -16,6 +17,7 @@
     { mimeType: "video/mp4;codecs=avc1.42E01E", extension: "mp4" },
     { mimeType: "video/mp4", extension: "mp4" }
   ];
+  const AUDIO_FORMATS = [{mimeType:"video/webm;codecs=vp9,opus",extension:"webm"},{mimeType:"video/webm;codecs=vp8,opus",extension:"webm"},{mimeType:"video/mp4;codecs=avc1.42E01E,mp4a.40.2",extension:"mp4"}];
   const MAX_DURATION = 30 * 60 * 1000, MAX_BYTES = 128 * 1024 * 1024;
   const activeCanvases = new WeakSet();
   function error(name, message) { const e = new Error(message); e.name = name; return e; }
@@ -40,7 +42,7 @@
     if (!Recorder || typeof Recorder.isTypeSupported !== "function") return { supported: false, mimeType: "", extension: "", reason: I("map.video.s001", {}, "当前浏览器没有可用的视频编码功能。可下载静态图片，或使用最新版 Windows Chrome 生成视频。") };
     const capture = e.canvas ? e.canvas.captureStream : e.HTMLCanvasElement && e.HTMLCanvasElement.prototype.captureStream;
     if (typeof capture !== "function") return { supported: false, mimeType: "", extension: "", reason: I("map.video.s002", {}, "当前浏览器不支持地图画布录像。可下载静态图片，或使用最新版 Windows Chrome 生成视频。") };
-    for (const format of FORMATS) {
+    for (const format of (custom && custom.audio ? AUDIO_FORMATS : FORMATS)) {
       try { if (Recorder.isTypeSupported(format.mimeType)) return { supported: true, mimeType: format.mimeType, extension: format.extension, reason: "" }; } catch (_) { /* Try the next explicit container/codec. */ }
     }
     return { supported: false, mimeType: "", extension: "", reason: I("map.video.s003", {}, "当前浏览器没有支持的 WebM 或 MP4 编码格式。请下载静态图片，或换用最新版 Windows Chrome。") };
@@ -116,7 +118,7 @@
 
   function record(options) {
     const o = options || {}, canvas = o.canvas, e = environment(Object.assign({}, o.environment, { canvas }));
-    const cap = capabilities(Object.assign({}, o.environment, { canvas }));
+    const cap = capabilities(Object.assign({}, o.environment, { canvas, audio: !!o.audioTrack }));
     const durationMs = Number(o.durationMs), fps = o.fps === undefined ? 30 : Number(o.fps);
     if (!cap.supported) return Promise.reject(error("NotSupportedError", cap.reason));
     if (!canvas || !Number.isInteger(canvas.width) || !Number.isInteger(canvas.height) || canvas.width <= 0 || canvas.height <= 0 || canvas.width > 4096 || canvas.height > 4096 || canvas.width * canvas.height > 9000000) return Promise.reject(error("ValidationError", I("map.video.s004", {}, "视频画幅无效，请重新生成。")));
@@ -189,7 +191,7 @@
           // Copying EBML metadata is bounded by the same 128 MiB output limit.
           blob = await withWebmDuration(blob, durationMs, e.Blob);
           if (settled) return;
-          settled = true; cleanup(); resolve({ blob, mimeType: actualType, extension, durationMs, width, height, fps });
+          settled = true; cleanup(); resolve({ blob, mimeType: actualType, extension, durationMs, width, height, fps, hasAudio: !!o.audioTrack });
         } catch (problem) { fail(error("EncodingError", I("map.video.s020", {}, "视频封装失败，请重试或下载静态图片。"))); }
       }
       try {
@@ -199,7 +201,12 @@
         stream = canvas.captureStream(fps);
         const tracks = stream.getTracks(), videos = stream.getVideoTracks();
         if (videos.length !== 1 || tracks.length !== 1 || tracks[0].kind !== "video") throw error("EncodingError", I("map.video.s021", {}, "地图录像没有获得唯一的视频轨道，请重试。") );
-        recorder = new e.MediaRecorder(stream, { mimeType: cap.mimeType, videoBitsPerSecond: 5000000 });
+        if (o.audioTrack) {
+          if (o.audioTrack.kind !== "audio" || o.audioTrack.readyState !== "live" || typeof stream.addTrack !== "function") throw error("EncodingError", I("map.video.s028", {}, "配乐音轨未准备好，请重试或选择无配乐。"));
+          stream.addTrack(o.audioTrack);
+          listen(o.audioTrack, "ended", () => { if (!settled && !finishing) fail(error("EncodingError", I("map.video.s029", {}, "配乐音轨已中断，未保留不完整的视频。请重试或选择无配乐。"))); });
+        }
+        recorder = new e.MediaRecorder(stream, { mimeType: cap.mimeType, videoBitsPerSecond: 5000000, ...(o.audioTrack ? {audioBitsPerSecond: 128000} : {}) });
         listen(recorder, "dataavailable", event => {
           if (settled || !event.data || !event.data.size) return;
           byteLength += event.data.size;
@@ -224,6 +231,10 @@
         // initial frozen second and shift every scene relative to video time.
         anchor = previous = e.now(); lastPaint = anchor;
         recorder.start(1000);
+        if (o.audioTrack) {
+          if (typeof o.startAudio !== "function") throw error("ValidationError", I("map.video.s028", {}, "配乐音轨未准备好，请重试或选择无配乐。"));
+          o.startAudio();
+        }
         if (!settled) { paint(0); notify("recording", 0); if (!settled) frame = e.requestFrame(tick); }
       } catch (problem) {
         if (problem && problem.name === "SecurityError") fail(error("SecurityError", I("map.video.s026", {}, "地图或头像不允许被本地录制。请使用本站底图和本地上传的头像后重试。")));
