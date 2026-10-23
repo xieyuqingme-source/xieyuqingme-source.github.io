@@ -14,6 +14,8 @@
     if (!copied) await browserNavigator.clipboard.writeText(text);
   };
   if (typeof module === 'object' && module.exports) { module.exports = { searchUrl, copyText }; return; }
+  const i18n = window.SiteI18n;
+  const tr = (key, values = {}, fallback) => i18n.t('anthology.' + key, values, fallback);
   const article = document.getElementById('original');
   const menu = document.getElementById('anthology-selection');
   const popup = document.getElementById('anthology-note');
@@ -24,7 +26,9 @@
   const copy = document.getElementById('anthology-copy');
   const search = document.getElementById('anthology-search');
   const status = document.getElementById('anthology-copy-status');
-  let selectedText = '', suppressed = '', dragging = false, moved = false, pointerStart;
+  let selectedText = '', suppressed = '', dragging = false, moved = false, pointerStart, statusKey = '';
+  const clearStatus = () => { statusKey = ''; status.textContent = ''; };
+  let languageRepaint = false;
   let selectionTimer, noteTimer, pointerMode = false, trigger = null, skipFocus = false, menuReturn = null;
 
   function selection() {
@@ -35,7 +39,7 @@
   }
   function closeMenu(restore = false) {
     clearTimeout(selectionTimer);
-    suppressed = selection(); menu.hidden = true; status.textContent = '';
+    suppressed = selection(); menu.hidden = true; clearStatus();
     if (restore && menuReturn?.isConnected) menuReturn.focus({ preventScroll: true });
     menuReturn = null;
   }
@@ -50,18 +54,30 @@
     if (!text) { if (!menu.contains(document.activeElement)) closeMenu(); return; }
     closeNote();
     if (dragging || text === suppressed) return;
-    if (text !== selectedText || menu.hidden) status.textContent = '';
+    if (text !== selectedText || menu.hidden) clearStatus();
     selectedText = text; menu.hidden = false;
   }
+  function paintNote(entry) {
+    const key = entry._key ? entry._key.replace(/^anthology\./, '') : '';
+    document.getElementById('anthology-note-title').textContent = entry.term;
+    document.getElementById('anthology-note-explanation').textContent = key ? tr(key + '.explanation', {}, entry.explanation) : entry.explanation;
+    document.getElementById('anthology-note-source').textContent = [key ? tr(key + '.source', {}, entry.source) : entry.source,
+      key ? tr(key + '.edition', {}, entry.edition || '') : entry.edition,
+      entry.page ? tr('page', { page: entry.page }) : '', tr('verified')].filter(Boolean).join(' · ');
+    document.getElementById('anthology-note-source-link').href = entry.source_url;
+  }
+  window.addEventListener("site:beforelanguagechange", () => { languageRepaint = true; });
+  i18n.onChange(() => {
+    languageRepaint = true;
+    requestAnimationFrame(() => requestAnimationFrame(() => { languageRepaint = false; }));
+    if (statusKey) status.textContent = tr(statusKey);
+    if (!popup.hidden && trigger) paintNote(entries[Number(trigger.dataset.noteIndex)]);
+  });
   function showNote(marker, focus = false) {
     const entry = entries[Number(marker.dataset.noteIndex)];
     if (!entry) return;
     closeMenu(); trigger = marker;
-    document.getElementById('anthology-note-title').textContent = entry.term;
-    document.getElementById('anthology-note-explanation').textContent = entry.explanation;
-    document.getElementById('anthology-note-source').textContent = [entry.source, entry.edition,
-      entry.page ? '页码 ' + entry.page : '', '词义已核对'].filter(Boolean).join(' · ');
-    document.getElementById('anthology-note-source-link').href = entry.source_url;
+    paintNote(entry);
     popup.hidden = false;
     if (focus) popup.focus({ preventScroll: true });
   }
@@ -83,6 +99,10 @@
     clearTimeout(selectionTimer); selectionTimer = setTimeout(showMenu, 160);
   });
   document.addEventListener('pointerdown', event => {
+    if (event.target.closest?.('.site-language-switch, [data-site-language-switch]')) {
+      if (selection()) event.preventDefault();
+      return;
+    }
     pointerMode = true;
     if (menu.contains(event.target) || popup.contains(event.target)) return;
     closeMenu(); closeNote(); moved = false;
@@ -116,14 +136,15 @@
   });
   document.getElementById('anthology-note-close').addEventListener('click', () => closeNote(true));
   window.addEventListener('scroll', event => {
+    if (languageRepaint) return;
     if (event.target instanceof Node && (popup.contains(event.target) || menu.contains(event.target))) return;
     closeMenu(); closeNote();
   }, { passive: true, capture: true });
   window.addEventListener('pagehide', () => { closeMenu(); closeNote(); });
   copy.addEventListener('click', async () => {
     const text = selectedText;
-    try { await copyText(text, document, navigator); if (selectedText === text && !menu.hidden) status.textContent = '已复制'; }
-    catch (_) { status.textContent = '请使用设备的复制菜单'; }
+    try { await copyText(text, document, navigator); if (selectedText === text && !menu.hidden) { statusKey = 'copied'; status.textContent = tr(statusKey); } }
+    catch (_) { statusKey = 'copyFailed'; status.textContent = tr(statusKey); }
   });
   search.addEventListener('click', () => {
     // No URL, request or prefetch is created before this explicit user action.

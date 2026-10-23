@@ -1,10 +1,12 @@
 (function (root, factory) {
   "use strict";
+  const I = (key, values, fallback) => globalThis.FootprintsI18n ? globalThis.FootprintsI18n.text(key, values, fallback) : fallback.replace(/\{(\w+)\}/g, (match, name) => Object.hasOwn(values, name) ? String(values[name]) : match);
   const playback = factory();
   if (typeof module === "object" && module.exports) module.exports = playback;
   else root.FootprintsPlayback = playback;
 })(typeof globalThis !== "undefined" ? globalThis : this, function () {
   "use strict";
+  const I = (key, values, fallback) => globalThis.FootprintsI18n ? globalThis.FootprintsI18n.text(key, values, fallback) : fallback.replace(/\{(\w+)\}/g, (match, name) => Object.hasOwn(values, name) ? String(values[name]) : match);
   const SPEEDS = [0.5, 1, 2, 4];
   // All durations below are presentation time, never an estimate of travel time.
   function create(options) {
@@ -49,14 +51,14 @@
     };
   }
   function duration(item) {
-    const prefix = item.certainty === "approximate" ? "约 " : "";
-    if (!item.start || !item.end) return "停留时长未知";
+    const prefix = item.certainty === "approximate" ? I("map.playback.s001", {}, "约 ") : "";
+    if (!item.start || !item.end) return I("map.playback.s002", {}, "停留时长未知");
     const start = item.start.split("-").map(Number), end = item.end.split("-").map(Number);
-    if (start.length !== end.length) return "日期精度不同，时长未计算";
-    if (start.length === 1) return start[0] === end[0] ? `${prefix}同年内，月份未知` : `${prefix}跨 ${end[0] - start[0]} 年（按年份差）`;
-    if (start.length === 2) { const months = (end[0] - start[0]) * 12 + end[1] - start[1]; return months === 0 ? `${prefix}同月内，日期未知` : `${prefix}跨 ${months} 个月（按月份差）`; }
+    if (start.length !== end.length) return I("map.playback.s003", {}, "日期精度不同，时长未计算");
+    if (start.length === 1) return start[0] === end[0] ? I("map.playback.s004", {p0:(prefix)}, "{p0}同年内，月份未知") : I("map.playback.s005", {p0:(prefix),p1:(end[0] - start[0])}, "{p0}跨 {p1} 年（按年份差）");
+    if (start.length === 2) { const months = (end[0] - start[0]) * 12 + end[1] - start[1]; return months === 0 ? I("map.playback.s006", {p0:(prefix)}, "{p0}同月内，日期未知") : I("map.playback.s007", {p0:(prefix),p1:(months)}, "{p0}跨 {p1} 个月（按月份差）"); }
     const utc = parts => { const value = new Date(0); value.setUTCFullYear(parts[0], parts[1] - 1, parts[2]); value.setUTCHours(0, 0, 0, 0); return value.getTime(); };
-    return `${prefix}${Math.round((utc(end) - utc(start)) / 86400000) + 1} 天（含首尾日）`;
+    return I("map.playback.s008", {p0:(prefix),p1:(Math.round((utc(end) - utc(start)) / 86400000) + 1)}, "{p0}{p1} 天（含首尾日）");
   }
   // Date-line jumps are handled by the view by switching only at arrival.
   function interpolate(from, to, progress) {

@@ -105,3 +105,30 @@ PNG 编码或文件下载 API 缺失时给出中文提示，恢复 API 后可继
 在真实手机上检查触屏拖动、滚动与系统下载行为；在计划使用的直播尺寸中检查展示模式、长标题与侧栏；核对真实用户图片的方向、透明背景与导出清晰度。自动化的触屏模拟与 PNG 下载检查不能完全代替各设备原生体验。检查 Git diff 后由用户决定提交、推送和上线。
 
 旧六档或自定义存档仍作为用户数据完整保留，不自动删行、合并或重命名；只有明确恢复当前模板默认才重建上述五档。
+
+
+## 中英界面与存档边界（2026-10-23）
+
+入口和排行各有 `/game/`、`/game/ranking/` 及对应 `/en/game/`、`/en/game/ranking/`。两语共用同一套模板和 `ranking*.js`，由 `scripts/site_i18n.py` 加载 `home/locales/games.json`、生成首屏与双语 SEO，并在游戏模块之前加载共享 `SiteI18n`。四个页面元数据键固定为 `games.page.game.title/description` 与 `games.page.ranking.title/description`。正文的内部游戏链接标记 `data-i18n-link`，随当前语言更新。
+
+`games.json` 为两语平铺 catalogue。静态文本使用 text-only `data-i18n` span，aria/title/placeholder 使用对应属性标记。动态消息由 `RankingModel.translate/localize/uiText/uiAttr` 通过共享 `SiteI18n.t` 显示；UI_KEYS 将现有中文消息映射到稳定 catalogue key，含参数的消息保持 `{name}` 等占位符。新增消息须同时补两语 catalogue 与 UI_KEYS；不要直接翻译用户输入。内部模型与存储异常的原文仍保留，展示时翻译，嵌套校验详情也会转换。
+
+语言切换通过共享 history API 原地完成，不执行 render、不重建编辑器、不触发保存，不关闭弹窗或取消图片读取。动态消息保留原消息，往返切换可恢复中文；已有卡片与等级节点仅更新展示文字和可访问名称。聚焦或已修改的名称/标题输入保留草稿；裁切、缩放、选级、焦点和撤销快照不变。语言变化不调用图片编辑器的 open/close。
+
+默认项目的英文展示同时要求稳定 `food-`/`sport-` ID、对应资源身份与精确原名称；新建 custom ID 即使沿用同名内置图，也保留用户名称。默认等级同样按稳定 ID 和原名识别。替换默认图片后仍可识别原身份；自定义改名不再翻译。标题、等级和项目使用 display helpers；未改动的英文输入通过绑定还原原始中文值后提交。PNG 使用校验后的独立 clone 展示投影，JSON 与 IndexedDB 始终保存原 state。JSON v1/v2/v3 兼容逻辑、IndexedDB `xieyuqing-ranking-v1`、`rankings`、`current`、`template:food` 与 `template:sport` 均不变，未修改 `ranking-storage.js`。默认名称和用户中文内容不会因切换语言写成英文。
+
+专项逻辑回归：
+
+```text
+node --test scripts/test_ranking_logic.cjs scripts/test_ranking_images.cjs scripts/test_ranking_template_storage.cjs scripts/test_ranking_dark.cjs scripts/test_ranking_i18n.cjs
+```
+
+可选独立浏览器回归（使用已有 Playwright/Chrome，不加生产依赖）：
+
+```text
+node scripts/test_ranking_i18n_browser.cjs _site_unified .local-checks/ranking-i18n
+```
+
+该脚本拦截供应本地页面与资源，固定使用全新非持久化 headless 上下文。测试库中的旧版及损坏存档都是人工测试数据，不访问真实浏览器档案。覆盖重复切换不 reload/不写存档、开放图片草稿取消、同名 custom、新旧名称保存、quota 失败后恢复、模板取消及切换后撤销、查看模式、JSON/PNG、v2 原始字节只读、损坏记录保护和 390px 手机布局。入口英文扫描允许语言切换按钮使用原生标签“中文”。
+
+在受限执行环境中，浏览器可能将原生下载报告为 canceled；必须如实记录，不把 Blob 生成当作实际下载成功。当前专项在正常审查后的隔离本地执行中验证了有效 JSON 与 PNG 原生下载。模拟手机不代表真实软键盘、设备系统保存或原生全屏授权；这些仍需人工验收。全站构建、CI 与发布由主任务统一执行。

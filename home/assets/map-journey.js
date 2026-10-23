@@ -1,10 +1,12 @@
 (function (root, factory) {
   "use strict";
+  const I = (key, values, fallback) => globalThis.FootprintsI18n ? globalThis.FootprintsI18n.text(key, values, fallback) : fallback.replace(/\{(\w+)\}/g, (match, name) => Object.hasOwn(values, name) ? String(values[name]) : match);
   const journey = factory();
   if (typeof module === "object" && module.exports) module.exports = journey;
   else root.FootprintsJourney = journey;
 })(typeof globalThis !== "undefined" ? globalThis : this, function () {
   "use strict";
+  const I = (key, values, fallback) => globalThis.FootprintsI18n ? globalThis.FootprintsI18n.text(key, values, fallback) : fallback.replace(/\{(\w+)\}/g, (match, name) => Object.hasOwn(values, name) ? String(values[name]) : match);
   const DAY = 86400000;
   const PACES = Object.freeze({ brisk: 0.75, normal: 1, relaxed: 1.3 });
 
@@ -20,10 +22,10 @@
   }
   function dateLabel(record) {
     if (record.derived) return record.dateLabel || record.end || "";
-    if (!record.start && !record.end) return "日期待确认";
-    if (record.ongoing) return `${record.start || "开始未知"} — 至今`;
+    if (!record.start && !record.end) return I("map.journey.s001", {}, "日期待确认");
+    if (record.ongoing) return I("map.journey.s002", {p0:(record.start || I("map.journey.s003", {}, "开始未知"))}, "{p0} — 至今");
     if (record.start === record.end) return record.start;
-    return `${record.start || "开始未知"} — ${record.end || "结束未知"}`;
+    return `${record.start || I("map.journey.s004", {}, "开始未知")} — ${record.end || I("map.journey.s005", {}, "结束未知")}`;
   }
   function interval(group) {
     const sample = group.records[0];
@@ -68,7 +70,7 @@
   }
 
   function build(records, options) {
-    if (!Array.isArray(records)) throw new TypeError("经历记录必须是数组。");
+    if (!Array.isArray(records)) throw new TypeError(I("map.journey.s006", {}, "经历记录必须是数组。"));
     const o = options || {}, baseChoices = o.baseChoices || {}, continuousGroups = Array.isArray(o.continuousGroups) ? o.continuousGroups : [];
     const groups = sourceGroups(records), scenes = [], warnings = [];
     function warning(code, ids, message) { warnings.push({ code, groupIds: ids, message }); }
@@ -81,41 +83,41 @@
       // Keep that metadata in source exports, never turn it into a detour.
       while (index + 1 < groups.length && groups[index + 1].type === "visit" && (explicitJoined(outings[outings.length - 1], groups[index + 1], continuousGroups) || autoJoined(outings, groups[index + 1]))) outings.push(groups[++index]);
       if (outings.some((item, position) => position && overlaps(outings[position - 1].interval, item.interval) && item.interval.start.min < outings[position - 1].interval.end.max)) {
-        warning("overlapping-visits", outings.map(item => item.id), "这些外出的日期范围重叠，按原记录顺序展示，未推断中途返回；这不代表已确认逐日行程。");
+        warning("overlapping-visits", outings.map(item => item.id), I("map.journey.s007", {}, "这些外出的日期范围重叠，按原记录顺序展示，未推断中途返回；这不代表已确认逐日行程。"));
       }
       outings.forEach(item => item.records.forEach(original));
       const trip = extent(outings), earlierBases = groups.slice(0, groups.indexOf(outings[0])).filter(item => item.type === "base");
       const candidates = earlierBases.filter(item => contains(item.interval, trip));
       if (candidates.length !== 1) {
-        if (candidates.length > 1) warning("ambiguous-base", outings.map(item => item.id), "这段外出同时落在多个长期居住范围内，未自动补入返回地点。");
-        else if (earlierBases.some(item => overlaps(item.interval, trip)) || earlierBases.length && !trip) warning("uncertain-base-span", outings.map(item => item.id), "这段外出与长期居住范围交叠或日期不完整，未自动补入返回地点。");
+        if (candidates.length > 1) warning("ambiguous-base", outings.map(item => item.id), I("map.journey.s008", {}, "这段外出同时落在多个长期居住范围内，未自动补入返回地点。"));
+        else if (earlierBases.some(item => overlaps(item.interval, trip)) || earlierBases.length && !trip) warning("uncertain-base-span", outings.map(item => item.id), I("map.journey.s009", {}, "这段外出与长期居住范围交叠或日期不完整，未自动补入返回地点。"));
         continue;
       }
       const base = candidates[0], next = groups[index + 1];
       // A single unrecorded day between outings is not evidence of a home visit.
       // Keep the source rows separate instead of asserting either a return or one continuous trip.
       if (next && next.type === "visit" && !next.interval) {
-        warning("unknown-next-date", outings.map(item => item.id).concat(next.id), "下一段外出日期不完整，未假定中间返回；原经历顺序和日期保持不变。"); continue;
+        warning("unknown-next-date", outings.map(item => item.id).concat(next.id), I("map.journey.s010", {}, "下一段外出日期不完整，未假定中间返回；原经历顺序和日期保持不变。")); continue;
       }
       if (next && next.type === "visit" && next.interval && next.interval.start.exact && trip.end.min === trip.end.max) {
         const gap = next.interval.start.min - trip.end.max;
         if (gap > DAY && gap <= 2 * DAY) {
-          warning("short-gap", outings.map(item => item.id).concat(next.id), "相邻外出之间只有一天未记录，未假定期间返回基地；原经历仍分别保留。"); continue;
+          warning("short-gap", outings.map(item => item.id).concat(next.id), I("map.journey.s011", {}, "相邻外出之间只有一天未记录，未假定期间返回基地；原经历仍分别保留。")); continue;
         }
       }
       // A new base at the end of an outing is a move, not evidence of a return to the old base.
       if (next && next.type === "base" && (!next.interval || next.interval.start.min <= trip.end.max + DAY)) {
-        warning("base-change", outings.map(item => item.id), "外出结束处衔接新的长期居住地，未补入返回原基地的节点。"); continue;
+        warning("base-change", outings.map(item => item.id), I("map.journey.s012", {}, "外出结束处衔接新的长期居住地，未补入返回原基地的节点。")); continue;
       }
       let destination;
       if (Object.hasOwn(baseChoices, base.id)) {
         destination = base.records.find(item => item.id === baseChoices[base.id]);
-        if (!destination) { warning("invalid-base-choice", [base.id].concat(outings.map(item => item.id)), "指定的返回城市不在这段长期居住记录中，未自动选择其他城市。"); continue; }
+        if (!destination) { warning("invalid-base-choice", [base.id].concat(outings.map(item => item.id)), I("map.journey.s013", {}, "指定的返回城市不在这段长期居住记录中，未自动选择其他城市。")); continue; }
       } else {
         const designated = base.records.filter(item => item.baseReturn === true);
-        if (designated.length > 1) { warning("ambiguous-base-return", [base.id].concat(outings.map(item => item.id)), "这段长期居住记录指定了多个返回城市，未自动选择其中一座。"); continue; }
+        if (designated.length > 1) { warning("ambiguous-base-return", [base.id].concat(outings.map(item => item.id)), I("map.journey.s014", {}, "这段长期居住记录指定了多个返回城市，未自动选择其中一座。")); continue; }
         destination = designated[0] || (base.records.length === 1 ? base.records[0] : null);
-        if (!destination) { warning("base-city-required", [base.id].concat(outings.map(item => item.id)), "长期居住地包含多座城市，请先确认返回城市；当前没有自动选择其中一座。"); continue; }
+        if (!destination) { warning("base-city-required", [base.id].concat(outings.map(item => item.id)), I("map.journey.s015", {}, "长期居住地包含多座城市，请先确认返回城市；当前没有自动选择其中一座。")); continue; }
       }
       const last = outings[outings.length - 1].records.at(-1);
       if (cityEqual(destination, last)) continue;
@@ -129,7 +131,7 @@
         id: `return-${last.id}-${destination.id}`, sourceId: destination.id, baseGroupId: base.id,
         afterGroupId: outings[outings.length - 1].id, derived: true, kind: "base-return",
         start: returnDate, end: returnDate, ongoing: false, certainty: "approximate", description: "", album: "",
-        dateLabel: returnDate, frameworkLabel: `返回${destination.city}`
+        dateLabel: returnDate, frameworkLabel: I("map.journey.s016", {p0:(destination.city)}, "返回{p0}")
       }));
     }
     return { scenes, warnings };
@@ -165,7 +167,7 @@
     if (introMs) segments.push({ startMs: 0, endMs: introMs, durationMs: introMs, index: -1, phase: "intro", pageText: "", pageIndex: 0, pageCount: 0 });
     scenes.forEach((record, index) => {
       const pages = typeof o.textPaginator === "function" ? o.textPaginator(record.description || "", record) : paginate(record.description, o.maxPageChars, o.maxPageLines);
-      if (!Array.isArray(pages) || !pages.length || pages.some(text => typeof text !== "string") || pages.join("") !== (record.description || "")) throw new TypeError("视频文字分页必须完整保留原始描述。");
+      if (!Array.isArray(pages) || !pages.length || pages.some(text => typeof text !== "string") || pages.join("") !== (record.description || "")) throw new TypeError(I("map.journey.s017", {}, "视频文字分页必须完整保留原始描述。"));
       pages.forEach((text, pageIndex) => {
         const duration = Math.round(Math.max(readingDuration(text), Number(o.minStayMs) || 0) * factor);
         segments.push({ startMs: durationMs, endMs: durationMs + duration, durationMs: duration, index, phase: "stay", pageText: text, pageIndex, pageCount: pages.length }); durationMs += duration;

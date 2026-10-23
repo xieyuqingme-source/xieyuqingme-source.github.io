@@ -14,6 +14,7 @@
 .album-card > a:hover img { transform: scale(1.025); }
 .album-card h2 { margin: 18px 0 8px; color: var(--ink); font: 500 1.6rem/1.5 var(--serif); overflow-wrap: anywhere; }
 .album-card h2 span { margin-left: 12px; color: var(--accent); font: 400 1rem var(--sans); }
+.album-card h2 > span[data-i18n] { margin: 0; color: inherit; font: inherit; }
 .album-card .album-description { margin: 0 0 12px; font-size: .85rem; }
 .photo-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px 22px; align-items: start; }
 .photo-item { min-width: 0; margin: 0; }
@@ -32,8 +33,11 @@
 .photo-viewer::backdrop { background: rgb(0 0 0 / .86); }
 .photo-viewer-head { position: sticky; top: 0; z-index: 2; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 16px; background: var(--surface); }
 .photo-position { margin: 0; color: var(--muted); font-size: .78rem; }
+.photo-viewer-actions { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+.photo-viewer-actions .site-language-switch { min-height: 44px; padding: 6px 12px; border: 1px solid var(--line); border-radius: 6px; color: var(--ink); background: var(--surface); }
+.photo-load-error { margin: 12px 0 0; color: var(--accent); }
 .photo-close, .photo-previous, .photo-next { display: inline-flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; padding: 6px 12px; border: 1px solid var(--line); border-radius: 6px; color: var(--ink); background: var(--surface); }
-.photo-close { font-size: .8rem; }
+.photo-close { gap: 6px; font-size: .8rem; }
 .photo-stage { position: relative; display: flex; align-items: center; justify-content: center; min-height: 160px; background: var(--soft); touch-action: pan-y pinch-zoom; }
 .photo-large { display: block; width: 100%; height: auto; max-height: calc(100dvh - 230px); object-fit: contain; }
 .photo-previous, .photo-next { position: absolute; top: 50%; transform: translateY(-50%); background: var(--surface); opacity: .94; font-size: 1.3rem; }

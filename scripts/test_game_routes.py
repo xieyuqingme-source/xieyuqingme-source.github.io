@@ -68,14 +68,31 @@ class GamePublicationTests(unittest.TestCase):
         origin = "https://preview.example"
         output, report = self.build_fixture(origin)
         self.assertTrue(report["success"])
-        self.assertEqual(report["metadata"]["canonical_pages"], 13 + len(report["anthology"]["routes"]))
         self.assertEqual(len(report["anthology"]["routes"]), 14)
         sitemap = [node.text for node in ET.parse(output / "sitemap.xml").findall(".//{*}loc")]
-        english_routes = {"/en/", "/en/about/", "/en/projects/", "/en/articles/"}
-        self.assertEqual(set(report["english"]["routes"]), english_routes)
+        profiles = {"/en/", "/en/about/", "/en/projects/", "/en/articles/"}
+        self.assertEqual(set(report["english"]["routes"]), profiles)
+        english_features = report["english_features"]
+        self.assertEqual(set(english_features), {"photography", "footprints", "anthology", "games"})
+        self.assertEqual(set(english_features["games"]), {"/en/game/", "/en/game/ranking/"})
+        english_map_route = "/" + english_features["footprints"]["route"].strip("/") + "/"
+        self.assertEqual(english_map_route, "/en/map/")
+        english_routes = profiles | set(english_features["games"]) | {english_map_route}
+        for module, chinese in (("photography", report["photography"]), ("anthology", report["anthology"])):
+            routes = {"/" + route.strip("/") + "/" for route in english_features[module]["routes"]}
+            self.assertEqual(routes, {"/en/" + route.strip("/") + "/" for route in chinese["routes"]})
+            english_routes.update(routes)
+        expected_routes = {"/", "/about/", "/projects/", "/map/", "/game/", "/game/ranking/",
+                           "/articles/index.html", "/articles/synthetic.html"} | english_routes
+        for module in (report["photography"], report["anthology"]):
+            expected_routes.update("/" + route.strip("/") + "/" for route in module["routes"])
+        self.assertEqual(set(sitemap), {origin + route for route in expected_routes})
+        self.assertEqual(len(sitemap), len(expected_routes), "Every canonical route must occur exactly once.")
+        self.assertEqual(report["metadata"]["canonical_pages"], len(expected_routes))
         self.assertEqual({url for url in sitemap if url.startswith(origin + "/en/")},
                          {origin + route for route in english_routes})
-        for route in ("game", "game/ranking"):
+        catalogues = json.loads((ROOT / "home/locales/games.json").read_text(encoding="utf-8"))
+        for route in ("game", "game/ranking", "en/game", "en/game/ranking"):
             with self.subTest(route=route):
                 html = (output / route / "index.html").read_text(encoding="utf-8")
                 elements = Elements(html).elements
@@ -85,6 +102,23 @@ class GamePublicationTests(unittest.TestCase):
                                   if tag == "link" and attrs.get("rel") == "canonical"], [url])
                 self.assertEqual([attrs.get("content") for tag, attrs in elements
                                   if tag == "meta" and attrs.get("property") == "og:url"], [url])
+                language = "en" if route.startswith("en/") else "zh-CN"
+                counterpart = route.removeprefix("en/")
+                page_key = "ranking" if counterpart.endswith("ranking") else "game"
+                title = catalogues[language]["games.page." + page_key + ".title"]
+                description = catalogues[language]["games.page." + page_key + ".description"]
+                self.assertEqual([attrs.get("lang") for tag, attrs in elements if tag == "html"], [language])
+                self.assertIn("<title>" + title + "</title>", html)
+                self.assertEqual([attrs.get("content") for tag, attrs in elements
+                                  if tag == "meta" and attrs.get("name") == "description"], [description])
+                self.assertEqual([attrs.get("content") for tag, attrs in elements
+                                  if tag == "meta" and attrs.get("property") == "og:title"], [title])
+                self.assertEqual([attrs.get("content") for tag, attrs in elements
+                                  if tag == "meta" and attrs.get("property") == "og:description"], [description])
+                alternates = [(attrs.get("hreflang"), attrs.get("href")) for tag, attrs in elements
+                              if tag == "link" and attrs.get("rel") == "alternate" and attrs.get("hreflang")]
+                self.assertCountEqual(alternates, [("zh-CN", origin + "/" + counterpart + "/"),
+                                                  ("en", origin + "/en/" + counterpart + "/")])
                 self.assertNotIn("xieyuqing.me", html, "Game metadata must follow the requested build origin.")
                 self.assertNotIn("{{", html)
                 self.assertEqual(sum(tag == "h1" for tag, _ in elements), 1)
@@ -107,8 +141,20 @@ class GamePublicationTests(unittest.TestCase):
             self.assertIn("/assets/" + name, scripts)
         self.assertLess(scripts.index("/assets/ranking-images.js"), scripts.index("/assets/ranking.js"))
         self.assertLess(scripts.index("/assets/ranking-view.js"), scripts.index("/assets/ranking.js"))
+        self.assertEqual(scripts.count("/assets/site-i18n.js"), 1)
+        self.assertLess(scripts.index("/assets/site-i18n.js"), scripts.index("/assets/ranking-model.js"))
         for name in ("portal.css", "game.css", "ranking-skins.css"):
             self.assertIn("/assets/" + name, styles)
+        english_ranking = Elements((output / "en/game/ranking/index.html").read_text(encoding="utf-8")).elements
+        self.assertEqual([attrs.get("src") for tag, attrs in english_ranking if tag == "script" and attrs.get("src")], scripts)
+        self.assertEqual([attrs.get("href") for tag, attrs in english_ranking
+                          if tag == "link" and attrs.get("rel") == "stylesheet"], styles)
+        for tag_name, attribute in (("script", "src"), ("link", "href")):
+            chinese_assets = [attrs[attribute] for tag, attrs in Elements((output / "game/index.html").read_text(encoding="utf-8")).elements
+                              if tag == tag_name and attrs.get(attribute, "").startswith("/assets/")]
+            english_assets = [attrs[attribute] for tag, attrs in Elements((output / "en/game/index.html").read_text(encoding="utf-8")).elements
+                              if tag == tag_name and attrs.get(attribute, "").startswith("/assets/")]
+            self.assertEqual(english_assets, chinese_assets)
         self.assertEqual(build_site.GAME_FOOD_ASSETS, EXPECTED_FOODS)
         self.assertEqual(build_site.GAME_SPORT_ASSETS, EXPECTED_SPORTS)
         registries = art_registries(output / "assets/ranking-model.js")
@@ -173,7 +219,7 @@ class GamePublicationTests(unittest.TestCase):
                     finally:
                         connection.close()
 
-                for route in ("game", "game/ranking", "about", "projects", "articles"):
+                for route in ("game", "game/ranking", "en/game", "en/game/ranking", "about", "projects", "articles"):
                     with self.subTest(route=route):
                         self.assertEqual(request("/" + route)[:2], (301, "/" + route + "/"))
                         self.assertEqual(request("/" + route + "/")[0], 200)

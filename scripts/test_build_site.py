@@ -260,9 +260,11 @@ class ProjectPublicationTests(unittest.TestCase):
                 language = "zh-CN" if name == "index.html" else "en"
                 alternates = ('<link rel="alternate" hreflang="zh-CN" href="' + address + '/">'
                               '<link rel="alternate" hreflang="en" href="' + address.removesuffix('/articles') + '/en/articles/">') if name == "index.html" else ''
-                (folder / name).write_text('<html lang="' + language + '"><head>' + alternates + '<link rel="canonical" href="' + url
+                fixture_page = ('<html lang="' + language + '"><head>' + alternates + '<link rel="canonical" href="' + url
                     + '"><meta property="og:url" content="' + url
-                    + '"></head><body id="main">Synthetic public fixture</body></html>', encoding="utf-8")
+                    + '"></head><body id="main">Synthetic public fixture</body></html>')
+                from site_i18n import localize_page
+                (folder / name).write_text(localize_page(fixture_page, blog.source_root, address.removesuffix('/articles'), '/articles/' + name, language), encoding='utf-8')
             url = address.removesuffix("/articles") + "/about/"
             (folder / "about.html").write_text('<html><head><link rel="canonical" href="' + url
                 + '"><meta property="og:url" content="' + url
@@ -309,15 +311,13 @@ class ProjectPublicationTests(unittest.TestCase):
                 self.assertTrue(any(tag == "meta" and attrs.get("property") == "og:url"
                                     and attrs.get("content") == "https://xieyuqing.me/projects/" for tag, attrs in tags))
                 sitemap = [node.text for node in ET.parse(output / "sitemap.xml").findall(".//{*}loc")]
-                self.assertEqual(sitemap, ["https://xieyuqing.me/", "https://xieyuqing.me/projects/", "https://xieyuqing.me/about/",
-                                           "https://xieyuqing.me/map/",
-                                           *["https://xieyuqing.me" + route for route in report["anthology"]["routes"]],
-                                           "https://xieyuqing.me/en/", "https://xieyuqing.me/en/about/",
-                                           "https://xieyuqing.me/en/projects/", "https://xieyuqing.me/en/articles/",
-                                           "https://xieyuqing.me/game/", "https://xieyuqing.me/game/ranking/",
-                                           "https://xieyuqing.me/photos/",
-                                           "https://xieyuqing.me/articles/index.html",
-                                           "https://xieyuqing.me/articles/synthetic.html"])
+                expected_routes = {'/', '/projects/', '/about/', '/map/', '/en/map/', '/en/', '/en/about/', '/en/projects/', '/en/articles/',
+                                   '/game/', '/en/game/', '/game/ranking/', '/en/game/ranking/', '/articles/index.html', '/articles/synthetic.html'}
+                for feature in (report['anthology'], report['english_features']['anthology'], report['photography'], report['english_features']['photography']):
+                    expected_routes.update('/' + route.strip('/') + '/' for route in feature['routes'])
+                self.assertEqual(set(sitemap), {'https://xieyuqing.me' + route for route in expected_routes})
+                self.assertEqual(len(sitemap), len(set(sitemap)))
+                self.assertTrue(report['localization']['success'])
                 self.assertEqual(report["metadata"]["compatibility_redirects"], 1)
                 self.assertNotIn("Folder Guide", about)
                 self.assertNotIn("Essays by Xie Yuqing", about)

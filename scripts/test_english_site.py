@@ -91,6 +91,8 @@ class EnglishPublicationTests(unittest.TestCase):
         (self.root / "中文文章/2026-01-02-等待翻译.md").write_text("# 等待翻译\n\n另一篇完整原文。\n", encoding="utf-8")
         (self.root / "English Articles/2026-01-01-original.md").write_text("# Original English article\n\nAn original English essay.\n", encoding="utf-8")
         shutil.copytree(ROOT / "home/en", self.root / "home/en")
+        if (REFERENCE / "home/locales").is_dir():
+            shutil.copytree(REFERENCE / "home/locales", self.root / "home/locales")
         for name in ("projects.json", "about.json"):
             shutil.copy2(REFERENCE / "home" / name, self.root / "home" / name)
         for source in (REFERENCE / "home/assets/projects").glob("*.webp"):
@@ -245,6 +247,12 @@ class EnglishPublicationTests(unittest.TestCase):
         original_text = (self.output / 'articles' / translated.original.destination).read_text(encoding="utf-8")
         self.assertIn('hreflang="en"', original_text)
         self.assertIn('href="' + english_article_url(blog, translated) + '"', original_text)
+        for page_text, paired_href in ((text, original), (original_text, english_article_url(blog, translated))):
+            switches = [attrs for tag, attrs in build_site.Elements(page_text).elements
+                        if tag == "a" and "site-language-switch" in attrs.get("class", "").split()]
+            self.assertEqual(len(switches), 1)
+            self.assertEqual(switches[0]["href"], paired_href)
+            self.assertNotIn("data-preserve-language-link", switches[0])
         self.assertEqual(self.source.read_text(encoding="utf-8"), CHINESE)
         pending = next(a for a in blog.articles if a.language == "zh-CN" and a.source != self.source)
         pending_page = (self.output / "articles" / pending.destination).read_text(encoding="utf-8")
@@ -286,6 +294,24 @@ class EnglishPublicationTests(unittest.TestCase):
         self.assertIn('<html lang="en"', text)
         self.assertIn('Originally written in English.', text)
         self.assertIn('Switch to dark mode', text)
+        self.assertIn('An original English essay.', text)
+        elements = build_site.Elements(text).elements
+        directories = [attrs for tag, attrs in elements if tag == "a" and "data-preserve-language-link" in attrs]
+        self.assertEqual(len(directories), 1)
+        self.assertEqual(directories[0]["href"], "/articles/")
+        self.assertEqual(directories[0]["lang"], "zh-CN")
+        self.assertIn("originally written in English", directories[0]["aria-label"])
+        self.assertIn("Chinese article directory", directories[0]["aria-label"])
+        self.assertNotIn("data-site-language-switch", directories[0])
+        self.assertIn('>中文目录</a>', text)
+        self.assertFalse(any(tag == "a" and "site-language-switch" in attrs.get("class", "").split()
+                             for tag, attrs in elements))
+        self.assertFalse(any("hreflang" in attrs for _, attrs in elements))
+        self.assertTrue(any(tag == "link" and attrs.get("rel") == "canonical"
+                            and attrs.get("href") == blog.canonical(article.destination) for tag, attrs in elements))
+        identity = blog.href(article.destination)
+        self.assertIn('data-article-path="' + identity + '"', text)
+        self.assertIn('data-stats-path="' + identity + '"', text)
         self.assertFalse((self.output / 'en/articles' / article.source.with_suffix('.html').name).exists())
 
     def test_stale_generated_translation_is_removed_without_deleting_other_files(self):
@@ -302,12 +328,12 @@ class EnglishPublicationTests(unittest.TestCase):
     def test_english_project_descriptions_retain_scope_and_chinese_tool_hints(self):
         self.build_fixture()
         page = (self.output / 'en/projects/index.html').read_text(encoding='utf-8')
-        for phrase in ('No hosted online version', 'There is no hosted online version', 'Chinese interface', 'await manual acceptance testing', 'Sources &amp; licensing'):
+        for phrase in ('No hosted online version', 'There is no hosted online version', 'support Chinese and English', 'await manual acceptance testing', 'Sources &amp; licensing'):
             if phrase == 'No hosted online version':
                 continue
             self.assertIn(phrase, page)
-        self.assertIn('href="/map/"', page)
-        self.assertIn('href="/game/ranking/"', page)
+        self.assertIn('href="/en/map/"', page)
+        self.assertIn('href="/en/game/ranking/"', page)
 
     def test_reciprocal_metadata_and_shared_comment_identity_fail_when_tampered(self):
         blog = self.build_fixture()

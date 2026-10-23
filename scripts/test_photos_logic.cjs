@@ -12,6 +12,8 @@ class Element {
     for (const action of this.listeners[name] || []) action(event);
     return event;
   }
+  setAttribute(name, value) { (this.attributes ||= {})[name] = String(value); }
+  getAttribute(name) { return this.attributes?.[name] ?? null; }
   focus() { this.document.activeElement = this; }
   replaceChildren() { this.children = []; }
   appendChild(element) { this.children.push(element); }
@@ -20,7 +22,7 @@ class Element {
   getBoundingClientRect() { return { left: 10, right: 100, top: 10, bottom: 100 }; }
 }
 
-function fixture({ supported = true, historyFails = false } = {}) {
+function fixture({ supported = true, historyFails = false, language = null } = {}) {
   const document = { activeElement: null };
   const make = () => new Element(document);
   document.documentElement = make(); document.body = make();
@@ -28,26 +30,52 @@ function fixture({ supported = true, historyFails = false } = {}) {
   document.createElement = make;
   const data = make(), dialog = make();
   const photos = [0, 1, 2].map((index) => ({
-    src: `/photos/images/${index}.webp`, title: index ? `照片 ${index}` : "",
+    id: `test-${index}`, src: `/photos/images/${index}.webp`, title: index ? `照片 ${index}` : "",
     caption: index === 0 ? '<img src=x onerror="alert(1)">' : index === 1 ? "长故事的第一段。".repeat(500) + "\n\n" + "第二段也必须完整保留。".repeat(200) : "",
     date: "2026-10-16", date_text: "2026年10月16日", time: "12:34", location: "北京", width: 1600, height: 1000
   }));
   data.textContent = JSON.stringify(photos);
-  const nodes = Object.fromEntries([".photo-large", "#photo-viewer-title", "#photo-viewer-caption", "#photo-viewer-story-label", "#photo-viewer-facts", ".photo-position", ".photo-close", ".photo-previous", ".photo-next", ".photo-stage"].map((name) => [name, make()]));
+  const nodes = Object.fromEntries([".photo-large", "#photo-viewer-title", "#photo-viewer-caption", "#photo-viewer-story-label", "#photo-viewer-facts", ".photo-position", ".photo-close", ".photo-previous", ".photo-next", ".photo-stage", "#photo-load-error"].map((name) => [name, make()]));
   dialog.querySelector = (selector) => nodes[selector];
   if (!supported) dialog.showModal = undefined;
   const links = photos.map((_, index) => { const link = make(); link.dataset.photoIndex = String(index); return link; });
   document.querySelector = (selector) => selector === "#photo-data" ? data : selector === "#photo-viewer" ? dialog : null;
-  document.querySelectorAll = () => links;
+  document.querySelectorAll = selector => selector === "[data-photo-open]" ? links : [];
   const window = make();
   const stack = [{ route: "album" }];
+  window.navigation = { get currentEntry() { return {index:stack.length - 1}; } };
   window.history = {
-    state: stack[0], backCalls: 0,
+    state: stack[0], backCalls: 0, goCalls: [],
+    go(step) { this.goCalls.push(step); stack.splice(Math.max(1,stack.length + step)); this.state=stack.at(-1); window.dispatch("popstate", {state:this.state}); },
     pushState(state) { if (historyFails) throw new Error("History unavailable"); stack.push(state); this.state = state; },
     back() { this.backCalls++; if (stack.length > 1) stack.pop(); this.state = stack[stack.length - 1]; window.dispatch("popstate", { state: this.state }); }
   };
+  let currentLanguage = language;
+  const languageListeners = [];
+  if (language) window.SiteI18n = {
+    lang: () => currentLanguage,
+    setLanguage(value, options = {}) {
+      if (value !== currentLanguage && !options.replace) window.history.pushState(window.history.state);
+      currentLanguage=value;
+      languageListeners.forEach(fn=>fn(value,{source:options.source || "switch"}));
+    },
+    t(key, values = {}, fallback = key) {
+      const photoIndex = Number(key.match(/test-(\d+)/)?.[1]);
+      let value = fallback;
+      if (key === "photos.position") value = currentLanguage === "en" ? "Photo {number} of {count}" : "第 {number} 张，共 {count} 张";
+      if (key === "photos.open") value = currentLanguage === "en" ? "View photo {number}" : "查看第 {number} 张照片";
+      if (key === "photos.open_named") value = currentLanguage === "en" ? "View photo {number}: {title}" : "查看第 {number} 张照片：{title}";
+      if (Number.isInteger(photoIndex)) {
+        const field = key.split(".").at(-1);
+        value = currentLanguage === "en" ? ({title: photoIndex ? `Photo ${photoIndex}` : "", caption: photoIndex < 2 ? `Complete English story ${photoIndex}\n\nSecond paragraph.` : "", date_text: "16 October 2026", location: "Beijing", alt: `English scene ${photoIndex}`}[field] ?? fallback) : (photos[photoIndex][field] || fallback);
+      }
+      return String(value).replace(/\{(\w+)\}/g, (_, name) => String(values[name] ?? `{${name}}`));
+    },
+    onChange(callback) { languageListeners.push(callback); }
+  };
+  const switchLanguage = value => { currentLanguage = value; languageListeners.forEach(fn => fn(value, {source:"test"})); };
   const controller = createGallery(document, window);
-  return { document, window, nodes, data, links, dialog, photos, controller, stack };
+  return { document, window, nodes, data, links, dialog, photos, controller, stack, switchLanguage };
 }
 
 test("unmodified photo click opens modal, presents literal metadata and preserves previous history", () => {
@@ -197,4 +225,64 @@ test("every move replaces the complete story, retaining long multi-paragraph tex
   assert.equal(f.nodes["#photo-viewer-caption"].textContent, f.photos[1].caption);
   assert.equal(f.nodes["#photo-viewer-caption"].hidden, false);
   assert.equal(f.nodes["#photo-viewer-story-label"].hidden, false);
+});
+
+
+test("changing locale preserves image source/node, index, dialog scroll, focus, history and source metadata", () => {
+  const f = fixture({language: "en"});
+  const beforeData = f.data.textContent;
+  const image = f.nodes[".photo-large"];
+  let assignments = 0, source;
+  Object.defineProperty(image, "src", {get: () => source, set: value => { source = value; assignments++; }});
+  f.links[1].dispatch("click");
+  assert.equal(f.nodes["#photo-viewer-caption"].textContent, "Complete English story 1\n\nSecond paragraph.");
+  assert.equal(f.nodes[".photo-position"].textContent, "Photo 2 of 3");
+  assert.equal(f.links[1].getAttribute("aria-label"), "View photo 2: Photo 1");
+  f.nodes[".photo-next"].focus(); f.dialog.scrollTop = 87;
+  const historyState = f.window.history.state;
+  f.switchLanguage("zh-CN");
+  assert.equal(f.nodes["#photo-viewer-caption"].textContent, f.photos[1].caption);
+  assert.equal(f.dialog.scrollTop, 87);
+  assert.equal(f.document.activeElement, f.nodes[".photo-next"]);
+  assert.equal(f.nodes[".photo-large"], image);
+  assert.equal(assignments, 1, "A language change never reloads the image or resets native zoom");
+  assert.equal(f.window.history.state, historyState);
+  assert.deepEqual(f.controller.getState(), {opened: true, index: 1});
+  f.switchLanguage("en");
+  assert.equal(f.nodes["#photo-viewer-facts"].children[0].textContent, "16 October 2026");
+  assert.equal(image.alt, "English scene 1");
+  assert.equal(f.data.textContent, beforeData);
+  assert.equal(assignments, 1);
+  f.controller.close();
+  assert.equal(f.document.activeElement, f.links[1]);
+});
+
+test("reinitialization cannot add locale or interaction listeners twice; error display does not reset state", () => {
+  const f = fixture({language: "en"});
+  assert.equal(createGallery(f.document, f.window), f.controller);
+  f.links[0].dispatch("click");
+  f.nodes[".photo-next"].dispatch("click");
+  assert.equal(f.controller.getState().index, 1);
+  f.nodes[".photo-large"].dispatch("error");
+  assert.equal(f.nodes["#photo-load-error"].hidden, false);
+  f.switchLanguage("zh-CN");
+  assert.equal(f.nodes["#photo-load-error"].hidden, false);
+  f.nodes[".photo-large"].dispatch("load");
+  assert.equal(f.nodes["#photo-load-error"].hidden, true);
+});
+
+
+test("closing after several language history pushes consumes the entire modal segment once", () => {
+  const f=fixture({language:"en"});
+  f.links[1].dispatch("click");
+  f.window.SiteI18n.setLanguage("zh-CN");
+  f.window.SiteI18n.setLanguage("en");
+  f.window.SiteI18n.setLanguage("zh-CN");
+  assert.equal(f.stack.length,5);
+  f.controller.close();
+  assert.deepEqual(f.window.history.goCalls,[-4]);
+  assert.equal(f.stack.length,1);
+  assert.equal(f.window.history.state.photoLightbox,undefined);
+  assert.equal(f.window.SiteI18n.lang(),"zh-CN");
+  assert.equal(f.document.activeElement,f.links[1]);
 });

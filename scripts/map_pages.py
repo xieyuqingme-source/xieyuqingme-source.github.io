@@ -65,7 +65,7 @@ TABLE_PLACES = {
     "马六甲": ("马六甲", "马六甲", "马来西亚", 2.1896, 102.2501),
 }
 PRIVATE_PATH = re.compile(r"(?<![A-Za-z0-9])[A-Za-z]:[\\/]|\\\\[^\s\\]+[\\/]|/(?:Users|home|mnt)/", re.I)
-ASSETS = ("map.css", "map-model.js", "map-playback.js", "map-avatar.js", "map-journey.js", "map-view.js", "map-labels.js", "map-terrain.webp", "map-terrain.jpg",
+ASSETS = ("map-i18n.js", "map.css", "map-model.js", "map-playback.js", "map-avatar.js", "map-journey.js", "map-view.js", "map-labels.js", "map-terrain.webp", "map-terrain.jpg",
           "map-video.js", "map-video-ui.js", "map.js",
           "map-land.json", "map-avatar-default.png")
 LIMIT = 1024 * 1024
@@ -432,33 +432,94 @@ def load_map(root, preview_source=None):
     return data
 
 
-def build_map(root, output, address, data, preview=False):
+def load_display_metadata(root, public, preview=False):
+    """English presentation only; never alter source records or visitor documents."""
+    path = Path(root) / "map/display.en.json"
+    if preview or not path.is_file():
+        return {"version": 1, "records": {}, "places": {}}
+    safe_file(Path(root), path)
+    metadata = json.loads(path.read_text(encoding="utf-8-sig"))
+    if not isinstance(metadata, dict) or metadata.get("version") != 1:
+        raise ValueError("Invalid map display metadata.")
+    fields = {"city", "region", "country", "title", "description"}
+    records = metadata.get("records", {})
+    if not isinstance(records, dict) or not isinstance(metadata.get("places", {}), dict):
+        raise ValueError("Invalid map display dictionaries.")
+    selected = {}
+    for record in public["records"]:
+        entry = records.get(record["id"])
+        if entry is None:
+            # Independent synthetic catalogs and new records retain their source text.
+            continue
+        if (not isinstance(entry, dict) or set(entry) != {"source", "en"}
+                or not isinstance(entry["source"], dict) or not isinstance(entry["en"], dict)
+                or set(entry["source"]) != fields or set(entry["en"]) != fields
+                or any(not isinstance(value, str) for value in entry["en"].values())
+                or entry["source"] != {key: record[key] for key in fields}):
+            raise ValueError("Stale or invalid map display metadata: " + record["id"])
+        selected[record["id"]] = entry
+    document = metadata.get("document", {})
+    if (not isinstance(document, dict) or set(document) != {"source_title", "title"}
+            or any(not isinstance(value, str) for value in document.values())):
+        raise ValueError("Invalid map display title metadata.")
+    if any(not isinstance(key, str) or not isinstance(value, str) for key, value in metadata.get("places", {}).items()):
+        raise ValueError("Invalid map display place labels.")
+    return {"version": 1, "document": document if document["source_title"] == public["title"] else {},
+            "records": selected, "places": metadata.get("places", {})}
+
+
+def build_map(root, output, address, data, preview=False, *, language="zh-CN"):
+    from site_i18n import localize_page, localized_path
+    if language not in {"zh-CN", "en"}:
+        raise ValueError("Site language must be zh-CN or en.")
     root, output = Path(root), Path(output)
     public = dict(validate_catalog(data))
     public["preview"] = bool(preview)
     public["notice"] = ("本地待核对预览：这些经历尚未批准公开，来源与私人备注不包含在网页中。"
                         if preview else "")
     serialized = json.dumps(public, ensure_ascii=False).replace("&", "\\u0026").replace("<", "\\u003c").replace(">", "\\u003e")
+    display = load_display_metadata(root, public, preview=preview)
+    display_json = json.dumps(display, ensure_ascii=False).replace("&", "\\u0026").replace("<", "\\u003c").replace(">", "\\u003e")
     page = (root / "home/map.template.html").read_text(encoding="utf-8")
-    if "{{" in page.replace("{{site_url}}", "").replace("{{map_data}}", ""):
+    if "{{" in page.replace("{{site_url}}", "").replace("{{map_data}}", "").replace("{{map_display_data}}", ""):
         raise ValueError("Unresolved map template placeholder.")
-    page = page.replace("{{site_url}}", escape(address, quote=True)).replace("{{map_data}}", serialized)
+    page = page.replace("{{site_url}}", escape(address, quote=True)).replace("{{map_data}}", serialized).replace("{{map_display_data}}", display_json)
+    if language == "en":
+        page = page.replace('value="我的足迹地图"', 'value="My footprints map"')
+        page = page.replace('href="/assets/map-example.md"', 'href="/assets/map-example.en.md"')
+    page = localize_page(page, root, address, "/map/", language=language, modules=("map",),
+                         title={"zh-CN": "地图与足迹 · 谢雨卿", "en": "Maps and Footprints · Xie Yuqing"},
+                         description={"zh-CN": "以城市和时间记录人生的停留，也可以在浏览器中制作自己的足迹地图。",
+                                      "en": "Record stays through cities and time, or make your own footprints map in your browser."})
     if preview:
         page = page.replace("</head>", '<meta name="robots" content="noindex,nofollow">\n</head>')
-    for folder in (output / "map", output / "assets"):
+    route = localized_path("/map/", language).strip("/")
+    for folder in (output / route, output / "assets"):
         safe_file(output, folder)
         folder.mkdir(parents=True, exist_ok=True)
-    target = output / "map/index.html"
+    target = output / route / "index.html"
     safe_file(output, target)
     target.write_text(page, encoding="utf-8")
     for name in ASSETS:
         target = output / "assets" / name
         safe_file(output, target)
         shutil.copy2(root / "home/assets" / name, target)
+    runtime = root / "home/assets/site-i18n.js"
+    if runtime.is_file():
+        safe_file(root, runtime)
+        target = output / "assets/site-i18n.js"
+        safe_file(output, target)
+        shutil.copy2(runtime, target)
     example = root / "map/example.md"
     if example.is_file():
         safe_file(root, example)
         target = output / "assets/map-example.md"
         safe_file(output, target)
         shutil.copy2(example, target)
-    return {"records": len(public["records"]), "preview": bool(preview), "route": "map"}
+    english_example = root / "map/example.en.md"
+    if english_example.is_file():
+        safe_file(root, english_example)
+        target = output / "assets/map-example.en.md"
+        safe_file(output, target)
+        shutil.copy2(english_example, target)
+    return {"records": len(public["records"]), "preview": bool(preview), "route": route}

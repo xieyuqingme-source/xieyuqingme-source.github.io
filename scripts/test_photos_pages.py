@@ -53,8 +53,8 @@ class PhotoPageTests(unittest.TestCase):
         photo["caption"] = story
         validate_catalog(data)
         html = render_album(data["albums"][0])
-        self.assertIn('<p class="photo-story-label">照片故事</p>', html)
-        self.assertIn('<p class="photo-caption">' + escape(story) + '</p>', html)
+        self.assertIn('<p class="photo-story-label" data-i18n="photos.story">照片故事</p>', html)
+        self.assertIn('data-i18n="photos.photo.' + photo["id"] + '.caption">' + escape(story) + '</p>', html)
         class StoryData(HTMLParser):
             collecting = False
             content = ""
@@ -79,6 +79,10 @@ class PhotoPageTests(unittest.TestCase):
         (root / "home/assets").mkdir(parents=True)
         for relative in ("home/photos.template.html", "home/assets/photos.css", "home/assets/photos.js"):
             shutil.copy2(ROOT / relative, root / relative)
+        (root / "home/locales").mkdir(parents=True)
+        for name in ("common", "photos"):
+            source = ROOT / "home/locales" / (name + ".json")
+            if source.is_file(): shutil.copy2(source, root / "home/locales" / source.name)
         (root / "photos/images").mkdir(parents=True)
         data = catalog()
         photo = data["albums"][0]["photos"][0]
@@ -87,6 +91,17 @@ class PhotoPageTests(unittest.TestCase):
         (root / "photos/private.md").write_text("PRIVATE NOTE MUST NEVER BE COPIED", encoding="utf-8")
         (root / "photos/images/unreferenced.jpg").write_bytes(b"private-original")
         (root / "photos/catalog.json").write_text(json.dumps(data, ensure_ascii=False), encoding="utf-8")
+        locale_path = root / "home/locales/photos.json"
+        locale = json.loads(locale_path.read_text(encoding="utf-8"))
+        album = data["albums"][0]; prefix = "photos.album." + album["id"]
+        locale["zh-CN"].update({prefix + "." + field: album[field] for field in ("title", "description", "date", "location")})
+        locale["en"].update({prefix + ".title": "Original Album", prefix + ".description": "", prefix + ".date": "", prefix + ".location": "", prefix + ".page_title": "Original Album · Xie Yuqing"})
+        locale["zh-CN"][prefix + ".page_title"] = "相册原标题 · 谢雨卿"
+        prefix = "photos.photo." + photo["id"]
+        locale["zh-CN"].update({prefix + "." + field: photo[field] for field in ("title", "caption", "date_text", "location")})
+        locale["zh-CN"][prefix + ".alt"] = "北京"
+        locale["en"].update({prefix + ".title": "", prefix + ".caption": "First paragraph\n\nSecond paragraph", prefix + ".date_text": "16 October 2026", prefix + ".location": "Beijing", prefix + ".alt": "A public photo in Beijing"})
+        locale_path.write_text(json.dumps(locale, ensure_ascii=False), encoding="utf-8")
         return root, data
 
     def test_only_public_referenced_images_are_copied_and_withdrawal_removes_old_outputs(self):
@@ -133,6 +148,54 @@ class PhotoPageTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "unknown"):
             build_photos(root, output, "https://preview.example")
         self.assertEqual(unknown.read_bytes(), b"must-preserve")
+
+    def test_english_routes_share_original_images_and_translate_full_content_and_seo(self):
+        root, data = self.fixture(); output = root / "_site_unified"
+        source_bytes = (root / "photos/catalog.json").read_bytes()
+        build_photos(root, output, "https://preview.example")
+        report = build_photos(root, output, "https://preview.example", language="en")
+        self.assertEqual(report, {"routes": ["en/photos", "en/photos/test-album"], "albums": 1, "photos": 1})
+        html = (output / "en/photos/test-album/index.html").read_text(encoding="utf-8")
+        self.assertIn('<html lang="en"', html)
+        self.assertIn('<title>Original Album · Xie Yuqing</title>', html)
+        self.assertIn('rel="canonical" href="https://preview.example/en/photos/test-album/"', html)
+        self.assertIn('hreflang="zh-CN" href="https://preview.example/photos/test-album/"', html)
+        self.assertIn('hreflang="en" href="https://preview.example/en/photos/test-album/"', html)
+        self.assertIn('href="/en/photos/"', html)
+        self.assertIn('First paragraph\n\nSecond paragraph', html)
+        self.assertIn('aria-label="View photo 1"', html)
+        self.assertIn('aria-label="Previous photo"', html)
+        self.assertIn('data-site-language-switch="toggle"', html)
+        self.assertIn('href="' + data["albums"][0]["photos"][0]["src"] + '"', html)
+        self.assertFalse((output / "en/photos/images").exists())
+        self.assertEqual(len(list((output / "photos/images").glob("*.webp"))), 2)
+        self.assertEqual((root / "photos/catalog.json").read_bytes(), source_bytes)
+        self.assertLess(html.index('/assets/site-i18n.js'), html.index('/assets/photos.js'))
+        index = (output / "en/photos/index.html").read_text(encoding="utf-8")
+        self.assertIn('href="/en/photos/test-album/"', index)
+        self.assertIn('1 photo', index)
+
+    def test_missing_or_stale_english_metadata_blocks_only_english_before_output(self):
+        root, data = self.fixture(); output = root / "_site_unified"
+        data["albums"][0]["photos"][0]["caption"] = "更新后的故事"
+        (root / "photos/catalog.json").write_text(json.dumps(data), encoding="utf-8")
+        build_photos(root, output, "https://preview.example")
+        with self.assertRaisesRegex(ValueError, "missing or stale"):
+            build_photos(root, output, "https://preview.example", language="en")
+        self.assertFalse((output / "en/photos").exists())
+        with self.assertRaisesRegex(ValueError, "Unsupported"):
+            build_photos(root, output, "https://preview.example", language="fr")
+
+    def test_english_withdrawal_is_owned_and_cannot_remove_chinese_pages_or_images(self):
+        root, data = self.fixture(); output = root / "_site_unified"
+        build_photos(root, output, "https://preview.example")
+        build_photos(root, output, "https://preview.example", language="en")
+        (root / "photos/catalog.json").write_text('{"version":1,"albums":[]}', encoding="utf-8")
+        build_photos(root, output, "https://preview.example", language="en")
+        self.assertFalse((output / "en/photos/test-album/index.html").exists())
+        self.assertTrue((output / "photos/test-album/index.html").is_file())
+        self.assertEqual(len(list((output / "photos/images").glob("*.webp"))), 2)
+        self.assertIn('The albums are being prepared.', (output / "en/photos/index.html").read_text(encoding="utf-8"))
 
 
 if __name__ == "__main__":

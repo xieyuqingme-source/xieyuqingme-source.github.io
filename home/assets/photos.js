@@ -1,6 +1,24 @@
 (function (scope) {
   "use strict";
+  const instances = new WeakMap();
   function createGallery(document, window) {
+    if (instances.has(document)) return instances.get(document);
+    instances.set(document, null);
+    const i18n = window.SiteI18n;
+    const tr = (key, values, fallback) => i18n ? i18n.t(key, values, fallback) : fallback;
+    const field = (photo, name) => tr(`photos.photo.${photo.id}.${name}`, {}, photo[name] || "");
+    let refreshViewer = null;
+    function translatePage() {
+      for (const node of document.querySelectorAll("[data-photo-count]")) {
+        const count = Number(node.dataset.photoCount);
+        node.textContent = tr(count === 1 ? "photos.count_one" : "photos.count_many", { count }, `${count} 张照片`);
+      }
+      const share = document.querySelector('meta[property="og:image:alt"]');
+      if (share) share.content = tr("photos.share_alt", {}, share.content);
+      if (refreshViewer) refreshViewer(...arguments);
+    }
+    if (i18n) i18n.onChange(translatePage);
+    translatePage();
     const data = document.querySelector("#photo-data");
     const dialog = document.querySelector("#photo-viewer");
     if (!data || !dialog || typeof dialog.showModal !== "function") return null;
@@ -18,33 +36,73 @@
     const previous = dialog.querySelector(".photo-previous");
     const next = dialog.querySelector(".photo-next");
     const stage = dialog.querySelector(".photo-stage");
+    const viewerCopy = dialog.querySelector(".photo-viewer-copy");
+    let localeScroll = null;
+    const loadError = dialog.querySelector("#photo-load-error");
+    const languageButton = dialog.querySelector("[data-site-language-switch]");
     let index = 0, opened = false, trigger = null, historyOwned = false, pointer = null;
     let oldRootOverflow = "", oldBodyOverflow = "";
+    let historyBaseIndex = null, viewerLanguage = null, pendingLanguage = null, pendingClose = false;
     const marker = `photos-${Date.now()}-${Math.random().toString(36).slice(2)}`;
-    function render() {
+    function render(changeImage = true) {
       const photo = photos[index];
-      image.src = photo.src;
-      image.alt = photo.title || photo.caption || "";
-      image.width = photo.width;
-      image.height = photo.height;
-      title.textContent = photo.title;
-      title.hidden = !photo.title;
-      caption.textContent = photo.caption;
-      caption.hidden = !photo.caption;
-      storyLabel.hidden = !photo.caption;
+      // A language change updates copy only. Keeping the same image node/source,
+      // scroll, active pointer and focus preserves native pinch zoom and browsing.
+      if (changeImage) {
+        localeScroll = null;
+        if (viewerCopy) viewerCopy.style.minHeight = "";
+        if (loadError) loadError.hidden = true;
+        image.src = photo.src;
+        image.width = photo.width;
+        image.height = photo.height;
+      }
+      image.alt = field(photo, "alt") || field(photo, "title") || field(photo, "caption");
+      title.textContent = field(photo, "title");
+      title.hidden = !title.textContent;
+      caption.textContent = field(photo, "caption");
+      caption.hidden = !caption.textContent;
+      storyLabel.hidden = !caption.textContent;
       facts.replaceChildren();
-      const date = photo.date_text || photo.date;
-      const metadata = [date, photo.time && !(date || "").includes(photo.time) ? photo.time : "", photo.location];
+      const date = field(photo, "date_text") || photo.date;
+      const metadata = [date, photo.time && !(date || "").includes(photo.time) ? photo.time : "", field(photo, "location")];
       metadata.filter(Boolean).forEach((value) => {
         const item = document.createElement("li");
         item.textContent = value;
         facts.appendChild(item);
       });
       facts.hidden = !facts.children.length;
-      position.textContent = `${index + 1} / ${photos.length}`;
+      position.textContent = tr("photos.position", { number: index + 1, count: photos.length }, `${index + 1} / ${photos.length}`);
       previous.hidden = next.hidden = photos.length < 2;
-      dialog.scrollTop = 0;
+      if (changeImage) dialog.scrollTop = 0;
+      else if (localeScroll) {
+        dialog.scrollTop = localeScroll.top; dialog.scrollLeft = localeScroll.left;
+        localeScroll = null;
+      }
     }
+    function translateLinks(language, detail) {
+      links.forEach((link, number) => {
+        const photo = photos[number];
+        if (!photo || !link.setAttribute) return;
+        const name = field(photo, "title");
+        link.setAttribute("aria-label", tr(name ? "photos.open_named" : "photos.open",
+          { number: number + 1, title: name }, `查看第 ${number + 1} 张照片${name ? "：" + name : ""}`));
+      });
+      if (opened) {
+        if (!detail || detail.source !== "history" || window.history.state?.photoLightbox === marker) viewerLanguage = language || i18n?.lang?.() || viewerLanguage;
+        render(false);
+      }
+    }
+    window.addEventListener("site:beforelanguagechange", () => {
+      if (!opened) return;
+      localeScroll = { top: dialog.scrollTop, left: dialog.scrollLeft };
+      // Keep enough copy space that a shorter translation cannot clamp the
+      // reader's current scroll position. Reset this floor on the next photo.
+      if (viewerCopy) viewerCopy.style.minHeight = Math.max(parseFloat(viewerCopy.style.minHeight) || 0, viewerCopy.getBoundingClientRect().height) + "px";
+    });
+    refreshViewer = translateLinks;
+    translateLinks();
+    image.addEventListener("error", () => { if (loadError) loadError.hidden = false; });
+    image.addEventListener("load", () => { if (loadError) loadError.hidden = true; });
     function finishClose() {
       if (!opened) return;
       opened = false;
@@ -54,15 +112,32 @@
       if (dialog.open) dialog.close();
       if (trigger && typeof trigger.focus === "function") trigger.focus({ preventScroll: true });
     }
+    function restoreFocusAfterTraversal() {
+      const focus = () => { if (!opened && trigger && typeof trigger.focus === "function") trigger.focus({ preventScroll: true }); };
+      // Fragment history restoration can move focus after the close handler.
+      if (typeof window.requestAnimationFrame === "function") window.requestAnimationFrame(focus);
+      else focus();
+    }
+    function restoreLanguage(language) {
+      if (language && i18n?.setLanguage) i18n.setLanguage(language, { replace: true, source: "photo-close" });
+    }
     function requestClose() {
       const goBack = historyOwned && window.history.state && window.history.state.photoLightbox === marker;
+      const currentEntry = window.navigation?.currentEntry?.index;
+      const steps = Number.isInteger(currentEntry) && Number.isInteger(historyBaseIndex) ? currentEntry - historyBaseIndex : 1;
+      pendingClose = Boolean(goBack);
+      pendingLanguage = goBack ? viewerLanguage : null;
       finishClose();
       historyOwned = false;
-      if (goBack) window.history.back();
+      if (goBack) {
+        if (steps > 1 && typeof window.history.go === "function") window.history.go(-steps);
+        else window.history.back();
+      }
     }
     function open(selected, element) {
       if (!Number.isInteger(selected) || selected < 0 || selected >= photos.length || opened) return false;
       index = selected;
+      viewerLanguage = i18n?.lang?.() || null;
       trigger = element;
       render();
       try { dialog.showModal(); } catch (_) { return false; }
@@ -72,6 +147,7 @@
       document.documentElement.style.overflow = document.body.style.overflow = "hidden";
       try {
         const state = window.history.state;
+        historyBaseIndex = window.navigation?.currentEntry?.index ?? null;
         window.history.pushState({ ...(state && typeof state === "object" ? state : {}), photoLightbox: marker }, "");
         historyOwned = true;
       } catch (_) { historyOwned = false; }
@@ -88,6 +164,11 @@
       if (open(Number(link.dataset.photoIndex), link)) event.preventDefault();
     }));
     closeButton.addEventListener("click", requestClose);
+    if (languageButton && i18n) languageButton.addEventListener("click", (event) => {
+      event.preventDefault();
+      const language = i18n.lang() === "en" ? "zh-CN" : "en";
+      i18n.setLanguage(language, { replace: true, source: "photo-viewer" });
+    });
     function navigationButton(button, step) {
       let touch = null, handledAt = 0;
       button.addEventListener("pointerdown", (event) => {
@@ -142,9 +223,17 @@
     });
     stage.addEventListener("pointercancel", () => { pointer = null; });
     window.addEventListener("popstate", (event) => {
-      if (opened && (!event.state || event.state.photoLightbox !== marker)) { historyOwned = false; finishClose(); }
+      if (pendingClose) {
+        const language = pendingLanguage; pendingLanguage = null; pendingClose = false;
+        restoreLanguage(language); restoreFocusAfterTraversal();
+      } else if (opened && (!event.state || event.state.photoLightbox !== marker)) {
+        const language = viewerLanguage;
+        historyOwned = false; finishClose(); restoreLanguage(language); restoreFocusAfterTraversal();
+      }
     });
-    return { open, close: requestClose, move, getState: () => ({ opened, index }) };
+    const controller = { open, close: requestClose, move, getState: () => ({ opened, index }) };
+    instances.set(document, controller);
+    return controller;
   }
   if (typeof module === "object" && module.exports) module.exports = { createGallery };
   else if (scope.document) createGallery(scope.document, scope);

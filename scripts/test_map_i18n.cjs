@@ -1,0 +1,42 @@
+'use strict';
+const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path');
+const {create}=require('../home/assets/map-i18n.js');
+const root=path.join(__dirname,'..');
+const catalogue=JSON.parse(fs.readFileSync(path.join(root,'home/locales/map.json'),'utf8'));
+const display=JSON.parse(fs.readFileSync(path.join(root,'map/display.en.json'),'utf8'));
+const source=JSON.parse(fs.readFileSync(path.join(root,'map/catalog.json'),'utf8'));
+let language='en';
+const runtime={lang:()=>language,t:(key,values={},fallback)=>String(catalogue[language][key]??fallback??key).replace(/\{(\w+)\}/g,(m,k)=>Object.hasOwn(values,k)?String(values[k]):m)};
+const helper=create({runtime,catalogue,display});global.FootprintsI18n=helper;
+const M=require('../home/assets/map-model.js'),J=require('../home/assets/map-journey.js');
+const original=JSON.stringify(source),item=source.records[0];
+assert.equal(helper.record(item,true).city,'Mianyang');assert.equal(JSON.stringify(source),original);
+assert.equal(helper.record(item,false),item,'visitor content is never translated even when its id matches an author id');
+const custom={...item,title:'我的自定义标题',description:'自定义说明 <b>kept</b>'};assert.equal(helper.record(custom,true),custom,'a changed source is not silently translated');
+const frozen=helper.freeze('en');language='zh-CN';assert.equal(frozen('map.return',{city:'London'},''),'Return to London');
+assert.equal(helper.record(item,true).city,'绵阳');language='en';
+assert.throws(()=>M.parse('{broken'),/Invalid JSON/);
+assert.equal(M.range({start:'2024-02',end:'',ongoing:true}),'2024-02 — present');
+assert.equal(M.range({start:'2024',end:'',ongoing:true},'zh-CN'),'2024 — 至今');
+const raw={version:1,title:'自定义标题',records:[{...custom,album:'',certainty:'approximate'}]};
+assert.deepEqual(M.parse(M.markdown(raw)),M.validate(raw),'English recovery Markdown preserves custom data');
+const first=M.validate(raw).records[0],base={...first,id:'home',groupId:'home-row',sequence:0,city:'London',region:'England',country:'United Kingdom',start:'2020',end:'2030',stayType:'base',baseReturn:true,lat:51.5,lon:-.1},visit={...first,id:'trip',groupId:'trip-row',sequence:1,city:'Paris',region:'',country:'France',start:'2024-01-01',end:'2024-01-03',stayType:'visit',lat:48.8,lon:2.3};
+const input=JSON.stringify([base,visit]),journey=J.build([base,visit]);assert.equal(JSON.stringify([base,visit]),input);
+assert.equal(journey.scenes.at(-1).frameworkLabel,'Return to London');
+assert.equal(journey.scenes.at(-1).start,'2024-01-03');
+// Exact independently audited public return: its inherited title is source
+// metadata, whereas frameworkLabel is the displayed return heading. The video
+// renderer uses this English place label plus dateLabel and the empty pageText.
+const publicJourney=J.build(source.records);
+const rawReturn=publicJourney.scenes.find(scene=>scene.id==='return-table-ca4e38b203344501-6-table-bb642ae2092e7100-1');
+assert(rawReturn?.derived,'the audited return scene still exists under the original journey rules');
+const displayedReturn=helper.record(rawReturn,true,'en');
+assert.equal(displayedReturn.city,'Mianyang');
+assert.equal(displayedReturn.frameworkLabel,'Return to Mianyang');
+assert.equal(displayedReturn.description,'');
+assert.equal(displayedReturn.title,rawReturn.title,'the inherited source title is not substituted for the return heading');
+for(const field of ['id','sourceId','start','end','dateLabel','lat','lon'])assert.equal(displayedReturn[field],rawReturn[field],field);
+const returnPlan=J.plan([displayedReturn],{introMs:0});
+assert.equal(J.frameAt(returnPlan,1).pageText,'','a return must not reuse the original base-stay description as its subtitle');
+assert.equal(JSON.stringify(source),original,'the read-only public regression does not alter original records');
+console.log('PASS map i18n: presentation isolation, dates, errors, recovery, return semantics, export language snapshot, and the exact audited public return scene');

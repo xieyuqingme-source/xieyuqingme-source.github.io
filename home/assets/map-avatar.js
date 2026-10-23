@@ -4,6 +4,7 @@
   else root.FootprintsAvatar = api;
 })(typeof globalThis !== 'undefined' ? globalThis : this, function () {
   'use strict';
+  const I = (key, values, fallback) => globalThis.FootprintsI18n ? globalThis.FootprintsI18n.text(key, values, fallback) : fallback.replace(/\{(\w+)\}/g, (match, name) => Object.hasOwn(values, name) ? String(values[name]) : match);
 
   // Only the bundled default image is fetched. User files stay in this page and
   // are redrawn into a small PNG, removing EXIF/text chunks and active formats.
@@ -16,27 +17,27 @@
   function invalid(message) { throw new Error(message); }
   function checkDimensions(width, height) {
     if (!Number.isInteger(width) || !Number.isInteger(height) || width < 1 || height < 1) {
-      invalid('图片尺寸无效，请换一张 PNG、JPEG 或 WebP 图片。');
+      invalid(I("map.avatar.s001", {}, "图片尺寸无效，请换一张 PNG、JPEG 或 WebP 图片。"));
     }
     if (width > MAX_DIMENSION || height > MAX_DIMENSION || width * height > MAX_PIXELS) {
-      invalid('图片尺寸过大：最长边须不超过 8192 像素，总像素不超过 3200 万。');
+      invalid(I("map.avatar.s002", {}, "图片尺寸过大：最长边须不超过 8192 像素，总像素不超过 3200 万。"));
     }
     return { width, height };
   }
   function validateFile(file) {
     if (!file || typeof file.arrayBuffer !== 'function' || !Number.isFinite(file.size) || file.size <= 0) {
-      invalid('请选择一张有效的图片。');
+      invalid(I("map.avatar.s003", {}, "请选择一张有效的图片。"));
     }
-    if (file.size > MAX_BYTES) invalid('头像图片须不超过 5 MiB。');
+    if (file.size > MAX_BYTES) invalid(I("map.avatar.s004", {}, "头像图片须不超过 5 MiB。"));
     const type = String(file.type || '').toLowerCase();
-    if (type && !MIME_TYPES.has(type)) invalid('仅支持 PNG、JPEG、WebP 图片，不支持 SVG、HTML 或 GIF。');
+    if (type && !MIME_TYPES.has(type)) invalid(I("map.avatar.s005", {}, "仅支持 PNG、JPEG、WebP 图片，不支持 SVG、HTML 或 GIF。"));
   }
   function ascii(bytes, offset, count) {
     return String.fromCharCode.apply(null, bytes.subarray(offset, offset + count));
   }
   function inspectImage(input, declaredType) {
     const bytes = input instanceof Uint8Array ? input : new Uint8Array(input);
-    if (!bytes.length || bytes.length > MAX_BYTES) invalid('头像图片无效或超过 5 MiB。');
+    if (!bytes.length || bytes.length > MAX_BYTES) invalid(I("map.avatar.s006", {}, "头像图片无效或超过 5 MiB。"));
     const view = new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength);
     let mime = '', width = 0, height = 0;
     if (bytes.length >= 24 && bytes[0] === 137 && ascii(bytes, 1, 3) === 'PNG' &&
@@ -69,7 +70,7 @@
         const chunk = ascii(bytes, offset, 4), size = view.getUint32(offset + 4, true), start = offset + 8;
         if (start + size > bytes.length) break;
         if (chunk === 'VP8X' && size >= 10) {
-          if (bytes[start] & 2) invalid('暂不支持动态 WebP，请选择静态图片。');
+          if (bytes[start] & 2) invalid(I("map.avatar.s007", {}, "暂不支持动态 WebP，请选择静态图片。"));
           width = 1 + bytes[start + 4] + (bytes[start + 5] << 8) + (bytes[start + 6] << 16);
           height = 1 + bytes[start + 7] + (bytes[start + 8] << 8) + (bytes[start + 9] << 16);
           mime = 'image/webp'; break;
@@ -86,15 +87,15 @@
         offset = start + size + (size % 2);
       }
     }
-    if (!mime) invalid('图片内容无法识别，请使用有效的 PNG、JPEG 或 WebP，不能只修改扩展名。');
+    if (!mime) invalid(I("map.avatar.s008", {}, "图片内容无法识别，请使用有效的 PNG、JPEG 或 WebP，不能只修改扩展名。"));
     const type = String(declaredType || '').toLowerCase();
-    if (type && type !== mime) invalid('图片格式与文件类型不符，请重新导出为 PNG、JPEG 或 WebP。');
+    if (type && type !== mime) invalid(I("map.avatar.s009", {}, "图片格式与文件类型不符，请重新导出为 PNG、JPEG 或 WebP。"));
     return Object.assign({ mime }, checkDimensions(width, height));
   }
 
   function cancelled(signal) {
     if (signal && signal.aborted) {
-      const error = new Error('头像选择已取消。'); error.name = 'AbortError'; throw error;
+      const error = new Error(I("map.avatar.s010", {}, "头像选择已取消。")); error.name = 'AbortError'; throw error;
     }
   }
   function decodeBlob(blob, environment, signal) {
@@ -102,7 +103,7 @@
       try { cancelled(signal); } catch (error) { reject(error); return; }
       const image = new environment.Image();
       const url = environment.URL.createObjectURL(blob);
-      const timeout = environment.setTimeout(function () { finish(new Error('图片加载超时，请换一张图片。')); }, 15000);
+      const timeout = environment.setTimeout(function () { finish(new Error(I("map.avatar.s011", {}, "图片加载超时，请换一张图片。"))); }, 15000);
       let finished = false;
       function finish(error) {
         if (finished) return;
@@ -118,8 +119,8 @@
         try { checkDimensions(image.naturalWidth, image.naturalHeight); finish(); }
         catch (error) { finish(error); }
       };
-      image.onerror = function () { finish(new Error('图片无法解码，请换一张 PNG、JPEG 或 WebP 图片。')); };
-      function onAbort() { const error = new Error('头像选择已取消。'); error.name = 'AbortError'; finish(error); }
+      image.onerror = function () { finish(new Error(I("map.avatar.s012", {}, "图片无法解码，请换一张 PNG、JPEG 或 WebP 图片。"))); };
+      function onAbort() { const error = new Error(I("map.avatar.s013", {}, "头像选择已取消。")); error.name = 'AbortError'; finish(error); }
       if (signal) signal.addEventListener('abort', onAbort, { once: true });
       image.src = url;
     });
@@ -134,14 +135,14 @@
     const canvas = environment.document.createElement('canvas');
     canvas.width = OUTPUT_SIZE; canvas.height = OUTPUT_SIZE;
     const context = canvas.getContext('2d');
-    if (!context) invalid('浏览器无法处理这张图片，请尝试重新选择。');
+    if (!context) invalid(I("map.avatar.s014", {}, "浏览器无法处理这张图片，请尝试重新选择。"));
     context.fillStyle = '#ffffff'; context.fillRect(0, 0, OUTPUT_SIZE, OUTPUT_SIZE);
     const scale = Math.min(OUTPUT_SIZE / image.naturalWidth, OUTPUT_SIZE / image.naturalHeight);
     const width = image.naturalWidth * scale, height = image.naturalHeight * scale;
     context.drawImage(image, (OUTPUT_SIZE - width) / 2, (OUTPUT_SIZE - height) / 2, width, height);
     const dataUrl = canvas.toDataURL('image/png');
     canvas.width = 1; canvas.height = 1;
-    if (!/^data:image\/png;base64,[A-Za-z0-9+/]+=*$/.test(dataUrl)) invalid('头像转换失败，请换一张图片。');
+    if (!/^data:image\/png;base64,[A-Za-z0-9+/]+=*$/.test(dataUrl)) invalid(I("map.avatar.s015", {}, "头像转换失败，请换一张图片。"));
     return dataUrl;
   }
 
@@ -152,7 +153,7 @@
     function emit(name, value, extra) {
       if (!disposed && typeof options[name] === 'function') options[name](value, extra);
     }
-    function state() { return { custom, label: custom ? '自定义头像（仅本次页面）' : '雨聊猫经典头像' }; }
+    function state() { return { custom, label: custom ? I("map.avatar.s016", {}, "自定义头像（仅本次页面）") : I("map.avatar.s017", {}, "雨聊猫经典头像") }; }
     function begin() {
       version++;
       if (abort) { abort.abort(); abort = null; }
@@ -174,7 +175,7 @@
         const value = await sanitizeImage(file, environment, abort.signal);
         return commit(value, true, token);
       } catch (error) {
-        if (current(token)) emit('onError', error.message || '头像处理失败，请重新选择。');
+        if (current(token)) emit('onError', error.message || I("map.avatar.s018", {}, "头像处理失败，请重新选择。"));
         return false;
       } finally { if (current(token)) { abort = null; emit('onBusy', false); } }
     }
@@ -185,13 +186,13 @@
         if (!cachedDefault) {
           const url = new environment.URL(options.defaultUrl || '/assets/map-avatar-default.png', environment.document.baseURI);
           if (!['http:', 'https:'].includes(url.protocol) || url.origin !== environment.location.origin) {
-            invalid('默认头像地址无效。');
+            invalid(I("map.avatar.s019", {}, "默认头像地址无效。"));
           }
           const response = await environment.fetch(url.href, { credentials: 'same-origin', cache: 'force-cache', signal: abort.signal });
           if (!current(token)) return false;
-          if (!response.ok) invalid('默认头像暂时无法加载，可以重试或选择自己的图片。');
+          if (!response.ok) invalid(I("map.avatar.s020", {}, "默认头像暂时无法加载，可以重试或选择自己的图片。"));
           const size = Number(response.headers.get('content-length'));
-          if (size > MAX_BYTES) invalid('默认头像文件过大，请稍后重试。');
+          if (size > MAX_BYTES) invalid(I("map.avatar.s021", {}, "默认头像文件过大，请稍后重试。"));
           const file = await response.blob();
           if (!current(token)) return false;
           const value = await sanitizeImage(file, environment, abort.signal);
@@ -200,14 +201,14 @@
         }
         return commit(cachedDefault, false, token);
       } catch (error) {
-        if (current(token)) emit('onError', error.name === 'AbortError' ? '默认头像加载已取消。' : (error.message || '默认头像暂时无法加载。'));
+        if (current(token)) emit('onError', error.name === 'AbortError' ? I("map.avatar.s022", {}, "默认头像加载已取消。") : (error.message || I("map.avatar.s023", {}, "默认头像暂时无法加载。")));
         return false;
       } finally { if (current(token)) { abort = null; emit('onBusy', false); } }
     }
     function download() {
-      if (disposed || !dataUrl) { emit('onError', '头像尚未准备好，请稍后重试。'); return false; }
+      if (disposed || !dataUrl) { emit('onError', I("map.avatar.s024", {}, "头像尚未准备好，请稍后重试。")); return false; }
       const link = environment.document.createElement('a');
-      link.href = dataUrl; link.download = custom ? '足迹地图-自定义头像.png' : '足迹地图-雨聊猫头像.png';
+      link.href = dataUrl; link.download = custom ? I("map.avatar.s025", {}, "足迹地图-自定义头像.png") : I("map.avatar.s026", {}, "足迹地图-雨聊猫头像.png");
       environment.document.body.appendChild(link); link.click(); link.remove();
       return true;
     }

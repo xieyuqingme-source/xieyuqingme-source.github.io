@@ -209,6 +209,7 @@ def build_english_site(blog, output, address, projects, about_data, values):
     """Generate only English routes; never add translations to blog.articles."""
     from build_blog import Blog
     from build_site import render_projects
+    from site_i18n import localize_page
     class EnglishView(Blog):
         def href(self, destination):
             if destination == "index.html":
@@ -269,7 +270,8 @@ def build_english_site(blog, output, address, projects, about_data, values):
             page = page.replace("{{" + key + "}}", value)
         if "{{" in page:
             raise ValueError(f"Unresolved English template: {name}")
-        pages[route] = page
+        chinese_route = "/" + route.removeprefix("en/").removesuffix("index.html")
+        pages[route] = localize_page(page, blog.source_root, address, chinese_route, "en")
     routes = sorted(pages)
     # Remove only old routes registered by this generator. A stale translation
     # cannot survive an incremental unified build or enter the root sitemap.

@@ -1,7 +1,13 @@
 (() => {
   "use strict";
+  const I = (key, values, fallback) => globalThis.FootprintsI18n ? globalThis.FootprintsI18n.text(key, values, fallback) : fallback.replace(/\{(\w+)\}/g, (match, name) => Object.hasOwn(values, name) ? String(values[name]) : match);
   const M = window.FootprintsModel, P = window.FootprintsPlayback, V = window.FootprintsView, L = window.FootprintsLabels, $ = id => document.getElementById(id);
   if (!M) return;
+  const D = window.FootprintsI18n;
+  const shown = (item, language) => D ? D.record(item, mode === "mine", language) : item;
+  const shownTitle = language => D ? D.documentTitle(current(), mode === "mine", language) : current().title;
+  const place = (value, language) => D ? D.place(value, language) : value;
+  let cityDialogSelection = null;
   const NS = "http://www.w3.org/2000/svg", STORAGE_KEY = "xieyuqing-footprints-v1";
   const cities = [
     ["北京", "北京", "中国", 39.9042, 116.4074], ["上海", "上海", "中国", 31.2304, 121.4737], ["广州", "广东", "中国", 23.1291, 113.2644],
@@ -21,8 +27,9 @@
     ["巴黎", "法兰西岛", "法国", 48.8566, 2.3522], ["纽约", "纽约州", "美国", 40.7128, -74.0060], ["旧金山", "加利福尼亚州", "美国", 37.7749, -122.4194],
     ["悉尼", "新南威尔士州", "澳大利亚", -33.8688, 151.2093], ["墨尔本", "维多利亚州", "澳大利亚", -37.8136, 144.9631]
   ];
-  const blank = () => ({ version: 1, title: "我的足迹地图", records: [] });
+  const blank = () => ({ version: 1, title: I("map.main.s001", {}, "我的足迹地图"), records: [] });
   let mine = blank(), guest = blank(), mode = "mine", land = null, selectedCity = null, detailId = null, landFailed = false;
+  $("visitor-title").value = guest.title;
   let avatar = null, avatarBusy = true, activeTimeline = null, activeMarker = null, frameLabel = "", playbackProjection = null, renderedAvatarSource = null, zoom = 1, expanded = false, previousBodyOverflow = "", previousMapScroll = { x: 0, y: 0 };
   let pan = { lon: 0, lat: 0 }, terrainData = "", terrainPromise = null, gestures = null, editContext = null, pickedPoint = null, resizeObserver = null, resizeFrame = null, pendingResize = false;
   const touchQuery = window.matchMedia("(any-pointer: coarse)");
@@ -38,7 +45,7 @@
   function current() { return mode === "mine" ? mine : guest; }
   function updateDraftTools() {
     $("undo-data").disabled = recording || !undoStack.length;
-    $("undo-data").title = undoStack.length ? `撤销${undoStack.at(-1).label}` : "暂无可撤销的更改";
+    $("undo-data").title = undoStack.length ? I("map.main.s002", {p0:(D ? D.retranslate(undoStack.at(-1).label) : undoStack.at(-1).label)}, "撤销{p0}") : I("map.main.s003", {}, "暂无可撤销的更改");
     $("clear-data").disabled = recording || !guest.records.length;
   }
   function commitGuest(next, label) {
@@ -52,7 +59,7 @@
   function pausePlayback() { const preview = $("video-preview"); if (preview) preview.pause(); }
   function renderSummary() {
     const all = groups(current().records), visible = all.filter(group => projection().contains(group.item)).length;
-    $("map-summary").textContent = `${all.length} 座城市 · ${current().records.length} 段经历${visible < all.length ? ` · 当前视野 ${visible} 座城市` : ""}`;
+    $("map-summary").textContent = I("map.main.s004", {p0:(all.length),p1:(current().records.length),p2:(visible < all.length ? I("map.main.s005", {p0:(visible)}, " · 当前视野 {p0} 座城市") : "")}, "{p0} 座城市 · {p1} 段经历{p2}");
   }
   function updateZoomTools() {
     if (recording) return;
@@ -66,9 +73,9 @@
   }
   function syncTouchNavigation() {
     $("footprints-map").style.touchAction = touchQuery.matches && !expanded ? "pan-y pinch-zoom" : "none";
-    $("map-expand").textContent = touchQuery.matches ? "操作地图 · 展开" : "展开大图";
-    $("map-expand").setAttribute("aria-label", touchQuery.matches ? "展开大图以拖动和双指缩放地图" : "展开大图");
-    $("map-interaction-note").textContent = touchQuery.matches ? expanded ? "单指拖动，双指缩放；右上角可退出大图，或点“工具与导出”查看下方操作。" : "在地图上单指滑动可滚动页面；点“操作地图 · 展开”后拖动或双指缩放。下方按钮可直接添加经历。" : "拖动平移，滚轮或双指缩放；双击空白处添加经历。键盘可用方向键与 ＋ / −。";
+    $("map-expand").textContent = touchQuery.matches ? I("map.main.s006", {}, "操作地图 · 展开") : I("map.main.s007", {}, "展开大图");
+    $("map-expand").setAttribute("aria-label", touchQuery.matches ? I("map.main.s008", {}, "展开大图以拖动和双指缩放地图") : I("map.main.s009", {}, "展开大图"));
+    $("map-interaction-note").textContent = touchQuery.matches ? expanded ? I("map.main.s010", {}, "单指拖动，双指缩放；右上角可退出大图，或点“工具与导出”查看下方操作。") : I("map.main.s011", {}, "在地图上单指滑动可滚动页面；点“操作地图 · 展开”后拖动或双指缩放。下方按钮可直接添加经历。") : I("map.main.s012", {}, "拖动平移，滚轮或双指缩放；双击空白处添加经历。键盘可用方向键与 ＋ / −。");
   }
   function expandMap(value) {
     if (recording && value) return;
@@ -77,7 +84,7 @@
     const panel = document.querySelector(".map-canvas-panel"); panel.classList.toggle("is-expanded", value);
     $("map-expand").setAttribute("aria-expanded", String(value)); $("map-expanded-close").hidden = !value; $("map-expanded-tools").hidden = !value;
     syncTouchNavigation();
-    if (value) { previousBodyOverflow = document.body.style.overflow; document.body.style.overflow = "hidden"; panel.setAttribute("role", "dialog"); panel.setAttribute("aria-modal", "true"); panel.setAttribute("aria-label", "足迹地图大图；按 Escape 退出"); $("map-expanded-close").focus({ preventScroll: true }); panel.scrollTop = 0; }
+    if (value) { previousBodyOverflow = document.body.style.overflow; document.body.style.overflow = "hidden"; panel.setAttribute("role", "dialog"); panel.setAttribute("aria-modal", "true"); panel.setAttribute("aria-label", I("map.main.s013", {}, "足迹地图大图；按 Escape 退出")); $("map-expanded-close").focus({ preventScroll: true }); panel.scrollTop = 0; }
     else { document.body.style.overflow = previousBodyOverflow; panel.removeAttribute("role"); panel.removeAttribute("aria-modal"); panel.removeAttribute("aria-label"); $("map-expand").focus({ preventScroll: true }); }
     renderMap();
     if (!value) {
@@ -101,9 +108,9 @@
   }
   function showPlaybackRecord(value) {
     if (value.state === "idle" || !value.record) return;
-    const item = value.record, card = $("playback-current");
-    card.replaceChildren(element("p", `${value.index + 1} / ${value.count} · ${item.city} · ${item.country}`, "playback-meta"), element("h3", item.derived ? item.frameworkLabel : item.title), element("p", item.derived ? item.dateLabel : `${item.certainty === "approximate" ? "≈ 约略 · " : ""}${M.range(item)}`, "playback-meta"), element("p", item.description || ""));
-    if (item.album) { const link = element("a", "查看关联相册 →"); link.href = item.album; card.append(link); }
+    const item = shown(value.record), card = $("playback-current");
+    card.replaceChildren(element("p", `${value.index + 1} / ${value.count} · ${item.city} · ${item.country}`, "playback-meta"), element("h3", item.derived ? item.frameworkLabel : item.title), element("p", item.derived ? item.dateLabel : `${item.certainty === "approximate" ? I("map.main.s014", {}, "≈ 约略 · ") : ""}${M.range(item)}`, "playback-meta"), element("p", item.description || ""));
+    if (item.album) { const link = element("a", I("map.main.s015", {}, "查看关联相册 →")); link.href = window.SiteI18n ? window.SiteI18n.localizedPath(item.album) : item.album; card.append(link); }
     if (activeTimeline) { activeTimeline.classList.remove("is-playing"); activeTimeline.removeAttribute("aria-current"); }
     activeTimeline = timelineNodes.get(item.id) || null;
     if (activeTimeline) { activeTimeline.classList.add("is-playing"); activeTimeline.setAttribute("aria-current", "step"); }
@@ -140,8 +147,8 @@
     const label = `${value.state}:${value.index}:${value.phase}:${value.speed}`;
     if (label !== frameLabel) {
       frameLabel = label; $("playback-panel").dataset.phase = value.phase;
-      const phase = value.state === "ended" ? "视频生成完成" : value.next ? "移动到下一站" : "当前停留";
-      $("playback-progress").textContent = `${value.index + 1} / ${value.count} · ${phase} · ${value.speed}×${project.contains(point) ? "" : " · 地点在当前视野外"}`;
+      const phase = value.state === "ended" ? I("map.main.s016", {}, "视频生成完成") : value.next ? I("map.main.s017", {}, "移动到下一站") : I("map.main.s018", {}, "当前停留");
+      $("playback-progress").textContent = `${value.index + 1} / ${value.count} · ${phase} · ${value.speed}×${project.contains(point) ? "" : I("map.main.s019", {}, " · 地点在当前视野外")}`;
     }
   }
   function groups(records) {
@@ -214,7 +221,7 @@
     layer.replaceChildren(); layer.dataset.count = "0";
     if (!$("map-labels").checked || !L || !labelMeasure) return;
     const project = playbackProjection || projection(), labelStyle = cityLabelStyle(); labelMeasure.font = `${labelStyle.fontSize}px sans-serif`;
-    const candidates = groups(current().records).filter(group => project.contains(group.item)).map(group => { const point = project.point(group.item.lon, group.item.lat); return { key: group.key, name: group.item.city, x: point[0], y: point[1], priority: group.key === activeKey ? 1 : 0, markerRadius: group.key === activeKey ? 22 : 4 }; });
+    const candidates = groups(current().records).filter(group => project.contains(group.item)).map(group => { const point = project.point(group.item.lon, group.item.lat); return { key: group.key, name: shown(group.item).city, x: point[0], y: point[1], priority: group.key === activeKey ? 1 : 0, markerRadius: group.key === activeKey ? 22 : 4 }; });
     const labels = L.layout(candidates, { width: project.width, height: project.height, visibleSet: allowed || undefined, ...labelStyle, measure: text => labelMeasure.measureText(text).width });
     for (const label of labels) {
       const group = svg("g", { class: "map-city-label", "data-city-key": label.key });
@@ -228,7 +235,7 @@
     const map = $("footprints-map"), doc = current(), project = projection(), allGroups = groups(doc.records);
     map.setAttribute("viewBox", `0 0 ${project.width} ${project.height}`);
     playbackProjection = project; markerNodes.clear(); activeMarker = null; renderedAvatarSource = null; frameLabel = "";
-    map.replaceChildren(svg("title", { id: "map-svg-title" }, `${doc.title} · 城市足迹示意图`), svg("desc", { id: "map-svg-description" }, "城市中心与各段停留。点击城市或通过 Tab 和回车查看经历。陆地底图无行政边界，非导航地图。"));
+    map.replaceChildren(svg("title", { id: "map-svg-title" }, I("map.main.s020", {p0:(shownTitle())}, "{p0} · 城市足迹示意图")), svg("desc", { id: "map-svg-description" }, I("map.main.s021", {}, "城市中心与各段停留。点击城市或通过 Tab 和回车查看经历。陆地底图无行政边界，非导航地图。")));
     const defs = svg("defs"), clip = svg("clipPath", { id: "footprints-clip" });
     clip.append(svg("rect", { x: project.left, y: project.top, width: project.width, height: project.height })); defs.append(clip);
     const avatarClip = svg("clipPath", { id: "playback-avatar-clip", clipPathUnits: "userSpaceOnUse" }); avatarClip.append(svg("circle", { r: 19 })); defs.append(avatarClip); map.append(defs);
@@ -249,8 +256,8 @@
     const visibleCities = allGroups.filter(group => project.contains(group.item));
     const hitRadius = 22 / screenScale();
     for (const city of visibleCities) {
-      const item = city.item, point = project.point(item.lon, item.lat), approximate = city.records.some(record => record.certainty === "approximate");
-      const marker = svg("g", { class: "map-marker", "data-city-key": city.key, transform: `translate(${point})`, tabindex: "0", role: "button", "aria-label": `${item.city}，${item.country}，${city.records.length} 段经历，查看说明` });
+      const item = shown(city.item), point = project.point(item.lon, item.lat), approximate = city.records.some(record => record.certainty === "approximate");
+      const marker = svg("g", { class: "map-marker", "data-city-key": city.key, transform: `translate(${point})`, tabindex: "0", role: "button", "aria-label": I("map.main.s022", {p0:(item.city),p1:(item.country),p2:(city.records.length)}, "{p0}，{p1}，{p2} 段经历，查看说明") });
       marker.append(svg("title", {}, `${item.city} · ${item.country}`), svg("circle", { class: "map-hit", r: hitRadius }), svg("circle", { class: "map-dot", r: 3.2 }));
       const onRight = point[0] > project.left + project.width - 160;
       marker.append(svg("text", { class: "map-hover-label", x: onRight ? -10 : 10, y: -10, "text-anchor": onRight ? "end" : "start" }, item.city + (approximate ? " ≈" : "")));
@@ -276,64 +283,68 @@
       button.setAttribute("aria-pressed", String(selectedCity === key)); if (accessible) button.setAttribute("aria-label", accessible);
       button.addEventListener("click", () => chooseCity(key)); panel.append(button);
     };
-    makeButton("全部城市", null);
+    makeButton(I("map.main.s023", {}, "全部城市"), null);
     for (const city of all) {
       const approximate = city.records.some(item => item.certainty === "approximate");
-      makeButton(`${city.item.city} · ${city.records.length} 段${approximate ? " ≈" : ""}`, city.key, `${[city.item.city, city.item.region, city.item.country].filter(Boolean).join("，")}，${city.records.length} 段经历${approximate ? "，含约略记录" : ""}`);
+      makeButton(I("map.main.s024", {p0:(shown(city.item).city),p1:(city.records.length),p2:(approximate ? " ≈" : "")}, "{p0} · {p1} 段{p2}"), city.key, I("map.main.s025", {p0:([shown(city.item).city, shown(city.item).region, shown(city.item).country].filter(Boolean).join(D?.lang() === "en" ? ", " : "，")),p1:(city.records.length),p2:(approximate ? I("map.main.s026", {}, "，含约略记录") : "")}, "{p0}，{p1} 段经历{p2}"));
     }
   }
   function renderTimeline() {
     const doc = current(), allGroups = groups(doc.records), chosen = selectedCity && allGroups.find(group => group.key === selectedCity);
     if (!chosen) selectedCity = null;
     const items = chosen ? chosen.records : M.sorted(doc.records);
-    $("timeline-title").textContent = chosen ? `${chosen.item.city} · ${items.length} 段经历` : "停留时间轴";
+    $("timeline-title").textContent = chosen ? I("map.main.s027", {p0:(shown(chosen.item).city),p1:(items.length)}, "{p0} · {p1} 段经历") : I("map.main.s028", {}, "停留时间轴");
     $("timeline-title").tabIndex = -1; $("clear-city").hidden = !chosen;
     const list = $("timeline-list"); list.replaceChildren(); timelineNodes.clear(); activeTimeline = null;
-    for (const item of items) {
+    for (const original of items) {
+      const item = shown(original);
       const li = element("li"); li.dataset.recordId = item.id;
       timelineNodes.set(item.id, li);
       li.append(element("p", M.range(item), "timeline-date"), element("span", `${item.city} · ${item.country}`, "timeline-place"));
-      if (item.certainty === "approximate") li.append(element("span", "约略", "certainty-badge"));
+      if (item.certainty === "approximate") li.append(element("span", I("map.main.s029", {}, "约略"), "certainty-badge"));
       const heading = element("h3"), open = element("button", item.title, "timeline-open"); open.type = "button"; open.addEventListener("click", () => openDetail(item.id)); heading.append(open); li.append(heading);
       // Keep the complete original text, but do not repeat a title used as its own description.
       if (item.description && item.description !== item.title) li.append(element("p", item.description, "timeline-description"));
       list.append(li);
     }
     $("empty-state").hidden = items.length > 0;
-    $("empty-state").textContent = mode === "visitor" ? "还没有可显示的经历。添加一段停留，或导入自己的足迹文档。" : "尚无已允许展示的经历；待本人核对后再加入。你可以切换到“制作你的地图”记录自己的故事。";
+    $("empty-state").textContent = mode === "visitor" ? I("map.main.s030", {}, "还没有可显示的经历。添加一段停留，或导入自己的足迹文档。") : I("map.main.s031", {}, "尚无已允许展示的经历；待本人核对后再加入。你可以切换到“制作你的地图”记录自己的故事。");
   }
   function render() {
     $("mode-mine").setAttribute("aria-pressed", String(mode === "mine")); $("mode-visitor").setAttribute("aria-pressed", String(mode === "visitor"));
-    $("visitor-tools").hidden = mode !== "visitor"; $("map-title").textContent = current().title;
+    $("visitor-tools").hidden = mode !== "visitor"; $("map-title").textContent = shownTitle();
     const all = groups(current().records);
     if (selectedCity && !all.some(city => city.key === selectedCity)) selectedCity = null;
     renderSummary();
     renderCities(all); renderMap(); renderTimeline();
     resetPlayback(); updateDraftTools();
   }
-  function openDetail(id) {
-    const item = current().records.find(record => record.id === id); if (!item) return;
-    pausePlayback();
+  function fillDetail(id) {
+    const original = current().records.find(record => record.id === id); if (!original) return false;
+    const item = shown(original);
     detailId = id; $("detail-title").textContent = item.title;
-    $("detail-meta").textContent = `${M.range(item)}${item.certainty === "approximate" ? " · 约略" : " · 已证实"}\n${[item.city, item.region, item.country].filter((value, index, values) => value && values.indexOf(value) === index).join(" · ")}`;
-    $("detail-description").textContent = item.description || "这段经历尚未填写说明。";
+    $("detail-meta").textContent = `${M.range(item)}${item.certainty === "approximate" ? I("map.main.s032", {}, " · 约略") : I("map.main.s033", {}, " · 已证实")}\n${[item.city, item.region, item.country].filter((value, index, values) => value && values.indexOf(value) === index).join(" · ")}`;
+    $("detail-description").textContent = item.description || I("map.main.s034", {}, "这段经历尚未填写说明。");
     $("detail-description").hidden = !!item.description && item.description === item.title;
-    $("detail-album").hidden = !item.album; if (item.album) $("detail-album").setAttribute("href", item.album); else $("detail-album").removeAttribute("href");
-    $("detail-edit-tools").hidden = mode !== "visitor"; $("detail-dialog").showModal();
+    $("detail-album").hidden = !item.album; if (item.album) $("detail-album").setAttribute("href", window.SiteI18n ? window.SiteI18n.localizedPath(item.album) : item.album); else $("detail-album").removeAttribute("href");
+    $("detail-edit-tools").hidden = mode !== "visitor"; return true;
+  }
+  function openDetail(id) {
+    pausePlayback(); if (fillDetail(id)) $("detail-dialog").showModal();
   }
   function knownCity() {
     const key = $("city-choice").value; if (key === "") return false;
     const city = cities[Number(key)];
-    return city && $("record-city").value.trim() === city[0] && $("record-region").value.trim() === city[1] && $("record-country").value.trim() === city[2] && Number($("record-lat").value) === city[3] && Number($("record-lon").value) === city[4];
+    return city && [city[0], place(city[0], "en")].includes($("record-city").value.trim()) && [city[1], place(city[1], "en")].includes($("record-region").value.trim()) && [city[2], place(city[2], "en")].includes($("record-country").value.trim()) && Number($("record-lat").value) === city[3] && Number($("record-lon").value) === city[4];
   }
   function editRecord(id, point) {
     pausePlayback(); if (gestures) gestures.reset(); editContext = { base: guest };
     const item = id && guest.records.find(record => record.id === id);
-    $("record-form").reset(); $("record-error").textContent = ""; $("record-dialog-title").textContent = item ? "编辑经历" : mode === "mine" ? "添加到访客草稿" : "添加经历";
+    $("record-form").reset(); $("record-error").textContent = ""; $("record-dialog-title").textContent = item ? I("map.main.s035", {}, "编辑经历") : mode === "mine" ? I("map.main.s036", {}, "添加到访客草稿") : I("map.main.s037", {}, "添加经历");
     $("record-id").value = item ? item.id : ""; $("record-stay-type").value = item && item.stayType || "visit"; $("record-ongoing").checked = !!(item && item.ongoing);
     for (const key of ["start", "end", "city", "region", "country", "lat", "lon", "title", "description", "album", "certainty"]) $("record-" + key).value = item ? item[key] : key === "certainty" ? "confirmed" : "";
     if (item) {
-      const index = cities.findIndex(city => city[0] === item.city && city[1] === item.region && city[2] === item.country && city[3] === item.lat && city[4] === item.lon);
+      const index = cities.findIndex(city => [city[0], place(city[0], "en")].includes(item.city) && [city[1], place(city[1], "en")].includes(item.region) && [city[2], place(city[2], "en")].includes(item.country) && city[3] === item.lat && city[4] === item.lon);
       $("city-choice").value = index < 0 ? "" : String(index); $("coordinate-confirm").checked = index < 0;
     }
     if (point) { $("record-lat").value = point.lat.toFixed(4); $("record-lon").value = point.lon.toFixed(4); $("record-certainty").value = "approximate"; $("coordinate-confirm").checked = false; }
@@ -356,7 +367,7 @@
     copy.querySelectorAll("image").forEach(node => { const href = node.getAttribute("href") || ""; if (!/^data:image\/png;base64,/.test(href) && !(node.id === "map-terrain-image" && /^data:image\/(?:jpeg|webp);base64,/.test(href))) node.remove(); });
     const sheet = svg("style", {}, `.map-water{fill:${colors.soft}}.map-land{fill:${colors.line};stroke:${colors.surface};stroke-width:.6}.map-graticule{fill:none;stroke:${colors.muted};stroke-opacity:.17;stroke-width:.7}.map-order{fill:none;stroke:${colors.accent};stroke-width:1.6;stroke-dasharray:5 5;opacity:.7}.map-marker .map-dot{fill:${colors.accent};stroke:${colors.surface};stroke-width:1.5}.map-marker .map-hit{fill:transparent;stroke:none}.map-playback-avatar .avatar-ring{fill:${colors.surface};stroke:${colors.accent};stroke-width:2.5}.map-playback-avatar .avatar-fallback{fill:${colors.accent}}.map-city-label{pointer-events:none;user-select:none;-webkit-user-select:none}.map-city-label text{fill:${colors.ink};font:14px sans-serif;paint-order:stroke fill;stroke:${colors.surface};stroke-opacity:.82;stroke-width:1.5;stroke-linejoin:round;pointer-events:none}.export-caption{fill:${colors.ink};font:20px sans-serif}.export-caption-date{fill:${colors.accent};font:20px sans-serif}.export-caption-city{fill:${colors.ink};font:bold 26px sans-serif}`);
     copy.insertBefore(sheet, copy.firstChild);
-    const item = videoFrame.state !== "idle" ? videoFrame.record : current().records.find(record => record.id === detailId);
+    const item = shown(videoFrame.state !== "idle" ? videoFrame.record : current().records.find(record => record.id === detailId));
     if (!backgroundOnly && item) {
       const lines = []; for (const paragraph of (item.description || "").split("\n")) { const chars = Array.from(paragraph); if (!chars.length) lines.push(""); for (let offset = 0; offset < chars.length; offset += 44) lines.push(chars.slice(offset, offset + 44).join("")); }
       const height = mapHeight + 55 + lines.length * 30;
@@ -374,33 +385,35 @@
   async function imageExport(kind) {
     try {
       const source = exportSvg();
-      if (kind === "svg") { download(source, "footprints.svg"); status("已导出 SVG 图片，包含当前视野与当前经历原文，底图来源见页面说明。"); return; }
+      if (kind === "svg") { download(source, "footprints.svg"); status(I("map.main.s038", {}, "已导出 SVG 图片，包含当前视野与当前经历原文，底图来源见页面说明。")); return; }
       const url = URL.createObjectURL(source);
       try {
         const image = new Image(); image.src = url; await image.decode();
-        const canvas = document.createElement("canvas"); canvas.width = 1600; canvas.height = Math.round(1600 * image.naturalHeight / image.naturalWidth); if (canvas.height > 16384 || canvas.width * canvas.height > 32000000) throw new Error("当前说明太长，请使用 SVG 完整保留原文，或缩短说明后生成 PNG。"); const context = canvas.getContext("2d"); if (!context) throw new Error("浏览器未提供图片画布。"); context.imageSmoothingEnabled = true; context.imageSmoothingQuality = "high"; context.drawImage(image, 0, 0, canvas.width, canvas.height);
-        const blob = await new Promise(resolve => canvas.toBlob(resolve, "image/png")); if (!blob) throw new Error("浏览器未能生成 PNG。");
-        download(blob, "footprints.png"); status("已导出 PNG 图片，包含当前视野与当前经历原文，底图来源见页面说明。");
+        const canvas = document.createElement("canvas"); canvas.width = 1600; canvas.height = Math.round(1600 * image.naturalHeight / image.naturalWidth); if (canvas.height > 16384 || canvas.width * canvas.height > 32000000) throw new Error(I("map.main.s039", {}, "当前说明太长，请使用 SVG 完整保留原文，或缩短说明后生成 PNG。")); const context = canvas.getContext("2d"); if (!context) throw new Error(I("map.main.s040", {}, "浏览器未提供图片画布。")); context.imageSmoothingEnabled = true; context.imageSmoothingQuality = "high"; context.drawImage(image, 0, 0, canvas.width, canvas.height);
+        const blob = await new Promise(resolve => canvas.toBlob(resolve, "image/png")); if (!blob) throw new Error(I("map.main.s041", {}, "浏览器未能生成 PNG。"));
+        download(blob, "footprints.png"); status(I("map.main.s042", {}, "已导出 PNG 图片，包含当前视野与当前经历原文，底图来源见页面说明。"));
       } finally { URL.revokeObjectURL(url); }
-    } catch (error) { status(`图片导出失败：${error.message} 请尝试 SVG，或使用浏览器截图。`, true); }
+    } catch (error) { status(I("map.main.s043", {p0:(error.message)}, "图片导出失败：{p0} 请尝试 SVG，或使用浏览器截图。"), true); }
   }
-  function openCityDetails(key) {
-    if (recording) return; pausePlayback(); if (gestures) gestures.reset();
+  function openCityDetails(key, refreshing = false) {
+    cityDialogSelection = { key };
+    if (recording && !refreshing) return; if (!refreshing) pausePlayback(); if (gestures && !refreshing) gestures.reset();
     const city = groups(current().records).find(group => group.key === key); if (!city) return;
     if (city.records.length === 1) { $("city-dialog").close(); openDetail(city.records[0].id); return; }
-    $("city-dialog-title").textContent = `${city.item.city} · ${city.records.length} 段经历`;
+    $("city-dialog-title").textContent = I("map.main.s044", {p0:(shown(city.item).city),p1:(city.records.length)}, "{p0} · {p1} 段经历");
     const panel = $("city-options"); panel.replaceChildren();
-    for (const item of city.records) { const section = element("section"), button = element("button", `${M.range(item)} · ${item.title}`); button.type = "button"; button.addEventListener("click", () => { $("city-dialog").close(); openDetail(item.id); }); section.append(button, element("p", item.description.length > 240 ? item.description.slice(0, 240) + "…" : item.description)); panel.append(section); }
-    $("city-dialog").showModal();
+    for (const original of city.records) { const item = shown(original); const section = element("section"), button = element("button", `${M.range(item)} · ${item.title}`); button.type = "button"; button.addEventListener("click", () => { $("city-dialog").close(); openDetail(item.id); }); section.append(button, element("p", item.description.length > 240 ? item.description.slice(0, 240) + "…" : item.description)); panel.append(section); }
+    if (!$("city-dialog").open) $("city-dialog").showModal();
   }
   function chooseNearby(event, fallback) {
     const point = V.localPoint($("footprints-map"), event); if (!point) { openCityDetails(fallback); return; }
     const ratio = screenScale(), project = projection();
     const nearby = groups(current().records).map(group => { const p = project.point(group.item.lon, group.item.lat); return { group, distance: Math.hypot(point.x - p[0], point.y - p[1]) * ratio }; }).filter(entry => entry.distance <= 22 && markerNodes.has(entry.group.key) && markerNodes.get(entry.group.key).getAttribute("display") !== "none").sort((a, b) => a.distance - b.distance);
     if (nearby.length < 2) { openCityDetails(nearby[0] ? nearby[0].group.key : fallback); return; }
-    $("city-dialog-title").textContent = "这里有多个地点，选择一个查看"; const panel = $("city-options"); panel.replaceChildren();
-    for (const entry of nearby) { const button = element("button", `${entry.group.item.city} · ${entry.group.records.length} 段经历`); button.type = "button"; button.addEventListener("click", () => { $("city-dialog").close(); openCityDetails(entry.group.key); }); panel.append(button); }
-    $("city-dialog").showModal();
+    cityDialogSelection = { nearby: nearby.map(entry => entry.group.key) };
+    $("city-dialog-title").textContent = I("map.main.s045", {}, "这里有多个地点，选择一个查看"); const panel = $("city-options"); panel.replaceChildren();
+    for (const entry of nearby) { const button = element("button", I("map.main.s046", {p0:(shown(entry.group.item).city),p1:(entry.group.records.length)}, "{p0} · {p1} 段经历")); button.type = "button"; button.addEventListener("click", () => { $("city-dialog").close(); openCityDetails(entry.group.key); }); panel.append(button); }
+    if (!$("city-dialog").open) $("city-dialog").showModal();
   }
   function pickPlace(point) {
     if (recording || !point || !projection().contains(point)) return;
@@ -414,13 +427,13 @@
       // WebP is preferred; a missing/unsupported derivative falls back to JPEG.
       for (const format of ["webp", "jpg"]) {
         try {
-          const response = await fetch(`/assets/map-terrain.${format}`, { credentials: "same-origin" }); if (!response.ok) throw new Error("本地地形资源无法读取。");
-          const blob = await response.blob(); if (blob.size > 8 * 1024 * 1024) throw new Error("地形资源过大。");
+          const response = await fetch(`/assets/map-terrain.${format}`, { credentials: "same-origin" }); if (!response.ok) throw new Error(I("map.main.s047", {}, "本地地形资源无法读取。"));
+          const blob = await response.blob(); if (blob.size > 8 * 1024 * 1024) throw new Error(I("map.main.s048", {}, "地形资源过大。"));
           const bytes = new Uint8Array(await blob.arrayBuffer());
           const valid = format === "webp" ? String.fromCharCode(...bytes.slice(0, 4)) === "RIFF" && String.fromCharCode(...bytes.slice(8, 12)) === "WEBP" : bytes[0] === 255 && bytes[1] === 216 && bytes[2] === 255;
-          if (!valid) throw new Error("地形资源格式无效。");
+          if (!valid) throw new Error(I("map.main.s049", {}, "地形资源格式无效。"));
           const type = format === "webp" ? "image/webp" : "image/jpeg";
-          const data = await new Promise((resolve, reject) => { const reader = new FileReader(); reader.onload = () => resolve(reader.result); reader.onerror = () => reject(new Error("无法读取地形图像。")); reader.readAsDataURL(new Blob([bytes], { type })); });
+          const data = await new Promise((resolve, reject) => { const reader = new FileReader(); reader.onload = () => resolve(reader.result); reader.onerror = () => reject(new Error(I("map.main.s050", {}, "无法读取地形图像。"))); reader.readAsDataURL(new Blob([bytes], { type })); });
           const image = new Image(); image.src = data; await image.decode(); terrainData = data; return;
         } catch (error) { if (format === "jpg") throw error; }
       }
@@ -428,12 +441,18 @@
   }
   try {
     const raw = JSON.parse($("footprints-data").textContent); mine = M.validate(raw, true);
-    if (raw.preview === true || (typeof raw.notice === "string" && raw.notice)) { $("preview-notice").hidden = false; $("preview-notice").textContent = typeof raw.notice === "string" && raw.notice ? raw.notice : "本地预览：经历尚待本人核对，未发布。"; }
-  } catch (error) { mine = { version: 1, title: "我的足迹", records: [] }; status(`站点足迹数据暂不可用：${error.message}`, true); }
-  cities.forEach((city, index) => { const option = element("option", [city[0], city[1] === city[0] ? "" : city[1], city[2]].filter(Boolean).join(" · ")); option.value = String(index); $("city-choice").append(option); });
+    if (raw.preview === true || (typeof raw.notice === "string" && raw.notice)) { $("preview-notice").hidden = false; $("preview-notice").textContent = raw.preview === true ? I("map.preview.notice", {}, "本地待核对预览：这些经历尚未批准公开，来源与私人备注不包含在网页中。") : typeof raw.notice === "string" && raw.notice ? raw.notice : I("map.main.s051", {}, "本地预览：经历尚待本人核对，未发布。"); }
+  } catch (error) { mine = { version: 1, title: I("map.main.s052", {}, "我的足迹"), records: [] }; status(I("map.main.s053", {p0:(error.message)}, "站点足迹数据暂不可用：{p0}"), true); }
+  function fillCityDictionary() {
+    const choice = $("city-choice"), selected = choice.value;
+    while (choice.options.length > 1) choice.remove(1);
+    cities.forEach((city, index) => { const option = element("option", [place(city[0]), city[1] === city[0] ? "" : place(city[1]), place(city[2])].filter(Boolean).join(" · ")); option.value = String(index); choice.append(option); });
+    choice.value = selected;
+  }
+  fillCityDictionary();
   $("mode-mine").addEventListener("click", () => { mode = "mine"; selectedCity = null; status(""); render(); });
   $("mode-visitor").addEventListener("click", () => { mode = "visitor"; selectedCity = null; status(""); render(); });
-  $("visitor-title").addEventListener("change", () => { const title = $("visitor-title").value.trim(); if (!title) { $("visitor-title").value = guest.title; status("地图名称不能为空。", true); return; } commitGuest({ ...guest, title }, "地图改名"); render(); });
+  $("visitor-title").addEventListener("change", () => { const title = $("visitor-title").value.trim(); if (!title) { $("visitor-title").value = guest.title; status(I("map.main.s054", {}, "地图名称不能为空。"), true); return; } commitGuest({ ...guest, title }, I("map.main.s055", {}, "地图改名")); render(); });
   $("map-view").addEventListener("change", () => { zoom = 1; pan = { lon: 0, lat: 0 }; redrawViewport(); }); $("map-route").addEventListener("change", renderMap); $("clear-city").addEventListener("click", () => { selectedCity = null; render(); });
   $("map-zoom-in").addEventListener("click", () => zoomCamera(2));
   $("map-zoom-out").addEventListener("click", () => zoomCamera(.5));
@@ -465,58 +484,60 @@
   $("undo-data").addEventListener("click", () => {
     if (recording || !undoStack.length) return; pausePlayback();
     const previous = undoStack.pop(); guest = M.parse(previous.document);
-    $("visitor-title").value = guest.title; selectedCity = null; render(); status(`已撤销${previous.label}。`);
+    $("visitor-title").value = guest.title; selectedCity = null; render(); status(I("map.main.s056", {p0:(D ? D.retranslate(previous.label) : previous.label)}, "已撤销{p0}。"));
   });
   $("clear-data").addEventListener("click", () => {
-    if (recording || !guest.records.length) return; pausePlayback();
-    commitGuest({ ...guest, records: [] }, "清空"); selectedCity = null; render(); status("已清空访客草稿，可撤销。");
+    if (recording || !guest.records.length) return;
+    if (!window.confirm(I("map.confirm.clear", {}, "清空当前访客草稿？可以撤销；本机保存不会删除。"))) { status(I("map.action.cancelled", {}, "已取消，草稿与本机保存未更改。")); return; }
+    pausePlayback();
+    commitGuest({ ...guest, records: [] }, I("map.main.s057", {}, "清空")); selectedCity = null; render(); status(I("map.main.s058", {}, "已清空访客草稿，可撤销。"));
   });
   $("city-choice").addEventListener("change", () => {
     const value = $("city-choice").value; $("coordinate-confirm").checked = false; if (value === "") return;
-    const city = cities[Number(value)]; ["city", "region", "country", "lat", "lon"].forEach((key, index) => { $("record-" + key).value = city[index]; });
+    const city = cities[Number(value)]; ["city", "region", "country", "lat", "lon"].forEach((key, index) => { $("record-" + key).value = index < 3 ? place(city[index]) : city[index]; });
   });
   for (const key of ["city", "region", "country", "lat", "lon"]) $("record-" + key).addEventListener("input", () => { $("city-choice").value = ""; $("coordinate-confirm").checked = false; });
   $("record-close").addEventListener("click", () => $("record-dialog").close()); $("record-cancel").addEventListener("click", () => $("record-dialog").close());
   $("record-form").addEventListener("submit", event => {
     event.preventDefault(); $("record-error").textContent = "";
     try {
-      if (!knownCity() && !$("coordinate-confirm").checked) throw new Error("手动地点需要先核对城市、国家 / 区域与城市中心坐标，再勾选确认；不会自动猜测重名城市。");
+      if (!knownCity() && !$("coordinate-confirm").checked) throw new Error(I("map.main.s059", {}, "手动地点需要先核对城市、国家 / 区域与城市中心坐标，再勾选确认；不会自动猜测重名城市。"));
       const previous = guest.records.find(record => record.id === $("record-id").value);
       const item = { ...(previous || {}), id: $("record-id").value || newId(), stayType: $("record-stay-type").value, ongoing: $("record-ongoing").checked };
       if (item.stayType !== "base") delete item.baseReturn;
       if (item.stayType !== "visit") delete item.returnAfter;
       for (const key of ["start", "end", "city", "region", "country", "title", "description", "album", "certainty"]) item[key] = $("record-" + key).value;
-      for (const key of ["lat", "lon"]) { if (!$("record-" + key).value.trim()) throw new Error("请填写城市中心经纬度。"); item[key] = Number($("record-" + key).value); }
+      for (const key of ["lat", "lon"]) { if (!$("record-" + key).value.trim()) throw new Error(I("map.main.s060", {}, "请填写城市中心经纬度。")); item[key] = Number($("record-" + key).value); }
       if (!item.title.trim()) item.title = item.city.trim();
       const base = editContext ? editContext.base : guest;
       const records = base.records.slice(), index = records.findIndex(record => record.id === item.id); if (index < 0) records.push(item); else records[index] = item;
-      commitGuest({ version: 1, title: base.title, records }, index < 0 ? "添加经历" : "编辑经历"); mode = "visitor"; $("visitor-title").value = guest.title; $("record-dialog").close(); selectedCity = null; render(); status(index < 0 ? "已添加经历。需要保留时，请主动保存或导出。" : "已保存修改。需要保留时，请主动保存或导出。");
+      commitGuest({ version: 1, title: base.title, records }, index < 0 ? I("map.main.s061", {}, "添加经历") : I("map.main.s062", {}, "编辑经历")); mode = "visitor"; $("visitor-title").value = guest.title; $("record-dialog").close(); selectedCity = null; render(); status(index < 0 ? I("map.main.s063", {}, "已添加经历。需要保留时，请主动保存或导出。") : I("map.main.s064", {}, "已保存修改。需要保留时，请主动保存或导出。"));
     } catch (error) { $("record-error").textContent = error.message; }
   });
   $("detail-close").addEventListener("click", () => $("detail-dialog").close());
   $("detail-edit").addEventListener("click", () => { if (mode !== "visitor") return; $("detail-dialog").close(); editRecord(detailId); });
-  $("detail-delete").addEventListener("click", () => { if (mode !== "visitor" || recording) return; commitGuest({ ...guest, records: guest.records.filter(item => item.id !== detailId) }, "移除经历"); $("detail-dialog").close(); render(); status("已移除经历，可撤销。"); });
+  $("detail-delete").addEventListener("click", () => { if (mode !== "visitor" || recording) return; commitGuest({ ...guest, records: guest.records.filter(item => item.id !== detailId) }, I("map.main.s065", {}, "移除经历")); $("detail-dialog").close(); render(); status(I("map.main.s066", {}, "已移除经历，可撤销。")); });
   $("import-file").addEventListener("change", async () => {
     pausePlayback();
     const file = $("import-file").files[0]; if (!file) return;
-    if (file.size > M.MAX_BYTES) { status("文档超过 1 MB，未读取。", true); $("import-file").value = ""; return; }
-    try { $("import-text").value = await file.text(); status("文件已载入输入框；点击“验证并合并导入”后才会更改地图。"); } catch (_) { status("无法读取该文件，请重新选择或粘贴文档。", true); }
+    if (file.size > M.MAX_BYTES) { status(I("map.main.s067", {}, "文档超过 1 MB，未读取。"), true); $("import-file").value = ""; return; }
+    try { $("import-text").value = await file.text(); status(I("map.main.s068", {}, "文件已载入输入框；点击“验证并合并导入”后才会更改地图。")); } catch (_) { status(I("map.main.s069", {}, "无法读取该文件，请重新选择或粘贴文档。"), true); }
     $("import-file").value = "";
   });
   $("import-apply").addEventListener("click", () => {
     pausePlayback();
-    try { const incoming = M.parse($("import-text").value), result = M.merge(guest, incoming); commitGuest(result.document, "导入"); $("visitor-title").value = guest.title; selectedCity = null; render(); status(`导入完成：新增 ${result.added} 条，跳过相同记录 ${result.skipped} 条。坐标来自文档，请自行核对。`); }
-    catch (error) { status(`未导入：${error.message}`, true); }
+    try { const incoming = M.parse($("import-text").value), result = M.merge(guest, incoming); commitGuest(result.document, I("map.main.s070", {}, "导入")); $("visitor-title").value = guest.title; selectedCity = null; render(); status(I("map.main.s071", {p0:(result.added),p1:(result.skipped)}, "导入完成：新增 {p0} 条，跳过相同记录 {p1} 条。坐标来自文档，请自行核对。")); }
+    catch (error) { status(I("map.main.s072", {p0:(error.message)}, "未导入：{p0}"), true); }
   });
-  $("save-local").addEventListener("click", () => { try { localStorage.setItem(STORAGE_KEY, M.json(guest)); status("已保存到此浏览器。此设备的其他使用者可能读取它；不会自动同步之后的修改。"); } catch (_) { status("本机保存失败，浏览器可能禁用了存储或空间不足。请导出 JSON 或 Markdown 保留草稿。", true); } });
+  $("save-local").addEventListener("click", () => { try { localStorage.setItem(STORAGE_KEY, M.json(guest)); status(I("map.main.s073", {}, "已保存到此浏览器。此设备的其他使用者可能读取它；不会自动同步之后的修改。")); } catch (_) { status(I("map.main.s074", {}, "本机保存失败，浏览器可能禁用了存储或空间不足。请导出 JSON 或 Markdown 保留草稿。"), true); } });
   $("restore-local").addEventListener("click", () => {
     pausePlayback();
-    try { const raw = localStorage.getItem(STORAGE_KEY); if (!raw) { status("此浏览器尚无保存的足迹。"); return; } const restored = M.parse(raw); commitGuest(restored, "恢复保存的草稿"); $("visitor-title").value = guest.title; selectedCity = null; render(); status("已恢复此浏览器保存的足迹。"); }
-    catch (error) { status(`无法恢复本机保存：${error.message} 现有草稿未更改。`, true); }
+    try { const raw = localStorage.getItem(STORAGE_KEY); if (!raw) { status(I("map.main.s075", {}, "此浏览器尚无保存的足迹。")); return; } const restored = M.parse(raw); if (guest.records.length && !window.confirm(I("map.confirm.restore", {}, "恢复本机保存将替换当前访客草稿。继续？可撤销此操作。"))) { status(I("map.action.cancelled", {}, "已取消，草稿与本机保存未更改。")); return; } commitGuest(restored, I("map.main.s076", {}, "恢复保存的草稿")); $("visitor-title").value = guest.title; selectedCity = null; render(); status(I("map.main.s077", {}, "已恢复此浏览器保存的足迹。")); }
+    catch (error) { status(I("map.main.s078", {p0:(error.message)}, "无法恢复本机保存：{p0} 现有草稿未更改。"), true); }
   });
-  $("delete-local").addEventListener("click", () => { try { localStorage.removeItem(STORAGE_KEY); status("已删除此浏览器保存的足迹。当前页面草稿仍在；关闭或刷新后不会自动恢复。"); } catch (_) { status("浏览器未允许删除本机保存，请通过浏览器的网站数据设置清除。", true); } });
-  $("export-json").addEventListener("click", () => { download(new Blob([M.json(current())], { type: "application/json;charset=utf-8" }), "footprints.json"); status("已导出恢复用 JSON。文件含你的城市、日期与说明，请自行保管。"); });
-  $("export-markdown").addEventListener("click", () => { download(new Blob([M.markdown(current())], { type: "text/markdown;charset=utf-8" }), "footprints.md"); status("已导出 Markdown 足迹文档，可再次导入恢复。"); });
+  $("delete-local").addEventListener("click", () => { if (!window.confirm(I("map.confirm.deleteSave", {}, "删除此浏览器保存的足迹？当前页面草稿不变；删除的本机保存无法恢复。"))) { status(I("map.action.cancelled", {}, "已取消，草稿与本机保存未更改。")); return; } try { localStorage.removeItem(STORAGE_KEY); status(I("map.main.s079", {}, "已删除此浏览器保存的足迹。当前页面草稿仍在；关闭或刷新后不会自动恢复。")); } catch (_) { status(I("map.main.s080", {}, "浏览器未允许删除本机保存，请通过浏览器的网站数据设置清除。"), true); } });
+  $("export-json").addEventListener("click", () => { download(new Blob([M.json(current())], { type: "application/json;charset=utf-8" }), "footprints.json"); status(I("map.main.s081", {}, "已导出恢复用 JSON。文件含你的城市、日期与说明，请自行保管。")); });
+  $("export-markdown").addEventListener("click", () => { download(new Blob([M.markdown(current())], { type: "text/markdown;charset=utf-8" }), "footprints.md"); status(I("map.main.s082", {}, "已导出 Markdown 足迹文档，可再次导入恢复。")); });
   $("export-svg").addEventListener("click", () => imageExport("svg")); $("export-png").addEventListener("click", () => imageExport("png"));
   document.addEventListener("visibilitychange", () => { if (document.hidden) pausePlayback(); });
   window.addEventListener("pagehide", event => { pausePlayback(); if (!event.persisted) { if (avatar) avatar.dispose(); if (gestures) gestures.dispose(); if (resizeObserver) resizeObserver.disconnect(); if (resizeFrame !== null) cancelAnimationFrame(resizeFrame); } });
@@ -525,7 +546,7 @@
       defaultUrl: "/assets/map-avatar-default.png",
       onChange(source, state) {
         $("avatar-preview").src = source; $("avatar-preview").hidden = !source;
-        $("avatar-status").textContent = state.custom ? "自定义头像" : "雨聊猫";
+        $("avatar-status").textContent = state.custom ? I("map.main.s083", {}, "自定义头像") : I("map.main.s084", {}, "雨聊猫");
         $("avatar-status").dataset.error = "false"; $("avatar-download").disabled = !source;
         if (player) drawPlaybackFrame(player.getState());
         window.dispatchEvent(new Event("footprints:avatar"));
@@ -536,7 +557,7 @@
     $("avatar-file").addEventListener("change", async () => { const file = $("avatar-file").files[0]; $("avatar-file").value = ""; if (file) await avatar.loadFile(file); });
     $("avatar-reset").addEventListener("click", () => avatar.reset());
     $("avatar-download").addEventListener("click", () => avatar.download());
-  } else { $("avatar-status").textContent = "头像工具未能加载，视频会使用圆点。请刷新页面后重试。"; $("avatar-file").disabled = true; $("avatar-reset").disabled = true; $("avatar-download").disabled = true; }
+  } else { $("avatar-status").textContent = I("map.main.s085", {}, "头像工具未能加载，视频会使用圆点。请刷新页面后重试。"); $("avatar-file").disabled = true; $("avatar-reset").disabled = true; $("avatar-download").disabled = true; }
   $("city-close").addEventListener("click", () => $("city-dialog").close());
   $("record-dialog").addEventListener("close", () => { editContext = null; if (gestures) gestures.reset(); });
   $("map-add-here").addEventListener("click", () => { const b = projection().bounds; pickPlace({ lon: (b[0] + b[2]) / 2, lat: (b[1] + b[3]) / 2 }); });
@@ -545,7 +566,7 @@
     try { localStorage.setItem("xieyuqing-footprints-labels-v1", String($("map-labels").checked)); } catch (_) {}
     renderMap(); window.dispatchEvent(new Event("footprints:labels"));
   });
-  $("map-layer").addEventListener("change", async () => { pausePlayback(); try { localStorage.setItem("xieyuqing-footprints-layer-v1", $("map-layer").value); } catch (_) {} try { if ($("map-layer").value === "terrain") { status("正在读取本地自然地形图…"); window.dispatchEvent(new Event("footprints:assets")); await loadTerrain(); } redrawViewport(); status(""); } catch (error) { $("map-layer").value = "simple"; redrawViewport(); status(error.message + " 已保留简洁底图，可重试。", true); } finally { window.dispatchEvent(new Event("footprints:assets")); } });
+  $("map-layer").addEventListener("change", async () => { pausePlayback(); try { localStorage.setItem("xieyuqing-footprints-layer-v1", $("map-layer").value); } catch (_) {} try { if ($("map-layer").value === "terrain") { status(I("map.main.s086", {}, "正在读取本地自然地形图…")); window.dispatchEvent(new Event("footprints:assets")); await loadTerrain(); } redrawViewport(); status(""); } catch (error) { $("map-layer").value = "simple"; redrawViewport(); status(error.message + I("map.main.s087", {}, " 已保留简洁底图，可重试。"), true); } finally { window.dispatchEvent(new Event("footprints:assets")); } });
   gestures = V.installGestures({ element: $("footprints-map"), toMapPoint: event => projection().unproject(V.localPoint($("footprints-map"), event), false), onPan: delta => moveCamera({ lon: pan.lon + delta.lon, lat: pan.lat + delta.lat }), onZoom: (factor, anchor) => zoomCamera(factor, anchor), onPick: pickPlace, isMarker: target => !!target.closest(".map-marker"), isTouchEnabled: () => expanded, isEnabled: () => !recording && !document.querySelector("dialog[open]") });
   syncTouchNavigation();
   if (touchQuery.addEventListener) touchQuery.addEventListener("change", syncTouchNavigation);
@@ -557,7 +578,7 @@
     else if (event.key === "+" || event.key === "=") { event.preventDefault(); zoomCamera(2); } else if (event.key === "-") { event.preventDefault(); zoomCamera(.5); }
   });
   window.FootprintsMap = {
-    records: playbackItems, document: current, projection, exportSvg, status, labelStyle: cityLabelStyle,
+    records: playbackItems, document: current, displayRecord: shown, displayTitle: shownTitle, isPublic: () => mode === "mine", projection, exportSvg, status, labelStyle: cityLabelStyle,
     setFrame(value) { videoFrame = { ...value, speed: 1, state: value.state || "paused" }; showPlaybackState(videoFrame); drawPlaybackFrame(videoFrame); },
     setRecording(value) { recording = value; $("main").dataset.recording = String(value); updateDraftTools(); if (!value && pendingResize) { pendingResize = false; resizeMap(); } },
       avatarSource: () => avatar && avatar.getDataUrl(),
@@ -568,7 +589,32 @@
   };
   try { const preferredLayer = localStorage.getItem("xieyuqing-footprints-layer-v1"); $("map-layer").value = ["simple", "terrain"].includes(preferredLayer) ? preferredLayer : "terrain"; } catch (_) { $("map-layer").value = "terrain"; }
   try { $("map-labels").checked = localStorage.getItem("xieyuqing-footprints-labels-v1") === "true"; } catch (_) {}
+  function refreshLanguage() {
+    const focused = document.activeElement, focusId = focused?.id, focusRecord = focused?.closest("[data-record-id]")?.dataset.recordId;
+    $("map-title").textContent = shownTitle();
+    const example = document.querySelector('a[download][href^="/assets/map-example"]');
+    if (example) example.href = window.SiteI18n?.lang() === "en" ? "/assets/map-example.en.md" : "/assets/map-example.md";
+    fillCityDictionary(); syncTouchNavigation(); renderSummary(); renderCities(groups(current().records)); renderMap(); renderTimeline(); updateDraftTools();
+    if ($("detail-dialog").open) fillDetail(detailId);
+    if ($("record-dialog").open) $("record-dialog-title").textContent = $("record-id").value ? I("map.main.s035", {}, "编辑经历") : mode === "mine" ? I("map.main.s036", {}, "添加到访客草稿") : I("map.main.s037", {}, "添加经历");
+    if ($("city-dialog").open && cityDialogSelection) {
+      if (cityDialogSelection.key) openCityDetails(cityDialogSelection.key, true);
+      else {
+        $("city-dialog-title").textContent = I("map.main.s045", {}, "这里有多个地点，选择一个查看");
+        const panel = $("city-options"); panel.replaceChildren();
+        for (const key of cityDialogSelection.nearby) { const group = groups(current().records).find(item => item.key === key); if (!group) continue; const button = element("button", I("map.main.s046", {p0:shown(group.item).city,p1:group.records.length}, "{p0} · {p1} 段经历")); button.type = "button"; button.addEventListener("click", () => { $("city-dialog").close(); openCityDetails(key); }); panel.append(button); }
+      }
+    }
+    if (videoFrame.record && videoFrame.state !== "idle") showPlaybackRecord(videoFrame);
+    if (expanded) document.querySelector(".map-canvas-panel").setAttribute("aria-label", I("map.main.s013", {}, "足迹地图大图；按 Escape 退出"));
+    if (D) D.refreshMessages(["map-status", "record-error", "avatar-status", "preview-notice", "playback-progress"]);
+    if (focused?.isConnected) { /* Existing editor fields and selections retain focus. */ }
+    else if (focusId && $(focusId)) $(focusId).focus({preventScroll:true});
+    else if (focusRecord) timelineNodes.get(focusRecord)?.querySelector("button")?.focus({preventScroll:true});
+    window.dispatchEvent(new Event("footprints:language"));
+  }
+  if (window.SiteI18n) window.SiteI18n.onChange(refreshLanguage);
   render(); redrawViewport();
-  if ($("map-layer").value === "terrain") loadTerrain().then(() => { if ($("map-layer").value === "terrain") renderMap(); window.dispatchEvent(new Event("footprints:assets")); }).catch(error => { $("map-layer").value = "simple"; renderMap(); status(error.message + " 已显示简洁底图，可重试。", true); window.dispatchEvent(new Event("footprints:assets")); });
-  fetch("/assets/map-land.json", { credentials: "same-origin" }).then(response => { if (!response.ok) throw new Error("底图读取失败"); return response.json(); }).then(value => { if (!geometries(value).length) throw new Error("底图格式不可用"); land = value; renderMap(); window.dispatchEvent(new Event("footprints:assets")); }).catch(() => { landFailed = true; if ($("map-layer").value === "simple") { renderMap(); status("陆地轮廓暂未加载；城市点和时间轴仍可使用。请通过本地 HTTP 预览打开页面。", true); } });
+  if ($("map-layer").value === "terrain") loadTerrain().then(() => { if ($("map-layer").value === "terrain") renderMap(); window.dispatchEvent(new Event("footprints:assets")); }).catch(error => { $("map-layer").value = "simple"; renderMap(); status(error.message + I("map.main.s088", {}, " 已显示简洁底图，可重试。"), true); window.dispatchEvent(new Event("footprints:assets")); });
+  fetch("/assets/map-land.json", { credentials: "same-origin" }).then(response => { if (!response.ok) throw new Error(I("map.main.s089", {}, "底图读取失败")); return response.json(); }).then(value => { if (!geometries(value).length) throw new Error(I("map.main.s090", {}, "底图格式不可用")); land = value; renderMap(); window.dispatchEvent(new Event("footprints:assets")); }).catch(() => { landFailed = true; if ($("map-layer").value === "simple") { renderMap(); status(I("map.main.s091", {}, "陆地轮廓暂未加载；城市点和时间轴仍可使用。请通过本地 HTTP 预览打开页面。"), true); } });
 })();

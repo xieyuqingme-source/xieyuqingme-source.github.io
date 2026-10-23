@@ -29,6 +29,36 @@ class Elements(HTMLParser):
     def handle_starttag(self, tag, attrs):
         self.elements.append((tag, dict(attrs)))
 
+
+class BrandLinks(HTMLParser):
+    """Read each brand link's accessible attributes, text and retained icon."""
+    def __init__(self, html):
+        super().__init__()
+        self.links, self.active, self.icon = [], None, None
+        self.feed(html)
+
+    def handle_starttag(self, tag, attrs):
+        attrs = dict(attrs)
+        if tag == "a" and "brand" in attrs.get("class", "").split():
+            self.active = {"attrs": attrs, "text": [], "icons": []}
+            self.links.append(self.active)
+        elif self.active is not None and "brand-mark" in attrs.get("class", "").split():
+            self.icon = []
+            self.active["icons"].append(self.icon)
+
+    def handle_data(self, text):
+        if self.active is not None:
+            self.active["text"].append(text)
+            if self.icon is not None:
+                self.icon.append(text)
+
+    def handle_endtag(self, tag):
+        if tag == "a":
+            self.active, self.icon = None, None
+        elif tag == "span":
+            self.icon = None
+
+
 class MarkdownRenderingTests(unittest.TestCase):
     def setUp(self):
         self.blog = Blog("https://example.com/articles")
@@ -135,8 +165,15 @@ class MarkdownRenderingTests(unittest.TestCase):
     def test_article_navigation_brand_language_filters_and_share_metadata(self):
         page = self.blog.document('测试', self.blog.archive([]), 'example.html', active='chinese.html')
         elements = Elements(page).elements
-        self.assertIn('aria-label="谢雨卿个人主页"', page)
-        self.assertIn('>谢</span><span>谢雨卿', page)
+        brands = BrandLinks(page).links
+        self.assertEqual(len(brands), 1)
+        brand = brands[0]
+        self.assertEqual(brand["attrs"].get("href"), "/")
+        self.assertTrue(brand["attrs"].get("aria-label", "").strip(),
+                        "The home link needs a readable accessible name.")
+        self.assertIn("谢雨卿", brand["attrs"]["aria-label"])
+        self.assertIn("谢雨卿", "".join(brand["text"]))
+        self.assertEqual(["".join(icon).strip() for icon in brand["icons"]], ["谢"])
         primary = page.split('<nav class="site-nav"', 1)[1].split('</nav>', 1)[0]
         self.assertEqual(primary.count('<a '), 9)
         self.assertIn('href="/anthology/"', primary)

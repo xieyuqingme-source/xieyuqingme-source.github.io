@@ -177,7 +177,8 @@ def render_work(work, notes=()):
                 original, parts, cursor = child.content, [], 0
                 for start, end, index in sorted(spans):
                     text = original[start:end]
-                    parts += [escape(original[cursor:start]), f'<span class="anthology-annotation" role="button" tabindex="0" aria-haspopup="dialog" aria-controls="anthology-note" aria-label="查看{escape(text, quote=True)}注释" data-note-index="{index}">{escape(text)}</span>']
+                    label_attr = (f' data-i18n-aria-label="{escape(notes[index]["_key"], quote=True)}.label"' if notes[index].get("_key") else "")
+                    parts += [escape(original[cursor:start]), f'<span class="anthology-annotation" role="button" tabindex="0" aria-haspopup="dialog" aria-controls="anthology-note" aria-label="查看{escape(text, quote=True)}注释" data-note-index="{index}"{label_attr}>{escape(text)}</span>']
                     cursor = end
                 parts.append(escape(original[cursor:]))
                 child.type = 'html_inline'; child.content = ''.join(parts)
@@ -185,76 +186,95 @@ def render_work(work, notes=()):
     return body, sections
 
 
-def build_anthology(root, output, address):
+def build_anthology(root, output, address, language="zh-CN"):
+    from site_i18n import localized_path, localize_page
+    if language not in {"zh-CN", "en"}:
+        raise ValueError("Unsupported anthology interface language.")
     root, output = Path(root), Path(output)
     works = load_anthology(root)
     glossary = load_glossary(root, works)
+    catalogue = json.loads((root / "home/locales/anthology.json").read_text(encoding="utf-8"))
+    def tr(key): return catalogue[language]["anthology." + key]
+    def node(key, tag="span", attrs=""):
+        return f'<{tag} data-i18n="anthology.{key}"{attrs}>{escape(tr(key))}</{tag}>'
+    def link(path): return escape(localized_path(path, language), quote=True)
+    def title_key(work): return "work." + work["slug"] + ".title"
+    def credit_key(work): return "work." + work["slug"] + ".credit"
+    categories = Counter(w["category"] for w in works)
+    category_keys = {c: "category." + str(i) for i, c in enumerate(categories)}
     glossary_total = sum(map(len, glossary.values()))
     template = (root / "home/anthology.template.html").read_text(encoding="utf-8")
-    categories = Counter(w["category"] for w in works)
-
-    def write(path, title, description, content):
+    def write(path, title_key_value, description_key, content):
+        titles = {code: catalogue[code]["anthology." + title_key_value] for code in catalogue}
+        descriptions = {code: catalogue[code]["anthology." + description_key] for code in catalogue}
         page = template
         for key, value in {"site_url": escape(address, quote=True), "route": path,
-                           "title": escape(title), "description": escape(description, quote=True), "content": content}.items():
+                           "title": escape(titles[language]), "description": escape(descriptions[language], quote=True), "content": content}.items():
             page = page.replace("{{" + key + "}}", value)
-        if "{{" in page:
-            raise ValueError("Unresolved anthology template placeholder.")
-        target = output / path.lstrip("/") / "index.html"
-        if any(p.is_symlink() or (hasattr(p, "is_junction") and p.is_junction()) for p in (output / "anthology", target.parent, target)):
+        if "{{" in page: raise ValueError("Unresolved anthology template placeholder.")
+        page = localize_page(page, root, address, path, language=language,
+                             modules=("anthology",), title=titles, description=descriptions)
+        target = output / localized_path(path, language).lstrip("/") / "index.html"
+        if any(p.is_symlink() or (hasattr(p, "is_junction") and p.is_junction()) for p in (output, output / 'en', output / 'anthology', output / 'en/anthology', target.parent, target)):
             raise ValueError("Linked anthology output is not supported.")
         target.parent.mkdir(parents=True, exist_ok=True)
         target.write_text(page, encoding="utf-8", newline="\n")
-
     cards = []
     for w in works:
         excerpt = plain(w["body"])
-        cards.append(f'''<li class="anthology-card" id="entry-{w['slug']}" data-work data-category="{escape(w['category'], quote=True)}" data-language="{w['language']}" data-search="{escape(' '.join((w['title'], w['credit'], w['category'], excerpt)), quote=True)}">
-<p class="anthology-meta">{escape(w['category'])} <span aria-hidden="true">·</span> <span lang="{w['language']}">{LANGUAGES[w['language']]}</span></p>
-<h2 lang="{w['language']}"><a data-detail href="{route(w)}">{escape(w['title'])}</a></h2>
-<p class="anthology-credit">{escape(w['credit']) if w['credit'] else '源文未标注作者与时代'}</p>
-<p class="anthology-excerpt" lang="{w['language']}">{escape(excerpt[:125])}{'…' if len(excerpt) > 125 else ''}</p>
-<a class="anthology-read" data-detail href="{route(w)}" aria-label="阅读全文：{escape(w['title'], quote=True)}">阅读全文 <span aria-hidden="true">→</span></a></li>''')
-    category_options = ''.join(f'<option value="{escape(c, quote=True)}">{escape(c)}（{n}）</option>' for c, n in categories.items())
-    language_options = ''.join(f'<option value="{code}">{label}</option>' for code, label in LANGUAGES.items() if any(w['language'] == code for w in works))
-    category_links = ''.join(f'<li><a href="/anthology/?{escape(urlencode({"category": c}), quote=True)}#catalog">{escape(c)}<span>{n}</span></a></li>' for c, n in categories.items())
-    index = f'''<section class="anthology-intro"><p class="eyebrow"><span aria-hidden="true"></span> ANTHOLOGY · 阅读与收藏</p>
-<h1>雨聊文选</h1><p>把喜欢的文字，留在这里慢慢读。</p><p class="anthology-intro-note">{len(works)} 篇选文 · {len(categories)} 类 · 中文、English、Français 原文<br><span lang="en">Selected readings in their original languages. No automatic translation.</span></p></section>
+        slug, ck = w["slug"], category_keys[w["category"]]
+        search = ' '.join([w['title'], w['credit'], w['category'], excerpt] +
+                          [catalogue[code]["anthology." + k] for code in catalogue for k in
+                           (title_key(w), credit_key(w), ck, 'work.' + slug + '.guide')])
+        cards.append(f'''<li class="anthology-card" id="entry-{slug}" data-work data-order="{len(cards)}" data-category="{escape(w['category'], quote=True)}" data-language="{w['language']}" data-search="{escape(search, quote=True)}">
+<p class="anthology-meta">{node(ck)} <span aria-hidden="true">·</span> {node('language.' + w['language'])}</p>
+<h2><a data-detail href="{link(route(w))}">{node(title_key(w))}</a></h2>
+{node(credit_key(w), 'p', ' class="anthology-credit"')}
+<p class="anthology-excerpt" data-source-excerpt lang="{w['language']}"{' hidden' if language == 'en' else ''}>{escape(excerpt[:125])}{'…' if len(excerpt)>125 else ''}</p>
+<p class="anthology-excerpt" data-reading-guide{' hidden' if language != 'en' else ''}>{node('guideLabel', 'small')} {node('work.' + slug + '.guide')}</p>
+<a class="anthology-read" data-detail href="{link(route(w))}" data-i18n-aria-label="anthology.work.{slug}.readLabel" aria-label="{escape(tr('work.'+slug+'.readLabel'), quote=True)}">{node('read')} <span aria-hidden="true">→</span></a></li>''')
+    category_options = ''.join(f'<option value="{escape(c, quote=True)}" data-i18n="anthology.{category_keys[c]}.count">{escape(tr(category_keys[c]+".count"))}</option>' for c in categories)
+    language_options = ''.join(f'<option value="{code}" data-i18n="anthology.language.{code}">{escape(tr("language."+code))}</option>' for code in LANGUAGES if any(w['language']==code for w in works))
+    category_links = ''.join(f'<li><a href="{link("/anthology/?"+urlencode({"category":c})+"#catalog")}">{node(category_keys[c])}<span>{n}</span></a></li>' for c,n in categories.items())
+    index = f'''<section class="anthology-intro"><p class="eyebrow"><span aria-hidden="true"></span> {node('eyebrow')}</p>
+{node('name','h1')}{node('tagline','p')}{node('inventory','p',' class="anthology-intro-note"')}</section>
 <div class="anthology-layout"><section id="catalog" aria-labelledby="catalog-title">
-<div class="anthology-list-heading"><h2 id="catalog-title">文选目录</h2><p id="anthology-count" role="status" aria-live="polite">共 {len(works)} 篇</p></div>
+<div class="anthology-list-heading">{node('catalog','h2',' id="catalog-title"')}<p id="anthology-count" role="status" aria-live="polite">{escape(tr('countInitial').replace('{total}',str(len(works))))}</p></div>
 <form class="anthology-filters" id="anthology-filters" role="search" hidden>
-<label class="anthology-query">搜索文选<input id="anthology-query" name="q" type="search" placeholder="篇名、作者或正文中的一句话" autocomplete="off"></label>
-<label>分类<select id="anthology-category" name="category"><option value="">全部分类</option>{category_options}</select></label>
-<label>语言<select id="anthology-language" name="language"><option value="">全部语言</option>{language_options}</select></label>
-<button type="reset">重置筛选</button></form>
-<noscript><p class="anthology-note">以下为完整目录；搜索与筛选需要 JavaScript。每篇原文均可直接阅读。</p></noscript>
-<div class="anthology-empty anthology-card" id="anthology-empty" hidden><h3>没有找到匹配的文选</h3><p>试试更短的关键词，或重置筛选查看全部。</p><button type="button" data-reset>重置筛选</button></div>
+<label class="anthology-query">{node('searchLabel')}<input id="anthology-query" name="q" type="search" data-i18n-placeholder="anthology.searchPlaceholder" placeholder="{escape(tr('searchPlaceholder'),quote=True)}" autocomplete="off"></label>
+<label>{node('categoryLabel')}<select id="anthology-category" name="category">{node('allCategories','option',' value=""')}{category_options}</select></label>
+<label>{node('languageLabel')}<select id="anthology-language" name="language">{node('allLanguages','option',' value=""')}{language_options}</select></label>
+<label>{node('sortLabel')}<select id="anthology-sort" name="sort">{node('sortSource','option',' value="source"')}{node('sortTitle','option',' value="title"')}</select></label>
+<button type="reset">{node('reset')}</button></form>
+<noscript>{node('noScript','p',' class="anthology-note"')}</noscript>
+<div class="anthology-empty anthology-card" id="anthology-empty" hidden>{node('emptyTitle','h3')}{node('emptyHelp','p')}<button type="button" data-reset>{node('reset')}</button></div>
 <ol class="anthology-list">{''.join(cards)}</ol></section>
-<aside class="anthology-aside" aria-label="文选辅助信息"><section><h2>按分类读</h2><ul class="anthology-categories">{category_links}</ul></section>
-<section><h2>关于这份文选</h2><p>这是个人选录的中外文学原文，与本站的原创文章分开编目。</p><p>作者与时代沿用源文标注；未标注处保留空缺。源文未附译注；另有 {glossary_total} 条注明来源的语境简释。</p><a href="/articles/">阅读我的原创文章 →</a></section></aside></div>'''
-    write('/anthology/', '雨聊文选', '谢雨卿选录的中外文学原文，按分类与语言浏览，搜索篇名、作者或正文。', index)
-    for position, w in enumerate(works):
-        local_entries = glossary.get(w['slug'], [])
-        rendered, sections = render_work(w, local_entries)
-        section_links = ''.join(f'<li><a href="#{identifier}">{escape(label)}</a></li>' for identifier, label in sections)
-        related = [item for item in works if item['category'] == w['category'] and item != w]
-        related_links = ''.join(f'<li><a href="{route(item)}" lang="{item["language"]}">{escape(item["title"])}</a></li>' for item in related)
-        adjacent = ''.join(f'<a href="{route(works[i])}"><small>{label}</small><span lang="{works[i]["language"]}">{escape(works[i]["title"])}</span></a>' for i, label in ((position-1, '上一篇'), (position+1, '下一篇')) if 0 <= i < len(works))
-        reading_note = f'<p class="anthology-note">本篇 {len(local_entries)} 处词句有淡色虚线注释标记。</p>' if local_entries else ''
-        glossary_json = json.dumps(glossary.get(w['slug'], []), ensure_ascii=False).replace('<', '\\u003c')
-        content = f'''<nav class="anthology-breadcrumb" aria-label="面包屑"><a data-back href="/anthology/#entry-{w['slug']}">← 返回文选目录</a><span>{escape(w['category'])}</span></nav>
+<aside class="anthology-aside" data-i18n-aria-label="anthology.catalogAside" aria-label="{escape(tr('catalogAside'),quote=True)}"><section>{node('byCategory','h2')}<ul class="anthology-categories">{category_links}</ul></section>
+<section>{node('about','h2')}{node('aboutText','p')}{node('creditsHelp','p')}{node('notesHelp','p')}<a href="{link('/articles/')}">{node('originalArticles')} →</a></section></aside></div>'''
+    write('/anthology/','name','description',index)
+    for position,w in enumerate(works):
+        slug,ck=w['slug'],category_keys[w['category']]
+        local_entries=[dict(e, _key=f"anthology.note.{slug}.{i}") for i,e in enumerate(glossary.get(slug,[]))]
+        rendered, sections=render_work(w,local_entries)
+        section_links=''.join(f'<li><a href="#{identifier}">{node("original") if identifier=="original" else escape(label)}</a></li>' for identifier,label in sections)
+        related=[item for item in works if item['category']==w['category'] and item!=w]
+        related_links=''.join(f'<li><a href="{link(route(item))}">{node(title_key(item))}</a></li>' for item in related)
+        adjacent=''.join(f'<a href="{link(route(works[i]))}">{node(label,"small")}{node(title_key(works[i]))}</a>' for i,label in ((position-1,'previous'),(position+1,'next')) if 0<=i<len(works))
+        guide=node('noteGuide','p',' class="anthology-note-guide"') if local_entries else ''
+        glossary_json=json.dumps(local_entries,ensure_ascii=False).replace('<','\\u003c')
+        content=f'''<nav class="anthology-breadcrumb" data-i18n-aria-label="anthology.breadcrumb" aria-label="{escape(tr('breadcrumb'),quote=True)}"><a data-back href="{link('/anthology/#entry-'+slug)}">← {node('back')}</a>{node(ck)}</nav>
 <div class="anthology-layout anthology-reading-layout"><article class="anthology-paper" aria-labelledby="work-title">
-<header class="anthology-work-header"><p class="eyebrow">雨聊文选 · {escape(w['category'])}</p><h1 id="work-title" lang="{w['language']}">{escape(w['title'])}</h1>
-<p class="anthology-credit">{escape(w['credit']) if w['credit'] else '源文未标注作者与时代'} <span aria-hidden="true">·</span> <span lang="{w['language']}">{LANGUAGES[w['language']]}</span></p>{'<p class="anthology-note-guide">淡色虚线词句有注释，可点击或用键盘聚焦查看。</p>' if local_entries else ''}</header>
-
-<section id="original" class="anthology-text" lang="{w['language']}" aria-label="原文">{rendered}</section>
-<footer class="anthology-source"><p>选录自《{escape(Path(w['source']).stem)}》。正文与署名按源文保留。</p><a data-back href="/anthology/#entry-{w['slug']}">返回文选目录</a> <a href="#work-title">回到篇首 ↑</a></footer>
-</article><aside class="anthology-aside" aria-label="阅读辅助"><section><h2>本篇阅读</h2><ul>{section_links}</ul>{reading_note}</section>{'<section><h2>同类选文</h2><ul>' + related_links + '</ul></section>' if related else ''}<section><h2>继续阅读</h2><nav class="anthology-adjacent" aria-label="前后篇">{adjacent}</nav><a data-back href="/anthology/#entry-{w['slug']}">全部文选 →</a></section></aside></div>'''
-        content += f'''<script type="application/json" id="anthology-glossary">{glossary_json}</script>
-<div class="anthology-selection" id="anthology-selection" role="toolbar" aria-label="选中文字操作" hidden><button type="button" id="anthology-copy">复制</button><button type="button" id="anthology-search" aria-label="搜索选中文字：打开 Google 外部搜索新页" title="在 Google 新页搜索，只发送选中文字">搜索 <small aria-hidden="true">Google ↗</small></button><span class="anthology-selection-status" id="anthology-copy-status" role="status" aria-live="polite"></span></div>
-<section class="anthology-note-popup" id="anthology-note" role="dialog" aria-modal="false" aria-labelledby="anthology-note-title" tabindex="-1" hidden><header><h2 id="anthology-note-title"></h2><button type="button" id="anthology-note-close" aria-label="关闭注释">关闭</button></header><p class="anthology-note">据参考资料整理的语境简释，非辞典逐字引文。</p><p id="anthology-note-explanation"></p><p class="anthology-note" id="anthology-note-source"></p><a id="anthology-note-source-link" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer">查看辞典原条目 ↗</a></section>'''
-        write(route(w), w['title'] + ' · 雨聊文选', plain(w['body'])[:150], content)
-    (output / 'assets').mkdir(exist_ok=True)
-    for name in ('anthology.css', 'anthology.js', 'anthology-selection.css', 'anthology-selection.js'):
-        shutil.copyfile(root / 'home/assets' / name, output / 'assets' / name)
-    return {'glossary_entries': glossary_total, 'glossary_works': len(glossary), 'works': len(works), 'collections': len(categories), 'routes': ['/anthology/', *map(route, works)]}
+<header class="anthology-work-header"><p class="eyebrow">{node('name')} · {node(ck)}</p>{node(title_key(w),'h1',' id="work-title"')}
+<p data-original-title lang="{w['language']}"{' hidden' if language!='en' or w['title']==catalogue['en']['anthology.'+title_key(w)] else ''}>{escape(w['title'])}</p>
+<p class="anthology-credit">{node(credit_key(w))} <span aria-hidden="true">·</span> {node('language.'+w['language'])}</p>{guide}</header>
+<section id="original" class="anthology-text" lang="{w['language']}" data-i18n-aria-label="anthology.original" aria-label="{escape(tr('original'),quote=True)}">{rendered}</section>
+<footer class="anthology-source">{node('source.'+str(list(categories).index(w['category'])),'p')}<a data-back href="{link('/anthology/#entry-'+slug)}">{node('back')}</a> <a href="#work-title">{node('top')} ↑</a></footer>
+</article><aside class="anthology-aside" data-i18n-aria-label="anthology.readingAside" aria-label="{escape(tr('readingAside'),quote=True)}"><section>{node('thisWork','h2')}<ul>{section_links}</ul></section>{'<section>'+node('related','h2')+'<ul>'+related_links+'</ul></section>' if related else ''}<section>{node('continue','h2')}<nav class="anthology-adjacent" data-i18n-aria-label="anthology.adjacent" aria-label="{escape(tr('adjacent'),quote=True)}">{adjacent}</nav><a data-back href="{link('/anthology/#entry-'+slug)}">{node('allWorks')} →</a></section></aside></div>'''
+        content+=f'''<script type="application/json" id="anthology-glossary">{glossary_json}</script>
+<div class="anthology-selection" id="anthology-selection" role="toolbar" data-i18n-aria-label="anthology.selection" aria-label="{escape(tr('selection'),quote=True)}" hidden><button type="button" id="anthology-copy">{node('copy')}</button><button type="button" id="anthology-search" data-i18n-aria-label="anthology.selectionSearchAria" data-i18n-title="anthology.selectionSearchTitle" aria-label="{escape(tr('selectionSearchAria'),quote=True)}" title="{escape(tr('selectionSearchTitle'),quote=True)}">{node('search')} <small aria-hidden="true">Google ↗</small></button><span class="anthology-selection-status" id="anthology-copy-status" role="status" aria-live="polite"></span></div>
+<section class="anthology-note-popup" id="anthology-note" role="dialog" aria-modal="false" aria-labelledby="anthology-note-title" tabindex="-1" hidden><header><h2 id="anthology-note-title"></h2><button type="button" id="anthology-note-close" data-i18n-aria-label="anthology.closeNote" aria-label="{escape(tr('closeNote'),quote=True)}">{node('close')}</button></header>{node('noteProvenance','p',' class="anthology-note"')}<p id="anthology-note-explanation"></p><p class="anthology-note" id="anthology-note-source"></p><a id="anthology-note-source-link" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer">{node('dictionarySource')} ↗</a></section>'''
+        write(route(w),'work.'+slug+'.pageTitle','work.'+slug+'.guide',content)
+    (output/'assets').mkdir(exist_ok=True)
+    for name in ('anthology.css','anthology.js','anthology-selection.css','anthology-selection.js'):
+        shutil.copyfile(root/'home/assets'/name,output/'assets'/name)
+    return {'glossary_entries':glossary_total,'glossary_works':len(glossary),'works':len(works),'collections':len(categories),'routes':[localized_path(p,language) for p in ['/anthology/',*map(route,works)]]}

@@ -286,7 +286,7 @@ class Blog:
         return self.parser.renderer.render(tokens, self.parser.options, {})
 
 
-    def document(self, title: str, body: str, destination: str, language="zh-CN", active="", description="", alternates="", switch_href="") -> str:
+    def document(self, title: str, body: str, destination: str, language="zh-CN", active="", description="", alternates="", switch_href="", unpaired_original=False) -> str:
         english = language == "en"
         description = description or self.config["english_description" if english else "description"]
         from english_site import alternate_links, site_origin
@@ -309,8 +309,11 @@ class Blog:
             address = target if target.startswith("/") else self.base_path
             link_language = ' lang="en"' if target == "english.html" else ""
             nav.append(f'<a href="{escape(address)}"{current}{link_language}>{label}</a>')
-        nav.append(f'<a class="site-language-switch" href="{escape(switch_href)}" lang="{"zh-CN" if english else "en"}" aria-label="{"Switch site language to Chinese" if english else "切换网站语言为英语"}">{"中文" if english else "EN"}</a>')
-        return f'''<!doctype html>
+        if unpaired_original:
+            nav.append('<a class="article-directory-link" href="/articles/" lang="zh-CN" data-preserve-language-link aria-label="This article was originally written in English. Open the Chinese article directory.">中文目录</a>')
+        else:
+            nav.append(f'<a class="site-language-switch" href="{escape(switch_href)}" lang="{"zh-CN" if english else "en"}" aria-label="{"Switch site language to Chinese" if english else "切换网站语言为英语"}">{"中文" if english else "EN"}</a>')
+        page = f'''<!doctype html>
 <html lang="{language}" data-theme="light">
 <head>
   <meta charset="utf-8">
@@ -351,6 +354,8 @@ class Blog:
 </body>
 </html>
 '''
+        from site_i18n import localize_page
+        return localize_page(page, self.source_root, origin, urlsplit(self.canonical(destination)).path, language)
 
     def waline_head(self, destination: str) -> str:
         if not self.waline["enabled"] or destination == "about.html":
@@ -584,7 +589,8 @@ class Blog:
 {self.statistics_notice(language)}{self.comments(article)}<div class="article-end"><span aria-hidden="true">◆</span><p>{"Thanks for reading." if english else "谢谢你读到这里。"}</p><a href="{escape(back_url)}#archive">{"Back to articles" if english else "返回文章归档"} →</a></div>{next_reading}</div>{directory}</div></article>
 <dialog class="article-image-viewer" id="article-image-viewer" aria-label="{"Article image" if english else "文章图片大图"}"><div class="image-viewer-actions"><a href="#" target="_blank" rel="noopener">{"View original image" if english else "查看原图"} {ARROW_ICON}</a><button type="button">{"Close" if english else "关闭"}</button></div><img alt=""><p></p></dialog>'''
         return self.document(article.title, body, article.destination, language, article.listing,
-                             self.excerpt(article), alternates=alternates, switch_href=switch_href)
+                             self.excerpt(article), alternates=alternates, switch_href=switch_href,
+                             unpaired_original=english and article.original is None and translated is None)
 
     def feed(self):
         rss = Element("rss", version="2.0")
@@ -708,9 +714,9 @@ class Blog:
                 # These exact root destinations belong to the unified-site builder.
                 # Do not exempt arbitrary root paths from this article-site check.
                 from english_site import english_article_url
-                english_routes = {"/en/", "/en/about/", "/en/projects/", "/en/articles/",
+                english_routes = {"/en/", "/en/about/", "/en/projects/", "/en/articles/", "/en/photos/", "/en/map/", "/en/game/", "/en/anthology/",
                                   *[english_article_url(self, a) for a in self.translations.values()]}
-                if parsed.path in {"/", "/anthology/", "/projects/", "/photos/", "/map/", "/game/", "/about/", "/assets/favicon.svg", *english_routes}:
+                if parsed.path in {"/", "/anthology/", "/projects/", "/photos/", "/map/", "/game/", "/about/", "/assets/favicon.svg", "/assets/site-i18n.js", *english_routes}:
                     root_links += 1
                     continue
                 if not parsed.path.startswith(self.base_path):

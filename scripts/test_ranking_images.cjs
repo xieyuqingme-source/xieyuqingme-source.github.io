@@ -106,7 +106,7 @@ function mockedEditor(fetchAsset) {
   }
   const allocation = { created: 0, released: 0 };
   const foodArt = { hotpot: { photo: '/assets/foods/hotpot.webp', emoji: '食', bg: '#fff' } };
-  const model = { LIMITS: { imageBytes: 1024 * 1024 }, FOOD_ART: foodArt,
+  const model = { uiText(element,text){element.textContent=text;}, uiAttr(element,key,text){element.setAttribute(key,text);}, translate:text=>text, displayItemName:item=>item.name, LIMITS: { imageBytes: 1024 * 1024 }, FOOD_ART: foodArt,
     BUILTIN_ART: { ...foodArt, walking: { photo: '/assets/sports/walking.webp', emoji: '走', bg: '#eee' } },
     inspectRaster: () => ({ width: 1600, height: 800 }), validateImage: value => value };
   const module = { exports: {} };

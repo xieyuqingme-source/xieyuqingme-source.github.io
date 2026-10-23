@@ -5,6 +5,7 @@ from build_site import check_site, check_publication_metadata, default_root
 from build_site import OUTPUT
 from build_blog import Blog
 from english_site import check_english_publication
+from site_i18n import check_site_languages
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
@@ -16,4 +17,5 @@ if __name__ == "__main__":
     blog = Blog(args.site_url.rstrip("/") + "/articles")
     blog.collect()
     report["english"] = check_english_publication(blog, OUTPUT, args.site_url.rstrip("/"), args.require_complete_translations)
+    report["localization"] = check_site_languages(OUTPUT, args.site_url.rstrip("/"))
     print(json.dumps(report, ensure_ascii=False, indent=2))

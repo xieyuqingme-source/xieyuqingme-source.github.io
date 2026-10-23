@@ -192,3 +192,15 @@ body.dragging { user-select: none; cursor: grabbing; }
   body.ranking-page.view-large.presentation .ranking-main { padding-top: max(10px, env(safe-area-inset-top, 0px)); padding-bottom: max(20px, env(safe-area-inset-bottom, 0px)); }
   .view-large .view-toolbar { top: env(safe-area-inset-top, 0px); }
 }
+
+/* Language changes affect labels only; preserve board dimensions and scrolling. */
+html[lang="en"] .item-list:empty::before { content: "Drop here / select a card to choose a tier"; }
+html[lang="en"] .pool-list:empty::before { content: "All ranked! You can add more items."; }
+html[lang="en"] .game-preview-type text { font-size: 12px; }
+html[lang="en"] .ranking-main .toolbar-group { flex-wrap: wrap; }
+html[lang="en"] .ranking-main .game-button { white-space: normal; }
+
+/* English tier words fit the existing columns; long custom labels still wrap. */
+html[lang="en"] body .tier-label { padding-inline: 3px; }
+html[lang="en"] body .tier-label strong { font-size: 1rem; max-width: 100%; }
+@media(max-width:760px) { html[lang="en"] body .tier-label { padding-inline: 1px; } html[lang="en"] body .tier-label strong { font-size: .8rem; } }

@@ -37,6 +37,9 @@ jobs:
         run: python scripts/test_build_blog.py
       - name: Check English publication and translation freshness
         run: |
+          python scripts/test_site_i18n.py
+          python scripts/test_site_i18n_build.py
+          node scripts/test_site_i18n.cjs
           python scripts/test_english_site.py
           node scripts/test_english_archive.cjs
           node scripts/test_english_waline.mjs
@@ -50,6 +53,8 @@ jobs:
       - name: Check footprints data, map, journey and local exports
         run: |
           python scripts/test_map_pages.py
+          python scripts/test_map_i18n.py
+          node scripts/test_map_i18n.cjs
           node scripts/test_map_logic.cjs
           node scripts/test_map_journey.cjs
           node scripts/test_map_view.cjs
@@ -57,11 +62,13 @@ jobs:
           node scripts/test_map_avatar.cjs
           node scripts/test_map_playback.cjs
           node scripts/test_map_video.cjs
+          node scripts/test_map_video_layout.cjs
       - name: Check unified site rules
         run: python scripts/test_build_site.py
       - name: Check anthology content and static routes
         run: |
           python scripts/test_anthology_pages.py
+          python scripts/test_anthology_i18n.py
           node --check home/assets/anthology-selection.js
           node scripts/test_anthology_selection.cjs
       - name: Check local about routes
@@ -69,7 +76,9 @@ jobs:
       - name: Check local game routes and navigation
         run: python scripts/test_game_routes.py
       - name: Check ranking model, persistence and export layout
-        run: node --test scripts/test_ranking_logic.cjs
+        run: |
+          node --test scripts/test_ranking_logic.cjs
+          node --test scripts/test_ranking_i18n.cjs
       - name: Check local image normalization and crop geometry
         run: node --test scripts/test_ranking_images.cjs
       - name: Check theme preference and system fallback
@@ -93,7 +102,9 @@ jobs:
       - name: Build and check personal site
         env:
           BLOG_SITE_URL: ${{ steps.pages.outputs.base_url }}
-        run: python scripts/build_site.py --site-url "$BLOG_SITE_URL"
+        run: |
+          python scripts/build_site.py --site-url "$BLOG_SITE_URL"
+          python scripts/check_site.py --site-url "$BLOG_SITE_URL"
       - name: Check archive interactions
         run: python scripts/test_archive_pages.py
       - name: Upload website

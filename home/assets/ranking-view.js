@@ -1,6 +1,7 @@
 /* Local viewing controls. Zoom changes layout only; ranking data and PNG stay independent. */
 (() => {
   'use strict';
+  const M=window.RankingModel;
   function create(options = {}) {
     const $ = id => document.getElementById(id);
     const viewport = $('board-viewport'), canvas = $('ranking-canvas'), sizer = $('board-scale-wrap');
@@ -9,7 +10,7 @@
     let scale = 1, boardOnly = false, poolCount = 0, large = false, fallback = false;
     let nativeSeen = false, pending = false, requestIndex = 0, frame = 0, resetAfterLayout = false;
     const status = $('view-status');
-    function notice(text) { status.textContent = text; status.hidden = !text; }
+    function notice(text) { M.uiText(status,text); status.hidden = !text; }
     function schedule() { if (!frame) frame = requestAnimationFrame(layout); }
     function layout() {
       frame = 0;
@@ -21,7 +22,7 @@
       sizer.style.width = Math.ceil(Math.max(width, canvas.scrollWidth) * scale) + 'px';
       sizer.style.height = Math.ceil(canvas.offsetHeight * scale) + 'px';
       $('view-zoom-value').value = Math.round(scale * 100) + '%';
-      $('view-zoom-value').textContent = Math.round(scale * 100) + '%';
+      M.uiText($('view-zoom-value'),Math.round(scale * 100) + '%');
       $('view-zoom-out').disabled = scale <= .75;
       $('view-zoom-in').disabled = scale >= 2;
       $('view-fullscreen').disabled = pending;
@@ -46,7 +47,7 @@
     }
     function poolNote() {
       const note = $('view-pool-note');
-      note.textContent = boardOnly && poolCount ? '待选区还有 ' + poolCount + ' 项，点「显示待选区」可恢复查看。' : '';
+      M.uiText(note,boardOnly && poolCount ? '待选区还有 ' + poolCount + ' 项，点「显示待选区」可恢复查看。' : '');
       note.hidden = !note.textContent;
     }
     function onlyBoard(enabled, enter = true) {
@@ -54,14 +55,14 @@
       boardOnly = enabled;
       body.classList.toggle('view-board-only', enabled);
       $('view-board-only').setAttribute('aria-pressed', String(enabled));
-      $('view-board-only').textContent = enabled ? '显示待选区' : '仅看榜单';
+      M.uiText($('view-board-only'),enabled ? '显示待选区' : '仅看榜单');
       poolNote(); schedule();
     }
     function mode() {
       body.classList.toggle('view-large', large);
       body.classList.toggle('view-fallback', large && fallback);
       $('view-fullscreen').setAttribute('aria-pressed', String(large));
-      $('view-fullscreen').textContent = large ? (fallback ? '退出大屏' : '退出全屏') : '全屏查看';
+      M.uiText($('view-fullscreen'),large ? (fallback ? '退出大屏' : '退出全屏') : '全屏查看');
       schedule();
     }
     async function exitLarge() {

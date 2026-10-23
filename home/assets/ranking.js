@@ -12,7 +12,7 @@
   const app = $('ranking-app'), board = $('ranking-board'), pool = $('candidate-pool');
   const title = $('ranking-title'), saveStatus = $('save-status');
   Object.values(M.TEMPLATES).forEach(template => {
-    const option = document.createElement('option'); option.value = template.id; option.textContent = template.label;
+    const option = document.createElement('option'); option.value = template.id; M.uiText(option,template.label);
     $('ranking-template').append(option);
   });
   function templateLabel(id = state.templateId) { return M.TEMPLATES[id].label; }
@@ -23,10 +23,10 @@
     return element;
   }
   function message(text, error = false) {
-    const area = $('tool-message'); area.textContent = text; area.dataset.error = String(error); area.hidden = !text;
+    const area = $('tool-message'); M.uiText(area,text); area.dataset.error = String(error); area.hidden = !text;
   }
   function failure(error) { message(error.message || '操作未完成，请重试或导出 JSON 备份。', true); }
-  function itemFailure(error) { $('item-error').textContent=error.message||'图片编辑未完成，请重试。';$('item-error').hidden=false; }
+  function itemFailure(error) { M.uiText($('item-error'),error.message||'图片编辑未完成，请重试。');$('item-error').hidden=false; }
   const imageEditor=Images.createEditor({canvas:$('crop-preview'),zoomInput:$('crop-zoom'),zoomValue:$('crop-zoom-value'),status:$('crop-status'),resetButton:$('crop-reset'),replaceInput:$('item-image-file'),removeButton:$('item-image-remove'),onBusy(value){imageBusy=value;$('item-save').disabled=value;$('item-delete').disabled=value;$('item-target').disabled=value;updateOrderButtons();},onError:itemFailure});
   const view = window.RankingView?.create({enterPresentation(){presentation(true);}});
   function autosizeTitle() { title.style.height = 'auto'; title.style.height = title.scrollHeight + 'px'; }
@@ -39,34 +39,34 @@
     if(!initialized || revision===savedRevision)return;
     const current = revision;
     if (protectedSave) {
-      saveStatus.textContent = '原存档受保护，请先导出备份或确认重置'; saveStatus.dataset.failed = 'true'; return;
+      M.uiText(saveStatus,'原存档受保护，请先导出备份或确认重置'); saveStatus.dataset.failed = 'true'; return;
     }
-    saveStatus.textContent = '正在保存…'; saveStatus.dataset.failed = 'false';
+    M.uiText(saveStatus,'正在保存…'); saveStatus.dataset.failed = 'false';
     try {
       await storage.save(state);
       savedRevision=current;
-      if (current === revision) { saveStatus.textContent = '已自动保存到本机'; saveStatus.dataset.failed = 'false'; }
+      if (current === revision) { M.uiText(saveStatus,'已自动保存到本机'); saveStatus.dataset.failed = 'false'; }
     } catch (error) {
-      if (current === revision) { saveStatus.textContent = '自动保存失败 · 请导出 JSON'; saveStatus.dataset.failed = 'true'; failure(error); }
+      if (current === revision) { M.uiText(saveStatus,'自动保存失败 · 请导出 JSON'); saveStatus.dataset.failed = 'true'; failure(error); }
     }
   }
-  function scheduleSave() { revision++; clearTimeout(saveTimer); saveStatus.textContent='正在保存…'; saveTimer=setTimeout(persist,350); }
+  function scheduleSave() { revision++; clearTimeout(saveTimer); M.uiText(saveStatus,'正在保存…'); saveTimer=setTimeout(persist,350); }
   document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden'){clearTimeout(saveTimer);persist();}});
   function invalidateClearUndo() { undoSnapshot=null;undoKind=null;$('undo-clear').hidden=true; }
   function changed(text,options={}) { if(!options.preserveUndo)invalidateClearUndo();render();scheduleSave();if(text)message(text); }
   function run(operation) { try { operation(); } catch (error) { failure(error); } }
   function list(target) { return target === 'pool' ? state.pool : state.rows.find(row => row.id === target).itemIds; }
   function card(id) {
-    const item = state.items[id], entry = node('div','rank-card'); entry.dataset.itemId = id;
-    const button = node('button','card-main'); button.type = 'button'; button.setAttribute('aria-label', '编辑或移动：' + item.name);
+    const item = state.items[id], entry = node('div','rank-card'), itemName=M.displayItemName(item); entry.dataset.itemId = id;
+    const button = node('button','card-main'); button.type = 'button'; M.uiAttr(button,'aria-label', '编辑或移动：' + itemName);
     const art = node('span','card-art');
     const builtIn=item.art?(M.BUILTIN_ART || M.FOOD_ART)[item.art]:null,source=item.image||builtIn?.photo;
     if (source) { const image = node('img');image.alt='';image.draggable=false;image.loading='lazy';image.decoding='async';if(item.image&&item.crop){const crop=item.crop;image.className='cropped-image';image.onload=()=>{image.style.width=(image.naturalWidth/crop.size*100)+'%';image.style.height=(image.naturalHeight/crop.size*100)+'%';image.style.left=(-crop.x/crop.size*100)+'%';image.style.top=(-crop.y/crop.size*100)+'%';};}else if(builtIn)image.className='builtin-photo';image.src=source;art.append(image); }
-    else if (item.art) { art.textContent = Array.from(item.name).slice(0,2).join('');art.classList.add('text-art'); }
-    else { art.classList.add('text-art'); art.textContent = Array.from(item.name).slice(0,2).join(''); }
-    art.setAttribute('aria-hidden','true'); button.append(art, node('span','card-name',item.name));
-    const handle = node('button','drag-handle editor-only','⠿'); handle.type = 'button'; handle.title = '拖动项目（触屏按住此处）'; handle.setAttribute('aria-label','拖动或编辑：' + item.name);
-    const remove=node('button','card-remove editor-only','×');remove.type='button';remove.dataset.removeItem=id;remove.title='删除项目';remove.setAttribute('aria-label','删除项目：'+item.name);
+    else if (item.art) { art.textContent = Array.from(itemName).slice(0,2).join('');art.classList.add('text-art'); }
+    else { art.classList.add('text-art'); art.textContent = Array.from(itemName).slice(0,2).join(''); }
+    art.setAttribute('aria-hidden','true'); button.append(art, node('span','card-name',itemName));
+    const handle = node('button','drag-handle editor-only','⠿'); handle.type = 'button'; M.uiAttr(handle,'title','拖动项目（触屏按住此处）'); M.uiAttr(handle,'aria-label','拖动或编辑：' + itemName);
+    const remove=node('button','card-remove editor-only','×');remove.type='button';remove.dataset.removeItem=id;M.uiAttr(remove,'title','删除项目');M.uiAttr(remove,'aria-label','删除项目：'+itemName);
     entry.append(button,handle,remove);return entry;
   }
   function render() {
@@ -76,45 +76,66 @@
       // Keep arbitrary user colors readable without changing the saved color.
       const rgb = row.color.match(/[a-f\d]{2}/gi).map(x => parseInt(x,16));
       label.style.color = (rgb[0]*.299+rgb[1]*.587+rgb[2]*.114)<145 ? '#ffffff' : '#202a25';
-      const heading = node('strong',null,row.name); const edit = node('button','row-settings','设置'); edit.type='button'; edit.dataset.editRow=row.id; edit.setAttribute('aria-label','设置等级：'+row.name);
+      const heading = node('strong',null,M.displayRowName(row,state)); const edit = node('button','row-settings',M.translate('设置')); edit.type='button'; edit.dataset.editRow=row.id; M.uiAttr(edit,'aria-label','设置等级：'+M.displayRowName(row,state));
       label.append(heading,edit);
-      const items = node('div','item-list'); items.dataset.zone=row.id; items.setAttribute('aria-label',row.name+'级项目'); items.append(...row.itemIds.map(card)); section.append(label,items); return section;
+      const items = node('div','item-list'); items.dataset.zone=row.id; M.uiAttr(items,'aria-label',M.displayRowName(row,state)+'级项目'); items.append(...row.itemIds.map(card)); section.append(label,items); return section;
     });
     board.replaceChildren(...boardNodes); pool.replaceChildren(...state.pool.map(card));
-    $('pool-count').textContent = state.pool.length;
-    if (document.activeElement !== title) { title.value = state.title; autosizeTitle(); }
-    $('display-title').textContent = state.title;
+    M.uiText($('pool-count'),state.pool.length);
+    if (document.activeElement !== title) { M.bindDisplayInput(title,state.title,()=>M.displayTitle(state)); autosizeTitle(); }
+    $('display-title').textContent=M.displayTitle(state);
     document.body.dataset.rankingSkin=state.skin;$('ranking-skin').value=state.skin;
     document.body.dataset.rankingTemplate=state.templateId;$('ranking-template').value=state.templateId;
-    $('reset-ranking').textContent='恢复默认'+templateLabel();
-    $('template-note').textContent=state.templateId==='sport'?'运动示例仅为个人偏好，不构成健康或训练建议。':'示例仅为个人演示，不代表权威评价。';
+    M.uiText($('reset-ranking'),'恢复默认'+templateLabel());
+    M.uiText($('template-note'),state.templateId==='sport'?'运动示例仅为个人偏好，不构成健康或训练建议。':'示例仅供个人演示，不代表权威评价。');
     $('add-row').disabled = state.rows.length >= M.LIMITS.rows;
-    $('clear-items').disabled=Object.keys(state.items).length===0;$('undo-clear').hidden=!undoSnapshot;$('undo-clear').textContent=undoKind==='template'?'撤销切换模板':undoKind==='reset'?'撤销恢复默认':'撤销清空';
+    $('clear-items').disabled=Object.keys(state.items).length===0;$('undo-clear').hidden=!undoSnapshot;M.uiText($('undo-clear'),undoKind==='template'?'撤销切换模板':undoKind==='reset'?'撤销恢复默认':'撤销清空');
     view?.refresh(state.pool.length);
   }
+
+  function refreshDisplayLanguage() {
+    document.querySelectorAll('.rank-card[data-item-id]').forEach(entry=>{
+      const item=state.items[entry.dataset.itemId];if(!item)return;const name=M.displayItemName(item);
+      entry.querySelector('.card-name').textContent=name;
+      const art=entry.querySelector('.text-art');if(art)art.textContent=Array.from(name).slice(0,2).join('');
+      M.uiAttr(entry.querySelector('.card-main'),'aria-label','编辑或移动：'+name);
+      M.uiAttr(entry.querySelector('.drag-handle'),'aria-label','拖动或编辑：'+name);
+      M.uiAttr(entry.querySelector('.card-remove'),'aria-label','删除项目：'+name);
+    });
+    document.querySelectorAll('.tier-row[data-row-id]').forEach(entry=>{
+      const row=state.rows.find(row=>row.id===entry.dataset.rowId);if(!row)return;const name=M.displayRowName(row,state);
+      entry.querySelector('.tier-label strong').textContent=name;M.uiText(entry.querySelector('.row-settings'),'设置');
+      M.uiAttr(entry.querySelector('.row-settings'),'aria-label','设置等级：'+name);M.uiAttr(entry.querySelector('.item-list'),'aria-label',name+'级项目');
+    });
+    for(const option of $('item-target').options){const row=state.rows.find(row=>row.id===option.value);option.textContent=row?M.displayRowName(row,state):M.translate('待选区');}
+    $('display-title').textContent=M.displayTitle(state);
+    autosizeTitle();imageEditor.refreshLanguage?.();view?.refresh(state.pool.length);
+  }
+  window.SiteI18n?.onChange?.(refreshDisplayLanguage);
+
   function focusCard(id) { document.querySelectorAll('.rank-card').forEach(entry => { if(entry.dataset.itemId===id) entry.querySelector('.card-main').focus({preventScroll:true}); }); }
   function isPresentation() { return document.body.classList.contains('presentation'); }
   function openItem(id) {
     if (busy || $('item-dialog').open || $('row-dialog').open) return; lastTap=null;itemId=id; const item=state.items[id]; if(!item) return;
-    $('item-name').value=item.name; const target=$('item-target'); target.replaceChildren();
-    const options=[{id:'pool',name:'待选区'},...state.rows]; options.forEach(row=>{const option=node('option',null,row.name);option.value=row.id;target.append(option);});
+    M.bindDisplayInput($('item-name'),item.name,()=>M.displayItemName(item)); const target=$('item-target'); target.replaceChildren();
+    const options=[{id:'pool',name:'待选区'},...state.rows]; options.forEach(row=>{const option=node('option',null,row.id==='pool'?M.translate('待选区'):M.displayRowName(row,state));option.value=row.id;target.append(option);});
     const location=M.locateItem(state,id);target.value=location.target;itemDraftIndex=location.index;$('item-error').hidden=true;updateOrderButtons();$('item-dialog').showModal();imageEditor.open(item).catch(itemFailure);
   }
   function updateOrderButtons() {
     if(!itemId||!state.items[itemId])return;const target=$('item-target').value;if(!target)return;
     const peers=list(target).filter(id=>id!==itemId);itemDraftIndex=Math.max(0,Math.min(peers.length,itemDraftIndex));
-    $('item-previous').disabled=imageBusy||itemDraftIndex===0;$('item-next').disabled=imageBusy||itemDraftIndex===peers.length;$('item-position').textContent='第 '+(itemDraftIndex+1)+' / '+(peers.length+1)+' 项 · 保存后生效';
+    $('item-previous').disabled=imageBusy||itemDraftIndex===0;$('item-next').disabled=imageBusy||itemDraftIndex===peers.length;M.uiText($('item-position'),'第 '+(itemDraftIndex+1)+' / '+(peers.length+1)+' 项 · 保存后生效');
   }
   function openRow(id) {
     if(busy)return; newRow=!id; rowId=id; const row=state.rows.find(row=>row.id===id);
-    $('row-name').value=row ? row.name : ''; $('row-color').value=row ? row.color : '#c7d7bd';
-    $('row-dialog-title').textContent=newRow?'添加等级':'等级设置'; $('row-delete').hidden=newRow;
+    M.bindDisplayInput($('row-name'),row ? row.name : '',()=>row?M.displayRowName(row,state):''); $('row-color').value=row ? row.color : '#c7d7bd';
+    M.uiText($('row-dialog-title'),newRow?'添加等级':'等级设置'); $('row-delete').hidden=newRow;
     $('row-up').disabled=newRow||state.rows.indexOf(row)===0; $('row-down').disabled=newRow||state.rows.indexOf(row)===state.rows.length-1;
     $('row-delete').disabled=state.rows.length<=1; $('row-dialog').showModal();
   }
   app.addEventListener('click',event=>{
     if(suppressClick&&event.detail!==0){event.preventDefault();event.stopPropagation();return;}
-    const remove=event.target.closest('[data-remove-item]');if(remove){if(!busy&&confirm('删除这个项目？此操作无法撤销。'))run(()=>{M.removeItem(state,remove.dataset.removeItem);changed('项目已删除。');});return;}
+    const remove=event.target.closest('[data-remove-item]');if(remove){if(!busy&&confirm(M.localize('删除这个项目？此操作无法撤销。')))run(()=>{M.removeItem(state,remove.dataset.removeItem);changed('项目已删除。');});return;}
     const button=event.target.closest('.card-main,.drag-handle');
     if(button){
       // Native keyboard activation has detail 0. Pointer clicks edit only outside presentation.
@@ -133,7 +154,7 @@
   $('item-dialog').addEventListener('close',()=>{imageEditor.close();if(itemId)focusCard(itemId);});
   $('row-dialog').addEventListener('close',()=>{document.querySelectorAll('[data-edit-row]').forEach(button=>{if(button.dataset.editRow===rowId)button.focus({preventScroll:true});});});
   $('item-edit-form').addEventListener('submit',event=>{event.preventDefault();if(imageBusy)return;try{
-    const name=$('item-name').value.trim(); if(!name)throw new Error('请填写项目名称。');
+    const name=M.inputValue($('item-name')); if(!name)throw new Error('请填写项目名称。');
     const draft=M.validateState(state);M.updateItem(draft,itemId,{name,...imageEditor.getValue()});const target=$('item-target').value;
     M.moveItem(draft,itemId,target,itemDraftIndex);state=draft;
     changed('项目已更新。'); $('item-dialog').close();
@@ -143,10 +164,10 @@
   [['item-previous',-1],['item-next',1]].forEach(([id,offset])=>$(id).addEventListener('click',()=>run(()=>{
     itemDraftIndex+=offset;updateOrderButtons();
   })));
-  $('item-delete').addEventListener('click',()=>{if(confirm('删除这个项目？此操作无法撤销。'))run(()=>{M.removeItem(state,itemId);itemId=null;changed('项目已删除。');$('item-dialog').close();});});
+  $('item-delete').addEventListener('click',()=>{if(confirm(M.localize('删除这个项目？此操作无法撤销。')))run(()=>{M.removeItem(state,itemId);itemId=null;changed('项目已删除。');$('item-dialog').close();});});
   $('add-row').addEventListener('click',()=>openRow(null));
   $('row-edit-form').addEventListener('submit',event=>{event.preventDefault();run(()=>{
-    const options={name:$('row-name').value.trim(),color:$('row-color').value};
+    const options={name:M.inputValue($('row-name')),color:$('row-color').value};
     if(newRow)rowId=M.addRow(state,options);else M.updateRow(state,rowId,options);
     changed('等级已保存。');$('row-dialog').close();
   });});
@@ -156,15 +177,15 @@
   })));
   $('row-delete').addEventListener('click',()=>run(()=>{M.deleteRow(state,rowId);changed('等级已删除，其中的项目已回到待选区。');$('row-dialog').close();}));
   $('add-text-form').addEventListener('submit',event=>{event.preventDefault();if(busy)return;run(()=>{M.addItem(state,{name:$('text-name').value.trim(),image:null,art:null});$('text-name').value='';changed('文字项目已加入待选区。');$('text-name').focus();});});
-  title.addEventListener('input',()=>{autosizeTitle();if(title.value.trim())run(()=>{M.setTitle(state,title.value.trim());invalidateClearUndo();$('display-title').textContent=state.title;scheduleSave();});});
-  title.addEventListener('blur',()=>{if(!title.value.trim()){title.value=state.title;message('标题不能为空，已恢复上次标题。');autosizeTitle();}});
+  title.addEventListener('input',()=>{autosizeTitle();if(title.value.trim())run(()=>{M.setTitle(state,M.inputValue(title));invalidateClearUndo();$('display-title').textContent=M.displayTitle(state);scheduleSave();});});
+  title.addEventListener('blur',()=>{if(!title.value.trim()){M.bindDisplayInput(title,state.title,()=>M.displayTitle(state));message('标题不能为空，已恢复上次标题。');autosizeTitle();}});
   window.addEventListener('resize',autosizeTitle);
   function download(blob,name) {
     const anchor=node('a');
     if(typeof URL.createObjectURL!=='function'||!('download' in anchor))throw new Error('当前浏览器暂不支持文件下载，请使用支持下载的浏览器。榜单仍保留在此页面。');
     const url=URL.createObjectURL(blob);anchor.href=url;anchor.download=name;document.body.append(anchor);anchor.click();anchor.remove();setTimeout(()=>URL.revokeObjectURL(url),60000);
   }
-  function safeFilename(extension) {return (state.title.replace(/[<>:"/\\|?*\x00-\x1f]/g,'_').slice(0,60)||'我的排行')+'.'+extension;}
+  function safeFilename(extension) {return (M.displayTitle(state).replace(/[<>:"/\\|?*\x00-\x1f]/g,'_').slice(0,60)||'我的排行')+'.'+extension;}
   $('png-export').addEventListener('click',async()=>{
     if(busy)return;setBusy(true);message('正在生成 PNG，请稍候…');
     try{const result=await Export.exportRanking(M.validateState(state),{scale:Number($('export-scale').value),theme:document.documentElement.dataset.theme});download(result.blob,safeFilename('png'));message('PNG 已生成（'+result.width+' × '+result.height+' 像素'+(result.scale<Number($('export-scale').value)?'，已为长图自动降低倍率':'')+'）。');}
@@ -177,27 +198,27 @@
     try{
       if(file.size>M.LIMITS.jsonBytes)throw new Error('备份文件过大，最多支持 30 MB。');
       const imported=M.deserialize(await file.text());
-      if(confirm('导入“'+templateLabel(imported.templateId)+'”备份？将替换此模板的内容，其他模板内容保留。请先导出 JSON 备份。')){
+      if(confirm(M.localize('导入“'+templateLabel(imported.templateId)+'”备份？将替换此模板的内容，其他模板内容保留。请先导出 JSON 备份。'))){
         const before=M.validateState(state);
         if(before.templateId!==imported.templateId&&!protectedSave)await storage.save(before);
         templateDrafts.set(before.templateId,before);state=imported;templateDrafts.set(state.templateId,M.validateState(state));protectedSave=false;changed('备份已导入。');
       }
     }catch(error){failure(error);}finally{event.target.value='';setBusy(false);render();}
   });
-  $('reset-ranking').addEventListener('click',()=>{if(busy)return;const label=templateLabel();if(confirm('恢复默认'+label+'？只替换当前模板的标题、等级和项目，皮肤与主题选择保留。继续编辑前可撤销；需要留档请先导出 JSON 备份。'))run(()=>{const skin=state.skin,templateId=state.templateId;undoSnapshot=M.validateState(state);undoKind='reset';state=M.createDefaultState(templateId);M.setSkin(state,skin);protectedSave=false;changed('已恢复默认'+label+'。继续编辑前可撤销恢复。',{preserveUndo:true});presentation(true);});});
-  $('clear-items').addEventListener('click',()=>{if(busy||!Object.keys(state.items).length)return;if(confirm('清空全部项目（含待选区）？标题和等级会保留，本页继续编辑前可撤销。'))run(()=>{undoSnapshot=M.validateState(state);undoKind='clear';M.clearItems(state);changed('全部项目已清空。继续编辑前，可点「撤销清空」恢复。',{preserveUndo:true});});});
+  $('reset-ranking').addEventListener('click',()=>{if(busy)return;const label=templateLabel();if(confirm(M.localize('恢复默认'+label+'？只替换当前模板的标题、等级和项目，皮肤与主题选择保留。继续编辑前可撤销；需要留档请先导出 JSON 备份。')))run(()=>{const skin=state.skin,templateId=state.templateId;undoSnapshot=M.validateState(state);undoKind='reset';state=M.createDefaultState(templateId);M.setSkin(state,skin);protectedSave=false;changed('已恢复默认'+label+'。继续编辑前可撤销恢复。',{preserveUndo:true});presentation(true);});});
+  $('clear-items').addEventListener('click',()=>{if(busy||!Object.keys(state.items).length)return;if(confirm(M.localize('清空全部项目（含待选区）？标题和等级会保留，本页继续编辑前可撤销。')))run(()=>{undoSnapshot=M.validateState(state);undoKind='clear';M.clearItems(state);changed('全部项目已清空。继续编辑前，可点「撤销清空」恢复。',{preserveUndo:true});});});
   $('undo-clear').addEventListener('click',()=>{if(busy||!undoSnapshot)return;const skin=state.skin,kind=undoKind,leaving=M.validateState(state);templateDrafts.set(leaving.templateId,leaving);if(kind==='template')storage.saveTemplate(leaving).catch(failure);state=M.validateState(undoSnapshot);if(kind!=='template')M.setSkin(state,skin);templateDrafts.set(state.templateId,M.validateState(state));changed(kind==='template'?'已撤销切换，原模板内容已还原。':kind==='reset'?'已撤销恢复默认，原有排行和图片已还原。':'已恢复清空前的全部项目。');});
   $('ranking-template').addEventListener('change',async()=>{
     const target=$('ranking-template').value;$('ranking-template').value=state.templateId;
     if(busy||target===state.templateId||!Object.prototype.hasOwnProperty.call(M.TEMPLATES,target))return;
-    if(!confirm('切换到“'+templateLabel(target)+'”？当前模板内容将分别保留，可切回继续，也可在继续编辑前撤销切换。重要内容建议先导出 JSON 备份。'))return;
+    if(!confirm(M.localize('切换到“'+templateLabel(target)+'”？当前模板内容将分别保留，可切回继续，也可在继续编辑前撤销切换。重要内容建议先导出 JSON 备份。')))return;
     const before=M.validateState(state),oldRevision=revision;templateDrafts.set(before.templateId,before);
     setBusy(true);clearTimeout(saveTimer);let warning='';
     try{
       let next=templateDrafts.has(target)?M.validateState(templateDrafts.get(target)):null;
       if(!next){try{next=await storage.loadTemplate(target);}catch(error){
         if(error.code==='corrupt'){
-          if(!confirm('“'+templateLabel(target)+'”存档无法读取。是否只恢复该模板默认？将替换这份损坏记录，当前模板内容保留；取消则不更改。'))throw error;
+          if(!confirm(M.localize('“'+templateLabel(target)+'”存档无法读取。是否只恢复该模板默认？将替换这份损坏记录，当前模板内容保留；取消则不更改。')))throw error;
           next=M.createDefaultState(target);M.setSkin(next,before.skin);await storage.saveTemplate(next);
         }else if(error.code==='unavailable')warning='本地存储不可用，本次模板内容仅在当前页面保留，请导出 JSON 备份。';
         else throw error;
@@ -218,11 +239,11 @@
     touchSortEnabled=enabled;lastTap=null;
     document.body.classList.toggle('touch-sort-enabled',enabled);
     const button=$('touch-sort-toggle'),note=$('touch-sort-note');
-    if(button){button.setAttribute('aria-pressed',String(enabled));button.textContent=enabled?'结束拖动':'拖动排序';}
-    if(note)note.textContent=enabled?'拖动已开启；点「结束拖动」即可恢复滑动浏览。':'滑动浏览；开启「拖动排序」后可移动卡片。';
+    if(button){button.setAttribute('aria-pressed',String(enabled));M.uiText(button,enabled?'结束拖动':'拖动排序');}
+    if(note)M.uiText(note,enabled?'拖动已开启；点「结束拖动」即可恢复滑动浏览。':'滑动浏览；开启「拖动排序」后可移动卡片。');
   }
   $('touch-sort-toggle')?.addEventListener('click',()=>touchSort(!touchSortEnabled));
-  function presentation(enabled){if(!enabled)touchSort(false);lastTap=null;document.body.classList.toggle('presentation',enabled);$('presentation-toggle').textContent=enabled?'制作我的榜单':'展示模式';$('presentation-toggle').setAttribute('aria-label',enabled?'制作我的榜单，退出展示并进入编辑模式':'进入展示模式，隐藏编辑控件');$('presentation-toggle').title=enabled?'制作我的榜单，也可按 Esc 进入编辑':'进入展示模式';$('presentation-toggle').setAttribute('aria-pressed',String(enabled));autosizeTitle();view?.presentation(enabled);}
+  function presentation(enabled){if(!enabled)touchSort(false);lastTap=null;document.body.classList.toggle('presentation',enabled);M.uiText($('presentation-toggle'),enabled?'制作我的榜单':'展示模式');M.uiAttr($('presentation-toggle'),'aria-label',enabled?'制作我的榜单，退出展示并进入编辑模式':'进入展示模式，隐藏编辑控件');M.uiAttr($('presentation-toggle'),'title',enabled?'制作我的榜单，也可按 Esc 进入编辑':'进入展示模式');$('presentation-toggle').setAttribute('aria-pressed',String(enabled));autosizeTitle();view?.presentation(enabled);}
   $('presentation-toggle').addEventListener('click',()=>presentation(!document.body.classList.contains('presentation')));
   document.addEventListener('keydown',event=>{if(event.key==='Escape'&&!$('item-dialog').open&&!$('row-dialog').open)presentation(false);});
   async function importFiles(files,target='pool'){
@@ -234,7 +255,7 @@
     for(let index=0;index<files.length;index++){
       const file=files[index];message('正在处理图片 '+(index+1)+' / '+files.length+'…');
       try{const prepared=await Images.prepareFile(file);const name=Array.from(file.name.replace(/\.[^.]+$/,'').trim()).slice(0,80).join('')||'未命名图片';M.addItem(state,{name,...prepared,art:null},target);added++;invalidateClearUndo();scheduleSave();}
-      catch(error){failed++;if(errors.length<4)errors.push(file.name+'：'+error.message);}
+      catch(error){failed++;if(errors.length<4)errors.push(file.name+': '+M.localize(error.message));}
     }
     setBusy(false);if(added)changed();else render();
     const destination=target==='pool'?'待选区':state.rows.find(row=>row.id===target).name+'等级';
@@ -302,8 +323,8 @@
   window.addEventListener('blur',()=>endDrag(null,true));
   document.addEventListener('keydown',event=>{if(event.key==='Escape'&&drag){endDrag(null,true);event.preventDefault();}});
   (async()=>{
-    try{const restored=await storage.load();if(restored){state=restored;saveStatus.textContent='已恢复本机排行';}else saveStatus.textContent='修改后自动保存到本机';}
-    catch(error){protectedSave=true;saveStatus.textContent='无法恢复存档 · 请备份';saveStatus.dataset.failed='true';failure(error);}
+    try{const restored=await storage.load();if(restored){state=restored;M.uiText(saveStatus,'已恢复本机排行');}else M.uiText(saveStatus,'修改后自动保存到本机');}
+    catch(error){protectedSave=true;M.uiText(saveStatus,'无法恢复存档 · 请备份');saveStatus.dataset.failed='true';failure(error);}
     render();app.hidden=false;initialized=true;presentation(true);
   })();
 })();

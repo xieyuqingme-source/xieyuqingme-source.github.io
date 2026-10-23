@@ -372,6 +372,8 @@ class MapRenderingTests(unittest.TestCase):
             '<head><link href="{{site_url}}/map/"></head><script id="footprints-data" type="application/json">{{map_data}}</script>', encoding="utf-8")
         for name in ASSETS:
             (self.root / "home/assets" / name).write_text("{}", encoding="utf-8")
+        (self.root / "home/locales").mkdir(parents=True)
+        (self.root / "home/locales/map.json").write_text('{"zh-CN":{},"en":{}}', encoding="utf-8")
 
     def test_no_implicit_private_discovery_when_public_catalog_is_absent(self):
         (self.root / ".map-local.json").write_text('{"source":"Z:/must-not-be-opened.md"}', encoding="utf-8")
@@ -385,7 +387,7 @@ class MapRenderingTests(unittest.TestCase):
         html = (output / "map/index.html").read_text(encoding="utf-8")
         self.assertNotIn(attack, html)
         self.assertIn('name="robots" content="noindex,nofollow"', html)
-        embedded = json.loads(re.search(r'application/json">(.*?)</script>', html, re.S)[1])
+        embedded = json.loads(re.search(r'<script id="footprints-data" type="application/json">(.*?)</script>', html, re.S)[1])
         self.assertEqual(embedded["records"][0]["description"], attack)
         self.assertTrue(embedded["preview"])
         self.assertEqual(report["records"], 1)

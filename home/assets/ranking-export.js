@@ -24,9 +24,25 @@
     const lines = [];
     String(text).split('\n').forEach(paragraph => {
       let line = '';
+      const tokens = [];
+      let word = '';
       characters(paragraph).forEach(char => {
-        if (line && measure(line + char, size) > maxWidth) { lines.push(line); line = char; }
-        else line += char;
+        if (/^[\p{Script=Latin}\p{M}\p{N}_'’]+$/u.test(char)) word += char;
+        else { if (word) { tokens.push(word); word = ''; } tokens.push(char); }
+      });
+      if (word) tokens.push(word);
+      tokens.forEach(token => {
+        // Preserve authored spaces, but do not count invisible trailing spaces
+        // as a reason to split the next word. CJK and emoji remain graphemes.
+        if (measure(token, size) > maxWidth && !/^\s+$/.test(token)) {
+          if (line) { lines.push(line); line = ''; }
+          characters(token).forEach(char => {
+            if (line && measure(line + char, size) > maxWidth) { lines.push(line); line = char; }
+            else line += char;
+          });
+        } else if (line && measure((line + token).trimEnd(), size) > maxWidth) {
+          lines.push(line); line = token;
+        } else line += token;
       });
       lines.push(line);
     });
@@ -35,7 +51,7 @@
   /* measureText(text,fontSize,weight) must return a numeric width in logical pixels. */
   function planLayout(input, options) {
     options = options || {};
-    const state = Model.validateState(input);
+    const state = Model.displayState(input);
     const width = options.width === undefined ? 1200 : options.width;
     if (!Number.isFinite(width) || width < 640 || width > 2000) throw new Error('导出布局宽度须在 640–2000 像素之间。');
     const classic = state.skin === 'classic';
@@ -60,12 +76,18 @@
     const contentWidth = boardWidth - labelWidth - padding * 2;
     const columns = Math.max(1, Math.floor((contentWidth + gap) / (cardWidth + gap)));
     const sourceRows = state.rows.slice();
-    if (options.includePool && state.pool.length) sourceRows.push({ id: 'pool', name: '待选区', color: '#dce5d6', itemIds: state.pool });
+    if (options.includePool && state.pool.length) sourceRows.push({ id: 'pool', name: Model.translate('待选区'), color: '#dce5d6', itemIds: state.pool });
     const rows = sourceRows.map(row => {
-      const labelSize = classic ? 24 : 26;
+      let labelSize = classic ? 24 : 26;
       const labelLineHeight = classic ? 32 : 36;
-      const labelLines = wrapText(row.name, labelWidth - (classic ? 20 : 28), labelSize, (text, size) =>
-        (options.measureText || approximation)(text, size, '700'));
+      const labelContentWidth = labelWidth - (classic ? 20 : 28);
+      const measureLabel = (text, size) => (options.measureText || approximation)(text, size, '700');
+      // Fit a short Latin word such as Awesome before resorting to wrapping.
+      // Long custom words retain the normal size and character fallback.
+      if (/^[A-Za-z]+$/.test(row.name) && measureLabel(row.name, labelSize) > labelContentWidth &&
+          measureLabel(row.name, 15) <= labelContentWidth)
+        labelSize = Math.max(15, Math.floor(labelSize * labelContentWidth / measureLabel(row.name, labelSize)));
+      const labelLines = wrapText(row.name, labelContentWidth, labelSize, measureLabel);
       const cards = [];
       let groupY = cursorY + padding;
       for (let first = 0; first < row.itemIds.length; first += columns) {
@@ -145,7 +167,7 @@
   async function exportRanking(input, options) {
     options = options || {};
     if (typeof document === 'undefined') throw new Error('PNG 导出需要支持 Canvas 的浏览器。');
-    const state = Model.validateState(input);
+    const state = Model.displayState(input);
     const classic = state.skin === 'classic';
     // Theme changes colour only. The data layout and resolution never depend on
     // screen zoom, fullscreen or viewport dimensions. Explicit theme wins.

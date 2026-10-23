@@ -16,6 +16,7 @@ from build_blog import Blog, ROOT
 from photo_pages import build_photos
 from map_pages import load_map, build_map
 from anthology_pages import load_anthology, load_glossary, build_anthology
+from site_i18n import localize_page, localized_path, load_catalogues, check_site_languages
 
 OUTPUT = ROOT / "_site_unified"
 GAME_PAGES = (("game.template.html", "game"), ("ranking.template.html", "game/ranking"))
@@ -178,6 +179,8 @@ def render_projects(projects, language="zh-CN"):
     cards = []
     for item in projects:
         text = {name: escape(value, quote=True) for name, value in item.items()}
+        if "demo_url" in text:
+            text["demo_url"] = localized_path(text["demo_url"], language)
         with Image.open(ROOT / "home" / item["screenshot"].lstrip("/")) as image:
             width, height = image.size
         labels = {"解决的问题": "Problem", "主要功能": "Features", "实际贡献": "My contribution", "来源与许可": "Sources & licensing"}
@@ -208,7 +211,7 @@ def render_projects(projects, language="zh-CN"):
     result = "\n".join(cards)
     if language == "en":
         for chinese, english in {"从这里开始": "Start here", "功能、贡献与来源": "Features, contribution & sources",
-                                  "发布链接待确认": "Publication link pending", "打开体验": "Open tool (Chinese interface)",
+                                  "发布链接待确认": "Publication link pending", "打开体验": "Open tool",
                                   "查看 GitHub": "View GitHub", "下载工作流": "Download workflow", "下载与使用说明": "Download & usage guide"}.items():
             result = result.replace(chinese, english)
     return result
@@ -418,8 +421,8 @@ def build_site(address, map_preview_source=None):
         raise ValueError("Keep the existing unrecognized output directory intact.")
     OUTPUT.mkdir(exist_ok=True)
     (OUTPUT / ".generated-by-unified-site").write_text("Generated unified website.\n", encoding="utf-8")
-    photo_report = build_photos(ROOT, OUTPUT, address, allow_local_map_preview=bool(map_preview_source))
-    map_report = build_map(ROOT, OUTPUT, address, map_data, preview=bool(map_preview_source))
+    photo_report = build_photos(ROOT, OUTPUT, address, allow_local_map_preview=bool(map_preview_source), language="zh-CN")
+    map_report = build_map(ROOT, OUTPUT, address, map_data, preview=bool(map_preview_source), language="zh-CN")
     blog = Blog(address + "/articles", output=OUTPUT / "articles")
     # Keep the legacy _site and every pre-existing file; CI starts from a clean checkout.
     blog.build(clean=False)
@@ -437,7 +440,7 @@ def build_site(address, map_preview_source=None):
               "photo_total": str(photo_report["photos"])}
     for name, value in values.items(): home = home.replace("{{" + name + "}}", value)
     if "{{" in home: raise ValueError("Unresolved home template placeholder.")
-    (OUTPUT / "index.html").write_text(home, encoding="utf-8")
+    (OUTPUT / "index.html").write_text(localize_page(home, ROOT, address, "/"), encoding="utf-8")
     projects_page = (ROOT / "home/projects.template.html").read_text(encoding="utf-8")
     project_values = {"site_url": escape(address, quote=True), "project_total": str(len(projects)),
                       "project_cards": render_projects(projects)}
@@ -446,29 +449,42 @@ def build_site(address, map_preview_source=None):
     if "{{" in projects_page:
         raise ValueError("Unresolved projects template placeholder.")
     (OUTPUT / "projects").mkdir(exist_ok=True)
-    (OUTPUT / "projects/index.html").write_text(projects_page, encoding="utf-8")
+    (OUTPUT / "projects/index.html").write_text(localize_page(projects_page, ROOT, address, "/projects/"), encoding="utf-8")
     about_page = (ROOT / "home/about.template.html").read_text(encoding="utf-8")
     for name, value in {"site_url": escape(address, quote=True), "about_content": render_about(about_data)}.items():
         about_page = about_page.replace("{{" + name + "}}", value)
     if "{{" in about_page:
         raise ValueError("Unresolved about template placeholder.")
     (OUTPUT / "about").mkdir(exist_ok=True)
-    (OUTPUT / "about/index.html").write_text(about_page, encoding="utf-8")
-    anthology_report = build_anthology(ROOT, OUTPUT, address)
+    (OUTPUT / "about/index.html").write_text(localize_page(about_page, ROOT, address, "/about/"), encoding="utf-8")
+    anthology_report = build_anthology(ROOT, OUTPUT, address, language="zh-CN")
     from english_site import build_english_site
     english_report = build_english_site(blog, OUTPUT, address, projects, about_data, values)
+    photo_english_report = build_photos(ROOT, OUTPUT, address, allow_local_map_preview=bool(map_preview_source), language="en")
+    map_english_report = build_map(ROOT, OUTPUT, address, map_data, preview=bool(map_preview_source), language="en")
+    anthology_english_report = build_anthology(ROOT, OUTPUT, address, language="en")
+    game_catalogue = load_catalogues(ROOT, ("games",))
+    game_routes = []
     for template, route in GAME_PAGES:
         source = ROOT / "home" / template
         if source.is_symlink():
             raise ValueError("Game template symlinks are not supported.")
-        page = source.read_text(encoding="utf-8").replace("{{site_url}}", escape(address, quote=True))
-        if "{{" in page:
+        template_page = source.read_text(encoding="utf-8").replace("{{site_url}}", escape(address, quote=True))
+        if "{{" in template_page:
             raise ValueError(f"Unresolved game template placeholder: {template}")
-        destination = OUTPUT / route
-        destination.mkdir(parents=True, exist_ok=True)
-        (destination / "index.html").write_text(page, encoding="utf-8")
+        page_name = "ranking" if route.endswith("ranking") else "game"
+        titles = {language: game_catalogue[language][f"games.page.{page_name}.title"] for language in ("zh-CN", "en")}
+        descriptions = {language: game_catalogue[language][f"games.page.{page_name}.description"] for language in ("zh-CN", "en")}
+        for language in ("zh-CN", "en"):
+            localized_route = localized_path("/" + route + "/", language)
+            page = localize_page(template_page, ROOT, address, "/" + route + "/", language,
+                                 modules=("games",), title=titles, description=descriptions)
+            destination = OUTPUT / localized_route.strip("/")
+            destination.mkdir(parents=True, exist_ok=True)
+            (destination / "index.html").write_text(page, encoding="utf-8")
+            game_routes.append(localized_route)
     (OUTPUT / "assets").mkdir(exist_ok=True)
-    for name in ("portal.css", "portal.js", "wechat-qrcode.jpg", *BRAND_ASSETS, *GAME_ASSETS):
+    for name in ("portal.css", "portal.js", "site-i18n.js", "wechat-qrcode.jpg", *BRAND_ASSETS, *GAME_ASSETS):
         source = ROOT / "home/assets" / name
         if source.is_symlink(): raise ValueError("Home asset symlinks are not supported.")
         shutil.copy2(source, OUTPUT / "assets" / name)
@@ -487,15 +503,13 @@ def build_site(address, map_preview_source=None):
     ET.SubElement(ET.SubElement(sitemap, "url"), "loc").text = address + "/"
     ET.SubElement(ET.SubElement(sitemap, "url"), "loc").text = address + "/projects/"
     ET.SubElement(ET.SubElement(sitemap, "url"), "loc").text = address + "/about/"
-    ET.SubElement(ET.SubElement(sitemap, "url"), "loc").text = address + "/map/"
-    for route in anthology_report["routes"]:
-        ET.SubElement(ET.SubElement(sitemap, "url"), "loc").text = address + route
+    feature_routes = ["/map/", "/en/map/", *game_routes,
+                      *anthology_report["routes"], *anthology_english_report["routes"],
+                      *photo_report["routes"], *photo_english_report["routes"]]
+    for route in feature_routes:
+        ET.SubElement(ET.SubElement(sitemap, "url"), "loc").text = address + "/" + route.strip("/") + "/"
     for route in english_report["routes"]:
         ET.SubElement(ET.SubElement(sitemap, "url"), "loc").text = address + route
-    for _, route in GAME_PAGES:
-        ET.SubElement(ET.SubElement(sitemap, "url"), "loc").text = address + "/" + route + "/"
-    for route in photo_report["routes"]:
-        ET.SubElement(ET.SubElement(sitemap, "url"), "loc").text = address + "/" + route + "/"
     article_sitemap = ET.parse(OUTPUT / "articles/sitemap.xml")
     for loc in article_sitemap.findall(".//{*}loc"):
         ET.SubElement(ET.SubElement(sitemap, "url"), "loc").text = loc.text
@@ -509,6 +523,9 @@ def build_site(address, map_preview_source=None):
     report["footprints"] = map_report
     report["english"] = english_report
     report["anthology"] = anthology_report
+    report["english_features"] = {"photography": photo_english_report, "footprints": map_english_report,
+                                  "anthology": anthology_english_report, "games": game_routes[1::2]}
+    report["localization"] = check_site_languages(OUTPUT, address)
     responsive = getattr(blog, "responsive_images", None)
     if responsive is not None:
         report["responsive_images"] = responsive.report()

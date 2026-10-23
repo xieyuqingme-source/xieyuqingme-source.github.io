@@ -1,10 +1,12 @@
 (function (root, factory) {
   "use strict";
+  const I = (key, values, fallback) => globalThis.FootprintsI18n ? globalThis.FootprintsI18n.text(key, values, fallback) : fallback.replace(/\{(\w+)\}/g, (match, name) => Object.hasOwn(values, name) ? String(values[name]) : match);
   const video = factory();
   if (typeof module === "object" && module.exports) module.exports = video;
   else root.FootprintsVideo = video;
 })(typeof globalThis !== "undefined" ? globalThis : this, function () {
   "use strict";
+  const I = (key, values, fallback) => globalThis.FootprintsI18n ? globalThis.FootprintsI18n.text(key, values, fallback) : fallback.replace(/\{(\w+)\}/g, (match, name) => Object.hasOwn(values, name) ? String(values[name]) : match);
   // Capture only the supplied canvas. This module never asks for screen, camera,
   // microphone, network access, or an audio track. Recording runs in real time.
   const FORMATS = [
@@ -35,13 +37,13 @@
   }
   function capabilities(custom) {
     const e = environment(custom), Recorder = e.MediaRecorder;
-    if (!Recorder || typeof Recorder.isTypeSupported !== "function") return { supported: false, mimeType: "", extension: "", reason: "当前浏览器没有可用的视频编码功能。可下载静态图片，或使用最新版 Windows Chrome 生成视频。" };
+    if (!Recorder || typeof Recorder.isTypeSupported !== "function") return { supported: false, mimeType: "", extension: "", reason: I("map.video.s001", {}, "当前浏览器没有可用的视频编码功能。可下载静态图片，或使用最新版 Windows Chrome 生成视频。") };
     const capture = e.canvas ? e.canvas.captureStream : e.HTMLCanvasElement && e.HTMLCanvasElement.prototype.captureStream;
-    if (typeof capture !== "function") return { supported: false, mimeType: "", extension: "", reason: "当前浏览器不支持地图画布录像。可下载静态图片，或使用最新版 Windows Chrome 生成视频。" };
+    if (typeof capture !== "function") return { supported: false, mimeType: "", extension: "", reason: I("map.video.s002", {}, "当前浏览器不支持地图画布录像。可下载静态图片，或使用最新版 Windows Chrome 生成视频。") };
     for (const format of FORMATS) {
       try { if (Recorder.isTypeSupported(format.mimeType)) return { supported: true, mimeType: format.mimeType, extension: format.extension, reason: "" }; } catch (_) { /* Try the next explicit container/codec. */ }
     }
-    return { supported: false, mimeType: "", extension: "", reason: "当前浏览器没有支持的 WebM 或 MP4 编码格式。请下载静态图片，或换用最新版 Windows Chrome。" };
+    return { supported: false, mimeType: "", extension: "", reason: I("map.video.s003", {}, "当前浏览器没有支持的 WebM 或 MP4 编码格式。请下载静态图片，或换用最新版 Windows Chrome。") };
   }
   function formatFor(type) {
     const container = String(type || "").split(";")[0].trim().toLowerCase();
@@ -117,12 +119,12 @@
     const cap = capabilities(Object.assign({}, o.environment, { canvas }));
     const durationMs = Number(o.durationMs), fps = o.fps === undefined ? 30 : Number(o.fps);
     if (!cap.supported) return Promise.reject(error("NotSupportedError", cap.reason));
-    if (!canvas || !Number.isInteger(canvas.width) || !Number.isInteger(canvas.height) || canvas.width <= 0 || canvas.height <= 0 || canvas.width > 4096 || canvas.height > 4096 || canvas.width * canvas.height > 9000000) return Promise.reject(error("ValidationError", "视频画幅无效，请重新生成。"));
-    if (activeCanvases.has(canvas)) return Promise.reject(error("InvalidStateError", "这张地图正在生成视频，请先取消或等待完成。"));
-    if (!Number.isFinite(durationMs) || durationMs <= 0 || durationMs > MAX_DURATION) return Promise.reject(error("ValidationError", "视频须在 30 分钟以内，请减少经历或提高整体节奏后重试。"));
-    if (!Number.isFinite(fps) || fps < 15 || fps > 60 || typeof o.renderFrame !== "function") return Promise.reject(error("ValidationError", "视频帧率或绘图设置无效。"));
-    if (o.signal && o.signal.aborted) return Promise.reject(error("AbortError", "已取消生成视频。"));
-    if (e.document && e.document.hidden) return Promise.reject(error("InterruptedError", "请保持本页面在前台，再生成视频。"));
+    if (!canvas || !Number.isInteger(canvas.width) || !Number.isInteger(canvas.height) || canvas.width <= 0 || canvas.height <= 0 || canvas.width > 4096 || canvas.height > 4096 || canvas.width * canvas.height > 9000000) return Promise.reject(error("ValidationError", I("map.video.s004", {}, "视频画幅无效，请重新生成。")));
+    if (activeCanvases.has(canvas)) return Promise.reject(error("InvalidStateError", I("map.video.s005", {}, "这张地图正在生成视频，请先取消或等待完成。")));
+    if (!Number.isFinite(durationMs) || durationMs <= 0 || durationMs > MAX_DURATION) return Promise.reject(error("ValidationError", I("map.video.s006", {}, "视频须在 30 分钟以内，请减少经历或提高整体节奏后重试。")));
+    if (!Number.isFinite(fps) || fps < 15 || fps > 60 || typeof o.renderFrame !== "function") return Promise.reject(error("ValidationError", I("map.video.s007", {}, "视频帧率或绘图设置无效。")));
+    if (o.signal && o.signal.aborted) return Promise.reject(error("AbortError", I("map.video.s008", {}, "已取消生成视频。")));
+    if (e.document && e.document.hidden) return Promise.reject(error("InterruptedError", I("map.video.s009", {}, "请保持本页面在前台，再生成视频。")));
     const width = canvas.width, height = canvas.height;
     activeCanvases.add(canvas);
     return new Promise((resolve, reject) => {
@@ -146,12 +148,12 @@
         o.onProgress({ state, progress: Math.max(0, Math.min(1, elapsedMs / durationMs)), elapsedMs: Math.min(durationMs, elapsedMs), durationMs });
       }
       function paint(at) {
-        if (canvas.width !== width || canvas.height !== height) throw error("InterruptedError", "视频画幅发生变化，已停止生成；请重试。" );
+        if (canvas.width !== width || canvas.height !== height) throw error("InterruptedError", I("map.video.s010", {}, "视频画幅发生变化，已停止生成；请重试。") );
         const result = o.renderFrame(at);
-        if (result && typeof result.then === "function") throw error("ValidationError", "视频画面尚未准备好，请等待地图和头像加载后重试。" );
+        if (result && typeof result.then === "function") throw error("ValidationError", I("map.video.s011", {}, "视频画面尚未准备好，请等待地图和头像加载后重试。") );
       }
-      function abort() { fail(error("AbortError", "已取消生成视频。")); }
-      function interrupt() { fail(error("InterruptedError", "页面已离开前台，生成已停止。回到页面后可以重试。")); }
+      function abort() { fail(error("AbortError", I("map.video.s012", {}, "已取消生成视频。"))); }
+      function interrupt() { fail(error("InterruptedError", I("map.video.s013", {}, "页面已离开前台，生成已停止。回到页面后可以重试。"))); }
       function visibility() { if (e.document.hidden) interrupt(); }
       function tick(timestamp) {
         frame = null; if (settled || finishing) return;
@@ -160,7 +162,7 @@
         // document.hidden stays false. Discard that recording instead of
         // offering a choppy file with missing transition frames. The first
         // frame gets a small encoder-startup allowance; later stalls do not.
-        if (current - previous > (tickCount === 0 ? 1500 : 750)) { fail(error("InterruptedError", "页面绘制被浏览器暂停或限速。请将 Chrome 窗口和本页保持前台，关闭遮挡后重试。")); return; }
+        if (current - previous > (tickCount === 0 ? 1500 : 750)) { fail(error("InterruptedError", I("map.video.s014", {}, "页面绘制被浏览器暂停或限速。请将 Chrome 窗口和本页保持前台，关闭遮挡后重试。"))); return; }
         tickCount++;
         previous = current;
         const elapsed = Math.max(0, Math.min(durationMs, current - anchor));
@@ -170,25 +172,25 @@
           if (elapsed >= durationMs) {
             finishing = true; notify("finalizing", durationMs);
             // Give the final canvas paint one capture interval before flushing.
-            stopTimer = e.setTimeout(() => { stopTimer = null; if (settled) return; try { recorder.stop(); } catch (_) { fail(error("EncodingError", "浏览器未能结束编码，请重试。")); } }, Math.ceil(1000 / fps) + 20);
+            stopTimer = e.setTimeout(() => { stopTimer = null; if (settled) return; try { recorder.stop(); } catch (_) { fail(error("EncodingError", I("map.video.s015", {}, "浏览器未能结束编码，请重试。"))); } }, Math.ceil(1000 / fps) + 20);
             if (watchdog !== null) e.clearTimeout(watchdog);
-            watchdog = e.setTimeout(() => fail(error("EncodingError", "浏览器结束编码超时，请重试。")), 10000);
+            watchdog = e.setTimeout(() => fail(error("EncodingError", I("map.video.s016", {}, "浏览器结束编码超时，请重试。"))), 10000);
           } else frame = e.requestFrame(tick);
         } catch (problem) { fail(problem); }
       }
       async function completed() {
         if (settled) return;
-        if (!finishing) { fail(error("EncodingError", "浏览器意外中断了视频生成，请重试。")); return; }
-        if (!byteLength) { fail(error("EncodingError", "浏览器没有生成视频数据，请重试或下载静态图片。")); return; }
+        if (!finishing) { fail(error("EncodingError", I("map.video.s017", {}, "浏览器意外中断了视频生成，请重试。"))); return; }
+        if (!byteLength) { fail(error("EncodingError", I("map.video.s018", {}, "浏览器没有生成视频数据，请重试或下载静态图片。"))); return; }
         const actualType = recorder.mimeType || cap.mimeType, extension = formatFor(actualType);
-        if (!extension) { fail(error("EncodingError", "浏览器返回了无法确认的视频格式，未下载文件。")); return; }
+        if (!extension) { fail(error("EncodingError", I("map.video.s019", {}, "浏览器返回了无法确认的视频格式，未下载文件。"))); return; }
         try {
           let blob = new e.Blob(chunks, { type: actualType });
           // Copying EBML metadata is bounded by the same 128 MiB output limit.
           blob = await withWebmDuration(blob, durationMs, e.Blob);
           if (settled) return;
           settled = true; cleanup(); resolve({ blob, mimeType: actualType, extension, durationMs, width, height, fps });
-        } catch (problem) { fail(error("EncodingError", "视频封装失败，请重试或下载静态图片。")); }
+        } catch (problem) { fail(error("EncodingError", I("map.video.s020", {}, "视频封装失败，请重试或下载静态图片。"))); }
       }
       try {
         // Paint before and after capture starts: a canvas stream needs a paint
@@ -196,27 +198,27 @@
         paint(0);
         stream = canvas.captureStream(fps);
         const tracks = stream.getTracks(), videos = stream.getVideoTracks();
-        if (videos.length !== 1 || tracks.length !== 1 || tracks[0].kind !== "video") throw error("EncodingError", "地图录像没有获得唯一的视频轨道，请重试。" );
+        if (videos.length !== 1 || tracks.length !== 1 || tracks[0].kind !== "video") throw error("EncodingError", I("map.video.s021", {}, "地图录像没有获得唯一的视频轨道，请重试。") );
         recorder = new e.MediaRecorder(stream, { mimeType: cap.mimeType, videoBitsPerSecond: 5000000 });
         listen(recorder, "dataavailable", event => {
           if (settled || !event.data || !event.data.size) return;
           byteLength += event.data.size;
-          if (byteLength > MAX_BYTES) { fail(error("QuotaExceededError", "视频超过 128 MiB，已停止生成。请减少经历或提高整体节奏后重试。")); return; }
+          if (byteLength > MAX_BYTES) { fail(error("QuotaExceededError", I("map.video.s022", {}, "视频超过 128 MiB，已停止生成。请减少经历或提高整体节奏后重试。"))); return; }
           chunks.push(event.data);
         });
-        listen(recorder, "error", () => fail(error("EncodingError", "浏览器编码失败，可能是内存或编码器暂时不足。请关闭无关页面后重试。")));
+        listen(recorder, "error", () => fail(error("EncodingError", I("map.video.s023", {}, "浏览器编码失败，可能是内存或编码器暂时不足。请关闭无关页面后重试。"))));
         listen(recorder, "stop", completed);
         listen(recorder, "start", () => {
           if (settled || started) return; started = true;
           if (!finishing && watchdog !== null) { e.clearTimeout(watchdog); watchdog = null; }
         });
-        listen(videos[0], "ended", () => { if (!finishing) fail(error("EncodingError", "地图视频轨道已中断，请重试。")); });
+        listen(videos[0], "ended", () => { if (!finishing) fail(error("EncodingError", I("map.video.s024", {}, "地图视频轨道已中断，请重试。"))); });
         listen(o.signal, "abort", abort); listen(e.document, "visibilitychange", visibility);
         listen(e.window, "pagehide", interrupt); listen(e.document, "freeze", interrupt);
         // Recheck after all cancellation listeners have been installed.
         if (o.signal && o.signal.aborted) { abort(); return; }
         if (e.document && e.document.hidden) { interrupt(); return; }
-        watchdog = e.setTimeout(() => fail(error("EncodingError", "浏览器未能启动视频编码，请重试。")), 10000);
+        watchdog = e.setTimeout(() => fail(error("EncodingError", I("map.video.s025", {}, "浏览器未能启动视频编码，请重试。"))), 10000);
         // The stream clock begins at start(), while the asynchronous start event
         // may wait for encoder output. Waiting for that event would create an
         // initial frozen second and shift every scene relative to video time.
@@ -224,8 +226,8 @@
         recorder.start(1000);
         if (!settled) { paint(0); notify("recording", 0); if (!settled) frame = e.requestFrame(tick); }
       } catch (problem) {
-        if (problem && problem.name === "SecurityError") fail(error("SecurityError", "地图或头像不允许被本地录制。请使用本站底图和本地上传的头像后重试。"));
-        else fail(problem instanceof Error ? problem : error("EncodingError", "无法启动视频生成，请重试。"));
+        if (problem && problem.name === "SecurityError") fail(error("SecurityError", I("map.video.s026", {}, "地图或头像不允许被本地录制。请使用本站底图和本地上传的头像后重试。")));
+        else fail(problem instanceof Error ? problem : error("EncodingError", I("map.video.s027", {}, "无法启动视频生成，请重试。")));
       }
     });
   }

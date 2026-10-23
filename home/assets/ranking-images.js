@@ -141,10 +141,10 @@
     const context = canvas.getContext('2d');
     if (!context) throw new Error('浏览器无法打开图片编辑器。');
     let active = false, busy = false, session = 0, resource = null, pendingResource = null, loadController = null, width = 0, height = 0, pointer = null;
-    let draft = { image: null, crop: null, art: null }, itemName = '';
+    let draft = { image: null, crop: null, art: null }, itemName = '', displayItem=null;
     const call = (name, value) => { if (typeof options[name] === 'function') options[name](value); };
     canvas.width = 640; canvas.height = 640; canvas.style.touchAction = 'none'; canvas.tabIndex = 0;
-    canvas.setAttribute('aria-label', '图片裁切预览：拖动图片定位，方向键微调，Shift 加速；使用缩放滑块放大。');
+    M.uiAttr(canvas,'aria-label','图片裁切预览：拖动图片定位，方向键微调，Shift 加速；使用缩放滑块放大。');
     zoomInput.min = '1'; zoomInput.max = '4'; zoomInput.step = '0.01'; zoomInput.value = '1';
     replaceInput.accept = 'image/png,image/jpeg,image/webp';
     function controls() {
@@ -155,7 +155,7 @@
       canvas.setAttribute('aria-busy', String(busy));
     }
     function setBusy(value) { busy = value; call('onBusy', value); controls(); }
-    function statusText(text, error) { status.textContent = text; status.dataset.error = String(!!error); }
+    function statusText(text, error) { M.uiText(status,text); status.dataset.error = String(!!error); }
     function report(error) { statusText(error.message || '图片处理失败，请重试。', true); call('onError', error); }
     function release() { if (resource) resource.dispose(); resource = null; width = 0; height = 0; }
     function cancelPointer() {
@@ -182,7 +182,7 @@
         const art = draft.art && (M.BUILTIN_ART || M.FOOD_ART)[draft.art];
         context.fillStyle = art ? art.bg : '#e4ebe2'; context.fillRect(0, 0, side, side);
         context.textAlign = 'center'; context.textBaseline = 'middle';
-        const placeholder = busy && art && art.photo ? '正在读取照片' : (Array.from(itemName).slice(0, 2).join('') || '图片');
+        const placeholder = busy && art && art.photo ? M.translate('正在读取照片') : (Array.from(displayItem?M.displayItemName(displayItem):itemName).slice(0,2).join('') || M.translate('图片'));
         context.fillStyle = '#2d4434'; context.font = 'bold ' + (Array.from(placeholder).length > 2 ? '78px' : '130px') + ' system-ui, sans-serif';
         context.fillText(placeholder, side / 2, side / 2);
       }
@@ -200,7 +200,7 @@
     function beginCrop() { if (!draft.crop) draft.crop = centeredCrop(width, height); }
     async function open(item) {
       close(); active = true; const token = ++session;
-      itemName = item.name || ''; draft = { image: item.image || null, crop: copyCrop(item.crop), art: item.art || null };
+      displayItem=item;itemName = item.name || ''; draft = { image: item.image || null, crop: copyCrop(item.crop), art: item.art || null };
       let photo;
       try { photo = draft.image ? null : builtinPhotoPath(draft.art); }
       catch (error) { report(error); controls(); draw(); return false; }
@@ -311,7 +311,7 @@
       draft.crop = translatedCrop(width, height, draft.crop, dx, dy); dirty();
     });
     controls(); draw();
-    return { open, getValue, close, isReady };
+    return { open, getValue, close, isReady, refreshLanguage(){draw();} };
   }
   return { prepareFile, createEditor, builtinPhotoPath, centeredCrop, boundedCrop, zoomCrop, translatedCrop };
 }));
