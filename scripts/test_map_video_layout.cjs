@@ -30,7 +30,39 @@ for(const heading of ['Xie Yuqing’s Footprints','An English journey through ci
 console.log('PASS 16:9 footer: complete bilingual headings, readable fixed font bounds and no caption overflow');
 
 
-const {captionLayout}=require('../home/assets/map-video-ui.js');const safe=captionLayout();assert.equal(safe.height,720);assert.equal(safe.mapBottom,440);assert(safe.descriptionYs.at(-1)+10<=safe.height-90,'two complete description lines stay above native-control safety region');assert(safe.dateY<safe.cityY&&safe.cityY<safe.descriptionYs[0]);for(const value of ['谢雨卿的足迹','A deliberately long English title about a journey through unfamiliar cities and lasting memories']){const layout=layoutOutroTitle(value,measure,{width:1184,height:720,mapBottom:safe.mapBottom});assert.equal(layout.truncated,false);assert(layout.closingBaseline+9<=safe.height-80);}
+const {captionLayout}=require('../home/assets/map-video-ui.js');const safe=captionLayout();assert.equal(safe.height,720);assert.equal(safe.mapBottom,720);assert.equal(safe.overlay,true);assert(safe.descriptionYs.at(-1)+8<=safe.height-safe.safeBottom,'complete event lines fit above the lower margin');assert.equal(safe.dateY,safe.cityY,'city and date share a compact header');assert(safe.cityY<safe.descriptionYs[0]);for(const value of ['谢雨卿的足迹','A deliberately long English title about a journey through unfamiliar cities and lasting memories']){const layout=layoutOutroTitle(value,measure,{width:1184,height:720,mapBottom:safe.mapBottom,overlay:true});assert.equal(layout.truncated,false);assert(layout.closingBaseline+8<=safe.height-safe.safeBottom);}
 console.log('PASS encoded captions: date, city, two event lines and complete bilingual outro above bottom safety margin');
 
 const {captionLines}=require('../home/assets/map-video-ui.js');const paragraph='Meaningful details and the end of the sentence stay complete.';const lines=captionLines(paragraph,text=>text.length,20);assert.equal(lines.join(''),paragraph);assert(lines.every(line=>line.length<=20));assert(lines.slice(0,-1).every(line=>/\s$/.test(line)));const cjk='城市、日期和真实事件说明不能丢字。'.repeat(8);assert.equal(captionLines(cjk,text=>Array.from(text).length,15).join(''),cjk);assert.equal(captionLines('first\nsecond',text=>text.length,30).join(''),'first\nsecond');console.log('PASS caption word wrapping: readable English boundaries and exact original Chinese/newline preservation');
+
+const fs=require('node:fs'),path=require('node:path');
+const renderer=fs.readFileSync(path.join(__dirname,'../home/assets/map-video-ui.js'),'utf8');
+assert.equal(safe.mapBottom/safe.height,1,'map covers the complete encoded frame');
+assert.equal(safe.safeBottom,56);assert.equal(safe.overlay,true);
+assert(!renderer.includes('fillRect(0, mapBottom, width, height - mapBottom)'), 'no opaque caption footer');
+assert(renderer.includes('strokeText(text,x,y,maxWidth)'),'transparent text retains a contrasting outline');
+const overlayTitle=layoutOutroTitle('A journey through familiar cities and unexpected memories',measure,{width:1184,height:720,mapBottom:720,overlay:true});
+assert(!overlayTitle.truncated);assert(overlayTitle.baselines[0]>=588);assert(overlayTitle.fontSize>=26&&overlayTitle.fontSize<=32);
+assert(overlayTitle.baselines.at(-1)+overlayTitle.fontSize*.3<overlayTitle.closingBaseline-18);
+assert(overlayTitle.closingBaseline+8<=720-safe.safeBottom);
+console.log('PASS transparent overlay: full-height map, outlined captions, safe intro/outro and no opaque footer');
+
+const single=captionLayout(1),double=captionLayout(2);
+assert.deepEqual(single.fontSizes,{date:22,city:30,description:26});
+assert.equal(single.headerY,624);assert.equal(double.headerY,592);
+assert.deepEqual(single.descriptionYs,[656]);assert.deepEqual(double.descriptionYs,[624,656]);
+assert.equal(single.cityY,single.dateY);assert(single.headerY>double.headerY,'short descriptions remain anchored at the bottom');
+for(const count of [0,1,2,20]){const item=captionLayout(count);assert(item.descriptionYs.length>=1&&item.descriptionYs.length<=2);assert.equal(item.descriptionYs.at(-1),656);}
+const outro=layoutOutroTitle('My footprints',measure,{height:720,width:1216,overlay:true});assert.equal(outro.fontSize,32);assert.deepEqual(outro.baselines,[620]);assert.equal(outro.closingBaseline,656);
+console.log('PASS smaller bottom captions: shared city/date header, 22/30/26 px type, bottom-anchored one/two-line descriptions, 56 px margin');
+
+const journey=require('../home/assets/map-journey.js'),catalog=JSON.parse(fs.readFileSync(path.join(__dirname,'../map/catalog.json'),'utf8'));
+const sourceById=new Map(catalog.records.map(record=>[record.id,record]));
+const built=journey.build(catalog.records),originalPlan=journey.plan(built.scenes,{textPaginator:text=>captionLines(text,value=>measure(value,26),1216)});
+for(const scene of originalPlan.scenes){
+ if(scene.derived)assert.equal(scene.description,'','automatic returns add no event description');
+ else assert.equal(scene.description,sourceById.get(scene.id).description,'journey preserves exact authored notes');
+ const text=originalPlan.segments.filter(segment=>segment.phase==='stay'&&originalPlan.scenes[segment.index].id===scene.id).map(segment=>segment.pageText).join('');assert.equal(text,scene.description||'');
+}
+assert.equal(catalog.records.find(record=>record.city==='衡阳').description,'暑假穷游');
+console.log('PASS authored notes: every production scene/paginated event equals source, returns have no added notes, Hengyang remains exactly 暑假穷游');

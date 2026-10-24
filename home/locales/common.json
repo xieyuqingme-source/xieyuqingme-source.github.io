@@ -84,7 +84,10 @@
     "video.mp4Help": "推荐 MP4（H.264；有配乐时为 AAC）。微信请按相册视频发送；作为文件发送可能仍显示附件，预览支持以客户端为准。",
     "video.webmHelp": "WebM 是备用格式，部分聊天软件和播放器不能直接预览。需要分享时建议改用支持 MP4 的浏览器。",
     "video.notCompatible": "输出未通过 H.264/AAC 兼容检查，未提供文件。请使用新版 Chrome / Edge 重试。",
-    "video.captionLabel": "视频当前文字"
+    "video.captionLabel": "视频当前文字",
+    "map.avatar.wechat": "微信头像",
+    "map.avatar.wechatUse": "使用微信头像",
+    "map.avatar.wechatDownload": "足迹地图-微信头像.png"
   },
   "en": {
     "common.nav.home": "Home",
@@ -171,6 +174,9 @@
     "video.mp4Help": "Recommended: MP4 with H.264 and AAC when music is selected. Send it as a gallery video in WeChat; sending a file may still create an attachment. Preview support depends on the client.",
     "video.webmHelp": "WebM is an alternative. Some chat apps and players cannot preview it directly. For sharing, use a browser that supports MP4.",
     "video.notCompatible": "The output did not pass the H.264/AAC check. No file was offered. Retry in a current Chrome / Edge.",
-    "video.captionLabel": "Current video text"
+    "video.captionLabel": "Current video text",
+    "map.avatar.wechat": "WeChat avatar",
+    "map.avatar.wechatUse": "Use WeChat avatar",
+    "map.avatar.wechatDownload": "Footprints-WeChat-avatar.png"
   }
 }

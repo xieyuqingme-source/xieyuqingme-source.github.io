@@ -6,7 +6,7 @@
   'use strict';
   const I = (key, values, fallback) => globalThis.FootprintsI18n ? globalThis.FootprintsI18n.text(key, values, fallback) : fallback.replace(/\{(\w+)\}/g, (match, name) => Object.hasOwn(values, name) ? String(values[name]) : match);
 
-  // Only the bundled default image is fetched. User files stay in this page and
+  // Only explicitly configured same-origin preset images are fetched. User files stay in this page and
   // are redrawn into a small PNG, removing EXIF/text chunks and active formats.
   const MAX_BYTES = 5 * 1024 * 1024;
   const MAX_DIMENSION = 8192;
@@ -149,11 +149,11 @@
   function createController(options) {
     options = options || {};
     const environment = options.environment || globalThis;
-    let version = 0, disposed = false, dataUrl = '', custom = false, cachedDefault = '', abort = null;
+    let version = 0, disposed = false, dataUrl = '', custom = false, preset = 'default', cachedPresets = new Map(), abort = null;
     function emit(name, value, extra) {
       if (!disposed && typeof options[name] === 'function') options[name](value, extra);
     }
-    function state() { return { custom, label: custom ? I("map.avatar.s016", {}, "自定义头像（仅本次页面）") : I("map.avatar.s017", {}, "雨聊猫经典头像") }; }
+    function state() { const value={custom,label:custom ? I("map.avatar.s016", {}, "自定义头像（仅本次页面）") : preset === "wechat" ? I("map.avatar.wechat", {}, "微信头像") : I("map.avatar.s017", {}, "雨聊猫经典头像")};if(preset!=="default"&&!custom)value.preset=preset;return value; }
     function begin() {
       version++;
       if (abort) { abort.abort(); abort = null; }
@@ -162,9 +162,9 @@
       return version;
     }
     function current(token) { return !disposed && token === version; }
-    function commit(value, isCustom, token) {
+    function commit(value, isCustom, token, selected = "default") {
       if (!current(token)) return false;
-      dataUrl = value; custom = isCustom;
+      dataUrl = value; custom = isCustom; preset = selected;
       emit('onChange', dataUrl, state());
       return true;
     }
@@ -179,12 +179,14 @@
         return false;
       } finally { if (current(token)) { abort = null; emit('onBusy', false); } }
     }
-    async function reset() {
+    async function loadPreset(key = "default") {
       if (disposed) return false;
       const token = begin();
       try {
-        if (!cachedDefault) {
-          const url = new environment.URL(options.defaultUrl || '/assets/map-avatar-default.png', environment.document.baseURI);
+        const configured = key === "default" ? (options.defaultUrl || "/assets/map-avatar-default.png") : options.presets?.[key];
+        if (!configured) invalid(I("map.avatar.s019", {}, "默认头像地址无效。"));
+        if (!cachedPresets.has(key)) {
+          const url = new environment.URL(configured, environment.document.baseURI);
           if (!['http:', 'https:'].includes(url.protocol) || url.origin !== environment.location.origin) {
             invalid(I("map.avatar.s019", {}, "默认头像地址无效。"));
           }
@@ -197,18 +199,19 @@
           if (!current(token)) return false;
           const value = await sanitizeImage(file, environment, abort.signal);
           if (!current(token)) return false;
-          cachedDefault = value;
+          cachedPresets.set(key, value);
         }
-        return commit(cachedDefault, false, token);
+        return commit(cachedPresets.get(key), false, token, key);
       } catch (error) {
         if (current(token)) emit('onError', error.name === 'AbortError' ? I("map.avatar.s022", {}, "默认头像加载已取消。") : (error.message || I("map.avatar.s023", {}, "默认头像暂时无法加载。")));
         return false;
       } finally { if (current(token)) { abort = null; emit('onBusy', false); } }
     }
+    function reset() { return loadPreset("default"); }
     function download() {
       if (disposed || !dataUrl) { emit('onError', I("map.avatar.s024", {}, "头像尚未准备好，请稍后重试。")); return false; }
       const link = environment.document.createElement('a');
-      link.href = dataUrl; link.download = custom ? I("map.avatar.s025", {}, "足迹地图-自定义头像.png") : I("map.avatar.s026", {}, "足迹地图-雨聊猫头像.png");
+      link.href = dataUrl; link.download = !custom && preset === "wechat" ? I("map.avatar.wechatDownload", {}, "足迹地图-微信头像.png") : custom ? I("map.avatar.s025", {}, "足迹地图-自定义头像.png") : I("map.avatar.s026", {}, "足迹地图-雨聊猫头像.png");
       environment.document.body.appendChild(link); link.click(); link.remove();
       return true;
     }
@@ -216,9 +219,9 @@
       if (disposed) return;
       disposed = true; version++;
       if (abort) abort.abort();
-      abort = null; dataUrl = ''; cachedDefault = '';
+      abort = null; dataUrl = ''; cachedPresets.clear();
     }
-    const controller = { getDataUrl: function () { return dataUrl; }, getState: state, loadFile, reset, download, dispose };
+    const controller = { getDataUrl: function () { return dataUrl; }, getState: state, loadFile, loadPreset, reset, download, dispose };
     controller.ready = reset();
     return controller;
   }

@@ -60,10 +60,12 @@ function fixture(options = {}) {
       assert.equal(request.credentials, 'same-origin');
       if (options.fetchDelay) await wait(options.fetchDelay);
       if (options.fetchFail) throw new Error('默认头像暂时无法加载。');
-      return { ok: true, headers: { get: () => String(defaultFile.size) }, blob: async () => defaultFile };
+      const responseFile = String(url).endsWith('/wechat.jpg') ? file(png(), {marker:'wechat', ...options.presetFile}) : defaultFile;
+      return { ok: true, headers: { get: () => String(responseFile.size) }, blob: async () => responseFile };
     }
   };
   const controller = A.createController({ environment, defaultUrl: options.defaultUrl,
+    presets: options.presets,
     onChange: (src, state) => changes.push({ src, state }), onError: error => errors.push(error), onBusy: value => busy.push(value) });
   return { controller, environment, changes, errors, busy, downloads, draws, urls, get fetches() { return fetches; } };
 }
@@ -141,6 +143,28 @@ test('missing default is recoverable and foreign default URLs are never fetched'
   for (const defaultUrl of ['https://third-party.invalid/avatar.png', 'data:image/png;base64,AAAA', 'javascript:alert(1)']) {
     const f = fixture({ defaultUrl }); assert.equal(await f.controller.ready, false); assert.equal(f.fetches, 0); assert.equal(f.errors.length, 1); f.controller.dispose();
   }
+});
+test('bundled WeChat preset is cached, labelled, downloadable and reversible without replacing the cat', async () => {
+  const f=fixture({presets:{wechat:'/assets/wechat.jpg'}});await f.controller.ready;
+  const cat=f.controller.getDataUrl();assert.equal(await f.controller.loadPreset('wechat'),true);
+  assert.deepEqual(f.controller.getState(),{custom:false,label:'微信头像',preset:'wechat'});
+  assert.notEqual(f.controller.getDataUrl(),cat);assert.equal(f.fetches,2);
+  assert.equal(f.controller.download(),true);assert.match(f.downloads[0].name,/微信头像\.png$/);
+  assert.equal(await f.controller.reset(),true);assert.equal(f.controller.getDataUrl(),cat);
+  assert.equal(await f.controller.loadPreset('wechat'),true);assert.equal(f.fetches,2);
+  assert.equal(await f.controller.loadFile(file()),true);assert.equal(f.controller.getState().custom,true);
+  assert.equal(f.controller.getState().preset,undefined);f.controller.dispose();assert.equal(f.urls.size,0);
+});
+test('invalid and foreign presets retain the last image; rapid reset cancels a pending preset',async()=>{
+  for(const candidate of ['https://foreign.invalid/avatar.jpg','data:image/jpeg;base64,AAAA']){
+    const f=fixture({presets:{wechat:candidate}});await f.controller.ready;const old=f.controller.getDataUrl();
+    assert.equal(await f.controller.loadPreset('wechat'),false);assert.equal(f.fetches,1);
+    assert.equal(f.controller.getDataUrl(),old);assert.equal(await f.controller.loadPreset('missing'),false);f.controller.dispose();
+  }
+  const f=fixture({presets:{wechat:'/assets/wechat.jpg'},presetFile:{delay:35}});await f.controller.ready;
+  const old=f.controller.getDataUrl(),pending=f.controller.loadPreset('wechat');await wait(2);
+  assert.equal(await f.controller.reset(),true);assert.equal(await pending,false);
+  assert.equal(f.controller.getDataUrl(),old);assert.equal(f.controller.getState().preset,undefined);f.controller.dispose();
 });
 (async () => {
   for (const [name, action] of tests) { await action(); console.log('PASS ' + name); }

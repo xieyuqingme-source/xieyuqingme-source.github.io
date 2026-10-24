@@ -549,9 +549,10 @@
   if (window.FootprintsAvatar) {
     avatar = window.FootprintsAvatar.createController({
       defaultUrl: "/assets/map-avatar-default.png",
+      presets: {wechat:"/assets/map-avatar-wechat.jpg"},
       onChange(source, state) {
         $("avatar-preview").src = source; $("avatar-preview").hidden = !source;
-        $("avatar-status").textContent = state.custom ? I("map.main.s083", {}, "自定义头像") : I("map.main.s084", {}, "雨聊猫");
+        $("avatar-status").textContent = state.preset === "wechat" ? I("map.avatar.wechat", {}, "微信头像") : state.custom ? I("map.main.s083", {}, "自定义头像") : I("map.main.s084", {}, "雨聊猫");
         $("avatar-status").dataset.error = "false"; $("avatar-download").disabled = !source;
         if (player) drawPlaybackFrame(player.getState());
         window.dispatchEvent(new Event("footprints:avatar"));
@@ -560,9 +561,10 @@
       onBusy(busy) { avatarBusy = busy; $("avatar-preview").setAttribute("aria-busy", String(busy)); $("avatar-download").disabled = busy || !avatar || !avatar.getDataUrl(); window.dispatchEvent(new Event("footprints:assets")); }
     });
     $("avatar-file").addEventListener("change", async () => { const file = $("avatar-file").files[0]; $("avatar-file").value = ""; if (file) await avatar.loadFile(file); });
+    $("avatar-wechat").addEventListener("click", () => avatar.loadPreset("wechat"));
     $("avatar-reset").addEventListener("click", () => avatar.reset());
     $("avatar-download").addEventListener("click", () => avatar.download());
-  } else { $("avatar-status").textContent = I("map.main.s085", {}, "头像工具未能加载，视频会使用圆点。请刷新页面后重试。"); $("avatar-file").disabled = true; $("avatar-reset").disabled = true; $("avatar-download").disabled = true; }
+  } else { $("avatar-status").textContent = I("map.main.s085", {}, "头像工具未能加载，视频会使用圆点。请刷新页面后重试。"); $("avatar-file").disabled = true; $("avatar-wechat").disabled = true; $("avatar-reset").disabled = true; $("avatar-download").disabled = true; }
   $("city-close").addEventListener("click", () => $("city-dialog").close());
   $("record-dialog").addEventListener("close", () => { editContext = null; if (gestures) gestures.reset(); });
   $("map-add-here").addEventListener("click", () => { const b = projection().bounds; pickPlace({ lon: (b[0] + b[2]) / 2, lat: (b[1] + b[3]) / 2 }); });

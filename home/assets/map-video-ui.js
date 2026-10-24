@@ -3,9 +3,9 @@
   const I = (key, values, fallback) => globalThis.FootprintsI18n ? globalThis.FootprintsI18n.text(key, values, fallback) : fallback.replace(/\{(\w+)\}/g, (match, name) => Object.hasOwn(values, name) ? String(values[name]) : match);
   function layoutOutroTitle(value, measure, options = {}) {
     const original = String(value || ""), text = original.replace(/\s+/gu, " ").trim(), width = options.width || 1152;
-    const compact = options.height === 720, maximum = compact ? 44 : 60, minimum = compact ? 32 : 44, maxLines = 2;
-    const firstBaseline = compact ? options.mapBottom + 89 : 818;
-    if (!/[\r\n]/u.test(original) && measure(original, maximum) <= width) return {fontSize:maximum, lines:[original], truncated:false, baselines:[firstBaseline], closingBaseline:compact ? options.mapBottom + 149 : 890};
+    const compact = options.height === 720, maximum = options.overlay ? 32 : compact ? 44 : 60, minimum = options.overlay ? 26 : compact ? 32 : 44, maxLines = 2;
+    const firstBaseline = options.overlay ? 588 : compact ? options.mapBottom + 89 : 818;
+    if (!/[\r\n]/u.test(original) && measure(original, maximum) <= width) return {fontSize:maximum, lines:[original], truncated:false, baselines:[options.overlay ? 620 : firstBaseline], closingBaseline:options.overlay ? 656 : compact ? options.mapBottom + 149 : 890};
     const graphemes = word => typeof Intl.Segmenter === "function" ? Array.from(new Intl.Segmenter(undefined, {granularity:"grapheme"}).segment(word), part => part.segment) : Array.from(word);
     function wrap(fontSize) {
       const lines = []; let line = "";
@@ -34,7 +34,7 @@
       }
       lines[maxLines - 1] = last + "…";
     }
-    return {fontSize, lines, truncated, baselines:lines.map((_, index) => firstBaseline + index * (fontSize + 6)), closingBaseline:compact ? (lines.length > 1 ? options.mapBottom + 191 : options.mapBottom + 149) : lines.length > 1 ? 946 : 890};
+    return {fontSize, lines, truncated, baselines:lines.map((_, index) => options.overlay && lines.length === 1 ? 620 : firstBaseline + index * (fontSize + 6)), closingBaseline:options.overlay ? 656 : compact ? (lines.length > 1 ? options.mapBottom + 191 : options.mapBottom + 149) : lines.length > 1 ? 946 : 890};
   }
   function captionLines(value,measure,width){
     const units=typeof Intl.Segmenter==='function'?Array.from(new Intl.Segmenter(undefined,{granularity:'grapheme'}).segment(String(value)),part=>part.segment):Array.from(String(value));
@@ -45,7 +45,11 @@
     }
     return lines.length?lines:[''];
   }
-  function captionLayout(){return{width:1280,height:720,mapBottom:440,dateY:474,cityY:528,descriptionYs:[578,618],safeBottom:92};}
+  function captionLayout(lineCount=2){
+    const count=Math.max(1,Math.min(2,Math.trunc(Number(lineCount)||1))),lastBaseline=656;
+    const descriptionYs=Array.from({length:count},(_,index)=>lastBaseline-(count-1-index)*32),headerY=descriptionYs[0]-32;
+    return{width:1280,height:720,mapBottom:720,left:32,textWidth:1216,headerY,dateY:headerY,cityY:headerY,descriptionYs,safeBottom:56,fontSizes:{date:22,city:30,description:26},overlay:true};
+  }
   if (typeof module === "object" && module.exports) { module.exports = {layoutOutroTitle,captionLayout,captionLines}; return; }
   const A = window.FootprintsMap, J = window.FootprintsJourney, V = window.FootprintsVideo, M = window.FootprintsModel, L = window.FootprintsLabels;
   const $ = id => document.getElementById(id);
@@ -128,7 +132,7 @@
 
   function seconds(ms) { const value = Math.ceil(ms / 1000); return I("map.video-ui.s003", {p0:(Math.floor(value / 60)),p1:(String(value % 60).padStart(2, "0"))}, "{p0} 分 {p1} 秒"); }
   function wrapped(text,width,font){context.font=font;return captionLines(text,value=>context.measureText(value).width,width);}
-  function textPages(text){context.font='34px sans-serif';const lines=captionLines(text,value=>context.measureText(value).width,1184),pages=[];for(let index=0;index<lines.length;index+=2)pages.push(lines.slice(index,index+2).join(''));return pages;}
+  function textPages(text){const layout=captionLayout();context.font=`${layout.fontSizes.description}px sans-serif`;const lines=captionLines(text,value=>context.measureText(value).width,layout.textWidth),pages=[];for(let index=0;index<lines.length;index+=2)pages.push(lines.slice(index,index+2).join(''));return pages;}
   function rebuild() {
     if (busy) return;
     if (!context) {
@@ -177,7 +181,7 @@
     await document.fonts.ready;
     const colors = palette(), assets = A.videoAssets(), View = window.FootprintsView;
     const mode = $("video-camera").value, showRoute = $("map-route").checked, showLabels = $("map-labels").checked;
-    const {mapBottom}=captionLayout(), width = canvas.width, height = canvas.height;
+    const layout=captionLayout(), {mapBottom}=layout, width = canvas.width, height = canvas.height;
     const allScenes = frozenPlan.fullScenes || frozenPlan.scenes, overviewLabel = musicText("video.briefLabel");
     const track = J.cameraTrack(allScenes, { aspect: width / mapBottom, followSpan:36, bounds: A.projection().bounds });
     const terrain = assets.layer === "terrain" && assets.terrain ? await imageFrom(await (await fetch(assets.terrain)).blob()) : null;
@@ -234,7 +238,7 @@
         context.font = "600 24px sans-serif";
         const recent = new Set(allScenes.slice(0,(frame.revealedIndex??frame.index)+1).slice(-10).map(M.cityKey));
         const candidates = markers.filter(([key, city]) => unlocked.has(key) && project.contains(city) && (frame.phase === "outro" || key === currentKey || recent.has(key))).map(([key, city]) => { const xy = project.point(city.lon, city.lat); return { key, name: city.city, x: xy[0], y: xy[1], priority: key === currentKey ? 1 : 0, markerRadius: key === currentKey ? 28 : 5 }; });
-        const labels = L.layout(candidates, { width, height: mapBottom, visibleSet: unlocked, fontSize: 24, lineHeight: 30, measure: text => context.measureText(text).width });
+        const labels = L.layout(candidates, { width, height: mapBottom, visibleSet: unlocked, reserved:[{x:24,y:558,width:1232,height:106}], fontSize: 24, lineHeight: 30, measure: text => context.measureText(text).width });
         for (const label of labels) { context.strokeStyle = colors.surface; context.lineWidth = 3; context.strokeText(label.text, label.x, label.y); context.fillStyle = colors.ink; context.fillText(label.text, label.x, label.y); }
       }
       const point = frame.point;
@@ -245,26 +249,32 @@
         if (avatar) context.drawImage(avatar, x - 22, y - 22, 44, 44); context.restore();
       }
       context.restore();
-      context.fillStyle = colors.surface; context.fillRect(0, mapBottom, width, height - mapBottom); context.fillStyle = colors.line; context.fillRect(0, mapBottom, width, 1);
-      const dateY = mapBottom + 34, cityY = mapBottom + 88, descriptionY = mapBottom + 138;
+      // Transparent caption overlay: map pixels continue behind every line.
+      // Stroke and a soft shadow provide contrast without an opaque footer.
+      const {left,textWidth,fontSizes}=layout;
+      function caption(text,x,y,font,maxWidth=textWidth){
+        context.save();context.font=font;context.lineJoin="round";context.lineWidth=2.5;
+        context.strokeStyle="rgba(12,24,29,.88)";context.fillStyle="#fff";
+        context.shadowColor="rgba(0,0,0,.6)";context.shadowBlur=3;context.shadowOffsetY=1;
+        context.strokeText(text,x,y,maxWidth);context.shadowBlur=0;context.shadowOffsetY=0;
+        context.fillText(text,x,y,maxWidth);context.restore();
+      }
       if (frame.phase === "outro" || frame.phase === "intro") {
-        context.fillStyle = colors.accent; context.font = "30px sans-serif";
-        context.fillText(I("map.video-ui.s009", {p0:markers.length,p1:allScenes.filter(record => !record.derived).length}, "{p0} 座城市 · {p1} 段经历") + (frozenPlan.brief ? " · " + overviewLabel : ""), 48, dateY);
-        const heading = layoutOutroTitle(title, (text, fontSize) => { context.font = `bold ${fontSize}px sans-serif`; return context.measureText(text).width; }, {width:1184,height,mapBottom});
-        context.fillStyle = colors.ink; context.font = `bold ${heading.fontSize}px sans-serif`;
-        heading.lines.forEach((line, index) => context.fillText(line, 48, heading.baselines[index]));
-        context.font = "28px sans-serif"; context.fillText(I("map.video-ui.s010", {}, "一路走来，足迹相连"), 48, heading.closingBaseline);
+        const heading = layoutOutroTitle(title, (text, fontSize) => { context.font = `bold ${fontSize}px sans-serif`; return context.measureText(text).width; }, {width:textWidth,height,mapBottom,overlay:true});
+        caption(I("map.video-ui.s009", {p0:markers.length,p1:allScenes.filter(record => !record.derived).length}, "{p0} 座城市 · {p1} 段经历") + (frozenPlan.brief ? " · " + overviewLabel : ""),left,heading.baselines[0]-36,"600 22px sans-serif");
+        heading.lines.forEach((line,index)=>caption(line,left,heading.baselines[index],`bold ${heading.fontSize}px sans-serif`));
+        caption(I("map.video-ui.s010", {}, "一路走来，足迹相连"),left,heading.closingBaseline,"22px sans-serif");
       } else if (item) {
-        context.fillStyle = colors.accent; context.font = "30px sans-serif";
         const date = item.derived ? item.dateLabel || item.end || "" : M.range(item, frozenPlan.language), pages = frame.pageCount > 1 ? I("map.video-ui.s011", {p0:frame.pageIndex + 1,p1:frame.pageCount}, " · {p0}/{p1} 页") : "";
-        context.fillText(`${frame.index + 1}/${frame.count}${date ? ` · ${date}` : ""}${pages}${frozenPlan.brief ? " · " + overviewLabel : ""}`, 48, dateY, 1184);
         const place = item.derived ? I("map.video-ui.s012", {p0:item.city}, "返回{p0}") : item.city;
-        context.fillStyle = colors.ink; context.font = "bold 48px sans-serif"; context.fillText(place, 48, cityY, 1184);
-        context.font = "34px sans-serif";
-        const lines = wrapped(frame.pageText || "", 1184, "34px sans-serif");
+        const lines = wrapped(frame.pageText || "",textWidth,`${fontSizes.description}px sans-serif`);
         if (lines.at(-1) === "") lines.pop();
-        lines.forEach((line, index) => context.fillText(line, 48, descriptionY + index * 40));
-        if (point && !project.contains(point)) { context.fillStyle = colors.muted; context.font = "22px sans-serif"; context.fillText(I("map.video-ui.s013", {}, "本幕地点在固定视野外"), 48, mapBottom - 20); }
+        const textLayout=captionLayout(lines.length),cityFont=`bold ${fontSizes.city}px sans-serif`;
+        context.font=cityFont;const cityWidth=Math.min(context.measureText(place).width,textWidth*.45),metadataX=left+cityWidth+18;
+        caption(place,left,textLayout.headerY,cityFont,textWidth*.45);
+        caption(`${frame.index + 1}/${frame.count}${date ? ` · ${date}` : ""}${pages}${frozenPlan.brief ? " · " + overviewLabel : ""}`,metadataX,textLayout.headerY,`600 ${fontSizes.date}px sans-serif`,textWidth-cityWidth-18);
+        lines.forEach((line,index)=>caption(line,left,textLayout.descriptionYs[index],`${fontSizes.description}px sans-serif`));
+        if (point && !project.contains(point)) caption(I("map.video-ui.s013", {}, "本幕地点在固定视野外"),left,textLayout.headerY-36,"20px sans-serif");
       }
       // Recording and native video seeking never write to the editable SVG map.
       $("video-canvas").dataset.phase = frame.phase;
@@ -328,6 +338,6 @@
     }
     if (window.FootprintsI18n) window.FootprintsI18n.refreshMessages(["video-download", "playback-progress"]);
   });
-  window.FootprintsVideoUI = { generate, cancel, layoutOutroTitle, getPlan: () => plan, getState: () => ({ version:"2026-10-24.3", audioEvidence:lastAudioEvidence, busy, ready: !!resultUrl, mimeType:lastResultType?.mimeType||formatCapability().mimeType,extension:lastResultType?.extension||formatCapability().extension }) };
+  window.FootprintsVideoUI = { generate, cancel, layoutOutroTitle, getPlan: () => plan, getState: () => ({ version:"2026-10-24.5", audioEvidence:lastAudioEvidence, busy, ready: !!resultUrl, mimeType:lastResultType?.mimeType||formatCapability().mimeType,extension:lastResultType?.extension||formatCapability().extension }) };
   rebuild();
 })();
