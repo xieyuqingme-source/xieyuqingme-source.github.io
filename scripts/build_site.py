@@ -41,7 +41,7 @@ PROJECT_FIELDS = {"id", "title", "english_title", "kind", "summary", "problem", 
                   "contribution", "usage", "license", "screenshot", "screenshot_alt", "screenshot_caption", "source_url", "guide_url"}
 PROJECT_OPTIONAL_FIELDS = {"download_url", "download_label", "guide_label", "link_status", "demo_url"}
 PROJECT_DEMO_ROUTES = {"/map/", "/game/ranking/"}
-BRAND_ASSETS = ("share-cover.png", "favicon.svg")
+BRAND_ASSETS = ("share-cover.png", "favicon.svg", "favicon.ico")
 ABOUT_FIELDS = {"name", "english_name", "chinese_bio", "english_bio", "wechat", "email"}
 PRIVATE_PATH = re.compile(r"(?<![A-Za-z0-9])[A-Za-z]:[\\/]|\\\\[^\s\\]+[\\/]|/(?:Users|home|mnt)/", re.I)
 EXTERNAL_ICON = '''<svg class="external-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 17 17 7M7 7h10v10"/></svg>'''

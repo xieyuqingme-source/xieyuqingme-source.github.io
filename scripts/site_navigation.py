@@ -1,6 +1,7 @@
 """Scope generated page scripts; shared audio is intentionally not page owned."""
 from pathlib import Path
 import re
+from urllib.parse import urlsplit
 
 PERSISTENT = {'/assets/site-i18n.js', '/assets/site-music.js', '/assets/site-navigation.js', '/assets/portal.js'}
 ALIASES = 'fetch,setTimeout,clearTimeout,setInterval,clearInterval,requestAnimationFrame,cancelAnimationFrame,ResizeObserver,IntersectionObserver,MutationObserver,URL,history,location,matchMedia'
@@ -19,7 +20,7 @@ def wrap_page_scripts(output):
     for page in output.rglob('*.html'):
         text = page.read_text(encoding='utf-8')
         for match in re.finditer(r'<script\b[^>]*\bsrc=["\']([^"\']+)["\'][^>]*>', text):
-            route = match[1]
+            route = urlsplit(match[1]).path
             if route.startswith('/') and not route.startswith('//') and route not in PERSISTENT:
                 path = (output / route.lstrip('/')).resolve()
                 if not path.is_relative_to(output.resolve()) or path.suffix != '.js':

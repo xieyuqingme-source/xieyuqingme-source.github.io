@@ -44,6 +44,8 @@
     const capture = e.canvas ? e.canvas.captureStream : e.HTMLCanvasElement && e.HTMLCanvasElement.prototype.captureStream;
     if (typeof capture !== "function") return { supported: false, mimeType: "", extension: "", reason: I("map.video.s002", {}, "当前浏览器不支持地图画布录像。可下载静态图片，或使用最新版 Windows Chrome 生成视频。") };
     for (const format of (custom && custom.audio ? AUDIO_FORMATS : FORMATS)) {
+      if(custom?.container && format.extension!==custom.container)continue;
+      if(custom?.compatible && (!format.mimeType.includes('avc1') || (custom.audio && !format.mimeType.includes('mp4a.40.2'))))continue;
       try { if (Recorder.isTypeSupported(format.mimeType)) return { supported: true, mimeType: format.mimeType, extension: format.extension, reason: "" }; } catch (_) { /* Try the next explicit container/codec. */ }
     }
     return { supported: false, mimeType: "", extension: "", reason: I("map.video.s003", {}, "当前浏览器没有支持的 WebM 或 MP4 编码格式。请下载静态图片，或换用最新版 Windows Chrome。") };
@@ -119,23 +121,28 @@
 
   // Inspect container headers without decoding or copying the whole movie.
   // This catches a dropped soundtrack instead of trusting the input stream.
-  async function inspectTracks(blob) {
+  async function inspectTracks(blob, options = {}) {
     const report = {audioTracks: 0, videoTracks: 0, container: formatFor(blob.type)};
     if (report.container === 'mp4') {
+      const codecs=new Set();let moovAt=null,mdatAt=null,fragmented=false;
       async function boxes(start, end, depth) {
-        if (depth > 5) return;
+        if (depth > 8) return;
         for (let at = start; at + 8 <= end;) {
           const bytes = new Uint8Array(await blob.slice(at, Math.min(at + 32, end)).arrayBuffer()), view = new DataView(bytes.buffer);let size = view.getUint32(0), header = 8;
           const type = String.fromCharCode(...bytes.slice(4,8));
           if (size === 1) { if(bytes.length < 16)throw new Error('Invalid MP4 box');size = Number(view.getBigUint64(8));header = 16; }
           if (size === 0) size = end - at;
           if (!Number.isSafeInteger(size) || size < header || at + size > end) throw new Error('Invalid MP4 box');
-          if (['moov','trak','mdia'].includes(type)) await boxes(at + header, at + size, depth + 1);
+          if(depth===0){if(type==='moov')moovAt=at;if(type==='mdat'&&mdatAt===null)mdatAt=at;if(type==='moof')fragmented=true;}
+          if (['moov','trak','mdia','minf','stbl'].includes(type)) await boxes(at + header, at + size, depth + 1);
+          if(options.details && type==='stsd'){
+            let entry=at+header+8;while(entry+8<=at+size){const bytes=new Uint8Array(await blob.slice(entry,entry+8).arrayBuffer()),view=new DataView(bytes.buffer),length=view.getUint32(0);if(length<8||entry+length>at+size)break;codecs.add(String.fromCharCode(...bytes.slice(4,8)));entry+=length;}
+          }
           if (type === 'hdlr') { const raw = new Uint8Array(await blob.slice(at + header + 8, at + header + 12).arrayBuffer()), handler = String.fromCharCode(...raw);if(handler === 'soun')report.audioTracks++;if(handler === 'vide')report.videoTracks++; }
           at += size;
         }
       }
-      await boxes(0, blob.size, 0);return report;
+      await boxes(0, blob.size, 0);if(options.details)Object.assign(report,{codecs:[...codecs],metadataBeforeMedia:moovAt!==null&&(mdatAt===null||moovAt<mdatAt),fragmented});return report;
     }
     if (report.container === 'webm') {
       const bytes = new Uint8Array(await blob.slice(0, Math.min(blob.size, 1048576)).arrayBuffer());
@@ -148,7 +155,7 @@
 
   function record(options) {
     const o = options || {}, canvas = o.canvas, e = environment(Object.assign({}, o.environment, { canvas }));
-    const cap = capabilities(Object.assign({}, o.environment, { canvas, audio: !!o.audioTrack }));
+    const cap = capabilities(Object.assign({}, o.environment, { canvas, audio: !!o.audioTrack, container:o.container, compatible:o.compatible }));
     const durationMs = Number(o.durationMs), fps = o.fps === undefined ? 30 : Number(o.fps);
     if (!cap.supported) return Promise.reject(error("NotSupportedError", cap.reason));
     if (!canvas || !Number.isInteger(canvas.width) || !Number.isInteger(canvas.height) || canvas.width <= 0 || canvas.height <= 0 || canvas.width > 4096 || canvas.height > 4096 || canvas.width * canvas.height > 9000000) return Promise.reject(error("ValidationError", I("map.video.s004", {}, "视频画幅无效，请重新生成。")));
@@ -215,7 +222,7 @@
         if (!finishing) { fail(error("EncodingError", I("map.video.s017", {}, "浏览器意外中断了视频生成，请重试。"))); return; }
         if (!byteLength) { fail(error("EncodingError", I("map.video.s018", {}, "浏览器没有生成视频数据，请重试或下载静态图片。"))); return; }
         const actualType = recorder.mimeType || cap.mimeType, extension = formatFor(actualType);
-        if (!extension) { fail(error("EncodingError", I("map.video.s019", {}, "浏览器返回了无法确认的视频格式，未下载文件。"))); return; }
+        if (!extension || (o.container && extension !== o.container)) { fail(error("EncodingError", I("map.video.s019", {}, "浏览器返回了无法确认的视频格式，未下载文件。"))); return; }
         try {
           let blob = new e.Blob(chunks, { type: actualType });
           // Copying EBML metadata is bounded by the same 128 MiB output limit.

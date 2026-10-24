@@ -21,4 +21,14 @@ class NavigationBuild(unittest.TestCase):
             root=Path(tmp);(root/'index.html').write_text('<script src="/../outside.js"></script>',encoding='utf-8')
             with self.assertRaises(ValueError):wrap_page_scripts(root)
 
+
+
+
+class VersionedNavigation(unittest.TestCase):
+    def test_cache_query_is_stripped_for_files_but_persistent_music_is_not_wrapped(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root=Path(tmp);(root/'assets').mkdir();(root/'assets/page.js').write_text('window.Sample=1;',encoding='utf8');(root/'assets/site-music.js').write_text('window.SiteMusic={};',encoding='utf8')
+            (root/'index.html').write_text('<script src="/assets/page.js?v=source123"></script><script src="/assets/site-music.js?v=audio456"></script>',encoding='utf8')
+            self.assertEqual(wrap_page_scripts(root)['page_scripts'],1);self.assertIn('site-page-scope:v1',(root/'assets/page.js').read_text());self.assertEqual((root/'assets/site-music.js').read_text(),'window.SiteMusic={};')
+
 if __name__=='__main__':unittest.main()

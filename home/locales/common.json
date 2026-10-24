@@ -76,7 +76,15 @@
     "video.brief": "90 秒概览（节选）",
     "video.briefLabel": "行程概览",
     "video.estimate": "{mode}：{count}/{total} 站，预计 {duration}。实时录制，生成耗时接近片长；概览保留起终点并节选站点，片尾展示完整轨迹。",
-    "video.progress": "生成中 {percent}% · {elapsed} / {duration} · 剩余约 {remaining}"
+    "video.progress": "生成中 {percent}% · {elapsed} / {duration} · 剩余约 {remaining}",
+    "video.format": "下载格式",
+    "video.mp4": "MP4（适合分享）",
+    "video.webm": "WebM（备用）",
+    "video.formatUnsupported": "此浏览器不支持所选格式。建议使用新版 Chrome / Edge 导出 MP4，或主动选择 WebM 备用格式。",
+    "video.mp4Help": "推荐 MP4（H.264；有配乐时为 AAC）。微信请按相册视频发送；作为文件发送可能仍显示附件，预览支持以客户端为准。",
+    "video.webmHelp": "WebM 是备用格式，部分聊天软件和播放器不能直接预览。需要分享时建议改用支持 MP4 的浏览器。",
+    "video.notCompatible": "输出未通过 H.264/AAC 兼容检查，未提供文件。请使用新版 Chrome / Edge 重试。",
+    "video.captionLabel": "视频当前文字"
   },
   "en": {
     "common.nav.home": "Home",
@@ -155,6 +163,14 @@
     "video.brief": "90-second overview (selected stops)",
     "video.briefLabel": "Journey overview",
     "video.estimate": "{mode}: {count}/{total} stops, about {duration}. Recording takes roughly the video length. The overview selects stops and retains both endpoints; the ending shows the complete trail.",
-    "video.progress": "Recording {percent}% · {elapsed} / {duration} · About {remaining} remaining"
+    "video.progress": "Recording {percent}% · {elapsed} / {duration} · About {remaining} remaining",
+    "video.format": "Download format",
+    "video.mp4": "MP4 (recommended)",
+    "video.webm": "WebM (alternative)",
+    "video.formatUnsupported": "This browser cannot record the selected format. Use a current Chrome / Edge for MP4, or explicitly choose WebM.",
+    "video.mp4Help": "Recommended: MP4 with H.264 and AAC when music is selected. Send it as a gallery video in WeChat; sending a file may still create an attachment. Preview support depends on the client.",
+    "video.webmHelp": "WebM is an alternative. Some chat apps and players cannot preview it directly. For sharing, use a browser that supports MP4.",
+    "video.notCompatible": "The output did not pass the H.264/AAC check. No file was offered. Retry in a current Chrome / Edge.",
+    "video.captionLabel": "Current video text"
   }
 }

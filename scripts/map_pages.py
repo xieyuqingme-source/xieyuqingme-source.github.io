@@ -491,6 +491,15 @@ def build_map(root, output, address, data, preview=False, *, language="zh-CN"):
                          title={"zh-CN": "地图与足迹 · 谢雨卿", "en": "Maps and Footprints · Xie Yuqing"},
                          description={"zh-CN": "以城市和时间记录人生的停留，也可以在浏览器中制作自己的足迹地图。",
                                       "en": "Record stays through cities and time, or make your own footprints map in your browser."})
+    # Bind cached export scripts/styles to their source revisions. Mixing a
+    # new 720px canvas with an old 960px renderer can crop every caption.
+    import hashlib
+    def version_asset(match):
+        route=match.group(2);name=route.rsplit('/',1)[-1];source=root/'home/assets'/name
+        if source.is_file() and (name.startswith('map') or name=='site-music.js'):
+            safe_file(root,source);return match.group(1)+route+'?v='+hashlib.sha256(source.read_bytes()).hexdigest()[:12]+match.group(3)
+        return match.group(0)
+    page=re.sub(r'((?:src|href)=["\'])(/assets/[^"\'?]+\.(?:js|css))(["\'])',version_asset,page)
     if preview:
         page = page.replace("</head>", '<meta name="robots" content="noindex,nofollow">\n</head>')
     route = localized_path("/map/", language).strip("/")

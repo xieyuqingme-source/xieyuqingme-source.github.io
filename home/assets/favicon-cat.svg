@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <title>Yuliao Cat</title>
+  <rect width="64" height="64" rx="14" fill="#204535"/>
+  <path d="M13 29 12 15q0-4 4-2l10 8q6-2 12 0l10-8q4-2 4 2l-1 14q6 9 1 17-5 10-20 10T12 46q-5-8 1-17Z" fill="#f7f5ee"/>
+  <path d="M25 18q1-9 10-9t10 10M20 23q14 2 28-3" fill="none" stroke="#f7f5ee" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M21 25q12 1 23-2" fill="none" stroke="#204535" stroke-width="2.5" stroke-linecap="round"/>
+  <g fill="#204535"><ellipse cx="23" cy="35" rx="2.5" ry="3.5"/><ellipse cx="41" cy="35" rx="2.5" ry="3.5"/><path d="m29 41 3 3 3-3Z"/></g>
+  <path d="M26 46q6 6 12 0" fill="none" stroke="#204535" stroke-width="2.5" stroke-linecap="round"/>
+</svg>

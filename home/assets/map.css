@@ -181,3 +181,11 @@
   .map-canvas-panel.is-expanded { top: max(5px, env(safe-area-inset-top, 0px)); right: max(5px, env(safe-area-inset-right, 0px)); bottom: max(5px, env(safe-area-inset-bottom, 0px)); left: max(5px, env(safe-area-inset-left, 0px)); }
   .map-canvas-panel.is-expanded .map-canvas { min-height: 140px; height: calc(100dvh - 140px); }
 }
+
+/* Keep the encoded picture contained in fullscreen; captions also have a
+   readable companion below the embedded player, outside native controls. */
+#video-preview:fullscreen{width:100%;height:100%;max-width:none;max-height:none;margin:0;border-radius:0;object-fit:contain;background:#000}
+#video-preview:-webkit-full-screen{width:100%;height:100%;max-width:none;max-height:none;margin:0;object-fit:contain;background:#000}
+.video-caption-preview{padding:12px 16px;border-left:3px solid var(--accent);background:var(--surface);margin:8px 0 16px;overflow-wrap:anywhere}
+.video-caption-preview p{margin:5px 0;line-height:1.65}.video-caption-preview h3{margin:6px 0;font-size:1.15rem}.video-caption-date{color:var(--muted);font-size:.78rem}.video-caption-description{white-space:pre-wrap;font-size:.9rem}
+.video-format-label{display:grid;gap:4px;max-width:100%}.video-format-label select{max-width:100%}
