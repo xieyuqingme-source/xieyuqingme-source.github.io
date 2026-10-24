@@ -24,3 +24,7 @@ for(const result of [long,huge,unbroken,chinese]){
  assert(result.closingBaseline+13<960,'closing line fits in the video frame');
 }
 console.log('PASS outro layout: unchanged short heading; natural-width two-line word wrapping; bounded font sizes; explicit ellipsis; unbroken/CJK fallback; nonoverlapping footer bounds');
+
+
+for(const heading of ['Xie Yuqing’s Footprints','An English journey through cities, memory and the passage of time','沿着时间一路走过的城市与回忆']){const compact=layoutOutroTitle(heading,measure,{width:1184,height:720,mapBottom:520});assert.equal(compact.truncated,false);assert(compact.baselines[0]-compact.fontSize>554);assert(compact.closingBaseline+9<=720);assert(compact.lines.every(line=>measure(line,compact.fontSize)<=1184));}
+console.log('PASS 16:9 footer: complete bilingual headings, readable fixed font bounds and no caption overflow');

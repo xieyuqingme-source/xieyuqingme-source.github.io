@@ -11,13 +11,14 @@
   // microphone or system audio. Only an explicitly prepared original soundtrack
   // can be supplied. Recording runs in real time.
   const FORMATS = [
+    { mimeType: "video/mp4;codecs=avc1.420028", extension: "mp4" },
     { mimeType: "video/webm;codecs=vp9", extension: "webm" },
     { mimeType: "video/webm;codecs=vp8", extension: "webm" },
     { mimeType: "video/webm", extension: "webm" },
     { mimeType: "video/mp4;codecs=avc1.42E01E", extension: "mp4" },
     { mimeType: "video/mp4", extension: "mp4" }
   ];
-  const AUDIO_FORMATS = [{mimeType:"video/webm;codecs=vp9,opus",extension:"webm"},{mimeType:"video/webm;codecs=vp8,opus",extension:"webm"},{mimeType:"video/mp4;codecs=avc1.42E01E,mp4a.40.2",extension:"mp4"}];
+  const AUDIO_FORMATS = [{mimeType:"video/mp4;codecs=avc1.420028,mp4a.40.2",extension:"mp4"},{mimeType:"video/webm;codecs=vp9,opus",extension:"webm"},{mimeType:"video/webm;codecs=vp8,opus",extension:"webm"},{mimeType:"video/mp4;codecs=avc1.42E01E,mp4a.40.2",extension:"mp4"}];
   const MAX_DURATION = 30 * 60 * 1000, MAX_BYTES = 128 * 1024 * 1024;
   const activeCanvases = new WeakSet();
   function error(name, message) { const e = new Error(message); e.name = name; return e; }
@@ -116,6 +117,35 @@
     return new (BlobType || Blob)([output], { type: blob.type });
   }
 
+  // Inspect container headers without decoding or copying the whole movie.
+  // This catches a dropped soundtrack instead of trusting the input stream.
+  async function inspectTracks(blob) {
+    const report = {audioTracks: 0, videoTracks: 0, container: formatFor(blob.type)};
+    if (report.container === 'mp4') {
+      async function boxes(start, end, depth) {
+        if (depth > 5) return;
+        for (let at = start; at + 8 <= end;) {
+          const bytes = new Uint8Array(await blob.slice(at, Math.min(at + 32, end)).arrayBuffer()), view = new DataView(bytes.buffer);let size = view.getUint32(0), header = 8;
+          const type = String.fromCharCode(...bytes.slice(4,8));
+          if (size === 1) { if(bytes.length < 16)throw new Error('Invalid MP4 box');size = Number(view.getBigUint64(8));header = 16; }
+          if (size === 0) size = end - at;
+          if (!Number.isSafeInteger(size) || size < header || at + size > end) throw new Error('Invalid MP4 box');
+          if (['moov','trak','mdia'].includes(type)) await boxes(at + header, at + size, depth + 1);
+          if (type === 'hdlr') { const raw = new Uint8Array(await blob.slice(at + header + 8, at + header + 12).arrayBuffer()), handler = String.fromCharCode(...raw);if(handler === 'soun')report.audioTracks++;if(handler === 'vide')report.videoTracks++; }
+          at += size;
+        }
+      }
+      await boxes(0, blob.size, 0);return report;
+    }
+    if (report.container === 'webm') {
+      const bytes = new Uint8Array(await blob.slice(0, Math.min(blob.size, 1048576)).arrayBuffer());
+      function header(at, end) { const id = vint(bytes, at, true);if(!id)return null;const size = vint(bytes, at + id.length, false);if(!size)return null;const data=at+id.length+size.length;return {id:id.value,data,end:size.unknown?end:Math.min(end,data+size.value)}; }
+      function walk(start,end,depth){if(depth>4)return;for(let at=start;at<end;){const node=header(at,end);if(!node||node.end<=at)break;if([0x18538067,0x1654ae6b,0xae].includes(node.id))walk(node.data,node.end,depth+1);if(node.id===0x83){if(bytes[node.data]===2)report.audioTracks++;if(bytes[node.data]===1)report.videoTracks++;}at=node.end;}}
+      walk(0,bytes.length,0);return report;
+    }
+    throw new Error('Unsupported recording container');
+  }
+
   function record(options) {
     const o = options || {}, canvas = o.canvas, e = environment(Object.assign({}, o.environment, { canvas }));
     const cap = capabilities(Object.assign({}, o.environment, { canvas, audio: !!o.audioTrack }));
@@ -206,7 +236,7 @@
           stream.addTrack(o.audioTrack);
           listen(o.audioTrack, "ended", () => { if (!settled && !finishing) fail(error("EncodingError", I("map.video.s029", {}, "配乐音轨已中断，未保留不完整的视频。请重试或选择无配乐。"))); });
         }
-        recorder = new e.MediaRecorder(stream, { mimeType: cap.mimeType, videoBitsPerSecond: 5000000, ...(o.audioTrack ? {audioBitsPerSecond: 128000} : {}) });
+        recorder = new e.MediaRecorder(stream, { mimeType: cap.mimeType, videoBitsPerSecond: 2400000, ...(o.audioTrack ? {audioBitsPerSecond: 128000} : {}) });
         listen(recorder, "dataavailable", event => {
           if (settled || !event.data || !event.data.size) return;
           byteLength += event.data.size;
@@ -242,5 +272,5 @@
       }
     });
   }
-  return Object.freeze({ capabilities, record, withWebmDuration, MAX_DURATION, MAX_BYTES });
+  return Object.freeze({ capabilities, record, inspectTracks, withWebmDuration, MAX_DURATION, MAX_BYTES });
 });

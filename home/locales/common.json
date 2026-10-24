@@ -66,7 +66,17 @@
     "music.fileLoading": "正在读取本地音频…",
     "music.fileReady": "已选本地音频：{name}（{seconds} 秒）。刷新后需重新选择。",
     "music.mapPlay": "播放地图配乐",
-    "music.mapPause": "暂停地图配乐"
+    "music.mapPause": "暂停地图配乐",
+    "video.zeroExport": "配乐音量为 0。请调高音量，或明确选择“无配乐”。",
+    "video.silentSource": "所选音频没有可检测的声音，请换一首音乐或选择无配乐。",
+    "video.missingAudio": "未能验证有效配乐，未提供无声成品。请重新生成，或明确选择无配乐。",
+    "video.unexpectedAudio": "无配乐模式出现意外音轨，未提供文件，请重试。",
+    "video.length": "视频长度",
+    "video.full": "完整行程",
+    "video.brief": "90 秒概览（节选）",
+    "video.briefLabel": "行程概览",
+    "video.estimate": "{mode}：{count}/{total} 站，预计 {duration}。实时录制，生成耗时接近片长；概览保留起终点并节选站点，片尾展示完整轨迹。",
+    "video.progress": "生成中 {percent}% · {elapsed} / {duration} · 剩余约 {remaining}"
   },
   "en": {
     "common.nav.home": "Home",
@@ -135,6 +145,16 @@
     "music.fileLoading": "Reading local audio…",
     "music.fileReady": "Selected: {name} ({seconds} seconds). Select it again after a refresh.",
     "music.mapPlay": "Play map music",
-    "music.mapPause": "Pause map music"
+    "music.mapPause": "Pause map music",
+    "video.zeroExport": "Soundtrack volume is 0. Increase it or explicitly choose None.",
+    "video.silentSource": "No audible signal was found in this audio. Choose another track or None.",
+    "video.missingAudio": "A valid soundtrack could not be verified. No silent result was offered. Retry or explicitly choose None.",
+    "video.unexpectedAudio": "An unexpected audio track was found in None mode. No file was offered. Retry.",
+    "video.length": "Video length",
+    "video.full": "Complete journey",
+    "video.brief": "90-second overview (selected stops)",
+    "video.briefLabel": "Journey overview",
+    "video.estimate": "{mode}: {count}/{total} stops, about {duration}. Recording takes roughly the video length. The overview selects stops and retains both endpoints; the ending shows the complete trail.",
+    "video.progress": "Recording {percent}% · {elapsed} / {duration} · About {remaining} remaining"
   }
 }

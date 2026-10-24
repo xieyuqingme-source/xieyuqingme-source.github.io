@@ -265,3 +265,15 @@ test("Longhai month-only row preserves all four stops in order with no intermedi
   const scenes=J.build(data.records).scenes, at=scenes.findIndex(x=>x.id===originals[0].id);
   assert.deepEqual(scenes.slice(at,at+4).map(x=>x.id),originals.map(x=>x.id)); assert(scenes.slice(at,at+4).every(x=>!x.derived));
 });
+
+
+{
+ const journey=require('../home/assets/map-journey.js'),records=Array.from({length:71},(_,index)=>({id:String(index),city:'City '+index,region:'Test',country:'Test',lat:20+(index%20),lon:80+index*.4,description:'An original event at stop '+index,start:'2021-05',end:'2021-05'}));
+ const snapshot=JSON.stringify(records),overview=journey.briefPlan(records,{targetMs:90000,introMs:1400,minStayMs:2600,movementMs:1500,outroMs:6200,outroZoomMs:3600});
+ assert.equal(JSON.stringify(records),snapshot);assert.equal(overview.durationMs,90000);assert(overview.scenes.length<71);assert.equal(overview.totalSceneCount,71);assert.equal(overview.scenes[0].id,'0');assert.equal(overview.scenes.at(-1).id,'70');assert(overview.sourceIndices.every((value,index,array)=>!index||value>array[index-1]));
+ for(const scene of overview.scenes)assert.deepEqual(scene,records[Number(scene.id)]);
+ const ending=journey.frameAt(overview,overview.durationMs);assert.equal(ending.cumulativePath.length,71);assert.equal(ending.revealedIndex,70);
+ for(const segment of overview.segments.filter(part=>part.phase==='travel')){const f=journey.frameAt(overview,segment.startMs+segment.durationMs*.6);assert(f.revealedIndex>=overview.sourceIndices[f.index]);assert(f.revealedIndex<overview.sourceIndices[f.index+1]);assert(f.cumulativePath.length>=f.revealedIndex+1);}
+ const short=journey.briefPlan(records.slice(0,2),{targetMs:90000});assert(short.durationMs<90000,'a short original journey is never padded to 90 seconds');
+ console.log('PASS overview: original text and dates immutable; explicit selected count; endpoints; original intermediate waypoints and complete ending; no forced delay for short journeys');
+}

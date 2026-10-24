@@ -183,6 +183,43 @@
     if (outroMs) { segments.push({ startMs: durationMs, endMs: durationMs + outroMs, durationMs: outroMs, index: scenes.length - 1, phase: "outro", pageText: "", pageIndex: 0, pageCount: 0 }); durationMs += outroMs; }
     return { scenes, segments, durationMs, introMs, outroMs, outroZoomMs, pace, movementMs: Math.round((Number(o.movementMs) || 800) * factor) };
   }
+  // A clearly labelled overview samples authored scenes; source records stay
+  // intact. Its moving marker still traverses every intervening waypoint.
+  function briefPlan(records, options = {}) {
+    const all = (Array.isArray(records) ? records : []).slice(), target = Math.max(1000, Number(options.targetMs) || 90000);
+    if (!all.length) return Object.assign(plan([], options), { brief: true, fullScenes: [], sourceIndices: [], totalSceneCount: 0 });
+    const complete = plan(all, options);if (complete.durationMs <= target) return Object.assign(complete, {brief:true,fullScenes:all.slice(),sourceIndices:all.map((_,index)=>index),totalSceneCount:all.length});
+    const candidates = all.map((record, index) => index).filter(index => !all[index].derived || index === 0 || index === all.length - 1);
+    let count = Math.min(20, candidates.length), indices, result;
+    do {
+      indices = count <= 1 ? [candidates[0]] : Array.from({length: count}, (_, i) => candidates[Math.round(i * (candidates.length - 1) / (count - 1))]);
+      result = plan(indices.map(index => all[index]), options);
+      if (result.durationMs <= target || count <= 2) break;
+      count--;
+    } while (true);
+    // Extend readable pauses to the requested length. Never shorten a text page
+    // below the normal planner's reading minimum just to satisfy a time target.
+    const stays = result.segments.filter(segment => segment.phase === 'stay'), extra = Math.max(0, target - result.durationMs);
+    if (stays.length && extra) {
+      stays.forEach((segment, index) => { segment.durationMs += Math.floor(extra / stays.length) + (index < extra % stays.length ? 1 : 0); });
+      let at = 0;for (const segment of result.segments) { segment.startMs = at;at += segment.durationMs;segment.endMs = at; }result.durationMs = at;
+    }
+    return Object.assign(result, { brief: true, fullScenes: all.slice(), sourceIndices: indices, totalSceneCount: all.length });
+  }
+  function briefFrame(videoPlan, frame) {
+    const all = videoPlan.fullScenes, source = videoPlan.sourceIndices;
+    const start = source[frame.index];
+    if (frame.phase === 'outro') return Object.assign(frame, {revealedIndex: all.length - 1, cumulativePath: all.map(point => ({lon: point.lon, lat: point.lat}))});
+    frame.revealedIndex = start;frame.cumulativePath = all.slice(0, start + 1).map(point => ({lon: point.lon, lat: point.lat}));
+    if (!frame.next) return frame;
+    const end = source[frame.index + 1], legs = [];let length = 0;
+    for (let i = start; i < end; i++) { const a = all[i], b = all[i + 1], distance = Math.hypot(Math.min(Math.abs(b.lon - a.lon), 360 - Math.abs(b.lon - a.lon)), b.lat - a.lat);legs.push({i, distance});length += distance; }
+    let remaining = length * frame.progress, chosen = legs.at(-1);
+    for (const leg of legs) { if (remaining <= leg.distance) { chosen = leg;break; }remaining -= leg.distance; }
+    if (chosen) { frame.revealedIndex = chosen.i;frame.point = interpolate(all[chosen.i], all[chosen.i + 1], chosen.distance ? remaining / chosen.distance : 1);frame.cumulativePath = all.slice(0, chosen.i + 1).map(point => ({lon: point.lon, lat: point.lat})).concat(frame.point); }
+    return frame;
+  }
+
   function ease(progress) { const value = Math.min(1, Math.max(0, Number(progress) || 0)); return value * value * (3 - 2 * value); }
   function interpolate(from, to, progress) {
     const value = Math.min(1, Math.max(0, Number(progress) || 0));
@@ -214,12 +251,13 @@
     if (segment.phase === "intro") return { index: -1, record: null, next: null, phase: "intro", progress: ease(elapsed / segment.durationMs), rawProgress: elapsed / segment.durationMs, elapsed, total: p.durationMs, count: scenes.length, pageText: "", pageIndex: 0, pageCount: 0, point: null, cumulativePath: [], ended: false };
     const record = scenes[index], next = segment.phase === "travel" ? scenes[index + 1] : null;
     const rawProgress = next || segment.phase === "outro" ? Math.min(1, Math.max(0, (elapsed - segment.startMs) / (segment.phase === "outro" ? p.outroZoomMs : segment.durationMs))) : 0, progress = ease(rawProgress);
-    return {
+    const result = {
       index, record, next, phase: segment.phase, progress, rawProgress, elapsed, total: p.durationMs, count: scenes.length,
       pageText: segment.pageText, pageIndex: segment.pageIndex, pageCount: segment.pageCount,
       point: next ? interpolate(record, next, progress) : { lon: record.lon, lat: record.lat },
       cumulativePath: cumulativePoints(scenes, index, next ? progress : 0), ended: elapsed >= p.durationMs
     };
+    return p.brief ? briefFrame(p, result) : result;
   }
   // Export-only cameras. No mutable page state, frame-history dependency or
   // geographic data edits: seeking and repeated exports give identical views.
@@ -256,5 +294,5 @@
     }
     return cameraBounds(point, width, track.aspect);
   }
-  return { PACES, dateBounds, dateLabel, build, paginate, plan, ease, interpolate, cumulativePoints, cityKey, unlocked, frameAt, cameraTrack, cameraAt };
+  return { PACES, dateBounds, dateLabel, build, paginate, plan, briefPlan, ease, interpolate, cumulativePoints, cityKey, unlocked, frameAt, cameraTrack, cameraAt };
 });

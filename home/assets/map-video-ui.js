@@ -3,8 +3,9 @@
   const I = (key, values, fallback) => globalThis.FootprintsI18n ? globalThis.FootprintsI18n.text(key, values, fallback) : fallback.replace(/\{(\w+)\}/g, (match, name) => Object.hasOwn(values, name) ? String(values[name]) : match);
   function layoutOutroTitle(value, measure, options = {}) {
     const original = String(value || ""), text = original.replace(/\s+/gu, " ").trim(), width = options.width || 1152;
-    const maximum = 60, minimum = 44, maxLines = 2;
-    if (!/[\r\n]/u.test(original) && measure(original, maximum) <= width) return {fontSize:maximum, lines:[original], truncated:false, baselines:[818], closingBaseline:890};
+    const compact = options.height === 720, maximum = compact ? 44 : 60, minimum = compact ? 32 : 44, maxLines = 2;
+    const firstBaseline = compact ? options.mapBottom + 89 : 818;
+    if (!/[\r\n]/u.test(original) && measure(original, maximum) <= width) return {fontSize:maximum, lines:[original], truncated:false, baselines:[firstBaseline], closingBaseline:compact ? options.mapBottom + 149 : 890};
     const graphemes = word => typeof Intl.Segmenter === "function" ? Array.from(new Intl.Segmenter(undefined, {granularity:"grapheme"}).segment(word), part => part.segment) : Array.from(word);
     function wrap(fontSize) {
       const lines = []; let line = "";
@@ -33,7 +34,7 @@
       }
       lines[maxLines - 1] = last + "…";
     }
-    return {fontSize, lines, truncated, baselines:lines.map((_, index) => 818 + index * (fontSize + 6)), closingBaseline:lines.length > 1 ? 946 : 890};
+    return {fontSize, lines, truncated, baselines:lines.map((_, index) => firstBaseline + index * (fontSize + 6)), closingBaseline:compact ? (lines.length > 1 ? 711 : options.mapBottom + 149) : lines.length > 1 ? 946 : 890};
   }
   if (typeof module === "object" && module.exports) { module.exports = {layoutOutroTitle}; return; }
   const A = window.FootprintsMap, J = window.FootprintsJourney, V = window.FootprintsVideo, M = window.FootprintsModel, L = window.FootprintsLabels;
@@ -50,24 +51,24 @@
   const musicControls = document.createElement("section"); musicControls.className = "video-music-options";
   musicControls.innerHTML = '<label><span id="video-music-label"></span><select id="video-music"><option value="travel"></option><option value="gentle"></option><option value="none"></option><option value="custom"></option></select></label><label><span id="video-music-volume-label"></span><input id="video-music-volume" type="range" min="0" max="100" step="5"><output id="video-music-volume-value"></output></label><button id="video-music-preview" type="button"></button><label><span id="video-music-file-label"></span><input id="video-music-file" type="file" accept="audio/*,.wav,.mp3,.m4a,.aac,.ogg,.oga,.flac,.webm"></label><button id="video-music-clear" type="button"></button><p id="video-music-note" role="status" aria-live="polite"></p><p class="music-file-hint" id="video-music-file-hint"></p>';
   document.querySelector(".map-toolbar").after(musicControls);
-  if (!window.SiteMusic?.supported()) musicPrefs.track = "none";
+  // A browser limitation never silently changes an intended soundtrack to None.
   $("video-music").value = musicPrefs.track; $("video-music-volume").value = Math.round(musicPrefs.volume * 100);
-  const effectiveMusic = () => musicPrefs.volume > 0 ? musicPrefs.track : "none";
+  const effectiveMusic = () => musicPrefs.track;
   function refreshMusic() {
     const state = window.SiteMusic?.state(), supported = !!window.SiteMusic?.supported(), previewing = state?.owner === "map", audioCap = effectiveMusic() === "none" || V.capabilities({audio: true}).supported;
     $("video-music-label").textContent = musicText("music.soundtrack"); musicControls.setAttribute("aria-label", musicText("music.soundtrack"));
     for (const [index, key] of ["music.recommended", "music.gentle", "music.none", "music.custom"].entries()) $("video-music").options[index].textContent = musicText(key);
     $("video-music").options[3].disabled = !state?.custom;
-    $("video-music").disabled = busy || importing || !supported; $("video-music-volume").disabled = busy || !supported;
+    $("video-music").disabled = busy || importing; for (const option of $("video-music").options) if (option.value !== "none") option.disabled = !supported || (option.value === "custom" && !state?.custom); $("video-music-volume").disabled = busy || !supported;
     $("video-music-volume-label").textContent = musicText("music.volume"); $("video-music-volume-value").textContent = $("video-music-volume").value + "%";
     $("video-music-volume").setAttribute("aria-label", musicText("music.videoVolume")); $("video-music-volume").setAttribute("aria-valuetext", $("video-music-volume").value + "%");
     $("video-music-preview").textContent = musicText(previewing ? "music.mapPause" : "music.mapPlay"); $("video-music-preview").disabled = busy || importing || !supported || (effectiveMusic() === "none" && !previewing); $("video-music-preview").setAttribute("aria-pressed", String(previewing));
     $("video-music-file-label").textContent = musicText("music.addFile"); $("video-music-file").disabled = busy || !supported;
     $("video-music-clear").textContent = musicText("music.clearFile"); $("video-music-clear").hidden = !state?.custom && !importing; $("video-music-clear").disabled = busy;
     $("video-music-file-hint").textContent = musicText("music.fileHint");
-    $("video-music-note").textContent = fileError ? musicText(fileError) : importing ? musicText("music.fileLoading") : musicText(!supported ? "music.noAudioSupport" : !audioCap ? "music.noRecordingSupport" : musicPrefs.volume === 0 && musicPrefs.track !== "none" ? "music.zero" : previewing ? "music.playing" : "music.exportHint");
+    $("video-music-note").textContent = fileError ? musicText(fileError) : importing ? musicText("music.fileLoading") : musicText(!supported ? "music.noAudioSupport" : !audioCap ? "music.noRecordingSupport" : musicPrefs.volume === 0 && musicPrefs.track !== "none" ? "video.zeroExport" : previewing ? "music.playing" : "music.exportHint");
     if (state?.custom && musicPrefs.track === "custom" && !importing && !fileError) $("video-music-note").textContent += " " + musicText("music.fileReady", {name: state.custom.name, seconds: state.custom.duration.toFixed(1)});
-    if (!busy && (!audioCap || importing || (musicPrefs.track === "custom" && !state?.custom))) $("video-generate").disabled = true;
+    if (!busy && (!audioCap || importing || (musicPrefs.track !== "none" && (!supported || musicPrefs.volume === 0)) || (musicPrefs.track === "custom" && !state?.custom))) $("video-generate").disabled = true;
   }
   function saveMusic() { try { localStorage.setItem("xieyuqing-video-music-v2", JSON.stringify(musicPrefs)); } catch (_) {} }
   function changed() { saveMusic(); clearResult(); rebuild(); refreshMusic(); }
@@ -93,6 +94,9 @@
   window.addEventListener("footprints:language", refreshMusic);
   refreshMusic();
 
+  const lengthLabel = document.createElement("label");lengthLabel.innerHTML = '<span id="video-length-label"></span><select id="video-length"><option value="full"></option><option value="brief"></option></select>';document.querySelector('.playback-controls').append(lengthLabel);
+  function refreshLength(){ $("video-length-label").textContent=musicText("video.length");$("video-length").options[0].textContent=musicText("video.full");$("video-length").options[1].textContent=musicText("video.brief"); }
+  refreshLength();window.addEventListener("footprints:language",refreshLength);
   function seconds(ms) { const value = Math.ceil(ms / 1000); return I("map.video-ui.s003", {p0:(Math.floor(value / 60)),p1:(String(value % 60).padStart(2, "0"))}, "{p0} 分 {p1} 秒"); }
   function wrapped(text, width, font) {
     context.font = font; const lines = []; let line = "";
@@ -103,14 +107,14 @@
     lines.push(line); return lines;
   }
   function textPages(text) {
-    context.font = "44px sans-serif";
+    context.font = "34px sans-serif";
     const pages = []; let page = "", line = "", lines = 1;
     for (const char of Array.from(text)) {
       if (char === "\n") {
         page += char; line = "";
         if (lines === 2) { pages.push(page); page = ""; lines = 1; } else lines++;
       } else {
-        if (line && context.measureText(line + char).width > 1152) {
+        if (line && context.measureText(line + char).width > 1184) {
           line = "";
           if (lines === 2) { pages.push(page); page = ""; lines = 1; } else lines++;
         }
@@ -133,10 +137,10 @@
     const panel = $("journey-options"); panel.replaceChildren(); panel.hidden = true;
     const journey = J.build(records);
     const language = window.FootprintsI18n?.lang() || "zh-CN";
-    plan = J.plan(journey.scenes.map(item => A.displayRecord(item, language)), { pace: $("video-pace").value, maxPageChars: 100, textPaginator: textPages, introMs: 1400, minStayMs: 2600, movementMs: 1500, distanceMs: 20, outroMs: 6200, outroZoomMs: 3600 });
+    plan = J[$("video-length").value === "brief" ? "briefPlan" : "plan"](journey.scenes.map(item => A.displayRecord(item, language)), { pace: $("video-pace").value, maxPageChars: 100, textPaginator: textPages, introMs: 1400, minStayMs: 2600, movementMs: 1500, distanceMs: 20, outroMs: 6200, outroZoomMs: 3600, targetMs:90000 });
     plan.language = language;
     $("journey-warnings").textContent = [...new Set(journey.warnings.map(value => typeof value === "string" ? value : value.message || "").filter(Boolean))].join("；");
-    $("video-estimate").textContent = I("map.video-ui.s005", {p0:(seconds(plan.durationMs))}, "预计 {p0}");
+    $("video-estimate").textContent = musicText("video.estimate", {duration:seconds(plan.durationMs),count:plan.scenes.length,total:plan.totalSceneCount||plan.scenes.length,mode:musicText(plan.brief?"video.brief":"video.full")});
     $("video-generate").disabled = !cap.supported || !context || !plan.scenes.length || !A.assetsReady();
     refreshMusic();
     $("video-generate").title = !A.assetsReady() ? I("map.video-ui.s006", {}, "请等待本地底图与头像加载；加载失败时请重选头像或刷新。") : "";
@@ -168,11 +172,12 @@
     await document.fonts.ready;
     const colors = palette(), assets = A.videoAssets(), View = window.FootprintsView;
     const mode = $("video-camera").value, showRoute = $("map-route").checked, showLabels = $("map-labels").checked;
-    const mapBottom = 684, width = 1280, height = 960;
-    const track = J.cameraTrack(frozenPlan.scenes, { aspect: width / mapBottom, bounds: A.projection().bounds });
+    const mapBottom = 520, width = canvas.width, height = canvas.height;
+    const allScenes = frozenPlan.fullScenes || frozenPlan.scenes, overviewLabel = musicText("video.briefLabel");
+    const track = J.cameraTrack(allScenes, { aspect: width / mapBottom, bounds: A.projection().bounds });
     const terrain = assets.layer === "terrain" && assets.terrain ? await imageFrom(await (await fetch(assets.terrain)).blob()) : null;
     const source = A.avatarSource(), avatar = source ? await imageFrom(await (await fetch(source)).blob()) : null;
-    const markers = Array.from(new Map(frozenPlan.scenes.filter(item => !item.derived).map(item => [M.cityKey(item), item])).entries());
+    const markers = Array.from(new Map(allScenes.filter(item => !item.derived).map(item => [M.cityKey(item), item])).entries());
     const title = A.displayTitle(frozenPlan.language) || I("map.video-ui.s008", {}, "我的足迹");
     function polygons(value) {
       if (!value) return [];
@@ -187,6 +192,7 @@
       if (terrain) {
         const area = project.bounds, sx = (area[0] + 180) / 360 * terrain.naturalWidth, sy = (90 - area[3]) / 180 * terrain.naturalHeight;
         context.drawImage(terrain, sx, sy, (area[2] - area[0]) / 360 * terrain.naturalWidth, (area[3] - area[1]) / 180 * terrain.naturalHeight, 0, 0, width, mapBottom);
+        context.globalAlpha=.28;context.fillStyle=colors.surface;context.fillRect(0,0,width,mapBottom);context.globalAlpha=1;
       } else {
         context.strokeStyle = colors.muted; context.lineWidth = 1; context.globalAlpha = .16; context.beginPath();
         for (let lon = -180; lon <= 180; lon += 30) { const a = project.point(lon, -90), b = project.point(lon, 90); context.moveTo(...a); context.lineTo(...b); }
@@ -202,14 +208,14 @@
       context.stroke(); context.setLineDash([]); context.globalAlpha = 1;
     }
     return time => {
-      const frame = J.frameAt(frozenPlan, time), item = frame.record, unlocked = J.unlocked(frozenPlan.scenes, frame);
+      const frame = J.frameAt(frozenPlan, time), item = frame.record, unlocked = J.unlocked(allScenes, Object.assign({},frame,{index:frame.revealedIndex??frame.index}));
       const bounds = J.cameraAt(track, frame, frozenPlan.scenes, mode), project = View.projection(bounds, { width, height: mapBottom });
       context.fillStyle = colors.surface; context.fillRect(0, 0, width, height);
       context.save(); context.beginPath(); context.rect(0, 0, width, mapBottom); context.clip();
       context.imageSmoothingEnabled = true; context.imageSmoothingQuality = "high"; basemap(project);
       if (showRoute) {
         const points = routePoints(frame), summary = frame.phase === "outro";
-        path(points, project, colors.accent, summary ? 3.2 : 2.6, summary ? .72 : .28, true);
+        path(points, project, colors.accent, summary ? 3.2 : 2.6, summary ? .60 : .16, true);
         const active = frame.next ? [item, frame.point] : frame.index > 0 ? [frozenPlan.scenes[frame.index - 1], item] : [];
         if (!summary && active.length) { path(active, project, colors.surface, 7, .9, false); path(active, project, colors.accent, 4.5, 1, false); }
       }
@@ -220,44 +226,47 @@
       }
       if (showLabels && L) {
         const currentKey = item ? M.cityKey(item) : null;
-        context.font = "24px sans-serif";
-        const candidates = markers.filter(([key, city]) => unlocked.has(key) && project.contains(city)).map(([key, city]) => { const xy = project.point(city.lon, city.lat); return { key, name: city.city, x: xy[0], y: xy[1], priority: key === currentKey ? 1 : 0, markerRadius: key === currentKey ? 28 : 5 }; });
+        context.font = "600 24px sans-serif";
+        const recent = new Set(allScenes.slice(0,(frame.revealedIndex??frame.index)+1).slice(-10).map(M.cityKey));
+        const candidates = markers.filter(([key, city]) => unlocked.has(key) && project.contains(city) && (frame.phase === "outro" || key === currentKey || recent.has(key))).map(([key, city]) => { const xy = project.point(city.lon, city.lat); return { key, name: city.city, x: xy[0], y: xy[1], priority: key === currentKey ? 1 : 0, markerRadius: key === currentKey ? 28 : 5 }; });
         const labels = L.layout(candidates, { width, height: mapBottom, visibleSet: unlocked, fontSize: 24, lineHeight: 30, measure: text => context.measureText(text).width });
         for (const label of labels) { context.strokeStyle = colors.surface; context.lineWidth = 3; context.strokeText(label.text, label.x, label.y); context.fillStyle = colors.ink; context.fillText(label.text, label.x, label.y); }
       }
       const point = frame.point;
       if (point && project.contains(point) && frame.phase !== "outro") {
         const [x, y] = project.point(point.lon, point.lat); context.fillStyle = colors.surface; context.strokeStyle = colors.accent; context.lineWidth = 3;
-        context.beginPath(); context.arc(x, y, 28, 0, Math.PI * 2); context.fill(); context.stroke();
-        context.save(); context.beginPath(); context.arc(x, y, 24, 0, Math.PI * 2); context.clip();
-        if (avatar) context.drawImage(avatar, x - 24, y - 24, 48, 48); context.restore();
+        context.beginPath(); context.arc(x, y, 26, 0, Math.PI * 2); context.fill(); context.stroke();
+        context.save(); context.beginPath(); context.arc(x, y, 22, 0, Math.PI * 2); context.clip();
+        if (avatar) context.drawImage(avatar, x - 22, y - 22, 44, 44); context.restore();
       }
       context.restore();
-      context.fillStyle = colors.surface; context.fillRect(0, mapBottom, width, height - mapBottom); context.fillStyle = colors.line; context.fillRect(0, mapBottom, width, 2);
-      if (frame.phase === "outro") {
-        context.fillStyle = colors.accent; context.font = "42px sans-serif"; context.fillText(I("map.video-ui.s009", {p0:(markers.length),p1:(frozenPlan.scenes.filter(record => !record.derived).length)}, "{p0} 座城市 · {p1} 段经历"), 64, 740);
-        const heading = layoutOutroTitle(title, (text, fontSize) => { context.font = `bold ${fontSize}px sans-serif`; return context.measureText(text).width; });
+      context.fillStyle = colors.surface; context.fillRect(0, mapBottom, width, height - mapBottom); context.fillStyle = colors.line; context.fillRect(0, mapBottom, width, 1);
+      const dateY = mapBottom + 34, cityY = mapBottom + 88, descriptionY = mapBottom + 138;
+      if (frame.phase === "outro" || frame.phase === "intro") {
+        context.fillStyle = colors.accent; context.font = "30px sans-serif";
+        context.fillText(I("map.video-ui.s009", {p0:markers.length,p1:allScenes.filter(record => !record.derived).length}, "{p0} 座城市 · {p1} 段经历") + (frozenPlan.brief ? " · " + overviewLabel : ""), 48, dateY);
+        const heading = layoutOutroTitle(title, (text, fontSize) => { context.font = `bold ${fontSize}px sans-serif`; return context.measureText(text).width; }, {width:1184,height,mapBottom});
         context.fillStyle = colors.ink; context.font = `bold ${heading.fontSize}px sans-serif`;
-        heading.lines.forEach((line, index) => context.fillText(line, 64, heading.baselines[index]));
-        context.font = "42px sans-serif"; context.fillText(I("map.video-ui.s010", {}, "一路走来，足迹相连"), 64, heading.closingBaseline);
+        heading.lines.forEach((line, index) => context.fillText(line, 48, heading.baselines[index]));
+        context.font = "28px sans-serif"; context.fillText(I("map.video-ui.s010", {}, "一路走来，足迹相连"), 48, heading.closingBaseline);
       } else if (item) {
-        context.fillStyle = colors.accent; context.font = "42px sans-serif";
-        const date = item.derived ? item.dateLabel || item.end || "" : M.range(item, frozenPlan.language), pages = frame.pageCount > 1 ? I("map.video-ui.s011", {p0:(frame.pageIndex + 1),p1:(frame.pageCount)}, " · {p0}/{p1} 页") : "";
-        context.fillText(`${frame.index + 1}/${frame.count}${date ? ` · ${date}` : ""}${pages}`, 64, 740, 1152);
-        const place = item.derived ? I("map.video-ui.s012", {p0:(item.city)}, "返回{p0}") : item.city;
-        context.fillStyle = colors.ink; context.font = "bold 60px sans-serif"; context.fillText(place, 64, 814, 1152);
-        context.font = "44px sans-serif";
-        const lines = wrapped(frame.pageText || "", 1152, "44px sans-serif");
+        context.fillStyle = colors.accent; context.font = "30px sans-serif";
+        const date = item.derived ? item.dateLabel || item.end || "" : M.range(item, frozenPlan.language), pages = frame.pageCount > 1 ? I("map.video-ui.s011", {p0:frame.pageIndex + 1,p1:frame.pageCount}, " · {p0}/{p1} 页") : "";
+        context.fillText(`${frame.index + 1}/${frame.count}${date ? ` · ${date}` : ""}${pages}${frozenPlan.brief ? " · " + overviewLabel : ""}`, 48, dateY, 1184);
+        const place = item.derived ? I("map.video-ui.s012", {p0:item.city}, "返回{p0}") : item.city;
+        context.fillStyle = colors.ink; context.font = "bold 48px sans-serif"; context.fillText(place, 48, cityY, 1184);
+        context.font = "34px sans-serif";
+        const lines = wrapped(frame.pageText || "", 1184, "34px sans-serif");
         if (lines.at(-1) === "") lines.pop();
-        lines.forEach((line, index) => context.fillText(line, 64, 872 + index * 54));
-        if (point && !project.contains(point)) { context.fillStyle = colors.muted; context.font = "24px sans-serif"; context.fillText(I("map.video-ui.s013", {}, "本幕地点在固定视野外"), 64, 650); }
+        lines.forEach((line, index) => context.fillText(line, 48, descriptionY + index * 40));
+        if (point && !project.contains(point)) { context.fillStyle = colors.muted; context.font = "22px sans-serif"; context.fillText(I("map.video-ui.s013", {}, "本幕地点在固定视野外"), 48, mapBottom - 20); }
       }
       // Recording and native video seeking never write to the editable SVG map.
       $("video-canvas").dataset.phase = frame.phase;
       $("video-canvas").dataset.camera = JSON.stringify(project.bounds);
     };
   }
-  let activeGeneration = null;
+  let activeGeneration = null, lastAudioEvidence = null;
   function generate() { if (activeGeneration) return activeGeneration; activeGeneration = generateVideo().finally(() => { activeGeneration = null; }); return activeGeneration; }
   async function generateVideo() {
     if (busy || $("video-generate").disabled || !plan) return;
@@ -267,14 +276,18 @@
       // Reserve the audio context within the original user click. No autoplay.
       const audioPreparation = window.SiteMusic?.prepareExport(effectiveMusic(), musicPrefs.volume, frozenPlan.durationMs, controller.signal);
       musicSession = audioPreparation ? await audioPreparation : null;
-      if (!musicSession && effectiveMusic() !== "none") throw new Error(musicText("music.noAudioSupport"));
+      if ((!musicSession || !musicSession.audioTrack) && effectiveMusic() !== "none") throw new Error(musicText("music.noAudioSupport"));
       const renderFrame = await makeRenderer(frozenPlan);
       if (controller.signal.aborted) throw new DOMException(I("map.video-ui.s015", {}, "已取消生成。"), "AbortError");
       const result = await V.record({ canvas, durationMs: frozenPlan.durationMs, audioTrack: musicSession?.audioTrack || null, startAudio: () => musicSession?.start(), renderFrame, signal: controller.signal, fps: 30, onProgress(value) {
-        $("video-progress").value = value.progress;
-        const label = value.state === "finalizing" ? I("map.video-ui.s016", {}, "正在封装视频…") : I("map.video-ui.s017", {p0:(Math.floor(value.progress * 100)),p1:(seconds(value.elapsedMs)),p2:(seconds(value.durationMs))}, "生成中 {p0}% · {p1} / {p2}");
+        $("video-progress").value = value.progress; musicSession?.measure?.();
+        const label = value.state === "finalizing" ? I("map.video-ui.s016", {}, "正在封装视频…") : musicText("video.progress", {percent:Math.floor(value.progress*100),elapsed:seconds(value.elapsedMs),duration:seconds(value.durationMs),remaining:seconds(Math.max(0,value.durationMs-value.elapsedMs))});
         if (label !== lastProgress) { lastProgress = label; $("playback-progress").textContent = label; }
       } });
+      const container = await V.inspectTracks(result.blob), signalEvidence = musicSession?.evidence?.();
+      if (effectiveMusic() !== "none" && (container.audioTracks < 1 || (signalEvidence?.windows > 0 && signalEvidence.maxRms < 1e-7))) throw new Error(musicText("video.missingAudio"));
+      if (effectiveMusic() === "none" && container.audioTracks) throw new Error(musicText("video.unexpectedAudio"));
+      lastAudioEvidence = {container,signal:signalEvidence||null,track:effectiveMusic()};
       resultUrl = URL.createObjectURL(result.blob); previewPlan = frozenPlan; preview.src = resultUrl; preview.muted = !result.hasAudio; preview.dataset.hasAudio = String(result.hasAudio); preview.hidden = false;
       const link = $("video-download"); link.href = resultUrl; link.download = `${window.FootprintsI18n ? window.FootprintsI18n.text("map.video.filename", {}, "足迹地图", frozenPlan.language) : "footprints"}.${result.extension}`; link.textContent = I("map.video-ui.s018", {p0:(result.extension.toUpperCase()),p1:((result.blob.size / 1048576).toFixed(1))}, "↓ 下载 {p0} 视频（{p1} MB）"); link.hidden = false;
       $("playback-progress").textContent = I("map.video-ui.s019", {p0:(result.extension.toUpperCase()),p1:(seconds(result.durationMs))}, "已生成 {p0} · {p1}。可预览、定位并下载。");
@@ -287,6 +300,7 @@
   }
   function cancel() { if (controller) controller.abort(); }
   $("video-generate").addEventListener("click", generate); $("video-cancel").addEventListener("click", cancel);
+  $("video-length").addEventListener("change", () => { clearResult(); rebuild(); });
   $("video-pace").addEventListener("change", () => { clearResult(); rebuild(); });
   $("video-camera").addEventListener("change", () => { clearResult(); rebuild(); });
   window.addEventListener("footprints:reset", () => { if (!busy) { clearResult(); rebuild(); } });
@@ -306,6 +320,6 @@
     }
     if (window.FootprintsI18n) window.FootprintsI18n.refreshMessages(["video-download", "playback-progress"]);
   });
-  window.FootprintsVideoUI = { generate, cancel, layoutOutroTitle, getPlan: () => plan, getState: () => ({ busy, ready: !!resultUrl, mimeType: cap.mimeType, extension: cap.extension }) };
+  window.FootprintsVideoUI = { generate, cancel, layoutOutroTitle, getPlan: () => plan, getState: () => ({ version:"2026-10-24.2", audioEvidence:lastAudioEvidence, busy, ready: !!resultUrl, mimeType: cap.mimeType, extension: cap.extension }) };
   rebuild();
 })();
