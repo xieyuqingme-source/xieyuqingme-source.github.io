@@ -1,126 +1,32 @@
-// Theme regression: explicit choice > live system preference > safe light fallback.
-// Executes the actual head bootstrap and runtime scripts without a browser.
-const fs = require('node:fs');
-const path = require('node:path');
-const vm = require('node:vm');
-const assert = require('node:assert/strict');
-const { test } = require('node:test');
-
-const root = path.resolve(__dirname, '..');
-const themeKey = 'xieyuqing-blog-theme';
-const read = (file) => fs.readFileSync(path.join(root, file), 'utf8');
-
-function harness(source, options = {}) {
-  const { saved = null, systemDark = false, storageFails = false, mediaUnavailable = false, legacyMedia = false } = options;
-  const stored = new Map(saved === null ? [] : [[themeKey, saved]]);
-  const events = {};
-  const label = { textContent: '' };
-  const button = {
-    hidden: true,
-    attributes: {},
-    querySelector: () => label,
-    setAttribute(name, value) { this.attributes[name] = value; },
-    addEventListener(name, callback) { events[name] = callback; }
-  };
-  const document = {
-    documentElement: { dataset: { theme: 'light' } },
-    querySelector: (selector) => selector === '#theme-toggle' ? button : null
-  };
-  let listener;
-  const media = { matches: systemDark };
-  if (legacyMedia) media.addListener = (callback) => { listener = callback; };
-  else media.addEventListener = (name, callback) => { assert.equal(name, 'change'); listener = callback; };
-  const window = {};
-  if (!mediaUnavailable) window.matchMedia = (query) => { assert.equal(query, '(prefers-color-scheme: dark)'); return media; };
-  const localStorage = {
-    getItem(key) { if (storageFails) throw new Error('Storage denied'); return stored.get(key) ?? null; },
-    setItem(key, value) { if (storageFails) throw new Error('Storage denied'); stored.set(key, value); }
-  };
-  vm.runInNewContext(source, { document, window, localStorage }, { timeout: 1000 });
-  return {
-    document, button, label, stored,
-    get theme() { return document.documentElement.dataset.theme; },
-    click() { events.click(); },
-    systemChange(dark) { media.matches = dark; if (listener) listener({ matches: dark }); }
-  };
+// Three theme states: legacy manual values remain valid; system resets remove the override.
+const fs=require('node:fs'),path=require('node:path'),vm=require('node:vm'),assert=require('node:assert/strict');
+const {test}=require('node:test'),root=path.resolve(__dirname,'..'),key='xieyuqing-blog-theme';
+const read=f=>fs.readFileSync(path.join(root,f),'utf8');
+function harness(source,{saved=null,skin=null,dark=false,unavailable=false,denied=false,legacy=false}={}){
+ const stored=new Map(saved===null?[]:[[key,saved]]),events={},label={},status={};let listener;
+ if(skin!==null)stored.set('xieyuqing-site-skin',skin);
+ const button={hidden:true,attributes:{},querySelector:s=>s==='.theme-label'?label:status,setAttribute(n,v){this.attributes[n]=v;}};
+ const control={hidden:true},options=['system','light','dark'].map(value=>({dataset:{themeChoice:value},setAttribute(n,v){this[n]=v;}}));
+ const skins=['emerald','sea'].map(value=>({dataset:{skinChoice:value},setAttribute(n,v){this[n]=v;}}));
+ const document={documentElement:{dataset:{theme:'light'},lang:'zh-CN'},querySelector:s=>s==='#theme-toggle'?button:s==='#theme-control'?control:null,querySelectorAll:s=>s==='[data-skin-choice]'?skins:options,addEventListener(n,f){events[n]=f;}};
+ const media={matches:dark};if(legacy)media.addListener=f=>listener=f;else media.addEventListener=(n,f)=>listener=f;
+ const window={SiteMenus:true,addEventListener(){}};if(!unavailable)window.matchMedia=()=>media;
+ const localStorage={getItem:k=>{if(denied)throw Error('denied');return stored.get(k)??null;},setItem(k,v){if(denied)throw Error('denied');stored.set(k,v);},removeItem(k){if(denied)throw Error('denied');stored.delete(k);}};
+ vm.runInNewContext(source,{document,window,localStorage,matchMedia:window.matchMedia},{timeout:1000});
+ return{document,window,button,label,status,stored,options,skins,choose:v=>window.SiteTheme.choose(v),chooseSkin:v=>window.SiteTheme.chooseSkin(v),system(v){media.matches=v;listener?.({matches:v});},get theme(){return document.documentElement.dataset.theme;},get skin(){return document.documentElement.dataset.skin;},get mode(){return window.SiteTheme?.state().mode;}};
 }
-
-for (const file of ['home/assets/portal.js', 'blog/site.js']) {
-  const source = read(file);
-  test(`${file}: absent or invalid choice follows system; absent API falls back light`, () => {
-    assert.equal(harness(source).theme, 'light');
-    assert.equal(harness(source, { systemDark: true }).theme, 'dark');
-    assert.equal(harness(source, { saved: 'invalid', systemDark: true }).theme, 'dark');
-    assert.equal(harness(source, { mediaUnavailable: true }).theme, 'light');
-  });
-  test(`${file}: saved light and dark override system and remain unchanged`, () => {
-    for (const saved of ['light', 'dark']) {
-      const ui = harness(source, { saved, systemDark: saved !== 'dark' });
-      assert.equal(ui.theme, saved);
-      ui.systemChange(saved === 'light');
-      assert.equal(ui.theme, saved);
-      assert.equal(ui.stored.get(themeKey), saved);
-    }
-  });
-  test(`${file}: no saved choice follows live system changes without writing a preference`, () => {
-    const ui = harness(source);
-    ui.systemChange(true); assert.equal(ui.theme, 'dark');
-    ui.systemChange(false); assert.equal(ui.theme, 'light');
-    assert.equal(ui.stored.has(themeKey), false);
-    const legacy = harness(source, { legacyMedia: true });
-    legacy.systemChange(true); assert.equal(legacy.theme, 'dark');
-  });
-  test(`${file}: manual choice persists and stops system changes`, () => {
-    const ui = harness(source, { systemDark: true });
-    assert.equal(ui.button.hidden, false);
-    ui.click(); assert.equal(ui.theme, 'light');
-    assert.equal(ui.stored.get(themeKey), 'light');
-    ui.systemChange(true); assert.equal(ui.theme, 'light');
-    ui.click(); assert.equal(ui.theme, 'dark');
-    assert.equal(ui.stored.get(themeKey), 'dark');
-    assert.equal(harness(source, { saved: ui.stored.get(themeKey) }).theme, 'dark');
-  });
-  test(`${file}: rejected storage still follows system until a manual session choice`, () => {
-    const ui = harness(source, { storageFails: true, systemDark: true });
-    assert.equal(ui.theme, 'dark');
-    ui.systemChange(false); assert.equal(ui.theme, 'light');
-    ui.click(); assert.equal(ui.theme, 'dark');
-    ui.systemChange(false); assert.equal(ui.theme, 'dark');
-    assert.equal(harness(source, { storageFails: true, mediaUnavailable: true }).theme, 'light');
-  });
-}
-
-for (const file of [
-  'home/index.template.html', 'home/about.template.html', 'home/projects.template.html',
-  'home/game.template.html', 'home/ranking.template.html', 'home/anthology.template.html', 'scripts/build_blog.py'
-]) {
-  test(`${file}: light HTML plus early saved/system bootstrap before CSS`, () => {
-    const html = read(file).replaceAll('{{', '{').replaceAll('}}', '}');
-    assert.match(html, /<html[^>]*data-theme="light"/);
-    const bootstrap = html.match(/<script>([^]*?)<\/script>/);
-    assert(bootstrap, 'early inline script exists');
-    assert(bootstrap.index < html.indexOf('<link rel="stylesheet"'), 'theme is selected before CSS');
-    const source = bootstrap[1];
-    assert.equal(harness(source).theme, 'light');
-    assert.equal(harness(source, { systemDark: true }).theme, 'dark');
-    assert.equal(harness(source, { saved: 'light', systemDark: true }).theme, 'light');
-    assert.equal(harness(source, { saved: 'dark' }).theme, 'dark');
-    assert.equal(harness(source, { saved: 'auto', systemDark: true }).theme, 'dark');
-    assert.equal(harness(source, { storageFails: true, systemDark: true }).theme, 'dark');
-    assert.equal(harness(source, { mediaUnavailable: true }).theme, 'light');
-  });
-}
-
-for (const file of ['home/assets/portal.css', 'blog/style.css']) {
-  test(`${file}: readable light CSS fallback and explicit dark palette`, () => {
-    const css = read(file);
-    const fallback = css.match(/^:root\s*\{([^]*?)\}/)[1];
-    const dark = css.match(/:root\[data-theme="dark"\]\s*\{([^]*?)\}/)[1];
-    assert.match(fallback, /color-scheme:\s*light/);
-    assert.match(fallback, /--paper:\s*#f7f5ee/);
-    assert.match(fallback, /--ink:\s*#243d32/);
-    assert.match(dark, /color-scheme:\s*dark/);
-    assert.match(dark, /--paper:\s*#090f19/);
-    assert(!css.includes('prefers-color-scheme'), 'CSS cannot override an explicit saved choice');
-  });
-}
+const source=read('home/assets/portal.js');
+test('absent/invalid preferences follow system and unavailable APIs have a light fallback',()=>{assert.equal(harness(source).mode,'system');assert.equal(harness(source,{dark:true}).theme,'dark');assert.equal(harness(source,{saved:'auto',dark:true}).theme,'dark');assert.equal(harness(source,{unavailable:true}).theme,'light');});
+test('legacy light/dark choices remain explicit, including after live system changes',()=>{for(const saved of['light','dark']){const ui=harness(source,{saved,dark:saved==='light'});assert.equal(ui.mode,saved);ui.system(saved==='light');assert.equal(ui.theme,saved);assert.equal(ui.stored.get(key),saved);}});
+test('system follows live changes without creating a saved override',()=>{const ui=harness(source);ui.system(true);assert.equal(ui.theme,'dark');ui.system(false);assert.equal(ui.theme,'light');assert(!ui.stored.has(key));});
+test('manual choices persist, and returning to system removes rather than rewrites preference',()=>{const ui=harness(source,{dark:true});ui.choose('light');assert.equal(ui.theme,'light');assert.equal(ui.stored.get(key),'light');ui.system(true);assert.equal(ui.theme,'light');ui.choose('system');assert.equal(ui.mode,'system');assert.equal(ui.theme,'dark');assert(!ui.stored.has(key));ui.system(false);assert.equal(ui.theme,'light');});
+test('denied storage allows a session choice and system recovery',()=>{const ui=harness(source,{denied:true,dark:true});ui.choose('light');assert.equal(ui.theme,'light');ui.system(true);assert.equal(ui.theme,'light');ui.choose('system');assert.equal(ui.theme,'dark');ui.system(false);assert.equal(ui.theme,'light');});
+test('legacy media listeners follow system',()=>{const ui=harness(source,{legacy:true});ui.system(true);assert.equal(ui.theme,'dark');});
+test('current name and brightness are distinct and accurately selected',()=>{const ui=harness(source);assert.equal(ui.label.textContent,'墨绿纸白');assert.equal(ui.status.textContent,'浅色 · 跟随系统');assert.equal(ui.options[0]['aria-pressed'],'true');ui.choose('dark');assert.equal(ui.label.textContent,'墨绿纸白');assert.equal(ui.status.textContent,'深色');assert.equal(ui.options[2]['aria-pressed'],'true');assert.equal(ui.options[0]['aria-pressed'],'false');ui.chooseSkin('sea');assert.equal(ui.label.textContent,'深海科技');assert.equal(ui.theme,'dark');});
+test('reapplying on navigation does not discard the selected mode',()=>{const ui=harness(source);ui.choose('dark');ui.window.SiteTheme.apply();assert.equal(ui.theme,'dark');assert.equal(ui.mode,'dark');});
+for(const file of['home/index.template.html','home/en/index.template.html','home/about.template.html','home/projects.template.html','home/game.template.html','home/ranking.template.html','home/anthology.template.html','home/map.template.html','scripts/build_blog.py'])test(file+': first appearance resolves before CSS',()=>{const html=read(file).replaceAll('{{','{').replaceAll('}}','}'),bootstrap=html.match(/<script>([^]*?)<\/script>/);assert(bootstrap&&bootstrap.index<html.indexOf('<link rel="stylesheet"'));for(const [options,expected]of[[{},'light'],[{dark:true},'dark'],[{saved:'light',dark:true},'light'],[{saved:'dark'},'dark'],[{saved:'auto',dark:true},'dark'],[{denied:true,dark:true},'dark'],[{unavailable:true},'light']])assert.equal(harness(bootstrap[1],options).theme,expected);});
+test('four palettes preserve their own green or blue atmosphere',()=>{const css=read('home/assets/site-themes.css');for(const hex of['#f5f8f4','#0d211a','#f2f6fa','#081523'])assert(css.includes('--paper:'+hex));assert(!css.includes('prefers-color-scheme'));assert(css.includes('prefers-reduced-motion'));});
+test('each dimension changes only its own stored preference',()=>{const ui=harness(source);ui.chooseSkin('sea');assert.equal(ui.mode,'system');assert(!ui.stored.has(key));ui.choose('dark');assert.equal(ui.skin,'sea');assert.equal(ui.stored.get('xieyuqing-site-skin'),'sea');ui.chooseSkin('emerald');assert.equal(ui.theme,'dark');assert.equal(ui.stored.get(key),'dark');ui.choose('system');assert.equal(ui.skin,'emerald');assert(!ui.stored.has(key));});
+test('new users default green in either system tone; legacy explicit choices migrate once',()=>{assert.equal(harness(source,{dark:true}).skin,'emerald');assert.equal(harness(source,{saved:'dark'}).skin,'sea');assert.equal(harness(source,{saved:'dark',skin:'emerald'}).skin,'emerald');assert.equal(harness(source,{saved:'light',skin:'sea'}).skin,'sea');});
+test('shared pre-CSS bootstrap resolves all four combinations without a late skin switch',()=>{const boot=read('scripts/site_i18n.py').match(/return '(<script>\(\(\)=>\{let saved,skin;[^\n]*?<\/script>)'/)[1].slice(8,-9);for(const skin of['emerald','sea'])for(const saved of['light','dark']){const ui=harness(boot,{skin,saved});assert.equal(ui.document.documentElement.dataset.skin,skin);assert.equal(ui.theme,saved);}});
+test('storage denial still supports both session dimensions',()=>{const ui=harness(source,{denied:true,dark:true});ui.chooseSkin('sea');ui.choose('light');assert.equal(ui.skin,'sea');assert.equal(ui.theme,'light');ui.choose('system');assert.equal(ui.skin,'sea');assert.equal(ui.theme,'dark');});

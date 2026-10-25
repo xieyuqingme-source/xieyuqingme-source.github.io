@@ -122,7 +122,7 @@ class EnglishPublicationTests(unittest.TestCase):
     def build_fixture(self):
         blog = Blog("https://public.test/articles", output=self.output / "articles")
         blog.build(clean=False)
-        values = {"site_url": "https://public.test", "project_total": "5", "article_total": "3", "chinese_total": "2", "english_total": "1", "photo_album_total": "0", "photo_total": "0"}
+        values = {"site_url": "https://public.test", "project_total": "5", "article_total": "3", "chinese_total": "2", "english_total": "1", "photo_album_total": "0", "photo_total": "0", "anthology_total": "0"}
         for name, route in (("index", "index.html"), ("about", "about/index.html"), ("projects", "projects/index.html")):
             page = (ROOT / f"home/{name}.template.html").read_text(encoding="utf-8")
             for key, value in {**values, "about_content": "<p>Fixture biography</p>", "project_cards": "", "recent_articles": ""}.items():
@@ -293,7 +293,9 @@ class EnglishPublicationTests(unittest.TestCase):
         text = (self.output / 'articles' / article.destination).read_text(encoding='utf-8')
         self.assertIn('<html lang="en"', text)
         self.assertIn('Originally written in English.', text)
-        self.assertIn('Switch to dark mode', text)
+        self.assertIn('Deep Sea Tech', text)
+        self.assertIn('data-skin-choice="sea"', text)
+        self.assertIn('data-theme-choice="dark"', text)
         self.assertIn('An original English essay.', text)
         elements = build_site.Elements(text).elements
         directories = [attrs for tag, attrs in elements if tag == "a" and "data-preserve-language-link" in attrs]

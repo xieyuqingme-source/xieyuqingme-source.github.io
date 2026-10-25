@@ -22,7 +22,7 @@ class Brand(HTMLParser):
 def check_brand(test,text,href=None):
     value=Brand(text);test.assertEqual(len(value.links),1);test.assertEqual(value.icons,[])
     link=value.links[0];name=' '.join(' '.join(link['text']).split())
-    test.assertEqual(name,'谢雨卿 Xie Yuqing · Carl');test.assertEqual(name.count('谢雨卿'),1)
+    test.assertEqual(name,'谢雨卿' if 'header-compact' in text else '谢雨卿 Xie Yuqing · Carl');test.assertEqual(name.count('谢雨卿'),1)
     test.assertTrue(link['attrs'].get('aria-label'))
     if href:test.assertEqual(link['attrs'].get('href'),href)
     return link
@@ -55,9 +55,22 @@ class BrandingTests(unittest.TestCase):
                 self.assertNotIn('href',key)
                 if 'url(' in value:
                     self.assertRegex(value,r'^url\(#[a-zA-Z][a-zA-Z0-9_-]*\)$');self.assertIn(value[5:-1],ids)
-        self.assertIn('#199bc1',ET.tostring(svg,encoding='unicode'));self.assertIn('#156eb3',ET.tostring(svg,encoding='unicode'))
+        self.assertIn('#49BDF4',ET.tostring(svg,encoding='unicode'));self.assertIn('#249FDF',ET.tostring(svg,encoding='unicode'))
+        self.assertEqual(ids, {'sky-top', 'sky-left', 'sky-bottom'})
+        self.assertIn('清环', svg.find('{http://www.w3.org/2000/svg}title').text)
         self.assertEqual((ROOT/'home/assets/favicon-cat.svg').read_text(encoding='utf8').count('Yuliao Cat'),1)
         self.assertTrue((ROOT/'home/assets/favicon-monogram.svg').is_file())
+
+    def test_png_and_ico_retain_transparent_center_and_sky_gradients(self):
+        from PIL import Image
+        png=Image.open(ROOT/'home/assets/favicon.png').convert('RGBA')
+        self.assertEqual(png.size,(256,256));self.assertEqual(png.getpixel((128,128))[3],0);self.assertEqual(png.getpixel((0,0))[3],0)
+        ico=Image.open(ROOT/'home/assets/favicon.ico');self.addCleanup(ico.close)
+        self.assertEqual(ico.ico.sizes(),{(16,16),(32,32),(48,48)})
+        for size in (16,32,48):
+            frame=ico.ico.getimage((size,size)).convert('RGBA')
+            self.assertEqual(frame.getpixel((size//2,size//2))[3],0)
+            self.assertGreater(len(set(frame.get_flattened_data())),20)
 
     def test_ico_fallback_contains_real_pngs_at_small_sizes(self):
         data=(ROOT/'home/assets/favicon.ico').read_bytes();self.assertEqual(struct.unpack_from('<HHH',data),(0,1,3))
@@ -68,7 +81,7 @@ class BrandingTests(unittest.TestCase):
         for source in sorted((ROOT/'home').rglob('*.template.html')):
             text=source.read_text(encoding='utf8')
             if 'favicon.svg'not in text:continue
-            self.assertIn('/assets/favicon.svg?v=yuliao-water-1',text);self.assertIn('/assets/favicon.ico?v=yuliao-water-1',text);self.assertNotIn('yuliao-cat-1',text)
+            self.assertIn('/assets/favicon.svg?v=qinghuan-1',text);self.assertIn('/assets/favicon.ico?v=qinghuan-1',text);self.assertNotIn('yuliao-cat-1',text)
 
 if __name__=='__main__':
     parser=argparse.ArgumentParser();parser.add_argument('--site',type=Path);args,remaining=parser.parse_known_args()

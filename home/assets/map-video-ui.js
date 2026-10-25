@@ -56,6 +56,7 @@
   if (!A || !J || !V) return;
   const canvas = $("video-canvas"), context = canvas.getContext("2d"), preview = $("video-preview");
   canvas.width=1280;canvas.height=720; // Protect cached older HTML from mismatched drawing coordinates.
+  let live = null, liveFrame = null, liveRevision = 0;
   let plan = null, controller = null, busy = false, resultUrl = null, previewPlan = null, lock = [], lastProgress = "";
   const cap = V.capabilities();
   $("video-capability").textContent = cap.supported ? "" : I("map.video-ui.s001", {p0:(cap.reason || I("map.video-ui.s002", {}, "此浏览器不能生成视频。"))}, "{p0} 可继续下载 PNG / SVG 图片；建议使用新版 Chrome 或 Edge。");
@@ -69,7 +70,7 @@
   if (musicPrefs.track === "custom" && !window.SiteMusic?.state().custom) fileError = "music.customMissing";
   const musicControls = document.createElement("section"); musicControls.className = "video-music-options";
   musicControls.innerHTML = '<label><span id="video-music-label"></span><select id="video-music"><option value="travel"></option><option value="gentle"></option><option value="none"></option><option value="custom"></option></select></label><label><span id="video-music-volume-label"></span><input id="video-music-volume" type="range" min="0" max="100" step="5"><output id="video-music-volume-value"></output></label><button id="video-music-preview" type="button"></button><label><span id="video-music-file-label"></span><input id="video-music-file" type="file" accept="audio/*,.wav,.mp3,.m4a,.aac,.ogg,.oga,.flac,.webm"></label><button id="video-music-clear" type="button"></button><p id="video-music-note" role="status" aria-live="polite"></p><p class="music-file-hint" id="video-music-file-hint"></p>';
-  document.querySelector(".map-toolbar").after(musicControls);
+  $("video-options").querySelector("summary").after(musicControls);
   // A browser limitation never silently changes an intended soundtrack to None.
   $("video-music").value = musicPrefs.track; $("video-music-volume").value = Math.round(musicPrefs.volume * 100);
   const effectiveMusic = () => musicPrefs.track;
@@ -109,8 +110,9 @@
   });
   $("video-music-clear").addEventListener("click", async () => { importRevision++; await window.SiteMusic?.clearCustom(); importing = false; fileError = null; musicPrefs.track = "travel"; $("video-music").value = "travel"; changed(); });
   window.SiteMusic?.onChange(refreshMusic);
-  preview.addEventListener("play", () => { if (window.SiteMusic?.state().locked) { preview.pause(); return; } window.SiteMusic?.claim("video-player"); });
-  window.addEventListener("site:audio:claim", event => { if (event.detail?.owner !== "video-player") preview.pause(); });
+  const playbackMedia = [preview, document.querySelector(".author-video video")].filter(Boolean);
+  for (const media of playbackMedia) media.addEventListener("play", () => { if (window.SiteMusic?.state().locked) { media.pause(); return; } for (const other of playbackMedia) if (other !== media) other.pause(); window.SiteMusic?.claim("video-player"); });
+  window.addEventListener("site:audio:claim", event => { if (event.detail?.owner !== "video-player") for (const media of playbackMedia) media.pause(); });
   window.addEventListener("footprints:language", refreshMusic);
   refreshMusic();
 
@@ -126,7 +128,7 @@
     captionPanel.hidden=false;captionPanel.setAttribute("aria-label",musicText("video.captionLabel"));
     captionPanel.querySelector('.video-caption-date').textContent=record?`${frame.index+1}/${frame.count} · ${record.derived?record.dateLabel||record.end||"":M.range(record,previewPlan.language)}`:"";
     captionPanel.querySelector('.video-caption-city').textContent=record?(record.derived?(frozen?frozen("map.video-ui.s012",{p0:record.city},"返回{p0}"):record.city):record.city):A.displayTitle(previewPlan.language);
-    captionPanel.querySelector('.video-caption-description').textContent=record?record.description||"":(frozen?frozen("map.video-ui.s010",{},"一路走来，足迹相连"):"");
+    captionPanel.querySelector('.video-caption-description').textContent=record?record.description||"":"";
   }
   for(const event of['loadeddata','timeupdate','seeked'])preview.addEventListener(event,refreshPreviewCaption);
 
@@ -151,7 +153,7 @@
     $("journey-warnings").textContent = [...new Set(journey.warnings.map(value => typeof value === "string" ? value : value.message || "").filter(Boolean))].join("；");
     $("video-estimate").textContent = musicText("video.estimate", {duration:seconds(plan.durationMs),count:plan.scenes.length,total:plan.totalSceneCount||plan.scenes.length,mode:musicText(plan.brief?"video.brief":"video.full")});
     $("video-generate").disabled = !cap.supported || !context || !plan.scenes.length || !A.assetsReady();
-    refreshMusic();
+    refreshMusic(); refreshPlayer();
     $("video-generate").title = !A.assetsReady() ? I("map.video-ui.s006", {}, "请等待本地底图与头像加载；加载失败时请重选头像或刷新。") : "";
   }
   function clearResult() {
@@ -263,7 +265,7 @@
         const heading = layoutOutroTitle(title, (text, fontSize) => { context.font = `bold ${fontSize}px sans-serif`; return context.measureText(text).width; }, {width:textWidth,height,mapBottom,overlay:true});
         caption(I("map.video-ui.s009", {p0:markers.length,p1:allScenes.filter(record => !record.derived).length}, "{p0} 座城市 · {p1} 段经历") + (frozenPlan.brief ? " · " + overviewLabel : ""),left,heading.baselines[0]-36,"600 22px sans-serif");
         heading.lines.forEach((line,index)=>caption(line,left,heading.baselines[index],`bold ${heading.fontSize}px sans-serif`));
-        caption(I("map.video-ui.s010", {}, "一路走来，足迹相连"),left,heading.closingBaseline,"22px sans-serif");
+
       } else if (item) {
         const date = item.derived ? item.dateLabel || item.end || "" : M.range(item, frozenPlan.language), pages = frame.pageCount > 1 ? I("map.video-ui.s011", {p0:frame.pageIndex + 1,p1:frame.pageCount}, " · {p0}/{p1} 页") : "";
         const place = item.derived ? I("map.video-ui.s012", {p0:item.city}, "返回{p0}") : item.city;
@@ -281,11 +283,58 @@
       $("video-canvas").dataset.camera = JSON.stringify(project.bounds);
     };
   }
+  function playerText(key, values={}) { return I(key, values, key); }
+  function refreshPlayer() {
+    const button=$("journey-play"), key=live?.running ? "map.player.pause" : live ? "map.player.resume" : "map.player.play";
+    button.removeAttribute("data-i18n"); button.textContent=playerText(key); button.setAttribute("aria-pressed", String(!!live?.running));
+    button.disabled=busy || !context || !plan?.scenes.length || !A.assetsReady();
+    $("journey-stop").disabled=!live || busy;
+  }
+  async function stopJourney() {
+    liveRevision++; if(liveFrame!==null) cancelAnimationFrame(liveFrame); liveFrame=null;
+    const owned=!!live?.audio; live=null; canvas.hidden=true; $("journey-status").textContent="";
+    if(owned && window.SiteMusic?.state().owner==='map') await window.SiteMusic.stop();
+    refreshPlayer();
+  }
+  function liveTick(now) {
+    if(!live?.running)return;
+    const ms=Math.min(live.plan.durationMs,live.offset+now-live.began);
+    live.render(ms);
+    const message=playerText("map.player.progress",{current:Math.floor(ms/1000),total:Math.ceil(live.plan.durationMs/1000)});
+    if($("journey-status").textContent!==message)$("journey-status").textContent=message;
+    if(ms>=live.plan.durationMs){live.offset=0;live.running=false;if(live.audio && window.SiteMusic?.state().owner==='map')void window.SiteMusic.stop();refreshPlayer();return;}
+    liveFrame=requestAnimationFrame(liveTick);
+  }
+  async function toggleJourney() {
+    if(busy || $("journey-play").disabled)return;
+    if(live?.running){live.offset+=performance.now()-live.began;live.running=false;cancelAnimationFrame(liveFrame);if(live.audio && window.SiteMusic?.state().owner==='map')await window.SiteMusic.stop();refreshPlayer();return;}
+    const ticket=++liveRevision;$("journey-play").disabled=true;$("journey-status").textContent=playerText("map.player.loading");
+    try{
+      const frozen=live?.plan || plan;
+      const music=window.SiteMusic,track=effectiveMusic();
+      // Explicit play click owns audio; no autoplay or remote media.
+      const audio=track!=='none' && music?.supported() && (track!=='custom'||music.state().custom);
+      const sound=audio ? (live?.audio && live.offset>0 ? music.resume() : music.playMap(track,musicPrefs.volume)) : Promise.resolve();
+      const [render]=await Promise.all([live?.render || makeRenderer(frozen),sound]);
+      if(ticket!==liveRevision)return;
+      live={plan:frozen,render,offset:live?.offset||0,began:performance.now(),running:true,audio};canvas.hidden=false;liveFrame=requestAnimationFrame(liveTick);
+    }catch(error){$("journey-status").textContent=error.message;}
+    finally{refreshPlayer();}
+  }
+  $("journey-play").addEventListener("click",toggleJourney);
+  $("journey-stop").addEventListener("click",stopJourney);
+  window.addEventListener("footprints:reset",stopJourney);
+  window.addEventListener("footprints:assets",refreshPlayer);
+  window.addEventListener("footprints:language",()=>{if(!live)refreshPlayer();else void stopJourney();});
+  window.addEventListener("site:audio:claim",event=>{if(event.detail?.owner!=='map' && live?.running){live.offset+=performance.now()-live.began;live.running=false;cancelAnimationFrame(liveFrame);refreshPlayer();}});
+  window.addEventListener("visibilitychange",()=>{if(document.hidden && live?.running)void toggleJourney();});
+  window.addEventListener("pagehide",stopJourney);
+
   let activeGeneration = null, lastAudioEvidence = null, lastResultType = null;
   function generate() { if (activeGeneration) return activeGeneration; activeGeneration = generateVideo().finally(() => { activeGeneration = null; }); return activeGeneration; }
   async function generateVideo() {
     if (busy || $("video-generate").disabled || !plan) return;
-    clearResult(); lastAudioEvidence=null;lastResultType=null;const desiredContainer=$("video-format").value; const frozenPlan = plan; controller = new AbortController(); setBusy(true); $("video-canvas").hidden = false; $("video-progress").value = 0; lastProgress = "";
+    await stopJourney(); clearResult(); lastAudioEvidence=null;lastResultType=null;const desiredContainer=$("video-format").value; const frozenPlan = plan; controller = new AbortController(); setBusy(true); $("video-canvas").hidden = false; $("video-progress").value = 0; lastProgress = "";
     try {
       $("playback-progress").textContent = I("map.video-ui.s014", {}, "正在准备本地地图画面…");
       // Reserve the audio context within the original user click. No autoplay.
@@ -325,8 +374,8 @@
   window.addEventListener("footprints:assets", rebuild);
   window.addEventListener("footprints:labels", () => { if (!busy) { clearResult(); rebuild(); } });
   window.addEventListener("footprints:avatar", () => { if (!busy) { clearResult(); rebuild(); } });
-  window.addEventListener("pagehide", () => { cancel(); clearResult(); });
-  window.SiteNavigation?.onLeave(async () => { cancel(); await activeGeneration; clearResult(); importRevision++; window.SiteMusic?.cancelImport(); });
+  window.addEventListener("pagehide", () => { for (const media of playbackMedia) media.pause(); cancel(); clearResult(); });
+  window.SiteNavigation?.onLeave(async () => { for (const media of playbackMedia) media.pause(); await stopJourney(); cancel(); await activeGeneration; clearResult(); importRevision++; window.SiteMusic?.cancelImport(); });
   window.addEventListener("footprints:language", () => {
     const currentCapability = V.capabilities();
     $("video-capability").textContent = currentCapability.supported ? "" : I("map.video-ui.s001", {p0:currentCapability.reason || I("map.video-ui.s002", {}, "此浏览器不能生成视频。")}, "{p0} 可继续下载 PNG / SVG 图片；建议使用新版 Chrome 或 Edge。");
@@ -338,6 +387,6 @@
     }
     if (window.FootprintsI18n) window.FootprintsI18n.refreshMessages(["video-download", "playback-progress"]);
   });
-  window.FootprintsVideoUI = { generate, cancel, layoutOutroTitle, getPlan: () => plan, getState: () => ({ version:"2026-10-24.5", audioEvidence:lastAudioEvidence, busy, ready: !!resultUrl, mimeType:lastResultType?.mimeType||formatCapability().mimeType,extension:lastResultType?.extension||formatCapability().extension }) };
+  window.FootprintsVideoUI = { generate, cancel, layoutOutroTitle, getPlan: () => plan, getPlayback: () => ({running:!!live?.running,offset:live?.offset||0,durationMs:live?.plan.durationMs||0}), getState: () => ({ version:"2026-10-24.5", audioEvidence:lastAudioEvidence, busy, ready: !!resultUrl, mimeType:lastResultType?.mimeType||formatCapability().mimeType,extension:lastResultType?.extension||formatCapability().extension }) };
   rebuild();
 })();

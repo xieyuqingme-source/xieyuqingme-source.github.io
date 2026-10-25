@@ -74,7 +74,7 @@ class GamePublicationTests(unittest.TestCase):
         self.assertEqual(set(report["english"]["routes"]), profiles)
         english_features = report["english_features"]
         self.assertEqual(set(english_features), {"photography", "footprints", "anthology", "games"})
-        self.assertEqual(set(english_features["games"]), {"/en/game/", "/en/game/ranking/"})
+        self.assertEqual(set(english_features["games"]), {"/en/game/", "/en/game/ranking/", "/en/game/footprints/"})
         english_map_route = "/" + english_features["footprints"]["route"].strip("/") + "/"
         self.assertEqual(english_map_route, "/en/map/")
         english_routes = profiles | set(english_features["games"]) | {english_map_route}
@@ -82,7 +82,7 @@ class GamePublicationTests(unittest.TestCase):
             routes = {"/" + route.strip("/") + "/" for route in english_features[module]["routes"]}
             self.assertEqual(routes, {"/en/" + route.strip("/") + "/" for route in chinese["routes"]})
             english_routes.update(routes)
-        expected_routes = {"/", "/about/", "/projects/", "/map/", "/game/", "/game/ranking/",
+        expected_routes = {"/", "/about/", "/projects/", "/map/", "/game/", "/game/ranking/", "/game/footprints/",
                            "/articles/index.html", "/articles/synthetic.html"} | english_routes
         for module in (report["photography"], report["anthology"]):
             expected_routes.update("/" + route.strip("/") + "/" for route in module["routes"])
@@ -131,7 +131,10 @@ class GamePublicationTests(unittest.TestCase):
                 if name.endswith(".js"):
                     from site_navigation import original_page_script
                     published = original_page_script(published.decode("utf-8")).encode("utf-8")
-                self.assertEqual(published, (ROOT / "home/assets" / name).read_bytes())
+                source_bytes = (ROOT / "home/assets" / name).read_bytes()
+                if name.endswith(".js"):
+                    source_bytes = source_bytes.replace(b"\r\n", b"\n")
+                self.assertEqual(published, source_bytes)
                 if name.endswith(".js"):
                     source = (output / "assets" / name).read_text(encoding="utf-8")
                     imports = re.findall(r'(?:from\s*|import\s*)["\'](\./[^"\']+)["\']', source)
@@ -147,7 +150,7 @@ class GamePublicationTests(unittest.TestCase):
         self.assertEqual(scripts.count("/assets/site-i18n.js"), 1)
         self.assertLess(scripts.index("/assets/site-i18n.js"), scripts.index("/assets/ranking-model.js"))
         for name in ("portal.css", "game.css", "ranking-skins.css"):
-            self.assertIn("/assets/" + name, styles)
+            self.assertIn("/assets/" + name, [href.partition("?")[0] for href in styles])
         english_ranking = Elements((output / "en/game/ranking/index.html").read_text(encoding="utf-8")).elements
         self.assertEqual([attrs.get("src") for tag, attrs in english_ranking if tag == "script" and attrs.get("src")], scripts)
         self.assertEqual([attrs.get("href") for tag, attrs in english_ranking
@@ -182,12 +185,14 @@ class GamePublicationTests(unittest.TestCase):
                 html = (output / relative).read_text(encoding="utf-8")
                 nav = html.split('class="site-nav"', 1)[1].split("</nav>", 1)[0]
                 links = [attrs.get("href") for tag, attrs in Elements(nav).elements if tag == "a"]
-                for route in ("/", "/articles/", "/projects/", "/game/", "/about/"):
+                self.assertTrue(any(tag == "a" and attrs.get("class") == "brand" and attrs.get("href") == "/" for tag, attrs in Elements(html).elements))
+                self.assertEqual(nav.count('class="nav-group'), 4)
+                for route in ("/articles/", "/projects/", "/game/", "/about/", "/photos/", "/anthology/", "/map/", "/game/footprints/"):
                     self.assertIn(route, links)
         home = (output / "index.html").read_text(encoding="utf-8")
-        self.assertIn('class="entry-title-link" href="/articles/"', home)
-        self.assertIn('class="entry-title-link" href="/projects/"', home)
-        self.assertIn('class="home-game-link" href="/game/"', home)
+        self.assertIn('class="home-entry-link" href="/articles/"', home)
+        self.assertIn('class="home-entry-link" href="/projects/"', home)
+        self.assertIn('href="/game/"', home)
 
     def test_article_navigation_uses_exact_game_root_and_keeps_other_roots(self):
         blog = build_blog.Blog("https://preview.example/articles")

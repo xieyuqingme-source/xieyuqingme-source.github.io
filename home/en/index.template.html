@@ -18,8 +18,8 @@
   <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="Xie Yuqing · Carl — Writing, projects, photos and places">
   <meta name="twitter:card" content="summary_large_image">
-  <link rel="icon" href="/assets/favicon.ico?v=yuliao-water-1" sizes="any">
-  <link rel="icon" href="/assets/favicon.svg?v=yuliao-water-1" type="image/svg+xml">
+  <link rel="icon" href="/assets/favicon.ico?v=qinghuan-1" sizes="any">
+  <link rel="icon" href="/assets/favicon.svg?v=qinghuan-1" type="image/svg+xml">
   <script>(() => { let theme = "light", saved; try { saved = localStorage.getItem("xieyuqing-blog-theme"); } catch (_) {} if (saved === "light" || saved === "dark") theme = saved; else try { if (window.matchMedia("(prefers-color-scheme: dark)").matches) theme = "dark"; } catch (_) {} document.documentElement.dataset.theme = theme; })();</script>
   <link rel="stylesheet" href="/assets/portal.css">
   <script src="/assets/portal.js" defer></script>
@@ -31,48 +31,15 @@
     <nav class="site-nav" aria-label="Main navigation"><a href="/en/" aria-current="page">Home</a><a href="/en/articles/">Articles</a><a href="/en/anthology/" title="Original texts in Chinese, English and French">Anthology</a><a href="/en/projects/">Projects</a><a href="/en/photos/">Photos</a><a href="/en/map/">Map</a><a href="/en/game/">Games</a><a href="/en/about/">About</a><a class="site-language-switch" href="/" lang="zh-CN" aria-label="Switch site language to Chinese">中文</a></nav>
     <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to dark mode" hidden><span class="theme-label">Dark</span></button>
   </header>
-  <main id="main" class="container">
-    <section class="intro" aria-labelledby="intro-title">
-      <div class="intro-copy">
-        <p class="eyebrow"><span aria-hidden="true"></span> PERSONAL HOME</p>
-        <h1 id="intro-title"><em>Xie Yuqing</em></h1>
-        <p class="intro-name" lang="en">Xie Yuqing · Carl</p>
-        <p class="intro-description">I graduated from the University of Chinese Academy of Social Sciences and am studying for an MBA at City University Malaysia.<br>I enjoy reading, writing and exploring AI applications.<br>Here I share my writing and projects.<br>WeChat official account: <span lang="zh-CN">谢雨聊</span>.<br>Email: <a href="mailto:xieyuqing.me@gmail.com">xieyuqing.me@gmail.com</a></p>
-        <a class="quiet-link" href="/en/about/">More about me <svg class="external-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 17 17 7M7 7h10v10"/></svg></a>
-      </div>
-    </section>
-    <section class="home-entries" aria-label="Writing and projects">
-      <article class="portal-entry writing-entry" aria-labelledby="writing-title">
-        <a class="entry-top entry-top-link" href="/en/articles/" aria-label="Explore articles"><p class="eyebrow">WRITING</p><svg class="external-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 17 17 7M7 7h10v10"/></svg></a>
-        <div><h2 id="writing-title"><a class="entry-title-link" href="/en/articles/">Articles</a></h2><p>A life has its limits, and honour and pleasure end with the individual; writing can endure beyond them.</p></div>
-        <p class="writing-count"><a class="entry-count-link" href="/en/articles/" aria-label="View all {{article_total}} original articles"><strong>{{article_total}}</strong></a><span>original articles<br><small>{{english_available}} available in English</small></span></p>
-        <a class="primary-link" href="/en/articles/">Explore articles <span aria-hidden="true">→</span></a>
-      </article>
-      <article class="portal-entry projects-entry" aria-labelledby="projects-title">
-        <a class="entry-top entry-top-link" href="/en/projects/" aria-label="Explore projects"><p class="eyebrow">PROJECTS</p><svg class="external-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 17 17 7M7 7h10v10"/></svg></a>
-        <div><h2 id="projects-title"><a class="entry-title-link" href="/en/projects/">Projects</a></h2><p>Useful tools, applications and workflows built around practical problems in writing and reading.</p></div>
-        <p class="writing-count"><a class="entry-count-link" href="/en/projects/" aria-label="View all {{project_total}} projects"><strong>{{project_total}}</strong></a><span>public projects<br><small>Browser tools · Local apps · Workflows</small></span></p>
-        <a class="primary-link" href="/en/projects/">Explore projects and guides <span aria-hidden="true">→</span></a>
-      </article>
-    </section>
-    <a class="home-game-link home-photo-link" href="/en/photos/">
-      <div><p class="eyebrow">PHOTOGRAPHY</p><h2>Photos</h2><p>{{photo_album_total}} albums · {{photo_total}} photos</p></div>
-      <span class="home-game-action">Browse albums <svg class="external-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 17 17 7M7 7h10v10"/></svg></span>
-    </a>
-    <a class="home-game-link home-map-link" href="/en/map/">
-      <div><p class="eyebrow">FOOTPRINTS</p><h2>Revisit the places along the way.</h2><p>Explore a terrain map and city timeline, or make your own travel record.</p></div>
-      <span class="home-game-action">Open map <svg class="external-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 17 17 7M7 7h10v10"/></svg></span>
-    </a>
-    <a class="home-game-link" href="/en/game/">
-      <div><p class="eyebrow">TAKE A BREAK</p><h2>Make a little time to play.</h2><p>Arrange your own tier list.</p></div>
-      <span class="home-game-action">Explore games <svg class="external-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 17 17 7M7 7h10v10"/></svg></span>
-    </a>
-    <section class="recent" aria-labelledby="recent-title">
-      <div class="section-heading"><div><p class="eyebrow">RECENT WRITING</p><h2 id="recent-title">Recent writing</h2></div><a class="quiet-link" href="/en/articles/">All articles <svg class="external-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 17 17 7M7 7h10v10"/></svg></a></div>
-      <ol class="recent-list">
-{{recent_articles}}
-      </ol>
-    </section>
+  <main id="main" class="container home-main">
+    <div class="home-stage">
+      <section class="home-hero" aria-labelledby="intro-title"><div class="hero-copy"><p class="eyebrow"><span aria-hidden="true"></span> PERSONAL HOME</p><h1 id="intro-title">Xie Yuqing</h1><p class="intro-name" lang="en">Carl</p><p class="hero-description">Reading, writing, and exploring AI applications.</p><a class="quiet-link" href="/en/about/">About me <span aria-hidden="true">↗</span></a></div><div class="hero-atmosphere" aria-hidden="true"><svg viewBox="0 0 640 380" focusable="false"><defs><pattern id="hero-grid" width="48" height="48" patternUnits="userSpaceOnUse"><path d="M48 0H0V48" fill="none" stroke="currentColor" stroke-width=".6"/></pattern></defs><rect x="20" y="20" width="600" height="340" fill="url(#hero-grid)" class="hero-grid"/><g fill="none" stroke="currentColor"><circle cx="346" cy="190" r="132"/><circle cx="346" cy="190" r="158" stroke-dasharray="2 12"/><ellipse cx="346" cy="190" rx="238" ry="67" transform="rotate(-28 346 190)"/><path d="M58 303 596 69M346 20V360M45 190H610" stroke-width=".5"/></g><g class="hero-points"><circle cx="226" cy="247" r="3"/><circle cx="463" cy="130" r="3"/><circle cx="346" cy="58" r="2"/><circle cx="346" cy="322" r="2"/></g></svg></div></section>
+      <section class="home-entries" aria-label="Articles and projects">
+        <article class="portal-entry writing-entry"><a class="home-entry-link" href="/en/articles/"><svg class="entry-symbol" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 8c-4-3-8-3-12-2v20c4-1 8-1 12 2 4-3 8-3 12-2V6c-4-1-8-1-12 2Zm0 0v20M8 11h4m-4 5h4m8-5h4m-4 5h4"/></svg><h2>Articles</h2><p>Writing about life, reading and ideas.</p><span class="entry-action">Explore articles<span aria-hidden="true">→</span></span></a></article>
+        <article class="portal-entry projects-entry"><a class="home-entry-link" href="/en/projects/"><svg class="entry-symbol" viewBox="0 0 32 32" aria-hidden="true"><path d="m16 3 12 7v13l-12 7L4 23V10Zm0 0v14m12-7-12 7L4 10m12 7v13"/></svg><h2>Projects</h2><p>Tools, applications and workflows.</p><span class="entry-action">Explore projects<span aria-hidden="true">→</span></span></a></article>
+      </section>
+    </div>
+    <section class="home-recent" aria-labelledby="recent-title"><div class="section-heading"><h2 id="recent-title">Recent writing</h2><a class="quiet-link" href="/en/articles/">All articles ↗</a></div><ol class="recent-list">{{recent_articles}}</ol><p class="home-content-total">{{article_total}} original articles · {{project_total}} public projects</p></section>
   </main>
   <footer class="site-footer container"><p>Xie Yuqing · Carl</p><div><a href="/en/articles/">Articles</a><a href="/en/anthology/" title="Original texts in Chinese, English and French">Anthology</a><a href="/en/projects/">Projects</a><a href="/en/photos/">Photos</a><a href="/en/map/">Map</a><a href="/en/game/">Games</a><a href="/en/about/">About</a><a href="/articles/feed.xml">RSS</a></div></footer>
 </body>

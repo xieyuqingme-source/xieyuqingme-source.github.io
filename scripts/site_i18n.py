@@ -179,6 +179,60 @@ def _metadata_values(value, fallback, language):
     return {lang: selected for lang in LANGUAGES}
 
 
+def appearance_bootstrap():
+    """Resolve independent axes before CSS; migrate only a missing skin preference."""
+    return '<script>(()=>{let saved,skin;try{saved=localStorage.getItem("xieyuqing-blog-theme");}catch(_){}try{skin=localStorage.getItem("xieyuqing-site-skin");}catch(_){}const mode=saved==="light"||saved==="dark"?saved:"system";skin=skin==="emerald"||skin==="sea"?skin:(mode==="dark"?"sea":"emerald");let tone=mode;if(mode==="system"){tone="light";try{if(window.matchMedia("(prefers-color-scheme: dark)").matches)tone="dark";}catch(_){}}document.documentElement.dataset.skin=skin;document.documentElement.dataset.theme=tone;document.documentElement.dataset.themeMode=mode;})();</script>'
+
+
+def version_shared_assets(page, root):
+    """Refresh shared UI after local/production updates without flushing user data."""
+    import hashlib
+    sources = {name: Path(root) / 'home/assets' / name for name in ['site-themes.css', 'portal.css', 'portfolio.css', 'photos.css', 'anthology.css', 'anthology-selection.css', 'game.css', 'ranking-skins.css', 'site-nav.css', 'site-music.css', 'portal.js', 'site-navigation.js', 'site-music.js']}
+    sources['style.css'] = Path(root) / 'blog/style.css'
+    def version(match):
+        route = match.group(2); source = sources.get(route.rsplit('/', 1)[-1])
+        if source is None or not source.is_file():
+            return match.group(0)
+        if source.is_symlink():
+            raise ValueError('Shared UI assets cannot be symlinks.')
+        return match.group(1) + route + '?v=' + hashlib.sha256(source.read_bytes()).hexdigest()[:12] + match.group(3)
+    return re.sub(r'((?:src|href)=["\'])(/(?:(?:articles/)?assets)/(?:site-themes|portal|portfolio|photos|anthology|anthology-selection|game|ranking-skins|site-nav|site-music|site-navigation|style)\.(?:css|js))(?:\?[^"\']*)?(["\'])', version, page)
+
+
+def compact_header(page, route, paired, language="zh-CN"):
+    """Four native disclosure groups; all original URLs remain reachable."""
+    def render(match):
+        raw = match.group(0)
+        theme = re.search(r'<button\b[^>]*class=["\'][^"\']*theme-toggle[^"\']*["\'][^>]*>.*?</button>', raw, re.S)
+        if not theme:
+            return raw
+        def link(path, key):
+            current = ' aria-current="page"' if route == path else ''
+            return f'<a href="{path}"{current}><span data-i18n="common.nav.{key}"></span></a>'
+        groups = [('articles', [('/articles/', 'articles'), ('/anthology/', 'anthology')]),
+                  ('projects', [('/projects/', 'projects'), ('/photos/', 'photos')]),
+                  ('about', [('/about/', 'about'), ('/map/', 'map')]),
+                  ('games', [('/game/', 'games'), ('/game/ranking/', 'ranking'), ('/game/footprints/', 'maker')])]
+        preserved = ''.join(re.findall(r'<a\b(?=[^>]*data-preserve-language-link)[^>]*>.*?</a>', raw, re.S))
+        nav = ''
+        for key, links in groups:
+            active = any(route == path or (path != '/' and route.startswith(path) and path not in ['/articles/', '/game/']) for path, _ in links)
+            nav += f'<details class="nav-group{" is-current" if active else ""}"><summary><span data-i18n="common.nav.{key}"></span></summary><div class="nav-menu">' + ''.join(link(*item) for item in links) + (preserved if key == 'articles' else '') + '</div></details>'
+        original_switch = re.search(r'<a\b[^>]*class=["\'][^"\']*site-language-switch[^"\']*["\'][^>]*>.*?</a>', raw, re.S)
+        switch = original_switch.group(0) if original_switch else ('<a class="site-language-switch" href="/en/" lang="en">EN</a>' if paired else '')
+        theme_control = ('<details class="theme-control" id="theme-control" hidden><summary class="theme-toggle" id="theme-toggle"><span class="theme-label"></span><small class="theme-mode"></small></summary>'
+                         '<div class="theme-panel"><fieldset><legend data-i18n="common.skin.label"></legend>'
+                         '<button type="button" data-skin-choice="emerald" aria-pressed="true"><span class="theme-swatch paper-swatch" aria-hidden="true"></span><span data-i18n="common.skin.emerald"></span></button>'
+                         '<button type="button" data-skin-choice="sea" aria-pressed="false"><span class="theme-swatch sea-swatch" aria-hidden="true"></span><span data-i18n="common.skin.sea"></span></button></fieldset>'
+                         '<fieldset><legend data-i18n="common.theme.mode"></legend>'
+                         '<button type="button" data-theme-choice="system" aria-pressed="true"><span data-i18n="common.theme.system"></span></button>'
+                         '<button type="button" data-theme-choice="light" aria-pressed="false"><span data-i18n="common.theme.light"></span></button>'
+                         '<button type="button" data-theme-choice="dark" aria-pressed="false"><span data-i18n="common.theme.dark"></span></button></fieldset></div></details>')
+        return (f'<header class="site-header container header-compact" lang="{language}"><a class="brand" href="/" aria-label="谢雨卿的个人主页"><span data-i18n="common.brandName">谢雨卿</span></a>'
+                + '<nav class="site-nav" aria-label="主导航">' + nav + '</nav><div class="header-tools">' + switch + theme_control + '</div></header>')
+    return re.sub(r'<header\b[^>]*class=["\'][^"\']*site-header[^"\']*["\'][^>]*>.*?</header>', render, page, count=1, flags=re.S)
+
+
 def localize_page(page, root, address, route, language="zh-CN", modules=(), title=None, description=None):
     """Translate marked UI and inject shared runtime/SEO without touching content.
 
@@ -192,6 +246,8 @@ def localize_page(page, root, address, route, language="zh-CN", modules=(), titl
     chinese = localized_path(route, "zh-CN")
     english = localized_path(chinese, "en")
     paired = chinese != english
+    if all("common.nav." + key in catalogues[language] for key in (*NAV_KEYS.values(), "ranking", "maker")) and "common.brandName" in catalogues[language]:
+        page = compact_header(page, chinese, paired, language)
     current = localized_path(chinese, language)
     canonical_path = "/articles/index.html" if route == "/articles/index.html" and language == "zh-CN" else current
     counterpart = localized_path(chinese, "zh-CN" if language == "en" else "en") if paired else None
@@ -248,14 +304,23 @@ def localize_page(page, root, address, route, language="zh-CN", modules=(), titl
     page = re.sub(r'<script\b[^>]*\bsrc=["\']/assets/site-i18n\.js["\'][^>]*>\s*</script>\s*', "", page, flags=re.I)
     bootstrap_html = f'{metadata}<script id="site-i18n-data" type="application/json">{encoded}</script>\n<script src="/assets/site-i18n.js"></script>\n'
     if (Path(root) / "home/assets/site-music.js").is_file() and "music.open" in catalogues[language]:
-        bootstrap_html += '<link rel="stylesheet" href="/assets/site-music.css"><script src="/assets/site-music.js" defer></script>\n'
+        bootstrap_html += '<link rel="stylesheet" href="/assets/site-nav.css"><link rel="stylesheet" href="/assets/site-music.css"><script src="/assets/site-music.js" defer></script>\n'
     if (Path(root) / "home/assets/site-navigation.js").is_file():
         page = re.sub(r'<script\b[^>]*\bsrc=["\']/assets/portal\.js["\'][^>]*>\s*</script>\s*', "", page, flags=re.I)
         bootstrap_html += '<script src="/assets/portal.js" defer></script>\n<script src="/assets/site-navigation.js" defer></script>\n'
+    # Choose appearance before every injected stylesheet, including on direct article loads.
+    appearance = re.search(r'<script>(?:(?!</script>).)*xieyuqing-blog-theme(?:(?!</script>).)*</script>', page, re.S)
+    if appearance:
+        bootstrap_html = appearance_bootstrap() + "\n" + bootstrap_html
+        page = page[:appearance.start()] + page[appearance.end():]
     # Synchronous shared runtime must precede all module and deferred UI scripts.
     if re.search(r'<meta\b[^>]*charset\s*=', page, re.I):
-        return re.sub(r'<meta\b[^>]*charset\s*=[^>]*>', lambda match: match.group(0) + "\n" + bootstrap_html, page, count=1, flags=re.I)
-    return re.sub(r"<head\b[^>]*>", lambda match: match.group(0) + "\n" + bootstrap_html, page, count=1, flags=re.I)
+        page = re.sub(r'<meta\b[^>]*charset\s*=[^>]*>', lambda match: match.group(0) + "\n" + bootstrap_html, page, count=1, flags=re.I)
+    else:
+        page = re.sub(r"<head\b[^>]*>", lambda match: match.group(0) + "\n" + bootstrap_html, page, count=1, flags=re.I)
+    if (Path(root) / "home/assets/site-themes.css").is_file():
+        page = page.replace("</head>", '<link rel="stylesheet" href="/assets/site-themes.css">\n</head>', 1)
+    return version_shared_assets(page, root)
 
 
 def check_site_languages(output, address):

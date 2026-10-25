@@ -204,3 +204,24 @@ html[lang="en"] .ranking-main .game-button { white-space: normal; }
 html[lang="en"] body .tier-label { padding-inline: 3px; }
 html[lang="en"] body .tier-label strong { font-size: 1rem; max-width: 100%; }
 @media(max-width:760px) { html[lang="en"] body .tier-label { padding-inline: 1px; } html[lang="en"] body .tier-label strong { font-size: .8rem; } }
+
+/* Sky actions retain readable dark labels. */
+.game-button.primary,.presentation #presentation-toggle{background:var(--action);color:var(--action-ink);border-color:var(--action)}
+
+/* Tool chrome stays quieter than the ranked content and its meaningful colours. */
+.ranking-main{padding-top:30px}.tool-intro{margin-bottom:24px;padding-bottom:22px;border-bottom:1px solid var(--line)}
+.tool-heading{align-items:start;gap:28px;margin-top:18px}.tool-heading h1{color:var(--ink);font-size:clamp(2.1rem,4vw,3.1rem)}
+.tool-description{font-size:1rem;line-height:1.85;max-width:56em}.tool-heading>p{font-size:.95rem;line-height:1.8}
+.tool-toolbar{padding:15px 0;border-bottom:1px solid var(--line);gap:14px}.game-button,.upload-button{font-size:.9rem;min-height:42px}
+.ranking-return{font-size:.9rem}.game-dialog{border-radius:7px;padding:26px}.game-dialog label{font-size:.95rem;line-height:1.7}
+.ranking-page input,.ranking-page select,.ranking-page textarea{font-size:1rem}.pool-heading h2{font-size:1.1rem}
+.game-feature{border-radius:7px;border-color:var(--line)}.game-feature-copy{padding:34px}.game-feature-description{font-size:1rem;line-height:1.85}.game-feature-details{font-size:.9rem;line-height:1.85}.game-start{font-size:.95rem;min-height:46px}
+.games-main>.section-entry{padding:25px 0;background:transparent;border:0;border-top:1px solid var(--line);border-radius:0}.games-main>.section-entry p{font-size:1rem;max-width:55em}
+@media(max-width:650px){.tool-heading{display:block}.tool-heading>p{margin-top:15px}.game-feature-copy{padding:24px}.tool-toolbar{padding-block:12px}.game-button,.upload-button{min-height:44px}.game-dialog{padding:22px}}
+
+.ranking-page input:not([type="color"]):not([type="file"]):not([type="range"]),.ranking-page select,.ranking-page textarea{border-color:var(--control-line)}
+.game-button.primary,.presentation #presentation-toggle{border-color:var(--accent)}
+
+/* Only the explicit English alias uses a smaller size; translated titles keep h1 hierarchy. */
+.games-main .projects-intro{max-width:none;padding-bottom:28px;border-bottom:1px solid var(--line)}
+.games-main .projects-intro h1{color:var(--ink)}

@@ -4,6 +4,7 @@
   const M = window.FootprintsModel, P = window.FootprintsPlayback, V = window.FootprintsView, L = window.FootprintsLabels, $ = id => document.getElementById(id);
   if (!M) return;
   const D = window.FootprintsI18n;
+  const maker = $("main").dataset.mapScope === "maker";
   const shown = (item, language) => D ? D.record(item, mode === "mine", language) : item;
   const shownTitle = language => D ? D.documentTitle(current(), mode === "mine", language) : current().title;
   const place = (value, language) => D ? D.place(value, language) : value;
@@ -28,7 +29,7 @@
     ["悉尼", "新南威尔士州", "澳大利亚", -33.8688, 151.2093], ["墨尔本", "维多利亚州", "澳大利亚", -37.8136, 144.9631]
   ];
   const blank = () => ({ version: 1, title: I("map.main.s001", {}, "我的足迹地图"), records: [] });
-  let mine = blank(), guest = blank(), mode = "mine", land = null, selectedCity = null, detailId = null, landFailed = false;
+  let mine = blank(), guest = blank(), mode = maker ? "visitor" : "mine", land = null, selectedCity = null, detailId = null, landFailed = false;
   $("visitor-title").value = guest.title;
   let avatar = null, avatarBusy = true, activeTimeline = null, activeMarker = null, frameLabel = "", playbackProjection = null, renderedAvatarSource = null, zoom = 1, expanded = false, previousBodyOverflow = "", previousMapScroll = { x: 0, y: 0 };
   let pan = { lon: 0, lat: 0 }, terrainData = "", terrainPromise = null, gestures = null, editContext = null, pickedPoint = null, resizeObserver = null, resizeFrame = null, pendingResize = false;
@@ -49,6 +50,7 @@
     $("clear-data").disabled = recording || !guest.records.length;
   }
   function commitGuest(next, label) {
+    if (!maker) return false;
     const valid = M.validate(next), before = M.json(guest);
     if (before === M.json(valid)) return false;
     undoStack.push({ document: before, label }); if (undoStack.length > 50) undoStack.shift();
@@ -75,6 +77,7 @@
     $("footprints-map").style.touchAction = touchQuery.matches && !expanded ? "pan-y pinch-zoom" : "none";
     $("map-expand").textContent = touchQuery.matches ? I("map.main.s006", {}, "操作地图 · 展开") : I("map.main.s007", {}, "展开大图");
     $("map-expand").setAttribute("aria-label", touchQuery.matches ? I("map.main.s008", {}, "展开大图以拖动和双指缩放地图") : I("map.main.s009", {}, "展开大图"));
+    if (!maker) { $("map-interaction-note").textContent = I("map.public.interaction", {}, "点按城市查看经历。拖动平移，滚轮缩放；手机点“操作地图 · 展开”，键盘可用方向键与 ＋ / −。"); return; }
     $("map-interaction-note").textContent = touchQuery.matches ? expanded ? I("map.main.s010", {}, "单指拖动，双指缩放；右上角可退出大图，或点“工具与导出”查看下方操作。") : I("map.main.s011", {}, "在地图上单指滑动可滚动页面；点“操作地图 · 展开”后拖动或双指缩放。下方按钮可直接添加经历。") : I("map.main.s012", {}, "拖动平移，滚轮或双指缩放；双击空白处添加经历。键盘可用方向键与 ＋ / −。");
   }
   function expandMap(value) {
@@ -110,7 +113,7 @@
     if (value.state === "idle" || !value.record) return;
     const item = shown(value.record), card = $("playback-current");
     card.replaceChildren(element("p", `${value.index + 1} / ${value.count} · ${item.city} · ${item.country}`, "playback-meta"), element("h3", item.derived ? item.frameworkLabel : item.title), element("p", item.derived ? item.dateLabel : `${item.certainty === "approximate" ? I("map.main.s014", {}, "≈ 约略 · ") : ""}${M.range(item)}`, "playback-meta"), element("p", item.description || ""));
-    if (item.album) { const link = element("a", I("map.main.s015", {}, "查看关联相册 →")); link.href = window.SiteI18n ? window.SiteI18n.localizedPath(item.album) : item.album; card.append(link); }
+    if (item.album) { const link = element("a", I("map.main.s015", {}, "查看关联相册 →")); link.href = window.SiteI18n ? window.SiteI18n.localizedPath(album) : album; card.append(link); }
     if (activeTimeline) { activeTimeline.classList.remove("is-playing"); activeTimeline.removeAttribute("aria-current"); }
     activeTimeline = timelineNodes.get(item.id) || null;
     if (activeTimeline) { activeTimeline.classList.add("is-playing"); activeTimeline.setAttribute("aria-current", "step"); }
@@ -307,13 +310,16 @@
       const heading = element("h3"), open = element("button", item.title, "timeline-open"); open.type = "button"; open.addEventListener("click", () => openDetail(item.id)); heading.append(open); li.append(heading);
       // Keep the complete original text, but do not repeat a title used as its own description.
       if (item.description && item.description !== item.title) li.append(element("p", item.description, "timeline-description"));
+      const media=Array.from(document.querySelectorAll('.map-photo-grid figure')).filter(node=>node.dataset.city===original.city);
+      if(mode==='mine' && media.length){const link=element('a',I('map.gallery.record',{count:media.length},'查看 {count} 张照片'));link.href='#map-media';link.className='timeline-photo-link';li.append(link);}
       list.append(li);
     }
     $("empty-state").hidden = items.length > 0;
     $("empty-state").textContent = mode === "visitor" ? I("map.main.s030", {}, "还没有可显示的经历。添加一段停留，或导入自己的足迹文档。") : I("map.main.s031", {}, "尚无已允许展示的经历；待本人核对后再加入。你可以切换到“制作你的地图”记录自己的故事。");
   }
   function render() {
-    $("mode-mine").setAttribute("aria-pressed", String(mode === "mine")); $("mode-visitor").setAttribute("aria-pressed", String(mode === "visitor"));
+    $("mode-mine").hidden = !maker; $("mode-visitor").hidden = maker;
+    document.querySelectorAll("[data-maker-only]").forEach(node => { node.hidden = !maker; });
     $("visitor-tools").hidden = mode !== "visitor"; $("map-title").textContent = shownTitle();
     const all = groups(current().records);
     if (selectedCity && !all.some(city => city.key === selectedCity)) selectedCity = null;
@@ -328,7 +334,8 @@
     $("detail-meta").textContent = `${M.range(item)}${item.certainty === "approximate" ? I("map.main.s032", {}, " · 约略") : I("map.main.s033", {}, " · 已证实")}\n${[item.city, item.region, item.country].filter((value, index, values) => value && values.indexOf(value) === index).join(" · ")}`;
     $("detail-description").textContent = item.description || I("map.main.s034", {}, "这段经历尚未填写说明。");
     $("detail-description").hidden = !!item.description && item.description === item.title;
-    $("detail-album").hidden = !item.album; if (item.album) $("detail-album").setAttribute("href", window.SiteI18n ? window.SiteI18n.localizedPath(item.album) : item.album); else $("detail-album").removeAttribute("href");
+    const album = item.album || (mode==='mine' ? Array.from(document.querySelectorAll('.map-photo-grid figure')).find(node=>node.dataset.city===original.city)?.querySelector('a')?.getAttribute('href')?.split('#')[0] : '');
+    $("detail-album").hidden = !album; if (album) $("detail-album").setAttribute("href", window.SiteI18n ? window.SiteI18n.localizedPath(album) : album); else $("detail-album").removeAttribute("href");
     $("detail-edit-tools").hidden = mode !== "visitor"; return true;
   }
   function openDetail(id) {
@@ -340,6 +347,7 @@
     return city && [city[0], place(city[0], "en")].includes($("record-city").value.trim()) && [city[1], place(city[1], "en")].includes($("record-region").value.trim()) && [city[2], place(city[2], "en")].includes($("record-country").value.trim()) && Number($("record-lat").value) === city[3] && Number($("record-lon").value) === city[4];
   }
   function editRecord(id, point) {
+    if (!maker || recording) return;
     pausePlayback(); if (gestures) gestures.reset(); editContext = { base: guest };
     const item = id && guest.records.find(record => record.id === id);
     $("record-form").reset(); $("record-error").textContent = ""; $("record-dialog-title").textContent = item ? I("map.main.s035", {}, "编辑经历") : mode === "mine" ? I("map.main.s036", {}, "添加到访客草稿") : I("map.main.s037", {}, "添加经历");
@@ -421,7 +429,7 @@
     if (!$("city-dialog").open) $("city-dialog").showModal();
   }
   function pickPlace(point) {
-    if (recording || !point || !projection().contains(point)) return;
+    if (!maker || recording || !point || !projection().contains(point)) return;
     pausePlayback(); if (gestures) gestures.reset(); pickedPoint = point;
     editRecord(null, point);
   }
@@ -455,9 +463,7 @@
     choice.value = selected;
   }
   fillCityDictionary();
-  $("mode-mine").addEventListener("click", () => { mode = "mine"; selectedCity = null; status(""); render(); });
-  $("mode-visitor").addEventListener("click", () => { mode = "visitor"; selectedCity = null; status(""); render(); });
-  $("visitor-title").addEventListener("change", () => { const title = $("visitor-title").value.trim(); if (!title) { $("visitor-title").value = guest.title; status(I("map.main.s054", {}, "地图名称不能为空。"), true); return; } commitGuest({ ...guest, title }, I("map.main.s055", {}, "地图改名")); render(); });
+  $("visitor-title").addEventListener("change", () => { if (!maker) return; const title = $("visitor-title").value.trim(); if (!title) { $("visitor-title").value = guest.title; status(I("map.main.s054", {}, "地图名称不能为空。"), true); return; } commitGuest({ ...guest, title }, I("map.main.s055", {}, "地图改名")); render(); });
   $("map-view").addEventListener("change", () => { zoom = 1; pan = { lon: 0, lat: 0 }; redrawViewport(); }); $("map-route").addEventListener("change", renderMap); $("clear-city").addEventListener("click", () => { selectedCity = null; render(); });
   $("map-zoom-in").addEventListener("click", () => zoomCamera(2));
   $("map-zoom-out").addEventListener("click", () => zoomCamera(.5));
@@ -486,12 +492,12 @@
   if (window.ResizeObserver) { resizeObserver = new ResizeObserver(resizeMap); resizeObserver.observe($("map-canvas")); }
   else window.addEventListener("resize", resizeMap);
   $("add-record").addEventListener("click", () => editRecord());
-  $("undo-data").addEventListener("click", () => {
+  $("undo-data").addEventListener("click", () => { if (!maker) return;
     if (recording || !undoStack.length) return; pausePlayback();
     const previous = undoStack.pop(); guest = M.parse(previous.document);
     $("visitor-title").value = guest.title; selectedCity = null; render(); status(I("map.main.s056", {p0:(D ? D.retranslate(previous.label) : previous.label)}, "已撤销{p0}。"));
   });
-  $("clear-data").addEventListener("click", () => {
+  $("clear-data").addEventListener("click", () => { if (!maker) return;
     if (recording || !guest.records.length) return;
     if (!window.confirm(I("map.confirm.clear", {}, "清空当前访客草稿？可以撤销；本机保存不会删除。"))) { status(I("map.action.cancelled", {}, "已取消，草稿与本机保存未更改。")); return; }
     pausePlayback();
@@ -504,7 +510,7 @@
   for (const key of ["city", "region", "country", "lat", "lon"]) $("record-" + key).addEventListener("input", () => { $("city-choice").value = ""; $("coordinate-confirm").checked = false; });
   $("record-close").addEventListener("click", () => $("record-dialog").close()); $("record-cancel").addEventListener("click", () => $("record-dialog").close());
   $("record-form").addEventListener("submit", event => {
-    event.preventDefault(); $("record-error").textContent = "";
+    event.preventDefault(); if (!maker) return; $("record-error").textContent = "";
     try {
       if (!knownCity() && !$("coordinate-confirm").checked) throw new Error(I("map.main.s059", {}, "手动地点需要先核对城市、国家 / 区域与城市中心坐标，再勾选确认；不会自动猜测重名城市。"));
       const previous = guest.records.find(record => record.id === $("record-id").value);
@@ -522,25 +528,25 @@
   $("detail-close").addEventListener("click", () => $("detail-dialog").close());
   $("detail-edit").addEventListener("click", () => { if (mode !== "visitor") return; $("detail-dialog").close(); editRecord(detailId); });
   $("detail-delete").addEventListener("click", () => { if (mode !== "visitor" || recording) return; commitGuest({ ...guest, records: guest.records.filter(item => item.id !== detailId) }, I("map.main.s065", {}, "移除经历")); $("detail-dialog").close(); render(); status(I("map.main.s066", {}, "已移除经历，可撤销。")); });
-  $("import-file").addEventListener("change", async () => {
+  $("import-file").addEventListener("change", async () => { if (!maker) return;
     pausePlayback();
     const file = $("import-file").files[0]; if (!file) return;
     if (file.size > M.MAX_BYTES) { status(I("map.main.s067", {}, "文档超过 1 MB，未读取。"), true); $("import-file").value = ""; return; }
     try { $("import-text").value = await file.text(); status(I("map.main.s068", {}, "文件已载入输入框；点击“验证并合并导入”后才会更改地图。")); } catch (_) { status(I("map.main.s069", {}, "无法读取该文件，请重新选择或粘贴文档。"), true); }
     $("import-file").value = "";
   });
-  $("import-apply").addEventListener("click", () => {
+  $("import-apply").addEventListener("click", () => { if (!maker) return;
     pausePlayback();
     try { const incoming = M.parse($("import-text").value), result = M.merge(guest, incoming); commitGuest(result.document, I("map.main.s070", {}, "导入")); $("visitor-title").value = guest.title; selectedCity = null; render(); status(I("map.main.s071", {p0:(result.added),p1:(result.skipped)}, "导入完成：新增 {p0} 条，跳过相同记录 {p1} 条。坐标来自文档，请自行核对。")); }
     catch (error) { status(I("map.main.s072", {p0:(error.message)}, "未导入：{p0}"), true); }
   });
-  $("save-local").addEventListener("click", () => { try { localStorage.setItem(STORAGE_KEY, M.json(guest)); status(I("map.main.s073", {}, "已保存到此浏览器。此设备的其他使用者可能读取它；不会自动同步之后的修改。")); } catch (_) { status(I("map.main.s074", {}, "本机保存失败，浏览器可能禁用了存储或空间不足。请导出 JSON 或 Markdown 保留草稿。"), true); } });
-  $("restore-local").addEventListener("click", () => {
+  $("save-local").addEventListener("click", () => { if (!maker) return; try { localStorage.setItem(STORAGE_KEY, M.json(guest)); status(I("map.main.s073", {}, "已保存到此浏览器。此设备的其他使用者可能读取它；不会自动同步之后的修改。")); } catch (_) { status(I("map.main.s074", {}, "本机保存失败，浏览器可能禁用了存储或空间不足。请导出 JSON 或 Markdown 保留草稿。"), true); } });
+  $("restore-local").addEventListener("click", () => { if (!maker) return;
     pausePlayback();
     try { const raw = localStorage.getItem(STORAGE_KEY); if (!raw) { status(I("map.main.s075", {}, "此浏览器尚无保存的足迹。")); return; } const restored = M.parse(raw); if (guest.records.length && !window.confirm(I("map.confirm.restore", {}, "恢复本机保存将替换当前访客草稿。继续？可撤销此操作。"))) { status(I("map.action.cancelled", {}, "已取消，草稿与本机保存未更改。")); return; } commitGuest(restored, I("map.main.s076", {}, "恢复保存的草稿")); $("visitor-title").value = guest.title; selectedCity = null; render(); status(I("map.main.s077", {}, "已恢复此浏览器保存的足迹。")); }
     catch (error) { status(I("map.main.s078", {p0:(error.message)}, "无法恢复本机保存：{p0} 现有草稿未更改。"), true); }
   });
-  $("delete-local").addEventListener("click", () => { if (!window.confirm(I("map.confirm.deleteSave", {}, "删除此浏览器保存的足迹？当前页面草稿不变；删除的本机保存无法恢复。"))) { status(I("map.action.cancelled", {}, "已取消，草稿与本机保存未更改。")); return; } try { localStorage.removeItem(STORAGE_KEY); status(I("map.main.s079", {}, "已删除此浏览器保存的足迹。当前页面草稿仍在；关闭或刷新后不会自动恢复。")); } catch (_) { status(I("map.main.s080", {}, "浏览器未允许删除本机保存，请通过浏览器的网站数据设置清除。"), true); } });
+  $("delete-local").addEventListener("click", () => { if (!maker) return; if (!window.confirm(I("map.confirm.deleteSave", {}, "删除此浏览器保存的足迹？当前页面草稿不变；删除的本机保存无法恢复。"))) { status(I("map.action.cancelled", {}, "已取消，草稿与本机保存未更改。")); return; } try { localStorage.removeItem(STORAGE_KEY); status(I("map.main.s079", {}, "已删除此浏览器保存的足迹。当前页面草稿仍在；关闭或刷新后不会自动恢复。")); } catch (_) { status(I("map.main.s080", {}, "浏览器未允许删除本机保存，请通过浏览器的网站数据设置清除。"), true); } });
   $("export-json").addEventListener("click", () => { download(new Blob([M.json(current())], { type: "application/json;charset=utf-8" }), "footprints.json"); status(I("map.main.s081", {}, "已导出恢复用 JSON。文件含你的城市、日期与说明，请自行保管。")); });
   $("export-markdown").addEventListener("click", () => { download(new Blob([M.markdown(current())], { type: "text/markdown;charset=utf-8" }), "footprints.md"); status(I("map.main.s082", {}, "已导出 Markdown 足迹文档，可再次导入恢复。")); });
   $("export-svg").addEventListener("click", () => imageExport("svg")); $("export-png").addEventListener("click", () => imageExport("png"));

@@ -312,7 +312,7 @@ class ProjectPublicationTests(unittest.TestCase):
                                     and attrs.get("content") == "https://xieyuqing.me/projects/" for tag, attrs in tags))
                 sitemap = [node.text for node in ET.parse(output / "sitemap.xml").findall(".//{*}loc")]
                 expected_routes = {'/', '/projects/', '/about/', '/map/', '/en/map/', '/en/', '/en/about/', '/en/projects/', '/en/articles/',
-                                   '/game/', '/en/game/', '/game/ranking/', '/en/game/ranking/', '/articles/index.html', '/articles/synthetic.html'}
+                                   '/game/', '/en/game/', '/game/ranking/', '/en/game/ranking/', '/game/footprints/', '/en/game/footprints/', '/articles/index.html', '/articles/synthetic.html'}
                 for feature in (report['anthology'], report['english_features']['anthology'], report['photography'], report['english_features']['photography']):
                     expected_routes.update('/' + route.strip('/') + '/' for route in feature['routes'])
                 self.assertEqual(set(sitemap), {'https://xieyuqing.me' + route for route in expected_routes})
@@ -330,7 +330,8 @@ class ProjectPublicationTests(unittest.TestCase):
                 self.assertEqual((output / "assets/wechat-qrcode.jpg").read_bytes(),
                                  (root / "home/assets/wechat-qrcode.jpg").read_bytes())
                 self.assertNotIn("wechat-qrcode", home)
-                self.assertIn('class="home-game-link home-map-link" href="/map/"', home)
+                self.assertIn('href="/map/"', home)
+                self.assertIn('class="home-entry-link" href="/articles/"', home)
                 for item in load_projects():
                     asset = item["screenshot"].lstrip("/")
                     self.assertEqual((output / asset).read_bytes(), (root / "home" / asset).read_bytes())

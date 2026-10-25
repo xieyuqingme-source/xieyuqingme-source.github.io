@@ -67,7 +67,7 @@ TABLE_PLACES = {
 PRIVATE_PATH = re.compile(r"(?<![A-Za-z0-9])[A-Za-z]:[\\/]|\\\\[^\s\\]+[\\/]|/(?:Users|home|mnt)/", re.I)
 ASSETS = ("map-i18n.js", "map.css", "map-model.js", "map-playback.js", "map-avatar.js", "map-journey.js", "map-view.js", "map-labels.js", "map-terrain.webp", "map-terrain.jpg",
           "map-video.js", "map-video-ui.js", "map.js",
-          "map-land.json", "map-avatar-default.png", "map-avatar-wechat.jpg")
+          "map-land.json", "map-author-malaysia.jpg", "map-author-malaysia.mp4", "map-avatar-default.png", "map-avatar-wechat.jpg")
 LIMIT = 1024 * 1024
 
 
@@ -468,29 +468,83 @@ def load_display_metadata(root, public, preview=False):
             "records": selected, "places": metadata.get("places", {})}
 
 
-def build_map(root, output, address, data, preview=False, *, language="zh-CN"):
+def public_video_preview(root, data):
+    """Hide a stale excerpt if any of its exact original records has changed."""
+    metadata = Path(root) / 'map/video-preview.json'
+    if not metadata.is_file():
+        return ''
+    safe_file(Path(root), metadata)
+    clip = json.loads(metadata.read_text(encoding='utf-8'))
+    records = {r['id']: r for r in data['records']}
+    if clip.get('version') != 1 or not clip.get('source_records') or any(records.get(r['id']) != r for r in clip['source_records']):
+        return ''
+    if clip.get('file') != 'map-author-malaysia.mp4':
+        raise ValueError('Unexpected author video file.')
+    source = Path(root) / 'home/assets' / clip['file']
+    safe_file(Path(root), source)
+    if not source.is_file() or hashlib.sha256(source.read_bytes()).hexdigest() != clip.get('sha256'):
+        raise ValueError('Author video does not match its reviewed local provenance.')
+    return '<section class="author-video"><h2 data-i18n="map.clip.title">马来西亚足迹 · 视频节选</h2><p data-i18n="map.clip.note">以吉隆坡、槟城、马六甲的真实记录生成的地图动画节选，保留原始注释和日期精度。约 19 秒，点击播放，有配乐。</p><video controls playsinline preload="none" poster="/assets/map-author-malaysia.jpg" src="/assets/map-author-malaysia.mp4" aria-label="马来西亚足迹地图动画节选" data-i18n-aria-label="map.clip.title"></video></section>'
+
+
+def public_photo_gallery(root, data):
+    """Only existing public photo metadata; never infer a trip from album names."""
+    source = Path(root) / 'photos/catalog.json'
+    if not source.is_file():
+        return ''
+    safe_file(Path(root), source)
+    catalog = json.loads(source.read_text(encoding='utf-8'))
+    cards = []
+    for album in catalog.get('albums', []):
+        for photo in album.get('photos', []):
+            # Only city-level association: a photograph does not establish an event.
+            matches = sorted({r['city'] for r in data['records'] if photo.get('location', '').startswith(r['city'])})
+            if len(matches) != 1:
+                continue
+            route = '/photos/' + album['id'] + '/#' + photo['id']
+            # The album viewer owns full-size display. Keep original captions and location.
+            label = ' · '.join(filter(None, [photo.get('date'), photo.get('location')]))
+            cards.append('<figure data-city="' + escape(matches[0], quote=True) + '"><a href="' + escape(route, quote=True) + '" data-i18n-link><img loading="lazy" src="' + escape(photo['thumbnail'], quote=True) + '" width="' + str(photo['thumbnail_width']) + '" height="' + str(photo['thumbnail_height']) + '" alt="' + escape(label, quote=True) + '"></a><figcaption>' + escape(label) + '</figcaption></figure>')
+    if not cards:
+        return ''
+    return '<section id="map-media" class="map-media"><h2 data-i18n="map.gallery.title">足迹中的照片</h2><p data-i18n="map.gallery.note">已公开的北京与吉隆坡照片。点开照片查看相册与原始注释。</p><div class="map-photo-grid">' + ''.join(cards) + '</div></section>'
+
+
+def build_map(root, output, address, data, preview=False, *, language="zh-CN", maker=False):
     from site_i18n import localize_page, localized_path
     if language not in {"zh-CN", "en"}:
         raise ValueError("Site language must be zh-CN or en.")
     root, output = Path(root), Path(output)
     public = dict(validate_catalog(data))
+    if maker:
+        public = {"version": 1, "title": "我的足迹地图", "records": []}
     public["preview"] = bool(preview)
     public["notice"] = ("本地待核对预览：这些经历尚未批准公开，来源与私人备注不包含在网页中。"
                         if preview else "")
     serialized = json.dumps(public, ensure_ascii=False).replace("&", "\\u0026").replace("<", "\\u003c").replace(">", "\\u003e")
-    display = load_display_metadata(root, public, preview=preview)
+    display = load_display_metadata(root, public, preview=preview) if not maker else {"version": 1, "records": {}, "places": {}}
     display_json = json.dumps(display, ensure_ascii=False).replace("&", "\\u0026").replace("<", "\\u003c").replace(">", "\\u003e")
     page = (root / "home/map.template.html").read_text(encoding="utf-8")
     if "{{" in page.replace("{{site_url}}", "").replace("{{map_data}}", "").replace("{{map_display_data}}", ""):
         raise ValueError("Unresolved map template placeholder.")
     page = page.replace("{{site_url}}", escape(address, quote=True)).replace("{{map_data}}", serialized).replace("{{map_display_data}}", display_json)
+    page = page.replace('data-map-scope="public"', 'data-map-scope="maker"' if maker else 'data-map-scope="public"')
+    if maker:
+        page = page.replace('data-i18n="map.html.s015"', 'data-i18n="map.maker.title"').replace('data-i18n="map.html.s016"', 'data-i18n="map.maker.subtitle"')
+        editor = re.search(r'<section data-maker-only id="visitor-tools"[^>]*>[\s\S]*?</section>', page)
+        if editor:
+            page = page[:editor.start()] + page[editor.end():]
+            page = page.replace('<section class="map-workspace"', editor.group(0) + '\n<section class="map-workspace"', 1)
+
+    else:
+        page = page.replace('<div id="map-media"></div>', public_video_preview(root, data) + public_photo_gallery(root, data))
+    route = "/game/footprints/" if maker else "/map/"
     if language == "en":
         page = page.replace('value="我的足迹地图"', 'value="My footprints map"')
         page = page.replace('href="/assets/map-example.md"', 'href="/assets/map-example.en.md"')
-    page = localize_page(page, root, address, "/map/", language=language, modules=("map",),
-                         title={"zh-CN": "地图与足迹 · 谢雨卿", "en": "Maps and Footprints · Xie Yuqing"},
-                         description={"zh-CN": "以城市和时间记录人生的停留，也可以在浏览器中制作自己的足迹地图。",
-                                      "en": "Record stays through cities and time, or make your own footprints map in your browser."})
+    page = localize_page(page, root, address, route, language=language, modules=("map",),
+                         title={"zh-CN": "制作我的足迹地图 · 谢雨卿", "en": "Make My Footprints Map · Xie Yuqing"} if maker else {"zh-CN": "我的足迹 · 谢雨卿", "en": "My Footprints · Xie Yuqing"},
+                         description={"zh-CN": "在浏览器本地添加或导入经历，制作自己的足迹地图、图片和视频。", "en": "Add or import experiences locally to make your own footprints map, images and videos."} if maker else {"zh-CN": "谢雨卿的城市足迹、原始经历、相关城市相册与地图动画。", "en": "Xie Yuqing’s city footprints, original experiences, related city albums and journey animations."})
     # Bind cached export scripts/styles to their source revisions. Mixing a
     # new 720px canvas with an old 960px renderer can crop every caption.
     import hashlib
@@ -502,7 +556,7 @@ def build_map(root, output, address, data, preview=False, *, language="zh-CN"):
     page=re.sub(r'((?:src|href)=["\'])(/assets/[^"\'?]+\.(?:js|css))(["\'])',version_asset,page)
     if preview:
         page = page.replace("</head>", '<meta name="robots" content="noindex,nofollow">\n</head>')
-    route = localized_path("/map/", language).strip("/")
+    route = localized_path(route, language).strip("/")
     for folder in (output / route, output / "assets"):
         safe_file(output, folder)
         folder.mkdir(parents=True, exist_ok=True)

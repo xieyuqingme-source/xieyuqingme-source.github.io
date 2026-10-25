@@ -51,7 +51,7 @@ class BilingualBuildContractTests(unittest.TestCase):
             def photos(*args, language='zh-CN', **kwargs):
                 return {**feature('photos', language), 'albums': 0, 'photos': 0}
             def footprints(*args, language='zh-CN', **kwargs):
-                return feature('map', language)
+                return feature('game/footprints' if kwargs.get('maker') else 'map', language)
             def anthology(*args, language='zh-CN', **kwargs):
                 return {**feature('anthology', language), 'works': 0, 'collections': 0}
 
@@ -65,14 +65,14 @@ class BilingualBuildContractTests(unittest.TestCase):
                  patch.object(build_site, 'build_anthology', side_effect=anthology):
                 report = build_site.build_site('https://site.test')
             self.assertEqual(calls, [('photos', 'zh-CN'), ('map', 'zh-CN'), ('anthology', 'zh-CN'),
-                                     ('photos', 'en'), ('map', 'en'), ('anthology', 'en')])
+                                     ('photos', 'en'), ('map', 'en'), ('anthology', 'en'), ('game/footprints', 'zh-CN'), ('game/footprints', 'en')])
             self.assertEqual(report['articles'], 2)
             self.assertEqual(report['english']['complete'], 0)
             self.assertEqual(report['english']['pending'], 1)
             self.assertEqual(report['english']['english_originals'], 1)
             self.assertTrue(report['metadata']['success'])
             self.assertTrue(report['localization']['success'])
-            self.assertEqual(report['localization']['english_feature_pages'], 9)
+            self.assertEqual(report['localization']['english_feature_pages'], 10)
             for route in ('/photos/', '/map/', '/anthology/', '/game/', '/game/ranking/', '/', '/about/', '/projects/', '/articles/'):
                 for language in ('zh-CN', 'en'):
                     page = output / localized_path(route, language).strip('/') / 'index.html'

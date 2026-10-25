@@ -145,7 +145,7 @@ def render_album(album, *, language="zh-CN", catalogue=None):
         aria = _tr(catalogue, language, "photos.open_named" if photo["title"] else "photos.open",
                    "查看第 {number} 张照片" + ("：{title}" if photo["title"] else ""), number=index + 1, title=title)
         alt = tr(prefix + ".alt", photo["title"] or photo["location"] or photo["caption"])
-        rows.append(f"""<figure class="photo-item"><a class="photo-open" data-photo-open data-photo-index="{index}" href="{escape(photo["src"])}" aria-label="{escape(aria, quote=True)}"><img src="{escape(photo["thumbnail"])}" width="{photo["thumbnail_width"]}" height="{photo["thumbnail_height"]}" alt="{escape(alt, quote=True)}" data-i18n-alt="{prefix}.alt" loading="lazy" decoding="async"></a>{copy}</figure>""")
+        rows.append(f"""<figure class="photo-item" id="{escape(photo["id"], quote=True)}"><a class="photo-open" data-photo-open data-photo-index="{index}" href="{escape(photo["src"])}" aria-label="{escape(aria, quote=True)}"><img src="{escape(photo["thumbnail"])}" width="{photo["thumbnail_width"]}" height="{photo["thumbnail_height"]}" alt="{escape(alt, quote=True)}" data-i18n-alt="{prefix}.alt" loading="lazy" decoding="async"></a>{copy}</figure>""")
     photos = ('<div class="photo-grid">' + "\n".join(rows) + "</div>" if rows else
               _label("photos.empty_album", tr("photos.empty_album", "此相册暂无公开照片。"), "p", ' class="photos-empty"'))
     prefix = "photos.album." + album["id"]

@@ -1,0 +1,75 @@
+{
+  "version": 1,
+  "file": "map-author-malaysia.mp4",
+  "sha256": "ca2408b4028b5df87367fb1a89fcf056ce4623da9d3073097823e5a7deea894c",
+  "duration_ms": 18888,
+  "bytes": 3397452,
+  "source_records": [
+    {
+      "id": "table-af9a1c097bd915d2-1",
+      "start": "2026-04-29",
+      "end": "",
+      "city": "吉隆坡",
+      "region": "吉隆坡联邦直辖区",
+      "country": "马来西亚",
+      "lat": 3.139,
+      "lon": 101.6869,
+      "title": "读研",
+      "description": "读研",
+      "album": "",
+      "certainty": "confirmed",
+      "stayType": "base",
+      "groupId": "table-af9a1c097bd915d2",
+      "sequence": 51,
+      "ongoing": true
+    },
+    {
+      "id": "table-a9d19780d5a6cdd7-1",
+      "start": "2026-08-27",
+      "end": "2026-08-28",
+      "city": "槟城",
+      "region": "槟城",
+      "country": "马来西亚",
+      "lat": 5.4141,
+      "lon": 100.3288,
+      "title": "旅游",
+      "description": "旅游",
+      "album": "",
+      "certainty": "approximate",
+      "stayType": "visit",
+      "groupId": "table-a9d19780d5a6cdd7",
+      "sequence": 52,
+      "ongoing": false
+    },
+    {
+      "id": "table-bf304b22bf6bc7c2-1",
+      "start": "2026-08-29",
+      "end": "2026-08-29",
+      "city": "马六甲",
+      "region": "马六甲",
+      "country": "马来西亚",
+      "lat": 2.1896,
+      "lon": 102.2501,
+      "title": "旅游",
+      "description": "旅游",
+      "album": "",
+      "certainty": "approximate",
+      "stayType": "visit",
+      "groupId": "table-bf304b22bf6bc7c2",
+      "sequence": 53,
+      "ongoing": false
+    }
+  ],
+  "soundtrack": "home/assets/music/travel.wav",
+  "container": {
+    "audioTracks": 1,
+    "videoTracks": 1,
+    "container": "mp4",
+    "codecs": [
+      "mp4a",
+      "avc1"
+    ],
+    "metadataBeforeMedia": true,
+    "fragmented": true
+  }
+}

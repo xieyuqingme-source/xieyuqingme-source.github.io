@@ -2,45 +2,7 @@
   "use strict";
   const english = (document.documentElement.lang || "").toLowerCase().startsWith("en");
 
-  if (!window.SiteTheme) {
-  const themeButton = document.querySelector("#theme-toggle");
-  const themeKey = "xieyuqing-blog-theme";
-  let preferredTheme = null;
-  try {
-    const saved = localStorage.getItem(themeKey);
-    if (saved === "light" || saved === "dark") preferredTheme = saved;
-  } catch (_) { /* System preference still works when storage is unavailable. */ }
-  let systemTheme = null;
-  try { systemTheme = window.matchMedia("(prefers-color-scheme: dark)"); } catch (_) {}
-  const initialTheme = preferredTheme || (systemTheme && systemTheme.matches ? "dark" : "light");
-
-  function applyTheme(theme) {
-    document.documentElement.dataset.theme = theme;
-    if (themeButton) {
-      const nextLabel = english ? (theme === "dark" ? "Light" : "Dark") : (theme === "dark" ? "浅色" : "深色");
-      const label = english ? `Switch to ${nextLabel.toLowerCase()} mode` : `切换到${nextLabel}模式`;
-      themeButton.querySelector(".theme-label").textContent = nextLabel;
-      themeButton.setAttribute("aria-label", label);
-      themeButton.setAttribute("title", label);
-      themeButton.hidden = false;
-    }
-  }
-  applyTheme(initialTheme);
-  const followSystem = (event) => {
-    if (!preferredTheme) applyTheme(event.matches ? "dark" : "light");
-  };
-  if (systemTheme) {
-    if (systemTheme.addEventListener) systemTheme.addEventListener("change", followSystem);
-    else if (systemTheme.addListener) systemTheme.addListener(followSystem);
-  }
-  if (themeButton) themeButton.addEventListener("click", () => {
-    const theme = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
-    preferredTheme = theme;
-    applyTheme(theme);
-    try { localStorage.setItem(themeKey, theme); } catch (_) { /* Keep the switch usable without storage. */ }
-  });
-
-  }
+  window.SiteTheme?.apply();
   const archive = document.querySelector(".archive");
   if (archive) {
     const controls = archive.querySelector(".archive-controls");

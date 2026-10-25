@@ -1,16 +1,26 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <title>Yuliao Water</title>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <title>清环 — 谢雨卿</title>
+  <desc>Sky-blue flowing water ring. Small-size derivative of the selected 清环 mark, with three relaxed arcs and one sparse water drop.</desc>
   <defs>
-    <linearGradient id="water" x1="9" y1="5" x2="55" y2="57" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#48cadb"/>
-      <stop offset=".48" stop-color="#199bc1"/>
-      <stop offset="1" stop-color="#156eb3"/>
+    <linearGradient id="sky-top" x1="12" y1="9" x2="52" y2="43" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#8DDBFF"/><stop offset=".42" stop-color="#49BDF4"/><stop offset="1" stop-color="#249FDF"/>
+    </linearGradient>
+    <linearGradient id="sky-left" x1="10" y1="53" x2="25" y2="15" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#91DEFF"/><stop offset=".5" stop-color="#3BB8F3"/><stop offset="1" stop-color="#22A7EC"/>
+    </linearGradient>
+    <linearGradient id="sky-bottom" x1="21" y1="36" x2="46" y2="57" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#20A7ED"/><stop offset=".55" stop-color="#3AB9F4"/><stop offset="1" stop-color="#96DFFF"/>
     </linearGradient>
   </defs>
-  <g fill="url(#water)">
-    <path d="M26 5C39 2 53 10 58 23c-6-6-12-8-18-7 8 5 12 13 11 22-3-11-9-17-17-19-7-1-13 2-17 8 2-9 10-15 20-15-3-3-7-5-11-7Z"/>
-    <path transform="rotate(90 32 32)" d="M26 5C39 2 53 10 58 23c-6-6-12-8-18-7 8 5 12 13 11 22-3-11-9-17-17-19-7-1-13 2-17 8 2-9 10-15 20-15-3-3-7-5-11-7Z"/>
-    <path transform="rotate(180 32 32)" d="M26 5C39 2 53 10 58 23c-6-6-12-8-18-7 8 5 12 13 11 22-3-11-9-17-17-19-7-1-13 2-17 8 2-9 10-15 20-15-3-3-7-5-11-7Z"/>
-    <path transform="rotate(270 32 32)" d="M26 5C39 2 53 10 58 23c-6-6-12-8-18-7 8 5 12 13 11 22-3-11-9-17-17-19-7-1-13 2-17 8 2-9 10-15 20-15-3-3-7-5-11-7Z"/>
-  </g>
+  <!-- Broad upper/right current. The open center is transparent. -->
+  <path fill="url(#sky-top)" d="M11 19C8 21 7 19 9 16C18 4 34 3 46 11C57 18 60 32 53 42C51 45 47 48 47 44C52 34 49 24 41 18C32 12 22 12 11 19Z"/>
+  <path fill="#C7EEFF" opacity=".83" d="M14 15C23 7 36 7 46 16C53 22 56 33 52 39C54 28 47 18 38 14C29 10 21 11 14 15Z"/>
+  <!-- Long, relaxed left/lower sweep. -->
+  <path fill="url(#sky-left)" d="M30 14C35 14 35 17 30 18C18 22 10 32 12 43C13 50 17 55 22 58C26 60 26 62 22 62C9 60 3 46 6 34C8 24 17 16 26 14C28 14 29 14 30 14Z"/>
+  <path fill="#BEEFFF" opacity=".87" d="M19 20C10 29 7 43 15 54C8 49 6 40 9 31C11 26 14 22 19 20Z"/>
+  <!-- Lower/right current retains the selected logo's flowing tail. -->
+  <path fill="url(#sky-bottom)" d="M57 41C60 38 61 40 59 44C54 55 39 60 27 55C19 52 14 44 15 36C16 32 18 33 19 38C23 48 34 52 44 49C50 47 54 43 57 41Z"/>
+  <path fill="#CBF1FF" opacity=".88" d="M22 45C29 53 43 54 54 46C48 54 33 58 25 51C23 49 22 47 22 45Z"/>
+  <!-- One large-enough splash; micro-drops are omitted for favicon legibility. -->
+  <path fill="#51BEF4" d="M49 3C53 2 57 8 57 14C55 10 50 9 49 6C48 4 48 3 49 3Z"/>
 </svg>

@@ -178,8 +178,11 @@ class MarkdownRenderingTests(unittest.TestCase):
         primary = page.split('<nav class="site-nav"', 1)[1].split('</nav>', 1)[0]
         self.assertEqual(primary.count('<a '), 9)
         self.assertIn('href="/anthology/"', primary)
-        self.assertIn('class="site-language-switch"', primary)
-        self.assertIn('href="/en/articles/"', primary)
+        self.assertEqual(primary.count('class="nav-group'), 4)
+        header = page.split('<header', 1)[1].split('</header>', 1)[0]
+        self.assertIn('class="header-tools"', header)
+        self.assertIn('class="site-language-switch"', header)
+        self.assertIn('href="/en/articles/"', header)
         self.assertNotIn('chinese.html', primary)
         self.assertNotIn('english.html', primary)
         self.assertIn('class="language-filters"', page)
@@ -454,11 +457,13 @@ class MarkdownRenderingTests(unittest.TestCase):
         elements = Elements(page).elements
         self.assertTrue(any(tag == "html" and attrs.get("lang") == "en" for tag, attrs in elements))
         for tag, css_class in (("header", "site-header container"), ("footer", "site-footer container")):
-            self.assertTrue(any(element == tag and attrs.get("class") == css_class
+            self.assertTrue(any(element == tag and set(css_class.split()).issubset(attrs.get("class", "").split())
                                 and attrs.get("lang") == "en" for element, attrs in elements))
-        self.assertTrue(any(tag == "small" and attrs.get("lang") == "en" for tag, attrs in elements))
+        self.assertEqual("".join(BrandLinks(page).links[0]["text"]).strip(), json.loads((ROOT / "home/locales/common.json").read_text(encoding="utf-8"))["en"]["common.brandName"])
         self.assertIn("Skip to content", page)
-        self.assertIn("Switch to dark mode", page)
+        self.assertIn("Deep Sea Tech", page)
+        self.assertIn('data-skin-choice="sea"', page)
+        self.assertIn('data-theme-choice="dark"', page)
         self.assertIn('href="/en/projects/"', page)
         headings = self.blog.toc(self.blog.render("## English heading", self.source), "en")
         self.assertTrue(any(tag == "a" and attrs.get("href") == "#english-heading"

@@ -41,7 +41,7 @@ PROJECT_FIELDS = {"id", "title", "english_title", "kind", "summary", "problem", 
                   "contribution", "usage", "license", "screenshot", "screenshot_alt", "screenshot_caption", "source_url", "guide_url"}
 PROJECT_OPTIONAL_FIELDS = {"download_url", "download_label", "guide_label", "link_status", "demo_url"}
 PROJECT_DEMO_ROUTES = {"/map/", "/game/ranking/"}
-BRAND_ASSETS = ("share-cover.png", "favicon.svg", "favicon.ico")
+BRAND_ASSETS = ("share-cover.png", "favicon.svg", "favicon.ico", "favicon.png")
 ABOUT_FIELDS = {"name", "english_name", "chinese_bio", "english_bio", "wechat", "email"}
 PRIVATE_PATH = re.compile(r"(?<![A-Za-z0-9])[A-Za-z]:[\\/]|\\\\[^\s\\]+[\\/]|/(?:Users|home|mnt)/", re.I)
 EXTERNAL_ICON = '''<svg class="external-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 17 17 7M7 7h10v10"/></svg>'''
@@ -463,8 +463,12 @@ def build_site(address, map_preview_source=None):
     photo_english_report = build_photos(ROOT, OUTPUT, address, allow_local_map_preview=bool(map_preview_source), language="en")
     map_english_report = build_map(ROOT, OUTPUT, address, map_data, preview=bool(map_preview_source), language="en")
     anthology_english_report = build_anthology(ROOT, OUTPUT, address, language="en")
+    maker_routes = []
+    for language in ("zh-CN", "en"):
+        build_map(ROOT, OUTPUT, address, map_data, language=language, maker=True)
+        maker_routes.append(localized_path("/game/footprints/", language))
     game_catalogue = load_catalogues(ROOT, ("games",))
-    game_routes = []
+    game_routes = maker_routes
     for template, route in GAME_PAGES:
         source = ROOT / "home" / template
         if source.is_symlink():
@@ -484,11 +488,11 @@ def build_site(address, map_preview_source=None):
             (destination / "index.html").write_text(page, encoding="utf-8")
             game_routes.append(localized_route)
     (OUTPUT / "assets").mkdir(exist_ok=True)
-    for name in ("portal.css", "portal.js", "site-i18n.js", "wechat-qrcode.jpg", *BRAND_ASSETS, *GAME_ASSETS):
+    for name in ("portal.css", "site-themes.css", "portfolio.css", "portal.js", "site-i18n.js", "wechat-qrcode.jpg", *BRAND_ASSETS, *GAME_ASSETS):
         source = ROOT / "home/assets" / name
         if source.is_symlink(): raise ValueError("Home asset symlinks are not supported.")
         shutil.copy2(source, OUTPUT / "assets" / name)
-    for name in ("site-music.js", "site-music.css", "site-navigation.js"):
+    for name in ("site-music.js", "site-music.css", "site-navigation.js", "site-nav.css"):
         source = ROOT / "home/assets" / name
         if source.is_file():
             if source.is_symlink(): raise ValueError("Music asset symlinks are not supported.")

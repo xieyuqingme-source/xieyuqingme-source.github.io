@@ -35,7 +35,7 @@ class MapI18nTests(unittest.TestCase):
         _,page=self.build('en')
         self.assertIn('<html lang="en"',page)
         self.assertIn('https://example.test/en/map/',page)
-        self.assertIn('Maps and Footprints · Xie Yuqing',page)
+        self.assertIn('My Footprints · Xie Yuqing',page)
         self.assertIn('aria-label="Close editor without saving"',page)
         self.assertIn('placeholder="For example: My student years in Beijing"',page)
         self.assertIn('id="map-svg-title" data-i18n="map.html.svgtitle">City footprints map</title>',page)

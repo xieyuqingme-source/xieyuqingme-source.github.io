@@ -30,8 +30,8 @@ This repository contains the source and public content for my personal website, 
 
 ### 本仓库内的应用与独立工具
 
-- **足迹地图**：查看城市足迹与时间轴，制作自己的经历记录，导入或导出 JSON / Markdown，并生成图片或视频。访客草稿在浏览器处理，主动保存后才写入当前站点的浏览器存储；不上传至网站后台。
-- **从夯到拉排行**：美食与运动示例、自定义图片、等级与排序编辑、展示模式、PNG 导出及 JSON 备份。榜单与图片保存在当前浏览器的 IndexedDB 中，不提供跨设备同步；清理浏览器数据前请导出备份。当前小游戏入口提供这一款排行工具。
+- **足迹地图**：`/map/` 展示作者的真实城市足迹、原始注释、相关城市相册和地图动画。独立的 `/game/footprints/` 提供访客添加、导入、编辑及图片/视频制作。两者数据隔离，访客草稿主动保存后才写入浏览器，不上传。
+- **从夯到拉排行**：美食与运动示例、自定义图片、等级与排序编辑、展示模式、PNG 导出及 JSON 备份。榜单与图片保存在当前浏览器的 IndexedDB 中，不提供跨设备同步；清理浏览器数据前请导出备份。小游戏入口同时提供排行与足迹地图制作工具。
 - **独立仓库工具**：作品页中的[雨聊公众号排版](https://github.com/xieyuqingme-source/yuliao-wechat-editor)、[Coze 论文速记工作流](https://github.com/xieyuqingme-source/coze-paper-quick-reference)和[雨聊壁纸](https://github.com/xieyuqingme-source/yuliao-wallpaper)分别在各自仓库维护。本仓库保存其展示资料、截图与链接，不包含这些工具的完整源码，也不代表它们都能在本站在线运行。公众号排版为本地工具，Coze 工作流需导入平台配置，壁纸为 Windows 测试版；具体使用方法和限制以各项目说明为准。
 
 ### 阅读、使用与维护

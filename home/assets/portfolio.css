@@ -1,0 +1,87 @@
+/* Project and profile pages share the site's tokens, not a generic card shell. */
+.projects-main,.about-main{padding-top:46px}
+.projects-main .projects-intro{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);column-gap:clamp(32px,5vw,72px);row-gap:12px;max-width:none;margin:0 0 38px;padding-bottom:32px;border-bottom:1px solid var(--line)}
+.projects-intro>.eyebrow{grid-column:1/-1;margin-bottom:7px;font-size:.73rem}
+.projects-main .projects-intro h1{grid-column:1;grid-row:2/span 2;color:var(--ink);margin:0;font-size:clamp(2.6rem,4.7vw,3.8rem);line-height:1.3}
+.projects-main .projects-intro h1 span{font-size:.4em;color:var(--muted)}
+.projects-main .projects-description{grid-column:2;font-size:1.12rem;line-height:1.85;margin:0}
+.projects-main .projects-note{grid-column:2;margin:0;font-size:.94rem;line-height:1.85;max-width:60ch}
+.projects-main .project-grid{display:block}
+.projects-main .project-card{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);column-gap:clamp(32px,5vw,72px);align-items:start;padding:36px 0 40px;border:0;border-top:1px solid var(--line);border-radius:0;background:transparent}
+.projects-main .project-card:first-child{padding-top:0;border-top:0}
+.projects-main .project-visual{margin:0;border:0;border-radius:0;background:transparent;min-width:0}
+.projects-main .project-visual img{display:block;width:100%;height:auto;aspect-ratio:auto;object-fit:contain;border:1px solid var(--line);border-radius:4px;background:var(--soft)}
+.projects-main .project-visual figcaption{padding:12px 0 0;font-size:.8rem;line-height:1.75;color:var(--muted)}
+.projects-main .project-body{display:flex;min-width:0;padding:0;align-items:stretch}
+.projects-main .project-card>.project-body:only-child{grid-column:1/-1;max-width:72ch}
+.projects-main .project-kind{font-size:.76rem;line-height:1.6;margin:0 0 11px;letter-spacing:.055em;color:var(--accent)}
+.projects-main .project-card h2{font-size:clamp(1.6rem,2.5vw,2.1rem);line-height:1.5;margin:0 0 14px;color:var(--ink)}
+.projects-main .project-english{font-size:.87rem;line-height:1.65;letter-spacing:0;color:var(--muted)}
+.projects-main .project-summary{font-size:1.08rem;line-height:1.85;color:var(--ink)}
+.projects-main .project-facts{font-size:.96rem;line-height:1.85;margin-top:20px;padding-top:17px}
+.projects-main .project-facts dt{font-weight:600;color:var(--ink)}
+.projects-main .project-facts dd{color:var(--muted)}
+.projects-main .project-usage{font-size:.96rem;line-height:1.85;margin:18px 0}
+.projects-main .project-details{font-size:.94rem;line-height:1.85;margin-bottom:18px}
+.projects-main .project-details summary{display:flex;align-items:center;min-height:44px;padding:6px 0;cursor:pointer;list-style:none}
+.projects-main .project-details summary::-webkit-details-marker{display:none}
+.projects-main .project-details summary::before{content:'＋';margin-right:9px;color:var(--accent)}
+.projects-main .project-details[open] summary::before{content:'−'}
+.projects-main .project-actions{gap:9px;margin-top:2px}
+.projects-main .project-actions a{font-size:.9rem;line-height:1.6;min-height:44px;padding:9px 14px;border-radius:5px}
+.projects-main .project-pending{font-size:.92rem;line-height:1.8}
+.projects-main .projects-footer-note{font-size:.9rem;line-height:1.8;margin-top:14px}
+.projects-main .section-entry,.about-main .section-entry{margin:30px 0 0;padding:24px 0;border:0;border-top:1px solid var(--line);border-radius:0;background:transparent}
+.projects-main .section-entry strong,.about-main .section-entry strong{font-size:1.2rem;line-height:1.6}
+.projects-main .section-entry p,.about-main .section-entry p{font-size:.96rem;line-height:1.85;max-width:64ch}
+
+/* A personal introduction and a usable contact column, without invented portraits. */
+.about-main .about-intro{max-width:none;margin:0 0 36px;padding-bottom:28px;border-bottom:1px solid var(--line)}
+.about-main .about-intro .eyebrow{font-size:.73rem}
+.about-main .about-intro h1{color:var(--ink);font-size:clamp(2.6rem,4.7vw,3.8rem);line-height:1.3}
+.about-main .about-intro h1 span{font-size:.4em;color:var(--muted)}
+.about-main .about-profile{display:grid;grid-template-columns:minmax(0,7fr) minmax(240px,5fr);column-gap:clamp(32px,5vw,72px);row-gap:0;max-width:none;align-items:start}
+.about-main .about-name,.about-main .about-identity,.about-main .about-bio,.about-main .about-english{grid-column:1;min-width:0}
+.about-main .about-name{font-size:2.2rem;line-height:1.5;margin:0 0 7px;color:var(--ink)}
+.about-main .about-identity{font-size:.95rem;line-height:1.8;letter-spacing:.025em;margin-bottom:24px}
+.about-main .about-bio{font-size:1.13rem;line-height:1.95;max-width:36em}
+.about-main .about-bio p{margin-bottom:18px}
+.about-main .about-contact{grid-column:2;grid-row:1/span 4;margin:0;padding:0 0 0 30px;border:0;border-left:1px solid var(--line);min-width:0}
+.about-main .about-contact h2{font-size:1.15rem;line-height:1.7;margin:0 0 20px}
+.about-main .about-contact dl{display:block;font-size:1rem;line-height:1.85}
+.about-main .about-contact dt{font-size:.86rem;line-height:1.7;margin:0 0 6px;color:var(--muted)}
+.about-main .about-contact dd{margin:0 0 22px;overflow-wrap:anywhere}
+.about-main .about-wechat-qr{margin-top:14px}
+.about-main .about-wechat-qr>a{width:156px}
+.about-main .about-wechat-qr img{border:1px solid var(--line);border-radius:3px}
+.about-main .about-wechat-qr figcaption{font-size:.82rem;line-height:1.8;max-width:30em;margin-top:10px}
+.about-main .about-english{margin-top:20px;padding-top:20px;font-size:1rem;line-height:1.9}
+.about-main .about-english h2{font-size:1rem;line-height:1.7;color:var(--muted);margin-bottom:12px}
+.projects-main :is(a,summary):focus-visible,.about-main a:focus-visible{outline:2px solid var(--accent);outline-offset:5px}
+
+@media(max-width:850px){
+ .projects-main .projects-intro,.projects-main .project-card{column-gap:30px;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr)}
+ .about-main .about-profile{column-gap:32px;grid-template-columns:minmax(0,1.2fr) minmax(220px,1fr)}
+ .about-main .about-contact{padding-left:24px}
+}
+@media(max-width:650px){
+ .projects-main,.about-main{padding-top:32px}
+ .projects-main .projects-intro{display:block;margin-bottom:28px;padding-bottom:25px}
+ .projects-intro>.eyebrow{margin-bottom:17px}
+ .projects-main .projects-intro h1{font-size:2.6rem}
+ .projects-main .projects-description{font-size:1.05rem;margin-top:20px}
+ .projects-main .projects-note{font-size:.92rem;margin-top:10px}
+ .projects-main .project-card{grid-template-columns:minmax(0,1fr);gap:24px;padding-block:28px}
+ .projects-main .project-visual figcaption{font-size:.8rem}
+ .projects-main .project-card h2{font-size:1.65rem}
+ .projects-main .project-summary{font-size:1.05rem}
+ .projects-main .project-actions a{min-height:44px}
+ .about-main .about-profile{display:block}
+ .about-main .about-intro{margin-bottom:27px;padding-bottom:25px}
+ .about-main .about-intro h1{font-size:2.6rem}
+ .about-main .about-name{font-size:1.9rem}
+ .about-main .about-bio{font-size:1.06rem;line-height:1.95}
+ .about-main .about-contact{margin-top:28px;padding:24px 0 0;border-left:0;border-top:1px solid var(--line)}
+ .about-main .about-contact dd{margin-bottom:20px}
+ .about-main .about-wechat-qr>a{width:164px}
+}
