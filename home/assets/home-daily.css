@@ -1,260 +1,250 @@
-/* Homepage: a quiet journal, almanac and personal writing. */
+/* Homepage. Top: who I am, Kuala Lumpur right now, my writing and work (雨聊).
+   Bottom: the reading brief, almanac and globe, kept as one module. */
 
-.daily-home{--yl-paper:var(--paper);--yl-panel:var(--surface);--yl-ink:var(--ink);--yl-body:var(--ink);--yl-muted:var(--muted);--yl-line:var(--line);--yl-soft:var(--soft);--yl-rust:#a44c33;--yl-sea:#d9e5da;--yl-land:#72937b;--yl-night:#112d266e;--yl-gap:20px;color:var(--yl-body);font:400 15px/1.8 var(--sans);overflow-wrap:anywhere;isolation:isolate}
+/* ---------- 雨聊 homepage ---------- */
+.home{padding-block:0 24px}
+.home h1,.home h2,.home h3,.home p,.home figure,.home blockquote{margin:0}
+.home a{color:inherit}
+.home-hero{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(280px,.8fr);gap:clamp(28px,5vw,64px);align-items:center;padding:clamp(40px,7vw,84px) 0 clamp(36px,5vw,56px)}
+.hero-tag{display:inline-flex;align-items:center;gap:8px;margin-bottom:20px!important;padding:3px 12px 3px 10px;border:1px solid var(--line);border-radius:999px;color:var(--accent);font-size:var(--fs-meta);font-weight:600;letter-spacing:.14em}
+.hero-tag:before{content:"";width:8px;height:11px;background:currentColor;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 22'%3E%3Cpath d='M8 0C8 0 0 9.5 0 14a8 8 0 0 0 16 0C16 9.5 8 0 8 0Z'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 22'%3E%3Cpath d='M8 0C8 0 0 9.5 0 14a8 8 0 0 0 16 0C16 9.5 8 0 8 0Z'/%3E%3C/svg%3E") center/contain no-repeat}
+.home-hero h1{font:650 clamp(36px,5.2vw,58px)/1.2 var(--sans);letter-spacing:.02em;color:var(--ink);margin-bottom:26px;text-wrap:balance}
+.hero-intro{max-width:33em;font-size:var(--fs-lead);line-height:1.9;color:var(--ink);text-wrap:pretty}
+.hero-intro+.hero-intro{margin-top:12px;color:var(--muted);font-size:var(--fs-body)}
+.hero-actions{display:flex;flex-wrap:wrap;gap:12px 24px;align-items:center;margin-top:30px!important}
+.hero-primary{display:inline-flex;align-items:center;gap:10px;min-height:46px;padding:0 22px;border-radius:999px;background:var(--action);color:var(--action-ink)!important;text-decoration:none;font-size:var(--fs-ui);font-weight:600}
+.hero-primary:hover{background:var(--action-hover)}
+.hero-link{display:inline-flex;align-items:center;gap:8px;min-height:44px;color:var(--accent)!important;text-decoration:none;font-size:var(--fs-ui)}
+.hero-link:hover,.section-head a:hover,.quote-source a:hover,.route-photo a:hover,.home .yl-project .yl-link:hover{text-decoration:underline;text-underline-offset:5px}
 
+/* Kuala Lumpur, right now. Streaks only fall when it is actually raining there. */
+.now-card{position:relative;overflow:hidden;isolation:isolate;padding:26px 28px 24px;border:1px solid var(--line);border-radius:20px;background:var(--surface)}
+.now-rain{position:absolute;inset:-40% -20%;z-index:-1;opacity:0;transform:rotate(14deg);transition:opacity .8s ease;pointer-events:none}
+.now-rain:before,.now-rain:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent 0 13px,var(--rain) 13px 14px,transparent 14px) 0 0/27px 100%;-webkit-mask:linear-gradient(transparent 0 58%,#000 88%,transparent 100%) 0 0/100% 70px;mask:linear-gradient(transparent 0 58%,#000 88%,transparent 100%) 0 0/100% 70px;animation:yl-rain .9s linear infinite}
+.now-rain:after{background-size:43px 100%;background-position:19px 0;-webkit-mask-size:100% 96px;mask-size:100% 96px;animation-duration:1.35s;opacity:.65}
+.now-card[data-state="rain"] .now-rain{opacity:.5}
+.now-card[data-state="rain"]{background:linear-gradient(180deg,var(--surface),var(--soft))}
+@keyframes yl-rain{to{-webkit-mask-position:0 192px;mask-position:0 192px}}
+.now-title{display:flex;align-items:center;gap:8px;margin-bottom:22px!important;font-size:var(--fs-meta);font-weight:600;letter-spacing:.1em;color:var(--accent)}
+.now-clock-row{display:flex;align-items:baseline;flex-wrap:wrap;gap:6px 14px}
+.now-clock{font:300 clamp(50px,5vw,66px)/1 var(--sans);font-variant-numeric:tabular-nums;letter-spacing:.01em;color:var(--ink)}
+.now-date{font-size:var(--fs-small);color:var(--muted)}
+.now-weather{margin-top:20px!important;font-size:var(--fs-lead);color:var(--ink)}
+.now-line{margin-top:6px!important;font-size:var(--fs-ui);color:var(--muted)}
+.now-card[data-state="rain"] .now-line{color:var(--accent);font-weight:600}
+.now-days{margin-top:22px!important;padding-top:14px;border-top:1px dashed var(--line);font-size:var(--fs-meta);color:var(--muted)}
+
+/* Sections */
+.home-section{padding-top:clamp(40px,5vw,60px)}
+.section-head{display:flex;justify-content:space-between;align-items:baseline;gap:16px;margin-bottom:6px;padding-bottom:14px;border-bottom:1px solid var(--line)}
+.section-head h2{font:650 var(--fs-h2)/1.35 var(--sans);letter-spacing:.02em;color:var(--ink)}
+.section-head a{color:var(--accent);font-size:var(--fs-ui);text-decoration:none;white-space:nowrap}
+
+/* Recent writing: the latest essay leads, the rest are a quiet list. */
+.recent-list{list-style:none;margin:0;padding:0;border-top:0}
+.recent-list li{display:grid;grid-template-columns:104px minmax(0,1fr) auto;gap:6px 24px;align-items:baseline;padding:16px 0;border-bottom:1px solid var(--line)}
+.recent-list time,.recent-list .yl-date{font-size:var(--fs-meta);color:var(--muted);font-variant-numeric:tabular-nums}
+.recent-list h3{font:600 var(--fs-lead)/1.55 var(--sans);color:var(--ink)}
+.recent-list h3 a{display:inline;text-decoration:none}
+.recent-list h3 a:hover{color:var(--accent)}
+.recent-list p{display:none}
+.recent-list .yl-article-topic{font-size:var(--fs-meta);color:var(--muted);white-space:nowrap}
+.recent-list li:first-child{grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"time topic" "body body";padding:22px 0 28px}
+.recent-list li:first-child>time,.recent-list li:first-child>.yl-date{grid-area:time}
+.recent-list li:first-child>div{grid-area:body}
+.recent-list li:first-child>.yl-article-topic{grid-area:topic;padding:2px 10px;border-radius:999px;background:var(--soft);color:var(--accent)}
+.recent-list li:first-child h3{font-size:clamp(24px,2.8vw,32px);line-height:1.4;margin-top:6px}
+.recent-list li:first-child p{display:block;margin-top:12px;max-width:40em;font-size:var(--fs-body);line-height:1.9;color:var(--muted)}
+
+/* A line from my own essays */
+.home-quote{position:relative;margin-top:clamp(44px,6vw,64px);padding:clamp(28px,4vw,44px) clamp(24px,5vw,60px);border-radius:20px;background:var(--soft)}
+.home-quote:before{content:"“";position:absolute;right:clamp(18px,4vw,48px);top:-6px;color:var(--rain);font:700 120px/1 Georgia,"Times New Roman",serif;pointer-events:none}
+.quote-title{margin-bottom:14px!important;font-size:var(--fs-meta);font-weight:600;letter-spacing:.1em;color:var(--accent)}
+.home-quote blockquote>p:first-child{max-width:30em;font:500 clamp(21px,2.5vw,28px)/1.7 var(--sans);color:var(--ink);text-wrap:pretty}
+.quote-source{margin-top:16px!important;font-size:var(--fs-small);color:var(--muted)}
+.quote-source a{color:var(--accent);text-decoration:none}
+
+/* Picks */
+.pick-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:20px}
+.pick{position:relative;display:flex;flex-direction:column;gap:10px;padding:22px 22px 24px;border:1px solid var(--line);border-radius:16px;background:var(--surface);transition:border-color .2s ease,transform .2s ease}
+.pick:hover{border-color:var(--control-line);transform:translateY(-2px)}
+.pick-meta{display:flex;justify-content:space-between;gap:10px;font-size:var(--fs-meta);color:var(--muted);font-variant-numeric:tabular-nums}
+.pick h3{font:600 var(--fs-h3)/1.5 var(--sans);color:var(--ink);text-wrap:balance}
+.pick h3 a{text-decoration:none}
+.pick h3 a:after{content:"";position:absolute;inset:0;border-radius:16px}
+.pick:hover h3 a{color:var(--accent)}
+.pick-note{font-size:var(--fs-ui);line-height:1.8;color:var(--muted)}
+
+/* Projects */
+.home .yl-project-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:20px}
+.home .yl-project{display:grid;grid-template-columns:44% minmax(0,1fr);gap:20px;align-items:center;padding:16px;border:1px solid var(--line);border-radius:16px;background:var(--surface);min-width:0}
+.home .yl-project img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;object-position:top left;border:1px solid var(--line);border-radius:10px}
+.home .yl-project h3{margin-bottom:6px;font:600 var(--fs-h3)/1.45 var(--sans);color:var(--ink)}
+.home .yl-project h3 a{text-decoration:none}
+.home .yl-project p{margin-bottom:10px;font-size:var(--fs-small);line-height:1.8;color:var(--muted)}
+.home .yl-project .yl-link{color:var(--accent);font-size:var(--fs-ui);text-decoration:none}
+
+/* From Sichuan to Kuala Lumpur */
+.route-line{position:relative;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px;margin:22px 0 0;padding:0;list-style:none}
+.route-line:before{content:"";position:absolute;left:8px;right:8px;top:7px;border-top:2px dashed var(--rain)}
+.route-line li{position:relative;display:grid;gap:2px;min-width:0;padding-top:30px}
+.route-line li:before{content:"";position:absolute;top:0;left:0;width:16px;height:16px;box-sizing:border-box;border:2px solid var(--accent);border-radius:50%;background:var(--paper)}
+.route-line li.is-now:before{border-color:var(--warm);background:var(--warm);box-shadow:0 0 0 5px color-mix(in srgb,var(--warm) 20%,transparent)}
+.route-line time{font-size:var(--fs-meta);color:var(--muted);font-variant-numeric:tabular-nums}
+.route-line strong{font:600 var(--fs-lead)/1.4 var(--sans);color:var(--ink)}
+.route-line span{font-size:var(--fs-small);color:var(--muted)}
+/* One wide photo from the Beijing years, captioned like a postcard. */
+.route-photo{margin:44px 0 0!important}
+.route-photo img{display:block;width:100%;height:auto;aspect-ratio:21/9;object-fit:cover;object-position:50% 58%;border-radius:14px;background:var(--soft)}
+.route-photo figcaption{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:6px 28px;margin-top:14px;font-size:var(--fs-small);line-height:1.8;color:var(--muted);text-wrap:pretty}
+.route-photo figcaption a{flex:none;color:var(--accent);text-decoration:none}
+:root[data-theme="dark"] .route-photo img{filter:brightness(.86)}
+
+/* The brief sits at the end as its own module. */
+.home-brief{margin-top:clamp(56px,8vw,96px);border-top:1px solid var(--line)}
+
+@media(max-width:860px){
+ .home-hero{grid-template-columns:minmax(0,1fr);gap:28px;padding-top:36px}
+ .pick-grid{grid-template-columns:minmax(0,1fr)}
+ .home .yl-project-grid{grid-template-columns:minmax(0,1fr)}
+ .route-photo img{aspect-ratio:3/2}
+}
+@media(max-width:620px){
+ .hero-intro{font-size:var(--fs-body)}
+ .hero-intro+.hero-intro{font-size:16px}
+ .now-card{padding:22px 22px 20px}
+ .section-head h2{font-size:24px}
+ .recent-list li{grid-template-columns:minmax(0,1fr);gap:2px}
+ .recent-list li>.yl-article-topic{display:none}
+ .recent-list li:first-child>.yl-article-topic{display:inline-block;justify-self:end}
+ .home .yl-project{grid-template-columns:38% minmax(0,1fr);gap:14px;padding:12px}
+ .route-line{grid-template-columns:minmax(0,1fr);gap:0;margin-top:18px}
+ .route-line:before{left:7px;right:auto;top:6px;bottom:14px;border-top:0;border-left:2px dashed var(--rain)}
+ .route-line li{grid-template-columns:52px auto minmax(0,1fr);align-items:baseline;gap:12px;padding:0 0 16px 32px}
+ .route-line li:before{top:5px}
+}
+
+/* ---------- Reading brief (moved to the bottom; content unchanged) ---------- */
+.daily-home{--yl-paper:var(--paper);--yl-panel:var(--surface);--yl-ink:var(--ink);--yl-body:var(--ink);--yl-muted:var(--muted);--yl-line:var(--line);--yl-soft:var(--soft);--yl-rust:var(--warm);--yl-sea:#d6e4ea;--yl-land:#6f8f9c;--yl-night:#0d1f2a6e;--yl-gap:20px;color:var(--yl-body);font:400 15px/1.8 var(--sans);overflow-wrap:anywhere;isolation:isolate}
+:root[data-theme=dark] .daily-home{--yl-sea:#1f3a47;--yl-land:#8fb0be;--yl-night:#050d1294}
 .daily-home *{box-sizing:border-box}
 .daily-home h1,.daily-home h2,.daily-home h3,.daily-home p{margin:0}
 .daily-home a{color:inherit;text-decoration:none}
 .daily-home a:hover{text-decoration:underline;text-underline-offset:5px}
 .daily-home button,.daily-home select,.daily-home input{font:inherit;color:inherit}
-.daily-home button:focus-visible,.daily-home a:focus-visible,.daily-home select:focus-visible,.daily-home input:focus-visible{outline:2px solid var(--yl-rust);outline-offset:4px}
-.daily-home button{background:none;border:0;padding:0}
-.daily-home .yl-wrap{padding:0 34px}
-.daily-home .yl-serif{font-family:"Noto Serif SC","Songti SC","STSong","SimSun",Georgia,serif}
-.daily-home .yl-small{font-size:12px;line-height:1.6;color:var(--yl-muted)}
-.daily-home .yl-kicker{font-size:11px;letter-spacing:.12em;color:var(--yl-muted)}
-.daily-home .yl-link{color:var(--yl-ink);font-size:13px;text-underline-offset:5px}
+.daily-home button:focus-visible,.daily-home a:focus-visible,.daily-home select:focus-visible,.daily-home input:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
+.daily-home button{background:none;border:0;padding:0;cursor:pointer}
+.daily-home .yl-small{font-size:13px;line-height:1.6;color:var(--yl-muted)}
+.daily-home .yl-kicker{font-size:13px;letter-spacing:.06em;color:var(--yl-muted)}
+.daily-home .yl-link{color:var(--yl-ink);font-size:14px;text-underline-offset:5px}
 .daily-home .yl-arrow{margin-left:10px}
-.daily-home .yl-header{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:24px 0 20px;border-bottom:1px solid var(--yl-ink)}
-.daily-home .yl-brand{display:flex;align-items:baseline;gap:13px;white-space:nowrap;color:var(--yl-ink)}
-.daily-home .yl-brand strong{font:500 24px/1.3 "Songti SC","SimSun",Georgia,serif}
-.daily-home .yl-brand span{font-size:11px;letter-spacing:.04em}
-.daily-home .yl-header nav{display:flex;align-items:center;gap:20px;font-size:13px;flex-wrap:wrap}
-.daily-home .yl-theme{width:28px;height:30px;font-size:18px}
-.daily-home .yl-mast{min-height:172px;position:relative;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:28px 0 24px;border-bottom:3px double var(--yl-line);overflow:hidden}
-.daily-home .yl-inkscape{position:absolute;width:69%;height:100%;object-fit:contain;object-position:right bottom;right:-1%;bottom:-8%;opacity:.38;pointer-events:none;z-index:0}
+.daily-home .yl-mast{min-height:180px;position:relative;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:30px 0 24px;border-bottom:1px solid var(--yl-line);overflow:hidden}
+.daily-home .yl-inkscape{position:absolute;width:62%;height:100%;object-fit:contain;object-position:right bottom;right:-1%;bottom:-8%;opacity:.28;pointer-events:none;z-index:0}
+:root[data-theme=dark] .daily-home .yl-inkscape{opacity:.14;filter:brightness(1.9) saturate(.4)}
 .daily-home .yl-mast-copy,.daily-home .yl-issue{position:relative;z-index:1}
-.daily-home .yl-mast h1{font:500 46px/1.3 "Noto Serif SC","Songti SC","STSong","SimSun",Georgia,serif;letter-spacing:.07em;color:var(--yl-ink);margin:8px 0}
-.daily-home .yl-mast .yl-intro{font:400 15px/1.7 "Songti SC","SimSun",serif;color:var(--yl-body)}
-.daily-home .yl-issue{text-align:right;align-self:flex-start;margin-top:7px;font-size:12px;color:var(--yl-muted)}
-.daily-home .yl-issue strong{display:block;color:var(--yl-ink);font-weight:500;font-size:13px;letter-spacing:.05em}
-.daily-home .yl-edition{display:inline-block;margin-top:12px;border:1px solid var(--yl-line);padding:2px 8px;background:var(--yl-paper);font-size:11px;letter-spacing:.06em}
-.daily-home .yl-today{display:grid;grid-template-columns:minmax(0,1fr) 276px;gap:28px;padding:25px 0 27px;border-bottom:1px solid var(--yl-ink)}
+.daily-home .yl-mast h2{font:650 34px/1.3 var(--sans);letter-spacing:.04em;color:var(--yl-ink);margin:6px 0}
+.daily-home .yl-mast .yl-intro{font-size:15px;line-height:1.7;color:var(--yl-body)}
+.daily-home .yl-issue{text-align:right;align-self:flex-start;margin-top:7px;font-size:13px;color:var(--yl-muted)}
+.daily-home .yl-issue strong{display:block;color:var(--yl-ink);font-weight:600;font-size:14px;letter-spacing:.03em;font-variant-numeric:tabular-nums}
+.daily-home .yl-edition{display:inline-block;margin-top:12px;border:1px solid var(--yl-line);border-radius:999px;padding:1px 10px;background:var(--yl-paper);font-size:12px}
+.daily-home .yl-today{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:28px;padding:24px 0 26px;border-bottom:1px solid var(--yl-line)}
 .daily-home .yl-news{min-width:0}
-.daily-home .yl-filter{display:flex;gap:19px;flex-wrap:wrap;padding-bottom:15px;border-bottom:1px solid var(--yl-line)}
-.daily-home .yl-filter button{font-size:12px;line-height:1.8;padding:2px 0;color:var(--yl-muted);border-bottom:2px solid transparent}
-.daily-home .yl-filter button[aria-pressed=true]{color:var(--yl-ink);border-bottom-color:var(--yl-rust)}
+.daily-home .yl-filter{display:flex;gap:18px;flex-wrap:wrap;padding-bottom:6px;border-bottom:1px solid var(--yl-line)}
+.daily-home .yl-filter[hidden]{display:none}
+.daily-home .yl-filter button{min-height:44px;font-size:14px;line-height:1.8;padding:2px 0;color:var(--yl-muted);border-bottom:2px solid transparent}
+.daily-home .yl-filter button[aria-pressed=true]{color:var(--yl-ink);border-bottom-color:var(--accent)}
 .daily-home .yl-lead{padding:22px 0 19px;border-bottom:1px solid var(--yl-line)}
-.daily-home .yl-label{display:inline-flex;align-items:center;gap:9px;color:var(--yl-rust);font-size:11px;letter-spacing:.06em}
+.daily-home .yl-label{display:inline-flex;align-items:center;gap:9px;color:var(--yl-rust);font-size:13px}
 .daily-home .yl-label:before{content:"";display:inline-block;width:18px;height:1px;background:var(--yl-rust)}
-.daily-home .yl-lead h2{font:500 27px/1.55 "Songti SC","STSong","SimSun",Georgia,serif;color:var(--yl-ink);margin:9px 0 10px}
-.daily-home .yl-lead p{font-size:13px;line-height:1.9;margin-bottom:12px;max-width:43em}
+.daily-home .yl-lead h2{font:600 25px/1.5 var(--sans);color:var(--yl-ink);margin:9px 0 10px}
+.daily-home .yl-lead p{font-size:15px;line-height:1.9;margin-bottom:12px;max-width:43em}
 .daily-home .yl-news-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 24px}
-.daily-home .yl-item{min-width:0;padding:var(--yl-gap) 0 17px;border-bottom:1px solid var(--yl-line);display:grid;grid-template-columns:21px minmax(0,1fr);gap:10px}
-.daily-home .yl-num{color:var(--yl-rust);font:400 13px/1.8 Georgia,serif}
-.daily-home .yl-item h3{font:500 17px/1.65 "Songti SC","SimSun",Georgia,serif;color:var(--yl-ink);margin-bottom:9px}
-.daily-home .yl-source{font-size:11px;color:var(--yl-muted);line-height:1.6}
-.daily-home .yl-source a{color:var(--yl-muted);text-decoration:underline;text-underline-offset:3px}
-.daily-home .yl-note{margin-top:13px;font-size:11px;color:var(--yl-muted);line-height:1.65}
+.daily-home .yl-news-grid>.yl-item:last-child:nth-child(odd){grid-column:1/-1}
+.daily-home .yl-item{min-width:0;padding:var(--yl-gap) 0 17px;border-bottom:1px solid var(--yl-line);display:grid;grid-template-columns:24px minmax(0,1fr);gap:10px}
+.daily-home .yl-num{color:var(--yl-rust);font-size:13px;line-height:1.9;font-variant-numeric:tabular-nums}
+.daily-home .yl-item h3{font:600 17px/1.6 var(--sans);color:var(--yl-ink);margin-bottom:8px}
+.daily-home .yl-source{font-size:13px;color:var(--yl-muted);line-height:1.6}
+.daily-home .yl-source a{color:var(--yl-muted);text-decoration:underline;text-underline-offset:3px;white-space:nowrap}
+.daily-home .yl-note{margin-top:13px;font-size:13px;color:var(--yl-muted);line-height:1.65}
 .daily-home .yl-news-footer{display:flex;justify-content:space-between;gap:12px;margin-top:20px;align-items:center}
-.daily-home .yl-readme{font-size:12px;color:var(--yl-ink);padding:7px 11px;border:1px solid var(--yl-line);border-radius:2px;display:inline-block}
+.daily-home .yl-readme{font-size:14px;color:var(--yl-ink);padding:8px 14px;border:1px solid var(--yl-line);border-radius:999px;display:inline-block}
 .daily-home .yl-sidebar{padding-left:24px;border-left:1px solid var(--yl-line);min-width:0}
 .daily-home .yl-cal-top{display:flex;justify-content:space-between;gap:10px;align-items:center}
-.daily-home .yl-day{font:400 62px/.95 Georgia,serif;color:var(--yl-ink);letter-spacing:-.06em}
-.daily-home .yl-cal-copy{text-align:right;font-size:12px;line-height:1.9}
-.daily-home .yl-cal-copy strong{color:var(--yl-ink);font-size:13px;font-weight:500}
+.daily-home .yl-day{font:300 58px/1 var(--sans);color:var(--yl-ink);font-variant-numeric:tabular-nums}
+.daily-home .yl-cal-copy{text-align:right;font-size:13px;line-height:1.9}
+.daily-home .yl-cal-copy strong{color:var(--yl-ink);font-size:14px;font-weight:600}
 .daily-home .yl-calendar{padding-bottom:17px;border-bottom:1px solid var(--yl-line)}
-.daily-home .yl-solar-term{color:var(--yl-rust);font-family:"Songti SC","SimSun",serif;font-size:13px;margin-top:12px}
+.daily-home .yl-solar-term{color:var(--yl-rust);font-size:14px;margin-top:12px}
 .daily-home .yl-weather{padding-top:12px;display:flex;align-items:center;justify-content:space-between;gap:10px}
-.daily-home .yl-city{font-size:12px;border:0;border-bottom:1px solid var(--yl-line);padding:2px 18px 3px 0;background:var(--yl-paper);max-width:130px;border-radius:0}
-.daily-home .yl-weather-readout{text-align:right;font-size:11px;color:var(--yl-muted)}
-.daily-home .yl-weather-readout strong{font:400 24px/1.2 Georgia,serif;color:var(--yl-ink);margin-left:8px}
-.daily-home .yl-almanac{font-size:11px;line-height:1.5;margin-top:10px;color:var(--yl-muted)}
-.daily-home .yl-almanac summary{display:inline;list-style:none;border-bottom:1px dotted var(--yl-muted)}
+.daily-home .yl-city{font-size:14px;border:0;border-bottom:1px solid var(--yl-line);padding:2px 18px 3px 0;background:var(--yl-paper);max-width:130px;border-radius:0}
+.daily-home .yl-weather-readout{text-align:right;font-size:13px;line-height:1.65;color:var(--yl-muted);max-width:150px;overflow-wrap:anywhere}
+.daily-home .yl-weather-readout strong{font:300 24px/1.2 var(--sans);color:var(--yl-ink);margin:0 5px 0 0}
+.daily-home .yl-weather-readout small{display:block;font-size:12px;line-height:1.6;margin-top:3px}
+.daily-home .yl-weather-readout a{text-decoration:underline;text-underline-offset:3px}
+.daily-home .yl-almanac{font-size:13px;line-height:1.5;margin-top:10px;color:var(--yl-muted)}
+.daily-home .yl-almanac summary{display:inline;list-style:none;border-bottom:1px dotted var(--yl-muted);cursor:pointer;line-height:2}
 .daily-home .yl-almanac p{padding-top:8px}
 .daily-home .yl-earth{padding-top:18px}
 .daily-home .yl-earth-heading{display:flex;justify-content:space-between;gap:10px;align-items:baseline}
-.daily-home .yl-earth-heading h2{font:500 18px/1.5 "Songti SC","SimSun",serif;color:var(--yl-ink)}
+.daily-home .yl-earth-heading h2{font:600 18px/1.5 var(--sans);color:var(--yl-ink)}
 .daily-home .yl-globe-wrap{position:relative;width:100%;margin:8px auto 0;max-width:290px;touch-action:pan-y}
 .daily-home canvas{display:block;width:100%;height:auto;aspect-ratio:1/1.02;touch-action:pan-y}
-.daily-home .yl-earth-small{font-size:10px;line-height:1.6;color:var(--yl-muted);text-align:center;margin-top:-4px}
+.daily-home .yl-earth-small{font-size:12px;line-height:1.6;color:var(--yl-muted);text-align:center;margin-top:-4px}
 .daily-home .yl-suntime{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0 9px;padding-top:13px;border-top:1px solid var(--yl-line)}
-.daily-home .yl-suntime div{font-size:11px;color:var(--yl-muted)}
-.daily-home .yl-suntime strong{display:block;font:400 24px/1.5 Georgia,serif;color:var(--yl-ink);font-variant-numeric:tabular-nums}
-.daily-home .yl-earth-info{font-size:11px;line-height:1.8;color:var(--yl-muted);min-height:40px}
-.daily-home .yl-earth-info b{font-weight:500;color:var(--yl-ink)}
-.daily-home .yl-time-row{margin-top:12px;display:flex;justify-content:space-between;font-size:11px;color:var(--yl-muted)}
-.daily-home .yl-time-row output{font-variant-numeric:tabular-nums;color:var(--yl-ink)}
-.daily-home .yl-time-slider{width:100%;accent-color:var(--yl-ink);margin:7px 0 0;min-height:24px}
-.daily-home .yl-time-ends{display:flex;justify-content:space-between;font-size:9px;color:var(--yl-muted)}
-.daily-home .yl-earth-source{font-size:10px;color:var(--yl-muted);margin-top:10px;line-height:1.6}
-.daily-home .yl-earth-source a{text-decoration:underline;text-underline-offset:3px}
-.daily-home .yl-bottomline{display:grid;grid-template-columns:1fr 1fr;gap:28px;padding:23px 0;border-bottom:1px solid var(--yl-line)}
-.daily-home .yl-bottomline article+article{border-left:1px solid var(--yl-line);padding-left:28px}
-.daily-home .yl-bottomline h2{font-size:11px;letter-spacing:.09em;color:var(--yl-rust);font-weight:400;margin-bottom:10px}
-.daily-home .yl-quote{font:400 20px/1.9 "Songti SC","SimSun",serif;color:var(--yl-ink)}
-.daily-home .yl-concept-title{font:500 19px/1.6 "Songti SC","SimSun",serif;color:var(--yl-ink);margin-bottom:6px}
-.daily-home .yl-concept-copy{font-size:12px;line-height:1.9;margin-bottom:8px}
-.daily-home .yl-street{display:grid;grid-template-columns:104px 1fr;gap:20px;padding:24px 0;border-bottom:1px solid var(--yl-ink)}
-.daily-home .yl-street-title{font:500 23px/1.5 "Songti SC","SimSun",serif;color:var(--yl-ink)}
-.daily-home .yl-street-main h3{font:500 20px/1.65 "Songti SC","SimSun",serif;color:var(--yl-ink);margin-bottom:8px}
-.daily-home .yl-street-main p{font-size:12px;line-height:1.9;max-width:60em}
-.daily-home .yl-street-links{display:flex;gap:20px;flex-wrap:wrap;margin-top:10px}
-.daily-home .yl-street-links a{font-size:11px;text-decoration:underline;text-underline-offset:4px}
-.daily-home .yl-section{padding:32px 0 8px}
-.daily-home .yl-section-head{display:flex;justify-content:space-between;gap:16px;align-items:center;margin-bottom:17px}
-.daily-home .yl-section-head h2{font:500 27px/1.5 "Songti SC","SimSun",serif;color:var(--yl-ink)}
-.daily-home .yl-section-head span{font-size:11px;margin-left:12px;letter-spacing:.06em;color:var(--yl-muted)}
-.daily-home .yl-article-list{list-style:none;margin:0;padding:0}
-.daily-home .yl-article-list li{display:grid;grid-template-columns:93px 1fr auto;gap:20px;padding:17px 0;border-top:1px solid var(--yl-line);align-items:baseline}
-.daily-home .yl-article-list time{font:400 12px/1.8 Georgia,serif;color:var(--yl-muted)}
-.daily-home .yl-article-list h3{font:500 19px/1.65 "Songti SC","SimSun",serif;color:var(--yl-ink)}
-.daily-home .yl-article-list p{font-size:12px;line-height:1.8;color:var(--yl-muted);margin-top:4px}
-.daily-home .yl-article-topic{font-size:11px;color:var(--yl-muted);white-space:nowrap}
-.daily-home .yl-project-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}
-.daily-home .yl-project{display:grid;grid-template-columns:43% minmax(0,1fr);gap:17px;border:1px solid var(--yl-line);padding:14px;background:var(--yl-panel);min-width:0}
-.daily-home .yl-project img{display:block;width:100%;height:122px;object-fit:cover;object-position:top;border-radius:2px}
-.daily-home .yl-project h3{font:500 20px/1.6 "Songti SC","SimSun",serif;color:var(--yl-ink);margin:3px 0 5px}
-.daily-home .yl-project p{font-size:11px;line-height:1.8;color:var(--yl-muted);margin-bottom:9px}
-.daily-home .yl-project .yl-link{font-size:12px;color:var(--yl-rust)}
-.daily-home .yl-photo{position:relative;margin-top:35px;height:180px;overflow:hidden}
-.daily-home .yl-photo img{width:100%;height:100%;object-fit:cover;object-position:center 57%;display:block}
-.daily-home .yl-photo:after{content:"";position:absolute;inset:0;background:linear-gradient(transparent,#071c1c80)}
-.daily-home .yl-photo-caption{position:absolute;left:34px;right:34px;bottom:20px;z-index:1;display:flex;justify-content:space-between;align-items:end;gap:15px;color:#fffdf4}
-.daily-home .yl-photo-caption h2{font:500 21px/1.5 "Songti SC","SimSun",serif;margin-bottom:3px}
-.daily-home .yl-photo-caption p,.daily-home .yl-photo-caption a{font-size:11px;color:#fffdf4}
-.daily-home .yl-footer{display:flex;justify-content:space-between;gap:16px;padding:21px 0 23px;font-size:11px;color:var(--yl-muted)}
-.daily-home .yl-footer div{display:flex;gap:18px;flex-wrap:wrap}
-.daily-home .yl-color-probe{position:absolute;width:0;height:0;overflow:hidden;pointer-events:none}
-
-@media(min-width:1100px){.daily-home .yl-today{grid-template-columns:minmax(0,1fr) 310px}
-}
-
-@media(max-width:800px){.daily-home .yl-wrap{padding:0 24px}
-.daily-home .yl-brand{gap:8px}
-.daily-home .yl-brand span{display:none}
-.daily-home .yl-header nav{gap:14px}
-.daily-home .yl-today{grid-template-columns:minmax(0,1fr) 225px;gap:22px}
-.daily-home .yl-sidebar{padding-left:20px}
-.daily-home .yl-filter{gap:14px}
-.daily-home .yl-news-grid{grid-template-columns:1fr}
-.daily-home .yl-item{padding:15px 0}
-.daily-home .yl-lead h2{font-size:24px}
-.daily-home .yl-item h3{font-size:16px}
-.daily-home .yl-mast h1{font-size:41px}
-.daily-home .yl-project{grid-template-columns:1fr}
-.daily-home .yl-project img{height:125px}
-.daily-home .yl-photo-caption{left:24px;right:24px}
-}
-
-@media(max-width:580px){.daily-home{font-size:14px}
-.daily-home .yl-wrap{padding:0 19px}
-.daily-home .yl-header{display:block;padding:20px 0 12px}
-.daily-home .yl-brand strong{font-size:23px}
-.daily-home .yl-brand span{display:inline;font-size:10px}
-.daily-home .yl-header nav{margin-top:14px;gap:21px;font-size:12px}
-.daily-home .yl-mast{display:block;padding:21px 0 20px;min-height:175px}
-.daily-home .yl-mast h1{font-size:36px;letter-spacing:.04em;margin:7px 0}
-.daily-home .yl-mast .yl-intro{font-size:13px}
-.daily-home .yl-issue{text-align:left;margin-top:11px;display:flex;align-items:center;gap:11px;flex-wrap:wrap;font-size:10px}
-.daily-home .yl-issue strong{font-size:11px}
-.daily-home .yl-edition{margin:0;font-size:9px;padding:1px 5px}
-.daily-home .yl-inkscape{width:100%;right:-14%;bottom:0;opacity:.3}
-.daily-home .yl-today{grid-template-columns:1fr;gap:24px;padding-top:20px}
-.daily-home .yl-sidebar{padding:21px 0 0;border:0;border-top:1px solid var(--yl-line);display:grid;grid-template-columns:1fr 1fr;gap:19px;align-items:start}
-.daily-home .yl-calendar{border-bottom:0;padding-top:6px}
-.daily-home .yl-cal-top{display:block}
-.daily-home .yl-day{font-size:51px}
-.daily-home .yl-cal-copy{text-align:left;margin-top:10px;font-size:11px}
-.daily-home .yl-earth{padding-top:0}
-.daily-home .yl-earth-heading h2{font-size:17px}
-.daily-home .yl-earth-heading>.yl-small{display:none}
-.daily-home .yl-weather{display:block;margin-top:12px}
-.daily-home .yl-weather-readout{text-align:left;margin-top:8px}
-.daily-home .yl-city{font-size:16px;width:100%;max-width:none}
-.daily-home .yl-earth-small{font-size:9px}
-.daily-home .yl-suntime{gap:5px;margin-top:10px}
-.daily-home .yl-suntime strong{font-size:21px}
-.daily-home .yl-earth-info{font-size:10px}
-.daily-home .yl-time-row{font-size:10px}
-.daily-home .yl-time-ends{font-size:9px}
-.daily-home .yl-filter{gap:18px}
-.daily-home .yl-filter button{font-size:12px;min-height:32px}
-.daily-home .yl-lead{padding-top:18px}
-.daily-home .yl-lead h2{font-size:25px}
-.daily-home .yl-news-grid{grid-template-columns:1fr}
-.daily-home .yl-item{grid-template-columns:19px 1fr}
-.daily-home .yl-item h3{font-size:18px}
-.daily-home .yl-bottomline{grid-template-columns:1fr;gap:20px;padding:23px 0}
-.daily-home .yl-bottomline article+article{border-left:0;border-top:1px solid var(--yl-line);padding:18px 0 0}
-.daily-home .yl-quote{font-size:20px}
-.daily-home .yl-street{grid-template-columns:1fr;gap:10px;padding:23px 0}
-.daily-home .yl-street-title{display:flex;gap:12px;align-items:baseline}
-.daily-home .yl-street-main h3{font-size:21px}
-.daily-home .yl-section{padding-top:25px}
-.daily-home .yl-section-head h2{font-size:25px}
-.daily-home .yl-section-head span{display:none}
-.daily-home .yl-article-list li{grid-template-columns:1fr;gap:6px;padding:15px 0}
-.daily-home .yl-article-list h3{font-size:20px}
-.daily-home .yl-article-topic{display:none}
-.daily-home .yl-project-grid{grid-template-columns:1fr;gap:16px}
-.daily-home .yl-project{grid-template-columns:40% minmax(0,1fr);gap:14px;padding:12px}
-.daily-home .yl-project img{height:124px}
-.daily-home .yl-project h3{font-size:18px}
-.daily-home .yl-photo{height:190px;margin-top:27px}
-.daily-home .yl-photo-caption{left:19px;right:19px;display:block}
-.daily-home .yl-photo-caption a{display:block;margin-top:8px}
-.daily-home .yl-footer{display:block;line-height:1.9}
-.daily-home .yl-footer div{margin-top:8px}
-.daily-home .yl-news-footer{align-items:start}
-.daily-home .yl-news-footer>.yl-small{max-width:48%}
-}
-
-@media(pointer:coarse){.daily-home .yl-header nav a,.daily-home .yl-filter button,.daily-home .yl-theme{min-height:44px;display:inline-flex;align-items:center}
-.daily-home .yl-city{min-height:44px}
-.daily-home .yl-time-slider{min-height:38px}
-}
-
-.daily-home .yl-earth-small,.daily-home .yl-time-ends,.daily-home .yl-earth-source{font-size:11px}
-.daily-home .yl-issue,.daily-home .yl-edition{font-size:11px}
-@media(max-width:580px){.daily-home .yl-brand span,.daily-home .yl-earth-info,.daily-home .yl-time-row{font-size:11px}
-}
-
-@media(max-width:420px){.daily-home .yl-header nav{gap:16px}
-.daily-home .yl-sidebar{grid-template-columns:1fr;gap:22px}
-.daily-home .yl-cal-top{display:flex;align-items:center}
-.daily-home .yl-cal-copy{text-align:right;margin-top:0}
-.daily-home .yl-weather{display:flex;margin-top:0}
-.daily-home .yl-weather-readout{text-align:right}
-.daily-home .yl-city{min-width:110px}
-.daily-home .yl-calendar{padding-bottom:18px;border-bottom:1px solid var(--yl-line)}
-.daily-home .yl-globe-wrap{max-width:250px}
-.daily-home .yl-earth-heading>.yl-small{display:block;font-size:11px}
-.daily-home .yl-suntime strong{font-size:24px}
-}
-
-
-body.daily-home-page{--paper:#f7f5ee;--surface:#fcfbf7;--white:#fcfbf7;--ink:#234b3c;--muted:#657267;--line:#c6cebf;background:var(--paper)}
-:root[data-theme=dark] body.daily-home-page{--paper:#16251f;--surface:#1b2c24;--white:#1b2c24;--ink:#d8e6d8;--muted:#a0b4a3;--line:#40574a}
-:root[data-skin=sea][data-theme=light] body.daily-home-page{--paper:#f2f6fa;--surface:#fbfdff;--white:#fbfdff;--ink:#1b3449;--muted:#536b80;--line:#abbfcf}
-:root[data-skin=sea][data-theme=dark] body.daily-home-page{--paper:#081523;--surface:#102638;--white:#102638;--ink:#e3edf4;--muted:#a9bdcb;--line:#33586f}
-:root[data-theme=dark] .daily-home{--yl-rust:#e3a17d;--yl-sea:#3c5c50;--yl-land:#99b59b;--yl-night:#08160e94}
-:root[data-skin=sea] .daily-home{--yl-sea:#d3e3ec;--yl-land:#7095a8}
-:root[data-skin=sea][data-theme=dark] .daily-home{--yl-sea:#25475b;--yl-land:#8db3c8}
-.daily-home{padding-top:0;padding-bottom:0}
-.daily-home .yl-mast{min-height:188px}
-.daily-home .yl-news-grid>.yl-item:last-child:nth-child(odd){grid-column:1/-1}
-.daily-home .yl-inkscape{width:73%;opacity:.4}
-:root[data-theme=dark] .daily-home .yl-inkscape{opacity:.24;filter:brightness(1.9) saturate(.5)}
-.daily-home button{cursor:pointer}
-.daily-home .yl-filter button{min-height:44px}
-.daily-home .yl-filter[hidden]{display:none}
-.daily-home .yl-quote-source{margin-top:10px}
-.daily-home .yl-concept-copy{margin-top:6px}
-.daily-home .yl-section-head h2{margin:0}
-.daily-home .yl-earth-now{font-size:11px;min-height:34px;text-decoration:underline;text-underline-offset:4px;color:var(--yl-rust)}
-.daily-home .yl-earth-now[hidden]{display:none}
+.daily-home .yl-suntime div{font-size:13px;color:var(--yl-muted)}
+.daily-home .yl-suntime strong{display:block;font:300 26px/1.4 var(--sans);color:var(--yl-ink);font-variant-numeric:tabular-nums}
+.daily-home .yl-earth-info{font-size:13px;line-height:1.8;color:var(--yl-muted);min-height:40px}
+.daily-home .yl-earth-info b{font-weight:600;color:var(--yl-ink)}
 .daily-home .yl-earth-actions{display:flex;align-items:center;justify-content:space-between;gap:8px}
-.daily-home .yl-time-row{flex:1;gap:8px;align-items:center}
-.daily-home .yl-weather-readout{font-size:11px;line-height:1.65;max-width:145px;overflow-wrap:anywhere}
-.daily-home .yl-weather-readout strong{margin:0 5px 0 0}
-.daily-home .yl-weather-readout small{display:block;font-size:10px;line-height:1.6;margin-top:3px}
-.daily-home .yl-weather-readout a{text-decoration:underline;text-underline-offset:3px}
-.daily-home .yl-photo{height:210px;margin-bottom:22px}
-.daily-home .yl-footer-note{font-size:11px;color:var(--yl-muted);margin:18px 0 0}
-.daily-home .yl-no-script{font-size:12px;color:var(--yl-muted);padding:10px 0}
-.daily-home .yl-almanac summary{cursor:pointer;line-height:2}
-.daily-home .yl-issue strong{font-variant-numeric:tabular-nums}
-.daily-home-page .site-footer{margin-top:25px}
-@media(max-width:580px){.daily-home .yl-mast{min-height:180px}.daily-home .yl-mast h1{font-size:36px}.daily-home .yl-photo{height:190px}.daily-home .yl-earth-actions{display:block}.daily-home .yl-earth-now{min-height:36px}.daily-home .yl-issue{gap:8px 12px}.daily-home .yl-inkscape{width:100%}}
-@media(prefers-reduced-motion:reduce){.daily-home *{scroll-behavior:auto;transition:none}}
+.daily-home .yl-time-row{flex:1;gap:8px;align-items:center;margin-top:12px;display:flex;justify-content:space-between;font-size:13px;color:var(--yl-muted)}
+.daily-home .yl-time-row output{font-variant-numeric:tabular-nums;color:var(--yl-ink)}
+.daily-home .yl-earth-now{font-size:13px;min-height:34px;text-decoration:underline;text-underline-offset:4px;color:var(--accent)}
+.daily-home .yl-earth-now[hidden]{display:none}
+.daily-home .yl-time-slider{width:100%;accent-color:var(--accent);margin:7px 0 0;min-height:24px}
+.daily-home .yl-time-ends{display:flex;justify-content:space-between;font-size:12px;color:var(--yl-muted)}
+.daily-home .yl-earth-source{font-size:12px;color:var(--yl-muted);margin-top:10px;line-height:1.6}
+.daily-home .yl-earth-source a{text-decoration:underline;text-underline-offset:3px}
+.daily-home .yl-bottomline{display:grid;grid-template-columns:1fr 1fr;gap:28px;padding:24px 0;border-bottom:1px solid var(--yl-line)}
+.daily-home .yl-bottomline article+article{border-left:1px solid var(--yl-line);padding-left:28px}
+.daily-home .yl-bottomline h2{font-size:13px;letter-spacing:.06em;color:var(--yl-rust);font-weight:600;margin-bottom:10px}
+.daily-home .yl-quote{font:500 20px/1.8 var(--sans);color:var(--yl-ink)}
+.daily-home .yl-quote-source{margin-top:10px}
+.daily-home .yl-concept-title{font:600 19px/1.6 var(--sans);color:var(--yl-ink);margin-bottom:6px}
+.daily-home .yl-concept-copy{font-size:15px;line-height:1.9;margin:6px 0 8px}
+.daily-home .yl-street{display:grid;grid-template-columns:110px 1fr;gap:20px;padding:24px 0}
+.daily-home .yl-street-title{font:650 22px/1.5 var(--sans);color:var(--yl-ink)}
+.daily-home .yl-street-main h3{font:600 20px/1.6 var(--sans);color:var(--yl-ink);margin-bottom:8px}
+.daily-home .yl-street-main p{font-size:15px;line-height:1.9;max-width:60em}
+.daily-home .yl-street-links{display:flex;gap:20px;flex-wrap:wrap;margin-top:10px}
+.daily-home .yl-street-links a{font-size:13px;text-decoration:underline;text-underline-offset:4px}
+.daily-home .yl-no-script{font-size:13px;color:var(--yl-muted);padding:10px 0}
+
+@media(max-width:860px){
+ .daily-home .yl-today{grid-template-columns:minmax(0,1fr) 230px;gap:22px}
+ .daily-home .yl-sidebar{padding-left:20px}
+ .daily-home .yl-news-grid{grid-template-columns:1fr}
+ .daily-home .yl-item{padding:15px 0}
+}
+@media(max-width:620px){
+ .daily-home{font-size:14px}
+ .daily-home .yl-mast{display:block;padding:24px 0 20px;min-height:170px}
+ .daily-home .yl-mast h2{font-size:30px}
+ .daily-home .yl-issue{text-align:left;margin-top:11px;display:flex;align-items:center;gap:8px 12px;flex-wrap:wrap}
+ .daily-home .yl-edition{margin:0}
+ .daily-home .yl-inkscape{width:100%;right:-14%;bottom:0;opacity:.22}
+ .daily-home .yl-today{grid-template-columns:1fr;gap:24px;padding-top:18px}
+ .daily-home .yl-sidebar{padding:21px 0 0;border:0;border-top:1px solid var(--yl-line);display:grid;grid-template-columns:1fr;gap:22px}
+ .daily-home .yl-calendar{padding-bottom:18px;border-bottom:1px solid var(--yl-line)}
+ .daily-home .yl-globe-wrap{max-width:250px}
+ .daily-home .yl-lead h2{font-size:22px}
+ .daily-home .yl-item h3{font-size:17px}
+ .daily-home .yl-bottomline{grid-template-columns:1fr;gap:20px}
+ .daily-home .yl-bottomline article+article{border-left:0;border-top:1px solid var(--yl-line);padding:18px 0 0}
+ .daily-home .yl-street{grid-template-columns:1fr;gap:10px}
+ .daily-home .yl-street-title{display:flex;gap:12px;align-items:baseline}
+ .daily-home .yl-news-footer{align-items:start}
+ .daily-home .yl-news-footer>.yl-small{max-width:48%}
+ .daily-home .yl-earth-actions{display:block}
+}
+@media(pointer:coarse){.daily-home .yl-filter button{min-height:44px;display:inline-flex;align-items:center}.daily-home .yl-city{min-height:44px}.daily-home .yl-time-slider{min-height:38px}}
+@media(prefers-reduced-motion:reduce){.now-rain:before,.now-rain:after{animation:none}.pick{transition:none}}

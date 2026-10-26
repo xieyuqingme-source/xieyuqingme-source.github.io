@@ -119,7 +119,8 @@ class GamePublicationTests(unittest.TestCase):
                               if tag == "link" and attrs.get("rel") == "alternate" and attrs.get("hreflang")]
                 self.assertCountEqual(alternates, [("zh-CN", origin + "/" + counterpart + "/"),
                                                   ("en", origin + "/en/" + counterpart + "/")])
-                self.assertNotIn("xieyuqing.me", html, "Game metadata must follow the requested build origin.")
+                # The footer's contact address is not page metadata.
+                self.assertNotIn("xieyuqing.me", html.replace("xieyuqing.me@gmail.com", ""), "Game metadata must follow the requested build origin.")
                 self.assertNotIn("{{", html)
                 self.assertEqual(sum(tag == "h1" for tag, _ in elements), 1)
                 resources = [attrs.get("src", attrs.get("href", "")) for tag, attrs in elements
@@ -186,14 +187,14 @@ class GamePublicationTests(unittest.TestCase):
                 nav = html.split('class="site-nav"', 1)[1].split("</nav>", 1)[0]
                 links = [attrs.get("href") for tag, attrs in Elements(nav).elements if tag == "a"]
                 self.assertTrue(any(tag == "a" and attrs.get("class") == "brand" and attrs.get("href") == "/" for tag, attrs in Elements(html).elements))
-                self.assertEqual(nav.count('class="nav-item'), 5)
+                self.assertEqual(nav.count('class="nav-item'), 4)
                 self.assertEqual(nav.count('class="nav-group'), 3)
                 for route in ("/articles/", "/projects/", "/game/", "/about/", "/photos/", "/anthology/", "/map/", "/game/footprints/"):
                     self.assertIn(route, links)
         home = (output / "index.html").read_text(encoding="utf-8")
-        self.assertIn('id="daily-title">今日简报</h1>', home)
+        self.assertIn('id="daily-title">今日简报</h2>', home)
         self.assertIn('href="#writing"', home)
-        self.assertIn('class="yl-article-list"', home)
+        self.assertIn('class="yl-article-list recent-list"', home)
         self.assertIn('class="nav-entry" href="/projects/"', home)
         self.assertIn('href="/game/"', home)
 

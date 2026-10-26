@@ -176,9 +176,9 @@ class MarkdownRenderingTests(unittest.TestCase):
         self.assertEqual(brand["icons"], [])
         self.assertEqual("".join(brand["text"]).count("谢雨卿"), 1)
         primary = page.split('<nav class="site-nav"', 1)[1].split('</nav>', 1)[0]
-        self.assertEqual(primary.count('<a '), 10)
+        self.assertEqual(primary.count('<a '), 9)
         self.assertIn('href="/anthology/"', primary)
-        self.assertEqual(primary.count('class="nav-item'), 5)
+        self.assertEqual(primary.count('class="nav-item'), 4)
         self.assertEqual(primary.count('class="nav-group'), 3)
         header = page.split('<header', 1)[1].split('</header>', 1)[0]
         self.assertIn('class="header-tools"', header)
@@ -294,7 +294,8 @@ class MarkdownRenderingTests(unittest.TestCase):
 
     def test_projects_navigation_uses_exact_site_root(self):
         page = self.blog.document("Example", "<p>Body</p>", "example.html", "en")
-        links = [attrs for tag, attrs in Elements(page).elements if tag == "a"]
+        header = page.split('<header', 1)[1].split('</header>', 1)[0]
+        links = [attrs for tag, attrs in Elements(header).elements if tag == "a"]
         self.assertEqual(sum(attrs.get("href") == "/en/projects/" for attrs in links), 1)
         self.assertNotIn("/articles/projects/", page)
         archive_links = [attrs for tag, attrs in Elements(self.blog.archive([])).elements if tag == "a"]
@@ -303,8 +304,10 @@ class MarkdownRenderingTests(unittest.TestCase):
 
     def test_about_navigation_uses_root_route_without_article_prefix(self):
         page = self.blog.document("Example", "<p>Body</p>", "example.html", "en")
-        links = [attrs for tag, attrs in Elements(page).elements if tag == "a"]
+        header = page.split('<header', 1)[1].split('</header>', 1)[0]
+        links = [attrs for tag, attrs in Elements(header).elements if tag == "a"]
         self.assertEqual(sum(attrs.get("href") == "/en/about/" for attrs in links), 1)
+        self.assertIn('href="/en/about/#site"', page.split('<footer', 1)[1])
         self.assertNotIn('/articles/about.html', page)
         self.assertNotIn('/articles/about/', page)
 
@@ -462,9 +465,9 @@ class MarkdownRenderingTests(unittest.TestCase):
                                 and attrs.get("lang") == "en" for element, attrs in elements))
         self.assertEqual("".join(BrandLinks(page).links[0]["text"]).strip(), json.loads((ROOT / "home/locales/common.json").read_text(encoding="utf-8"))["en"]["common.brandName"])
         self.assertIn("Skip to content", page)
-        self.assertIn("Deep Sea Tech", page)
-        self.assertIn('data-skin-choice="sea"', page)
-        self.assertIn('data-theme-choice="dark"', page)
+        self.assertIn('id="theme-toggle"', page)
+        self.assertNotIn('data-skin-choice', page)
+        self.assertIn("Rainy days are good for a chat.", page)
         self.assertIn('href="/en/projects/"', page)
         headings = self.blog.toc(self.blog.render("## English heading", self.source), "en")
         self.assertTrue(any(tag == "a" and attrs.get("href") == "#english-heading"

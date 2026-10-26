@@ -195,7 +195,7 @@ def english_archive(blog):
     if any(not a.published for a in blog.articles):
         options += '<option value="unknown">Date unconfirmed</option>'
     report = translation_report(blog)
-    return f'''<section class="page-intro"><p class="eyebrow">ESSAYS &amp; NOTES</p><h1>Articles</h1><p>{escape(blog.config['article_english_description'])}</p>
+    return f'''<section class="page-intro"><h1>Articles</h1><p>{escape(blog.config['article_english_description'])}</p>
 <p>{report['complete']} English translations · {report['english_originals']} English original. Translations are AI-assisted; each links to its exact Chinese original.</p>
 <p class="translation-coverage">{report['pending']} pending · {report['stale']} awaiting an update. Unavailable translations link to the Chinese original.</p></section>
 <section class="archive" id="archive" aria-labelledby="archive-heading"><div class="section-heading"><h2 id="archive-heading">All articles</h2><span class="archive-total">{len(cards)} <small>original articles</small></span></div>

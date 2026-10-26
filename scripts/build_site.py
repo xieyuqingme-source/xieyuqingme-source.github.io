@@ -4,6 +4,7 @@ from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import unquote, urlsplit, urlunsplit
 from xml.etree import ElementTree as ET
+from datetime import date
 import argparse
 import json
 import ipaddress
@@ -43,9 +44,10 @@ PROJECT_FIELDS = {"id", "title", "english_title", "kind", "summary", "problem", 
 PROJECT_OPTIONAL_FIELDS = {"download_url", "download_label", "guide_label", "link_status", "demo_url"}
 PROJECT_DEMO_ROUTES = {"/map/", "/game/ranking/"}
 BRAND_ASSETS = ("share-cover.png", "favicon.svg", "favicon.ico", "favicon.png")
-HOME_DAILY_ASSETS = ("home-daily.css", "home-daily.js", "home-earth.js", "astronomy-solar.js", "home-ink.webp",
+HOME_DAILY_ASSETS = ("home-daily.css", "home-daily.js", "home-now.js", "home-earth.js", "astronomy-solar.js", "home-ink.webp",
                      "vendor/d3-7.9.0.min.js", "vendor/D3-LICENSE")
-HOME_PHOTO = "/photos/images/p-4122f58ade4023f152364ccc-fc4b164a51dcc1e8-640.webp"
+HOME_PHOTO = "/photos/images/p-71f77ab6511ec1ce656a58a3-18000666287e1d55-640.webp"
+HOME_PICKS = "home/home-picks.json"
 ABOUT_FIELDS = {"name", "english_name", "chinese_bio", "english_bio", "wechat", "email"}
 PRIVATE_PATH = re.compile(r"(?<![A-Za-z0-9])[A-Za-z]:[\\/]|\\\\[^\s\\]+[\\/]|/(?:Users|home|mnt)/", re.I)
 EXTERNAL_ICON = '''<svg class="external-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 17 17 7M7 7h10v10"/></svg>'''
@@ -142,9 +144,11 @@ def render_about(data):
     text = {key: escape(value, quote=True) for key, value in data.items() if key != "chinese_bio"}
     paragraphs = "\n".join(f'<p>{escape(value, quote=True)}</p>' for value in data["chinese_bio"])
     return f'''<article class="about-profile" aria-labelledby="about-name">
-  <h2 class="about-name" id="about-name">{text["name"]}</h2>
-  <p class="about-identity" lang="en">{text["english_name"]}</p>
-  <div class="about-bio" lang="zh-CN">{paragraphs}</div>
+  <div class="about-story">
+    <h2 class="about-name" id="about-name">{text["name"]}</h2>
+    <p class="about-identity" lang="en">{text["english_name"]}</p>
+    <div class="about-bio" lang="zh-CN">{paragraphs}</div>
+  </div>
   <section class="about-contact" aria-labelledby="about-contact-title">
     <h2 id="about-contact-title">联系我</h2>
     <dl><dt>微信公众号</dt><dd>{text["wechat"]}
@@ -158,6 +162,33 @@ def render_about(data):
     <h2 id="about-english-title">About me</h2><p>{text["english_bio"]}</p>
   </section>
 </article>'''
+
+
+def render_site_notes(waline, repository, language="zh-CN"):
+    """Technical and privacy notes, gathered on /about/#site instead of scattered across pages."""
+    host = escape(waline.get("hostingProvider", ""))
+    database = escape(waline.get("databaseProvider", ""))
+    repository = escape(repository, quote=True)
+    if language == "en":
+        items = [f'The source code is public on <a href="{repository}">GitHub</a>; pages are generated with Python and use system fonts only, with no external font files.',
+                 'The reading brief at the bottom of the homepage is a curated sample. It is not updated automatically every day, and each item keeps its original date and link.',
+                 'Weather on the homepage comes from Open-Meteo, queried by city only. Your location is never requested; the chosen city and the latest reading stay in your browser.',
+                 'Article view counts and comments use Waline. These requests send your IP address and browser information to the Waline backend and its providers'
+                 + (f' (hosting: {host}; database: {database})' if host and database else '') + '. The comment area explains what is shown publicly.',
+                 'Map geography comes from Natural Earth (public domain). Project screenshots and other third-party sources are credited in each project.']
+        title = "About this site"
+    else:
+        items = [f'网站的源代码公开在 <a href="{repository}">GitHub</a>，页面用 Python 生成。全站使用设备自带的字体，不加载外部字体文件。',
+                 '首页底部的“今日简报”是一份选读样刊，不会每天自动更新；每条新闻都保留原文日期和链接。',
+                 '首页的天气来自 Open-Meteo，只按城市查询，不读取你的位置；所选城市和最近一次天气只保存在你的浏览器里。',
+                 '文章的浏览量和留言由 Waline 提供：相关请求会把 IP 和浏览器信息发送给 Waline 后端及其托管商'
+                 + (f'（服务托管：{host}；数据库：{database}）' if host and database else '') + '。留言区另有说明。',
+                 '足迹地图的底图来自 Natural Earth（公有领域）；作品截图与其他第三方来源见各项目说明。']
+        title = "关于本站"
+    if not waline.get("enabled"):
+        items = [item for item in items if "Waline" not in item]
+    lis = "".join(f"<li>{item}</li>" for item in items)
+    return f'<section class="about-site" id="site" aria-labelledby="site-title"><h2 id="site-title">{title}</h2><ul>{lis}</ul></section>'
 
 
 def project_asset_sources(projects):
@@ -235,6 +266,8 @@ def render_home_recent(blog, language="zh-CN", limit=5):
                 continue
             if article.original:
                 url = english_article_url(blog, original)
+        elif article.language != "zh-CN" and any(item.language == "zh-CN" for item in originals):
+            continue  # English practice pieces lead the English homepage instead.
         topic = blog.topic(article) if article.language == "zh-CN" or article.original else "English"
         if language == "en":
             topic = TOPICS.get(topic, topic)
@@ -270,6 +303,114 @@ def render_home_projects(projects, language="zh-CN"):
         label = "Open tool →" if language == "en" else "打开体验 →"
         cards.append(f'<article class="yl-project"><a href="{url}" aria-label="{text["title"]}"><img src="{text["screenshot"]}" width="{width}" height="{height}" alt="{text["screenshot_alt"]}" loading="lazy" decoding="async"></a><div><h3><a href="{url}">{text["title"]}</a></h3><p>{text["summary"]}</p><a class="yl-link" href="{url}">{label}</a></div></article>')
     return "\n".join(cards)
+
+
+def plain_markdown(text):
+    """Article text without emphasis markers or footnote references, for quote checks."""
+    return re.sub(r"\*\*|\[\^[^\]]+\]", "", text)
+
+
+def load_home_picks(blog):
+    """Featured essays and verbatim one-line quotes, all tied to published articles."""
+    source = ROOT / HOME_PICKS
+    if source.is_symlink():
+        raise ValueError("Homepage picks cannot be a symlink.")
+    data = json.loads(source.read_text(encoding="utf-8"))
+    if not isinstance(data, dict) or set(data) != {"featured", "quotes"}:
+        raise ValueError("home/home-picks.json needs only featured and quotes lists.")
+    by_source = {article.source.relative_to(blog.source_root).as_posix(): article for article in blog.articles}
+    featured, quotes = [], []
+    if not isinstance(data["featured"], list) or not 1 <= len(data["featured"]) <= 6:
+        raise ValueError("Feature between one and six essays on the homepage.")
+    for item in data["featured"]:
+        if not isinstance(item, dict) or set(item) != {"source", "note"} or not isinstance(item.get("source"), str):
+            raise ValueError(f"Featured essays need a source and a note: {item!r}")
+        if item["source"] not in by_source:
+            continue  # Checked against the real archive by test_build_site.py.
+        note = item["note"]
+        if (not isinstance(note, dict) or set(note) != {"zh-CN", "en"}
+                or any(not isinstance(value, str) or not value.strip() or len(value) > 200 or PRIVATE_PATH.search(value) for value in note.values())):
+            raise ValueError("Each featured essay needs a short Chinese and English note.")
+        featured.append((by_source[item["source"]], note))
+    if not isinstance(data["quotes"], list) or not 1 <= len(data["quotes"]) <= 365:
+        raise ValueError("Keep between 1 and 365 homepage quotes.")
+    for item in data["quotes"]:
+        if not isinstance(item, dict) or set(item) != {"source", "text", "en"} or not isinstance(item.get("source"), str):
+            raise ValueError(f"Quotes need a source, text and English rendering: {item!r}")
+        if item["source"] not in by_source:
+            continue
+        article = by_source[item["source"]]
+        text, english = item["text"], item["en"]
+        if not isinstance(text, str) or not 4 <= len(text) <= 120 or text not in plain_markdown(article.source.read_text(encoding="utf-8-sig")):
+            raise ValueError(f"A homepage quote must appear verbatim in its article: {str(text)[:24]}")
+        if not isinstance(english, str) or not english.strip() or len(english) > 320:
+            raise ValueError("Each homepage quote needs a short English rendering.")
+        quotes.append((article, text, english))
+    return featured, quotes
+
+
+def article_link(blog, article, language):
+    """Title, URL and language to show for an article: its English translation on English pages."""
+    from english_site import english_article_url
+    if language == "en":
+        translated = blog.translations.get(article.source.relative_to(blog.source_root).as_posix())
+        if translated is not None:
+            return translated.title, english_article_url(blog, article), "en"
+    return article.title, blog.href(article.destination), article.language
+
+
+def render_home_picks(blog, featured, language="zh-CN"):
+    from english_site import TOPICS
+    cards = []
+    for article, note in featured:
+        title, url, lang = article_link(blog, article, language)
+        topic = blog.topic(article)
+        if language == "en":
+            topic = TOPICS.get(topic, topic)
+        stamp = escape(article.published.replace("-", ".")) if article.published else ""
+        cards.append(f'<article class="pick"><p class="pick-meta"><span>{escape(topic)}</span><time datetime="{escape(article.published, quote=True)}">{stamp}</time></p>'
+                     f'<h3 lang="{escape(lang, quote=True)}"><a href="{escape(url, quote=True)}">{escape(title)}</a></h3>'
+                     f'<p class="pick-note">{escape(note[language])}</p></article>')
+    return "\n".join(cards)
+
+
+def home_quote_items(blog, quotes):
+    items = []
+    for article, text, english in quotes:
+        zh_title, zh_url, _ = article_link(blog, article, "zh-CN")
+        en_title, en_url, _ = article_link(blog, article, "en")
+        items.append({"text": {"zh-CN": text, "en": english}, "title": {"zh-CN": zh_title, "en": en_title},
+                      "url": {"zh-CN": zh_url, "en": en_url}, "date": article.published or ""})
+    return items
+
+
+def render_home_quote(item, language="zh-CN"):
+    """No-script default; home-now.js picks the day's quote in Kuala Lumpur time."""
+    title = item["title"][language]
+    label = title if language == "en" else "《" + title + "》"
+    stamp = escape(item["date"].replace("-", ".")) if item["date"] else ""
+    text = escape(item["text"][language])
+    source = (f'<span aria-hidden="true">{"—" if language == "en" else "——"}</span> <a href="{escape(item["url"][language], quote=True)}">{escape(label)}</a>'
+              + (f' <time datetime="{escape(item["date"], quote=True)}">{stamp}</time>' if stamp else ""))
+    return text, source
+
+
+def render_quote_section(items, language="zh-CN"):
+    if not items:
+        return ""
+    item = items[(date.today() - date(1970, 1, 1)).days % len(items)]
+    text, source = render_home_quote(item, language)
+    title = "A line from my essays" if language == "en" else "旧文一句"
+    return (f'<section class="home-quote" aria-labelledby="quote-title"><h2 class="quote-title" id="quote-title">{title}</h2>'
+            f'<blockquote id="own-quote"><p id="own-quote-text">{text}</p><p class="quote-source" id="own-quote-source">{source}</p></blockquote></section>')
+
+
+def render_picks_section(blog, featured, language="zh-CN"):
+    if not featured:
+        return ""
+    title = "Start with these" if language == "en" else ("先读这三篇" if len(featured) == 3 else "先读这几篇")
+    return (f'<section class="home-section home-picks" id="picks" aria-labelledby="picks-title"><div class="section-head"><h2 id="picks-title">{title}</h2></div>'
+            f'<div class="pick-grid">{render_home_picks(blog, featured, language)}</div></section>')
 
 
 def daily_asset_sources():
@@ -535,10 +676,19 @@ def build_site(address, map_preview_source=None):
         "home_recent_articles": render_home_recent(blog), "home_recent_articles_en": render_home_recent(blog, "en"),
         "home_project_cards": render_home_projects(projects), "home_project_cards_en": render_home_projects(projects, "en"),
         "home_photo_src": HOME_PHOTO if has_home_photo else "/assets/home-ink.webp",
-        "home_photo_alt": "谢雨卿摄影：北京永定河傍晚的水面与远山" if has_home_photo else "水墨山景",
-        "home_photo_alt_en": "Photograph by Xie Yuqing: the Yongding River and distant hills at dusk" if has_home_photo else "An ink-wash mountain landscape",
-        "home_photo_caption": "宛平城外，卢沟桥边，夕阳西下。" if has_home_photo else "在主题之间，慢慢探索。",
-        "home_photo_caption_en": "Sunset by Lugou Bridge, outside Wanping." if has_home_photo else "Explore at your own pace.",
+        "home_photo_srcset": (HOME_PHOTO + " 640w, " + HOME_PHOTO.replace("-640.webp", "-1706.webp") + " 1706w") if has_home_photo else "/assets/home-ink.webp 2172w",
+        "home_photo_alt": "谢雨卿摄影：北京小清河公园的雪和河面" if has_home_photo else "水墨山景",
+        "home_photo_alt_en": "Photograph by Xie Yuqing: snow and the river in Xiaoqinghe Park, Beijing" if has_home_photo else "An ink-wash mountain landscape",
+        "home_photo_caption": "小清河公园在社科大东边一公里左右，那时常来这里散步。" if has_home_photo else "在主题之间，慢慢探索。",
+        "home_photo_caption_en": "Xiaoqinghe Park, about a kilometre east of my university in Beijing. I often walked here." if has_home_photo else "Explore at your own pace.",
+    })
+    featured, quotes = load_home_picks(blog)
+    quote_items = home_quote_items(blog, quotes)
+    values.update({
+        "own_quotes_data": safe_json(quote_items),
+        "home_quote_section": render_quote_section(quote_items), "home_quote_section_en": render_quote_section(quote_items, "en"),
+        "home_picks_section": render_picks_section(blog, featured), "home_picks_section_en": render_picks_section(blog, featured, "en"),
+        "site_notes_en": render_site_notes(blog.waline, blog.config["repository_url"], "en"),
     })
     for name, value in values.items(): home = home.replace("{{" + name + "}}", value)
     if "{{" in home: raise ValueError("Unresolved home template placeholder.")
@@ -553,7 +703,8 @@ def build_site(address, map_preview_source=None):
     (OUTPUT / "projects").mkdir(exist_ok=True)
     (OUTPUT / "projects/index.html").write_text(localize_page(projects_page, ROOT, address, "/projects/"), encoding="utf-8")
     about_page = (ROOT / "home/about.template.html").read_text(encoding="utf-8")
-    for name, value in {"site_url": escape(address, quote=True), "about_content": render_about(about_data)}.items():
+    for name, value in {"site_url": escape(address, quote=True), "about_content": render_about(about_data),
+                        "site_notes": render_site_notes(blog.waline, blog.config["repository_url"])}.items():
         about_page = about_page.replace("{{" + name + "}}", value)
     if "{{" in about_page:
         raise ValueError("Unresolved about template placeholder.")

@@ -471,12 +471,12 @@ class Blog:
 <p class="article-meta"><span class="topic-tag">{escape(topic)}</span>{self.publication(article)}<span>{article.category}</span>{self.metrics(article)}</p>
 <h2 class="article-title"><a href="{escape(self.href(article.destination))}" lang="{article.language}">{escape(article.title)}</a></h2>
 <p class="article-excerpt" lang="{article.language}">{escape(excerpt)}</p>
-<p class="article-read"><span>约 {self.reading_minutes(article)} 分钟阅读</span><a href="{escape(self.href(article.destination))}" aria-label="阅读：{escape(article.title)}">阅读全文 {ARROW_ICON}</a></p>
+<p class="article-read"><span>约 {self.reading_minutes(article)} 分钟阅读</span><a href="{escape(self.href(article.destination))}" aria-label="阅读：{escape(article.title)}">阅读全文 <span aria-hidden="true">→</span></a></p>
 </div>
 </li>''')
         return '<ul class="article-list">' + "\n".join(cards) + '</ul>' if cards else '<p class="empty-state">文章即将更新。</p>'
 
-    def archive(self, articles: list[Article], title="文章", subtitle="从一篇文章开始，慢慢读。") -> str:
+    def archive(self, articles: list[Article], title="全部文章", subtitle="从一篇文章开始，慢慢读。") -> str:
         notice = ('<p class="statistics-notice">浏览与评论统计请求会向所选Waline后端及其托管商发送IP和浏览器信息。'
                   + self.provider_notice() + '</p>') if self.waline["enabled"] else ""
         topics = sorted({self.topic(article) for article in articles})
@@ -489,14 +489,14 @@ class Blog:
         if any(not article.published for article in articles):
             year_options += '<option value="unknown">时间待确认</option>'
         return f'''<section class="archive" id="archive" aria-labelledby="archive-heading">
-<div class="section-heading"><div><p class="eyebrow">~/writing · 文章</p><h2 id="archive-heading">{escape(title)}</h2><p>{escape(subtitle)}</p></div><span class="archive-total">{len(articles):02d} <small>篇文章</small></span></div>
+<div class="section-heading"><div><h2 id="archive-heading">{escape(title)}</h2><p>{escape(subtitle)}</p></div><span class="archive-total">{len(articles):02d} <small>篇文章</small></span></div>
 <nav class="language-filters" aria-label="按文章语言浏览"><a href="{escape(self.href('index.html'))}#archive"{' aria-current="page"' if len({a.language for a in articles}) != 1 else ''}>全部文章</a><a href="{escape(self.href('chinese.html'))}#archive"{' aria-current="page"' if articles and all(a.language == 'zh-CN' for a in articles) else ''}>中文</a><a href="{escape(self.href('english.html'))}#archive" lang="en"{' aria-current="page"' if articles and all(a.language == 'en' for a in articles) else ''}>English</a></nav>
 <div class="archive-controls" hidden>
 <div class="topic-filters" role="group" aria-label="按主题筛选">{''.join(filters)}</div>
 <div class="archive-query"><label class="year-filter"><span class="sr-only">按发表年份筛选</span><select id="article-year" aria-label="按发表年份筛选"><option value="all">全部年份</option>{year_options}</select></label>
 <label class="search-box"><span class="search-icon" aria-hidden="true"></span><span class="sr-only">搜索文章标题或摘要</span><input type="search" id="article-search" placeholder="搜索标题或摘要…" autocomplete="off" aria-controls="archive-results"><span class="search-key" aria-hidden="true">/</span></label>
 </div></div>
-{notice}<p class="search-status" id="archive-results" role="status" aria-live="polite" hidden></p>
+<p class="search-status" id="archive-results" role="status" aria-live="polite" hidden></p>
 {self.listing(articles)}
 <nav class="archive-pagination" aria-label="文章分页" hidden>
 <button type="button" data-page="prev">← 上一页</button><span class="pagination-position"></span><button type="button" data-page="next">下一页 →</button>
@@ -504,7 +504,7 @@ class Blog:
 <p id="page-jump-message" class="page-jump-message" role="status" aria-live="polite" hidden></p>
 </nav>
 <div class="search-empty" hidden><p>没有找到符合条件的文章。</p><button type="button" class="reset-search">清除搜索与筛选</button></div>
-</section>'''
+{notice}</section>'''
 
     def toc(self, rendered: str, language="zh-CN") -> str:
         class Headings(HTMLParser):
@@ -578,14 +578,14 @@ class Blog:
         for neighbour, label in ((index - 1, "Newer article" if english else "较新一篇"), (index + 1, "Older article" if english else "较早一篇")):
             if 0 <= neighbour < len(entries):
                 other = entries[neighbour]
-                related.append(f'<a href="{escape(self.href(other.destination))}"><span>{label}</span><strong lang="{other.language}">{escape(other.title)}</strong><small>{other.published} {ARROW_ICON}</small></a>')
+                related.append(f'<a href="{escape(self.href(other.destination))}"><span>{label}</span><strong lang="{other.language}">{escape(other.title)}</strong><small>{other.published} <span aria-hidden="true">→</span></small></a>')
         next_reading = f'<nav class="next-reading" aria-label="{"Continue reading" if english else "继续阅读"}" lang="{language}">' + ''.join(related) + '</nav>' if related else ''
         topic = TOPICS[self.topic(article)] if english else self.topic(article)
         back_url = "/en/articles/" if english else self.href(article.listing)
         body = f'''<div class="reading-progress" aria-hidden="true"><span></span></div><article class="reading-page"><header class="article-header">
 <a class="back-link" href="{escape(back_url)}">← {"Articles" if english else article.category}</a>
 <p class="eyebrow">{escape(topic)}</p><h1>{escape(article.title)}</h1>
-<p class="article-meta">{self.publication(article, language)}<span>{escape(self.config['author'])}</span><span>{str(self.reading_minutes(article)) + " min read" if english else "约 " + str(self.reading_minutes(article)) + " 分钟阅读"}</span>{self.metrics(article, language)}</p>{translation_note}</header>
+<p class="article-meta">{self.publication(article, language)}<span>{"Xie Yuqing" if english else "谢雨卿"}</span><span>{str(self.reading_minutes(article)) + " min read" if english else "约 " + str(self.reading_minutes(article)) + " 分钟阅读"}</span>{self.metrics(article, language)}</p>{translation_note}</header>
 {controls}<div {layout}><div class="reading-content"><div class="article-body" id="article-content">{rendered}</div>
 {self.statistics_notice(language)}{self.comments(article)}<div class="article-end"><span aria-hidden="true">◆</span><p>{"Thanks for reading." if english else "谢谢你读到这里。"}</p><a href="{escape(back_url)}#archive">{"Back to articles" if english else "返回文章归档"} →</a></div>{next_reading}</div>{directory}</div></article>
 <dialog class="article-image-viewer" id="article-image-viewer" aria-label="{"Article image" if english else "文章图片大图"}"><div class="image-viewer-actions"><a href="#" target="_blank" rel="noopener">{"View original image" if english else "查看原图"} {ARROW_ICON}</a><button type="button">{"Close" if english else "关闭"}</button></div><img alt=""><p></p></dialog>'''
@@ -664,17 +664,16 @@ class Blog:
         featured = ""
         if self.articles:
             latest = self.articles[0]
-            featured = f'''<aside class="featured-article"><div class="feature-top"><p class="eyebrow">LATEST ESSAY · 最新一篇</p>{ARROW_ICON}</div><div><p class="featured-meta">{escape(self.topic(latest))} <span> / </span>{self.publication(latest)}</p><h2><a href="{escape(self.href(latest.destination))}" lang="{latest.language}">{escape(latest.title)}</a></h2><p class="featured-excerpt" lang="{latest.language}">{escape(self.excerpt(latest))}</p></div><a class="featured-link" href="{escape(self.href(latest.destination))}">读这篇文章 <span aria-hidden="true">→</span></a></aside>'''
+            featured = f'''<aside class="featured-article"><div class="feature-top"><p class="eyebrow">最新一篇</p></div><div><p class="featured-meta">{escape(self.topic(latest))} <span> / </span>{self.publication(latest)}</p><h2><a href="{escape(self.href(latest.destination))}" lang="{latest.language}">{escape(latest.title)}</a></h2><p class="featured-excerpt" lang="{latest.language}">{escape(self.excerpt(latest))}</p></div><a class="featured-link" href="{escape(self.href(latest.destination))}">读这篇文章 <span aria-hidden="true">→</span></a></aside>'''
         chinese_heading, separator, english_heading = self.config['article_heading'].partition(' ')
         article_heading = escape(chinese_heading) + (f' <span>{escape(english_heading)}</span>' if separator else '')
-        intro = f'''<section class="home-intro" aria-labelledby="home-heading"><div class="intro-copy"><p class="eyebrow"><span class="eyebrow-line" aria-hidden="true"></span> ~/essays · 个人写作</p><h1 id="home-heading">{article_heading}</h1><p class="intro-description">{escape(self.config['article_description'])}</p><p class="intro-english" lang="en">{escape(self.config['article_english_description'])}</p><div class="intro-actions"><a class="primary-link" href="#archive">浏览文章 <span aria-hidden="true">↓</span></a><a class="quiet-link" href="/about/">认识作者 {ARROW_ICON}</a></div></div>{featured}</section>
-<div class="archive-banner"><p>写作，是观察世界的另一种方式。</p><div><span><strong>{chinese:02d}</strong> 中文文章</span><span><strong>{english:02d}</strong> English</span><span><strong>{len({self.topic(a) for a in self.articles}):02d}</strong> 写作主题</span></div></div>'''
+        intro = f'''<section class="home-intro" aria-labelledby="home-heading"><div class="intro-copy"><h1 id="home-heading">{article_heading}</h1><p class="intro-description">{escape(self.config['article_description'])}</p><p class="intro-count">{chinese} 篇中文文章，{english} 篇英文练习，按 {len({self.topic(a) for a in self.articles})} 个主题整理。</p><div class="intro-actions"><a class="primary-link" href="#archive">浏览文章 <span aria-hidden="true">↓</span></a><a class="quiet-link" href="/about/">认识作者 <span aria-hidden="true">→</span></a></div></div>{featured}</section>'''
         self.write("index.html", self.document("文章", intro + self.archive(self.articles), "index.html", active="index.html", description=self.config["article_description"]))
         for folder, (language, category, destination) in FOLDERS.items():
             entries = [article for article in self.articles if article.category == category]
             label = "CHINESE ESSAYS" if language == "zh-CN" else "ENGLISH WRITING"
             description = "用中文记录生活里的问题、见闻与思考。" if language == "zh-CN" else "Short essays and writing practice, one piece at a time."
-            heading = f'<section class="page-intro"><p class="eyebrow">{label}</p><h1>{category}</h1><p>{description}</p></section>'
+            heading = f'<section class="page-intro"><h1>{category}</h1><p>{description}</p></section>'
             self.write(destination, self.document(category, heading + self.archive(entries, "全部文章", "按写作日期排列，最新文章在前。"), destination, active=destination))
         self.write("about.html", self.about_redirect())
         for article in self.articles:

@@ -125,15 +125,15 @@
         "city": "绵阳",
         "region": "四川",
         "country": "中国",
-        "title": "在秀水镇出生",
-        "description": "在秀水镇出生"
+        "title": "在绵阳出生",
+        "description": "在绵阳出生"
       },
       "en": {
         "city": "Mianyang",
         "region": "Sichuan",
         "country": "China",
-        "title": "Born in Xiushui Town",
-        "description": "Born in Xiushui Town"
+        "title": "Born in Mianyang",
+        "description": "Born in Mianyang"
       }
     },
     "table-d7c27ef9b13a2dba-1": {
@@ -157,15 +157,15 @@
         "city": "西充",
         "region": "四川",
         "country": "中国",
-        "title": "在西充中学上初中",
-        "description": "在西充中学上初中"
+        "title": "在西充上初中",
+        "description": "在西充上初中"
       },
       "en": {
         "city": "Xichong",
         "region": "Sichuan",
         "country": "China",
-        "title": "Attended junior high at Xichong Middle School",
-        "description": "Attended junior high at Xichong Middle School"
+        "title": "Attended junior high in Xichong",
+        "description": "Attended junior high in Xichong"
       }
     },
     "table-bb642ae2092e7100-1": {

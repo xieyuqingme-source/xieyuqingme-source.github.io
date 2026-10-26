@@ -49,10 +49,10 @@ class CompactHeaderTests(unittest.TestCase):
     def render(self, route="/map/", language="zh-CN"):
         return Nodes(localize_page(PAGE, ROOT, "https://example.test", route, language))
 
-    def test_five_section_names_are_direct_links_in_both_languages(self):
-        destinations = ["/", "/articles/", "/projects/", "/photos/", "/about/"]
-        for language, labels in [("zh-CN", ["今日", "文章", "作品", "生活", "关于"]),
-                                 ("en", ["Today", "Articles", "Projects", "Life", "About"])]:
+    def test_four_section_names_are_direct_links_in_both_languages(self):
+        destinations = ["/articles/", "/projects/", "/map/", "/about/"]
+        for language, labels in [("zh-CN", ["文章", "作品", "足迹", "关于"]),
+                                 ("en", ["Articles", "Projects", "Map", "About"])]:
             with self.subTest(language=language):
                 tree = self.render(language=language)
                 entries = tree.find(lambda node: node["attrs"].get("class") == "nav-entry")
@@ -64,7 +64,7 @@ class CompactHeaderTests(unittest.TestCase):
         tree = self.render(language="en")
         nav = tree.find(lambda node: node["tag"] == "nav")[0]
         links = tree.find(lambda node: node["tag"] == "a", nav)
-        for route in ["/anthology/", "/game/", "/game/ranking/", "/game/footprints/", "/map/"]:
+        for route in ["/anthology/", "/game/", "/game/ranking/", "/game/footprints/", "/photos/"]:
             self.assertIn("/en" + route, [node["attrs"]["href"] for node in links])
         summaries = tree.find(lambda node: node["tag"] == "summary" and "data-i18n-aria-label" in node["attrs"], nav)
         self.assertEqual(len(summaries), 3)
@@ -77,14 +77,33 @@ class CompactHeaderTests(unittest.TestCase):
 
     def test_nested_destinations_highlight_their_section_and_keep_tools(self):
         for route, section in [("/articles/中文文章/example.html", "/articles/"),
-                               ("/game/ranking/", "/projects/"), ("/map/", "/photos/")]:
+                               ("/game/ranking/", "/projects/"), ("/photos/", "/map/")]:
             with self.subTest(route=route):
                 tree = self.render(route)
                 selected = tree.find(lambda node: node["attrs"].get("class") == "nav-item is-current")
                 self.assertEqual(len(selected), 1)
                 self.assertEqual(selected[0]["children"][0]["attrs"]["href"], section)
                 self.assertEqual(len(tree.find(lambda node: node["attrs"].get("class") == "site-language-switch")), 1)
-                self.assertEqual(len(tree.find(lambda node: node["attrs"].get("id") == "theme-control")), 1)
+                toggles = tree.find(lambda node: node["attrs"].get("id") == "theme-toggle")
+                self.assertEqual(len(toggles), 1)
+                self.assertEqual(toggles[0]["tag"], "button")
+                self.assertEqual(tree.find(lambda node: "data-skin-choice" in node["attrs"]), [])
+
+    def test_home_route_highlights_no_section_and_every_page_ends_with_one_footer(self):
+        tree = self.render("/")
+        self.assertEqual(tree.find(lambda node: node["attrs"].get("class") == "nav-item is-current"), [])
+        page = PAGE.replace("</main>", '</main><footer class="site-footer container"><p>Old footer</p></footer>')
+        for language, prefix in (("zh-CN", ""), ("en", "/en")):
+            with self.subTest(language=language):
+                tree = Nodes(localize_page(page, ROOT, "https://example.test", "/projects/", language))
+                footers = tree.find(lambda node: node["tag"] == "footer")
+                self.assertEqual(len(footers), 1)
+                self.assertNotIn("Old footer", footers[0]["text"])
+                links = [node["attrs"]["href"] for node in tree.find(lambda node: node["tag"] == "a", footers[0])]
+                for route in ("/articles/", "/projects/", "/map/", "/photos/", "/about/"):
+                    self.assertIn(prefix + route, links)
+                self.assertIn(prefix + "/about/#site", links)
+                self.assertTrue(any(href.startswith("mailto:") for href in links))
 
 
 if __name__ == "__main__":

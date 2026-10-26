@@ -51,8 +51,8 @@ body.ranking-page.view-large.presentation .ranking-main { width: calc(100% - 32p
 }
 .board-heading { padding: 20px 12px 22px; text-align: center; }
 .title-label { display: block; color: var(--muted); font-size: .65rem; margin-bottom: 6px; }
-#ranking-title { display: block; width: 100%; padding: 5px 12px; border: 1px solid transparent; background: transparent; text-align: center; font: 600 clamp(1.35rem,2.5vw,2rem)/1.5 var(--sans); resize: none; overflow: hidden; overflow-wrap: anywhere; }
-#ranking-title:hover { border-color: var(--line); }
+textarea#ranking-title { display: block; width: 100%; padding: 5px 12px; border: 1px solid transparent; background: transparent; text-align: center; font: 600 clamp(1.35rem,2.5vw,2rem)/1.5 var(--sans); resize: none; overflow: hidden; overflow-wrap: anywhere; }
+textarea#ranking-title:hover { border-color: var(--line); }
 .operation-hint { margin: 0 0 12px; color: var(--muted); font-size: .73rem; }
 .ranking-board { overflow: hidden; border: 1px solid var(--line); border-radius: 8px; }
 .tier-row { display: grid; grid-template-columns: 100px minmax(0,1fr); min-height: 134px; background: var(--surface); }
@@ -129,7 +129,7 @@ body.dragging { user-select: none; cursor: grabbing; }
 .presentation #presentation-toggle { background: var(--accent); color: var(--paper); border-color: var(--accent); }
 .presentation .board-heading { padding-top: 0; }
 .presentation #display-title { display: block !important; margin: 0; font-size: clamp(1.5rem,3vw,2.5rem); line-height: 1.4; overflow-wrap: anywhere; }
-.presentation #ranking-title { display: none; }
+.presentation textarea#ranking-title { display: none; }
 .presentation .pool-tag, .presentation .pool-footnote, .presentation .save-status { display: none; }
 .presentation .game-message[data-error="false"] { display: none; }
 .presentation .item-list:empty::before { content: ""; }

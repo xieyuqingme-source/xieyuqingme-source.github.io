@@ -58,19 +58,18 @@ for (const name of Object.keys(generated)) {
   checks.push(`${name}: empty state and clear reset`);
   assert.equal(ui.window.SiteTheme, ui.themeController);
   assert.equal(ui.document.documentElement.dataset.theme, 'light');
-  assert.equal(ui.themeLabel.textContent, '墨绿纸白');
-  assert.equal(ui.themeMode.textContent, '浅色 · 跟随系统');
+  assert.equal(ui.themeLabel.textContent, '切换到深色');
+  assert.equal(ui.document.documentElement.dataset.themeMode, 'system');
   ui.window.SiteTheme.choose('dark');
   assert.equal(ui.document.documentElement.dataset.theme, 'dark');
-  assert.equal(ui.document.documentElement.dataset.skin, 'emerald');
-  assert.equal(ui.themeLabel.textContent, '墨绿纸白');
-  assert.equal(ui.themeMode.textContent, '深色');
+  assert.equal(ui.document.documentElement.dataset.skin, undefined);
+  assert.equal(ui.themeLabel.textContent, '切换到浅色');
   assert.equal(ui.stored.get('xieyuqing-blog-theme'), 'dark');
   ui.window.SiteTheme.choose('light');
   assert.equal(ui.document.documentElement.dataset.theme, 'light');
-  assert.equal(ui.themeMode.textContent, '浅色');
-  assert.equal(ui.stored.get('xieyuqing-blog-theme'), 'light');
-  checks.push(`${name}: shared skin and brightness controller remains usable`);
+  assert.equal(ui.themeLabel.textContent, '切换到深色');
+  assert.equal(ui.stored.has('xieyuqing-blog-theme'), false);
+  checks.push(`${name}: shared light/dark controller remains usable`);
   if (ui.year.options.some(x => x.value === '2024')) {
     ui.year.value = '2024'; ui.year.emit('change');
     assert(ui.visible().every(x => x.year === '2024')); assert.equal(ui.position.textContent.startsWith('1 /'), true);

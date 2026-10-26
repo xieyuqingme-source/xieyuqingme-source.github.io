@@ -180,14 +180,14 @@ def _metadata_values(value, fallback, language):
 
 
 def appearance_bootstrap():
-    """Resolve independent axes before CSS; migrate only a missing skin preference."""
-    return '<script>(()=>{let saved,skin;try{saved=localStorage.getItem("xieyuqing-blog-theme");}catch(_){}try{skin=localStorage.getItem("xieyuqing-site-skin");}catch(_){}const mode=saved==="light"||saved==="dark"?saved:"system";skin=skin==="emerald"||skin==="sea"?skin:(mode==="dark"?"sea":"emerald");let tone=mode;if(mode==="system"){tone="light";try{if(window.matchMedia("(prefers-color-scheme: dark)").matches)tone="dark";}catch(_){}}document.documentElement.dataset.skin=skin;document.documentElement.dataset.theme=tone;document.documentElement.dataset.themeMode=mode;})();</script>'
+    """Resolve light/dark before CSS: a saved choice, otherwise the system setting."""
+    return '<script>(()=>{let saved;try{saved=localStorage.getItem("xieyuqing-blog-theme");}catch(_){}const mode=saved==="light"||saved==="dark"?saved:"system";let tone=mode;if(mode==="system"){tone="light";try{if(window.matchMedia("(prefers-color-scheme: dark)").matches)tone="dark";}catch(_){}}document.documentElement.dataset.theme=tone;document.documentElement.dataset.themeMode=mode;})();</script>'
 
 
 def version_shared_assets(page, root):
     """Refresh shared UI after local/production updates without flushing user data."""
     import hashlib
-    sources = {name: Path(root) / 'home/assets' / name for name in ['site-themes.css', 'portal.css', 'portfolio.css', 'photos.css', 'anthology.css', 'anthology-selection.css', 'game.css', 'ranking-skins.css', 'site-nav.css', 'site-music.css', 'portal.js', 'site-navigation.js', 'site-music.js', 'home-daily.css', 'home-daily.js', 'home-earth.js', 'astronomy-solar.js']}
+    sources = {name: Path(root) / 'home/assets' / name for name in ['site-themes.css', 'portal.css', 'portfolio.css', 'photos.css', 'anthology.css', 'anthology-selection.css', 'game.css', 'ranking-skins.css', 'site-nav.css', 'site-music.css', 'portal.js', 'site-navigation.js', 'site-music.js', 'home-daily.css', 'home-daily.js', 'home-now.js', 'home-earth.js', 'astronomy-solar.js']}
     sources['style.css'] = Path(root) / 'blog/style.css'
     def version(match):
         route = match.group(2); source = sources.get(route.rsplit('/', 1)[-1])
@@ -196,11 +196,21 @@ def version_shared_assets(page, root):
         if source.is_symlink():
             raise ValueError('Shared UI assets cannot be symlinks.')
         return match.group(1) + route + '?v=' + hashlib.sha256(source.read_bytes()).hexdigest()[:12] + match.group(3)
-    return re.sub(r'((?:src|href)=["\'])(/(?:(?:articles/)?assets)/(?:site-themes|portal|portfolio|photos|anthology|anthology-selection|game|ranking-skins|site-nav|site-music|site-navigation|home-daily|home-earth|astronomy-solar|style)\.(?:css|js))(?:\?[^"\']*)?(["\'])', version, page)
+    return re.sub(r'((?:src|href)=["\'])(/(?:(?:articles/)?assets)/(?:site-themes|portal|portfolio|photos|anthology|anthology-selection|game|ranking-skins|site-nav|site-music|site-navigation|home-daily|home-now|home-earth|astronomy-solar|style)\.(?:css|js))(?:\?[^"\']*)?(["\'])', version, page)
+
+
+NAV_GROUPS = (('/articles/', 'articles', [('/anthology/', 'anthology')], ['/articles/', '/anthology/']),
+              ('/projects/', 'projects', [('/game/', 'games'), ('/game/ranking/', 'ranking'), ('/game/footprints/', 'maker')], ['/projects/', '/game/']),
+              ('/map/', 'map', [('/photos/', 'photos')], ['/map/', '/photos/']),
+              ('/about/', 'about', [], ['/about/']))
+NAV_REQUIRED = (*NAV_KEYS.values(), "ranking", "maker", "more.articles", "more.projects", "more.map")
+FOOTER_LINKS = (('/articles/', 'articles'), ('/anthology/', 'anthology'), ('/projects/', 'projects'), ('/game/', 'games'),
+                ('/map/', 'map'), ('/photos/', 'photos'), ('/about/', 'about'))
+CONTACT_EMAIL = "xieyuqing.me@gmail.com"
 
 
 def compact_header(page, route, paired, language="zh-CN"):
-    """Five direct section links with native disclosures for related destinations."""
+    """The name links home; four sections, each with a native disclosure for related pages."""
     def render(match):
         raw = match.group(0)
         theme = re.search(r'<button\b[^>]*class=["\'][^"\']*theme-toggle[^"\']*["\'][^>]*>.*?</button>', raw, re.S)
@@ -210,14 +220,9 @@ def compact_header(page, route, paired, language="zh-CN"):
             current = ' aria-current="page"' if route == path else ''
             css = ' class="nav-entry"' if primary else ''
             return f'<a{css} href="{path}"{current} data-i18n="common.nav.{key}"></a>'
-        groups = [('/', 'today', [], []),
-                  ('/articles/', 'articles', [('/anthology/', 'anthology')], ['/articles/', '/anthology/']),
-                  ('/projects/', 'projects', [('/game/', 'games'), ('/game/ranking/', 'ranking'), ('/game/footprints/', 'maker')], ['/projects/', '/game/']),
-                  ('/photos/', 'life', [('/map/', 'map')], ['/photos/', '/map/']),
-                  ('/about/', 'about', [], ['/about/'])]
         preserved = ''.join(re.findall(r'<a\b(?=[^>]*data-preserve-language-link)[^>]*>.*?</a>', raw, re.S))
         nav = ''
-        for path, key, links, branches in groups:
+        for path, key, links, branches in NAV_GROUPS:
             active = route == path or any(route.startswith(branch) for branch in branches)
             nav += f'<div class="nav-item{" is-current" if active else ""}">' + link(path, key, primary=True)
             extras = ''.join(link(*item) for item in links) + (preserved if key == 'articles' else '')
@@ -226,17 +231,29 @@ def compact_header(page, route, paired, language="zh-CN"):
             nav += '</div>'
         original_switch = re.search(r'<a\b[^>]*class=["\'][^"\']*site-language-switch[^"\']*["\'][^>]*>.*?</a>', raw, re.S)
         switch = original_switch.group(0) if original_switch else ('<a class="site-language-switch" href="/en/" lang="en">EN</a>' if paired else '')
-        theme_control = ('<details class="theme-control" id="theme-control" hidden><summary class="theme-toggle" id="theme-toggle"><span class="theme-label"></span><small class="theme-mode"></small></summary>'
-                         '<div class="theme-panel"><fieldset><legend data-i18n="common.skin.label"></legend>'
-                         '<button type="button" data-skin-choice="emerald" aria-pressed="true"><span class="theme-swatch paper-swatch" aria-hidden="true"></span><span data-i18n="common.skin.emerald"></span></button>'
-                         '<button type="button" data-skin-choice="sea" aria-pressed="false"><span class="theme-swatch sea-swatch" aria-hidden="true"></span><span data-i18n="common.skin.sea"></span></button></fieldset>'
-                         '<fieldset><legend data-i18n="common.theme.mode"></legend>'
-                         '<button type="button" data-theme-choice="system" aria-pressed="true"><span data-i18n="common.theme.system"></span></button>'
-                         '<button type="button" data-theme-choice="light" aria-pressed="false"><span data-i18n="common.theme.light"></span></button>'
-                         '<button type="button" data-theme-choice="dark" aria-pressed="false"><span data-i18n="common.theme.dark"></span></button></fieldset></div></details>')
+        theme_control = ('<button class="theme-toggle" id="theme-toggle" type="button" hidden>'
+                         '<span class="theme-icon" aria-hidden="true"></span><span class="theme-label sr-only"></span></button>')
         return (f'<header class="site-header container header-compact" lang="{language}"><a class="brand" href="/" aria-label="谢雨卿的个人主页"><span data-i18n="common.brandName">谢雨卿</span></a>'
                 + '<nav class="site-nav" aria-label="主导航">' + nav + '</nav><div class="header-tools">' + switch + theme_control + '</div></header>')
     return re.sub(r'<header\b[^>]*class=["\'][^"\']*site-header[^"\']*["\'][^>]*>.*?</header>', render, page, count=1, flags=re.S)
+
+
+def unified_footer(page, route, language="zh-CN"):
+    """Every page ends with the same signature, section links and contact line."""
+    def link(path, key):
+        current = ' aria-current="page"' if route == path else ''
+        return f'<a href="{path}"{current} data-i18n="common.nav.{key}"></a>'
+    links = ''.join(link(path, key) for path, key in FOOTER_LINKS)
+    footer = (f'<footer class="site-footer container" lang="{language}">'
+              '<div class="footer-sign"><p class="footer-brand"><span data-i18n="common.brandName">谢雨卿</span>'
+              '<span class="footer-yuliao" data-i18n="common.footer.yuliao"></span></p>'
+              '<p class="footer-note" data-i18n="common.footer.note"></p></div>'
+              f'<nav class="footer-links" aria-label="页脚导航" data-i18n-aria-label="common.footer.label">{links}</nav>'
+              '<p class="footer-meta"><span data-i18n="common.footer.wechat"></span>'
+              f'<a href="mailto:{CONTACT_EMAIL}" data-i18n="common.footer.email"></a>'
+              '<a href="/articles/feed.xml" data-i18n="common.rss"></a>'
+              '<a href="/about/#site" data-i18n="common.footer.site"></a></p></footer>')
+    return re.sub(r'<footer\b[^>]*class=["\'][^"\']*\bsite-footer\b[^"\']*["\'][^>]*>.*?</footer>', lambda _: footer, page, count=1, flags=re.S)
 
 
 def localize_page(page, root, address, route, language="zh-CN", modules=(), title=None, description=None):
@@ -252,8 +269,10 @@ def localize_page(page, root, address, route, language="zh-CN", modules=(), titl
     chinese = localized_path(route, "zh-CN")
     english = localized_path(chinese, "en")
     paired = chinese != english
-    if all("common.nav." + key in catalogues[language] for key in (*NAV_KEYS.values(), "ranking", "maker", "today", "life", "more.articles", "more.projects", "more.life")) and "common.brandName" in catalogues[language]:
+    if all("common.nav." + key in catalogues[language] for key in NAV_REQUIRED) and "common.brandName" in catalogues[language]:
         page = compact_header(page, chinese, paired, language)
+        if "common.footer.note" in catalogues[language]:
+            page = unified_footer(page, chinese, language)
     current = localized_path(chinese, language)
     canonical_path = "/articles/index.html" if route == "/articles/index.html" and language == "zh-CN" else current
     counterpart = localized_path(chinese, "zh-CN" if language == "en" else "en") if paired else None

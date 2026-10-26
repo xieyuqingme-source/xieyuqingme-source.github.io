@@ -120,7 +120,7 @@ def render_index(albums, *, language="zh-CN", catalogue=None):
         title = _label(prefix + ".title", tr(prefix + ".title", album["title"]))
         route = localized_path("/photos/" + album["id"] + "/", language)
         cards.append(f"""<article class="album-card"><a href="{route}"><div class="album-cover">{cover}</div>
-<h2>{title} <svg class="external-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true" focusable="false"><path d="M6 18 18 6M6 6h12v12"/></svg></h2></a>{description}
+<h2>{title} <span class="album-arrow" aria-hidden="true">→</span></h2></a>{description}
 {_facts(album["date"], location=album["location"], prefix=prefix, date_field="date", language=language, catalogue=catalogue)}{_photo_count(len(photos), language, catalogue)}</article>""")
     body = ('<div class="album-grid">' + "\n".join(cards) + "</div>" if cards else
             _label("photos.empty_index", tr("photos.empty_index", "相册正在整理中。"), "p", ' class="photos-empty"'))

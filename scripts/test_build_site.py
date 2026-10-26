@@ -282,6 +282,19 @@ class DailyHomepageTests(unittest.TestCase):
             self.assertTrue(item["url"].startswith("https://ctext.org/"))
             self.assertIn("site's translation", item["translation_note"]["en"])
 
+    def test_homepage_picks_and_quotes_resolve_to_published_articles(self):
+        from build_blog import Blog
+        blog = Blog("https://xieyuqing.me/articles")
+        blog.source_root = ROOT
+        blog.collect()
+        data = json.loads((ROOT / "home/home-picks.json").read_text(encoding="utf-8"))
+        featured, quotes = build_site.load_home_picks(blog)
+        self.assertEqual(len(featured), len(data["featured"]), "Every featured essay must name a published article.")
+        self.assertEqual(len(quotes), len(data["quotes"]), "Every quote must name a published article.")
+        for article, text, english in quotes:
+            self.assertIn(text, build_site.plain_markdown(article.source.read_text(encoding="utf-8-sig")))
+            self.assertTrue(english.strip())
+
     def test_recent_writing_uses_original_dates_and_direct_available_language_links(self):
         from build_blog import Article
         from dataclasses import replace
@@ -293,8 +306,9 @@ class DailyHomepageTests(unittest.TestCase):
                                href=lambda destination: "/articles/" + destination,
                                topic=lambda article: "生活与思考", excerpt=lambda article: article.markdown)
         html = build_site.render_home_recent(blog)
-        self.assertLess(html.index("Newer"), html.index("Older"))
-        self.assertIn('href="/articles/newer.html"', html)
+        # The Chinese homepage lists Chinese writing; English pieces lead the English homepage.
+        self.assertNotIn("Newer", html)
+        self.assertIn('href="/articles/older.html"', html)
         english = build_site.render_home_recent(blog, "en")
         self.assertLess(english.index("Newer"), english.index("Older translated"))
         self.assertIn('datetime="2025-01-01"', english)
@@ -409,9 +423,11 @@ class ProjectPublicationTests(unittest.TestCase):
                                  (root / "home/assets/wechat-qrcode.jpg").read_bytes())
                 self.assertNotIn("wechat-qrcode", home)
                 self.assertIn('href="/map/"', home)
-                self.assertIn('class="yl-article-list"', home)
+                self.assertIn('class="yl-article-list recent-list"', home)
                 self.assertIn('href="#writing"', home)
-                self.assertIn('id="daily-title">今日简报</h1>', home)
+                self.assertIn('id="daily-title">今日简报</h2>', home)
+                self.assertIn('id="home-title">下雨天，适合聊聊。</h1>', home)
+                self.assertIn('id="now"', home)
                 self.assertIn("选读样刊", home)
                 self.assertIn('datetime="2026-10-24"', home)
                 for filename in ("daily-brief.json", "daily-content.json"):

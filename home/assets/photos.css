@@ -17,6 +17,9 @@
 .album-card h2{display:flex;align-items:baseline;flex-wrap:wrap;gap:8px 14px;margin:18px 0 8px;color:var(--ink);font:550 1.7rem/1.5 var(--serif);overflow-wrap:anywhere}
 .album-card h2 span{margin:0;color:var(--muted);font:400 .88rem/1.7 var(--sans)}
 .album-card h2>span[data-i18n]{margin:0;color:inherit;font:inherit}
+.album-card h2 .album-arrow{color:var(--accent);font:400 1.2rem/1 var(--sans);transition:transform .2s ease}
+.album-card>a:hover .album-arrow{transform:translateX(4px)}
+.album-card .photo-help{margin-top:2px}
 .album-card .album-description{margin:0 0 12px;font-size:.98rem;line-height:1.85}
 /* Column flow keeps each image with its complete caption and preserves DOM order. */
 .photo-grid{display:block;columns:2;column-gap:32px}

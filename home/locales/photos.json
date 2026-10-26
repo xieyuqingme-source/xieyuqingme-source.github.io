@@ -1,8 +1,8 @@
 {
   "zh-CN": {
-    "photos.heading": "摄影",
-    "photos.eyebrow": "PHOTOGRAPHY · 摄影",
-    "photos.page_title": "摄影 · 谢雨卿",
+    "photos.heading": "照片",
+    "photos.eyebrow": "路上随手拍的",
+    "photos.page_title": "照片 · 谢雨卿",
     "photos.description": "谢雨卿的摄影相册。",
     "photos.no_cover": "暂无公开照片",
     "photos.empty_index": "相册正在整理中。",
@@ -97,7 +97,7 @@
   },
   "en": {
     "photos.heading": "Photos",
-    "photos.eyebrow": "PHOTOGRAPHY",
+    "photos.eyebrow": "Snapshots from the road",
     "photos.page_title": "Photos · Xie Yuqing",
     "photos.description": "Photography albums by Xie Yuqing (Carl).",
     "photos.no_cover": "No public photos yet",

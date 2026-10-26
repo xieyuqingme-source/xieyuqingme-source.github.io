@@ -142,6 +142,10 @@ class EnglishPublicationTests(unittest.TestCase):
             "home_photo_src": "/assets/home-ink.webp",
             "home_photo_alt": "合成首页水墨背景", "home_photo_alt_en": "Synthetic homepage ink background",
             "home_photo_caption": "合成公开首页", "home_photo_caption_en": "Synthetic public homepage",
+            "home_photo_srcset": "/assets/home-ink.webp 2172w", "own_quotes_data": "[]",
+            "home_quote_section": "", "home_quote_section_en": "", "home_picks_section": "", "home_picks_section_en": "",
+            "site_notes": build_site.render_site_notes(blog.waline, blog.config["repository_url"]),
+            "site_notes_en": build_site.render_site_notes(blog.waline, blog.config["repository_url"], "en"),
         })
         for name, route in (("index", "index.html"), ("about", "about/index.html"), ("projects", "projects/index.html")):
             page = (ROOT / f"home/{name}.template.html").read_text(encoding="utf-8")
@@ -180,7 +184,7 @@ class EnglishPublicationTests(unittest.TestCase):
                         self.assertIn(escape(item["published_label"][language]), feed[1])
                 self.assertIn(escape(brief["notice"][language]), text)
         english = (self.output / "en/index.html").read_text(encoding="utf-8")
-        recent = re.search(r'<ol class="yl-article-list">(.*?)</ol>', english, re.S)[1]
+        recent = re.search(r'<ol class="yl-article-list[^"]*">(.*?)</ol>', english, re.S)[1]
         self.assertIn(english_article_url(blog, blog.translations[self.key]), recent)
         pending = next(a for a in blog.articles if a.language == "zh-CN" and a.source != self.source)
         self.assertNotIn(blog.href(pending.destination), recent)
@@ -345,9 +349,9 @@ class EnglishPublicationTests(unittest.TestCase):
         text = (self.output / 'articles' / article.destination).read_text(encoding='utf-8')
         self.assertIn('<html lang="en"', text)
         self.assertIn('Originally written in English.', text)
-        self.assertIn('Deep Sea Tech', text)
-        self.assertIn('data-skin-choice="sea"', text)
-        self.assertIn('data-theme-choice="dark"', text)
+        self.assertIn('id="theme-toggle"', text)
+        self.assertIn('Rainy days are good for a chat.', text)
+        self.assertNotIn('data-skin-choice', text)
         self.assertIn('An original English essay.', text)
         elements = build_site.Elements(text).elements
         directories = [attrs for tag, attrs in elements if tag == "a" and "data-preserve-language-link" in attrs]
@@ -382,7 +386,7 @@ class EnglishPublicationTests(unittest.TestCase):
     def test_english_project_descriptions_retain_scope_and_chinese_tool_hints(self):
         self.build_fixture()
         page = (self.output / 'en/projects/index.html').read_text(encoding='utf-8')
-        for phrase in ('No hosted online version', 'There is no hosted online version', 'support Chinese and English', 'await manual acceptance testing', 'Sources &amp; licensing'):
+        for phrase in ('No hosted online version', 'There is no hosted online version', 'support Chinese and English', 'not been fully tested', 'Sources &amp; licensing'):
             if phrase == 'No hosted online version':
                 continue
             self.assertIn(phrase, page)

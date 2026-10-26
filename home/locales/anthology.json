@@ -1,7 +1,7 @@
 {
   "zh-CN": {
     "anthology.name": "雨聊文选",
-    "anthology.eyebrow": "ANTHOLOGY · 阅读与收藏",
+    "anthology.eyebrow": "读过、想留着的文字",
     "anthology.tagline": "把喜欢的文字，留在这里慢慢读。",
     "anthology.inventory": "13 篇选文 · 5 类 · 中文、English、Français 原文",
     "anthology.description": "谢雨卿选录的中外文学原文，按分类与语言浏览，搜索篇名、作者或正文。",
@@ -67,7 +67,7 @@
     "anthology.nav.articles": "文章",
     "anthology.nav.anthology": "雨聊文选",
     "anthology.nav.projects": "作品",
-    "anthology.nav.photos": "摄影",
+    "anthology.nav.photos": "照片",
     "anthology.nav.map": "足迹",
     "anthology.nav.games": "小游戏",
     "anthology.nav.about": "关于我",
@@ -187,7 +187,7 @@
   },
   "en": {
     "anthology.name": "Yuliao Anthology",
-    "anthology.eyebrow": "ANTHOLOGY · READ & COLLECT",
+    "anthology.eyebrow": "Texts I keep coming back to",
     "anthology.tagline": "A place to keep favorite writing and read it slowly.",
     "anthology.inventory": "13 selections · 5 categories · Chinese, English and French originals",
     "anthology.description": "Literary selections curated by Xie Yuqing. Browse original works by category and language, or search titles, credits and text.",
