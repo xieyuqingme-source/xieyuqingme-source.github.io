@@ -1,11 +1,13 @@
 """Focused synthetic English publication tests; no private sources or network."""
 from copy import deepcopy
 from hashlib import sha256
+from html import escape
 from pathlib import Path
 from tempfile import TemporaryDirectory
 from unittest.mock import patch
 import json
 import os
+import re
 import shutil
 import unittest
 from urllib.parse import unquote
@@ -14,6 +16,7 @@ from xml.etree import ElementTree as ET
 import build_blog
 import build_site
 from build_blog import Blog
+from daily_brief import load_daily, render_brief, safe_json
 from english_site import (build_english_site, check_english_publication, collect_translations,
                           english_archive, english_article_url, source_sha256, translation_report)
 from PIL import Image
@@ -93,7 +96,7 @@ class EnglishPublicationTests(unittest.TestCase):
         shutil.copytree(ROOT / "home/en", self.root / "home/en")
         if (REFERENCE / "home/locales").is_dir():
             shutil.copytree(REFERENCE / "home/locales", self.root / "home/locales")
-        for name in ("projects.json", "about.json"):
+        for name in ("projects.json", "about.json", "daily-brief.json", "daily-content.json"):
             shutil.copy2(REFERENCE / "home" / name, self.root / "home" / name)
         for source in (REFERENCE / "home/assets/projects").glob("*.webp"):
             shutil.copy2(source, self.root / "home/assets/projects" / source.name)
@@ -123,6 +126,23 @@ class EnglishPublicationTests(unittest.TestCase):
         blog = Blog("https://public.test/articles", output=self.output / "articles")
         blog.build(clean=False)
         values = {"site_url": "https://public.test", "project_total": "5", "article_total": "3", "chinese_total": "2", "english_total": "1", "photo_album_total": "0", "photo_total": "0", "anthology_total": "0"}
+        brief, daily_content = load_daily(self.root, build_site.linked_directory)
+        projects = build_site.load_projects()
+        # This fixture calls the English publisher directly, so supply the same
+        # homepage inputs that the unified builder normally passes to it.
+        values.update({
+            "daily_brief_data": safe_json(brief), "daily_content_data": safe_json(daily_content),
+            "daily_brief_notice": escape(brief["notice"]["zh-CN"]),
+            "daily_brief_notice_en": escape(brief["notice"]["en"]),
+            "brief_feed": render_brief(brief), "brief_feed_en": render_brief(brief, "en"),
+            "home_recent_articles": build_site.render_home_recent(blog),
+            "home_recent_articles_en": build_site.render_home_recent(blog, "en"),
+            "home_project_cards": build_site.render_home_projects(projects),
+            "home_project_cards_en": build_site.render_home_projects(projects, "en"),
+            "home_photo_src": "/assets/home-ink.webp",
+            "home_photo_alt": "合成首页水墨背景", "home_photo_alt_en": "Synthetic homepage ink background",
+            "home_photo_caption": "合成公开首页", "home_photo_caption_en": "Synthetic public homepage",
+        })
         for name, route in (("index", "index.html"), ("about", "about/index.html"), ("projects", "projects/index.html")):
             page = (ROOT / f"home/{name}.template.html").read_text(encoding="utf-8")
             for key, value in {**values, "about_content": "<p>Fixture biography</p>", "project_cards": "", "recent_articles": ""}.items():
@@ -130,8 +150,40 @@ class EnglishPublicationTests(unittest.TestCase):
             target = self.output / route
             target.parent.mkdir(parents=True, exist_ok=True)
             target.write_text(page, encoding="utf-8")
-        build_english_site(blog, self.output, "https://public.test", build_site.load_projects(), build_site.load_about(), values)
+        build_english_site(blog, self.output, "https://public.test", projects, build_site.load_about(), values)
         return blog
+
+    def test_bilingual_homepage_has_readable_sample_sources_and_daily_json_without_scripts(self):
+        blog = self.build_fixture()
+        brief, daily_content = load_daily(self.root, build_site.linked_directory)
+        for language, route in (("zh-CN", "index.html"), ("en", "en/index.html")):
+            with self.subTest(language=language):
+                text = (self.output / route).read_text(encoding="utf-8")
+                self.assertNotIn("{{", text)
+                for element_id, expected in (("daily-brief-data", brief), ("daily-content-data", daily_content)):
+                    script = re.search(r'<script id="' + element_id + r'"[^>]*>(.*?)</script>', text, re.S)
+                    self.assertIsNotNone(script)
+                    self.assertEqual(json.loads(script[1]), expected)
+                # Restrict assertions to visible server-rendered news. Matching
+                # the inert JSON alone would not prove no-JavaScript readability.
+                feed = re.search(r'<div id="daily-feed"[^>]*>(.*?)<p class="yl-note" id="daily-brief-notice">', text, re.S)
+                self.assertIsNotNone(feed)
+                elements = build_site.Elements(feed[1]).elements
+                links = {attrs.get("href") for tag, attrs in elements if tag == "a"}
+                dates = {attrs.get("datetime") for tag, attrs in elements if tag == "time"}
+                for item in brief["items"]:
+                    self.assertIn(escape(item["title"][language]), feed[1])
+                    self.assertIn(item["url"], links)
+                    if item["published"]:
+                        self.assertIn(item["published"], dates)
+                    else:
+                        self.assertIn(escape(item["published_label"][language]), feed[1])
+                self.assertIn(escape(brief["notice"][language]), text)
+        english = (self.output / "en/index.html").read_text(encoding="utf-8")
+        recent = re.search(r'<ol class="yl-article-list">(.*?)</ol>', english, re.S)[1]
+        self.assertIn(english_article_url(blog, blog.translations[self.key]), recent)
+        pending = next(a for a in blog.articles if a.language == "zh-CN" and a.source != self.source)
+        self.assertNotIn(blog.href(pending.destination), recent)
 
     def test_counts_dates_and_complete_body_are_preserved(self):
         blog = self.blog()

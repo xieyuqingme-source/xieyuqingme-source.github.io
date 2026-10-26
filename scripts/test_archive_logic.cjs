@@ -8,6 +8,7 @@ const root = path.resolve(__dirname, '..');
 const work = process.argv[2] || path.join(root, '.local-checks');
 const generated = JSON.parse(fs.readFileSync(path.join(work, 'archive-test-data.json'), 'utf8'));
 const script = fs.readFileSync(path.join(root, 'blog/site.js'), 'utf8');
+const themeScript = fs.readFileSync(path.join(root, 'home/assets/portal.js'), 'utf8');
 class Node {
   constructor() { this.hidden = true; this.disabled = false; this.value = ''; this.textContent = ''; this.dataset = {}; this.events = {}; this.attributes = {}; this.classes = new Set(); this.classList = { toggle: (name, on) => { if (on) this.classes.add(name); else this.classes.delete(name); } }; }
   addEventListener(name, callback) { this.events[name] = callback; }
@@ -17,7 +18,7 @@ class Node {
   emit(name, event = {}) { this.events[name](event); }
 }
 function setup(name, query = '') {
-  const data = generated[name], controls = new Node(), search = new Node(), year = new Node(), status = new Node(), empty = new Node(), pager = new Node(), previous = new Node(), next = new Node(), position = new Node(), reset = new Node(), theme = new Node(), themeLabel = new Node(), jumpForm = new Node(), jumpInput = new Node(), jumpButton = new Node(), jumpMessage = new Node();
+  const data = generated[name], controls = new Node(), search = new Node(), year = new Node(), status = new Node(), empty = new Node(), pager = new Node(), previous = new Node(), next = new Node(), position = new Node(), reset = new Node(), theme = new Node(), themeLabel = new Node(), themeMode = new Node(), jumpForm = new Node(), jumpInput = new Node(), jumpButton = new Node(), jumpMessage = new Node();
   year.options = data.years.map(value => ({ value }));
   const cards = data.cards.map(item => { const node = new Node(), card = new Node(); node.dataset = { topic: item.topic, year: item.year, search: item.text }; node.closest = () => card; return { node, card }; });
   const filters = data.filters.map(value => { const node = new Node(); node.dataset.filter = value; return node; });
@@ -28,13 +29,16 @@ function setup(name, query = '') {
   archive.querySelector = selector => lookup[selector];
   archive.querySelectorAll = selector => selector === '[data-filter]' ? filters : selector === '.article-card-content' ? cards.map(x => x.node) : [];
   archive.scrollIntoView = () => { archive.scrolled = true; };
-  theme.querySelector = () => themeLabel;
-  const document = { documentElement: { dataset: {} }, events: {}, querySelector: selector => ({ '.archive': archive, '#theme-toggle': theme })[selector] || null, addEventListener(name, fn) { this.events[name] = fn; } };
+  theme.querySelector = selector => ({ '.theme-label': themeLabel, '.theme-mode': themeMode })[selector] || null;
+  const document = { documentElement: { lang: 'zh-CN', dataset: {} }, events: {}, querySelector: selector => ({ '.archive': archive, '#theme-toggle': theme })[selector] || null, querySelectorAll: () => [], addEventListener(name, fn) { this.events[name] = fn; } };
   const window = { location: new URL(`http://127.0.0.1:8767/articles/${name}${query}`), events: {}, addEventListener(name, fn) { this.events[name] = fn; } };
   window.history = { replaceState: (_state, _title, url) => { window.location = new URL(url); } };
-  const stored = new Map(), localStorage = { getItem: key => stored.get(key), setItem: (key, value) => stored.set(key, value) };
-  vm.runInNewContext(script, { document, window, localStorage, URL, URLSearchParams, console });
-  return { jumpForm, jumpInput, jumpButton, jumpMessage, data, search, year, status, empty, pager, previous, next, position, reset, cards, filters, theme, document, window, visible: () => cards.filter(x => !x.card.hidden).map(x => x.node.dataset) };
+  const stored = new Map(), localStorage = { getItem: key => stored.get(key), setItem: (key, value) => stored.set(key, value), removeItem: key => stored.delete(key) };
+  const context = { document, window, localStorage, URL, URLSearchParams, console };
+  vm.runInNewContext(themeScript, context);
+  const themeController = window.SiteTheme;
+  vm.runInNewContext(script, context);
+  return { jumpForm, jumpInput, jumpButton, jumpMessage, data, search, year, status, empty, pager, previous, next, position, reset, cards, filters, theme, themeLabel, themeMode, themeController, stored, document, window, visible: () => cards.filter(x => !x.card.hidden).map(x => x.node.dataset) };
 }
 const checks = [];
 for (const name of Object.keys(generated)) {
@@ -52,10 +56,21 @@ for (const name of Object.keys(generated)) {
   assert.equal(ui.visible().length, 0); assert.equal(ui.empty.hidden, false); assert.equal(ui.pager.hidden, true);
   ui.reset.emit('click'); assert.equal(ui.visible().length, Math.min(12, ui.cards.length));
   checks.push(`${name}: empty state and clear reset`);
+  assert.equal(ui.window.SiteTheme, ui.themeController);
   assert.equal(ui.document.documentElement.dataset.theme, 'light');
-  ui.theme.emit('click'); assert.equal(ui.document.documentElement.dataset.theme, 'dark');
-  ui.theme.emit('click'); assert.equal(ui.document.documentElement.dataset.theme, 'light');
-  checks.push(`${name}: dark/light toggle`);
+  assert.equal(ui.themeLabel.textContent, '墨绿纸白');
+  assert.equal(ui.themeMode.textContent, '浅色 · 跟随系统');
+  ui.window.SiteTheme.choose('dark');
+  assert.equal(ui.document.documentElement.dataset.theme, 'dark');
+  assert.equal(ui.document.documentElement.dataset.skin, 'emerald');
+  assert.equal(ui.themeLabel.textContent, '墨绿纸白');
+  assert.equal(ui.themeMode.textContent, '深色');
+  assert.equal(ui.stored.get('xieyuqing-blog-theme'), 'dark');
+  ui.window.SiteTheme.choose('light');
+  assert.equal(ui.document.documentElement.dataset.theme, 'light');
+  assert.equal(ui.themeMode.textContent, '浅色');
+  assert.equal(ui.stored.get('xieyuqing-blog-theme'), 'light');
+  checks.push(`${name}: shared skin and brightness controller remains usable`);
   if (ui.year.options.some(x => x.value === '2024')) {
     ui.year.value = '2024'; ui.year.emit('change');
     assert(ui.visible().every(x => x.year === '2024')); assert.equal(ui.position.textContent.startsWith('1 /'), true);

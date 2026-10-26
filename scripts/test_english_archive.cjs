@@ -4,6 +4,7 @@ const path = require('node:path');
 const vm = require('node:vm');
 const assert = require('node:assert/strict');
 const script = fs.readFileSync(path.join(__dirname, '../blog/site.js'), 'utf8');
+const themeScript = fs.readFileSync(path.join(__dirname, '../home/assets/portal.js'), 'utf8');
 class Node {
   constructor() { this.hidden = true; this.disabled = false; this.value = ''; this.textContent = ''; this.dataset = {}; this.attributes = {}; this.events = {}; this.classList = { toggle() {} }; }
   addEventListener(name, fn) { this.events[name] = fn; }
@@ -13,7 +14,7 @@ class Node {
   emit(name, event = {}) { this.events[name](event); }
 }
 function setup(query = '') {
-  const controls = new Node(), search = new Node(), year = new Node(), status = new Node(), empty = new Node(), pager = new Node(), previous = new Node(), next = new Node(), position = new Node(), reset = new Node(), theme = new Node(), themeLabel = new Node(), jumpForm = new Node(), jumpInput = new Node(), jumpButton = new Node(), jumpMessage = new Node();
+  const controls = new Node(), search = new Node(), year = new Node(), status = new Node(), empty = new Node(), pager = new Node(), previous = new Node(), next = new Node(), position = new Node(), reset = new Node(), theme = new Node(), themeLabel = new Node(), themeMode = new Node(), jumpForm = new Node(), jumpInput = new Node(), jumpButton = new Node(), jumpMessage = new Node();
   year.options = ['all', '2026', '2025', 'unknown'].map(value => ({ value }));
   const cards = Array.from({ length: 27 }, (_, index) => {
     const node = new Node(), card = new Node();
@@ -29,24 +30,33 @@ function setup(query = '') {
   archive.querySelector = selector => ({ '.archive-controls': controls, '#article-search': search, '#article-year': year, '.search-status': status, '.search-empty': empty, '.archive-pagination': pager, '.reset-search': reset })[selector];
   archive.querySelectorAll = selector => ({ '[data-filter]': filters, '[data-language-filter]': languageFilters, '.article-card-content': cards.map(c => c.node) })[selector] || [];
   archive.scrollIntoView = () => { archive.scrolled = true; };
-  theme.querySelector = () => themeLabel;
-  const document = { documentElement: { lang: 'en', dataset: {} }, events: {}, querySelector: selector => ({ '.archive': archive, '#theme-toggle': theme })[selector] || null, addEventListener(name, fn) { this.events[name] = fn; } };
+  theme.querySelector = selector => ({ '.theme-label': themeLabel, '.theme-mode': themeMode })[selector] || null;
+  const document = { documentElement: { lang: 'en', dataset: {} }, events: {}, querySelector: selector => ({ '.archive': archive, '#theme-toggle': theme })[selector] || null, querySelectorAll: () => [], addEventListener(name, fn) { this.events[name] = fn; } };
   const window = { location: new URL('https://site.test/en/articles/' + query), events: {}, addEventListener(name, fn) { this.events[name] = fn; } };
   window.history = { replaceState: (_, __, url) => { window.location = new URL(url); } };
   const stored = new Map();
-  vm.runInNewContext(script, { document, window, localStorage: { getItem: k => stored.get(k), setItem: (k, v) => stored.set(k, v) }, URL, URLSearchParams });
-  return { controls, search, year, status, empty, pager, previous, next, position, reset, theme, themeLabel, jumpForm, jumpInput, jumpMessage, filters, languageFilters, cards, document, window, visible: () => cards.filter(c => !c.card.hidden) };
+  const context = { document, window, localStorage: { getItem: k => stored.get(k), setItem: (k, v) => stored.set(k, v), removeItem: k => stored.delete(k) }, URL, URLSearchParams };
+  vm.runInNewContext(themeScript, context);
+  const themeController = window.SiteTheme;
+  vm.runInNewContext(script, context);
+  return { controls, search, year, status, empty, pager, previous, next, position, reset, theme, themeLabel, themeMode, themeController, stored, jumpForm, jumpInput, jumpMessage, filters, languageFilters, cards, document, window, visible: () => cards.filter(c => !c.card.hidden) };
 }
 const checks = [];
 const ui = setup();
 assert.equal(ui.visible().length, 12);
 assert.equal(ui.status.textContent, 'Showing 1–12 of 27');
 assert.equal(ui.position.textContent, 'Page 1 / 3');
-assert.equal(ui.themeLabel.textContent, 'Dark');
-ui.theme.emit('click');
-assert.equal(ui.themeLabel.textContent, 'Light');
-assert.equal(ui.theme.attributes['aria-label'], 'Switch to light mode');
-checks.push('English theme and pagination labels');
+assert.equal(ui.window.SiteTheme, ui.themeController);
+assert.equal(ui.themeLabel.textContent, 'Emerald Paper');
+assert.equal(ui.themeMode.textContent, 'Light · System');
+ui.window.SiteTheme.choose('dark');
+assert.equal(ui.themeLabel.textContent, 'Emerald Paper');
+assert.equal(ui.themeMode.textContent, 'Dark');
+assert.equal(ui.theme.attributes['aria-label'], 'Appearance: Emerald Paper, Dark. Choose skin and brightness');
+assert.equal(ui.document.documentElement.dataset.skin, 'emerald');
+assert.equal(ui.document.documentElement.dataset.theme, 'dark');
+assert.equal(ui.stored.get('xieyuqing-blog-theme'), 'dark');
+checks.push('English archive retains the shared skin/brightness controller and pagination labels');
 const seen = [];
 do { seen.push(...ui.visible().map(c => c.node.dataset.search)); if (!ui.next.disabled) ui.next.emit('click'); else break; } while (true);
 assert.deepEqual(seen, ui.cards.map(c => c.node.dataset.search));
