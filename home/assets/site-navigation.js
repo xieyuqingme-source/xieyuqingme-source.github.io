@@ -37,6 +37,19 @@
  function onLeave(fn){current.leavers.push(fn);}
  function sameFeature(url){const data=window.SiteI18n?.page();return data?.switchMode==='history'&&[window.SiteI18n.localizedPath(data.route,'en'),window.SiteI18n.localizedPath(data.route,'zh-CN')].some(path=>cleanPath(path)===cleanPath(url));}
  function saveScroll(){history.replaceState({...history.state,__siteScroll:[scrollX,scrollY]},'',location.href);}
+ function restoreScroll(position){if(!Array.isArray(position)||position.length!==2||!position.every(Number.isFinite))return false;window.scrollTo({left:position[0],top:position[1],behavior:'instant'});return true;}
+ function focusTarget(target){
+  if(!target||typeof target.focus!=='function')return;
+  const temporary=!target.matches('a[href],button,input,select,textarea,[tabindex],[contenteditable="true"]');
+  if(temporary){target.setAttribute('tabindex','-1');target.addEventListener('blur',()=>{if(target.getAttribute('tabindex')==='-1')target.removeAttribute('tabindex');},{once:true});}
+  target.focus({preventScroll:true});
+ }
+ function scrollFragment(url,focus=false){
+  if(!url.hash){window.scrollTo({left:0,top:0,behavior:'instant'});if(focus)focusTarget(document.querySelector('main'));return true;}
+  let id;try{id=decodeURIComponent(url.hash.slice(1));}catch(_){return false;}
+  const target=document.getElementById(id);if(!target)return false;
+  target.scrollIntoView({behavior:'instant',block:'start'});if(focus)focusTarget(target===document.body?document.querySelector('main')||target:target);return true;
+ }
  function syncHeader(next){const header=document.querySelector('.site-header'),source=next.querySelector('.site-header');for(const selector of ['.brand','.site-nav','.site-language-switch']){const old=header.querySelector(selector),fresh=source.querySelector(selector);if(old&&fresh)old.replaceWith(fresh);}const skip=document.querySelector('.skip-link'),fresh=next.querySelector('.skip-link');if(skip&&fresh)skip.replaceWith(fresh);document.querySelector('#site-music')?.removeAttribute('open');}
  async function styles(next){const target=[...next.head.querySelectorAll('link[rel="stylesheet"]')],old=[...document.head.querySelectorAll('link[rel="stylesheet"]')],href=node=>new URL(node.getAttribute('href'),location.href).href;await Promise.all(target.map(node=>{if(old.some(x=>href(x)===href(node)))return;const item=document.importNode(node,true);item.href=href(node);return new Promise(resolve=>{item.onload=resolve;item.onerror=resolve;native.timeout(resolve,4000);document.head.append(item);});}));for(const node of old)if(!target.some(x=>href(x)===href(node))&&!node.href.endsWith('/assets/site-music.css'))node.remove();}
  function metadata(next){for(const node of [...document.head.querySelectorAll('title,meta:not([charset]),link[rel="canonical"],link[rel="alternate"]')])node.remove();for(const node of next.head.querySelectorAll('title,meta:not([charset]),link[rel="canonical"],link[rel="alternate"]'))document.head.append(document.importNode(node,true));}
@@ -44,7 +57,7 @@
  async function visit(value,options={}){
   if(transition){queued={value,options};return;}
   const url=new URL(value,location.href);if(url.origin!==location.origin||!/^https?:$/.test(url.protocol)){location.assign(url.href);return;}
-  if(!options.pop&&cleanPath(url)===cleanPath(rendered)&&url.search===new URL(rendered).search){if(options.replace)history.replaceState(history.state,'',url);else if(location.href!==url.href){saveScroll();history.pushState(null,'',url);}rendered=url.href;if(url.hash)document.getElementById(decodeURIComponent(url.hash.slice(1)))?.scrollIntoView();return;}
+  if(!options.pop&&cleanPath(url)===cleanPath(rendered)&&url.search===new URL(rendered).search){if(options.replace)history.replaceState(history.state,'',url);else if(location.href!==url.href){saveScroll();history.pushState(null,'',url);}rendered=url.href;scrollFragment(url,true);return;}
   const ticket=++revision;request?.abort();request=new AbortController();let next;
   try{const response=await native.fetch(url.href,{signal:request.signal,credentials:'same-origin',headers:{'X-Site-Navigation':'1'}});if(!response.ok||!response.headers.get('content-type')?.includes('text/html'))throw new Error('Not a site page');next=new DOMParser().parseFromString(await response.text(),'text/html');if(!next.querySelector('.site-header')||!next.querySelector('#site-i18n-data'))throw new Error('Unsupported page');}catch(error){if(ticket!==revision||error.name==='AbortError')return;location.assign(url.href);return;}
   if(ticket!==revision)return;
@@ -54,17 +67,20 @@
    if(!options.pop)saveScroll();if(options.pop){}else history[options.replace?'replaceState':'pushState'](null,'',url.href);
    syncHeader(next);await styles(next);metadata(next);
    const header=document.querySelector('.site-header');for(const node of [...document.body.childNodes])if(node!==header){if(node.nodeType===1&&node.matches('.skip-link'))continue;old.detached.body.append(node);}
-   document.body.className=next.body.className;document.body.removeAttribute('style');document.documentElement.style.cssText=next.documentElement.style.cssText;for(const node of [...next.body.childNodes]){if(node.nodeType===1&&node.matches('.site-header,.skip-link,script[src]'))continue;document.body.append(document.importNode(node,true));}
+   document.body.className=next.body.className;document.body.id=next.body.id;document.body.removeAttribute('style');document.documentElement.style.cssText=next.documentElement.style.cssText;for(const node of [...next.body.childNodes]){if(node.nodeType===1&&node.matches('.site-header,.skip-link,script[src]'))continue;document.body.append(document.importNode(node,true));}
    document.documentElement.lang=next.documentElement.lang;current=new PageScope();
    const data=JSON.parse(next.querySelector('#site-i18n-data').textContent);document.querySelector('#site-i18n-data')?.remove();const boot=next.querySelector('#site-i18n-data').cloneNode(true);document.body.append(boot);
    window.SiteI18n.loadPage(data,next.documentElement.lang);window.SiteTheme?.apply();await scripts(next,ticket);rendered=url.href;
-   if(ticket===revision){const position=options.scroll||[0,0];window.scrollTo(...position);if(url.hash)document.getElementById(decodeURIComponent(url.hash.slice(1)))?.scrollIntoView();const main=document.querySelector('main');if(main&&!options.pop){main.setAttribute('tabindex','-1');main.focus({preventScroll:true});}window.dispatchEvent(new CustomEvent('site:navigated',{detail:{url:url.href}}));}
+   if(ticket===revision){if(!(options.pop&&restoreScroll(options.scroll))&&!scrollFragment(url,!options.pop)){restoreScroll([0,0]);if(!options.pop)focusTarget(document.querySelector('main'));}window.dispatchEvent(new CustomEvent('site:navigated',{detail:{url:url.href}}));}
   }catch(error){console.error('Site navigation failed',error);location.assign(url.href);}finally{transition=false;document.documentElement.removeAttribute('aria-busy');if(queued){const next=queued;queued=null;void visit(next.value,next.options);}}
  }
  current=new PageScope();
  window.SiteNavigation=Object.freeze({visit,own,onLeave,environment:()=>current.env,state:()=>({rendered,transition,scopeListeners:current.events.length,scopeCleanups:current.cleanups.length})});
  document.addEventListener('click',event=>{if(event.defaultPrevented||event.button!==0||event.metaKey||event.ctrlKey||event.altKey||event.shiftKey)return;const link=event.target.closest?.('a[href]');if(!link||link.target||link.hasAttribute('download')||link.hasAttribute('data-native-navigation')||link.closest('#site-music'))return;const url=new URL(link.href,location.href);if(url.origin!==location.origin||!/^https?:$/.test(url.protocol)||/\.[a-z\d]{2,5}$/i.test(url.pathname)&&!url.pathname.endsWith('.html'))return;event.preventDefault();void visit(url.href);});
  window.addEventListener('site:languagechange',()=>{rendered=location.href;});
- window.addEventListener('popstate',()=>{if(sameFeature(location.href)){rendered=location.href;return;}if(cleanPath(location.href)===cleanPath(rendered)){rendered=location.href;return;}void visit(location.href,{pop:true,scroll:history.state?.__siteScroll});});
+ window.addEventListener('popstate',()=>{if(sameFeature(location.href)){rendered=location.href;return;}if(cleanPath(location.href)===cleanPath(rendered)){rendered=location.href;if(!restoreScroll(history.state?.__siteScroll))scrollFragment(new URL(location.href));return;}void visit(location.href,{pop:true,scroll:history.state?.__siteScroll});});
+ // Capture the final reading position without replacing history on every animation frame.
+ let scrollSaveTimer=null;
+ window.addEventListener('scroll',()=>{window.clearTimeout(scrollSaveTimer);scrollSaveTimer=native.timeout(()=>{scrollSaveTimer=null;if(!transition&&location.href===rendered)saveScroll();},160);},{passive:true});
  history.scrollRestoration='manual';
 })();

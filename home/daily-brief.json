@@ -1,0 +1,71 @@
+{
+  "version": 1,
+  "edition_date": "2026-10-26",
+  "status": "sample",
+  "notice": {
+    "zh-CN": "选读样刊，非自动更新的今日新闻。日期为原文发表日期；未核实日期的内容标作文化周报选题。原文可能需要订阅。",
+    "en": "A curated reading sample, not an automatically updated news feed. Dates refer to the original publications; undated items are labelled as culture-weekly selections. Some sources may require a subscription."
+  },
+  "items": [
+    {
+      "id": "railway-track-completion",
+      "categories": ["domestic"],
+      "title": {"zh-CN": "渝昆高铁全线铺轨完成", "en": "Track laying completed on the Chongqing–Kunming high-speed railway"},
+      "summary": {"zh-CN": "线路建设向后续验收与联调联试推进。开通运营仍需后续工作，具体进度以原文为准。", "en": "Construction moves toward inspection and system testing. Further work is required before passenger service; see the original report for details."},
+      "source": "新华网 · Xinhua",
+      "published": "2026-10-24",
+      "published_label": {"zh-CN": "原文发表日期", "en": "Original publication date"},
+      "url": "https://www.news.cn/politics/20261024/58c8ed727dac45ccaa40d30d48165cd8/c.html"
+    },
+    {
+      "id": "satellite-internet-launch",
+      "categories": ["domestic", "science"],
+      "title": {"zh-CN": "我国成功发射卫星互联网低轨28组卫星", "en": "China launches its 28th group of low-orbit internet satellites"},
+      "summary": {"zh-CN": "长征八号甲运载火箭执行此次发射任务，卫星进入预定轨道。", "en": "A Long March-8A rocket carried the satellites into their planned orbit."},
+      "source": "新华网 · Xinhua",
+      "published": "2026-10-25",
+      "published_label": {"zh-CN": "原文发表日期", "en": "Original publication date"},
+      "url": "https://www.news.cn/politics/20261025/3573644b269e466f83510360cb84eff4/c.html"
+    },
+    {
+      "id": "antimatter-measurement",
+      "categories": ["world", "science"],
+      "title": {"zh-CN": "囚禁一颗反物质粒子，为物理测量打开新窗口", "en": "Trapping an antimatter particle opens a window for precision measurement"},
+      "summary": {"zh-CN": "Nature 报道一项反物质粒子测量进展。研究背景与限制请见原文。", "en": "Nature reports progress in antimatter-particle measurement. Consult the original for the research context and limitations."},
+      "source": "Nature",
+      "published": "2026-10-21",
+      "published_label": {"zh-CN": "原文发表日期", "en": "Original publication date"},
+      "url": "https://www.nature.com/articles/d41586-026-03342-2"
+    },
+    {
+      "id": "brain-body-atlas",
+      "categories": ["world", "science"],
+      "title": {"zh-CN": "大规模脑图谱研究，追踪大脑如何感知身体", "en": "A large-scale brain atlas traces how the brain senses the body"},
+      "summary": {"zh-CN": "一项关于大脑与身体感知联系的研究报道。", "en": "A report on research into the connection between the brain and bodily perception."},
+      "source": "Nature",
+      "published": "2026-10-21",
+      "published_label": {"zh-CN": "原文发表日期", "en": "Original publication date"},
+      "url": "https://www.nature.com/articles/d41586-026-03334-2"
+    },
+    {
+      "id": "publishing-and-ai",
+      "categories": ["business", "culture"],
+      "title": {"zh-CN": "出版业如何面对 AI 写作与创作工具？", "en": "How is publishing responding to AI writing and creative tools?"},
+      "summary": {"zh-CN": "从文学奖到出版流程，文化周报梳理了人类与 AI 合作创作的讨论。", "en": "A culture-weekly selection surveys discussions of human–AI collaboration, from literary awards to publishing workflows."},
+      "source": "界面文化 · Jiemian Culture",
+      "published": null,
+      "published_label": {"zh-CN": "文化周报选题 · 日期未核实", "en": "Culture-weekly selection · date unverified"},
+      "url": "https://m.jiemian.com/article/15234992.html"
+    },
+    {
+      "id": "everyday-internet-theories",
+      "categories": ["culture"],
+      "title": {"zh-CN": "“大水”“薄肌”等网络说法进入文化讨论", "en": "Everyday internet “theories” enter the cultural conversation"},
+      "summary": {"zh-CN": "观察生活选择如何被包装为流行话语，延伸阅读见“街谈”。", "en": "A starting point for thinking about how everyday choices become popular expressions. Continue in the internet-culture section."},
+      "source": "界面文化 · Jiemian Culture",
+      "published": null,
+      "published_label": {"zh-CN": "文化周报选题 · 日期未核实", "en": "Culture-weekly selection · date unverified"},
+      "url": "https://m.jiemian.com/article/15234992.html"
+    }
+  ]
+}

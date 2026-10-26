@@ -186,12 +186,15 @@ class GamePublicationTests(unittest.TestCase):
                 nav = html.split('class="site-nav"', 1)[1].split("</nav>", 1)[0]
                 links = [attrs.get("href") for tag, attrs in Elements(nav).elements if tag == "a"]
                 self.assertTrue(any(tag == "a" and attrs.get("class") == "brand" and attrs.get("href") == "/" for tag, attrs in Elements(html).elements))
-                self.assertEqual(nav.count('class="nav-group'), 4)
+                self.assertEqual(nav.count('class="nav-item'), 5)
+                self.assertEqual(nav.count('class="nav-group'), 3)
                 for route in ("/articles/", "/projects/", "/game/", "/about/", "/photos/", "/anthology/", "/map/", "/game/footprints/"):
                     self.assertIn(route, links)
         home = (output / "index.html").read_text(encoding="utf-8")
-        self.assertIn('class="home-entry-link" href="/articles/"', home)
-        self.assertIn('class="home-entry-link" href="/projects/"', home)
+        self.assertIn('id="daily-title">今日简报</h1>', home)
+        self.assertIn('href="#writing"', home)
+        self.assertIn('class="yl-article-list"', home)
+        self.assertIn('class="nav-entry" href="/projects/"', home)
         self.assertIn('href="/game/"', home)
 
     def test_article_navigation_uses_exact_game_root_and_keeps_other_roots(self):
@@ -250,6 +253,8 @@ class GameFoodPreflightTests(unittest.TestCase):
             with patch.object(build_site, "ROOT", root), patch.object(build_site, "OUTPUT", output), \
                  patch.object(build_site, "load_projects", return_value=[]), \
                  patch.object(build_site, "load_about", return_value={}), \
+                 patch.object(build_site, "load_daily", return_value=({}, {})), \
+                 patch.object(build_site, "daily_asset_sources", return_value=[]), \
                  patch.object(build_site, "Blog") as blog, \
                  self.assertRaisesRegex(ValueError, r"Missing required game food photo: home/assets/foods/hotpot\.webp"):
                 build_site.build_site("https://preview.example")
@@ -304,6 +309,8 @@ class GameSportResourceTests(unittest.TestCase):
                      patch.object(build_site, "OUTPUT", output), \
                      patch.object(build_site, "load_projects", return_value=[]), \
                      patch.object(build_site, "load_about", return_value={}), \
+                     patch.object(build_site, "load_daily", return_value=({}, {})), \
+                     patch.object(build_site, "daily_asset_sources", return_value=[]), \
                      patch.object(Path, "is_symlink", return_value=False), \
                      patch.object(Path, "is_file", autospec=True, side_effect=lambda path: path != missing), \
                      patch.object(build_site, "Blog") as blog, \

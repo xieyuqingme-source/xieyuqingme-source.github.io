@@ -19,6 +19,7 @@ import build_site
 from build_site import (site_root, default_root, check_site, Elements, load_projects,
                         validate_projects, render_projects, check_publication_metadata, build_site as publish_site,
                         load_about, validate_about, render_about)
+from daily_brief import load_daily, validate_brief, validate_content, render_brief, safe_json
 
 
 class UnifiedPublicationTests(unittest.TestCase):
@@ -237,6 +238,83 @@ class PublicProjectTests(unittest.TestCase):
                           "Long bilingual titles must wrap rather than disappear.")
 
 
+class DailyHomepageTests(unittest.TestCase):
+    def setUp(self):
+        self.brief, self.content = load_daily(ROOT, build_site.linked_directory)
+
+    def test_sample_dates_and_source_links_remain_explicit_in_both_languages(self):
+        self.assertEqual(self.brief["status"], "sample")
+        self.assertEqual(self.brief["edition_date"], "2026-10-26")
+        for language, label in (("zh-CN", "选读样刊"), ("en", "Reading sample")):
+            html = render_brief(self.brief, language)
+            self.assertIn(label, html)
+            self.assertIn('datetime="2026-10-24"', html)
+            for item in self.brief["items"]:
+                self.assertIn(item["url"], html)
+                if item["published"] is None:
+                    self.assertIn(item["published_label"][language], html)
+            self.assertEqual(sum(tag == "article" for tag, _ in Elements(html).elements), 6)
+
+    def test_sources_dates_and_schema_are_validated_before_publication(self):
+        for url in ("http://example.com/news", "https://localhost/news", "https://127.0.0.1/news",
+                    "https://example.com/news?token=private", "https://user:pass@example.com/news"):
+            data = deepcopy(self.brief)
+            data["items"][0]["url"] = url
+            with self.subTest(url=url), self.assertRaises(ValueError):
+                validate_brief(data)
+        for field, value in (("published", "2026-02-30"), ("published", "2027-01-01"), ("private_notes", "not for publication")):
+            data = deepcopy(self.brief)
+            data["items"][0][field] = value
+            with self.subTest(field=field, value=value), self.assertRaises(ValueError):
+                validate_brief(data)
+        data = deepcopy(self.content)
+        data["street"][0]["related_url"] = "/articles/%2e%2e/private.html"
+        with self.assertRaises(ValueError):
+            validate_content(data)
+
+    def test_inline_json_cannot_close_its_script_and_all_daily_words_have_sources(self):
+        text = safe_json({"example": "</script><script>alert(1)</script>&\u2028"})
+        self.assertNotIn("<", text)
+        self.assertNotIn("&", text)
+        self.assertEqual(json.loads(text)["example"], "</script><script>alert(1)</script>&\u2028")
+        validate_content(self.content)
+        for item in self.content["quotes"]:
+            self.assertTrue(item["url"].startswith("https://ctext.org/"))
+            self.assertIn("site's translation", item["translation_note"]["en"])
+
+    def test_recent_writing_uses_original_dates_and_direct_available_language_links(self):
+        from build_blog import Article
+        from dataclasses import replace
+        older = Article(ROOT / "中文文章/2025-01-01-older.md", "older.html", "Older", "2025-01-01", "zh-CN", "中文文章", "chinese.html", "Older excerpt")
+        newer = Article(ROOT / "English Articles/2026-01-01-newer.md", "newer.html", "Newer", "2026-01-01", "en", "English Articles", "english.html", "Newer excerpt")
+        translation = replace(older, title="Older translated", language="en", destination="older-en.html", published="2027-01-01", original=older)
+        blog = SimpleNamespace(articles=[older, newer], source_root=ROOT,
+                               translations={older.source.relative_to(ROOT).as_posix(): translation},
+                               href=lambda destination: "/articles/" + destination,
+                               topic=lambda article: "生活与思考", excerpt=lambda article: article.markdown)
+        html = build_site.render_home_recent(blog)
+        self.assertLess(html.index("Newer"), html.index("Older"))
+        self.assertIn('href="/articles/newer.html"', html)
+        english = build_site.render_home_recent(blog, "en")
+        self.assertLess(english.index("Newer"), english.index("Older translated"))
+        self.assertIn('datetime="2025-01-01"', english)
+        self.assertNotIn("2027-01-01", english)
+        self.assertIn('href="/en/articles/', english)
+
+    def test_homepage_projects_are_two_usable_tools_without_reordering_the_catalogue(self):
+        projects = load_projects()
+        before = deepcopy(projects)
+        html = build_site.render_home_projects(projects)
+        self.assertLess(html.index("足迹地图"), html.index("从夯到拉排行"))
+        self.assertIn('href="/map/"', html)
+        self.assertIn('href="/game/ranking/"', html)
+        self.assertEqual(sum(tag == "article" for tag, _ in Elements(html).elements), 2)
+        english = build_site.render_home_projects(projects, "en")
+        self.assertIn('href="/en/map/"', english)
+        self.assertIn('href="/en/game/ranking/"', english)
+        self.assertEqual(projects, before)
+
+
 class ProjectPublicationTests(unittest.TestCase):
     """Exercise actual unified output and navigation without copying private article fixtures."""
     def fake_blog(self, address, output):
@@ -331,7 +409,14 @@ class ProjectPublicationTests(unittest.TestCase):
                                  (root / "home/assets/wechat-qrcode.jpg").read_bytes())
                 self.assertNotIn("wechat-qrcode", home)
                 self.assertIn('href="/map/"', home)
-                self.assertIn('class="home-entry-link" href="/articles/"', home)
+                self.assertIn('class="yl-article-list"', home)
+                self.assertIn('href="#writing"', home)
+                self.assertIn('id="daily-title">今日简报</h1>', home)
+                self.assertIn("选读样刊", home)
+                self.assertIn('datetime="2026-10-24"', home)
+                for filename in ("daily-brief.json", "daily-content.json"):
+                    self.assertEqual(json.loads((output / "assets" / filename).read_text(encoding="utf-8")),
+                                     json.loads((root / "home" / filename).read_text(encoding="utf-8")))
                 for item in load_projects():
                     asset = item["screenshot"].lstrip("/")
                     self.assertEqual((output / asset).read_bytes(), (root / "home" / asset).read_bytes())

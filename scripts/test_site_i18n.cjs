@@ -110,14 +110,15 @@ test('modified clicks keep normal browser navigation and do not mutate language'
 
 test('live theme labels follow display language without changing saved theme', () => {
   const code = fs.readFileSync(path.join(root, 'home/assets/portal.js'), 'utf8');
-  const label = { textContent: '' }, attrs = {}, writes = [];
+  const label = { textContent: '' }, status = { textContent: '' }, attrs = {}, writes = [];
   let current = 'zh-CN', listener;
-  const document = { documentElement: { lang: current, dataset: {} }, querySelector: () => ({ querySelector: () => label, setAttribute: (key,value) => { attrs[key]=value; }, addEventListener() {} }) };
+  const button = { querySelector: selector => selector === '.theme-label' ? label : status, setAttribute: (key,value) => { attrs[key]=value; } };
+  const document = { documentElement: { lang: current, dataset: {} }, addEventListener() {}, querySelectorAll: () => [], querySelector: selector => selector === '#theme-toggle' ? button : null };
   const window = { SiteI18n: { lang: () => current, t: key => common[current][key], onChange: fn => { listener=fn; } }, matchMedia: () => ({ matches: false, addEventListener() {} }) };
-  vm.runInNewContext(code,{document,window,localStorage:{getItem:()=> 'dark',setItem:(...args)=>writes.push(args)}});
-  assert.equal(label.textContent,'浅色'); assert.equal(document.documentElement.dataset.theme,'dark');
+  vm.runInNewContext(code,{document,window,localStorage:{getItem:key=> key === 'xieyuqing-blog-theme' ? 'dark' : 'sea',setItem:(...args)=>writes.push(args)}});
+  assert.equal(label.textContent,'深海科技'); assert.equal(status.textContent,'深色'); assert.equal(document.documentElement.dataset.theme,'dark');
   current='en'; listener();
-  assert.equal(label.textContent,'Light'); assert.equal(attrs['aria-label'],'Switch to light mode');
+  assert.equal(label.textContent,'Deep Sea Tech'); assert.equal(status.textContent,'Dark'); assert.equal(attrs['aria-label'],'Appearance: Deep Sea Tech, Dark. Choose skin and brightness');
   assert.equal(document.documentElement.dataset.theme,'dark'); assert.deepEqual(writes,[]);
 });
 

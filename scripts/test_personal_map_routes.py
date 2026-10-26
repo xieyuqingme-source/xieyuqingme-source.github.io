@@ -41,10 +41,11 @@ class PersonalMapTests(unittest.TestCase):
         self.assertIn('map-author-malaysia.mp4',public_video_preview(ROOT,self.source))
         changed=deepcopy(self.source);changed['records'][-1]['description']='Changed original'
         self.assertEqual(public_video_preview(ROOT,changed),'')
-    def test_four_groups_keep_legacy_destinations_and_readable_single_language_brand(self):
+    def test_five_direct_sections_keep_legacy_destinations_and_readable_single_language_brand(self):
         page=localize_page((ROOT/'home/map.template.html').read_text(encoding='utf-8'),ROOT,'https://example.test','/map/','en',modules=('map',))
         header=page.split('<header',1)[1].split('</header>',1)[0]
-        self.assertEqual(header.count('class="nav-group'),4)
+        self.assertEqual(header.count('class="nav-item'),5)
+        self.assertEqual(header.count('class="nav-group'),3)
         for route in ['/articles/','/anthology/','/projects/','/photos/','/map/','/about/','/game/','/game/ranking/','/game/footprints/']:
             self.assertIn('href="/en'+route+'"',header)
         self.assertNotIn('Xie Yuqing · Carl',header)

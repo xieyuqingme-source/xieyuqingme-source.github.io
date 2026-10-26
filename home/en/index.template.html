@@ -4,14 +4,14 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Xie Yuqing · Carl</title>
-  <meta name="description" content="I graduated from the University of Chinese Academy of Social Sciences and am studying for an MBA at City University Malaysia. I enjoy reading, writing and exploring AI applications. This site brings together my writing and projects.">
+  <meta name="description" content="A daily reading brief, a living Earth and a place for writing, projects and observations by Xie Yuqing.">
   <meta name="author" content="Xie Yuqing (Carl)">
   <link rel="canonical" href="{{site_url}}/en/">
   <link rel="alternate" hreflang="zh-CN" href="{{site_url}}/">
   <link rel="alternate" hreflang="en" href="{{site_url}}/en/">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Xie Yuqing · Carl">
-  <meta property="og:description" content="I graduated from the University of Chinese Academy of Social Sciences and am studying for an MBA at City University Malaysia. I enjoy reading, writing and exploring AI applications. This site brings together my writing and projects.">
+  <meta property="og:description" content="A daily reading brief, a living Earth and a place for writing, projects and observations by Xie Yuqing.">
   <meta property="og:url" content="{{site_url}}/en/">
   <meta property="og:image" content="{{site_url}}/assets/share-cover.png">
   <meta property="og:image:width" content="1200">
@@ -22,25 +22,42 @@
   <link rel="icon" href="/assets/favicon.svg?v=qinghuan-1" type="image/svg+xml">
   <script>(() => { let theme = "light", saved; try { saved = localStorage.getItem("xieyuqing-blog-theme"); } catch (_) {} if (saved === "light" || saved === "dark") theme = saved; else try { if (window.matchMedia("(prefers-color-scheme: dark)").matches) theme = "dark"; } catch (_) {} document.documentElement.dataset.theme = theme; })();</script>
   <link rel="stylesheet" href="/assets/portal.css">
+  <link rel="stylesheet" href="/assets/home-daily.css">
   <script src="/assets/portal.js" defer></script>
 </head>
-<body>
+<body class="daily-home-page">
   <a class="skip-link" href="#main">Skip to content</a>
   <header class="site-header container">
     <a class="brand" href="/en/" aria-label="Xie Yuqing personal home"><span><span lang="zh-CN">谢雨卿</span><small lang="en">Xie Yuqing · Carl</small></span></a>
     <nav class="site-nav" aria-label="Main navigation"><a href="/en/" aria-current="page">Home</a><a href="/en/articles/">Articles</a><a href="/en/anthology/" title="Original texts in Chinese, English and French">Anthology</a><a href="/en/projects/">Projects</a><a href="/en/photos/">Photos</a><a href="/en/map/">Map</a><a href="/en/game/">Games</a><a href="/en/about/">About</a><a class="site-language-switch" href="/" lang="zh-CN" aria-label="Switch site language to Chinese">中文</a></nav>
     <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to dark mode" hidden><span class="theme-label">Dark</span></button>
   </header>
-  <main id="main" class="container home-main">
-    <div class="home-stage">
-      <section class="home-hero" aria-labelledby="intro-title"><div class="hero-copy"><p class="eyebrow"><span aria-hidden="true"></span> PERSONAL HOME</p><h1 id="intro-title">Xie Yuqing</h1><p class="intro-name" lang="en">Carl</p><p class="hero-description">Reading, writing, and exploring AI applications.</p><a class="quiet-link" href="/en/about/">About me <span aria-hidden="true">↗</span></a></div><div class="hero-atmosphere" aria-hidden="true"><svg viewBox="0 0 640 380" focusable="false"><defs><pattern id="hero-grid" width="48" height="48" patternUnits="userSpaceOnUse"><path d="M48 0H0V48" fill="none" stroke="currentColor" stroke-width=".6"/></pattern></defs><rect x="20" y="20" width="600" height="340" fill="url(#hero-grid)" class="hero-grid"/><g fill="none" stroke="currentColor"><circle cx="346" cy="190" r="132"/><circle cx="346" cy="190" r="158" stroke-dasharray="2 12"/><ellipse cx="346" cy="190" rx="238" ry="67" transform="rotate(-28 346 190)"/><path d="M58 303 596 69M346 20V360M45 190H610" stroke-width=".5"/></g><g class="hero-points"><circle cx="226" cy="247" r="3"/><circle cx="463" cy="130" r="3"/><circle cx="346" cy="58" r="2"/><circle cx="346" cy="322" r="2"/></g></svg></div></section>
-      <section class="home-entries" aria-label="Articles and projects">
-        <article class="portal-entry writing-entry"><a class="home-entry-link" href="/en/articles/"><svg class="entry-symbol" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 8c-4-3-8-3-12-2v20c4-1 8-1 12 2 4-3 8-3 12-2V6c-4-1-8-1-12 2Zm0 0v20M8 11h4m-4 5h4m8-5h4m-4 5h4"/></svg><h2>Articles</h2><p>Writing about life, reading and ideas.</p><span class="entry-action">Explore articles<span aria-hidden="true">→</span></span></a></article>
-        <article class="portal-entry projects-entry"><a class="home-entry-link" href="/en/projects/"><svg class="entry-symbol" viewBox="0 0 32 32" aria-hidden="true"><path d="m16 3 12 7v13l-12 7L4 23V10Zm0 0v14m12-7-12 7L4 10m12 7v13"/></svg><h2>Projects</h2><p>Tools, applications and workflows.</p><span class="entry-action">Explore projects<span aria-hidden="true">→</span></span></a></article>
-      </section>
-    </div>
-    <section class="home-recent" aria-labelledby="recent-title"><div class="section-heading"><h2 id="recent-title">Recent writing</h2><a class="quiet-link" href="/en/articles/">All articles ↗</a></div><ol class="recent-list">{{recent_articles}}</ol><p class="home-content-total">{{article_total}} original articles · {{project_total}} public projects</p></section>
+  <main id="main" class="container daily-home">
+    <section class="yl-mast" id="today" aria-labelledby="daily-title">
+      <img class="yl-inkscape" src="/assets/home-ink.webp" width="2172" height="724" alt="" aria-hidden="true">
+      <div class="yl-mast-copy"><p class="yl-kicker">A WINDOW ON THE WORLD, A PLACE FOR EVERYDAY LIFE</p><h1 id="daily-title">Today’s Brief</h1><p class="yl-intro">News, the turning seasons, and things worth thinking about.</p></div>
+      <div class="yl-issue"><strong id="home-date">Take a look around today</strong><span>Live almanac · News keeps its original dates</span><span class="yl-edition" id="daily-edition">Reading sample</span></div>
+    </section>
+    <section class="yl-today" aria-label="Reading and the day outside">
+      <div class="yl-news"><div class="yl-filter" id="daily-filters" role="group" aria-label="Filter news by category" hidden><button type="button" data-news-filter="all" aria-pressed="true">All</button><button type="button" data-news-filter="domestic" aria-pressed="false">China</button><button type="button" data-news-filter="world" aria-pressed="false">World</button><button type="button" data-news-filter="business" aria-pressed="false">Business</button><button type="button" data-news-filter="science" aria-pressed="false">Science</button><button type="button" data-news-filter="culture" aria-pressed="false">Culture</button></div><div id="daily-feed" aria-live="polite">{{brief_feed_en}}</div><p class="yl-note" id="daily-brief-notice">{{daily_brief_notice_en}}</p><div class="yl-news-footer"><a class="yl-readme" href="#writing">Read my writing <span class="yl-arrow" aria-hidden="true">↓</span></a><span class="yl-small">Explore the world through news.<br>Get to know me through writing.</span></div></div>
+      <aside class="yl-sidebar" id="daily-earth" aria-label="Calendar, weather and Earth">
+        <section class="yl-calendar" aria-label="Calendar and weather"><div class="yl-cal-top"><div class="yl-day" id="daily-calendar-day">—</div><div class="yl-cal-copy"><strong id="daily-calendar-weekday">Today</strong><div id="daily-calendar-lunar">Loading lunar calendar</div><div class="yl-small" id="daily-calendar-month">—</div></div></div><p class="yl-solar-term" id="daily-calendar-term">The twenty-four solar terms</p><div class="yl-weather"><label for="daily-city"><span class="yl-small" style="display:block;margin-bottom:3px">Selected city</span><select class="yl-city" id="daily-city"><option value="beijing">Beijing</option><option value="shanghai">Shanghai</option><option value="kuala">Kuala Lumpur</option><option value="london">London</option></select></label><div class="yl-weather-readout" id="daily-weather" aria-live="polite">Loading weather…</div></div><details class="yl-almanac"><summary>Traditional almanac</summary><p>Traditional almanac entries have not been connected yet. Solar calculations are shown independently.</p></details></section>
+        <section class="yl-earth" aria-labelledby="earth-heading"><div class="yl-earth-heading"><h2 id="earth-heading">Earth, now</h2><span class="yl-small">EARTH / SOLAR TIME</span></div><div class="yl-globe-wrap"><canvas id="earth-canvas" width="560" height="570" role="img" aria-label="Earth day and night, showing the subsolar point and selected city"></canvas></div><p class="yl-earth-small">Drag the globe to explore another view</p><div class="yl-suntime"><div>Sunrise · local<strong id="daily-sunrise">—</strong></div><div>Sunset · local<strong id="daily-sunset">—</strong></div></div><div class="yl-earth-info" aria-live="polite"><div id="daily-local-time">—</div><div>Subsolar point <b id="daily-subsolar">—</b></div><div id="daily-daylength">—</div></div><div class="yl-earth-actions"><label class="yl-time-row" for="earth-hour"><span>Time · Beijing</span><output id="earth-hour-label">—</output></label><button type="button" class="yl-earth-now" id="earth-now" hidden>Back to now</button></div><input class="yl-time-slider" id="earth-hour" type="range" min="0" max="23.9833333" step="0.0166667" value="12"><div class="yl-time-ends" aria-hidden="true"><span>00:00</span><span>12:00</span><span>23:59</span></div><p class="yl-earth-source">Axis ≈ 23.4° from the orbital normal · Approximate calculations<br><a href="https://gml.noaa.gov/grad/solcalc/calcdetails.html" target="_blank" rel="noopener noreferrer">Calculation reference</a> · Geography Natural Earth</p></section>
+      </aside>
+    </section>
+    <noscript><p class="yl-no-script">News, writing and projects are available without JavaScript. Enable it for the live calendar, weather and globe.</p></noscript>
+    <section class="yl-bottomline" aria-label="A quotation and a scientific idea"><article><h2>WORDS TO KEEP</h2><p class="yl-quote" id="daily-quote">Learning without reflection leaves one confused; reflection without learning leaves one in danger.</p><p class="yl-small yl-quote-source" id="daily-quote-source" title="English translation by this site">Confucius · <a href="https://ctext.org/analects/wei-zheng/zh" target="_blank" rel="noopener noreferrer">Analects, Wei Zheng ↗</a></p></article><article><h2>ONE IDEA A DAY</h2><h3 class="yl-concept-title" id="daily-concept-title">Solar declination</h3><p class="yl-concept-copy" id="daily-concept-text">The Sun’s angular position north or south of the celestial equator also gives the latitude of its subsolar point. It changes with the seasons, affecting daylight and solar altitude.</p><a class="yl-small" id="daily-concept-source" href="https://gml.noaa.gov/grad/solcalc/glossary.html" target="_blank" rel="noopener noreferrer">NOAA · Concept reference ↗</a></article></section>
+    <section class="yl-street" aria-labelledby="street-heading"><h2 class="yl-street-title" id="street-heading">In conversation<span class="yl-kicker" style="display:block">INTERNET CULTURE</span></h2><div class="yl-street-main"><h3 id="daily-street-title">Why does every everyday choice seem to have a “theory” now?</h3><p id="daily-street-text">How does an everyday choice become an internet catchphrase? Follow the context and the way it spreads, then return to your own experience.</p><div class="yl-street-links" id="daily-street-links"><a href="https://m.jiemian.com/article/15234992.html" target="_blank" rel="noopener noreferrer">Culture reporting ↗</a></div></div></section>
+    <section class="yl-section" id="writing" aria-labelledby="writing-heading"><div class="yl-section-head"><h2 id="writing-heading">Recent writing<span>WRITING &amp; OBSERVATIONS</span></h2><a class="yl-link" href="/en/articles/">All articles ↗</a></div><ol class="yl-article-list">{{home_recent_articles_en}}</ol></section>
+    <section class="yl-section" id="projects" aria-labelledby="projects-heading"><div class="yl-section-head"><h2 id="projects-heading">Making useful things<span>PROJECTS</span></h2><a class="yl-link" href="/en/projects/">All projects ↗</a></div><div class="yl-project-grid">{{home_project_cards_en}}</div></section>
+    <section class="yl-photo" id="life" aria-label="Photography and places"><img src="{{home_photo_src}}" alt="{{home_photo_alt_en}}" width="1706" height="1280" loading="lazy"><div class="yl-photo-caption"><div><h2>Beijing · Yongding River</h2><p>{{home_photo_caption_en}}</p></div><a href="/en/photos/">Photography and places <span class="yl-arrow" aria-hidden="true">↗</span></a></div></section>
   </main>
   <footer class="site-footer container"><p>Xie Yuqing · Carl</p><div><a href="/en/articles/">Articles</a><a href="/en/anthology/" title="Original texts in Chinese, English and French">Anthology</a><a href="/en/projects/">Projects</a><a href="/en/photos/">Photos</a><a href="/en/map/">Map</a><a href="/en/game/">Games</a><a href="/en/about/">About</a><a href="/articles/feed.xml">RSS</a></div></footer>
+  <script id="daily-brief-data" type="application/json">{{daily_brief_data}}</script>
+  <script id="daily-content-data" type="application/json">{{daily_content_data}}</script>
+  <script src="/assets/vendor/d3-7.9.0.min.js" defer></script>
+  <script src="/assets/astronomy-solar.js" defer></script>
+  <script src="/assets/home-earth.js" defer></script>
+  <script src="/assets/home-daily.js" defer></script>
 </body>
 </html>

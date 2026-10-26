@@ -1,0 +1,63 @@
+{
+  "version": 1,
+  "quotes": [
+    {
+      "id": "learning-and-reflection",
+      "text": {"zh-CN": "学而不思则罔，思而不学则殆。", "en": "Learning without reflection leaves one confused; reflection without learning leaves one in danger."},
+      "author": {"zh-CN": "孔子", "en": "Confucius"},
+      "work": {"zh-CN": "《论语·为政》2.15", "en": "Analects · Wei Zheng, 2.15"},
+      "translation_note": {"zh-CN": "引文据《论语》；英文为本站译文。", "en": "The Chinese quotation follows the Analects; the English is this site's translation."},
+      "url": "https://ctext.org/analects/wei-zheng/zh"
+    },
+    {
+      "id": "knowing-what-you-know",
+      "text": {"zh-CN": "知之为知之，不知为不知，是知也。", "en": "To recognise what you know, and recognise what you do not know: that is knowledge."},
+      "author": {"zh-CN": "孔子", "en": "Confucius"},
+      "work": {"zh-CN": "《论语·为政》2.17", "en": "Analects · Wei Zheng, 2.17"},
+      "translation_note": {"zh-CN": "引文据《论语》；英文为本站译文。", "en": "The Chinese quotation follows the Analects; the English is this site's translation."},
+      "url": "https://ctext.org/analects/wei-zheng/zh"
+    },
+    {
+      "id": "passing-like-a-river",
+      "text": {"zh-CN": "逝者如斯夫，不舍昼夜。", "en": "What passes is like this river, never ceasing by day or night."},
+      "author": {"zh-CN": "孔子", "en": "Confucius"},
+      "work": {"zh-CN": "《论语·子罕》9.17", "en": "Analects · Zi Han, 9.17"},
+      "translation_note": {"zh-CN": "引文据《论语》；英文为本站译文。", "en": "The Chinese quotation follows the Analects; the English is this site's translation."},
+      "url": "https://ctext.org/analects/zi-han/zh"
+    }
+  ],
+  "concepts": [
+    {
+      "id": "solar-declination",
+      "title": {"zh-CN": "太阳赤纬", "en": "Solar declination"},
+      "text": {"zh-CN": "太阳相对天球赤道的角位置，也对应太阳直射点的纬度。它随季节在南北回归线之间变化，影响各地昼长与太阳高度。", "en": "The Sun's angular position north or south of the celestial equator also gives the latitude of the subsolar point. Its seasonal change affects daylight duration and the Sun's height in the sky."},
+      "source": "NOAA Global Monitoring Laboratory",
+      "url": "https://gml.noaa.gov/grad/solcalc/glossary.html"
+    },
+    {
+      "id": "solar-noon",
+      "title": {"zh-CN": "太阳正午", "en": "Solar noon"},
+      "text": {"zh-CN": "太阳越过当地子午线的时刻，一般也是当天太阳高度最高的时刻。由于经度与均时差的影响，它不一定发生在钟表的12点。", "en": "The moment the Sun crosses the local meridian is usually its highest point of the day. Longitude and the equation of time mean it need not coincide with 12:00 on a clock."},
+      "source": "NOAA Global Monitoring Laboratory",
+      "url": "https://gml.noaa.gov/grad/solcalc/glossary.html"
+    },
+    {
+      "id": "twenty-four-solar-terms",
+      "title": {"zh-CN": "二十四节气", "en": "The 24 solar terms"},
+      "text": {"zh-CN": "将太阳在黄道上的视位置每15度划分一段，得到二十四节气。它们依据太阳位置确定，因此对应的公历日期通常只在小范围内变化。", "en": "The 24 solar terms divide the Sun's apparent path along the ecliptic into 15-degree intervals. Because they follow the Sun's position, their Gregorian dates vary only slightly from year to year."},
+      "source": "香港天文台 · Hong Kong Observatory",
+      "url": "https://www.hko.gov.hk/en/gts/time/24solarterms.htm"
+    }
+  ],
+  "street": [
+    {
+      "id": "everyday-theories",
+      "title": {"zh-CN": "薄肌、大水、大睡：为什么生活也开始讲“理论”？", "en": "Why do everyday choices become internet “theories”?"},
+      "text": {"zh-CN": "一个生活选择，如何变成一套流行话语？从网络说法的语境与传播方式读起，再回到自己的日常经验。网络热词是文化观察对象，不是科学定论。", "en": "How does an everyday choice become a shared expression? Read its context and circulation, then return to your own experience. Internet catchphrases are cultural observations, not established scientific findings."},
+      "source": "界面文化 · Jiemian Culture",
+      "url": "https://m.jiemian.com/article/15234992.html",
+      "related_url": "/articles/%E4%B8%AD%E6%96%87%E6%96%87%E7%AB%A0/2026-10-11-%E8%AE%BA%E5%A4%A7%E8%B5%B0%E7%90%86%E8%AE%BA%EF%BC%88The%20Great%20Walk%20Theory%EF%BC%89.html",
+      "related_label": {"zh-CN": "我的延伸思考：论大走理论", "en": "My related essay: The Great Walk Theory"}
+    }
+  ]
+}

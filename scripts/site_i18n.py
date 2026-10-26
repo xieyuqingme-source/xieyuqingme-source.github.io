@@ -132,7 +132,7 @@ class _Localizer(HTMLParser):
             updated = _attribute(updated, "href", href)
             chinese = localized_path(href, "zh-CN")
             key = "common.nav." + NAV_KEYS[chinese] if chinese in NAV_KEYS and "brand" not in classes else ""
-            if key in self.catalogue:
+            if key in self.catalogue and not content_key:
                 content_key = key
             if chinese == "/articles/feed.xml" and "common.rss" in self.catalogue:
                 content_key = "common.rss"
@@ -187,7 +187,7 @@ def appearance_bootstrap():
 def version_shared_assets(page, root):
     """Refresh shared UI after local/production updates without flushing user data."""
     import hashlib
-    sources = {name: Path(root) / 'home/assets' / name for name in ['site-themes.css', 'portal.css', 'portfolio.css', 'photos.css', 'anthology.css', 'anthology-selection.css', 'game.css', 'ranking-skins.css', 'site-nav.css', 'site-music.css', 'portal.js', 'site-navigation.js', 'site-music.js']}
+    sources = {name: Path(root) / 'home/assets' / name for name in ['site-themes.css', 'portal.css', 'portfolio.css', 'photos.css', 'anthology.css', 'anthology-selection.css', 'game.css', 'ranking-skins.css', 'site-nav.css', 'site-music.css', 'portal.js', 'site-navigation.js', 'site-music.js', 'home-daily.css', 'home-daily.js', 'home-earth.js', 'astronomy-solar.js']}
     sources['style.css'] = Path(root) / 'blog/style.css'
     def version(match):
         route = match.group(2); source = sources.get(route.rsplit('/', 1)[-1])
@@ -196,28 +196,34 @@ def version_shared_assets(page, root):
         if source.is_symlink():
             raise ValueError('Shared UI assets cannot be symlinks.')
         return match.group(1) + route + '?v=' + hashlib.sha256(source.read_bytes()).hexdigest()[:12] + match.group(3)
-    return re.sub(r'((?:src|href)=["\'])(/(?:(?:articles/)?assets)/(?:site-themes|portal|portfolio|photos|anthology|anthology-selection|game|ranking-skins|site-nav|site-music|site-navigation|style)\.(?:css|js))(?:\?[^"\']*)?(["\'])', version, page)
+    return re.sub(r'((?:src|href)=["\'])(/(?:(?:articles/)?assets)/(?:site-themes|portal|portfolio|photos|anthology|anthology-selection|game|ranking-skins|site-nav|site-music|site-navigation|home-daily|home-earth|astronomy-solar|style)\.(?:css|js))(?:\?[^"\']*)?(["\'])', version, page)
 
 
 def compact_header(page, route, paired, language="zh-CN"):
-    """Four native disclosure groups; all original URLs remain reachable."""
+    """Five direct section links with native disclosures for related destinations."""
     def render(match):
         raw = match.group(0)
         theme = re.search(r'<button\b[^>]*class=["\'][^"\']*theme-toggle[^"\']*["\'][^>]*>.*?</button>', raw, re.S)
         if not theme:
             return raw
-        def link(path, key):
+        def link(path, key, primary=False):
             current = ' aria-current="page"' if route == path else ''
-            return f'<a href="{path}"{current}><span data-i18n="common.nav.{key}"></span></a>'
-        groups = [('articles', [('/articles/', 'articles'), ('/anthology/', 'anthology')]),
-                  ('projects', [('/projects/', 'projects'), ('/photos/', 'photos')]),
-                  ('about', [('/about/', 'about'), ('/map/', 'map')]),
-                  ('games', [('/game/', 'games'), ('/game/ranking/', 'ranking'), ('/game/footprints/', 'maker')])]
+            css = ' class="nav-entry"' if primary else ''
+            return f'<a{css} href="{path}"{current} data-i18n="common.nav.{key}"></a>'
+        groups = [('/', 'today', [], []),
+                  ('/articles/', 'articles', [('/anthology/', 'anthology')], ['/articles/', '/anthology/']),
+                  ('/projects/', 'projects', [('/game/', 'games'), ('/game/ranking/', 'ranking'), ('/game/footprints/', 'maker')], ['/projects/', '/game/']),
+                  ('/photos/', 'life', [('/map/', 'map')], ['/photos/', '/map/']),
+                  ('/about/', 'about', [], ['/about/'])]
         preserved = ''.join(re.findall(r'<a\b(?=[^>]*data-preserve-language-link)[^>]*>.*?</a>', raw, re.S))
         nav = ''
-        for key, links in groups:
-            active = any(route == path or (path != '/' and route.startswith(path) and path not in ['/articles/', '/game/']) for path, _ in links)
-            nav += f'<details class="nav-group{" is-current" if active else ""}"><summary><span data-i18n="common.nav.{key}"></span></summary><div class="nav-menu">' + ''.join(link(*item) for item in links) + (preserved if key == 'articles' else '') + '</div></details>'
+        for path, key, links, branches in groups:
+            active = route == path or any(route.startswith(branch) for branch in branches)
+            nav += f'<div class="nav-item{" is-current" if active else ""}">' + link(path, key, primary=True)
+            extras = ''.join(link(*item) for item in links) + (preserved if key == 'articles' else '')
+            if extras:
+                nav += f'<details class="nav-group"><summary data-i18n-aria-label="common.nav.more.{key}"><span aria-hidden="true">⌄</span></summary><div class="nav-menu">{extras}</div></details>'
+            nav += '</div>'
         original_switch = re.search(r'<a\b[^>]*class=["\'][^"\']*site-language-switch[^"\']*["\'][^>]*>.*?</a>', raw, re.S)
         switch = original_switch.group(0) if original_switch else ('<a class="site-language-switch" href="/en/" lang="en">EN</a>' if paired else '')
         theme_control = ('<details class="theme-control" id="theme-control" hidden><summary class="theme-toggle" id="theme-toggle"><span class="theme-label"></span><small class="theme-mode"></small></summary>'
@@ -246,7 +252,7 @@ def localize_page(page, root, address, route, language="zh-CN", modules=(), titl
     chinese = localized_path(route, "zh-CN")
     english = localized_path(chinese, "en")
     paired = chinese != english
-    if all("common.nav." + key in catalogues[language] for key in (*NAV_KEYS.values(), "ranking", "maker")) and "common.brandName" in catalogues[language]:
+    if all("common.nav." + key in catalogues[language] for key in (*NAV_KEYS.values(), "ranking", "maker", "today", "life", "more.articles", "more.projects", "more.life")) and "common.brandName" in catalogues[language]:
         page = compact_header(page, chinese, paired, language)
     current = localized_path(chinese, language)
     canonical_path = "/articles/index.html" if route == "/articles/index.html" and language == "zh-CN" else current

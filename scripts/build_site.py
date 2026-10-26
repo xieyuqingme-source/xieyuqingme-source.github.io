@@ -17,6 +17,7 @@ from photo_pages import build_photos
 from map_pages import load_map, build_map
 from anthology_pages import load_anthology, load_glossary, build_anthology
 from site_i18n import localize_page, localized_path, load_catalogues, check_site_languages
+from daily_brief import load_daily, safe_json, render_brief
 
 OUTPUT = ROOT / "_site_unified"
 GAME_PAGES = (("game.template.html", "game"), ("ranking.template.html", "game/ranking"))
@@ -42,6 +43,9 @@ PROJECT_FIELDS = {"id", "title", "english_title", "kind", "summary", "problem", 
 PROJECT_OPTIONAL_FIELDS = {"download_url", "download_label", "guide_label", "link_status", "demo_url"}
 PROJECT_DEMO_ROUTES = {"/map/", "/game/ranking/"}
 BRAND_ASSETS = ("share-cover.png", "favicon.svg", "favicon.ico", "favicon.png")
+HOME_DAILY_ASSETS = ("home-daily.css", "home-daily.js", "home-earth.js", "astronomy-solar.js", "home-ink.webp",
+                     "vendor/d3-7.9.0.min.js", "vendor/D3-LICENSE")
+HOME_PHOTO = "/photos/images/p-4122f58ade4023f152364ccc-fc4b164a51dcc1e8-640.webp"
 ABOUT_FIELDS = {"name", "english_name", "chinese_bio", "english_bio", "wechat", "email"}
 PRIVATE_PATH = re.compile(r"(?<![A-Za-z0-9])[A-Za-z]:[\\/]|\\\\[^\s\\]+[\\/]|/(?:Users|home|mnt)/", re.I)
 EXTERNAL_ICON = '''<svg class="external-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 17 17 7M7 7h10v10"/></svg>'''
@@ -215,6 +219,89 @@ def render_projects(projects, language="zh-CN"):
                                   "查看 GitHub": "View GitHub", "下载工作流": "Download workflow", "下载与使用说明": "Download & usage guide"}.items():
             result = result.replace(chinese, english)
     return result
+
+
+def render_home_recent(blog, language="zh-CN", limit=5):
+    """List actual writing by original publication date, with direct article links."""
+    from english_site import TOPICS, english_article_url
+    originals = sorted(blog.articles, key=lambda item: (item.published or "", item.destination), reverse=True)
+    rows = []
+    for original in originals:
+        article = original
+        url = blog.href(article.destination)
+        if language == "en":
+            article = blog.translations.get(original.source.relative_to(blog.source_root).as_posix(), original)
+            if article.language != "en":
+                continue
+            if article.original:
+                url = english_article_url(blog, original)
+        topic = blog.topic(article) if article.language == "zh-CN" or article.original else "English"
+        if language == "en":
+            topic = TOPICS.get(topic, topic)
+        published = (f'<time datetime="{escape(original.published, quote=True)}">{escape(original.published.replace("-", "."))}</time>'
+                     if original.published else '<span class="yl-date">' + ("Date unconfirmed" if language == "en" else "发表时间待确认") + '</span>')
+        excerpt = blog.excerpt(article)
+        if len(excerpt) > 100:
+            excerpt = excerpt[:100].rstrip() + "…"
+        rows.append(f'<li>{published}<div><h3 lang="{escape(article.language, quote=True)}"><a href="{escape(url, quote=True)}">{escape(article.title)}</a></h3><p lang="{escape(article.language, quote=True)}">{escape(excerpt)}</p></div><span class="yl-article-topic">{escape(topic)}</span></li>')
+        if len(rows) == limit:
+            break
+    return "\n".join(rows)
+
+
+def render_home_projects(projects, language="zh-CN"):
+    """Two usable browser tools, without changing the full projects catalogue."""
+    by_id = {item["id"]: item for item in projects}
+    if language == "en":
+        source = ROOT / "home/en/projects.json"
+        if linked_directory(source) or linked_directory(source.parent):
+            raise ValueError("English project data links are not supported.")
+        translated = json.loads(source.read_text(encoding="utf-8"))["projects"]
+        for item in translated:
+            if item["id"] in by_id:
+                by_id[item["id"]] = {**by_id[item["id"]], **item}
+    cards = []
+    for project_id in ("footprints-map", "tier-ranking"):
+        item = validate_projects({"projects": [by_id[project_id]]})[0]
+        text = {name: escape(value, quote=True) for name, value in item.items()}
+        url = escape(localized_path(item["demo_url"], language), quote=True)
+        with Image.open(ROOT / "home" / item["screenshot"].lstrip("/")) as image:
+            width, height = image.size
+        label = "Open tool →" if language == "en" else "打开体验 →"
+        cards.append(f'<article class="yl-project"><a href="{url}" aria-label="{text["title"]}"><img src="{text["screenshot"]}" width="{width}" height="{height}" alt="{text["screenshot_alt"]}" loading="lazy" decoding="async"></a><div><h3><a href="{url}">{text["title"]}</a></h3><p>{text["summary"]}</p><a class="yl-link" href="{url}">{label}</a></div></article>')
+    return "\n".join(cards)
+
+
+def daily_asset_sources():
+    folder = ROOT / "home/assets"
+    if any(linked_directory(path) for path in (ROOT / "home", folder, folder / "vendor")):
+        raise ValueError("Daily homepage asset directory links are not supported.")
+    sources = []
+    for name in HOME_DAILY_ASSETS:
+        source = folder / name
+        if linked_directory(source) or not source.is_file():
+            raise ValueError(f"Missing or linked daily homepage asset: {name}")
+        sources.append((name, source))
+    return sources
+
+
+def copy_daily_assets(sources, brief, content):
+    folder = OUTPUT / "assets"
+    vendor = folder / "vendor"
+    if linked_directory(folder) or linked_directory(vendor):
+        raise ValueError("Generated daily homepage directory links are not supported.")
+    folder.mkdir(exist_ok=True)
+    vendor.mkdir(exist_ok=True)
+    for name, source in sources:
+        destination = folder / name
+        if linked_directory(destination) or (destination.exists() and not destination.is_file()):
+            raise ValueError("Generated daily homepage assets must be regular files.")
+        shutil.copy2(source, destination)
+    for name, data in (("daily-brief.json", brief), ("daily-content.json", content)):
+        destination = folder / name
+        if linked_directory(destination) or (destination.exists() and not destination.is_file()):
+            raise ValueError("Generated daily content must be regular files.")
+        destination.write_text(safe_json(data) + "\n", encoding="utf-8")
 
 
 def site_root(address):
@@ -406,6 +493,8 @@ def build_site(address, map_preview_source=None):
     address = site_root(address)
     projects = load_projects()
     about_data = load_about()
+    brief_data, daily_content = load_daily(ROOT, linked_directory)
+    daily_sources = daily_asset_sources()
     # Every template's complete photo set must pass before any output is generated.
     photo_sets = (("foods", "food", game_food_sources()), ("sports", "sport", game_sport_sources()))
     project_sources = project_asset_sources(projects)
@@ -438,6 +527,19 @@ def build_site(address, map_preview_source=None):
               "project_total": str(len(projects)), "anthology_total": str(len(anthology_works)),
               "photo_album_total": str(photo_report["albums"]),
               "photo_total": str(photo_report["photos"])}
+    has_home_photo = (ROOT / HOME_PHOTO.lstrip("/")).is_file()
+    values.update({
+        "daily_brief_data": safe_json(brief_data), "daily_content_data": safe_json(daily_content),
+        "daily_brief_notice": escape(brief_data["notice"]["zh-CN"]), "daily_brief_notice_en": escape(brief_data["notice"]["en"]),
+        "brief_feed": render_brief(brief_data), "brief_feed_en": render_brief(brief_data, "en"),
+        "home_recent_articles": render_home_recent(blog), "home_recent_articles_en": render_home_recent(blog, "en"),
+        "home_project_cards": render_home_projects(projects), "home_project_cards_en": render_home_projects(projects, "en"),
+        "home_photo_src": HOME_PHOTO if has_home_photo else "/assets/home-ink.webp",
+        "home_photo_alt": "谢雨卿摄影：北京永定河傍晚的水面与远山" if has_home_photo else "水墨山景",
+        "home_photo_alt_en": "Photograph by Xie Yuqing: the Yongding River and distant hills at dusk" if has_home_photo else "An ink-wash mountain landscape",
+        "home_photo_caption": "宛平城外，卢沟桥边，夕阳西下。" if has_home_photo else "在主题之间，慢慢探索。",
+        "home_photo_caption_en": "Sunset by Lugou Bridge, outside Wanping." if has_home_photo else "Explore at your own pace.",
+    })
     for name, value in values.items(): home = home.replace("{{" + name + "}}", value)
     if "{{" in home: raise ValueError("Unresolved home template placeholder.")
     (OUTPUT / "index.html").write_text(localize_page(home, ROOT, address, "/"), encoding="utf-8")
@@ -488,6 +590,7 @@ def build_site(address, map_preview_source=None):
             (destination / "index.html").write_text(page, encoding="utf-8")
             game_routes.append(localized_route)
     (OUTPUT / "assets").mkdir(exist_ok=True)
+    copy_daily_assets(daily_sources, brief_data, daily_content)
     for name in ("portal.css", "site-themes.css", "portfolio.css", "portal.js", "site-i18n.js", "wechat-qrcode.jpg", *BRAND_ASSETS, *GAME_ASSETS):
         source = ROOT / "home/assets" / name
         if source.is_symlink(): raise ValueError("Home asset symlinks are not supported.")

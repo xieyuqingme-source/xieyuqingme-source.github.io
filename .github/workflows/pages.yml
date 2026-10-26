@@ -71,6 +71,12 @@ jobs:
         run: |
           python scripts/test_build_site.py
           python scripts/test_branding.py
+      - name: Check homepage astronomy and navigation history
+        run: |
+          node --test scripts/test_home_earth.cjs
+          node scripts/test_site_navigation_history.cjs
+          node --check home/assets/home-daily.js
+          python scripts/test_compact_header.py
       - name: Check anthology content and static routes
         run: |
           python scripts/test_anthology_pages.py
