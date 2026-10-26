@@ -208,7 +208,7 @@ def english_archive(blog):
 def build_english_site(blog, output, address, projects, about_data, values):
     """Generate only English routes; never add translations to blog.articles."""
     from build_blog import Blog
-    from build_site import render_projects
+    from build_site import render_projects, render_about
     from site_i18n import localize_page
     class EnglishView(Blog):
         def href(self, destination):
@@ -261,6 +261,7 @@ def build_english_site(blog, output, address, projects, about_data, values):
         if len(recent) == 3:
             break
     english_values["recent_articles"] = ''.join(recent) or '<li>English translations are being prepared.</li>'
+    english_values["about_content_en"] = render_about(about_data, "en")
     english_values["about_name"] = escape(about_data["english_name"])
     english_values["about_email"] = escape(about_data["email"], quote=True)
     english_values["about_wechat"] = escape(about_data["wechat"])

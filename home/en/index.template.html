@@ -4,14 +4,14 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Xie Yuqing · Yuliao</title>
-  <meta name="description" content="The personal site of Xie Yuqing: born in Sichuan, a university student in Beijing, now doing an MBA in Kuala Lumpur. Essays from my WeChat column 谢雨聊, projects and footprints.">
+  <meta name="description" content="Xie Yuqing’s personal site: essays, photos, small games and a daily brief.">
   <meta name="author" content="Xie Yuqing">
   <link rel="canonical" href="{{site_url}}/en/">
   <link rel="alternate" hreflang="zh-CN" href="{{site_url}}/">
   <link rel="alternate" hreflang="en" href="{{site_url}}/en/">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Xie Yuqing · Yuliao">
-  <meta property="og:description" content="The personal site of Xie Yuqing: born in Sichuan, a university student in Beijing, now doing an MBA in Kuala Lumpur. Essays from my WeChat column 谢雨聊, projects and footprints.">
+  <meta property="og:description" content="Xie Yuqing’s personal site: essays, photos, small games and a daily brief.">
   <meta property="og:url" content="{{site_url}}/en/">
   <meta property="og:image" content="{{site_url}}/assets/share-cover.png">
   <meta property="og:image:width" content="1200">
@@ -21,6 +21,7 @@
   <link rel="icon" href="/assets/favicon.ico?v=qinghuan-1" sizes="any">
   <link rel="icon" href="/assets/favicon.svg?v=qinghuan-1" type="image/svg+xml">
   <script>(() => { let theme = "light", saved; try { saved = localStorage.getItem("xieyuqing-blog-theme"); } catch (_) {} if (saved === "light" || saved === "dark") theme = saved; else try { if (window.matchMedia("(prefers-color-scheme: dark)").matches) theme = "dark"; } catch (_) {} document.documentElement.dataset.theme = theme; })();</script>
+  <script>(() => { let saved = null; try { saved = localStorage.getItem("xieyuqing-brief-closed"); } catch (_) {} const parts = new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Shanghai", year: "numeric", month: "2-digit", day: "2-digit" }).formatToParts(new Date()); const get = type => parts.find(part => part.type === type).value; const today = `${get("year")}-${get("month")}-${get("day")}`; if (saved === today || (saved === null && window.matchMedia("(max-width: 720px)").matches)) document.documentElement.dataset.brief = "closed"; })();</script>
   <link rel="stylesheet" href="/assets/portal.css">
   <link rel="stylesheet" href="/assets/home-daily.css">
   <script src="/assets/portal.js" defer></script>
@@ -34,25 +35,38 @@
   </header>
   <main id="main" class="container home">
     <section class="home-hero" aria-labelledby="home-title">
+      {{home_avatar_en}}
       <div class="hero-copy">
-        <p class="hero-tag" lang="zh-CN">雨聊</p>
-        <h1 id="home-title">Rainy days are good for a chat.</h1>
-        <p class="hero-intro">I’m Xie Yuqing (Carl). I was born in Sichuan, spent my childhood in Zhejiang, went back to Sichuan for school, studied at university in Beijing, and I’m now doing an MBA in Kuala Lumpur.</p>
-        <p class="hero-intro">My name contains the character for rain, 雨, so my WeChat column is called 谢雨聊, “Yuliao”, or rainy-day talks: history, economics and everyday city life. I have been writing since 2024; all {{chinese_total}} essays are here, most with an English translation.</p>
-        <p class="hero-actions"><a class="hero-primary" href="#writing">Start with the latest <span aria-hidden="true">↓</span></a><a class="hero-link" href="/en/about/">About me <span aria-hidden="true">→</span></a></p>
+        <h1 id="home-title">Xie Yuqing</h1>
+        <p class="hero-signature"><span data-i18n="common.signature.1"></span><span data-i18n="common.signature.2"></span></p>
       </div>
-      <aside class="now-card" id="now" data-state="unknown" aria-labelledby="now-title">
-        <div class="now-rain" aria-hidden="true"></div>
-        <h2 class="now-title" id="now-title">Now · Kuala Lumpur</h2>
-        <p class="now-clock-row"><time class="now-clock" id="now-clock">--:--</time><span class="now-date" id="now-date"></span></p>
-        <p class="now-weather" id="now-weather" aria-live="polite">Checking the window…</p>
-        <p class="now-line" id="now-line">It rains a lot here, especially in the afternoon.</p>
-        <p class="now-days" id="now-days">Living in Kuala Lumpur</p>
-      </aside>
+    </section>
+    <section class="daily-home home-brief" id="brief" aria-labelledby="daily-title">
+      <div class="brief-bar" id="today">
+        <h2 id="daily-title">Today’s Brief</h2>
+        <span class="brief-date" id="home-date">—</span>
+        <span class="brief-lunar" id="brief-lunar"></span>
+        <span class="brief-weather" id="brief-weather"></span>
+        <span class="brief-headline" id="brief-headline">{{daily_brief_headline_en}}</span>
+        <span class="brief-edition" id="daily-edition">{{daily_brief_edition_en}}</span>
+        <button class="brief-toggle" id="brief-toggle" type="button" aria-expanded="true" aria-controls="brief-body" hidden>Hide</button>
+      </div>
+      <section class="yl-today" id="brief-body" aria-label="Reading and the day outside">
+        <div class="yl-news"><div class="yl-filter" id="daily-filters" role="group" aria-label="Filter news by category" hidden><button type="button" data-news-filter="all" aria-pressed="true">All</button><button type="button" data-news-filter="domestic" aria-pressed="false">China</button><button type="button" data-news-filter="world" aria-pressed="false">World</button><button type="button" data-news-filter="business" aria-pressed="false">Business</button><button type="button" data-news-filter="science" aria-pressed="false">Science</button><button type="button" data-news-filter="culture" aria-pressed="false">Culture</button></div><div id="daily-feed" aria-live="polite">{{brief_feed_en}}</div><p class="yl-note" id="daily-brief-notice">{{daily_brief_notice_en}}</p></div>
+        <aside class="yl-sidebar" id="daily-earth" aria-label="Calendar, weather and Earth">
+          <section class="yl-calendar" aria-label="Calendar and weather"><div class="yl-cal-top"><div class="yl-day" id="daily-calendar-day">—</div><div class="yl-cal-copy"><strong id="daily-calendar-weekday">Today</strong><div id="daily-calendar-lunar">Loading lunar calendar</div><div class="yl-small" id="daily-calendar-month">—</div></div></div><p class="yl-solar-term" id="daily-calendar-term">The twenty-four solar terms</p><div class="yl-weather"><label for="daily-city"><span class="yl-small" style="display:block;margin-bottom:3px">Selected city</span><select class="yl-city" id="daily-city"><option value="beijing">Beijing</option><option value="shanghai">Shanghai</option><option value="kuala">Kuala Lumpur</option><option value="london">London</option></select></label><div class="yl-weather-readout" id="daily-weather" aria-live="polite">Loading weather…</div></div><details class="yl-almanac"><summary>Traditional almanac</summary><p>Traditional almanac entries have not been connected yet. Solar calculations are shown independently.</p></details></section>
+          <section class="yl-earth" aria-labelledby="earth-heading"><div class="yl-earth-heading"><h2 id="earth-heading">Earth, now</h2><span class="yl-small">EARTH / SOLAR TIME</span></div><div class="yl-globe-wrap"><canvas id="earth-canvas" width="560" height="570" role="img" aria-label="Earth day and night, showing the subsolar point and selected city"></canvas></div><p class="yl-earth-small">Drag the globe to explore another view</p><div class="yl-suntime"><div>Sunrise · local<strong id="daily-sunrise">—</strong></div><div>Sunset · local<strong id="daily-sunset">—</strong></div></div><div class="yl-earth-info" aria-live="polite"><div id="daily-local-time">—</div><div>Subsolar point <b id="daily-subsolar">—</b></div><div id="daily-daylength">—</div></div><div class="yl-earth-actions"><label class="yl-time-row" for="earth-hour"><span>Time · Beijing</span><output id="earth-hour-label">—</output></label><button type="button" class="yl-earth-now" id="earth-now" hidden>Back to now</button></div><input class="yl-time-slider" id="earth-hour" type="range" min="0" max="23.9833333" step="0.0166667" value="12"><div class="yl-time-ends" aria-hidden="true"><span>00:00</span><span>12:00</span><span>23:59</span></div><p class="yl-earth-source">Axis ≈ 23.4° from the orbital normal · Approximate calculations<br><a href="https://gml.noaa.gov/grad/solcalc/calcdetails.html" target="_blank" rel="noopener noreferrer">Calculation reference</a> · Geography Natural Earth</p></section>
+        </aside>
+      </section>
+      <noscript><p class="yl-no-script">News, writing and projects are available without JavaScript. Enable it for the live calendar, weather and globe.</p></noscript>
     </section>
     <section class="home-section" id="writing" aria-labelledby="writing-title">
-      <div class="section-head"><h2 id="writing-title">Recent writing</h2><a href="/en/articles/">All articles <span aria-hidden="true">→</span></a></div>
+      <div class="section-head"><h2 id="writing-title">Recent writing</h2><div class="section-actions"><button class="home-random" id="home-random-button" type="button" hidden>Read a random article</button><a href="/en/articles/">All articles <span aria-hidden="true">→</span></a></div></div>
       <ol class="yl-article-list recent-list">{{home_recent_articles_en}}</ol>
+    </section>
+    <section class="home-section home-photos" id="home-photos" aria-labelledby="home-photos-title">
+      <div class="section-head"><h2 id="home-photos-title">Photos</h2><a href="/en/photos/">All photos <span aria-hidden="true">→</span></a></div>
+      <div class="home-photo-grid">{{home_photos_en}}</div>
     </section>
     {{home_quote_section_en}}
     {{home_picks_section_en}}
@@ -60,37 +74,14 @@
       <div class="section-head"><h2 id="projects-title">Making useful things</h2><a href="/en/projects/">All projects <span aria-hidden="true">→</span></a></div>
       <div class="yl-project-grid">{{home_project_cards_en}}</div>
     </section>
-    <section class="home-section home-route" id="route" aria-labelledby="route-title">
-      <div class="section-head"><h2 id="route-title">From Sichuan to Kuala Lumpur</h2><a href="/en/map/">Open the footprints map <span aria-hidden="true">→</span></a></div>
-      <ol class="route-line">
-        <li><time>2000</time><strong>Mianyang</strong><span>Born</span></li>
-        <li><time>2001</time><strong>Haiyan</strong><span>Childhood</span></li>
-        <li><time>2013</time><strong>Xichong</strong><span>Middle school</span></li>
-        <li><time>2016</time><strong>Mianyang</strong><span>High school</span></li>
-        <li><time>2020</time><strong>Beijing</strong><span>University</span></li>
-        <li class="is-now"><time>2026</time><strong>Kuala Lumpur</strong><span>MBA</span></li>
-      </ol>
-      <figure class="route-photo"><img src="{{home_photo_src}}" srcset="{{home_photo_srcset}}" sizes="(max-width: 760px) 100vw, 1120px" alt="{{home_photo_alt_en}}" width="640" height="480" loading="lazy" decoding="async"><figcaption>{{home_photo_caption_en}} <a href="/en/photos/">See more photos <span aria-hidden="true">→</span></a></figcaption></figure>
-    </section>
-    <section class="daily-home home-brief" id="brief" aria-label="Today’s Brief">
-      <section class="yl-mast" id="today" aria-labelledby="daily-title">
-        <img class="yl-inkscape" src="/assets/home-ink.webp" width="2172" height="724" alt="" aria-hidden="true">
-        <div class="yl-mast-copy"><p class="yl-kicker">A WINDOW ON THE WORLD, A PLACE FOR EVERYDAY LIFE</p><h2 id="daily-title">Today’s Brief</h2><p class="yl-intro">News, the turning seasons, and things worth thinking about.</p></div>
-        <div class="yl-issue"><strong id="home-date">Take a look around today</strong><span>Live almanac · News keeps its original dates</span><span class="yl-edition" id="daily-edition">Reading sample</span></div>
-      </section>
-      <section class="yl-today" aria-label="Reading and the day outside">
-        <div class="yl-news"><div class="yl-filter" id="daily-filters" role="group" aria-label="Filter news by category" hidden><button type="button" data-news-filter="all" aria-pressed="true">All</button><button type="button" data-news-filter="domestic" aria-pressed="false">China</button><button type="button" data-news-filter="world" aria-pressed="false">World</button><button type="button" data-news-filter="business" aria-pressed="false">Business</button><button type="button" data-news-filter="science" aria-pressed="false">Science</button><button type="button" data-news-filter="culture" aria-pressed="false">Culture</button></div><div id="daily-feed" aria-live="polite">{{brief_feed_en}}</div><p class="yl-note" id="daily-brief-notice">{{daily_brief_notice_en}}</p><div class="yl-news-footer"><a class="yl-readme" href="#writing">Back to my writing <span class="yl-arrow" aria-hidden="true">↑</span></a><span class="yl-small">Explore the world through news.<br>Get to know me through writing.</span></div></div>
-        <aside class="yl-sidebar" id="daily-earth" aria-label="Calendar, weather and Earth">
-          <section class="yl-calendar" aria-label="Calendar and weather"><div class="yl-cal-top"><div class="yl-day" id="daily-calendar-day">—</div><div class="yl-cal-copy"><strong id="daily-calendar-weekday">Today</strong><div id="daily-calendar-lunar">Loading lunar calendar</div><div class="yl-small" id="daily-calendar-month">—</div></div></div><p class="yl-solar-term" id="daily-calendar-term">The twenty-four solar terms</p><div class="yl-weather"><label for="daily-city"><span class="yl-small" style="display:block;margin-bottom:3px">Selected city</span><select class="yl-city" id="daily-city"><option value="beijing">Beijing</option><option value="shanghai">Shanghai</option><option value="kuala">Kuala Lumpur</option><option value="london">London</option></select></label><div class="yl-weather-readout" id="daily-weather" aria-live="polite">Loading weather…</div></div><details class="yl-almanac"><summary>Traditional almanac</summary><p>Traditional almanac entries have not been connected yet. Solar calculations are shown independently.</p></details></section>
-          <section class="yl-earth" aria-labelledby="earth-heading"><div class="yl-earth-heading"><h2 id="earth-heading">Earth, now</h2><span class="yl-small">EARTH / SOLAR TIME</span></div><div class="yl-globe-wrap"><canvas id="earth-canvas" width="560" height="570" role="img" aria-label="Earth day and night, showing the subsolar point and selected city"></canvas></div><p class="yl-earth-small">Drag the globe to explore another view</p><div class="yl-suntime"><div>Sunrise · local<strong id="daily-sunrise">—</strong></div><div>Sunset · local<strong id="daily-sunset">—</strong></div></div><div class="yl-earth-info" aria-live="polite"><div id="daily-local-time">—</div><div>Subsolar point <b id="daily-subsolar">—</b></div><div id="daily-daylength">—</div></div><div class="yl-earth-actions"><label class="yl-time-row" for="earth-hour"><span>Time · Beijing</span><output id="earth-hour-label">—</output></label><button type="button" class="yl-earth-now" id="earth-now" hidden>Back to now</button></div><input class="yl-time-slider" id="earth-hour" type="range" min="0" max="23.9833333" step="0.0166667" value="12"><div class="yl-time-ends" aria-hidden="true"><span>00:00</span><span>12:00</span><span>23:59</span></div><p class="yl-earth-source">Axis ≈ 23.4° from the orbital normal · Approximate calculations<br><a href="https://gml.noaa.gov/grad/solcalc/calcdetails.html" target="_blank" rel="noopener noreferrer">Calculation reference</a> · Geography Natural Earth</p></section>
-        </aside>
-      </section>
-      <noscript><p class="yl-no-script">News, writing and projects are available without JavaScript. Enable it for the live calendar, weather and globe.</p></noscript>
+    <section class="daily-home home-section home-odds" id="odds" aria-labelledby="odds-title">
+      <div class="section-head"><h2 id="odds-title">Today’s odds and ends</h2></div>
       <section class="yl-bottomline" aria-label="A quotation and a scientific idea"><article><h2>WORDS TO KEEP</h2><p class="yl-quote" id="daily-quote">Learning without reflection leaves one confused; reflection without learning leaves one in danger.</p><p class="yl-small yl-quote-source" id="daily-quote-source" title="English translation by this site">Confucius · <a href="https://ctext.org/analects/wei-zheng/zh" target="_blank" rel="noopener noreferrer">Analects, Wei Zheng ↗</a></p></article><article><h2>ONE IDEA A DAY</h2><h3 class="yl-concept-title" id="daily-concept-title">Solar declination</h3><p class="yl-concept-copy" id="daily-concept-text">The Sun’s angular position north or south of the celestial equator also gives the latitude of its subsolar point. It changes with the seasons, affecting daylight and solar altitude.</p><a class="yl-small" id="daily-concept-source" href="https://gml.noaa.gov/grad/solcalc/glossary.html" target="_blank" rel="noopener noreferrer">NOAA · Concept reference ↗</a></article></section>
       <section class="yl-street" aria-labelledby="street-heading"><h2 class="yl-street-title" id="street-heading">In conversation<span class="yl-kicker" style="display:block">INTERNET CULTURE</span></h2><div class="yl-street-main"><h3 id="daily-street-title">Why does every everyday choice seem to have a “theory” now?</h3><p id="daily-street-text">How does an everyday choice become an internet catchphrase? Follow the context and the way it spreads, then return to your own experience.</p><div class="yl-street-links" id="daily-street-links"><a href="https://m.jiemian.com/article/15234992.html" target="_blank" rel="noopener noreferrer">Culture reporting ↗</a></div></div></section>
     </section>
   </main>
   <footer class="site-footer container"><p>Xie Yuqing</p><div><a href="/en/articles/">Articles</a><a href="/en/about/">About</a><a href="/articles/feed.xml">RSS</a></div></footer>
+  <script id="home-random-data" type="application/json">{{home_article_links_en}}</script>
   <script id="daily-brief-data" type="application/json">{{daily_brief_data}}</script>
   <script id="daily-content-data" type="application/json">{{daily_content_data}}</script>
   <script id="own-quotes-data" type="application/json">{{own_quotes_data}}</script>

@@ -247,7 +247,7 @@ def unified_footer(page, route, language="zh-CN"):
     footer = (f'<footer class="site-footer container" lang="{language}">'
               '<div class="footer-sign"><p class="footer-brand"><span data-i18n="common.brandName">谢雨卿</span>'
               '<span class="footer-yuliao" data-i18n="common.footer.yuliao"></span></p>'
-              '<p class="footer-note" data-i18n="common.footer.note"></p></div>'
+              '<p class="footer-note"><span data-i18n="common.signature.1"></span> <span data-i18n="common.signature.2"></span></p></div>'
               f'<nav class="footer-links" aria-label="页脚导航" data-i18n-aria-label="common.footer.label">{links}</nav>'
               '<p class="footer-meta"><span data-i18n="common.footer.wechat"></span>'
               f'<a href="mailto:{CONTACT_EMAIL}" data-i18n="common.footer.email"></a>'

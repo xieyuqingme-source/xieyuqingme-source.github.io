@@ -77,3 +77,40 @@ a:focus-visible,button:focus-visible,summary:focus-visible,select:focus-visible,
 .map-mode button.active,.game-button.primary,.presentation #presentation-toggle,.game-start,.project-actions a:first-child{background:var(--action);color:var(--action-ink);border-color:var(--action)}
 @media(max-width:650px){.projects-main .project-card,.projects-main .project-card:first-child{padding:22px}.projects-main .section-entry,.about-main .section-entry,.games-main>.section-entry{padding:20px}.archive-controls,.anthology-filters{padding:16px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}}
+
+/* From Sichuan to Kuala Lumpur */
+.route-line{position:relative;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px;margin:22px 0 0;padding:0;list-style:none}
+.route-line:before{content:"";position:absolute;left:8px;right:8px;top:7px;border-top:2px dashed var(--rain)}
+.route-line li{position:relative;display:grid;gap:2px;min-width:0;padding-top:30px}
+.route-line li:before{content:"";position:absolute;top:0;left:0;width:16px;height:16px;box-sizing:border-box;border:2px solid var(--accent);border-radius:50%;background:var(--paper)}
+.route-line li.is-now:before{border-color:var(--warm);background:var(--warm);box-shadow:0 0 0 5px color-mix(in srgb,var(--warm) 20%,transparent)}
+.route-line time{font-size:var(--fs-meta);color:var(--muted);font-variant-numeric:tabular-nums}
+.route-line strong{font:600 var(--fs-lead)/1.4 var(--sans);color:var(--ink)}
+.route-line span{font-size:var(--fs-small);color:var(--muted)}
+/* One wide photo from the Beijing years, captioned like a postcard. */
+.route-photo{margin:44px 0 0!important}
+.route-photo img{display:block;width:100%;height:auto;aspect-ratio:21/9;object-fit:cover;object-position:50% 58%;border-radius:14px;background:var(--soft)}
+.route-photo figcaption{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:6px 28px;margin-top:14px;font-size:var(--fs-small);line-height:1.8;color:var(--muted);text-wrap:pretty}
+.route-photo figcaption a{flex:none;color:var(--accent);text-decoration:none}
+:root[data-theme="dark"] .route-photo img{filter:brightness(.86)}
+
+
+.about-main .about-lead{font-size:var(--fs-small);color:var(--muted)}
+.about-story{min-width:0}
+.about-story .about-bio p{margin:0 0 1.25em;font-size:var(--fs-body);line-height:1.95;overflow-wrap:anywhere}
+.about-colophon{text-align:right;color:var(--muted);font-size:var(--fs-small);line-height:1.8;margin-top:28px}
+.about-colophon p{margin:0}
+.about-story hr{border:0;border-top:1px solid var(--line);margin:24px 0 12px}
+.about-written-note{font-size:var(--fs-meta);line-height:1.8;color:var(--muted)}
+.about-main .home-route{margin-top:44px;padding-top:28px;border-top:1px solid var(--line)}
+.about-main .home-route .section-head{display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:8px 20px}
+.about-main .home-route h2{margin:0;font:650 var(--fs-h3)/1.4 var(--sans)}
+.about-main .home-route a{color:var(--accent);font-size:var(--fs-small);text-decoration:none}
+.about-main .home-route a:hover{text-decoration:underline;text-underline-offset:5px}
+@media(max-width:860px){.route-photo img{aspect-ratio:3/2}}
+@media(max-width:620px){
+ .route-line{grid-template-columns:minmax(0,1fr);gap:0;margin-top:18px}
+ .route-line:before{left:7px;right:auto;top:6px;bottom:14px;border-top:0;border-left:2px dashed var(--rain)}
+ .route-line li{grid-template-columns:52px auto minmax(0,1fr);align-items:baseline;gap:12px;padding:0 0 16px 32px}
+ .route-line li:before{top:5px}
+}

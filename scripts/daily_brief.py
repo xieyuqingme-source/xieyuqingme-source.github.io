@@ -147,7 +147,7 @@ def render_brief(data, language="zh-CN"):
     source_link = "Read source ↗" if language == "en" else "阅读原文 ↗"
     heading = "Reading sample" if language == "en" else "选读样刊"
     cards = []
-    for index, item in enumerate(data["items"]):
+    for index, item in enumerate(data["items"][:6]):
         title, summary = (escape(item[name][language]) for name in ("title", "summary"))
         url = escape(item["url"], quote=True)
         published = (f'<time datetime="{item["published"]}">{item["published"]}</time>' if item["published"]

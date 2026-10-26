@@ -193,7 +193,7 @@ class GamePublicationTests(unittest.TestCase):
                     self.assertIn(route, links)
         home = (output / "index.html").read_text(encoding="utf-8")
         self.assertIn('id="daily-title">今日简报</h2>', home)
-        self.assertIn('href="#writing"', home)
+        self.assertIn('aria-controls="brief-body"', home)
         self.assertIn('class="yl-article-list recent-list"', home)
         self.assertIn('class="nav-entry" href="/projects/"', home)
         self.assertIn('href="/game/"', home)
@@ -310,6 +310,7 @@ class GameSportResourceTests(unittest.TestCase):
                      patch.object(build_site, "OUTPUT", output), \
                      patch.object(build_site, "load_projects", return_value=[]), \
                      patch.object(build_site, "load_about", return_value={}), \
+                     patch.object(build_site, "load_home_photos", return_value={"version": 1, "albums": []}), \
                      patch.object(build_site, "load_daily", return_value=({}, {})), \
                      patch.object(build_site, "daily_asset_sources", return_value=[]), \
                      patch.object(Path, "is_symlink", return_value=False), \

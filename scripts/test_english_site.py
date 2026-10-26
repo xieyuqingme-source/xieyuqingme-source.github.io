@@ -132,6 +132,11 @@ class EnglishPublicationTests(unittest.TestCase):
         # homepage inputs that the unified builder normally passes to it.
         values.update({
             "daily_brief_data": safe_json(brief), "daily_content_data": safe_json(daily_content),
+            "daily_brief_edition": build_site.brief_edition_label(brief), "daily_brief_edition_en": build_site.brief_edition_label(brief, "en"),
+            "daily_brief_headline": escape(brief["items"][0]["title"]["zh-CN"]), "daily_brief_headline_en": escape(brief["items"][0]["title"]["en"]),
+            "home_photos": "", "home_photos_en": "",
+            "home_article_links": build_site.home_article_links(blog), "home_article_links_en": build_site.home_article_links(blog, "en"),
+            "home_avatar": build_site.render_home_avatar(), "home_avatar_en": build_site.render_home_avatar("en"),
             "daily_brief_notice": escape(brief["notice"]["zh-CN"]),
             "daily_brief_notice_en": escape(brief["notice"]["en"]),
             "brief_feed": render_brief(brief), "brief_feed_en": render_brief(brief, "en"),
@@ -350,7 +355,8 @@ class EnglishPublicationTests(unittest.TestCase):
         self.assertIn('<html lang="en"', text)
         self.assertIn('Originally written in English.', text)
         self.assertIn('id="theme-toggle"', text)
-        self.assertIn('Rainy days are good for a chat.', text)
+        self.assertIn('I’m putting my energy into English.', text)
+        self.assertIn('I’m working hard on a few questions.', text)
         self.assertNotIn('data-skin-choice', text)
         self.assertIn('An original English essay.', text)
         elements = build_site.Elements(text).elements

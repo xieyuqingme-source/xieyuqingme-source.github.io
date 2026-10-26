@@ -35,10 +35,21 @@
   <main id="main" class="container about-main">
     <section class="about-intro" aria-labelledby="about-page-title">
       <h1 id="about-page-title">关于我</h1>
-      <p class="about-lead">四川人，现在在吉隆坡读 MBA，写公众号“谢雨聊”。</p>
+      <p class="about-lead">一篇墓志铭式的自我介绍</p>
     </section>
 {{about_content}}
-<a class="section-entry" href="/map/" data-i18n-link><strong data-i18n="common.entry.footprints"></strong><p data-i18n="common.entry.footprintsNote"></p></a>
+    <section class="home-section home-route" id="route" aria-labelledby="route-title">
+      <div class="section-head"><h2 id="route-title">走过的地方</h2><a href="/map/">打开足迹地图 <span aria-hidden="true">→</span></a></div>
+      <ol class="route-line">
+        <li><time>2000</time><strong>绵阳</strong><span>出生</span></li>
+        <li><time>2001</time><strong>海盐</strong><span>童年</span></li>
+        <li><time>2013</time><strong>西充</strong><span>初中</span></li>
+        <li><time>2016</time><strong>绵阳</strong><span>高中</span></li>
+        <li><time>2020</time><strong>北京</strong><span>大学</span></li>
+        <li class="is-now"><time>2026</time><strong>吉隆坡</strong><span>读 MBA</span></li>
+      </ol>
+      <figure class="route-photo"><img src="{{home_photo_src}}" srcset="{{home_photo_srcset}}" sizes="(max-width: 760px) 100vw, 1120px" alt="{{home_photo_alt}}" width="640" height="480" loading="lazy" decoding="async"><figcaption>{{home_photo_caption}} <a href="/photos/">看看路上的照片 <span aria-hidden="true">→</span></a></figcaption></figure>
+    </section>
 {{site_notes}}
   </main>
   <footer class="site-footer container"><p>谢雨卿 · Carl</p><div><a href="/articles/">文章 <span lang="en">Articles</span></a><a href="/anthology/">雨聊文选 <span lang="en">Anthology</span></a><a href="/projects/">作品 <span lang="en">Projects</span></a><a href="/photos/">摄影 <span lang="en">Photos</span></a><a href="/map/">足迹 <span lang="en">Map</span></a><a href="/game/">小游戏 <span lang="en">Games</span></a><a href="/about/" aria-current="page">关于我 <span lang="en">About</span></a><a href="/articles/feed.xml">RSS</a></div></footer>

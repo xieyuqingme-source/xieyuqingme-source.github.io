@@ -467,7 +467,8 @@ class MarkdownRenderingTests(unittest.TestCase):
         self.assertIn("Skip to content", page)
         self.assertIn('id="theme-toggle"', page)
         self.assertNotIn('data-skin-choice', page)
-        self.assertIn("Rainy days are good for a chat.", page)
+        self.assertIn("I’m putting my energy into English.", page)
+        self.assertIn("I’m working hard on a few questions.", page)
         self.assertIn('href="/en/projects/"', page)
         headings = self.blog.toc(self.blog.render("## English heading", self.source), "en")
         self.assertTrue(any(tag == "a" and attrs.get("href") == "#english-heading"

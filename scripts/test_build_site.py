@@ -1,4 +1,5 @@
 """Check unified publication boundaries and link validation without touching source files."""
+from html import escape
 from pathlib import Path
 from copy import deepcopy
 from tempfile import TemporaryDirectory
@@ -309,6 +310,11 @@ class DailyHomepageTests(unittest.TestCase):
         # The Chinese homepage lists Chinese writing; English pieces lead the English homepage.
         self.assertNotIn("Newer", html)
         self.assertIn('href="/articles/older.html"', html)
+        self.assertEqual(json.loads(build_site.home_article_links(blog)), ["/articles/older.html"])
+        english_links = json.loads(build_site.home_article_links(blog, "en"))
+        self.assertEqual(len(english_links), 2)
+        self.assertEqual(english_links[0], "/articles/newer.html")
+        self.assertTrue(english_links[1].startswith("/en/articles/"))
         english = build_site.render_home_recent(blog, "en")
         self.assertLess(english.index("Newer"), english.index("Older translated"))
         self.assertIn('datetime="2025-01-01"', english)
@@ -391,8 +397,10 @@ class ProjectPublicationTests(unittest.TestCase):
                 self.assertIn('href="/articles/"', nav)
                 self.assertIn('href="/projects/"', nav)
                 self.assertIn('href="/about/"', nav)
-                self.assertIn('href="/articles/synthetic.html"', home)
-                self.assertIn("Synthetic article", home)
+                english_home = (output / 'en/index.html').read_text(encoding='utf-8')
+                self.assertIn('href="/articles/synthetic.html"', english_home)
+                self.assertIn("Synthetic article", english_home)
+                self.assertNotIn('href="/articles/synthetic.html"', home)
                 for text in (home, projects, about):
                     self.assertNotIn("{{", text)
                     self.assertNotIn("Obsidian Vault", text)
@@ -413,8 +421,11 @@ class ProjectPublicationTests(unittest.TestCase):
                 self.assertEqual(report["metadata"]["compatibility_redirects"], 1)
                 self.assertNotIn("Folder Guide", about)
                 self.assertNotIn("Essays by Xie Yuqing", about)
-                self.assertIn(load_about()["english_bio"], about)
-                qr = [attrs for tag, attrs in Elements(about).elements if tag == "img"]
+                self.assertIn(load_about()["chinese_bio"][0], about)
+                self.assertNotIn(load_about()["english_bio"][0], about)
+                self.assertIn(load_about()["written_note"], about)
+                self.assertIn("走过的地方", about)
+                qr = [attrs for tag, attrs in Elements(about).elements if tag == "img" and attrs.get("src") == "/assets/wechat-qrcode.jpg"]
                 self.assertEqual(len(qr), 1)
                 self.assertEqual(qr[0]["src"], "/assets/wechat-qrcode.jpg")
                 self.assertEqual((qr[0]["width"], qr[0]["height"]), ("1280", "1280"))
@@ -424,10 +435,11 @@ class ProjectPublicationTests(unittest.TestCase):
                 self.assertNotIn("wechat-qrcode", home)
                 self.assertIn('href="/map/"', home)
                 self.assertIn('class="yl-article-list recent-list"', home)
-                self.assertIn('href="#writing"', home)
+                self.assertIn('id="home-random-button"', home)
                 self.assertIn('id="daily-title">今日简报</h2>', home)
-                self.assertIn('id="home-title">下雨天，适合聊聊。</h1>', home)
-                self.assertIn('id="now"', home)
+                self.assertIn('id="home-title">谢雨卿</h1>', home)
+                self.assertIn('我要把精力放到英语上。', home)
+                self.assertNotIn('id="now"', home)
                 self.assertIn("选读样刊", home)
                 self.assertIn('datetime="2026-10-24"', home)
                 for filename in ("daily-brief.json", "daily-content.json"):
@@ -510,11 +522,29 @@ class PublicBiographyTests(unittest.TestCase):
         data = deepcopy(load_about())
         data["name"] = '<script>alert("name")</script>'
         self.assertNotIn("<script>", render_about(data))
-        for key, value in (("internal_notes", "Private"), ("chinese_bio", []),
+        for key, value in (("internal_notes", "Private"), ("chinese_bio", []), ("english_bio", []),
+                           ("chinese_colophon", ["one", "two", "three"]),
+                           ("english_colophon", ["Private C:\\Users\\example"]),
+                           ("written_note", "hidden\x00control"), ("english_written_note", "x" * 2001),
                            ("name", r"D:\Obsidian Vault\private.md"), ("email", 'x@example.com" onclick="x')):
             sample = deepcopy(load_about()); sample[key] = value
             with self.subTest(key=key), self.assertRaises(ValueError):
                 validate_about(sample)
+
+    def test_biographies_colophons_and_written_dates_are_separate_by_language(self):
+        data = load_about()
+        self.assertEqual(len(data["chinese_bio"]), 6)
+        self.assertEqual(len(data["english_bio"]), 6)
+        for language, bio, colophon, note in (("zh-CN", "chinese_bio", "chinese_colophon", "written_note"),
+                                               ("en", "english_bio", "english_colophon", "english_written_note")):
+            html = render_about(data, language)
+            for paragraph in data[bio] + data[colophon]:
+                self.assertIn(escape(paragraph, quote=True), html)
+            self.assertIn(escape(data[note], quote=True), html)
+            self.assertIn('class="about-colophon"', html)
+            self.assertIn('<hr>', html)
+            self.assertNotIn('class="about-english"', html)
+        self.assertIn("遗嘱", render_about(data))
 
     def test_data_symlinks_are_rejected(self):
         with patch.object(Path, "is_symlink", return_value=True), self.assertRaisesRegex(ValueError, "symlinks"):

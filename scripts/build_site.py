@@ -14,7 +14,7 @@ import shutil
 from PIL import Image
 
 from build_blog import Blog, ROOT
-from photo_pages import build_photos
+from photo_pages import build_photos, validate_catalog as validate_photo_catalog, _safe_path as safe_photo_path
 from map_pages import load_map, build_map
 from anthology_pages import load_anthology, load_glossary, build_anthology
 from site_i18n import localize_page, localized_path, load_catalogues, check_site_languages
@@ -48,7 +48,8 @@ HOME_DAILY_ASSETS = ("home-daily.css", "home-daily.js", "home-now.js", "home-ear
                      "vendor/d3-7.9.0.min.js", "vendor/D3-LICENSE")
 HOME_PHOTO = "/photos/images/p-71f77ab6511ec1ce656a58a3-18000666287e1d55-640.webp"
 HOME_PICKS = "home/home-picks.json"
-ABOUT_FIELDS = {"name", "english_name", "chinese_bio", "english_bio", "wechat", "email"}
+ABOUT_FIELDS = {"name", "english_name", "chinese_bio", "english_bio", "chinese_colophon", "english_colophon",
+                "written_note", "english_written_note", "wechat", "email"}
 PRIVATE_PATH = re.compile(r"(?<![A-Za-z0-9])[A-Za-z]:[\\/]|\\\\[^\s\\]+[\\/]|/(?:Users|home|mnt)/", re.I)
 EXTERNAL_ICON = '''<svg class="external-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 17 17 7M7 7h10v10"/></svg>'''
 
@@ -120,10 +121,14 @@ def load_projects():
 def validate_about(data):
     if not isinstance(data, dict) or set(data) != ABOUT_FIELDS:
         raise ValueError("home/about.json must contain only the public biography fields.")
-    paragraphs = data["chinese_bio"]
-    if not isinstance(paragraphs, list) or not 1 <= len(paragraphs) <= 20:
-        raise ValueError("The Chinese biography needs a short list of paragraphs.")
-    values = [value for key, value in data.items() if key != "chinese_bio"] + paragraphs
+    list_fields = {"chinese_bio", "english_bio", "chinese_colophon", "english_colophon"}
+    for field in list_fields:
+        paragraphs = data[field]
+        maximum = 2 if field.endswith("colophon") else 20
+        if not isinstance(paragraphs, list) or not 1 <= len(paragraphs) <= maximum:
+            raise ValueError(f"The {field} needs a short list of paragraphs.")
+    values = [value for key, value in data.items() if key not in list_fields]
+    values += [value for field in list_fields for value in data[field]]
     if any(not isinstance(value, str) or not value.strip() or len(value) > 2000
            or PRIVATE_PATH.search(value) or any(ord(c) < 32 for c in value) for value in values):
         raise ValueError("Invalid public biography text.")
@@ -139,28 +144,38 @@ def load_about():
     return validate_about(json.loads(source.read_text(encoding="utf-8")))
 
 
-def render_about(data):
+def render_about(data, language="zh-CN"):
     data = validate_about(data)
-    text = {key: escape(value, quote=True) for key, value in data.items() if key != "chinese_bio"}
-    paragraphs = "\n".join(f'<p>{escape(value, quote=True)}</p>' for value in data["chinese_bio"])
-    return f'''<article class="about-profile" aria-labelledby="about-name">
-  <div class="about-story">
-    <h2 class="about-name" id="about-name">{text["name"]}</h2>
-    <p class="about-identity" lang="en">{text["english_name"]}</p>
-    <div class="about-bio" lang="zh-CN">{paragraphs}</div>
-  </div>
-  <section class="about-contact" aria-labelledby="about-contact-title">
-    <h2 id="about-contact-title">联系我</h2>
+    if language not in {"zh-CN", "en"}:
+        raise ValueError("Biography language must be zh-CN or en.")
+    english = language == "en"
+    text = {key: escape(value, quote=True) for key, value in data.items() if isinstance(value, str)}
+    paragraphs = "\n".join(f'<p>{escape(value, quote=True)}</p>' for value in data["english_bio" if english else "chinese_bio"])
+    colophon = "".join(f'<p>{escape(value, quote=True)}</p>' for value in data["english_colophon" if english else "chinese_colophon"])
+    written = text["english_written_note" if english else "written_note"]
+    if english:
+        contact = f'''<h2 id="about-contact-title">Get in touch</h2>
+    <dl><dt>WeChat official account</dt><dd><span lang="zh-CN">{text["wechat"]}</span>
+      <figure class="about-wechat-qr"><a href="/assets/wechat-qrcode.jpg" aria-label="View the original WeChat QR code"><img src="/assets/wechat-qrcode.jpg" width="1280" height="1280" alt="Official QR code for the WeChat account" loading="lazy" decoding="async"></a>
+        <figcaption><a href="/assets/wechat-qrcode.jpg">View original QR code</a><br>On a computer, scan with WeChat. On a phone, save the image and recognise its QR code in WeChat.</figcaption>
+      </figure>
+    </dd><dt>Email</dt><dd><a href="mailto:{text["email"]}">{text["email"]}</a></dd></dl>'''
+    else:
+        contact = f'''<h2 id="about-contact-title">联系我</h2>
     <dl><dt>微信公众号</dt><dd>{text["wechat"]}
       <figure class="about-wechat-qr">
         <a href="/assets/wechat-qrcode.jpg" aria-label="查看{text["wechat"]}公众号二维码原图"><img src="/assets/wechat-qrcode.jpg" width="1280" height="1280" alt="{text["wechat"]}公众号官方二维码" loading="lazy" decoding="async"></a>
         <figcaption><a href="/assets/wechat-qrcode.jpg">查看二维码原图</a><br>电脑端请用微信扫码；手机端可保存图片后，在微信中识别二维码。</figcaption>
       </figure>
-    </dd><dt>邮箱</dt><dd><a href="mailto:{text["email"]}">{text["email"]}</a></dd></dl>
-  </section>
-  <section class="about-english" lang="en" aria-labelledby="about-english-title">
-    <h2 id="about-english-title">About me</h2><p>{text["english_bio"]}</p>
-  </section>
+    </dd><dt>邮箱</dt><dd><a href="mailto:{text["email"]}">{text["email"]}</a></dd></dl>'''
+    return f'''<article class="about-profile" aria-labelledby="about-page-title">
+  <div class="about-story">
+    <div class="about-bio" lang="{language}">{paragraphs}</div>
+    <div class="about-colophon">{colophon}</div>
+    <hr>
+    <p class="about-written-note">{written}</p>
+  </div>
+  <section class="about-contact" aria-labelledby="about-contact-title">{contact}</section>
 </article>'''
 
 
@@ -171,7 +186,7 @@ def render_site_notes(waline, repository, language="zh-CN"):
     repository = escape(repository, quote=True)
     if language == "en":
         items = [f'The source code is public on <a href="{repository}">GitHub</a>; pages are generated with Python and use system fonts only, with no external font files.',
-                 'The reading brief at the bottom of the homepage is a curated sample. It is not updated automatically every day, and each item keeps its original date and link.',
+                 'The homepage’s “Today’s Brief”: the calendar, weather and globe are calculated live; news is selected by hand, marked with its update date, and automatically folded away when it expires.',
                  'Weather on the homepage comes from Open-Meteo, queried by city only. Your location is never requested; the chosen city and the latest reading stay in your browser.',
                  'Article view counts and comments use Waline. These requests send your IP address and browser information to the Waline backend and its providers'
                  + (f' (hosting: {host}; database: {database})' if host and database else '') + '. The comment area explains what is shown publicly.',
@@ -179,7 +194,7 @@ def render_site_notes(waline, repository, language="zh-CN"):
         title = "About this site"
     else:
         items = [f'网站的源代码公开在 <a href="{repository}">GitHub</a>，页面用 Python 生成。全站使用设备自带的字体，不加载外部字体文件。',
-                 '首页底部的“今日简报”是一份选读样刊，不会每天自动更新；每条新闻都保留原文日期和链接。',
+                 '首页的“今日简报”：日历、天气和地球是实时计算的；新闻由人工挑选，标明更新日期，过期会自动收起。',
                  '首页的天气来自 Open-Meteo，只按城市查询，不读取你的位置；所选城市和最近一次天气只保存在你的浏览器里。',
                  '文章的浏览量和留言由 Waline 提供：相关请求会把 IP 和浏览器信息发送给 Waline 后端及其托管商'
                  + (f'（服务托管：{host}；数据库：{database}）' if host and database else '') + '。留言区另有说明。',
@@ -252,11 +267,10 @@ def render_projects(projects, language="zh-CN"):
     return result
 
 
-def render_home_recent(blog, language="zh-CN", limit=5):
-    """List actual writing by original publication date, with direct article links."""
-    from english_site import TOPICS, english_article_url
+def home_articles(blog, language="zh-CN"):
+    """Use the same real article selection for recent writing and random links."""
+    from english_site import english_article_url
     originals = sorted(blog.articles, key=lambda item: (item.published or "", item.destination), reverse=True)
-    rows = []
     for original in originals:
         article = original
         url = blog.href(article.destination)
@@ -266,8 +280,69 @@ def render_home_recent(blog, language="zh-CN", limit=5):
                 continue
             if article.original:
                 url = english_article_url(blog, original)
-        elif article.language != "zh-CN" and any(item.language == "zh-CN" for item in originals):
-            continue  # English practice pieces lead the English homepage instead.
+        elif article.language != "zh-CN":
+            continue
+        yield original, article, url
+
+
+def home_article_links(blog, language="zh-CN"):
+    return safe_json([url for _, _, url in home_articles(blog, language)])
+
+
+def load_home_photos():
+    """Read only the same validated public photo catalog used by photo_pages."""
+    path = ROOT / "photos/catalog.json"
+    safe_photo_path(ROOT, path)
+    return (validate_photo_catalog(json.loads(path.read_text(encoding="utf-8")))
+            if path.is_file() else {"version": 1, "albums": []})
+
+
+def render_home_photos(catalog, language="zh-CN", limit=6):
+    catalog = validate_photo_catalog(catalog)
+    photos = [(photo, album) for album in catalog["albums"] for photo in album["photos"]]
+    photos.sort(key=lambda pair: (pair[0]["date"] or pair[1]["date"], pair[0]["time"], pair[0]["id"]), reverse=True)
+    if not photos:
+        return ""
+    catalogue = load_catalogues(ROOT, ("photos",))[language]
+    cards, seen = [], set()
+    for photo, album in photos:
+        if photo["id"] in seen:
+            continue
+        seen.add(photo["id"])
+        prefix = "photos.photo." + photo["id"]
+        location = catalogue.get(prefix + ".location", photo["location"]) or catalogue.get("photos.album." + album["id"] + ".location", album["location"])
+        stamp = photo["date"] or catalogue.get(prefix + ".date_text", photo["date_text"]) or album["date"]
+        alt = catalogue.get(prefix + ".alt", photo["title"] or location or photo["caption"])
+        url = localized_path("/photos/" + album["id"] + "/", language)
+        caption = " · ".join(value for value in (location, stamp) if value)
+        cards.append(f'<figure class="home-photo-card"><a href="{escape(url, quote=True)}"><img src="{escape(photo["thumbnail"], quote=True)}" width="{photo["thumbnail_width"]}" height="{photo["thumbnail_height"]}" alt="{escape(alt, quote=True)}" loading="lazy" decoding="async"></a><figcaption>{escape(caption)}</figcaption></figure>')
+        if len(cards) == limit:
+            break
+    return "\n".join(cards)
+
+
+def render_home_avatar(language="zh-CN"):
+    source = ROOT / "home/assets/avatar-line.svg"
+    label = "Line drawing of Xie Yuqing" if language == "en" else "谢雨卿的简笔头像"
+    if linked_directory(source):
+        raise ValueError("Homepage avatar links are not supported.")
+    modifier, text = ("home-avatar-line", "") if source.is_file() else ("home-avatar-placeholder", "谢")
+    return f'<span class="home-avatar {modifier}" role="img" aria-label="{label}">{text}</span>'
+
+
+def brief_edition_label(brief, language="zh-CN"):
+    edition = date.fromisoformat(brief["edition_date"])
+    if language == "en":
+        months = ("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December")
+        return f"News updated on {edition.day} {months[edition.month - 1]}"
+    return f"新闻更新于 {edition.month}月{edition.day}日"
+
+
+def render_home_recent(blog, language="zh-CN", limit=5):
+    """List actual writing by original publication date, with direct article links."""
+    from english_site import TOPICS
+    rows = []
+    for original, article, url in home_articles(blog, language):
         topic = blog.topic(article) if article.language == "zh-CN" or article.original else "English"
         if language == "en":
             topic = TOPICS.get(topic, topic)
@@ -634,6 +709,7 @@ def build_site(address, map_preview_source=None):
     address = site_root(address)
     projects = load_projects()
     about_data = load_about()
+    home_photos = load_home_photos()
     brief_data, daily_content = load_daily(ROOT, linked_directory)
     daily_sources = daily_asset_sources()
     # Every template's complete photo set must pass before any output is generated.
@@ -671,6 +747,12 @@ def build_site(address, map_preview_source=None):
     has_home_photo = (ROOT / HOME_PHOTO.lstrip("/")).is_file()
     values.update({
         "daily_brief_data": safe_json(brief_data), "daily_content_data": safe_json(daily_content),
+        "daily_brief_edition": escape(brief_edition_label(brief_data)), "daily_brief_edition_en": escape(brief_edition_label(brief_data, "en")),
+        "daily_brief_headline": escape(brief_data["items"][0]["title"]["zh-CN"]),
+        "daily_brief_headline_en": escape(brief_data["items"][0]["title"]["en"]),
+        "home_photos": render_home_photos(home_photos), "home_photos_en": render_home_photos(home_photos, "en"),
+        "home_article_links": home_article_links(blog), "home_article_links_en": home_article_links(blog, "en"),
+        "home_avatar": render_home_avatar(), "home_avatar_en": render_home_avatar("en"),
         "daily_brief_notice": escape(brief_data["notice"]["zh-CN"]), "daily_brief_notice_en": escape(brief_data["notice"]["en"]),
         "brief_feed": render_brief(brief_data), "brief_feed_en": render_brief(brief_data, "en"),
         "home_recent_articles": render_home_recent(blog), "home_recent_articles_en": render_home_recent(blog, "en"),
@@ -703,7 +785,7 @@ def build_site(address, map_preview_source=None):
     (OUTPUT / "projects").mkdir(exist_ok=True)
     (OUTPUT / "projects/index.html").write_text(localize_page(projects_page, ROOT, address, "/projects/"), encoding="utf-8")
     about_page = (ROOT / "home/about.template.html").read_text(encoding="utf-8")
-    for name, value in {"site_url": escape(address, quote=True), "about_content": render_about(about_data),
+    for name, value in {**values, "site_url": escape(address, quote=True), "about_content": render_about(about_data),
                         "site_notes": render_site_notes(blog.waline, blog.config["repository_url"])}.items():
         about_page = about_page.replace("{{" + name + "}}", value)
     if "{{" in about_page:
@@ -742,6 +824,11 @@ def build_site(address, map_preview_source=None):
             game_routes.append(localized_route)
     (OUTPUT / "assets").mkdir(exist_ok=True)
     copy_daily_assets(daily_sources, brief_data, daily_content)
+    avatar_source = ROOT / "home/assets/avatar-line.svg"
+    if avatar_source.is_file():
+        if linked_directory(avatar_source):
+            raise ValueError("Homepage avatar links are not supported.")
+        shutil.copy2(avatar_source, OUTPUT / "assets/avatar-line.svg")
     for name in ("portal.css", "site-themes.css", "portfolio.css", "portal.js", "site-i18n.js", "wechat-qrcode.jpg", *BRAND_ASSETS, *GAME_ASSETS):
         source = ROOT / "home/assets" / name
         if source.is_symlink(): raise ValueError("Home asset symlinks are not supported.")

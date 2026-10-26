@@ -4,14 +4,14 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>谢雨卿 · 雨聊</title>
-  <meta name="description" content="谢雨卿的个人网站。生在四川，大学在北京，现在在吉隆坡读 MBA。公众号“谢雨聊”的文章、作品和足迹都在这里。">
+  <meta name="description" content="谢雨卿的个人网站：文章、照片、小游戏和每天的简报。">
   <meta name="author" content="谢雨卿 Xie Yuqing">
   <link rel="canonical" href="{{site_url}}/">
   <link rel="alternate" hreflang="zh-CN" href="{{site_url}}/">
   <link rel="alternate" hreflang="en" href="{{site_url}}/en/">
   <meta property="og:type" content="website">
   <meta property="og:title" content="谢雨卿 · 雨聊">
-  <meta property="og:description" content="谢雨卿的个人网站。生在四川，大学在北京，现在在吉隆坡读 MBA。公众号“谢雨聊”的文章、作品和足迹都在这里。">
+  <meta property="og:description" content="谢雨卿的个人网站：文章、照片、小游戏和每天的简报。">
   <meta property="og:url" content="{{site_url}}/">
   <meta property="og:image" content="{{site_url}}/assets/share-cover.png">
   <meta property="og:image:width" content="1200">
@@ -21,6 +21,7 @@
   <link rel="icon" href="/assets/favicon.ico?v=qinghuan-1" sizes="any">
   <link rel="icon" href="/assets/favicon.svg?v=qinghuan-1" type="image/svg+xml">
   <script>(() => { let theme = "light", saved; try { saved = localStorage.getItem("xieyuqing-blog-theme"); } catch (_) {} if (saved === "light" || saved === "dark") theme = saved; else try { if (window.matchMedia("(prefers-color-scheme: dark)").matches) theme = "dark"; } catch (_) {} document.documentElement.dataset.theme = theme; })();</script>
+  <script>(() => { let saved = null; try { saved = localStorage.getItem("xieyuqing-brief-closed"); } catch (_) {} const parts = new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Shanghai", year: "numeric", month: "2-digit", day: "2-digit" }).formatToParts(new Date()); const get = type => parts.find(part => part.type === type).value; const today = `${get("year")}-${get("month")}-${get("day")}`; if (saved === today || (saved === null && window.matchMedia("(max-width: 720px)").matches)) document.documentElement.dataset.brief = "closed"; })();</script>
   <link rel="stylesheet" href="/assets/portal.css">
   <link rel="stylesheet" href="/assets/home-daily.css">
   <script src="/assets/portal.js" defer></script>
@@ -34,25 +35,38 @@
   </header>
   <main id="main" class="container home">
     <section class="home-hero" aria-labelledby="home-title">
+      {{home_avatar}}
       <div class="hero-copy">
-        <p class="hero-tag">雨聊</p>
-        <h1 id="home-title">下雨天，适合聊聊。</h1>
-        <p class="hero-intro">我是谢雨卿。生在四川，童年在浙江，中学回到四川，大学在北京，现在在吉隆坡读 MBA。</p>
-        <p class="hero-intro">名字里有个“雨”，公众号就叫“谢雨聊”：聊历史，聊经济，也聊城市里的日常。从 2024 年写到现在，{{chinese_total}} 篇文章都在这里。</p>
-        <p class="hero-actions"><a class="hero-primary" href="#writing">从最新一篇读起 <span aria-hidden="true">↓</span></a><a class="hero-link" href="/about/">认识我 <span aria-hidden="true">→</span></a></p>
+        <h1 id="home-title">谢雨卿</h1>
+        <p class="hero-signature"><span data-i18n="common.signature.1"></span><span data-i18n="common.signature.2"></span></p>
       </div>
-      <aside class="now-card" id="now" data-state="unknown" aria-labelledby="now-title">
-        <div class="now-rain" aria-hidden="true"></div>
-        <h2 class="now-title" id="now-title">此刻 · 吉隆坡</h2>
-        <p class="now-clock-row"><time class="now-clock" id="now-clock">--:--</time><span class="now-date" id="now-date"></span></p>
-        <p class="now-weather" id="now-weather" aria-live="polite">正在看窗外…</p>
-        <p class="now-line" id="now-line">吉隆坡常下雨，尤其是下午。</p>
-        <p class="now-days" id="now-days">我在吉隆坡</p>
-      </aside>
+    </section>
+    <section class="daily-home home-brief" id="brief" aria-labelledby="daily-title">
+      <div class="brief-bar" id="today">
+        <h2 id="daily-title">今日简报</h2>
+        <span class="brief-date" id="home-date">—</span>
+        <span class="brief-lunar" id="brief-lunar"></span>
+        <span class="brief-weather" id="brief-weather"></span>
+        <span class="brief-headline" id="brief-headline">{{daily_brief_headline}}</span>
+        <span class="brief-edition" id="daily-edition">{{daily_brief_edition}}</span>
+        <button class="brief-toggle" id="brief-toggle" type="button" aria-expanded="true" aria-controls="brief-body" hidden>收起</button>
+      </div>
+      <section class="yl-today" id="brief-body" aria-label="今日导读与时序">
+        <div class="yl-news"><div class="yl-filter" id="daily-filters" role="group" aria-label="按新闻类别浏览" hidden><button type="button" data-news-filter="all" aria-pressed="true">全部</button><button type="button" data-news-filter="domestic" aria-pressed="false">国内</button><button type="button" data-news-filter="world" aria-pressed="false">国际</button><button type="button" data-news-filter="business" aria-pressed="false">商业</button><button type="button" data-news-filter="science" aria-pressed="false">科学</button><button type="button" data-news-filter="culture" aria-pressed="false">文化</button></div><div id="daily-feed" aria-live="polite">{{brief_feed}}</div><p class="yl-note" id="daily-brief-notice">{{daily_brief_notice}}</p></div>
+        <aside class="yl-sidebar" id="daily-earth" aria-label="日历、天气与地球时序">
+          <section class="yl-calendar" aria-label="日历与天气"><div class="yl-cal-top"><div class="yl-day" id="daily-calendar-day">—</div><div class="yl-cal-copy"><strong id="daily-calendar-weekday">今日</strong><div id="daily-calendar-lunar">农历加载中</div><div class="yl-small" id="daily-calendar-month">—</div></div></div><p class="yl-solar-term" id="daily-calendar-term">二十四节气</p><div class="yl-weather"><label for="daily-city"><span class="yl-small" style="display:block;margin-bottom:3px">所选城市</span><select class="yl-city" id="daily-city"><option value="beijing">北京</option><option value="shanghai">上海</option><option value="kuala">吉隆坡</option><option value="london">伦敦</option></select></label><div class="yl-weather-readout" id="daily-weather" aria-live="polite">天气加载中…</div></div><details class="yl-almanac"><summary>传统历俗 · 宜忌</summary><p>宜忌资料待接入。传统历俗与天文数据分开呈现。</p></details></section>
+          <section class="yl-earth" aria-labelledby="earth-heading"><div class="yl-earth-heading"><h2 id="earth-heading">此刻地球</h2><span class="yl-small">EARTH / SOLAR TIME</span></div><div class="yl-globe-wrap"><canvas id="earth-canvas" width="560" height="570" role="img" aria-label="地球昼夜图，标出太阳直射点与所选城市"></canvas></div><p class="yl-earth-small">拖动地球，换个角度看世界</p><div class="yl-suntime"><div>日出 · 当地时间<strong id="daily-sunrise">—</strong></div><div>日落 · 当地时间<strong id="daily-sunset">—</strong></div></div><div class="yl-earth-info" aria-live="polite"><div id="daily-local-time">—</div><div>太阳直射 <b id="daily-subsolar">—</b></div><div id="daily-daylength">—</div></div><div class="yl-earth-actions"><label class="yl-time-row" for="earth-hour"><span>时刻 · 北京时间</span><output id="earth-hour-label">—</output></label><button type="button" class="yl-earth-now" id="earth-now" hidden>回到此刻</button></div><input class="yl-time-slider" id="earth-hour" type="range" min="0" max="23.9833333" step="0.0166667" value="12"><div class="yl-time-ends" aria-hidden="true"><span>00:00</span><span>12:00</span><span>23:59</span></div><p class="yl-earth-source">地轴与公转轨道法线夹角约 23.4° · 近似计算<br><a href="https://gml.noaa.gov/grad/solcalc/calcdetails.html" target="_blank" rel="noopener noreferrer">计算依据</a> · 底图 Natural Earth</p></section>
+        </aside>
+      </section>
+      <noscript><p class="yl-no-script">新闻、文章和作品可以直接阅读。启用 JavaScript 后可查看实时日历、天气和地球。</p></noscript>
     </section>
     <section class="home-section" id="writing" aria-labelledby="writing-title">
-      <div class="section-head"><h2 id="writing-title">最近写的</h2><a href="/articles/">全部文章 <span aria-hidden="true">→</span></a></div>
+      <div class="section-head"><h2 id="writing-title">最近写的</h2><div class="section-actions"><button class="home-random" id="home-random-button" type="button" hidden>随便看一篇</button><a href="/articles/">全部文章 <span aria-hidden="true">→</span></a></div></div>
       <ol class="yl-article-list recent-list">{{home_recent_articles}}</ol>
+    </section>
+    <section class="home-section home-photos" id="home-photos" aria-labelledby="home-photos-title">
+      <div class="section-head"><h2 id="home-photos-title">照片</h2><a href="/photos/">全部照片 <span aria-hidden="true">→</span></a></div>
+      <div class="home-photo-grid">{{home_photos}}</div>
     </section>
     {{home_quote_section}}
     {{home_picks_section}}
@@ -60,37 +74,14 @@
       <div class="section-head"><h2 id="projects-title">做一点有用的东西</h2><a href="/projects/">全部作品 <span aria-hidden="true">→</span></a></div>
       <div class="yl-project-grid">{{home_project_cards}}</div>
     </section>
-    <section class="home-section home-route" id="route" aria-labelledby="route-title">
-      <div class="section-head"><h2 id="route-title">从四川到吉隆坡</h2><a href="/map/">打开足迹地图 <span aria-hidden="true">→</span></a></div>
-      <ol class="route-line">
-        <li><time>2000</time><strong>绵阳</strong><span>出生</span></li>
-        <li><time>2001</time><strong>海盐</strong><span>童年</span></li>
-        <li><time>2013</time><strong>西充</strong><span>初中</span></li>
-        <li><time>2016</time><strong>绵阳</strong><span>高中</span></li>
-        <li><time>2020</time><strong>北京</strong><span>大学</span></li>
-        <li class="is-now"><time>2026</time><strong>吉隆坡</strong><span>读 MBA</span></li>
-      </ol>
-      <figure class="route-photo"><img src="{{home_photo_src}}" srcset="{{home_photo_srcset}}" sizes="(max-width: 760px) 100vw, 1120px" alt="{{home_photo_alt}}" width="640" height="480" loading="lazy" decoding="async"><figcaption>{{home_photo_caption}} <a href="/photos/">看看路上的照片 <span aria-hidden="true">→</span></a></figcaption></figure>
-    </section>
-    <section class="daily-home home-brief" id="brief" aria-label="今日简报">
-      <section class="yl-mast" id="today" aria-labelledby="daily-title">
-        <img class="yl-inkscape" src="/assets/home-ink.webp" width="2172" height="724" alt="" aria-hidden="true">
-        <div class="yl-mast-copy"><p class="yl-kicker">看世界，也照看日常</p><h2 id="daily-title">今日简报</h2><p class="yl-intro">时事、时序，与一些值得慢慢想的事。</p></div>
-        <div class="yl-issue"><strong id="home-date">今天，看看世界</strong><span>日历随此刻更新 · 新闻保留原文日期</span><span class="yl-edition" id="daily-edition">选读样刊</span></div>
-      </section>
-      <section class="yl-today" aria-label="今日导读与时序">
-        <div class="yl-news"><div class="yl-filter" id="daily-filters" role="group" aria-label="按新闻类别浏览" hidden><button type="button" data-news-filter="all" aria-pressed="true">全部</button><button type="button" data-news-filter="domestic" aria-pressed="false">国内</button><button type="button" data-news-filter="world" aria-pressed="false">国际</button><button type="button" data-news-filter="business" aria-pressed="false">商业</button><button type="button" data-news-filter="science" aria-pressed="false">科学</button><button type="button" data-news-filter="culture" aria-pressed="false">文化</button></div><div id="daily-feed" aria-live="polite">{{brief_feed}}</div><p class="yl-note" id="daily-brief-notice">{{daily_brief_notice}}</p><div class="yl-news-footer"><a class="yl-readme" href="#writing">回到我的文章 <span class="yl-arrow" aria-hidden="true">↑</span></a><span class="yl-small">循着新闻看世界<br>顺着文章认识我</span></div></div>
-        <aside class="yl-sidebar" id="daily-earth" aria-label="日历、天气与地球时序">
-          <section class="yl-calendar" aria-label="日历与天气"><div class="yl-cal-top"><div class="yl-day" id="daily-calendar-day">—</div><div class="yl-cal-copy"><strong id="daily-calendar-weekday">今日</strong><div id="daily-calendar-lunar">农历加载中</div><div class="yl-small" id="daily-calendar-month">—</div></div></div><p class="yl-solar-term" id="daily-calendar-term">二十四节气</p><div class="yl-weather"><label for="daily-city"><span class="yl-small" style="display:block;margin-bottom:3px">所选城市</span><select class="yl-city" id="daily-city"><option value="beijing">北京</option><option value="shanghai">上海</option><option value="kuala">吉隆坡</option><option value="london">伦敦</option></select></label><div class="yl-weather-readout" id="daily-weather" aria-live="polite">天气加载中…</div></div><details class="yl-almanac"><summary>传统历俗 · 宜忌</summary><p>宜忌资料待接入。传统历俗与天文数据分开呈现。</p></details></section>
-          <section class="yl-earth" aria-labelledby="earth-heading"><div class="yl-earth-heading"><h2 id="earth-heading">此刻地球</h2><span class="yl-small">EARTH / SOLAR TIME</span></div><div class="yl-globe-wrap"><canvas id="earth-canvas" width="560" height="570" role="img" aria-label="地球昼夜图，标出太阳直射点与所选城市"></canvas></div><p class="yl-earth-small">拖动地球，换个角度看世界</p><div class="yl-suntime"><div>日出 · 当地时间<strong id="daily-sunrise">—</strong></div><div>日落 · 当地时间<strong id="daily-sunset">—</strong></div></div><div class="yl-earth-info" aria-live="polite"><div id="daily-local-time">—</div><div>太阳直射 <b id="daily-subsolar">—</b></div><div id="daily-daylength">—</div></div><div class="yl-earth-actions"><label class="yl-time-row" for="earth-hour"><span>时刻 · 北京时间</span><output id="earth-hour-label">—</output></label><button type="button" class="yl-earth-now" id="earth-now" hidden>回到此刻</button></div><input class="yl-time-slider" id="earth-hour" type="range" min="0" max="23.9833333" step="0.0166667" value="12"><div class="yl-time-ends" aria-hidden="true"><span>00:00</span><span>12:00</span><span>23:59</span></div><p class="yl-earth-source">地轴与公转轨道法线夹角约 23.4° · 近似计算<br><a href="https://gml.noaa.gov/grad/solcalc/calcdetails.html" target="_blank" rel="noopener noreferrer">计算依据</a> · 底图 Natural Earth</p></section>
-        </aside>
-      </section>
-      <noscript><p class="yl-no-script">新闻、文章和作品可以直接阅读。启用 JavaScript 后可查看实时日历、天气和地球。</p></noscript>
+    <section class="daily-home home-section home-odds" id="odds" aria-labelledby="odds-title">
+      <div class="section-head"><h2 id="odds-title">今天的闲话</h2></div>
       <section class="yl-bottomline" aria-label="每日一言与科学概念"><article><h2>每日一言 · WORDS TO KEEP</h2><p class="yl-quote" id="daily-quote">学而不思则罔，思而不学则殆。</p><p class="yl-small yl-quote-source" id="daily-quote-source">孔子 · <a href="https://ctext.org/analects/wei-zheng/zh" target="_blank" rel="noopener noreferrer">《论语·为政》 ↗</a></p></article><article><h2>知一物 · ONE IDEA A DAY</h2><h3 class="yl-concept-title" id="daily-concept-title">太阳赤纬</h3><p class="yl-concept-copy" id="daily-concept-text">太阳相对天球赤道的角位置，也对应太阳直射点的纬度。它随季节在南北回归线之间变化，影响各地昼长与太阳高度。</p><a class="yl-small" id="daily-concept-source" href="https://gml.noaa.gov/grad/solcalc/glossary.html" target="_blank" rel="noopener noreferrer">NOAA · 概念来源 ↗</a></article></section>
       <section class="yl-street" aria-labelledby="street-heading"><h2 class="yl-street-title" id="street-heading">街谈<span class="yl-kicker" style="display:block">网络文化</span></h2><div class="yl-street-main"><h3 id="daily-street-title">薄肌、大水、大睡：为什么生活也开始讲“理论”？</h3><p id="daily-street-text">一个生活选择，如何变成一套流行话语？从网络说法的语境与传播方式读起，再回到自己的日常经验。</p><div class="yl-street-links" id="daily-street-links"><a href="https://m.jiemian.com/article/15234992.html" target="_blank" rel="noopener noreferrer">文化报道 ↗</a></div></div></section>
     </section>
   </main>
   <footer class="site-footer container"><p>谢雨卿</p><div><a href="/articles/">文章</a><a href="/about/">关于</a><a href="/articles/feed.xml">RSS</a></div></footer>
+  <script id="home-random-data" type="application/json">{{home_article_links}}</script>
   <script id="daily-brief-data" type="application/json">{{daily_brief_data}}</script>
   <script id="daily-content-data" type="application/json">{{daily_content_data}}</script>
   <script id="own-quotes-data" type="application/json">{{own_quotes_data}}</script>
