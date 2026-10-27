@@ -394,8 +394,12 @@
     "map.export.options": "图片与数据下载",
     "map.public.interaction": "点按城市查看经历。拖动平移，滚轮缩放；手机点“操作地图 · 展开”，键盘可用方向键与 ＋ / −。",
     "map.gallery.record": "相关城市相册 · {count} 张照片",
-    "map.clip.title": "马来西亚足迹 · 视频节选",
-    "map.clip.note": "以吉隆坡、槟城、马六甲的真实记录生成的地图动画节选，保留原始注释和日期精度。约 19 秒，点击播放，有配乐。"
+    "map.maker.preview": "返回预览",
+    "map.maker.back": "← 小游戏",
+    "map.author.readonly": "请先进入制作模式。",
+    "map.public.tools": "地图工具",
+    "map.public.viewTools": "地图显示",
+    "map.public.noScript": "请启用 JavaScript 查看作者足迹地图。"
   },
   "en": {
     "map.avatar.s001": "Invalid image dimensions. Choose another PNG, JPEG, or WebP image.",
@@ -792,7 +796,11 @@
     "map.export.options": "Download images and data",
     "map.public.interaction": "Select a city for its experiences. Drag or scroll to explore; on mobile expand the map. Keyboard: arrows and + / −.",
     "map.gallery.record": "Related city album · {count} photographs",
-    "map.clip.title": "Malaysia footprints · Video excerpt",
-    "map.clip.note": "A map animation from the original Kuala Lumpur, Penang and Malacca records, preserving the original Chinese notes and date precision. About 19 seconds. Press play for music."
+    "map.maker.preview": "Back to preview",
+    "map.maker.back": "← Games",
+    "map.author.readonly": "Enter maker mode first.",
+    "map.public.tools": "Map tools",
+    "map.public.viewTools": "Map view",
+    "map.public.noScript": "Enable JavaScript to view this footprints map."
   }
 }

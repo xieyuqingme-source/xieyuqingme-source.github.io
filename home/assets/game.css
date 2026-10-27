@@ -225,3 +225,6 @@ html[lang="en"] body .tier-label strong { font-size: 1rem; max-width: 100%; }
 /* Only the explicit English alias uses a smaller size; translated titles keep h1 hierarchy. */
 .games-main .projects-intro{max-width:none;padding-bottom:28px;border-bottom:1px solid var(--line)}
 .games-main .projects-intro h1{color:var(--ink)}
+
+/* The second game feature uses the existing real footprints screenshot. */
+.footprints-feature{margin-top:28px}.footprints-feature .game-cover{display:grid;place-items:center;min-width:0;padding:24px}.footprints-feature .game-cover img{display:block;width:100%;max-width:100%;height:auto;object-fit:contain;border:1px solid var(--line);border-radius:var(--radius)}

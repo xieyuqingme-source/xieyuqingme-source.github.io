@@ -55,7 +55,7 @@
       const target = localizedPath(original);
       if (target !== original) element.setAttribute("href", target);
       const key = navKeys[localizedPath(original, "zh-CN")];
-      if (key && !element.classList.contains("brand") && !element.querySelector("[data-i18n]")) {
+      if (key && !element.classList.contains("brand") && !element.hasAttribute?.("data-i18n") && !element.querySelector("[data-i18n]")) {
         // Older generated navigation may still have a secondary bilingual span.
         element.textContent = t("common.nav." + key, {}, element.textContent);
         element.setAttribute("data-i18n", "common.nav." + key);

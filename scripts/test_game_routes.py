@@ -195,10 +195,10 @@ class GamePublicationTests(unittest.TestCase):
                 self.assertTrue(any(tag == "a" and attrs.get("class") == "brand" and attrs.get("href") == "/" for tag, attrs in Elements(html).elements))
                 self.assertEqual(nav.count('class="nav-item'), 4)
                 self.assertEqual(nav.count('class="nav-group'), 3)
-                for route in ("/articles/", "/projects/", "/game/", "/about/", "/photos/", "/anthology/", "/map/", "/game/footprints/"):
-                    self.assertIn(route, links)
+                self.assertCountEqual(links, ("/articles/", "/projects/", "/game/", "/about/", "/photos/", "/anthology/", "/map/"))
+                self.assertEqual(sum(tag == "summary" for tag, _ in Elements(nav).elements), 3)
         home = (output / "index.html").read_text(encoding="utf-8")
-        self.assertIn('id="glance-title">今日简报</h2>', home)
+        self.assertIn('id="glance-title"><a href="/today/">今日简报</a></h2>', home)
         self.assertIn('data-brief-mode="glance"', home)
         self.assertIn('class="home-top"', home)
         self.assertIn('href="/today/"', home)
@@ -206,7 +206,8 @@ class GamePublicationTests(unittest.TestCase):
         self.assertNotIn('id="brief-toggle"', home)
         self.assertNotIn('class="yl-article-list recent-list"', home)
         self.assertNotIn('id="daily-feed"', home)
-        self.assertIn('class="nav-entry" href="/projects/"', home)
+        self.assertIn('data-nav-group="projects"', home)
+        self.assertIn('href="/projects/" data-i18n="common.nav.aiApps"', home)
         self.assertIn('href="/game/"', home)
 
     def test_article_navigation_uses_exact_game_root_and_keeps_other_roots(self):

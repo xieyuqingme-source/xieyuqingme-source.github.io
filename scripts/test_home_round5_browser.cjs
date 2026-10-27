@@ -7,7 +7,7 @@ const path = require('node:path');
 const os = require('node:os');
 const { chromium } = require(path.join(os.homedir(), '.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright'));
 const root = process.env.WEBSITE_ROOT || path.resolve(__dirname, '..');
-const site = path.join(root, '_site_unified'), out = path.join(root, '.local-checks/round5');
+const site = path.join(root, '_site_unified'), out = process.env.HOME_BROWSER_OUTPUT || path.join(root, '.local-checks/round5');
 const origin = 'http://127.0.0.1:8767', epoch = Date.parse('2026-10-27T04:00:00Z');
 const widths = [1440, 1280, 1024, 960, 768, 390, 320];
 const latest = fs.readdirSync(path.join(root, 'home/brief/news')).filter(name => /^\d{4}-\d{2}-\d{2}\.json$/.test(name)).sort().at(-1);
@@ -120,7 +120,23 @@ function latestPhotos() {
   all.sort((a, b) => { const x = [a.photo.date || a.album.date, a.photo.time, a.photo.id], y = [b.photo.date || b.album.date, b.photo.time, b.photo.id]; for (let i = 0; i < x.length; i++) { if (x[i] < y[i]) return 1; if (x[i] > y[i]) return -1; } return 0; });
   const seen = new Set(); return all.filter(({ photo }) => seen.has(photo.id) ? false : (seen.add(photo.id), true)).slice(0, 6);
 }
+async function headerStructure(page, language) {
+  const prefix = language === 'en' ? '/en' : '';
+  const brand = await page.locator('.site-header .brand').innerText();
+  assert(brand.includes('谢雨卿') && brand.includes('Xie Yuqing · Carl'), brand);
+  const menus = { articles: ['/articles/', '/anthology/'], projects: ['/projects/', '/game/'], map: ['/map/', '/photos/'] };
+  for (const [group, paths] of Object.entries(menus)) {
+    const container = page.locator('.nav-item[data-nav-group="' + group + '"]');
+    assert.equal(await container.locator('summary.nav-entry').count(), 1);
+    assert.equal(await container.locator('summary.nav-entry').getAttribute('href'), null);
+    assert.equal(await container.locator('summary.nav-entry a').count(), 0);
+    assert.deepEqual(await container.locator('.nav-menu a').evaluateAll(nodes => nodes.map(n => n.getAttribute('href'))), paths.map(p => prefix + p));
+    if (language === 'zh-CN') assert.deepEqual(await container.locator('.nav-menu a').allTextContents(), { articles: ['我的文章', '古今名作'], projects: ['AI应用', '小游戏'], map: ['我的足迹', '我的照片'] }[group]);
+  }
+  await noOverflow(page);
+}
 async function homeStructure(page, language, width) {
+  await headerStructure(page, language);
   const prefix = language === 'en' ? '/en' : '';
   const blocks = await page.locator('main > .home-top > section, main > section').evaluateAll(nodes => nodes.map(node => node.classList.contains('home-hero') ? 'hero' : node.id));
   assert.deepEqual(blocks, ['hero', 'brief', 'writing', 'home-photos', 'projects']);
@@ -135,6 +151,7 @@ async function homeStructure(page, language, width) {
   assert.equal(await page.locator('#projects .yl-project-grid > article').count(), 2);
   assert.equal(await page.locator('#projects .section-head a[href="' + prefix + '/projects/"]').count(), 1);
   assert.equal(await page.locator('#projects .section-head a[href="' + prefix + '/game/"]').count(), 1);
+  assert.equal(await page.locator('#glance-title > a').getAttribute('href'), prefix + '/today/');
   const cards = page.locator('#brief a.glance-cards');
   assert.equal(await cards.getAttribute('href'), prefix + '/today/');
   assert.equal(await cards.getAttribute('aria-label'), language === 'en' ? 'Today’s brief: date, solar term and almanac' : '今日简报：日期、节气和黄历');
@@ -162,6 +179,7 @@ async function glanceContent(page, language) {
   const size = await page.locator('#earth-canvas').boundingBox(); assert(size.width > 80 && size.width <= 145);
 }
 async function fullContent(page, language, width) {
+  await headerStructure(page, language);
   assert.equal(await page.locator('#brief').getAttribute('data-brief-mode'), 'full');
   assert.equal(await page.locator('#brief-toggle,.brief-bar').count(), 0);
   assert.equal(await page.locator('main h1').count(), 1);
@@ -267,7 +285,8 @@ async function clickFull(page, language) { const route = language === 'en' ? '/e
     for (const theme of ['light', 'dark']) await check('shared styles remain stable through article and about links ' + theme, async () => {
       const { ctx, requests } = await context({ theme }); try {
         const page = await ctx.newPage(); await go(page, '/'); await waitGlance(page); await page.evaluate(() => { window.__round5Style = document.querySelector('link[href*="site-themes.css"]'); });
-        for (const [selector, route] of [['.nav-entry[href="/articles/"]', '/articles/'], ['.site-header .brand', '/'], ['.nav-entry[href="/about/"]', '/about/']]) {
+        for (const [selector, route] of [['.nav-menu a[href="/articles/"]', '/articles/'], ['.site-header .brand', '/'], ['.nav-entry[href="/about/"]', '/about/']]) {
+          if (route === '/articles/') await page.locator('.nav-item[data-nav-group="articles"] summary.nav-entry').click();
           await page.locator(selector).click(); await page.waitForURL(origin + route); await ready(page); await appearance(page, theme, 'zh-CN', route !== '/');
           assert.equal(await page.evaluate(() => window.__round5Style === document.querySelector('link[href*="site-themes.css"]')), true);
         }
@@ -309,6 +328,43 @@ async function clickFull(page, language) { const route = language === 'en' ? '/e
         const page = await ctx.newPage(), prefix = language === 'en' ? '/en' : ''; await page.goto(origin + prefix + '/');
         assert.equal(await page.locator('#home-random-button').isVisible(), false); assert.equal(await page.locator('#daily-feed').count(), 0); assert((await page.locator('#brief noscript').textContent()).includes(language === 'en' ? 'Enable JavaScript' : '启用 JavaScript'));
         await page.locator('#brief a[href="' + prefix + '/today/"]').first().click(); await page.waitForURL(origin + prefix + '/today/'); assert.equal(await page.locator('#daily-feed article').count(), news.length); assert.equal(weather.length, 0); await noOverflow(page);
+      } finally { await ctx.close(); }
+    });
+    for (const language of ['zh-CN', 'en']) await check('updated biography, site notes and anthology introduction ' + language, async () => {
+      const { ctx } = await context({ width: 390 });
+      try {
+        const page = await ctx.newPage(), prefix = language === 'en' ? '/en' : '', biography = JSON.parse(fs.readFileSync(path.join(root, 'home/about.json'), 'utf8'));
+        await go(page, prefix + '/about/');
+        assert.deepEqual(await page.locator('.about-bio > p').allTextContents(), biography[language === 'en' ? 'english_bio' : 'chinese_bio']);
+        assert.deepEqual(await page.locator('.about-colophon > p').allTextContents(), biography[language === 'en' ? 'english_colophon' : 'chinese_colophon']);
+        assert.equal(await page.locator('.about-written-note').count(), 0);
+        assert(!(await page.locator('main').innerText()).includes(language === 'en' ? 'Actual date of writing' : '真实写作日期'));
+        assert.equal(await page.locator('#site a[href*="github.com"]').count(), 0); await noOverflow(page);
+        await go(page, prefix + '/anthology/');
+        const catalogue = JSON.parse(fs.readFileSync(path.join(root, 'home/locales/anthology.json'), 'utf8'));
+        assert.equal(await page.locator('[data-i18n="anthology.tagline"]').textContent(), catalogue[language]['anthology.tagline']);
+        assert.equal(await page.locator('meta[name="description"]').getAttribute('content'), catalogue[language]['anthology.description']);
+        await noOverflow(page); await capture(page, `anthology-${language}-390-light`);
+      } finally { await ctx.close(); }
+    });
+    for (const language of ['zh-CN', 'en']) for (const javascript of [true, false]) await check(`grouped menu keyboard and linked brief heading ${language} scripts=${javascript}`, async () => {
+      const { ctx } = await context({ javascript, width: 390 });
+      try {
+        const page = await ctx.newPage(), prefix = language === 'en' ? '/en' : '';
+        await page.goto(origin + prefix + '/'); if (javascript) await ready(page);
+        await headerStructure(page, language);
+        for (const group of ['articles', 'projects', 'map']) {
+          const menu = page.locator('.nav-item[data-nav-group="' + group + '"] .nav-group'), summary = menu.locator('summary.nav-entry');
+          await summary.focus(); await page.keyboard.press('Enter'); assert.equal(await menu.evaluate(n => n.open), true);
+          assert.equal(new URL(page.url()).pathname, prefix + '/');
+          await page.keyboard.press(javascript ? 'Escape' : 'Space'); assert.equal(await menu.evaluate(n => n.open), false);
+          if (javascript) assert.equal(await summary.evaluate(n => document.activeElement === n), true);
+          await summary.focus(); await page.keyboard.press('Space'); assert.equal(await menu.evaluate(n => n.open), true);
+          await page.keyboard.press('Enter'); assert.equal(await menu.evaluate(n => n.open), false);
+        }
+        await page.locator('#glance-title > a').focus(); await page.keyboard.press('Enter'); await page.waitForURL(origin + prefix + '/today/');
+        if (javascript) { await ready(page); await waitFull(page); }
+        assert.equal(await page.locator('#daily-feed article').count(), news.length); await noOverflow(page);
       } finally { await ctx.close(); }
     });
     await check('all generated local resources and page scopes are clean', async () => { assert.deepEqual(report.pageErrors, []); assert.deepEqual(report.missing, []); });

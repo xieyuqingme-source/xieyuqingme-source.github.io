@@ -49,40 +49,57 @@ class CompactHeaderTests(unittest.TestCase):
     def render(self, route="/map/", language="zh-CN"):
         return Nodes(localize_page(PAGE, ROOT, "https://example.test", route, language))
 
-    def test_four_section_names_are_direct_links_in_both_languages(self):
-        destinations = ["/articles/", "/projects/", "/map/", "/about/"]
+    def test_three_section_names_are_menu_buttons_and_about_remains_a_link(self):
         for language, labels in [("zh-CN", ["文章", "作品", "足迹", "关于"]),
-                                 ("en", ["Articles", "Projects", "Map", "About"])]:
+                                 ("en", ["Articles", "Projects", "Footprints", "About"])]:
             with self.subTest(language=language):
                 tree = self.render(language=language)
                 entries = tree.find(lambda node: node["attrs"].get("class") == "nav-entry")
-                self.assertEqual([node["text"] for node in entries], labels)
-                self.assertEqual([node["attrs"]["href"] for node in entries],
-                                 [("/en" if language == "en" else "") + route for route in destinations])
+                self.assertEqual([node["text"].replace("⌄", "") for node in entries], labels)
+                self.assertEqual([node["tag"] for node in entries], ["summary", "summary", "summary", "a"])
+                for entry in entries[:3]:
+                    self.assertNotIn("href", entry["attrs"])
+                    self.assertEqual(tree.find(lambda node: node["tag"] in {"a", "button"}, entry), [])
+                self.assertEqual(entries[-1]["attrs"]["href"], ("/en" if language == "en" else "") + "/about/")
 
-    def test_secondary_destinations_have_separate_named_native_disclosures(self):
-        tree = self.render(language="en")
-        nav = tree.find(lambda node: node["tag"] == "nav")[0]
-        links = tree.find(lambda node: node["tag"] == "a", nav)
-        for route in ["/anthology/", "/game/", "/game/ranking/", "/game/footprints/", "/photos/"]:
-            self.assertIn("/en" + route, [node["attrs"]["href"] for node in links])
-        summaries = tree.find(lambda node: node["tag"] == "summary" and "data-i18n-aria-label" in node["attrs"], nav)
-        self.assertEqual(len(summaries), 3)
-        for summary in summaries:
-            self.assertTrue(summary["attrs"]["aria-label"].strip())
-            self.assertEqual(tree.find(lambda node: node["tag"] == "a", summary), [])
-        original = next(node for node in links if "data-preserve-language-link" in node["attrs"])
-        self.assertEqual(original["attrs"]["href"], "/articles/")
-        self.assertEqual(original["text"], "中文目录")
+    def test_each_native_menu_contains_its_two_destinations_and_keeps_original_links(self):
+        for language, labels in [("zh-CN", [["我的文章", "古今名作"], ["AI应用", "小游戏"], ["我的足迹", "我的照片"]]),
+                                 ("en", [["My articles", "Literary classics"], ["AI applications", "Games"], ["My footprints", "My photos"]])]:
+            tree = self.render(language=language)
+            nav = tree.find(lambda node: node["tag"] == "nav")[0]
+            groups = tree.find(lambda node: node["tag"] == "details", nav)
+            self.assertEqual(len(groups), 3)
+            expected = [["/articles/", "/anthology/"], ["/projects/", "/game/"], ["/map/", "/photos/"]]
+            for group, routes, names in zip(groups, expected, labels):
+                links = tree.find(lambda node: node["tag"] == "a" and "data-preserve-language-link" not in node["attrs"], group)
+                self.assertEqual([node["attrs"]["href"] for node in links], [("/en" if language == "en" else "") + route for route in routes])
+                self.assertEqual([node["text"] for node in links], names)
+                summary = tree.find(lambda node: node["tag"] == "summary", group)[0]
+                self.assertTrue(summary["attrs"]["aria-label"].strip())
+            original = tree.find(lambda node: "data-preserve-language-link" in node["attrs"], nav)[0]
+            self.assertEqual(original["attrs"]["href"], "/articles/")
+            self.assertEqual(original["text"], "中文目录")
+
+    def test_header_keeps_both_names_and_homepage_brief_heading_is_a_real_link(self):
+        for language in ("zh-CN", "en"):
+            tree = self.render(language=language)
+            brand = tree.find(lambda node: node["attrs"].get("class") == "brand")[0]
+            self.assertEqual(brand["text"], "谢雨卿 Xie Yuqing · Carl")
+            self.assertEqual(brand["attrs"]["href"], "/en/" if language == "en" else "/")
+        for file, route, label in (("home/index.template.html", "/today/", "今日简报"), ("home/en/index.template.html", "/en/today/", "Today’s brief")):
+            tree = Nodes((ROOT / file).read_text(encoding="utf-8"))
+            heading = tree.find(lambda node: node["attrs"].get("id") == "glance-title")[0]
+            links = tree.find(lambda node: node["tag"] == "a", heading)
+            self.assertEqual([(node["attrs"].get("href"), node["text"]) for node in links], [(route, label)])
 
     def test_nested_destinations_highlight_their_section_and_keep_tools(self):
-        for route, section in [("/articles/中文文章/example.html", "/articles/"),
-                               ("/game/ranking/", "/projects/"), ("/photos/", "/map/")]:
+        for route, section in [("/articles/中文文章/example.html", "articles"),
+                               ("/game/ranking/", "projects"), ("/photos/", "map")]:
             with self.subTest(route=route):
                 tree = self.render(route)
                 selected = tree.find(lambda node: node["attrs"].get("class") == "nav-item is-current")
                 self.assertEqual(len(selected), 1)
-                self.assertEqual(selected[0]["children"][0]["attrs"]["href"], section)
+                self.assertEqual(selected[0]["attrs"]["data-nav-group"], section)
                 self.assertEqual(len(tree.find(lambda node: node["attrs"].get("class") == "site-language-switch")), 1)
                 toggles = tree.find(lambda node: node["attrs"].get("id") == "theme-toggle")
                 self.assertEqual(len(toggles), 1)

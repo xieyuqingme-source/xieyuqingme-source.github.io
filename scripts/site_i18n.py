@@ -201,18 +201,19 @@ def version_shared_assets(page, root):
     return re.sub(r'((?:src|href)=["\'])(/(?:(?:articles/)?assets)/(?:site-themes|portal|portfolio|photos|anthology|anthology-selection|game|ranking-skins|site-nav|site-music|site-navigation|home-daily|home-now|home-earth|astronomy-solar|style|vendor/(?:d3-7\.9\.0\.min|lunar-javascript-1\.7\.7))\.(?:css|js))(?:\?[^"\']*)?(["\'])', version, page)
 
 
-NAV_GROUPS = (('/articles/', 'articles', [('/anthology/', 'anthology')], ['/articles/', '/anthology/']),
-              ('/projects/', 'projects', [('/game/', 'games'), ('/game/ranking/', 'ranking'), ('/game/footprints/', 'maker')], ['/projects/', '/game/']),
-              ('/map/', 'map', [('/photos/', 'photos')], ['/map/', '/photos/']),
+NAV_GROUPS = (('/articles/', 'articles', [('/articles/', 'myArticles'), ('/anthology/', 'classics')], ['/articles/', '/anthology/']),
+              ('/projects/', 'projects', [('/projects/', 'aiApps'), ('/game/', 'games')], ['/projects/', '/game/']),
+              ('/map/', 'map', [('/map/', 'myFootprints'), ('/photos/', 'myPhotos')], ['/map/', '/photos/']),
               ('/about/', 'about', [], ['/about/']))
-NAV_REQUIRED = (*NAV_KEYS.values(), "ranking", "maker", "more.articles", "more.projects", "more.map")
+NAV_REQUIRED = (*NAV_KEYS.values(), "myArticles", "classics", "aiApps", "myFootprints", "myPhotos", "footprints",
+                "more.articles", "more.projects", "more.map")
 FOOTER_LINKS = (('/today/', 'today'), ('/articles/', 'articles'), ('/anthology/', 'anthology'), ('/projects/', 'projects'), ('/game/', 'games'),
                 ('/map/', 'map'), ('/photos/', 'photos'), ('/about/', 'about'))
 CONTACT_EMAIL = "xieyuqing.me@gmail.com"
 
 
 def compact_header(page, route, paired, language="zh-CN"):
-    """The name links home; four sections, each with a native disclosure for related pages."""
+    """The bilingual name links home; three native menu buttons and an About link."""
     def render(match):
         raw = match.group(0)
         theme = re.search(r'<button\b[^>]*class=["\'][^"\']*theme-toggle[^"\']*["\'][^>]*>.*?</button>', raw, re.S)
@@ -226,16 +227,21 @@ def compact_header(page, route, paired, language="zh-CN"):
         nav = ''
         for path, key, links, branches in NAV_GROUPS:
             active = route == path or any(route.startswith(branch) for branch in branches)
-            nav += f'<div class="nav-item{" is-current" if active else ""}">' + link(path, key, primary=True)
-            extras = ''.join(link(*item) for item in links) + (preserved if key == 'articles' else '')
-            if extras:
-                nav += f'<details class="nav-group"><summary data-i18n-aria-label="common.nav.more.{key}"><span aria-hidden="true">⌄</span></summary><div class="nav-menu">{extras}</div></details>'
+            nav += f'<div class="nav-item{" is-current" if active else ""}" data-nav-group="{key}">'
+            if links:
+                extras = ''.join(link(*item) for item in links) + (preserved if key == 'articles' else '')
+                label_key = 'footprints' if key == 'map' else key
+                nav += (f'<details class="nav-group"><summary class="nav-entry" data-i18n-aria-label="common.nav.more.{key}">'
+                        f'<span data-i18n="common.nav.{label_key}"></span><span class="nav-chevron" aria-hidden="true">⌄</span></summary>'
+                        f'<div class="nav-menu">{extras}</div></details>')
+            else:
+                nav += link(path, key, primary=True)
             nav += '</div>'
         original_switch = re.search(r'<a\b[^>]*class=["\'][^"\']*site-language-switch[^"\']*["\'][^>]*>.*?</a>', raw, re.S)
         switch = original_switch.group(0) if original_switch else ('<a class="site-language-switch" href="/en/" lang="en">EN</a>' if paired else '')
         theme_control = ('<button class="theme-toggle" id="theme-toggle" type="button" hidden>'
                          '<span class="theme-icon" aria-hidden="true"></span><span class="theme-label sr-only"></span></button>')
-        return (f'<header class="site-header container header-compact" lang="{language}"><a class="brand" href="/" aria-label="谢雨卿的个人主页"><span data-i18n="common.brandName">谢雨卿</span></a>'
+        return (f'<header class="site-header container header-compact" lang="{language}"><a class="brand" href="/" aria-label="谢雨卿的个人主页"><span class="brand-name" data-i18n="common.brandName">谢雨卿</span> <span class="brand-english" lang="en" data-i18n="common.brandEnglish">Xie Yuqing · Carl</span></a>'
                 + '<nav class="site-nav" aria-label="主导航">' + nav + '</nav><div class="header-tools">' + switch + theme_control + '</div></header>')
     return re.sub(r'<header\b[^>]*class=["\'][^"\']*site-header[^"\']*["\'][^>]*>.*?</header>', render, page, count=1, flags=re.S)
 
@@ -271,7 +277,7 @@ def localize_page(page, root, address, route, language="zh-CN", modules=(), titl
     chinese = localized_path(route, "zh-CN")
     english = localized_path(chinese, "en")
     paired = chinese != english
-    if all("common.nav." + key in catalogues[language] for key in NAV_REQUIRED) and "common.brandName" in catalogues[language]:
+    if all("common.nav." + key in catalogues[language] for key in NAV_REQUIRED) and all(key in catalogues[language] for key in ("common.brandName", "common.brandEnglish")):
         page = compact_header(page, chinese, paired, language)
         if "common.footer.note" in catalogues[language]:
             page = unified_footer(page, chinese, language)

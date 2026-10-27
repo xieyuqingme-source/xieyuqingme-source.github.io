@@ -176,7 +176,7 @@ class MarkdownRenderingTests(unittest.TestCase):
         self.assertEqual(brand["icons"], [])
         self.assertEqual("".join(brand["text"]).count("谢雨卿"), 1)
         primary = page.split('<nav class="site-nav"', 1)[1].split('</nav>', 1)[0]
-        self.assertEqual(primary.count('<a '), 9)
+        self.assertEqual(primary.count('<a '), 7)
         self.assertIn('href="/anthology/"', primary)
         self.assertEqual(primary.count('class="nav-item'), 4)
         self.assertEqual(primary.count('class="nav-group'), 3)
@@ -463,7 +463,7 @@ class MarkdownRenderingTests(unittest.TestCase):
         for tag, css_class in (("header", "site-header container"), ("footer", "site-footer container")):
             self.assertTrue(any(element == tag and set(css_class.split()).issubset(attrs.get("class", "").split())
                                 and attrs.get("lang") == "en" for element, attrs in elements))
-        self.assertEqual("".join(BrandLinks(page).links[0]["text"]).strip(), json.loads((ROOT / "home/locales/common.json").read_text(encoding="utf-8"))["en"]["common.brandName"])
+        self.assertEqual("".join(BrandLinks(page).links[0]["text"]).strip(), "谢雨卿 Xie Yuqing · Carl")
         self.assertIn("Skip to content", page)
         self.assertIn('id="theme-toggle"', page)
         self.assertNotIn('data-skin-choice', page)

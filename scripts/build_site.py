@@ -134,10 +134,11 @@ def validate_about(data):
         maximum = 2 if field.endswith("colophon") else 20
         if not isinstance(paragraphs, list) or not 1 <= len(paragraphs) <= maximum:
             raise ValueError(f"The {field} needs a short list of paragraphs.")
-    values = [value for key, value in data.items() if key not in list_fields]
-    values += [value for field in list_fields for value in data[field]]
-    if any(not isinstance(value, str) or not value.strip() or len(value) > 2000
-           or PRIVATE_PATH.search(value) or any(ord(c) < 32 for c in value) for value in values):
+    values = [(key, value) for key, value in data.items() if key not in list_fields]
+    values += [(field, value) for field in list_fields for value in data[field]]
+    optional_notes = {"written_note", "english_written_note"}
+    if any(not isinstance(value, str) or (not value.strip() and key not in optional_notes) or len(value) > 2000
+           or PRIVATE_PATH.search(value) or any(ord(c) < 32 for c in value) for key, value in values):
         raise ValueError("Invalid public biography text.")
     if not re.fullmatch(r"[A-Za-z0-9.!#$%&'*+/=?^_`{|}~-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}", data["email"]):
         raise ValueError("The contact email must be a plain public email address.")
@@ -160,6 +161,7 @@ def render_about(data, language="zh-CN"):
     paragraphs = "\n".join(f'<p>{escape(value, quote=True)}</p>' for value in data["english_bio" if english else "chinese_bio"])
     colophon = "".join(f'<p>{escape(value, quote=True)}</p>' for value in data["english_colophon" if english else "chinese_colophon"])
     written = text["english_written_note" if english else "written_note"]
+    written_note = f'<hr><p class="about-written-note">{written}</p>' if written.strip() else ""
     if english:
         contact = f'''<h2 id="about-contact-title">Get in touch</h2>
     <dl><dt>WeChat official account</dt><dd><span lang="zh-CN">{text["wechat"]}</span>
@@ -179,8 +181,7 @@ def render_about(data, language="zh-CN"):
   <div class="about-story">
     <div class="about-bio" lang="{language}">{paragraphs}</div>
     <div class="about-colophon">{colophon}</div>
-    <hr>
-    <p class="about-written-note">{written}</p>
+    {written_note}
   </div>
   <section class="about-contact" aria-labelledby="about-contact-title">{contact}</section>
 </article>'''
@@ -190,9 +191,8 @@ def render_site_notes(waline, repository, language="zh-CN"):
     """Technical and privacy notes, gathered on /about/#site instead of scattered across pages."""
     host = escape(waline.get("hostingProvider", ""))
     database = escape(waline.get("databaseProvider", ""))
-    repository = escape(repository, quote=True)
     if language == "en":
-        items = [f'The source code is public on <a href="{repository}">GitHub</a>; pages are generated with Python and use system fonts only, with no external font files.',
+        items = ['Pages are generated with Python and use system fonts only, with no external font files.',
                  'The Today’s brief page: the calendar, weather and globe are calculated live; news is selected by hand, marked with its update date, and paused when it goes out of date. The homepage shows only the date, solar term, almanac and a small globe.',
                  'Weather on the Today’s brief page comes from Open-Meteo, queried by city only. Your location is never requested; the chosen city and the latest reading stay in your browser. The homepage makes no weather request.',
                  'Article view counts and comments use Waline. These requests send your IP address and browser information to the Waline backend and its providers'
@@ -200,7 +200,7 @@ def render_site_notes(waline, repository, language="zh-CN"):
                  'Map geography comes from Natural Earth (public domain). Project screenshots and other third-party sources are credited in each project.']
         title = "About this site"
     else:
-        items = [f'网站的源代码公开在 <a href="{repository}">GitHub</a>，页面用 Python 生成。全站使用设备自带的字体，不加载外部字体文件。',
+        items = ['页面用 Python 生成。全站使用设备自带的字体，不加载外部字体文件。',
                  '「今日简报」页：日历、天气和地球是实时计算的；新闻由人工挑选，标明更新日期，过期会暂停显示。首页只放日期、节气、黄历和一个小地球。',
                  '今日简报页的天气来自 Open-Meteo，只按城市查询，不读取你的位置；所选城市和最近一次天气只保存在你的浏览器里。首页不请求天气。',
                  '文章的浏览量和留言由 Waline 提供：相关请求会把 IP 和浏览器信息发送给 Waline 后端及其托管商'

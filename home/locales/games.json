@@ -378,7 +378,14 @@
     "games.tier.3": "NPC",
     "games.tier.4": "拉完了",
     "games.title.food": "美食从夯到拉",
-    "games.title.sport": "运动从夯到拉"
+    "games.title.sport": "运动从夯到拉",
+    "games.footprints.coverAlt": "足迹地图工具预览",
+    "games.footprints.eyebrow": "02 / 自己的足迹",
+    "games.footprints.records": "添加经历或导入 JSON / Markdown",
+    "games.footprints.view": "拖动地图，查看时间轴与行程",
+    "games.footprints.export": "保存草稿，导出图片、数据和视频",
+    "games.footprints.open": "打开足迹工具",
+    "games.footprints.note": "先预览地图，点「制作我的足迹地图」进入编辑。无需登录，经历和文件仅在浏览器本地处理。"
   },
   "en": {
     "games.ui.3bdd78610ae4": "Skip to content",
@@ -759,6 +766,13 @@
     "games.tier.3": "NPC",
     "games.tier.4": "Awful",
     "games.title.food": "Food: Rank It Your Way",
-    "games.title.sport": "Sports: Rank It Your Way"
+    "games.title.sport": "Sports: Rank It Your Way",
+    "games.footprints.coverAlt": "Preview of the footprints map tool",
+    "games.footprints.eyebrow": "02 / Your footprints",
+    "games.footprints.records": "Add experiences or import JSON / Markdown",
+    "games.footprints.view": "Explore the map, timeline and journey",
+    "games.footprints.export": "Save drafts and export images, data and videos",
+    "games.footprints.open": "Open the footprints tool",
+    "games.footprints.note": "Preview the map, then choose “Make my footprints map” to edit. No sign-in; experiences and files stay in your browser."
   }
 }

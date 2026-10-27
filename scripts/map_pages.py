@@ -67,7 +67,7 @@ TABLE_PLACES = {
 PRIVATE_PATH = re.compile(r"(?<![A-Za-z0-9])[A-Za-z]:[\\/]|\\\\[^\s\\]+[\\/]|/(?:Users|home|mnt)/", re.I)
 ASSETS = ("map-i18n.js", "map.css", "map-model.js", "map-playback.js", "map-avatar.js", "map-journey.js", "map-view.js", "map-labels.js", "map-terrain.webp", "map-terrain.jpg",
           "map-video.js", "map-video-ui.js", "map.js",
-          "map-land.json", "map-author-malaysia.jpg", "map-author-malaysia.mp4", "map-avatar-default.png", "map-avatar-wechat.jpg")
+          "map-land.json", "map-avatar-default.png", "map-avatar-wechat.jpg")
 LIMIT = 1024 * 1024
 
 
@@ -469,22 +469,22 @@ def load_display_metadata(root, public, preview=False):
 
 
 def public_video_preview(root, data):
-    """Hide a stale excerpt if any of its exact original records has changed."""
-    metadata = Path(root) / 'map/video-preview.json'
-    if not metadata.is_file():
-        return ''
-    safe_file(Path(root), metadata)
-    clip = json.loads(metadata.read_text(encoding='utf-8'))
-    records = {r['id']: r for r in data['records']}
-    if clip.get('version') != 1 or not clip.get('source_records') or any(records.get(r['id']) != r for r in clip['source_records']):
-        return ''
-    if clip.get('file') != 'map-author-malaysia.mp4':
-        raise ValueError('Unexpected author video file.')
-    source = Path(root) / 'home/assets' / clip['file']
-    safe_file(Path(root), source)
-    if not source.is_file() or hashlib.sha256(source.read_bytes()).hexdigest() != clip.get('sha256'):
-        raise ValueError('Author video does not match its reviewed local provenance.')
-    return '<section class="author-video"><h2 data-i18n="map.clip.title">马来西亚足迹 · 视频节选</h2><p data-i18n="map.clip.note">以吉隆坡、槟城、马六甲的真实记录生成的地图动画节选，保留原始注释和日期精度。约 19 秒，点击播放，有配乐。</p><video controls playsinline preload="none" poster="/assets/map-author-malaysia.jpg" src="/assets/map-author-malaysia.mp4" aria-label="马来西亚足迹地图动画节选" data-i18n-aria-label="map.clip.title"></video></section>'
+    """The retired excerpt is no longer displayed or published."""
+    return ""
+
+
+def remove_retired_map_video(output):
+    """Remove only the two known generated excerpt copies from an incremental build."""
+    output = Path(output)
+    for name in ("map-author-malaysia.mp4", "map-author-malaysia.jpg"):
+        target = output / "assets" / name
+        if not target.resolve().is_relative_to(output.resolve() / "assets"):
+            raise ValueError("Retired map media must stay within generated assets.")
+        safe_file(output, target)
+        if target.exists():
+            if not target.is_file():
+                raise ValueError("Retired map media must be an ordinary generated file.")
+            target.unlink()
 
 
 def public_photo_gallery(root, data):
@@ -528,7 +528,7 @@ def build_map(root, output, address, data, preview=False, *, language="zh-CN", m
     if "{{" in page.replace("{{site_url}}", "").replace("{{map_data}}", "").replace("{{map_display_data}}", ""):
         raise ValueError("Unresolved map template placeholder.")
     page = page.replace("{{site_url}}", escape(address, quote=True)).replace("{{map_data}}", serialized).replace("{{map_display_data}}", display_json)
-    page = page.replace('data-map-scope="public"', 'data-map-scope="maker"' if maker else 'data-map-scope="public"')
+    page = page.replace('data-map-scope="public"', 'data-map-scope="maker" data-maker-state="preview"' if maker else 'data-map-scope="public"')
     if maker:
         page = page.replace('data-i18n="map.html.s015"', 'data-i18n="map.maker.title"').replace('data-i18n="map.html.s016"', 'data-i18n="map.maker.subtitle"')
         editor = re.search(r'<section data-maker-only id="visitor-tools"[^>]*>[\s\S]*?</section>', page)
@@ -537,7 +537,10 @@ def build_map(root, output, address, data, preview=False, *, language="zh-CN", m
             page = page.replace('<section class="map-workspace"', editor.group(0) + '\n<section class="map-workspace"', 1)
 
     else:
-        page = page.replace('<div id="map-media"></div>', public_video_preview(root, data) + public_photo_gallery(root, data))
+        page = page.replace('<div id="map-media"></div>', public_photo_gallery(root, data))
+        page = page.replace('data-i18n="map.html.s020"', 'data-i18n="map.public.tools"')
+        page = page.replace('data-i18n-aria-label="map.html.s042"', 'data-i18n-aria-label="map.public.viewTools"')
+        page = page.replace('data-i18n="map.html.s017"', 'data-i18n="map.public.noScript"')
     route = "/game/footprints/" if maker else "/map/"
     if language == "en":
         page = page.replace('value="我的足迹地图"', 'value="My footprints map"')
@@ -563,6 +566,7 @@ def build_map(root, output, address, data, preview=False, *, language="zh-CN", m
     target = output / route / "index.html"
     safe_file(output, target)
     target.write_text(page, encoding="utf-8")
+    remove_retired_map_video(output)
     for name in ASSETS:
         target = output / "assets" / name
         safe_file(output, target)

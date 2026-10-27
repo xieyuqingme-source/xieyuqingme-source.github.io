@@ -2,9 +2,9 @@
   "zh-CN": {
     "anthology.name": "雨聊文选",
     "anthology.eyebrow": "读过、想留着的文字",
-    "anthology.tagline": "把喜欢的文字，留在这里慢慢读。",
+    "anthology.tagline": "这些是谢雨卿推崇的名篇，涵盖古今中外各种文学体裁，他已倒背如流，也推荐你们阅读",
     "anthology.inventory": "13 篇选文 · 5 类 · 中文、English、Français 原文",
-    "anthology.description": "谢雨卿选录的中外文学原文，按分类与语言浏览，搜索篇名、作者或正文。",
+    "anthology.description": "这些是谢雨卿推崇的名篇，涵盖古今中外各种文学体裁，他已倒背如流，也推荐你们阅读",
     "anthology.catalog": "文选目录",
     "anthology.countInitial": "共 {total} 篇",
     "anthology.count": "共 {total} 篇 · 显示 {visible} 篇",
@@ -188,9 +188,9 @@
   "en": {
     "anthology.name": "Yuliao Anthology",
     "anthology.eyebrow": "Texts I keep coming back to",
-    "anthology.tagline": "A place to keep favorite writing and read it slowly.",
+    "anthology.tagline": "These are celebrated works that Xie Yuqing admires, spanning literary forms from China and abroad, past and present. He can recite them backwards and recommends them to you.",
     "anthology.inventory": "13 selections · 5 categories · Chinese, English and French originals",
-    "anthology.description": "Literary selections curated by Xie Yuqing. Browse original works by category and language, or search titles, credits and text.",
+    "anthology.description": "These are celebrated works that Xie Yuqing admires, spanning literary forms from China and abroad, past and present. He can recite them backwards and recommends them to you.",
     "anthology.catalog": "Contents",
     "anthology.countInitial": "{total} works",
     "anthology.count": "{visible} of {total} works",

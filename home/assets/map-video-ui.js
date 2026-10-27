@@ -152,7 +152,7 @@
     plan.language = language;
     $("journey-warnings").textContent = [...new Set(journey.warnings.map(value => typeof value === "string" ? value : value.message || "").filter(Boolean))].join("；");
     $("video-estimate").textContent = musicText("video.estimate", {duration:seconds(plan.durationMs),count:plan.scenes.length,total:plan.totalSceneCount||plan.scenes.length,mode:musicText(plan.brief?"video.brief":"video.full")});
-    $("video-generate").disabled = !cap.supported || !context || !plan.scenes.length || !A.assetsReady();
+    $("video-generate").disabled = !A.canEdit() || !cap.supported || !context || !plan.scenes.length || !A.assetsReady();
     refreshMusic(); refreshPlayer();
     $("video-generate").title = !A.assetsReady() ? I("map.video-ui.s006", {}, "请等待本地底图与头像加载；加载失败时请重选头像或刷新。") : "";
   }
@@ -331,9 +331,9 @@
   window.addEventListener("pagehide",stopJourney);
 
   let activeGeneration = null, lastAudioEvidence = null, lastResultType = null;
-  function generate() { if (activeGeneration) return activeGeneration; activeGeneration = generateVideo().finally(() => { activeGeneration = null; }); return activeGeneration; }
+  function generate() { if (!A.canEdit()) return Promise.resolve(); if (activeGeneration) return activeGeneration; activeGeneration = generateVideo().finally(() => { activeGeneration = null; }); return activeGeneration; }
   async function generateVideo() {
-    if (busy || $("video-generate").disabled || !plan) return;
+    if (!A.canEdit() || busy || $("video-generate").disabled || !plan) return;
     await stopJourney(); clearResult(); lastAudioEvidence=null;lastResultType=null;const desiredContainer=$("video-format").value; const frozenPlan = plan; controller = new AbortController(); setBusy(true); $("video-canvas").hidden = false; $("video-progress").value = 0; lastProgress = "";
     try {
       $("playback-progress").textContent = I("map.video-ui.s014", {}, "正在准备本地地图画面…");
@@ -372,6 +372,7 @@
   $("video-camera").addEventListener("change", () => { clearResult(); rebuild(); });
   window.addEventListener("footprints:reset", () => { if (!busy) { clearResult(); rebuild(); } });
   window.addEventListener("footprints:assets", rebuild);
+  window.addEventListener("footprints:editmode", () => { if (!busy) { clearResult(); rebuild(); } });
   window.addEventListener("footprints:labels", () => { if (!busy) { clearResult(); rebuild(); } });
   window.addEventListener("footprints:avatar", () => { if (!busy) { clearResult(); rebuild(); } });
   window.addEventListener("pagehide", () => { for (const media of playbackMedia) media.pause(); cancel(); clearResult(); });

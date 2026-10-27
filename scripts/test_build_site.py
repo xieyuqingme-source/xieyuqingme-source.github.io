@@ -769,7 +769,9 @@ class ProjectPublicationTests(unittest.TestCase):
                 self.assertNotIn("Essays by Xie Yuqing", about)
                 self.assertIn(load_about()["chinese_bio"][0], about)
                 self.assertNotIn(load_about()["english_bio"][0], about)
-                self.assertIn(load_about()["written_note"], about)
+                self.assertNotIn("真实写作日期", about)
+                self.assertNotIn("Actual date of writing", about)
+                self.assertNotIn('class="about-written-note"', about)
                 self.assertIn("走过的地方", about)
                 qr = [attrs for tag, attrs in Elements(about).elements if tag == "img" and attrs.get("src") == "/assets/wechat-qrcode.jpg"]
                 self.assertEqual(len(qr), 1)
@@ -781,7 +783,8 @@ class ProjectPublicationTests(unittest.TestCase):
                 self.assertNotIn("wechat-qrcode", home)
                 self.assertIn('href="/map/"', home)
                 self.assertIn('id="home-random-button"', home)
-                self.assertIn('id="glance-title">今日简报</h2>', home)
+                self.assertIn('<h2 id="glance-title"><a href="/today/">今日简报</a></h2>', home)
+                self.assertIn('<h2 id="glance-title"><a href="/en/today/">Today’s brief</a></h2>', english_home)
                 self.assertIn('id="home-title">谢雨卿</h1>', home)
                 self.assertIn('我要把精力放到英语上。', home)
                 self.assertNotIn('id="now"', home)
@@ -904,11 +907,36 @@ class PublicBiographyTests(unittest.TestCase):
             html = render_about(data, language)
             for paragraph in data[bio] + data[colophon]:
                 self.assertIn(escape(paragraph, quote=True), html)
-            self.assertIn(escape(data[note], quote=True), html)
+            self.assertEqual(data[note], "")
+            self.assertNotIn('class="about-written-note"', html)
+            self.assertNotIn('<hr>', html)
             self.assertIn('class="about-colophon"', html)
-            self.assertIn('<hr>', html)
             self.assertNotIn('class="about-english"', html)
         self.assertIn("遗嘱", render_about(data))
+
+    def test_unpublished_written_notes_do_not_render_an_empty_date_or_divider(self):
+        data = load_about()
+        self.assertEqual(data["chinese_colophon"], ["AI统治地球后，浏览完谢雨卿所有遗作，有感而发，生成此文", "2126年10月26日"])
+        for language in ("zh-CN", "en"):
+            html = render_about(data, language)
+            self.assertNotIn("真实写作日期", html)
+            self.assertNotIn("Actual date of writing", html)
+            self.assertNotIn("这句话不要上传到网站", html)
+            self.assertNotIn('<hr>', html)
+        sample = deepcopy(data)
+        sample["written_note"] = r"C:\Users\private\note.md"
+        with self.assertRaises(ValueError):
+            validate_about(sample)
+
+    def test_site_notes_keep_generation_and_font_details_without_a_repository_link(self):
+        for language in ("zh-CN", "en"):
+            html = build_site.render_site_notes({"enabled": False}, "https://github.com/public/repository", language)
+            self.assertNotIn("GitHub", html)
+            self.assertNotIn("github.com", html)
+            self.assertNotIn("源代码公开", html)
+            self.assertNotIn("source code is public", html)
+            self.assertIn("Python", html)
+            self.assertIn("设备自带的字体" if language == "zh-CN" else "system fonts only", html)
 
     def test_data_symlinks_are_rejected(self):
         with patch.object(Path, "is_symlink", return_value=True), self.assertRaisesRegex(ValueError, "symlinks"):

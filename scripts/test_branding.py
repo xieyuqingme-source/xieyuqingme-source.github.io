@@ -22,7 +22,7 @@ class Brand(HTMLParser):
 def check_brand(test,text,href=None):
     value=Brand(text);test.assertEqual(len(value.links),1);test.assertEqual(value.icons,[])
     link=value.links[0];name=' '.join(' '.join(link['text']).split())
-    test.assertEqual(name,'谢雨卿' if 'header-compact' in text else '谢雨卿 Xie Yuqing · Carl');test.assertEqual(name.count('谢雨卿'),1)
+    test.assertEqual(name,'谢雨卿 Xie Yuqing · Carl');test.assertEqual(name.count('谢雨卿'),1)
     test.assertTrue(link['attrs'].get('aria-label'))
     if href:test.assertEqual(link['attrs'].get('href'),href)
     return link

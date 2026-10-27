@@ -129,3 +129,20 @@ test('an explicit archive link for an unpaired original is not rewritten as a la
   harness({ path: '/articles/English%20Articles/original.html', lang: 'en', route: '/articles/English%20Articles/original.html', mode: 'navigate', chrome: [link] });
   assert.equal(attrs.href,'/articles/'); assert.equal(link.textContent,'中文目录');
 });
+
+test('explicit menu labels survive language changes without taking the footer route label', () => {
+  const attrs = { href: '/map/', 'data-i18n': 'common.nav.myFootprints' };
+  const link = {
+    tagName: 'A', children: [], textContent: '', isContentEditable: false,
+    matches: () => false, classList: { contains: () => false }, querySelector: () => null,
+    getAttribute: name => attrs[name], hasAttribute: name => Object.hasOwn(attrs, name),
+    setAttribute: (name, value) => { attrs[name] = value; }
+  };
+  const ui = harness({ chrome: [link], elements: [link] });
+  assert.equal(link.textContent, '我的足迹');
+  assert.equal(attrs['data-i18n'], 'common.nav.myFootprints');
+  ui.api.setLanguage('en');
+  assert.equal(link.textContent, 'My footprints');
+  assert.equal(attrs.href, '/en/map/');
+  assert.equal(common.en['common.nav.map'], 'Map');
+});

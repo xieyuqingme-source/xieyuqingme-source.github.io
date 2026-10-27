@@ -1,8 +1,8 @@
 {
   "zh-CN": {
     "common.nav.home": "个人主页",
-    "common.nav.more.articles": "更多文章入口",
-    "common.nav.more.projects": "更多作品与工具",
+    "common.nav.more.articles": "展开文章菜单",
+    "common.nav.more.projects": "展开作品菜单",
     "common.nav.articles": "文章",
     "common.nav.anthology": "雨聊文选",
     "common.nav.projects": "作品",
@@ -97,7 +97,7 @@
     "common.entry.photography": "路上的照片",
     "common.entry.photosNote": "在北京与马来西亚留下的影像和文字。",
     "common.entry.makerNote": "记录自己的停留，导入文档，制作图片或视频。草稿只在你的浏览器本地处理。",
-    "common.nav.more.map": "更多足迹",
+    "common.nav.more.map": "展开足迹菜单",
     "common.footer.yuliao": "雨聊",
     "common.footer.note": "努力研究一些问题。",
     "common.footer.label": "页脚导航",
@@ -106,12 +106,19 @@
     "common.footer.site": "关于本站",
     "common.signature.1": "我要把精力放到英语上。",
     "common.signature.2": "努力研究一些问题。",
-    "common.nav.today": "今日简报"
+    "common.nav.today": "今日简报",
+    "common.nav.myArticles": "我的文章",
+    "common.nav.classics": "古今名作",
+    "common.nav.aiApps": "AI应用",
+    "common.nav.myFootprints": "我的足迹",
+    "common.nav.myPhotos": "我的照片",
+    "common.nav.footprints": "足迹",
+    "common.brandEnglish": "Xie Yuqing · Carl"
   },
   "en": {
     "common.nav.home": "Home",
-    "common.nav.more.articles": "More writing destinations",
-    "common.nav.more.projects": "More projects and tools",
+    "common.nav.more.articles": "Open articles menu",
+    "common.nav.more.projects": "Open projects menu",
     "common.nav.articles": "Articles",
     "common.nav.anthology": "Anthology",
     "common.nav.projects": "Projects",
@@ -206,7 +213,7 @@
     "common.entry.photography": "Photos from the road",
     "common.entry.photosNote": "Photographs and notes from Beijing and Malaysia.",
     "common.entry.makerNote": "Record your own stays, import a document, and make images or videos. Drafts are processed locally in your browser.",
-    "common.nav.more.map": "More from my footprints",
+    "common.nav.more.map": "Open footprints menu",
     "common.footer.yuliao": "Yuliao · rainy-day talks",
     "common.footer.note": "I’m working hard on a few questions.",
     "common.footer.label": "Footer navigation",
@@ -215,6 +222,13 @@
     "common.footer.site": "About this site",
     "common.signature.1": "I’m putting my energy into English.",
     "common.signature.2": "I’m working hard on a few questions.",
-    "common.nav.today": "Today’s brief"
+    "common.nav.today": "Today’s brief",
+    "common.nav.myArticles": "My articles",
+    "common.nav.classics": "Literary classics",
+    "common.nav.aiApps": "AI applications",
+    "common.nav.myFootprints": "My footprints",
+    "common.nav.myPhotos": "My photos",
+    "common.nav.footprints": "Footprints",
+    "common.brandEnglish": "Xie Yuqing · Carl"
   }
 }

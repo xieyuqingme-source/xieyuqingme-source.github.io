@@ -55,6 +55,7 @@
 .home-glance .section-head{padding-bottom:10px;margin-bottom:12px;gap:8px 14px}
 .home-glance .section-head h2{font-size:20px}
 .home-glance .section-head a{font-size:13px;color:var(--accent)}
+.home-glance #glance-title a{font:inherit;color:inherit}
 .glance-layout{display:grid;grid-template-columns:minmax(0,1fr) 140px;gap:14px;align-items:center;min-width:0}
 .glance-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;min-width:0}
 .daily-home .glance-cards:hover{text-decoration:none}
