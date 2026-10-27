@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "weather": [
+    {
+      "id": "rain",
+      "field": "precipitation_probability_max",
+      "operator": "gte",
+      "threshold": 60,
+      "text": {
+        "zh-CN": "可能下雨，记得带伞",
+        "en": "Rain is possible; remember an umbrella"
+      }
+    },
+    {
+      "id": "heat",
+      "field": "temperature_2m_max",
+      "operator": "gte",
+      "threshold": 33,
+      "text": {
+        "zh-CN": "很热，注意防暑",
+        "en": "Very hot; take care in the heat"
+      }
+    },
+    {
+      "id": "cold",
+      "field": "temperature_2m_min",
+      "operator": "lte",
+      "threshold": 0,
+      "text": {
+        "zh-CN": "很冷，注意保暖",
+        "en": "Very cold; keep warm"
+      }
+    }
+  ]
+}

@@ -58,17 +58,21 @@ test('actual vendored D3 and astronomy share the published PageScope and can be 
   const sandbox = {window: target,console}; vm.createContext(sandbox);
   const scoper = read('scripts/site_navigation.py');
   assert.ok(scoper.includes('function(document,window,self,globalThis)'));
-  const header = '/* site-page-scope:v1 */\n(function(document,window,self,globalThis){\nconst {fetch,setTimeout,clearTimeout,setInterval,clearInterval,requestAnimationFrame,cancelAnimationFrame,ResizeObserver,IntersectionObserver,MutationObserver,URL,history,location,matchMedia}=window;\n';
-  const footer = '\n})(...(()=>{if(typeof module==="object"&&module.exports)return[globalThis.document,globalThis,globalThis,globalThis];const e=window.SiteNavigation.environment();return[e.document,e.window,e.window,e.window];})());\n';
-  for (const file of ['home/assets/vendor/d3-7.9.0.min.js','home/assets/astronomy-solar.js']) vm.runInContext(header + read(file) + footer, sandbox);
+  const header = '/* site-page-scope:v1 */\n(function(document,window,self,globalThis){\nif(document.currentScript?.dataset.homeScope&&document.currentScript.dataset.homeScope!==window.HomeBriefPageId)return;\nconst {fetch,setTimeout,clearTimeout,setInterval,clearInterval,requestAnimationFrame,cancelAnimationFrame,ResizeObserver,IntersectionObserver,MutationObserver,URL,history,location,matchMedia}=window;\n';
+  const footer = '\n}).apply(...(()=>{if(typeof module==="object"&&module.exports)return[globalThis,[globalThis.document,globalThis,globalThis,globalThis]];const e=window.SiteNavigation.environment();return[e.window,[e.document,e.window,e.window,e.window]];})());\n';
+  for (const file of ['home/assets/vendor/d3-7.9.0.min.js','home/assets/astronomy-solar.js','home/assets/vendor/lunar-javascript-1.7.7.js','home/assets/home-earth.js']) vm.runInContext(header + read(file) + footer, sandbox);
   assert.equal(typeof owned.d3.geoOrthographic, 'function');
   assert.ok(Math.abs(owned.HomeAstronomy.position(epoch).declination - A.position(epoch).declination) < 1e-9);
   const geography = JSON.parse(read('home/assets/map-land.json'));
   const fraction = owned.d3.geoArea(geography) / (4 * Math.PI);
   assert.ok(fraction > .25 && fraction < .35, 'existing GeoJSON winding represents land');
-  assert.ok(globals.has('d3') && globals.has('HomeAstronomy'));
+  assert.ok(globals.has('d3') && globals.has('HomeAstronomy') && globals.has('Solar') && globals.has('I18n') && globals.has('HomeEarth'));
+  assert.equal(owned.Solar.fromYmd(2026,10,27).getLunar().getPrevJieQi(true).getName(),'霜降');
   for (const [key, value] of globals) if (target[key] === value) delete target[key];
-  assert.equal(target.d3, undefined); assert.equal(target.HomeAstronomy, undefined);
+  assert.equal(target.d3, undefined); assert.equal(target.HomeAstronomy, undefined); assert.equal(target.Solar,undefined); assert.equal(target.I18n,undefined); assert.equal(target.HomeEarth,undefined);
+  target.HomeBriefPageId = 'new-home'; target.document.currentScript = {dataset:{homeScope:'old-home'}};
+  vm.runInContext(header + read('home/assets/vendor/lunar-javascript-1.7.7.js') + footer,sandbox);
+  assert.equal(target.Solar,undefined,'a late script from a departed scope must not publish globals');
 });
 
 class Element {
@@ -81,7 +85,7 @@ class Element {
   append(...nodes) { this.children.push(...nodes); }
 }
 function harness(cached) {
-  const ids = ['daily-city','earth-hour','earth-hour-label','daily-local-time','daily-sunrise','daily-sunset','daily-daylength','daily-subsolar','daily-calendar-month','daily-calendar-day','daily-calendar-weekday','daily-calendar-lunar','daily-calendar-term','daily-weather','earth-now'];
+  const ids = ['daily-city','earth-hour','earth-hour-label','daily-local-time','daily-sunrise','daily-sunset','daily-daylength','daily-subsolar','daily-calendar-month','daily-calendar-day','daily-calendar-weekday','daily-calendar-lunar','daily-calendar-term','daily-weather','earth-now','daily-moon-phase','daily-world-clocks'];
   const nodes = Object.fromEntries(ids.map(id => [id, new Element()])), element = new Element(), document = new Element(), storage = new Map();
   if (cached) storage.set('xieyuqing-weather-v1:beijing', JSON.stringify(cached));
   document.documentElement = {lang: 'zh-CN',dataset: {theme: 'light'}};
@@ -173,13 +177,50 @@ test('missing optional DOM fields and canvas are safe', async () => {
   assert.equal(createEarth(h.document, h.window), null);
 });
 
-test('both templates keep the Earth DOM contract and dependency order', () => {
+test('both templates keep the Earth DOM contract and declare heavy scripts only as lazy URLs', () => {
   const ids = ['daily-earth','earth-canvas','daily-city','earth-hour','earth-hour-label','earth-now','daily-local-time','daily-sunrise','daily-sunset','daily-daylength','daily-subsolar','daily-calendar-month','daily-calendar-day','daily-calendar-weekday','daily-calendar-lunar','daily-calendar-term','daily-weather'];
   for (const file of ['home/index.template.html','home/en/index.template.html']) {
     const html = read(file);
     for (const id of ids) assert.equal((html.match(new RegExp('id="' + id + '"', 'g')) || []).length, 1, file + ' #' + id);
-    const d3 = html.indexOf('src="/assets/vendor/d3-7.9.0.min.js"');
-    const astro = html.indexOf('src="/assets/astronomy-solar.js"'), earth = html.indexOf('src="/assets/home-earth.js"');
-    assert.ok(d3 >= 0 && astro > d3 && earth > astro, file + ' script order');
+    assert.match(html,/data-d3-src="\/assets\/vendor\/d3-7\.9\.0\.min\.js"/);
+    assert.match(html,/data-earth-src="\/assets\/home-earth\.js"/);
+    assert.match(html,/data-lunar-src="\/assets\/vendor\/lunar-javascript-1\.7\.7\.js"/);
+    assert.doesNotMatch(html,/<script\b[^>]+src="\/assets\/(?:vendor\/(?:d3|lunar)|home-earth)/);
+    assert.ok(html.indexOf('src="/assets/astronomy-solar.js"') < html.indexOf('src="/assets/home-daily.js"'),file + ' light astronomy precedes daily controller');
   }
+});
+
+test('mean lunar phase follows the synodic cycle and rejects invalid dates',() => {
+  const zero = Date.UTC(2000,0,6,18,14), month = 29.530588853 * 86400000;
+  assert.equal(A.moonPhase(zero).name,'新月'); assert.ok(A.moonPhase(zero).illumination < 1e-9);
+  assert.equal(A.moonPhase(zero + month / 2,true).name,'Full moon'); assert.ok(Math.abs(A.moonPhase(zero + month / 2).illumination - 1) < 1e-9);
+  assert.equal(A.moonPhase(zero + month * .625).name,'亏凸月'); assert.equal(A.moonPhase(zero + month * .75,true).name,'Last quarter');
+  assert.throws(() => A.moonPhase('invalid'),TypeError);
+});
+
+test('lazy globe mode adds four world clocks without a second weather request and pauses rendering',async () => {
+  const h = harness();
+  let draws = 0;
+  const context = {setTransform() {},clearRect() { draws++; },createRadialGradient:() => ({addColorStop() {}}),beginPath() {},arc() {},fill() {},fillText() {}};
+  h.nodes['earth-canvas'] = new Element(); Object.assign(h.nodes['earth-canvas'],{getContext:() => context,getBoundingClientRect:() => ({width:160}),setAttribute() {}});
+  h.window.getComputedStyle = () => ({getPropertyValue:() => ''});
+  const control = createEarth(h.document,h.window,{globeOnly:true});
+  assert.equal(h.requests.length,0);
+  assert.equal(h.nodes['daily-world-clocks'].children.length,4);
+  assert.match(h.nodes['daily-world-clocks'].textContent,/北京.*吉隆坡.*伦敦.*纽约/);
+  assert.match(h.nodes['daily-moon-phase'].textContent,/月相/);
+  const before = draws; control.setPaused(true); control.refresh(); assert.equal(draws,before); assert.equal(control.getState().paused,true);
+  control.setPaused(false); assert.ok(draws > before); control.destroy(); await settle(); assert.equal(h.intervals.size,0);
+});
+
+test('a lazy globe keeps the already selected city when storage is unavailable', async () => {
+  const h = harness();
+  h.nodes['daily-city'].value = 'kuala';
+  h.window.localStorage.getItem = () => { throw new Error('Storage unavailable'); };
+  const control = createEarth(h.document,h.window,{globeOnly:true});
+  assert.equal(control.getState().city,'kuala');
+  assert.equal(h.nodes['daily-city'].value,'kuala');
+  assert.match(h.nodes['daily-local-time'].textContent,/吉隆坡/);
+  assert.equal(h.requests.length,0);
+  control.destroy(); await settle();
 });

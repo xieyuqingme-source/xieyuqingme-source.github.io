@@ -26,6 +26,12 @@ class BilingualBuildContractTests(unittest.TestCase):
             root = Path(temporary)
             output = root / '_site_unified'
             shutil.copytree(REFERENCE / 'home', root / 'home')
+            memes = root / 'home/brief/memes.json'
+            public = json.loads(memes.read_text(encoding='utf-8'))
+            for item in public['items']:
+                if 'related_url' in item:
+                    item['related_url'] = '/articles/index.html'
+            memes.write_text(json.dumps(public, ensure_ascii=False), encoding='utf-8')
             (root / 'blog').mkdir()
             for name in ('config.json', 'publication-dates.json', 'style.css', 'site.js', 'comment-avatar.svg'):
                 shutil.copy2(REFERENCE / 'blog' / name, root / 'blog' / name)

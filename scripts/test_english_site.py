@@ -16,7 +16,7 @@ from xml.etree import ElementTree as ET
 import build_blog
 import build_site
 from build_blog import Blog
-from daily_brief import load_daily, render_brief, safe_json
+from daily_brief import load_daily, load_brief_extras, render_brief, render_brief_bottom, safe_json, BRIEF_NOTICE
 from english_site import (build_english_site, check_english_publication, collect_translations,
                           english_archive, english_article_url, source_sha256, translation_report)
 from PIL import Image
@@ -96,8 +96,15 @@ class EnglishPublicationTests(unittest.TestCase):
         shutil.copytree(ROOT / "home/en", self.root / "home/en")
         if (REFERENCE / "home/locales").is_dir():
             shutil.copytree(REFERENCE / "home/locales", self.root / "home/locales")
-        for name in ("projects.json", "about.json", "daily-brief.json", "daily-content.json"):
+        for name in ("projects.json", "about.json", "daily-content.json"):
             shutil.copy2(REFERENCE / "home" / name, self.root / "home" / name)
+        shutil.copytree(REFERENCE / "home/brief", self.root / "home/brief")
+        memes = self.root / "home/brief/memes.json"
+        public = json.loads(memes.read_text(encoding="utf-8"))
+        for item in public["items"]:
+            if "related_url" in item:
+                item["related_url"] = "/articles/index.html"
+        memes.write_text(json.dumps(public, ensure_ascii=False), encoding="utf-8")
         for source in (REFERENCE / "home/assets/projects").glob("*.webp"):
             shutil.copy2(source, self.root / "home/assets/projects" / source.name)
         for module, values in ((build_blog, {"ROOT": self.root, "INTERACTION_DIR": self.root / "blog"}),
@@ -127,6 +134,7 @@ class EnglishPublicationTests(unittest.TestCase):
         blog.build(clean=False)
         values = {"site_url": "https://public.test", "project_total": "5", "article_total": "3", "chinese_total": "2", "english_total": "1", "photo_album_total": "0", "photo_total": "0", "anthology_total": "0"}
         brief, daily_content = load_daily(self.root, build_site.linked_directory)
+        extras = load_brief_extras(self.root, build_site.linked_directory)
         projects = build_site.load_projects()
         # This fixture calls the English publisher directly, so supply the same
         # homepage inputs that the unified builder normally passes to it.
@@ -137,8 +145,12 @@ class EnglishPublicationTests(unittest.TestCase):
             "home_photos": "", "home_photos_en": "",
             "home_article_links": build_site.home_article_links(blog), "home_article_links_en": build_site.home_article_links(blog, "en"),
             "home_avatar": build_site.render_home_avatar(), "home_avatar_en": build_site.render_home_avatar("en"),
-            "daily_brief_notice": escape(brief["notice"]["zh-CN"]),
-            "daily_brief_notice_en": escape(brief["notice"]["en"]),
+            "daily_brief_notice": escape(BRIEF_NOTICE["zh-CN"]),
+            "daily_brief_notice_en": escape(BRIEF_NOTICE["en"]),
+            "brief_knowledge_data": safe_json(extras["knowledge"]), "brief_memes_data": safe_json(extras["memes"]),
+            "brief_rules_data": safe_json(extras["rules"]), "brief_holidays_data": safe_json(extras["holidays"]),
+            "brief_bottom_cards": render_brief_bottom(daily_content, extras),
+            "brief_bottom_cards_en": render_brief_bottom(daily_content, extras, "en"),
             "brief_feed": render_brief(brief), "brief_feed_en": render_brief(brief, "en"),
             "home_recent_articles": build_site.render_home_recent(blog),
             "home_recent_articles_en": build_site.render_home_recent(blog, "en"),
@@ -162,7 +174,7 @@ class EnglishPublicationTests(unittest.TestCase):
         build_english_site(blog, self.output, "https://public.test", projects, build_site.load_about(), values)
         return blog
 
-    def test_bilingual_homepage_has_readable_sample_sources_and_daily_json_without_scripts(self):
+    def test_bilingual_homepage_has_readable_manual_news_and_daily_json_without_scripts(self):
         blog = self.build_fixture()
         brief, daily_content = load_daily(self.root, build_site.linked_directory)
         for language, route in (("zh-CN", "index.html"), ("en", "en/index.html")):
@@ -187,7 +199,7 @@ class EnglishPublicationTests(unittest.TestCase):
                         self.assertIn(item["published"], dates)
                     else:
                         self.assertIn(escape(item["published_label"][language]), feed[1])
-                self.assertIn(escape(brief["notice"][language]), text)
+                self.assertIn(escape(BRIEF_NOTICE[language]), text)
         english = (self.output / "en/index.html").read_text(encoding="utf-8")
         recent = re.search(r'<ol class="yl-article-list[^"]*">(.*?)</ol>', english, re.S)[1]
         self.assertIn(english_article_url(blog, blog.translations[self.key]), recent)
@@ -355,8 +367,9 @@ class EnglishPublicationTests(unittest.TestCase):
         self.assertIn('<html lang="en"', text)
         self.assertIn('Originally written in English.', text)
         self.assertIn('id="theme-toggle"', text)
-        self.assertIn('I’m putting my energy into English.', text)
-        self.assertIn('I’m working hard on a few questions.', text)
+        footer = text.split("<footer", 1)[1].split("</footer>", 1)[0]
+        self.assertNotIn('I’m putting my energy into English.', footer)
+        self.assertIn('I’m working hard on a few questions.', footer)
         self.assertNotIn('data-skin-choice', text)
         self.assertIn('An original English essay.', text)
         elements = build_site.Elements(text).elements

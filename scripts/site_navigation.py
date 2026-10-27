@@ -5,8 +5,8 @@ from urllib.parse import urlsplit
 
 PERSISTENT = {'/assets/site-i18n.js', '/assets/site-music.js', '/assets/site-navigation.js', '/assets/portal.js'}
 ALIASES = 'fetch,setTimeout,clearTimeout,setInterval,clearInterval,requestAnimationFrame,cancelAnimationFrame,ResizeObserver,IntersectionObserver,MutationObserver,URL,history,location,matchMedia'
-HEADER = '/* site-page-scope:v1 */\n(function(document,window,self,globalThis){\nconst {' + ALIASES + '}=window;\n'
-FOOTER = '\n})(...(()=>{if(typeof module==="object"&&module.exports)return[globalThis.document,globalThis,globalThis,globalThis];const e=window.SiteNavigation.environment();return[e.document,e.window,e.window,e.window];})());\n'
+HEADER = '/* site-page-scope:v1 */\n(function(document,window,self,globalThis){\nif(document?.currentScript?.dataset?.homeScope&&document.currentScript.dataset.homeScope!==window.HomeBriefPageId)return;\nconst {' + ALIASES + '}=window;\n'
+FOOTER = '\n}).apply(...(()=>{if(typeof module==="object"&&module.exports)return[globalThis,[globalThis.document,globalThis,globalThis,globalThis]];const e=window.SiteNavigation.environment();return[e.window,[e.document,e.window,e.window,e.window]];})());\n'
 
 def original_page_script(source):
     """Recover exact authored bytes for publication integrity checks."""
@@ -19,7 +19,9 @@ def wrap_page_scripts(output):
     paths = set()
     for page in output.rglob('*.html'):
         text = page.read_text(encoding='utf-8')
-        for match in re.finditer(r'<script\b[^>]*\bsrc=["\']([^"\']+)["\'][^>]*>', text):
+        references = list(re.finditer(r'<script\b[^>]*\bsrc=["\']([^"\']+)["\'][^>]*>', text))
+        references += list(re.finditer(r'\bdata-(?:lunar|d3|earth)-src=["\']([^"\']+)["\']', text))
+        for match in references:
             route = urlsplit(match[1]).path
             if route.startswith('/') and not route.startswith('//') and route not in PERSISTENT:
                 path = (output / route.lstrip('/')).resolve()

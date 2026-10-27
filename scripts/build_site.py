@@ -18,7 +18,8 @@ from photo_pages import build_photos, validate_catalog as validate_photo_catalog
 from map_pages import load_map, build_map
 from anthology_pages import load_anthology, load_glossary, build_anthology
 from site_i18n import localize_page, localized_path, load_catalogues, check_site_languages
-from daily_brief import load_daily, safe_json, render_brief
+from daily_brief import (load_daily, load_brief_extras, safe_json, render_brief, render_brief_bottom,
+                         sorted_brief_items, BRIEF_NOTICE)
 
 OUTPUT = ROOT / "_site_unified"
 GAME_PAGES = (("game.template.html", "game"), ("ranking.template.html", "game/ranking"))
@@ -45,7 +46,8 @@ PROJECT_OPTIONAL_FIELDS = {"download_url", "download_label", "guide_label", "lin
 PROJECT_DEMO_ROUTES = {"/map/", "/game/ranking/"}
 BRAND_ASSETS = ("share-cover.png", "favicon.svg", "favicon.ico", "favicon.png")
 HOME_DAILY_ASSETS = ("home-daily.css", "home-daily.js", "home-now.js", "home-earth.js", "astronomy-solar.js", "home-ink.webp",
-                     "vendor/d3-7.9.0.min.js", "vendor/D3-LICENSE")
+                     "vendor/d3-7.9.0.min.js", "vendor/D3-LICENSE",
+                     "vendor/lunar-javascript-1.7.7.js", "vendor/lunar-javascript-1.7.7.LICENSE")
 HOME_PHOTO = "/photos/images/p-71f77ab6511ec1ce656a58a3-18000666287e1d55-640.webp"
 HOME_PICKS = "home/home-picks.json"
 ABOUT_FIELDS = {"name", "english_name", "chinese_bio", "english_bio", "chinese_colophon", "english_colophon",
@@ -334,8 +336,8 @@ def brief_edition_label(brief, language="zh-CN"):
     edition = date.fromisoformat(brief["edition_date"])
     if language == "en":
         months = ("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December")
-        return f"News updated on {edition.day} {months[edition.month - 1]}"
-    return f"新闻更新于 {edition.month}月{edition.day}日"
+        return f"News updated on {edition.day} {months[edition.month - 1]} {brief['updated_at'][11:16]}"
+    return f"新闻更新于 {edition.month}月{edition.day}日 {brief['updated_at'][11:16]}"
 
 
 def render_home_recent(blog, language="zh-CN", limit=5):
@@ -501,7 +503,7 @@ def daily_asset_sources():
     return sources
 
 
-def copy_daily_assets(sources, brief, content):
+def copy_daily_assets(sources, brief, content, extras):
     folder = OUTPUT / "assets"
     vendor = folder / "vendor"
     if linked_directory(folder) or linked_directory(vendor):
@@ -513,11 +515,19 @@ def copy_daily_assets(sources, brief, content):
         if linked_directory(destination) or (destination.exists() and not destination.is_file()):
             raise ValueError("Generated daily homepage assets must be regular files.")
         shutil.copy2(source, destination)
-    for name, data in (("daily-brief.json", brief), ("daily-content.json", content)):
+    datasets = [("daily-brief.json", brief), ("daily-content.json", content)]
+    datasets += [("brief-" + key + ".json", value) for key, value in extras.items()]
+    for name, data in datasets:
         destination = folder / name
         if linked_directory(destination) or (destination.exists() and not destination.is_file()):
             raise ValueError("Generated daily content must be regular files.")
         destination.write_text(safe_json(data) + "\n", encoding="utf-8")
+
+    if extras["holidays"]["years"]:
+        destination = folder / "brief-holidays.LICENSE"
+        if linked_directory(destination) or (destination.exists() and not destination.is_file()):
+            raise ValueError("Generated holiday license must be a regular file.")
+        shutil.copy2(ROOT / "home/brief/holidays/LICENSE", destination)
 
 
 def site_root(address):
@@ -711,6 +721,7 @@ def build_site(address, map_preview_source=None):
     about_data = load_about()
     home_photos = load_home_photos()
     brief_data, daily_content = load_daily(ROOT, linked_directory)
+    brief_extras = load_brief_extras(ROOT, linked_directory)
     daily_sources = daily_asset_sources()
     # Every template's complete photo set must pass before any output is generated.
     photo_sets = (("foods", "food", game_food_sources()), ("sports", "sport", game_sport_sources()))
@@ -747,13 +758,17 @@ def build_site(address, map_preview_source=None):
     has_home_photo = (ROOT / HOME_PHOTO.lstrip("/")).is_file()
     values.update({
         "daily_brief_data": safe_json(brief_data), "daily_content_data": safe_json(daily_content),
+        "brief_knowledge_data": safe_json(brief_extras["knowledge"]), "brief_memes_data": safe_json(brief_extras["memes"]),
+        "brief_rules_data": safe_json(brief_extras["rules"]), "brief_holidays_data": safe_json(brief_extras["holidays"]),
+        "brief_bottom_cards": render_brief_bottom(daily_content, brief_extras),
+        "brief_bottom_cards_en": render_brief_bottom(daily_content, brief_extras, "en"),
         "daily_brief_edition": escape(brief_edition_label(brief_data)), "daily_brief_edition_en": escape(brief_edition_label(brief_data, "en")),
-        "daily_brief_headline": escape(brief_data["items"][0]["title"]["zh-CN"]),
-        "daily_brief_headline_en": escape(brief_data["items"][0]["title"]["en"]),
+        "daily_brief_headline": escape(sorted_brief_items(brief_data)[0]["title"]["zh-CN"]),
+        "daily_brief_headline_en": escape(sorted_brief_items(brief_data)[0]["title"]["en"]),
         "home_photos": render_home_photos(home_photos), "home_photos_en": render_home_photos(home_photos, "en"),
         "home_article_links": home_article_links(blog), "home_article_links_en": home_article_links(blog, "en"),
         "home_avatar": render_home_avatar(), "home_avatar_en": render_home_avatar("en"),
-        "daily_brief_notice": escape(brief_data["notice"]["zh-CN"]), "daily_brief_notice_en": escape(brief_data["notice"]["en"]),
+        "daily_brief_notice": escape(BRIEF_NOTICE["zh-CN"]), "daily_brief_notice_en": escape(BRIEF_NOTICE["en"]),
         "brief_feed": render_brief(brief_data), "brief_feed_en": render_brief(brief_data, "en"),
         "home_recent_articles": render_home_recent(blog), "home_recent_articles_en": render_home_recent(blog, "en"),
         "home_project_cards": render_home_projects(projects), "home_project_cards_en": render_home_projects(projects, "en"),
@@ -823,7 +838,7 @@ def build_site(address, map_preview_source=None):
             (destination / "index.html").write_text(page, encoding="utf-8")
             game_routes.append(localized_route)
     (OUTPUT / "assets").mkdir(exist_ok=True)
-    copy_daily_assets(daily_sources, brief_data, daily_content)
+    copy_daily_assets(daily_sources, brief_data, daily_content, brief_extras)
     avatar_source = ROOT / "home/assets/avatar-line.svg"
     if avatar_source.is_file():
         if linked_directory(avatar_source):

@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "items": [
+    {
+      "id": "everyday-theories",
+      "term": {
+        "zh-CN": "薄肌、大水、大睡：为什么生活也开始讲“理论”？",
+        "en": "Why do everyday choices become internet “theories”?"
+      },
+      "meaning": {
+        "zh-CN": "一个生活选择，如何变成一套流行话语？从网络说法的语境与传播方式读起，再回到自己的日常经验。网络热词是文化观察对象，不是科学定论。",
+        "en": "How does an everyday choice become a shared expression? Read its context and circulation, then return to your own experience. Internet catchphrases are cultural observations, not established scientific findings."
+      },
+      "source": "界面文化 · Jiemian Culture",
+      "url": "https://m.jiemian.com/article/15234992.html",
+      "added": "2026-10-26",
+      "related_url": "/articles/%E4%B8%AD%E6%96%87%E6%96%87%E7%AB%A0/2026-10-11-%E8%AE%BA%E5%A4%A7%E8%B5%B0%E7%90%86%E8%AE%BA%EF%BC%88The%20Great%20Walk%20Theory%EF%BC%89.html",
+      "related_label": {
+        "zh-CN": "我的延伸思考：论大走理论",
+        "en": "My related essay: The Great Walk Theory"
+      }
+    }
+  ]
+}

@@ -1,0 +1,130 @@
+{
+  "version": 2,
+  "edition_date": "2026-10-27",
+  "updated_at": "2026-10-27T09:50+08:00",
+  "status": "manual",
+  "items": [
+    {
+      "id": "lula-reelected-brazil",
+      "category": "world",
+      "priority": "major",
+      "major_reason": {
+        "zh-CN": "巴西总统选举结果",
+        "en": "Result of Brazil's presidential election"
+      },
+      "title": {
+        "zh-CN": "卢拉连任巴西总统",
+        "en": "Lula re-elected as Brazil's president"
+      },
+      "summary": {
+        "zh-CN": "计票 99.80% 时卢拉得票 51.76%，击败弗拉维奥·博索纳罗，第四次当选；新任期 2027 年 1 月 5 日开始。",
+        "en": "With 99.80% of votes counted, Lula won 51.76% to beat Flávio Bolsonaro, winning the presidency for a fourth time. His new term begins on 5 January 2027."
+      },
+      "source": {
+        "zh-CN": "新华社",
+        "en": "Xinhua"
+      },
+      "published": "2026-10-26T08:27+08:00",
+      "url": "https://www.news.cn/20261026/cbf15c746ad041718364bc5fe09c93ee/c.html"
+    },
+    {
+      "id": "vucic-concedes-serbia",
+      "category": "world",
+      "priority": "major",
+      "major_reason": {
+        "zh-CN": "塞尔维亚议会选举结果",
+        "en": "Result of Serbia's parliamentary election"
+      },
+      "title": {
+        "zh-CN": "武契奇承认前进党在塞议会选举中败选",
+        "en": "Vučić concedes his Progressive Party lost Serbia's parliamentary election"
+      },
+      "summary": {
+        "zh-CN": "塞尔维亚前总统武契奇 10 月 25 日承认，他领导的前进党选举联盟在当天的议会选举中失利。",
+        "en": "Former Serbian president Aleksandar Vučić conceded on 25 October that the alliance led by his Serbian Progressive Party lost that day's parliamentary election."
+      },
+      "source": {
+        "zh-CN": "新华社",
+        "en": "Xinhua"
+      },
+      "published": "2026-10-26T04:58+08:00",
+      "url": "https://www.news.cn/world/20261026/2bff6d54966c492781a4374140495297/c.html"
+    },
+    {
+      "id": "steinmeier-china-visit",
+      "category": "domestic",
+      "priority": "normal",
+      "title": {
+        "zh-CN": "德国总统施泰因迈尔抵达安徽开始访华",
+        "en": "German President Steinmeier arrives in Anhui to begin his visit to China"
+      },
+      "summary": {
+        "zh-CN": "施泰因迈尔 10 月 27 日抵达合肥，开始为期 5 天的国事访问，这是他近 8 年来首次访华。",
+        "en": "Steinmeier arrived in Hefei on 27 October to begin a five-day state visit, his first visit to China in nearly eight years."
+      },
+      "source": {
+        "zh-CN": "新华社（中新网转载）",
+        "en": "Xinhua (via China News Service)"
+      },
+      "published": "2026-10-27T00:34+08:00",
+      "url": "https://www.chinanews.com.cn/gn/2026/10-27/10721432.shtml"
+    },
+    {
+      "id": "fukuda-yasuo-dies",
+      "category": "world",
+      "priority": "normal",
+      "title": {
+        "zh-CN": "日本前首相福田康夫去世",
+        "en": "Former Japanese prime minister Yasuo Fukuda dies"
+      },
+      "summary": {
+        "zh-CN": "据日本媒体报道，福田康夫 10 月 22 日因心力衰竭在东京一家医院去世，享年 90 岁；他 2007 年至 2008 年任首相。",
+        "en": "Japanese media reported that Fukuda died of heart failure at a Tokyo hospital on 22 October, aged 90. He was prime minister from 2007 to 2008."
+      },
+      "source": {
+        "zh-CN": "新华社",
+        "en": "Xinhua"
+      },
+      "published": "2026-10-26T13:43+08:00",
+      "url": "https://www.news.cn/world/20261026/2001ce488c7f4b109349577582afe75a/c.html"
+    },
+    {
+      "id": "central-banks-super-week",
+      "category": "economy",
+      "priority": "normal",
+      "title": {
+        "zh-CN": "全球央行“超级周”再度来袭：美欧日预计或均将按兵不动",
+        "en": "Central banks' 'super week' returns: Fed, ECB and Bank of Japan expected to hold rates"
+      },
+      "summary": {
+        "zh-CN": "本周全球五大央行公布利率决议，市场预计美联储、欧央行和日本央行维持利率不变，加拿大央行和新西兰联储可能加息。",
+        "en": "Five major central banks announce rate decisions this week. Markets expect the Fed, the ECB and the Bank of Japan to hold, while the Bank of Canada and the Reserve Bank of New Zealand may raise rates."
+      },
+      "source": {
+        "zh-CN": "第一财经",
+        "en": "Yicai"
+      },
+      "published": "2026-10-26T17:45+08:00",
+      "url": "https://www.yicai.com/news/103409613.html"
+    },
+    {
+      "id": "armoured-amphibian-ancient-seas",
+      "category": "science",
+      "priority": "normal",
+      "title": {
+        "zh-CN": "演化的“改变者”：远古海洋里生活过一种披甲的奇特两栖动物",
+        "en": "Evolutionary ‘game-changer’: weird armoured amphibian lived in ancient seas"
+      },
+      "summary": {
+        "zh-CN": "Nature 新闻：一种身披甲片的奇特两栖动物曾生活在远古海洋中，被称为演化上的“改变游戏规则者”。",
+        "en": "Nature reports on a strange armoured amphibian that lived in ancient seas, described as an evolutionary ‘game-changer’."
+      },
+      "source": {
+        "zh-CN": "Nature",
+        "en": "Nature"
+      },
+      "published": "2026-10-26",
+      "url": "https://www.nature.com/articles/d41586-026-03440-1"
+    }
+  ]
+}

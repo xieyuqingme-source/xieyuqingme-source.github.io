@@ -189,6 +189,8 @@ def version_shared_assets(page, root):
     import hashlib
     sources = {name: Path(root) / 'home/assets' / name for name in ['site-themes.css', 'portal.css', 'portfolio.css', 'photos.css', 'anthology.css', 'anthology-selection.css', 'game.css', 'ranking-skins.css', 'site-nav.css', 'site-music.css', 'portal.js', 'site-navigation.js', 'site-music.js', 'home-daily.css', 'home-daily.js', 'home-now.js', 'home-earth.js', 'astronomy-solar.js']}
     sources['style.css'] = Path(root) / 'blog/style.css'
+    for name in ('d3-7.9.0.min.js', 'lunar-javascript-1.7.7.js'):
+        sources[name] = Path(root) / 'home/assets/vendor' / name
     def version(match):
         route = match.group(2); source = sources.get(route.rsplit('/', 1)[-1])
         if source is None or not source.is_file():
@@ -196,7 +198,7 @@ def version_shared_assets(page, root):
         if source.is_symlink():
             raise ValueError('Shared UI assets cannot be symlinks.')
         return match.group(1) + route + '?v=' + hashlib.sha256(source.read_bytes()).hexdigest()[:12] + match.group(3)
-    return re.sub(r'((?:src|href)=["\'])(/(?:(?:articles/)?assets)/(?:site-themes|portal|portfolio|photos|anthology|anthology-selection|game|ranking-skins|site-nav|site-music|site-navigation|home-daily|home-now|home-earth|astronomy-solar|style)\.(?:css|js))(?:\?[^"\']*)?(["\'])', version, page)
+    return re.sub(r'((?:src|href)=["\'])(/(?:(?:articles/)?assets)/(?:site-themes|portal|portfolio|photos|anthology|anthology-selection|game|ranking-skins|site-nav|site-music|site-navigation|home-daily|home-now|home-earth|astronomy-solar|style|vendor/(?:d3-7\.9\.0\.min|lunar-javascript-1\.7\.7))\.(?:css|js))(?:\?[^"\']*)?(["\'])', version, page)
 
 
 NAV_GROUPS = (('/articles/', 'articles', [('/anthology/', 'anthology')], ['/articles/', '/anthology/']),
@@ -247,7 +249,7 @@ def unified_footer(page, route, language="zh-CN"):
     footer = (f'<footer class="site-footer container" lang="{language}">'
               '<div class="footer-sign"><p class="footer-brand"><span data-i18n="common.brandName">谢雨卿</span>'
               '<span class="footer-yuliao" data-i18n="common.footer.yuliao"></span></p>'
-              '<p class="footer-note"><span data-i18n="common.signature.1"></span> <span data-i18n="common.signature.2"></span></p></div>'
+              '<p class="footer-note" data-i18n="common.signature.2"></p></div>'
               f'<nav class="footer-links" aria-label="页脚导航" data-i18n-aria-label="common.footer.label">{links}</nav>'
               '<p class="footer-meta"><span data-i18n="common.footer.wechat"></span>'
               f'<a href="mailto:{CONTACT_EMAIL}" data-i18n="common.footer.email"></a>'

@@ -20,7 +20,9 @@ import build_site
 from build_site import (site_root, default_root, check_site, Elements, load_projects,
                         validate_projects, render_projects, check_publication_metadata, build_site as publish_site,
                         load_about, validate_about, render_about)
-from daily_brief import load_daily, validate_brief, validate_content, render_brief, safe_json
+from daily_brief import (load_daily, load_brief_extras, validate_brief, validate_content,
+                         validate_knowledge, validate_memes, validate_rules, validate_holidays,
+                         render_brief, render_brief_bottom, safe_json, sorted_brief_items)
 
 
 class UnifiedPublicationTests(unittest.TestCase):
@@ -242,19 +244,286 @@ class PublicProjectTests(unittest.TestCase):
 class DailyHomepageTests(unittest.TestCase):
     def setUp(self):
         self.brief, self.content = load_daily(ROOT, build_site.linked_directory)
+        self.extras = load_brief_extras(ROOT, build_site.linked_directory)
 
-    def test_sample_dates_and_source_links_remain_explicit_in_both_languages(self):
-        self.assertEqual(self.brief["status"], "sample")
-        self.assertEqual(self.brief["edition_date"], "2026-10-26")
-        for language, label in (("zh-CN", "选读样刊"), ("en", "Reading sample")):
+    def test_latest_manual_news_dates_and_sources_remain_explicit_in_both_languages(self):
+        self.assertEqual(self.brief["version"], 2)
+        self.assertEqual(self.brief["status"], "manual")
+        self.assertEqual(self.brief["edition_date"], "2026-10-27")
+        self.assertEqual(self.brief["updated_at"], "2026-10-27T09:50+08:00")
+        self.assertEqual(len(self.brief["items"]), 6)
+        expected = ["lula-reelected-brazil", "vucic-concedes-serbia", "steinmeier-china-visit",
+                    "fukuda-yasuo-dies", "central-banks-super-week", "armoured-amphibian-ancient-seas"]
+        self.assertEqual([item["id"] for item in sorted_brief_items(self.brief)], expected)
+        for language, major in (("zh-CN", "要闻"), ("en", "Major")):
             html = render_brief(self.brief, language)
-            self.assertIn(label, html)
-            self.assertIn('datetime="2026-10-24"', html)
+            self.assertNotIn("选读样刊", html)
             for item in self.brief["items"]:
                 self.assertIn(item["url"], html)
-                if item["published"] is None:
-                    self.assertIn(item["published_label"][language], html)
-            self.assertEqual(sum(tag == "article" for tag, _ in Elements(html).elements), 6)
+                self.assertIn(escape(item["title"][language]), html)
+                self.assertIn(escape(item["summary"][language]), html)
+                self.assertIn(escape(item["source"][language]), html)
+                self.assertIn('datetime="' + item["published"] + '"', html)
+            elements = Elements(html).elements
+            self.assertEqual(sum(tag == "article" for tag, _ in elements), 6)
+            self.assertEqual(sum("news-major" in attrs.get("class", "").split() for _, attrs in elements), 2)
+
+    def test_news_and_frost_knowledge_preserve_the_reviewed_text(self):
+        # Exact user-supplied source data; this fixture never reads outside the repository.
+        expected_news = json.loads(r'''
+[
+  {
+    "id": "lula-reelected-brazil",
+    "category": "world",
+    "priority": "major",
+    "major_reason": {
+      "zh-CN": "巴西总统选举结果",
+      "en": "Result of Brazil's presidential election"
+    },
+    "title": {
+      "zh-CN": "卢拉连任巴西总统",
+      "en": "Lula re-elected as Brazil's president"
+    },
+    "summary": {
+      "zh-CN": "计票 99.80% 时卢拉得票 51.76%，击败弗拉维奥·博索纳罗，第四次当选；新任期 2027 年 1 月 5 日开始。",
+      "en": "With 99.80% of votes counted, Lula won 51.76% to beat Flávio Bolsonaro, winning the presidency for a fourth time. His new term begins on 5 January 2027."
+    },
+    "source": {
+      "zh-CN": "新华社",
+      "en": "Xinhua"
+    },
+    "published": "2026-10-26T08:27+08:00",
+    "url": "https://www.news.cn/20261026/cbf15c746ad041718364bc5fe09c93ee/c.html"
+  },
+  {
+    "id": "vucic-concedes-serbia",
+    "category": "world",
+    "priority": "major",
+    "major_reason": {
+      "zh-CN": "塞尔维亚议会选举结果",
+      "en": "Result of Serbia's parliamentary election"
+    },
+    "title": {
+      "zh-CN": "武契奇承认前进党在塞议会选举中败选",
+      "en": "Vučić concedes his Progressive Party lost Serbia's parliamentary election"
+    },
+    "summary": {
+      "zh-CN": "塞尔维亚前总统武契奇 10 月 25 日承认，他领导的前进党选举联盟在当天的议会选举中失利。",
+      "en": "Former Serbian president Aleksandar Vučić conceded on 25 October that the alliance led by his Serbian Progressive Party lost that day's parliamentary election."
+    },
+    "source": {
+      "zh-CN": "新华社",
+      "en": "Xinhua"
+    },
+    "published": "2026-10-26T04:58+08:00",
+    "url": "https://www.news.cn/world/20261026/2bff6d54966c492781a4374140495297/c.html"
+  },
+  {
+    "id": "steinmeier-china-visit",
+    "category": "domestic",
+    "priority": "normal",
+    "title": {
+      "zh-CN": "德国总统施泰因迈尔抵达安徽开始访华",
+      "en": "German President Steinmeier arrives in Anhui to begin his visit to China"
+    },
+    "summary": {
+      "zh-CN": "施泰因迈尔 10 月 27 日抵达合肥，开始为期 5 天的国事访问，这是他近 8 年来首次访华。",
+      "en": "Steinmeier arrived in Hefei on 27 October to begin a five-day state visit, his first visit to China in nearly eight years."
+    },
+    "source": {
+      "zh-CN": "新华社（中新网转载）",
+      "en": "Xinhua (via China News Service)"
+    },
+    "published": "2026-10-27T00:34+08:00",
+    "url": "https://www.chinanews.com.cn/gn/2026/10-27/10721432.shtml"
+  },
+  {
+    "id": "fukuda-yasuo-dies",
+    "category": "world",
+    "priority": "normal",
+    "title": {
+      "zh-CN": "日本前首相福田康夫去世",
+      "en": "Former Japanese prime minister Yasuo Fukuda dies"
+    },
+    "summary": {
+      "zh-CN": "据日本媒体报道，福田康夫 10 月 22 日因心力衰竭在东京一家医院去世，享年 90 岁；他 2007 年至 2008 年任首相。",
+      "en": "Japanese media reported that Fukuda died of heart failure at a Tokyo hospital on 22 October, aged 90. He was prime minister from 2007 to 2008."
+    },
+    "source": {
+      "zh-CN": "新华社",
+      "en": "Xinhua"
+    },
+    "published": "2026-10-26T13:43+08:00",
+    "url": "https://www.news.cn/world/20261026/2001ce488c7f4b109349577582afe75a/c.html"
+  },
+  {
+    "id": "central-banks-super-week",
+    "category": "economy",
+    "priority": "normal",
+    "title": {
+      "zh-CN": "全球央行“超级周”再度来袭：美欧日预计或均将按兵不动",
+      "en": "Central banks' 'super week' returns: Fed, ECB and Bank of Japan expected to hold rates"
+    },
+    "summary": {
+      "zh-CN": "本周全球五大央行公布利率决议，市场预计美联储、欧央行和日本央行维持利率不变，加拿大央行和新西兰联储可能加息。",
+      "en": "Five major central banks announce rate decisions this week. Markets expect the Fed, the ECB and the Bank of Japan to hold, while the Bank of Canada and the Reserve Bank of New Zealand may raise rates."
+    },
+    "source": {
+      "zh-CN": "第一财经",
+      "en": "Yicai"
+    },
+    "published": "2026-10-26T17:45+08:00",
+    "url": "https://www.yicai.com/news/103409613.html"
+  },
+  {
+    "id": "armoured-amphibian-ancient-seas",
+    "category": "science",
+    "priority": "normal",
+    "title": {
+      "zh-CN": "演化的“改变者”：远古海洋里生活过一种披甲的奇特两栖动物",
+      "en": "Evolutionary ‘game-changer’: weird armoured amphibian lived in ancient seas"
+    },
+    "summary": {
+      "zh-CN": "Nature 新闻：一种身披甲片的奇特两栖动物曾生活在远古海洋中，被称为演化上的“改变游戏规则者”。",
+      "en": "Nature reports on a strange armoured amphibian that lived in ancient seas, described as an evolutionary ‘game-changer’."
+    },
+    "source": {
+      "zh-CN": "Nature",
+      "en": "Nature"
+    },
+    "published": "2026-10-26",
+    "url": "https://www.nature.com/articles/d41586-026-03440-1"
+  }
+]
+''')
+        expected_knowledge = json.loads(r'''
+{
+  "id": "frosts-descent",
+  "title": {
+    "zh-CN": "霜降：秋天的最后一个节气",
+    "en": "Frost's Descent: the last solar term of autumn"
+  },
+  "text": {
+    "zh-CN": "霜降是二十四节气中的第 18 个，也是秋季的最后一个节气。霜是贴近地面的白色冰晶；在黄河中下游，初霜一般出现在 10 月下旬到 11 月上旬。闽南和台湾有霜降吃鸭子的习俗。",
+    "en": "Frost's Descent is the 18th of the 24 solar terms and the last one of autumn. Frost is a layer of white ice crystals near the ground; along the middle and lower Yellow River, the first frost usually comes in late October or early November. In southern Fujian and Taiwan, people traditionally eat duck on this day."
+  },
+  "source": "中国日报双语新闻 China Daily",
+  "url": "https://language.chinadaily.com.cn/a/202310/24/WS6537658da31090682a5ea6d5.html",
+  "trigger": {
+    "solar_term": "霜降"
+  }
+}
+''')
+        self.assertEqual(self.brief["items"], expected_news)
+        actual = next(item for item in self.extras["knowledge"]["items"] if item["id"] == "frosts-descent")
+        self.assertEqual(actual, expected_knowledge)
+
+    def test_news_bounds_categories_and_major_reasons_are_enforced(self):
+        for count in (1, 8):
+            data = deepcopy(self.brief)
+            data["items"] = []
+            for index in range(count):
+                item = deepcopy(self.brief["items"][0])
+                item["id"] = "synthetic-news-" + str(index)
+                data["items"].append(item)
+            self.assertIs(validate_brief(data), data)
+        for mutate in (lambda data: data.update(items=[]),
+                       lambda data: data.update(items=[deepcopy(data["items"][0])] * 9),
+                       lambda data: data["items"][0].update(category="business"),
+                       lambda data: data["items"][0].pop("major_reason"),
+                       lambda data: data["items"][0].update(major_reason={"zh-CN": "缺少英文"}),
+                       lambda data: data["items"][0].update(priority="urgent"),
+                       lambda data: data.update(status="sample"),
+                       lambda data: data.update(updated_at="2026-10-28T09:50+08:00"),
+                       lambda data: data.update(updated_at="2026-10-27T01:50Z")):
+            data = deepcopy(self.brief)
+            mutate(data)
+            with self.subTest(data=data), self.assertRaises(ValueError):
+                validate_brief(data)
+        automatic = deepcopy(self.brief)
+        automatic["status"] = "auto"
+        self.assertIs(validate_brief(automatic), automatic)
+        data = deepcopy(self.brief)
+        data["items"][0]["summary"]["zh-CN"] = "字" * 61
+        with self.assertRaises(ValueError):
+            validate_brief(data)
+
+    def test_knowledge_triggers_limits_and_meme_optional_fields_remain_public(self):
+        self.assertEqual(set(self.content), {"version", "quotes"})
+        frost = next(item for item in self.extras["knowledge"]["items"] if item["id"] == "frosts-descent")
+        self.assertEqual(frost["trigger"], {"solar_term": "霜降"})
+        self.assertEqual(len(self.extras["knowledge"]["items"]), 4)
+        for trigger in ({"solar_term": "不存在"}, {"date": "02-30"}, {"date": "2-03"},
+                        {"solar_term": "霜降", "date": "10-27"}):
+            data = deepcopy(self.extras["knowledge"])
+            data["items"][0]["trigger"] = trigger
+            with self.subTest(trigger=trigger), self.assertRaises(ValueError):
+                validate_knowledge(data)
+        data = deepcopy(self.extras["knowledge"])
+        data["items"][0]["text"]["zh-CN"] = "字" * 121
+        with self.assertRaises(ValueError):
+            validate_knowledge(data)
+        for field, value in (("source", "D:/private/draft.md"), ("source", "bad\x00text"),
+                             ("url", "https://localhost/private")):
+            data = deepcopy(self.extras["knowledge"])
+            data["items"][0][field] = value
+            with self.subTest(field=field, value=value), self.assertRaises(ValueError):
+                validate_knowledge(data)
+        self.assertEqual(len(self.extras["memes"]["items"]), 1)
+        self.assertEqual(self.extras["memes"]["items"][0]["added"], "2026-10-26")
+        empty = {"version": 1, "items": []}
+        self.assertIs(validate_memes(empty), empty)
+        extras = {**self.extras, "memes": empty}
+        html = render_brief_bottom(self.content, extras)
+        self.assertEqual(sum(tag == "article" for tag, _ in Elements(html).elements), 2)
+        self.assertNotIn('id="daily-meme-card"', html)
+        for optional in ("origin", "example", "why_popular"):
+            data = deepcopy(self.extras["memes"])
+            data["items"][0][optional] = {"zh-CN": "", "en": ""}
+            self.assertIs(validate_memes(data), data)
+
+    def test_weather_rules_and_sourced_holidays_have_strict_schemas(self):
+        self.assertEqual([item["threshold"] for item in self.extras["rules"]["weather"]], [60, 33, 0])
+        for field, value in (("threshold", float("nan")), ("threshold", True), ("field", "unsupported"),
+                             ("operator", "eval"), ("text", {"zh-CN": "只有中文"})):
+            data = deepcopy(self.extras["rules"])
+            data["weather"][0][field] = value
+            with self.subTest(field=field, value=value), self.assertRaises(ValueError):
+                validate_rules(data)
+        holiday = self.extras["holidays"]["years"]["2026"]
+        self.assertIs(validate_holidays(holiday, 2026), holiday)
+        for field, value in (("date", "2027-01-01"), ("isOffDay", "yes"), ("name", "C:/Users/private")):
+            data = deepcopy(holiday)
+            data["days"][0][field] = value
+            with self.subTest(field=field, value=value), self.assertRaises(ValueError):
+                validate_holidays(data, 2026)
+        data = deepcopy(holiday)
+        data["days"].append(deepcopy(data["days"][0]))
+        with self.assertRaises(ValueError):
+            validate_holidays(data, 2026)
+
+    def test_dated_loader_checks_historical_files_and_filename_dates(self):
+        with TemporaryDirectory(prefix="brief-dated-fixture-", dir=ROOT) as temporary:
+            root = Path(temporary)
+            shutil.copytree(ROOT / "home/brief/news", root / "home/brief/news")
+            shutil.copy2(ROOT / "home/daily-content.json", root / "home/daily-content.json")
+            latest = deepcopy(self.brief)
+            latest.update(edition_date="2026-10-28", updated_at="2026-10-28T09:50+08:00")
+            path = root / "home/brief/news/2026-10-28.json"
+            path.write_text(json.dumps(latest, ensure_ascii=False), encoding="utf-8")
+            selected, _ = load_daily(root, build_site.linked_directory)
+            self.assertEqual(selected["edition_date"], "2026-10-28")
+            latest["edition_date"] = "2026-10-29"
+            path.write_text(json.dumps(latest), encoding="utf-8")
+            with self.assertRaises(ValueError):
+                load_daily(root, build_site.linked_directory)
+            path.unlink()
+            archive = root / "home/brief/news/2026-10-26.json"
+            old = json.loads(archive.read_text(encoding="utf-8"))
+            old["items"][0]["url"] = "https://localhost/private"
+            archive.write_text(json.dumps(old), encoding="utf-8")
+            with self.assertRaises(ValueError):
+                load_daily(root, build_site.linked_directory)
 
     def test_sources_dates_and_schema_are_validated_before_publication(self):
         for url in ("http://example.com/news", "https://localhost/news", "https://127.0.0.1/news",
@@ -268,10 +537,10 @@ class DailyHomepageTests(unittest.TestCase):
             data["items"][0][field] = value
             with self.subTest(field=field, value=value), self.assertRaises(ValueError):
                 validate_brief(data)
-        data = deepcopy(self.content)
-        data["street"][0]["related_url"] = "/articles/%2e%2e/private.html"
+        data = deepcopy(self.extras["memes"])
+        data["items"][0]["related_url"] = "/articles/%2e%2e/private.html"
         with self.assertRaises(ValueError):
-            validate_content(data)
+            validate_memes(data)
 
     def test_inline_json_cannot_close_its_script_and_all_daily_words_have_sources(self):
         text = safe_json({"example": "</script><script>alert(1)</script>&\u2028"})
@@ -381,6 +650,13 @@ class ProjectPublicationTests(unittest.TestCase):
         with TemporaryDirectory(prefix="yuliao-site-projects-", dir=ROOT) as temporary:
             root = Path(temporary)
             shutil.copytree(ROOT / "home", root / "home")
+            # Static meme cards now expose their related link without JavaScript.
+            memes = root / "home/brief/memes.json"
+            public = json.loads(memes.read_text(encoding="utf-8"))
+            for item in public["items"]:
+                if "related_url" in item:
+                    item["related_url"] = "/articles/synthetic.html"
+            memes.write_text(json.dumps(public, ensure_ascii=False), encoding="utf-8")
             shutil.copytree(ROOT / "map", root / "map")
             shutil.copytree(ROOT / "anthology", root / "anthology")
             output = root / "_site_unified"
@@ -400,7 +676,8 @@ class ProjectPublicationTests(unittest.TestCase):
                 english_home = (output / 'en/index.html').read_text(encoding='utf-8')
                 self.assertIn('href="/articles/synthetic.html"', english_home)
                 self.assertIn("Synthetic article", english_home)
-                self.assertNotIn('href="/articles/synthetic.html"', home)
+                recent = re.search(r'<ol class="yl-article-list[^"]*">(.*?)</ol>', home, re.S)[1]
+                self.assertNotIn('href="/articles/synthetic.html"', recent)
                 for text in (home, projects, about):
                     self.assertNotIn("{{", text)
                     self.assertNotIn("Obsidian Vault", text)
@@ -440,11 +717,11 @@ class ProjectPublicationTests(unittest.TestCase):
                 self.assertIn('id="home-title">谢雨卿</h1>', home)
                 self.assertIn('我要把精力放到英语上。', home)
                 self.assertNotIn('id="now"', home)
-                self.assertIn("选读样刊", home)
-                self.assertIn('datetime="2026-10-24"', home)
-                for filename in ("daily-brief.json", "daily-content.json"):
-                    self.assertEqual(json.loads((output / "assets" / filename).read_text(encoding="utf-8")),
-                                     json.loads((root / "home" / filename).read_text(encoding="utf-8")))
+                self.assertNotIn("选读样刊", home)
+                self.assertIn('datetime="2026-10-26T08:27+08:00"', home)
+                expected_brief, expected_content = load_daily(root, build_site.linked_directory)
+                for filename, expected in (("daily-brief.json", expected_brief), ("daily-content.json", expected_content)):
+                    self.assertEqual(json.loads((output / "assets" / filename).read_text(encoding="utf-8")), expected)
                 for item in load_projects():
                     asset = item["screenshot"].lstrip("/")
                     self.assertEqual((output / asset).read_bytes(), (root / "home" / asset).read_bytes())
@@ -475,6 +752,13 @@ class ProjectPublicationTests(unittest.TestCase):
         with TemporaryDirectory(prefix="yuliao-site-cache-", dir=ROOT) as temporary:
             root = Path(temporary)
             shutil.copytree(ROOT / "home", root / "home")
+            # Static meme cards now expose their related link without JavaScript.
+            memes = root / "home/brief/memes.json"
+            public = json.loads(memes.read_text(encoding="utf-8"))
+            for item in public["items"]:
+                if "related_url" in item:
+                    item["related_url"] = "/articles/synthetic.html"
+            memes.write_text(json.dumps(public, ensure_ascii=False), encoding="utf-8")
             shutil.copytree(ROOT / "map", root / "map")
             shutil.copytree(ROOT / "anthology", root / "anthology")
             output = root / "_site_unified"

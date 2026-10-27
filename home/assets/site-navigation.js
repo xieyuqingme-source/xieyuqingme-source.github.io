@@ -51,7 +51,18 @@
   target.scrollIntoView({behavior:'instant',block:'start'});if(focus)focusTarget(target===document.body?document.querySelector('main')||target:target);return true;
  }
  function syncHeader(next){const header=document.querySelector('.site-header'),source=next.querySelector('.site-header');for(const selector of ['.brand','.site-nav','.site-language-switch']){const old=header.querySelector(selector),fresh=source.querySelector(selector);if(old&&fresh)old.replaceWith(fresh);}const skip=document.querySelector('.skip-link'),fresh=next.querySelector('.skip-link');if(skip&&fresh)skip.replaceWith(fresh);document.querySelector('#site-music')?.removeAttribute('open');}
- async function styles(next){const target=[...next.head.querySelectorAll('link[rel="stylesheet"]')],old=[...document.head.querySelectorAll('link[rel="stylesheet"]')],href=node=>new URL(node.getAttribute('href'),location.href).href;await Promise.all(target.map(node=>{if(old.some(x=>href(x)===href(node)))return;const item=document.importNode(node,true);item.href=href(node);return new Promise(resolve=>{item.onload=resolve;item.onerror=resolve;native.timeout(resolve,4000);document.head.append(item);});}));for(const node of old)if(!target.some(x=>href(x)===href(node))&&!node.href.endsWith('/assets/site-music.css'))node.remove();}
+ async function styles(next){
+  const target=[...next.head.querySelectorAll('link[rel="stylesheet"]')],old=[...document.head.querySelectorAll('link[rel="stylesheet"]')],href=node=>new URL(node.getAttribute('href'),location.href).href;
+  await Promise.all(target.map(node=>{if(old.some(x=>href(x)===href(node)))return;const item=document.importNode(node,true);item.href=href(node);return new Promise(resolve=>{item.onload=resolve;item.onerror=resolve;native.timeout(resolve,4000);document.head.append(item);});}));
+  for(const node of old)if(!target.some(x=>href(x)===href(node))&&new URL(node.href,location.href).pathname!=='/assets/site-music.css')node.remove();
+  // Move loaded elements into the target cascade order; moving does not reload them.
+  const loaded=[...document.head.querySelectorAll('link[rel="stylesheet"]')];
+  const moveLast=node=>{if(node===document.head.lastElementChild)return;if(typeof document.head.moveBefore==='function')document.head.moveBefore(node,null);else document.head.append(node);};
+  for(const source of target){const node=loaded.find(item=>href(item)===href(source));if(node)moveLast(node);}
+  const themes=[...document.head.querySelectorAll('link[rel="stylesheet"]')].find(node=>new URL(node.href,location.href).pathname==='/assets/site-themes.css');
+  if(themes)moveLast(themes);
+ }
+
  function metadata(next){for(const node of [...document.head.querySelectorAll('title,meta:not([charset]),link[rel="canonical"],link[rel="alternate"]')])node.remove();for(const node of next.head.querySelectorAll('title,meta:not([charset]),link[rel="canonical"],link[rel="alternate"]'))document.head.append(document.importNode(node,true));}
  async function scripts(next,ticket){for(const source of next.querySelectorAll('script[src]')){const url=new URL(source.getAttribute('src'),location.href);if(url.origin!==location.origin||persistent.has(url.pathname))continue;if(ticket!==revision)return;const node=document.createElement('script');node.src=url.href+(source.type==='module'?(url.search?'&':'?')+'navigation='+ticket:'');if(source.type)node.type=source.type;node.async=false;node.dataset.pageScript='';await new Promise((resolve,reject)=>{node.onload=resolve;node.onerror=()=>reject(new Error('Page script unavailable: '+url.pathname));document.body.append(node);});}}
  async function visit(value,options={}){

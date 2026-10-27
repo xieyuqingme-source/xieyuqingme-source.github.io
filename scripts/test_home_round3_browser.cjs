@@ -10,11 +10,13 @@ const root = process.env.WEBSITE_ROOT || path.resolve(__dirname, '..');
 const site = path.join(root, '_site_unified');
 const out = path.join(root, '.local-checks/home-round3');
 const origin = 'http://127.0.0.1:8767';
-const key = 'xieyuqing-brief-closed', today = '2026-10-26';
-const now = Date.parse('2026-10-26T04:00:00Z');
+const key = 'xieyuqing-brief-closed', today = '2026-10-27';
+const now = Date.parse('2026-10-27T04:00:00Z');
 const about = JSON.parse(fs.readFileSync(path.join(root, 'home/about.json'), 'utf8'));
 const catalog = JSON.parse(fs.readFileSync(path.join(root, 'photos/catalog.json'), 'utf8'));
-const brief = JSON.parse(fs.readFileSync(path.join(root, 'home/daily-brief.json'), 'utf8'));
+const newsDirectory = path.join(root, 'home/brief/news');
+const newsFile = fs.readdirSync(newsDirectory).filter(name => /^\d{4}-\d{2}-\d{2}\.json$/.test(name)).sort().at(-1);
+const brief = JSON.parse(fs.readFileSync(path.join(newsDirectory, newsFile), 'utf8'));
 const signatures = {
   'zh-CN': ['我要把精力放到英语上。', '努力研究一些问题。'],
   en: ['I’m putting my energy into English.', 'I’m working hard on a few questions.']
@@ -40,7 +42,7 @@ async function check(name, action) {
 async function context({ width = 1440, theme = 'light', saved, denied = false, javaScriptEnabled = true, edition, epoch = now, extraNews = false } = {}) {
   const ctx = await browser.newContext({ viewport: { width, height: 1000 }, colorScheme: theme, javaScriptEnabled });
   ctx.setDefaultTimeout(7000);
-  const weather = [];
+  const weather = [], localRequests = [];
   await ctx.addInitScript(({ epoch, saved, denied, key, origin }) => {
     const NativeDate = Date;
     class FixedDate extends NativeDate {
@@ -63,10 +65,11 @@ async function context({ width = 1440, theme = 'light', saved, denied = false, j
     if (/^(blob|data):/.test(url)) return route.continue();
     if (url.startsWith('https://api.open-meteo.com/')) {
       weather.push(url);
-      return route.fulfill({ contentType: 'application/json', body: JSON.stringify({ current: { temperature_2m: 21.4, weather_code: 0, time: '2026-10-26T12:00' } }) });
+      return route.fulfill({ contentType: 'application/json', body: JSON.stringify({ current: { temperature_2m: 21.4, weather_code: 0, time: '2026-10-27T12:00' }, daily: { temperature_2m_max: [34], temperature_2m_min: [15], precipitation_probability_max: [65] } }) });
     }
     if (!url.startsWith(origin + '/')) { report.external.push(url); return route.abort(); }
     try {
+      localRequests.push(new URL(url).pathname);
       let file = path.resolve(site, '.' + decodeURIComponent(new URL(url).pathname));
       assert(file === site || file.startsWith(site + path.sep), 'Local path boundary');
       if (fs.statSync(file).isDirectory()) file = path.join(file, 'index.html');
@@ -76,7 +79,7 @@ async function context({ width = 1440, theme = 'light', saved, denied = false, j
         html = html.replace(/(<script\b[^>]*id="daily-brief-data"[^>]*>)([\s\S]*?)(<\/script>)/, (_, open, json, close) => {
           const data = JSON.parse(json);
           if (edition) data.edition_date = edition;
-          if (extraNews) for (let i = data.items.length; i < 9; i++) data.items.push({ ...data.items[0], id: 'synthetic-extra-' + i, title: { 'zh-CN': '测试新闻 ' + i, en: 'Synthetic news ' + i } });
+          if (extraNews) for (let i = data.items.length; i < 8; i++) data.items.push({ ...data.items[0], id: 'synthetic-extra-' + i, priority: 'major', major_reason: { 'zh-CN': '测试原因', en: 'Synthetic reason' }, title: { 'zh-CN': '测试新闻 ' + i, en: 'Synthetic news ' + i } });
           return open + JSON.stringify(data).replaceAll('<', '\\u003c') + close;
         });
         body = Buffer.from(html);
@@ -88,7 +91,7 @@ async function context({ width = 1440, theme = 'light', saved, denied = false, j
     }
   });
   ctx.on('page', page => page.on('pageerror', error => report.pageErrors.push(error.stack || error.message)));
-  return { ctx, weather };
+  return { ctx, weather, localRequests };
 }
 
 async function ready(page) {
@@ -105,6 +108,7 @@ async function expanded(page, value) {
 }
 async function screenshot(page, name) {
   await page.locator('main img').evaluateAll(images => Promise.all(images.map(image => { image.loading = 'eager'; return image.decode(); })));
+  await page.locator('img').evaluateAll(async images => { for (const image of images) image.loading = 'eager'; await Promise.all(images.map(image => image.decode())); });
   const file = path.join(out, name + '.png');
   await page.screenshot({ path: file, fullPage: true });
   report.screenshots.push(file);
@@ -132,11 +136,14 @@ async function homeContent(page, language, width) {
   assert.equal(await page.locator('#now').count(), 0);
   assert.equal(await page.locator('.home-hero a,.home-hero button').count(), 0);
   const order = await page.locator('main > section').evaluateAll(nodes => nodes.map(node => node.classList.contains('home-hero') ? 'hero' : node.classList.contains('home-quote') ? 'quote' : node.id));
-  assert.deepEqual(order, ['hero', 'brief', 'writing', 'home-photos', 'quote', 'picks', 'projects', 'odds']);
-  for (let i = 0; i < 2; i++) {
-    assert.equal(await page.locator('.hero-signature [data-i18n="common.signature.' + (i + 1) + '"]').textContent(), signatures[language][i]);
-    assert.equal(await page.locator('footer [data-i18n="common.signature.' + (i + 1) + '"]').textContent(), signatures[language][i]);
-  }
+  assert.deepEqual(order, ['hero', 'brief', 'writing', 'home-photos', 'quote', 'picks', 'projects']);
+  assert.equal(await page.locator('.hero-signature [data-i18n="common.signature.1"]').textContent(), signatures[language][0]);
+  assert.equal(await page.locator('.hero-signature [data-i18n="common.signature.2"]').count(), 0);
+  assert.equal(await page.locator('footer [data-i18n="common.signature.2"]').textContent(), signatures[language][1]);
+  assert.equal(await page.locator('footer [data-i18n="common.signature.1"]').count(), 0);
+  assert.equal(await page.locator('#odds').count(), 0);
+  for (const id of ['daily-concept-title', 'daily-street-title', 'daily-quote'])
+    assert.equal(await page.locator('#brief-body #' + id).count(), 1);
   const avatar = page.locator('.home-avatar');
   assert.equal(await avatar.getAttribute('role'), 'img');
   assert.equal(await avatar.getAttribute('aria-label'), language === 'en' ? 'Line drawing of Xie Yuqing' : '谢雨卿的简笔头像');
@@ -181,7 +188,9 @@ async function aboutContent(page, language) {
   assert(ordered, 'biography, places and site notes appear in order');
 }
 
-(async () => {
+module.exports = { root, site, out, origin, now, brief, context, ready, go, expanded, noOverflow, report, setBrowser(value) { browser = value; } };
+
+if (require.main === module) (async () => {
   try {
     browser = await chromium.launch({ channel: 'chrome', headless: true });
     for (const language of ['zh-CN', 'en']) for (const width of [1440, 390]) for (const theme of ['light', 'dark']) {
@@ -196,10 +205,10 @@ async function aboutContent(page, language) {
           if (width <= 720) await page.locator('#brief-toggle').click();
           await expanded(page, true); await noOverflow(page);
           assert(await page.locator('#earth-canvas').isVisible());
-          assert(await page.locator('#daily-feed article').count() <= 6);
-          if (width > 720) assert((await page.locator('#brief-body').boundingBox()).height <= 642);
+          assert(await page.locator('#daily-feed article').count() <= 8);
+          if (width > 720) assert((await page.locator('#brief-body').boundingBox()).height <= 762);
           assert((await page.locator('#home-date').textContent()).includes('2026'));
-          assert((await page.locator('#daily-edition').textContent()).includes(language === 'en' ? '26 October' : '10月26日'));
+          assert((await page.locator('#daily-edition').textContent()).includes(language === 'en' ? '27 October' : '10月27日'));
           await page.waitForFunction(() => document.querySelector('#brief-weather').textContent.includes('21°C'));
           assert.equal(weather.length, 1, 'Summary reuses one weather request');
           await screenshot(page, `home-${language}-${width}-${theme}`);
@@ -226,7 +235,7 @@ async function aboutContent(page, language) {
       } finally { await ctx.close(); }
     });
     for (const width of [1440, 390]) await check('previous-day key automatically opens at ' + width, async () => {
-      const { ctx } = await context({ width, saved: '2026-10-25' });
+      const { ctx } = await context({ width, saved: '2026-10-26' });
       try { const page = await ctx.newPage(); await go(page, '/'); await expanded(page, true); }
       finally { await ctx.close(); }
     });
@@ -242,20 +251,20 @@ async function aboutContent(page, language) {
         await expanded(page, true); assert.equal(await page.locator('#daily-feed article').count(), 0);
         assert(await page.locator('#daily-feed .yl-news-paused').isVisible());
         assert.equal(await page.locator('#daily-feed').textContent(), language === 'en' ? 'News updates paused; take a look at Earth' : '新闻暂停更新，先看看地球');
-        assert.equal(await page.locator('#daily-filters').isVisible(), false);
+        assert.equal(await page.locator('#daily-filters').count(), 0);
         assert(await page.locator('#earth-canvas').isVisible()); await noOverflow(page);
       } finally { await ctx.close(); }
     });
-    await check('fresh news is capped at six and categories remain usable', async () => {
+    await check('fresh news supports eight items, category labels and major badges', async () => {
       const { ctx } = await context({ extraNews: true });
       try {
         const page = await ctx.newPage(); await go(page, '/');
-        assert.equal(await page.locator('#daily-feed article').count(), 6);
-        await page.locator('[data-news-filter="science"]').focus(); await page.keyboard.press('Enter');
-        assert.equal(await page.locator('[data-news-filter="science"]').getAttribute('aria-pressed'), 'true');
+        assert.equal(await page.locator('#daily-feed article').count(), 8);
+        assert.equal(await page.locator('#daily-filters,[data-news-filter]').count(), 0);
+        assert.equal(await page.locator('#daily-feed article .news-category').count(), 8);
         const urls = await page.locator('#daily-feed h2 a,#daily-feed h3 a').evaluateAll(nodes => nodes.map(node => node.getAttribute('href')));
-        assert.deepEqual(urls, brief.items.filter(item => item.categories.includes('science')).slice(0, 6).map(item => item.url));
-        await page.locator('[data-news-filter="all"]').click(); assert.equal(await page.locator('#daily-feed article').count(), 6);
+        assert.equal(urls.length, 8); assert(urls.every(url => url.startsWith('https://')));
+        assert.equal(await page.locator('#daily-feed .news-major,#daily-feed .yl-major').count(), 4);
       } finally { await ctx.close(); }
     });
     for (const language of ['zh-CN', 'en']) await check('random article opens a real ' + language + ' page', async () => {
@@ -276,15 +285,15 @@ async function aboutContent(page, language) {
         const page = await ctx.newPage(); await page.goto(origin + (language === 'en' ? '/en/' : '/'));
         assert(await page.locator('#brief-body').isVisible()); assert.equal(await page.locator('#brief-toggle').isVisible(), false);
         assert.equal(await page.locator('#home-random-button').isVisible(), false);
-        const count = await page.locator('#daily-feed article').count(); assert(count > 0 && count <= 6);
+        const count = await page.locator('#daily-feed article').count(); assert(count > 0 && count <= 8);
         assert((await page.locator('#daily-feed a[href^="https://"]').count()) > 0); await noOverflow(page);
       } finally { await ctx.close(); }
     });
     await check('progressive return synchronizes state and installs one toggle handler', async () => {
-      const { ctx } = await context();
+      const { ctx } = await context({ saved: today });
       try {
         const page = await ctx.newPage(); await go(page, '/'); await page.evaluate(() => { window.__round3Marker = 'same-document'; });
-        await page.locator('#brief-toggle').click(); await expanded(page, false);
+        await expanded(page, false);
         const initial = await page.evaluate(() => SiteNavigation.state());
         for (let i = 0; i < 3; i++) {
           await page.locator('.nav-entry[href="/about/"]').click(); await page.waitForURL(origin + '/about/'); await ready(page);

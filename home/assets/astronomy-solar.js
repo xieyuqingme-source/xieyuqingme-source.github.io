@@ -97,5 +97,14 @@
       return (field('yearName') || field('relatedYear')) + '年' + field('month') + (days[Number(field('day')) - 1] || field('day'));
     } catch (_) { return english ? 'Lunar calendar unavailable' : '农历暂不可用'; }
   }
-  return Object.freeze({position, dateParts, riseSet, altitude, term, lunar, normal});
+  function moonPhase(value, english = false) {
+    // Mean synodic cycle, anchored to the 2000-01-06 new moon. Educational approximation.
+    // NASA: https://eclipse.gsfc.nasa.gov/LEsaros/LEperiodicity.html
+    const age = (((validDate(value).getTime() - Date.UTC(2000, 0, 6, 18, 14)) / DAY) % 29.530588853 + 29.530588853) % 29.530588853;
+    const fraction = age / 29.530588853, index = Math.floor(fraction * 8 + .5) % 8;
+    const names = english ? ['New moon','Waxing crescent','First quarter','Waxing gibbous','Full moon','Waning gibbous','Last quarter','Waning crescent']
+      : ['新月','蛾眉月','上弦月','盈凸月','满月','亏凸月','下弦月','残月'];
+    return {name: names[index],fraction,illumination: (1 - Math.cos(2 * Math.PI * fraction)) / 2};
+  }
+  return Object.freeze({position, dateParts, riseSet, altitude, term, lunar, normal, moonPhase});
 });

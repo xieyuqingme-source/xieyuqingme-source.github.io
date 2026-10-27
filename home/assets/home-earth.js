@@ -10,7 +10,7 @@
     kuala: {name: '吉隆坡',en: 'Kuala Lumpur',lat: 3.139,lon: 101.6869,tz: 'Asia/Kuala_Lumpur'},
     london: {name: '伦敦',en: 'London',lat: 51.5074,lon: -.1278,tz: 'Europe/London'}
   });
-  function createEarth(document, window) {
+  function createEarth(document, window, options = {}) {
     const root = document.querySelector('#daily-earth');
     if (!root || root.dataset.earthReady === 'true') return null;
     const astro = window.HomeAstronomy;
@@ -25,10 +25,11 @@
     const text = (zh, en) => language() ? en : zh;
     const state = {city: 'beijing',demo: false,hour: 12,demoDay: null,viewLon: 110,viewLat: 16};
     const cleanup = [];
-    let disposed = false, geography = null, weatherTicket = 0, weatherRequest = null, drawFrame = null, weatherResult = null;
+    let disposed = false, paused = false, geography = null, weatherTicket = 0, weatherRequest = null, drawFrame = null, weatherResult = null;
     const TIMEOUT = 8000, CACHE_AGE = 30 * 60000, STALE_AGE = 24 * 3600000;
     const cityKey = 'xieyuqing-home-city-v1', cacheKey = city => 'xieyuqing-weather-v1:' + city;
     try { const saved = window.localStorage.getItem(cityKey); if (CITIES[saved]) state.city = saved; } catch (_) {}
+    if (options.globeOnly && CITIES[cityInput?.value]) state.city = cityInput.value;
     state.viewLon = CITIES[state.city].lon;
     state.viewLat = Math.max(-25, Math.min(35, CITIES[state.city].lat * .6));
     function write(id, value) { const node = find(id); if (node) node.textContent = value; }
@@ -50,15 +51,17 @@
     }
     function angle(value, north, south) { return (value < 0 ? south : north) + ' ' + Math.abs(value).toFixed(2) + '°'; }
     function renderFacts() {
-      if (disposed) return;
+      if (disposed || paused) return;
       const date = currentDate(), city = CITIES[state.city], solar = astro.position(date);
       const local = astro.dateParts(date, city.tz), beijing = astro.dateParts(date, 'Asia/Shanghai');
+      if (!options.globeOnly) {
       const month = new Intl.DateTimeFormat(language() ? 'en-GB' : 'zh-CN', {timeZone: city.tz,month: 'long'}).format(date);
       write('daily-calendar-month', local.year + ' · ' + (language() ? month.toUpperCase() : month));
       write('daily-calendar-day', String(local.day));
       write('daily-calendar-weekday', new Intl.DateTimeFormat(language() ? 'en-GB' : 'zh-CN', {timeZone: city.tz,weekday: 'long'}).format(date));
       write('daily-calendar-lunar', (language() ? 'Lunar · ' : '农历') + astro.lunar(date, city.tz, language()));
       write('daily-calendar-term', astro.term(date, language()));
+      }
       const above = astro.altitude(date, city.lat, city.lon) >= 0;
       write('daily-local-time', (language() ? city.en : city.name) + ' · ' + dateStamp(date, city.tz) + ' ' + clock(date, city.tz) + ' · ' + text(above ? '白昼' : '夜间', above ? 'Day' : 'Night'));
       write('daily-subsolar', language() ? angle(solar.declination, 'N', 'S') + ' · ' + angle(solar.subsolarLongitude, 'E', 'W')
@@ -69,6 +72,19 @@
       write('daily-sunset', events.set ? clock(new Date(Math.round(events.set.getTime() / 60000) * 60000), city.tz) : polar);
       const duration = Number.isFinite(events.daylightMinutes) ? Math.round(events.daylightMinutes) : null;
       write('daily-daylength', duration === null ? text('今日太阳事件需进一步计算', 'Solar events unavailable') : text('白昼约 ', 'Daylight ≈ ') + Math.floor(duration / 60) + text(' 时 ', ' h ') + String(duration % 60).padStart(2, '0') + text(' 分', ' min'));
+      const actual = new Date();
+      write('daily-moon-phase', text('月相 · ', 'Moon phase · ') + astro.moonPhase(actual, language()).name);
+      const clocks = find('daily-world-clocks');
+      if (clocks) {
+        clocks.replaceChildren();
+        const cities = [CITIES.beijing,CITIES.kuala,CITIES.london,{name: '纽约',en: 'New York',lat: 40.7128,lon: -74.006,tz: 'America/New_York'}];
+        for (const place of cities) {
+          const item = document.createElement('div');
+          const daytime = astro.altitude(actual, place.lat, place.lon) >= 0;
+          item.textContent = (language() ? place.en : place.name) + ' · ' + clock(actual, place.tz) + ' · ' + text(daytime ? '白天' : '夜晚', daytime ? 'Day' : 'Night');
+          clocks.append(item);
+        }
+      }
       if (cityInput) cityInput.value = state.city;
       if (hourInput) {
         const hour = state.demo ? state.hour : Number(new Intl.DateTimeFormat('en-GB', {timeZone: 'Asia/Shanghai',hour: '2-digit',hourCycle: 'h23'}).format(date))
@@ -89,7 +105,7 @@
       return value || fallback;
     }
     function renderGlobe() {
-      if (!context || !canvas || disposed) return;
+      if (!context || !canvas || disposed || paused) return;
       const d3 = window.d3, bounds = canvas.getBoundingClientRect();
       const width = Math.max(1, bounds.width || 240), height = width * 1.02, ratio = Math.min(window.devicePixelRatio || 1, 2);
       const pixels = Math.round(width * ratio), rows = Math.round(height * ratio);
@@ -149,7 +165,7 @@
       context.font = '11px sans-serif'; context.textAlign = 'center'; context.fillStyle = ink; context.fillText('N', northTip[0], northTip[1] - 4);
     }
     function requestDraw() {
-      if (drawFrame !== null || disposed) return;
+      if (drawFrame !== null || disposed || paused) return;
       drawFrame = window.requestAnimationFrame(() => { drawFrame = null; renderGlobe(); });
     }
     function weatherCode(code) {
@@ -203,28 +219,34 @@
         weatherResult = cached ? {...cached,stale: true} : {error: true};
       } finally { window.clearTimeout(timeout); if (!disposed && ticket === weatherTicket) renderWeather(); }
     }
-    listen(cityInput, 'change', () => { if (!CITIES[cityInput.value]) return; state.city = cityInput.value; state.viewLon = CITIES[state.city].lon; state.viewLat = Math.max(-25, Math.min(35, CITIES[state.city].lat * .6)); try { window.localStorage.setItem(cityKey, state.city); } catch (_) {} renderFacts(); loadWeather(); });
+    listen(cityInput, 'change', () => { if (!CITIES[cityInput.value]) return; state.city = cityInput.value; state.viewLon = CITIES[state.city].lon; state.viewLat = Math.max(-25, Math.min(35, CITIES[state.city].lat * .6)); try { window.localStorage.setItem(cityKey, state.city); } catch (_) {} renderFacts(); if (!options.globeOnly) loadWeather(); });
     listen(hourInput, 'input', () => { if (!state.demo) state.demoDay = astro.dateParts(new Date(), 'Asia/Shanghai'); state.demo = true; state.hour = Math.min(1439, Math.max(0, Math.round(Number(hourInput.value) * 60) || 0)) / 60; renderFacts(); });
     listen(find('earth-now'), 'click', () => { state.demo = false; renderFacts(); });
     let pointer = null;
+    if (canvas) canvas.setAttribute('tabindex','0');
+    listen(canvas, 'keydown', event => {
+      const step = {ArrowLeft:[-8,0],ArrowRight:[8,0],ArrowUp:[0,8],ArrowDown:[0,-8]}[event.key];
+      if (!step) return;
+      event.preventDefault(); state.viewLon = astro.normal(state.viewLon + step[0]); state.viewLat = Math.max(-70,Math.min(70,state.viewLat + step[1])); requestDraw();
+    });
     listen(canvas, 'pointerdown', event => { pointer = {id: event.pointerId,x: event.clientX,y: event.clientY,lon: state.viewLon,lat: state.viewLat}; canvas.setPointerCapture?.(event.pointerId); });
     listen(canvas, 'pointermove', event => { if (!pointer || event.pointerId !== pointer.id) return; state.viewLon = astro.normal(pointer.lon - (event.clientX - pointer.x) * .5); state.viewLat = Math.max(-70, Math.min(70, pointer.lat + (event.clientY - pointer.y) * .4)); requestDraw(); });
     listen(canvas, 'pointerup', () => { pointer = null; }); listen(canvas, 'pointercancel', () => { pointer = null; });
     if (window.ResizeObserver && canvas?.parentElement) { const observer = new window.ResizeObserver(requestDraw); observer.observe(canvas.parentElement); onCleanup(() => observer.disconnect()); }
     if (window.MutationObserver) { const observer = new window.MutationObserver(requestDraw); observer.observe(document.documentElement, {attributes: true,attributeFilter: ['data-theme','data-skin']}); onCleanup(() => observer.disconnect()); }
     listen(window, 'resize', requestDraw);
-    listen(document, 'visibilitychange', () => { if (!document.hidden) { renderFacts(); loadWeather(); } });
+    listen(document, 'visibilitychange', () => { if (!document.hidden) { renderFacts(); if (!options.globeOnly) loadWeather(); } });
     const refresh = window.setInterval(() => { if (!document.hidden && !state.demo) renderFacts(); }, 60000);
-    const weatherRefresh = window.setInterval(() => { if (!document.hidden) loadWeather(); }, CACHE_AGE);
+    const weatherRefresh = options.globeOnly ? null : window.setInterval(() => { if (!document.hidden) loadWeather(); }, CACHE_AGE);
     onCleanup(() => { window.clearInterval(refresh); window.clearInterval(weatherRefresh); weatherRequest?.abort(); if (drawFrame !== null) window.cancelAnimationFrame(drawFrame); });
     const unsubscribe = window.SiteI18n?.onChange?.(() => { renderFacts(); renderWeather(); }); if (typeof unsubscribe === 'function') onCleanup(unsubscribe);
     const mapController = new window.AbortController(); onCleanup(() => mapController.abort());
     window.fetch('/assets/map-land.json', {signal: mapController.signal,credentials: 'same-origin'}).then(response => { if (!response.ok) throw new Error('Land geometry unavailable'); return response.json(); }).then(data => { if (!disposed && data?.type === 'FeatureCollection' && Array.isArray(data.features)) { geography = data; requestDraw(); } }).catch(() => { if (!disposed) { geography = false; requestDraw(); } });
-    const controller = {refresh: renderFacts,destroy() { if (disposed) return; disposed = true; cleanup.splice(0).reverse().forEach(fn => { try { fn(); } catch (_) {} }); root.dataset.earthReady = 'false'; },getState: () => ({city: state.city,demo: state.demo,hour: state.hour})};
+    const controller = {refresh: renderFacts,setPaused(value) { paused = !!value; if (paused && drawFrame !== null) { window.cancelAnimationFrame(drawFrame); drawFrame = null; } if (!paused) renderFacts(); },destroy() { if (disposed) return; disposed = true; cleanup.splice(0).reverse().forEach(fn => { try { fn(); } catch (_) {} }); root.dataset.earthReady = 'false'; },getState: () => ({city: state.city,demo: state.demo,hour: state.hour,paused})};
     window.SiteNavigation?.own?.(() => controller.destroy());
-    renderFacts(); loadWeather();
+    renderFacts(); if (!options.globeOnly) loadWeather();
     return controller;
   }
   if (typeof module === 'object' && module.exports) module.exports = {createEarth,CITIES};
-  else if (scope.document) createEarth(scope.document, scope);
+  else scope.HomeEarth = Object.freeze({createEarth,CITIES});
 })(typeof window !== 'undefined' ? window : globalThis);

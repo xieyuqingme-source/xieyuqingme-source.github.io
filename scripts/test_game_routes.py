@@ -55,6 +55,12 @@ class GamePublicationTests(unittest.TestCase):
         self.addCleanup(temporary.cleanup)
         root = Path(temporary.name)
         shutil.copytree(ROOT / "home", root / "home")
+        memes = root / "home/brief/memes.json"
+        public = json.loads(memes.read_text(encoding="utf-8"))
+        for item in public["items"]:
+            if "related_url" in item:
+                item["related_url"] = "/articles/synthetic.html"
+        memes.write_text(json.dumps(public, ensure_ascii=False), encoding="utf-8")
         shutil.copytree(ROOT / "map", root / "map")
         shutil.copytree(ROOT / "anthology", root / "anthology")
         output = root / "_site_unified"
@@ -255,6 +261,7 @@ class GameFoodPreflightTests(unittest.TestCase):
                  patch.object(build_site, "load_projects", return_value=[]), \
                  patch.object(build_site, "load_about", return_value={}), \
                  patch.object(build_site, "load_daily", return_value=({}, {})), \
+                 patch.object(build_site, "load_brief_extras", return_value={}), \
                  patch.object(build_site, "daily_asset_sources", return_value=[]), \
                  patch.object(build_site, "Blog") as blog, \
                  self.assertRaisesRegex(ValueError, r"Missing required game food photo: home/assets/foods/hotpot\.webp"):
@@ -312,6 +319,7 @@ class GameSportResourceTests(unittest.TestCase):
                      patch.object(build_site, "load_about", return_value={}), \
                      patch.object(build_site, "load_home_photos", return_value={"version": 1, "albums": []}), \
                      patch.object(build_site, "load_daily", return_value=({}, {})), \
+                     patch.object(build_site, "load_brief_extras", return_value={}), \
                      patch.object(build_site, "daily_asset_sources", return_value=[]), \
                      patch.object(Path, "is_symlink", return_value=False), \
                      patch.object(Path, "is_file", autospec=True, side_effect=lambda path: path != missing), \
