@@ -62,7 +62,7 @@ class UnifiedPublicationTests(unittest.TestCase):
             blog.output = Path(temporary).resolve()
             blog.articles, blog.translations = [], {}
             page = blog.output / "index.html"
-            page.write_text('<a href="/today/">今日简报</a><a href="/en/today/">Today’s brief</a>', encoding="utf-8")
+            page.write_text('<a href="/today/">历史中的今天</a><a href="/en/today/">Today in history</a>', encoding="utf-8")
             with patch("builtins.print"):
                 blog.check()
             for route in ("/today/private/", "/en/today/private/", "/today/%2e%2e/private", "/today", "/unknown/"):
@@ -769,9 +769,9 @@ class ProjectPublicationTests(unittest.TestCase):
                 self.assertNotIn("Essays by Xie Yuqing", about)
                 self.assertIn(load_about()["chinese_bio"][0], about)
                 self.assertNotIn(load_about()["english_bio"][0], about)
-                self.assertNotIn("真实写作日期", about)
+                self.assertIn(load_about()["written_note"], about)
                 self.assertNotIn("Actual date of writing", about)
-                self.assertNotIn('class="about-written-note"', about)
+                self.assertIn('class="about-written-note"', about)
                 self.assertIn("走过的地方", about)
                 qr = [attrs for tag, attrs in Elements(about).elements if tag == "img" and attrs.get("src") == "/assets/wechat-qrcode.jpg"]
                 self.assertEqual(len(qr), 1)
@@ -783,8 +783,8 @@ class ProjectPublicationTests(unittest.TestCase):
                 self.assertNotIn("wechat-qrcode", home)
                 self.assertIn('href="/map/"', home)
                 self.assertIn('id="home-random-button"', home)
-                self.assertIn('<h2 id="glance-title"><a href="/today/">今日简报</a></h2>', home)
-                self.assertIn('<h2 id="glance-title"><a href="/en/today/">Today’s brief</a></h2>', english_home)
+                self.assertIn('<h2 id="glance-title"><a href="/today/">历史中的今天</a></h2>', home)
+                self.assertIn('<h2 id="glance-title"><a href="/en/today/">Today in history</a></h2>', english_home)
                 self.assertIn('id="home-title">谢雨卿</h1>', home)
                 self.assertIn('我要把精力放到英语上。', home)
                 self.assertNotIn('id="now"', home)
@@ -907,22 +907,28 @@ class PublicBiographyTests(unittest.TestCase):
             html = render_about(data, language)
             for paragraph in data[bio] + data[colophon]:
                 self.assertIn(escape(paragraph, quote=True), html)
-            self.assertEqual(data[note], "")
-            self.assertNotIn('class="about-written-note"', html)
-            self.assertNotIn('<hr>', html)
+            self.assertIn(escape(data[note], quote=True), html)
+            self.assertIn('class="about-written-note"', html)
+            self.assertIn('<hr>', html)
             self.assertIn('class="about-colophon"', html)
             self.assertNotIn('class="about-english"', html)
         self.assertIn("遗嘱", render_about(data))
 
-    def test_unpublished_written_notes_do_not_render_an_empty_date_or_divider(self):
+    def test_author_requested_written_note_is_published_verbatim_in_both_languages(self):
         data = load_about()
         self.assertEqual(data["chinese_colophon"], ["AI统治地球后，浏览完谢雨卿所有遗作，有感而发，生成此文", "2126年10月26日"])
-        for language in ("zh-CN", "en"):
+        self.assertEqual(data["written_note"], "真实写作日期：2026年10月26日晚（这句话不要上传到网站）")
+        self.assertEqual(data["english_written_note"], "Actual date of writing: the evening of 26 October 2026 (do not upload this sentence to the website)")
+        for language, note, other in (("zh-CN", "written_note", "english_written_note"),
+                                      ("en", "english_written_note", "written_note")):
             html = render_about(data, language)
-            self.assertNotIn("真实写作日期", html)
-            self.assertNotIn("Actual date of writing", html)
-            self.assertNotIn("这句话不要上传到网站", html)
-            self.assertNotIn('<hr>', html)
+            self.assertIn(escape(data[note], quote=True), html)
+            self.assertNotIn(escape(data[other], quote=True), html)
+            self.assertIn('<hr><p class="about-written-note">', html)
+        empty = deepcopy(data)
+        empty.update(written_note="", english_written_note="")
+        self.assertNotIn('class="about-written-note"', render_about(empty))
+        self.assertNotIn('<hr>', render_about(empty, "en"))
         sample = deepcopy(data)
         sample["written_note"] = r"C:\Users\private\note.md"
         with self.assertRaises(ValueError):
@@ -935,6 +941,11 @@ class PublicBiographyTests(unittest.TestCase):
             self.assertNotIn("github.com", html)
             self.assertNotIn("源代码公开", html)
             self.assertNotIn("source code is public", html)
+            self.assertNotIn("黄历", html)
+            self.assertNotIn("almanac", html)
+            self.assertIn("历史中的今天" if language == "zh-CN" else "Today in history", html)
+            self.assertIn("输入的城市名" if language == "zh-CN" else "the name you enter to its geocoding service", html)
+            self.assertIn("首页不请求天气" if language == "zh-CN" else "The homepage makes no weather request", html)
             self.assertIn("Python", html)
             self.assertIn("设备自带的字体" if language == "zh-CN" else "system fonts only", html)
 

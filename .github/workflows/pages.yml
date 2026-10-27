@@ -53,6 +53,7 @@ jobs:
       - name: Check footprints data, map, journey and local exports
         run: |
           python scripts/test_map_pages.py
+          python scripts/test_footprints_people.py
           python scripts/test_map_i18n.py
           node scripts/test_map_i18n.cjs
           node scripts/test_map_logic.cjs

@@ -233,3 +233,17 @@
 .map-maker-toolbar{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin:0 0 22px;padding:14px 0;border-bottom:1px solid var(--line)}
 .map-maker-toolbar a{color:var(--accent);font-size:.95rem}.map-maker-toolbar button{border:1px solid var(--accent);border-radius:var(--radius);padding:10px 18px;min-height:44px}
 [data-map-scope="public"] [data-maker-route],[data-map-scope="maker"][data-maker-state="preview"] [data-maker-only]{display:none!important}
+.people-import{margin-top:22px;padding-block:16px;border-block:1px solid var(--line);font-size:.95rem}
+.people-import>summary{cursor:pointer;color:var(--accent)}
+.people-import[open]>summary{margin-bottom:16px}
+.people-import label{display:grid;gap:7px;margin-block:14px}
+.people-actions{display:flex;align-items:center;flex-wrap:wrap;gap:10px}
+.people-note{color:var(--muted);font-size:var(--fs-small,14px);line-height:1.8;overflow-wrap:anywhere}
+.people-preview-list{display:grid;gap:12px;margin-block:16px;padding-left:24px}
+.people-preview-list li{padding-left:4px;line-height:1.8;overflow-wrap:anywhere}
+.people-preview-date{display:block;color:var(--muted);font-size:var(--fs-small,14px)}
+.people-preview-place{display:block;color:var(--ink)}
+.record-provenance{margin-block:18px;border-top:1px solid var(--line);padding-top:12px;color:var(--muted);font-size:var(--fs-small,14px);line-height:1.8}
+.record-provenance>summary{cursor:pointer;color:var(--muted)}
+.reference-list{display:grid;gap:7px;padding-left:22px;margin:12px 0 0;overflow-wrap:anywhere}
+.reference-list a{color:var(--accent);text-underline-offset:3px}

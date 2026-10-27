@@ -161,6 +161,70 @@ test('confirmed return flags require booleans and explicit matching stay type', 
   assert.throws(() => M.merge(before, doc([record({ id: 'valid', stayType: 'base', baseReturn: true }), record({ id: 'bad', stayType: 'base', returnAfter: true })])), /returnAfter/);
   assert.equal(JSON.stringify(before), snapshot);
 });
+test('public references survive JSON, Markdown and atomic merge without entering video text', () => {
+  const references = [{label:'公开人物年谱 · Biography',url:'https://www.example.org/biography?edition=1#timeline'}];
+  const source = doc([record({references, sources:['D:/private/research.md'], privateNote:'PRIVATE-SOURCE'})]);
+  const expected = M.validate(source), before = JSON.stringify(source);
+  assert.deepEqual(expected.records[0].references,references);
+  for (const output of [M.json(source),M.markdown(source)]) {
+    assert.deepEqual(M.parse(output),expected);
+    assert(!output.includes('PRIVATE-SOURCE')); assert(!output.includes('private/research'));
+  }
+  const merged = M.merge(doc([record({id:'existing'})]),source);
+  assert.equal(merged.added,1); assert.deepEqual(merged.document.records[1].references,references);
+  assert.equal(M.merge(merged.document,source).skipped,1);
+  assert.equal(JSON.stringify(source),before);
+  const journey = require('../home/assets/map-journey.js').plan(expected.records);
+  assert(journey.segments.some(segment=>segment.pageText.includes(source.records[0].description)));
+  for (const segment of journey.segments) for (const reference of references) {
+    assert(!segment.pageText.includes(reference.label)); assert(!segment.pageText.includes(reference.url));
+  }
+  assert.equal(expected.records[0].description,source.records[0].description);
+});
+
+test('references reject unsafe URLs, local paths, controls and malformed arrays', () => {
+  const valid = {label:'Museum timeline',url:'https://museum.example.org/timeline'};
+  for (const url of ['http://museum.example.org','https://user:pass@museum.example.org','https://@museum.example.org','https://localhost/a','https://host/a','https://host.local/a','https://host.internal/a','https://host.lan/a','https://host.home/a','https://host.test/a','https://host.invalid/a','https://host.onion/a','https://127.0.0.1/a','https://192.168.1.1/a','https://[::1]/a','https://2130706433/a','https://0177.0.0.1/a','https://museum.example.org:8080/a','https://museum.example.org/a%0Ab','https://museum.example.org/a\nb','https://museum.example.org/hello world','https://museum.example.org\\@localhost/a','https:////museum.example.org/a','file:///C:/research.md','javascript:alert(1)']) {
+    assert.equal(M.publicReferenceUrl(url),false,url);
+    assert.throws(()=>M.validate(doc([record({references:[{...valid,url}]})])),/来源/);
+  }
+  for (const references of [null,{},[],Array(7).fill(valid),[null],[{...valid,privateNote:'x'}],[{url:valid.url}],[{...valid,label:''}],[{...valid,label:'a'.repeat(121)}],[{...valid,label:'<b>source</b>'}],[{...valid,label:'Line\nbreak'}],[{...valid,label:'\tlabel'}],[{...valid,label:'C:\\private\\note.md'}],[{...valid,label:'/home/private/note.md'}],[{...valid,label:'/mnt/private/note.md'}]]) {
+    assert.throws(()=>M.validate(doc([record({references})])),/来源|label/);
+  }
+  assert.doesNotThrow(()=>M.validate(doc([record({references:Array(6).fill(valid)})])));
+  assert(M.publicReferenceUrl('https://museum.example.org:443/文献?part=一'));
+  const source=doc([record()]), before=JSON.stringify(source);
+  assert.throws(()=>M.merge(source,doc([record({id:'valid'}),record({id:'unsafe',references:[{...valid,url:'https://localhost/a'}]})])));
+  assert.equal(JSON.stringify(source),before);
+});
+
+const personEntry = (id='sample-person',count=1) => ({id,label:{'zh-CN':'示例人物',en:'Sample person'},coverage:{'zh-CN':'仅收录已核对的城市。',en:'Verified cities only.'},record_count:count,document_url:'/assets/footprints-people/'+id+'.json',markdown:'/assets/footprints-people/'+id+'.md'});
+const personBundle = (id='sample-person') => ({version:1,id,documents:{'zh-CN':doc([record({id:'person-sample-001',sequence:0,references:[{label:'人物年谱',url:'https://museum.example.org/biography'}]})]),en:{version:1,title:'Sample footprints',records:[record({id:'person-sample-001',city:'Beijing',region:'Beijing',country:'China',title:'A verified stay',description:'English biography.',sequence:0,references:[{label:'Biography',url:'https://museum.example.org/biography'}]})]}},sources:[{label:'Institutional biography',url:'https://museum.example.org/biography'}]});
+test('person catalogue accepts generic local assets and rejects ambiguous or remote destinations', () => {
+  const original={version:1,people:[personEntry(),personEntry('another-person',0)]},snapshot=JSON.stringify(original);
+  const catalogue=M.peopleManifest(original);
+  assert.deepEqual(catalogue,original); assert.notEqual(catalogue.people[0],original.people[0]);
+  assert.equal(JSON.stringify(original),snapshot);
+  for (const patch of [{id:'../sample-person'},{id:'__proto__'},{document_url:'https://example.org/sample-person.json'},{document_url:'/assets/footprints-people/another-person.json'},{markdown:'/assets/footprints-people/../sample-person.md'},{record_count:-1},{record_count:501},{record_count:'1'},{label:{'zh-CN':'缺失英文'}},{coverage:{'zh-CN':'<script>',en:'Text'}}]) assert.throws(()=>M.peopleManifest({version:1,people:[{...personEntry(),...patch}]}));
+  assert.throws(()=>M.peopleManifest({version:1,people:[personEntry(),personEntry()]}));
+  assert.throws(()=>M.peopleManifest({version:2,people:[]}));
+});
+
+test('person bundles validate both language documents before import and preserve source order and unknown dates', () => {
+  const entry=M.peopleManifest({version:1,people:[personEntry()]}).people[0],source=personBundle(),before=JSON.stringify(source);
+  for (const language of ['zh-CN','en']) {source.documents[language].records[0].start='';source.documents[language].records[0].end='';source.documents[language].records[0].certainty='approximate';}
+  const bundle=M.personBundle(source,entry);
+  assert.equal(bundle.documents.en.records[0].description,'English biography.');
+  assert.equal(bundle.documents.en.records[0].start,''); assert.equal(bundle.documents.en.records[0].sequence,0);
+  assert.deepEqual(bundle.sources,source.sources);
+  assert.notEqual(bundle.documents.en,source.documents.en);
+  const snapshot=JSON.stringify(source);
+  for (const alter of [value=>value.id='another-person',value=>delete value.documents.en,value=>value.documents.en.records=[],value=>value.documents.en.records[0].lat=40,value=>value.documents.en.records[0].start='2024',value=>value.documents.en.records[0].sequence=1,value=>value.documents.en.records[0].references[0].url='http://example.org',value=>value.sources=[{label:'Unsafe',url:'https://localhost/'}]]) {
+    const invalid=JSON.parse(snapshot);alter(invalid);assert.throws(()=>M.personBundle(invalid,entry));
+  }
+  assert.equal(JSON.stringify(source),snapshot); assert.notEqual(before,snapshot);
+});
+
 let failed = 0;
 for (const [name, action] of tests) { try { action(); console.log('PASS ' + name); } catch (error) { failed++; console.error('FAIL ' + name); console.error(error.stack); } }
 console.log(`${tests.length - failed}/${tests.length} map logic checks passed.`);

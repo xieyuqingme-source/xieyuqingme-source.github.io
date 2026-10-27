@@ -4,12 +4,8 @@
  */
 (function (scope) {
   'use strict';
-  const CITIES = Object.freeze({
-    beijing: {name: '北京',en: 'Beijing',lat: 39.9042,lon: 116.4074,tz: 'Asia/Shanghai'},
-    shanghai: {name: '上海',en: 'Shanghai',lat: 31.2304,lon: 121.4737,tz: 'Asia/Shanghai'},
-    kuala: {name: '吉隆坡',en: 'Kuala Lumpur',lat: 3.139,lon: 101.6869,tz: 'Asia/Kuala_Lumpur'},
-    london: {name: '伦敦',en: 'London',lat: 51.5074,lon: -.1278,tz: 'Europe/London'}
-  });
+  const cityModel = (typeof module === 'object' && module.exports ? require('./astronomy-solar.js') : scope.HomeAstronomy)?.cityModel;
+  const CITIES = cityModel?.presets || {};
   function createEarth(document, window, options = {}) {
     const root = document.querySelector('#daily-earth');
     if (!root || root.dataset.earthReady === 'true') return null;
@@ -24,15 +20,21 @@
     const cityInput = find('daily-city'), hourInput = find('earth-hour');
     const language = () => (window.SiteI18n?.lang?.() || document.documentElement.lang || 'zh-CN').startsWith('en');
     const text = (zh, en) => language() ? en : zh;
-    const state = {city: 'beijing',demo: false,hour: 12,demoDay: null,viewLon: 110,viewLat: 16};
+    const state = {city:'beijing',observer:CITIES.beijing,demo:false,hour:12,demoDay:null,viewLon:110,viewLat:16};
     const cleanup = [];
     let disposed = false, paused = false, geography = null, weatherTicket = 0, weatherRequest = null, drawFrame = null, weatherResult = null;
     const TIMEOUT = 8000, CACHE_AGE = 30 * 60000, STALE_AGE = 24 * 3600000;
     const cityKey = 'xieyuqing-home-city-v1', cacheKey = city => 'xieyuqing-weather-v1:' + city;
-    if (!glance) try { const saved = window.localStorage.getItem(cityKey); if (CITIES[saved]) state.city = saved; } catch (_) {}
-    if (!glance && options.globeOnly && CITIES[cityInput?.value]) state.city = cityInput.value;
-    state.viewLon = CITIES[state.city].lon;
-    state.viewLat = Math.max(-25, Math.min(35, CITIES[state.city].lat * .6));
+    if (!glance) {
+      let selected = cityModel.normalize(options.city);
+      if (!selected) {
+        try { selected = cityModel.decode(window.localStorage.getItem('xieyuqing-home-city-v2')) || cityModel.decode(window.localStorage.getItem(cityKey)); } catch (_) {}
+        if (options.globeOnly && CITIES[cityInput?.value]) selected = CITIES[cityInput.value];
+      }
+      if (selected) { state.observer = selected; state.city = selected.id; }
+    }
+    state.viewLon = state.observer.lon;
+    state.viewLat = Math.max(-25,Math.min(35,state.observer.lat * .6));
     function write(id, value) { const node = find(id); if (node) node.textContent = value; }
     function listen(target, type, handler, options) {
       if (!target?.addEventListener) return;
@@ -53,7 +55,7 @@
     function angle(value, north, south) { return (value < 0 ? south : north) + ' ' + Math.abs(value).toFixed(2) + '°'; }
     function renderFacts() {
       if (disposed || paused) return;
-      const date = currentDate(), city = CITIES[state.city], solar = astro.position(date);
+      const date = currentDate(), city = state.observer, solar = astro.position(date);
       const local = astro.dateParts(date, city.tz), beijing = astro.dateParts(date, 'Asia/Shanghai');
       if (!options.globeOnly) {
       const month = new Intl.DateTimeFormat(language() ? 'en-GB' : 'zh-CN', {timeZone: city.tz,month: 'long'}).format(date);
@@ -78,7 +80,7 @@
       const clocks = find('daily-world-clocks');
       if (clocks) {
         clocks.replaceChildren();
-        const cities = [CITIES.beijing,CITIES.kuala,CITIES.london,{name: '纽约',en: 'New York',lat: 40.7128,lon: -74.006,tz: 'America/New_York'}];
+        const cities = cityModel.clockCities(city);
         for (const place of cities) {
           const item = document.createElement('div');
           const daytime = astro.altitude(actual, place.lat, place.lon) >= 0;
@@ -86,7 +88,7 @@
           clocks.append(item);
         }
       }
-      if (cityInput) cityInput.value = state.city;
+      if (cityInput && !options.globeOnly) cityInput.value = state.city;
       if (hourInput) {
         const hour = state.demo ? state.hour : Number(new Intl.DateTimeFormat('en-GB', {timeZone: 'Asia/Shanghai',hour: '2-digit',hourCycle: 'h23'}).format(date))
           + Number(new Intl.DateTimeFormat('en-GB', {timeZone: 'Asia/Shanghai',minute: '2-digit'}).format(date)) / 60;
@@ -126,7 +128,7 @@
         context.fillText(geography === false ? text('地球底图暂不可用', 'Map unavailable') : text('地球底图加载中', 'Loading Earth'), x, y);
         return;
       }
-      const sun = astro.position(currentDate()), city = CITIES[state.city];
+      const sun = astro.position(currentDate()), city = state.observer;
       const projection = d3.geoOrthographic().translate([x, y]).scale(radius).rotate([-state.viewLon, -state.viewLat, -11]).clipAngle(90);
       const path = d3.geoPath(projection, context);
       // Axis endpoints use exactly the map projection. Its screen angle depends on
@@ -220,7 +222,7 @@
         weatherResult = cached ? {...cached,stale: true} : {error: true};
       } finally { window.clearTimeout(timeout); if (!disposed && ticket === weatherTicket) renderWeather(); }
     }
-    listen(cityInput, 'change', () => { if (!CITIES[cityInput.value]) return; state.city = cityInput.value; state.viewLon = CITIES[state.city].lon; state.viewLat = Math.max(-25, Math.min(35, CITIES[state.city].lat * .6)); try { window.localStorage.setItem(cityKey, state.city); } catch (_) {} renderFacts(); if (!options.globeOnly) loadWeather(); });
+    if (!options.globeOnly) listen(cityInput, 'change', () => { if (!CITIES[cityInput.value]) return; state.city = cityInput.value; state.observer = CITIES[state.city]; state.viewLon = state.observer.lon; state.viewLat = Math.max(-25, Math.min(35, state.observer.lat * .6)); try { window.localStorage.setItem(cityKey, state.city); } catch (_) {} renderFacts(); if (!options.globeOnly) loadWeather(); });
     listen(hourInput, 'input', () => { if (!state.demo) state.demoDay = astro.dateParts(new Date(), 'Asia/Shanghai'); state.demo = true; state.hour = Math.min(1439, Math.max(0, Math.round(Number(hourInput.value) * 60) || 0)) / 60; renderFacts(); });
     listen(find('earth-now'), 'click', () => { state.demo = false; renderFacts(); });
     let pointer = null;
@@ -243,7 +245,7 @@
     const unsubscribe = window.SiteI18n?.onChange?.(() => { renderFacts(); renderWeather(); }); if (typeof unsubscribe === 'function') onCleanup(unsubscribe);
     const mapController = new window.AbortController(); onCleanup(() => mapController.abort());
     window.fetch('/assets/map-land.json', {signal: mapController.signal,credentials: 'same-origin'}).then(response => { if (!response.ok) throw new Error('Land geometry unavailable'); return response.json(); }).then(data => { if (!disposed && data?.type === 'FeatureCollection' && Array.isArray(data.features)) { geography = data; requestDraw(); } }).catch(() => { if (!disposed) { geography = false; requestDraw(); } });
-    const controller = {refresh: renderFacts,setPaused(value) { paused = !!value; if (paused && drawFrame !== null) { window.cancelAnimationFrame(drawFrame); drawFrame = null; } if (!paused) renderFacts(); },destroy() { if (disposed) return; disposed = true; cleanup.splice(0).reverse().forEach(fn => { try { fn(); } catch (_) {} }); root.dataset.earthReady = 'false'; },getState: () => ({city: state.city,demo: state.demo,hour: state.hour,paused})};
+    const controller = {refresh:renderFacts,setCity(value) { const selected = glance ? CITIES.beijing : cityModel.normalize(value); if (!selected) return false; state.observer = selected; state.city = selected.id; state.viewLon = selected.lon; state.viewLat = Math.max(-25,Math.min(35,selected.lat * .6)); renderFacts(); return true; },setPaused(value) { paused = !!value; if (paused && drawFrame !== null) { window.cancelAnimationFrame(drawFrame); drawFrame = null; } if (!paused) renderFacts(); },destroy() { if (disposed) return; disposed = true; cleanup.splice(0).reverse().forEach(fn => { try { fn(); } catch (_) {} }); root.dataset.earthReady = 'false'; },getState: () => ({city:state.city,observer:state.observer,demo:state.demo,hour:state.hour,paused})};
     window.SiteNavigation?.own?.(() => controller.destroy());
     renderFacts(); if (!options.globeOnly) loadWeather();
     return controller;

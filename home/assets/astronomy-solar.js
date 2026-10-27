@@ -106,5 +106,77 @@
       : ['新月','蛾眉月','上弦月','盈凸月','满月','亏凸月','下弦月','残月'];
     return {name: names[index],fraction,illumination: (1 - Math.cos(2 * Math.PI * fraction)) / 2};
   }
-  return Object.freeze({position, dateParts, riseSet, altitude, term, lunar, normal, moonPhase});
+  // Public city data and validation are independent of the astronomical calculations.
+  // Both the day card and the lazy globe use this one observer model.
+  const cityModel = (() => {
+    const entries = [
+      ['beijing','北京','Beijing',39.9042,116.4074,'Asia/Shanghai','CN','中国','北京市'],
+      ['shanghai','上海','Shanghai',31.2304,121.4737,'Asia/Shanghai','CN','中国','上海市'],
+      ['kuala','吉隆坡','Kuala Lumpur',3.139,101.6869,'Asia/Kuala_Lumpur','MY','马来西亚','吉隆坡'],
+      ['london','伦敦','London',51.5074,-.1278,'Europe/London','GB','英国','England'],
+      ['newyork','纽约','New York',40.7128,-74.006,'America/New_York','US','美国','New York'],
+      ['moscow','莫斯科','Moscow',55.7558,37.6173,'Europe/Moscow','RU','俄罗斯','Moscow'],
+      ['dubai','迪拜','Dubai',25.2048,55.2708,'Asia/Dubai','AE','阿联酋','Dubai'],
+      ['guangzhou','广州','Guangzhou',23.1291,113.2644,'Asia/Shanghai','CN','中国','广东'],
+      ['shenzhen','深圳','Shenzhen',22.5431,114.0579,'Asia/Shanghai','CN','中国','广东'],
+      ['chengdu','成都','Chengdu',30.5728,104.0668,'Asia/Shanghai','CN','中国','四川'],
+      ['hangzhou','杭州','Hangzhou',30.2741,120.1551,'Asia/Shanghai','CN','中国','浙江'],
+      ['nanjing','南京','Nanjing',32.0603,118.7969,'Asia/Shanghai','CN','中国','江苏'],
+      ['wuhan','武汉','Wuhan',30.5928,114.3055,'Asia/Shanghai','CN','中国','湖北'],
+      ['chongqing','重庆','Chongqing',29.563,106.5516,'Asia/Shanghai','CN','中国','重庆市'],
+      ['xian','西安','Xi’an',34.3416,108.9398,'Asia/Shanghai','CN','中国','陕西'],
+      ['tianjin','天津','Tianjin',39.3434,117.3616,'Asia/Shanghai','CN','中国','天津市'],
+      ['mianyang','绵阳','Mianyang',31.4675,104.6796,'Asia/Shanghai','CN','中国','四川']
+    ];
+    const presets = Object.freeze(Object.assign(Object.create(null),Object.fromEntries(entries.map(([id,name,en,lat,lon,tz,countryCode,country,region]) => [id,Object.freeze({id,name,en,lat,lon,tz,countryCode,country,region})]))));
+    const clean = (value,max = 100) => typeof value === 'string' && value.trim().length > 0 && value.trim().length <= max && !/[\u0000-\u001f\u007f-\u009f<>]/.test(value) ? value.trim() : '';
+    function normalize(value) {
+      if (typeof value === 'string') return presets[value] || null;
+      if (!value || typeof value !== 'object' || Array.isArray(value)) return null;
+      const name = clean(value.name), en = clean(value.en) || name, tz = clean(value.tz,80), country = clean(value.country);
+      if (!name || !country || !tz || !Number.isFinite(value.lat) || !Number.isFinite(value.lon) || Math.abs(value.lat) > 90 || Math.abs(value.lon) > 180) return null;
+      try { new Intl.DateTimeFormat('en-GB',{timeZone:tz}).format(0); } catch (_) { return null; }
+      const region = value.region === undefined || value.region === '' ? '' : clean(value.region);
+      if (value.region && !region) return null;
+      const countryCode = typeof value.countryCode === 'string' && /^[A-Z]{2}$/.test(value.countryCode) ? value.countryCode : '';
+      const id = clean(value.id,80) || 'custom';
+      return Object.freeze({id,name,en,lat:value.lat,lon:value.lon,tz,country,countryCode,region});
+    }
+    function identity(value) { return `${value.lat.toFixed(5)}|${value.lon.toFixed(5)}|${value.tz}`; }
+    function fromResult(value) {
+      if (!value || !Number.isInteger(value.id) || value.id < 0) return null;
+      return normalize({id:'geo-' + value.id,name:value.name,en:value.name,country:value.country,countryCode:value.country_code,region:value.admin1 || '',lat:value.latitude,lon:value.longitude,tz:value.timezone});
+    }
+    function countryName(value,english = false) {
+      if (value.countryCode && typeof Intl.DisplayNames === 'function') {
+        try { return new Intl.DisplayNames([english ? 'en' : 'zh-CN'],{type:'region'}).of(value.countryCode) || value.country; } catch (_) {}
+      }
+      return value.country;
+    }
+    function label(value,english = false,full = true) {
+      const fields = [english ? value.en : value.name];
+      if (full) fields.push(value.region,countryName(value,english),value.tz);
+      return [...new Set(fields.filter(Boolean))].join(' · ');
+    }
+    function decode(raw) {
+      if (typeof raw !== 'string') return null;
+      if (presets[raw]) return presets[raw];
+      try { const saved = JSON.parse(raw || 'null'); return saved?.version === 1 ? normalize(saved.city) : null; } catch (_) { return null; }
+    }
+    function samePlace(a,b) {
+      if (identity(a) === identity(b)) return true;
+      const name = value => {
+        const compact = value.toLowerCase().replace(/[\s’'·-]/g,'').replace(/市$/,'');
+        return compact === 'newyorkcity' || compact === 'nyc' ? 'newyork' : compact;
+      };
+      const overlap = [name(a.name),name(a.en)].some(value => value === name(b.name) || value === name(b.en));
+      return overlap && a.countryCode === b.countryCode && a.tz === b.tz && Math.abs(a.lat - b.lat) < .2 && Math.abs(a.lon - b.lon) < .2;
+    }
+    function clockCities(selected) {
+      const fixed = ['beijing','kuala','london','newyork','moscow'].map(key => presets[key]);
+      return fixed.some(place => samePlace(selected,place)) ? [...fixed,presets.dubai] : [selected,...fixed];
+    }
+    return Object.freeze({presets,normalize,identity,fromResult,label,countryName,decode,samePlace,clockCities});
+  })();
+  return Object.freeze({position, dateParts, riseSet, altitude, term, lunar, normal, moonPhase, cityModel});
 });

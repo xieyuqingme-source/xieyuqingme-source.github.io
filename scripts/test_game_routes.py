@@ -198,7 +198,7 @@ class GamePublicationTests(unittest.TestCase):
                 self.assertCountEqual(links, ("/articles/", "/projects/", "/game/", "/about/", "/photos/", "/anthology/", "/map/"))
                 self.assertEqual(sum(tag == "summary" for tag, _ in Elements(nav).elements), 3)
         home = (output / "index.html").read_text(encoding="utf-8")
-        self.assertIn('id="glance-title"><a href="/today/">今日简报</a></h2>', home)
+        self.assertIn('id="glance-title"><a href="/today/">历史中的今天</a></h2>', home)
         self.assertIn('data-brief-mode="glance"', home)
         self.assertIn('class="home-top"', home)
         self.assertIn('href="/today/"', home)

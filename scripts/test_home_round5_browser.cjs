@@ -7,7 +7,7 @@ const path = require('node:path');
 const os = require('node:os');
 const { chromium } = require(path.join(os.homedir(), '.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright'));
 const root = process.env.WEBSITE_ROOT || path.resolve(__dirname, '..');
-const site = path.join(root, '_site_unified'), out = process.env.HOME_BROWSER_OUTPUT || path.join(root, '.local-checks/round5');
+const site = path.join(root, '_site_unified'), out = process.env.HOME_BROWSER_OUTPUT || path.join(root, '.local-checks/history-20261027');
 const origin = 'http://127.0.0.1:8767', epoch = Date.parse('2026-10-27T04:00:00Z');
 const widths = [1440, 1280, 1024, 960, 768, 390, 320];
 const latest = fs.readdirSync(path.join(root, 'home/brief/news')).filter(name => /^\d{4}-\d{2}-\d{2}\.json$/.test(name)).sort().at(-1);
@@ -26,10 +26,53 @@ async function check(name, fn) {
   try { const detail = await fn(); report.checks.push({ name, passed: true, ms: Date.now() - start, detail }); process.stdout.write('PASS ' + name + '\n'); }
   catch (error) { report.checks.push({ name, passed: false, ms: Date.now() - start, error: error.stack }); process.stdout.write('FAIL ' + name + ': ' + error.message + '\n'); }
 }
-async function context({ width = 1440, theme = 'light', javascript = true, lunarFailure = false, denied = false, seedOld = false, idleUnavailable = false } = {}) {
-  const ctx = await browser.newContext({ viewport: { width, height: 1000 }, colorScheme: theme, javaScriptEnabled: javascript });
+const parisResults = [
+  { id: 2988507, name: 'Paris', latitude: 48.85341, longitude: 2.3488, timezone: 'Europe/Paris', country: 'France', country_code: 'FR', admin1: 'Île-de-France' },
+  { id: 4717560, name: 'Paris', latitude: 33.66094, longitude: -95.55551, timezone: 'America/Chicago', country: 'United States', country_code: 'US', admin1: 'Texas' }
+];
+function forecast({ code = 0, temperature = 21.4 } = {}) {
+  return { current: { temperature_2m: temperature, weather_code: code, time: '2026-10-27T12:00', apparent_temperature: 19.2, relative_humidity_2m: 67, wind_speed_10m: 18.5, wind_direction_10m: 225, pressure_msl: 1015.8 }, daily: { time: ['2026-10-27'], temperature_2m_max: [34], temperature_2m_min: [15], precipitation_probability_max: [65] } };
+}
+function assertForecastQuery(value) {
+  const url = new URL(value), query = url.searchParams;
+  assert.equal(url.origin + url.pathname, 'https://api.open-meteo.com/v1/forecast');
+  assert.equal(query.get('forecast_days'), '1'); assert.equal(query.get('wind_speed_unit'), 'kmh');
+  assert.equal(query.get('temperature_unit'), 'celsius'); assert(query.get('timezone'));
+  const fields = query.get('current').split(',');
+  for (const field of ['temperature_2m', 'weather_code', 'apparent_temperature', 'relative_humidity_2m', 'wind_speed_10m', 'wind_direction_10m', 'pressure_msl']) assert(fields.includes(field), field);
+  for (const field of ['temperature_2m_max', 'temperature_2m_min', 'precipitation_probability_max']) assert(query.get('daily').split(',').includes(field), field);
+}
+async function noAlmanac(page) {
+  assert.equal(await page.locator('main [id*="almanac"],main [class*="almanac"]').count(), 0, 'Almanac and fortune content is removed from the DOM');
+}
+async function clocks(page, language, selected = null) {
+  const fixed = [
+    { zh: '北京', en: 'Beijing', tz: 'Asia/Shanghai' }, { zh: '吉隆坡', en: 'Kuala Lumpur', tz: 'Asia/Kuala_Lumpur' },
+    { zh: '伦敦', en: 'London', tz: 'Europe/London' }, { zh: '纽约', en: 'New York', tz: 'America/New_York' }, { zh: '莫斯科', en: 'Moscow', tz: 'Europe/Moscow' }
+  ];
+  const expected = selected ? [selected, ...fixed] : [...fixed, { zh: '迪拜', en: 'Dubai', tz: 'Asia/Dubai' }];
+  const values = await page.locator('#daily-world-clocks > div').allTextContents();
+  assert.equal(values.length, 6); assert.deepEqual(values.map(value => value.split(' · ')[0]), expected.map(place => place[language === 'en' ? 'en' : 'zh']));
+  values.forEach((value, index) => { const time = new Intl.DateTimeFormat('en-GB', { timeZone: expected[index].tz, hour: '2-digit', minute: '2-digit', hourCycle: 'h23' }).format(new Date(epoch)); assert(value.includes(time), value + ' should show ' + time); });
+  return values;
+}
+async function timeline(page, language, dated = true) {
+  const figure = page.locator('figure.today-timeline'), svg = figure.locator('svg.today-timeline-svg');
+  assert.equal(await figure.count(), 1); assert.equal(await figure.getAttribute('aria-labelledby'), 'timeline-caption');
+  assert.equal(await svg.getAttribute('role'), 'img'); assert.equal(await svg.getAttribute('aria-labelledby'), 'timeline-title timeline-description');
+  for (const id of ['timeline-title', 'timeline-description', 'timeline-caption']) assert((await page.locator('#' + id).textContent()).trim());
+  assert.deepEqual(await figure.locator('.timeline-labels > *').allTextContents(), language === 'en' ? ['Past', 'Today', 'Future'] : ['过去', '今天', '未来']);
+  const geometry = await figure.evaluate(node => { const figure = node.getBoundingClientRect(), title = document.querySelector('.today-intro-copy').getBoundingClientRect(); return { width: innerWidth, x: figure.x, y: figure.y, right: figure.right, bottom: figure.bottom, title: { x: title.x, y: title.y, right: title.right, bottom: title.bottom } }; });
+  if (geometry.width >= 768) assert(geometry.x >= geometry.title.right - 1, 'Timeline sits to the right of the title');
+  else assert(geometry.y >= geometry.title.bottom - 1, 'Timeline stacks after the title on mobile');
+  assert.equal(await svg.locator('animate,animateMotion,animateTransform').count(), 0);
+  assert(await svg.evaluate(node => [node, ...node.querySelectorAll('*')].every(item => getComputedStyle(item).animationName === 'none')));
+  if (dated) assert((await page.locator('#timeline-date').textContent()).includes('27'));
+}
+async function context({ width = 1440, theme = 'light', javascript = true, lunarFailure = false, denied = false, seedOld = false, idleUnavailable = false, reducedMotion = 'no-preference', forecastMock = null, searchMock = null } = {}) {
+  const ctx = await browser.newContext({ viewport: { width, height: 1000 }, colorScheme: theme, javaScriptEnabled: javascript, reducedMotion });
   ctx.setDefaultTimeout(10000);
-  const requests = [], weather = [];
+  const requests = [], weather = [], searches = [];
   await ctx.addInitScript(({ epoch, denied, seedOld, origin, idleUnavailable }) => {
     const NativeDate = Date;
     class Clock extends NativeDate { constructor(...args) { super(...(args.length ? args : [epoch])); } static now() { return epoch; } }
@@ -58,8 +101,16 @@ async function context({ width = 1440, theme = 'light', javascript = true, lunar
       try { frame = await route.request().frame().evaluate(() => ({ pagePath: location.pathname, loaded: Boolean(window.__round5Loaded), elapsedAfterLoad: window.__round5LoadTime === null ? null : performance.now() - window.__round5LoadTime })); } catch (_) {}
     }
     if (url.startsWith('https://api.open-meteo.com/')) {
-      weather.push({ url, ...frame });
-      return route.fulfill({ contentType: 'application/json', body: JSON.stringify({ current: { temperature_2m: 21.4, weather_code: 0, time: '2026-10-27T12:00' }, daily: { temperature_2m_max: [34], temperature_2m_min: [15], precipitation_probability_max: [65] } }) });
+      const request = { url, ...frame }; weather.push(request);
+      const response = forecastMock ? await forecastMock(new URL(url), weather.length - 1, request) : { body: forecast() };
+      if (response.delay) await new Promise(resolve => setTimeout(resolve, response.delay));
+      try { return await route.fulfill({ status: response.status || 200, contentType: 'application/json', body: JSON.stringify(response.body || {}) }); } catch (_) { return; }
+    }
+    if (url.startsWith('https://geocoding-api.open-meteo.com/')) {
+      const request = { url, ...frame }; searches.push(request);
+      const response = searchMock ? await searchMock(new URL(url), searches.length - 1, request) : { body: { results: parisResults } };
+      if (response.delay) await new Promise(resolve => setTimeout(resolve, response.delay));
+      try { return await route.fulfill({ status: response.status || 200, contentType: 'application/json', body: JSON.stringify(response.body || {}) }); } catch (_) { return; }
     }
     if (!url.startsWith(origin + '/')) { report.blockedExternal.push(url); return route.abort(); }
     try {
@@ -72,19 +123,19 @@ async function context({ width = 1440, theme = 'light', javascript = true, lunar
     } catch (error) { report.missing.push({ url, error: error.message }); return route.fulfill({ status: 404, body: 'Missing local file' }); }
   });
   ctx.on('page', page => page.on('pageerror', error => report.pageErrors.push(error.stack || error.message)));
-  return { ctx, requests, weather };
+  return { ctx, requests, weather, searches };
 }
 async function ready(page) { await page.waitForFunction(() => window.SiteI18n && window.SiteNavigation && !SiteNavigation.state().transition); await page.evaluate(() => document.fonts.ready); }
 async function go(page, route) { await page.goto(origin + route); await ready(page); }
 async function waitGlance(page, { failed = false } = {}) {
   await page.locator('#earth-canvas').scrollIntoViewIfNeeded();
   await page.waitForFunction(() => document.querySelector('#daily-earth')?.dataset.earthReady === 'true');
-  if (failed) await page.waitForFunction(() => document.querySelector('#glance-almanac-card')?.hidden);
+  if (failed) await page.waitForFunction(() => document.querySelector('#daily-calendar-term')?.textContent.trim());
   else await page.waitForFunction(() => document.querySelector('#daily-calendar-next-term')?.textContent.trim());
   await paint(page);
 }
 async function waitFull(page) {
-  await page.waitForFunction(() => document.querySelector('#daily-almanac-directions')?.textContent.trim());
+  await page.waitForFunction(() => document.querySelector('#daily-calendar-lunar')?.textContent.trim() && document.querySelector('#daily-calendar-term')?.textContent.trim());
   await page.waitForFunction(() => document.querySelector('#daily-weather')?.textContent.includes('21°C'));
   await page.locator('#earth-canvas').scrollIntoViewIfNeeded();
   await page.waitForFunction(() => document.querySelector('#daily-earth')?.dataset.earthReady === 'true' && document.querySelector('#daily-moon-phase')?.textContent.trim());
@@ -104,6 +155,7 @@ async function appearance(page, theme, language, full) {
   assert.equal(await page.locator('html').getAttribute('lang'), language);
   const prefix = language === 'en' ? '/en' : '';
   assert.equal(await page.locator('footer .footer-links > a').first().getAttribute('href'), prefix + '/today/');
+  assert.equal(await page.locator('footer .footer-links > a').first().innerText(), language === 'en' ? 'Today in history' : '历史中的今天');
   assert.equal(await page.locator('footer .footer-note').innerText(), language === 'en' ? 'I’m working hard on a few questions.' : '努力研究一些问题。');
   assert.equal(await page.locator('footer [data-i18n="common.signature.1"]').count(), 0);
   if (!full) {
@@ -154,8 +206,12 @@ async function homeStructure(page, language, width) {
   assert.equal(await page.locator('#glance-title > a').getAttribute('href'), prefix + '/today/');
   const cards = page.locator('#brief a.glance-cards');
   assert.equal(await cards.getAttribute('href'), prefix + '/today/');
-  assert.equal(await cards.getAttribute('aria-label'), language === 'en' ? 'Today’s brief: date, solar term and almanac' : '今日简报：日期、节气和黄历');
-  assert.equal(await cards.locator('.glance-card').count(), 3);
+  assert.equal(await cards.getAttribute('aria-label'), language === 'en' ? 'Today in history: date and solar term' : '历史中的今天：日期与节气');
+  assert.equal(await cards.locator('.glance-card').count(), 2);
+  assert.equal(await page.locator('#glance-title > a').innerText(), language === 'en' ? 'Today in history' : '历史中的今天');
+  assert.equal(await page.title(), '谢雨卿 Xie Yuqing · Carl');
+  assert.equal(await page.locator('meta[property="og:title"]').getAttribute('content'), '谢雨卿 Xie Yuqing · Carl');
+  await noAlmanac(page);
   assert.equal(await page.locator('#earth-canvas').evaluate(node => Boolean(node.closest('a'))), false);
   const positions = await page.evaluate(() => { const box = selector => { const r = document.querySelector(selector).getBoundingClientRect(); return { x: r.x, y: r.y, right: r.right, bottom: r.bottom }; }; return { hero: box('.home-hero'), brief: box('#brief') }; });
   if (width >= 960) { assert(positions.brief.x >= positions.hero.right - 1); assert(Math.min(positions.hero.bottom, positions.brief.bottom) > Math.max(positions.hero.y, positions.brief.y), 'First-row blocks overlap vertically'); }
@@ -172,10 +228,7 @@ async function glanceContent(page, language) {
   assert(language === 'en' ? /day\s+\d+/i.test(term) : /第\s*\d+\s*天/.test(term));
   assert(language === 'en' ? /\d+\s+days until/i.test(next) : /距.+还有\s*\d+\s*天/.test(next));
   assert((await page.locator('#daily-calendar-lunar').textContent()).trim());
-  for (const id of ['daily-almanac-yi', 'daily-almanac-ji']) {
-    const value = (await page.locator('#' + id).textContent()).trim(); assert.equal(value.split(/\s*·\s*/).length, 3, id + ': ' + value);
-    const expected = await page.evaluate(id => { const lunar = Solar.fromYmd(2026, 10, 27).getLunar(); return (id.endsWith('-yi') ? lunar.getDayYi() : lunar.getDayJi()).slice(0, 3).join(' · '); }, id); assert.equal(value, expected);
-  }
+  await noAlmanac(page);
   const size = await page.locator('#earth-canvas').boundingBox(); assert(size.width > 80 && size.width <= 145);
 }
 async function fullContent(page, language, width) {
@@ -192,14 +245,17 @@ async function fullContent(page, language, width) {
   assert((await page.locator('#daily-edition').textContent()).includes(brief.updated_at.slice(11, 16)));
   for (const id of ['daily-news-title', 'today-heading', 'earth-heading']) assert.equal(await page.locator('#' + id).evaluate(node => node.tagName), 'H2');
   assert.equal(await page.locator('#daily-feed article h3').count(), news.length);
-  assert.equal(await page.locator('#daily-almanac details').count(), 0);
   assert((await page.locator('#daily-weather').textContent()).includes('21°C'));
-  for (const id of ['daily-almanac-yi', 'daily-almanac-ji', 'daily-almanac-clash', 'daily-almanac-directions', 'daily-moon-phase']) assert((await page.locator('#' + id).innerText()).trim(), id);
-  if (language === 'en') { assert.equal(await page.locator('#daily-almanac-pengzu').isVisible(), false); assert((await page.locator('#daily-almanac-directions').textContent()).includes('Joy')); }
-  else { assert(await page.locator('#daily-almanac-pengzu').isVisible()); assert((await page.locator('#daily-almanac-pengzu').textContent()).trim()); for (const label of ['喜神', '福神', '财神']) assert((await page.locator('#daily-almanac-directions').textContent()).includes(label)); }
-  assert.equal(await page.locator('#daily-world-clocks > div').count(), 4);
-  const clocks = await page.locator('#daily-world-clocks').textContent(); for (const city of language === 'en' ? ['Beijing', 'Kuala Lumpur', 'London', 'New York'] : ['北京', '吉隆坡', '伦敦', '纽约']) assert(clocks.includes(city));
-  for (const id of ['daily-almanac-yi', 'daily-almanac-ji']) { const expected = await page.evaluate(id => { const lunar = Solar.fromYmd(2026, 10, 27).getLunar(); return (id.endsWith('-yi') ? lunar.getDayYi() : lunar.getDayJi()).join(' · '); }, id); assert.equal(await page.locator('#' + id).textContent(), expected); }
+  for (const id of ['daily-calendar-lunar', 'daily-calendar-term', 'daily-moon-phase']) assert((await page.locator('#' + id).innerText()).trim(), id);
+  await noAlmanac(page);
+  await clocks(page, language);
+  await timeline(page, language);
+  assert.equal(await page.locator('main h1').innerText(), language === 'en' ? 'Today in history' : '历史中的今天');
+  assert.equal(await page.title(), language === 'en' ? 'Today in history · Xie Yuqing' : '历史中的今天 · 谢雨卿');
+  assert.equal(await page.locator('#city-search-form').count(), 1);
+  assert.equal(await page.locator('#city-search-input').getAttribute('type'), 'search');
+  assert.equal(await page.locator('#city-search-status').getAttribute('aria-live'), 'polite');
+  assert((await page.locator('#daily-weather-details').textContent()).trim());
   assert.equal(await page.locator('#brief-bottom > article').count(), 3 + Number(memes.length > 0));
   assert.equal(await page.locator('#brief-bottom > article > h2').count(), 3 + Number(memes.length > 0));
   assert.equal(await page.locator('#brief-bottom #own-quote').count(), 1);
@@ -242,13 +298,13 @@ async function clickFull(page, language) { const route = language === 'en' ? '/e
   try {
     browser = await chromium.launch({ channel: 'chrome', headless: true });
     for (const language of ['zh-CN', 'en']) for (const width of widths) for (const theme of ['light', 'dark']) {
-      const { ctx, requests, weather } = await context({ width, theme });
+      const { ctx, requests, weather, searches } = await context({ width, theme });
       const page = await ctx.newPage(), prefix = language === 'en' ? '/en' : '';
       try {
         await check(`home ${language} ${width} ${theme}`, async () => {
           await go(page, prefix + '/'); const structure = await homeStructure(page, language, width);
           await waitGlance(page); await glanceContent(page, language); await appearance(page, theme, language, false);
-          assert.equal(weather.length, 0);
+          assert.equal(weather.length, 0); assert.equal(searches.length, 0);
           const cache = await page.evaluate(() => window.__round5Storage.filter(item => /weather|home-city/.test(item.key))); assert.deepEqual(cache, []);
           const early = requests.filter(item => /\/vendor\/(?:lunar|d3)|\/home-earth\.js$|\/map-land\.json$/.test(item.pathname) && !item.loaded); assert.deepEqual(early, [], 'Heavy assets wait until the load event');
           const idle = await page.evaluate(() => window.__round5Idle); assert(idle.some(options => options?.timeout === 2000));
@@ -257,10 +313,11 @@ async function clickFull(page, language) { const route = language === 'en' ? '/e
         await check(`today ${language} ${width} ${theme}`, async () => {
           await clickFull(page, language); const detail = await fullContent(page, language, width); await appearance(page, theme, language, true);
           assert.equal(weather.length, 1, 'Full page alone makes one current+daily weather query');
+          assertForecastQuery(weather[0].url); assert.equal(searches.length, 0);
           assert(weather.every(item => /\/(?:en\/)?today\//.test(item.pagePath)));
           await capture(page, `today-${language}-${width}-${theme}`); return detail;
         });
-      } finally { report.network.push({ language, width, theme, requests, weather }); await ctx.close(); }
+      } finally { report.network.push({ language, width, theme, requests, weather, searches }); await ctx.close(); }
     }
     for (const language of ['zh-CN', 'en']) for (const theme of ['light', 'dark']) await check(`three complete navigation cycles ${language} ${theme}`, async () => {
       const { ctx, requests, weather } = await context({ theme, seedOld: true });
@@ -313,10 +370,10 @@ async function clickFull(page, language) { const route = language === 'en' ? '/e
         await page.evaluate(() => { Math.random = () => 0; }); await page.locator('#home-random-button').focus(); await page.keyboard.press('Tab'); await page.keyboard.press('Shift+Tab'); assert(await page.locator('#home-random-button').evaluate(node => node === document.activeElement && node.matches(':focus-visible'))); await page.keyboard.press(key); await page.waitForURL(origin + links[0]); await ready(page); assert.equal(await page.locator('html').getAttribute('lang'), language);
       } finally { await ctx.close(); }
     });
-    for (const language of ['zh-CN', 'en']) await check('lunar failure preserves date and globe without almanac ' + language, async () => {
+    for (const language of ['zh-CN', 'en']) await check('lunar failure preserves the date, solar term and globe ' + language, async () => {
       const { ctx, weather } = await context({ width: 390, lunarFailure: true }); try {
         const page = await ctx.newPage(); await go(page, language === 'en' ? '/en/' : '/'); await waitGlance(page, { failed: true });
-        assert.equal(await page.locator('#glance-almanac-card').isVisible(), false); assert.equal((await page.locator('#daily-calendar-next-term').textContent()).trim(), ''); assert((await page.locator('#glance-date').textContent()).includes('27')); assert.equal(weather.length, 0); await noOverflow(page);
+        await noAlmanac(page); assert.equal((await page.locator('#daily-calendar-next-term').textContent()).trim(), ''); assert((await page.locator('#glance-date').textContent()).includes('27')); assert.equal(weather.length, 0); await noOverflow(page);
       } finally { await ctx.close(); }
     });
     await check('storage denied still renders the homepage without weather', async () => {
@@ -327,7 +384,7 @@ async function clickFull(page, language) { const route = language === 'en' ? '/e
       const { ctx, weather } = await context({ javascript: false, width: 390 }); try {
         const page = await ctx.newPage(), prefix = language === 'en' ? '/en' : ''; await page.goto(origin + prefix + '/');
         assert.equal(await page.locator('#home-random-button').isVisible(), false); assert.equal(await page.locator('#daily-feed').count(), 0); assert((await page.locator('#brief noscript').textContent()).includes(language === 'en' ? 'Enable JavaScript' : '启用 JavaScript'));
-        await page.locator('#brief a[href="' + prefix + '/today/"]').first().click(); await page.waitForURL(origin + prefix + '/today/'); assert.equal(await page.locator('#daily-feed article').count(), news.length); assert.equal(weather.length, 0); await noOverflow(page);
+        await page.locator('#brief a[href="' + prefix + '/today/"]').first().click(); await page.waitForURL(origin + prefix + '/today/'); assert.equal(await page.locator('#daily-feed article').count(), news.length); assert.equal(weather.length, 0); await noAlmanac(page); await timeline(page, language, false); assert.equal(await page.locator('main h1').innerText(), language === 'en' ? 'Today in history' : '历史中的今天'); await noOverflow(page);
       } finally { await ctx.close(); }
     });
     for (const language of ['zh-CN', 'en']) await check('updated biography, site notes and anthology introduction ' + language, async () => {
@@ -337,9 +394,11 @@ async function clickFull(page, language) { const route = language === 'en' ? '/e
         await go(page, prefix + '/about/');
         assert.deepEqual(await page.locator('.about-bio > p').allTextContents(), biography[language === 'en' ? 'english_bio' : 'chinese_bio']);
         assert.deepEqual(await page.locator('.about-colophon > p').allTextContents(), biography[language === 'en' ? 'english_colophon' : 'chinese_colophon']);
-        assert.equal(await page.locator('.about-written-note').count(), 0);
-        assert(!(await page.locator('main').innerText()).includes(language === 'en' ? 'Actual date of writing' : '真实写作日期'));
+        assert.equal(await page.locator('.about-written-note').count(), 1);
+        assert.equal(await page.locator('.about-written-note').innerText(), biography[language === 'en' ? 'english_written_note' : 'written_note']);
+        assert((await page.locator('main').innerText()).includes(language === 'en' ? 'Actual date of writing' : '真实写作日期'));
         assert.equal(await page.locator('#site a[href*="github.com"]').count(), 0); await noOverflow(page);
+        await capture(page, `about-${language}-390-light`);
         await go(page, prefix + '/anthology/');
         const catalogue = JSON.parse(fs.readFileSync(path.join(root, 'home/locales/anthology.json'), 'utf8'));
         assert.equal(await page.locator('[data-i18n="anthology.tagline"]').textContent(), catalogue[language]['anthology.tagline']);
@@ -365,6 +424,112 @@ async function clickFull(page, language) { const route = language === 'en' ? '/e
         await page.locator('#glance-title > a').focus(); await page.keyboard.press('Enter'); await page.waitForURL(origin + prefix + '/today/');
         if (javascript) { await ready(page); await waitFull(page); }
         assert.equal(await page.locator('#daily-feed article').count(), news.length); await noOverflow(page);
+      } finally { await ctx.close(); }
+    });
+    for (const language of ['zh-CN', 'en']) await check('weather preset, keyboard search and cached custom city ' + language, async () => {
+      const { ctx, weather, searches } = await context({ width: 390 });
+      try {
+        const page = await ctx.newPage(), prefix = language === 'en' ? '/en' : '';
+        await go(page, prefix + '/today/'); await waitFull(page);
+        await page.locator('#daily-city').selectOption('shanghai');
+        await page.waitForFunction(() => document.querySelector('#daily-local-time').textContent.includes(document.documentElement.lang === 'en' ? 'Shanghai' : '上海'));
+        await clocks(page, language, { zh: '上海', en: 'Shanghai', tz: 'Asia/Shanghai' });
+        await page.locator('#daily-city').selectOption('london');
+        await page.waitForFunction(() => document.querySelector('#daily-local-time').textContent.includes(document.documentElement.lang === 'en' ? 'London' : '伦敦'));
+        await clocks(page, language);
+        const details = await page.locator('#daily-weather-details').innerText();
+        for (const pattern of [/19(?:[.,]2)?/, /67/, /18(?:[.,]5)?/, /101[56](?:[.,]8)?/, /hPa/i]) assert(pattern.test(details), details);
+        assert(language === 'en' ? /wind/i.test(details) && /pressure/i.test(details) : /风/.test(details) && /气压/.test(details));
+        await page.locator('#city-search-input').fill('Paris'); await page.waitForTimeout(120); assert.equal(searches.length, 0, 'Search starts only on submit');
+        await page.locator('#city-search-input').press('Enter');
+        await page.waitForFunction(() => document.querySelectorAll('#city-search-results li > button').length === 2);
+        assert.equal(searches.length, 1);
+        const query = new URL(searches[0].url); assert.equal(query.origin + query.pathname, 'https://geocoding-api.open-meteo.com/v1/search');
+        assert.equal(query.searchParams.get('name'), 'Paris'); assert.equal(query.searchParams.get('count'), '10'); assert.equal(query.searchParams.get('language'), language === 'en' ? 'en' : 'zh'); assert.equal(query.searchParams.get('format'), 'json');
+        const buttons = page.locator('#city-search-results li > button'), resultText = await buttons.first().innerText();
+        for (const part of ['Paris', language === 'en' ? 'France' : '法国', 'Europe/Paris']) assert(resultText.includes(part), resultText);
+        await noOverflow(page); await capture(page, `history-search-results-${language}-390-light`);
+        await buttons.first().focus(); await page.keyboard.press('Enter');
+        await page.waitForFunction(() => document.querySelector('#daily-local-time').textContent.startsWith('Paris'));
+        await clocks(page, language, { zh: 'Paris', en: 'Paris', tz: 'Europe/Paris' });
+        assert((await page.locator('#daily-city option:checked').innerText()).startsWith('Paris'));
+        await page.waitForFunction(() => [...Array(localStorage.length)].map((_, index) => localStorage.key(index)).some(key => key === 'xieyuqing-weather-v3:48.85341|2.34880|Europe/Paris'));
+        const saved = await page.evaluate(() => JSON.parse(localStorage.getItem('xieyuqing-home-city-v2'))); assert.equal(saved.version, 1); assert.equal(saved.city.tz, 'Europe/Paris'); assert.equal(saved.city.lat, 48.85341); assert.equal(saved.city.lon, 2.3488);
+        const priorForecasts = weather.length, priorSearches = searches.length, storageStart = await page.evaluate(() => window.__round5Storage.length);
+        await page.locator('.site-header .brand').click(); await page.waitForURL(origin + prefix + '/'); await ready(page); await waitGlance(page);
+        const homepageReads = await page.evaluate(start => window.__round5Storage.slice(start).filter(item => /weather|home-city/.test(item.key)), storageStart); assert.deepEqual(homepageReads, []);
+        assert.equal(weather.length, priorForecasts); assert.equal(searches.length, priorSearches); assert.equal(await page.locator('#city-search-form,#daily-weather').count(), 0);
+        await clickFull(page, language); await clocks(page, language, { zh: 'Paris', en: 'Paris', tz: 'Europe/Paris' });
+        assert.equal(weather.length, priorForecasts, 'Fresh matching city cache avoids a repeated forecast'); assert.equal(searches.length, priorSearches, 'Reopening a saved city needs no geocoding');
+        weather.forEach(item => assertForecastQuery(item.url)); await noOverflow(page); await capture(page, `history-selected-paris-${language}-390-light`);
+        return { forecasts: weather.length, searches: searches.length, saved };
+      } finally { await ctx.close(); }
+    });
+    await check('late geocoding and forecast responses cannot overwrite the latest city', async () => {
+      const { ctx, weather, searches } = await context({ width: 390,
+        searchMock: url => url.searchParams.get('name') === 'Slow' ? { delay: 800, body: { results: [{ ...parisResults[0], id: 1850147, name: 'Tokyo', latitude: 35.6895, longitude: 139.69171, timezone: 'Asia/Tokyo', country: 'Japan', country_code: 'JP' }] } } : { body: { results: parisResults } },
+        forecastMock: url => Number(url.searchParams.get('latitude')) === 31.2304 ? { delay: 800, body: forecast({ temperature: 33 }) } : { body: forecast() }
+      });
+      try {
+        const page = await ctx.newPage(); await go(page, '/en/today/'); await waitFull(page);
+        const firstSearch = page.waitForRequest(request => request.url().startsWith('https://geocoding-api.open-meteo.com/'));
+        await page.locator('#city-search-input').fill('Slow'); await page.locator('#city-search-input').press('Enter'); await firstSearch;
+        await page.locator('#city-search-input').fill('Paris'); await page.locator('#city-search-input').press('Enter');
+        await page.waitForFunction(() => document.querySelector('#city-search-results')?.textContent.includes('France'));
+        await page.waitForTimeout(950); assert(!(await page.locator('#city-search-results').innerText()).includes('Tokyo'));
+        const slowForecast = page.waitForRequest(request => request.url().startsWith('https://api.open-meteo.com/')); await page.locator('#daily-city').selectOption('shanghai'); await slowForecast;
+        await page.locator('#daily-city').selectOption('london');
+        await page.waitForFunction(() => document.querySelector('#daily-local-time').textContent.startsWith('London') && document.querySelector('#daily-weather strong')?.textContent === '21°C');
+        await page.waitForTimeout(950); assert.equal(await page.locator('#daily-weather strong').textContent(), '21°C'); await clocks(page, 'en'); await noOverflow(page);
+        return { forecasts: weather.length, searches: searches.length };
+      } finally { await ctx.close(); }
+    });
+    for (const language of ['zh-CN', 'en']) await check('search and forecast failures preserve readable calendar and allow recovery ' + language, async () => {
+      const { ctx, weather, searches } = await context({ width: 320,
+        searchMock: url => url.searchParams.get('name') === 'Empty' ? { body: { results: [] } } : { status: 503, body: {} },
+        forecastMock: url => Number(url.searchParams.get('latitude')) === 31.2304 ? { status: 503, body: {} } : { body: forecast() }
+      });
+      try {
+        const page = await ctx.newPage(), prefix = language === 'en' ? '/en' : ''; await go(page, prefix + '/today/'); await waitFull(page);
+        await page.locator('#city-search-input').fill('Empty'); await page.locator('#city-search-input').press('Enter');
+        await page.waitForFunction(() => /没有|未找到|No (?:cities|results|matching)/i.test(document.querySelector('#city-search-status').textContent)); assert.equal(await page.locator('#city-search-results button').count(), 0);
+        await page.locator('#city-search-input').fill('Offline'); await page.locator('#city-search-input').press('Enter');
+        await page.waitForFunction(() => /暂|失败|unavailable|try again/i.test(document.querySelector('#city-search-status').textContent)); assert.equal(await page.locator('#city-search-results button').count(), 0);
+        await page.locator('#daily-city').selectOption('shanghai'); await page.waitForFunction(() => /暂不可用|unavailable/i.test(document.querySelector('#daily-weather').textContent));
+        await clocks(page, language, { zh: '上海', en: 'Shanghai', tz: 'Asia/Shanghai' });
+        assert((await page.locator('#daily-calendar-lunar').textContent()).trim()); assert((await page.locator('#daily-calendar-term').textContent()).trim());
+        await page.locator('#daily-city').selectOption('london'); await page.waitForFunction(() => document.querySelector('#daily-weather strong')?.textContent === '21°C'); await clocks(page, language);
+        await noAlmanac(page); await noOverflow(page); await capture(page, `history-weather-recovery-${language}-320-light`);
+        return { forecasts: weather.length, searches: searches.length };
+      } finally { await ctx.close(); }
+    });
+    for (const language of ['zh-CN', 'en']) await check('all supported WMO conditions and current-condition safety hints ' + language, async () => {
+      const codes = [0,1,2,3,45,48,51,53,55,56,57,61,63,65,66,67,71,73,75,77,80,81,82,85,86,95,96,97,99]; let activeCode = 0, activeTemperature = 21.4;
+      const { ctx, weather } = await context({ forecastMock: () => { const body = forecast({ code: activeCode, temperature: activeTemperature }); body.daily.temperature_2m_max = [22]; body.daily.temperature_2m_min = [12]; body.daily.precipitation_probability_max = [0]; return { body }; } });
+      try {
+        const page = await ctx.newPage(); await go(page, language === 'en' ? '/en/today/' : '/today/'); await waitFull(page);
+        for (const [index, code] of codes.entries()) {
+          activeCode = code; activeTemperature = 10 + index;
+          const response = page.waitForResponse(item => item.url().startsWith('https://api.open-meteo.com/'));
+          await page.evaluate(() => { const keys = [...Array(localStorage.length)].map((_, index) => localStorage.key(index)); for (const key of keys) if (key.startsWith('xieyuqing-weather-')) localStorage.removeItem(key); document.dispatchEvent(new Event('visibilitychange')); });
+          await response; await page.waitForFunction(value => document.querySelector('#daily-weather strong')?.textContent === value + '°C', activeTemperature);
+          const condition = await page.locator('#daily-weather > span').innerText(), hint = await page.locator('#daily-weather-hint').innerText();
+          assert(condition.trim() && !/unknown|未知|暂不可用|unavailable/i.test(condition), code + ': ' + condition);
+          const pattern = code <= 3 ? (language === 'en' ? /clear|cloud|overcast/i : /晴|云|阴/) : code <= 48 ? (language === 'en' ? /fog/i : /雾/) : code <= 57 ? (language === 'en' ? /drizzle/i : /毛毛雨/) : code <= 67 ? (language === 'en' ? /rain/i : /雨/) : code <= 77 ? (language === 'en' ? /snow/i : /雪/) : code <= 82 ? (language === 'en' ? /shower|rain/i : /阵雨|雨/) : code <= 86 ? (language === 'en' ? /snow/i : /雪/) : (language === 'en' ? /thunder/i : /雷/);
+          assert(pattern.test(condition), code + ': ' + condition);
+          if (code > 3) { assert(await page.locator('#daily-weather-hint').isVisible()); assert(language === 'en' ? /visibility|fog|rain|umbrella|snow|slip|ice|icy|thunder|lightning/i.test(hint) : /雾|能见度|雨|伞|雪|滑|冰|雷/.test(hint), code + ': ' + hint); }
+          else { assert(await page.locator('#daily-weather-hint').isVisible()); assert(language === 'en' ? /weather|sun/i.test(hint) : /天气|日照|防晒/.test(hint), hint); }
+          process.stdout.write('WMO ' + language + ' ' + code + ' passed\n');
+        }
+        assert.equal(weather.length, codes.length + 1); return { codes };
+      } finally { await ctx.close(); }
+    });
+    for (const language of ['zh-CN', 'en']) await check('reduced motion preserves the static timeline and interactive globe ' + language, async () => {
+      const { ctx, weather, searches } = await context({ width: 390, theme: 'dark', reducedMotion: 'reduce' });
+      try {
+        const page = await ctx.newPage(), prefix = language === 'en' ? '/en' : ''; await go(page, prefix + '/'); await waitGlance(page); await noAlmanac(page); assert.equal(weather.length, 0); assert.equal(searches.length, 0);
+        assert(await page.evaluate(() => matchMedia('(prefers-reduced-motion: reduce)').matches));
+        await clickFull(page, language); await timeline(page, language); await clocks(page, language); await drag(page); await noOverflow(page); await capture(page, `history-reduced-motion-${language}-390-dark`);
       } finally { await ctx.close(); }
     });
     await check('all generated local resources and page scopes are clean', async () => { assert.deepEqual(report.pageErrors, []); assert.deepEqual(report.missing, []); });

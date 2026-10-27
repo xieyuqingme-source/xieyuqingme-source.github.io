@@ -62,6 +62,13 @@ class PersonalMapTests(unittest.TestCase):
             self.assertIn('id="map-maker-toggle"',tool)
             self.assertIn('aria-pressed="false"',tool)
             self.assertIn('data-maker-state="preview"',tool)
+            self.assertNotIn('id="mode-mine"',tool)
+            main=tool.split('<main',1)[1].split('</main>',1)[0]
+            self.assertNotIn('href="'+('/en/map/' if language=='en' else '/map/')+'"',main)
+            mode=re.search(r'<div class="map-mode">(.*?)</div>',main,re.S)[1]
+            self.assertNotIn('谢雨卿的足迹',mode)
+            self.assertNotIn('Xie Yuqing’s footprints',mode)
+            self.assertIn('href="'+('/en/game/' if language=='en' else '/game/')+'"',main)
             self.assertEqual(self.payload(tool)['records'],[])
 
     def test_retired_media_cleanup_refuses_links_and_directories(self):

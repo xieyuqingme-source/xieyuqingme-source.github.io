@@ -6,15 +6,17 @@ by an explicit local export/preview operation, never discovered by the builder.
 from datetime import date
 import hashlib
 from html import escape
+import ipaddress
 import json
 import math
 from pathlib import Path
 import re
 import shutil
+from urllib.parse import unquote, urlsplit
 
 FIELDS = ("id", "start", "end", "city", "region", "country", "lat", "lon",
           "title", "description", "album", "certainty")
-OPTIONAL_FIELDS = ("stayType", "groupId", "sequence", "ongoing", "baseReturn", "returnAfter")
+OPTIONAL_FIELDS = ("stayType", "groupId", "sequence", "ongoing", "baseReturn", "returnAfter", "references")
 # Curated offline city/county-centre display points, not inferred addresses or GPS.
 # A label missing from this dictionary is an error; no network geocoder is used.
 TABLE_PLACES = {
@@ -321,6 +323,57 @@ def _date(value):
         raise ValueError("Invalid footprints calendar date.") from exc
 
 
+def public_reference_url(value):
+    """Allow public HTTPS citation URLs without contacting their destination."""
+    if (not isinstance(value, str) or len(value) > 2048 or value != value.strip()
+            or not re.match(r"https://", value, re.I) or "\\" in value
+            or any(c.isspace() or ord(c) < 32 or 127 <= ord(c) <= 159 or c in "<>" for c in value)
+            or re.search(r"%(?![0-9a-f]{2})", value, re.I)):
+        return False
+    try:
+        decoded = unquote(value, errors="strict")
+        if any(ord(c) < 32 or 127 <= ord(c) <= 159 for c in decoded):
+            return False
+        parsed = urlsplit(value)
+        if (parsed.scheme.lower() != "https" or parsed.username is not None or parsed.password is not None
+                or parsed.port not in {None, 443} or not parsed.hostname):
+            return False
+        host = unquote(parsed.hostname, errors="strict").encode("idna").decode("ascii").lower().removesuffix(".")
+        if (len(host) > 253 or "." not in host or ":" in host
+                or re.search(r"(?:^|\.)(?:localhost|local|internal|lan|home|test|invalid|onion)$", host)):
+            return False
+        # Browsers also accept shortened, integer, octal and hexadecimal IPv4
+        # spellings. None is a domain name for an external source citation.
+        if all(re.fullmatch(r"(?:0x[0-9a-f]+|[0-9]+)", part) for part in host.split(".")):
+            return False
+        try:
+            ipaddress.ip_address(host)
+            return False
+        except ValueError:
+            pass
+        return all(len(part) <= 63 and re.fullmatch(r"[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", part)
+                   for part in host.split("."))
+    except (ValueError, UnicodeError):
+        return False
+
+
+def validate_references(value, maximum=6, *, allow_empty=False):
+    if (not isinstance(value, list) or not (0 if allow_empty else 1) <= len(value) <= maximum):
+        raise ValueError(f"Footprints references need 1 to {maximum} public HTTPS sources.")
+    result = []
+    for item in value:
+        if not isinstance(item, dict) or set(item) != {"label", "url"}:
+            raise ValueError("A footprints reference needs label and url only.")
+        label = item["label"]
+        if (not isinstance(label, str) or not label.strip() or len(label) > 120
+                or PRIVATE_PATH.search(label) or re.search(r"file://|\\\\|/(?:tmp)/", label, re.I)
+                or any(ord(c) < 32 or 127 <= ord(c) <= 159 or c in "<>" for c in label)
+                or not public_reference_url(item["url"])):
+            raise ValueError("Invalid footprints reference label or public HTTPS URL.")
+        result.append({"label": label.strip(), "url": item["url"]})
+    return result
+
+
 def validate_catalog(data):
     if (not isinstance(data, dict) or set(data) != {"version", "title", "records"}
             or type(data["version"]) is not int or data["version"] != 1
@@ -353,6 +406,8 @@ def validate_catalog(data):
             raise ValueError("Unconfirmed interpretations cannot enter the public map.")
         if record["album"] and not re.fullmatch(r"/photos/[a-z][a-z0-9]*(?:-[a-z0-9]+)*/", record["album"]):
             raise ValueError("Albums must be local /photos/album-slug/ links.")
+        if "references" in record:
+            validate_references(record["references"])
         if "stayType" in record and (not isinstance(record["stayType"], str) or record["stayType"] not in {"base", "visit"}):
             raise ValueError("stayType must be base or visit.")
         if "groupId" in record and (not isinstance(record["groupId"], str) or not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9_-]{0,79}", record["groupId"])):
@@ -512,9 +567,13 @@ def public_photo_gallery(root, data):
 
 def build_map(root, output, address, data, preview=False, *, language="zh-CN", maker=False):
     from site_i18n import localize_page, localized_path
+    from footprints_people import load_people, publish_people
     if language not in {"zh-CN", "en"}:
         raise ValueError("Site language must be zh-CN or en.")
     root, output = Path(root), Path(output)
+    people = load_people(root) if maker else None
+    people_data = people["manifest"] if people else {"version": 1, "people": []}
+    people_json = json.dumps(people_data, ensure_ascii=False).replace("&", "\\u0026").replace("<", "\\u003c").replace(">", "\\u003e")
     public = dict(validate_catalog(data))
     if maker:
         public = {"version": 1, "title": "我的足迹地图", "records": []}
@@ -525,9 +584,9 @@ def build_map(root, output, address, data, preview=False, *, language="zh-CN", m
     display = load_display_metadata(root, public, preview=preview) if not maker else {"version": 1, "records": {}, "places": {}}
     display_json = json.dumps(display, ensure_ascii=False).replace("&", "\\u0026").replace("<", "\\u003c").replace(">", "\\u003e")
     page = (root / "home/map.template.html").read_text(encoding="utf-8")
-    if "{{" in page.replace("{{site_url}}", "").replace("{{map_data}}", "").replace("{{map_display_data}}", ""):
+    if "{{" in page.replace("{{site_url}}", "").replace("{{map_data}}", "").replace("{{map_display_data}}", "").replace("{{people_data}}", ""):
         raise ValueError("Unresolved map template placeholder.")
-    page = page.replace("{{site_url}}", escape(address, quote=True)).replace("{{map_data}}", serialized).replace("{{map_display_data}}", display_json)
+    page = page.replace("{{site_url}}", escape(address, quote=True)).replace("{{map_data}}", serialized).replace("{{map_display_data}}", display_json).replace("{{people_data}}", people_json)
     page = page.replace('data-map-scope="public"', 'data-map-scope="maker" data-maker-state="preview"' if maker else 'data-map-scope="public"')
     if maker:
         page = page.replace('data-i18n="map.html.s015"', 'data-i18n="map.maker.title"').replace('data-i18n="map.html.s016"', 'data-i18n="map.maker.subtitle"')
@@ -565,6 +624,8 @@ def build_map(root, output, address, data, preview=False, *, language="zh-CN", m
         folder.mkdir(parents=True, exist_ok=True)
     target = output / route / "index.html"
     safe_file(output, target)
+    if people:
+        publish_people(output, people)
     target.write_text(page, encoding="utf-8")
     remove_retired_map_video(output)
     for name in ASSETS:

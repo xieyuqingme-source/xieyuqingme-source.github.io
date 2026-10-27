@@ -26,7 +26,8 @@ test('NOAA solar geometry agrees with equinox, solstices and the subsolar zenith
 
 test('four city sunrise/sunset use the local civil date, including London after DST', () => {
   const expected = {beijing: [396,1040],shanghai: [365,1031],kuala: [417,1138],london: [403,1005]};
-  for (const [key, city] of Object.entries(CITIES)) {
+  for (const key of Object.keys(expected)) {
+    const city = CITIES[key];
     const events = A.riseSet(epoch, city);
     const minute = date => {
       const rounded = new Date(Math.round(date.getTime() / 60000) * 60000);
@@ -201,7 +202,7 @@ test('mean lunar phase follows the synodic cycle and rejects invalid dates',() =
   assert.throws(() => A.moonPhase('invalid'),TypeError);
 });
 
-test('lazy globe mode adds four world clocks without a second weather request and pauses rendering',async () => {
+test('lazy globe mode adds six world clocks without a second weather request and pauses rendering',async () => {
   const h = harness();
   let draws = 0;
   const context = {setTransform() {},clearRect() { draws++; },createRadialGradient:() => ({addColorStop() {}}),beginPath() {},arc() {},fill() {},fillText() {}};
@@ -209,8 +210,8 @@ test('lazy globe mode adds four world clocks without a second weather request an
   h.window.getComputedStyle = () => ({getPropertyValue:() => ''});
   const control = createEarth(h.document,h.window,{globeOnly:true});
   assert.equal(h.requests.length,0);
-  assert.equal(h.nodes['daily-world-clocks'].children.length,4);
-  assert.match(h.nodes['daily-world-clocks'].textContent,/北京.*吉隆坡.*伦敦.*纽约/);
+  assert.equal(h.nodes['daily-world-clocks'].children.length,6);
+  assert.match(h.nodes['daily-world-clocks'].textContent,/北京.*吉隆坡.*伦敦.*纽约.*莫斯科.*迪拜/);
   assert.match(h.nodes['daily-moon-phase'].textContent,/月相/);
   const before = draws; control.setPaused(true); control.refresh(); assert.equal(draws,before); assert.equal(control.getState().paused,true);
   control.setPaused(false); assert.ok(draws > before); control.destroy(); await settle(); assert.equal(h.intervals.size,0);
@@ -237,4 +238,30 @@ test('a lazy globe keeps the already selected city when storage is unavailable',
   assert.match(h.nodes['daily-local-time'].textContent,/吉隆坡/);
   assert.equal(h.requests.length,0);
   control.destroy(); await settle();
+});
+const CM = A.cityModel;
+test('one city model supplies validated presets, custom observers, legacy decoding and clock membership',() => {
+  assert.equal(CITIES,CM.presets);
+  for (const value of Object.values(CM.presets)) assert.ok(CM.normalize(value));
+  for (const id of ['beijing','shanghai','kuala','london','newyork','moscow','dubai','chengdu','mianyang']) assert.ok(CM.presets[id]);
+  assert.equal(CM.decode('london').tz,'Europe/London');
+  const paris = CM.fromResult({id:2988507,name:'Paris',country:'France',country_code:'FR',admin1:'Île-de-France',latitude:48.8534,longitude:2.3488,timezone:'Europe/Paris'});
+  assert.ok(paris); assert.match(CM.label(paris,true),/Paris.*France.*Europe\/Paris/);
+  assert.equal(CM.decode(JSON.stringify({version:1,city:paris})).lat,paris.lat);
+  for (const changed of [{lat:999},{lon:181},{lat:'48.8'},{tz:'Invalid/Zone'},{name:'<script>'},{country:''}]) assert.equal(CM.normalize({...paris,...changed}),null);
+  assert.deepEqual(CM.clockCities(CM.presets.beijing).map(value => value.id),['beijing','kuala','london','newyork','moscow','dubai']);
+  assert.deepEqual(CM.clockCities(paris).map(value => value.id),[paris.id,'beijing','kuala','london','newyork','moscow']);
+  const ny = CM.fromResult({id:5128581,name:'New York City',country:'United States',country_code:'US',admin1:'New York',latitude:40.7143,longitude:-74.006,timezone:'America/New_York'});
+  assert.equal(CM.clockCities(ny).at(-1).id,'dubai');
+  assert.equal(CM.clockCities({...ny,name:'Jersey City',en:'Jersey City'}).at(0).name,'Jersey City');
+});
+test('the lazy globe accepts the day card observer and keeps a custom select option unchanged',async () => {
+  const h = harness(), paris = CM.normalize({id:'geo-2988507',name:'Paris',en:'Paris',country:'France',countryCode:'FR',region:'Île-de-France',lat:48.8534,lon:2.3488,tz:'Europe/Paris'});
+  h.nodes['daily-city'].value = 'custom';
+  const control = createEarth(h.document,h.window,{globeOnly:true,city:paris});
+  assert.equal(h.nodes['daily-city'].value,'custom'); assert.equal(control.getState().observer.lat,paris.lat); assert.equal(control.getState().observer.tz,paris.tz);
+  assert.equal(h.nodes['daily-world-clocks'].children.length,6); assert.match(h.nodes['daily-world-clocks'].children[0].textContent,/Paris/); assert.match(h.nodes['daily-world-clocks'].children[5].textContent,/莫斯科/); assert.match(h.nodes['daily-local-time'].textContent,/Paris/);
+  assert.equal(h.requests.length,0); assert.equal(control.setCity({...paris,lat:1000}),false);
+  assert.equal(control.setCity(CM.presets.newyork),true); assert.match(h.nodes['daily-world-clocks'].children[5].textContent,/迪拜/); assert.match(h.nodes['daily-local-time'].textContent,/纽约/); assert.equal(h.nodes['daily-city'].value,'custom');
+  control.destroy(); await settle(); assert.equal(h.intervals.size,0);
 });

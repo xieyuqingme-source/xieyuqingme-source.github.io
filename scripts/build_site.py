@@ -50,10 +50,10 @@ HOME_DAILY_ASSETS = ("home-daily.css", "home-daily.js", "home-now.js", "home-ear
                      "vendor/lunar-javascript-1.7.7.js", "vendor/lunar-javascript-1.7.7.LICENSE")
 HOME_PHOTO = "/photos/images/p-71f77ab6511ec1ce656a58a3-18000666287e1d55-640.webp"
 HOME_PICKS = "home/home-picks.json"
-TODAY_TITLES = {"zh-CN": "今日简报 · 谢雨卿", "en": "Today’s brief · Xie Yuqing"}
+TODAY_TITLES = {"zh-CN": "历史中的今天 · 谢雨卿", "en": "Today in history · Xie Yuqing"}
 TODAY_DESCRIPTIONS = {
-    "zh-CN": "每天人工挑选的几条新闻，配上日历、节气、天气、黄历和此刻的地球。",
-    "en": "A few hand-picked news stories each day, with the calendar, solar terms, weather, almanac and the Earth right now.",
+    "zh-CN": "新闻选读，配上日历、节气、天气和此刻的地球。",
+    "en": "Selected news, with the calendar, solar terms, weather and the Earth right now.",
 }
 ABOUT_FIELDS = {"name", "english_name", "chinese_bio", "english_bio", "chinese_colophon", "english_colophon",
                 "written_note", "english_written_note", "wechat", "email"}
@@ -193,16 +193,16 @@ def render_site_notes(waline, repository, language="zh-CN"):
     database = escape(waline.get("databaseProvider", ""))
     if language == "en":
         items = ['Pages are generated with Python and use system fonts only, with no external font files.',
-                 'The Today’s brief page: the calendar, weather and globe are calculated live; news is selected by hand, marked with its update date, and paused when it goes out of date. The homepage shows only the date, solar term, almanac and a small globe.',
-                 'Weather on the Today’s brief page comes from Open-Meteo, queried by city only. Your location is never requested; the chosen city and the latest reading stay in your browser. The homepage makes no weather request.',
+                 'The Today in history page: the calendar, weather and globe are calculated live; news is selected by hand, marked with its update date, and paused when it goes out of date. The homepage shows only the date, solar term and a small globe.',
+                 'Weather on the Today in history page comes from Open-Meteo. City searches send the name you enter to its geocoding service; your location is never requested. The chosen city and the latest reading stay in your browser. The homepage makes no weather request.',
                  'Article view counts and comments use Waline. These requests send your IP address and browser information to the Waline backend and its providers'
                  + (f' (hosting: {host}; database: {database})' if host and database else '') + '. The comment area explains what is shown publicly.',
                  'Map geography comes from Natural Earth (public domain). Project screenshots and other third-party sources are credited in each project.']
         title = "About this site"
     else:
         items = ['页面用 Python 生成。全站使用设备自带的字体，不加载外部字体文件。',
-                 '「今日简报」页：日历、天气和地球是实时计算的；新闻由人工挑选，标明更新日期，过期会暂停显示。首页只放日期、节气、黄历和一个小地球。',
-                 '今日简报页的天气来自 Open-Meteo，只按城市查询，不读取你的位置；所选城市和最近一次天气只保存在你的浏览器里。首页不请求天气。',
+                 '「历史中的今天」页：日历、天气和地球是实时计算的；新闻由人工挑选，标明更新日期，过期会暂停显示。首页只放日期、节气和一个小地球。',
+                 '历史中的今天页的天气来自 Open-Meteo；搜索城市时会向其地名服务发送输入的城市名，不读取你的位置；所选城市和最近一次天气只保存在你的浏览器里。首页不请求天气。',
                  '文章的浏览量和留言由 Waline 提供：相关请求会把 IP 和浏览器信息发送给 Waline 后端及其托管商'
                  + (f'（服务托管：{host}；数据库：{database}）' if host and database else '') + '。留言区另有说明。',
                  '足迹地图的底图来自 Natural Earth（公有领域）；作品截图与其他第三方来源见各项目说明。']

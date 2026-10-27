@@ -57,22 +57,19 @@
 .home-glance .section-head a{font-size:13px;color:var(--accent)}
 .home-glance #glance-title a{font:inherit;color:inherit}
 .glance-layout{display:grid;grid-template-columns:minmax(0,1fr) 140px;gap:14px;align-items:center;min-width:0}
-.glance-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;min-width:0}
+.glance-cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;min-width:0}
 .daily-home .glance-cards:hover{text-decoration:none}
 .glance-card{display:flex;flex-direction:column;gap:6px;min-width:0;padding:12px 14px;border:1px solid var(--line);border-radius:var(--radius);background:var(--surface)}
 .glance-cards:hover .glance-card{border-color:var(--control-line)}
 .glance-main{display:block;font:600 16px/1.6 var(--sans);color:var(--ink)}
 .glance-detail{display:block;font-size:13px;line-height:1.75;color:var(--muted)}
-.glance-note{display:block;font-size:11px;line-height:1.6;color:var(--muted)}
-.glance-yi{color:var(--accent)}
-.glance-ji{color:var(--warm)}
 .glance-earth{width:140px;min-width:0;align-self:center}
 .glance-earth canvas{display:block;width:140px;height:auto;aspect-ratio:1/1.02;touch-action:pan-y}
 .glance-earth p{font-size:11px;line-height:1.7;text-align:center;color:var(--muted);overflow-wrap:anywhere}
 
 /* Today: all content stays in the document's natural scroll flow. */
 .today-main{padding-block:38px 24px}
-.today-intro{margin-bottom:30px;padding-bottom:24px;border-bottom:1px solid var(--line)}
+.today-intro{display:grid;grid-template-columns:minmax(0,1fr) minmax(240px,.8fr);align-items:center;gap:24px 40px;margin-bottom:30px;padding-bottom:24px;border-bottom:1px solid var(--line)}
 .today-intro h1{margin-bottom:12px}
 .today-brief .yl-today{display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:32px;align-items:start}
 .today-brief .yl-news,.today-brief .yl-sidebar{min-width:0}
@@ -97,20 +94,13 @@
 .yl-cal-copy strong{color:var(--ink);font-size:14px;font-weight:600}
 .yl-calendar>.yl-small,.yl-solar-term{margin-top:8px;font-size:13px;line-height:1.8}
 .yl-solar-term{color:var(--accent)}
-.yl-weather{padding-top:14px;display:flex;align-items:center;justify-content:space-between;gap:10px}
-.yl-city{font-size:14px;border:1px solid var(--line);padding:6px 10px;background:var(--paper);max-width:140px;border-radius:var(--radius)}
-.yl-weather-readout{text-align:right;font-size:13px;line-height:1.8;color:var(--muted);max-width:180px;overflow-wrap:anywhere}
+.yl-weather{padding-top:16px}
+.yl-city{display:block;width:100%;max-width:100%;font-size:14px;border:1px solid var(--control-line);padding:9px 10px;background:var(--paper);border-radius:var(--radius);min-height:42px}
+.yl-weather-readout{text-align:left;font-size:14px;line-height:1.8;color:var(--muted);overflow-wrap:anywhere}
 .yl-weather-readout strong{font:300 26px/1.3 var(--sans);color:var(--ink);margin-right:5px}
 .yl-weather-readout small{display:block;font-size:12px;line-height:1.7;margin-top:4px}
 .yl-weather-readout a{text-decoration:underline;text-underline-offset:3px}
-.weather-hint{color:var(--accent)}
-.yl-almanac{font-size:13px;line-height:1.9;margin-top:16px;padding-top:12px;border-top:1px dashed var(--line);color:var(--muted)}
-.almanac-preview{margin:0}
-.almanac-preview>div{display:grid;grid-template-columns:auto minmax(0,1fr);gap:10px;margin-bottom:6px}
-.almanac-preview dt{color:var(--accent)}
-.almanac-preview dd{margin:0}
-.yl-almanac p{margin-top:8px!important}
-.almanac-credit{font-size:11px;color:var(--muted)}
+.weather-hint{color:var(--accent);margin-top:12px!important;padding:10px 12px;border-left:2px solid var(--accent);background:var(--soft)}
 .yl-earth{padding-top:26px}
 .yl-earth-heading{display:flex;justify-content:space-between;gap:8px 12px;align-items:baseline;flex-wrap:wrap}
 .yl-earth-heading h2{font:600 22px/1.5 var(--sans);color:var(--ink)}
@@ -145,6 +135,22 @@
 .yl-street-links a{font-size:13px;text-decoration:underline;text-underline-offset:4px}
 #daily-meme-added{color:var(--muted);font-size:13px;margin-top:10px}
 #daily-meme-origin,#daily-meme-example,#daily-meme-why{font-size:14px;line-height:1.8;margin-top:8px}
+/* A quiet timeline: the point is today, with room for the future. */
+.today-intro-copy{min-width:0}.today-timeline{margin:0;min-width:0;width:100%;max-width:440px;justify-self:end;color:var(--accent)}
+.today-timeline-svg{display:block;width:100%;height:auto;max-height:74px;overflow:visible}
+.timeline-route,.timeline-ticks,.timeline-arrow{fill:none;stroke-width:1.4}.timeline-ticks,.timeline-arrow{stroke:currentColor}.timeline-ticks{opacity:.25}.timeline-arrow{opacity:.5;stroke-linecap:round;stroke-linejoin:round}
+.timeline-halo{fill:var(--paper);stroke:currentColor;stroke-width:1;stroke-opacity:.25}.timeline-today-point{fill:currentColor}
+.timeline-labels{display:flex;align-items:baseline;justify-content:space-between;gap:12px;font-size:12px;line-height:1.7;color:var(--muted)}.timeline-labels strong{font-weight:600;color:var(--accent)}
+.today-timeline figcaption{text-align:center;font-size:12px;line-height:1.8;color:var(--muted);margin-top:7px}.timeline-date-line{display:block;font-size:11px;font-variant-numeric:tabular-nums}
+/* Choosing a place is explicit; local weather never needs device location. */
+.city-picker{margin-top:18px;padding-top:16px;border-top:1px solid var(--line);min-width:0}.city-picker>label{display:block;margin-bottom:6px}.city-picker #daily-city-label{margin-top:7px}
+.city-search-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;margin-top:12px;align-items:stretch}
+.city-search-row input{box-sizing:border-box;width:100%;min-width:0;border:1px solid var(--control-line);border-radius:var(--radius);background:var(--paper);padding:9px 10px;color:var(--ink);font-size:13px;min-height:42px}
+.daily-home .city-search-submit{border:1px solid var(--control-line);border-radius:var(--radius);background:var(--surface);padding:8px 10px;font-size:13px;line-height:1.5;color:var(--ink);min-height:42px}
+.daily-home .city-search-submit:hover{border-color:var(--accent);color:var(--accent)}.city-search-status:empty{display:none}.city-search-status{margin-top:8px!important}
+.city-search-results{display:grid;gap:8px;list-style:none;padding:0;margin:10px 0 0}.city-search-results li{min-width:0}.daily-home .city-search-results button{display:block;width:100%;text-align:left;white-space:normal;overflow-wrap:anywhere;padding:9px 10px;border:1px solid var(--line);border-radius:var(--radius);background:var(--surface);font-size:13px;line-height:1.7}
+.daily-home .city-search-results button:hover{border-color:var(--accent)}.city-search-source{margin-top:8px!important;font-size:11px;line-height:1.8;color:var(--muted)}.city-search-source a{text-decoration:underline;text-underline-offset:3px}
+.weather-details{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 14px;margin:14px 0 0;min-width:0}.weather-details:empty{display:none}.weather-details>div{min-width:0}.weather-details dt{font-size:12px;line-height:1.7;color:var(--muted)}.weather-details dd{margin:0;font-size:14px;line-height:1.7;color:var(--ink);font-variant-numeric:tabular-nums}
 /* The retained global music panel also follows natural flow on this page. */
 .today-page .music-panel{max-height:none;overflow:visible}
 
@@ -168,7 +174,7 @@
  .home-photo-card{flex:0 0 72%;scroll-snap-align:start}
  .home .yl-project{grid-template-columns:38% minmax(0,1fr);gap:14px;padding:12px}
  .today-main{padding-top:28px}
- .today-intro{margin-bottom:24px;padding-bottom:20px}
+ .today-intro{grid-template-columns:minmax(0,1fr);gap:24px;margin-bottom:24px;padding-bottom:20px}
  .today-brief .yl-today{grid-template-columns:minmax(0,1fr);gap:28px}
  .today-brief .yl-sidebar{padding:24px 0 0;border:0;border-top:1px solid var(--line)}
  .yl-bottomline{grid-template-columns:minmax(0,1fr);gap:16px;margin-top:28px}

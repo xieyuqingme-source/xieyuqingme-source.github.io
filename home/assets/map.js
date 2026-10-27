@@ -39,6 +39,8 @@
   const labelMeasure = document.createElement("canvas").getContext("2d");
   let labelSignature = "";
   const undoStack = [];
+  let peopleCatalogue = {version:1,people:[]}, peopleBusy = false, peopleRequest = null, peopleTicket = 0, peopleDisposed = false, peoplePreviewId = null;
+  const peopleCache = new Map();
   const timelineNodes = new Map(), markerNodes = new Map(), reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
   let videoFrame = { state: "idle", count: 0, index: 0 }, recording = false;
   const player = { getState: () => videoFrame, pause() {}, reset(items) { videoFrame = { state: "idle", count: items.length, index: 0 }; showPlaybackState(videoFrame); drawPlaybackFrame(videoFrame); } };
@@ -50,6 +52,7 @@
     $("undo-data").disabled = recording || !undoStack.length;
     $("undo-data").title = undoStack.length ? I("map.main.s002", {p0:(D ? D.retranslate(undoStack.at(-1).label) : undoStack.at(-1).label)}, "撤销{p0}") : I("map.main.s003", {}, "暂无可撤销的更改");
     $("clear-data").disabled = recording || !guest.records.length;
+    syncPeopleTools();
   }
   function commitGuest(next, label) {
     if (!canEdit()) return false;
@@ -57,6 +60,90 @@
     if (before === M.json(valid)) return false;
     undoStack.push({ document: before, label }); if (undoStack.length > 50) undoStack.shift();
     guest = valid; updateDraftTools(); return true;
+  }
+  function peopleLanguage() { return D?.lang() === "en" ? "en" : "zh-CN"; }
+  function chosenPerson() { return peopleCatalogue.people.find(item => item.id === $("people-choice")?.value); }
+  function syncPeopleTools() {
+    if (!maker || !$("people-choice")) return;
+    const entry = chosenPerson(), unavailable = !canEdit() || recording;
+    $("people-choice").disabled = unavailable || !peopleCatalogue.people.length;
+    $("people-preview").disabled = unavailable || peopleBusy || !entry || !entry.record_count;
+    $("people-import").disabled = unavailable || peopleBusy || !entry || !entry.record_count;
+    $("people-status").setAttribute("aria-busy",String(peopleBusy));
+  }
+  function renderReferences(target, references) {
+    if (!target) return;
+    target.replaceChildren();
+    for (const reference of references) {
+      const item = element("li"), link = element("a",reference.label);
+      link.href = reference.url; link.target = "_blank"; link.rel = "noopener noreferrer"; item.append(link); target.append(item);
+    }
+  }
+  function fillPeopleChoices() {
+    const choice = $("people-choice"); if (!maker || !choice) return;
+    const selected = choice.value; choice.replaceChildren();
+    const empty = element("option",I("map.people.placeholder",{},"请选择人物")); empty.value = ""; choice.append(empty);
+    for (const entry of peopleCatalogue.people) { const option = element("option",entry.label[peopleLanguage()]); option.value = entry.id; choice.append(option); }
+    choice.value = peopleCatalogue.people.some(item => item.id === selected) ? selected : "";
+    refreshPeopleDescription();
+  }
+  function refreshPeopleDescription() {
+    if (!maker || !$("people-choice")) return;
+    const entry = chosenPerson(), download = $("people-markdown");
+    $("people-coverage").textContent = entry ? I("map.people.coverage",{name:entry.label[peopleLanguage()],count:entry.record_count,coverage:entry.coverage[peopleLanguage()]},"{name} · {count} 条记录。{coverage}") : "";
+    if (download) { download.hidden = !entry; if (entry) download.href = entry.markdown; else download.removeAttribute("href"); }
+    syncPeopleTools();
+  }
+  function renderPeoplePreview() {
+    const entry = chosenPerson(), bundle = entry && peopleCache.get(entry.id), list = $("people-preview-list"), sources = $("people-provenance");
+    if (!list || !sources) return;
+    list.replaceChildren();
+    const shown = entry && peoplePreviewId === entry.id && bundle;
+    list.hidden = !shown;
+    sources.hidden = !shown || !bundle.sources.length;
+    renderReferences($("people-source-list"),shown ? bundle.sources : []);
+    if (!shown) return;
+    for (const item of bundle.documents[peopleLanguage()].records) {
+      const row = element("li"), date = element("span",M.range(item,peopleLanguage()),"people-preview-date"), place = element("span",[item.city,item.region,item.country].filter((value,index,all) => value && all.indexOf(value) === index).join(" · "),"people-preview-place");
+      row.append(date,place,element("strong",item.title)); list.append(row);
+    }
+  }
+  async function peopleAction(importing) {
+    if (!maker || !canEdit() || recording || peopleBusy) return;
+    const entry = chosenPerson(); if (!entry || !entry.record_count) return;
+    const ticket = ++peopleTicket, selectedLanguage = peopleLanguage();
+    peopleRequest?.abort(); peopleBusy = true; syncPeopleTools();
+    $("people-status").textContent = I("map.people.loading",{},"正在读取本地人物资料…");
+    try {
+      let bundle = peopleCache.get(entry.id);
+      if (!bundle) {
+        const controller = new window.AbortController(); peopleRequest = controller;
+        const timeout = window.setTimeout(() => controller.abort(),10000);
+        try {
+          const response = await fetch(entry.document_url,{credentials:"same-origin",signal:controller.signal});
+          if (!response.ok) throw new Error(I("map.people.unavailable",{},"人物资料暂不可用，请重试。"));
+          const text = await response.text();
+          if (new TextEncoder().encode(text).length > M.MAX_BYTES * 2 + 131072) throw new Error(I("map.people.invalid",{},"人物足迹资料格式无效。"));
+          bundle = M.personBundle(JSON.parse(text),entry);
+        } finally { window.clearTimeout(timeout); }
+        if (peopleDisposed || ticket !== peopleTicket) return;
+        peopleCache.set(entry.id,bundle);
+      }
+      if (peopleDisposed || ticket !== peopleTicket || chosenPerson()?.id !== entry.id) return;
+      if (!importing) {
+        peoplePreviewId = entry.id; $("people-provenance").open = false; renderPeoplePreview();
+        $("people-status").textContent = I("map.people.previewed",{count:entry.record_count},"已预览 {count} 条记录，当前地图和草稿未改变。");
+      } else {
+        if (!canEdit() || recording) { $("people-status").textContent = I("map.people.retryImport",{},"资料已载入，请在可编辑时重新点击导入。"); return; }
+        const result = M.merge(guest,bundle.documents[selectedLanguage]);
+        result.document.title = guest.title;
+        pausePlayback(); commitGuest(result.document,I("map.people.undo",{},"人物足迹导入"));
+        $("visitor-title").value = guest.title; selectedCity = null; render();
+        $("people-status").textContent = I("map.people.imported",{added:result.added,skipped:result.skipped},"已合并 {added} 条记录，跳过相同记录 {skipped} 条。原草稿与标题已保留，可撤销；尚未保存到浏览器。");
+      }
+    } catch (error) {
+      if (!peopleDisposed && ticket === peopleTicket) $("people-status").textContent = I("map.people.failed",{error:error.message},"未导入：{error} 当前草稿未改变。");
+    } finally { if (!peopleDisposed && ticket === peopleTicket) { peopleBusy = false; syncPeopleTools(); } }
   }
   function playbackItems() { const records = selectedCity ? current().records.filter(item => M.cityKey(item) === selectedCity) : current().records; return M.sorted(records); }
   function resetPlayback() { player.reset(playbackItems()); window.dispatchEvent(new Event("footprints:reset")); }
@@ -320,7 +407,7 @@
     $("empty-state").textContent = mode === "visitor" ? I("map.main.s030", {}, "还没有可显示的经历。添加一段停留，或导入自己的足迹文档。") : I("map.main.s031", {}, "尚无已允许展示的经历；待本人核对后再加入。你可以切换到“制作你的地图”记录自己的故事。");
   }
   function render() {
-    $("mode-mine").hidden = !maker; $("mode-visitor").hidden = maker;
+    $("mode-visitor").hidden = maker;
     $("main").dataset.makerState = maker ? (editing ? "edit" : "preview") : "view";
     document.querySelectorAll("[data-maker-route]").forEach(node => { node.hidden = !maker; });
     document.querySelectorAll("[data-maker-only]").forEach(node => { node.hidden = !canEdit(); });
@@ -337,6 +424,8 @@
     const original = current().records.find(record => record.id === id); if (!original) return false;
     const item = shown(original);
     detailId = id; $("detail-title").textContent = item.title;
+    const provenance = $("record-provenance");
+    if (provenance) { provenance.hidden = !original.references?.length; provenance.open = false; renderReferences($("record-reference-list"),original.references || []); }
     $("detail-meta").textContent = `${M.range(item)}${item.certainty === "approximate" ? I("map.main.s032", {}, " · 约略") : I("map.main.s033", {}, " · 已证实")}\n${[item.city, item.region, item.country].filter((value, index, values) => value && values.indexOf(value) === index).join(" · ")}`;
     $("detail-description").textContent = item.description || I("map.main.s034", {}, "这段经历尚未填写说明。");
     $("detail-description").hidden = !!item.description && item.description === item.title;
@@ -471,6 +560,19 @@
     choice.value = selected;
   }
   fillCityDictionary();
+  if (maker && $("people-choice")) {
+    try { peopleCatalogue = M.peopleManifest(JSON.parse($("footprints-people-data")?.textContent || '{"version":1,"people":[]}')); }
+    catch (error) { $("people-status").textContent = I("map.people.failed",{error:error.message},"未导入：{error} 当前草稿未改变。"); }
+    fillPeopleChoices();
+    $("people-choice").addEventListener("change",() => {
+      peopleTicket++; peopleRequest?.abort(); peopleBusy = false; peoplePreviewId = null;
+      $("people-status").textContent = ""; $("people-provenance").open = false;
+      refreshPeopleDescription(); renderPeoplePreview();
+    });
+    $("people-preview").addEventListener("click",() => peopleAction(false));
+    $("people-import").addEventListener("click",() => peopleAction(true));
+    window.SiteNavigation?.own?.(() => { peopleDisposed = true; peopleTicket++; peopleRequest?.abort(); peopleCache.clear(); });
+  }
   $("map-maker-toggle")?.addEventListener("click", () => {
     if (!maker || recording) return;
     editing = !editing; $("record-dialog").close(); $("detail-dialog").close();
@@ -622,7 +724,7 @@
     const example = document.querySelector('a[download][href^="/assets/map-example"]');
     if (example) example.href = window.SiteI18n?.lang() === "en" ? "/assets/map-example.en.md" : "/assets/map-example.md";
     const toggle = $("map-maker-toggle"); if (toggle) toggle.textContent = editing ? I("map.maker.preview", {}, "返回预览") : I("map.maker.title", {}, "制作我的足迹地图");
-    fillCityDictionary(); syncTouchNavigation(); renderSummary(); renderCities(groups(current().records)); renderMap(); renderTimeline(); updateDraftTools();
+    fillCityDictionary(); fillPeopleChoices(); renderPeoplePreview(); syncTouchNavigation(); renderSummary(); renderCities(groups(current().records)); renderMap(); renderTimeline(); updateDraftTools();
     if ($("detail-dialog").open) fillDetail(detailId);
     if ($("record-dialog").open) $("record-dialog-title").textContent = $("record-id").value ? I("map.main.s035", {}, "编辑经历") : mode === "mine" ? I("map.main.s036", {}, "添加到访客草稿") : I("map.main.s037", {}, "添加经历");
     if ($("city-dialog").open && cityDialogSelection) {
@@ -635,7 +737,7 @@
     }
     if (videoFrame.record && videoFrame.state !== "idle") showPlaybackRecord(videoFrame);
     if (expanded) document.querySelector(".map-canvas-panel").setAttribute("aria-label", I("map.main.s013", {}, "足迹地图大图；按 Escape 退出"));
-    if (D) D.refreshMessages(["map-status", "record-error", "avatar-status", "preview-notice", "playback-progress"]);
+    if (D) D.refreshMessages(["map-status", "record-error", "avatar-status", "preview-notice", "playback-progress", "people-status"]);
     if (focused?.isConnected) { /* Existing editor fields and selections retain focus. */ }
     else if (focusId && $(focusId)) $(focusId).focus({preventScroll:true});
     else if (focusRecord) timelineNodes.get(focusRecord)?.querySelector("button")?.focus({preventScroll:true});

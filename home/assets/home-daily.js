@@ -9,26 +9,25 @@
   const brief = glance ? null : read('daily-brief-data'), content = glance ? null : read('daily-content-data');
   const knowledge = glance ? [] : read('daily-knowledge-data')?.items || [], memes = glance ? [] : read('daily-memes-data')?.items || [];
   const rules = glance ? [] : read('daily-rules-data')?.weather || [], holidays = glance ? {} : read('daily-holidays-data')?.years || {};
-  const astro = window.HomeAstronomy;
+  const astro = window.HomeAstronomy, cityModel = astro.cityModel, cities = cityModel.presets;
   const lang = () => (window.SiteI18n?.lang?.() || document.documentElement.lang || 'zh-CN').startsWith('en') ? 'en' : 'zh-CN';
   const text = value => typeof value === 'string' ? value : value?.[lang()] || value?.['zh-CN'] || '';
   const word = (zh, en) => lang() === 'en' ? en : zh;
   const categories = {domestic: ['时政','Politics'],world: ['国际','World'],economy: ['经济','Economy'],science: ['科技','Science'],culture: ['文化','Culture']};
   const order = Object.keys(categories);
   try { window.localStorage.removeItem('xieyuqing-brief-closed'); } catch (_) {}
-  const cities = {
-    beijing: {name: ['北京','Beijing'],lat: 39.9042,lon: 116.4074,tz: 'Asia/Shanghai'},
-    shanghai: {name: ['上海','Shanghai'],lat: 31.2304,lon: 121.4737,tz: 'Asia/Shanghai'},
-    kuala: {name: ['吉隆坡','Kuala Lumpur'],lat: 3.139,lon: 101.6869,tz: 'Asia/Kuala_Lumpur'},
-    london: {name: ['伦敦','London'],lat: 51.5074,lon: -.1278,tz: 'Europe/London'}
-  };
-  let lastDay = '', lastLanguage = '', disposed = false, city = 'beijing', assetsReady = !glance, lunarAttempted = false;
+  let lastDay = '', lastLanguage = '', disposed = false, city = cities.beijing, assetsReady = !glance, lunarAttempted = false;
   let weather = null, weatherRequest = null, weatherTicket = 0, earth = null, earthVisible = false, earthLoading = false;
-  let festivalCache = null;
+  let festivalCache = null, searchRequest = null, searchTicket = 0, searchResults = [];
   const cleanup = [], pending = new Map();
   const pageId = window.crypto?.randomUUID?.() || Date.now().toString(36) + '-' + Math.random().toString(36).slice(2);
   window.HomeBriefPageId = pageId;
-  if (!glance) try { const saved = window.localStorage.getItem('xieyuqing-home-city-v1'); if (cities[saved]) city = saved; } catch (_) {}
+  if (!glance) try {
+    const current = cityModel.decode(window.localStorage.getItem('xieyuqing-home-city-v2'));
+    const legacy = current ? null : cityModel.decode(window.localStorage.getItem('xieyuqing-home-city-v1'));
+    if (current || legacy) city = current || legacy;
+    if (legacy) window.localStorage.setItem('xieyuqing-home-city-v2',JSON.stringify({version:1,city}));
+  } catch (_) {}
   function listen(target, type, handler, options) {
     if (!target?.addEventListener) return;
     target.addEventListener(type, handler, options);
@@ -111,26 +110,78 @@
       find('daily-street-links')?.replaceChildren(...links);
     }
   }
+  const conditionCodes = {};
+  function conditions(codes,zh,en,hintZh,hintEn,wet = false) {
+    codes.forEach((code,index) => { conditionCodes[code] = {label:[zh[index],en[index]],hint:[hintZh,hintEn],wet}; });
+  }
+  conditions([0,1,2,3],['晴','大部晴朗','局部多云','阴天'],['Clear','Mainly clear','Partly cloudy','Overcast'],'出门留意天气变化，有日照时注意防晒。','Keep an eye on changing weather and use sun protection when needed.');
+  conditions([45,48],['雾','雾凇'],['Fog','Depositing rime fog'],'能见度可能较低，出行放慢速度，注意路况。','Visibility may be low; slow down and pay attention to road conditions.');
+  conditions([51,53,55],['小毛毛雨','中等毛毛雨','强毛毛雨'],['Light drizzle','Moderate drizzle','Dense drizzle'],'有毛毛雨，出门带把伞，留意路面湿滑。','Take an umbrella for drizzle and watch for slippery surfaces.',true);
+  conditions([56,57],['轻度冻毛毛雨','强冻毛毛雨'],['Light freezing drizzle','Dense freezing drizzle'],'有冻毛毛雨，路面可能结冰，出行注意防滑。','Freezing drizzle may make surfaces icy; take care when travelling.',true);
+  conditions([61,63,65],['小雨','中雨','大雨'],['Slight rain','Moderate rain','Heavy rain'],'正在下雨，记得带伞，注意路面湿滑。','Take an umbrella for rain and watch for slippery roads.',true);
+  conditions([66,67],['轻度冻雨','强冻雨'],['Light freezing rain','Heavy freezing rain'],'有冻雨，路面可能结冰，出行注意防滑。','Freezing rain may make roads icy; take care when travelling.',true);
+  conditions([71,73,75,77],['小雪','中雪','大雪','米雪'],['Slight snowfall','Moderate snowfall','Heavy snowfall','Snow grains'],'有降雪，注意保暖，留意积雪和路面防滑。','Dress warmly for snow and watch for snow-covered or slippery surfaces.',true);
+  conditions([80,81,82],['小阵雨','中等阵雨','强阵雨'],['Slight rain showers','Moderate rain showers','Violent rain showers'],'有阵雨，带伞出门，留意天气变化和路面积水。','Carry an umbrella for showers and watch for changing weather and standing water.',true);
+  conditions([85,86],['小阵雪','强阵雪'],['Slight snow showers','Heavy snow showers'],'有阵雪，注意保暖和防滑，留意天气变化。','Dress warmly for snow showers and watch for slippery surfaces.',true);
+  conditions([95,97],['雷暴','强雷暴'],['Thunderstorm','Heavy thunderstorm'],'有雷暴，尽量留在室内，远离树木和积水。','Stay indoors during thunderstorms when possible, away from trees and standing water.',true);
+  conditions([96,99],['雷暴伴小冰雹','雷暴伴大冰雹'],['Thunderstorm with slight hail','Thunderstorm with heavy hail'],'雷暴伴冰雹，尽量留在室内，远离窗边。','Thunderstorms with hail: stay indoors when possible and keep away from windows.',true);
+  function numberIn(value,min,max) { return typeof value === 'number' && Number.isFinite(value) && value >= min && value <= max; }
+  function detailsFrom(value) {
+    const result = {};
+    for (const [key,min,max] of [['apparent_temperature',-100,100],['relative_humidity_2m',0,100],['wind_speed_10m',0,500],['wind_direction_10m',0,360],['pressure_msl',300,1200]]) if (numberIn(value?.[key],min,max)) result[key] = value[key];
+    if (result.wind_speed_10m === 0) delete result.wind_direction_10m;
+    return result;
+  }
+  function dailyFrom(value) {
+    const result = {};
+    if (!value || !/^\d{4}-\d{2}-\d{2}$/.test(value.date || '') || !Number.isFinite(Date.parse(value.date + 'T00:00:00Z'))) return result;
+    result.date = value.date;
+    for (const field of ['temperature_2m_max','temperature_2m_min']) if (numberIn(value[field],-100,70)) result[field] = value[field];
+    if (numberIn(value.precipitation_probability_max,0,100)) result.precipitation_probability_max = value.precipitation_probability_max;
+    if (result.temperature_2m_max < result.temperature_2m_min) { delete result.temperature_2m_max; delete result.temperature_2m_min; }
+    return result;
+  }
   function renderWeather() {
     if (glance) return;
-    const target = find('daily-weather');
+    const target = find('daily-weather'), current = weather?.cityKey === cityModel.identity(city) ? weather : null;
+    const condition = current && conditionCodes[current.code], english = lang() === 'en';
     if (target) {
       target.replaceChildren();
-      if (weather?.city === city) {
-        const descriptions = weather.code === 0 ? ['晴','Clear'] : weather.code <= 3 ? ['多云','Cloudy'] : weather.code <= 48 ? ['雾','Fog'] : weather.code <= 57 ? ['毛毛雨','Drizzle'] : weather.code <= 67 ? ['雨','Rain'] : weather.code <= 77 ? ['雪','Snow'] : weather.code <= 82 ? ['阵雨','Rain showers'] : weather.code <= 86 ? ['阵雪','Snow showers'] : ['雷暴','Thunderstorm'];
-        target.append(node('strong','',Math.round(weather.temperature) + '°C'),node('span','',descriptions[lang() === 'en' ? 1 : 0]));
-        const caption = node('small','',(weather.stale ? word('上次数据 · ','Last data · ') : word('当地 ','Local ')) + weather.time.replace('T',' ').slice(5,16) + ' · ');
+      if (current) {
+        target.append(node('strong','',Math.round(current.temperature) + '°C'),node('span','',condition?.label[english ? 1 : 0] || word('天气状况暂不可用','Weather condition unavailable')));
+        const caption = node('small','',(current.stale ? word('上次数据 · ','Last data · ') : word('当地 ','Local ')) + current.time.replace('T',' ').slice(5,16) + ' · ');
         caption.append(link('https://open-meteo.com/','Open-Meteo')); target.append(caption);
       } else target.textContent = weather?.error ? word('天气暂不可用','Weather unavailable') : word('正在读取天气…','Loading weather…');
     }
-    const matching = weather?.daily?.date === dayStamp(new Date(),cities[city].tz) ? rules.filter(rule => {
-      const value = weather.daily[rule.field]; return Number.isFinite(value) && (rule.operator === 'gte' ? value >= rule.threshold : rule.operator === 'lte' && value <= rule.threshold);
+    const detail = find('daily-weather-details');
+    if (detail) {
+      detail.replaceChildren();
+      const values = current?.details || {};
+      const directions = english ? ['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSW','SW','WSW','W','WNW','NW','NNW'] : ['北','北东北','东北','东东北','东','东东南','东南','南东南','南','南西南','西南','西西南','西','西西北','西北','北西北'];
+      const fields = [
+        ['apparent_temperature',word('体感温度','Feels like'),value => value.toFixed(1) + ' °C'],
+        ['relative_humidity_2m',word('相对湿度','Relative humidity'),value => Math.round(value) + '%'],
+        ['wind_speed_10m',word('风速','Wind speed'),value => value.toFixed(1) + ' km/h'],
+        ['wind_direction_10m',word('风向','Wind direction'),value => directions[Math.round(value / 22.5) % 16] + ' · ' + Math.round(value) + '°'],
+        ['pressure_msl',word('海平面气压','Mean sea-level pressure'),value => value.toFixed(1) + ' hPa']
+      ];
+      for (const [key,label,format] of fields) if (Number.isFinite(values[key])) { const group = node('div','weather-detail'); group.append(node('dt','',label),node('dd','',format(values[key]))); detail.append(group); }
+      detail.hidden = !detail.children.length;
+    }
+    const matching = current?.daily?.date === dayStamp(new Date(),city.tz) ? rules.filter(rule => {
+      const value = current.daily[rule.field]; return Number.isFinite(value) && (rule.operator === 'gte' ? value >= rule.threshold : rule.operator === 'lte' && value <= rule.threshold);
     }) : [];
-    const hint = find('daily-weather-hint'); if (hint) { hint.hidden = !matching.length; hint.textContent = matching.map(rule => text(rule.text)).join(' · '); }
+    const hints = condition ? [condition.hint[english ? 1 : 0]] : [];
+    for (const rule of matching) {
+      if (rule.field === 'precipitation_probability_max' && condition?.wet) continue;
+      const prefix = rule.field === 'temperature_2m_max' ? word('今日最高气温：','Today’s high: ') : rule.field === 'temperature_2m_min' ? word('今日最低气温：','Today’s low: ') : word('今日预报：','Today’s forecast: ');
+      hints.push(prefix + text(rule.text));
+    }
+    const hint = find('daily-weather-hint'); if (hint) { hint.hidden = !hints.length; hint.textContent = [...new Set(hints)].join(' · '); }
   }
   function renderCalendar(date) {
     if (disposed) return;
-    const zone = glance ? 'Asia/Shanghai' : cities[city].tz;
+    const zone = glance ? 'Asia/Shanghai' : city.tz;
     const local = parts(date,zone), beijing = parts(date), english = lang() === 'en';
     const weekday = new Intl.DateTimeFormat(english ? 'en-GB' : 'zh-CN',{timeZone:zone,weekday:'long'}).format(date);
     if (glance) {
@@ -139,7 +190,7 @@
     } else {
       write('daily-calendar-day',String(+local.day)); write('daily-calendar-weekday',weekday);
       write('daily-calendar-month',local.year + ' · ' + new Intl.DateTimeFormat(english ? 'en-GB' : 'zh-CN',{timeZone:zone,month:'long'}).format(date));
-      if (find('daily-city')) find('daily-city').value = city;
+
     }
     write('daily-calendar-lunar',word('农历','Lunar · ') + (astro?.lunar(date,zone,english) || ''));
     write('daily-calendar-term',astro?.term(date,english) || ''); write('daily-calendar-next-term','');
@@ -150,7 +201,6 @@
       if (holidayNode) { holidayNode.hidden = !holiday; holidayNode.textContent = holiday ? (holiday.isOffDay ? word('假期 · ','Holiday · ') : word('调休上班 · ','Adjusted working day · ')) + (english ? holidayNames[holiday.name] || holiday.name : holiday.name) : ''; }
     }
     if (!window.Solar || !window.I18n) {
-      if (glance) { write('daily-almanac-yi','—'); write('daily-almanac-ji','—'); }
       return;
     }
     window.I18n.setLanguage(english ? 'en' : 'chs');
@@ -177,43 +227,90 @@
       const nextText = upcoming ? (english ? `${upcoming.names.join(' · ')} in ${upcoming.days} days` : `距${upcoming.names.join(' · ')}还有${upcoming.days}天`) : '';
       write('daily-calendar-festivals',[current.join(' · '),nextText].filter(Boolean).join(' · '));
     }
-    const yi = lunar.getDayYi(), ji = lunar.getDayJi();
-    write('daily-almanac-yi',(glance ? yi.slice(0,3) : yi).join(' · ')); write('daily-almanac-ji',(glance ? ji.slice(0,3) : ji).join(' · '));
-    if (!glance) {
-      write('daily-almanac-clash',word('冲','Clash · ') + lunar.getDayChongDesc() + word(' · 煞',' · Sha · ') + lunar.getDaySha());
-      write('daily-almanac-directions',english ? `Lucky directions — Joy: ${lunar.getDayPositionXiDesc()} · Fortune: ${lunar.getDayPositionFuDesc()} · Wealth: ${lunar.getDayPositionCaiDesc()}`
-        : `喜神 ${lunar.getDayPositionXiDesc()} · 福神 ${lunar.getDayPositionFuDesc()} · 财神 ${lunar.getDayPositionCaiDesc()}`);
-      const pengzu = find('daily-almanac-pengzu'); if (pengzu) { pengzu.hidden = english; pengzu.textContent = english ? '' : '彭祖百忌：' + lunar.getPengZuGan() + ' · ' + lunar.getPengZuZhi(); }
-      const almanac = find('daily-almanac'); if (almanac) almanac.hidden = false;
-    }
   }
-  function cachedWeather() {
+  function weatherRecord(value,selected,legacy = false) {
+    const key = cityModel.identity(selected), observer = cityModel.normalize(value?.observer);
+    if (!value || (legacy ? value.city !== selected.id || !cities[selected.id] || cityModel.identity(cities[selected.id]) !== key : value.cityKey !== key || !observer || cityModel.identity(observer) !== key)
+      || !Number.isFinite(value.savedAt) || value.savedAt > Date.now() + 60000 || Date.now() - value.savedAt >= 86400000
+      || !numberIn(value.temperature,-100,100) || typeof value.time !== 'string' || !/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}/.test(value.time)) return null;
+    return {observer:selected,cityKey:key,temperature:value.temperature,code:Number.isInteger(value.code) ? value.code : null,time:value.time,savedAt:value.savedAt,details:detailsFrom(value.details),daily:dailyFrom(value.daily),needsRefresh:legacy};
+  }
+  function cachedWeather(selected) {
     try {
-      const value = JSON.parse(window.localStorage.getItem('xieyuqing-weather-v2:' + city) || 'null');
-      if (value?.city === city && Number.isFinite(value.savedAt) && value.savedAt <= Date.now() + 60000 && Date.now() - value.savedAt < 86400000 && Number.isFinite(value.temperature) && Math.abs(value.temperature) < 100 && Number.isInteger(value.code) && value.code >= 0 && value.code <= 99 && /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}/.test(value.time || '')) return value;
+      const current = weatherRecord(JSON.parse(window.localStorage.getItem('xieyuqing-weather-v3:' + cityModel.identity(selected)) || 'null'),selected);
+      if (current) return current;
+      if (cities[selected.id] && cityModel.identity(cities[selected.id]) === cityModel.identity(selected)) return weatherRecord(JSON.parse(window.localStorage.getItem('xieyuqing-weather-v2:' + selected.id) || 'null'),selected,true);
     } catch (_) {} return null;
   }
   async function loadWeather() {
     if (glance || !window.fetch || disposed) return;
-    const selectedCity = city, selected = cities[city], ticket = ++weatherTicket, cached = cachedWeather();
+    const selected = city, key = cityModel.identity(selected), ticket = ++weatherTicket, cached = cachedWeather(selected);
     weatherRequest?.abort();
-    if (cached) { weather = {...cached,stale:Date.now() - cached.savedAt >= 1800000}; renderWeather(); if (!weather.stale) return; }
+    if (cached) { weather = {...cached,stale:cached.needsRefresh || Date.now() - cached.savedAt >= 1800000}; renderWeather(); if (!weather.stale) return; }
     else { weather = null; renderWeather(); }
     const controller = new window.AbortController(); weatherRequest = controller;
     const timeout = window.setTimeout(() => controller.abort(),8000);
     try {
-      const query = new window.URLSearchParams({latitude:String(selected.lat),longitude:String(selected.lon),current:'temperature_2m,weather_code',daily:'temperature_2m_max,temperature_2m_min,precipitation_probability_max',temperature_unit:'celsius',timezone:selected.tz,forecast_days:'1'});
+      const query = new window.URLSearchParams({latitude:String(selected.lat),longitude:String(selected.lon),current:'temperature_2m,weather_code,apparent_temperature,relative_humidity_2m,wind_speed_10m,wind_direction_10m,pressure_msl',daily:'temperature_2m_max,temperature_2m_min,precipitation_probability_max',temperature_unit:'celsius',wind_speed_unit:'kmh',timezone:selected.tz,forecast_days:'1'});
       const response = await window.fetch('https://api.open-meteo.com/v1/forecast?' + query,{signal:controller.signal,credentials:'omit',referrerPolicy:'no-referrer'});
       if (!response.ok) throw new Error('Weather unavailable');
       const data = await response.json(), current = data.current;
-      if (!current || !Number.isFinite(current.temperature_2m) || Math.abs(current.temperature_2m) >= 100 || !Number.isInteger(current.weather_code) || current.weather_code < 0 || current.weather_code > 99 || !/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}/.test(current.time || '')) throw new Error('Invalid weather');
-      if (disposed || ticket !== weatherTicket || selectedCity !== city) return;
+      if (!current || !numberIn(current.temperature_2m,-100,100) || typeof current.time !== 'string' || !/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}/.test(current.time)) throw new Error('Invalid weather');
+      if (disposed || ticket !== weatherTicket || key !== cityModel.identity(city)) return;
       const dailyIndex = Math.max(0,data.daily?.time?.indexOf(current.time.slice(0,10)) ?? 0), daily = {date:data.daily?.time?.[dailyIndex]};
-      for (const field of ['temperature_2m_max','temperature_2m_min','precipitation_probability_max']) { const value = data.daily?.[field]?.[dailyIndex]; if (Number.isFinite(value)) daily[field] = value; }
-      weather = {city,temperature:current.temperature_2m,code:current.weather_code,time:current.time,savedAt:Date.now(),stale:false,daily};
-      try { window.localStorage.setItem('xieyuqing-weather-v2:' + city,JSON.stringify(weather)); } catch (_) {}
-    } catch (_) { if (!disposed && ticket === weatherTicket) weather = cached ? {...cached,stale:true} : {error:true}; }
+      for (const field of ['temperature_2m_max','temperature_2m_min','precipitation_probability_max']) daily[field] = data.daily?.[field]?.[dailyIndex];
+      weather = {observer:selected,cityKey:key,temperature:current.temperature_2m,code:Number.isInteger(current.weather_code) ? current.weather_code : null,time:current.time,savedAt:Date.now(),stale:false,details:detailsFrom(current),daily:dailyFrom(daily)};
+      try { window.localStorage.setItem('xieyuqing-weather-v3:' + key,JSON.stringify(weather)); } catch (_) {}
+    } catch (_) { if (!disposed && ticket === weatherTicket && key === cityModel.identity(city)) weather = cached ? {...cached,stale:true} : {error:true}; }
     finally { window.clearTimeout(timeout); if (!disposed && ticket === weatherTicket) renderWeather(); }
+  }
+  function renderCityChoices() {
+    if (glance) return;
+    const input = find('daily-city');
+    if (input) {
+      input.replaceChildren();
+      let selected = '';
+      for (const preset of Object.values(cities)) { const option = node('option','',cityModel.label(preset,lang() === 'en',false)); option.value = preset.id; input.append(option); if (cityModel.identity(preset) === cityModel.identity(city)) selected = preset.id; }
+      if (!selected) { const option = node('option','',cityModel.label(city,lang() === 'en')); option.value = 'custom'; input.append(option); selected = 'custom'; }
+      input.value = selected;
+    }
+    write('daily-city-label',cityModel.label(city,lang() === 'en'));
+  }
+  function selectCity(value) {
+    const selected = cityModel.normalize(value); if (!selected || glance || disposed) return;
+    searchTicket++; searchRequest?.abort(); searchResults = []; renderSearchResults();
+    city = selected;
+    try {
+      window.localStorage.setItem('xieyuqing-home-city-v2',JSON.stringify({version:1,city}));
+      if (cities[city.id] && cityModel.identity(cities[city.id]) === cityModel.identity(city)) window.localStorage.setItem('xieyuqing-home-city-v1',city.id);
+      else window.localStorage.removeItem('xieyuqing-home-city-v1');
+    } catch (_) {}
+    renderCityChoices(); renderCalendar(new Date()); earth?.setCity(city); loadWeather();
+  }
+  function renderSearchResults() {
+    const list = find('city-search-results'); if (!list) return;
+    list.replaceChildren();
+    list.hidden = !searchResults.length;
+    searchResults.forEach((place,index) => { const item = node('li'), button = node('button','city-result',cityModel.label(place,lang() === 'en')); button.type = 'button'; button.dataset.cityResult = String(index); item.append(button); list.append(item); });
+  }
+  async function searchCities(event) {
+    event.preventDefault();
+    if (glance || disposed) return;
+    const ticket = ++searchTicket; searchRequest?.abort(); searchResults = []; renderSearchResults();
+    const query = find('city-search-input')?.value?.trim() || '';
+    if (query.length < 2 || query.length > 80) { write('city-search-status',word('请输入2到80个字的城市名。','Enter a city name with 2 to 80 characters.')); return; }
+    write('city-search-status',word('正在查找城市…','Finding cities…'));
+    const controller = new window.AbortController(); searchRequest = controller;
+    const timeout = window.setTimeout(() => controller.abort(),8000);
+    try {
+      const params = new window.URLSearchParams({name:query,count:'10',language:lang() === 'en' ? 'en' : 'zh',format:'json'});
+      const response = await window.fetch('https://geocoding-api.open-meteo.com/v1/search?' + params,{signal:controller.signal,credentials:'omit',referrerPolicy:'no-referrer'});
+      if (!response.ok) throw new Error('City search unavailable');
+      const data = await response.json(); if (disposed || ticket !== searchTicket) return;
+      const seen = new Set(); searchResults = (Array.isArray(data.results) ? data.results : []).slice(0,10).map(cityModel.fromResult).filter(place => { if (!place) return false; const id = cityModel.identity(place); if (seen.has(id)) return false; seen.add(id); return true; });
+      renderSearchResults(); write('city-search-status',searchResults.length ? word(`找到${searchResults.length}个城市，请选择。`,`Found ${searchResults.length} cities. Choose one.`) : word('没有找到城市，请换个名称再试。','No cities found. Try another name.'));
+    } catch (_) { if (!disposed && ticket === searchTicket) write('city-search-status',word('城市查找暂不可用，请稍后再试。','City search is unavailable. Try again later.')); }
+    finally { window.clearTimeout(timeout); }
   }
   function loadAsset(url) {
     if (!/^\/assets\//.test(url || '')) return Promise.reject(new Error('Missing local asset'));
@@ -233,7 +330,7 @@
     try {
       await loadAsset(root.dataset.d3Src); if (disposed || !assetsReady || !earthVisible) return;
       await loadAsset(root.dataset.earthSrc); if (disposed || !assetsReady || !earthVisible) return;
-      earth = window.HomeEarth?.createEarth(document,window,{globeOnly:true});
+      earth = window.HomeEarth?.createEarth(document,window,{globeOnly:true,city:glance ? cities.beijing : city});
     } catch (_) {} finally { earthLoading = false; }
   }
   function loadLunar() {
@@ -242,7 +339,6 @@
     if (window.Solar) { renderCalendar(new Date()); return; }
     loadAsset(root.dataset.lunarSrc).then(() => { if (!disposed) { renderCalendar(new Date()); if (!glance) renderDaily(new Date()); } }).catch(() => {
       if (disposed) return;
-      const almanac = find('glance-almanac-card'); if (glance && almanac) almanac.hidden = true;
       write('daily-calendar-next-term','');
     });
   }
@@ -254,15 +350,19 @@
     if (disposed) return;
     const date = new Date(), currentDay = String(dayIndex(date)), currentLanguage = lang();
     if (force || lastDay !== currentDay || lastLanguage !== currentLanguage) {
-      if (!glance) { renderDaily(date); renderFeed(date); renderWeather(); }
+      if (!glance) { renderDaily(date); renderFeed(date); renderCityChoices(); renderSearchResults(); renderWeather(); write('timeline-date',dayStamp(date)); }
       renderCalendar(date); lastDay = currentDay; lastLanguage = currentLanguage;
     } else renderCalendar(date);
   }
-  if (!glance) listen(find('daily-city'),'change',() => {
-    const value = find('daily-city').value; if (!cities[value]) return; city = value;
-    try { window.localStorage.setItem('xieyuqing-home-city-v1',city); } catch (_) {}
-    renderCalendar(new Date()); loadWeather();
-  });
+  if (!glance) {
+    listen(find('daily-city'),'change',() => { const value = find('daily-city').value; if (cities[value]) selectCity(cities[value]); });
+    listen(find('city-search-form'),'submit',searchCities);
+    listen(find('city-search-results'),'click',event => {
+      const button = event.target.closest?.('[data-city-result]'); if (!button || !find('city-search-results').contains(button)) return;
+      const selected = searchResults[Number(button.dataset.cityResult)]; if (!selected) return;
+      selectCity(selected); searchResults = []; renderSearchResults(); write('city-search-status',word('已选择：','Selected: ') + cityModel.label(city,lang() === 'en'));
+    });
+  }
   const articles = read('home-random-data'), randomButton = find('home-random-button'), english = lang() === 'en';
   const articleLinks = Array.isArray(articles) ? articles.filter(url => typeof url === 'string' && (english ? /^\/(?:en\/)?articles\/(?!\/)/ : /^\/articles\/(?!\/)/).test(url)) : [];
   if (randomButton && articleLinks.length) { randomButton.hidden = false; listen(randomButton,'click',() => { const url = articleLinks[Math.floor(Math.random() * articleLinks.length)]; if (window.SiteNavigation?.visit) window.SiteNavigation.visit(url); else window.location.assign(url); }); }
@@ -291,6 +391,6 @@
   const weatherTimer = glance ? null : window.setInterval(() => { if (!document.hidden) loadWeather(); },1800000);
   const unsubscribe = window.SiteI18n?.onChange?.(() => refresh(true));
   listen(document,'visibilitychange',() => { if (!document.hidden) { refresh(true); if (!glance) loadWeather(); } });
-  window.SiteNavigation?.own?.(() => { disposed = true; weatherRequest?.abort(); earth?.destroy(); window.clearInterval(timer); if (weatherTimer !== null) window.clearInterval(weatherTimer); if (typeof unsubscribe === 'function') unsubscribe(); cleanup.splice(0).reverse().forEach(fn => fn()); });
+  window.SiteNavigation?.own?.(() => { disposed = true; weatherRequest?.abort(); searchRequest?.abort(); earth?.destroy(); window.clearInterval(timer); if (weatherTimer !== null) window.clearInterval(weatherTimer); if (typeof unsubscribe === 'function') unsubscribe(); cleanup.splice(0).reverse().forEach(fn => fn()); });
 
 })();

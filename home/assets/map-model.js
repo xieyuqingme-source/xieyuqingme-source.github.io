@@ -18,6 +18,28 @@
     if (required && !value.trim()) fail(I("map.model.s003", {p0:(key)}, "{p0} 不能为空。"));
     return value.trim();
   }
+  function publicReferenceUrl(value) {
+    if (typeof value !== "string" || !/^https:\/\/[^/\\]/i.test(value) || /^https:\/\/[^/?#]*@/i.test(value) || value.includes("\\") || value.length > 2048 || value !== value.trim() || /[\s\u0000-\u001f\u007f-\u009f<>]/.test(value)) return false;
+    let parsed;
+    try {
+      parsed = new URL(value);
+      if (/[\u0000-\u001f\u007f-\u009f]/.test(decodeURIComponent(value))) return false;
+    } catch (_) { return false; }
+    const host = parsed.hostname.toLowerCase().replace(/\.$/, "");
+    return parsed.protocol === "https:" && !parsed.username && !parsed.password && (!parsed.port || parsed.port === "443")
+      && host.includes(".") && !host.includes(":") && !/^\d+(?:\.\d+){3}$/.test(host)
+      && !/(?:^|\.)(?:localhost|local|internal|lan|home|test|invalid|onion)$/.test(host)
+      && host.split(".").every(part => /^[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/.test(part));
+  }
+  function referenceList(value, maximum = 6, empty = false) {
+    if (!Array.isArray(value) || value.length < (empty ? 0 : 1) || value.length > maximum) fail(I("map.references.invalid", {}, "来源需要有效的 HTTPS 公开链接和简短标题。"));
+    return value.map(item => {
+      if (!plain(item) || Object.keys(item).length !== 2 || !Object.hasOwn(item, "label") || !Object.hasOwn(item, "url")) fail(I("map.references.invalid", {}, "来源需要有效的 HTTPS 公开链接和简短标题。"));
+      const label = field(item, "label", 120, true);
+      if (/[\u0000-\u001f\u007f-\u009f<>]/.test(item.label) || /(?:[A-Za-z]:[\\/]|file:\/\/|\\\\|\/(?:Users|home|mnt|tmp)\/)/i.test(label) || !publicReferenceUrl(item.url)) fail(I("map.references.invalid", {}, "来源需要有效的 HTTPS 公开链接和简短标题。"));
+      return {label,url:item.url};
+    });
+  }
   function dateBounds(value) {
     if (value === "") return null;
     if (!/^\d{4}(?:-\d{2}(?:-\d{2})?)?$/.test(value)) fail(I("map.model.s004", {}, "日期请使用 YYYY、YYYY-MM 或 YYYY-MM-DD；未知请留空。"));
@@ -44,6 +66,7 @@
     if (typeof output.lat !== "number" || !Number.isFinite(output.lat) || output.lat < -90 || output.lat > 90 || typeof output.lon !== "number" || !Number.isFinite(output.lon) || output.lon < -180 || output.lon > 180) fail(I("map.model.s011", {p0:(output.title)}, "“{p0}”需要有效城市中心坐标（纬度 -90～90，经度 -180～180）。"));
     if (output.album && !/^\/photos\/[a-z][a-z0-9]*(?:-[a-z0-9]+)*\/$/.test(output.album)) fail(I("map.model.s012", {}, "相册只允许本站 /photos/相册标识/ 链接，或留空。"));
     if (!["confirmed", "approximate"].includes(output.certainty)) fail(I("map.model.s013", {}, "certainty 只能是 confirmed 或 approximate。"));
+    if (Object.hasOwn(value, "references")) output.references = referenceList(value.references);
     // Optional journey semantics are public data; their absence preserves legacy files.
     if (Object.prototype.hasOwnProperty.call(value, "stayType")) {
       if (!["base", "visit"].includes(value.stayType)) fail(I("map.model.s014", {}, "stayType 只能是 base 或 visit。"));
@@ -123,6 +146,37 @@
     if (before.records.length + additions.length > MAX_RECORDS) fail(I("map.model.s030", {p0:(MAX_RECORDS)}, "合并后超过 {p0} 条，未更改现有地图。"));
     return { document: { version: 1, title: before.records.length ? before.title : next.title, records: before.records.concat(additions) }, added: additions.length, skipped };
   }
+  function peopleManifest(value) {
+    if (!plain(value) || value.version !== 1 || !Array.isArray(value.people) || value.people.length > 40) fail(I("map.people.invalid", {}, "人物足迹资料格式无效。"));
+    const ids = new Set();
+    function localized(value, maximum) {
+      if (!plain(value)) fail(I("map.people.invalid", {}, "人物足迹资料格式无效。"));
+      const result = {};
+      for (const language of ["zh-CN", "en"]) {
+        result[language] = field(value, language, maximum, true);
+        if (/[\u0000-\u001f\u007f-\u009f<>]/.test(result[language])) fail(I("map.people.invalid", {}, "人物足迹资料格式无效。"));
+      }
+      return result;
+    }
+    return {version:1,people:value.people.map(item => {
+      if (!plain(item) || typeof item.id !== "string" || !/^[a-z][a-z0-9-]{0,63}$/.test(item.id) || ids.has(item.id)
+        || !Number.isInteger(item.record_count) || item.record_count < 0 || item.record_count > MAX_RECORDS
+        || item.document_url !== "/assets/footprints-people/" + item.id + ".json" || item.markdown !== "/assets/footprints-people/" + item.id + ".md") fail(I("map.people.invalid", {}, "人物足迹资料格式无效。"));
+      ids.add(item.id);
+      return {id:item.id,label:localized(item.label,120),coverage:localized(item.coverage,1000),record_count:item.record_count,document_url:item.document_url,markdown:item.markdown};
+    })};
+  }
+  function personBundle(value, entry) {
+    if (!plain(value) || value.version !== 1 || value.id !== entry.id || !plain(value.documents)) fail(I("map.people.invalid", {}, "人物足迹资料格式无效。"));
+    const documents = {};
+    for (const language of ["zh-CN", "en"]) {
+      documents[language] = validate(value.documents[language]);
+      if (documents[language].records.length !== entry.record_count) fail(I("map.people.invalid", {}, "人物足迹资料格式无效。"));
+    }
+    const factual = ["id","start","end","lat","lon","certainty","stayType","groupId","sequence","ongoing","baseReturn","returnAfter"];
+    for (let index = 0; index < entry.record_count; index++) for (const key of factual) if (documents["zh-CN"].records[index][key] !== documents.en.records[index][key]) fail(I("map.people.invalid", {}, "人物足迹资料格式无效。"));
+    return {version:1,id:entry.id,documents,sources:referenceList(value.sources || [],40,true)};
+  }
   function sorted(records) {
     return records.slice().sort((a, b) => (a.start ? dateBounds(a.start).min : Infinity) - (b.start ? dateBounds(b.start).min : Infinity) ||
       (Number.isSafeInteger(a.sequence) && Number.isSafeInteger(b.sequence) ? a.sequence - b.sequence : 0) || a.id.localeCompare(b.id));
@@ -137,5 +191,5 @@
   function cityKey(item) { return JSON.stringify([item.country, item.region, item.city, item.lat.toFixed(4), item.lon.toFixed(4)]); }
   function json(document) { return JSON.stringify(validate(document), null, 2); }
   function markdown(document) { return I("map.model.s036", {p0:(validate(document).title.replace(/[\r\n]/g, " ")),p1:(json(document))}, "# {p0}\n\n日期可用 YYYY、YYYY-MM、YYYY-MM-DD；空白表示未知，不能据此推断“至今”。坐标仅用于城市中心示意。\n\n```footprints\n{p1}\n```\n"); }
-  return { MAX_BYTES, MAX_RECORDS, validate, parse, merge, sorted, range, cityKey, json, markdown, dateBounds };
+  return { MAX_BYTES, MAX_RECORDS, validate, parse, merge, sorted, range, cityKey, json, markdown, dateBounds, publicReferenceUrl, referenceList, peopleManifest, personBundle };
 });
