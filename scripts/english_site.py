@@ -208,7 +208,7 @@ def english_archive(blog):
 def build_english_site(blog, output, address, projects, about_data, values):
     """Generate only English routes; never add translations to blog.articles."""
     from build_blog import Blog
-    from build_site import render_projects, render_about
+    from build_site import render_projects, render_about, TODAY_TITLES, TODAY_DESCRIPTIONS
     from site_i18n import localize_page
     class EnglishView(Blog):
         def href(self, destination):
@@ -265,14 +265,16 @@ def build_english_site(blog, output, address, projects, about_data, values):
     english_values["about_name"] = escape(about_data["english_name"])
     english_values["about_email"] = escape(about_data["email"], quote=True)
     english_values["about_wechat"] = escape(about_data["wechat"])
-    for name, route in (("index", "en/index.html"), ("about", "en/about/index.html"), ("projects", "en/projects/index.html")):
+    for name, route in (("index", "en/index.html"), ("about", "en/about/index.html"), ("projects", "en/projects/index.html"), ("today", "en/today/index.html")):
         page = (blog.source_root / f"home/en/{name}.template.html").read_text(encoding="utf-8")
         for key, value in english_values.items():
             page = page.replace("{{" + key + "}}", value)
         if "{{" in page:
             raise ValueError(f"Unresolved English template: {name}")
         chinese_route = "/" + route.removeprefix("en/").removesuffix("index.html")
-        pages[route] = localize_page(page, blog.source_root, address, chinese_route, "en")
+        pages[route] = localize_page(page, blog.source_root, address, chinese_route, "en",
+            title=TODAY_TITLES if name == "today" else None,
+            description=TODAY_DESCRIPTIONS if name == "today" else None)
     routes = sorted(pages)
     # Remove only old routes registered by this generator. A stale translation
     # cannot survive an incremental unified build or enter the root sitemap.
@@ -290,7 +292,7 @@ def build_english_site(blog, output, address, projects, about_data, values):
         target.write_text(page, encoding="utf-8")
     marker.write_text("Generated English pages only.\n", encoding="utf-8")
     manifest.write_text(json.dumps(routes, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    return {**translation_report(blog), "routes": ["/en/", "/en/about/", "/en/projects/", "/en/articles/",
+    return {**translation_report(blog), "routes": ["/en/", "/en/today/", "/en/about/", "/en/projects/", "/en/articles/",
              *[english_article_url(blog, article) for article in blog.translations.values()]]}
 
 

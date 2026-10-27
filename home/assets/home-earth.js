@@ -13,6 +13,7 @@
   function createEarth(document, window, options = {}) {
     const root = document.querySelector('#daily-earth');
     if (!root || root.dataset.earthReady === 'true') return null;
+    const glance = document.querySelector('.daily-home')?.dataset.briefMode === 'glance';
     const astro = window.HomeAstronomy;
     if (!astro) return null;
     root.dataset.earthReady = 'true';
@@ -28,8 +29,8 @@
     let disposed = false, paused = false, geography = null, weatherTicket = 0, weatherRequest = null, drawFrame = null, weatherResult = null;
     const TIMEOUT = 8000, CACHE_AGE = 30 * 60000, STALE_AGE = 24 * 3600000;
     const cityKey = 'xieyuqing-home-city-v1', cacheKey = city => 'xieyuqing-weather-v1:' + city;
-    try { const saved = window.localStorage.getItem(cityKey); if (CITIES[saved]) state.city = saved; } catch (_) {}
-    if (options.globeOnly && CITIES[cityInput?.value]) state.city = cityInput.value;
+    if (!glance) try { const saved = window.localStorage.getItem(cityKey); if (CITIES[saved]) state.city = saved; } catch (_) {}
+    if (!glance && options.globeOnly && CITIES[cityInput?.value]) state.city = cityInput.value;
     state.viewLon = CITIES[state.city].lon;
     state.viewLat = Math.max(-25, Math.min(35, CITIES[state.city].lat * .6));
     function write(id, value) { const node = find(id); if (node) node.textContent = value; }
@@ -95,7 +96,7 @@
       const now = find('earth-now');
       if (now) { now.hidden = !state.demo; now.textContent = text('回到实时', 'Return to live'); }
       if (root.dataset) root.dataset.earthMode = state.demo ? 'demo' : 'live';
-      if (canvas) canvas.setAttribute('aria-label', text('地球昼夜图：', 'Earth day and night: ') + (language() ? city.en : city.name) + ' ' + clock(date, city.tz) + '；' + text('太阳直射点 ', 'Subsolar point ') + (find('daily-subsolar')?.textContent || ''));
+      if (canvas) canvas.setAttribute('aria-label', text('地球昼夜图：', 'Earth day and night: ') + (language() ? city.en : city.name) + ' ' + clock(date, city.tz) + (find('daily-subsolar') ? '；' + text('太阳直射点 ', 'Subsolar point ') + find('daily-subsolar').textContent : ''));
       // The slider always uses a Beijing civil day, while city facts use their own local dates.
       if (!state.demo) state.demoDay = beijing;
       renderGlobe();

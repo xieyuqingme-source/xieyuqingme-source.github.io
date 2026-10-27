@@ -21,7 +21,6 @@
   <link rel="icon" href="/assets/favicon.ico?v=qinghuan-1" sizes="any">
   <link rel="icon" href="/assets/favicon.svg?v=qinghuan-1" type="image/svg+xml">
   <script>(() => { let theme = "light", saved; try { saved = localStorage.getItem("xieyuqing-blog-theme"); } catch (_) {} if (saved === "light" || saved === "dark") theme = saved; else try { if (window.matchMedia("(prefers-color-scheme: dark)").matches) theme = "dark"; } catch (_) {} document.documentElement.dataset.theme = theme; })();</script>
-  <script>(() => { let saved = null; try { saved = localStorage.getItem("xieyuqing-brief-closed"); } catch (_) {} const parts = new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Shanghai", year: "numeric", month: "2-digit", day: "2-digit" }).formatToParts(new Date()); const get = type => parts.find(part => part.type === type).value; const today = `${get("year")}-${get("month")}-${get("day")}`; if (saved === today || (saved === null && window.matchMedia("(max-width: 720px)").matches)) document.documentElement.dataset.brief = "closed"; })();</script>
   <link rel="stylesheet" href="/assets/portal.css">
   <link rel="stylesheet" href="/assets/home-daily.css">
   <script src="/assets/portal.js" defer></script>
@@ -34,6 +33,7 @@
     <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to dark mode" hidden><span class="theme-label">Dark</span></button>
   </header>
   <main id="main" class="container home">
+    <div class="home-top">
     <section class="home-hero" aria-labelledby="home-title">
       {{home_avatar_en}}
       <div class="hero-copy">
@@ -41,61 +41,34 @@
         <p class="hero-signature"><span data-i18n="common.signature.1"></span></p>
       </div>
     </section>
-    <section class="daily-home home-brief" id="brief" aria-labelledby="daily-title" data-lunar-src="/assets/vendor/lunar-javascript-1.7.7.js" data-d3-src="/assets/vendor/d3-7.9.0.min.js" data-earth-src="/assets/home-earth.js">
-      <div class="brief-bar" id="today">
-        <h2 id="daily-title">Today’s Brief</h2>
-        <span class="brief-date" id="home-date">—</span>
-        <span class="brief-lunar" id="brief-lunar"></span>
-        <span class="brief-term" id="brief-term"></span>
-        <span class="brief-weather" id="brief-weather"></span>
-        <span class="brief-headline" id="brief-headline">{{daily_brief_headline_en}}</span>
-        <span class="brief-edition" id="daily-edition">{{daily_brief_edition_en}}</span>
-        <button class="brief-toggle" id="brief-toggle" type="button" aria-expanded="true" aria-controls="brief-body" hidden>Hide</button>
+    <section id="brief" class="daily-home home-glance" data-brief-mode="glance" aria-labelledby="glance-title" data-lunar-src="/assets/vendor/lunar-javascript-1.7.7.js" data-d3-src="/assets/vendor/d3-7.9.0.min.js" data-earth-src="/assets/home-earth.js">
+      <div class="section-head"><h2 id="glance-title">Today’s brief</h2><a href="/en/today/">Open the full brief <span aria-hidden="true">→</span></a></div>
+      <div class="glance-layout">
+        <a class="glance-cards" href="/en/today/" aria-label="Today’s brief: date, solar term and almanac">
+          <span class="glance-card"><strong class="glance-main" id="glance-date">—</strong><span class="glance-detail" id="daily-calendar-lunar">—</span><span class="glance-detail" id="daily-calendar-festivals" hidden></span></span>
+          <span class="glance-card"><strong class="glance-main" id="daily-calendar-term">—</strong><span class="glance-detail" id="daily-calendar-next-term"></span></span>
+          <span class="glance-card" id="glance-almanac-card"><span class="glance-main"><span class="glance-yi">Suitable: </span><span id="daily-almanac-yi">—</span></span><span class="glance-detail"><span class="glance-ji">Avoid: </span><span id="daily-almanac-ji">—</span></span><small class="glance-note">Just for fun</small></span>
+        </a>
+        <div class="glance-earth" id="daily-earth"><canvas id="earth-canvas" width="280" height="286" role="img" aria-label="Interactive Earth day and night globe"></canvas><p id="daily-local-time"></p></div>
       </div>
-      <div class="brief-body" id="brief-body">
-        <div class="yl-today" aria-label="Reading and the day outside">
-          <section class="yl-news" aria-labelledby="daily-news-title"><h3 class="brief-panel-heading" id="daily-news-title">News</h3><div id="daily-feed" aria-live="polite">{{brief_feed_en}}</div><p class="yl-note" id="daily-brief-notice">{{daily_brief_notice_en}}</p></section>
-          <aside class="yl-sidebar" id="daily-sidebar" aria-label="Calendar and weather">
-          <section class="yl-calendar" aria-labelledby="today-heading">
-            <h3 class="brief-panel-heading" id="today-heading">Today</h3>
-            <div class="yl-cal-top"><div class="yl-day" id="daily-calendar-day">—</div><div class="yl-cal-copy"><strong id="daily-calendar-weekday">Today</strong><div id="daily-calendar-lunar">—</div><div class="yl-small" id="daily-calendar-month">—</div></div></div>
-            <p class="yl-small" id="daily-calendar-cycle"></p><p class="yl-solar-term" id="daily-calendar-term"></p><p class="yl-small" id="daily-calendar-festivals"></p><p class="yl-small" id="daily-calendar-holiday" hidden></p>
-            <div class="yl-weather"><label for="daily-city"><span class="yl-small" style="display:block;margin-bottom:3px">Selected city</span><select class="yl-city" id="daily-city"><option value="beijing">Beijing</option><option value="shanghai">Shanghai</option><option value="kuala">Kuala Lumpur</option><option value="london">London</option></select></label><div class="yl-weather-readout" id="daily-weather" aria-live="polite">Loading weather…</div></div>
-            <p class="yl-small weather-hint" id="daily-weather-hint" hidden></p>
-            <div class="yl-almanac" id="daily-almanac" hidden><dl class="almanac-preview"><div><dt>Suitable</dt><dd id="daily-almanac-yi"></dd></div><div><dt>Avoid</dt><dd id="daily-almanac-ji"></dd></div></dl><p id="daily-almanac-clash"></p><details><summary>More</summary><div id="daily-almanac-more"></div></details><p class="almanac-credit">Traditional folklore, just for fun · Calculated with lunar-javascript</p></div>
-          </section>
-          <section class="yl-earth" id="daily-earth" aria-labelledby="earth-heading"><div class="yl-earth-heading"><h2 id="earth-heading">Earth, now</h2><span class="yl-small">EARTH / SOLAR TIME</span></div><div class="yl-globe-wrap"><canvas id="earth-canvas" width="560" height="570" role="img" aria-label="Earth day and night, showing the subsolar point and selected city"></canvas></div><p class="yl-earth-small">Drag the globe to explore another view</p><div class="yl-suntime"><div>Sunrise · local<strong id="daily-sunrise">—</strong></div><div>Sunset · local<strong id="daily-sunset">—</strong></div></div><div class="yl-earth-info" aria-live="polite"><div id="daily-local-time">—</div><div>Subsolar point <b id="daily-subsolar">—</b></div><div id="daily-daylength">—</div></div><p class="yl-moon" id="daily-moon-phase"></p><div class="yl-world-clocks" id="daily-world-clocks"></div><div class="yl-earth-actions"><label class="yl-time-row" for="earth-hour"><span>Time · Beijing</span><output id="earth-hour-label">—</output></label><button type="button" class="yl-earth-now" id="earth-now" hidden>Back to now</button></div><input class="yl-time-slider" id="earth-hour" type="range" min="0" max="23.9833333" step="0.0166667" value="12"><div class="yl-time-ends" aria-hidden="true"><span>00:00</span><span>12:00</span><span>23:59</span></div><p class="yl-earth-source">Axis ≈ 23.4° from the orbital normal · Approximate calculations<br><a href="https://gml.noaa.gov/grad/solcalc/calcdetails.html" target="_blank" rel="noopener noreferrer">Calculation reference</a> · Geography Natural Earth</p></section>
-          </aside>
-        </div>
-        {{brief_bottom_cards_en}}
-      </div>
-      <noscript><p class="yl-no-script">News, writing and projects are available without JavaScript. Enable it for the live calendar, weather and globe.</p></noscript>
+      <noscript><p class="yl-no-script">Enable JavaScript to see the date, solar term, almanac and globe.</p></noscript>
     </section>
-    <section class="home-section" id="writing" aria-labelledby="writing-title">
-      <div class="section-head"><h2 id="writing-title">Recent writing</h2><div class="section-actions"><button class="home-random" id="home-random-button" type="button" hidden>Read a random article</button><a href="/en/articles/">All articles <span aria-hidden="true">→</span></a></div></div>
-      <ol class="yl-article-list recent-list">{{home_recent_articles_en}}</ol>
+    </div>
+    <section class="home-section home-writing" id="writing" aria-labelledby="writing-title">
+      <div class="section-head"><h2 id="writing-title">Articles</h2></div>
+      <div class="article-entries"><a class="article-entry" href="/en/articles/"><strong>All articles</strong><span>{{english_available}} pieces in English</span></a><a class="article-entry" href="/en/anthology/"><strong>Anthology</strong><span>Selected literature in the original · {{anthology_total}} works</span></a><button class="article-entry home-random" id="home-random-button" type="button" hidden><strong>Read a random article</strong><span>Picks one at random</span></button></div>
     </section>
     <section class="home-section home-photos" id="home-photos" aria-labelledby="home-photos-title">
       <div class="section-head"><h2 id="home-photos-title">Photos</h2><a href="/en/photos/">All photos <span aria-hidden="true">→</span></a></div>
       <div class="home-photo-grid">{{home_photos_en}}</div>
     </section>
-    {{home_quote_section_en}}
-    {{home_picks_section_en}}
     <section class="home-section" id="projects" aria-labelledby="projects-title">
-      <div class="section-head"><h2 id="projects-title">Making useful things</h2><a href="/en/projects/">All projects <span aria-hidden="true">→</span></a></div>
+      <div class="section-head"><h2 id="projects-title">Projects and games</h2><div class="section-actions"><a href="/en/projects/">All projects <span aria-hidden="true">→</span></a><a href="/en/game/">Games <span aria-hidden="true">→</span></a></div></div>
       <div class="yl-project-grid">{{home_project_cards_en}}</div>
     </section>
   </main>
   <footer class="site-footer container"><p>Xie Yuqing</p><div><a href="/en/articles/">Articles</a><a href="/en/about/">About</a><a href="/articles/feed.xml">RSS</a></div></footer>
   <script id="home-random-data" type="application/json">{{home_article_links_en}}</script>
-  <script id="daily-brief-data" type="application/json">{{daily_brief_data}}</script>
-  <script id="daily-content-data" type="application/json">{{daily_content_data}}</script>
-  <script id="daily-knowledge-data" type="application/json">{{brief_knowledge_data}}</script>
-  <script id="daily-memes-data" type="application/json">{{brief_memes_data}}</script>
-  <script id="daily-rules-data" type="application/json">{{brief_rules_data}}</script>
-  <script id="daily-holidays-data" type="application/json">{{brief_holidays_data}}</script>
-  <script id="own-quotes-data" type="application/json">{{own_quotes_data}}</script>
-  <script src="/assets/home-now.js" defer></script>
   <script src="/assets/astronomy-solar.js" defer></script>
   <script src="/assets/home-daily.js" defer></script>
 </body>

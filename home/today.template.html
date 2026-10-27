@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>今日简报 · 谢雨卿</title>
+  <meta name="description" content="每天人工挑选的几条新闻，配上日历、节气、天气、黄历和此刻的地球。">
+  <meta name="author" content="谢雨卿 Xie Yuqing">
+  <link rel="canonical" href="{{site_url}}/today/">
+  <link rel="alternate" hreflang="zh-CN" href="{{site_url}}/today/">
+  <link rel="alternate" hreflang="en" href="{{site_url}}/en/today/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="今日简报 · 谢雨卿">
+  <meta property="og:description" content="每天人工挑选的几条新闻，配上日历、节气、天气、黄历和此刻的地球。">
+  <meta property="og:url" content="{{site_url}}/today/">
+  <meta property="og:image" content="{{site_url}}/assets/share-cover.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="谢雨卿 · 雨聊：文章、作品与足迹">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="/assets/favicon.ico?v=qinghuan-1" sizes="any">
+  <link rel="icon" href="/assets/favicon.svg?v=qinghuan-1" type="image/svg+xml">
+  <script>(() => { let theme = "light", saved; try { saved = localStorage.getItem("xieyuqing-blog-theme"); } catch (_) {} if (saved === "light" || saved === "dark") theme = saved; else try { if (window.matchMedia("(prefers-color-scheme: dark)").matches) theme = "dark"; } catch (_) {} document.documentElement.dataset.theme = theme; })();</script>
+  <link rel="stylesheet" href="/assets/portal.css">
+  <link rel="stylesheet" href="/assets/home-daily.css">
+  <script src="/assets/portal.js" defer></script>
+</head>
+<body class="today-page">
+  <a class="skip-link" href="#main">跳转到正文</a>
+  <header class="site-header container">
+    <a class="brand" href="/" aria-label="谢雨卿个人主页"><span><span lang="zh-CN">谢雨卿</span><small lang="en">Xie Yuqing · Carl</small></span></a>
+    <nav class="site-nav" aria-label="主导航"><a href="/articles/">文章</a><a href="/anthology/">雨聊文选</a><a href="/projects/">作品</a><a href="/map/">足迹</a><a href="/photos/">照片</a><a href="/game/">小游戏</a><a href="/about/">关于</a><a class="site-language-switch" href="/en/" lang="en" aria-label="切换网站语言为英语">EN</a></nav>
+    <button class="theme-toggle" id="theme-toggle" type="button" aria-label="切换到深色模式" hidden><span class="theme-label">深色</span></button>
+  </header>
+  <main id="main" class="container today-main">
+    <section class="daily-home today-brief" data-brief-mode="full" id="brief" aria-labelledby="today-title" data-lunar-src="/assets/vendor/lunar-javascript-1.7.7.js" data-d3-src="/assets/vendor/d3-7.9.0.min.js" data-earth-src="/assets/home-earth.js">
+      <header class="page-intro today-intro"><h1 id="today-title">今日简报</h1><p class="yl-small" id="daily-edition">{{daily_brief_edition}}</p></header>
+      <div class="brief-body" id="brief-body">
+        <div class="yl-today" aria-label="今日导读与时序">
+          <section class="yl-news" aria-labelledby="daily-news-title"><h2 class="brief-panel-heading" id="daily-news-title">要闻</h2><div id="daily-feed" aria-live="polite">{{brief_feed}}</div><p class="yl-note" id="daily-brief-notice">{{daily_brief_notice}}</p></section>
+          <aside class="yl-sidebar" id="daily-sidebar" aria-label="日历与天气">
+          <section class="yl-calendar" aria-labelledby="today-heading">
+            <h2 class="brief-panel-heading" id="today-heading">今日</h2>
+            <div class="yl-cal-top"><div class="yl-day" id="daily-calendar-day">—</div><div class="yl-cal-copy"><strong id="daily-calendar-weekday">今日</strong><div id="daily-calendar-lunar">—</div><div class="yl-small" id="daily-calendar-month">—</div></div></div>
+            <p class="yl-small" id="daily-calendar-cycle"></p><p class="yl-solar-term" id="daily-calendar-term"></p><p class="yl-small" id="daily-calendar-festivals"></p><p class="yl-small" id="daily-calendar-holiday" hidden></p>
+            <div class="yl-weather"><label for="daily-city"><span class="yl-small" style="display:block;margin-bottom:3px">所选城市</span><select class="yl-city" id="daily-city"><option value="beijing">北京</option><option value="shanghai">上海</option><option value="kuala">吉隆坡</option><option value="london">伦敦</option></select></label><div class="yl-weather-readout" id="daily-weather" aria-live="polite">天气加载中…</div></div>
+            <p class="yl-small weather-hint" id="daily-weather-hint" hidden></p>
+            <div class="yl-almanac" id="daily-almanac" hidden><dl class="almanac-preview"><div><dt>宜</dt><dd id="daily-almanac-yi"></dd></div><div><dt>忌</dt><dd id="daily-almanac-ji"></dd></div></dl><p id="daily-almanac-clash"></p><p id="daily-almanac-directions"></p><p id="daily-almanac-pengzu"></p><p class="almanac-credit">传统民俗，仅供一乐 · 据 lunar-javascript 推算</p></div>
+          </section>
+          <section class="yl-earth" id="daily-earth" aria-labelledby="earth-heading"><div class="yl-earth-heading"><h2 id="earth-heading">此刻地球</h2><span class="yl-small">EARTH / SOLAR TIME</span></div><div class="yl-globe-wrap"><canvas id="earth-canvas" width="560" height="570" role="img" aria-label="地球昼夜图，标出太阳直射点与所选城市"></canvas></div><p class="yl-earth-small">拖动地球，换个角度看世界</p><div class="yl-suntime"><div>日出 · 当地时间<strong id="daily-sunrise">—</strong></div><div>日落 · 当地时间<strong id="daily-sunset">—</strong></div></div><div class="yl-earth-info" aria-live="polite"><div id="daily-local-time">—</div><div>太阳直射 <b id="daily-subsolar">—</b></div><div id="daily-daylength">—</div></div><p class="yl-moon" id="daily-moon-phase"></p><div class="yl-world-clocks" id="daily-world-clocks"></div><div class="yl-earth-actions"><label class="yl-time-row" for="earth-hour"><span>时刻 · 北京时间</span><output id="earth-hour-label">—</output></label><button type="button" class="yl-earth-now" id="earth-now" hidden>回到此刻</button></div><input class="yl-time-slider" id="earth-hour" type="range" min="0" max="23.9833333" step="0.0166667" value="12"><div class="yl-time-ends" aria-hidden="true"><span>00:00</span><span>12:00</span><span>23:59</span></div><p class="yl-earth-source">地轴与公转轨道法线夹角约 23.4° · 近似计算<br><a href="https://gml.noaa.gov/grad/solcalc/calcdetails.html" target="_blank" rel="noopener noreferrer">计算依据</a> · 底图 Natural Earth</p></section>
+          </aside>
+        </div>
+        {{brief_bottom_cards}}
+      </div>
+      <noscript><p class="yl-no-script">新闻、文章和作品可以直接阅读。启用 JavaScript 后可查看实时日历、天气和地球。</p></noscript>
+    </section>
+  </main>
+  <footer class="site-footer container"><p>谢雨卿</p><div><a href="/articles/">文章</a><a href="/about/">关于</a><a href="/articles/feed.xml">RSS</a></div></footer>
+  <script id="daily-brief-data" type="application/json">{{daily_brief_data}}</script>
+  <script id="daily-content-data" type="application/json">{{daily_content_data}}</script>
+  <script id="daily-knowledge-data" type="application/json">{{brief_knowledge_data}}</script>
+  <script id="daily-memes-data" type="application/json">{{brief_memes_data}}</script>
+  <script id="daily-rules-data" type="application/json">{{brief_rules_data}}</script>
+  <script id="daily-holidays-data" type="application/json">{{brief_holidays_data}}</script>
+  <script id="own-quotes-data" type="application/json">{{own_quotes_data}}</script>
+  <script src="/assets/home-now.js" defer></script>
+  <script src="/assets/astronomy-solar.js" defer></script>
+  <script src="/assets/home-daily.js" defer></script>
+</body>
+</html>

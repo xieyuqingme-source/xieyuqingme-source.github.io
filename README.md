@@ -20,7 +20,8 @@ This repository contains the source and public content for my personal website, 
 
 | 栏目或应用 | 网站入口 | 本仓库中的来源 |
 | --- | --- | --- |
-| 个人主页 | [首页](https://xieyuqing.me/) | `home/index.template.html`；最近文章与数量由构建器生成 |
+| 个人主页 | [首页](https://xieyuqing.me/) | `home/index.template.html`；头像、今日简报精简版、文章入口、照片、作品和小游戏，数量由构建器生成 |
+| 今日简报 | [今日简报](https://xieyuqing.me/today/) | `home/today.template.html`、`home/brief/`；完整新闻、日历、天气、黄历与地球 |
 | 中英文文章 | [文章](https://xieyuqing.me/articles/) | `中文文章/`、`English Articles/`、`blog/` |
 | 作品展示 | [作品](https://xieyuqing.me/projects/) | `home/projects.json`、`home/projects.template.html` |
 | 摄影相册 | [摄影](https://xieyuqing.me/photos/) | `photos/catalog.json`、`photos/images/`；只使用已选定的公开导出 |

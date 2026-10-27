@@ -164,20 +164,23 @@ class EnglishPublicationTests(unittest.TestCase):
             "site_notes": build_site.render_site_notes(blog.waline, blog.config["repository_url"]),
             "site_notes_en": build_site.render_site_notes(blog.waline, blog.config["repository_url"], "en"),
         })
-        for name, route in (("index", "index.html"), ("about", "about/index.html"), ("projects", "projects/index.html")):
+        for name, route in (("index", "index.html"), ("today", "today/index.html"), ("about", "about/index.html"), ("projects", "projects/index.html")):
             page = (ROOT / f"home/{name}.template.html").read_text(encoding="utf-8")
             for key, value in {**values, "about_content": "<p>Fixture biography</p>", "project_cards": "", "recent_articles": ""}.items():
                 page = page.replace("{{" + key + "}}", value)
+            if name == "today":
+                page = build_site.localize_page(page, self.root, "https://public.test", "/today/", "zh-CN",
+                    title=build_site.TODAY_TITLES, description=build_site.TODAY_DESCRIPTIONS)
             target = self.output / route
             target.parent.mkdir(parents=True, exist_ok=True)
             target.write_text(page, encoding="utf-8")
-        build_english_site(blog, self.output, "https://public.test", projects, build_site.load_about(), values)
+        self.english_report = build_english_site(blog, self.output, "https://public.test", projects, build_site.load_about(), values)
         return blog
 
-    def test_bilingual_homepage_has_readable_manual_news_and_daily_json_without_scripts(self):
+    def test_bilingual_full_brief_has_readable_manual_news_and_daily_json_without_scripts(self):
         blog = self.build_fixture()
         brief, daily_content = load_daily(self.root, build_site.linked_directory)
-        for language, route in (("zh-CN", "index.html"), ("en", "en/index.html")):
+        for language, route in (("zh-CN", "today/index.html"), ("en", "en/today/index.html")):
             with self.subTest(language=language):
                 text = (self.output / route).read_text(encoding="utf-8")
                 self.assertNotIn("{{", text)
@@ -201,10 +204,37 @@ class EnglishPublicationTests(unittest.TestCase):
                         self.assertIn(escape(item["published_label"][language]), feed[1])
                 self.assertIn(escape(BRIEF_NOTICE[language]), text)
         english = (self.output / "en/index.html").read_text(encoding="utf-8")
-        recent = re.search(r'<ol class="yl-article-list[^"]*">(.*?)</ol>', english, re.S)[1]
-        self.assertIn(english_article_url(blog, blog.translations[self.key]), recent)
+        self.assertNotIn('class="yl-article-list', english)
+        self.assertNotIn('id="daily-feed"', english)
+        self.assertNotIn('id="daily-brief-data"', english)
+        self.assertIn('data-brief-mode="glance"', english)
+        self.assertIn('href="/en/today/"', english)
+        random = re.search(r'<script id="home-random-data"[^>]*>(.*?)</script>', english, re.S)
+        self.assertIsNotNone(random)
+        urls = json.loads(random[1])
+        self.assertIn(english_article_url(blog, blog.translations[self.key]), urls)
         pending = next(a for a in blog.articles if a.language == "zh-CN" and a.source != self.source)
-        self.assertNotIn(blog.href(pending.destination), recent)
+        self.assertNotIn(blog.href(pending.destination), urls)
+        self.assertIn("2 pieces in English", english)
+
+    def test_full_brief_routes_have_their_own_metadata_and_language_pair(self):
+        self.build_fixture()
+        self.assertIn("/en/today/", self.english_report["routes"])
+        for language, relative, route in (("zh-CN", "today/index.html", "/today/"),
+                                           ("en", "en/today/index.html", "/en/today/")):
+            with self.subTest(language=language):
+                text = (self.output / relative).read_text(encoding="utf-8")
+                elements = build_site.Elements(text).elements
+                self.assertEqual([attrs.get("lang") for tag, attrs in elements if tag == "html"], [language])
+                self.assertEqual([attrs.get("href") for tag, attrs in elements if tag == "link" and attrs.get("rel") == "canonical"], ["https://public.test" + route])
+                self.assertEqual([attrs.get("content") for tag, attrs in elements if tag == "meta" and attrs.get("property") == "og:url"], ["https://public.test" + route])
+                self.assertEqual([attrs.get("content") for tag, attrs in elements if tag == "meta" and attrs.get("name") == "description"], [build_site.TODAY_DESCRIPTIONS[language]])
+                self.assertIn("<title>" + escape(build_site.TODAY_TITLES[language]) + "</title>", text)
+                alternates = [(attrs.get("hreflang"), attrs.get("href")) for tag, attrs in elements if tag == "link" and attrs.get("rel") == "alternate" and attrs.get("hreflang")]
+                self.assertCountEqual(alternates, [("zh-CN", "https://public.test/today/"), ("en", "https://public.test/en/today/")])
+                self.assertEqual(sum(tag == "h1" for tag, _ in elements), 1)
+                self.assertIn('data-brief-mode="full"', text)
+                self.assertNotIn('id="brief-toggle"', text)
 
     def test_counts_dates_and_complete_body_are_preserved(self):
         blog = self.blog()
@@ -333,7 +363,7 @@ class EnglishPublicationTests(unittest.TestCase):
         self.assertNotIn("Originally written in English", pending_page)
         report = check_english_publication(blog, self.output, "https://public.test")
         self.assertEqual(report["directory_entries"], 3)
-        self.assertEqual(report["language_metadata_pages"], 10)
+        self.assertEqual(report["language_metadata_pages"], 12)
         self.assertEqual(ET.parse(self.output / 'articles/feed.xml').findall('./channel/item').__len__(), 3)
         self.assertNotIn('/en/', (self.output / 'articles/feed.xml').read_text(encoding="utf-8"))
 

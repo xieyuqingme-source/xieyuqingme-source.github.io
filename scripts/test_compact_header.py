@@ -100,8 +100,9 @@ class CompactHeaderTests(unittest.TestCase):
                 self.assertEqual(len(footers), 1)
                 self.assertNotIn("Old footer", footers[0]["text"])
                 links = [node["attrs"]["href"] for node in tree.find(lambda node: node["tag"] == "a", footers[0])]
-                for route in ("/articles/", "/projects/", "/map/", "/photos/", "/about/"):
+                for route in ("/today/", "/articles/", "/projects/", "/map/", "/photos/", "/about/"):
                     self.assertIn(prefix + route, links)
+                self.assertEqual(links[0], prefix + "/today/")
                 self.assertIn(prefix + "/about/#site", links)
                 self.assertTrue(any(href.startswith("mailto:") for href in links))
 

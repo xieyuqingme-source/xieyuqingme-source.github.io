@@ -58,7 +58,7 @@ test('actual vendored D3 and astronomy share the published PageScope and can be 
   const sandbox = {window: target,console}; vm.createContext(sandbox);
   const scoper = read('scripts/site_navigation.py');
   assert.ok(scoper.includes('function(document,window,self,globalThis)'));
-  const header = '/* site-page-scope:v1 */\n(function(document,window,self,globalThis){\nif(document.currentScript?.dataset.homeScope&&document.currentScript.dataset.homeScope!==window.HomeBriefPageId)return;\nconst {fetch,setTimeout,clearTimeout,setInterval,clearInterval,requestAnimationFrame,cancelAnimationFrame,ResizeObserver,IntersectionObserver,MutationObserver,URL,history,location,matchMedia}=window;\n';
+  const header = '/* site-page-scope:v1 */\n(function(document,window,self,globalThis){\nif(document?.currentScript?.dataset?.homeScope&&document.currentScript.dataset.homeScope!==window.HomeBriefPageId)return;\nconst {fetch,setTimeout,clearTimeout,setInterval,clearInterval,requestAnimationFrame,cancelAnimationFrame,ResizeObserver,IntersectionObserver,MutationObserver,URL,history,location,matchMedia}=window;\n';
   const footer = '\n}).apply(...(()=>{if(typeof module==="object"&&module.exports)return[globalThis,[globalThis.document,globalThis,globalThis,globalThis]];const e=window.SiteNavigation.environment();return[e.window,[e.document,e.window,e.window,e.window]];})());\n';
   for (const file of ['home/assets/vendor/d3-7.9.0.min.js','home/assets/astronomy-solar.js','home/assets/vendor/lunar-javascript-1.7.7.js','home/assets/home-earth.js']) vm.runInContext(header + read(file) + footer, sandbox);
   assert.equal(typeof owned.d3.geoOrthographic, 'function');
@@ -177,11 +177,14 @@ test('missing optional DOM fields and canvas are safe', async () => {
   assert.equal(createEarth(h.document, h.window), null);
 });
 
-test('both templates keep the Earth DOM contract and declare heavy scripts only as lazy URLs', () => {
-  const ids = ['daily-earth','earth-canvas','daily-city','earth-hour','earth-hour-label','earth-now','daily-local-time','daily-sunrise','daily-sunset','daily-daylength','daily-subsolar','daily-calendar-month','daily-calendar-day','daily-calendar-weekday','daily-calendar-lunar','daily-calendar-term','daily-weather'];
-  for (const file of ['home/index.template.html','home/en/index.template.html']) {
+test('glance and full templates keep their Earth contracts and declare heavy scripts only as lazy URLs', () => {
+  for (const file of ['home/index.template.html','home/en/index.template.html','home/today.template.html','home/en/today.template.html']) {
     const html = read(file);
+    const glance = !file.includes('today.template');
+    const ids = glance ? ['daily-earth','earth-canvas','daily-local-time','daily-calendar-lunar','daily-calendar-term']
+      : ['daily-earth','earth-canvas','daily-city','earth-hour','earth-hour-label','earth-now','daily-local-time','daily-sunrise','daily-sunset','daily-daylength','daily-subsolar','daily-calendar-month','daily-calendar-day','daily-calendar-weekday','daily-calendar-lunar','daily-calendar-term','daily-weather'];
     for (const id of ids) assert.equal((html.match(new RegExp('id="' + id + '"', 'g')) || []).length, 1, file + ' #' + id);
+    assert.ok(html.includes('data-brief-mode="' + (glance ? 'glance' : 'full') + '"'),file + ' mode');
     assert.match(html,/data-d3-src="\/assets\/vendor\/d3-7\.9\.0\.min\.js"/);
     assert.match(html,/data-earth-src="\/assets\/home-earth\.js"/);
     assert.match(html,/data-lunar-src="\/assets\/vendor\/lunar-javascript-1\.7\.7\.js"/);
@@ -211,6 +214,17 @@ test('lazy globe mode adds four world clocks without a second weather request an
   assert.match(h.nodes['daily-moon-phase'].textContent,/月相/);
   const before = draws; control.setPaused(true); control.refresh(); assert.equal(draws,before); assert.equal(control.getState().paused,true);
   control.setPaused(false); assert.ok(draws > before); control.destroy(); await settle(); assert.equal(h.intervals.size,0);
+});
+
+test('homepage mini globe stays in Beijing without reading city preferences or weather caches',async () => {
+  const h = harness(); let reads = 0;
+  h.document.querySelector = selector => selector === '#daily-earth' ? h.element : selector === '.daily-home' ? {dataset:{briefMode:'glance'}} : null;
+  h.window.localStorage.getItem = () => { reads++; return 'london'; };
+  const clock = new Element(), canvas = new Element(); canvas.setAttribute = () => {};
+  h.document.getElementById = id => id === 'daily-local-time' ? clock : id === 'earth-canvas' ? canvas : null;
+  const controller = createEarth(h.document,h.window,{globeOnly:true});
+  assert.equal(controller.getState().city,'beijing'); assert.equal(reads,0); assert.equal(h.requests.length,0); assert.match(clock.textContent,/北京/);
+  controller.destroy(); await settle(); assert.equal(h.intervals.size,0);
 });
 
 test('a lazy globe keeps the already selected city when storage is unavailable', async () => {

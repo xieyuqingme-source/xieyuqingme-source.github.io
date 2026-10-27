@@ -90,7 +90,7 @@ def validate_brief(data):
         raise ValueError("Update timestamp must use the edition date and Beijing timezone.")
     if not isinstance(data["status"], str) or data["status"] not in {"manual", "auto"}:
         raise ValueError("Briefing status must be manual or auto.")
-    _entries(data["items"], {"id", "category", "title", "summary", "source", "published", "url", "priority"}, {"major_reason"}, maximum=8)
+    _entries(data["items"], {"id", "category", "title", "summary", "source", "published", "url", "priority"}, {"major_reason"}, maximum=12)
     normal_categories = set()
     for item in data["items"]:
         if not isinstance(item["category"], str) or item["category"] not in CATEGORIES:
@@ -332,7 +332,7 @@ def render_brief(data, language="zh-CN"):
     return "\n".join(cards)
 
 
-def render_brief_bottom(content, extras, language="zh-CN", today=None):
+def render_brief_bottom(content, extras, language="zh-CN", today=None, own_quote=""):
     """Source-backed initial cards; the browser applies live calendar triggers."""
     content = validate_content(content)
     knowledge = validate_knowledge(extras["knowledge"])["items"]
@@ -364,4 +364,6 @@ def render_brief_bottom(content, extras, language="zh-CN", today=None):
         meme_title = "Internet meme" if language == "en" else "热梗"
         cards.append(f'<article class="yl-daily-card" id="daily-meme-card"><h2>{meme_title}</h2><h3 id="daily-street-title">{text(meme["term"])}</h3><p id="daily-street-text">{text(meme["meaning"])}</p>{"".join(lines)}<p class="yl-small" id="daily-meme-added">{added}</p><div class="yl-street-links" id="daily-street-links">{"".join(links)}</div></article>')
     cards.append(f'<article class="yl-daily-card"><h2>{quote_title}</h2><p class="yl-quote" id="daily-quote">{text(quote["text"])}</p><p class="yl-small yl-quote-source" id="daily-quote-source">{text(quote["author"])} · {source_link(quote["url"], text(quote["work"]))}</p></article>')
+    if own_quote:
+        cards.append(own_quote)
     return '<section class="yl-bottomline' + (' has-meme' if memes else '') + '" id="brief-bottom">' + "\n".join(cards) + '</section>'

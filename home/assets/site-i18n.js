@@ -5,9 +5,9 @@
   const catalogues = { "zh-CN": Object.create(null), en: Object.create(null) };
   const subscribers = new Set();
   const preferenceKey = "xieyuqing-site-language";
-  const feature = /^\/(?:about|projects|photos|map|game|anthology)(?:\/|$)/;
+  const feature = /^\/(?:today|about|projects|photos|map|game|anthology)(?:\/|$)/;
   const resource = /\/(?:assets|images|data)(?:\/|$)|\.(?:png|jpe?g|webp|gif|svg|json|css|js|xml|mp4|webm)$/i;
-  const navKeys = { "/": "home", "/articles/": "articles", "/anthology/": "anthology", "/projects/": "projects", "/photos/": "photos", "/map/": "map", "/game/": "games", "/about/": "about" };
+  const navKeys = { "/": "home", "/today/": "today", "/articles/": "articles", "/anthology/": "anthology", "/projects/": "projects", "/photos/": "photos", "/map/": "map", "/game/": "games", "/about/": "about" };
   let page = {};
   let current = document.documentElement.lang?.toLowerCase().startsWith("en") ? "en" : "zh-CN";
   if (/^\/en(?:\/|$)/.test(window.location.pathname)) current = "en";

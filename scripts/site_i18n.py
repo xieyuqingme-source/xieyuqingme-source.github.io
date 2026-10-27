@@ -7,9 +7,9 @@ import re
 from urllib.parse import urlsplit, urlunsplit
 
 LANGUAGES = ("zh-CN", "en")
-FEATURES = ("/about", "/projects", "/photos", "/map", "/game", "/anthology")
+FEATURES = ("/today", "/about", "/projects", "/photos", "/map", "/game", "/anthology")
 VOID = {"area", "base", "br", "col", "embed", "hr", "img", "input", "link", "meta", "param", "source", "track", "wbr"}
-NAV_KEYS = {"/": "home", "/articles/": "articles", "/anthology/": "anthology", "/projects/": "projects",
+NAV_KEYS = {"/": "home", "/today/": "today", "/articles/": "articles", "/anthology/": "anthology", "/projects/": "projects",
             "/photos/": "photos", "/map/": "map", "/game/": "games", "/about/": "about"}
 
 
@@ -206,7 +206,7 @@ NAV_GROUPS = (('/articles/', 'articles', [('/anthology/', 'anthology')], ['/arti
               ('/map/', 'map', [('/photos/', 'photos')], ['/map/', '/photos/']),
               ('/about/', 'about', [], ['/about/']))
 NAV_REQUIRED = (*NAV_KEYS.values(), "ranking", "maker", "more.articles", "more.projects", "more.map")
-FOOTER_LINKS = (('/articles/', 'articles'), ('/anthology/', 'anthology'), ('/projects/', 'projects'), ('/game/', 'games'),
+FOOTER_LINKS = (('/today/', 'today'), ('/articles/', 'articles'), ('/anthology/', 'anthology'), ('/projects/', 'projects'), ('/game/', 'games'),
                 ('/map/', 'map'), ('/photos/', 'photos'), ('/about/', 'about'))
 CONTACT_EMAIL = "xieyuqing.me@gmail.com"
 

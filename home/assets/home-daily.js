@@ -3,30 +3,32 @@
   'use strict';
   const root = document.querySelector('.daily-home');
   if (!root) return;
+  const glance = root.dataset.briefMode === 'glance';
   const find = id => document.getElementById(id);
   const read = id => { try { return JSON.parse(find(id)?.textContent || 'null'); } catch (_) { return null; } };
-  const brief = read('daily-brief-data'), content = read('daily-content-data');
-  const knowledge = read('daily-knowledge-data')?.items || [], memes = read('daily-memes-data')?.items || [];
-  const rules = read('daily-rules-data')?.weather || [], holidays = read('daily-holidays-data')?.years || {};
+  const brief = glance ? null : read('daily-brief-data'), content = glance ? null : read('daily-content-data');
+  const knowledge = glance ? [] : read('daily-knowledge-data')?.items || [], memes = glance ? [] : read('daily-memes-data')?.items || [];
+  const rules = glance ? [] : read('daily-rules-data')?.weather || [], holidays = glance ? {} : read('daily-holidays-data')?.years || {};
   const astro = window.HomeAstronomy;
   const lang = () => (window.SiteI18n?.lang?.() || document.documentElement.lang || 'zh-CN').startsWith('en') ? 'en' : 'zh-CN';
   const text = value => typeof value === 'string' ? value : value?.[lang()] || value?.['zh-CN'] || '';
   const word = (zh, en) => lang() === 'en' ? en : zh;
   const categories = {domestic: ['时政','Politics'],world: ['国际','World'],economy: ['经济','Economy'],science: ['科技','Science'],culture: ['文化','Culture']};
-  const order = Object.keys(categories), briefKey = 'xieyuqing-brief-closed';
+  const order = Object.keys(categories);
+  try { window.localStorage.removeItem('xieyuqing-brief-closed'); } catch (_) {}
   const cities = {
     beijing: {name: ['北京','Beijing'],lat: 39.9042,lon: 116.4074,tz: 'Asia/Shanghai'},
     shanghai: {name: ['上海','Shanghai'],lat: 31.2304,lon: 121.4737,tz: 'Asia/Shanghai'},
     kuala: {name: ['吉隆坡','Kuala Lumpur'],lat: 3.139,lon: 101.6869,tz: 'Asia/Kuala_Lumpur'},
     london: {name: ['伦敦','London'],lat: 51.5074,lon: -.1278,tz: 'Europe/London'}
   };
-  let lastDay = '', lastLanguage = '', closed = false, disposed = false, city = 'beijing';
+  let lastDay = '', lastLanguage = '', disposed = false, city = 'beijing', assetsReady = !glance, lunarAttempted = false;
   let weather = null, weatherRequest = null, weatherTicket = 0, earth = null, earthVisible = false, earthLoading = false;
   let festivalCache = null;
   const cleanup = [], pending = new Map();
   const pageId = window.crypto?.randomUUID?.() || Date.now().toString(36) + '-' + Math.random().toString(36).slice(2);
   window.HomeBriefPageId = pageId;
-  try { const saved = window.localStorage.getItem('xieyuqing-home-city-v1'); if (cities[saved]) city = saved; } catch (_) {}
+  if (!glance) try { const saved = window.localStorage.getItem('xieyuqing-home-city-v1'); if (cities[saved]) city = saved; } catch (_) {}
   function listen(target, type, handler, options) {
     if (!target?.addEventListener) return;
     target.addEventListener(type, handler, options);
@@ -55,7 +57,7 @@
     return result;
   }
   function renderFeed(date) {
-    if (!brief?.items?.length || !find('daily-feed')) return;
+    if (glance || !brief?.items?.length || !find('daily-feed')) return;
     const age = dayIndex(date) - Math.floor(Date.parse(brief.edition_date + 'T00:00:00Z') / 86400000), stale = age > 3;
     root.classList.toggle('brief-news-stale', stale);
     write('daily-news-title', age === 1 ? word('昨日要闻','Yesterday’s news') : word('要闻','News'));
@@ -65,11 +67,10 @@
     if (notice) { notice.hidden = stale; notice.textContent = word('新闻由人工挑选，标题和摘要依据原文；点「阅读原文」看全文。','News is selected manually; headlines and summaries follow the sources. Choose “Read source” for the full text.'); }
     if (stale) {
       const paused = word('新闻暂停更新，先看看地球','News updates paused; take a look at Earth');
-      find('daily-feed').replaceChildren(node('p','yl-note yl-news-paused',paused)); write('brief-headline',paused); return;
+      find('daily-feed').replaceChildren(node('p','yl-note yl-news-paused',paused)); return;
     }
     const category = item => item.category || (item.categories?.[0] === 'business' ? 'economy' : item.categories?.[0]);
-    const entries = [...brief.items].sort((a,b) => Number(b.priority === 'major') - Number(a.priority === 'major') || order.indexOf(category(a)) - order.indexOf(category(b))).slice(0,8);
-    write('brief-headline',text(entries[0].title));
+    const entries = [...brief.items].sort((a,b) => Number(b.priority === 'major') - Number(a.priority === 'major') || order.indexOf(category(a)) - order.indexOf(category(b)));
     const fragment = document.createDocumentFragment();
     entries.forEach((item,index) => {
       const article = node('article',(index === 0 ? 'yl-lead' : 'yl-item') + ' news-row');
@@ -82,6 +83,7 @@
     find('daily-feed').replaceChildren(fragment);
   }
   function renderDaily(date) {
+    if (glance) return;
     const index = dayIndex(date), pick = list => list?.length ? list[((index % list.length) + list.length) % list.length] : null;
     const quote = pick(content?.quotes);
     if (quote) {
@@ -110,6 +112,7 @@
     }
   }
   function renderWeather() {
+    if (glance) return;
     const target = find('daily-weather');
     if (target) {
       target.replaceChildren();
@@ -124,52 +127,65 @@
       const value = weather.daily[rule.field]; return Number.isFinite(value) && (rule.operator === 'gte' ? value >= rule.threshold : rule.operator === 'lte' && value <= rule.threshold);
     }) : [];
     const hint = find('daily-weather-hint'); if (hint) { hint.hidden = !matching.length; hint.textContent = matching.map(rule => text(rule.text)).join(' · '); }
-    renderSummary();
-  }
-  function renderSummary() {
-    const selected = cities[city];
-    const target = find('daily-weather'), temperature = target?.querySelector('strong')?.textContent || '', description = target?.querySelector('span')?.textContent || '';
-    write('brief-weather',selected.name[lang() === 'en' ? 1 : 0] + ' · ' + (temperature ? [temperature,description].filter(Boolean).join(' ') : target?.textContent || ''));
   }
   function renderCalendar(date) {
     if (disposed) return;
-    const local = parts(date,cities[city].tz), beijing = parts(date), english = lang() === 'en';
-    write('daily-calendar-day',String(+local.day));
-    write('daily-calendar-weekday',new Intl.DateTimeFormat(english ? 'en-GB' : 'zh-CN',{timeZone:cities[city].tz,weekday:'long'}).format(date));
-    write('daily-calendar-month',local.year + ' · ' + new Intl.DateTimeFormat(english ? 'en-GB' : 'zh-CN',{timeZone:cities[city].tz,month:'long'}).format(date));
-    const lunarText = astro?.lunar(date,cities[city].tz,english) || '', termText = astro?.term(date,english) || '';
-    write('daily-calendar-lunar',word('农历','Lunar · ') + lunarText); write('daily-calendar-term',termText);
-    write('brief-lunar',astro?.lunar(date,'Asia/Shanghai',english) || ''); write('brief-term',termText);
-    if (find('daily-city')) find('daily-city').value = city;
-    const today = dayStamp(date), holiday = holidays[beijing.year]?.days?.find(item => item.date === today);
-    const holidayNode = find('daily-calendar-holiday');
-    const holidayNames = {'元旦':'New Year’s Day','春节':'Spring Festival','清明节':'Qingming Festival','劳动节':'Labour Day','端午节':'Dragon Boat Festival','中秋节':'Mid-Autumn Festival','国庆节':'National Day'};
-    if (holidayNode) { holidayNode.hidden = !holiday; holidayNode.textContent = holiday ? (holiday.isOffDay ? word('假期 · ','Holiday · ') : word('调休上班 · ','Adjusted working day · ')) + (english ? holidayNames[holiday.name] || holiday.name : holiday.name) : ''; }
-    if (!window.Solar || !window.I18n) return;
+    const zone = glance ? 'Asia/Shanghai' : cities[city].tz;
+    const local = parts(date,zone), beijing = parts(date), english = lang() === 'en';
+    const weekday = new Intl.DateTimeFormat(english ? 'en-GB' : 'zh-CN',{timeZone:zone,weekday:'long'}).format(date);
+    if (glance) {
+      const stamp = new Intl.DateTimeFormat(english ? 'en-GB' : 'zh-CN',{timeZone:zone,month:'long',day:'numeric'}).format(date);
+      write('glance-date',english ? weekday + ' ' + stamp : stamp + ' ' + weekday);
+    } else {
+      write('daily-calendar-day',String(+local.day)); write('daily-calendar-weekday',weekday);
+      write('daily-calendar-month',local.year + ' · ' + new Intl.DateTimeFormat(english ? 'en-GB' : 'zh-CN',{timeZone:zone,month:'long'}).format(date));
+      if (find('daily-city')) find('daily-city').value = city;
+    }
+    write('daily-calendar-lunar',word('农历','Lunar · ') + (astro?.lunar(date,zone,english) || ''));
+    write('daily-calendar-term',astro?.term(date,english) || ''); write('daily-calendar-next-term','');
+    if (!glance) {
+      const holiday = holidays[beijing.year]?.days?.find(item => item.date === dayStamp(date));
+      const holidayNode = find('daily-calendar-holiday');
+      const holidayNames = {'元旦':'New Year’s Day','春节':'Spring Festival','清明节':'Qingming Festival','劳动节':'Labour Day','端午节':'Dragon Boat Festival','中秋节':'Mid-Autumn Festival','国庆节':'National Day'};
+      if (holidayNode) { holidayNode.hidden = !holiday; holidayNode.textContent = holiday ? (holiday.isOffDay ? word('假期 · ','Holiday · ') : word('调休上班 · ','Adjusted working day · ')) + (english ? holidayNames[holiday.name] || holiday.name : holiday.name) : ''; }
+    }
+    if (!window.Solar || !window.I18n) {
+      if (glance) { write('daily-almanac-yi','—'); write('daily-almanac-ji','—'); }
+      return;
+    }
     window.I18n.setLanguage(english ? 'en' : 'chs');
     const solar = window.Solar.fromYmd(+local.year,+local.month,+local.day), lunar = solar.getLunar();
     write('daily-calendar-cycle',lunar.getYearInGanZhi() + word('年 · ',' · ') + lunar.getYearShengXiao());
     const previous = lunar.getPrevJieQi(true), next = lunar.getNextJieQi(true);
-    const localDay = dayIndex(date,cities[city].tz), toDay = value => Math.floor(Date.parse(value + 'T00:00:00Z') / 86400000);
-    write('daily-calendar-term',english ? `${previous.getName()} · day ${localDay - toDay(previous.getSolar().toYmd()) + 1} · ${toDay(next.getSolar().toYmd()) - localDay} days until ${next.getName()}`
-      : `${previous.getName()}第${localDay - toDay(previous.getSolar().toYmd()) + 1}天 · 距${next.getName()}还有${toDay(next.getSolar().toYmd()) - localDay}天`);
-    const cacheKey = solar.toYmd() + ':' + lang();
-    if (festivalCache?.key !== cacheKey) {
-      const current = [...solar.getFestivals(),...lunar.getFestivals()]; let upcoming = null;
-      for (let days = 1; days <= 370 && !upcoming; days++) { const day = solar.next(days), names = [...day.getFestivals(),...day.getLunar().getFestivals()]; if (names.length) upcoming = {days,names}; }
-      festivalCache = {key:cacheKey,current,upcoming};
+    const localDay = dayIndex(date,zone), toDay = value => Math.floor(Date.parse(value + 'T00:00:00Z') / 86400000);
+    const elapsed = localDay - toDay(previous.getSolar().toYmd()) + 1, remaining = toDay(next.getSolar().toYmd()) - localDay;
+    const first = english ? `${previous.getName()} · day ${elapsed}` : `${previous.getName()}第${elapsed}天`;
+    const second = english ? `${remaining} days until ${next.getName()}` : `距${next.getName()}还有${remaining}天`;
+    write('daily-calendar-term',glance ? first : first + ' · ' + second);
+    if (glance) write('daily-calendar-next-term',second);
+    const current = [...solar.getFestivals(),...lunar.getFestivals()];
+    if (glance) {
+      const festivals = find('daily-calendar-festivals'); if (festivals) { festivals.hidden = !current.length; festivals.textContent = current.join(' · '); }
+    } else {
+      const cacheKey = solar.toYmd() + ':' + lang();
+      if (festivalCache?.key !== cacheKey) {
+        let upcoming = null;
+        for (let days = 1; days <= 370 && !upcoming; days++) { const day = solar.next(days), names = [...day.getFestivals(),...day.getLunar().getFestivals()]; if (names.length) upcoming = {days,names}; }
+        festivalCache = {key:cacheKey,upcoming};
+      }
+      const upcoming = festivalCache.upcoming;
+      const nextText = upcoming ? (english ? `${upcoming.names.join(' · ')} in ${upcoming.days} days` : `距${upcoming.names.join(' · ')}还有${upcoming.days}天`) : '';
+      write('daily-calendar-festivals',[current.join(' · '),nextText].filter(Boolean).join(' · '));
     }
-    const names = festivalCache.current.join(' · '), upcoming = festivalCache.upcoming;
-    const nextText = upcoming ? (english ? `${upcoming.names.join(' · ')} in ${upcoming.days} days` : `距${upcoming.names.join(' · ')}还有${upcoming.days}天`) : '';
-    write('daily-calendar-festivals',[names,nextText].filter(Boolean).join(' · '));
-    // The summary always uses the Beijing civil day, independent of the weather city.
-    const summarySolar = window.Solar.fromYmd(+beijing.year,+beijing.month,+beijing.day), summaryLunar = summarySolar.getLunar();
-    write('brief-term',[...summarySolar.getFestivals(),...summaryLunar.getFestivals()].join(' · ') || summaryLunar.getPrevJieQi(true).getName());
     const yi = lunar.getDayYi(), ji = lunar.getDayJi();
-    write('daily-almanac-yi',yi.slice(0,4).join(' · ')); write('daily-almanac-ji',ji.slice(0,4).join(' · '));
-    write('daily-almanac-clash',word('冲','Clash · ') + lunar.getDayChongDesc() + word(' · 煞',' · Sha · ') + lunar.getDaySha());
-    write('daily-almanac-more',word('宜：','Suitable: ') + yi.join(' · ') + word('；忌：','; Avoid: ') + ji.join(' · '));
-    const almanac = find('daily-almanac'); if (almanac) almanac.hidden = false;
+    write('daily-almanac-yi',(glance ? yi.slice(0,3) : yi).join(' · ')); write('daily-almanac-ji',(glance ? ji.slice(0,3) : ji).join(' · '));
+    if (!glance) {
+      write('daily-almanac-clash',word('冲','Clash · ') + lunar.getDayChongDesc() + word(' · 煞',' · Sha · ') + lunar.getDaySha());
+      write('daily-almanac-directions',english ? `Lucky directions — Joy: ${lunar.getDayPositionXiDesc()} · Fortune: ${lunar.getDayPositionFuDesc()} · Wealth: ${lunar.getDayPositionCaiDesc()}`
+        : `喜神 ${lunar.getDayPositionXiDesc()} · 福神 ${lunar.getDayPositionFuDesc()} · 财神 ${lunar.getDayPositionCaiDesc()}`);
+      const pengzu = find('daily-almanac-pengzu'); if (pengzu) { pengzu.hidden = english; pengzu.textContent = english ? '' : '彭祖百忌：' + lunar.getPengZuGan() + ' · ' + lunar.getPengZuZhi(); }
+      const almanac = find('daily-almanac'); if (almanac) almanac.hidden = false;
+    }
   }
   function cachedWeather() {
     try {
@@ -178,7 +194,7 @@
     } catch (_) {} return null;
   }
   async function loadWeather() {
-    if (!window.fetch || disposed) return;
+    if (glance || !window.fetch || disposed) return;
     const selectedCity = city, selected = cities[city], ticket = ++weatherTicket, cached = cachedWeather();
     weatherRequest?.abort();
     if (cached) { weather = {...cached,stale:Date.now() - cached.savedAt >= 1800000}; renderWeather(); if (!weather.stale) return; }
@@ -210,44 +226,39 @@
     pending.set(url,promise); return promise;
   }
   async function maybeLoadEarth() {
-    if (disposed || closed || !earthVisible) { earth?.setPaused(true); return; }
+    if (disposed || !assetsReady || !earthVisible) { earth?.setPaused(true); return; }
     if (earth) { earth.setPaused(false); return; }
     if (earthLoading) return;
     earthLoading = true;
     try {
-      await loadAsset(root.dataset.d3Src); if (disposed || closed || !earthVisible) return;
-      await loadAsset(root.dataset.earthSrc); if (disposed || closed || !earthVisible) return;
+      await loadAsset(root.dataset.d3Src); if (disposed || !assetsReady || !earthVisible) return;
+      await loadAsset(root.dataset.earthSrc); if (disposed || !assetsReady || !earthVisible) return;
       earth = window.HomeEarth?.createEarth(document,window,{globeOnly:true});
     } catch (_) {} finally { earthLoading = false; }
   }
-  function loadExpanded() {
-    if (closed || disposed) { earth?.setPaused(true); return; }
-    if (!window.Solar) loadAsset(root.dataset.lunarSrc).then(() => { if (!disposed && !closed) { renderCalendar(new Date()); renderDaily(new Date()); } }).catch(() => {});
-    else renderCalendar(new Date());
-    maybeLoadEarth();
+  function loadLunar() {
+    if (disposed || lunarAttempted) return;
+    lunarAttempted = true;
+    if (window.Solar) { renderCalendar(new Date()); return; }
+    loadAsset(root.dataset.lunarSrc).then(() => { if (!disposed) { renderCalendar(new Date()); if (!glance) renderDaily(new Date()); } }).catch(() => {
+      if (disposed) return;
+      const almanac = find('glance-almanac-card'); if (glance && almanac) almanac.hidden = true;
+      write('daily-calendar-next-term','');
+    });
   }
-  function renderBriefState() {
-    document.documentElement.dataset.brief = closed ? 'closed' : 'open';
-    const body = find('brief-body'), button = find('brief-toggle'); if (body) body.hidden = closed;
-    if (button) { button.hidden = false; button.setAttribute('aria-controls','brief-body'); button.setAttribute('aria-expanded',String(!closed)); button.textContent = closed ? word('展开今日简报','Show today’s brief') : word('收起','Hide'); }
-    loadExpanded();
-  }
-  function syncBrief(date,rollover) {
-    let saved = null; try { saved = window.localStorage.getItem(briefKey); } catch (_) {}
-    let mobile = false; try { mobile = window.matchMedia('(max-width: 720px)').matches; } catch (_) {}
-    closed = saved === dayStamp(date) || (!rollover && saved === null && mobile); renderBriefState();
+  function startAssets() {
+    if (disposed) return;
+    assetsReady = true; loadLunar(); maybeLoadEarth();
   }
   function refresh(force) {
     if (disposed) return;
     const date = new Date(), currentDay = String(dayIndex(date)), currentLanguage = lang();
     if (force || lastDay !== currentDay || lastLanguage !== currentLanguage) {
-      if (lastDay && lastDay !== currentDay) syncBrief(date,true);
-      write('home-date',new Intl.DateTimeFormat(currentLanguage === 'en' ? 'en-GB' : 'zh-CN',{timeZone:'Asia/Shanghai',year:'numeric',month:'long',day:'numeric',weekday:'long'}).format(date));
-      renderDaily(date); renderFeed(date); renderCalendar(date); renderWeather(); renderBriefState(); lastDay = currentDay; lastLanguage = currentLanguage;
+      if (!glance) { renderDaily(date); renderFeed(date); renderWeather(); }
+      renderCalendar(date); lastDay = currentDay; lastLanguage = currentLanguage;
     } else renderCalendar(date);
   }
-  listen(find('brief-toggle'),'click',() => { closed = !closed; try { if (closed) window.localStorage.setItem(briefKey,dayStamp(new Date())); else window.localStorage.removeItem(briefKey); } catch (_) {} renderBriefState(); });
-  listen(find('daily-city'),'change',() => {
+  if (!glance) listen(find('daily-city'),'change',() => {
     const value = find('daily-city').value; if (!cities[value]) return; city = value;
     try { window.localStorage.setItem('xieyuqing-home-city-v1',city); } catch (_) {}
     renderCalendar(new Date()); loadWeather();
@@ -262,9 +273,24 @@
     const check = () => { const rect = earthTarget.getBoundingClientRect?.(); earthVisible = !!rect && rect.bottom > 0 && rect.top < window.innerHeight; maybeLoadEarth(); };
     listen(window,'scroll',check,{passive:true}); listen(window,'resize',check); check();
   }
-  syncBrief(new Date(),false); refresh(true); loadWeather();
-  const timer = window.setInterval(() => refresh(false),60000), weatherTimer = window.setInterval(() => { if (!document.hidden) loadWeather(); },1800000);
+  refresh(true);
+  if (glance) {
+    let scheduled = false;
+    const schedule = () => {
+      if (scheduled || disposed) return; scheduled = true;
+      if (window.requestIdleCallback) {
+        const idle = window.requestIdleCallback(() => { if (!disposed) startAssets(); },{timeout:2000});
+        cleanup.push(() => window.cancelIdleCallback?.(idle));
+      } else {
+        const timeout = window.setTimeout(startAssets,1200); cleanup.push(() => window.clearTimeout(timeout));
+      }
+    };
+    if (document.readyState === 'complete') schedule(); else listen(window,'load',schedule,{once:true});
+  } else { startAssets(); loadWeather(); }
+  const timer = window.setInterval(() => refresh(false),60000);
+  const weatherTimer = glance ? null : window.setInterval(() => { if (!document.hidden) loadWeather(); },1800000);
   const unsubscribe = window.SiteI18n?.onChange?.(() => refresh(true));
-  listen(document,'visibilitychange',() => { if (!document.hidden) { refresh(true); loadWeather(); } });
-  window.SiteNavigation?.own?.(() => { disposed = true; weatherRequest?.abort(); earth?.destroy(); window.clearInterval(timer); window.clearInterval(weatherTimer); if (typeof unsubscribe === 'function') unsubscribe(); cleanup.splice(0).reverse().forEach(fn => fn()); });
+  listen(document,'visibilitychange',() => { if (!document.hidden) { refresh(true); if (!glance) loadWeather(); } });
+  window.SiteNavigation?.own?.(() => { disposed = true; weatherRequest?.abort(); earth?.destroy(); window.clearInterval(timer); if (weatherTimer !== null) window.clearInterval(weatherTimer); if (typeof unsubscribe === 'function') unsubscribe(); cleanup.splice(0).reverse().forEach(fn => fn()); });
+
 })();

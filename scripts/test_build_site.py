@@ -1,5 +1,6 @@
 """Check unified publication boundaries and link validation without touching source files."""
 from html import escape
+from datetime import date, timedelta
 from pathlib import Path
 from copy import deepcopy
 from tempfile import TemporaryDirectory
@@ -51,6 +52,23 @@ class UnifiedPublicationTests(unittest.TestCase):
             # The parser map has each page's own IDs; no filesystem writes are used.
             with patch("build_site.Elements", side_effect=[Elements(v) for v in targets.values()]):
                 return check_site("https://xieyuqingme-source.github.io")
+
+    def test_article_checker_allows_exact_today_routes_and_rejects_nearby_private_paths(self):
+        from build_blog import Blog
+        with TemporaryDirectory(prefix="today-article-root-", dir=ROOT) as temporary:
+            blog = object.__new__(Blog)
+            blog.site_url = "https://xieyuqing.me/articles"
+            blog.base_path = "/articles/"
+            blog.output = Path(temporary).resolve()
+            blog.articles, blog.translations = [], {}
+            page = blog.output / "index.html"
+            page.write_text('<a href="/today/">今日简报</a><a href="/en/today/">Today’s brief</a>', encoding="utf-8")
+            with patch("builtins.print"):
+                blog.check()
+            for route in ("/today/private/", "/en/today/private/", "/today/%2e%2e/private", "/today", "/unknown/"):
+                page.write_text('<a href="' + route + '">Unreviewed route</a>', encoding="utf-8")
+                with self.subTest(route=route), self.assertRaisesRegex(ValueError, "Link misses site base path"):
+                    blog.check()
 
     def test_duplicate_article_prefix_is_rejected(self):
         with self.assertRaisesRegex(ValueError, "Duplicated article prefix"):
@@ -243,30 +261,29 @@ class PublicProjectTests(unittest.TestCase):
 
 class DailyHomepageTests(unittest.TestCase):
     def setUp(self):
-        self.brief, self.content = load_daily(ROOT, build_site.linked_directory)
+        self.latest, self.content = load_daily(ROOT, build_site.linked_directory)
+        self.brief = validate_brief(json.loads((ROOT / "home/brief/news/2026-10-27.json").read_text(encoding="utf-8")))
         self.extras = load_brief_extras(ROOT, build_site.linked_directory)
 
     def test_latest_manual_news_dates_and_sources_remain_explicit_in_both_languages(self):
-        self.assertEqual(self.brief["version"], 2)
-        self.assertEqual(self.brief["status"], "manual")
-        self.assertEqual(self.brief["edition_date"], "2026-10-27")
-        self.assertEqual(self.brief["updated_at"], "2026-10-27T09:50+08:00")
-        self.assertEqual(len(self.brief["items"]), 6)
-        expected = ["lula-reelected-brazil", "vucic-concedes-serbia", "steinmeier-china-visit",
-                    "fukuda-yasuo-dies", "central-banks-super-week", "armoured-amphibian-ancient-seas"]
-        self.assertEqual([item["id"] for item in sorted_brief_items(self.brief)], expected)
-        for language, major in (("zh-CN", "要闻"), ("en", "Major")):
-            html = render_brief(self.brief, language)
+        self.assertEqual(self.latest["version"], 2)
+        self.assertIn(self.latest["status"], {"manual", "auto"})
+        path = max((ROOT / "home/brief/news").glob("*.json"))
+        self.assertEqual(path.stem, self.latest["edition_date"])
+        self.assertTrue(1 <= len(self.latest["items"]) <= 12)
+        for language in ("zh-CN", "en"):
+            html = render_brief(self.latest, language)
             self.assertNotIn("选读样刊", html)
-            for item in self.brief["items"]:
+            for item in self.latest["items"]:
                 self.assertIn(item["url"], html)
                 self.assertIn(escape(item["title"][language]), html)
                 self.assertIn(escape(item["summary"][language]), html)
                 self.assertIn(escape(item["source"][language]), html)
                 self.assertIn('datetime="' + item["published"] + '"', html)
             elements = Elements(html).elements
-            self.assertEqual(sum(tag == "article" for tag, _ in elements), 6)
-            self.assertEqual(sum("news-major" in attrs.get("class", "").split() for _, attrs in elements), 2)
+            self.assertEqual(sum(tag == "article" for tag, _ in elements), len(self.latest["items"]))
+            self.assertEqual(sum("news-major" in attrs.get("class", "").split() for _, attrs in elements),
+                             sum(item["priority"] == "major" for item in self.latest["items"]))
 
     def test_news_and_frost_knowledge_preserve_the_reviewed_text(self):
         # Exact user-supplied source data; this fixture never reads outside the repository.
@@ -419,7 +436,7 @@ class DailyHomepageTests(unittest.TestCase):
         self.assertEqual(actual, expected_knowledge)
 
     def test_news_bounds_categories_and_major_reasons_are_enforced(self):
-        for count in (1, 8):
+        for count in (1, 12):
             data = deepcopy(self.brief)
             data["items"] = []
             for index in range(count):
@@ -428,7 +445,7 @@ class DailyHomepageTests(unittest.TestCase):
                 data["items"].append(item)
             self.assertIs(validate_brief(data), data)
         for mutate in (lambda data: data.update(items=[]),
-                       lambda data: data.update(items=[deepcopy(data["items"][0])] * 9),
+                       lambda data: data.update(items=[{**deepcopy(data["items"][0]), "id": "synthetic-boundary-" + str(index)} for index in range(13)]),
                        lambda data: data["items"][0].update(category="business"),
                        lambda data: data["items"][0].pop("major_reason"),
                        lambda data: data["items"][0].update(major_reason={"zh-CN": "缺少英文"}),
@@ -452,7 +469,6 @@ class DailyHomepageTests(unittest.TestCase):
         self.assertEqual(set(self.content), {"version", "quotes"})
         frost = next(item for item in self.extras["knowledge"]["items"] if item["id"] == "frosts-descent")
         self.assertEqual(frost["trigger"], {"solar_term": "霜降"})
-        self.assertEqual(len(self.extras["knowledge"]["items"]), 4)
         for trigger in ({"solar_term": "不存在"}, {"date": "02-30"}, {"date": "2-03"},
                         {"solar_term": "霜降", "date": "10-27"}):
             data = deepcopy(self.extras["knowledge"])
@@ -469,8 +485,8 @@ class DailyHomepageTests(unittest.TestCase):
             data["items"][0][field] = value
             with self.subTest(field=field, value=value), self.assertRaises(ValueError):
                 validate_knowledge(data)
-        self.assertEqual(len(self.extras["memes"]["items"]), 1)
-        self.assertEqual(self.extras["memes"]["items"][0]["added"], "2026-10-26")
+        migrated = next(item for item in self.extras["memes"]["items"] if item["id"] == "everyday-theories")
+        self.assertEqual(migrated["added"], "2026-10-26")
         empty = {"version": 1, "items": []}
         self.assertIs(validate_memes(empty), empty)
         extras = {**self.extras, "memes": empty}
@@ -479,7 +495,7 @@ class DailyHomepageTests(unittest.TestCase):
         self.assertNotIn('id="daily-meme-card"', html)
         for optional in ("origin", "example", "why_popular"):
             data = deepcopy(self.extras["memes"])
-            data["items"][0][optional] = {"zh-CN": "", "en": ""}
+            next(item for item in data["items"] if item["id"] == "everyday-theories")[optional] = {"zh-CN": "", "en": ""}
             self.assertIs(validate_memes(data), data)
 
     def test_weather_rules_and_sourced_holidays_have_strict_schemas(self):
@@ -507,13 +523,14 @@ class DailyHomepageTests(unittest.TestCase):
             root = Path(temporary)
             shutil.copytree(ROOT / "home/brief/news", root / "home/brief/news")
             shutil.copy2(ROOT / "home/daily-content.json", root / "home/daily-content.json")
-            latest = deepcopy(self.brief)
-            latest.update(edition_date="2026-10-28", updated_at="2026-10-28T09:50+08:00")
-            path = root / "home/brief/news/2026-10-28.json"
+            latest = deepcopy(self.latest)
+            next_day = (date.fromisoformat(latest["edition_date"]) + timedelta(days=1)).isoformat()
+            latest.update(edition_date=next_day, updated_at=next_day + "T09:50+08:00")
+            path = root / "home/brief/news" / (next_day + ".json")
             path.write_text(json.dumps(latest, ensure_ascii=False), encoding="utf-8")
             selected, _ = load_daily(root, build_site.linked_directory)
-            self.assertEqual(selected["edition_date"], "2026-10-28")
-            latest["edition_date"] = "2026-10-29"
+            self.assertEqual(selected["edition_date"], next_day)
+            latest["edition_date"] = (date.fromisoformat(next_day) + timedelta(days=1)).isoformat()
             path.write_text(json.dumps(latest), encoding="utf-8")
             with self.assertRaises(ValueError):
                 load_daily(root, build_site.linked_directory)
@@ -524,6 +541,41 @@ class DailyHomepageTests(unittest.TestCase):
             archive.write_text(json.dumps(old), encoding="utf-8")
             with self.assertRaises(ValueError):
                 load_daily(root, build_site.linked_directory)
+
+    def test_normal_daily_update_accepts_a_new_edition_meme_and_knowledge(self):
+        with TemporaryDirectory(prefix="brief-update-regression-", dir=ROOT) as temporary:
+            root = Path(temporary)
+            shutil.copytree(ROOT / "home/brief", root / "home/brief")
+            shutil.copy2(ROOT / "home/daily-content.json", root / "home/daily-content.json")
+            latest = deepcopy(self.latest)
+            next_day = (date.fromisoformat(latest["edition_date"]) + timedelta(days=1)).isoformat()
+            latest.update(edition_date=next_day, updated_at=next_day + "T09:50+08:00")
+            (root / "home/brief/news" / (next_day + ".json")).write_text(safe_json(latest), encoding="utf-8")
+            for filename, prototype in (("memes.json", next(item for item in self.extras["memes"]["items"] if item["id"] == "everyday-theories")),
+                                        ("knowledge.json", self.extras["knowledge"]["items"][0])):
+                path = root / "home/brief" / filename
+                data = json.loads(path.read_text(encoding="utf-8"))
+                item = deepcopy(prototype)
+                item["id"] = "synthetic-update-" + next_day
+                if filename == "memes.json":
+                    existing_dates = [date.fromisoformat(self.latest["edition_date"]),
+                                      *[date.fromisoformat(entry["added"]) for entry in data["items"]]]
+                    item["added"] = (max(existing_dates) + timedelta(days=1)).isoformat()
+                    item["term"] = {"zh-CN": "合成更新测试", "en": "Synthetic update regression"}
+                else:
+                    item.pop("trigger", None)
+                data["items"].append(item)
+                path.write_text(safe_json(data), encoding="utf-8")
+            selected, content = load_daily(root, build_site.linked_directory)
+            extras = load_brief_extras(root, build_site.linked_directory)
+            self.assertEqual(selected["edition_date"], next_day)
+            for language in ("zh-CN", "en"):
+                news = render_brief(selected, language)
+                self.assertEqual(sum(tag == "article" for tag, _ in Elements(news).elements), len(latest["items"]))
+                for item in selected["items"]:
+                    self.assertIn(escape(item["title"][language]), news)
+                cards = render_brief_bottom(content, extras, language)
+                self.assertIn("合成更新测试" if language == "zh-CN" else "Synthetic update regression", cards)
 
     def test_sources_dates_and_schema_are_validated_before_publication(self):
         for url in ("http://example.com/news", "https://localhost/news", "https://127.0.0.1/news",
@@ -538,7 +590,7 @@ class DailyHomepageTests(unittest.TestCase):
             with self.subTest(field=field, value=value), self.assertRaises(ValueError):
                 validate_brief(data)
         data = deepcopy(self.extras["memes"])
-        data["items"][0]["related_url"] = "/articles/%2e%2e/private.html"
+        next(item for item in data["items"] if item["id"] == "everyday-theories")["related_url"] = "/articles/%2e%2e/private.html"
         with self.assertRaises(ValueError):
             validate_memes(data)
 
@@ -564,6 +616,16 @@ class DailyHomepageTests(unittest.TestCase):
         for article, text, english in quotes:
             self.assertIn(text, build_site.plain_markdown(article.source.read_text(encoding="utf-8-sig")))
             self.assertTrue(english.strip())
+        items = build_site.home_quote_items(blog, quotes)
+        for language in ("zh-CN", "en"):
+            quote_card = build_site.render_quote_section(items, language)
+            self.assertIn('id="daily-own-quote-card"', quote_card)
+            self.assertIn('id="own-quote-text"', quote_card)
+            self.assertIn('id="own-quote-source"', quote_card)
+            self.assertEqual(sum(tag == "h2" for tag, _ in Elements(quote_card).elements), 1)
+            cards = render_brief_bottom(self.content, self.extras, language, own_quote=quote_card)
+            self.assertIn(quote_card, cards)
+            self.assertNotIn('class="home-quote"', cards)
 
     def test_recent_writing_uses_original_dates_and_direct_available_language_links(self):
         from build_blog import Article
@@ -669,16 +731,23 @@ class ProjectPublicationTests(unittest.TestCase):
                 home = (output / "index.html").read_text(encoding="utf-8")
                 projects = (output / "projects/index.html").read_text(encoding="utf-8")
                 about = (output / "about/index.html").read_text(encoding="utf-8")
+                today = (output / "today/index.html").read_text(encoding="utf-8")
+                english_today = (output / "en/today/index.html").read_text(encoding="utf-8")
                 nav = home.split('class="site-nav"', 1)[1].split("</nav>", 1)[0]
                 self.assertIn('href="/articles/"', nav)
                 self.assertIn('href="/projects/"', nav)
                 self.assertIn('href="/about/"', nav)
                 english_home = (output / 'en/index.html').read_text(encoding='utf-8')
-                self.assertIn('href="/articles/synthetic.html"', english_home)
-                self.assertIn("Synthetic article", english_home)
-                recent = re.search(r'<ol class="yl-article-list[^"]*">(.*?)</ol>', home, re.S)[1]
-                self.assertNotIn('href="/articles/synthetic.html"', recent)
-                for text in (home, projects, about):
+                random_data = re.search(r'<script id="home-random-data" type="application/json">(.*?)</script>', english_home, re.S)[1]
+                self.assertIn("/articles/synthetic.html", json.loads(random_data))
+                self.assertNotIn("Synthetic article", english_home)
+                self.assertNotIn("recent-list", home)
+                self.assertNotIn('id="own-quote"', home)
+                self.assertNotIn('id="picks"', home)
+                self.assertIn('data-brief-mode="glance"', home)
+                self.assertIn('href="/today/"', home)
+                self.assertIn('id="writing"', home)
+                for text in (home, projects, about, today, english_today):
                     self.assertNotIn("{{", text)
                     self.assertNotIn("Obsidian Vault", text)
                     self.assertNotIn("D:\\", text)
@@ -688,7 +757,7 @@ class ProjectPublicationTests(unittest.TestCase):
                 self.assertTrue(any(tag == "meta" and attrs.get("property") == "og:url"
                                     and attrs.get("content") == "https://xieyuqing.me/projects/" for tag, attrs in tags))
                 sitemap = [node.text for node in ET.parse(output / "sitemap.xml").findall(".//{*}loc")]
-                expected_routes = {'/', '/projects/', '/about/', '/map/', '/en/map/', '/en/', '/en/about/', '/en/projects/', '/en/articles/',
+                expected_routes = {'/', '/today/', '/en/today/', '/projects/', '/about/', '/map/', '/en/map/', '/en/', '/en/about/', '/en/projects/', '/en/articles/',
                                    '/game/', '/en/game/', '/game/ranking/', '/en/game/ranking/', '/game/footprints/', '/en/game/footprints/', '/articles/index.html', '/articles/synthetic.html'}
                 for feature in (report['anthology'], report['english_features']['anthology'], report['photography'], report['english_features']['photography']):
                     expected_routes.update('/' + route.strip('/') + '/' for route in feature['routes'])
@@ -711,15 +780,26 @@ class ProjectPublicationTests(unittest.TestCase):
                                  (root / "home/assets/wechat-qrcode.jpg").read_bytes())
                 self.assertNotIn("wechat-qrcode", home)
                 self.assertIn('href="/map/"', home)
-                self.assertIn('class="yl-article-list recent-list"', home)
                 self.assertIn('id="home-random-button"', home)
-                self.assertIn('id="daily-title">今日简报</h2>', home)
+                self.assertIn('id="glance-title">今日简报</h2>', home)
                 self.assertIn('id="home-title">谢雨卿</h1>', home)
                 self.assertIn('我要把精力放到英语上。', home)
                 self.assertNotIn('id="now"', home)
                 self.assertNotIn("选读样刊", home)
-                self.assertIn('datetime="2026-10-26T08:27+08:00"', home)
                 expected_brief, expected_content = load_daily(root, build_site.linked_directory)
+                first = sorted_brief_items(expected_brief)[0]
+                self.assertIn('datetime="' + first["published"] + '"', today)
+                self.assertNotIn('id="daily-feed"', home)
+                for language, page in (("zh-CN", today), ("en", english_today)):
+                    self.assertIn('data-brief-mode="full"', page)
+                    for item in expected_brief["items"]:
+                        for field in ("title", "summary", "source"):
+                            self.assertIn(escape(item[field][language]), page)
+                        self.assertIn(item["url"], page)
+                        self.assertIn(item["published"], page)
+                    bootstrap = json.loads(re.search(r'<script id="site-i18n-data" type="application/json">(.*?)</script>', page, re.S)[1])
+                    self.assertEqual(bootstrap["page"]["titles"], build_site.TODAY_TITLES)
+                    self.assertEqual(bootstrap["page"]["descriptions"], build_site.TODAY_DESCRIPTIONS)
                 for filename, expected in (("daily-brief.json", expected_brief), ("daily-content.json", expected_content)):
                     self.assertEqual(json.loads((output / "assets" / filename).read_text(encoding="utf-8")), expected)
                 for item in load_projects():

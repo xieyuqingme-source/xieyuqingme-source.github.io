@@ -78,8 +78,8 @@ class BilingualBuildContractTests(unittest.TestCase):
             self.assertEqual(report['english']['english_originals'], 1)
             self.assertTrue(report['metadata']['success'])
             self.assertTrue(report['localization']['success'])
-            self.assertEqual(report['localization']['english_feature_pages'], 10)
-            for route in ('/photos/', '/map/', '/anthology/', '/game/', '/game/ranking/', '/', '/about/', '/projects/', '/articles/'):
+            self.assertEqual(report['localization']['english_feature_pages'], 11)
+            for route in ('/photos/', '/map/', '/anthology/', '/game/', '/game/ranking/', '/', '/today/', '/about/', '/projects/', '/articles/'):
                 for language in ('zh-CN', 'en'):
                     page = output / localized_path(route, language).strip('/') / 'index.html'
                     self.assertTrue(page.is_file(), str(page))
@@ -92,7 +92,7 @@ class BilingualBuildContractTests(unittest.TestCase):
             self.assertFalse((output/'en/assets').exists())
             sitemap = [node.text for node in ET.parse(output/'sitemap.xml').findall('.//{*}loc')]
             self.assertEqual(len(sitemap), len(set(sitemap)))
-            for route in ('/en/photos/', '/en/map/', '/en/anthology/', '/en/game/', '/en/game/ranking/'):
+            for route in ('/en/today/', '/en/photos/', '/en/map/', '/en/anthology/', '/en/game/', '/en/game/ranking/'):
                 self.assertIn('https://site.test' + route, sitemap)
             rss = ET.parse(output/'articles/feed.xml').findall('./channel/item')
             self.assertEqual(len(rss), 2)

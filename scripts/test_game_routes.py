@@ -76,7 +76,7 @@ class GamePublicationTests(unittest.TestCase):
         self.assertTrue(report["success"])
         self.assertEqual(len(report["anthology"]["routes"]), 14)
         sitemap = [node.text for node in ET.parse(output / "sitemap.xml").findall(".//{*}loc")]
-        profiles = {"/en/", "/en/about/", "/en/projects/", "/en/articles/"}
+        profiles = {"/en/", "/en/today/", "/en/about/", "/en/projects/", "/en/articles/"}
         self.assertEqual(set(report["english"]["routes"]), profiles)
         english_features = report["english_features"]
         self.assertEqual(set(english_features), {"photography", "footprints", "anthology", "games"})
@@ -88,7 +88,7 @@ class GamePublicationTests(unittest.TestCase):
             routes = {"/" + route.strip("/") + "/" for route in english_features[module]["routes"]}
             self.assertEqual(routes, {"/en/" + route.strip("/") + "/" for route in chinese["routes"]})
             english_routes.update(routes)
-        expected_routes = {"/", "/about/", "/projects/", "/map/", "/game/", "/game/ranking/", "/game/footprints/",
+        expected_routes = {"/", "/today/", "/about/", "/projects/", "/map/", "/game/", "/game/ranking/", "/game/footprints/",
                            "/articles/index.html", "/articles/synthetic.html"} | english_routes
         for module in (report["photography"], report["anthology"]):
             expected_routes.update("/" + route.strip("/") + "/" for route in module["routes"])
@@ -198,9 +198,14 @@ class GamePublicationTests(unittest.TestCase):
                 for route in ("/articles/", "/projects/", "/game/", "/about/", "/photos/", "/anthology/", "/map/", "/game/footprints/"):
                     self.assertIn(route, links)
         home = (output / "index.html").read_text(encoding="utf-8")
-        self.assertIn('id="daily-title">今日简报</h2>', home)
-        self.assertIn('aria-controls="brief-body"', home)
-        self.assertIn('class="yl-article-list recent-list"', home)
+        self.assertIn('id="glance-title">今日简报</h2>', home)
+        self.assertIn('data-brief-mode="glance"', home)
+        self.assertIn('class="home-top"', home)
+        self.assertIn('href="/today/"', home)
+        self.assertIn('id="writing"', home)
+        self.assertNotIn('id="brief-toggle"', home)
+        self.assertNotIn('class="yl-article-list recent-list"', home)
+        self.assertNotIn('id="daily-feed"', home)
         self.assertIn('class="nav-entry" href="/projects/"', home)
         self.assertIn('href="/game/"', home)
 
@@ -237,7 +242,7 @@ class GamePublicationTests(unittest.TestCase):
                     finally:
                         connection.close()
 
-                for route in ("game", "game/ranking", "en/game", "en/game/ranking", "about", "projects", "articles"):
+                for route in ("today", "en/today", "game", "game/ranking", "en/game", "en/game/ranking", "about", "projects", "articles"):
                     with self.subTest(route=route):
                         self.assertEqual(request("/" + route)[:2], (301, "/" + route + "/"))
                         self.assertEqual(request("/" + route + "/")[0], 200)

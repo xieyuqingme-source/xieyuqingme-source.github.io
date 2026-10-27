@@ -50,6 +50,11 @@ HOME_DAILY_ASSETS = ("home-daily.css", "home-daily.js", "home-now.js", "home-ear
                      "vendor/lunar-javascript-1.7.7.js", "vendor/lunar-javascript-1.7.7.LICENSE")
 HOME_PHOTO = "/photos/images/p-71f77ab6511ec1ce656a58a3-18000666287e1d55-640.webp"
 HOME_PICKS = "home/home-picks.json"
+TODAY_TITLES = {"zh-CN": "今日简报 · 谢雨卿", "en": "Today’s brief · Xie Yuqing"}
+TODAY_DESCRIPTIONS = {
+    "zh-CN": "每天人工挑选的几条新闻，配上日历、节气、天气、黄历和此刻的地球。",
+    "en": "A few hand-picked news stories each day, with the calendar, solar terms, weather, almanac and the Earth right now.",
+}
 ABOUT_FIELDS = {"name", "english_name", "chinese_bio", "english_bio", "chinese_colophon", "english_colophon",
                 "written_note", "english_written_note", "wechat", "email"}
 PRIVATE_PATH = re.compile(r"(?<![A-Za-z0-9])[A-Za-z]:[\\/]|\\\\[^\s\\]+[\\/]|/(?:Users|home|mnt)/", re.I)
@@ -188,16 +193,16 @@ def render_site_notes(waline, repository, language="zh-CN"):
     repository = escape(repository, quote=True)
     if language == "en":
         items = [f'The source code is public on <a href="{repository}">GitHub</a>; pages are generated with Python and use system fonts only, with no external font files.',
-                 'The homepage’s “Today’s Brief”: the calendar, weather and globe are calculated live; news is selected by hand, marked with its update date, and automatically folded away when it expires.',
-                 'Weather on the homepage comes from Open-Meteo, queried by city only. Your location is never requested; the chosen city and the latest reading stay in your browser.',
+                 'The Today’s brief page: the calendar, weather and globe are calculated live; news is selected by hand, marked with its update date, and paused when it goes out of date. The homepage shows only the date, solar term, almanac and a small globe.',
+                 'Weather on the Today’s brief page comes from Open-Meteo, queried by city only. Your location is never requested; the chosen city and the latest reading stay in your browser. The homepage makes no weather request.',
                  'Article view counts and comments use Waline. These requests send your IP address and browser information to the Waline backend and its providers'
                  + (f' (hosting: {host}; database: {database})' if host and database else '') + '. The comment area explains what is shown publicly.',
                  'Map geography comes from Natural Earth (public domain). Project screenshots and other third-party sources are credited in each project.']
         title = "About this site"
     else:
         items = [f'网站的源代码公开在 <a href="{repository}">GitHub</a>，页面用 Python 生成。全站使用设备自带的字体，不加载外部字体文件。',
-                 '首页的“今日简报”：日历、天气和地球是实时计算的；新闻由人工挑选，标明更新日期，过期会自动收起。',
-                 '首页的天气来自 Open-Meteo，只按城市查询，不读取你的位置；所选城市和最近一次天气只保存在你的浏览器里。',
+                 '「今日简报」页：日历、天气和地球是实时计算的；新闻由人工挑选，标明更新日期，过期会暂停显示。首页只放日期、节气、黄历和一个小地球。',
+                 '今日简报页的天气来自 Open-Meteo，只按城市查询，不读取你的位置；所选城市和最近一次天气只保存在你的浏览器里。首页不请求天气。',
                  '文章的浏览量和留言由 Waline 提供：相关请求会把 IP 和浏览器信息发送给 Waline 后端及其托管商'
                  + (f'（服务托管：{host}；数据库：{database}）' if host and database else '') + '。留言区另有说明。',
                  '足迹地图的底图来自 Natural Earth（公有领域）；作品截图与其他第三方来源见各项目说明。']
@@ -478,8 +483,8 @@ def render_quote_section(items, language="zh-CN"):
     item = items[(date.today() - date(1970, 1, 1)).days % len(items)]
     text, source = render_home_quote(item, language)
     title = "A line from my essays" if language == "en" else "旧文一句"
-    return (f'<section class="home-quote" aria-labelledby="quote-title"><h2 class="quote-title" id="quote-title">{title}</h2>'
-            f'<blockquote id="own-quote"><p id="own-quote-text">{text}</p><p class="quote-source" id="own-quote-source">{source}</p></blockquote></section>')
+    return (f'<article class="yl-daily-card" id="daily-own-quote-card" aria-labelledby="quote-title"><h2 id="quote-title">{title}</h2>'
+            f'<blockquote id="own-quote"><p id="own-quote-text">{text}</p><p class="quote-source" id="own-quote-source">{source}</p></blockquote></article>')
 
 
 def render_picks_section(blog, featured, language="zh-CN"):
@@ -760,8 +765,6 @@ def build_site(address, map_preview_source=None):
         "daily_brief_data": safe_json(brief_data), "daily_content_data": safe_json(daily_content),
         "brief_knowledge_data": safe_json(brief_extras["knowledge"]), "brief_memes_data": safe_json(brief_extras["memes"]),
         "brief_rules_data": safe_json(brief_extras["rules"]), "brief_holidays_data": safe_json(brief_extras["holidays"]),
-        "brief_bottom_cards": render_brief_bottom(daily_content, brief_extras),
-        "brief_bottom_cards_en": render_brief_bottom(daily_content, brief_extras, "en"),
         "daily_brief_edition": escape(brief_edition_label(brief_data)), "daily_brief_edition_en": escape(brief_edition_label(brief_data, "en")),
         "daily_brief_headline": escape(sorted_brief_items(brief_data)[0]["title"]["zh-CN"]),
         "daily_brief_headline_en": escape(sorted_brief_items(brief_data)[0]["title"]["en"]),
@@ -783,6 +786,8 @@ def build_site(address, map_preview_source=None):
     quote_items = home_quote_items(blog, quotes)
     values.update({
         "own_quotes_data": safe_json(quote_items),
+        "brief_bottom_cards": render_brief_bottom(daily_content, brief_extras, own_quote=render_quote_section(quote_items)),
+        "brief_bottom_cards_en": render_brief_bottom(daily_content, brief_extras, "en", own_quote=render_quote_section(quote_items, "en")),
         "home_quote_section": render_quote_section(quote_items), "home_quote_section_en": render_quote_section(quote_items, "en"),
         "home_picks_section": render_picks_section(blog, featured), "home_picks_section_en": render_picks_section(blog, featured, "en"),
         "site_notes_en": render_site_notes(blog.waline, blog.config["repository_url"], "en"),
@@ -790,6 +795,14 @@ def build_site(address, map_preview_source=None):
     for name, value in values.items(): home = home.replace("{{" + name + "}}", value)
     if "{{" in home: raise ValueError("Unresolved home template placeholder.")
     (OUTPUT / "index.html").write_text(localize_page(home, ROOT, address, "/"), encoding="utf-8")
+    today_page = (ROOT / "home/today.template.html").read_text(encoding="utf-8")
+    for name, value in values.items():
+        today_page = today_page.replace("{{" + name + "}}", value)
+    if "{{" in today_page:
+        raise ValueError("Unresolved today template placeholder.")
+    (OUTPUT / "today").mkdir(exist_ok=True)
+    (OUTPUT / "today/index.html").write_text(localize_page(today_page, ROOT, address, "/today/",
+        title=TODAY_TITLES, description=TODAY_DESCRIPTIONS), encoding="utf-8")
     projects_page = (ROOT / "home/projects.template.html").read_text(encoding="utf-8")
     project_values = {"site_url": escape(address, quote=True), "project_total": str(len(projects)),
                       "project_cards": render_projects(projects)}
@@ -878,7 +891,7 @@ def build_site(address, map_preview_source=None):
     ET.SubElement(ET.SubElement(sitemap, "url"), "loc").text = address + "/"
     ET.SubElement(ET.SubElement(sitemap, "url"), "loc").text = address + "/projects/"
     ET.SubElement(ET.SubElement(sitemap, "url"), "loc").text = address + "/about/"
-    feature_routes = ["/map/", "/en/map/", *game_routes,
+    feature_routes = ["/today/", "/map/", "/en/map/", *game_routes,
                       *anthology_report["routes"], *anthology_english_report["routes"],
                       *photo_report["routes"], *photo_english_report["routes"]]
     for route in feature_routes:
