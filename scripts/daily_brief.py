@@ -144,10 +144,20 @@ def _validate_archive(data):
 def validate_content(data):
     if not isinstance(data, dict) or set(data) != {"version", "quotes"} or type(data["version"]) is not int or data["version"] != 1:
         raise ValueError("Daily content data contains version 1 and quotes only.")
-    _entries(data["quotes"], {"id", "text", "author", "work", "url", "translation_note"})
+    _entries(data["quotes"], {"id", "text", "author", "work", "url", "translation_note"}, {"source_language"}, maximum=1000)
+    seen_text = {language: set() for language in LANGUAGES}
     for item in data["quotes"]:
         for name in ("text", "author", "work", "translation_note"):
             _localized(item[name])
+        for language in LANGUAGES:
+            normalized = re.sub(r"[\W_]+", "", item["text"][language]).casefold()
+            if not normalized or normalized in seen_text[language]:
+                raise ValueError("Quotation texts must be non-empty and distinct in each language.")
+            seen_text[language].add(normalized)
+        if "source_language" in item:
+            _localized(item["source_language"])
+            if any(value not in LANGUAGES for value in item["source_language"].values()):
+                raise ValueError("Quotation source languages must be supported language tags.")
         if isinstance(item["url"], dict):
             _localized(item["url"])
             for value in item["url"].values():
@@ -348,5 +358,6 @@ def render_brief_bottom(content, extras, language="zh-CN", today=None, own_quote
     another = "Another quote" if language == "en" else "换一句"
     note = "Quotation notes" if language == "en" else "引文说明"
     quote_url = escape(quote["url"][language] if isinstance(quote["url"], dict) else quote["url"], quote=True)
-    card = f'''<article class="yl-daily-card" id="daily-quotation-card" aria-labelledby="daily-quotation-title"><div class="reading-heading"><h3 id="daily-quotation-title">{title}</h3><button class="quote-change" id="daily-quote-button" type="button" aria-label="{another} · {title}" hidden>{another}</button></div><blockquote id="daily-quote"><p class="yl-quote" id="daily-quote-text">{text(quote["text"])}</p><p class="yl-small yl-quote-source" id="daily-quote-source"><span id="daily-quote-author">{text(quote["author"])}</span> · <a id="daily-quote-work" href="{quote_url}" hreflang="{language}" lang="{language}" target="_blank" rel="noopener noreferrer">{text(quote["work"])} ↗</a></p></blockquote><details class="quote-note"><summary>{note}</summary><p id="daily-quote-note">{text(quote["translation_note"])}</p></details></article>'''
+    source_language = quote.get("source_language", {}).get(language, language)
+    card = f'''<article class="yl-daily-card" id="daily-quotation-card" aria-labelledby="daily-quotation-title"><div class="reading-heading"><h3 id="daily-quotation-title">{title}</h3><button class="quote-change" id="daily-quote-button" type="button" aria-label="{another} · {title}" hidden>{another}</button></div><blockquote id="daily-quote"><p class="yl-quote" id="daily-quote-text">{text(quote["text"])}</p><p class="yl-small yl-quote-source" id="daily-quote-source"><span id="daily-quote-author">{text(quote["author"])}</span> · <a id="daily-quote-work" href="{quote_url}" hreflang="{source_language}" lang="{language}" target="_blank" rel="noopener noreferrer">{text(quote["work"])} ↗</a></p></blockquote><details class="quote-note"><summary>{note}</summary><p id="daily-quote-note">{text(quote["translation_note"])}</p></details></article>'''
     return '<div class="yl-bottomline" id="brief-bottom">' + card + own_quote + '</div>'

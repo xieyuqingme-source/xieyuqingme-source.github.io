@@ -49,7 +49,8 @@
     const seen = new Set();
     return (value?.version === 1 && Array.isArray(value.quotes) ? value.quotes : []).filter(item => {
       const sourcesValid = typeof item?.url === 'string' ? safeSource(item.url) : bilingual(item?.url) && ['zh-CN','en'].every(language => safeSource(item.url[language]));
-      if (!item || typeof item.id !== 'string' || !item.id || seen.has(item.id) || !['text','author','work','translation_note'].every(key => bilingual(item[key])) || !sourcesValid) return false;
+      const sourceLanguagesValid = item?.source_language === undefined || (bilingual(item.source_language) && ['zh-CN','en'].every(language => ['zh-CN','en'].includes(item.source_language[language])));
+      if (!item || typeof item.id !== 'string' || !item.id || seen.has(item.id) || !['text','author','work','translation_note'].every(key => bilingual(item[key])) || !sourcesValid || !sourceLanguagesValid) return false;
       seen.add(item.id); return true;
     });
   }
@@ -88,7 +89,7 @@
       const item = classic[classicDeck?.current()]; if (!item) return;
       write('daily-quotation-title',language === 'en' ? 'Red quotations' : '红色语录');
       write('daily-quote-text',item.text[language]); write('daily-quote-author',item.author[language]); write('daily-quote-note',item.translation_note[language]);
-      const link = find('daily-quote-work'); if (link) { link.href = typeof item.url === 'string' ? item.url : item.url[language]; link.textContent = item.work[language]+' ↗'; link.target = '_blank'; link.rel = 'noopener noreferrer'; link.setAttribute('hreflang',language); link.setAttribute('lang',language); }
+      const link = find('daily-quote-work'); if (link) { link.href = typeof item.url === 'string' ? item.url : item.url[language]; link.textContent = item.work[language]+' ↗'; link.target = '_blank'; link.rel = 'noopener noreferrer'; link.setAttribute('hreflang',item.source_language?.[language] || language); link.setAttribute('lang',language); }
       if (find('daily-quote')) find('daily-quote').dataset.quoteId = item.id;
       renderButton('daily-quote-button','daily-quotation-title',language === 'en' ? 'Red quotations' : '红色语录');
     }

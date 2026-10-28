@@ -37,10 +37,11 @@ test('the daily opening is deterministic, including dates before the epoch',()=>
   assert.equal(R.createDeck(0,12).current(),-1);assert.equal(R.createDeck(0,12).next(),-1);assert.equal(R.createDeck(1,12).next(),0);
 });
 test('each shuffle cycle visits every quotation before reuse and never immediately repeats',()=>{
-  let seed=71;const random=()=>((seed=(seed*1664525+1013904223)>>>0)/2**32),deck=R.createDeck(20,20754,random),values=[deck.current()];
-  for(let index=1;index<220;index++)values.push(deck.next());
+  const size=data.quotes.length;
+  let seed=71;const random=()=>((seed=(seed*1664525+1013904223)>>>0)/2**32),deck=R.createDeck(size,20754,random),values=[deck.current()];
+  for(let index=1;index<size*3;index++)values.push(deck.next());
   for(let index=1;index<values.length;index++)assert.notEqual(values[index],values[index-1]);
-  for(let index=0;index<values.length;index+=20)assert.equal(new Set(values.slice(index,index+20)).size,20);
+  for(let index=0;index<values.length;index+=size)assert.equal(new Set(values.slice(index,index+size)).size,size);
   const pair=R.createDeck(2,0,()=>0);for(let index=0;index<100;index++)assert.equal(pair.next(),(index+1)%2);
 });
 test('malformed entries and unsafe source or article links preserve the readable fallback',()=>{
@@ -64,10 +65,10 @@ test('both native buttons advance independently and a same-day timer does not un
 test('language changes render the same two chosen items with their matching source links',()=>{
   const h=harness(),e=h.elements;e['daily-quote-button'].fire('click');e['own-quote-button'].fire('click');const id=e['daily-quote'].dataset.quoteId,index=+e['own-quote'].dataset.quoteIndex;
   h.language('en');const quote=data.quotes.find(item=>item.id===id);assert.equal(e['daily-quote'].dataset.quoteId,id);assert.equal(e['daily-quote-text'].textContent,quote.text.en);assert.equal(e['daily-quote-author'].textContent,quote.author.en);assert.equal(e['daily-quote-work'].href,quote.url.en);assert.equal(e['daily-quote-note'].textContent,quote.translation_note.en);
-  assert.equal(e['daily-quotation-title'].textContent,'Red quotations');assert.equal(e['daily-quote-work'].attributes.hreflang,'en');assert.equal(e['daily-quote-work'].attributes.lang,'en');assert.equal(e['daily-quote-button'].attributes['aria-label'],'Another quote · Red quotations');
+  assert.equal(e['daily-quotation-title'].textContent,'Red quotations');assert.equal(e['daily-quote-work'].attributes.hreflang,quote.source_language?.en||'en');assert.equal(e['daily-quote-work'].attributes.lang,'en');assert.equal(e['daily-quote-button'].attributes['aria-label'],'Another quote · Red quotations');
   assert.equal(e['own-quote-text'].textContent,ownItems[index].text.en);assert.equal(e['own-quote-source'].children.find(child=>child.tagName==='A').href,ownItems[index].url.en);assert.equal(e['daily-quote-button'].textContent,'Another quote');
   h.language('zh-CN');assert.equal(e['daily-quote'].dataset.quoteId,id);assert.equal(e['own-quote-text'].textContent,ownItems[index].text['zh-CN']);assert.equal(e['own-quote-source'].children.find(child=>child.tagName==='TIME').textContent,'2024.05.06');
-  assert.equal(e['daily-quote-work'].href,quote.url['zh-CN']);assert.equal(e['daily-quote-work'].attributes.hreflang,'zh-CN');assert.equal(e['daily-quotation-title'].textContent,'红色语录');assert.equal(e['daily-quote-button'].attributes['aria-label'],'换一句 · 红色语录');
+  assert.equal(e['daily-quote-work'].href,quote.url['zh-CN']);assert.equal(e['daily-quote-work'].attributes.hreflang,quote.source_language?.['zh-CN']||'zh-CN');assert.equal(e['daily-quotation-title'].textContent,'红色语录');assert.equal(e['daily-quote-button'].attributes['aria-label'],'换一句 · 红色语录');
 });
 test('a paired language navigation consumes one in-memory handoff and preserves both remaining decks',()=>{
   const first=harness(),e=first.elements,seen=[e['daily-quote'].dataset.quoteId];
@@ -103,12 +104,19 @@ test('a single valid entry is readable and has no ineffective change button',()=
   const h=harness({classic:{version:1,quotes:[data.quotes[0]]},own:[ownItems[0]]});assert.equal(h.elements['daily-quote-text'].textContent,data.quotes[0].text['zh-CN']);assert(h.elements['daily-quote-button'].hidden);assert(h.elements['own-quote-button'].hidden);
   assert.doesNotThrow(()=>R.mount());
 });
-test('the checked pool has five short bilingual entries per author with independent MIA editions and per-work excerpt limits',()=>{
-  assert.equal(data.version,1);assert.equal(data.quotes.length,20);assert.equal(new Set(data.quotes.map(item=>item.id)).size,20);assert.equal(R.quotations(data).length,20);
-  const counts=new Map(),works=new Map(),notes=fs.readFileSync(path.join(__dirname,'../home/brief/quotes-sources.md'),'utf8');
-  for(const item of data.quotes){counts.set(item.author['zh-CN'],(counts.get(item.author['zh-CN'])||0)+1);assert(notes.includes('`'+item.id+'`'));assert(/^https:\/\/www\.marxists\.org\/chinese\//.test(item.url['zh-CN']));assert(/^https:\/\/www\.marxists\.org\/(?:archive|reference\/archive)\//.test(item.url.en));assert.notEqual(item.url.en,item.url['zh-CN']);assert(notes.includes(item.url.en));assert(notes.includes(item.url['zh-CN']));assert(/MIA/.test(item.translation_note.en));assert(!/this site|translated by this site|site’s translation/i.test(item.translation_note.en));
+test('the checked pool has 430 distinct bilingual entries, joint authorship and traceable editions',()=>{
+  assert.equal(data.version,1);assert.equal(data.quotes.length,430);assert.equal(new Set(data.quotes.map(item=>item.id)).size,430);assert.equal(R.quotations(data).length,430);
+  const counts=new Map(),notes=fs.readFileSync(path.join(__dirname,'../home/brief/quotes-sources.md'),'utf8');
+  const review=JSON.parse(fs.readFileSync(path.join(__dirname,'../home/brief/quotes-review.json'),'utf8')),records=new Map(review.quotes.map(item=>[item.id,item])),hash=text=>require('node:crypto').createHash('sha256').update(text).digest('hex');
+  assert.equal(records.size,430);
+  for(const language of ['zh-CN','en'])assert.equal(new Set(data.quotes.map(item=>item.text[language].replace(/[\p{P}\p{Z}\s]/gu,'').toLowerCase())).size,430);
+  for(const item of data.quotes){counts.set(item.author['zh-CN'],(counts.get(item.author['zh-CN'])||0)+1);assert(notes.includes('`'+item.id+'`'));assert(notes.includes(item.url.en));assert(notes.includes(item.url['zh-CN']));
     for(const key of ['text','author','work','translation_note'])for(const language of ['zh-CN','en'])assert(typeof item[key][language]==='string'&&item[key][language].trim());
-    for(const language of ['zh-CN','en']){const key=item.url[language],size=language==='en'?item.text.en.trim().split(/\s+/).length:Array.from(item.text['zh-CN']).length;works.set(key,(works.get(key)||0)+size);}
+    for(const language of ['zh-CN','en']){assert(['www.marxists.org','www.chinaleifeng.com','archive.org'].includes(new URL(item.url[language]).hostname));assert.equal(records.get(item.id).sources[language].url,item.url[language]);assert.equal(records.get(item.id).texts_sha256[language],hash(item.text[language]));}
   }
-  assert.deepEqual(Object.fromEntries(counts),{'马克思':5,'恩格斯':5,'列宁':5,'毛泽东':5});for(const [url,total]of works)assert(total<=25,url+' excerpt total '+total);
+  assert.deepEqual(Object.fromEntries(counts),{'马克思':110,'恩格斯':60,'列宁':50,'毛泽东':100,'马恩':80,'切·格瓦拉':10,'雷锋':10,'尼古拉·奥斯特洛夫斯基':10});
+});
+test('source-language metadata follows the linked edition, including translated diary entries',()=>{
+  for(const language of ['zh-CN','en'])for(const quote of data.quotes){const h=harness({language,classic:{version:1,quotes:[quote]}});assert.equal(h.elements['daily-quote-work'].attributes.hreflang,quote.source_language?.[language]||language);}
+  const quote=data.quotes[0];for(const tag of ['fr','en" onclick="alert(1)','javascript:en'])assert.equal(R.quotations({version:1,quotes:[{...quote,source_language:{'zh-CN':tag,en:'en'}}]}).length,0);
 });

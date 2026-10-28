@@ -170,7 +170,7 @@ def render_about(data, language="zh-CN"):
     if english:
         contact = f'''<h2 id="about-contact-title">Get in touch</h2>
     <dl><dt>WeChat official account</dt><dd><span lang="zh-CN">{text["wechat"]}</span>
-      <figure class="about-wechat-qr"><a href="/assets/wechat-qrcode.jpg" aria-label="View the original WeChat QR code"><img src="/assets/wechat-qrcode.jpg" width="1280" height="1280" alt="Official QR code for the WeChat account" loading="lazy" decoding="async"></a>
+      <figure class="about-wechat-qr"><a href="/assets/wechat-qrcode.jpg" aria-label="View the original WeChat QR code"><img src="/assets/wechat-qrcode.jpg" width="180" height="180" style="max-width:100%;height:auto" alt="Official QR code for the WeChat account" loading="lazy" decoding="async"></a>
         <figcaption><a href="/assets/wechat-qrcode.jpg">View original QR code</a><br>On a computer, scan with WeChat. On a phone, save the image and recognise its QR code in WeChat.</figcaption>
       </figure>
     </dd><dt>Email</dt><dd><a href="mailto:{text["email"]}">{text["email"]}</a></dd>
@@ -180,7 +180,7 @@ def render_about(data, language="zh-CN"):
         contact = f'''<h2 id="about-contact-title">联系我</h2>
     <dl><dt>微信公众号</dt><dd>{text["wechat"]}
       <figure class="about-wechat-qr">
-        <a href="/assets/wechat-qrcode.jpg" aria-label="查看{text["wechat"]}公众号二维码原图"><img src="/assets/wechat-qrcode.jpg" width="1280" height="1280" alt="{text["wechat"]}公众号官方二维码" loading="lazy" decoding="async"></a>
+        <a href="/assets/wechat-qrcode.jpg" aria-label="查看{text["wechat"]}公众号二维码原图"><img src="/assets/wechat-qrcode.jpg" width="180" height="180" style="max-width:100%;height:auto" alt="{text["wechat"]}公众号官方二维码" loading="lazy" decoding="async"></a>
         <figcaption><a href="/assets/wechat-qrcode.jpg">查看二维码原图</a><br>电脑端请用微信扫码；手机端可保存图片后，在微信中识别二维码。</figcaption>
       </figure>
     </dd><dt>邮箱</dt><dd><a href="mailto:{text["email"]}">{text["email"]}</a></dd>
@@ -204,7 +204,7 @@ def render_site_notes(waline, repository, language="zh-CN"):
         items = ['Pages are generated with Python and use system fonts only, with no external font files.',
                  'The Today page presents Earth, weather, history, reading and news, in that order. The calendar and globe are calculated live; historical events and reading rotate from local collections using Beijing time. The homepage shows only the date, solar term and a small globe.',
                  'Weather comes from Open-Meteo. City searches send the name you enter to its geocoding service; choosing a point on the map sends its coordinates for weather. The page never requests your device location, and saves your selected city or coordinates and the latest weather only in your browser. The homepage makes no weather request.',
-                 'News follows source newsroom selections and preset rules, with original headlines, publication times and links. Red quotations are excerpted from the corresponding Chinese and English works on the Marxists Internet Archive and stored locally; each language uses its own linked edition, and reading them makes no automatic request to that site.',
+                 'News follows source newsroom selections and preset rules, with original headlines, publication times and links. Red quotations cite works in the Marxists Internet Archive, dated diaries from the Lei Feng Memorial Hall, and published translations of How the Steel Was Tempered. Edition notes distinguish published excerpts from translations prepared for this site. The reading collections are stored locally; browsing them makes no automatic request to the sources.',
                  'Article view counts and comments use Waline. These requests send your IP address and browser information to the Waline backend and its providers'
                  + (f' (hosting: {host}; database: {database})' if host and database else '') + '. The comment area explains what is shown publicly.',
                  'Map geography comes from Natural Earth (public domain). Project screenshots and other third-party sources are credited in each project.']
@@ -213,7 +213,7 @@ def render_site_notes(waline, repository, language="zh-CN"):
         items = ['页面用 Python 生成。全站使用设备自带的字体，不加载外部字体文件。',
                  '「今天」页依次展示地球、天气、历史、阅读和新闻。日历和地球实时计算，历史事件与阅读内容从本地资料库按北京时间轮换。首页只放日期、节气和一个小地球。',
                  '天气来自 Open-Meteo；搜索城市会向其地名服务发送输入的城市名，地图选点会发送所选坐标以查询天气，不读取设备定位。页面仅在浏览器里保存所选城市或坐标及最近一次天气。首页不请求天气。',
-                 '新闻按来源媒体选题和预设规则自动汇集，保留原题、原文发布时间与链接。红色语录摘自马克思主义者网对应中、英文作品，并随本站保存，阅读时不自动请求该站。',
+                 '新闻按来源媒体选题和预设规则自动汇集，保留原题、原文发布时间与链接。红色语录的来源包括马克思主义者网原著页、雷锋纪念馆日记及《钢铁是怎样炼成的》出版译本；版本说明区分原文摘录与本站节译。阅读资料随本站保存，浏览和换句时不自动请求来源网站。',
                  '文章的浏览量和留言由 Waline 提供：相关请求会把 IP 和浏览器信息发送给 Waline 后端及其托管商'
                  + (f'（服务托管：{host}；数据库：{database}）' if host and database else '') + '。留言区另有说明。',
                  '足迹地图的底图来自 Natural Earth（公有领域）；作品截图与其他第三方来源见各项目说明。']

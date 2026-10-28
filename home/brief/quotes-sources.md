@@ -1,71 +1,472 @@
-# 红色语录核对记录
+# 红色语录来源与版本说明
 
-核对日期：2026-10-28。数据文件：`home/daily-content.json`。共20条，马克思、恩格斯、列宁、毛泽东各5条；按作者交错排列。
+核对日期：2026-10-28。数据：`home/daily-content.json`；逐条校对记录：`home/brief/quotes-review.json`。共 **430 条**，按作者交错排列。
 
-所有引文逐条对照下列作品正文或标题核实，不使用格言网站、名人语录汇编或搜索摘要作为最终依据。所链为中文马克思主义文库的公开文本；马恩、列宁条目采用该网页的中译措辞，不把中译文称为德文或俄文原稿。英文改为逐条核对并直接摘录MIA所载的英文作品正文或章节标题，使用独立的英文作品链接，不再使用本站译文。中英条目按同一思想配对，但各自遵循所链版本的实际措辞、章节和日期，不宣称逐词对应，也不把MIA的英文译本称为作者的外文原稿。
+| 署名 | 条数 |
+| --- | ---: |
+| 马克思 | 110 |
+| 恩格斯 | 60 |
+| 马恩（共同作品） | 80 |
+| 列宁 | 50 |
+| 毛泽东 | 100 |
+| 雷锋 | 10 |
+| 切·格瓦拉 | 10 |
+| 尼古拉·奥斯特洛夫斯基 | 10 |
 
-## 摘录边界与语境
+## 选句与署名
 
-每项保留可核对的原文短句，不拼接、不把概括改成引号内的原话；未引完整句的条目在界面引文说明中标为节选。省去的前后文仍可通过作品链接阅读，涉及指代或限定条件的条目另在说明中交代。每个作品的中文摘录合计不超过25个字符（含标点）；每个作品的英文正文摘录合计不超过25个空格分词（同一作品不同条目合并计数）。该数值是本次保守摘录上限，不是对版权状态的法律结论。毛泽东仅从5篇不同文章各取一个短句，不复制完整段落、文集或后世编辑说明。核对表不重复抄录正文，避免累计长引。
+优先选择经典著作中有独立含义、值得反复阅读的论述，并回到具体作品核对。MIA 的经典语录选编、《毛主席语录》的出处索引只作为选句线索，最终链接到原著页；未把检索摘要、格言网站或无法定位的网络传言作为最终出处。没有为每本作品规定条数。《资本论》和《共产党宣言》可以各选多条，共同作品署名“马恩”。这份选录不宣称是传播量排名，也不宣称所有句子都同等知名。
 
-## 逐条定位
+保留原有 20 条的稳定 ID。新增马恩列毛 380 条、雷锋和切·格瓦拉各 10 条，另加小说名句 10 条。没有用相同句子的标点变体凑数；同一段落的不同节录分别标明出处。小说条目是人物发言、思考或叙述，不能脱离小说语境当作作者亲口发表的格言。
 
-| 数据ID | 作品与公开文本 | 定位及校核说明 |
-| --- | --- | --- |
-| `marx-social-practice` | 马克思 · [《关于费尔巴哈的提纲》1845年稿本，第八条](https://www.marxists.org/chinese/marx/marxist.org-chinese-marx-1845.htm) | 第八条首句；采用1845年稿本，不混入1888年恩格斯整理稿。 |
-| `engels-communism-conditions` | 恩格斯 · [《共产主义原理》第一个问题（1847年）](https://www.marxists.org/chinese/engels/marxist.org-chinese-engels-1847a.htm) | 第一个问题的回答全文；不是后人概括。 |
-| `lenin-revolutionary-theory` | 列宁 · [《怎么办？》第一章第四节（1902年）](https://www.marxists.org/chinese/lenin/1901-1902/01.htm) | 第一章（四）恩格斯论理论斗争的意义；以该句起首的段落。 |
-| `mao-investigation` | 毛泽东 · [《反对本本主义》第一节（1930年）](https://www.marxists.org/chinese/maozedong/marxist.org-chinese-mao-193005.htm) | 第一节标题；保留标题原貌，不添句末标点。 |
-| `marx-science-road` | 马克思 · [《资本论》第一卷，法文版序言（1872年3月18日）](https://www.marxists.org/chinese/marx/capital/00.htm) | 法文版序言倒数第二段末句的首个分句；不挪用其他中译版本的措辞。 |
-| `engels-labour-humanity` | 恩格斯 · [《劳动在从猿到人转变过程中的作用》首段](https://www.marxists.org/chinese/engels/marxist.org-chinese-engels-1875a.htm) | 首段最后一个分句；上文明确以“在某种意义上”限定这一说法。 |
-| `lenin-marx-theory` | 列宁 · [《马克思主义的三个来源和三个组成部分》引言（1913年）](https://www.marxists.org/chinese/lenin/12.htm) | 引言第三段首句；不改成其他版本常见的“万能”表述。 |
-| `mao-truth-practice` | 毛泽东 · [《实践论》关于真理标准的段落（1937年）](https://www.marxists.org/chinese/maozedong/marxist.org-chinese-mao-193707.htm) | 正文说明如何验证认识的段落，位于该段末尾。 |
-| `marx-making-history` | 马克思 · [《路易·波拿巴的雾月十八日》第一章（1852年）](https://www.marxists.org/chinese/marx/1851-1852/01.htm) | 第一章第二段首个分句；后文紧接对既定的、从过去承继的条件的限定。 |
-| `engels-research-processes` | 恩格斯 · [《费尔巴哈和德国古典哲学的终结》第四节（1888年）](https://www.marxists.org/chinese/engels/marxist.org-chinese-engels-1888.htm) | 第四节讨论旧研究方法有历史根据的段落；此处回顾科学发展的阶段，不是拒绝研究变化过程。 |
-| `lenin-go-slowly` | 列宁 · [《宁肯少些，但要好些》关于国家机关的段落（1923年）](https://www.marxists.org/chinese/lenin/mia-chinese-lenin-19230304.htm) | 正文第二段冒号后的短句；语境是改善国家机关时重视质量。网页文件名带19230304，正文标注3月2日，本数据以正文为准。 |
-| `mao-contradiction-process` | 毛泽东 · [《矛盾论》结论段（1937年）](https://www.marxists.org/chinese/maozedong/marxist.org-chinese-mao-193708.htm) | 全文总结段关于普遍性的判断；不是文中转引列宁的引语。 |
-| `marx-solvable-tasks` | 马克思 · [《政治经济学批判》序言（1859年）](https://www.marxists.org/chinese/marx/06.htm) | 阐述研究总的结果的长段后部；后文以物质条件已经存在或正在生成限定“能够解决”。 |
-| `engels-read-originals` | 恩格斯 · [致约瑟夫·布洛赫的信（1890年9月21—22日）](https://www.marxists.org/chinese/engels/marxist.org-chinese-engels-1890-9-21.htm) | 书信末部，对收信人的阅读材料建议；所讨论的理论是唯物史观。 |
-| `lenin-haste` | 列宁 · [《宁肯少些，但要好些》关于检查工作的段落（1923年）](https://www.marxists.org/chinese/lenin/mia-chinese-lenin-19230304.htm) | 正文第四段；与go-slowly同一作品，合计只收18个中文字符（含标点）；新英文版两条合计16个英文词。 |
-| `mao-seek-facts` | 毛泽东 · [《改造我们的学习》第三节（1941年）](https://www.marxists.org/chinese/maozedong/marxist.org-chinese-mao-19410519.htm) | 第三节第二种态度的段落；“这种态度”指有目的地结合理论和实际、作系统周密的调查研究。 |
-| `marx-theory-material-force` | 马克思 · [《黑格尔法哲学批判》导言（1843年写）](https://www.marxists.org/chinese/marx/marxist.org-chinese-marx-1843.htm) | 导言中部讨论理论与群众关系的段落，分号后的完整判断。 |
-| `engels-marx-personal-foes` | 恩格斯 · [《在马克思墓前的讲话》正文倒数第二段（1883年）](https://www.marxists.org/chinese/engels/mia-chinese-engels-18830317.htm) | 正式发表的讲话最后一个长段的末句；“他”指马克思。不采用同页后附的悼词草稿。 |
-| `lenin-cultural-inheritance` | 列宁 · [《关于无产阶级文化》决议草稿要点第二点（1920年10月9日）](https://www.marxists.org/chinese/lenin/marxist.org-chinese-lenin-1920a.htm) | 第二部分决议草稿要点第二点的收尾分句；保留所链中译本的两个“的”。 |
-| `mao-ask-why` | 毛泽东 · [《整顿党的作风》反对盲从的段落（1942年）](https://www.marxists.org/chinese/maozedong/marxist.org-chinese-mao-19420201.htm) | 接近正文末尾、讨论反对主观主义的段落；下一分句要求经过自己的周密思考。 |
+## 中英文版本
 
+- 新增马恩列毛及切·格瓦拉条目的英文直接摘录所链 MIA 英文作品。多数新增中文为本站根据这些英文版本所作的节译，已在每条“版本说明”中明确标注，不冒充正式出版中译本。原有 20 条继续保留已核对的中英文独立版本。
+- 马恩两部多次引用的经典采用 MIA 所列的早期英译本：《资本论》第一卷（Samuel Moore、Edward Aveling，1887），《共产党宣言》（Samuel Moore 与 Engels，1888）；《社会主义从空想到科学的发展》为 Edward Aveling 1892 年译本。其他作品以所链页面列明的版本为准，不把现代译本称为作者的德文、俄文或西班牙文原稿。
+- 毛泽东新增条目中，90 条已进一步对照并采用 MIA 中文原著措辞；少数不能稳妥对应的条目保留明确标注的节译。
+- 雷锋条目的中文按湖南雷锋纪念馆在中国雷锋网刊载的具体日期日记摘录，英文为本站翻译。保留日记原有措辞，不采用网络上擅改的日期。
+- 小说中文使用 MIA 所收 **黄树南全译本**，不是本站另译；英文使用 **R. Prokofieva 译本，Foreign Languages Publishing House，Moscow，1952**。已对照书名页、译者页及所引扫描页核对，并纠正 OCR 的明显识别错误。英文链接可直接进入对应扫描页；“p.”是印刷页码，“n”是从零起算的扫描页索引。十条英文合计 158 个空白分词，均为短节录。
+- 中文与英文各自遵循对应版本的措辞，允许出版译本的表达差异，不宣称逐词对应。`source_language` 表明所链原文的语言：例如中文本站节译链接英文原著时，链接的 `hreflang` 应为 `en`。
 
-## 英文版本逐条定位
+## 维护与验证
 
-下列链接是本轮实际打开核对的英文作品页面；保留该页拼写、大小写、标点及片段边界。说明中的章节标题、译者和出版信息用于辨认版本，不补写来源未注明的译者。不将开头或结尾截取的分句冒充完整句；省略部分可由作品链接查看。界面的英文引文说明明确标出分句节选及必要的语境。
+语录和出处在构建时保存在本站，读者浏览或换句不自动访问 MIA、雷锋纪念馆或 Internet Archive。点击篇名才进入来源。版本说明默认折叠，换句按钮维持小尺寸。每日开场按北京时间轮换，手动换句遍历完整池后再洗牌；两轮交界也避免紧邻重复。
 
-| 数据ID | 英文作品正文 | 定位与版本说明 |
-| --- | --- | --- |
-| `marx-social-practice` | [Theses on Feuerbach](https://www.marxists.org/archive/marx/works/1845/theses/index.htm) | 第8条首句；采用1845年原稿的Cyril Smith 2002年译本（基于与Don Cuckson的合作），不是恩格斯1888年整理稿。 |
-| `engels-communism-conditions` | [The Principles of Communism](https://www.marxists.org/archive/marx/works/1847/11/prin-com.htm) | 问题1的完整回答；Paul Sweezy译，MIA注明1969年Progress Publishers选集版。 |
-| `lenin-revolutionary-theory` | [What Is To Be Done?, chapter I](https://www.marxists.org/archive/lenin/works/1901/witbd/i.htm) | 第一章D节正文讨论理论作用的段落首句；英文原版该句没有theory后的逗号。 |
-| `mao-investigation` | [Oppose Book Worship](https://www.marxists.org/reference/archive/mao/selected-works/volume-6/mswv6_11.htm) | 1930年5月文章第一节标题；保留英文标题大写，省去章节编号，不加句末标点。 |
-| `marx-science-road` | [Capital, 1872 preface to the French edition](https://www.marxists.org/archive/marx/works/1867-c1/p2.htm) | 末个正文段落的第二句首个分句；保留英文版本的比喻。 |
-| `engels-labour-humanity` | [The Part played by Labour in the Transition from Ape to Man](https://www.marxists.org/archive/marx/works/1876/part-played-labour/index.htm) | 正文首段结尾分句；Clemens Dutt译。该页标写于1876年5—6月；限定语见上文，说明中保留其含义。 |
-| `lenin-marx-theory` | [The Three Sources and Three Component Parts of Marxism](https://www.marxists.org/archive/lenin/works/1913/mar/x01.htm) | 引言讨论学说地位的段落首句；George Hanna译，《全集》英文第19卷，Progress Publishers 1977。按英文版实际措辞，独立于中文措辞。 |
-| `mao-truth-practice` | [On Practice](https://www.marxists.org/reference/archive/mao/selected-works/volume-1/mswv1_16.htm) | 正文讨论检验认识、排除主观感受的段落，完整短句；不是该文转引列宁或斯大林的部分。 |
-| `marx-making-history` | [The Eighteenth Brumaire of Louis Bonaparte, chapter I](https://www.marxists.org/archive/marx/works/1852/18th-brumaire/ch01.htm) | 第二段开头分句；保留所链英文版本用词，说明中提示紧随的历史条件限定。 |
-| `engels-research-processes` | [Ludwig Feuerbach and the End of Classical German Philosophy, part 4](https://www.marxists.org/archive/marx/works/1886/ludwig-feuerbach/ch04.htm) | 回顾旧研究方法历史根据的段落第二句；该英文页面路径采用1886年，区别于中文作品所标1888年版。 |
-| `lenin-go-slowly` | [Better Fewer, But Better](https://www.marxists.org/archive/lenin/works/1923/mar/02.htm) | 正文开头讨论国家机关、总结以往经验的段落末尾分句；David Skvirsky、George Hanna译，《全集》英文第33卷，Progress Publishers 1965。正文写作日期3月2日，刊出3月4日。 |
-| `mao-contradiction-process` | [On Contradiction](https://www.marxists.org/reference/archive/mao/selected-works/volume-1/mswv1_17.htm) | 第VII节结论第二段首句后部的连续分句；前面的主语和对象在引文说明中解释；不是文中转引列宁的部分。 |
-| `marx-solvable-tasks` | [A Contribution to the Critique of Political Economy, preface](https://www.marxists.org/archive/marx/works/1859/critique-pol-economy/preface.htm) | 论述物质条件的段落开头分句；英文页标Progress Publishers 1977年版。保留随后条件限制的提示。 |
-| `engels-read-originals` | [Letter to J. Bloch](https://www.marxists.org/archive/marx/works/1890/letters/90_09_21.htm) | 末部读书建议段落的首个分句；Historical Materialism，Progress Publishers 1972。英文页标题日期9月21日，与中文标注21—22日分别保留。 |
-| `lenin-haste` | [Better Fewer, But Better](https://www.marxists.org/archive/lenin/works/1923/mar/02.htm) | 讨论核验进步的段落末句；与go-slowly同一英文作品，两条正文摘录累计16个英文词。 |
-| `mao-seek-facts` | [Reform Our Study](https://www.marxists.org/reference/archive/mao/selected-works/volume-3/mswv3_02.htm) | 第III节第二种态度段落的结尾首个分句；省略后半句，保留这种态度指系统调查、结合理论与实际的说明。 |
-| `marx-theory-material-force` | [A Contribution to the Critique of Hegel’s Philosophy of Right, introduction](https://www.marxists.org/archive/marx/works/1843/critique-hpr/intro.htm) | 讨论理论与群众的段落第一句分号后的分句，省去连接词；英文页写作日期1843年12月—1844年1月。 |
-| `engels-marx-personal-foes` | [Speech at the Grave of Karl Marx](https://www.marxists.org/archive/marx/works/1883/death/burial.htm) | 倒数第二段末尾的连续分句，保留让步语气；指代马克思，不混入悼词草稿。 |
-| `lenin-cultural-inheritance` | [Rough Draft of a Resolution on Proletarian Culture](https://www.marxists.org/archive/lenin/works/1920/oct/09b.htm) | 1920年10月9日草稿第2点的连续名词短语；Bernard Isaacs译，《全集》英文第42卷，Progress Publishers 1971。不是10月8日另一份决议草稿。 |
-| `mao-ask-why` | [Rectify the Party’s Style of Work](https://www.marxists.org/reference/archive/mao/selected-works/volume-3/mswv3_06.htm) | 正文结尾前、号召独立思考的段落首个分句；后续内容要求自己思考、反对盲从，说明中保留。 |
+`quotes-review.json` 保存每条当前中英文文字的 SHA-256、来源页的 SHA-256、定位说明和核对方式。CI 在本地检查文字、来源和记录是否一致，不每天联网抓取原著。修改引文时须重新核对并同步更新记录；仅新闻快照日更不会改变本语录库。机器比对只能检查文字出现，署名、语境和译本仍须人工判断。
 
-## 维护约定
+## 逐条出处
 
-- 改动文本时重新打开对应正文，核对版次、章节、指代和标点；不得为了流畅而把改写冒充直接引语。
-- 同一作品新增条目时须累计检查现有摘录长度，不能仅按不同网页或文集卷次重新计数。
-- 数据保持version 1、20个既有ID及双语 `text`、`author`、`work`、`translation_note`。`url` 改为 `{"zh-CN": "中文正文HTTPS地址", "en": "英文正文HTTPS地址"}`；两种语言分别指向所引用的具体版本。校验器及前端兼容旧单一URL，但当前正式数据全部使用双语URL。作品链接同步设置 `lang` / `hreflang`。
-- 英文是MIA英文版直接引文；不再标成本站自译。新增条目须核对来源页面正文，保留出处、节选边界和必要语境。
-- 页面不请求这些来源来抽取引文；这些链接仅供读者主动核查。
-- 每日首句按北京时间与池长度取模；手动切换使用当前页的非重复牌组，刷新或返回页面重新从当日首句开始。中英切换只改显示语言，不改当前条目。
+以下表格不重复刊登全文。篇名与引文范围、译本说明见数据记录及页面对应卡片。
+
+| ID | 署名与作品 | 中文卡片来源 | 英文卡片来源 |
+| --- | --- | --- | --- |
+| `marx-social-practice` | 马克思 · 《关于费尔巴哈的提纲》1845年稿本，第八条 | [原文](https://www.marxists.org/chinese/marx/marxist.org-chinese-marx-1845.htm) | [原文](https://www.marxists.org/archive/marx/works/1845/theses/index.htm) |
+| `engels-communism-conditions` | 恩格斯 · 《共产主义原理》第一个问题（1847年） | [原文](https://www.marxists.org/chinese/engels/marxist.org-chinese-engels-1847a.htm) | [原文](https://www.marxists.org/archive/marx/works/1847/11/prin-com.htm) |
+| `lenin-revolutionary-theory` | 列宁 · 《怎么办？》第一章第四节（1902年） | [原文](https://www.marxists.org/chinese/lenin/1901-1902/01.htm) | [原文](https://www.marxists.org/archive/lenin/works/1901/witbd/i.htm) |
+| `mao-investigation` | 毛泽东 · 《反对本本主义》第一节（1930年） | [原文](https://www.marxists.org/chinese/maozedong/marxist.org-chinese-mao-193005.htm) | [原文](https://www.marxists.org/reference/archive/mao/selected-works/volume-6/mswv6_11.htm) |
+| `marx-engels-reading-001` | 马恩 · 《共产党宣言》正文开篇（1848年） | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch01.htm) | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch01.htm) |
+| `che-guevara-reading-001` | 切·格瓦拉 · 《论革命的医疗》（1960年8月19日） | [原文](https://www.marxists.org/archive/guevara/1960/08/19.htm) | [原文](https://www.marxists.org/archive/guevara/1960/08/19.htm) |
+| `lei-feng-reading-001` | 雷锋 · 《雷锋日记》1958年6月7日 | [原文](https://www.chinaleifeng.com/content/2019/09/18/6000191.html) | [原文](https://www.chinaleifeng.com/content/2019/09/18/6000191.html) |
+| `ostrovsky-steel-01` | 尼古拉·奥斯特洛夫斯基 · 《钢铁是怎样炼成的》第二部第3章 | [原文](https://www.marxists.org/chinese/reference-books/the-making-of-steel/12.htm) | [原文](https://archive.org/details/nikolai-ostrovsky-how-the-steel-was-tempered-part-2-flph-1952/page/n110/mode/1up) |
+| `marx-science-road` | 马克思 · 《资本论》第一卷，法文版序言（1872年3月18日） | [原文](https://www.marxists.org/chinese/marx/capital/00.htm) | [原文](https://www.marxists.org/archive/marx/works/1867-c1/p2.htm) |
+| `engels-labour-humanity` | 恩格斯 · 《劳动在从猿到人转变过程中的作用》首段 | [原文](https://www.marxists.org/chinese/engels/marxist.org-chinese-engels-1875a.htm) | [原文](https://www.marxists.org/archive/marx/works/1876/part-played-labour/index.htm) |
+| `lenin-marx-theory` | 列宁 · 《马克思主义的三个来源和三个组成部分》引言（1913年） | [原文](https://www.marxists.org/chinese/lenin/12.htm) | [原文](https://www.marxists.org/archive/lenin/works/1913/mar/x01.htm) |
+| `mao-truth-practice` | 毛泽东 · 《实践论》关于真理标准的段落（1937年） | [原文](https://www.marxists.org/chinese/maozedong/marxist.org-chinese-mao-193707.htm) | [原文](https://www.marxists.org/reference/archive/mao/selected-works/volume-1/mswv1_16.htm) |
+| `marx-engels-reading-002` | 马恩 · 《共产党宣言》第一章 | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch01.htm) | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch01.htm) |
+| `che-guevara-reading-002` | 切·格瓦拉 · 《论革命的医疗》（1960年8月19日） | [原文](https://www.marxists.org/archive/guevara/1960/08/19.htm) | [原文](https://www.marxists.org/archive/guevara/1960/08/19.htm) |
+| `lei-feng-reading-002` | 雷锋 · 《雷锋日记》1959年10月25日 | [原文](https://www.chinaleifeng.com/content/2019/09/18/6000262.html) | [原文](https://www.chinaleifeng.com/content/2019/09/18/6000262.html) |
+| `ostrovsky-steel-02` | 尼古拉·奥斯特洛夫斯基 · 《钢铁是怎样炼成的》第二部第3章 | [原文](https://www.marxists.org/chinese/reference-books/the-making-of-steel/12.htm) | [原文](https://archive.org/details/nikolai-ostrovsky-how-the-steel-was-tempered-part-2-flph-1952/page/n110/mode/1up) |
+| `marx-making-history` | 马克思 · 《路易·波拿巴的雾月十八日》第一章（1852年） | [原文](https://www.marxists.org/chinese/marx/1851-1852/01.htm) | [原文](https://www.marxists.org/archive/marx/works/1852/18th-brumaire/ch01.htm) |
+| `engels-research-processes` | 恩格斯 · 《费尔巴哈和德国古典哲学的终结》第四节（1888年） | [原文](https://www.marxists.org/chinese/engels/marxist.org-chinese-engels-1888.htm) | [原文](https://www.marxists.org/archive/marx/works/1886/ludwig-feuerbach/ch04.htm) |
+| `lenin-go-slowly` | 列宁 · 《宁肯少些，但要好些》关于国家机关的段落（1923年） | [原文](https://www.marxists.org/chinese/lenin/mia-chinese-lenin-19230304.htm) | [原文](https://www.marxists.org/archive/lenin/works/1923/mar/02.htm) |
+| `mao-contradiction-process` | 毛泽东 · 《矛盾论》结论段（1937年） | [原文](https://www.marxists.org/chinese/maozedong/marxist.org-chinese-mao-193708.htm) | [原文](https://www.marxists.org/reference/archive/mao/selected-works/volume-1/mswv1_17.htm) |
+| `marx-engels-reading-003` | 马恩 · 《共产党宣言》第一章 | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch01.htm) | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch01.htm) |
+| `che-guevara-reading-003` | 切·格瓦拉 · 《论革命的医疗》（1960年8月19日） | [原文](https://www.marxists.org/archive/guevara/1960/08/19.htm) | [原文](https://www.marxists.org/archive/guevara/1960/08/19.htm) |
+| `lei-feng-reading-003` | 雷锋 · 《雷锋日记》1959年10月25日 | [原文](https://www.chinaleifeng.com/content/2019/09/18/6000262.html) | [原文](https://www.chinaleifeng.com/content/2019/09/18/6000262.html) |
+| `ostrovsky-steel-03` | 尼古拉·奥斯特洛夫斯基 · 《钢铁是怎样炼成的》第二部第3章 | [原文](https://www.marxists.org/chinese/reference-books/the-making-of-steel/12.htm) | [原文](https://archive.org/details/nikolai-ostrovsky-how-the-steel-was-tempered-part-2-flph-1952/page/n110/mode/1up) |
+| `marx-solvable-tasks` | 马克思 · 《政治经济学批判》序言（1859年） | [原文](https://www.marxists.org/chinese/marx/06.htm) | [原文](https://www.marxists.org/archive/marx/works/1859/critique-pol-economy/preface.htm) |
+| `engels-read-originals` | 恩格斯 · 致约瑟夫·布洛赫的信（1890年9月21—22日） | [原文](https://www.marxists.org/chinese/engels/marxist.org-chinese-engels-1890-9-21.htm) | [原文](https://www.marxists.org/archive/marx/works/1890/letters/90_09_21.htm) |
+| `lenin-haste` | 列宁 · 《宁肯少些，但要好些》关于检查工作的段落（1923年） | [原文](https://www.marxists.org/chinese/lenin/mia-chinese-lenin-19230304.htm) | [原文](https://www.marxists.org/archive/lenin/works/1923/mar/02.htm) |
+| `mao-seek-facts` | 毛泽东 · 《改造我们的学习》第三节（1941年） | [原文](https://www.marxists.org/chinese/maozedong/marxist.org-chinese-mao-19410519.htm) | [原文](https://www.marxists.org/reference/archive/mao/selected-works/volume-3/mswv3_02.htm) |
+| `marx-engels-reading-004` | 马恩 · 《共产党宣言》第一章 | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch01.htm) | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch01.htm) |
+| `che-guevara-reading-004` | 切·格瓦拉 · 《古巴的社会主义和人》（1965年3月） | [原文](https://www.marxists.org/archive/guevara/1965/03/man-socialism.htm) | [原文](https://www.marxists.org/archive/guevara/1965/03/man-socialism.htm) |
+| `lei-feng-reading-004` | 雷锋 · 《雷锋日记》1960年6月5日 | [原文](https://www.chinaleifeng.com/content/2019/09/24/6066333.html) | [原文](https://www.chinaleifeng.com/content/2019/09/24/6066333.html) |
+| `ostrovsky-steel-04` | 尼古拉·奥斯特洛夫斯基 · 《钢铁是怎样炼成的》第二部第4章 | [原文](https://www.marxists.org/chinese/reference-books/the-making-of-steel/13.htm) | [原文](https://archive.org/details/nikolai-ostrovsky-how-the-steel-was-tempered-part-2-flph-1952/page/n185/mode/1up) |
+| `marx-theory-material-force` | 马克思 · 《黑格尔法哲学批判》导言（1843年写） | [原文](https://www.marxists.org/chinese/marx/marxist.org-chinese-marx-1843.htm) | [原文](https://www.marxists.org/archive/marx/works/1843/critique-hpr/intro.htm) |
+| `engels-marx-personal-foes` | 恩格斯 · 《在马克思墓前的讲话》正文倒数第二段（1883年） | [原文](https://www.marxists.org/chinese/engels/mia-chinese-engels-18830317.htm) | [原文](https://www.marxists.org/archive/marx/works/1883/death/burial.htm) |
+| `lenin-cultural-inheritance` | 列宁 · 《关于无产阶级文化》决议草稿要点第二点（1920年10月9日） | [原文](https://www.marxists.org/chinese/lenin/marxist.org-chinese-lenin-1920a.htm) | [原文](https://www.marxists.org/archive/lenin/works/1920/oct/09b.htm) |
+| `mao-ask-why` | 毛泽东 · 《整顿党的作风》反对盲从的段落（1942年） | [原文](https://www.marxists.org/chinese/maozedong/marxist.org-chinese-mao-19420201.htm) | [原文](https://www.marxists.org/reference/archive/mao/selected-works/volume-3/mswv3_06.htm) |
+| `marx-engels-reading-005` | 马恩 · 《共产党宣言》第一章 | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch01.htm) | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch01.htm) |
+| `che-guevara-reading-005` | 切·格瓦拉 · 《古巴的社会主义和人》（1965年3月） | [原文](https://www.marxists.org/archive/guevara/1965/03/man-socialism.htm) | [原文](https://www.marxists.org/archive/guevara/1965/03/man-socialism.htm) |
+| `lei-feng-reading-005` | 雷锋 · 《雷锋日记》1961年10月19日 | [原文](https://www.chinaleifeng.com/content/2019/09/25/6069497.html) | [原文](https://www.chinaleifeng.com/content/2019/09/25/6069497.html) |
+| `ostrovsky-steel-05` | 尼古拉·奥斯特洛夫斯基 · 《钢铁是怎样炼成的》第二部第2章 | [原文](https://www.marxists.org/chinese/reference-books/the-making-of-steel/11.htm) | [原文](https://archive.org/details/nikolai-ostrovsky-how-the-steel-was-tempered-part-2-flph-1952/page/n78/mode/1up) |
+| `marx-reading-001` | 马克思 · 《青年在选择职业时的考虑》（1835年） | [原文](https://www.marxists.org/archive/marx/works/1837-pre/marx/1835-ref.htm#q2) | [原文](https://www.marxists.org/archive/marx/works/1837-pre/marx/1835-ref.htm#q2) |
+| `engels-reading-001` | 恩格斯 · 《国民经济学批判大纲》（1844年） | [原文](https://www.marxists.org/archive/marx/works/1844/df-jahrbucher/outlines.htm) | [原文](https://www.marxists.org/archive/marx/works/1844/df-jahrbucher/outlines.htm) |
+| `lenin-reading-001` | 列宁 · 《伟大的创举》 | [原文](https://www.marxists.org/archive/lenin/works/1919/jun/28.htm) | [原文](https://www.marxists.org/archive/lenin/works/1919/jun/28.htm) |
+| `mao-reading-001` | 毛泽东 · 《为建设一个伟大的社会主义国家而奋斗》 | [原文](https://www.marxists.org/chinese/maozedong/marxist.org-chinese-mao-19540915.htm) | [原文](https://www.marxists.org/reference/archive/mao/selected-works/volume-5/mswv5_38.htm) |
+| `marx-engels-reading-006` | 马恩 · 《共产党宣言》第一章 | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch01.htm) | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch01.htm) |
+| `che-guevara-reading-006` | 切·格瓦拉 · 《古巴的社会主义和人》（1965年3月） | [原文](https://www.marxists.org/archive/guevara/1965/03/man-socialism.htm) | [原文](https://www.marxists.org/archive/guevara/1965/03/man-socialism.htm) |
+| `lei-feng-reading-006` | 雷锋 · 《雷锋日记》1961年10月20日 | [原文](https://www.chinaleifeng.com/content/2019/09/25/6069503.html) | [原文](https://www.chinaleifeng.com/content/2019/09/25/6069503.html) |
+| `ostrovsky-steel-06` | 尼古拉·奥斯特洛夫斯基 · 《钢铁是怎样炼成的》第二部第8章 | [原文](https://www.marxists.org/chinese/reference-books/the-making-of-steel/17.htm) | [原文](https://archive.org/details/nikolai-ostrovsky-how-the-steel-was-tempered-part-2-flph-1952/page/n331/mode/1up) |
+| `marx-reading-002` | 马克思 · 《青年在选择职业时的考虑》（1835年） | [原文](https://www.marxists.org/archive/marx/works/1837-pre/marx/1835-ref.htm#q1) | [原文](https://www.marxists.org/archive/marx/works/1837-pre/marx/1835-ref.htm#q1) |
+| `engels-reading-002` | 恩格斯 · 《共产主义原理》第七个问题（1847年） | [原文](https://www.marxists.org/archive/marx/works/1847/11/prin-com.htm) | [原文](https://www.marxists.org/archive/marx/works/1847/11/prin-com.htm) |
+| `lenin-reading-002` | 列宁 · 《伟大的创举》 | [原文](https://www.marxists.org/archive/lenin/works/1919/jun/28.htm) | [原文](https://www.marxists.org/archive/lenin/works/1919/jun/28.htm) |
+| `mao-reading-002` | 毛泽东 · 《为建设一个伟大的社会主义国家而奋斗》 | [原文](https://www.marxists.org/chinese/maozedong/marxist.org-chinese-mao-19540915.htm) | [原文](https://www.marxists.org/reference/archive/mao/selected-works/volume-5/mswv5_38.htm) |
+| `marx-engels-reading-007` | 马恩 · 《共产党宣言》第一章 | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch01.htm) | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch01.htm) |
+| `che-guevara-reading-007` | 切·格瓦拉 · 《古巴的社会主义和人》（1965年3月） | [原文](https://www.marxists.org/archive/guevara/1965/03/man-socialism.htm) | [原文](https://www.marxists.org/archive/guevara/1965/03/man-socialism.htm) |
+| `lei-feng-reading-007` | 雷锋 · 《雷锋日记》1961年11月26日 | [原文](https://www.chinaleifeng.com/content/2019/09/25/6069644.html) | [原文](https://www.chinaleifeng.com/content/2019/09/25/6069644.html) |
+| `ostrovsky-steel-07` | 尼古拉·奥斯特洛夫斯基 · 《钢铁是怎样炼成的》第二部第9章 | [原文](https://www.marxists.org/chinese/reference-books/the-making-of-steel/18.htm) | [原文](https://archive.org/details/nikolai-ostrovsky-how-the-steel-was-tempered-part-2-flph-1952/page/n365/mode/1up) |
+| `marx-reading-003` | 马克思 · 《致阿尔诺德·卢格的信》（1843年9月） | [原文](https://www.marxists.org/archive/marx/works/1843/letters/43_09.htm#p144) | [原文](https://www.marxists.org/archive/marx/works/1843/letters/43_09.htm#p144) |
+| `engels-reading-003` | 恩格斯 · 《在伦敦举行的波兰纪念大会上的演说》（1847年11月29日） | [原文](https://www.marxists.org/archive/marx/works/1847/12/09.htm#engels) | [原文](https://www.marxists.org/archive/marx/works/1847/12/09.htm#engels) |
+| `lenin-reading-003` | 列宁 · 《伟大的创举》 | [原文](https://www.marxists.org/archive/lenin/works/1919/jun/28.htm) | [原文](https://www.marxists.org/archive/lenin/works/1919/jun/28.htm) |
+| `mao-reading-003` | 毛泽东 · 《全世界革命力量团结起来，反对帝国主义的侵略》 | [原文](https://www.marxists.org/chinese/maozedong/marxist.org-chinese-mao-194811.htm) | [原文](https://www.marxists.org/reference/archive/mao/selected-works/volume-4/mswv4_44.htm) |
+| `marx-engels-reading-008` | 马恩 · 《共产党宣言》第一章 | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch01.htm) | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch01.htm) |
+| `che-guevara-reading-008` | 切·格瓦拉 · 《古巴的社会主义和人》（1965年3月） | [原文](https://www.marxists.org/archive/guevara/1965/03/man-socialism.htm) | [原文](https://www.marxists.org/archive/guevara/1965/03/man-socialism.htm) |
+| `lei-feng-reading-008` | 雷锋 · 《雷锋日记》1962年3月28日 | [原文](https://www.chinaleifeng.com/content/2019/10/09/6091706.html) | [原文](https://www.chinaleifeng.com/content/2019/10/09/6091706.html) |
+| `ostrovsky-steel-08` | 尼古拉·奥斯特洛夫斯基 · 《钢铁是怎样炼成的》第二部第9章 | [原文](https://www.marxists.org/chinese/reference-books/the-making-of-steel/18.htm) | [原文](https://archive.org/details/nikolai-ostrovsky-how-the-steel-was-tempered-part-2-flph-1952/page/n366/mode/1up) |
+| `marx-reading-004` | 马克思 · 《致阿尔诺德·卢格的信》（1843年9月） | [原文](https://www.marxists.org/archive/marx/works/1843/letters/43_09.htm#p144) | [原文](https://www.marxists.org/archive/marx/works/1843/letters/43_09.htm#p144) |
+| `engels-reading-004` | 恩格斯 · 《论权威》（1872—1873年） | [原文](https://www.marxists.org/archive/marx/works/1872/10/authority.htm) | [原文](https://www.marxists.org/archive/marx/works/1872/10/authority.htm) |
+| `lenin-reading-004` | 列宁 · 《伟大的创举》 | [原文](https://www.marxists.org/archive/lenin/works/1919/jun/28.htm) | [原文](https://www.marxists.org/archive/lenin/works/1919/jun/28.htm) |
+| `mao-reading-004` | 毛泽东 · 《关于农业合作化问题》 | [原文](https://www.marxists.org/chinese/maozedong/marxist.org-chinese-mao-19550731.htm) | [原文](https://www.marxists.org/reference/archive/mao/selected-works/volume-5/mswv5_44.htm) |
+| `marx-engels-reading-009` | 马恩 · 《共产党宣言》第一章 | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch01.htm) | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch01.htm) |
+| `che-guevara-reading-009` | 切·格瓦拉 · 《古巴的社会主义和人》（1965年3月） | [原文](https://www.marxists.org/archive/guevara/1965/03/man-socialism.htm) | [原文](https://www.marxists.org/archive/guevara/1965/03/man-socialism.htm) |
+| `lei-feng-reading-009` | 雷锋 · 《雷锋日记》1962年4月4日 | [原文](https://www.chinaleifeng.com/content/2019/10/09/6091719.html) | [原文](https://www.chinaleifeng.com/content/2019/10/09/6091719.html) |
+| `ostrovsky-steel-09` | 尼古拉·奥斯特洛夫斯基 · 《钢铁是怎样炼成的》第二部第6章 | [原文](https://www.marxists.org/chinese/reference-books/the-making-of-steel/15.htm) | [原文](https://archive.org/details/nikolai-ostrovsky-how-the-steel-was-tempered-part-2-flph-1952/page/n270/mode/1up) |
+| `marx-reading-005` | 马克思 · 《致阿尔诺德·卢格的信》（1843年9月） | [原文](https://www.marxists.org/archive/marx/works/1843/letters/43_09.htm#criticism) | [原文](https://www.marxists.org/archive/marx/works/1843/letters/43_09.htm#criticism) |
+| `engels-reading-005` | 恩格斯 · 《劳动在从猿到人转变中的作用》（1876年） | [原文](https://www.marxists.org/archive/marx/works/1876/part-played-labour/index.htm#nature) | [原文](https://www.marxists.org/archive/marx/works/1876/part-played-labour/index.htm#nature) |
+| `lenin-reading-005` | 列宁 · 《帝国主义和社会主义运动中的分裂》 | [原文](https://www.marxists.org/archive/lenin/works/1916/oct/x01.htm) | [原文](https://www.marxists.org/archive/lenin/works/1916/oct/x01.htm) |
+| `mao-reading-005` | 毛泽东 · 《关于工商业政策》 | [原文](https://www.marxists.org/chinese/maozedong/marxist.org-chinese-mao-19480227.htm) | [原文](https://www.marxists.org/reference/archive/mao/selected-works/volume-4/mswv4_31.htm) |
+| `marx-engels-reading-010` | 马恩 · 《共产党宣言》第一章 | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch01.htm) | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch01.htm) |
+| `che-guevara-reading-010` | 切·格瓦拉 · 《致菲德尔·卡斯特罗的告别信》（1965年4月1日） | [原文](https://www.marxists.org/archive/guevara/1965/04/01.htm) | [原文](https://www.marxists.org/archive/guevara/1965/04/01.htm) |
+| `lei-feng-reading-010` | 雷锋 · 《雷锋日记》1962年4月17日 | [原文](https://www.chinaleifeng.com/content/2019/10/09/6091742.html) | [原文](https://www.chinaleifeng.com/content/2019/10/09/6091742.html) |
+| `ostrovsky-steel-10` | 尼古拉·奥斯特洛夫斯基 · 《钢铁是怎样炼成的》第二部第6章 | [原文](https://www.marxists.org/chinese/reference-books/the-making-of-steel/15.htm) | [原文](https://archive.org/details/nikolai-ostrovsky-how-the-steel-was-tempered-part-2-flph-1952/page/n270/mode/1up) |
+| `marx-reading-006` | 马克思 · 《〈黑格尔法哲学批判〉导言》（1844年） | [原文](https://www.marxists.org/archive/marx/works/1843/critique-hpr/intro.htm#32) | [原文](https://www.marxists.org/archive/marx/works/1843/critique-hpr/intro.htm#32) |
+| `engels-reading-006` | 恩格斯 · 《劳动在从猿到人转变中的作用》（1876年） | [原文](https://www.marxists.org/archive/marx/works/1876/part-played-labour/index.htm) | [原文](https://www.marxists.org/archive/marx/works/1876/part-played-labour/index.htm) |
+| `lenin-reading-006` | 列宁 · 《帝国主义和社会主义运动中的分裂》 | [原文](https://www.marxists.org/archive/lenin/works/1916/oct/x01.htm) | [原文](https://www.marxists.org/archive/lenin/works/1916/oct/x01.htm) |
+| `mao-reading-006` | 毛泽东 · 《关于情况的通报》 | [原文](https://www.marxists.org/chinese/maozedong/marxist.org-chinese-mao-19480320.htm) | [原文](https://www.marxists.org/reference/archive/mao/selected-works/volume-4/mswv4_34.htm) |
+| `marx-engels-reading-011` | 马恩 · 《共产党宣言》第一章 | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch01.htm) | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch01.htm) |
+| `marx-reading-007` | 马克思 · 《〈黑格尔法哲学批判〉导言》（1844年） | [原文](https://www.marxists.org/archive/marx/works/1843/critique-hpr/intro.htm#05) | [原文](https://www.marxists.org/archive/marx/works/1843/critique-hpr/intro.htm#05) |
+| `engels-reading-007` | 恩格斯 · 《反杜林论》引论（1878年） | [原文](https://www.marxists.org/archive/marx/works/1877/anti-duhring/introduction.htm#025) | [原文](https://www.marxists.org/archive/marx/works/1877/anti-duhring/introduction.htm#025) |
+| `lenin-reading-007` | 列宁 · 《帝国主义和社会主义运动中的分裂》 | [原文](https://www.marxists.org/archive/lenin/works/1916/oct/x01.htm) | [原文](https://www.marxists.org/archive/lenin/works/1916/oct/x01.htm) |
+| `mao-reading-007` | 毛泽东 · 《丢掉幻想，准备斗争》 | [原文](https://www.marxists.org/chinese/maozedong/marxist.org-chinese-mao-19490814.htm) | [原文](https://www.marxists.org/reference/archive/mao/selected-works/volume-4/mswv4_66.htm) |
+| `marx-engels-reading-012` | 马恩 · 《共产党宣言》第一章 | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch01.htm) | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch01.htm) |
+| `marx-reading-008` | 马克思 · 《〈黑格尔法哲学批判〉导言》（1844年） | [原文](https://www.marxists.org/archive/marx/works/1843/critique-hpr/intro.htm#05) | [原文](https://www.marxists.org/archive/marx/works/1843/critique-hpr/intro.htm#05) |
+| `engels-reading-008` | 恩格斯 · 《反杜林论》引论（1878年） | [原文](https://www.marxists.org/archive/marx/works/1877/anti-duhring/introduction.htm#025) | [原文](https://www.marxists.org/archive/marx/works/1877/anti-duhring/introduction.htm#025) |
+| `lenin-reading-008` | 列宁 · 《帝国主义和社会主义运动中的分裂》 | [原文](https://www.marxists.org/archive/lenin/works/1916/oct/x01.htm) | [原文](https://www.marxists.org/archive/lenin/works/1916/oct/x01.htm) |
+| `mao-reading-008` | 毛泽东 · 《实践论》 | [原文](https://www.marxists.org/chinese/maozedong/marxist.org-chinese-mao-193707.htm) | [原文](https://www.marxists.org/reference/archive/mao/selected-works/volume-1/mswv1_16.htm) |
+| `marx-engels-reading-013` | 马恩 · 《共产党宣言》第一章 | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch01.htm) | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch01.htm) |
+| `marx-reading-009` | 马克思 · 《詹姆斯·穆勒〈政治经济学原理〉一书摘要》（1844年） | [原文](https://www.marxists.org/archive/marx/works/1844/james-mill/index.htm#078) | [原文](https://www.marxists.org/archive/marx/works/1844/james-mill/index.htm#078) |
+| `engels-reading-009` | 恩格斯 · 《反杜林论》第一编第三章（1878年） | [原文](https://www.marxists.org/archive/marx/works/1877/anti-duhring/ch01.htm#084) | [原文](https://www.marxists.org/archive/marx/works/1877/anti-duhring/ch01.htm#084) |
+| `lenin-reading-009` | 列宁 · 《帝国主义和社会主义运动中的分裂》 | [原文](https://www.marxists.org/archive/lenin/works/1916/oct/x01.htm) | [原文](https://www.marxists.org/archive/lenin/works/1916/oct/x01.htm) |
+| `mao-reading-009` | 毛泽东 · 《湖南农民运动考察报告》 | [原文](https://www.marxists.org/chinese/maozedong/marxist.org-chinese-mao-192703.htm) | [原文](https://www.marxists.org/reference/archive/mao/selected-works/volume-1/mswv1_2.htm) |
+| `marx-engels-reading-014` | 马恩 · 《共产党宣言》第一章 | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch01.htm) | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch01.htm) |
+| `marx-reading-010` | 马克思 · 《1844年经济学哲学手稿·工资》 | [原文](https://www.marxists.org/archive/marx/works/1844/manuscripts/wages.htm) | [原文](https://www.marxists.org/archive/marx/works/1844/manuscripts/wages.htm) |
+| `engels-reading-010` | 恩格斯 · 《反杜林论》第一编第十一章（1878年） | [原文](https://www.marxists.org/archive/marx/works/1877/anti-duhring/ch09.htm) | [原文](https://www.marxists.org/archive/marx/works/1877/anti-duhring/ch09.htm) |
+| `lenin-reading-010` | 列宁 · 《给美国工人的信》 | [原文](https://www.marxists.org/archive/lenin/works/1918/aug/20.htm) | [原文](https://www.marxists.org/archive/lenin/works/1918/aug/20.htm) |
+| `mao-reading-010` | 毛泽东 · 《湖南农民运动考察报告》 | [原文](https://www.marxists.org/chinese/maozedong/marxist.org-chinese-mao-192703.htm) | [原文](https://www.marxists.org/reference/archive/mao/selected-works/volume-1/mswv1_2.htm) |
+| `marx-engels-reading-015` | 马恩 · 《共产党宣言》第一章 | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch01.htm) | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch01.htm) |
+| `marx-reading-011` | 马克思 · 《1844年经济学哲学手稿·私有财产和共产主义》 | [原文](https://www.marxists.org/archive/marx/works/1844/manuscripts/comm.htm#44CC4) | [原文](https://www.marxists.org/archive/marx/works/1844/manuscripts/comm.htm#44CC4) |
+| `engels-reading-011` | 恩格斯 · 《反杜林论》第二编第四章（1878年） | [原文](https://www.marxists.org/archive/marx/works/1877/anti-duhring/ch14.htm) | [原文](https://www.marxists.org/archive/marx/works/1877/anti-duhring/ch14.htm) |
+| `lenin-reading-011` | 列宁 · 《论大俄罗斯人的民族自豪感》 | [原文](https://www.marxists.org/archive/lenin/works/1914/dec/12a.htm) | [原文](https://www.marxists.org/archive/lenin/works/1914/dec/12a.htm) |
+| `mao-reading-011` | 毛泽东 · 《中国社会各阶级的分析》 | [原文](https://www.marxists.org/chinese/maozedong/marxist.org-chinese-mao-19251201.htm) | [原文](https://www.marxists.org/reference/archive/mao/selected-works/volume-1/mswv1_1.htm) |
+| `marx-engels-reading-016` | 马恩 · 《共产党宣言》第一章 | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch01.htm) | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch01.htm) |
+| `marx-reading-012` | 马克思 · 《1844年经济学哲学手稿·私有财产和共产主义》 | [原文](https://www.marxists.org/archive/marx/works/1844/manuscripts/comm.htm#44CC8) | [原文](https://www.marxists.org/archive/marx/works/1844/manuscripts/comm.htm#44CC8) |
+| `engels-reading-012` | 恩格斯 · 《自然辩证法·辩证法》（1878年） | [原文](https://www.marxists.org/archive/marx/works/1878/05/dialectics.htm#04) | [原文](https://www.marxists.org/archive/marx/works/1878/05/dialectics.htm#04) |
+| `lenin-reading-012` | 列宁 · 《我们的纲领》 | [原文](https://www.marxists.org/archive/lenin/works/1899/articles/arg2op.htm) | [原文](https://www.marxists.org/archive/lenin/works/1899/articles/arg2op.htm) |
+| `mao-reading-012` | 毛泽东 · 《中国社会各阶级的分析》 | [原文](https://www.marxists.org/chinese/maozedong/marxist.org-chinese-mao-19251201.htm) | [原文](https://www.marxists.org/reference/archive/mao/selected-works/volume-1/mswv1_1.htm) |
+| `marx-engels-reading-017` | 马恩 · 《共产党宣言》第一章 | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch01.htm) | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch01.htm) |
+| `marx-reading-013` | 马克思 · 《关于费尔巴哈的提纲》第二条（1845年） | [原文](https://www.marxists.org/archive/marx/works/1845/theses/theses.htm#003) | [原文](https://www.marxists.org/archive/marx/works/1845/theses/theses.htm#003) |
+| `engels-reading-013` | 恩格斯 · 《自然辩证法·辩证法》（1878年） | [原文](https://www.marxists.org/archive/marx/works/1878/05/dialectics.htm#05) | [原文](https://www.marxists.org/archive/marx/works/1878/05/dialectics.htm#05) |
+| `lenin-reading-013` | 列宁 · 《我们的纲领》 | [原文](https://www.marxists.org/archive/lenin/works/1899/articles/arg2op.htm) | [原文](https://www.marxists.org/archive/lenin/works/1899/articles/arg2op.htm) |
+| `mao-reading-013` | 毛泽东 · 《中国社会各阶级的分析》 | [原文](https://www.marxists.org/chinese/maozedong/marxist.org-chinese-mao-19251201.htm) | [原文](https://www.marxists.org/reference/archive/mao/selected-works/volume-1/mswv1_1.htm) |
+| `marx-engels-reading-018` | 马恩 · 《共产党宣言》第一章 | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch01.htm) | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch01.htm) |
+| `marx-reading-014` | 马克思 · 《关于费尔巴哈的提纲》第三条（1845年） | [原文](https://www.marxists.org/archive/marx/works/1845/theses/theses.htm#004) | [原文](https://www.marxists.org/archive/marx/works/1845/theses/theses.htm#004) |
+| `engels-reading-014` | 恩格斯 · 《必需的和多余的社会阶级》（1881年） | [原文](https://www.marxists.org/archive/marx/works/1881/08/06.htm) | [原文](https://www.marxists.org/archive/marx/works/1881/08/06.htm) |
+| `lenin-reading-014` | 列宁 · 《我们的纲领》 | [原文](https://www.marxists.org/archive/lenin/works/1899/articles/arg2op.htm) | [原文](https://www.marxists.org/archive/lenin/works/1899/articles/arg2op.htm) |
+| `mao-reading-014` | 毛泽东 · 《做一个完全的革命派》 | [原文](https://www.marxists.org/chinese/maozedong/marxist.org-chinese-mao-19500623.htm) | [原文](https://www.marxists.org/reference/archive/mao/selected-works/volume-5/mswv5_08.htm) |
+| `marx-engels-reading-019` | 马恩 · 《共产党宣言》第一章 | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch01.htm) | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch01.htm) |
+| `marx-reading-015` | 马克思 · 《关于费尔巴哈的提纲》第十一条（1845年） | [原文](https://www.marxists.org/archive/marx/works/1845/theses/theses.htm#018) | [原文](https://www.marxists.org/archive/marx/works/1845/theses/theses.htm#018) |
+| `engels-reading-015` | 恩格斯 · 《在马克思墓前的讲话》（1883年3月17日） | [原文](https://www.marxists.org/archive/marx/works/1883/death/burial.htm) | [原文](https://www.marxists.org/archive/marx/works/1883/death/burial.htm) |
+| `lenin-reading-015` | 列宁 · 《党的组织和党的出版物》 | [原文](https://www.marxists.org/archive/lenin/works/1905/nov/13.htm) | [原文](https://www.marxists.org/archive/lenin/works/1905/nov/13.htm) |
+| `mao-reading-015` | 毛泽东 · 《和中央社、扫荡报、新民报三记者的谈话》 | [原文](https://www.marxists.org/chinese/maozedong/marxist.org-chinese-mao-19390916.htm) | [原文](https://www.marxists.org/reference/archive/mao/selected-works/volume-2/mswv2_18.htm) |
+| `marx-engels-reading-020` | 马恩 · 《共产党宣言》第一章 | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch01.htm) | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch01.htm) |
+| `marx-reading-016` | 马克思 · 《致帕·瓦·安年科夫的信》（1846年12月28日） | [原文](https://www.marxists.org/archive/marx/works/1846/letters/46_12_28.htm) | [原文](https://www.marxists.org/archive/marx/works/1846/letters/46_12_28.htm) |
+| `engels-reading-016` | 恩格斯 · 《自然辩证法》（1873—1882年手稿） | [原文](https://www.marxists.org/archive/marx/works/1883/don/ch07c.htm#alteration) | [原文](https://www.marxists.org/archive/marx/works/1883/don/ch07c.htm#alteration) |
+| `lenin-reading-016` | 列宁 · 《党的组织和党的出版物》 | [原文](https://www.marxists.org/archive/lenin/works/1905/nov/13.htm) | [原文](https://www.marxists.org/archive/lenin/works/1905/nov/13.htm) |
+| `mao-reading-016` | 毛泽东 · 《在中国共产党全国宣传工作会议上的讲话》 | [原文](https://www.marxists.org/chinese/maozedong/marxist.org-chinese-mao-19570312.htm) | [原文](https://www.marxists.org/reference/archive/mao/selected-works/volume-5/mswv5_59.htm) |
+| `marx-engels-reading-021` | 马恩 · 《共产党宣言》第一章 | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch01.htm) | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch01.htm) |
+| `marx-reading-017` | 马克思 · 《哲学的贫困》第二章（1847年） | [原文](https://www.marxists.org/archive/marx/works/1847/poverty-philosophy/ch02.htm#s2) | [原文](https://www.marxists.org/archive/marx/works/1847/poverty-philosophy/ch02.htm#s2) |
+| `engels-reading-017` | 恩格斯 · 《自然辩证法·辩证法》（1873—1882年手稿） | [原文](https://www.marxists.org/archive/marx/works/1883/don/ch02.htm) | [原文](https://www.marxists.org/archive/marx/works/1883/don/ch02.htm) |
+| `lenin-reading-017` | 列宁 · 《青年团的任务》 | [原文](https://www.marxists.org/archive/lenin/works/1920/oct/02.htm) | [原文](https://www.marxists.org/archive/lenin/works/1920/oct/02.htm) |
+| `mao-reading-017` | 毛泽东 · 《新民主主义论》 | [原文](https://www.marxists.org/chinese/maozedong/marxist.org-chinese-mao-194001.htm) | [原文](https://www.marxists.org/reference/archive/mao/selected-works/volume-2/mswv2_26.htm) |
+| `marx-engels-reading-022` | 马恩 · 《共产党宣言》第一章 | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch01.htm) | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch01.htm) |
+| `marx-reading-018` | 马克思 · 《哲学的贫困》第二章（1847年） | [原文](https://www.marxists.org/archive/marx/works/1847/poverty-philosophy/ch02.htm#s1) | [原文](https://www.marxists.org/archive/marx/works/1847/poverty-philosophy/ch02.htm#s1) |
+| `engels-reading-018` | 恩格斯 · 《关于共产主义者同盟的历史》（1885年） | [原文](https://www.marxists.org/archive/marx/works/1847/communist-league/1885hist.htm) | [原文](https://www.marxists.org/archive/marx/works/1847/communist-league/1885hist.htm) |
+| `lenin-reading-018` | 列宁 · 《青年团的任务》 | [原文](https://www.marxists.org/archive/lenin/works/1920/oct/02.htm) | [原文](https://www.marxists.org/archive/lenin/works/1920/oct/02.htm) |
+| `mao-reading-018` | 毛泽东 · 《中国革命和中国共产党》 | [原文](https://www.marxists.org/chinese/maozedong/marxist.org-chinese-mao-193912.htm) | [原文](https://www.marxists.org/reference/archive/mao/selected-works/volume-2/mswv2_23.htm) |
+| `marx-engels-reading-023` | 马恩 · 《共产党宣言》第一章 | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch01.htm) | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch01.htm) |
+| `marx-reading-019` | 马克思 · 《哲学的贫困》第二章（1847年） | [原文](https://www.marxists.org/archive/marx/works/1847/poverty-philosophy/ch02e.htm) | [原文](https://www.marxists.org/archive/marx/works/1847/poverty-philosophy/ch02e.htm) |
+| `engels-reading-019` | 恩格斯 · 《路德维希·费尔巴哈和德国古典哲学的终结》第二章（1886年） | [原文](https://www.marxists.org/archive/marx/works/1886/ludwig-feuerbach/ch02.htm) | [原文](https://www.marxists.org/archive/marx/works/1886/ludwig-feuerbach/ch02.htm) |
+| `lenin-reading-019` | 列宁 · 《青年团的任务》 | [原文](https://www.marxists.org/archive/lenin/works/1920/oct/02.htm) | [原文](https://www.marxists.org/archive/lenin/works/1920/oct/02.htm) |
+| `mao-reading-019` | 毛泽东 · 《矛盾论》 | [原文](https://www.marxists.org/chinese/maozedong/marxist.org-chinese-mao-193708.htm) | [原文](https://www.marxists.org/reference/archive/mao/selected-works/volume-1/mswv1_17.htm) |
+| `marx-engels-reading-024` | 马恩 · 《共产党宣言》第一章 | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch01.htm) | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch01.htm) |
+| `marx-reading-020` | 马克思 · 《哲学的贫困》第二章（1847年） | [原文](https://www.marxists.org/archive/marx/works/1847/poverty-philosophy/ch02e.htm#3b) | [原文](https://www.marxists.org/archive/marx/works/1847/poverty-philosophy/ch02e.htm#3b) |
+| `engels-reading-020` | 恩格斯 · 《致约瑟夫·布洛赫的信》（1890年9月21—22日） | [原文](https://www.marxists.org/archive/marx/works/1890/letters/90_09_21.htm) | [原文](https://www.marxists.org/archive/marx/works/1890/letters/90_09_21.htm) |
+| `lenin-reading-020` | 列宁 · 《青年团的任务》 | [原文](https://www.marxists.org/archive/lenin/works/1920/oct/02.htm) | [原文](https://www.marxists.org/archive/lenin/works/1920/oct/02.htm) |
+| `mao-reading-020` | 毛泽东 · 《关于正确处理人民内部矛盾的问题》 | [原文](https://www.marxists.org/chinese/maozedong/marxist.org-chinese-mao-19570227.htm) | [原文](https://www.marxists.org/reference/archive/mao/selected-works/volume-5/mswv5_58.htm) |
+| `marx-engels-reading-025` | 马恩 · 《共产党宣言》第一章 | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch01.htm) | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch01.htm) |
+| `marx-reading-021` | 马克思 · 《雇佣劳动与资本》（1849年） | [原文](https://www.marxists.org/archive/marx/works/1847/wage-labour/ch02.htm) | [原文](https://www.marxists.org/archive/marx/works/1847/wage-labour/ch02.htm) |
+| `engels-reading-021` | 恩格斯 · 《致奥托·冯·伯尼克的信》（1890年8月21日） | [原文](https://www.marxists.org/archive/marx/works/1890/letters/90_08_21.htm) | [原文](https://www.marxists.org/archive/marx/works/1890/letters/90_08_21.htm) |
+| `lenin-reading-021` | 列宁 · 《马克思主义的三个来源和三个组成部分》 | [原文](https://www.marxists.org/archive/lenin/works/1913/mar/x01.htm) | [原文](https://www.marxists.org/archive/lenin/works/1913/mar/x01.htm) |
+| `mao-reading-021` | 毛泽东 · 《关于正确处理人民内部矛盾的问题》 | [原文](https://www.marxists.org/chinese/maozedong/marxist.org-chinese-mao-19570227.htm) | [原文](https://www.marxists.org/reference/archive/mao/selected-works/volume-5/mswv5_58.htm) |
+| `marx-engels-reading-026` | 马恩 · 《共产党宣言》第一章 | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch01.htm) | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch01.htm) |
+| `marx-reading-022` | 马克思 · 《雇佣劳动与资本》（1849年） | [原文](https://www.marxists.org/archive/marx/works/1847/wage-labour/ch06.htm) | [原文](https://www.marxists.org/archive/marx/works/1847/wage-labour/ch06.htm) |
+| `engels-reading-022` | 恩格斯 · 《致瓦尔特·博尔吉乌斯的信》（1894年1月25日，旧版误作致施塔肯堡） | [原文](https://www.marxists.org/archive/marx/works/1894/letters/94_01_25.htm) | [原文](https://www.marxists.org/archive/marx/works/1894/letters/94_01_25.htm) |
+| `lenin-reading-022` | 列宁 · 《马克思主义的三个来源和三个组成部分》 | [原文](https://www.marxists.org/archive/lenin/works/1913/mar/x01.htm) | [原文](https://www.marxists.org/archive/lenin/works/1913/mar/x01.htm) |
+| `mao-reading-022` | 毛泽东 · 《在延安文艺座谈会上的讲话》 | [原文](https://www.marxists.org/chinese/maozedong/marxist.org-chinese-mao-194205.htm) | [原文](https://www.marxists.org/reference/archive/mao/selected-works/volume-3/mswv3_08.htm) |
+| `marx-engels-reading-027` | 马恩 · 《共产党宣言》第一章 | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch01.htm) | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch01.htm) |
+| `marx-reading-023` | 马克思 · 《路易·波拿巴的雾月十八日》第一章（1852年） | [原文](https://www.marxists.org/archive/marx/works/1852/18th-brumaire/ch01.htm) | [原文](https://www.marxists.org/archive/marx/works/1852/18th-brumaire/ch01.htm) |
+| `engels-reading-023` | 恩格斯 · 《社会主义从空想到科学的发展》第一章 | [原文](https://www.marxists.org/archive/marx/works/1880/soc-utop/ch01.htm) | [原文](https://www.marxists.org/archive/marx/works/1880/soc-utop/ch01.htm) |
+| `lenin-reading-023` | 列宁 · 《国家与革命》第1章 | [原文](https://www.marxists.org/archive/lenin/works/1917/staterev/ch01.htm) | [原文](https://www.marxists.org/archive/lenin/works/1917/staterev/ch01.htm) |
+| `mao-reading-023` | 毛泽东 · 《论持久战》 | [原文](https://www.marxists.org/chinese/maozedong/marxist.org-chinese-mao-193805b.htm) | [原文](https://www.marxists.org/reference/archive/mao/selected-works/volume-2/mswv2_09.htm) |
+| `marx-engels-reading-028` | 马恩 · 《共产党宣言》第一章 | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch01.htm) | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch01.htm) |
+| `marx-reading-024` | 马克思 · 《路易·波拿巴的雾月十八日》第一章（1852年） | [原文](https://www.marxists.org/archive/marx/works/1852/18th-brumaire/ch01.htm) | [原文](https://www.marxists.org/archive/marx/works/1852/18th-brumaire/ch01.htm) |
+| `engels-reading-024` | 恩格斯 · 《社会主义从空想到科学的发展》第一章 | [原文](https://www.marxists.org/archive/marx/works/1880/soc-utop/ch01.htm) | [原文](https://www.marxists.org/archive/marx/works/1880/soc-utop/ch01.htm) |
+| `lenin-reading-024` | 列宁 · 《国家与革命》第1章 | [原文](https://www.marxists.org/archive/lenin/works/1917/staterev/ch01.htm) | [原文](https://www.marxists.org/archive/lenin/works/1917/staterev/ch01.htm) |
+| `mao-reading-024` | 毛泽东 · 《中国革命战争的战略问题》 | [原文](https://www.marxists.org/chinese/maozedong/marxist.org-chinese-mao-193612.htm) | [原文](https://www.marxists.org/reference/archive/mao/selected-works/volume-1/mswv1_12.htm) |
+| `marx-engels-reading-029` | 马恩 · 《共产党宣言》第一章 | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch01.htm) | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch01.htm) |
+| `marx-reading-025` | 马克思 · 《在〈人民报〉创刊纪念会上的演说》（1856年4月14日） | [原文](https://www.marxists.org/archive/marx/works/1856/04/14.htm) | [原文](https://www.marxists.org/archive/marx/works/1856/04/14.htm) |
+| `engels-reading-025` | 恩格斯 · 《社会主义从空想到科学的发展》第一章 | [原文](https://www.marxists.org/archive/marx/works/1880/soc-utop/ch01.htm) | [原文](https://www.marxists.org/archive/marx/works/1880/soc-utop/ch01.htm) |
+| `lenin-reading-025` | 列宁 · 《国家与革命》第1章 | [原文](https://www.marxists.org/archive/lenin/works/1917/staterev/ch01.htm) | [原文](https://www.marxists.org/archive/lenin/works/1917/staterev/ch01.htm) |
+| `mao-reading-025` | 毛泽东 · 《关于正确处理人民内部矛盾的问题》 | [原文](https://www.marxists.org/chinese/maozedong/marxist.org-chinese-mao-19570227.htm) | [原文](https://www.marxists.org/reference/archive/mao/selected-works/volume-5/mswv5_58.htm) |
+| `marx-engels-reading-030` | 马恩 · 《共产党宣言》第一章 | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch01.htm) | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch01.htm) |
+| `marx-reading-026` | 马克思 · 《〈政治经济学批判〉导言》（1857年） | [原文](https://www.marxists.org/archive/marx/works/1857/grundrisse/ch01.htm#loc1) | [原文](https://www.marxists.org/archive/marx/works/1857/grundrisse/ch01.htm#loc1) |
+| `engels-reading-026` | 恩格斯 · 《社会主义从空想到科学的发展》第一章 | [原文](https://www.marxists.org/archive/marx/works/1880/soc-utop/ch01.htm) | [原文](https://www.marxists.org/archive/marx/works/1880/soc-utop/ch01.htm) |
+| `lenin-reading-026` | 列宁 · 《国家与革命》第1章 | [原文](https://www.marxists.org/archive/lenin/works/1917/staterev/ch01.htm) | [原文](https://www.marxists.org/archive/lenin/works/1917/staterev/ch01.htm) |
+| `mao-reading-026` | 毛泽东 · 《关于重庆谈判》 | [原文](https://www.marxists.org/chinese/maozedong/marxist.org-chinese-mao-19451017.htm) | [原文](https://www.marxists.org/reference/archive/mao/selected-works/volume-4/mswv4_06.htm) |
+| `marx-engels-reading-031` | 马恩 · 《共产党宣言》第一章 | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch01.htm) | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch01.htm) |
+| `marx-reading-027` | 马克思 · 《〈政治经济学批判〉导言》（1857年） | [原文](https://www.marxists.org/archive/marx/works/1857/grundrisse/ch01.htm#p109) | [原文](https://www.marxists.org/archive/marx/works/1857/grundrisse/ch01.htm#p109) |
+| `engels-reading-027` | 恩格斯 · 《社会主义从空想到科学的发展》第一章 | [原文](https://www.marxists.org/archive/marx/works/1880/soc-utop/ch01.htm) | [原文](https://www.marxists.org/archive/marx/works/1880/soc-utop/ch01.htm) |
+| `lenin-reading-027` | 列宁 · 《国家与革命》第1章 | [原文](https://www.marxists.org/archive/lenin/works/1917/staterev/ch01.htm) | [原文](https://www.marxists.org/archive/lenin/works/1917/staterev/ch01.htm) |
+| `mao-reading-027` | 毛泽东 · 《和美国记者安娜·路易斯·斯特朗的谈话》 | [原文](https://www.marxists.org/reference/archive/mao/selected-works/volume-4/mswv4_13.htm) | [原文](https://www.marxists.org/reference/archive/mao/selected-works/volume-4/mswv4_13.htm) |
+| `marx-engels-reading-032` | 马恩 · 《共产党宣言》第一章 | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch01.htm) | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch01.htm) |
+| `marx-reading-028` | 马克思 · 《1857—1858年经济学手稿》 | [原文](https://www.marxists.org/archive/marx/works/1857/grundrisse/ch05.htm#individuals) | [原文](https://www.marxists.org/archive/marx/works/1857/grundrisse/ch05.htm#individuals) |
+| `engels-reading-028` | 恩格斯 · 《社会主义从空想到科学的发展》第一章 | [原文](https://www.marxists.org/archive/marx/works/1880/soc-utop/ch01.htm) | [原文](https://www.marxists.org/archive/marx/works/1880/soc-utop/ch01.htm) |
+| `lenin-reading-028` | 列宁 · 《国家与革命》第2章 | [原文](https://www.marxists.org/archive/lenin/works/1917/staterev/ch02.htm) | [原文](https://www.marxists.org/archive/lenin/works/1917/staterev/ch02.htm) |
+| `mao-reading-028` | 毛泽东 · 《关于重庆谈判》 | [原文](https://www.marxists.org/chinese/maozedong/marxist.org-chinese-mao-19451017.htm) | [原文](https://www.marxists.org/reference/archive/mao/selected-works/volume-4/mswv4_06.htm) |
+| `marx-engels-reading-033` | 马恩 · 《共产党宣言》第一章 | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch01.htm) | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch01.htm) |
+| `marx-reading-029` | 马克思 · 《1857—1858年经济学手稿》 | [原文](https://www.marxists.org/archive/marx/works/1857/grundrisse/ch10.htm) | [原文](https://www.marxists.org/archive/marx/works/1857/grundrisse/ch10.htm) |
+| `engels-reading-029` | 恩格斯 · 《社会主义从空想到科学的发展》第一章 | [原文](https://www.marxists.org/archive/marx/works/1880/soc-utop/ch01.htm) | [原文](https://www.marxists.org/archive/marx/works/1880/soc-utop/ch01.htm) |
+| `lenin-reading-029` | 列宁 · 《国家与革命》第4章 | [原文](https://www.marxists.org/archive/lenin/works/1917/staterev/ch04.htm) | [原文](https://www.marxists.org/archive/lenin/works/1917/staterev/ch04.htm) |
+| `mao-reading-029` | 毛泽东 · 《目前形势和我们的任务》 | [原文](https://www.marxists.org/chinese/maozedong/marxist.org-chinese-mao-19471225.htm) | [原文](https://www.marxists.org/reference/archive/mao/selected-works/volume-4/mswv4_24.htm) |
+| `marx-engels-reading-034` | 马恩 · 《共产党宣言》第一章 | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch01.htm) | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch01.htm) |
+| `marx-reading-030` | 马克思 · 《〈政治经济学批判〉序言》（1859年） | [原文](https://www.marxists.org/archive/marx/works/1859/critique-pol-economy/preface.htm#005) | [原文](https://www.marxists.org/archive/marx/works/1859/critique-pol-economy/preface.htm#005) |
+| `engels-reading-030` | 恩格斯 · 《社会主义从空想到科学的发展》第一章 | [原文](https://www.marxists.org/archive/marx/works/1880/soc-utop/ch01.htm) | [原文](https://www.marxists.org/archive/marx/works/1880/soc-utop/ch01.htm) |
+| `lenin-reading-030` | 列宁 · 《国家与革命》第5章 | [原文](https://www.marxists.org/archive/lenin/works/1917/staterev/ch05.htm) | [原文](https://www.marxists.org/archive/lenin/works/1917/staterev/ch05.htm) |
+| `mao-reading-030` | 毛泽东 · 《目前形势和我们的任务》 | [原文](https://www.marxists.org/chinese/maozedong/marxist.org-chinese-mao-19471225.htm) | [原文](https://www.marxists.org/reference/archive/mao/selected-works/volume-4/mswv4_24.htm) |
+| `marx-engels-reading-035` | 马恩 · 《共产党宣言》第一章 | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch01.htm) | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch01.htm) |
+| `marx-reading-031` | 马克思 · 《〈政治经济学批判〉序言》（1859年） | [原文](https://www.marxists.org/archive/marx/works/1859/critique-pol-economy/preface.htm#005) | [原文](https://www.marxists.org/archive/marx/works/1859/critique-pol-economy/preface.htm#005) |
+| `engels-reading-031` | 恩格斯 · 《社会主义从空想到科学的发展》第一章 | [原文](https://www.marxists.org/archive/marx/works/1880/soc-utop/ch01.htm) | [原文](https://www.marxists.org/archive/marx/works/1880/soc-utop/ch01.htm) |
+| `lenin-reading-031` | 列宁 · 《国家与革命》第5章 | [原文](https://www.marxists.org/archive/lenin/works/1917/staterev/ch05.htm) | [原文](https://www.marxists.org/archive/lenin/works/1917/staterev/ch05.htm) |
+| `mao-reading-031` | 毛泽东 · 《论持久战》 | [原文](https://www.marxists.org/chinese/maozedong/marxist.org-chinese-mao-193805b.htm) | [原文](https://www.marxists.org/reference/archive/mao/selected-works/volume-2/mswv2_09.htm) |
+| `marx-engels-reading-036` | 马恩 · 《共产党宣言》第一章 | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch01.htm) | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch01.htm) |
+| `marx-reading-032` | 马克思 · 《〈政治经济学批判〉序言》（1859年） | [原文](https://www.marxists.org/archive/marx/works/1859/critique-pol-economy/preface.htm#005) | [原文](https://www.marxists.org/archive/marx/works/1859/critique-pol-economy/preface.htm#005) |
+| `engels-reading-032` | 恩格斯 · 《社会主义从空想到科学的发展》第二章 | [原文](https://www.marxists.org/archive/marx/works/1880/soc-utop/ch02.htm) | [原文](https://www.marxists.org/archive/marx/works/1880/soc-utop/ch02.htm) |
+| `lenin-reading-032` | 列宁 · 《国家与革命》第5章 | [原文](https://www.marxists.org/archive/lenin/works/1917/staterev/ch05.htm) | [原文](https://www.marxists.org/archive/lenin/works/1917/staterev/ch05.htm) |
+| `mao-reading-032` | 毛泽东 · 《党委会的工作方法》 | [原文](https://www.marxists.org/chinese/maozedong/marxist.org-chinese-mao-19490313.htm) | [原文](https://www.marxists.org/reference/archive/mao/selected-works/volume-4/mswv4_59.htm) |
+| `marx-engels-reading-037` | 马恩 · 《共产党宣言》第一章 | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch01.htm) | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch01.htm) |
+| `marx-reading-033` | 马克思 · 《〈政治经济学批判〉序言》（1859年） | [原文](https://www.marxists.org/archive/marx/works/1859/critique-pol-economy/preface.htm#005) | [原文](https://www.marxists.org/archive/marx/works/1859/critique-pol-economy/preface.htm#005) |
+| `engels-reading-033` | 恩格斯 · 《社会主义从空想到科学的发展》第二章 | [原文](https://www.marxists.org/archive/marx/works/1880/soc-utop/ch02.htm) | [原文](https://www.marxists.org/archive/marx/works/1880/soc-utop/ch02.htm) |
+| `lenin-reading-033` | 列宁 · 《国家与革命》第5章 | [原文](https://www.marxists.org/archive/lenin/works/1917/staterev/ch05.htm) | [原文](https://www.marxists.org/archive/lenin/works/1917/staterev/ch05.htm) |
+| `mao-reading-033` | 毛泽东 · 《党委会的工作方法》 | [原文](https://www.marxists.org/chinese/maozedong/marxist.org-chinese-mao-19490313.htm) | [原文](https://www.marxists.org/reference/archive/mao/selected-works/volume-4/mswv4_59.htm) |
+| `marx-engels-reading-038` | 马恩 · 《共产党宣言》第一章 | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch01.htm) | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch01.htm) |
+| `marx-reading-034` | 马克思 · 《〈政治经济学批判〉序言》（1859年） | [原文](https://www.marxists.org/archive/marx/works/1859/critique-pol-economy/preface.htm) | [原文](https://www.marxists.org/archive/marx/works/1859/critique-pol-economy/preface.htm) |
+| `engels-reading-034` | 恩格斯 · 《社会主义从空想到科学的发展》第二章 | [原文](https://www.marxists.org/archive/marx/works/1880/soc-utop/ch02.htm) | [原文](https://www.marxists.org/archive/marx/works/1880/soc-utop/ch02.htm) |
+| `lenin-reading-034` | 列宁 · 《国家与革命》第6章 | [原文](https://www.marxists.org/archive/lenin/works/1917/staterev/ch06.htm) | [原文](https://www.marxists.org/archive/lenin/works/1917/staterev/ch06.htm) |
+| `mao-reading-034` | 毛泽东 · 《党委会的工作方法》 | [原文](https://www.marxists.org/chinese/maozedong/marxist.org-chinese-mao-19490313.htm) | [原文](https://www.marxists.org/reference/archive/mao/selected-works/volume-4/mswv4_59.htm) |
+| `marx-engels-reading-039` | 马恩 · 《共产党宣言》第一章 | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch01.htm) | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch01.htm) |
+| `marx-reading-035` | 马克思 · 《致斐迪南·弗莱里格拉特的信》（1860年2月29日） | [原文](https://www.marxists.org/archive/marx/works/1860/letters/60_02_29.htm) | [原文](https://www.marxists.org/archive/marx/works/1860/letters/60_02_29.htm) |
+| `engels-reading-035` | 恩格斯 · 《社会主义从空想到科学的发展》第二章 | [原文](https://www.marxists.org/archive/marx/works/1880/soc-utop/ch02.htm) | [原文](https://www.marxists.org/archive/marx/works/1880/soc-utop/ch02.htm) |
+| `lenin-reading-035` | 列宁 · 《国家与革命》第6章 | [原文](https://www.marxists.org/archive/lenin/works/1917/staterev/ch06.htm) | [原文](https://www.marxists.org/archive/lenin/works/1917/staterev/ch06.htm) |
+| `mao-reading-035` | 毛泽东 · 《《农村调查》的序言和跋》 | [原文](https://www.marxists.org/chinese/maozedong/marxist.org-chinese-mao-194134.htm) | [原文](https://www.marxists.org/reference/archive/mao/selected-works/volume-3/mswv3_01.htm) |
+| `marx-engels-reading-040` | 马恩 · 《共产党宣言》第一章 | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch01.htm) | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch01.htm) |
+| `marx-reading-036` | 马克思 · 《剩余价值理论》第一章（1861—1863年手稿） | [原文](https://www.marxists.org/archive/marx/works/1863/theories-surplus-value/ch01.htm) | [原文](https://www.marxists.org/archive/marx/works/1863/theories-surplus-value/ch01.htm) |
+| `engels-reading-036` | 恩格斯 · 《社会主义从空想到科学的发展》第二章 | [原文](https://www.marxists.org/archive/marx/works/1880/soc-utop/ch02.htm) | [原文](https://www.marxists.org/archive/marx/works/1880/soc-utop/ch02.htm) |
+| `lenin-reading-036` | 列宁 · 《帝国主义是资本主义的最高阶段》第1章 | [原文](https://www.marxists.org/archive/lenin/works/1916/imp-hsc/ch01.htm) | [原文](https://www.marxists.org/archive/lenin/works/1916/imp-hsc/ch01.htm) |
+| `mao-reading-036` | 毛泽东 · 《文化工作中的统一战线》 | [原文](https://www.marxists.org/chinese/maozedong/marxist.org-chinese-mao-19441030.htm) | [原文](https://www.marxists.org/reference/archive/mao/selected-works/volume-3/mswv3_21.htm) |
+| `marx-engels-reading-041` | 马恩 · 《共产党宣言》第一章 | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch01.htm) | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch01.htm) |
+| `marx-reading-037` | 马克思 · 《致路德维希·库格曼的信》（1868年12月12日） | [原文](https://www.marxists.org/archive/marx/works/1868/letters/68_12_12.htm) | [原文](https://www.marxists.org/archive/marx/works/1868/letters/68_12_12.htm) |
+| `engels-reading-037` | 恩格斯 · 《社会主义从空想到科学的发展》第二章 | [原文](https://www.marxists.org/archive/marx/works/1880/soc-utop/ch02.htm) | [原文](https://www.marxists.org/archive/marx/works/1880/soc-utop/ch02.htm) |
+| `lenin-reading-037` | 列宁 · 《帝国主义是资本主义的最高阶段》第4章 | [原文](https://www.marxists.org/archive/lenin/works/1916/imp-hsc/ch04.htm) | [原文](https://www.marxists.org/archive/lenin/works/1916/imp-hsc/ch04.htm) |
+| `mao-reading-037` | 毛泽东 · 《关于领导方法的若干问题》 | [原文](https://www.marxists.org/chinese/maozedong/marxist.org-chinese-mao-19430601.htm) | [原文](https://www.marxists.org/reference/archive/mao/selected-works/volume-3/mswv3_13.htm) |
+| `marx-engels-reading-042` | 马恩 · 《共产党宣言》第一章 | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch01.htm) | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch01.htm) |
+| `marx-reading-038` | 马克思 · 《法兰西内战》第三部分（1871年） | [原文](https://www.marxists.org/archive/marx/works/1871/civil-war-france/ch05.htm#p221-years) | [原文](https://www.marxists.org/archive/marx/works/1871/civil-war-france/ch05.htm#p221-years) |
+| `engels-reading-038` | 恩格斯 · 《社会主义从空想到科学的发展》第二章 | [原文](https://www.marxists.org/archive/marx/works/1880/soc-utop/ch02.htm) | [原文](https://www.marxists.org/archive/marx/works/1880/soc-utop/ch02.htm) |
+| `lenin-reading-038` | 列宁 · 《帝国主义是资本主义的最高阶段》第4章 | [原文](https://www.marxists.org/archive/lenin/works/1916/imp-hsc/ch04.htm) | [原文](https://www.marxists.org/archive/lenin/works/1916/imp-hsc/ch04.htm) |
+| `mao-reading-038` | 毛泽东 · 《《中国农村的社会主义高潮》的按语》 | [原文](https://www.marxists.org/chinese/maozedong/marxist.org-chinese-mao-195509a.htm) | [原文](https://www.marxists.org/reference/archive/mao/selected-works/volume-5/mswv5_48.htm) |
+| `marx-engels-reading-043` | 马恩 · 《共产党宣言》第一章 | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch01.htm) | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch01.htm) |
+| `marx-reading-039` | 马克思 · 《法兰西内战》第三部分（1871年） | [原文](https://www.marxists.org/archive/marx/works/1871/civil-war-france/ch05.htm) | [原文](https://www.marxists.org/archive/marx/works/1871/civil-war-france/ch05.htm) |
+| `engels-reading-039` | 恩格斯 · 《社会主义从空想到科学的发展》第二章 | [原文](https://www.marxists.org/archive/marx/works/1880/soc-utop/ch02.htm) | [原文](https://www.marxists.org/archive/marx/works/1880/soc-utop/ch02.htm) |
+| `lenin-reading-039` | 列宁 · 《帝国主义是资本主义的最高阶段》第4章 | [原文](https://www.marxists.org/archive/lenin/works/1916/imp-hsc/ch04.htm) | [原文](https://www.marxists.org/archive/lenin/works/1916/imp-hsc/ch04.htm) |
+| `mao-reading-039` | 毛泽东 · 《论持久战》 | [原文](https://www.marxists.org/chinese/maozedong/marxist.org-chinese-mao-193805b.htm) | [原文](https://www.marxists.org/reference/archive/mao/selected-works/volume-2/mswv2_09.htm) |
+| `marx-engels-reading-044` | 马恩 · 《共产党宣言》第一章 | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch01.htm) | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch01.htm) |
+| `marx-reading-040` | 马克思 · 《资本论》第一卷第二版跋（1873年） | [原文](https://www.marxists.org/archive/marx/works/1867-c1/p3.htm#method) | [原文](https://www.marxists.org/archive/marx/works/1867-c1/p3.htm#method) |
+| `engels-reading-040` | 恩格斯 · 《社会主义从空想到科学的发展》第二章 | [原文](https://www.marxists.org/archive/marx/works/1880/soc-utop/ch02.htm) | [原文](https://www.marxists.org/archive/marx/works/1880/soc-utop/ch02.htm) |
+| `lenin-reading-040` | 列宁 · 《帝国主义是资本主义的最高阶段》第7章 | [原文](https://www.marxists.org/archive/lenin/works/1916/imp-hsc/ch07.htm) | [原文](https://www.marxists.org/archive/lenin/works/1916/imp-hsc/ch07.htm) |
+| `mao-reading-040` | 毛泽东 · 《论联合政府》 | [原文](https://www.marxists.org/chinese/maozedong/marxist.org-chinese-mao-19450424.htm) | [原文](https://www.marxists.org/reference/archive/mao/selected-works/volume-3/mswv3_25.htm) |
+| `marx-engels-reading-045` | 马恩 · 《共产党宣言》第一章 | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch01.htm) | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch01.htm) |
+| `marx-reading-041` | 马克思 · 《资本论》第一卷第二版跋（1873年） | [原文](https://www.marxists.org/archive/marx/works/1867-c1/p3.htm) | [原文](https://www.marxists.org/archive/marx/works/1867-c1/p3.htm) |
+| `engels-reading-041` | 恩格斯 · 《社会主义从空想到科学的发展》第三章 | [原文](https://www.marxists.org/archive/marx/works/1880/soc-utop/ch03.htm) | [原文](https://www.marxists.org/archive/marx/works/1880/soc-utop/ch03.htm) |
+| `lenin-reading-041` | 列宁 · 《帝国主义是资本主义的最高阶段》第7章 | [原文](https://www.marxists.org/archive/lenin/works/1916/imp-hsc/ch07.htm) | [原文](https://www.marxists.org/archive/lenin/works/1916/imp-hsc/ch07.htm) |
+| `mao-reading-041` | 毛泽东 · 《为人民服务》 | [原文](https://www.marxists.org/chinese/maozedong/marxist.org-chinese-mao-19440908.htm) | [原文](https://www.marxists.org/reference/archive/mao/selected-works/volume-3/mswv3_19.htm) |
+| `marx-engels-reading-046` | 马恩 · 《共产党宣言》第二章 | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch02.htm) | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch02.htm) |
+| `marx-reading-042` | 马克思 · 《哥达纲领批判》第一部分（1875年） | [原文](https://www.marxists.org/archive/marx/works/1875/gotha/ch01.htm) | [原文](https://www.marxists.org/archive/marx/works/1875/gotha/ch01.htm) |
+| `engels-reading-042` | 恩格斯 · 《社会主义从空想到科学的发展》第三章 | [原文](https://www.marxists.org/archive/marx/works/1880/soc-utop/ch03.htm) | [原文](https://www.marxists.org/archive/marx/works/1880/soc-utop/ch03.htm) |
+| `lenin-reading-042` | 列宁 · 《帝国主义是资本主义的最高阶段》第7章 | [原文](https://www.marxists.org/archive/lenin/works/1916/imp-hsc/ch07.htm) | [原文](https://www.marxists.org/archive/lenin/works/1916/imp-hsc/ch07.htm) |
+| `mao-reading-042` | 毛泽东 · 《中国的两种命运》 | [原文](https://www.marxists.org/reference/archive/mao/selected-works/volume-3/mswv3_24.htm) | [原文](https://www.marxists.org/reference/archive/mao/selected-works/volume-3/mswv3_24.htm) |
+| `marx-engels-reading-047` | 马恩 · 《共产党宣言》第二章 | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch02.htm) | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch02.htm) |
+| `marx-reading-043` | 马克思 · 《哥达纲领批判》第一部分（1875年） | [原文](https://www.marxists.org/archive/marx/works/1875/gotha/ch01.htm) | [原文](https://www.marxists.org/archive/marx/works/1875/gotha/ch01.htm) |
+| `engels-reading-043` | 恩格斯 · 《社会主义从空想到科学的发展》第三章 | [原文](https://www.marxists.org/archive/marx/works/1880/soc-utop/ch03.htm) | [原文](https://www.marxists.org/archive/marx/works/1880/soc-utop/ch03.htm) |
+| `lenin-reading-043` | 列宁 · 《帝国主义是资本主义的最高阶段》第8章 | [原文](https://www.marxists.org/archive/lenin/works/1916/imp-hsc/ch08.htm) | [原文](https://www.marxists.org/archive/lenin/works/1916/imp-hsc/ch08.htm) |
+| `mao-reading-043` | 毛泽东 · 《纪念白求恩》 | [原文](https://www.marxists.org/chinese/maozedong/marxist.org-chinese-mao-19391221.htm) | [原文](https://www.marxists.org/reference/archive/mao/selected-works/volume-2/mswv2_25.htm) |
+| `marx-engels-reading-048` | 马恩 · 《共产党宣言》第二章 | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch02.htm) | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch02.htm) |
+| `marx-reading-044` | 马克思 · 《哥达纲领批判》第四部分（1875年） | [原文](https://www.marxists.org/archive/marx/works/1875/gotha/ch04.htm) | [原文](https://www.marxists.org/archive/marx/works/1875/gotha/ch04.htm) |
+| `engels-reading-044` | 恩格斯 · 《社会主义从空想到科学的发展》第三章 | [原文](https://www.marxists.org/archive/marx/works/1880/soc-utop/ch03.htm) | [原文](https://www.marxists.org/archive/marx/works/1880/soc-utop/ch03.htm) |
+| `lenin-reading-044` | 列宁 · 《帝国主义是资本主义的最高阶段》第9章 | [原文](https://www.marxists.org/archive/lenin/works/1916/imp-hsc/ch09.htm) | [原文](https://www.marxists.org/archive/lenin/works/1916/imp-hsc/ch09.htm) |
+| `mao-reading-044` | 毛泽东 · 《为人民服务》 | [原文](https://www.marxists.org/chinese/maozedong/marxist.org-chinese-mao-19440908.htm) | [原文](https://www.marxists.org/reference/archive/mao/selected-works/volume-3/mswv3_19.htm) |
+| `marx-engels-reading-049` | 马恩 · 《共产党宣言》第二章 | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch02.htm) | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch02.htm) |
+| `marx-reading-045` | 马克思 · 《致威廉·白拉克的信》（1875年5月5日） | [原文](https://www.marxists.org/archive/marx/works/1875/letters/75_05_05.htm) | [原文](https://www.marxists.org/archive/marx/works/1875/letters/75_05_05.htm) |
+| `engels-reading-045` | 恩格斯 · 《社会主义从空想到科学的发展》第三章 | [原文](https://www.marxists.org/archive/marx/works/1880/soc-utop/ch03.htm) | [原文](https://www.marxists.org/archive/marx/works/1880/soc-utop/ch03.htm) |
+| `lenin-reading-045` | 列宁 · 《帝国主义是资本主义的最高阶段》第9章 | [原文](https://www.marxists.org/archive/lenin/works/1916/imp-hsc/ch09.htm) | [原文](https://www.marxists.org/archive/lenin/works/1916/imp-hsc/ch09.htm) |
+| `mao-reading-045` | 毛泽东 · 《为人民服务》 | [原文](https://www.marxists.org/chinese/maozedong/marxist.org-chinese-mao-19440908.htm) | [原文](https://www.marxists.org/reference/archive/mao/selected-works/volume-3/mswv3_19.htm) |
+| `marx-engels-reading-050` | 马恩 · 《共产党宣言》第二章 | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch02.htm) | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch02.htm) |
+| `marx-reading-046` | 马克思 · 《致维拉·查苏利奇的信》初稿（1881年） | [原文](https://www.marxists.org/archive/marx/works/1881/zasulich/draft-1.htm) | [原文](https://www.marxists.org/archive/marx/works/1881/zasulich/draft-1.htm) |
+| `engels-reading-046` | 恩格斯 · 《社会主义从空想到科学的发展》第三章 | [原文](https://www.marxists.org/archive/marx/works/1880/soc-utop/ch03.htm) | [原文](https://www.marxists.org/archive/marx/works/1880/soc-utop/ch03.htm) |
+| `mao-reading-046` | 毛泽东 · 《中国共产党在民族战争中的地位》 | [原文](https://www.marxists.org/chinese/maozedong/marxist.org-chinese-mao-19381014.htm) | [原文](https://www.marxists.org/reference/archive/mao/selected-works/volume-2/mswv2_10.htm) |
+| `marx-engels-reading-051` | 马恩 · 《共产党宣言》第二章 | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch02.htm) | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch02.htm) |
+| `marx-reading-047` | 马克思 · 《评阿道夫·瓦格纳的〈政治经济学教科书〉》（1879—1880年） | [原文](https://www.marxists.org/archive/marx/works/1881/01/wagner.htm) | [原文](https://www.marxists.org/archive/marx/works/1881/01/wagner.htm) |
+| `engels-reading-047` | 恩格斯 · 《社会主义从空想到科学的发展》第三章 | [原文](https://www.marxists.org/archive/marx/works/1880/soc-utop/ch03.htm) | [原文](https://www.marxists.org/archive/marx/works/1880/soc-utop/ch03.htm) |
+| `mao-reading-047` | 毛泽东 · 《论联合政府》 | [原文](https://www.marxists.org/chinese/maozedong/marxist.org-chinese-mao-19450424.htm) | [原文](https://www.marxists.org/reference/archive/mao/selected-works/volume-3/mswv3_25.htm) |
+| `marx-engels-reading-052` | 马恩 · 《共产党宣言》第二章 | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch02.htm) | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch02.htm) |
+| `marx-reading-048` | 马克思 · 《资本论》第三卷第四十八章（1894年出版） | [原文](https://www.marxists.org/archive/marx/works/1894-c3/ch48.htm) | [原文](https://www.marxists.org/archive/marx/works/1894-c3/ch48.htm) |
+| `engels-reading-048` | 恩格斯 · 《社会主义从空想到科学的发展》第三章 | [原文](https://www.marxists.org/archive/marx/works/1880/soc-utop/ch03.htm) | [原文](https://www.marxists.org/archive/marx/works/1880/soc-utop/ch03.htm) |
+| `mao-reading-048` | 毛泽东 · 《必须学会做经济工作》 | [原文](https://www.marxists.org/chinese/maozedong/marxist.org-chinese-mao-19450110.htm) | [原文](https://www.marxists.org/reference/archive/mao/selected-works/volume-3/mswv3_22.htm) |
+| `marx-engels-reading-053` | 马恩 · 《共产党宣言》第二章 | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch02.htm) | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch02.htm) |
+| `marx-reading-049` | 马克思 · 《资本论》第一卷第一章 | [原文](https://www.marxists.org/archive/marx/works/1867-c1/ch01.htm#015) | [原文](https://www.marxists.org/archive/marx/works/1867-c1/ch01.htm#015) |
+| `engels-reading-049` | 恩格斯 · 《社会主义从空想到科学的发展》第三章 | [原文](https://www.marxists.org/archive/marx/works/1880/soc-utop/ch03.htm) | [原文](https://www.marxists.org/archive/marx/works/1880/soc-utop/ch03.htm) |
+| `mao-reading-049` | 毛泽东 · 《我们的经济政策》 | [原文](https://www.marxists.org/reference/archive/mao/selected-works/volume-1/mswv1_9.htm) | [原文](https://www.marxists.org/reference/archive/mao/selected-works/volume-1/mswv1_9.htm) |
+| `marx-engels-reading-054` | 马恩 · 《共产党宣言》第二章 | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch02.htm) | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch02.htm) |
+| `marx-reading-050` | 马克思 · 《资本论》第一卷第一章 | [原文](https://www.marxists.org/archive/marx/works/1867-c1/ch01.htm) | [原文](https://www.marxists.org/archive/marx/works/1867-c1/ch01.htm) |
+| `engels-reading-050` | 恩格斯 · 《社会主义从空想到科学的发展》第三章 | [原文](https://www.marxists.org/archive/marx/works/1880/soc-utop/ch03.htm) | [原文](https://www.marxists.org/archive/marx/works/1880/soc-utop/ch03.htm) |
+| `mao-reading-050` | 毛泽东 · 《必须学会做经济工作》 | [原文](https://www.marxists.org/chinese/maozedong/marxist.org-chinese-mao-19450110.htm) | [原文](https://www.marxists.org/reference/archive/mao/selected-works/volume-3/mswv3_22.htm) |
+| `marx-engels-reading-055` | 马恩 · 《共产党宣言》第二章 | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch02.htm) | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch02.htm) |
+| `marx-reading-051` | 马克思 · 《资本论》第一卷第一章 | [原文](https://www.marxists.org/archive/marx/works/1867-c1/ch01.htm) | [原文](https://www.marxists.org/archive/marx/works/1867-c1/ch01.htm) |
+| `engels-reading-051` | 恩格斯 · 《社会主义从空想到科学的发展》第三章 | [原文](https://www.marxists.org/archive/marx/works/1880/soc-utop/ch03.htm) | [原文](https://www.marxists.org/archive/marx/works/1880/soc-utop/ch03.htm) |
+| `mao-reading-051` | 毛泽东 · 《必须学会做经济工作》 | [原文](https://www.marxists.org/chinese/maozedong/marxist.org-chinese-mao-19450110.htm) | [原文](https://www.marxists.org/reference/archive/mao/selected-works/volume-3/mswv3_22.htm) |
+| `marx-engels-reading-056` | 马恩 · 《共产党宣言》第二章 | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch02.htm) | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch02.htm) |
+| `marx-reading-052` | 马克思 · 《资本论》第一卷第一章 | [原文](https://www.marxists.org/archive/marx/works/1867-c1/ch01.htm) | [原文](https://www.marxists.org/archive/marx/works/1867-c1/ch01.htm) |
+| `engels-reading-052` | 恩格斯 · 《社会主义从空想到科学的发展》第三章 | [原文](https://www.marxists.org/archive/marx/works/1880/soc-utop/ch03.htm) | [原文](https://www.marxists.org/archive/marx/works/1880/soc-utop/ch03.htm) |
+| `mao-reading-052` | 毛泽东 · 《在中国共产党第七届中央委员会第二次全体会议上的报告》 | [原文](https://www.marxists.org/chinese/maozedong/marxist.org-chinese-mao-19490305.htm) | [原文](https://www.marxists.org/reference/archive/mao/selected-works/volume-4/mswv4_58.htm) |
+| `marx-engels-reading-057` | 马恩 · 《共产党宣言》第二章 | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch02.htm) | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch02.htm) |
+| `marx-reading-053` | 马克思 · 《资本论》第一卷第一章 | [原文](https://www.marxists.org/archive/marx/works/1867-c1/ch01.htm) | [原文](https://www.marxists.org/archive/marx/works/1867-c1/ch01.htm) |
+| `engels-reading-053` | 恩格斯 · 《社会主义从空想到科学的发展》第三章 | [原文](https://www.marxists.org/archive/marx/works/1880/soc-utop/ch03.htm) | [原文](https://www.marxists.org/archive/marx/works/1880/soc-utop/ch03.htm) |
+| `mao-reading-053` | 毛泽东 · 《愚公移山》 | [原文](https://www.marxists.org/chinese/maozedong/marxist.org-chinese-mao-19450611.htm) | [原文](https://www.marxists.org/reference/archive/mao/selected-works/volume-3/mswv3_26.htm) |
+| `marx-engels-reading-058` | 马恩 · 《共产党宣言》第二章 | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch02.htm) | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch02.htm) |
+| `marx-reading-054` | 马克思 · 《资本论》第一卷第一章 | [原文](https://www.marxists.org/archive/marx/works/1867-c1/ch01.htm#198) | [原文](https://www.marxists.org/archive/marx/works/1867-c1/ch01.htm#198) |
+| `engels-reading-054` | 恩格斯 · 《社会主义从空想到科学的发展》第三章 | [原文](https://www.marxists.org/archive/marx/works/1880/soc-utop/ch03.htm) | [原文](https://www.marxists.org/archive/marx/works/1880/soc-utop/ch03.htm) |
+| `mao-reading-054` | 毛泽东 · 《愚公移山》 | [原文](https://www.marxists.org/chinese/maozedong/marxist.org-chinese-mao-19450611.htm) | [原文](https://www.marxists.org/reference/archive/mao/selected-works/volume-3/mswv3_26.htm) |
+| `marx-engels-reading-059` | 马恩 · 《共产党宣言》第二章 | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch02.htm) | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch02.htm) |
+| `marx-reading-055` | 马克思 · 《资本论》第一卷第一章 | [原文](https://www.marxists.org/archive/marx/works/1867-c1/ch01.htm#204) | [原文](https://www.marxists.org/archive/marx/works/1867-c1/ch01.htm#204) |
+| `engels-reading-055` | 恩格斯 · 《社会主义从空想到科学的发展》第三章 | [原文](https://www.marxists.org/archive/marx/works/1880/soc-utop/ch03.htm) | [原文](https://www.marxists.org/archive/marx/works/1880/soc-utop/ch03.htm) |
+| `mao-reading-055` | 毛泽东 · 《实践论》 | [原文](https://www.marxists.org/chinese/maozedong/marxist.org-chinese-mao-193707.htm) | [原文](https://www.marxists.org/reference/archive/mao/selected-works/volume-1/mswv1_16.htm) |
+| `marx-engels-reading-060` | 马恩 · 《共产党宣言》第二章 | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch02.htm) | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch02.htm) |
+| `marx-reading-056` | 马克思 · 《资本论》第一卷第一章 | [原文](https://www.marxists.org/archive/marx/works/1867-c1/ch01.htm#19) | [原文](https://www.marxists.org/archive/marx/works/1867-c1/ch01.htm#19) |
+| `mao-reading-056` | 毛泽东 · 《实践论》 | [原文](https://www.marxists.org/chinese/maozedong/marxist.org-chinese-mao-193707.htm) | [原文](https://www.marxists.org/reference/archive/mao/selected-works/volume-1/mswv1_16.htm) |
+| `marx-engels-reading-061` | 马恩 · 《共产党宣言》第二章 | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch02.htm) | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch02.htm) |
+| `marx-reading-057` | 马克思 · 《资本论》第一卷第二章 | [原文](https://www.marxists.org/archive/marx/works/1867-c1/ch02.htm) | [原文](https://www.marxists.org/archive/marx/works/1867-c1/ch02.htm) |
+| `mao-reading-057` | 毛泽东 · 《实践论》 | [原文](https://www.marxists.org/chinese/maozedong/marxist.org-chinese-mao-193707.htm) | [原文](https://www.marxists.org/reference/archive/mao/selected-works/volume-1/mswv1_16.htm) |
+| `marx-engels-reading-062` | 马恩 · 《共产党宣言》第二章 | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch02.htm) | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch02.htm) |
+| `marx-reading-058` | 马克思 · 《资本论》第一卷第二章 | [原文](https://www.marxists.org/archive/marx/works/1867-c1/ch02.htm) | [原文](https://www.marxists.org/archive/marx/works/1867-c1/ch02.htm) |
+| `mao-reading-058` | 毛泽东 · 《矛盾论》 | [原文](https://www.marxists.org/chinese/maozedong/marxist.org-chinese-mao-193708.htm) | [原文](https://www.marxists.org/reference/archive/mao/selected-works/volume-1/mswv1_17.htm) |
+| `marx-engels-reading-063` | 马恩 · 《共产党宣言》第二章 | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch02.htm) | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch02.htm) |
+| `marx-reading-059` | 马克思 · 《资本论》第一卷第二章 | [原文](https://www.marxists.org/archive/marx/works/1867-c1/ch02.htm) | [原文](https://www.marxists.org/archive/marx/works/1867-c1/ch02.htm) |
+| `mao-reading-059` | 毛泽东 · 《矛盾论》 | [原文](https://www.marxists.org/chinese/maozedong/marxist.org-chinese-mao-193708.htm) | [原文](https://www.marxists.org/reference/archive/mao/selected-works/volume-1/mswv1_17.htm) |
+| `marx-engels-reading-064` | 马恩 · 《共产党宣言》第二章 | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch02.htm) | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch02.htm) |
+| `marx-reading-060` | 马克思 · 《资本论》第一卷第三章 | [原文](https://www.marxists.org/archive/marx/works/1867-c1/ch03.htm#a3) | [原文](https://www.marxists.org/archive/marx/works/1867-c1/ch03.htm#a3) |
+| `mao-reading-060` | 毛泽东 · 《关于正确处理人民内部矛盾的问题》 | [原文](https://www.marxists.org/chinese/maozedong/marxist.org-chinese-mao-19570227.htm) | [原文](https://www.marxists.org/reference/archive/mao/selected-works/volume-5/mswv5_58.htm) |
+| `marx-engels-reading-065` | 马恩 · 《共产党宣言》第二章 | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch02.htm) | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch02.htm) |
+| `marx-reading-061` | 马克思 · 《资本论》第一卷第三章 | [原文](https://www.marxists.org/archive/marx/works/1867-c1/ch03.htm) | [原文](https://www.marxists.org/archive/marx/works/1867-c1/ch03.htm) |
+| `mao-reading-061` | 毛泽东 · 《关于重庆谈判》 | [原文](https://www.marxists.org/chinese/maozedong/marxist.org-chinese-mao-19451017.htm) | [原文](https://www.marxists.org/reference/archive/mao/selected-works/volume-4/mswv4_06.htm) |
+| `marx-engels-reading-066` | 马恩 · 《共产党宣言》第二章 | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch02.htm) | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch02.htm) |
+| `marx-reading-062` | 马克思 · 《资本论》第一卷第四章 | [原文](https://www.marxists.org/archive/marx/works/1867-c1/ch04.htm) | [原文](https://www.marxists.org/archive/marx/works/1867-c1/ch04.htm) |
+| `mao-reading-062` | 毛泽东 · 《关于重庆谈判》 | [原文](https://www.marxists.org/chinese/maozedong/marxist.org-chinese-mao-19451017.htm) | [原文](https://www.marxists.org/reference/archive/mao/selected-works/volume-4/mswv4_06.htm) |
+| `marx-engels-reading-067` | 马恩 · 《共产党宣言》第二章 | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch02.htm) | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch02.htm) |
+| `marx-reading-063` | 马克思 · 《资本论》第一卷第四章 | [原文](https://www.marxists.org/archive/marx/works/1867-c1/ch04.htm#9a) | [原文](https://www.marxists.org/archive/marx/works/1867-c1/ch04.htm#9a) |
+| `mao-reading-063` | 毛泽东 · 《矛盾论》 | [原文](https://www.marxists.org/chinese/maozedong/marxist.org-chinese-mao-193708.htm) | [原文](https://www.marxists.org/reference/archive/mao/selected-works/volume-1/mswv1_17.htm) |
+| `marx-engels-reading-068` | 马恩 · 《共产党宣言》第二章 | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch02.htm) | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch02.htm) |
+| `marx-reading-064` | 马克思 · 《资本论》第一卷第四章 | [原文](https://www.marxists.org/archive/marx/works/1867-c1/ch04.htm#13a) | [原文](https://www.marxists.org/archive/marx/works/1867-c1/ch04.htm#13a) |
+| `mao-reading-064` | 毛泽东 · 《矛盾论》 | [原文](https://www.marxists.org/chinese/maozedong/marxist.org-chinese-mao-193708.htm) | [原文](https://www.marxists.org/reference/archive/mao/selected-works/volume-1/mswv1_17.htm) |
+| `marx-engels-reading-069` | 马恩 · 《共产党宣言》第二章 | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch02.htm#135) | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch02.htm#135) |
+| `marx-reading-065` | 马克思 · 《资本论》第一卷第五章 | [原文](https://www.marxists.org/archive/marx/works/1867-c1/ch05.htm) | [原文](https://www.marxists.org/archive/marx/works/1867-c1/ch05.htm) |
+| `mao-reading-065` | 毛泽东 · 《论反对日本帝国主义的策略》 | [原文](https://www.marxists.org/chinese/maozedong/marxist.org-chinese-mao-19351227.htm) | [原文](https://www.marxists.org/reference/archive/mao/selected-works/volume-1/mswv1_11.htm) |
+| `marx-engels-reading-070` | 马恩 · 《共产党宣言》第三章 | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch03.htm) | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch03.htm) |
+| `marx-reading-066` | 马克思 · 《资本论》第一卷第六章 | [原文](https://www.marxists.org/archive/marx/works/1867-c1/ch06.htm) | [原文](https://www.marxists.org/archive/marx/works/1867-c1/ch06.htm) |
+| `mao-reading-066` | 毛泽东 · 《关于正确处理人民内部矛盾的问题》 | [原文](https://www.marxists.org/chinese/maozedong/marxist.org-chinese-mao-19570227.htm) | [原文](https://www.marxists.org/reference/archive/mao/selected-works/volume-5/mswv5_58.htm) |
+| `marx-engels-reading-071` | 马恩 · 《共产党宣言》第三章 | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch03.htm) | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch03.htm) |
+| `marx-reading-067` | 马克思 · 《资本论》第一卷第六章 | [原文](https://www.marxists.org/archive/marx/works/1867-c1/ch06.htm) | [原文](https://www.marxists.org/archive/marx/works/1867-c1/ch06.htm) |
+| `mao-reading-067` | 毛泽东 · 《《中国农村的社会主义高潮》的序言》 | [原文](https://www.marxists.org/chinese/maozedong/marxist.org-chinese-mao-195509.htm) | [原文](https://www.marxists.org/reference/archive/mao/selected-works/volume-5/mswv5_47.htm) |
+| `marx-engels-reading-072` | 马恩 · 《共产党宣言》第三章 | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch03.htm) | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch03.htm) |
+| `marx-reading-068` | 马克思 · 《资本论》第一卷第六章 | [原文](https://www.marxists.org/archive/marx/works/1867-c1/ch06.htm) | [原文](https://www.marxists.org/archive/marx/works/1867-c1/ch06.htm) |
+| `mao-reading-068` | 毛泽东 · 《学习和时局》 | [原文](https://www.marxists.org/chinese/maozedong/marxist.org-chinese-mao-19440412.htm) | [原文](https://www.marxists.org/reference/archive/mao/selected-works/volume-3/mswv3_18.htm) |
+| `marx-engels-reading-073` | 马恩 · 《共产党宣言》第四章 | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch04.htm) | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch04.htm) |
+| `marx-reading-069` | 马克思 · 《资本论》第一卷第七章 | [原文](https://www.marxists.org/archive/marx/works/1867-c1/ch07.htm) | [原文](https://www.marxists.org/archive/marx/works/1867-c1/ch07.htm) |
+| `mao-reading-069` | 毛泽东 · 《关心群众生活，注意工作方法》 | [原文](https://www.marxists.org/chinese/maozedong/marxist.org-chinese-mao-19340127.htm) | [原文](https://www.marxists.org/reference/archive/mao/selected-works/volume-1/mswv1_10.htm) |
+| `marx-engels-reading-074` | 马恩 · 《共产党宣言》第四章 | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch04.htm) | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch04.htm) |
+| `marx-reading-070` | 马克思 · 《资本论》第一卷第七章 | [原文](https://www.marxists.org/archive/marx/works/1867-c1/ch07.htm) | [原文](https://www.marxists.org/archive/marx/works/1867-c1/ch07.htm) |
+| `mao-reading-070` | 毛泽东 · 《关心群众生活，注意工作方法》 | [原文](https://www.marxists.org/chinese/maozedong/marxist.org-chinese-mao-19340127.htm) | [原文](https://www.marxists.org/reference/archive/mao/selected-works/volume-1/mswv1_10.htm) |
+| `marx-engels-reading-075` | 马恩 · 《共产党宣言》第四章 | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch04.htm) | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch04.htm) |
+| `marx-reading-071` | 马克思 · 《资本论》第一卷第七章 | [原文](https://www.marxists.org/archive/marx/works/1867-c1/ch07.htm) | [原文](https://www.marxists.org/archive/marx/works/1867-c1/ch07.htm) |
+| `mao-reading-071` | 毛泽东 · 《关于领导方法的若干问题》 | [原文](https://www.marxists.org/chinese/maozedong/marxist.org-chinese-mao-19430601.htm) | [原文](https://www.marxists.org/reference/archive/mao/selected-works/volume-3/mswv3_13.htm) |
+| `marx-engels-reading-076` | 马恩 · 《共产党宣言》第四章 | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch04.htm) | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch04.htm) |
+| `marx-reading-072` | 马克思 · 《资本论》第一卷第七章 | [原文](https://www.marxists.org/archive/marx/works/1867-c1/ch07.htm) | [原文](https://www.marxists.org/archive/marx/works/1867-c1/ch07.htm) |
+| `mao-reading-072` | 毛泽东 · 《关于工商业政策》 | [原文](https://www.marxists.org/reference/archive/mao/selected-works/volume-4/mswv4_31.htm) | [原文](https://www.marxists.org/reference/archive/mao/selected-works/volume-4/mswv4_31.htm) |
+| `marx-engels-reading-077` | 马恩 · 《共产党宣言》第四章 | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch04.htm) | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch04.htm) |
+| `marx-reading-073` | 马克思 · 《资本论》第一卷第八章 | [原文](https://www.marxists.org/archive/marx/works/1867-c1/ch08.htm) | [原文](https://www.marxists.org/archive/marx/works/1867-c1/ch08.htm) |
+| `mao-reading-073` | 毛泽东 · 《中国革命战争的战略问题》 | [原文](https://www.marxists.org/chinese/maozedong/marxist.org-chinese-mao-193612.htm) | [原文](https://www.marxists.org/reference/archive/mao/selected-works/volume-1/mswv1_12.htm) |
+| `marx-engels-reading-078` | 马恩 · 《共产党宣言》第一章 | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch01.htm) | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch01.htm) |
+| `marx-reading-074` | 马克思 · 《资本论》第一卷第十章 | [原文](https://www.marxists.org/archive/marx/works/1867-c1/ch10.htm) | [原文](https://www.marxists.org/archive/marx/works/1867-c1/ch10.htm) |
+| `mao-reading-074` | 毛泽东 · 《反对本本主义》 | [原文](https://www.marxists.org/reference/archive/mao/selected-works/volume-6/mswv6_11.htm) | [原文](https://www.marxists.org/reference/archive/mao/selected-works/volume-6/mswv6_11.htm) |
+| `marx-engels-reading-079` | 马恩 · 《共产党宣言》第一章 | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch01.htm) | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch01.htm) |
+| `marx-reading-075` | 马克思 · 《资本论》第一卷第十章 | [原文](https://www.marxists.org/archive/marx/works/1867-c1/ch10.htm#161a) | [原文](https://www.marxists.org/archive/marx/works/1867-c1/ch10.htm#161a) |
+| `mao-reading-075` | 毛泽东 · 《反对本本主义》 | [原文](https://www.marxists.org/chinese/maozedong/marxist.org-chinese-mao-193005.htm) | [原文](https://www.marxists.org/reference/archive/mao/selected-works/volume-6/mswv6_11.htm) |
+| `marx-engels-reading-080` | 马恩 · 《共产党宣言》第二章 | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch02.htm) | [原文](https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch02.htm) |
+| `marx-reading-076` | 马克思 · 《资本论》第一卷第十章 | [原文](https://www.marxists.org/archive/marx/works/1867-c1/ch10.htm#80a) | [原文](https://www.marxists.org/archive/marx/works/1867-c1/ch10.htm#80a) |
+| `mao-reading-076` | 毛泽东 · 《反对本本主义》 | [原文](https://www.marxists.org/chinese/maozedong/marxist.org-chinese-mao-193005.htm) | [原文](https://www.marxists.org/reference/archive/mao/selected-works/volume-6/mswv6_11.htm) |
+| `marx-reading-077` | 马克思 · 《资本论》第一卷第十章 | [原文](https://www.marxists.org/archive/marx/works/1867-c1/ch10.htm) | [原文](https://www.marxists.org/archive/marx/works/1867-c1/ch10.htm) |
+| `mao-reading-077` | 毛泽东 · 《《农村调查》的序言和跋》 | [原文](https://www.marxists.org/chinese/maozedong/marxist.org-chinese-mao-194134.htm) | [原文](https://www.marxists.org/reference/archive/mao/selected-works/volume-3/mswv3_01.htm) |
+| `marx-reading-078` | 马克思 · 《资本论》第一卷第十章 | [原文](https://www.marxists.org/archive/marx/works/1867-c1/ch10.htm) | [原文](https://www.marxists.org/archive/marx/works/1867-c1/ch10.htm) |
+| `mao-reading-078` | 毛泽东 · 《学习和时局》 | [原文](https://www.marxists.org/chinese/maozedong/marxist.org-chinese-mao-19440412.htm) | [原文](https://www.marxists.org/reference/archive/mao/selected-works/volume-3/mswv3_18.htm) |
+| `marx-reading-079` | 马克思 · 《资本论》第一卷第十二章 | [原文](https://www.marxists.org/archive/marx/works/1867-c1/ch12.htm) | [原文](https://www.marxists.org/archive/marx/works/1867-c1/ch12.htm) |
+| `mao-reading-079` | 毛泽东 · 《学习和时局》 | [原文](https://www.marxists.org/chinese/maozedong/marxist.org-chinese-mao-19440412.htm) | [原文](https://www.marxists.org/reference/archive/mao/selected-works/volume-3/mswv3_18.htm) |
+| `marx-reading-080` | 马克思 · 《资本论》第一卷第十三章 | [原文](https://www.marxists.org/archive/marx/works/1867-c1/ch13.htm) | [原文](https://www.marxists.org/archive/marx/works/1867-c1/ch13.htm) |
+| `mao-reading-080` | 毛泽东 · 《关于重庆谈判》 | [原文](https://www.marxists.org/chinese/maozedong/marxist.org-chinese-mao-19451017.htm) | [原文](https://www.marxists.org/reference/archive/mao/selected-works/volume-4/mswv4_06.htm) |
+| `marx-reading-081` | 马克思 · 《资本论》第一卷第十三章 | [原文](https://www.marxists.org/archive/marx/works/1867-c1/ch13.htm) | [原文](https://www.marxists.org/archive/marx/works/1867-c1/ch13.htm) |
+| `mao-reading-081` | 毛泽东 · 《整顿党的作风》 | [原文](https://www.marxists.org/chinese/maozedong/marxist.org-chinese-mao-19420201.htm) | [原文](https://www.marxists.org/reference/archive/mao/selected-works/volume-3/mswv3_06.htm) |
+| `marx-reading-082` | 马克思 · 《资本论》第一卷第十四章 | [原文](https://www.marxists.org/archive/marx/works/1867-c1/ch14.htm) | [原文](https://www.marxists.org/archive/marx/works/1867-c1/ch14.htm) |
+| `mao-reading-082` | 毛泽东 · 《反对自由主义》 | [原文](https://www.marxists.org/chinese/maozedong/marxist.org-chinese-mao-19370907.htm) | [原文](https://www.marxists.org/reference/archive/mao/selected-works/volume-2/mswv2_03.htm) |
+| `marx-reading-083` | 马克思 · 《资本论》第一卷第十五章 | [原文](https://www.marxists.org/archive/marx/works/1867-c1/ch15.htm#n1) | [原文](https://www.marxists.org/archive/marx/works/1867-c1/ch15.htm#n1) |
+| `mao-reading-083` | 毛泽东 · 《论联合政府》 | [原文](https://www.marxists.org/chinese/maozedong/marxist.org-chinese-mao-19450424.htm) | [原文](https://www.marxists.org/reference/archive/mao/selected-works/volume-3/mswv3_25.htm) |
+| `marx-reading-084` | 马克思 · 《资本论》第一卷第十五章 | [原文](https://www.marxists.org/archive/marx/works/1867-c1/ch15.htm#a245) | [原文](https://www.marxists.org/archive/marx/works/1867-c1/ch15.htm#a245) |
+| `mao-reading-084` | 毛泽东 · 《关于纠正党内的错误思想》 | [原文](https://www.marxists.org/chinese/maozedong/marxist.org-chinese-mao-192912.htm) | [原文](https://www.marxists.org/reference/archive/mao/selected-works/volume-1/mswv1_5.htm) |
+| `marx-reading-085` | 马克思 · 《资本论》第一卷第十五章 | [原文](https://www.marxists.org/archive/marx/works/1867-c1/ch15.htm) | [原文](https://www.marxists.org/archive/marx/works/1867-c1/ch15.htm) |
+| `mao-reading-085` | 毛泽东 · 《论人民民主专政》 | [原文](https://www.marxists.org/chinese/maozedong/marxist.org-chinese-mao-19490630.htm) | [原文](https://www.marxists.org/reference/archive/mao/selected-works/volume-4/mswv4_65.htm) |
+| `marx-reading-086` | 马克思 · 《资本论》第一卷第十五章 | [原文](https://www.marxists.org/archive/marx/works/1867-c1/ch15.htm) | [原文](https://www.marxists.org/archive/marx/works/1867-c1/ch15.htm) |
+| `mao-reading-086` | 毛泽东 · 《关于重庆谈判》 | [原文](https://www.marxists.org/chinese/maozedong/marxist.org-chinese-mao-19451017.htm) | [原文](https://www.marxists.org/reference/archive/mao/selected-works/volume-4/mswv4_06.htm) |
+| `marx-reading-087` | 马克思 · 《资本论》第一卷第十六章 | [原文](https://www.marxists.org/archive/marx/works/1867-c1/ch16.htm) | [原文](https://www.marxists.org/archive/marx/works/1867-c1/ch16.htm) |
+| `mao-reading-087` | 毛泽东 · 《中国共产党在民族战争中的地位》 | [原文](https://www.marxists.org/chinese/maozedong/marxist.org-chinese-mao-19381014.htm) | [原文](https://www.marxists.org/reference/archive/mao/selected-works/volume-2/mswv2_10.htm) |
+| `marx-reading-088` | 马克思 · 《资本论》第一卷第十六章 | [原文](https://www.marxists.org/archive/marx/works/1867-c1/ch16.htm) | [原文](https://www.marxists.org/archive/marx/works/1867-c1/ch16.htm) |
+| `mao-reading-088` | 毛泽东 · 《青年运动的方向》（谈判断青年是否革命的标准） | [原文](https://www.marxists.org/chinese/maozedong/marxist.org-chinese-mao-19390504.htm) | [原文](https://www.marxists.org/reference/archive/mao/selected-works/volume-2/mswv2_14.htm) |
+| `marx-reading-089` | 马克思 · 《资本论》第一卷第十九章 | [原文](https://www.marxists.org/archive/marx/works/1867-c1/ch19.htm#5a) | [原文](https://www.marxists.org/archive/marx/works/1867-c1/ch19.htm#5a) |
+| `mao-reading-089` | 毛泽东 · 《《中国农村的社会主义高潮》的按语》 | [原文](https://www.marxists.org/chinese/maozedong/marxist.org-chinese-mao-195509a.htm) | [原文](https://www.marxists.org/reference/archive/mao/selected-works/volume-5/mswv5_48.htm) |
+| `marx-reading-090` | 马克思 · 《资本论》第一卷第十九章 | [原文](https://www.marxists.org/archive/marx/works/1867-c1/ch19.htm) | [原文](https://www.marxists.org/archive/marx/works/1867-c1/ch19.htm) |
+| `mao-reading-090` | 毛泽东 · 《在延安文艺座谈会上的讲话》 | [原文](https://www.marxists.org/chinese/maozedong/marxist.org-chinese-mao-194205.htm) | [原文](https://www.marxists.org/reference/archive/mao/selected-works/volume-3/mswv3_08.htm) |
+| `marx-reading-091` | 马克思 · 《资本论》第一卷第二十三章 | [原文](https://www.marxists.org/archive/marx/works/1867-c1/ch23.htm) | [原文](https://www.marxists.org/archive/marx/works/1867-c1/ch23.htm) |
+| `mao-reading-091` | 毛泽东 · 《关于正确处理人民内部矛盾的问题》 | [原文](https://www.marxists.org/chinese/maozedong/marxist.org-chinese-mao-19570227.htm) | [原文](https://www.marxists.org/reference/archive/mao/selected-works/volume-5/mswv5_58.htm) |
+| `marx-reading-092` | 马克思 · 《资本论》第一卷第二十三章 | [原文](https://www.marxists.org/archive/marx/works/1867-c1/ch23.htm) | [原文](https://www.marxists.org/archive/marx/works/1867-c1/ch23.htm) |
+| `mao-reading-092` | 毛泽东 · 《在中国共产党全国宣传工作会议上的讲话》 | [原文](https://www.marxists.org/chinese/maozedong/marxist.org-chinese-mao-19570312.htm) | [原文](https://www.marxists.org/reference/archive/mao/selected-works/volume-5/mswv5_59.htm) |
+| `marx-reading-093` | 马克思 · 《资本论》第一卷第二十四章 | [原文](https://www.marxists.org/archive/marx/works/1867-c1/ch24.htm) | [原文](https://www.marxists.org/archive/marx/works/1867-c1/ch24.htm) |
+| `mao-reading-093` | 毛泽东 · 《在中国共产党第七届中央委员会第二次全体会议上的报告》 | [原文](https://www.marxists.org/chinese/maozedong/marxist.org-chinese-mao-19490305.htm) | [原文](https://www.marxists.org/reference/archive/mao/selected-works/volume-4/mswv4_58.htm) |
+| `marx-reading-094` | 马克思 · 《资本论》第一卷第二十四章 | [原文](https://www.marxists.org/archive/marx/works/1867-c1/ch24.htm) | [原文](https://www.marxists.org/archive/marx/works/1867-c1/ch24.htm) |
+| `mao-reading-094` | 毛泽东 · 《中国革命战争的战略问题》 | [原文](https://www.marxists.org/chinese/maozedong/marxist.org-chinese-mao-193612.htm) | [原文](https://www.marxists.org/reference/archive/mao/selected-works/volume-1/mswv1_12.htm) |
+| `marx-reading-095` | 马克思 · 《资本论》第一卷第二十五章 | [原文](https://www.marxists.org/archive/marx/works/1867-c1/ch25.htm#6a) | [原文](https://www.marxists.org/archive/marx/works/1867-c1/ch25.htm#6a) |
+| `mao-reading-095` | 毛泽东 · 《中国共产党在民族战争中的地位》 | [原文](https://www.marxists.org/chinese/maozedong/marxist.org-chinese-mao-19381014.htm) | [原文](https://www.marxists.org/reference/archive/mao/selected-works/volume-2/mswv2_10.htm) |
+| `marx-reading-096` | 马克思 · 《资本论》第一卷第二十五章 | [原文](https://www.marxists.org/archive/marx/works/1867-c1/ch25.htm) | [原文](https://www.marxists.org/archive/marx/works/1867-c1/ch25.htm) |
+| `marx-reading-097` | 马克思 · 《资本论》第一卷第二十六章 | [原文](https://www.marxists.org/archive/marx/works/1867-c1/ch26.htm) | [原文](https://www.marxists.org/archive/marx/works/1867-c1/ch26.htm) |
+| `marx-reading-098` | 马克思 · 《资本论》第一卷第二十六章 | [原文](https://www.marxists.org/archive/marx/works/1867-c1/ch26.htm) | [原文](https://www.marxists.org/archive/marx/works/1867-c1/ch26.htm) |
+| `marx-reading-099` | 马克思 · 《资本论》第一卷第三十一章 | [原文](https://www.marxists.org/archive/marx/works/1867-c1/ch31.htm) | [原文](https://www.marxists.org/archive/marx/works/1867-c1/ch31.htm) |
+| `marx-reading-100` | 马克思 · 《资本论》第一卷第三十一章 | [原文](https://www.marxists.org/archive/marx/works/1867-c1/ch31.htm) | [原文](https://www.marxists.org/archive/marx/works/1867-c1/ch31.htm) |
+| `marx-reading-101` | 马克思 · 《资本论》第一卷第三十一章 | [原文](https://www.marxists.org/archive/marx/works/1867-c1/ch31.htm) | [原文](https://www.marxists.org/archive/marx/works/1867-c1/ch31.htm) |
+| `marx-reading-102` | 马克思 · 《资本论》第一卷第三十二章 | [原文](https://www.marxists.org/archive/marx/works/1867-c1/ch32.htm#1a) | [原文](https://www.marxists.org/archive/marx/works/1867-c1/ch32.htm#1a) |
+| `marx-reading-103` | 马克思 · 《资本论》第一卷第三十三章 | [原文](https://www.marxists.org/archive/marx/works/1867-c1/ch33.htm) | [原文](https://www.marxists.org/archive/marx/works/1867-c1/ch33.htm) |
+| `marx-reading-104` | 马克思 · 《资本论》第一卷第一版序言（1867年） | [原文](https://www.marxists.org/archive/marx/works/1867-c1/p1.htm#1b) | [原文](https://www.marxists.org/archive/marx/works/1867-c1/p1.htm#1b) |
+| `marx-reading-105` | 马克思 · 《资本论》第一卷第一版序言（1867年） | [原文](https://www.marxists.org/archive/marx/works/1867-c1/p1.htm) | [原文](https://www.marxists.org/archive/marx/works/1867-c1/p1.htm) |

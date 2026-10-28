@@ -252,7 +252,8 @@ def unified_footer(page, route, language="zh-CN"):
     def link(path, key):
         current = ' aria-current="page"' if route == path else ''
         return f'<a href="{path}"{current} data-i18n="common.nav.{key}"></a>'
-    links = ''.join(link(path, key) for path, key in FOOTER_LINKS)
+    # Preserve word boundaries when a browser cannot load the layout stylesheet.
+    links = ' '.join(link(path, key) for path, key in FOOTER_LINKS)
     footer = (f'<footer class="site-footer container" lang="{language}">'
               '<div class="footer-sign"><p class="footer-brand"><span data-i18n="common.brandName">谢雨卿</span>'
               '<span class="footer-yuliao" data-i18n="common.footer.yuliao"></span></p>'

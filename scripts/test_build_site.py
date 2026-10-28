@@ -797,7 +797,8 @@ class ProjectPublicationTests(unittest.TestCase):
                 qr = [attrs for tag, attrs in Elements(about).elements if tag == "img" and attrs.get("src") == "/assets/wechat-qrcode.jpg"]
                 self.assertEqual(len(qr), 1)
                 self.assertEqual(qr[0]["src"], "/assets/wechat-qrcode.jpg")
-                self.assertEqual((qr[0]["width"], qr[0]["height"]), ("1280", "1280"))
+                self.assertEqual((qr[0]["width"], qr[0]["height"]), ("180", "180"))
+                self.assertIn("max-width:100%", qr[0]["style"])
                 self.assertIn("手机端可保存图片后，在微信中识别二维码", about)
                 self.assertEqual((output / "assets/wechat-qrcode.jpg").read_bytes(),
                                  (root / "home/assets/wechat-qrcode.jpg").read_bytes())
@@ -1003,7 +1004,10 @@ class PublicBiographyTests(unittest.TestCase):
             self.assertIn("所选坐标" if language == "zh-CN" else "sends its coordinates for weather", html)
             self.assertIn("不读取设备定位" if language == "zh-CN" else "never requests your device location", html)
             self.assertIn("地球、天气、历史、阅读和新闻" if language == "zh-CN" else "Earth, weather, history, reading and news", html)
-            self.assertIn("阅读时不自动请求该站" if language == "zh-CN" else "no automatic request to that site", html)
+            self.assertIn("浏览和换句时不自动请求来源网站" if language == "zh-CN" else "no automatic request to the sources", html)
+            self.assertIn("雷锋纪念馆" if language == "zh-CN" else "Lei Feng Memorial Hall", html)
+            self.assertIn("钢铁是怎样炼成的" if language == "zh-CN" else "How the Steel Was Tempered", html)
+            self.assertIn("本站节译" if language == "zh-CN" else "translations prepared for this site", html)
             self.assertIn("首页不请求天气" if language == "zh-CN" else "The homepage makes no weather request", html)
             self.assertIn("Python", html)
             self.assertIn("设备自带的字体" if language == "zh-CN" else "system fonts only", html)
