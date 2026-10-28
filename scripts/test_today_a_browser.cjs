@@ -2,7 +2,7 @@
 // Isolated, real Chrome acceptance. News/forecast fixtures use a fixed clock; no remote publishing.
 const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path'),os=require('node:os');
 const {chromium}=require(path.join(os.homedir(),'.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright'));
-const root=process.env.WEBSITE_ROOT||path.resolve(__dirname,'..'),site=process.env.WEBSITE_SITE||path.join(root,'_site_unified'),out=path.join(root,'.local-checks/today-b-20261028/browser');
+const root=process.env.WEBSITE_ROOT||path.resolve(__dirname,'..'),site=process.env.WEBSITE_SITE||path.join(root,'_site_unified'),out=process.env.TODAY_A_OUTPUT||path.join(root,'.local-checks/today-b-20261028/browser');
 const origin='http://today-a.test',epoch=Date.parse('2026-10-28T04:00:00Z'),widths=[1440,1024,768,761,760,390,320];
 const history=JSON.parse(fs.readFileSync(path.join(root,'home/brief/history.json'),'utf8'));
 const sources=JSON.parse(fs.readFileSync(path.join(root,'home/brief/news-sources.json'),'utf8')).sources;

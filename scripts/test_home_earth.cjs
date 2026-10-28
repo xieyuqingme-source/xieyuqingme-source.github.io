@@ -124,7 +124,7 @@ test('demo reaches 23:59, live mode returns, and language subscriptions clean up
     assert.equal(h.nodes['earth-now'].hidden, false);
     h.changeLanguage('en');
     assert.ok(h.nodes['earth-hour-label'].textContent.includes('Demo'));
-    assert.ok(h.nodes['daily-calendar-month'].textContent.includes(' · '));
+    assert.match(h.nodes['daily-local-time'].textContent,/Beijing.*Day|Beijing.*Night/);
     h.nodes['earth-now'].events.click();
     assert.equal(control.getState().demo, false); assert.equal(h.nodes['earth-now'].hidden, true);
   } finally { control.destroy(); }
@@ -182,14 +182,20 @@ test('glance and full templates keep their Earth contracts and declare heavy scr
   for (const file of ['home/index.template.html','home/en/index.template.html','home/today.template.html','home/en/today.template.html']) {
     const html = read(file);
     const glance = !file.includes('today.template');
-    const ids = glance ? ['daily-earth','earth-canvas','daily-local-time','daily-calendar-lunar','daily-calendar-term']
-      : ['daily-earth','earth-canvas','daily-city','earth-hour','earth-hour-label','earth-now','daily-local-time','daily-sunrise','daily-sunset','daily-daylength','daily-subsolar','daily-calendar-month','daily-calendar-day','daily-calendar-weekday','daily-calendar-lunar','daily-calendar-term','daily-weather'];
+    const ids = glance ? ['daily-earth','earth-canvas','daily-local-time','daily-calendar-lunar','daily-calendar-term','glance-date','daily-calendar-next-term']
+      : ['daily-earth','earth-canvas','daily-city','earth-hour','earth-hour-label','earth-now','daily-local-time','daily-sunrise','daily-sunset','daily-daylength','daily-subsolar','daily-moon-phase','daily-world-clocks','timeline-date','today-title','daily-calendar-lunar','daily-calendar-term','daily-calendar-festivals','daily-weather'];
     for (const id of ids) assert.equal((html.match(new RegExp('id="' + id + '"', 'g')) || []).length, 1, file + ' #' + id);
+    if (!glance) {
+      const title = file.startsWith('home/en/') ? 'today_date_title_en' : 'today_date_title';
+      assert.ok(html.includes('<h1 id="today-title">{{' + title + '}}</h1>'),file + ' date title is supplied by the builder');
+      for (const id of ['daily-calendar-month','daily-calendar-day','daily-calendar-weekday']) assert.doesNotMatch(html,new RegExp('id="' + id + '"'),file + ' obsolete calendar block stays removed');
+    }
     assert.ok(html.includes('data-brief-mode="' + (glance ? 'glance' : 'full') + '"'),file + ' mode');
     assert.match(html,/data-d3-src="\/assets\/vendor\/d3-7\.9\.0\.min\.js"/);
     assert.match(html,/data-earth-src="\/assets\/home-earth\.js"/);
     assert.match(html,/data-lunar-src="\/assets\/vendor\/lunar-javascript-1\.7\.7\.js"/);
     assert.doesNotMatch(html,/<script\b[^>]+src="\/assets\/(?:vendor\/(?:d3|lunar)|home-earth)/);
+    for (const name of ['astronomy-solar','home-daily']) assert.equal((html.match(new RegExp('<script\\b[^>]+src="/assets/' + name + '\\.js"','g')) || []).length,1,file + ' loads one ' + name + ' controller');
     assert.ok(html.indexOf('src="/assets/astronomy-solar.js"') < html.indexOf('src="/assets/home-daily.js"'),file + ' light astronomy precedes daily controller');
   }
 });

@@ -56,15 +56,7 @@
     function renderFacts() {
       if (disposed || paused) return;
       const date = currentDate(), city = state.observer, solar = astro.position(date);
-      const local = astro.dateParts(date, city.tz), beijing = astro.dateParts(date, 'Asia/Shanghai');
-      if (!options.globeOnly) {
-      const month = new Intl.DateTimeFormat(language() ? 'en-GB' : 'zh-CN', {timeZone: city.tz,month: 'long'}).format(date);
-      write('daily-calendar-month', local.year + ' · ' + (language() ? month.toUpperCase() : month));
-      write('daily-calendar-day', String(local.day));
-      write('daily-calendar-weekday', new Intl.DateTimeFormat(language() ? 'en-GB' : 'zh-CN', {timeZone: city.tz,weekday: 'long'}).format(date));
-      write('daily-calendar-lunar', (language() ? 'Lunar · ' : '农历') + astro.lunar(date, city.tz, language()));
-      write('daily-calendar-term', astro.term(date, language()));
-      }
+      const beijing = astro.dateParts(date, 'Asia/Shanghai');
       const above = astro.altitude(date, city.lat, city.lon) >= 0;
       write('daily-local-time', (language() ? city.en : city.name) + ' · ' + dateStamp(date, city.tz) + ' ' + clock(date, city.tz) + ' · ' + text(above ? '白昼' : '夜间', above ? 'Day' : 'Night'));
       write('daily-subsolar', language() ? angle(solar.declination, 'N', 'S') + ' · ' + angle(solar.subsolarLongitude, 'E', 'W')

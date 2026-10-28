@@ -6,7 +6,6 @@
   const glance = root.dataset.briefMode === 'glance';
   const find = id => document.getElementById(id);
   const read = id => { try { return JSON.parse(find(id)?.textContent || 'null'); } catch (_) { return null; } };
-  const brief = glance ? null : read('daily-brief-data');
   const snapshot = glance ? null : read('news-snapshot-data');
   const newsSources = glance ? [] : read('news-sources-data')?.sources || [];
   const historical = glance ? null : read('daily-history-data');
@@ -16,7 +15,6 @@
   const text = value => typeof value === 'string' ? value : value?.[lang()] || value?.['zh-CN'] || '';
   const word = (zh, en) => lang() === 'en' ? en : zh;
   const categories = {domestic: ['时政','Politics'],world: ['国际','World'],economy: ['经济','Economy'],science: ['科技','Science'],culture: ['文化','Culture']};
-  const order = Object.keys(categories);
   try { window.localStorage.removeItem('xieyuqing-brief-closed'); } catch (_) {}
   let feedVersion = '', lastDay = '', lastLanguage = '', disposed = false, city = cities.beijing, assetsReady = !glance, lunarAttempted = false;
   let weather = null, weatherRequest = null, weatherTicket = 0, earth = null, earthVisible = false, earthLoading = false;
@@ -47,56 +45,18 @@
   function parts(date, zone = 'Asia/Shanghai') { return Object.fromEntries(new Intl.DateTimeFormat('en-GB', {timeZone: zone,year: 'numeric',month: '2-digit',day: '2-digit'}).formatToParts(date).map(part => [part.type, part.value])); }
   function dayIndex(date, zone) { const p = parts(date, zone); return Math.floor(Date.UTC(+p.year,+p.month - 1,+p.day) / 86400000); }
   function dayStamp(date, zone) { return new Date(dayIndex(date, zone) * 86400000).toISOString().slice(0,10); }
-  function monthDay(date) { return new Intl.DateTimeFormat(lang() === 'en' ? 'en-GB' : 'zh-CN', {timeZone: 'Asia/Shanghai',month: 'long',day: 'numeric'}).format(date); }
-  function source(item) {
-    const result = node('div', 'yl-source');
-    result.append(document.createTextNode(text(item.source) + ' · '));
-    if (item.published) {
-      const time = node('time', '', item.published.replace('T',' ').replace(/\+08:00$/, ''));
-      time.dateTime = item.published; result.append(time);
-    } else result.append(document.createTextNode(text(item.published_label)));
-    result.append(document.createTextNode(' · '), link(item.url, word('阅读原文 ↗','Read source ↗')));
-    return result;
-  }
-  function renderLegacyFeed(date) {
-    if (glance || !brief?.items?.length || !find('daily-feed')) return;
-    const age = dayIndex(date) - Math.floor(Date.parse(brief.edition_date + 'T00:00:00Z') / 86400000), stale = age > 3;
-    root.classList.toggle('brief-news-stale', stale);
-    write('daily-news-title', age === 1 ? word('昨日要闻','Yesterday’s news') : word('要闻','News'));
-    const edition = new Date(brief.edition_date + 'T04:00:00Z'), updated = brief.updated_at?.slice(11,16) || '';
-    write('daily-edition', word('新闻更新于 ','News updated ') + monthDay(edition) + (updated ? ' ' + updated : ''));
-    const notice = find('daily-brief-notice');
-    if (notice) { notice.hidden = stale; notice.textContent = word('新闻由人工挑选，标题和摘要依据原文；点「阅读原文」看全文。','News is selected manually; headlines and summaries follow the sources. Choose “Read source” for the full text.'); }
-    if (stale) {
-      const paused = word('新闻暂停更新，先看看地球','News updates paused; take a look at Earth');
-      find('daily-feed').replaceChildren(node('p','yl-note yl-news-paused',paused)); return;
-    }
-    const category = item => item.category || (item.categories?.[0] === 'business' ? 'economy' : item.categories?.[0]);
-    const entries = [...brief.items].sort((a,b) => Number(b.priority === 'major') - Number(a.priority === 'major') || order.indexOf(category(a)) - order.indexOf(category(b)));
-    const fragment = document.createDocumentFragment();
-    entries.forEach((item,index) => {
-      const article = node('article',(index === 0 ? 'yl-lead' : 'yl-item') + ' news-row');
-      const label = node('div','yl-label');
-      label.append(node('span','news-category',categories[category(item)]?.[lang() === 'en' ? 1 : 0] || ''));
-      if (item.priority === 'major') { const badge = node('span','news-major',word('要闻','Major')); badge.title = text(item.major_reason); label.append(badge); }
-      const heading = node('h3'); heading.append(link(item.url,text(item.title)));
-      article.append(label,heading,node('p','news-summary',text(item.summary)),source(item)); fragment.append(article);
-    });
-    find('daily-feed').replaceChildren(fragment);
-  }
   function renderFeed(date) {
     if (glance) return;
-    if (!snapshot) { renderLegacyFeed(date); return; }
     const feed = find('daily-feed'); if (!feed) return;
     const now = date.getTime(), maximumAge = 72 * 3600000;
-    const entries = (Array.isArray(snapshot.items) ? snapshot.items : []).filter(item => {
+    const entries = (Array.isArray(snapshot?.items) ? snapshot.items : []).filter(item => {
       const published = Date.parse(item.published);
       return Number.isFinite(published) && published <= now + 300000 && now - published <= maximumAge && /^https:\/\//.test(item.url || '');
     }).slice(0,8);
-    const version = JSON.stringify([lang(),snapshot.collected_at,entries]);
+    const version = JSON.stringify([lang(),snapshot?.collected_at,entries]);
     if (version === feedVersion) return; feedVersion = version;
     write('daily-news-title',word('重点新闻','News to know'));
-    const collected = Date.parse(snapshot.collected_at || '');
+    const collected = Date.parse(snapshot?.collected_at || '');
     const formatter = new Intl.DateTimeFormat(lang() === 'en' ? 'en-GB' : 'zh-CN',{timeZone:'Asia/Shanghai',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',hour12:false});
     write('daily-edition',Number.isFinite(collected) ? word('最近检查：','Last checked: ') + formatter.format(new Date(collected)) + word(' · 北京时间',' · Beijing time') : word('等待首次自动更新','Awaiting the first automatic update'));
     const notice = find('daily-brief-notice');
@@ -224,9 +184,6 @@
     } else {
       const title = english ? 'Today: ' + new Intl.DateTimeFormat('en-GB',{timeZone:zone,year:'numeric',month:'long',day:'numeric'}).format(date) : `今天：${local.year}年${+local.month}月${+local.day}日`;
       write('today-title',title);
-      write('daily-calendar-day',String(+local.day)); write('daily-calendar-weekday',weekday);
-      write('daily-calendar-month',local.year + ' · ' + new Intl.DateTimeFormat(english ? 'en-GB' : 'zh-CN',{timeZone:zone,month:'long'}).format(date));
-
     }
     write('daily-calendar-lunar',(glance ? word('农历','Lunar · ') : '') + (astro?.lunar(date,zone,english) || ''));
     write('daily-calendar-term',astro?.term(date,english) || ''); write('daily-calendar-next-term','');
@@ -241,7 +198,6 @@
     }
     window.I18n.setLanguage(english ? 'en' : 'chs');
     const solar = window.Solar.fromYmd(+local.year,+local.month,+local.day), lunar = solar.getLunar();
-    write('daily-calendar-cycle',lunar.getYearInGanZhi() + word('年 · ',' · ') + lunar.getYearShengXiao());
     const previous = lunar.getPrevJieQi(true), next = lunar.getNextJieQi(true);
     const localDay = dayIndex(date,zone), toDay = value => Math.floor(Date.parse(value + 'T00:00:00Z') / 86400000);
     const elapsed = localDay - toDay(previous.getSolar().toYmd()) + 1, remaining = toDay(next.getSolar().toYmd()) - localDay;

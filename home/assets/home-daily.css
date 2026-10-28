@@ -71,9 +71,9 @@
 .today-main{padding-block:38px 24px}
 .today-intro{display:grid;grid-template-columns:minmax(0,1fr) minmax(240px,.8fr);align-items:center;gap:24px 40px;margin-bottom:30px;padding-bottom:24px;border-bottom:1px solid var(--line)}
 .today-intro h1{margin-bottom:12px}
-.today-brief .yl-today{display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:32px;align-items:start}
-.today-brief .yl-news,.today-brief .yl-sidebar{min-width:0}
-.today-brief .yl-sidebar{padding-left:24px;border-left:1px solid var(--line)}
+
+.today-brief .yl-news{min-width:0}
+
 .brief-panel-heading{margin:0 0 16px!important;font:600 22px/1.5 var(--sans);color:var(--ink)}
 .news-row{display:block;min-width:0;padding:18px 0;border-bottom:1px solid var(--line)}
 .news-row:first-child{padding-top:0}
@@ -87,13 +87,11 @@
 .yl-source{font-size:13px;line-height:1.8;color:var(--muted)}
 .yl-source a{text-decoration:underline;text-underline-offset:3px}
 .yl-note{margin-top:16px!important;font-size:13px;line-height:1.8;color:var(--muted)}
-.yl-calendar{padding-bottom:24px;border-bottom:1px solid var(--line)}
-.yl-cal-top{display:flex;justify-content:space-between;gap:10px;align-items:center}
-.yl-day{font:300 54px/1 var(--sans);color:var(--ink);font-variant-numeric:tabular-nums}
-.yl-cal-copy{text-align:right;font-size:13px;line-height:1.9}
-.yl-cal-copy strong{color:var(--ink);font-size:14px;font-weight:600}
-.yl-calendar>.yl-small,.yl-solar-term{margin-top:8px;font-size:13px;line-height:1.8}
-.yl-solar-term{color:var(--accent)}
+
+
+
+
+
 .yl-weather{padding-top:16px}
 .yl-city{display:block;width:100%;max-width:100%;font-size:14px;border:1px solid var(--control-line);padding:9px 10px;background:var(--paper);border-radius:var(--radius);min-height:42px}
 .yl-weather-readout{text-align:left;font-size:14px;line-height:1.8;color:var(--muted);overflow-wrap:anywhere}
@@ -125,16 +123,15 @@
 .yl-earth-source a{text-decoration:underline;text-underline-offset:3px}
 .yl-bottomline{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;margin-top:36px;align-items:start}
 .yl-daily-card{min-width:0;padding:20px;border:1px solid var(--line);border-radius:var(--radius);background:var(--surface)}
-.yl-daily-card h2{font:600 18px/1.6 var(--sans);color:var(--accent);margin-bottom:12px}
+
 .yl-daily-card h3{font:600 19px/1.6 var(--sans);margin-bottom:8px}
 .yl-daily-card p{font-size:15px;line-height:1.9}
 .yl-daily-card blockquote{margin:0}
 .yl-daily-card .yl-quote,.yl-daily-card #own-quote-text{font:500 19px/1.8 var(--sans)}
 .yl-daily-card .yl-small,.yl-daily-card .quote-source{font-size:13px;line-height:1.8;color:var(--muted);margin-top:12px}
-.yl-street-links{display:flex;gap:8px 18px;flex-wrap:wrap;margin-top:12px}
-.yl-street-links a{font-size:13px;text-decoration:underline;text-underline-offset:4px}
-#daily-meme-added{color:var(--muted);font-size:13px;margin-top:10px}
-#daily-meme-origin,#daily-meme-example,#daily-meme-why{font-size:14px;line-height:1.8;margin-top:8px}
+
+
+
 /* A quiet timeline: the point is today, with room for the future. */
 .today-intro-copy{min-width:0}.today-timeline{margin:0;min-width:0;width:100%;max-width:440px;justify-self:end;color:var(--accent)}
 .today-timeline-svg{display:block;width:100%;height:auto;max-height:74px;overflow:visible}
@@ -155,7 +152,7 @@
 .today-page .music-panel{max-height:none;overflow:visible}
 
 @media(min-width:960px){.home-top{grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:32px;padding-block:42px 12px}.home-glance{justify-self:end}}
-@media(min-width:721px) and (max-width:1000px){.today-brief .yl-today{grid-template-columns:minmax(0,1fr) 320px;gap:24px}.today-brief .yl-sidebar{padding-left:20px}}
+
 @media(max-width:860px){.home .yl-project-grid{grid-template-columns:minmax(0,1fr)}}
 @media(max-width:720px){
  .home-top{padding-top:28px;gap:26px}
@@ -175,8 +172,7 @@
  .home .yl-project{grid-template-columns:38% minmax(0,1fr);gap:14px;padding:12px}
  .today-main{padding-top:28px}
  .today-intro{grid-template-columns:minmax(0,1fr);gap:24px;margin-bottom:24px;padding-bottom:20px}
- .today-brief .yl-today{grid-template-columns:minmax(0,1fr);gap:28px}
- .today-brief .yl-sidebar{padding:24px 0 0;border:0;border-top:1px solid var(--line)}
+
  .yl-bottomline{grid-template-columns:minmax(0,1fr);gap:16px;margin-top:28px}
  .yl-globe-wrap{max-width:320px}
  .yl-daily-card{padding:18px}
@@ -184,24 +180,21 @@
 }
 @media(pointer:coarse){.yl-city{min-height:44px}.yl-time-slider{min-height:38px}}
 
-/* News first, a separate historical timeline, then Earth and reading. */
+/* Shared full-width sections, history and daily reading. */
 .today-a .today-intro{align-items:start;margin-bottom:26px}
 .today-a .today-intro h1{margin-bottom:18px}
 .today-dateline{display:flex;align-items:baseline;flex-wrap:wrap;gap:8px 16px;color:var(--muted);font-size:13px;line-height:1.8}
-.today-dateline .yl-cal-top{display:flex;align-items:baseline;justify-content:start;gap:12px}
-.today-dateline .yl-day{font-size:28px;font-weight:400}
-.today-dateline .yl-cal-copy{text-align:left;display:flex;gap:6px 12px;flex-wrap:wrap;align-items:baseline}
-.today-dateline .yl-cal-copy strong{font-size:13px}
-.today-dateline>p:empty{display:none}
-.today-a .yl-today{grid-template-columns:minmax(0,1.9fr) minmax(250px,1fr);gap:32px}
+
+
+
+
 .today-section-heading{display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:6px 18px;margin-bottom:20px}
 .today-section-heading .brief-panel-heading{margin:0!important}
 .today-section-heading .yl-small{max-width:100%}
-.today-a .yl-calendar{padding-bottom:0;border-bottom:0}
+
 .today-a .city-picker{padding-top:0;margin-top:0;border-top:0}
-.weather-more{margin-top:16px;color:var(--muted);font-size:13px}
-.weather-more>summary,.news-sources>summary,.history-more>summary,.quote-note>summary{cursor:pointer;width:fit-content;padding-block:5px;text-underline-offset:4px}
-.weather-more>summary:hover,.news-sources>summary:hover,.history-more>summary:hover,.quote-note>summary:hover{color:var(--accent)}
+.news-sources>summary,.history-more>summary,.quote-note>summary{cursor:pointer;width:fit-content;padding-block:5px;text-underline-offset:4px}
+.news-sources>summary:hover,.history-more>summary:hover,.quote-note>summary:hover{color:var(--accent)}
 .today-a .yl-news{counter-reset:today-news}
 .today-a .news-row{counter-increment:today-news;position:relative;padding:18px 0 18px 34px}
 .today-a .news-row:first-child{padding-top:0}
@@ -247,9 +240,9 @@
 .today-reading .yl-quote,.today-reading #own-quote-text{font:500 18px/1.9 var(--sans)}
 .quote-note{font-size:12px;color:var(--muted);margin-top:12px}
 .quote-note p{font-size:12px!important;line-height:1.8}
-@media(max-width:960px) and (min-width:721px){.today-a .yl-today{grid-template-columns:minmax(0,1.7fr) minmax(240px,1fr);gap:24px}.today-a .yl-sidebar{padding-left:18px}}
-@media(max-width:720px){.today-a .yl-today,.today-earth-grid{grid-template-columns:minmax(0,1fr);gap:26px}.today-a .news-row:nth-child(-n+2) h3{font-size:19px}.today-a .yl-sidebar{padding-top:24px}.today-earth-grid .yl-globe-wrap{max-width:340px}.history-item{grid-template-columns:58px minmax(0,1fr);gap:10px;padding-left:17px}.history-year{font-size:18px}.today-section-heading{margin-bottom:16px}.today-a .today-intro h1{margin-bottom:14px}}
-@media(pointer:coarse){.daily-home .quote-change{min-height:44px;padding-block:10px}.news-sources>summary,.history-more>summary,.weather-more>summary{min-height:44px}}
+
+@media(max-width:720px){.today-earth-grid{grid-template-columns:minmax(0,1fr);gap:26px}.today-a .news-row:nth-child(-n+2) h3{font-size:19px}.today-earth-grid .yl-globe-wrap{max-width:340px}.history-item{grid-template-columns:58px minmax(0,1fr);gap:10px;padding-left:17px}.history-year{font-size:18px}.today-section-heading{margin-bottom:16px}.today-a .today-intro h1{margin-bottom:14px}}
+@media(pointer:coarse){.daily-home .quote-change{min-height:44px;padding-block:10px}.news-sources>summary,.history-more>summary{min-height:44px}}
 
 .history-notes{font-size:12px;color:var(--muted);margin-top:18px}.history-notes>summary{cursor:pointer;padding-block:5px;width:fit-content}.history-notes .history-policy{margin-top:8px!important}
 
