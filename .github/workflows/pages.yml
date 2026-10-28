@@ -4,6 +4,10 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+  workflow_run:
+    workflows: [Update news snapshot]
+    types: [completed]
+    branches: [main]
 
 permissions:
   contents: read
@@ -14,6 +18,7 @@ concurrency:
 
 jobs:
   build:
+    if: github.event_name != 'workflow_run' || (github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_repository.full_name == github.repository)
     runs-on: ubuntu-latest
     steps:
       - name: Require the renamed root repository
@@ -72,10 +77,14 @@ jobs:
         run: |
           python scripts/test_build_site.py
           python scripts/test_branding.py
+          python scripts/test_news_snapshot.py
+          python scripts/test_history_today.py
       - name: Check homepage astronomy and navigation history
         run: |
           node --test scripts/test_home_earth.cjs
           node --test scripts/test_home_daily.cjs
+          node --test scripts/test_daily_reading.cjs
+          node --check home/assets/daily-reading.js
           node scripts/test_site_navigation_history.cjs
           node --check home/assets/home-daily.js
           python scripts/test_compact_header.py
@@ -113,9 +122,16 @@ jobs:
           key: ${{ runner.os }}-responsive-images-v1-${{ hashFiles('scripts/image_assets.py', 'blog/requirements.txt') }}-${{ hashFiles('images/**', '附属资料/**') }}
           restore-keys: |
             ${{ runner.os }}-responsive-images-v1-${{ hashFiles('scripts/image_assets.py', 'blog/requirements.txt') }}-
+      - name: Restore optional last valid news snapshot
+        timeout-minutes: 1
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python scripts/news_snapshot.py restore --output "$RUNNER_TEMP/news-snapshot.json"
       - name: Build and check personal site
         env:
           BLOG_SITE_URL: ${{ steps.pages.outputs.base_url }}
+          NEWS_SNAPSHOT_PATH: ${{ runner.temp }}/news-snapshot.json
         run: |
           python scripts/build_site.py --site-url "$BLOG_SITE_URL"
           python scripts/check_site.py --site-url "$BLOG_SITE_URL"

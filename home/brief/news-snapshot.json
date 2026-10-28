@@ -1,0 +1,86 @@
+{
+  "version": 1,
+  "collected_at": "2026-10-28T00:47:58Z",
+  "items": [
+    {
+      "id": "news-f3ba0cce826277ee1cd8",
+      "category": "domestic",
+      "title": "超市生鲜一夜之间全都变质？国安部：警惕网络攻击",
+      "source": "中国新闻网",
+      "source_id": "chinanews-china",
+      "published": "2026-10-28T00:05:16Z",
+      "lang": "zh-CN",
+      "url": "https://www.chinanews.com.cn/gn/2026/10-28/10721978.shtml"
+    },
+    {
+      "id": "news-7a5a445a59c350b82ca0",
+      "category": "world",
+      "title": "Norway and Finland leaders hold rare call with Putin",
+      "source": "BBC News",
+      "source_id": "bbc-world",
+      "published": "2026-10-27T18:28:23Z",
+      "lang": "en",
+      "url": "https://www.bbc.co.uk/news/articles/c6vgj813mlelo?at_medium=RSS&at_campaign=rss"
+    },
+    {
+      "id": "news-c9b6fabf983a7cf1804c",
+      "category": "economy",
+      "title": "Budget 2026: six charts that reveal the economic realities facing the chancellor",
+      "source": "The Guardian",
+      "source_id": "guardian-business",
+      "published": "2026-10-27T18:15:29Z",
+      "lang": "en",
+      "url": "https://www.theguardian.com/uk-news/2026/oct/27/budget-2026-six-charts-underpin-chancellor-decisions-john-healey"
+    },
+    {
+      "id": "news-71e6962cecf66d3a764e",
+      "category": "science",
+      "title": "NASA Invites Media to Crew Completion of Yearlong Mars Simulation",
+      "source": "NASA",
+      "source_id": "nasa-releases",
+      "published": "2026-10-27T19:27:22Z",
+      "lang": "en",
+      "url": "https://www.nasa.gov/news-release/nasa-invites-media-to-crew-completion-of-yearlong-mars-simulation/"
+    },
+    {
+      "id": "news-198e75b16b3e3691d8da",
+      "category": "domestic",
+      "title": "民政部部署“寒冬送温暖”专项救助行动",
+      "source": "中国新闻网",
+      "source_id": "chinanews-china",
+      "published": "2026-10-27T22:26:21Z",
+      "lang": "zh-CN",
+      "url": "https://www.chinanews.com.cn/gn/2026/10-28/10721963.shtml"
+    },
+    {
+      "id": "news-9a1fae5376420d9b5eec",
+      "category": "world",
+      "title": "加沙民众将在临时帐篷中迎来第四个冬天，人道主义援助持续受阻",
+      "source": "联合国新闻",
+      "source_id": "un-news-zh",
+      "published": "2026-10-27T12:00:00Z",
+      "lang": "zh-CN",
+      "url": "https://news.un.org/feed/view/zh/story/2026/10/1143082"
+    },
+    {
+      "id": "news-29ed7a0b756e062412eb",
+      "category": "economy",
+      "title": "Homes across UK to get low- or no-interest loans to fund solar panels and heat pumps",
+      "source": "The Guardian",
+      "source_id": "guardian-business",
+      "published": "2026-10-27T17:28:33Z",
+      "lang": "en",
+      "url": "https://www.theguardian.com/environment/2026/oct/27/homes-across-uk-to-get-low--or-no-interest-loans-to-fund-solar-panels-and-heat-pumps"
+    },
+    {
+      "id": "news-6f7b94d4e0f7d4bc45e8",
+      "category": "science",
+      "title": "NASA’s Neo Surveyor Sunshade",
+      "source": "NASA",
+      "source_id": "nasa-releases",
+      "published": "2026-10-27T17:58:57Z",
+      "lang": "en",
+      "url": "https://www.nasa.gov/image-article/nasas-neo-surveyor-sunshade/"
+    }
+  ]
+}

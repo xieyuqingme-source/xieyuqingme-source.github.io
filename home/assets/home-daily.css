@@ -183,3 +183,72 @@
  .yl-earth-actions{flex-wrap:wrap}
 }
 @media(pointer:coarse){.yl-city{min-height:44px}.yl-time-slider{min-height:38px}}
+
+/* News first, a separate historical timeline, then Earth and reading. */
+.today-a .today-intro{align-items:start;margin-bottom:26px}
+.today-a .today-intro h1{margin-bottom:18px}
+.today-dateline{display:flex;align-items:baseline;flex-wrap:wrap;gap:8px 16px;color:var(--muted);font-size:13px;line-height:1.8}
+.today-dateline .yl-cal-top{display:flex;align-items:baseline;justify-content:start;gap:12px}
+.today-dateline .yl-day{font-size:28px;font-weight:400}
+.today-dateline .yl-cal-copy{text-align:left;display:flex;gap:6px 12px;flex-wrap:wrap;align-items:baseline}
+.today-dateline .yl-cal-copy strong{font-size:13px}
+.today-dateline>p:empty{display:none}
+.today-a .yl-today{grid-template-columns:minmax(0,1.9fr) minmax(250px,1fr);gap:32px}
+.today-section-heading{display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:6px 18px;margin-bottom:20px}
+.today-section-heading .brief-panel-heading{margin:0!important}
+.today-section-heading .yl-small{max-width:100%}
+.today-a .yl-calendar{padding-bottom:0;border-bottom:0}
+.today-a .city-picker{padding-top:0;margin-top:0;border-top:0}
+.weather-more{margin-top:16px;color:var(--muted);font-size:13px}
+.weather-more>summary,.news-sources>summary,.history-more>summary,.quote-note>summary{cursor:pointer;width:fit-content;padding-block:5px;text-underline-offset:4px}
+.weather-more>summary:hover,.news-sources>summary:hover,.history-more>summary:hover,.quote-note>summary:hover{color:var(--accent)}
+.today-a .yl-news{counter-reset:today-news}
+.today-a .news-row{counter-increment:today-news;position:relative;padding:18px 0 18px 34px}
+.today-a .news-row:first-child{padding-top:0}
+.today-a .news-row:before{content:counter(today-news,decimal-leading-zero);position:absolute;left:0;top:19px;font-size:14px;font-variant-numeric:tabular-nums;color:var(--muted)}
+.today-a .news-row:first-child:before{top:1px}
+.today-a .news-row:nth-child(-n+2):before{color:var(--accent)}
+.today-a .news-row h3{margin:5px 0 10px;font-size:18px;line-height:1.65}
+.today-a .news-row:nth-child(-n+2) h3{font-size:21px}
+.news-meta{display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 9px;font-size:12px;line-height:1.8;color:var(--muted)}
+.news-meta a{text-decoration:underline;text-underline-offset:3px}
+.news-language{font-size:11px;padding:0 5px;border:1px solid var(--line);border-radius:4px}
+.news-feed-note,.news-empty{font-size:13px;line-height:1.8;color:var(--muted);margin-block:14px!important}
+.news-sources{margin-top:14px;font-size:13px;color:var(--muted)}
+#news-source-links,.news-source-links{display:flex;gap:8px 16px;flex-wrap:wrap;margin-top:8px}
+#news-source-links a,.news-source-links a{text-decoration:underline;text-underline-offset:4px}
+.today-history{margin-top:38px;padding-top:28px;border-top:1px solid var(--line)}
+.history-list{list-style:none;margin:0;padding:0;display:grid;gap:22px}
+.history-item{display:grid;grid-template-columns:76px minmax(0,1fr);gap:18px;position:relative;padding-left:20px;min-width:0}
+.history-item:before{content:"";position:absolute;left:1px;top:9px;width:7px;height:7px;border-radius:50%;background:var(--accent)}
+.history-item:after{content:"";position:absolute;left:4px;top:22px;bottom:-13px;width:1px;background:var(--line)}
+.history-item:last-child:after{display:none}
+.history-year{font-size:21px;font-weight:400;line-height:1.5;color:var(--accent);font-variant-numeric:tabular-nums}
+.history-item h3{font-size:17px;line-height:1.8;font-weight:600;margin-bottom:4px}
+.history-item p{font-size:14px;line-height:1.9}
+.history-item .history-source{font-size:12px;color:var(--muted);margin-top:5px}
+.history-source a{text-decoration:underline;text-underline-offset:3px}
+.history-more{margin-top:22px;font-size:13px;color:var(--muted)}
+.history-more[open]>.history-list{margin-top:18px;color:var(--ink)}
+.history-policy,.history-built-date,.history-date-note{font-size:12px!important;color:var(--muted);line-height:1.8;margin-top:18px!important}
+.today-a>.brief-body>.yl-earth{margin-top:38px;padding-top:28px;border-top:1px solid var(--line)}
+.today-earth-grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:32px;align-items:center}
+.today-earth-grid .yl-globe-wrap{max-width:420px;margin-top:12px}
+.earth-readings{min-width:0}
+.earth-readings .yl-suntime{margin-top:0;border-top:0;padding-top:0}
+.earth-readings .yl-world-clocks{gap:10px 18px;margin-top:18px}
+.today-reading{margin-top:38px;padding-top:28px;border-top:1px solid var(--line)}
+.today-reading .yl-bottomline{margin-top:0}
+.reading-heading{display:flex;align-items:baseline;justify-content:space-between;gap:10px 18px;margin-bottom:14px}
+.reading-heading h3{font-size:17px!important;line-height:1.6;margin:0!important;color:var(--accent)}
+.daily-home .quote-change{flex:none;font-size:12px;line-height:1.5;min-height:30px;padding:4px 3px;color:var(--muted);white-space:nowrap}
+.quote-change:before{content:"↻";font-size:15px;margin-right:4px}
+.daily-home .quote-change:hover{color:var(--accent);text-decoration:underline;text-underline-offset:4px}
+.today-reading .yl-quote,.today-reading #own-quote-text{font:500 18px/1.9 var(--sans)}
+.quote-note{font-size:12px;color:var(--muted);margin-top:12px}
+.quote-note p{font-size:12px!important;line-height:1.8}
+@media(max-width:960px) and (min-width:721px){.today-a .yl-today{grid-template-columns:minmax(0,1.7fr) minmax(240px,1fr);gap:24px}.today-a .yl-sidebar{padding-left:18px}}
+@media(max-width:720px){.today-a .yl-today,.today-earth-grid{grid-template-columns:minmax(0,1fr);gap:26px}.today-a .news-row:nth-child(-n+2) h3{font-size:19px}.today-a .yl-sidebar{padding-top:24px}.today-earth-grid .yl-globe-wrap{max-width:340px}.history-item{grid-template-columns:58px minmax(0,1fr);gap:10px;padding-left:17px}.history-year{font-size:18px}.today-section-heading{margin-bottom:16px}.today-a .today-intro h1{margin-bottom:14px}}
+@media(pointer:coarse){.daily-home .quote-change{min-height:44px;padding-block:10px}.news-sources>summary,.history-more>summary,.weather-more>summary{min-height:44px}}
+
+.history-notes{font-size:12px;color:var(--muted);margin-top:18px}.history-notes>summary{cursor:pointer;padding-block:5px;width:fit-content}.history-notes .history-policy{margin-top:8px!important}

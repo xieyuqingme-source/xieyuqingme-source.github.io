@@ -1,4 +1,4 @@
-/* Manual daily news, a lightweight day card, and page-owned lazy Earth assets. */
+/* Source news snapshots, a local historical calendar, and page-owned Earth assets. */
 (function () {
   'use strict';
   const root = document.querySelector('.daily-home');
@@ -6,8 +6,10 @@
   const glance = root.dataset.briefMode === 'glance';
   const find = id => document.getElementById(id);
   const read = id => { try { return JSON.parse(find(id)?.textContent || 'null'); } catch (_) { return null; } };
-  const brief = glance ? null : read('daily-brief-data'), content = glance ? null : read('daily-content-data');
-  const knowledge = glance ? [] : read('daily-knowledge-data')?.items || [], memes = glance ? [] : read('daily-memes-data')?.items || [];
+  const brief = glance ? null : read('daily-brief-data');
+  const snapshot = glance ? null : read('news-snapshot-data');
+  const newsSources = glance ? [] : read('news-sources-data')?.sources || [];
+  const historical = glance ? null : read('daily-history-data');
   const rules = glance ? [] : read('daily-rules-data')?.weather || [], holidays = glance ? {} : read('daily-holidays-data')?.years || {};
   const astro = window.HomeAstronomy, cityModel = astro.cityModel, cities = cityModel.presets;
   const lang = () => (window.SiteI18n?.lang?.() || document.documentElement.lang || 'zh-CN').startsWith('en') ? 'en' : 'zh-CN';
@@ -16,7 +18,7 @@
   const categories = {domestic: ['时政','Politics'],world: ['国际','World'],economy: ['经济','Economy'],science: ['科技','Science'],culture: ['文化','Culture']};
   const order = Object.keys(categories);
   try { window.localStorage.removeItem('xieyuqing-brief-closed'); } catch (_) {}
-  let lastDay = '', lastLanguage = '', disposed = false, city = cities.beijing, assetsReady = !glance, lunarAttempted = false;
+  let feedVersion = '', lastDay = '', lastLanguage = '', disposed = false, city = cities.beijing, assetsReady = !glance, lunarAttempted = false;
   let weather = null, weatherRequest = null, weatherTicket = 0, earth = null, earthVisible = false, earthLoading = false;
   let festivalCache = null, searchRequest = null, searchTicket = 0, searchResults = [];
   const cleanup = [], pending = new Map();
@@ -37,7 +39,7 @@
   function node(tag, className, value) { const result = document.createElement(tag); if (className) result.className = className; if (value !== undefined) result.textContent = value; return result; }
   function link(url, value) {
     const result = node('a', '', value);
-    if (/^https:\/\//.test(url || '') || /^\/(?:en\/)?articles\//.test(url || '')) result.href = url;
+    if (/^https:\/\//.test(url || '') || (/^\/(?:en\/)?articles\//.test(url || '') || /^\/assets\/(?:history|quotes)-sources\.md$/.test(url || ''))) result.href = url;
     if (/^https:\/\//.test(url || '')) { result.target = '_blank'; result.rel = 'noopener noreferrer'; }
     return result;
   }
@@ -55,7 +57,7 @@
     result.append(document.createTextNode(' · '), link(item.url, word('阅读原文 ↗','Read source ↗')));
     return result;
   }
-  function renderFeed(date) {
+  function renderLegacyFeed(date) {
     if (glance || !brief?.items?.length || !find('daily-feed')) return;
     const age = dayIndex(date) - Math.floor(Date.parse(brief.edition_date + 'T00:00:00Z') / 86400000), stale = age > 3;
     root.classList.toggle('brief-news-stale', stale);
@@ -81,34 +83,65 @@
     });
     find('daily-feed').replaceChildren(fragment);
   }
-  function renderDaily(date) {
+  function renderFeed(date) {
     if (glance) return;
-    const index = dayIndex(date), pick = list => list?.length ? list[((index % list.length) + list.length) % list.length] : null;
-    const quote = pick(content?.quotes);
-    if (quote) {
-      write('daily-quote',text(quote.text));
-      const credit = find('daily-quote-source');
-      if (credit) { credit.replaceChildren(document.createTextNode(text(quote.author) + ' · '),link(quote.url,text(quote.work) + ' ↗')); credit.title = text(quote.translation_note); }
+    if (!snapshot) { renderLegacyFeed(date); return; }
+    const feed = find('daily-feed'); if (!feed) return;
+    const now = date.getTime(), maximumAge = 72 * 3600000;
+    const entries = (Array.isArray(snapshot.items) ? snapshot.items : []).filter(item => {
+      const published = Date.parse(item.published);
+      return Number.isFinite(published) && published <= now + 300000 && now - published <= maximumAge && /^https:\/\//.test(item.url || '');
+    }).slice(0,8);
+    const version = JSON.stringify([lang(),snapshot.collected_at,entries]);
+    if (version === feedVersion) return; feedVersion = version;
+    write('daily-news-title',word('重点新闻','News to know'));
+    const collected = Date.parse(snapshot.collected_at || '');
+    const formatter = new Intl.DateTimeFormat(lang() === 'en' ? 'en-GB' : 'zh-CN',{timeZone:'Asia/Shanghai',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',hour12:false});
+    write('daily-edition',Number.isFinite(collected) ? word('最近检查：','Last checked: ') + formatter.format(new Date(collected)) + word(' · 北京时间',' · Beijing time') : word('等待首次自动更新','Awaiting the first automatic update'));
+    const notice = find('daily-brief-notice');
+    if (notice) { notice.hidden = false; notice.textContent = word('依据来源媒体选题与预设规则汇集；标题保留原文语言。原文时间与本站检查时间分别标明。','Gathered using source newsroom selections and preset rules. Headlines retain their original language; publication and check times are shown separately.'); }
+    root.classList.toggle('brief-news-stale',!entries.length);
+    const fragment = document.createDocumentFragment();
+    for (const item of entries) {
+      const article = node('article','news-row'), label = node('div','news-category',categories[item.category]?.[lang() === 'en' ? 1 : 0] || '');
+      const heading = node('h3'), headline = link(item.url,item.title); headline.lang = item.lang || ''; heading.append(headline);
+      const meta = node('div','news-meta'), published = node('time','',formatter.format(new Date(item.published))); published.dateTime = item.published;
+      meta.append(node('span','',item.source),published,node('span','news-language',(item.lang || '').toLowerCase().startsWith('zh') ? word('中文','Chinese') : word('英文','English')),link(item.url,word('阅读原文 ↗','Read source ↗')));
+      article.append(label,heading,meta); fragment.append(article);
     }
-    const term = astro?.term(date,false), stamp = dayStamp(date).slice(5);
-    const concept = knowledge.find(item => item.trigger?.date === stamp) || knowledge.find(item => item.trigger?.solar_term === term) || pick(knowledge);
-    if (concept) {
-      write('daily-concept-title',text(concept.title)); write('daily-concept-text',text(concept.text));
-      const credit = find('daily-concept-source'); if (credit) { credit.href = concept.url; credit.textContent = concept.source + ' ↗'; }
-    }
-    const meme = [...memes].sort((a,b) => b.added.localeCompare(a.added))[0], card = find('daily-meme-card');
-    if (card) card.hidden = !meme;
-    find('brief-bottom')?.classList.toggle('has-meme',!!meme);
-    if (meme) {
-      write('daily-street-title',text(meme.term)); write('daily-street-text',text(meme.meaning));
-      write('daily-meme-added',lang() === 'en' ? 'Added ' + monthDay(new Date(meme.added + 'T04:00:00Z')) : monthDay(new Date(meme.added + 'T04:00:00Z')) + '收录');
-      for (const [id,key,label] of [['daily-meme-origin','origin',word('出处','Origin')],['daily-meme-example','example',word('例句','Example')],['daily-meme-why','why_popular',word('为什么火','Why popular')]]) {
-        const target = find(id), value = text(meme[key]); if (target) { target.hidden = !value; target.textContent = value ? label + '：' + value : ''; }
+    if (!entries.length) fragment.append(node('p','news-empty',word('暂无符合时效的新条目。可以从下方新闻源入口继续阅读。','No current entries are available. Continue through the news source links below.')));
+    feed.replaceChildren(fragment);
+    const sources = find('news-source-links');
+    if (sources) sources.replaceChildren(...newsSources.filter(item => /^https:\/\//.test(item.home_url || '')).map(item => link(item.home_url,item.name)));
+  }
+  function renderDaily(date) {
+    if (glance || !historical || !find('daily-history-list')) return;
+    const stamp = dayStamp(date).slice(5), items = (historical.items || []).filter(item => item.month_day === stamp);
+    const container = find('daily-history-list'), fragment = document.createDocumentFragment();
+    const dated = node('p','history-built-date',word('北京时间 · ','Beijing date · ') + dayStamp(date)); dated.dataset.historyDate = dayStamp(date); fragment.append(dated);
+    const list = rows => {
+      const ol = node('ol','history-list');
+      for (const item of rows) {
+        const li = node('li','history-item'), body = node('div'), heading = node('h3');
+        heading.append(link(item.url,text(item.title))); body.append(heading);
+        if (text(item.text)) body.append(node('p','',text(item.text)));
+        const source = node('p','history-source'); source.append(link(item.url,item.source + ' ↗'));
+        const host = /^https:\/\/([a-z]+\.wikipedia\.org)\//.exec(item.source_page || '')?.[1];
+        if (host && Number.isSafeInteger(item.source_revision)) source.append(document.createTextNode(' · '),link('https://' + host + '/wiki/Special:PermanentLink/' + item.source_revision,word('日期出处 ↗','Date source ↗')));
+        body.append(source);
+        li.append(node('span','history-year',String(item.year)),body); ol.append(li);
       }
-      const links = [link(meme.url,text(meme.source) + ' ↗')];
-      if (meme.related_url) links.push(link(lang() === 'en' ? meme.related_url.replace(/^\/articles\/[^/]+\//,'/en/articles/') : meme.related_url,text(meme.related_label) + ' ↗'));
-      find('daily-street-links')?.replaceChildren(...links);
-    }
+      return ol;
+    };
+    if (items.length) {
+      fragment.append(list(items.slice(0,3)));
+      if (items.length > 3) { const details = node('details','history-more'); details.append(node('summary','',word('更多这一天的历史','More events on this day')),list(items.slice(3))); fragment.append(details); }
+    } else fragment.append(node('p','yl-note',word('这一天暂未收录资料。','No entries have been included for this date.')));
+    const notes = node('details','history-notes'); notes.append(node('summary','',word('资料说明 · 自动整理与译编','About this collection · compiled and adapted')),node('p','history-policy',text(historical.selection_policy)));
+    const attribution = node('p','history-policy',text(historical.attribution) + ' ');
+    attribution.append(link('https://creativecommons.org/licenses/by-sa/4.0/','CC BY-SA 4.0'),document.createTextNode(' · '),link('/assets/history-sources.md',word('完整来源说明','Full source notes')));
+    fragment.append(notes,attribution); container.replaceChildren(fragment);
+    write('history-date-note',word('资料日期：','Calendar date: ') + dayStamp(date) + word(' · 按北京时间轮换',' · Changes at midnight in Beijing'));
   }
   const conditionCodes = {};
   function conditions(codes,zh,en,hintZh,hintEn,wet = false) {
@@ -181,7 +214,7 @@
   }
   function renderCalendar(date) {
     if (disposed) return;
-    const zone = glance ? 'Asia/Shanghai' : city.tz;
+    const zone = 'Asia/Shanghai';
     const local = parts(date,zone), beijing = parts(date), english = lang() === 'en';
     const weekday = new Intl.DateTimeFormat(english ? 'en-GB' : 'zh-CN',{timeZone:zone,weekday:'long'}).format(date);
     if (glance) {
@@ -350,9 +383,10 @@
     if (disposed) return;
     const date = new Date(), currentDay = String(dayIndex(date)), currentLanguage = lang();
     if (force || lastDay !== currentDay || lastLanguage !== currentLanguage) {
-      if (!glance) { renderDaily(date); renderFeed(date); renderCityChoices(); renderSearchResults(); renderWeather(); write('timeline-date',dayStamp(date)); }
+      if (!glance) { renderDaily(date); renderCityChoices(); renderSearchResults(); renderWeather(); write('timeline-date',dayStamp(date)); }
       renderCalendar(date); lastDay = currentDay; lastLanguage = currentLanguage;
     } else renderCalendar(date);
+    if (!glance) renderFeed(date);
   }
   if (!glance) {
     listen(find('daily-city'),'change',() => { const value = find('daily-city').value; if (cities[value]) selectCity(cities[value]); });

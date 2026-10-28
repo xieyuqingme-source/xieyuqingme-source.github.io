@@ -24,6 +24,8 @@ from build_site import (site_root, default_root, check_site, Elements, load_proj
 from daily_brief import (load_daily, load_brief_extras, validate_brief, validate_content,
                          validate_knowledge, validate_memes, validate_rules, validate_holidays,
                          render_brief, render_brief_bottom, safe_json, sorted_brief_items)
+from news_snapshot import load_snapshot, load_sources, timestamp, visible_items
+from history_today import load_history, history_items
 
 
 class UnifiedPublicationTests(unittest.TestCase):
@@ -491,7 +493,11 @@ class DailyHomepageTests(unittest.TestCase):
         self.assertIs(validate_memes(empty), empty)
         extras = {**self.extras, "memes": empty}
         html = render_brief_bottom(self.content, extras)
-        self.assertEqual(sum(tag == "article" for tag, _ in Elements(html).elements), 2)
+        self.assertEqual(sum(tag == "article" for tag, _ in Elements(html).elements), 1)
+        self.assertIn('id="daily-quotation-card"', html)
+        self.assertIn('id="daily-quote-button"', html)
+        self.assertIn('class="quote-note"', html)
+        self.assertNotIn('id="daily-concept-title"', html)
         self.assertNotIn('id="daily-meme-card"', html)
         for optional in ("origin", "example", "why_popular"):
             data = deepcopy(self.extras["memes"])
@@ -542,7 +548,7 @@ class DailyHomepageTests(unittest.TestCase):
             with self.assertRaises(ValueError):
                 load_daily(root, build_site.linked_directory)
 
-    def test_normal_daily_update_accepts_a_new_edition_meme_and_knowledge(self):
+    def test_archived_daily_update_keeps_new_edition_meme_and_knowledge_valid(self):
         with TemporaryDirectory(prefix="brief-update-regression-", dir=ROOT) as temporary:
             root = Path(temporary)
             shutil.copytree(ROOT / "home/brief", root / "home/brief")
@@ -569,13 +575,18 @@ class DailyHomepageTests(unittest.TestCase):
             selected, content = load_daily(root, build_site.linked_directory)
             extras = load_brief_extras(root, build_site.linked_directory)
             self.assertEqual(selected["edition_date"], next_day)
+            self.assertIn("synthetic-update-" + next_day, {item["id"] for item in extras["knowledge"]["items"]})
+            latest_meme = next(item for item in extras["memes"]["items"] if item["id"] == "synthetic-update-" + next_day)
+            self.assertEqual(latest_meme["term"], {"zh-CN": "合成更新测试", "en": "Synthetic update regression"})
             for language in ("zh-CN", "en"):
                 news = render_brief(selected, language)
                 self.assertEqual(sum(tag == "article" for tag, _ in Elements(news).elements), len(latest["items"]))
                 for item in selected["items"]:
                     self.assertIn(escape(item["title"][language]), news)
                 cards = render_brief_bottom(content, extras, language)
-                self.assertIn("合成更新测试" if language == "zh-CN" else "Synthetic update regression", cards)
+                self.assertIn('id="daily-quotation-card"', cards)
+                self.assertNotIn('id="daily-meme-card"', cards)
+                self.assertNotIn('id="daily-concept-title"', cards)
 
     def test_sources_dates_and_schema_are_validated_before_publication(self):
         for url in ("http://example.com/news", "https://localhost/news", "https://127.0.0.1/news",
@@ -601,8 +612,9 @@ class DailyHomepageTests(unittest.TestCase):
         self.assertEqual(json.loads(text)["example"], "</script><script>alert(1)</script>&\u2028")
         validate_content(self.content)
         for item in self.content["quotes"]:
-            self.assertTrue(item["url"].startswith("https://ctext.org/"))
-            self.assertIn("site's translation", item["translation_note"]["en"])
+            self.assertTrue(item["url"].startswith("https://"))
+            for field in ("author", "work", "translation_note"):
+                self.assertTrue(all(item[field][language].strip() for language in ("zh-CN", "en")))
 
     def test_homepage_picks_and_quotes_resolve_to_published_articles(self):
         from build_blog import Blog
@@ -622,9 +634,13 @@ class DailyHomepageTests(unittest.TestCase):
             self.assertIn('id="daily-own-quote-card"', quote_card)
             self.assertIn('id="own-quote-text"', quote_card)
             self.assertIn('id="own-quote-source"', quote_card)
-            self.assertEqual(sum(tag == "h2" for tag, _ in Elements(quote_card).elements), 1)
+            self.assertEqual(sum(tag == "h3" for tag, _ in Elements(quote_card).elements), 1)
+            self.assertIn('id="own-quote-button"', quote_card)
             cards = render_brief_bottom(self.content, self.extras, language, own_quote=quote_card)
             self.assertIn(quote_card, cards)
+            self.assertEqual(sum(tag == "article" for tag, _ in Elements(cards).elements), 2)
+            self.assertIn('id="daily-quote-button"', cards)
+            self.assertNotIn('id="daily-meme-card"', cards)
             self.assertNotIn('class="home-quote"', cards)
 
     def test_recent_writing_uses_original_dates_and_direct_available_language_links(self):
@@ -712,7 +728,7 @@ class ProjectPublicationTests(unittest.TestCase):
         with TemporaryDirectory(prefix="yuliao-site-projects-", dir=ROOT) as temporary:
             root = Path(temporary)
             shutil.copytree(ROOT / "home", root / "home")
-            # Static meme cards now expose their related link without JavaScript.
+            # Keep legacy public extras tied to this fixture's synthetic article.
             memes = root / "home/brief/memes.json"
             public = json.loads(memes.read_text(encoding="utf-8"))
             for item in public["items"]:
@@ -722,7 +738,12 @@ class ProjectPublicationTests(unittest.TestCase):
             shutil.copytree(ROOT / "map", root / "map")
             shutil.copytree(ROOT / "anthology", root / "anthology")
             output = root / "_site_unified"
+            snapshot = load_snapshot(root)
+            sources = load_sources(root)
+            public_sources = {"sources": [{"name": source["name"], "home_url": source["home_url"]} for source in sources["sources"]]}
+            news_now = timestamp(snapshot["collected_at"])
             with patch.object(build_site, "ROOT", root), patch.object(build_site, "OUTPUT", output), \
+                 patch("news_snapshot._now", return_value=news_now), \
                  patch.object(build_site, "Blog", side_effect=self.fake_blog):
                 report = publish_site("https://xieyuqing.me")
                 self.assertEqual((report["articles"], report["projects"]), (1, 5))
@@ -790,16 +811,32 @@ class ProjectPublicationTests(unittest.TestCase):
                 self.assertNotIn('id="now"', home)
                 self.assertNotIn("选读样刊", home)
                 expected_brief, expected_content = load_daily(root, build_site.linked_directory)
-                first = sorted_brief_items(expected_brief)[0]
-                self.assertIn('datetime="' + first["published"] + '"', today)
+                expected_history = load_history(root, build_site.linked_directory)
                 self.assertNotIn('id="daily-feed"', home)
                 for language, page in (("zh-CN", today), ("en", english_today)):
                     self.assertIn('data-brief-mode="full"', page)
-                    for item in expected_brief["items"]:
-                        for field in ("title", "summary", "source"):
-                            self.assertIn(escape(item[field][language]), page)
-                        self.assertIn(item["url"], page)
-                        self.assertIn(item["published"], page)
+                    feed = re.search(r'<div id="daily-feed"[^>]*>(.*?)</div>', page, re.S)[1]
+                    feed_links = {attrs.get("href") for tag, attrs in Elements(feed).elements if tag == "a"}
+                    for item in visible_items(snapshot, sources, news_now):
+                        self.assertIn(escape(item["title"]), feed)
+                        self.assertIn(escape(item["source"]), feed)
+                        self.assertIn(item["url"], feed_links)
+                        self.assertIn('lang="' + item["lang"] + '"', feed)
+                    for element_id, expected in (("news-snapshot-data", snapshot), ("news-sources-data", public_sources),
+                                                 ("daily-history-data", expected_history), ("daily-content-data", expected_content)):
+                        data = re.search(r'<script id="' + element_id + r'"[^>]*>(.*?)</script>', page, re.S)[1]
+                        self.assertEqual(json.loads(data), expected)
+                    self.assertIn('id="today-history"', page)
+                    history = re.search(r'<div id="daily-history-list">(.*?)</div><p', page, re.S)[1]
+                    day = re.search(r'data-history-date="(\d{4}-\d{2}-\d{2})"', history)[1]
+                    for item in history_items(expected_history, day[5:])[:3]:
+                        self.assertIn(escape(item["title"][language]), history)
+                    self.assertNotIn('id="daily-brief-data"', page)
+                    self.assertNotIn('id="daily-meme-card"', page)
+                    self.assertNotIn('id="daily-concept-title"', page)
+                    self.assertIn('id="daily-quotation-card"', page)
+                    self.assertIn('/assets/daily-reading.js', page)
+                    self.assertNotIn('/assets/home-now.js', page)
                     bootstrap = json.loads(re.search(r'<script id="site-i18n-data" type="application/json">(.*?)</script>', page, re.S)[1])
                     self.assertEqual(bootstrap["page"]["titles"], build_site.TODAY_TITLES)
                     self.assertEqual(bootstrap["page"]["descriptions"], build_site.TODAY_DESCRIPTIONS)
@@ -835,7 +872,7 @@ class ProjectPublicationTests(unittest.TestCase):
         with TemporaryDirectory(prefix="yuliao-site-cache-", dir=ROOT) as temporary:
             root = Path(temporary)
             shutil.copytree(ROOT / "home", root / "home")
-            # Static meme cards now expose their related link without JavaScript.
+            # Keep legacy public extras tied to this fixture's synthetic article.
             memes = root / "home/brief/memes.json"
             public = json.loads(memes.read_text(encoding="utf-8"))
             for item in public["items"]:

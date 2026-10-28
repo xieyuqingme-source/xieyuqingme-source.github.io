@@ -4,7 +4,7 @@ from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import unquote, urlsplit, urlunsplit
 from xml.etree import ElementTree as ET
-from datetime import date
+from datetime import date, datetime
 import argparse
 import json
 import ipaddress
@@ -18,8 +18,10 @@ from photo_pages import build_photos, validate_catalog as validate_photo_catalog
 from map_pages import load_map, build_map
 from anthology_pages import load_anthology, load_glossary, build_anthology
 from site_i18n import localize_page, localized_path, load_catalogues, check_site_languages
+from news_snapshot import load_sources, load_snapshot, render_snapshot
+from history_today import load_history, render_history
 from daily_brief import (load_daily, load_brief_extras, safe_json, render_brief, render_brief_bottom,
-                         sorted_brief_items, BRIEF_NOTICE)
+                         sorted_brief_items, BRIEF_NOTICE, CHINA)
 
 OUTPUT = ROOT / "_site_unified"
 GAME_PAGES = (("game.template.html", "game"), ("ranking.template.html", "game/ranking"))
@@ -45,15 +47,15 @@ PROJECT_FIELDS = {"id", "title", "english_title", "kind", "summary", "problem", 
 PROJECT_OPTIONAL_FIELDS = {"download_url", "download_label", "guide_label", "link_status", "demo_url"}
 PROJECT_DEMO_ROUTES = {"/map/", "/game/ranking/"}
 BRAND_ASSETS = ("share-cover.png", "favicon.svg", "favicon.ico", "favicon.png")
-HOME_DAILY_ASSETS = ("home-daily.css", "home-daily.js", "home-now.js", "home-earth.js", "astronomy-solar.js", "home-ink.webp",
+HOME_DAILY_ASSETS = ("home-daily.css", "home-daily.js", "home-now.js", "daily-reading.js", "home-earth.js", "astronomy-solar.js", "home-ink.webp",
                      "vendor/d3-7.9.0.min.js", "vendor/D3-LICENSE",
                      "vendor/lunar-javascript-1.7.7.js", "vendor/lunar-javascript-1.7.7.LICENSE")
 HOME_PHOTO = "/photos/images/p-71f77ab6511ec1ce656a58a3-18000666287e1d55-640.webp"
 HOME_PICKS = "home/home-picks.json"
 TODAY_TITLES = {"zh-CN": "历史中的今天 · 谢雨卿", "en": "Today in history · Xie Yuqing"}
 TODAY_DESCRIPTIONS = {
-    "zh-CN": "新闻选读，配上日历、节气、天气和此刻的地球。",
-    "en": "Selected news, with the calendar, solar terms, weather and the Earth right now.",
+    "zh-CN": "重点新闻、历史上的今天、天气、此刻地球与每日语录。",
+    "en": "Source headlines, historical anniversaries, weather, Earth and daily quotations.",
 }
 ABOUT_FIELDS = {"name", "english_name", "chinese_bio", "english_bio", "chinese_colophon", "english_colophon",
                 "written_note", "english_written_note", "wechat", "email"}
@@ -193,7 +195,7 @@ def render_site_notes(waline, repository, language="zh-CN"):
     database = escape(waline.get("databaseProvider", ""))
     if language == "en":
         items = ['Pages are generated with Python and use system fonts only, with no external font files.',
-                 'The Today in history page: the calendar, weather and globe are calculated live; news is selected by hand, marked with its update date, and paused when it goes out of date. The homepage shows only the date, solar term and a small globe.',
+                 'The Today in history page: the calendar, weather and globe are calculated live; news is gathered using source newsroom selections and preset rules, with original publication times and links; historical events rotate from a local date collection. The homepage shows only the date, solar term and a small globe.',
                  'Weather on the Today in history page comes from Open-Meteo. City searches send the name you enter to its geocoding service; your location is never requested. The chosen city and the latest reading stay in your browser. The homepage makes no weather request.',
                  'Article view counts and comments use Waline. These requests send your IP address and browser information to the Waline backend and its providers'
                  + (f' (hosting: {host}; database: {database})' if host and database else '') + '. The comment area explains what is shown publicly.',
@@ -201,7 +203,7 @@ def render_site_notes(waline, repository, language="zh-CN"):
         title = "About this site"
     else:
         items = ['页面用 Python 生成。全站使用设备自带的字体，不加载外部字体文件。',
-                 '「历史中的今天」页：日历、天气和地球是实时计算的；新闻由人工挑选，标明更新日期，过期会暂停显示。首页只放日期、节气和一个小地球。',
+                 '「历史中的今天」页：日历、天气和地球是实时计算的；新闻按来源媒体选题和预设规则自动汇集，保留原文时间与链接；历史事件从本地日期资料库轮换。首页只放日期、节气和一个小地球。',
                  '历史中的今天页的天气来自 Open-Meteo；搜索城市时会向其地名服务发送输入的城市名，不读取你的位置；所选城市和最近一次天气只保存在你的浏览器里。首页不请求天气。',
                  '文章的浏览量和留言由 Waline 提供：相关请求会把 IP 和浏览器信息发送给 Waline 后端及其托管商'
                  + (f'（服务托管：{host}；数据库：{database}）' if host and database else '') + '。留言区另有说明。',
@@ -467,7 +469,7 @@ def home_quote_items(blog, quotes):
 
 
 def render_home_quote(item, language="zh-CN"):
-    """No-script default; home-now.js picks the day's quote in Kuala Lumpur time."""
+    """No-script default; live reading rotation follows Beijing time."""
     title = item["title"][language]
     label = title if language == "en" else "《" + title + "》"
     stamp = escape(item["date"].replace("-", ".")) if item["date"] else ""
@@ -480,10 +482,11 @@ def render_home_quote(item, language="zh-CN"):
 def render_quote_section(items, language="zh-CN"):
     if not items:
         return ""
-    item = items[(date.today() - date(1970, 1, 1)).days % len(items)]
+    item = items[(datetime.now(CHINA).date() - date(1970, 1, 1)).days % len(items)]
     text, source = render_home_quote(item, language)
     title = "A line from my essays" if language == "en" else "旧文一句"
-    return (f'<article class="yl-daily-card" id="daily-own-quote-card" aria-labelledby="quote-title"><h2 id="quote-title">{title}</h2>'
+    another = "Another quote" if language == "en" else "换一句"
+    return (f'<article class="yl-daily-card" id="daily-own-quote-card" aria-labelledby="quote-title"><div class="reading-heading"><h3 id="quote-title">{title}</h3><button class="quote-change" id="own-quote-button" type="button" aria-label="{another} · {title}" hidden>{another}</button></div>'
             f'<blockquote id="own-quote"><p id="own-quote-text">{text}</p><p class="quote-source" id="own-quote-source">{source}</p></blockquote></article>')
 
 
@@ -519,6 +522,12 @@ def copy_daily_assets(sources, brief, content, extras):
         destination = folder / name
         if linked_directory(destination) or (destination.exists() and not destination.is_file()):
             raise ValueError("Generated daily homepage assets must be regular files.")
+        shutil.copy2(source, destination)
+    for name in ("history-sources.md", "quotes-sources.md"):
+        source = ROOT / "home/brief" / name
+        destination = folder / name
+        if linked_directory(source) or linked_directory(destination) or not source.is_file():
+            raise ValueError("Reading source notes must be regular public files.")
         shutil.copy2(source, destination)
     datasets = [("daily-brief.json", brief), ("daily-content.json", content)]
     datasets += [("brief-" + key + ".json", value) for key, value in extras.items()]
@@ -730,6 +739,10 @@ def build_site(address, map_preview_source=None):
     daily_sources = daily_asset_sources()
     # Every template's complete photo set must pass before any output is generated.
     photo_sets = (("foods", "food", game_food_sources()), ("sports", "sport", game_sport_sources()))
+    news_sources = load_sources(ROOT)
+    news_snapshot = load_snapshot(ROOT)
+    history_data = load_history(ROOT, linked_directory)
+    brief_extras["history"] = history_data
     project_sources = project_asset_sources(projects)
     map_data = load_map(ROOT, map_preview_source)
     anthology_works = load_anthology(ROOT)  # Validate reviewed content before writing outputs.
@@ -762,6 +775,16 @@ def build_site(address, map_preview_source=None):
               "photo_total": str(photo_report["photos"])}
     has_home_photo = (ROOT / HOME_PHOTO.lstrip("/")).is_file()
     values.update({
+        "news_snapshot_data": safe_json(news_snapshot),
+        "news_sources_data": safe_json({"sources": [{"name": item["name"], "home_url": item["home_url"]} for item in news_sources["sources"]]}),
+        "news_snapshot_feed": render_snapshot(news_snapshot, "zh-CN", news_sources, include_sources=False, include_stamp=False),
+        "news_snapshot_feed_en": render_snapshot(news_snapshot, "en", news_sources, include_sources=False, include_stamp=False),
+        "news_checked_label": escape("最近检查：" + datetime.fromisoformat(news_snapshot["collected_at"].replace("Z", "+00:00")).astimezone(CHINA).strftime("%Y-%m-%d %H:%M · 北京时间") if news_snapshot["collected_at"] else "等待首次自动更新"),
+        "news_checked_label_en": escape("Last checked: " + datetime.fromisoformat(news_snapshot["collected_at"].replace("Z", "+00:00")).astimezone(CHINA).strftime("%Y-%m-%d %H:%M · Beijing time") if news_snapshot["collected_at"] else "Awaiting the first automatic update"),
+        "news_source_links": " ".join('<a href="' + escape(item["home_url"], quote=True) + '" target="_blank" rel="noopener noreferrer">' + escape(item["name"]) + '</a>' for item in news_sources["sources"]),
+        "news_source_links_en": " ".join('<a href="' + escape(item["home_url"], quote=True) + '" target="_blank" rel="noopener noreferrer">' + escape(item["name"]) + '</a>' for item in news_sources["sources"]),
+        "history_data": safe_json(history_data),
+        "history_today": render_history(history_data), "history_today_en": render_history(history_data, "en"),
         "daily_brief_data": safe_json(brief_data), "daily_content_data": safe_json(daily_content),
         "brief_knowledge_data": safe_json(brief_extras["knowledge"]), "brief_memes_data": safe_json(brief_extras["memes"]),
         "brief_rules_data": safe_json(brief_extras["rules"]), "brief_holidays_data": safe_json(brief_extras["holidays"]),

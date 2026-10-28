@@ -1,0 +1,64 @@
+{
+  "version": 1,
+  "max_items": 8,
+  "max_per_source": 2,
+  "max_per_publisher": 2,
+  "max_age_hours": 72,
+  "sources": [
+    {
+      "id": "chinanews-china",
+      "publisher": "chinanews",
+      "name": "中国新闻网",
+      "category": "domestic",
+      "lang": "zh-CN",
+      "feed_url": "https://www.chinanews.com.cn/rss/china.xml",
+      "home_url": "https://www.chinanews.com.cn/china.shtml",
+      "docs_url": "https://www.chinanews.com.cn/rss/",
+      "article_hosts": ["www.chinanews.com.cn"]
+    },
+    {
+      "id": "bbc-world",
+      "publisher": "bbc",
+      "name": "BBC News",
+      "category": "world",
+      "lang": "en",
+      "feed_url": "https://feeds.bbci.co.uk/news/world/rss.xml",
+      "home_url": "https://www.bbc.com/news/world",
+      "docs_url": "https://support.bbc.co.uk/platform/feeds/NewsFeeds.htm",
+      "article_hosts": ["www.bbc.co.uk", "www.bbc.com", "bbc.co.uk", "bbc.com"]
+    },
+    {
+      "id": "un-news-zh",
+      "publisher": "un",
+      "name": "联合国新闻",
+      "category": "world",
+      "lang": "zh-CN",
+      "feed_url": "https://news.un.org/feed/subscribe/zh/news/all/rss.xml",
+      "home_url": "https://news.un.org/zh/",
+      "docs_url": "https://news.un.org/zh/rss-feeds",
+      "article_hosts": ["news.un.org"]
+    },
+    {
+      "id": "guardian-business",
+      "publisher": "guardian",
+      "name": "The Guardian",
+      "category": "economy",
+      "lang": "en",
+      "feed_url": "https://www.theguardian.com/business/rss",
+      "home_url": "https://www.theguardian.com/business",
+      "docs_url": "https://www.theguardian.com/help/feeds",
+      "article_hosts": ["www.theguardian.com"]
+    },
+    {
+      "id": "nasa-releases",
+      "publisher": "nasa",
+      "name": "NASA",
+      "category": "science",
+      "lang": "en",
+      "feed_url": "https://www.nasa.gov/news-release/feed/",
+      "home_url": "https://www.nasa.gov/news/all-news/",
+      "docs_url": "https://www.nasa.gov/rss-feeds/",
+      "article_hosts": ["www.nasa.gov", "science.nasa.gov"]
+    }
+  ]
+}

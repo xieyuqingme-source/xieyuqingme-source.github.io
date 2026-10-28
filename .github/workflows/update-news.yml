@@ -1,0 +1,40 @@
+name: Update news snapshot
+
+on:
+  schedule:
+    # Beijing 08:20, 14:20 and 20:20. The schedule can be delayed by GitHub.
+    - cron: '20 0,6,12 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: news-snapshot
+  cancel-in-progress: false
+
+jobs:
+  collect:
+    if: github.repository == 'xieyuqingme-source/xieyuqingme-source.github.io' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    permissions:
+      contents: write
+    steps:
+      - name: Read trusted main branch
+        uses: actions/checkout@v7
+        with:
+          ref: main
+          persist-credentials: false
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+      - name: Check collection, validation and failure isolation
+        run: python scripts/test_news_snapshot.py
+      - name: Collect original-source headlines
+        run: python scripts/news_snapshot.py collect --output "$RUNNER_TEMP/news-snapshot.json"
+      - name: Store a new validated snapshot before pruning old data
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python scripts/news_snapshot.py publish --input "$RUNNER_TEMP/news-snapshot.json"

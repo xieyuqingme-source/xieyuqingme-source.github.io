@@ -187,7 +187,7 @@ def appearance_bootstrap():
 def version_shared_assets(page, root):
     """Refresh shared UI after local/production updates without flushing user data."""
     import hashlib
-    sources = {name: Path(root) / 'home/assets' / name for name in ['site-themes.css', 'portal.css', 'portfolio.css', 'photos.css', 'anthology.css', 'anthology-selection.css', 'game.css', 'ranking-skins.css', 'site-nav.css', 'site-music.css', 'portal.js', 'site-navigation.js', 'site-music.js', 'home-daily.css', 'home-daily.js', 'home-now.js', 'home-earth.js', 'astronomy-solar.js']}
+    sources = {name: Path(root) / 'home/assets' / name for name in ['site-themes.css', 'portal.css', 'portfolio.css', 'photos.css', 'anthology.css', 'anthology-selection.css', 'game.css', 'ranking-skins.css', 'site-nav.css', 'site-music.css', 'portal.js', 'site-navigation.js', 'site-music.js', 'home-daily.css', 'home-daily.js', 'home-now.js', 'daily-reading.js', 'home-earth.js', 'astronomy-solar.js']}
     sources['style.css'] = Path(root) / 'blog/style.css'
     for name in ('d3-7.9.0.min.js', 'lunar-javascript-1.7.7.js'):
         sources[name] = Path(root) / 'home/assets/vendor' / name
@@ -198,7 +198,7 @@ def version_shared_assets(page, root):
         if source.is_symlink():
             raise ValueError('Shared UI assets cannot be symlinks.')
         return match.group(1) + route + '?v=' + hashlib.sha256(source.read_bytes()).hexdigest()[:12] + match.group(3)
-    return re.sub(r'((?:src|href)=["\'])(/(?:(?:articles/)?assets)/(?:site-themes|portal|portfolio|photos|anthology|anthology-selection|game|ranking-skins|site-nav|site-music|site-navigation|home-daily|home-now|home-earth|astronomy-solar|style|vendor/(?:d3-7\.9\.0\.min|lunar-javascript-1\.7\.7))\.(?:css|js))(?:\?[^"\']*)?(["\'])', version, page)
+    return re.sub(r'((?:src|href)=["\'])(/(?:(?:articles/)?assets)/(?:site-themes|portal|portfolio|photos|anthology|anthology-selection|game|ranking-skins|site-nav|site-music|site-navigation|home-daily|home-now|daily-reading|home-earth|astronomy-solar|style|vendor/(?:d3-7\.9\.0\.min|lunar-javascript-1\.7\.7))\.(?:css|js))(?:\?[^"\']*)?(["\'])', version, page)
 
 
 NAV_GROUPS = (('/articles/', 'articles', [('/articles/', 'myArticles'), ('/anthology/', 'classics')], ['/articles/', '/anthology/']),

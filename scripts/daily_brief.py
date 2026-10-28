@@ -333,37 +333,14 @@ def render_brief(data, language="zh-CN"):
 
 
 def render_brief_bottom(content, extras, language="zh-CN", today=None, own_quote=""):
-    """Source-backed initial cards; the browser applies live calendar triggers."""
+    """A source-backed quotation and one line from the author's essays."""
     content = validate_content(content)
-    knowledge = validate_knowledge(extras["knowledge"])["items"]
-    memes = validate_memes(extras["memes"])["items"]
     today = today or datetime.now(CHINA).date()
-    offset = (today - date(1970, 1, 1)).days
-    matched = [item for item in knowledge if item.get("trigger", {}).get("date") == today.strftime("%m-%d")]
-    concept = matched[0] if matched else knowledge[offset % len(knowledge)]
-    quote = content["quotes"][offset % len(content["quotes"])]
+    quote = content["quotes"][(today - date(1970, 1, 1)).days % len(content["quotes"])]
     text = lambda value: escape(value[language] if isinstance(value, dict) else value)
-    def source_link(url, label, extra=""):
-        return f'<a {extra}href="{escape(url, quote=True)}" target="_blank" rel="noopener noreferrer">{label} ↗</a>'
-    knowledge_title = "Daily knowledge" if language == "en" else "每日小知识"
-    quote_title = "Daily quote" if language == "en" else "每日一言"
-    concept_source = source_link(concept["url"], text(concept["source"]), 'id="daily-concept-source" class="yl-small" ')
-    cards = [f'<article class="yl-daily-card"><h2>{knowledge_title}</h2><h3 class="yl-concept-title" id="daily-concept-title">{text(concept["title"])}</h3><p class="yl-concept-copy" id="daily-concept-text">{text(concept["text"])}</p>{concept_source}</article>']
-    if memes:
-        meme = max(memes, key=lambda item: item["added"])
-        stamp = _date(meme["added"])
-        added = f"Added {stamp.day} {stamp.strftime('%B')}" if language == "en" else f"{stamp.month}月{stamp.day}日收录"
-        lines = []
-        for field, dom in (("origin", "origin"), ("example", "example"), ("why_popular", "why")):
-            value = meme.get(field, {}).get(language, "")
-            lines.append(f'<p id="daily-meme-{dom}"' + ('' if value else ' hidden') + f'>{escape(value)}</p>')
-        links = [source_link(meme["url"], text(meme["source"]))]
-        if "related_url" in meme:
-            related = (re.sub(r"^/articles/[^/]+/", "/en/articles/", meme["related_url"]) if language == "en" else meme["related_url"])
-            links.append(source_link(related, text(meme["related_label"])))
-        meme_title = "Internet meme" if language == "en" else "热梗"
-        cards.append(f'<article class="yl-daily-card" id="daily-meme-card"><h2>{meme_title}</h2><h3 id="daily-street-title">{text(meme["term"])}</h3><p id="daily-street-text">{text(meme["meaning"])}</p>{"".join(lines)}<p class="yl-small" id="daily-meme-added">{added}</p><div class="yl-street-links" id="daily-street-links">{"".join(links)}</div></article>')
-    cards.append(f'<article class="yl-daily-card"><h2>{quote_title}</h2><p class="yl-quote" id="daily-quote">{text(quote["text"])}</p><p class="yl-small yl-quote-source" id="daily-quote-source">{text(quote["author"])} · {source_link(quote["url"], text(quote["work"]))}</p></article>')
-    if own_quote:
-        cards.append(own_quote)
-    return '<section class="yl-bottomline' + (' has-meme' if memes else '') + '" id="brief-bottom">' + "\n".join(cards) + '</section>'
+    title = "Daily quotations" if language == "en" else "每日语录"
+    another = "Another quote" if language == "en" else "换一句"
+    note = "Quotation notes" if language == "en" else "引文说明"
+    quote_url = escape(quote["url"], quote=True)
+    card = f'''<article class="yl-daily-card" id="daily-quotation-card" aria-labelledby="daily-quotation-title"><div class="reading-heading"><h3 id="daily-quotation-title">{title}</h3><button class="quote-change" id="daily-quote-button" type="button" aria-label="{another} · {title}" hidden>{another}</button></div><blockquote id="daily-quote"><p class="yl-quote" id="daily-quote-text">{text(quote["text"])}</p><p class="yl-small yl-quote-source" id="daily-quote-source"><span id="daily-quote-author">{text(quote["author"])}</span> · <a id="daily-quote-work" href="{quote_url}" target="_blank" rel="noopener noreferrer">{text(quote["work"])} ↗</a></p></blockquote><details class="quote-note"><summary>{note}</summary><p id="daily-quote-note">{text(quote["translation_note"])}</p></details></article>'''
+    return '<div class="yl-bottomline" id="brief-bottom">' + card + own_quote + '</div>'

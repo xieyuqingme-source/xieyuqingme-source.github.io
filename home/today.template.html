@@ -4,14 +4,14 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>历史中的今天 · 谢雨卿</title>
-  <meta name="description" content="新闻选读，配上日历、节气、天气和此刻的地球。">
+  <meta name="description" content="重点新闻、历史上的今天、天气、此刻地球与每日语录。">
   <meta name="author" content="谢雨卿 Xie Yuqing">
   <link rel="canonical" href="{{site_url}}/today/">
   <link rel="alternate" hreflang="zh-CN" href="{{site_url}}/today/">
   <link rel="alternate" hreflang="en" href="{{site_url}}/en/today/">
   <meta property="og:type" content="website">
   <meta property="og:title" content="历史中的今天 · 谢雨卿">
-  <meta property="og:description" content="新闻选读，配上日历、节气、天气和此刻的地球。">
+  <meta property="og:description" content="重点新闻、历史上的今天、天气、此刻地球与每日语录。">
   <meta property="og:url" content="{{site_url}}/today/">
   <meta property="og:image" content="{{site_url}}/assets/share-cover.png">
   <meta property="og:image:width" content="1200">
@@ -33,8 +33,12 @@
     <button class="theme-toggle" id="theme-toggle" type="button" aria-label="切换到深色模式" hidden><span class="theme-label">深色</span></button>
   </header>
   <main id="main" class="container today-main">
-    <section class="daily-home today-brief" data-brief-mode="full" id="brief" aria-labelledby="today-title" data-lunar-src="/assets/vendor/lunar-javascript-1.7.7.js" data-d3-src="/assets/vendor/d3-7.9.0.min.js" data-earth-src="/assets/home-earth.js">
-      <header class="page-intro today-intro"><div class="today-intro-copy"><h1 id="today-title">历史中的今天</h1><p class="yl-small" id="daily-edition">{{daily_brief_edition}}</p></div>
+    <section class="daily-home today-brief today-a" data-brief-mode="full" id="brief" aria-labelledby="today-title" data-lunar-src="/assets/vendor/lunar-javascript-1.7.7.js" data-d3-src="/assets/vendor/d3-7.9.0.min.js" data-earth-src="/assets/home-earth.js">
+      <header class="page-intro today-intro">
+        <div class="today-intro-copy"><h1 id="today-title">历史中的今天</h1>
+          <div class="today-dateline" aria-label="日历 · 北京时间"><div class="yl-cal-top"><div class="yl-day" id="daily-calendar-day">—</div><div class="yl-cal-copy"><strong id="daily-calendar-weekday">今日</strong><div id="daily-calendar-lunar">—</div><div class="yl-small" id="daily-calendar-month">—</div></div></div>
+            <p class="yl-small" id="daily-calendar-cycle"></p><p class="yl-solar-term" id="daily-calendar-term"></p><p class="yl-small" id="daily-calendar-festivals"></p><p class="yl-small" id="daily-calendar-holiday" hidden></p></div>
+        </div>
         <figure class="today-timeline" aria-labelledby="timeline-caption">
           <svg class="today-timeline-svg" viewBox="0 0 440 64" role="img" aria-labelledby="timeline-title timeline-description"><title id="timeline-title">今天，位于过去与未来之间</title><desc id="timeline-description">时间向未来延伸，实心圆点标记今天。</desc><defs><linearGradient id="timeline-trace"><stop offset="0" stop-color="currentColor" stop-opacity=".12"/><stop offset=".48" stop-color="currentColor"/><stop offset="1" stop-color="currentColor" stop-opacity=".3"/></linearGradient></defs><path class="timeline-route" d="M12 32H427" stroke="url(#timeline-trace)"/><path class="timeline-ticks" d="M44 27V37M86 27V37M128 27V37M170 27V37M266 27V37M308 27V37M350 27V37M392 27V37"/><path class="timeline-arrow" d="M418 25L427 32L418 39"/><circle class="timeline-halo" cx="218" cy="32" r="12"/><circle class="timeline-today-point" cx="218" cy="32" r="5"/></svg>
           <div class="timeline-labels" aria-hidden="true"><span>过去</span><strong>今天</strong><span>未来</span></div>
@@ -42,39 +46,31 @@
         </figure>
       </header>
       <div class="brief-body" id="brief-body">
-        <div class="yl-today" aria-label="今日导读与时序">
-          <section class="yl-news" aria-labelledby="daily-news-title"><h2 class="brief-panel-heading" id="daily-news-title">要闻</h2><div id="daily-feed" aria-live="polite">{{brief_feed}}</div><p class="yl-note" id="daily-brief-notice">{{daily_brief_notice}}</p></section>
-          <aside class="yl-sidebar" id="daily-sidebar" aria-label="日历与天气">
-          <section class="yl-calendar" aria-labelledby="today-heading">
-            <h2 class="brief-panel-heading" id="today-heading">今日</h2>
-            <div class="yl-cal-top"><div class="yl-day" id="daily-calendar-day">—</div><div class="yl-cal-copy"><strong id="daily-calendar-weekday">今日</strong><div id="daily-calendar-lunar">—</div><div class="yl-small" id="daily-calendar-month">—</div></div></div>
-            <p class="yl-small" id="daily-calendar-cycle"></p><p class="yl-solar-term" id="daily-calendar-term"></p><p class="yl-small" id="daily-calendar-festivals"></p><p class="yl-small" id="daily-calendar-holiday" hidden></p>
-
-            <div class="city-picker"><label class="yl-small" for="daily-city">选择城市</label><select class="yl-city" id="daily-city"><option value="beijing">北京</option><option value="shanghai">上海</option><option value="kuala">吉隆坡</option><option value="london">伦敦</option><option value="newyork">纽约</option><option value="moscow">莫斯科</option><option value="dubai">迪拜</option></select><p class="yl-small" id="daily-city-label">北京 · Asia/Shanghai</p>
+        <div class="yl-today" aria-label="新闻与天气">
+          <section class="yl-news" aria-labelledby="daily-news-title"><div class="today-section-heading"><h2 class="brief-panel-heading" id="daily-news-title">重点新闻</h2><p class="yl-small" id="daily-edition">{{news_checked_label}}</p></div><div id="daily-feed" aria-live="polite">{{news_snapshot_feed}}</div><p class="yl-note" id="daily-brief-notice">依据来源媒体选题与预设规则汇集；点击标题，直达原始报道。</p><details class="news-sources"><summary>新闻源入口</summary><div id="news-source-links">{{news_source_links}}</div></details></section>
+          <aside class="yl-sidebar" id="daily-sidebar" aria-label="城市天气"><section class="yl-calendar" aria-labelledby="today-heading"><h2 class="brief-panel-heading" id="today-heading">你的天气</h2><div class="city-picker"><label class="yl-small" for="daily-city">选择城市</label><select class="yl-city" id="daily-city"><option value="beijing">北京</option><option value="shanghai">上海</option><option value="kuala">吉隆坡</option><option value="london">伦敦</option><option value="newyork">纽约</option><option value="moscow">莫斯科</option><option value="dubai">迪拜</option></select><p class="yl-small" id="daily-city-label">北京 · Asia/Shanghai</p>
               <form id="city-search-form" role="search" aria-label="查找城市"><label class="sr-only" for="city-search-input">城市名称</label><div class="city-search-row"><input id="city-search-input" name="city" type="search" placeholder="如成都、巴黎或 New York" minlength="2" maxlength="80" autocomplete="off" required><button class="city-search-submit" type="submit">查找城市</button></div><p class="yl-small city-search-status" id="city-search-status" role="status" aria-live="polite"></p><ul class="city-search-results" id="city-search-results" aria-label="匹配的城市" hidden></ul></form>
               <p class="city-search-source">城市检索 <a href="https://open-meteo.com/en/docs/geocoding-api" target="_blank" rel="noopener noreferrer">Open-Meteo</a> · 地名数据 <a href="https://www.geonames.org/" target="_blank" rel="noopener noreferrer">GeoNames</a></p>
             </div>
-            <div class="yl-weather"><div class="yl-weather-readout" id="daily-weather" aria-live="polite">天气加载中…</div></div><dl class="weather-details" id="daily-weather-details"></dl>
-            <p class="yl-small weather-hint" id="daily-weather-hint" hidden></p>
-
-          </section>
-          <section class="yl-earth" id="daily-earth" aria-labelledby="earth-heading"><div class="yl-earth-heading"><h2 id="earth-heading">此刻地球</h2><span class="yl-small">EARTH / SOLAR TIME</span></div><div class="yl-globe-wrap"><canvas id="earth-canvas" width="560" height="570" role="img" aria-label="地球昼夜图，标出太阳直射点与所选城市"></canvas></div><p class="yl-earth-small">拖动地球，换个角度看世界</p><div class="yl-suntime"><div>日出 · 当地时间<strong id="daily-sunrise">—</strong></div><div>日落 · 当地时间<strong id="daily-sunset">—</strong></div></div><div class="yl-earth-info" aria-live="polite"><div id="daily-local-time">—</div><div>太阳直射 <b id="daily-subsolar">—</b></div><div id="daily-daylength">—</div></div><p class="yl-moon" id="daily-moon-phase"></p><div class="yl-world-clocks" id="daily-world-clocks"></div><div class="yl-earth-actions"><label class="yl-time-row" for="earth-hour"><span>时刻 · 北京时间</span><output id="earth-hour-label">—</output></label><button type="button" class="yl-earth-now" id="earth-now" hidden>回到此刻</button></div><input class="yl-time-slider" id="earth-hour" type="range" min="0" max="23.9833333" step="0.0166667" value="12"><div class="yl-time-ends" aria-hidden="true"><span>00:00</span><span>12:00</span><span>23:59</span></div><p class="yl-earth-source">地轴与公转轨道法线夹角约 23.4° · 近似计算<br><a href="https://gml.noaa.gov/grad/solcalc/calcdetails.html" target="_blank" rel="noopener noreferrer">计算依据</a> · 底图 Natural Earth</p></section>
-          </aside>
+            <div class="yl-weather"><div class="yl-weather-readout" id="daily-weather" aria-live="polite">天气加载中…</div></div><details class="weather-more"><summary>天气详情</summary><dl class="weather-details" id="daily-weather-details"></dl></details>
+            <p class="yl-small weather-hint" id="daily-weather-hint" hidden></p></section></aside>
         </div>
-        {{brief_bottom_cards}}
+        <section class="today-history" id="today-history" aria-labelledby="history-heading"><div class="today-section-heading"><h2 class="brief-panel-heading" id="history-heading">历史上的今天</h2><p class="yl-small">这一天，曾经发生过什么。</p></div><div id="daily-history-list">{{history_today}}</div><p class="yl-small history-date-note" id="history-date-note"></p></section>
+        <section class="yl-earth" id="daily-earth" aria-labelledby="earth-heading"><div class="yl-earth-heading"><h2 id="earth-heading">此刻地球</h2><span class="yl-small">EARTH / SOLAR TIME</span></div><div class="today-earth-grid"><div class="earth-visual"><div class="yl-globe-wrap"><canvas id="earth-canvas" width="560" height="570" role="img" aria-label="地球昼夜图，标出太阳直射点与所选城市"></canvas></div><p class="yl-earth-small">拖动地球，换个角度看世界</p></div><div class="earth-readings"><div class="yl-suntime"><div>日出 · 当地时间<strong id="daily-sunrise">—</strong></div><div>日落 · 当地时间<strong id="daily-sunset">—</strong></div></div><div class="yl-earth-info" aria-live="polite"><div id="daily-local-time">—</div><div>太阳直射 <b id="daily-subsolar">—</b></div><div id="daily-daylength">—</div></div><p class="yl-moon" id="daily-moon-phase"></p><div class="yl-world-clocks" id="daily-world-clocks"></div><div class="yl-earth-actions"><label class="yl-time-row" for="earth-hour"><span>时刻 · 北京时间</span><output id="earth-hour-label">—</output></label><button type="button" class="yl-earth-now" id="earth-now" hidden>回到此刻</button></div><input class="yl-time-slider" id="earth-hour" type="range" min="0" max="23.9833333" step="0.0166667" value="12"><div class="yl-time-ends" aria-hidden="true"><span>00:00</span><span>12:00</span><span>23:59</span></div><p class="yl-earth-source">地轴与公转轨道法线夹角约 23.4° · 近似计算<br><a href="https://gml.noaa.gov/grad/solcalc/calcdetails.html" target="_blank" rel="noopener noreferrer">计算依据</a> · 底图 Natural Earth</p></div></div></section>
+        <section class="today-reading" aria-labelledby="reading-heading"><h2 class="brief-panel-heading" id="reading-heading">一天一段阅读</h2>{{brief_bottom_cards}}</section>
       </div>
-      <noscript><p class="yl-no-script">新闻、文章和作品可以直接阅读。启用 JavaScript 后可查看实时日历、天气和地球。</p></noscript>
+      <noscript><p class="yl-no-script">新闻、语录和来源链接可以直接阅读。历史事件显示明确标注的生成日期；启用 JavaScript 后按当天轮换，并显示实时天气与地球。</p></noscript>
     </section>
   </main>
   <footer class="site-footer container"><p>谢雨卿</p><div><a href="/articles/">文章</a><a href="/about/">关于</a><a href="/articles/feed.xml">RSS</a></div></footer>
-  <script id="daily-brief-data" type="application/json">{{daily_brief_data}}</script>
+  <script id="news-snapshot-data" type="application/json">{{news_snapshot_data}}</script>
+  <script id="news-sources-data" type="application/json">{{news_sources_data}}</script>
+  <script id="daily-history-data" type="application/json">{{history_data}}</script>
   <script id="daily-content-data" type="application/json">{{daily_content_data}}</script>
-  <script id="daily-knowledge-data" type="application/json">{{brief_knowledge_data}}</script>
-  <script id="daily-memes-data" type="application/json">{{brief_memes_data}}</script>
   <script id="daily-rules-data" type="application/json">{{brief_rules_data}}</script>
   <script id="daily-holidays-data" type="application/json">{{brief_holidays_data}}</script>
   <script id="own-quotes-data" type="application/json">{{own_quotes_data}}</script>
-  <script src="/assets/home-now.js" defer></script>
+  <script src="/assets/daily-reading.js" defer></script>
   <script src="/assets/astronomy-solar.js" defer></script>
   <script src="/assets/home-daily.js" defer></script>
 </body>
