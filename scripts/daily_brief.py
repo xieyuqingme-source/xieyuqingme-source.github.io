@@ -158,6 +158,12 @@ def validate_content(data):
             _localized(item["source_language"])
             if any(value not in LANGUAGES for value in item["source_language"].values()):
                 raise ValueError("Quotation source languages must be supported language tags.")
+            for language, value in item["source_language"].items():
+                translated_exception = (
+                    language == "en" and value == "zh-CN" and item["author"]["zh-CN"] == "雷锋" and item["id"].startswith("lei-feng-")
+                    or language == "zh-CN" and value == "en" and item["author"]["zh-CN"] == "切·格瓦拉" and item["id"].startswith("che-guevara-"))
+                if value != language and not translated_exception:
+                    raise ValueError("Each quotation language must cite a source in that same language, except the explicitly allowed Lei Feng English and Che Chinese translations.")
         if isinstance(item["url"], dict):
             _localized(item["url"])
             for value in item["url"].values():

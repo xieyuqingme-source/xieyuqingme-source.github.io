@@ -50,7 +50,14 @@ class DailyBriefReadingTests(unittest.TestCase):
             self.assertEqual(set(item["url"]), {"zh-CN", "en"})
             for url in item["url"].values():
                 self.assertTrue(url.startswith("https://"))
-            self.assertTrue(all(value in {"zh-CN", "en"} for value in item.get("source_language", {}).values()))
+            expected_languages = {"zh-CN": "zh-CN", "en": "en"}
+            if item["author"]["zh-CN"] == "雷锋":
+                self.assertIn(item["source_language"]["en"], {"zh-CN", "en"})
+                expected_languages["en"] = item["source_language"]["en"]
+            if item["author"]["zh-CN"] == "切·格瓦拉":
+                self.assertIn(item["source_language"]["zh-CN"], {"zh-CN", "en"})
+                expected_languages["zh-CN"] = item["source_language"]["zh-CN"]
+            self.assertEqual(item["source_language"], expected_languages)
         self.assertEqual(counts, {"马克思": 110, "恩格斯": 60, "马恩": 80, "列宁": 50, "毛泽东": 100,
                                  "雷锋": 10, "切·格瓦拉": 10, "尼古拉·奥斯特洛夫斯基": 10})
 
@@ -59,17 +66,41 @@ class DailyBriefReadingTests(unittest.TestCase):
         records = {item["id"]: item for item in review["quotes"]}
         self.assertEqual(len(records), len(self.content["quotes"]))
         self.assertEqual(set(records), {q["id"] for q in self.content["quotes"]})
+        expected_exceptions = {(item["id"], language) for item in self.content["quotes"] for language in ("zh-CN", "en")
+                               if records[item["id"]]["sources"][language]["method"] == "site-translation"}
+        declared = review["translation_exceptions"]
+        self.assertEqual(len(declared), len(expected_exceptions))
+        self.assertEqual({(item["id"], item["language"]) for item in declared}, expected_exceptions)
+        for exception in declared:
+            self.assertEqual(exception["source_language"], records[exception["id"]]["sources"][exception["language"]]["language"])
         for item in self.content["quotes"]:
             record = records[item["id"]]
             for language in ("zh-CN", "en"):
                 with self.subTest(id=item["id"], language=language):
                     source = record["sources"][language]
                     self.assertEqual(source["url"], item["url"][language])
-                    self.assertEqual(source["language"], item.get("source_language", {}).get(language, language))
+                    self.assertEqual(source["language"], item["source_language"][language])
                     self.assertEqual(record["texts_sha256"][language], hashlib.sha256(item["text"][language].encode("utf-8")).hexdigest())
                     self.assertRegex(source["source_sha256"], r"^[0-9a-f]{64}$")
                     self.assertTrue(source["locator"].strip())
-                    self.assertIn(source["method"], {"site-translation", "verbatim-normalized", "scan-visually-checked"})
+                    self.assertIn(source["method"], {"verbatim-normalized", "scan-visually-checked", "site-translation"})
+                    if source["method"] == "site-translation":
+                        self.assertIn((item["author"]["zh-CN"], language), {("雷锋", "en"), ("切·格瓦拉", "zh-CN")})
+                        self.assertNotEqual(source["language"], language)
+                        self.assertIn("AI", item["translation_note"][language])
+                    else:
+                        self.assertEqual(source["language"], language)
+                    if "edition" in source:
+                        self.assertTrue(source["edition"].strip())
+                    if "edition_url" in source:
+                        self.assertTrue(source["edition_url"].startswith("https://"))
+
+    def test_marx_engels_lenin_and_mao_chinese_quotes_cite_the_chinese_mia_text(self):
+        for item in self.content["quotes"]:
+            if item["author"]["zh-CN"] in {"马克思", "恩格斯", "马恩", "列宁", "毛泽东"}:
+                with self.subTest(id=item["id"]):
+                    self.assertTrue(item["url"]["zh-CN"].startswith("https://www.marxists.org/chinese/"))
+                    self.assertEqual(item["source_language"], {"zh-CN": "zh-CN", "en": "en"})
 
     def test_novel_uses_published_translations_and_stays_within_short_excerpt_scope(self):
         items = [q for q in self.content["quotes"] if q["id"].startswith("ostrovsky-steel-")]
@@ -82,6 +113,11 @@ class DailyBriefReadingTests(unittest.TestCase):
             self.assertIn("/the-making-of-steel/", item["url"]["zh-CN"])
             self.assertIn("/page/n", item["url"]["en"])
             self.assertNotIn("site-translation", item["translation_note"]["en"])
+        # Independently read from the cited 1952 scan, printed pp. 105 and 178.
+        by_id = {item["id"]: item for item in items}
+        self.assertIn("every moment of life, lest", by_id["ostrovsky-steel-03"]["text"]["en"])
+        self.assertNotIn("moment of his life", by_id["ostrovsky-steel-03"]["text"]["en"])
+        self.assertIn("not the other way around.", by_id["ostrovsky-steel-04"]["text"]["en"])
 
     def test_no_script_cards_render_each_entry_and_its_own_language_link(self):
         for index, item in enumerate(self.content["quotes"]):
@@ -136,6 +172,14 @@ class DailyBriefReadingTests(unittest.TestCase):
             content = copy.deepcopy(self.content)
             content["quotes"][0]["source_language"] = {"zh-CN": "en", "en": tag}
             with self.assertRaises(ValueError):
+                validate_content(content)
+
+    def test_a_quote_cannot_use_the_other_languages_source_as_its_own(self):
+        for language in ("zh-CN", "en"):
+            content = copy.deepcopy(self.content)
+            content["quotes"][0]["source_language"] = {"zh-CN": "zh-CN", "en": "en"}
+            content["quotes"][0]["source_language"][language] = "en" if language == "zh-CN" else "zh-CN"
+            with self.assertRaisesRegex(ValueError, "same language"):
                 validate_content(content)
 
     def test_full_pool_daily_rotation_survives_midnight_and_future_dates(self):

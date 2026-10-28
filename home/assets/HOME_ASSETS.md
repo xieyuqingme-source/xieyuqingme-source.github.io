@@ -31,7 +31,7 @@
 
 - **自动新闻**：`home/brief/news-sources.json` 定义来源与规则；`scripts/news_snapshot.py` 在构建端采集、去重与校验，`Update news snapshot` 工作流定时运行并支持手动触发。当前来源为中国新闻网、BBC、联合国新闻、The Guardian和NASA，最多8条、单个来源或出版方最多2条，保留72小时内的原题、原文语言、来源、原文时间与直达链接。不自动翻译标题、改写摘要或凭热度认定「重大」。页面使用经校验的 `news-snapshot`，浏览器不自行抓取新闻源；过期或空快照保留来源入口，不把旧闻改成今天的新闻。`home/brief/news-snapshot.json` 是仓库内的初始快照，发布流程可恢复更新的有效快照。
 - **历史上的今天**：`home/brief/history.json` 是覆盖全年366个日期的双语本地库，包含02-29，按北京时间日期查找。当前542条，其中10月28日至11月30日为每天6–7条，共210条；其余332个日期保留首版每天1条。已扩充条目支持多个具体来源，核对记录和双语文字指纹见`home/brief/history-review.json`；`source_review`表示核对所引资料，不冒充原始档案审定。旧日期页修订信息与CC BY-SA 4.0署名保留，资料范围、历法约定与逐条来源见 `home/brief/history-sources.md`。页面不依赖每日在线历史接口。
-- **马克思主义名句**：`home/daily-content.json`保存430条双语语录及出处，涵盖马恩列毛、雷锋、切·格瓦拉和《钢铁是怎样炼成的》。原文、本站节译及正式出版译本分别注明；`source_language`指定链接实际语言。小说使用黄树南中译本和R. Prokofieva英译本（1952），附扫描页链接。来源说明见`home/brief/quotes-sources.md`，逐条核对与文字指纹见`home/brief/quotes-review.json`。
+- **马克思主义名句**：`home/daily-content.json`保存430条双语语录及出处。马恩列毛的中文直接摘录中马库中文文本，英文分别摘录英文文献，未明译者的页面不强行冠以中央编译局。仅9条雷锋英文与3条切·格瓦拉中文按站主规则保留AI译文并明示；雷锋另1条已有1968年出版英译。`source_language`按真实原文填写。小说仍使用黄树南中译本与R. Prokofieva英译本（1952），附扫描页链接。逐条来源、语境、文字指纹和例外清单见`home/brief/quotes-sources.md`及`quotes-review.json`。
 - **保留归档**：`home/brief/news/YYYY-MM-DD.json` 的旧人工新闻，以及知识、热梗等旧JSON继续归档并接受校验；它们不再注入当前页面来驱动新闻或阅读。当前天气提示规则使用 `home/brief/rules.json`，法定假日与调休使用年度假日文件。
 
 详细维护流程见 `blog/今日简报维护.md`。历史与语录的来源说明随静态站点发布，既可在页面查看对应出处，也可下载完整说明。

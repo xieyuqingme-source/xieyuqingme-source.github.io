@@ -93,7 +93,16 @@ test('the checked pool has 430 distinct bilingual entries, joint authorship and 
   }
   assert.deepEqual(Object.fromEntries(counts),{'马克思':110,'恩格斯':60,'列宁':50,'毛泽东':100,'马恩':80,'切·格瓦拉':10,'雷锋':10,'尼古拉·奥斯特洛夫斯基':10});
 });
-test('source-language metadata follows the linked edition, including translated diary entries',()=>{
+test('sources use the card language with only the two explicitly allowed translation exceptions',()=>{
   for(const language of ['zh-CN','en'])for(const quote of data.quotes){const h=harness({language,classic:{version:1,quotes:[quote]}});assert.equal(h.elements['daily-quote-work'].attributes.hreflang,quote.source_language?.[language]||language);}
   const quote=data.quotes[0];for(const tag of ['fr','en" onclick="alert(1)','javascript:en'])assert.equal(R.quotations({version:1,quotes:[{...quote,source_language:{'zh-CN':tag,en:'en'}}]}).length,0);
+  for(const source_language of [{'zh-CN':'en',en:'en'},{'zh-CN':'zh-CN',en:'zh-CN'}])assert.equal(R.quotations({version:1,quotes:[{...quote,source_language}]}).length,0);
+  for(const item of data.quotes){
+    const expected={'zh-CN':'zh-CN',en:'en'};
+    if(item.author['zh-CN']==='雷锋')expected.en=item.source_language.en;
+    if(item.author['zh-CN']==='切·格瓦拉')expected['zh-CN']=item.source_language['zh-CN'];
+    assert.deepEqual(item.source_language,expected);
+    if(expected['zh-CN']===expected.en)assert(item.translation_note[expected.en==='en'?'zh-CN':'en'].includes('AI'));
+    else assert.notEqual(item.url['zh-CN'],item.url.en);
+  }
 });

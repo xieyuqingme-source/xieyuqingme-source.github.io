@@ -37,6 +37,11 @@
     };
   }
   const bilingual = value => value && typeof value === 'object' && ['zh-CN','en'].every(language => typeof value[language] === 'string' && value[language].trim());
+  function translatedSourceAllowed(item,language,sourceLanguage) {
+    if (typeof item?.id !== 'string') return false;
+    return language === 'en' && sourceLanguage === 'zh-CN' && item.author?.['zh-CN'] === '雷锋' && item.id.startsWith('lei-feng-')
+      || language === 'zh-CN' && sourceLanguage === 'en' && item.author?.['zh-CN'] === '切·格瓦拉' && item.id.startsWith('che-guevara-');
+  }
   function safeSource(value) {
     if (typeof value !== 'string' || !/^https:\/\//.test(value) || /[\s\u0000-\u001f<>\\]/.test(value)) return false;
     try { const url = new URL(value); return url.protocol === 'https:' && !!url.hostname && !url.username && !url.password; } catch (_) { return false; }
@@ -45,7 +50,7 @@
     const seen = new Set();
     return (value?.version === 1 && Array.isArray(value.quotes) ? value.quotes : []).filter(item => {
       const sourcesValid = typeof item?.url === 'string' ? safeSource(item.url) : bilingual(item?.url) && ['zh-CN','en'].every(language => safeSource(item.url[language]));
-      const sourceLanguagesValid = item?.source_language === undefined || (bilingual(item.source_language) && ['zh-CN','en'].every(language => ['zh-CN','en'].includes(item.source_language[language])));
+      const sourceLanguagesValid = item?.source_language === undefined || (bilingual(item.source_language) && ['zh-CN','en'].every(language => item.source_language[language] === language || translatedSourceAllowed(item,language,item.source_language[language])));
       if (!item || typeof item.id !== 'string' || !item.id || seen.has(item.id) || !['text','author','work','translation_note'].every(key => bilingual(item[key])) || !sourcesValid || !sourceLanguagesValid) return false;
       seen.add(item.id); return true;
     });
