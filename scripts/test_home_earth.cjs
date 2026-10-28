@@ -183,7 +183,7 @@ test('glance and full templates keep their Earth contracts and declare heavy scr
     const html = read(file);
     const glance = !file.includes('today.template');
     const ids = glance ? ['daily-earth','earth-canvas','daily-local-time','daily-calendar-lunar','daily-calendar-term','glance-date','daily-calendar-next-term']
-      : ['daily-earth','earth-canvas','daily-city','earth-hour','earth-hour-label','earth-now','daily-local-time','daily-sunrise','daily-sunset','daily-daylength','daily-subsolar','daily-moon-phase','daily-world-clocks','timeline-date','today-title','daily-calendar-lunar','daily-calendar-term','daily-calendar-festivals','daily-weather'];
+      : ['daily-earth','earth-canvas','daily-city','earth-hour','earth-hour-label','earth-now','daily-local-time','daily-sunrise','daily-sunset','daily-daylength','daily-subsolar','daily-moon-phase','daily-world-clocks','today-title','daily-calendar-lunar','daily-calendar-term','daily-calendar-festivals','daily-weather'];
     for (const id of ids) assert.equal((html.match(new RegExp('id="' + id + '"', 'g')) || []).length, 1, file + ' #' + id);
     if (!glance) {
       const title = file.startsWith('home/en/') ? 'today_date_title_en' : 'today_date_title';

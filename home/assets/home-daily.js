@@ -182,7 +182,7 @@
       const stamp = new Intl.DateTimeFormat(english ? 'en-GB' : 'zh-CN',{timeZone:zone,month:'long',day:'numeric'}).format(date);
       write('glance-date',english ? weekday + ' ' + stamp : stamp + ' ' + weekday);
     } else {
-      const title = english ? 'Today: ' + new Intl.DateTimeFormat('en-GB',{timeZone:zone,year:'numeric',month:'long',day:'numeric'}).format(date) : `今天：${local.year}年${+local.month}月${+local.day}日`;
+      const title = english ? new Intl.DateTimeFormat('en-GB',{timeZone:zone,year:'numeric',month:'long',day:'numeric'}).format(date) : `${local.year}年${+local.month}月${+local.day}日`;
       write('today-title',title);
     }
     write('daily-calendar-lunar',(glance ? word('农历','Lunar · ') : '') + (astro?.lunar(date,zone,english) || ''));
@@ -370,7 +370,7 @@
     if (disposed) return;
     const date = new Date(), currentDay = String(dayIndex(date)), currentLanguage = lang();
     if (force || lastDay !== currentDay || lastLanguage !== currentLanguage) {
-      if (!glance) { renderDaily(date); renderCityChoices(); renderSearchResults(); renderWeather(); weatherMap?.refresh(); write('timeline-date',dayStamp(date)); }
+      if (!glance) { renderDaily(date); renderCityChoices(); renderSearchResults(); renderWeather(); weatherMap?.refresh(); }
       renderCalendar(date); lastDay = currentDay; lastLanguage = currentLanguage;
     } else renderCalendar(date);
     if (!glance) renderFeed(date);

@@ -777,8 +777,8 @@ def build_site(address, map_preview_source=None):
     has_home_photo = (ROOT / HOME_PHOTO.lstrip("/")).is_file()
     beijing_today = datetime.now(CHINA).date()
     values.update({
-        "today_date_title": f"今天：{beijing_today.year}年{beijing_today.month}月{beijing_today.day}日",
-        "today_date_title_en": f"Today: {beijing_today.day} {beijing_today.strftime('%B')} {beijing_today.year}",
+        "today_date_title": f"{beijing_today.year}年{beijing_today.month}月{beijing_today.day}日",
+        "today_date_title_en": f"{beijing_today.day} {beijing_today.strftime('%B')} {beijing_today.year}",
         "news_snapshot_data": safe_json(news_snapshot),
         "news_sources_data": safe_json({"sources": [{"name": item["name"], "home_url": item["home_url"]} for item in news_sources["sources"]]}),
         "news_snapshot_feed": render_snapshot(news_snapshot, "zh-CN", news_sources, include_sources=False, include_stamp=False),

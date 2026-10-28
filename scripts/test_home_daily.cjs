@@ -25,7 +25,7 @@ class Element {
 function harness({mode = 'full',readyState = 'loading',idle = true,now = '2026-10-26T16:30:00Z',saved = null,mobile = false,denied = false,language = 'zh-CN',articles = null,content = null,knowledge = [],memes = [],snapshot = null,history = null,newsSources = [],rules = [],holidays = {},weatherData,geocodingData,storedValues = {},deferForecast = false,deferGeocoding = false,withWeatherMap = false} = {}) {
   let epoch = new Date(now).getTime(), subscription, nextTimer = 0;
   class Clock extends Date { constructor(...args) { super(...(args.length ? args : [epoch])); } static now() { return epoch; } }
-  const ids = ['today-title','daily-city-name','weather-selection-status','news-snapshot-data','news-sources-data','daily-history-data','daily-history-list','history-date-note','news-source-links','timeline-date','daily-city-label','daily-weather-details','city-search-form','city-search-input','city-search-results','city-search-status','glance-date','daily-calendar-next-term','daily-content-data','daily-knowledge-data','daily-memes-data','daily-rules-data','daily-holidays-data','home-random-data','daily-feed','daily-news-title','daily-brief-notice','daily-edition','home-date','brief-body','brief-toggle','brief-lunar','brief-term','brief-weather','brief-headline','daily-calendar-lunar','daily-calendar-term','daily-calendar-cycle','daily-calendar-festivals','daily-calendar-holiday','daily-calendar-day','daily-calendar-weekday','daily-calendar-month','daily-weather','daily-weather-hint','daily-city','home-random-button','daily-street-title','daily-street-text','daily-street-links','daily-meme-card','daily-meme-added','daily-meme-origin','daily-meme-example','daily-meme-why','daily-concept-title','daily-concept-text','daily-concept-source','daily-quote','daily-quote-source','brief-bottom','daily-earth'];
+  const ids = ['today-title','daily-city-name','weather-selection-status','news-snapshot-data','news-sources-data','daily-history-data','daily-history-list','history-date-note','news-source-links','daily-city-label','daily-weather-details','city-search-form','city-search-input','city-search-results','city-search-status','glance-date','daily-calendar-next-term','daily-content-data','daily-knowledge-data','daily-memes-data','daily-rules-data','daily-holidays-data','home-random-data','daily-feed','daily-news-title','daily-brief-notice','daily-edition','home-date','brief-body','brief-toggle','brief-lunar','brief-term','brief-weather','brief-headline','daily-calendar-lunar','daily-calendar-term','daily-calendar-cycle','daily-calendar-festivals','daily-calendar-holiday','daily-calendar-day','daily-calendar-weekday','daily-calendar-month','daily-weather','daily-weather-hint','daily-city','home-random-button','daily-street-title','daily-street-text','daily-street-links','daily-meme-card','daily-meme-added','daily-meme-origin','daily-meme-example','daily-meme-why','daily-concept-title','daily-concept-text','daily-concept-source','daily-quote','daily-quote-source','brief-bottom','daily-earth'];
   const nodes = Object.fromEntries(ids.map(id => [id,new Element()]));
   if (withWeatherMap) nodes['weather-map-canvas'] = new Element('canvas');
   for (const id of ['home-random-button','city-search-results']) nodes[id].hidden = true;
@@ -121,8 +121,8 @@ test('full weather includes validated detail fields, code advice and distinct fo
   assert.match(h.nodes['daily-weather-hint'].textContent,/今日预报：可能下雨.*今日最高气温：很热.*今日最低气温：很冷/); assert.equal(h.nodes['daily-weather-details'].children.length,5); assert.match(h.nodes['daily-weather-details'].textContent,/体感温度10.2 °C.*相对湿度72%.*15.5 km\/h.*西北.*315°.*海平面气压1012.4 hPa/); h.dispose(); assert.equal(h.intervals.size,0);
   const invalid = harness({weatherData:{current:{...data.current,apparent_temperature:null,relative_humidity_2m:101,wind_speed_10m:-1,wind_direction_10m:400,pressure_msl:Infinity}}}); await settle(); assert.equal(invalid.nodes['daily-weather-details'].hidden,true); assert.equal(invalid.nodes['daily-weather-details'].children.length,0);
 });
-test('calendar retains lunar, solar terms and Beijing timeline date but no almanac operations',async () => {
-  const h = harness(); h.loadScript('lunar'); await settle(); assert.match(h.nodes['daily-calendar-lunar'].textContent,/丙午年九月十八/); assert.match(h.nodes['daily-calendar-term'].textContent,/霜降第5天.*立冬还有11天/); assert.equal(h.nodes['timeline-date'].textContent,'2026-10-27'); assert.doesNotMatch(source,/getDayYi|getDayJi|getPengZu|getDayPosition|daily-almanac/); h.selectPreset('london'); assert.equal(h.nodes['timeline-date'].textContent,'2026-10-27'); h.changeLanguage('en'); assert.match(h.nodes['daily-calendar-term'].textContent,/First Frost/);
+test('calendar retains lunar, solar terms and Beijing date but no almanac operations',async () => {
+  const h = harness(); h.loadScript('lunar'); await settle(); assert.match(h.nodes['daily-calendar-lunar'].textContent,/丙午年九月十八/); assert.match(h.nodes['daily-calendar-term'].textContent,/霜降第5天.*立冬还有11天/); assert.equal(h.nodes['today-title'].textContent,'2026年10月27日'); assert.doesNotMatch(source,/getDayYi|getDayJi|getPengZu|getDayPosition|daily-almanac/); h.selectPreset('london'); assert.equal(h.nodes['today-title'].textContent,'2026年10月27日'); h.changeLanguage('en'); assert.match(h.nodes['daily-calendar-term'].textContent,/First Frost/);
 });
 test('calendar uses supplied holiday data and lunar-javascript festivals, including English library values',async () => {
   const h = harness({now:'2026-10-01T04:00:00Z',holidays:{2026:{days:[{date:'2026-10-01',name:'国庆节',isOffDay:true}]}}}); h.loadScript('lunar'); await settle(); assert.match(h.nodes['daily-calendar-holiday'].textContent,/假期.*国庆节/); assert.match(h.nodes['daily-calendar-festivals'].textContent,/国庆节/); h.changeLanguage('en'); assert.match(h.nodes['daily-calendar-lunar'].textContent,/Lunar|Month|2026/); assert.match(h.nodes['daily-calendar-festivals'].textContent,/National Day/);
@@ -189,14 +189,14 @@ test('prototype-named city preferences fall back safely and array-valued weather
 
 test('today headline and compact lunar/term/festival line advance at Beijing midnight',async () => {
   const h = harness({now:'2026-10-28T15:59:00Z'}); h.loadScript('lunar'); await settle();
-  assert.equal(h.nodes['today-title'].textContent,'今天：2026年10月28日');
+  assert.equal(h.nodes['today-title'].textContent,'2026年10月28日');
   assert.equal(h.nodes['daily-calendar-lunar'].textContent,'丙午年九月十九');
   assert.equal(h.nodes['daily-calendar-term'].textContent,'霜降第6天 · 距立冬还有10天');
   assert.equal(h.nodes['daily-calendar-festivals'].textContent,'距万圣节前夜还有3天');
   h.selectPreset('newyork'); h.tick('2026-10-28T16:01:00Z');
-  assert.equal(h.nodes['today-title'].textContent,'今天：2026年10月29日');
+  assert.equal(h.nodes['today-title'].textContent,'2026年10月29日');
   assert.match(h.nodes['daily-calendar-term'].textContent,/第7天.*还有9天/);
-  h.changeLanguage('en'); assert.equal(h.nodes['today-title'].textContent,'Today: 29 October 2026');
+  h.changeLanguage('en'); assert.equal(h.nodes['today-title'].textContent,'29 October 2026');
   h.dispose();
 });
 
