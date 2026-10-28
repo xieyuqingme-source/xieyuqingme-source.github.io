@@ -47,18 +47,18 @@ PROJECT_FIELDS = {"id", "title", "english_title", "kind", "summary", "problem", 
 PROJECT_OPTIONAL_FIELDS = {"download_url", "download_label", "guide_label", "link_status", "demo_url"}
 PROJECT_DEMO_ROUTES = {"/map/", "/game/ranking/"}
 BRAND_ASSETS = ("share-cover.png", "favicon.svg", "favicon.ico", "favicon.png")
-HOME_DAILY_ASSETS = ("home-daily.css", "home-daily.js", "home-now.js", "daily-reading.js", "home-earth.js", "astronomy-solar.js", "home-ink.webp",
+HOME_DAILY_ASSETS = ("home-daily.css", "home-daily.js", "home-now.js", "daily-reading.js", "weather-map.js", "weather-map.css", "home-earth.js", "astronomy-solar.js", "home-ink.webp",
                      "vendor/d3-7.9.0.min.js", "vendor/D3-LICENSE",
                      "vendor/lunar-javascript-1.7.7.js", "vendor/lunar-javascript-1.7.7.LICENSE")
 HOME_PHOTO = "/photos/images/p-71f77ab6511ec1ce656a58a3-18000666287e1d55-640.webp"
 HOME_PICKS = "home/home-picks.json"
-TODAY_TITLES = {"zh-CN": "历史中的今天 · 谢雨卿", "en": "Today in history · Xie Yuqing"}
+TODAY_TITLES = {"zh-CN": "今天 · 谢雨卿", "en": "Today · Xie Yuqing"}
 TODAY_DESCRIPTIONS = {
-    "zh-CN": "重点新闻、历史上的今天、天气、此刻地球与每日语录。",
-    "en": "Source headlines, historical anniversaries, weather, Earth and daily quotations.",
+    "zh-CN": "从此刻地球与天气，到历史、每日阅读和重点新闻。",
+    "en": "Earth and weather, historical anniversaries, daily reading and source headlines.",
 }
 ABOUT_FIELDS = {"name", "english_name", "chinese_bio", "english_bio", "chinese_colophon", "english_colophon",
-                "written_note", "english_written_note", "wechat", "email"}
+                "written_note", "english_written_note", "wechat", "email", "zhihu", "x_handle"}
 PRIVATE_PATH = re.compile(r"(?<![A-Za-z0-9])[A-Za-z]:[\\/]|\\\\[^\s\\]+[\\/]|/(?:Users|home|mnt)/", re.I)
 EXTERNAL_ICON = '''<svg class="external-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 17 17 7M7 7h10v10"/></svg>'''
 
@@ -144,6 +144,10 @@ def validate_about(data):
         raise ValueError("Invalid public biography text.")
     if not re.fullmatch(r"[A-Za-z0-9.!#$%&'*+/=?^_`{|}~-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}", data["email"]):
         raise ValueError("The contact email must be a plain public email address.")
+    if len(data["zhihu"]) > 80 or any(character in data["zhihu"] for character in "<>"):
+        raise ValueError("The Zhihu display name must be short public plain text.")
+    if not re.fullmatch(r"[A-Za-z0-9_]{1,15}", data["x_handle"]):
+        raise ValueError("The X account must be a plain public handle.")
     return data
 
 
@@ -170,7 +174,9 @@ def render_about(data, language="zh-CN"):
       <figure class="about-wechat-qr"><a href="/assets/wechat-qrcode.jpg" aria-label="View the original WeChat QR code"><img src="/assets/wechat-qrcode.jpg" width="1280" height="1280" alt="Official QR code for the WeChat account" loading="lazy" decoding="async"></a>
         <figcaption><a href="/assets/wechat-qrcode.jpg">View original QR code</a><br>On a computer, scan with WeChat. On a phone, save the image and recognise its QR code in WeChat.</figcaption>
       </figure>
-    </dd><dt>Email</dt><dd><a href="mailto:{text["email"]}">{text["email"]}</a></dd></dl>'''
+    </dd><dt>Email</dt><dd><a href="mailto:{text["email"]}">{text["email"]}</a></dd>
+    <dt>Zhihu</dt><dd><span lang="zh-CN">@{text["zhihu"]}</span></dd>
+    <dt>X</dt><dd><a href="https://x.com/{text["x_handle"]}" target="_blank" rel="noopener noreferrer">@{text["x_handle"]}</a></dd></dl>'''
     else:
         contact = f'''<h2 id="about-contact-title">联系我</h2>
     <dl><dt>微信公众号</dt><dd>{text["wechat"]}
@@ -178,7 +184,9 @@ def render_about(data, language="zh-CN"):
         <a href="/assets/wechat-qrcode.jpg" aria-label="查看{text["wechat"]}公众号二维码原图"><img src="/assets/wechat-qrcode.jpg" width="1280" height="1280" alt="{text["wechat"]}公众号官方二维码" loading="lazy" decoding="async"></a>
         <figcaption><a href="/assets/wechat-qrcode.jpg">查看二维码原图</a><br>电脑端请用微信扫码；手机端可保存图片后，在微信中识别二维码。</figcaption>
       </figure>
-    </dd><dt>邮箱</dt><dd><a href="mailto:{text["email"]}">{text["email"]}</a></dd></dl>'''
+    </dd><dt>邮箱</dt><dd><a href="mailto:{text["email"]}">{text["email"]}</a></dd>
+    <dt>知乎</dt><dd>@{text["zhihu"]}</dd>
+    <dt>X</dt><dd><a href="https://x.com/{text["x_handle"]}" target="_blank" rel="noopener noreferrer">@{text["x_handle"]}</a></dd></dl>'''
     return f'''<article class="about-profile" aria-labelledby="about-page-title">
   <div class="about-story">
     <div class="about-bio" lang="{language}">{paragraphs}</div>
@@ -195,16 +203,18 @@ def render_site_notes(waline, repository, language="zh-CN"):
     database = escape(waline.get("databaseProvider", ""))
     if language == "en":
         items = ['Pages are generated with Python and use system fonts only, with no external font files.',
-                 'The Today in history page: the calendar, weather and globe are calculated live; news is gathered using source newsroom selections and preset rules, with original publication times and links; historical events rotate from a local date collection. The homepage shows only the date, solar term and a small globe.',
-                 'Weather on the Today in history page comes from Open-Meteo. City searches send the name you enter to its geocoding service; your location is never requested. The chosen city and the latest reading stay in your browser. The homepage makes no weather request.',
+                 'The Today page presents Earth, weather, history, reading and news, in that order. The calendar and globe are calculated live; historical events and reading rotate from local collections using Beijing time. The homepage shows only the date, solar term and a small globe.',
+                 'Weather comes from Open-Meteo. City searches send the name you enter to its geocoding service; choosing a point on the map sends its coordinates for weather. The page never requests your device location, and saves your selected city or coordinates and the latest weather only in your browser. The homepage makes no weather request.',
+                 'News follows source newsroom selections and preset rules, with original headlines, publication times and links. Red quotations are excerpted from the corresponding Chinese and English works on the Marxists Internet Archive and stored locally; each language uses its own linked edition, and reading them makes no automatic request to that site.',
                  'Article view counts and comments use Waline. These requests send your IP address and browser information to the Waline backend and its providers'
                  + (f' (hosting: {host}; database: {database})' if host and database else '') + '. The comment area explains what is shown publicly.',
                  'Map geography comes from Natural Earth (public domain). Project screenshots and other third-party sources are credited in each project.']
         title = "About this site"
     else:
         items = ['页面用 Python 生成。全站使用设备自带的字体，不加载外部字体文件。',
-                 '「历史中的今天」页：日历、天气和地球是实时计算的；新闻按来源媒体选题和预设规则自动汇集，保留原文时间与链接；历史事件从本地日期资料库轮换。首页只放日期、节气和一个小地球。',
-                 '历史中的今天页的天气来自 Open-Meteo；搜索城市时会向其地名服务发送输入的城市名，不读取你的位置；所选城市和最近一次天气只保存在你的浏览器里。首页不请求天气。',
+                 '「今天」页依次展示地球、天气、历史、阅读和新闻。日历和地球实时计算，历史事件与阅读内容从本地资料库按北京时间轮换。首页只放日期、节气和一个小地球。',
+                 '天气来自 Open-Meteo；搜索城市会向其地名服务发送输入的城市名，地图选点会发送所选坐标以查询天气，不读取设备定位。页面仅在浏览器里保存所选城市或坐标及最近一次天气。首页不请求天气。',
+                 '新闻按来源媒体选题和预设规则自动汇集，保留原题、原文发布时间与链接。红色语录摘自马克思主义者网对应中、英文作品，并随本站保存，阅读时不自动请求该站。',
                  '文章的浏览量和留言由 Waline 提供：相关请求会把 IP 和浏览器信息发送给 Waline 后端及其托管商'
                  + (f'（服务托管：{host}；数据库：{database}）' if host and database else '') + '。留言区另有说明。',
                  '足迹地图的底图来自 Natural Earth（公有领域）；作品截图与其他第三方来源见各项目说明。']
@@ -774,7 +784,10 @@ def build_site(address, map_preview_source=None):
               "photo_album_total": str(photo_report["albums"]),
               "photo_total": str(photo_report["photos"])}
     has_home_photo = (ROOT / HOME_PHOTO.lstrip("/")).is_file()
+    beijing_today = datetime.now(CHINA).date()
     values.update({
+        "today_date_title": f"今天：{beijing_today.year}年{beijing_today.month}月{beijing_today.day}日",
+        "today_date_title_en": f"Today: {beijing_today.day} {beijing_today.strftime('%B')} {beijing_today.year}",
         "news_snapshot_data": safe_json(news_snapshot),
         "news_sources_data": safe_json({"sources": [{"name": item["name"], "home_url": item["home_url"]} for item in news_sources["sources"]]}),
         "news_snapshot_feed": render_snapshot(news_snapshot, "zh-CN", news_sources, include_sources=False, include_stamp=False),

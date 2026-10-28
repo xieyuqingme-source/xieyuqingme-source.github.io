@@ -4,6 +4,7 @@ from pathlib import Path
 from xml.etree import ElementTree as ET
 import argparse,json,unittest,re,struct
 from build_blog import Blog
+from site_i18n import HOME_TITLES, localize_page
 
 ROOT=Path(__file__).resolve().parent.parent
 class Brand(HTMLParser):
@@ -28,6 +29,20 @@ def check_brand(test,text,href=None):
     return link
 
 class BrandingTests(unittest.TestCase):
+    def test_homepage_tab_titles_are_localized_without_changing_the_shared_brand(self):
+        self.assertEqual(HOME_TITLES, {'zh-CN': '谢雨卿个人网站', 'en': 'Xie Yuqing’s personal website'})
+        for language, template in [('zh-CN', 'home/index.template.html'), ('en', 'home/en/index.template.html')]:
+            with self.subTest(language=language):
+                source=(ROOT/template).read_text(encoding='utf8').replace('{{site_url}}','https://site.test')
+                title=HOME_TITLES[language]
+                self.assertIn('<title>'+title+'</title>',source)
+                self.assertIn('property="og:title" content="'+title+'"',source)
+                page=localize_page(source,ROOT,'https://site.test','/',language)
+                self.assertIn('<title>'+title+'</title>',page)
+                bootstrap=json.loads(re.search(r'<script id="site-i18n-data"[^>]*>(.*?)</script>',page,re.S)[1])
+                self.assertEqual(bootstrap['page']['titles'],HOME_TITLES)
+                check_brand(self,page,'/en/' if language=='en' else '/')
+
     def test_all_live_home_feature_templates_have_one_wordmark_and_correct_home(self):
         sources=sorted((ROOT/'home').glob('*.template.html'))+sorted((ROOT/'home/en').glob('*.template.html'))
         count=0

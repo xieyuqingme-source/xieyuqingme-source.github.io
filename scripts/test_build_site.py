@@ -612,7 +612,7 @@ class DailyHomepageTests(unittest.TestCase):
         self.assertEqual(json.loads(text)["example"], "</script><script>alert(1)</script>&\u2028")
         validate_content(self.content)
         for item in self.content["quotes"]:
-            self.assertTrue(item["url"].startswith("https://"))
+            self.assertTrue(all(url.startswith("https://") for url in item["url"].values()))
             for field in ("author", "work", "translation_note"):
                 self.assertTrue(all(item[field][language].strip() for language in ("zh-CN", "en")))
 
@@ -804,8 +804,8 @@ class ProjectPublicationTests(unittest.TestCase):
                 self.assertNotIn("wechat-qrcode", home)
                 self.assertIn('href="/map/"', home)
                 self.assertIn('id="home-random-button"', home)
-                self.assertIn('<h2 id="glance-title"><a href="/today/">历史中的今天</a></h2>', home)
-                self.assertIn('<h2 id="glance-title"><a href="/en/today/">Today in history</a></h2>', english_home)
+                self.assertIn('<h2 id="glance-title"><a href="/today/">今天</a></h2>', home)
+                self.assertIn('<h2 id="glance-title"><a href="/en/today/">Today</a></h2>', english_home)
                 self.assertIn('id="home-title">谢雨卿</h1>', home)
                 self.assertIn('我要把精力放到英语上。', home)
                 self.assertNotIn('id="now"', home)
@@ -916,11 +916,26 @@ class PublicBiographyTests(unittest.TestCase):
         self.assertEqual(data["name"], "谢雨卿")
         self.assertEqual(data["wechat"], "谢雨聊")
         self.assertEqual(data["email"], "xieyuqing.me@gmail.com")
+        self.assertEqual(data["zhihu"], "谢雨聊")
+        self.assertEqual(data["x_handle"], "MeXieyuqing")
         html = render_about(data)
         self.assertEqual(sum(tag == "article" for tag, _ in Elements(html).elements), 1)
         for paragraph in data["chinese_bio"]:
             self.assertIn(paragraph, html)
         self.assertNotIn("Folder Guide", html)
+
+    def test_public_social_contacts_keep_zhihu_as_text_and_link_the_exact_x_handle(self):
+        data = load_about()
+        for language in ("zh-CN", "en"):
+            html = render_about(data, language)
+            self.assertIn("@谢雨聊", html)
+            self.assertIn("@MeXieyuqing", html)
+            links = [attrs for tag, attrs in Elements(html).elements if tag == "a"]
+            self.assertFalse(any("zhihu.com" in attrs.get("href", "") for attrs in links))
+            x_links = [attrs for attrs in links if attrs.get("href") == "https://x.com/MeXieyuqing"]
+            self.assertEqual(len(x_links), 1)
+            self.assertEqual(x_links[0].get("rel"), "noopener noreferrer")
+            self.assertTrue(any(attrs.get("href") == "mailto:" + data["email"] for attrs in links))
 
     def test_text_is_escaped_and_private_fields_are_rejected(self):
         data = deepcopy(load_about())
@@ -930,7 +945,10 @@ class PublicBiographyTests(unittest.TestCase):
                            ("chinese_colophon", ["one", "two", "three"]),
                            ("english_colophon", ["Private C:\\Users\\example"]),
                            ("written_note", "hidden\x00control"), ("english_written_note", "x" * 2001),
-                           ("name", r"D:\Obsidian Vault\private.md"), ("email", 'x@example.com" onclick="x')):
+                           ("name", r"D:\Obsidian Vault\private.md"), ("email", 'x@example.com" onclick="x'),
+                           ("zhihu", "<script>account</script>"), ("zhihu", "name\x00control"),
+                           ("x_handle", "https://x.com/SomeoneElse"), ("x_handle", "name?token=private"),
+                           ("x_handle", "name/other"), ("x_handle", "@MeXieyuqing")):
             sample = deepcopy(load_about()); sample[key] = value
             with self.subTest(key=key), self.assertRaises(ValueError):
                 validate_about(sample)
@@ -980,8 +998,12 @@ class PublicBiographyTests(unittest.TestCase):
             self.assertNotIn("source code is public", html)
             self.assertNotIn("黄历", html)
             self.assertNotIn("almanac", html)
-            self.assertIn("历史中的今天" if language == "zh-CN" else "Today in history", html)
+            self.assertIn("「今天」页" if language == "zh-CN" else "The Today page", html)
             self.assertIn("输入的城市名" if language == "zh-CN" else "the name you enter to its geocoding service", html)
+            self.assertIn("所选坐标" if language == "zh-CN" else "sends its coordinates for weather", html)
+            self.assertIn("不读取设备定位" if language == "zh-CN" else "never requests your device location", html)
+            self.assertIn("地球、天气、历史、阅读和新闻" if language == "zh-CN" else "Earth, weather, history, reading and news", html)
+            self.assertIn("阅读时不自动请求该站" if language == "zh-CN" else "no automatic request to that site", html)
             self.assertIn("首页不请求天气" if language == "zh-CN" else "The homepage makes no weather request", html)
             self.assertIn("Python", html)
             self.assertIn("设备自带的字体" if language == "zh-CN" else "system fonts only", html)

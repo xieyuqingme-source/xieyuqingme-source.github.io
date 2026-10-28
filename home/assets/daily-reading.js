@@ -48,7 +48,8 @@
   function quotations(value) {
     const seen = new Set();
     return (value?.version === 1 && Array.isArray(value.quotes) ? value.quotes : []).filter(item => {
-      if (!item || typeof item.id !== 'string' || !item.id || seen.has(item.id) || !['text','author','work','translation_note'].every(key => bilingual(item[key])) || !safeSource(item.url)) return false;
+      const sourcesValid = typeof item?.url === 'string' ? safeSource(item.url) : bilingual(item?.url) && ['zh-CN','en'].every(language => safeSource(item.url[language]));
+      if (!item || typeof item.id !== 'string' || !item.id || seen.has(item.id) || !['text','author','work','translation_note'].every(key => bilingual(item[key])) || !sourcesValid) return false;
       seen.add(item.id); return true;
     });
   }
@@ -85,10 +86,11 @@
     }
     function renderClassic() {
       const item = classic[classicDeck?.current()]; if (!item) return;
+      write('daily-quotation-title',language === 'en' ? 'Red quotations' : '红色语录');
       write('daily-quote-text',item.text[language]); write('daily-quote-author',item.author[language]); write('daily-quote-note',item.translation_note[language]);
-      const link = find('daily-quote-work'); if (link) { link.href = item.url; link.textContent = item.work[language]+' ↗'; link.target = '_blank'; link.rel = 'noopener noreferrer'; }
+      const link = find('daily-quote-work'); if (link) { link.href = typeof item.url === 'string' ? item.url : item.url[language]; link.textContent = item.work[language]+' ↗'; link.target = '_blank'; link.rel = 'noopener noreferrer'; link.setAttribute('hreflang',language); link.setAttribute('lang',language); }
       if (find('daily-quote')) find('daily-quote').dataset.quoteId = item.id;
-      renderButton('daily-quote-button','daily-quotation-title',language === 'en' ? 'Daily quotations' : '每日语录');
+      renderButton('daily-quote-button','daily-quotation-title',language === 'en' ? 'Red quotations' : '红色语录');
     }
     function renderOwn() {
       const index = ownDeck?.current(), item = own[index]; if (!item) return;

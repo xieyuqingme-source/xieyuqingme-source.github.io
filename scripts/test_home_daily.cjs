@@ -22,11 +22,12 @@ class Element {
   closest(selector) { return selector === '[data-city-result]' && this.dataset.cityResult !== undefined ? this : null; }
   remove() { this.removed = true; }
 }
-function harness({mode = 'full',readyState = 'loading',idle = true,now = '2026-10-26T16:30:00Z',saved = null,mobile = false,denied = false,language = 'zh-CN',edition = '2026-10-27',articles = null,content = null,knowledge = [],memes = [],snapshot = null,history = null,newsSources = [],rules = [],holidays = {},weatherData,geocodingData,storedValues = {},deferForecast = false,deferGeocoding = false} = {}) {
+function harness({mode = 'full',readyState = 'loading',idle = true,now = '2026-10-26T16:30:00Z',saved = null,mobile = false,denied = false,language = 'zh-CN',edition = '2026-10-27',articles = null,content = null,knowledge = [],memes = [],snapshot = null,history = null,newsSources = [],rules = [],holidays = {},weatherData,geocodingData,storedValues = {},deferForecast = false,deferGeocoding = false,withWeatherMap = false} = {}) {
   let epoch = new Date(now).getTime(), subscription, nextTimer = 0;
   class Clock extends Date { constructor(...args) { super(...(args.length ? args : [epoch])); } static now() { return epoch; } }
-  const ids = ['news-snapshot-data','news-sources-data','daily-history-data','daily-history-list','history-date-note','news-source-links','timeline-date','daily-city-label','daily-weather-details','city-search-form','city-search-input','city-search-results','city-search-status','glance-date','daily-calendar-next-term','daily-brief-data','daily-content-data','daily-knowledge-data','daily-memes-data','daily-rules-data','daily-holidays-data','home-random-data','daily-feed','daily-news-title','daily-brief-notice','daily-edition','home-date','brief-body','brief-toggle','brief-lunar','brief-term','brief-weather','brief-headline','daily-calendar-lunar','daily-calendar-term','daily-calendar-cycle','daily-calendar-festivals','daily-calendar-holiday','daily-calendar-day','daily-calendar-weekday','daily-calendar-month','daily-weather','daily-weather-hint','daily-city','home-random-button','daily-street-title','daily-street-text','daily-street-links','daily-meme-card','daily-meme-added','daily-meme-origin','daily-meme-example','daily-meme-why','daily-concept-title','daily-concept-text','daily-concept-source','daily-quote','daily-quote-source','brief-bottom','daily-earth'];
+  const ids = ['today-title','daily-city-name','weather-selection-status','news-snapshot-data','news-sources-data','daily-history-data','daily-history-list','history-date-note','news-source-links','timeline-date','daily-city-label','daily-weather-details','city-search-form','city-search-input','city-search-results','city-search-status','glance-date','daily-calendar-next-term','daily-brief-data','daily-content-data','daily-knowledge-data','daily-memes-data','daily-rules-data','daily-holidays-data','home-random-data','daily-feed','daily-news-title','daily-brief-notice','daily-edition','home-date','brief-body','brief-toggle','brief-lunar','brief-term','brief-weather','brief-headline','daily-calendar-lunar','daily-calendar-term','daily-calendar-cycle','daily-calendar-festivals','daily-calendar-holiday','daily-calendar-day','daily-calendar-weekday','daily-calendar-month','daily-weather','daily-weather-hint','daily-city','home-random-button','daily-street-title','daily-street-text','daily-street-links','daily-meme-card','daily-meme-added','daily-meme-origin','daily-meme-example','daily-meme-why','daily-concept-title','daily-concept-text','daily-concept-source','daily-quote','daily-quote-source','brief-bottom','daily-earth'];
   const nodes = Object.fromEntries(ids.map(id => [id,new Element()]));
+  if (withWeatherMap) nodes['weather-map-canvas'] = new Element('canvas');
   for (const id of ['home-random-button','city-search-results']) nodes[id].hidden = true;
   const items = Array.from({length:12},(_,index) => ({title:{'zh-CN':'标题 ' + index,en:'Title ' + index},summary:{'zh-CN':'摘要',en:'Summary'},source:{'zh-CN':'来源',en:'Source'},published:'2026-10-26T09:00+08:00',category:['culture','science','economy','world','domestic'][index % 5],priority:index === 3 ? 'major' : 'normal',major_reason:index === 3 ? {'zh-CN':'重大事件',en:'Major event'} : undefined,url:'https://example.test/' + index}));
   for (const [id,value] of Object.entries({'news-snapshot-data':snapshot,'news-sources-data':{sources:newsSources},'daily-history-data':history,'daily-brief-data':{version:2,edition_date:edition,updated_at:edition + 'T09:50+08:00',items},'daily-content-data':content,'daily-knowledge-data':{items:knowledge},'daily-memes-data':{items:memes},'daily-rules-data':{weather:rules},'daily-holidays-data':{years:holidays},'home-random-data':articles})) nodes[id].textContent = JSON.stringify(value);
@@ -55,9 +56,11 @@ function harness({mode = 'full',readyState = 'loading',idle = true,now = '2026-1
       return Promise.resolve({ok:true,json:async () => result});
     }
   });
+  let mapOptions, mapDestroyed = false; const mapCities = [];
+  window.HomeWeatherMap = {createWeatherMap(doc,win,options) { mapOptions = options; return {setCity(value) { mapCities.push(value); },refresh() {},destroy() { mapDestroyed = true; }}; }};
   if (idle) { window.requestIdleCallback = (fn,options) => { const id = ++nextTimer; idleCallbacks.set(id,{fn,options}); return id; }; window.cancelIdleCallback = id => idleCallbacks.delete(id); }
   vm.runInNewContext(source,{document,window,Intl,Date:Clock,Math},{timeout:1000});
-  return {nodes,root,document,window,stored,intervals,timers,observers,visited,assigned,body,requests,earthCalls,earthCityChanges,reads,storageOps,idleCallbacks,search(query) { nodes['city-search-input'].value = query; nodes['city-search-form'].events.submit({preventDefault() {}}); },chooseResult(index) { nodes['city-search-results'].events.click({target:nodes['city-search-results'].children[index].children[0]}); },selectPreset(value) { nodes['daily-city'].value = value; nodes['daily-city'].events.change(); },load() { document.readyState = 'complete'; window.events.load?.(); },runIdle() { const jobs = [...idleCallbacks.values()]; idleCallbacks.clear(); jobs.forEach(job => job.fn()); },runTimeouts() { const jobs = [...timers.values()]; timers.clear(); jobs.forEach(job => job.fn()); },tick(instant) { epoch = new Date(instant).getTime(); [...intervals.values()].forEach(fn => fn()); },changeLanguage(value) { document.documentElement.lang = value; subscription?.(); },intersect(value) { observers[0].fn([{isIntersecting:value}]); },loadScript(kind) { const script = body.children.find(node => node.src.includes(kind) && !node.loaded); assert.ok(script,'pending ' + kind); script.loaded = true; if (kind === 'lunar') Object.assign(window,Lunar); if (kind === 'home-earth') window.HomeEarth = {createEarth(...args) { earthCalls.push(args); return {setCity(value) { earthCityChanges.push(value); },setPaused(value) { earthCalls.push({paused:value}); },destroy() { earthCalls.push('destroy'); }}; }}; script.onload(); },failScript(kind) { const script = body.children.find(node => node.src.includes(kind) && !node.loaded); assert.ok(script); script.loaded = true; script.onerror(); },dispose() { owned.forEach(fn => fn()); }};
+  return {nodes,root,document,window,stored,mapCities,pickMap(point) { return mapOptions.onPick(point); },mapDestroyed:() => mapDestroyed,intervals,timers,observers,visited,assigned,body,requests,earthCalls,earthCityChanges,reads,storageOps,idleCallbacks,search(query) { nodes['city-search-input'].value = query; nodes['city-search-form'].events.submit({preventDefault() {}}); },chooseResult(index) { nodes['city-search-results'].events.click({target:nodes['city-search-results'].children[index].children[0]}); },selectPreset(value) { nodes['daily-city'].value = value; nodes['daily-city'].events.change(); },load() { document.readyState = 'complete'; window.events.load?.(); },runIdle() { const jobs = [...idleCallbacks.values()]; idleCallbacks.clear(); jobs.forEach(job => job.fn()); },runTimeouts() { const jobs = [...timers.values()]; timers.clear(); jobs.forEach(job => job.fn()); },tick(instant) { epoch = new Date(instant).getTime(); [...intervals.values()].forEach(fn => fn()); },changeLanguage(value) { document.documentElement.lang = value; subscription?.(); },intersect(value) { observers[0].fn([{isIntersecting:value}]); },loadScript(kind) { const script = body.children.find(node => node.src.includes(kind) && !node.loaded); assert.ok(script,'pending ' + kind); script.loaded = true; if (kind === 'lunar') Object.assign(window,Lunar); if (kind === 'home-earth') window.HomeEarth = {createEarth(...args) { earthCalls.push(args); return {setCity(value) { earthCityChanges.push(value); },setPaused(value) { earthCalls.push({paused:value}); },destroy() { earthCalls.push('destroy'); }}; }}; script.onload(); },failScript(kind) { const script = body.children.find(node => node.src.includes(kind) && !node.loaded); assert.ok(script); script.loaded = true; script.onerror(); },dispose() { owned.forEach(fn => fn()); }};
 }
 test('glance fills Beijing date and fallback term without reading embedded news, city or weather data',async () => {
   const h = harness({mode:'glance',saved:'2026-10-27'}); await settle();
@@ -169,4 +172,43 @@ test('prototype-named city preferences fall back safely and array-valued weather
   const good = harness(); await settle(); const stored = Object.fromEntries(good.stored), key = 'xieyuqing-weather-v3:' + A.cityModel.identity(A.cityModel.presets.beijing), poison = JSON.parse(stored[key]); poison.time = ['2026-10-27T00:30']; stored[key] = JSON.stringify(poison);
   const cached = harness({storedValues:stored}); await settle(); assert.equal(cached.requests.length,1); assert.match(cached.nodes['daily-weather'].textContent,/12°C/);
   const bad = forecast(0); bad.current.time = ['2026-10-27T00:30']; const incoming = harness({weatherData:bad}); await settle(); assert.equal(incoming.nodes['daily-weather'].textContent,'天气暂不可用'); assert.ok(!incoming.stored.has(key)); incoming.dispose();
+});
+
+test('today headline and compact lunar/term/festival line advance at Beijing midnight',async () => {
+  const h = harness({now:'2026-10-28T15:59:00Z'}); h.loadScript('lunar'); await settle();
+  assert.equal(h.nodes['today-title'].textContent,'今天：2026年10月28日');
+  assert.equal(h.nodes['daily-calendar-lunar'].textContent,'丙午年九月十九');
+  assert.equal(h.nodes['daily-calendar-term'].textContent,'霜降第6天 · 距立冬还有10天');
+  assert.equal(h.nodes['daily-calendar-festivals'].textContent,'距万圣节前夜还有3天');
+  h.selectPreset('newyork'); h.tick('2026-10-28T16:01:00Z');
+  assert.equal(h.nodes['today-title'].textContent,'今天：2026年10月29日');
+  assert.match(h.nodes['daily-calendar-term'].textContent,/第7天.*还有9天/);
+  h.changeLanguage('en'); assert.equal(h.nodes['today-title'].textContent,'Today: 29 October 2026');
+  h.dispose();
+});
+
+test('map selection resolves the actual timezone once and reuses its forecast for weather and Earth',async () => {
+  const h = harness({withWeatherMap:true,deferForecast:true});
+  const pending = h.pickMap({lat:48.5,lon:2.2}); assert.equal(h.requests.length,2);
+  assert.match(h.requests[1].url,/timezone=auto/); const data = forecast(1); data.timezone = 'Europe/Paris';
+  h.requests[1].resolve(data); await pending; await settle();
+  assert.equal(h.requests.length,2,'the resolved forecast is reused');
+  assert.equal(h.nodes['daily-city-name'].textContent,'地图选点');
+  assert.match(h.nodes['daily-city-label'].textContent,/48.50°.*2.20°.*Europe\/Paris/);
+  assert.equal(h.mapCities.at(-1).tz,'Europe/Paris');
+  const saved = JSON.parse(h.stored.get('xieyuqing-home-city-v2')).city;
+  assert.equal(saved.lat,48.5); assert.equal(saved.tz,'Europe/Paris'); assert(h.requests[0].signal.aborted);
+  h.dispose(); assert(h.mapDestroyed());
+});
+
+test('obsolete map lookups, invalid timezones and late responses cannot replace a chosen city',async () => {
+  const h = harness({withWeatherMap:true,deferForecast:true});
+  const first = h.pickMap({lat:48.5,lon:2.2}); h.selectPreset('shanghai');
+  assert(h.requests[1].signal.aborted); const valid = forecast(1); valid.timezone = 'Europe/Paris';
+  h.requests[1].resolve(valid); await first; assert.equal(h.mapCities.at(-1).id,'shanghai');
+  const second = h.pickMap({lat:20,lon:30}); const invalid = forecast(0); invalid.timezone = 'not/a/zone';
+  h.requests[3].resolve(invalid); await second;
+  assert.equal(h.mapCities.at(-1).id,'shanghai'); assert.match(h.nodes['weather-selection-status'].textContent,/保留当前天气/);
+  const third = h.pickMap({lat:10,lon:20}); h.dispose(); assert(h.requests[4].signal.aborted);
+  h.requests[4].resolve(valid); await third; assert.equal(h.mapCities.at(-1).id,'shanghai');
 });

@@ -10,6 +10,10 @@
 
 邮箱：[xieyuqing.me@gmail.com](mailto:xieyuqing.me@gmail.com)
 
+知乎：@谢雨聊
+
+X：[@MeXieyuqing](https://x.com/MeXieyuqing)
+
 I’m Xie Yuqing (Carl), an MBA student in Malaysia. Here I share my original Chinese essays and English writing practice, exploring everyday life, learning, and society.
 
 ## 网站与应用
@@ -20,19 +24,20 @@ This repository contains the source and public content for my personal website, 
 
 | 栏目或应用 | 网站入口 | 本仓库中的来源 |
 | --- | --- | --- |
-| 个人主页 | [首页](https://xieyuqing.me/) | `home/index.template.html`；头像、历史中的今天精简版、文章入口、照片、作品和小游戏，数量由构建器生成 |
-| 历史中的今天 | [历史中的今天](https://xieyuqing.me/today/) | `home/today.template.html`、`home/brief/`；新闻选读、日历、节气、天气与地球 |
+| 个人主页 | [首页](https://xieyuqing.me/) | `home/index.template.html`；五块精简首页，保留「今天」轻量入口及文章、照片、作品和小游戏入口，数量由构建器生成 |
+| 今天 | [今天](https://xieyuqing.me/today/) | `home/today.template.html`、`home/brief/`；依次为地球、地图选点天气、历史上的今天、每日阅读、重点新闻 |
 | 中英文文章 | [文章](https://xieyuqing.me/articles/) | `中文文章/`、`English Articles/`、`blog/` |
 | 作品展示 | [作品](https://xieyuqing.me/projects/) | `home/projects.json`、`home/projects.template.html` |
 | 摄影相册 | [摄影](https://xieyuqing.me/photos/) | `photos/catalog.json`、`photos/images/`；只使用已选定的公开导出 |
 | 足迹地图 | [地图与足迹](https://xieyuqing.me/map/) | `map/catalog.json`、`home/map.template.html`、`home/assets/map*.js` |
 | 小游戏与排行工具 | [小游戏](https://xieyuqing.me/game/)、[从夯到拉排行](https://xieyuqing.me/game/ranking/) | `home/game.template.html`、`home/ranking.template.html`、`home/assets/ranking*.js` |
-| 关于我 | [关于页](https://xieyuqing.me/about/) | `home/about.json`、`home/about.template.html`；不从 README 生成 |
+| 关于我 | [关于页](https://xieyuqing.me/about/) | `home/about.json`、`home/about.template.html`；个人介绍、公众号、邮箱、知乎和 X，不从 README 生成 |
 
 ### 本仓库内的应用与独立工具
 
 - **足迹地图**：`/map/` 展示作者的真实城市足迹、原始注释、相关城市相册和地图动画。独立的 `/game/footprints/` 提供访客添加、导入、编辑及图片/视频制作。两者数据隔离，访客草稿主动保存后才写入浏览器，不上传。
 - **从夯到拉排行**：美食与运动示例、自定义图片、等级与排序编辑、展示模式、PNG 导出及 JSON 备份。榜单与图片保存在当前浏览器的 IndexedDB 中，不提供跨设备同步；清理浏览器数据前请导出备份。小游戏入口同时提供排行与足迹地图制作工具。
+- **今天**：页首显示北京时间日期，沿时间长河的轻量动效展开地球、天气、历史、阅读和新闻。天气可在本地地图上选点，也可选择或搜索城市；首页轻量入口不请求天气。每日阅读由「红色语录」与「旧文一句」组成，均可换句；红色语录的中文和英文分别链接已核对的 MIA 作品版本。新闻由独立流程每天检查三次，点击原标题直达来源；历史与阅读按日期在本地轮换。实际维护方式与来源限制见[今天页维护](blog/今日简报维护.md)。
 - **独立仓库工具**：作品页中的[雨聊公众号排版](https://github.com/xieyuqingme-source/yuliao-wechat-editor)、[Coze 论文速记工作流](https://github.com/xieyuqingme-source/coze-paper-quick-reference)和[雨聊壁纸](https://github.com/xieyuqingme-source/yuliao-wallpaper)分别在各自仓库维护。本仓库保存其展示资料、截图与链接，不包含这些工具的完整源码，也不代表它们都能在本站在线运行。公众号排版为本地工具，Coze 工作流需导入平台配置，壁纸为 Windows 测试版；具体使用方法和限制以各项目说明为准。
 
 ### 阅读、使用与维护
@@ -50,7 +55,7 @@ python scripts/check_site.py --site-url https://xieyuqing.me
 python scripts/preview_site.py
 ```
 
-打开 <http://127.0.0.1:8767/>，按 `Ctrl+C` 停止本机预览。构建和预览不会提交或发布；用户审阅后推送 `main` 才会触发已有的 `Publish personal site` 工作流。不要直接修改生成目录。完整检查与环境说明见[网站与作品维护](blog/网站与作品维护.md)。
+打开 <http://127.0.0.1:8767/>，按 `Ctrl+C` 停止本机预览。构建和预览不会提交或发布；推送 `main`、手动运行或独立新闻采集成功会触发 `Publish personal site` 工作流。不要直接修改生成目录。完整检查与环境说明见[网站与作品维护](blog/网站与作品维护.md)。
 
 ### 公开内容与隐私
 

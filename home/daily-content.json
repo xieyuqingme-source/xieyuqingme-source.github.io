@@ -13,19 +13,22 @@
       },
       "work": {
         "zh-CN": "《关于费尔巴哈的提纲》1845年稿本，第八条",
-        "en": "Theses on Feuerbach, 1845 manuscript, thesis VIII"
+        "en": "Theses on Feuerbach, original manuscript, thesis 8 (1845)"
       },
       "translation_note": {
-        "zh-CN": "中文据所链文本；英文为本站依据中文所作译文。",
-        "en": "The Chinese follows the linked text; the English is this site’s translation from Chinese."
+        "zh-CN": "中文据所链文本；英文另据MIA英文版本。",
+        "en": "MIA English edition: Cyril Smith (2002), based on work with Don Cuckson; first sentence of thesis 8."
       },
-      "url": "https://www.marxists.org/chinese/marx/marxist.org-chinese-marx-1845.htm"
+      "url": {
+        "zh-CN": "https://www.marxists.org/chinese/marx/marxist.org-chinese-marx-1845.htm",
+        "en": "https://www.marxists.org/archive/marx/works/1845/theses/index.htm"
+      }
     },
     {
       "id": "engels-communism-conditions",
       "text": {
         "zh-CN": "共产主义是关于无产阶级解放的条件的学说。",
-        "en": "Communism is the theory of the conditions for proletarian liberation."
+        "en": "Communism is the doctrine of the conditions of the liberation of the proletariat."
       },
       "author": {
         "zh-CN": "恩格斯",
@@ -33,19 +36,22 @@
       },
       "work": {
         "zh-CN": "《共产主义原理》第一个问题（1847年）",
-        "en": "Principles of Communism, question 1 (1847)"
+        "en": "The Principles of Communism, question 1 (1847)"
       },
       "translation_note": {
-        "zh-CN": "中文据所链文本；英文为本站依据中文所作译文。",
-        "en": "The Chinese follows the linked text; the English is this site’s translation from Chinese."
+        "zh-CN": "中文据所链文本；英文另据MIA英文版本。",
+        "en": "MIA English edition, translated by Paul Sweezy; the answer to question 1."
       },
-      "url": "https://www.marxists.org/chinese/engels/marxist.org-chinese-engels-1847a.htm"
+      "url": {
+        "zh-CN": "https://www.marxists.org/chinese/engels/marxist.org-chinese-engels-1847a.htm",
+        "en": "https://www.marxists.org/archive/marx/works/1847/11/prin-com.htm"
+      }
     },
     {
       "id": "lenin-revolutionary-theory",
       "text": {
         "zh-CN": "没有革命的理论，就不会有革命的运动。",
-        "en": "Without revolutionary theory, there can be no revolutionary movement."
+        "en": "Without revolutionary theory there can be no revolutionary movement."
       },
       "author": {
         "zh-CN": "列宁",
@@ -53,19 +59,22 @@
       },
       "work": {
         "zh-CN": "《怎么办？》第一章第四节（1902年）",
-        "en": "What Is to Be Done?, chapter I, section D (1902)"
+        "en": "What Is To Be Done?, chapter I, section D (1902)"
       },
       "translation_note": {
-        "zh-CN": "中文据所链文本；英文为本站依据中文所作译文。",
-        "en": "The Chinese follows the linked text; the English is this site’s translation from Chinese."
+        "zh-CN": "中文据所链文本；英文另据MIA英文版本。",
+        "en": "Quoted directly from the MIA English edition, chapter I, section D."
       },
-      "url": "https://www.marxists.org/chinese/lenin/1901-1902/01.htm"
+      "url": {
+        "zh-CN": "https://www.marxists.org/chinese/lenin/1901-1902/01.htm",
+        "en": "https://www.marxists.org/archive/lenin/works/1901/witbd/i.htm"
+      }
     },
     {
       "id": "mao-investigation",
       "text": {
         "zh-CN": "没有调查，没有发言权",
-        "en": "Without investigation, there is no right to speak."
+        "en": "NO INVESTIGATION, NO RIGHT TO SPEAK"
       },
       "author": {
         "zh-CN": "毛泽东",
@@ -73,19 +82,22 @@
       },
       "work": {
         "zh-CN": "《反对本本主义》第一节（1930年）",
-        "en": "Oppose Book Worship, section I (1930)"
+        "en": "Oppose Book Worship, section I (May 1930)"
       },
       "translation_note": {
-        "zh-CN": "中文为所链文本的短句节选；英文为本站译文。",
-        "en": "A short excerpt from the linked Chinese text; the English is this site’s translation."
+        "zh-CN": "中文为所链文本的短句节选；英文另据MIA英文版本。",
+        "en": "MIA English edition; section I heading, retaining its capitalization and omitting the section number."
       },
-      "url": "https://www.marxists.org/chinese/maozedong/marxist.org-chinese-mao-193005.htm"
+      "url": {
+        "zh-CN": "https://www.marxists.org/chinese/maozedong/marxist.org-chinese-mao-193005.htm",
+        "en": "https://www.marxists.org/reference/archive/mao/selected-works/volume-6/mswv6_11.htm"
+      }
     },
     {
       "id": "marx-science-road",
       "text": {
         "zh-CN": "在科学上没有平坦的大道",
-        "en": "There is no smooth highway in science."
+        "en": "There is no royal road to science"
       },
       "author": {
         "zh-CN": "马克思",
@@ -96,16 +108,19 @@
         "en": "Capital, volume I, preface to the French edition (18 March 1872)"
       },
       "translation_note": {
-        "zh-CN": "中文为所链文本的短句节选；英文为本站译文。",
-        "en": "A short excerpt from the linked Chinese text; the English is this site’s translation."
+        "zh-CN": "中文为所链文本的短句节选；英文另据MIA英文版本。",
+        "en": "MIA English edition; a clause excerpt from the final body paragraph. The sentence continues with the effort required of readers."
       },
-      "url": "https://www.marxists.org/chinese/marx/capital/00.htm"
+      "url": {
+        "zh-CN": "https://www.marxists.org/chinese/marx/capital/00.htm",
+        "en": "https://www.marxists.org/archive/marx/works/1867-c1/p2.htm"
+      }
     },
     {
       "id": "engels-labour-humanity",
       "text": {
         "zh-CN": "劳动创造了人本身。",
-        "en": "Labour created humanity itself."
+        "en": "labour created man himself."
       },
       "author": {
         "zh-CN": "恩格斯",
@@ -113,19 +128,22 @@
       },
       "work": {
         "zh-CN": "《劳动在从猿到人转变过程中的作用》首段",
-        "en": "The Part Played by Labour in the Transition from Ape to Man, opening paragraph"
+        "en": "The Part played by Labour in the Transition from Ape to Man, opening paragraph (1876)"
       },
       "translation_note": {
-        "zh-CN": "短句节选；原文以“在某种意义上”作限定。英文为本站译文。",
-        "en": "A short excerpt; the original qualifies this as “in a certain sense”. English translated by this site."
+        "zh-CN": "短句节选；原文以“在某种意义上”作限定。英文另据MIA英文版本。",
+        "en": "MIA English edition, translated by Clemens Dutt; a clause excerpt. The preceding text qualifies the claim as being true in a certain sense."
       },
-      "url": "https://www.marxists.org/chinese/engels/marxist.org-chinese-engels-1875a.htm"
+      "url": {
+        "zh-CN": "https://www.marxists.org/chinese/engels/marxist.org-chinese-engels-1875a.htm",
+        "en": "https://www.marxists.org/archive/marx/works/1876/part-played-labour/index.htm"
+      }
     },
     {
       "id": "lenin-marx-theory",
       "text": {
         "zh-CN": "马克思学说具有无限力量，就是因为它正确。",
-        "en": "Marx’s theory has boundless power because it is correct."
+        "en": "The Marxist doctrine is omnipotent because it is true."
       },
       "author": {
         "zh-CN": "列宁",
@@ -136,16 +154,19 @@
         "en": "The Three Sources and Three Component Parts of Marxism, introduction (1913)"
       },
       "translation_note": {
-        "zh-CN": "中文据所链文本；英文为本站依据中文所作译文。",
-        "en": "The Chinese follows the linked text; the English is this site’s translation from Chinese."
+        "zh-CN": "中文据所链文本；英文另据MIA英文版本。",
+        "en": "MIA English edition, translated by George Hanna, Collected Works, volume 19; the wording follows this English edition."
       },
-      "url": "https://www.marxists.org/chinese/lenin/12.htm"
+      "url": {
+        "zh-CN": "https://www.marxists.org/chinese/lenin/12.htm",
+        "en": "https://www.marxists.org/archive/lenin/works/1913/mar/x01.htm"
+      }
     },
     {
       "id": "mao-truth-practice",
       "text": {
         "zh-CN": "真理的标准只能是社会的实践。",
-        "en": "The criterion of truth can only be social practice."
+        "en": "Only social practice can be the criterion of truth."
       },
       "author": {
         "zh-CN": "毛泽东",
@@ -153,19 +174,22 @@
       },
       "work": {
         "zh-CN": "《实践论》关于真理标准的段落（1937年）",
-        "en": "On Practice, paragraph on the criterion of truth (1937)"
+        "en": "On Practice, paragraph on the criterion of truth (July 1937)"
       },
       "translation_note": {
-        "zh-CN": "中文据所链文本；英文为本站依据中文所作译文。",
-        "en": "The Chinese follows the linked text; the English is this site’s translation from Chinese."
+        "zh-CN": "中文据所链文本；英文另据MIA英文版本。",
+        "en": "Quoted directly from the MIA English edition; the sentence discussing the criterion of truth."
       },
-      "url": "https://www.marxists.org/chinese/maozedong/marxist.org-chinese-mao-193707.htm"
+      "url": {
+        "zh-CN": "https://www.marxists.org/chinese/maozedong/marxist.org-chinese-mao-193707.htm",
+        "en": "https://www.marxists.org/reference/archive/mao/selected-works/volume-1/mswv1_16.htm"
+      }
     },
     {
       "id": "marx-making-history",
       "text": {
         "zh-CN": "人们自己创造自己的历史",
-        "en": "People make their own history."
+        "en": "Men make their own history"
       },
       "author": {
         "zh-CN": "马克思",
@@ -176,16 +200,19 @@
         "en": "The Eighteenth Brumaire of Louis Bonaparte, chapter I (1852)"
       },
       "translation_note": {
-        "zh-CN": "短句节选；后文强调既定历史条件。英文为本站译文。",
-        "en": "A short excerpt; the following text stresses inherited historical conditions. English translated by this site."
+        "zh-CN": "短句节选；后文强调既定历史条件。英文另据MIA英文版本。",
+        "en": "MIA English edition; an opening-clause excerpt. The following clauses stress inherited historical circumstances."
       },
-      "url": "https://www.marxists.org/chinese/marx/1851-1852/01.htm"
+      "url": {
+        "zh-CN": "https://www.marxists.org/chinese/marx/1851-1852/01.htm",
+        "en": "https://www.marxists.org/archive/marx/works/1852/18th-brumaire/ch01.htm"
+      }
     },
     {
       "id": "engels-research-processes",
       "text": {
         "zh-CN": "必须先研究事物，而后才能研究过程。",
-        "en": "Things must first be studied before processes can be studied."
+        "en": "It was necessary first to examine things before it was possible to examine processes."
       },
       "author": {
         "zh-CN": "恩格斯",
@@ -193,19 +220,22 @@
       },
       "work": {
         "zh-CN": "《费尔巴哈和德国古典哲学的终结》第四节（1888年）",
-        "en": "Ludwig Feuerbach and the End of Classical German Philosophy, section IV (1888)"
+        "en": "Ludwig Feuerbach and the End of Classical German Philosophy, part 4 (1886)"
       },
       "translation_note": {
-        "zh-CN": "此处回顾科学研究发展的历史阶段。英文为本站译文。",
-        "en": "This passage discusses historical stages in the development of scientific research. English translated by this site."
+        "zh-CN": "此处回顾科学研究发展的历史阶段。英文另据MIA英文版本。",
+        "en": "MIA English edition; this passage describes historical stages of scientific inquiry, rather than prescribing an unchanging method."
       },
-      "url": "https://www.marxists.org/chinese/engels/marxist.org-chinese-engels-1888.htm"
+      "url": {
+        "zh-CN": "https://www.marxists.org/chinese/engels/marxist.org-chinese-engels-1888.htm",
+        "en": "https://www.marxists.org/archive/marx/works/1886/ludwig-feuerbach/ch04.htm"
+      }
     },
     {
       "id": "lenin-go-slowly",
       "text": {
         "zh-CN": "最好慢一些。",
-        "en": "Better to go more slowly."
+        "en": "it would be better to proceed more slowly."
       },
       "author": {
         "zh-CN": "列宁",
@@ -213,19 +243,22 @@
       },
       "work": {
         "zh-CN": "《宁肯少些，但要好些》关于国家机关的段落（1923年）",
-        "en": "Better Fewer, But Better, paragraph on the state apparatus (1923)"
+        "en": "Better Fewer, But Better, opening discussion of the state apparatus (2 March 1923)"
       },
       "translation_note": {
-        "zh-CN": "此处讨论改善国家机关时重视质量。英文为本站译文。",
-        "en": "The context is improving the quality of the state apparatus. English translated by this site."
+        "zh-CN": "此处讨论改善国家机关时重视质量。英文另据MIA英文版本。",
+        "en": "MIA English edition, translated by David Skvirsky and George Hanna; a clause excerpt about improving the quality of the state apparatus."
       },
-      "url": "https://www.marxists.org/chinese/lenin/mia-chinese-lenin-19230304.htm"
+      "url": {
+        "zh-CN": "https://www.marxists.org/chinese/lenin/mia-chinese-lenin-19230304.htm",
+        "en": "https://www.marxists.org/archive/lenin/works/1923/mar/02.htm"
+      }
     },
     {
       "id": "mao-contradiction-process",
       "text": {
         "zh-CN": "矛盾贯串于一切过程的始终",
-        "en": "Contradiction runs through every process from beginning to end."
+        "en": "and permeates all these processes from beginning to end"
       },
       "author": {
         "zh-CN": "毛泽东",
@@ -233,19 +266,22 @@
       },
       "work": {
         "zh-CN": "《矛盾论》结论段（1937年）",
-        "en": "On Contradiction, concluding paragraph (1937)"
+        "en": "On Contradiction, section VII: Conclusion (August 1937)"
       },
       "translation_note": {
-        "zh-CN": "中文为所链文本的短句节选；英文为本站译文。",
-        "en": "A short excerpt from the linked Chinese text; the English is this site’s translation."
+        "zh-CN": "中文为所链文本的短句节选；英文另据MIA英文版本。",
+        "en": "MIA English edition; a clause excerpt. Its subject is contradiction in objective things and subjective thought, stated earlier in the sentence."
       },
-      "url": "https://www.marxists.org/chinese/maozedong/marxist.org-chinese-mao-193708.htm"
+      "url": {
+        "zh-CN": "https://www.marxists.org/chinese/maozedong/marxist.org-chinese-mao-193708.htm",
+        "en": "https://www.marxists.org/reference/archive/mao/selected-works/volume-1/mswv1_17.htm"
+      }
     },
     {
       "id": "marx-solvable-tasks",
       "text": {
         "zh-CN": "人类始终只提出自己能够解决的任务",
-        "en": "Humanity only sets itself tasks it can solve."
+        "en": "Mankind thus inevitably sets itself only such tasks as it is able to solve"
       },
       "author": {
         "zh-CN": "马克思",
@@ -256,16 +292,19 @@
         "en": "A Contribution to the Critique of Political Economy, preface (1859)"
       },
       "translation_note": {
-        "zh-CN": "短句节选；后文强调解决任务的物质条件。英文为本站译文。",
-        "en": "A short excerpt; the following text stresses the material conditions for solving tasks. English translated by this site."
+        "zh-CN": "短句节选；后文强调解决任务的物质条件。英文另据MIA英文版本。",
+        "en": "MIA English edition, Progress Publishers (1977); a clause excerpt. The sentence continues with the material conditions required for a solution."
       },
-      "url": "https://www.marxists.org/chinese/marx/06.htm"
+      "url": {
+        "zh-CN": "https://www.marxists.org/chinese/marx/06.htm",
+        "en": "https://www.marxists.org/archive/marx/works/1859/critique-pol-economy/preface.htm"
+      }
     },
     {
       "id": "engels-read-originals",
       "text": {
         "zh-CN": "我请您根据原著来研究这个理论",
-        "en": "Please study this theory from the original works."
+        "en": "I would furthermore ask you to study this theory from its original sources and not at second-hand"
       },
       "author": {
         "zh-CN": "恩格斯",
@@ -273,19 +312,22 @@
       },
       "work": {
         "zh-CN": "致约瑟夫·布洛赫的信（1890年9月21—22日）",
-        "en": "Letter to Joseph Bloch (21–22 September 1890)"
+        "en": "Letter to J. Bloch, concluding reading advice (21 September 1890, MIA English heading)"
       },
       "translation_note": {
-        "zh-CN": "短句节选；“这个理论”指唯物史观。英文为本站译文。",
-        "en": "A short excerpt; “this theory” means historical materialism. English translated by this site."
+        "zh-CN": "短句节选；“这个理论”指唯物史观。英文另据MIA英文版本。",
+        "en": "MIA English edition, Historical Materialism, Progress Publishers (1972); a clause excerpt. The theory discussed is historical materialism."
       },
-      "url": "https://www.marxists.org/chinese/engels/marxist.org-chinese-engels-1890-9-21.htm"
+      "url": {
+        "zh-CN": "https://www.marxists.org/chinese/engels/marxist.org-chinese-engels-1890-9-21.htm",
+        "en": "https://www.marxists.org/archive/marx/works/1890/letters/90_09_21.htm"
+      }
     },
     {
       "id": "lenin-haste",
       "text": {
         "zh-CN": "这里最有害的就是急躁。",
-        "en": "Haste is the most harmful thing here."
+        "en": "The most harmful thing here would be haste."
       },
       "author": {
         "zh-CN": "列宁",
@@ -293,19 +335,22 @@
       },
       "work": {
         "zh-CN": "《宁肯少些，但要好些》关于检查工作的段落（1923年）",
-        "en": "Better Fewer, But Better, paragraph on checking work (1923)"
+        "en": "Better Fewer, But Better, paragraph on testing progress (2 March 1923)"
       },
       "translation_note": {
-        "zh-CN": "此处讨论改善国家机关时重视质量。英文为本站译文。",
-        "en": "The context is improving the quality of the state apparatus. English translated by this site."
+        "zh-CN": "此处讨论改善国家机关时重视质量。英文另据MIA英文版本。",
+        "en": "MIA English edition, translated by David Skvirsky and George Hanna; the context is testing improvements to the state apparatus."
       },
-      "url": "https://www.marxists.org/chinese/lenin/mia-chinese-lenin-19230304.htm"
+      "url": {
+        "zh-CN": "https://www.marxists.org/chinese/lenin/mia-chinese-lenin-19230304.htm",
+        "en": "https://www.marxists.org/archive/lenin/works/1923/mar/02.htm"
+      }
     },
     {
       "id": "mao-seek-facts",
       "text": {
         "zh-CN": "这种态度，就是实事求是的态度。",
-        "en": "This is the attitude of seeking truth from facts."
+        "en": "Such an attitude is one of seeking truth from facts"
       },
       "author": {
         "zh-CN": "毛泽东",
@@ -313,19 +358,22 @@
       },
       "work": {
         "zh-CN": "《改造我们的学习》第三节（1941年）",
-        "en": "Reform Our Study, section III (1941)"
+        "en": "Reform Our Study, section III (May 1941)"
       },
       "translation_note": {
-        "zh-CN": "此处“这种态度”指结合理论和实际作调查研究。英文为本站译文。",
-        "en": "“This attitude” means investigation that connects theory with practice. English translated by this site."
+        "zh-CN": "此处“这种态度”指结合理论和实际作调查研究。英文另据MIA英文版本。",
+        "en": "MIA English edition; a clause excerpt. The attitude refers to systematic investigation that connects theory with practice."
       },
-      "url": "https://www.marxists.org/chinese/maozedong/marxist.org-chinese-mao-19410519.htm"
+      "url": {
+        "zh-CN": "https://www.marxists.org/chinese/maozedong/marxist.org-chinese-mao-19410519.htm",
+        "en": "https://www.marxists.org/reference/archive/mao/selected-works/volume-3/mswv3_02.htm"
+      }
     },
     {
       "id": "marx-theory-material-force",
       "text": {
         "zh-CN": "理论一经掌握群众，也会变成物质力量。",
-        "en": "Theory also becomes a material force once it grips the masses."
+        "en": "theory also becomes a material force as soon as it has gripped the masses."
       },
       "author": {
         "zh-CN": "马克思",
@@ -333,19 +381,22 @@
       },
       "work": {
         "zh-CN": "《黑格尔法哲学批判》导言（1843年写）",
-        "en": "A Contribution to the Critique of Hegel’s Philosophy of Right, introduction (written 1843)"
+        "en": "A Contribution to the Critique of Hegel’s Philosophy of Right, introduction (1843–44)"
       },
       "translation_note": {
-        "zh-CN": "中文为所链文本的短句节选；英文为本站译文。",
-        "en": "A short excerpt from the linked Chinese text; the English is this site’s translation."
+        "zh-CN": "中文为所链文本的短句节选；英文另据MIA英文版本。",
+        "en": "MIA English edition; a clause excerpt from the discussion of theory and the masses."
       },
-      "url": "https://www.marxists.org/chinese/marx/marxist.org-chinese-marx-1843.htm"
+      "url": {
+        "zh-CN": "https://www.marxists.org/chinese/marx/marxist.org-chinese-marx-1843.htm",
+        "en": "https://www.marxists.org/archive/marx/works/1843/critique-hpr/intro.htm"
+      }
     },
     {
       "id": "engels-marx-personal-foes",
       "text": {
         "zh-CN": "他可能有过许多敌人，但未必有一个私敌。",
-        "en": "He may have had many enemies, but hardly a personal foe."
+        "en": "though he may have had many opponents, he had hardly one personal enemy."
       },
       "author": {
         "zh-CN": "恩格斯",
@@ -353,19 +404,22 @@
       },
       "work": {
         "zh-CN": "《在马克思墓前的讲话》正文倒数第二段（1883年）",
-        "en": "Speech at the Graveside of Karl Marx, penultimate paragraph (1883)"
+        "en": "Speech at the Grave of Karl Marx, penultimate paragraph (17 March 1883)"
       },
       "translation_note": {
-        "zh-CN": "此处“他”指马克思；中文据所链文本，英文为本站译文。",
-        "en": "“He” refers to Marx. The Chinese follows the linked text; English translated by this site."
+        "zh-CN": "此处“他”指马克思；中文据所链文本，英文另据MIA英文版本。",
+        "en": "MIA English edition; a clause excerpt. The pronoun refers to Marx; this is the published graveside speech."
       },
-      "url": "https://www.marxists.org/chinese/engels/mia-chinese-engels-18830317.htm"
+      "url": {
+        "zh-CN": "https://www.marxists.org/chinese/engels/mia-chinese-engels-18830317.htm",
+        "en": "https://www.marxists.org/archive/marx/works/1883/death/burial.htm"
+      }
     },
     {
       "id": "lenin-cultural-inheritance",
       "text": {
         "zh-CN": "发扬现有文化的优秀的典范、传统和成果。",
-        "en": "Develop the finest models, traditions and achievements of existing culture."
+        "en": "the development of the best models, traditions and results of the existing culture"
       },
       "author": {
         "zh-CN": "列宁",
@@ -373,19 +427,22 @@
       },
       "work": {
         "zh-CN": "《关于无产阶级文化》决议草稿要点第二点（1920年10月9日）",
-        "en": "On Proletarian Culture, draft resolution points, point 2 (9 October 1920)"
+        "en": "Rough Draft of a Resolution on Proletarian Culture, point 2 (9 October 1920)"
       },
       "translation_note": {
-        "zh-CN": "中文为所链文本的短句节选；英文为本站译文。",
-        "en": "A short excerpt from the linked Chinese text; the English is this site’s translation."
+        "zh-CN": "中文为所链文本的短句节选；英文另据MIA英文版本。",
+        "en": "MIA English edition, translated by Bernard Isaacs, Collected Works, volume 42; a clause excerpt from point 2."
       },
-      "url": "https://www.marxists.org/chinese/lenin/marxist.org-chinese-lenin-1920a.htm"
+      "url": {
+        "zh-CN": "https://www.marxists.org/chinese/lenin/marxist.org-chinese-lenin-1920a.htm",
+        "en": "https://www.marxists.org/archive/lenin/works/1920/oct/09b.htm"
+      }
     },
     {
       "id": "mao-ask-why",
       "text": {
         "zh-CN": "共产党员对任何事情都要问一个为什么",
-        "en": "Communists should ask why about everything."
+        "en": "Communists must always go into the whys and wherefores of anything"
       },
       "author": {
         "zh-CN": "毛泽东",
@@ -393,13 +450,16 @@
       },
       "work": {
         "zh-CN": "《整顿党的作风》反对盲从的段落（1942年）",
-        "en": "Rectify the Party’s Style of Work, paragraph against blind obedience (1942)"
+        "en": "Rectify the Party’s Style of Work, paragraph against blind obedience (1 February 1942)"
       },
       "translation_note": {
-        "zh-CN": "中文为所链文本的短句节选；英文为本站译文。",
-        "en": "A short excerpt from the linked Chinese text; the English is this site’s translation."
+        "zh-CN": "中文为所链文本的短句节选；英文另据MIA英文版本。",
+        "en": "MIA English edition; a clause excerpt. The following clauses call for independent thought and opposition to blind obedience."
       },
-      "url": "https://www.marxists.org/chinese/maozedong/marxist.org-chinese-mao-19420201.htm"
+      "url": {
+        "zh-CN": "https://www.marxists.org/chinese/maozedong/marxist.org-chinese-mao-19420201.htm",
+        "en": "https://www.marxists.org/reference/archive/mao/selected-works/volume-3/mswv3_06.htm"
+      }
     }
   ]
 }

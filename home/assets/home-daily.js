@@ -21,6 +21,7 @@
   let feedVersion = '', lastDay = '', lastLanguage = '', disposed = false, city = cities.beijing, assetsReady = !glance, lunarAttempted = false;
   let weather = null, weatherRequest = null, weatherTicket = 0, earth = null, earthVisible = false, earthLoading = false;
   let festivalCache = null, searchRequest = null, searchTicket = 0, searchResults = [];
+  let weatherMap = null, mapRequest = null, mapTicket = 0;
   const cleanup = [], pending = new Map();
   const pageId = window.crypto?.randomUUID?.() || Date.now().toString(36) + '-' + Math.random().toString(36).slice(2);
   window.HomeBriefPageId = pageId;
@@ -221,11 +222,13 @@
       const stamp = new Intl.DateTimeFormat(english ? 'en-GB' : 'zh-CN',{timeZone:zone,month:'long',day:'numeric'}).format(date);
       write('glance-date',english ? weekday + ' ' + stamp : stamp + ' ' + weekday);
     } else {
+      const title = english ? 'Today: ' + new Intl.DateTimeFormat('en-GB',{timeZone:zone,year:'numeric',month:'long',day:'numeric'}).format(date) : `今天：${local.year}年${+local.month}月${+local.day}日`;
+      write('today-title',title);
       write('daily-calendar-day',String(+local.day)); write('daily-calendar-weekday',weekday);
       write('daily-calendar-month',local.year + ' · ' + new Intl.DateTimeFormat(english ? 'en-GB' : 'zh-CN',{timeZone:zone,month:'long'}).format(date));
 
     }
-    write('daily-calendar-lunar',word('农历','Lunar · ') + (astro?.lunar(date,zone,english) || ''));
+    write('daily-calendar-lunar',(glance ? word('农历','Lunar · ') : '') + (astro?.lunar(date,zone,english) || ''));
     write('daily-calendar-term',astro?.term(date,english) || ''); write('daily-calendar-next-term','');
     if (!glance) {
       const holiday = holidays[beijing.year]?.days?.find(item => item.date === dayStamp(date));
@@ -275,19 +278,25 @@
       if (cities[selected.id] && cityModel.identity(cities[selected.id]) === cityModel.identity(selected)) return weatherRecord(JSON.parse(window.localStorage.getItem('xieyuqing-weather-v2:' + selected.id) || 'null'),selected,true);
     } catch (_) {} return null;
   }
-  async function loadWeather() {
+  function weatherQuery(selected,zone = selected.tz) {
+    return new window.URLSearchParams({latitude:String(selected.lat),longitude:String(selected.lon),current:'temperature_2m,weather_code,apparent_temperature,relative_humidity_2m,wind_speed_10m,wind_direction_10m,pressure_msl',daily:'temperature_2m_max,temperature_2m_min,precipitation_probability_max',temperature_unit:'celsius',wind_speed_unit:'kmh',timezone:zone,forecast_days:'1'});
+  }
+  async function loadWeather(prefetched = null) {
     if (glance || !window.fetch || disposed) return;
     const selected = city, key = cityModel.identity(selected), ticket = ++weatherTicket, cached = cachedWeather(selected);
     weatherRequest?.abort();
-    if (cached) { weather = {...cached,stale:cached.needsRefresh || Date.now() - cached.savedAt >= 1800000}; renderWeather(); if (!weather.stale) return; }
+    if (cached) { weather = {...cached,stale:cached.needsRefresh || Date.now() - cached.savedAt >= 1800000}; renderWeather(); if (!weather.stale && !prefetched) return; }
     else { weather = null; renderWeather(); }
     const controller = new window.AbortController(); weatherRequest = controller;
     const timeout = window.setTimeout(() => controller.abort(),8000);
     try {
-      const query = new window.URLSearchParams({latitude:String(selected.lat),longitude:String(selected.lon),current:'temperature_2m,weather_code,apparent_temperature,relative_humidity_2m,wind_speed_10m,wind_direction_10m,pressure_msl',daily:'temperature_2m_max,temperature_2m_min,precipitation_probability_max',temperature_unit:'celsius',wind_speed_unit:'kmh',timezone:selected.tz,forecast_days:'1'});
-      const response = await window.fetch('https://api.open-meteo.com/v1/forecast?' + query,{signal:controller.signal,credentials:'omit',referrerPolicy:'no-referrer'});
-      if (!response.ok) throw new Error('Weather unavailable');
-      const data = await response.json(), current = data.current;
+      let data = prefetched;
+      if (!data) {
+        const response = await window.fetch('https://api.open-meteo.com/v1/forecast?' + weatherQuery(selected),{signal:controller.signal,credentials:'omit',referrerPolicy:'no-referrer'});
+        if (!response.ok) throw new Error('Weather unavailable');
+        data = await response.json();
+      }
+      const current = data.current;
       if (!current || !numberIn(current.temperature_2m,-100,100) || typeof current.time !== 'string' || !/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}/.test(current.time)) throw new Error('Invalid weather');
       if (disposed || ticket !== weatherTicket || key !== cityModel.identity(city)) return;
       const dailyIndex = Math.max(0,data.daily?.time?.indexOf(current.time.slice(0,10)) ?? 0), daily = {date:data.daily?.time?.[dailyIndex]};
@@ -307,10 +316,12 @@
       if (!selected) { const option = node('option','',cityModel.label(city,lang() === 'en')); option.value = 'custom'; input.append(option); selected = 'custom'; }
       input.value = selected;
     }
-    write('daily-city-label',cityModel.label(city,lang() === 'en'));
+    write('daily-city-name',lang() === 'en' ? city.en : city.name);
+    write('daily-city-label',city.id.startsWith('point-') ? `${city.lat.toFixed(2)}°, ${city.lon.toFixed(2)}° · ${city.tz}` : [city.region,cityModel.countryName(city,lang() === 'en'),city.tz].filter(Boolean).join(' · '));
   }
-  function selectCity(value) {
+  function selectCity(value,prefetched = null) {
     const selected = cityModel.normalize(value); if (!selected || glance || disposed) return;
+    mapTicket++; mapRequest?.abort(); write('weather-selection-status','');
     searchTicket++; searchRequest?.abort(); searchResults = []; renderSearchResults();
     city = selected;
     try {
@@ -318,7 +329,27 @@
       if (cities[city.id] && cityModel.identity(cities[city.id]) === cityModel.identity(city)) window.localStorage.setItem('xieyuqing-home-city-v1',city.id);
       else window.localStorage.removeItem('xieyuqing-home-city-v1');
     } catch (_) {}
-    renderCityChoices(); renderCalendar(new Date()); earth?.setCity(city); loadWeather();
+    renderCityChoices(); renderCalendar(new Date()); earth?.setCity(city); weatherMap?.setCity(city); loadWeather(prefetched);
+    const tools = document.querySelector('.weather-city-tools'); if (tools) tools.open = false;
+  }
+  async function selectMapPoint(point) {
+    if (glance || disposed) return;
+    if (point?.preset) { selectCity(point.preset); return; }
+    if (!numberIn(point?.lat,-90,90) || !numberIn(point?.lon,-180,180)) return;
+    const ticket = ++mapTicket; mapRequest?.abort();
+    const controller = new window.AbortController(); mapRequest = controller;
+    const timeout = window.setTimeout(() => controller.abort(),8000);
+    write('weather-selection-status',word('正在读取所选地点…','Loading the selected location…'));
+    try {
+      const response = await window.fetch('https://api.open-meteo.com/v1/forecast?' + weatherQuery(point,'auto'),{signal:controller.signal,credentials:'omit',referrerPolicy:'no-referrer'});
+      if (!response.ok) throw new Error('Map weather unavailable');
+      const data = await response.json();
+      if (disposed || ticket !== mapTicket) return;
+      const selected = cityModel.normalize({id:`point-${point.lat.toFixed(4)}-${point.lon.toFixed(4)}`,name:'地图选点',en:'Map location',lat:point.lat,lon:point.lon,tz:data.timezone,country:'Coordinates',region:''});
+      if (!selected || !numberIn(data.current?.temperature_2m,-100,100) || typeof data.current?.time !== 'string' || !/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}/.test(data.current.time)) throw new Error('Invalid map location');
+      selectCity(selected,data);
+    } catch (_) { if (!disposed && ticket === mapTicket) write('weather-selection-status',word('暂时无法读取该地点，保留当前天气。可重试或搜索城市。','This location is unavailable for now. The current weather is kept; try again or search for a city.')); }
+    finally { window.clearTimeout(timeout); }
   }
   function renderSearchResults() {
     const list = find('city-search-results'); if (!list) return;
@@ -383,7 +414,7 @@
     if (disposed) return;
     const date = new Date(), currentDay = String(dayIndex(date)), currentLanguage = lang();
     if (force || lastDay !== currentDay || lastLanguage !== currentLanguage) {
-      if (!glance) { renderDaily(date); renderCityChoices(); renderSearchResults(); renderWeather(); write('timeline-date',dayStamp(date)); }
+      if (!glance) { renderDaily(date); renderCityChoices(); renderSearchResults(); renderWeather(); weatherMap?.refresh(); write('timeline-date',dayStamp(date)); }
       renderCalendar(date); lastDay = currentDay; lastLanguage = currentLanguage;
     } else renderCalendar(date);
     if (!glance) renderFeed(date);
@@ -407,6 +438,7 @@
     const check = () => { const rect = earthTarget.getBoundingClientRect?.(); earthVisible = !!rect && rect.bottom > 0 && rect.top < window.innerHeight; maybeLoadEarth(); };
     listen(window,'scroll',check,{passive:true}); listen(window,'resize',check); check();
   }
+  if (!glance && find('weather-map-canvas')) weatherMap = window.HomeWeatherMap?.createWeatherMap(document,window,{city,onPick:selectMapPoint});
   refresh(true);
   if (glance) {
     let scheduled = false;
@@ -425,6 +457,6 @@
   const weatherTimer = glance ? null : window.setInterval(() => { if (!document.hidden) loadWeather(); },1800000);
   const unsubscribe = window.SiteI18n?.onChange?.(() => refresh(true));
   listen(document,'visibilitychange',() => { if (!document.hidden) { refresh(true); if (!glance) loadWeather(); } });
-  window.SiteNavigation?.own?.(() => { disposed = true; weatherRequest?.abort(); searchRequest?.abort(); earth?.destroy(); window.clearInterval(timer); if (weatherTimer !== null) window.clearInterval(weatherTimer); if (typeof unsubscribe === 'function') unsubscribe(); cleanup.splice(0).reverse().forEach(fn => fn()); });
+  window.SiteNavigation?.own?.(() => { disposed = true; weatherRequest?.abort(); searchRequest?.abort(); mapRequest?.abort(); weatherMap?.destroy(); earth?.destroy(); window.clearInterval(timer); if (weatherTimer !== null) window.clearInterval(weatherTimer); if (typeof unsubscribe === 'function') unsubscribe(); cleanup.splice(0).reverse().forEach(fn => fn()); });
 
 })();

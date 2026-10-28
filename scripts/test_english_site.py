@@ -152,6 +152,7 @@ class EnglishPublicationTests(unittest.TestCase):
         # This fixture calls the English publisher directly, so supply the same
         # homepage inputs that the unified builder normally passes to it.
         values.update({
+            "today_date_title": "今天：2026年10月28日", "today_date_title_en": "Today: 28 October 2026",
             "daily_content_data": safe_json(daily_content),
             "news_snapshot_data": safe_json(self.snapshot), "news_sources_data": safe_json(self.public_news_sources),
             "news_snapshot_feed": render_snapshot(self.snapshot, "zh-CN", self.news_sources, now=self.news_now, include_sources=False, include_stamp=False),

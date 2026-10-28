@@ -21,7 +21,7 @@ function harness({classic=data,own=ownItems,day='2026-10-28T02:00:00Z',language=
   elements['own-quotes-data'].textContent=typeof own==='string'?own:JSON.stringify(own);
   for(const id of ['daily-quote-text','own-quote-text'])elements[id].textContent='Server-rendered fallback';
   elements['daily-quote-button'].hidden=elements['own-quote-button'].hidden=true;
-  elements['daily-quotation-title'].textContent='每日语录';elements['quote-title'].textContent='旧文一句';
+  elements['daily-quotation-title'].textContent='红色语录';elements['quote-title'].textContent='旧文一句';
   const doc=new Element('document');doc.documentElement=carrier||{lang:language};doc.documentElement.lang=language;doc.hidden=false;doc.getElementById=id=>elements[id]||null;doc.createElement=tag=>new Element(tag);doc.createTextNode=text=>{const node=new Element('#text');node.textContent=text;return node;};
   const timers=new Map(),cleanups=[],changes=new Set();let time=new Date(day),selectedLanguage=language,unsubscribed=0;
   const win={setInterval(fn,delay){const id=timers.size+1;timers.set(id,{fn,delay});return id;},clearInterval(id){timers.delete(id);},fetch(){throw Error('Quotes must not be fetched');},localStorage:{getItem(){throw Error('Quote controls must not read storage');}},SiteNavigation:{own(fn){cleanups.push(fn);}},SiteI18n:{lang:()=>selectedLanguage,page:()=>({switchMode:'navigate'}),onChange(fn){changes.add(fn);return()=>{changes.delete(fn);unsubscribed++;};}}};
@@ -46,6 +46,8 @@ test('each shuffle cycle visits every quotation before reuse and never immediate
 test('malformed entries and unsafe source or article links preserve the readable fallback',()=>{
   const quote=data.quotes[0];
   for(const url of ['javascript:alert(1)','http://example.org','https://name:secret@example.org','https://example.org/\npath'])assert.equal(R.quotations({version:1,quotes:[{...quote,url}]}).length,0);
+  for(const url of [{'zh-CN':quote.url['zh-CN']},{'zh-CN':quote.url['zh-CN'],en:'javascript:alert(1)'},{'zh-CN':'http://example.org',en:quote.url.en},{'zh-CN':[],en:quote.url.en},null])assert.equal(R.quotations({version:1,quotes:[{...quote,url}]}).length,0);
+  assert.equal(R.quotations({version:1,quotes:[{...quote,url:quote.url['zh-CN']}]}).length,1,'Legacy single-source fixtures remain supported');
   assert.equal(R.quotations({version:2,quotes:[quote]}).length,0);assert.equal(R.quotations({version:1,quotes:[quote,quote]}).length,1);
   for(const url of ['//example.org/articles/','/articles/../../about/','/articles/\nunsafe','/projects/','/articles/\\evil'])assert.equal(R.essayLines([{...ownItems[0],url:{'zh-CN':url,en:'/en/articles/valid/'}}]).length,0);
   assert.equal(R.essayLines([ownItems[0],ownItems[0]]).length,1);
@@ -61,9 +63,11 @@ test('both native buttons advance independently and a same-day timer does not un
 });
 test('language changes render the same two chosen items with their matching source links',()=>{
   const h=harness(),e=h.elements;e['daily-quote-button'].fire('click');e['own-quote-button'].fire('click');const id=e['daily-quote'].dataset.quoteId,index=+e['own-quote'].dataset.quoteIndex;
-  h.language('en');const quote=data.quotes.find(item=>item.id===id);assert.equal(e['daily-quote'].dataset.quoteId,id);assert.equal(e['daily-quote-text'].textContent,quote.text.en);assert.equal(e['daily-quote-author'].textContent,quote.author.en);assert.equal(e['daily-quote-work'].href,quote.url);assert.equal(e['daily-quote-note'].textContent,quote.translation_note.en);
+  h.language('en');const quote=data.quotes.find(item=>item.id===id);assert.equal(e['daily-quote'].dataset.quoteId,id);assert.equal(e['daily-quote-text'].textContent,quote.text.en);assert.equal(e['daily-quote-author'].textContent,quote.author.en);assert.equal(e['daily-quote-work'].href,quote.url.en);assert.equal(e['daily-quote-note'].textContent,quote.translation_note.en);
+  assert.equal(e['daily-quotation-title'].textContent,'Red quotations');assert.equal(e['daily-quote-work'].attributes.hreflang,'en');assert.equal(e['daily-quote-work'].attributes.lang,'en');assert.equal(e['daily-quote-button'].attributes['aria-label'],'Another quote · Red quotations');
   assert.equal(e['own-quote-text'].textContent,ownItems[index].text.en);assert.equal(e['own-quote-source'].children.find(child=>child.tagName==='A').href,ownItems[index].url.en);assert.equal(e['daily-quote-button'].textContent,'Another quote');
   h.language('zh-CN');assert.equal(e['daily-quote'].dataset.quoteId,id);assert.equal(e['own-quote-text'].textContent,ownItems[index].text['zh-CN']);assert.equal(e['own-quote-source'].children.find(child=>child.tagName==='TIME').textContent,'2024.05.06');
+  assert.equal(e['daily-quote-work'].href,quote.url['zh-CN']);assert.equal(e['daily-quote-work'].attributes.hreflang,'zh-CN');assert.equal(e['daily-quotation-title'].textContent,'红色语录');assert.equal(e['daily-quote-button'].attributes['aria-label'],'换一句 · 红色语录');
 });
 test('a paired language navigation consumes one in-memory handoff and preserves both remaining decks',()=>{
   const first=harness(),e=first.elements,seen=[e['daily-quote'].dataset.quoteId];
@@ -99,12 +103,12 @@ test('a single valid entry is readable and has no ineffective change button',()=
   const h=harness({classic:{version:1,quotes:[data.quotes[0]]},own:[ownItems[0]]});assert.equal(h.elements['daily-quote-text'].textContent,data.quotes[0].text['zh-CN']);assert(h.elements['daily-quote-button'].hidden);assert(h.elements['own-quote-button'].hidden);
   assert.doesNotThrow(()=>R.mount());
 });
-test('the checked pool has five short bilingual entries per author with per-work excerpt limits and documented locators',()=>{
+test('the checked pool has five short bilingual entries per author with independent MIA editions and per-work excerpt limits',()=>{
   assert.equal(data.version,1);assert.equal(data.quotes.length,20);assert.equal(new Set(data.quotes.map(item=>item.id)).size,20);assert.equal(R.quotations(data).length,20);
   const counts=new Map(),works=new Map(),notes=fs.readFileSync(path.join(__dirname,'../home/brief/quotes-sources.md'),'utf8');
-  for(const item of data.quotes){counts.set(item.author['zh-CN'],(counts.get(item.author['zh-CN'])||0)+1);assert(notes.includes('`'+item.id+'`'));assert(/^https:\/\/www\.marxists\.org\/chinese\//.test(item.url));assert(item.translation_note['zh-CN'].includes('本站'));assert(/site/i.test(item.translation_note.en));
+  for(const item of data.quotes){counts.set(item.author['zh-CN'],(counts.get(item.author['zh-CN'])||0)+1);assert(notes.includes('`'+item.id+'`'));assert(/^https:\/\/www\.marxists\.org\/chinese\//.test(item.url['zh-CN']));assert(/^https:\/\/www\.marxists\.org\/(?:archive|reference\/archive)\//.test(item.url.en));assert.notEqual(item.url.en,item.url['zh-CN']);assert(notes.includes(item.url.en));assert(notes.includes(item.url['zh-CN']));assert(/MIA/.test(item.translation_note.en));assert(!/this site|translated by this site|site’s translation/i.test(item.translation_note.en));
     for(const key of ['text','author','work','translation_note'])for(const language of ['zh-CN','en'])assert(typeof item[key][language]==='string'&&item[key][language].trim());
-    const total=works.get(item.url)||{zh:0,en:0};total.zh+=Array.from(item.text['zh-CN']).length;total.en+=item.text.en.trim().split(/\s+/).length;works.set(item.url,total);
+    for(const language of ['zh-CN','en']){const key=item.url[language],size=language==='en'?item.text.en.trim().split(/\s+/).length:Array.from(item.text['zh-CN']).length;works.set(key,(works.get(key)||0)+size);}
   }
-  assert.deepEqual(Object.fromEntries(counts),{'马克思':5,'恩格斯':5,'列宁':5,'毛泽东':5});for(const [url,total]of works){assert(total.zh<=25,url+' Chinese excerpt total '+total.zh);assert(total.en<=25,url+' English excerpt total '+total.en);}
+  assert.deepEqual(Object.fromEntries(counts),{'马克思':5,'恩格斯':5,'列宁':5,'毛泽东':5});for(const [url,total]of works)assert(total<=25,url+' excerpt total '+total);
 });

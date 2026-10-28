@@ -86,7 +86,7 @@ class CompactHeaderTests(unittest.TestCase):
             brand = tree.find(lambda node: node["attrs"].get("class") == "brand")[0]
             self.assertEqual(brand["text"], "谢雨卿 Xie Yuqing · Carl")
             self.assertEqual(brand["attrs"]["href"], "/en/" if language == "en" else "/")
-        for file, route, label in (("home/index.template.html", "/today/", "历史中的今天"), ("home/en/index.template.html", "/en/today/", "Today in history")):
+        for file, route, label in (("home/index.template.html", "/today/", "今天"), ("home/en/index.template.html", "/en/today/", "Today")):
             tree = Nodes((ROOT / file).read_text(encoding="utf-8"))
             heading = tree.find(lambda node: node["attrs"].get("id") == "glance-title")[0]
             links = tree.find(lambda node: node["tag"] == "a", heading)

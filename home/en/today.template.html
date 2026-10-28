@@ -3,15 +3,15 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Today in history · Xie Yuqing</title>
-  <meta name="description" content="Source headlines, historical anniversaries, weather, Earth and daily quotations.">
+  <title>Today · Xie Yuqing</title>
+  <meta name="description" content="Earth and weather, historical anniversaries, daily reading and source headlines.">
   <meta name="author" content="Xie Yuqing">
   <link rel="canonical" href="{{site_url}}/en/today/">
   <link rel="alternate" hreflang="zh-CN" href="{{site_url}}/today/">
   <link rel="alternate" hreflang="en" href="{{site_url}}/en/today/">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Today in history · Xie Yuqing">
-  <meta property="og:description" content="Source headlines, historical anniversaries, weather, Earth and daily quotations.">
+  <meta property="og:title" content="Today · Xie Yuqing">
+  <meta property="og:description" content="Earth and weather, historical anniversaries, daily reading and source headlines.">
   <meta property="og:url" content="{{site_url}}/en/today/">
   <meta property="og:image" content="{{site_url}}/assets/share-cover.png">
   <meta property="og:image:width" content="1200">
@@ -23,6 +23,7 @@
   <script>(() => { let theme = "light", saved; try { saved = localStorage.getItem("xieyuqing-blog-theme"); } catch (_) {} if (saved === "light" || saved === "dark") theme = saved; else try { if (window.matchMedia("(prefers-color-scheme: dark)").matches) theme = "dark"; } catch (_) {} document.documentElement.dataset.theme = theme; })();</script>
   <link rel="stylesheet" href="/assets/portal.css">
   <link rel="stylesheet" href="/assets/home-daily.css">
+  <link rel="stylesheet" href="/assets/weather-map.css">
   <script src="/assets/portal.js" defer></script>
 </head>
 <body class="today-page">
@@ -33,31 +34,38 @@
     <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to dark mode" hidden><span class="theme-label">Dark</span></button>
   </header>
   <main id="main" class="container today-main">
-    <section class="daily-home today-brief today-a" data-brief-mode="full" id="brief" aria-labelledby="today-title" data-lunar-src="/assets/vendor/lunar-javascript-1.7.7.js" data-d3-src="/assets/vendor/d3-7.9.0.min.js" data-earth-src="/assets/home-earth.js">
+    <section class="daily-home today-brief today-a today-river" data-brief-mode="full" id="brief" aria-labelledby="today-title" data-lunar-src="/assets/vendor/lunar-javascript-1.7.7.js" data-d3-src="/assets/vendor/d3-7.9.0.min.js" data-earth-src="/assets/home-earth.js">
       <header class="page-intro today-intro">
-        <div class="today-intro-copy"><h1 id="today-title">Today in history</h1>
-          <div class="today-dateline" aria-label="Calendar · Beijing time"><div class="yl-cal-top"><div class="yl-day" id="daily-calendar-day">—</div><div class="yl-cal-copy"><strong id="daily-calendar-weekday">Today</strong><div id="daily-calendar-lunar">—</div><div class="yl-small" id="daily-calendar-month">—</div></div></div>
-            <p class="yl-small" id="daily-calendar-cycle"></p><p class="yl-solar-term" id="daily-calendar-term"></p><p class="yl-small" id="daily-calendar-festivals"></p><p class="yl-small" id="daily-calendar-holiday" hidden></p></div>
+        <div class="today-intro-copy"><h1 id="today-title">{{today_date_title_en}}</h1>
+          <div class="today-dateline" aria-label="Calendar · Beijing time"><span id="daily-calendar-lunar"></span><span id="daily-calendar-term"></span><span id="daily-calendar-festivals"></span><span id="daily-calendar-holiday" hidden></span></div>
         </div>
         <figure class="today-timeline" aria-labelledby="timeline-caption">
-          <svg class="today-timeline-svg" viewBox="0 0 440 64" role="img" aria-labelledby="timeline-title timeline-description"><title id="timeline-title">Today, between the past and the future</title><desc id="timeline-description">Time extends into the future; the solid dot marks today.</desc><defs><linearGradient id="timeline-trace"><stop offset="0" stop-color="currentColor" stop-opacity=".12"/><stop offset=".48" stop-color="currentColor"/><stop offset="1" stop-color="currentColor" stop-opacity=".3"/></linearGradient></defs><path class="timeline-route" d="M12 32H427" stroke="url(#timeline-trace)"/><path class="timeline-ticks" d="M44 27V37M86 27V37M128 27V37M170 27V37M266 27V37M308 27V37M350 27V37M392 27V37"/><path class="timeline-arrow" d="M418 25L427 32L418 39"/><circle class="timeline-halo" cx="218" cy="32" r="12"/><circle class="timeline-today-point" cx="218" cy="32" r="5"/></svg>
+          <svg class="today-timeline-svg" viewBox="0 0 440 64" role="img" aria-labelledby="timeline-title timeline-description"><title id="timeline-title">Today, between the past and the future</title><desc id="timeline-description">Gentle ripples flow towards the future; the solid dot marks today.</desc><defs><linearGradient id="timeline-trace"><stop offset="0" stop-color="currentColor" stop-opacity=".12"/><stop offset=".48" stop-color="currentColor"/><stop offset="1" stop-color="currentColor" stop-opacity=".3"/></linearGradient></defs><path class="timeline-wave timeline-wave-back" d="M12 32Q38 15 64 32T116 32T168 32T220 32T272 32T324 32T376 32T428 32"/><path class="timeline-wave timeline-wave-flow" d="M12 32Q38 46 64 32T116 32T168 32T220 32T272 32T324 32T376 32T428 32"/><path class="timeline-route" d="M12 32H427" stroke="url(#timeline-trace)"/><path class="timeline-ticks" d="M44 27V37M86 27V37M128 27V37M170 27V37M266 27V37M308 27V37M350 27V37M392 27V37"/><path class="timeline-arrow" d="M418 25L427 32L418 39"/><circle class="timeline-halo" cx="218" cy="32" r="12"/><circle class="timeline-today-point" cx="218" cy="32" r="5"/></svg>
           <div class="timeline-labels" aria-hidden="true"><span>Past</span><strong>Today</strong><span>Future</span></div>
           <figcaption id="timeline-caption">Today in the flow of history<span class="timeline-date-line">Beijing time · <time id="timeline-date"></time></span></figcaption>
         </figure>
       </header>
       <div class="brief-body" id="brief-body">
-        <div class="yl-today" aria-label="News and weather">
-          <section class="yl-news" aria-labelledby="daily-news-title"><div class="today-section-heading"><h2 class="brief-panel-heading" id="daily-news-title">News to know</h2><p class="yl-small" id="daily-edition">{{news_checked_label_en}}</p></div><div id="daily-feed" aria-live="polite">{{news_snapshot_feed_en}}</div><p class="yl-note" id="daily-brief-notice">Headlines are gathered from source newsrooms. Choose a title to read the original.</p><details class="news-sources"><summary>News sources</summary><div id="news-source-links">{{news_source_links_en}}</div></details></section>
-          <aside class="yl-sidebar" id="daily-sidebar" aria-label="City weather"><section class="yl-calendar" aria-labelledby="today-heading"><h2 class="brief-panel-heading" id="today-heading">Your weather</h2><div class="city-picker"><label class="yl-small" for="daily-city">Choose a city</label><select class="yl-city" id="daily-city"><option value="beijing">Beijing</option><option value="shanghai">Shanghai</option><option value="kuala">Kuala Lumpur</option><option value="london">London</option><option value="newyork">New York</option><option value="moscow">Moscow</option><option value="dubai">Dubai</option></select><p class="yl-small" id="daily-city-label">Beijing · Asia/Shanghai</p>
-              <form id="city-search-form" role="search" aria-label="Find city"><label class="sr-only" for="city-search-input">City name</label><div class="city-search-row"><input id="city-search-input" name="city" type="search" placeholder="e.g. Chengdu, Paris or New York" minlength="2" maxlength="80" autocomplete="off" required><button class="city-search-submit" type="submit">Find city</button></div><p class="yl-small city-search-status" id="city-search-status" role="status" aria-live="polite"></p><ul class="city-search-results" id="city-search-results" aria-label="Matching cities" hidden></ul></form>
-              <p class="city-search-source">City search <a href="https://open-meteo.com/en/docs/geocoding-api" target="_blank" rel="noopener noreferrer">Open-Meteo</a> · Place data <a href="https://www.geonames.org/" target="_blank" rel="noopener noreferrer">GeoNames</a></p>
-            </div>
-            <div class="yl-weather"><div class="yl-weather-readout" id="daily-weather" aria-live="polite">Loading weather…</div></div><details class="weather-more"><summary>Weather details</summary><dl class="weather-details" id="daily-weather-details"></dl></details>
-            <p class="yl-small weather-hint" id="daily-weather-hint" hidden></p></section></aside>
-        </div>
-        <section class="today-history" id="today-history" aria-labelledby="history-heading"><div class="today-section-heading"><h2 class="brief-panel-heading" id="history-heading">On this day</h2><p class="yl-small">Events from other years, selected by this calendar date.</p></div><div id="daily-history-list">{{history_today_en}}</div><p class="yl-small history-date-note" id="history-date-note"></p></section>
         <section class="yl-earth" id="daily-earth" aria-labelledby="earth-heading"><div class="yl-earth-heading"><h2 id="earth-heading">Earth, now</h2><span class="yl-small">EARTH / SOLAR TIME</span></div><div class="today-earth-grid"><div class="earth-visual"><div class="yl-globe-wrap"><canvas id="earth-canvas" width="560" height="570" role="img" aria-label="Earth day and night, showing the subsolar point and selected city"></canvas></div><p class="yl-earth-small">Drag the globe to explore another view</p></div><div class="earth-readings"><div class="yl-suntime"><div>Sunrise · local<strong id="daily-sunrise">—</strong></div><div>Sunset · local<strong id="daily-sunset">—</strong></div></div><div class="yl-earth-info" aria-live="polite"><div id="daily-local-time">—</div><div>Subsolar point <b id="daily-subsolar">—</b></div><div id="daily-daylength">—</div></div><p class="yl-moon" id="daily-moon-phase"></p><div class="yl-world-clocks" id="daily-world-clocks"></div><div class="yl-earth-actions"><label class="yl-time-row" for="earth-hour"><span>Time · Beijing</span><output id="earth-hour-label">—</output></label><button type="button" class="yl-earth-now" id="earth-now" hidden>Back to now</button></div><input class="yl-time-slider" id="earth-hour" type="range" min="0" max="23.9833333" step="0.0166667" value="12"><div class="yl-time-ends" aria-hidden="true"><span>00:00</span><span>12:00</span><span>23:59</span></div><p class="yl-earth-source">Axis ≈ 23.4° from the orbital normal · Approximate calculations<br><a href="https://gml.noaa.gov/grad/solcalc/calcdetails.html" target="_blank" rel="noopener noreferrer">Calculation reference</a> · Geography Natural Earth</p></div></div></section>
-        <section class="today-reading" aria-labelledby="reading-heading"><h2 class="brief-panel-heading" id="reading-heading">A moment to read</h2>{{brief_bottom_cards_en}}</section>
+        <section class="today-weather" id="today-weather" aria-labelledby="today-heading">
+          <div class="today-section-heading"><h2 class="brief-panel-heading" id="today-heading">Weather</h2><p class="yl-small">Choose a place on the map to see its weather.</p></div>
+          <div class="weather-layout">
+            <div class="weather-map-panel" id="weather-map"><canvas id="weather-map-canvas" width="800" height="420" tabindex="0" role="application" aria-label="Weather map: arrow keys move, Enter selects, plus and minus zoom." aria-describedby="weather-map-help"></canvas>
+              <div class="weather-map-toolbar"><output id="weather-map-coordinate"></output><div class="weather-map-controls" aria-label="Map view"><button type="button" data-weather-map-zoom="in" aria-label="Zoom in">+</button><button type="button" data-weather-map-zoom="out" aria-label="Zoom out">−</button><button type="button" data-weather-map-zoom="reset">World</button></div></div>
+              <p class="weather-map-note" id="weather-map-help">Click to choose · drag to explore · arrow keys and Enter · + / − to zoom</p><p id="weather-map-status" role="status" aria-live="polite"></p><p class="weather-map-source">Natural Earth</p>
+            </div>
+            <div class="weather-detail-panel" id="daily-sidebar"><div class="weather-place-heading"><h3 id="daily-city-name">Beijing</h3>
+              <details class="weather-city-tools"><summary>Change place</summary><div class="city-picker"><label class="sr-only" for="daily-city">Choose a city</label><select class="yl-city" id="daily-city"><option value="beijing">Beijing</option></select>
+                <form id="city-search-form" role="search" aria-label="Find city"><label class="sr-only" for="city-search-input">City name</label><div class="city-search-row"><input id="city-search-input" name="city" type="search" placeholder="Find a city…" minlength="2" maxlength="80" autocomplete="off" required><button class="city-search-submit" type="submit">Find</button></div><p class="yl-small city-search-status" id="city-search-status" role="status" aria-live="polite"></p><ul class="city-search-results" id="city-search-results" aria-label="Matching cities" hidden></ul></form>
+                <p class="city-search-source"><a href="https://open-meteo.com/en/docs/geocoding-api" target="_blank" rel="noopener noreferrer">Open-Meteo</a> · <a href="https://www.geonames.org/" target="_blank" rel="noopener noreferrer">GeoNames</a></p></div></details></div>
+              <p class="yl-small" id="daily-city-label">Asia/Shanghai</p><p class="yl-small weather-selection-status" id="weather-selection-status" role="status" aria-live="polite"></p>
+              <div class="yl-weather"><div class="yl-weather-readout" id="daily-weather" aria-live="polite">Loading weather…</div></div><dl class="weather-details" id="daily-weather-details"></dl><p class="yl-small weather-hint" id="daily-weather-hint" hidden></p>
+            </div>
+          </div>
+        </section>
+        <section class="today-history" id="today-history" aria-labelledby="history-heading"><div class="today-section-heading"><h2 class="brief-panel-heading" id="history-heading">On this day</h2><p class="yl-small">Events from other years, selected by this calendar date.</p></div><div id="daily-history-list">{{history_today_en}}</div><p class="yl-small history-date-note" id="history-date-note"></p></section>
+        <section class="today-reading" aria-labelledby="reading-heading"><h2 class="brief-panel-heading" id="reading-heading">Daily reading</h2>{{brief_bottom_cards_en}}</section>
+        <section class="yl-news today-news" id="today-news" aria-labelledby="daily-news-title"><div class="today-section-heading"><h2 class="brief-panel-heading" id="daily-news-title">News to know</h2><p class="yl-small" id="daily-edition">{{news_checked_label_en}}</p></div><div id="daily-feed" aria-live="polite">{{news_snapshot_feed_en}}</div><p class="yl-note" id="daily-brief-notice">Headlines are gathered from source newsrooms. Choose a title to read the original.</p><details class="news-sources"><summary>News sources</summary><div id="news-source-links">{{news_source_links_en}}</div></details></section>
       </div>
       <noscript><p class="yl-no-script">Headlines, quotations and source links remain readable. The displayed historical date is the build date; enable JavaScript for the current date, weather and globe.</p></noscript>
     </section>
@@ -72,6 +80,7 @@
   <script id="own-quotes-data" type="application/json">{{own_quotes_data}}</script>
   <script src="/assets/daily-reading.js" defer></script>
   <script src="/assets/astronomy-solar.js" defer></script>
+  <script src="/assets/weather-map.js" defer></script>
   <script src="/assets/home-daily.js" defer></script>
 </body>
 </html>

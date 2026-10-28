@@ -7,6 +7,7 @@ import re
 from urllib.parse import urlsplit, urlunsplit
 
 LANGUAGES = ("zh-CN", "en")
+HOME_TITLES = {"zh-CN": "谢雨卿个人网站", "en": "Xie Yuqing’s personal website"}
 FEATURES = ("/today", "/about", "/projects", "/photos", "/map", "/game", "/anthology")
 VOID = {"area", "base", "br", "col", "embed", "hr", "img", "input", "link", "meta", "param", "source", "track", "wbr"}
 NAV_KEYS = {"/": "home", "/today/": "today", "/articles/": "articles", "/anthology/": "anthology", "/projects/": "projects",
@@ -187,7 +188,7 @@ def appearance_bootstrap():
 def version_shared_assets(page, root):
     """Refresh shared UI after local/production updates without flushing user data."""
     import hashlib
-    sources = {name: Path(root) / 'home/assets' / name for name in ['site-themes.css', 'portal.css', 'portfolio.css', 'photos.css', 'anthology.css', 'anthology-selection.css', 'game.css', 'ranking-skins.css', 'site-nav.css', 'site-music.css', 'portal.js', 'site-navigation.js', 'site-music.js', 'home-daily.css', 'home-daily.js', 'home-now.js', 'daily-reading.js', 'home-earth.js', 'astronomy-solar.js']}
+    sources = {name: Path(root) / 'home/assets' / name for name in ['site-themes.css', 'portal.css', 'portfolio.css', 'photos.css', 'anthology.css', 'anthology-selection.css', 'game.css', 'ranking-skins.css', 'site-nav.css', 'site-music.css', 'portal.js', 'site-navigation.js', 'site-music.js', 'home-daily.css', 'home-daily.js', 'home-now.js', 'daily-reading.js', 'weather-map.js', 'weather-map.css', 'home-earth.js', 'astronomy-solar.js']}
     sources['style.css'] = Path(root) / 'blog/style.css'
     for name in ('d3-7.9.0.min.js', 'lunar-javascript-1.7.7.js'):
         sources[name] = Path(root) / 'home/assets/vendor' / name
@@ -198,7 +199,7 @@ def version_shared_assets(page, root):
         if source.is_symlink():
             raise ValueError('Shared UI assets cannot be symlinks.')
         return match.group(1) + route + '?v=' + hashlib.sha256(source.read_bytes()).hexdigest()[:12] + match.group(3)
-    return re.sub(r'((?:src|href)=["\'])(/(?:(?:articles/)?assets)/(?:site-themes|portal|portfolio|photos|anthology|anthology-selection|game|ranking-skins|site-nav|site-music|site-navigation|home-daily|home-now|daily-reading|home-earth|astronomy-solar|style|vendor/(?:d3-7\.9\.0\.min|lunar-javascript-1\.7\.7))\.(?:css|js))(?:\?[^"\']*)?(["\'])', version, page)
+    return re.sub(r'((?:src|href)=["\'])(/(?:(?:articles/)?assets)/(?:site-themes|portal|portfolio|photos|anthology|anthology-selection|game|ranking-skins|site-nav|site-music|site-navigation|home-daily|home-now|daily-reading|weather-map|home-earth|astronomy-solar|style|vendor/(?:d3-7\.9\.0\.min|lunar-javascript-1\.7\.7))\.(?:css|js))(?:\?[^"\']*)?(["\'])', version, page)
 
 
 NAV_GROUPS = (('/articles/', 'articles', [('/articles/', 'myArticles'), ('/anthology/', 'classics')], ['/articles/', '/anthology/']),
@@ -275,6 +276,8 @@ def localize_page(page, root, address, route, language="zh-CN", modules=(), titl
         raise ValueError("Localize a root route in zh-CN or en.")
     catalogues = load_catalogues(root, modules)
     chinese = localized_path(route, "zh-CN")
+    if title is None and chinese == "/":
+        title = HOME_TITLES
     english = localized_path(chinese, "en")
     paired = chinese != english
     if all("common.nav." + key in catalogues[language] for key in NAV_REQUIRED) and all(key in catalogues[language] for key in ("common.brandName", "common.brandEnglish")):

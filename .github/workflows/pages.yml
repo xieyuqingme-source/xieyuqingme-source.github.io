@@ -79,11 +79,14 @@ jobs:
           python scripts/test_branding.py
           python scripts/test_news_snapshot.py
           python scripts/test_history_today.py
+          python scripts/test_daily_brief_reading.py
       - name: Check homepage astronomy and navigation history
         run: |
           node --test scripts/test_home_earth.cjs
           node --test scripts/test_home_daily.cjs
           node --test scripts/test_daily_reading.cjs
+          node --test scripts/test_weather_map.cjs
+          node --check home/assets/weather-map.js
           node --check home/assets/daily-reading.js
           node scripts/test_site_navigation_history.cjs
           node --check home/assets/home-daily.js
