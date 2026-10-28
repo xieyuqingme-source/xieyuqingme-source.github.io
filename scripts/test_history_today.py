@@ -4,6 +4,7 @@ from datetime import date, datetime, timezone
 from pathlib import Path
 from tempfile import TemporaryDirectory
 import json
+import hashlib
 import unittest
 
 from history_today import ALL_DAYS, MONTHS, history_items, load_history, render_history, validate_history
@@ -31,7 +32,77 @@ class HistoryTodayTests(unittest.TestCase):
         data = load_history(ROOT)
         self.assertEqual({item["month_day"] for item in data["items"]}, ALL_DAYS)
         self.assertTrue(history_items(data, "02-29"))
-        self.assertTrue(all(item["verification"] in {"automated_import", "editorial_review"} for item in data["items"]))
+        self.assertTrue(all(item["verification"] in {"automated_import", "editorial_review", "source_review"} for item in data["items"]))
+
+    def test_expanded_window_has_review_records_for_each_bilingual_event(self):
+        data = load_history(ROOT)
+        audit = json.loads((ROOT / "home/brief/history-review.json").read_text(encoding="utf-8"))
+        self.assertEqual(audit["scope"], {"start": "10-28", "end": "11-30", "days": 34})
+        expanded = [item for item in data["items"] if "10-28" <= item["month_day"] <= "11-30"]
+        records = {record["id"]: record for record in audit["items"]}
+        self.assertEqual(len(records), len(audit["items"]))
+        self.assertEqual(set(records), {item["id"] for item in expanded})
+        stamps = sorted({item["month_day"] for item in expanded})
+        self.assertEqual(len(stamps), 34)
+        for stamp in stamps:
+            items = history_items(data, stamp)
+            self.assertTrue(5 <= len(items) <= 8, stamp)
+            for language in ("zh-CN", "en"):
+                rendered = render_history(data, language, date(2026, *map(int, stamp.split("-"))))
+                self.assertEqual(rendered.count('class="history-item"'), len(items))
+                self.assertIn('class="history-more"', rendered)
+        for item in expanded:
+            record = records[item["id"]]
+            self.assertEqual(item["verification"], "source_review")
+            self.assertEqual(record["month_day"], item["month_day"])
+            self.assertEqual(record["year"], item["year"])
+            self.assertEqual([{key: source[key] for key in ("name", "url")} for source in record["sources"]], item["references"])
+            self.assertTrue(record["review_note"].strip())
+            for source in record["sources"]:
+                self.assertTrue(source["note"].strip())
+            for language in ("zh-CN", "en"):
+                fingerprint = hashlib.sha256((item["title"][language] + "\n" + item["text"][language]).encode("utf-8")).hexdigest()
+                self.assertEqual(record["text_sha256"][language], fingerprint)
+
+    def test_reviewed_institutional_sources_do_not_require_a_wikipedia_revision(self):
+        data = fixture()
+        item = data["items"][0]
+        item.pop("source_page")
+        item.pop("source_revision")
+        item.update(source="Museum archive", url="https://museum.example.org/pages/home/history/record", verification="source_review")
+        item["references"] = [{"name": item["source"], "url": item["url"]},
+                              {"name": "Research & records", "url": "https://archive.example.org/record"}]
+        validate_history(data)
+        for language in ("zh-CN", "en"):
+            html = render_history(data, language, date(2026, 1, 1))
+            self.assertIn('href="https://museum.example.org/pages/home/history/record"', html)
+            self.assertIn('href="https://archive.example.org/record"', html)
+            self.assertIn("Research &amp; records", html)
+            self.assertNotIn("Special:PermanentLink", html)
+
+    def test_reviewed_references_have_names_safe_distinct_urls_and_a_matching_primary_source(self):
+        for references in ([], [{"name": "", "url": "https://example.org/a"}],
+                           [{"name": "Source", "url": "https://127.0.0.1/a"}],
+                           [{"name": "Source", "url": "https://example.org/a", "private_note": "extra"}],
+                           [{"name": "Source", "url": "https://example.org/a"}] * 2,
+                           [{"name": "Different primary", "url": "https://example.org/a"}]):
+            data = fixture()
+            data["items"][0]["references"] = references
+            with self.subTest(references=references), self.assertRaises(ValueError):
+                validate_history(data)
+        for removed in ("source_page", "source_revision"):
+            data = fixture()
+            data["items"][0].pop(removed)
+            with self.subTest(removed=removed), self.assertRaisesRegex(ValueError, "both"):
+                validate_history(data)
+        data = fixture()
+        data["items"][0]["verification"] = "source_review"
+        with self.assertRaisesRegex(ValueError, "explicit reviewed"):
+            validate_history(data)
+        data["items"][0].pop("source_page")
+        data["items"][0].pop("source_revision")
+        with self.assertRaisesRegex(ValueError, "provenance"):
+            validate_history(data)
 
     def test_missing_date_cannot_be_masked_by_a_duplicate_day(self):
         data = fixture()

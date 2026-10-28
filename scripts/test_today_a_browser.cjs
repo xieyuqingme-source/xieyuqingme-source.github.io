@@ -93,6 +93,32 @@ async function clocks(page,language,selected=null){const expected=selected?[sele
       assert.equal(await page.locator('.weather-city-tools').evaluate(node=>node.open),false);assert.equal(await page.locator('#daily-city').isVisible(),false);await page.waitForFunction(()=>document.querySelector('#daily-weather').textContent.includes('21°C'));await detailsVisible(page,language);await noOverflow(page);return {historyEvents:count,news:fixture.items.length,order};
     }finally{await ctx.close();}
   });
+  await check('all 34 expanded history dates retain bilingual sources, three visible events and keyboard expansion',async()=>{
+    const stamps=[...new Set(history.items.map(item=>item.month_day))].filter(day=>day>='10-28'&&day<='11-30').sort();assert.equal(stamps.length,34);
+    let checked=0;
+    for(const language of ['zh-CN','en']){
+      const ctx=await context({width:390}),page=await ctx.newPage();
+      try{
+        await go(page,(language==='en'?'/en':'')+'/today/');
+        for(const stamp of ['10-27',...stamps,'12-01']){
+          await page.evaluate(stamp=>{window.__todayNow=Date.parse('2026-'+stamp+'T04:00:00Z');window.__todayMinute();},stamp);
+          const expected=history.items.filter(item=>item.month_day===stamp),count=await historyDay(page,stamp,language);
+          if(stamp>='10-28'&&stamp<='11-30'){
+            assert(count>=5&&count<=8,stamp+': '+count);const details=page.locator('#daily-history-list details.history-more');
+            await details.locator(':scope>summary').press('Enter');assert(await details.evaluate(node=>node.open));assert.equal(await page.locator('#daily-history-list .history-item:visible').count(),count);
+            for(let index=0;index<expected.length;index++){
+              const item=expected[index],urls=await page.locator('#daily-history-list .history-item').nth(index).locator('.history-source a').evaluateAll(nodes=>nodes.map(node=>node.href));
+              for(const reference of item.references||[{url:item.url}])assert(urls.includes(reference.url),item.id+': '+reference.url);
+              if(!item.source_page)assert(!urls.some(url=>url.includes('Special:PermanentLink/')),item.id);
+            }
+            if(['11-07','11-30'].includes(stamp)){const name=`history-${stamp}-${language}-390-light.png`;await page.locator('#today-history').screenshot({path:path.join(out,name)});report.screenshots.push(name);}
+          }else assert.equal(await page.locator('#daily-history-list details.history-more').count(),count>3?1:0);
+          await noOverflow(page);checked++;
+        }
+      }finally{await ctx.close();}
+    }
+    return {expandedDates:stamps.length,bilingualDateChecks:checked};
+  });
   await check('one full-width Marxist quotation exhausts its pool and preserves language selection',async()=>{
     const ctx=await context(),page=await ctx.newPage();try{await go(page,'/today/');const classicSeen=new Set([await page.locator('#daily-quote').getAttribute('data-quote-id')]);
       assert.equal(await page.locator('#brief-bottom .yl-daily-card').count(),1);assert.equal(await page.locator('[id^="own-quote"],#daily-own-quote-card').count(),0);

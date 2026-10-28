@@ -1,0 +1,3644 @@
+{
+  "version": 1,
+  "reviewed_at": "2026-10-28",
+  "scope": {
+    "start": "10-28",
+    "end": "11-30",
+    "days": 34
+  },
+  "method": "Each selected event was checked against the cited concrete source, including secondary encyclopedias. This is not a claim of universal original-archive verification.",
+  "retired_items": [
+    {
+      "id": "history-11-23-1644",
+      "month_day": "11-23",
+      "year": 1644,
+      "title": {
+        "zh-CN": "论出版自由",
+        "en": "Areopagitica"
+      },
+      "url": "https://en.wikipedia.org/wiki/Areopagitica"
+    }
+  ],
+  "items": [
+    {
+      "id": "history-10-28-1886",
+      "month_day": "10-28",
+      "year": 1886,
+      "sources": [
+        {
+          "name": "US National Park Service",
+          "url": "https://home.nps.gov/stli/learn/statue-of-liberty-facts.htm",
+          "note": "机构/专题资料：核对“自由女神像举行落成典礼”的1886年10月28日与正文事实；不冒充原始档案全文核验。"
+        }
+      ],
+      "review_note": "逐项核对所引具体来源的日期与事件，文字为本站中英文简编；机构资料和二手百科的核对范围分别见sources.note。",
+      "text_sha256": {
+        "zh-CN": "badad20369ee57d2fe64054d513d9f6c4c7ea0f1e68041587e7869660f7fa280",
+        "en": "77ee660fabca8fe92a0a300e567250daa32d8e8136724967db20e7ffd1603d9d"
+      }
+    },
+    {
+      "id": "history-10-28-1928-indonesian-youth-pledge",
+      "month_day": "10-28",
+      "year": 1928,
+      "sources": [
+        {
+          "name": "Wikipedia contributors",
+          "url": "https://en.wikipedia.org/wiki/Youth_Pledge",
+          "note": "二手百科具体事件页：核对“印度尼西亚青年誓言”的1928年10月28日与正文事实。"
+        }
+      ],
+      "review_note": "逐项核对所引具体来源的日期与事件，文字为本站中英文简编；机构资料和二手百科的核对范围分别见sources.note。",
+      "text_sha256": {
+        "zh-CN": "944136d2a3cab37cd77a130ee848ab481f58fe8b4adcad6a54814b21553681f2",
+        "en": "8c6cc7e57abb48a1b0242d292b3145ff8e6f7261aad4547f10254e12bdaad2eb"
+      }
+    },
+    {
+      "id": "history-10-28-1962-cuban-missile-withdrawal",
+      "month_day": "10-28",
+      "year": 1962,
+      "sources": [
+        {
+          "name": "Wikipedia contributors",
+          "url": "https://en.wikipedia.org/wiki/Cuban_Missile_Crisis",
+          "note": "二手百科具体事件页：核对“赫鲁晓夫宣布撤除古巴导弹”的1962年10月28日与正文事实。"
+        }
+      ],
+      "review_note": "逐项核对所引具体来源的日期与事件，文字为本站中英文简编；机构资料和二手百科的核对范围分别见sources.note。",
+      "text_sha256": {
+        "zh-CN": "f66cbf5b01277b0c24c46cd77c502efd2b11c6cca70586811367104014bec88d",
+        "en": "03db8542a3fc3c1ea97a801105217ba17db266026e68e5d36b3d30222010fe57"
+      }
+    },
+    {
+      "id": "history-10-28-1918-czechoslovakia-independence",
+      "month_day": "10-28",
+      "year": 1918,
+      "sources": [
+        {
+          "name": "Czech Ministry of Foreign Affairs",
+          "url": "https://mzv.gov.cz/jnp/en/issues_and_press/archive/events_and_issues/x2011/czechoslovak_independence_day.mobi",
+          "note": "机构/专题资料：核对“捷克斯洛伐克宣布独立”的1918年10月28日与正文事实；不冒充原始档案全文核验。"
+        }
+      ],
+      "review_note": "逐项核对所引具体来源的日期与事件，文字为本站中英文简编；机构资料和二手百科的核对范围分别见sources.note。",
+      "text_sha256": {
+        "zh-CN": "3b2b73e13885958096ff2c8dc79e6e40dbf191e1eaff98361559b84c39a45a3f",
+        "en": "5c6d502afe86ecbf241517dbab201f91a4409f629056f080a1dcb9e5cd0fded6"
+      }
+    },
+    {
+      "id": "history-10-28-1919-volstead-veto-overridden",
+      "month_day": "10-28",
+      "year": 1919,
+      "sources": [
+        {
+          "name": "United States Senate",
+          "url": "https://www.senate.gov/artandhistory/history/minute/Volstead_Act.htm",
+          "note": "机构/专题资料：核对“美国国会推翻禁酒执法法案否决”的1919年10月28日与正文事实；不冒充原始档案全文核验。此日为国会推翻否决、法案成为法律；全国禁酒正式实施为1920年1月。"
+        }
+      ],
+      "review_note": "逐项核对所引具体来源的日期与事件，文字为本站中英文简编；机构资料和二手百科的核对范围分别见sources.note。",
+      "text_sha256": {
+        "zh-CN": "122241c762147efdfc9fafc7621c386e423e8f692acef106acf709ebfede2d61",
+        "en": "5b098fb952f846f56b0d5304c7e416107bceea04c85ec2a8435c51a19b00f946"
+      }
+    },
+    {
+      "id": "history-10-28-1940-greece-rejects-ultimatum",
+      "month_day": "10-28",
+      "year": 1940,
+      "sources": [
+        {
+          "name": "Wikipedia contributors",
+          "url": "https://en.wikipedia.org/wiki/Ohi_Day",
+          "note": "二手百科具体事件页：核对“希腊拒绝意大利最后通牒”的1940年10月28日与正文事实。"
+        }
+      ],
+      "review_note": "逐项核对所引具体来源的日期与事件，文字为本站中英文简编；机构资料和二手百科的核对范围分别见sources.note。",
+      "text_sha256": {
+        "zh-CN": "4c6f2f59b5bb8d8acb4cc10335b5947a964bb213a90033de366d301e6a21269e",
+        "en": "79fc601f78f4e2311b42f1904805de110314a5baee688a3417f9607768b5d63b"
+      }
+    },
+    {
+      "id": "history-10-29-1929-wall-street-black-tuesday",
+      "month_day": "10-29",
+      "year": 1929,
+      "sources": [
+        {
+          "name": "Wikipedia contributors",
+          "url": "https://en.wikipedia.org/wiki/Wall_Street_Crash_of_1929",
+          "note": "二手百科具体事件页：核对“华尔街“黑色星期二””的1929年10月29日与正文事实。"
+        }
+      ],
+      "review_note": "逐项核对所引具体来源的日期与事件，文字为本站中英文简编；机构资料和二手百科的核对范围分别见sources.note。",
+      "text_sha256": {
+        "zh-CN": "bc86aa3721ff6ba4360fd978828f6f7f86540cbe514701a61f2469771c32488b",
+        "en": "65c84ec62c52976ad37cbd25d18129547e7a76fe4d96d9088e82bc499a835bd5"
+      }
+    },
+    {
+      "id": "history-10-29-1969-arpanet-first-message",
+      "month_day": "10-29",
+      "year": 1969,
+      "sources": [
+        {
+          "name": "Internet Society",
+          "url": "https://news.internetsociety.org/the-invisible-internet/",
+          "note": "机构/专题资料：核对“ARPANET首次主机间通信”的1969年10月29日与正文事实；不冒充原始档案全文核验。采用加州当地10月29日；UTC已是10月30日。"
+        },
+        {
+          "name": "Wikipedia contributors",
+          "url": "https://en.wikipedia.org/wiki/ARPANET",
+          "note": "二手百科具体事件页：核对“ARPANET首次主机间通信”的1969年10月29日与正文事实。"
+        }
+      ],
+      "review_note": "逐项核对所引具体来源的日期与事件，文字为本站中英文简编；机构资料和二手百科的核对范围分别见sources.note。",
+      "text_sha256": {
+        "zh-CN": "a2155e7f820a2f6e083ca6678dbc1fadddd058f40d3c2a5b95ff003e29b74b80",
+        "en": "dcc7b47d142212f6a8cf9be385270f4f75fa6a49e97cfd1fc5367224a446b96e"
+      }
+    },
+    {
+      "id": "history-10-29-1863-geneva-red-cross-resolutions",
+      "month_day": "10-29",
+      "year": 1863,
+      "sources": [
+        {
+          "name": "Wikipedia contributors",
+          "url": "https://en.wikipedia.org/wiki/International_Committee_of_the_Red_Cross",
+          "note": "二手百科具体事件页：核对“日内瓦会议通过红十字救护决议”的1863年10月29日与正文事实。所记为会议通过救护原则与共同标志决议，不把国际委员会2月成立或次年日内瓦公约混作本日。"
+        }
+      ],
+      "review_note": "逐项核对所引具体来源的日期与事件，文字为本站中英文简编；机构资料和二手百科的核对范围分别见sources.note。",
+      "text_sha256": {
+        "zh-CN": "e28f7aa61ee29006e2c1a9acafe7f6a2786d3a3785391b938db9fa6afebd6729",
+        "en": "a9cc080b453eeae300579c40e988dbb5765186aceac92d5eb8f75630c2acb163"
+      }
+    },
+    {
+      "id": "history-10-29-1923-turkey-republic-proclamation",
+      "month_day": "10-29",
+      "year": 1923,
+      "sources": [
+        {
+          "name": "Wikipedia contributors",
+          "url": "https://en.wikipedia.org/wiki/Republic_Day_(Turkey)",
+          "note": "二手百科具体事件页：核对“土耳其共和国成立”的1923年10月29日与正文事实。"
+        }
+      ],
+      "review_note": "逐项核对所引具体来源的日期与事件，文字为本站中英文简编；机构资料和二手百科的核对范围分别见sources.note。",
+      "text_sha256": {
+        "zh-CN": "6cb5aa120014f32fb16e181868e05bae0625834a7b580f874bb8acfa6843dc12",
+        "en": "d0422a90c527b98c5f51084c9712af0be5f457a12fe43c7744ea371e603dea8d"
+      }
+    },
+    {
+      "id": "history-10-29-1956-suez-israeli-invasion",
+      "month_day": "10-29",
+      "year": 1956,
+      "sources": [
+        {
+          "name": "Wikipedia contributors",
+          "url": "https://en.wikipedia.org/wiki/Suez_Crisis",
+          "note": "二手百科具体事件页：核对“苏伊士危机中的西奈进攻开始”的1956年10月29日与正文事实。"
+        }
+      ],
+      "review_note": "逐项核对所引具体来源的日期与事件，文字为本站中英文简编；机构资料和二手百科的核对范围分别见sources.note。",
+      "text_sha256": {
+        "zh-CN": "2a42261dfb463953f297b0b339fe9ceeb40766e72e24f83879cb2e3af74ee9e4",
+        "en": "e2770a0e9abbe05eaa8f0f66584a947f7edeee959d56cfb8594f2a967acf9790"
+      }
+    },
+    {
+      "id": "history-10-29-1991",
+      "month_day": "10-29",
+      "year": 1991,
+      "sources": [
+        {
+          "name": "NASA",
+          "url": "https://science.nasa.gov/mission/galileo/",
+          "note": "机构/专题资料：核对“伽利略号飞掠加斯普拉”的1991年10月29日与正文事实；不冒充原始档案全文核验。"
+        }
+      ],
+      "review_note": "逐项核对所引具体来源的日期与事件，文字为本站中英文简编；机构资料和二手百科的核对范围分别见sources.note。",
+      "text_sha256": {
+        "zh-CN": "5333f298612b35ec9ab3c5b75c4b3fbab21b5f7e32c16492d0627083303df0bd",
+        "en": "29b07f8846988ae28ba6d8aac6574f8db59b3ed41b348b52f37211cc13bb9897"
+      }
+    },
+    {
+      "id": "history-10-30-1938",
+      "month_day": "10-30",
+      "year": 1938,
+      "sources": [
+        {
+          "name": "Wikipedia contributors",
+          "url": "https://en.wikipedia.org/wiki/The_War_of_the_Worlds_(1938_radio_drama)",
+          "note": "二手百科具体事件页：核对“广播剧《世界大战》播出”的1938年10月30日与正文事实。"
+        }
+      ],
+      "review_note": "逐项核对所引具体来源的日期与事件，文字为本站中英文简编；机构资料和二手百科的核对范围分别见sources.note。",
+      "text_sha256": {
+        "zh-CN": "5a23bd9e54521a52b98bd96f01a470987d288cf59f35c2384bbd7617f8a04fc9",
+        "en": "915b16bb7cb385cb622d73a77b7ecc7d88df13cc499e4589da62fc6036929851"
+      }
+    },
+    {
+      "id": "history-10-30-1989-project-hope-launched",
+      "month_day": "10-30",
+      "year": 1989,
+      "sources": [
+        {
+          "name": "中国青年网",
+          "url": "https://qnzz.youth.cn/zhuanti/kszt/xdemo_128647/09/xdemo_127402/08/201702/t20170217_9134114.htm",
+          "note": "机构/专题资料：核对“希望工程启动”的1989年10月30日与正文事实；不冒充原始档案全文核验。"
+        }
+      ],
+      "review_note": "逐项核对所引具体来源的日期与事件，文字为本站中英文简编；机构资料和二手百科的核对范围分别见sources.note。",
+      "text_sha256": {
+        "zh-CN": "e9f79ca211679995ec887d7fffef44880f3964e6e28f40e0bf940ed8f0525de1",
+        "en": "58a2888bda9a75bdc02ec462a5f09e9d512d928ced8a3bc38520bd753c711eb3"
+      }
+    },
+    {
+      "id": "history-10-30-1973-bosphorus-bridge-opens",
+      "month_day": "10-30",
+      "year": 1973,
+      "sources": [
+        {
+          "name": "Wikipedia contributors",
+          "url": "https://en.wikipedia.org/wiki/Bosphorus_Bridge",
+          "note": "二手百科具体事件页：核对“博斯普鲁斯大桥通车”的1973年10月30日与正文事实。"
+        }
+      ],
+      "review_note": "逐项核对所引具体来源的日期与事件，文字为本站中英文简编；机构资料和二手百科的核对范围分别见sources.note。",
+      "text_sha256": {
+        "zh-CN": "4cb4947b644a606ef6577f00b628a3498b2a849cf78657ddc4038898a466f68f",
+        "en": "9ff8cde0c1cf86408c1c2032ed200deb92ba159878ca625304e6d98f888f4dd9"
+      }
+    },
+    {
+      "id": "history-10-30-1945-india-un-membership",
+      "month_day": "10-30",
+      "year": 1945,
+      "sources": [
+        {
+          "name": "Wikipedia contributors",
+          "url": "https://en.wikipedia.org/wiki/India_and_the_United_Nations",
+          "note": "二手百科具体事件页：核对“印度成为联合国创始会员国”的1945年10月30日与正文事实。"
+        }
+      ],
+      "review_note": "逐项核对所引具体来源的日期与事件，文字为本站中英文简编；机构资料和二手百科的核对范围分别见sources.note。",
+      "text_sha256": {
+        "zh-CN": "58c5569a77f92be4b5cf21c5449c883d7f66663933874a8d23c927c90b6c80e1",
+        "en": "0ef2f0d354460a19918034f9cb21d83aa0336337a285c740145342f657457580"
+      }
+    },
+    {
+      "id": "history-10-30-1961-tsar-bomba-test",
+      "month_day": "10-30",
+      "year": 1961,
+      "sources": [
+        {
+          "name": "Wikipedia contributors",
+          "url": "https://en.wikipedia.org/wiki/Tsar_Bomba",
+          "note": "二手百科具体事件页：核对“苏联试爆“沙皇炸弹””的1961年10月30日与正文事实。"
+        }
+      ],
+      "review_note": "逐项核对所引具体来源的日期与事件，文字为本站中英文简编；机构资料和二手百科的核对范围分别见sources.note。",
+      "text_sha256": {
+        "zh-CN": "987d8fc4cbffbc91da3017e215986e511ea7bd232529feb6e5dd4334ba4d624f",
+        "en": "736392fb38f3040ce4da309923c67ec501093e41f21b0821a349d2d11e63f74a"
+      }
+    },
+    {
+      "id": "history-10-30-1995-quebec-sovereignty-referendum",
+      "month_day": "10-30",
+      "year": 1995,
+      "sources": [
+        {
+          "name": "Wikipedia contributors",
+          "url": "https://en.wikipedia.org/wiki/1995_Quebec_referendum",
+          "note": "二手百科具体事件页：核对“魁北克举行主权公投”的1995年10月30日与正文事实。"
+        }
+      ],
+      "review_note": "逐项核对所引具体来源的日期与事件，文字为本站中英文简编；机构资料和二手百科的核对范围分别见sources.note。",
+      "text_sha256": {
+        "zh-CN": "9759557b1516e91727efe37ed45009804ef01807ee5be17feb703ffe6dd0e5e6",
+        "en": "d39c079bd899eaa57beb08e76ed111c2230cdd0b9ef6af2019dc1b5a41322a95"
+      }
+    },
+    {
+      "id": "history-10-31-2010-shanghai-expo-closes",
+      "month_day": "10-31",
+      "year": 2010,
+      "sources": [
+        {
+          "name": "Wikipedia contributors",
+          "url": "https://en.wikipedia.org/wiki/Expo_2010",
+          "note": "二手百科具体事件页：核对“上海世博会闭幕”的2010年10月31日与正文事实。"
+        }
+      ],
+      "review_note": "逐项核对所引具体来源的日期与事件，文字为本站中英文简编；机构资料和二手百科的核对范围分别见sources.note。",
+      "text_sha256": {
+        "zh-CN": "375c4c3232765bd4312883209c6c368b5556ad5defb42a14c6f210d81d8a2e14",
+        "en": "0b81811394d2f686089cc2339ef33a3320aec1ee7891a5c22716bab220804760"
+      }
+    },
+    {
+      "id": "history-10-31-1941",
+      "month_day": "10-31",
+      "year": 1941,
+      "sources": [
+        {
+          "name": "US National Park Service",
+          "url": "https://www.nps.gov/moru/learn/historyculture/memorial-history.htm",
+          "note": "NPS工程史记1941年10月31日结束；资金及美国即将卷入第二次世界大战的形势影响原方案，并非称世界大战尚未发生。"
+        }
+      ],
+      "review_note": "逐项核对所引具体来源的日期与事件，文字为本站中英文简编；机构资料和二手百科的核对范围分别见sources.note。",
+      "text_sha256": {
+        "zh-CN": "5ec12b461def68d9bab78f78c7489074381286088a4f780dff5af24d020e628c",
+        "en": "902160a0fa0a8043bc31a34dbb3ad35515f1e0e1e8abaf1019b794bf77571c81"
+      }
+    },
+    {
+      "id": "history-10-31-1940-battle-britain-official-end",
+      "month_day": "10-31",
+      "year": 1940,
+      "sources": [
+        {
+          "name": "Wikipedia contributors",
+          "url": "https://en.wikipedia.org/wiki/Battle_of_Britain",
+          "note": "二手百科具体事件页：核对“不列颠空战的英国官方终日”的1940年10月31日与正文事实。10月31日为英国官方采用的战役终日；来源说明其他历史叙述可能采用不同分期。"
+        }
+      ],
+      "review_note": "逐项核对所引具体来源的日期与事件，文字为本站中英文简编；机构资料和二手百科的核对范围分别见sources.note。",
+      "text_sha256": {
+        "zh-CN": "3b9cd8cb889006e151d9bb1e92b21b3cec925dae5d03d34bc448d3bf6ca9badc",
+        "en": "b671f81bd435618512f08bd37e82ae294c0e54b1b4872fa450437c5570398235"
+      }
+    },
+    {
+      "id": "history-10-31-1864-nevada-statehood",
+      "month_day": "10-31",
+      "year": 1864,
+      "sources": [
+        {
+          "name": "Wikipedia contributors",
+          "url": "https://en.wikipedia.org/wiki/Nevada",
+          "note": "二手百科具体事件页：核对“内华达成为美国第36州”的1864年10月31日与正文事实。"
+        }
+      ],
+      "review_note": "逐项核对所引具体来源的日期与事件，文字为本站中英文简编；机构资料和二手百科的核对范围分别见sources.note。",
+      "text_sha256": {
+        "zh-CN": "3dfd951f1346bdce7bb8a63c92dd5eb50825729afa897a7c5dd1a08f0eef4862",
+        "en": "07e2c35d727a209ec79d696bcc6871b4b88d7e1cd666f8fb71caa884d73e8eff"
+      }
+    },
+    {
+      "id": "history-10-31-1926-houdini-dies",
+      "month_day": "10-31",
+      "year": 1926,
+      "sources": [
+        {
+          "name": "Wikipedia contributors",
+          "url": "https://en.wikipedia.org/wiki/Harry_Houdini",
+          "note": "二手百科具体事件页：核对“魔术师胡迪尼逝世”的1926年10月31日与正文事实。"
+        }
+      ],
+      "review_note": "逐项核对所引具体来源的日期与事件，文字为本站中英文简编；机构资料和二手百科的核对范围分别见sources.note。",
+      "text_sha256": {
+        "zh-CN": "58651c69eb162ec3af569315a18efddbe2920977cd2f194250e5372ac55ba6b9",
+        "en": "e376b660b3e1a8e235c0dbbae46b8ca9442963a2df5191744f3a0245ef38ab34"
+      }
+    },
+    {
+      "id": "history-10-31-1984-indira-gandhi-assassinated",
+      "month_day": "10-31",
+      "year": 1984,
+      "sources": [
+        {
+          "name": "Wikipedia contributors",
+          "url": "https://en.wikipedia.org/wiki/Assassination_of_Indira_Gandhi",
+          "note": "二手百科具体事件页：核对“英迪拉·甘地遇刺”的1984年10月31日与正文事实。"
+        }
+      ],
+      "review_note": "逐项核对所引具体来源的日期与事件，文字为本站中英文简编；机构资料和二手百科的核对范围分别见sources.note。",
+      "text_sha256": {
+        "zh-CN": "927695b78a07a4c5252bee4d9d317b9d9df25990920f32b97b4712fcfe1b5ecc",
+        "en": "c10e7e4939bc1d2f8396b7aa090fbda84254ee37c209774c7c0c25e753db3918"
+      }
+    },
+    {
+      "id": "history-11-01-1993",
+      "month_day": "11-01",
+      "year": 1993,
+      "sources": [
+        {
+          "name": "European Union",
+          "url": "https://european-union.europa.eu/principles-countries-history/history-eu/1990-99_en",
+          "note": "机构/专题资料：核对“《马斯特里赫特条约》生效”的1993年11月1日与正文事实；不冒充原始档案全文核验。"
+        }
+      ],
+      "review_note": "逐项核对所引具体来源的日期与事件，文字为本站中英文简编；机构资料和二手百科的核对范围分别见sources.note。",
+      "text_sha256": {
+        "zh-CN": "469718e054271e97a763afc24f2890f3a86c077b817d96a1c892e075b572af61",
+        "en": "1fe7fb48dcb2027917687e575aeaea89aaa8056a5a0566f1ab299da901e12b03"
+      }
+    },
+    {
+      "id": "history-11-01-1512-sistine-ceiling-inaugurated",
+      "month_day": "11-01",
+      "year": 1512,
+      "sources": [
+        {
+          "name": "Vatican Museums",
+          "url": "https://www.museivaticani.va/content/museivaticani/en/collezioni/musei/cappella-sistina/storia-cappella-sistina.html",
+          "note": "机构/专题资料：核对“西斯廷礼拜堂新天顶画揭幕”的1512年11月1日与正文事实；不冒充原始档案全文核验。"
+        }
+      ],
+      "review_note": "逐项核对所引具体来源的日期与事件，文字为本站中英文简编；机构资料和二手百科的核对范围分别见sources.note。",
+      "text_sha256": {
+        "zh-CN": "143bbb54c13f18281ccb9650428ba39eeb5acdd1114ad4fea3d8aa5c364b7442",
+        "en": "ec3415b482407b1f137b28a89b9a2f3dfd78be1840eee678723cd05c1ed29e5a"
+      }
+    },
+    {
+      "id": "history-11-01-1949-chinese-academy-sciences-founded",
+      "month_day": "11-01",
+      "year": 1949,
+      "sources": [
+        {
+          "name": "中国科学院地质与地球物理研究所",
+          "url": "https://igg.cas.cn/gkjj/lsyg/",
+          "note": "机构/专题资料：核对“中国科学院成立”的1949年11月1日与正文事实；不冒充原始档案全文核验。"
+        }
+      ],
+      "review_note": "逐项核对所引具体来源的日期与事件，文字为本站中英文简编；机构资料和二手百科的核对范围分别见sources.note。",
+      "text_sha256": {
+        "zh-CN": "62d90baaeb7d5e4435690bb26244e381e0ae3a2faa9e2948b406935911a84691",
+        "en": "80d941638161def5c75f243963cd034a792e2aec85bc9e3053b92e1c90d76431"
+      }
+    },
+    {
+      "id": "history-11-01-1755-lisbon-earthquake",
+      "month_day": "11-01",
+      "year": 1755,
+      "sources": [
+        {
+          "name": "Wikipedia contributors",
+          "url": "https://en.wikipedia.org/wiki/1755_Lisbon_earthquake",
+          "note": "二手百科具体事件页：核对“里斯本大地震”的1755年11月1日与正文事实。"
+        }
+      ],
+      "review_note": "逐项核对所引具体来源的日期与事件，文字为本站中英文简编；机构资料和二手百科的核对范围分别见sources.note。",
+      "text_sha256": {
+        "zh-CN": "2b552cc69ee90b904a84e3bd2810bc167fa82ec5cc8c420888324485d6ccc8f7",
+        "en": "4ebb616a403ecbab9d8db06c93af00502b7c9cbecf1117b889c4073f71fd529c"
+      }
+    },
+    {
+      "id": "history-11-01-1952-ivy-mike-test",
+      "month_day": "11-01",
+      "year": 1952,
+      "sources": [
+        {
+          "name": "Wikipedia contributors",
+          "url": "https://en.wikipedia.org/wiki/Ivy_Mike",
+          "note": "二手百科具体事件页：核对“美国进行“常春藤麦克”试验”的1952年11月1日与正文事实。采用马绍尔群岛当地日期；不自动换算为北京时间。"
+        }
+      ],
+      "review_note": "逐项核对所引具体来源的日期与事件，文字为本站中英文简编；机构资料和二手百科的核对范围分别见sources.note。",
+      "text_sha256": {
+        "zh-CN": "dc7f531c86963634320a9a4754a92ef393c2320ad85be2cda9c95c3b990df0e1",
+        "en": "4bf2171d82ca153730bbfbff5381002778edb5ef3a0f9b37209de9b4c5501ea5"
+      }
+    },
+    {
+      "id": "history-11-01-1928-turkish-alphabet-law",
+      "month_day": "11-01",
+      "year": 1928,
+      "sources": [
+        {
+          "name": "Wikipedia contributors",
+          "url": "https://en.wikipedia.org/wiki/Turkish_alphabet",
+          "note": "二手百科具体事件页：核对“土耳其通过新字母法”的1928年11月1日与正文事实。"
+        }
+      ],
+      "review_note": "逐项核对所引具体来源的日期与事件，文字为本站中英文简编；机构资料和二手百科的核对范围分别见sources.note。",
+      "text_sha256": {
+        "zh-CN": "442917189fd4ea1af8b487bc7424666d1b4f488ddb973a9f2c621647ae59833a",
+        "en": "0b94b98bafcb8d6bae5e06c94e4d4776a08711962e35d3e90b91fa3b65c850ad"
+      }
+    },
+    {
+      "id": "history-11-02-2000",
+      "month_day": "11-02",
+      "year": 2000,
+      "sources": [
+        {
+          "name": "NASA",
+          "url": "https://www.nasa.gov/history/space-station-20th-expedition-1-arrives-at-the-international-space-station/",
+          "note": "机构/专题资料：核对“国际空间站迎来首批常驻乘员”的2000年11月2日与正文事实；不冒充原始档案全文核验。"
+        }
+      ],
+      "review_note": "逐项核对所引具体来源的日期与事件，文字为本站中英文简编；机构资料和二手百科的核对范围分别见sources.note。",
+      "text_sha256": {
+        "zh-CN": "2885e09890e057c4e48ca1ef74775722dabad63e9cf28c7af4cdfed0cada3e26",
+        "en": "635d4542ae670851dc88f83fb63b053456ace54fb303dbafae216e1c2c133348"
+      }
+    },
+    {
+      "id": "history-11-02-1936-bbc-regular-television",
+      "month_day": "11-02",
+      "year": 1936,
+      "sources": [
+        {
+          "name": "Wikipedia contributors",
+          "url": "https://en.wikipedia.org/wiki/BBC_Television_Service",
+          "note": "二手百科具体事件页：核对“BBC开始定期电视广播”的1936年11月2日与正文事实。"
+        }
+      ],
+      "review_note": "逐项核对所引具体来源的日期与事件，文字为本站中英文简编；机构资料和二手百科的核对范围分别见sources.note。",
+      "text_sha256": {
+        "zh-CN": "b1199a2b578f362ec707a94de35ef9bb73b2874aeb35abd31141a593c752b3ea",
+        "en": "377c95fbae132f3270aaba95e6185b534b79f23ffe0008c0879eaccba56bf094"
+      }
+    },
+    {
+      "id": "history-11-02-1948-liaoshen-campaign-ends",
+      "month_day": "11-02",
+      "year": 1948,
+      "sources": [
+        {
+          "name": "Wikipedia contributors",
+          "url": "https://en.wikipedia.org/wiki/Liaoshen_campaign",
+          "note": "二手百科具体事件页：核对“辽沈战役结束”的1948年11月2日与正文事实。"
+        }
+      ],
+      "review_note": "逐项核对所引具体来源的日期与事件，文字为本站中英文简编；机构资料和二手百科的核对范围分别见sources.note。",
+      "text_sha256": {
+        "zh-CN": "de9fb4b03f0f937810685c40b5b57fac7ce6b393a5440e03ba59f2c1dcb313eb",
+        "en": "247a4849e38bb924e8edc5332b55ecc8a227857832535579e7f4c8ff031277a8"
+      }
+    },
+    {
+      "id": "history-11-02-1917-balfour-declaration",
+      "month_day": "11-02",
+      "year": 1917,
+      "sources": [
+        {
+          "name": "Wikipedia contributors",
+          "url": "https://en.wikipedia.org/wiki/Balfour_Declaration",
+          "note": "所引具体事件页区分11月2日信函署期与11月9日报刊公开；本条记签发信函，并简述民族家园及既有社群权利条款。"
+        }
+      ],
+      "review_note": "逐项核对所引具体来源的日期与事件，文字为本站中英文简编；机构资料和二手百科的核对范围分别见sources.note。",
+      "text_sha256": {
+        "zh-CN": "a8b8ed779264b03ea55abdfbb4cafedc6444dfdeb3646578c69552b04fbf0438",
+        "en": "b2cb30ca73c3ea063e157a7b23de97b7aebbe79dae73dc1d665e1e61179e7c19"
+      }
+    },
+    {
+      "id": "history-11-02-1983-mlk-holiday-law",
+      "month_day": "11-02",
+      "year": 1983,
+      "sources": [
+        {
+          "name": "Wikipedia contributors",
+          "url": "https://en.wikipedia.org/wiki/Martin_Luther_King_Jr._Day",
+          "note": "二手百科具体事件页：核对“马丁·路德·金纪念假日立法”的1983年11月2日与正文事实。"
+        }
+      ],
+      "review_note": "逐项核对所引具体来源的日期与事件，文字为本站中英文简编；机构资料和二手百科的核对范围分别见sources.note。",
+      "text_sha256": {
+        "zh-CN": "95b202c7a1fa85986f89f45b9e594da8725efe23e7115755afff6a58eceaf97e",
+        "en": "eaedf0d7d42c09fa2ccc81d24bea3814615d397c9c29a06c062f515c6e7ec483"
+      }
+    },
+    {
+      "id": "history-11-02-1988-morris-worm-spreads",
+      "month_day": "11-02",
+      "year": 1988,
+      "sources": [
+        {
+          "name": "Federal Bureau of Investigation",
+          "url": "https://www.fbi.gov/news/stories/morris-worm-30-years-since-first-major-attack-on-internet-110218",
+          "note": "机构/专题资料：核对“莫里斯蠕虫在互联网传播”的1988年11月2日与正文事实；不冒充原始档案全文核验。"
+        }
+      ],
+      "review_note": "逐项核对所引具体来源的日期与事件，文字为本站中英文简编；机构资料和二手百科的核对范围分别见sources.note。",
+      "text_sha256": {
+        "zh-CN": "1f5ce047a6d083c6bcb99c9a11825b0e67e7f6e16350a587cbcb5408bb4b442a",
+        "en": "c1943571ea7aadb7366e2e00e62a44b94ea9a0a14eebfb5027d2b143bd1aa9af"
+      }
+    },
+    {
+      "id": "history-11-03-1957",
+      "month_day": "11-03",
+      "year": 1957,
+      "sources": [
+        {
+          "name": "NASA",
+          "url": "https://www.nasa.gov/history/65-years-ago-sputnik-ushers-in-the-space-age/",
+          "note": "机构/专题资料：核对“莱卡进入地球轨道”的1957年11月3日与正文事实；不冒充原始档案全文核验。"
+        }
+      ],
+      "review_note": "逐项核对所引具体来源的日期与事件，文字为本站中英文简编；机构资料和二手百科的核对范围分别见sources.note。",
+      "text_sha256": {
+        "zh-CN": "f5f92f0f1f8ce2583894a951f9b61c2ae66dfca303e388a69e6ddb72ab4aa25a",
+        "en": "9ae158bfa5a70b823f22ab8ff5466e81e4d390dba17919cc5ab165a368d9e603"
+      }
+    },
+    {
+      "id": "history-11-03-1838-times-india-first-issue",
+      "month_day": "11-03",
+      "year": 1838,
+      "sources": [
+        {
+          "name": "Wikipedia contributors",
+          "url": "https://en.wikipedia.org/wiki/The_Times_of_India",
+          "note": "二手百科具体事件页：核对“《印度时报》前身创刊”的1838年11月3日与正文事实。"
+        }
+      ],
+      "review_note": "逐项核对所引具体来源的日期与事件，文字为本站中英文简编；机构资料和二手百科的核对范围分别见sources.note。",
+      "text_sha256": {
+        "zh-CN": "ad6fa182ca836707d7ca2417e5d559c639a4566486e0e57bc0c18b5e8e999090",
+        "en": "403be0c68b8e8b223daab6ac9331bdae6d96f42a2fd826748f7d2a445c16b31f"
+      }
+    },
+    {
+      "id": "history-11-03-2016-long-march5-first-flight",
+      "month_day": "11-03",
+      "year": 2016,
+      "sources": [
+        {
+          "name": "Wikipedia contributors",
+          "url": "https://en.wikipedia.org/wiki/Long_March_5",
+          "note": "二手百科具体事件页：核对“长征五号首次发射”的2016年11月3日与正文事实。"
+        }
+      ],
+      "review_note": "逐项核对所引具体来源的日期与事件，文字为本站中英文简编；机构资料和二手百科的核对范围分别见sources.note。",
+      "text_sha256": {
+        "zh-CN": "00932ff5dfb32921d748d987286f47d3bc9a56b1a18e5da5f78b8ea6d64a5e61",
+        "en": "cc0e280cd0ef0bb65e6bb18fd77cfeb9b0cca650a2b441af09dad2b5949f5f4b"
+      }
+    },
+    {
+      "id": "history-11-03-1903-panama-separation-colombia",
+      "month_day": "11-03",
+      "year": 1903,
+      "sources": [
+        {
+          "name": "Wikipedia contributors",
+          "url": "https://en.wikipedia.org/wiki/Separation_of_Panama_from_Colombia",
+          "note": "二手百科具体事件页：核对“巴拿马脱离哥伦比亚”的1903年11月3日与正文事实。"
+        }
+      ],
+      "review_note": "逐项核对所引具体来源的日期与事件，文字为本站中英文简编；机构资料和二手百科的核对范围分别见sources.note。",
+      "text_sha256": {
+        "zh-CN": "514442586a0599cb199e6dcadc6ebc6a505bc06a9e6ed9208d636faa9cf1e429",
+        "en": "6938977a68cfe4c60df6fade1d2d678366a805031a4a7d76e5f1336ebca8a1d8"
+      }
+    },
+    {
+      "id": "history-11-03-1911-chevrolet-founded",
+      "month_day": "11-03",
+      "year": 1911,
+      "sources": [
+        {
+          "name": "Wikipedia contributors",
+          "url": "https://en.wikipedia.org/wiki/Chevrolet",
+          "note": "二手百科具体事件页：核对“雪佛兰汽车公司成立”的1911年11月3日与正文事实。"
+        }
+      ],
+      "review_note": "逐项核对所引具体来源的日期与事件，文字为本站中英文简编；机构资料和二手百科的核对范围分别见sources.note。",
+      "text_sha256": {
+        "zh-CN": "1c2f33dbecd3c062fe5ced5d8aa6a0e7174a76f902763e18f705beec4c392dd5",
+        "en": "865162dba31781b60bf9caf901c7a6a32f750c56a8161ca70362710ef43b56d6"
+      }
+    },
+    {
+      "id": "history-11-03-1978-dominica-independence",
+      "month_day": "11-03",
+      "year": 1978,
+      "sources": [
+        {
+          "name": "Wikipedia contributors",
+          "url": "https://en.wikipedia.org/wiki/Dominica",
+          "note": "二手百科具体事件页：核对“多米尼克独立”的1978年11月3日与正文事实。"
+        }
+      ],
+      "review_note": "逐项核对所引具体来源的日期与事件，文字为本站中英文简编；机构资料和二手百科的核对范围分别见sources.note。",
+      "text_sha256": {
+        "zh-CN": "74d77ceda5fae81eaacb41c8d7cd9386d254dfd9a99904c8154d691ae5a78c02",
+        "en": "dc0d858c1f6b34442d3d737d83ae37f208286802c1150cdf84e55878dcd2b0ac"
+      }
+    },
+    {
+      "id": "history-11-04-2016-paris-agreement-in-force",
+      "month_day": "11-04",
+      "year": 2016,
+      "sources": [
+        {
+          "name": "Wikipedia contributors",
+          "url": "https://en.wikipedia.org/wiki/Paris_Agreement",
+          "note": "二手百科具体事件页：核对“《巴黎协定》生效”的2016年11月4日与正文事实。"
+        }
+      ],
+      "review_note": "逐项核对所引具体来源的日期与事件，文字为本站中英文简编；机构资料和二手百科的核对范围分别见sources.note。",
+      "text_sha256": {
+        "zh-CN": "68808d4621deb8619559859d407cbcf7a7174e7a51b9319086896e12499e8a92",
+        "en": "78e02bc1745137b6155cd4d89f02b558fe91fc78b092b664c262a2a73bb0afea"
+      }
+    },
+    {
+      "id": "history-11-04-1922-tutankhamun-first-step",
+      "month_day": "11-04",
+      "year": 1922,
+      "sources": [
+        {
+          "name": "Wikipedia contributors",
+          "url": "https://en.wikipedia.org/wiki/Discovery_of_the_tomb_of_Tutankhamun",
+          "note": "二手百科具体事件页：核对“图坦卡蒙陵墓入口阶梯被发现”的1922年11月4日与正文事实。所记为第一层入口阶梯被发现；后来打开前室、墓室是其他日期。"
+        }
+      ],
+      "review_note": "逐项核对所引具体来源的日期与事件，文字为本站中英文简编；机构资料和二手百科的核对范围分别见sources.note。",
+      "text_sha256": {
+        "zh-CN": "dc7cd6c6eea52b3d4ea5c0a4131a1792bd8892a6d1221f874b60e23e9a796935",
+        "en": "e9b39080eb12e35e176b9e2d391f079d4b2d204bad5ad7af76638cbae1e51aa1"
+      }
+    },
+    {
+      "id": "history-11-04-1995",
+      "month_day": "11-04",
+      "year": 1995,
+      "sources": [
+        {
+          "name": "Nobel Prize",
+          "url": "https://www.nobelprize.org/prizes/peace/1994/rabin/facts/",
+          "note": "机构/专题资料：核对“拉宾在和平集会后遇刺”的1995年11月4日与正文事实；不冒充原始档案全文核验。"
+        },
+        {
+          "name": "Wikipedia contributors",
+          "url": "https://en.wikipedia.org/wiki/Assassination_of_Yitzhak_Rabin",
+          "note": "二手百科具体事件页：核对“拉宾在和平集会后遇刺”的1995年11月4日与正文事实。"
+        }
+      ],
+      "review_note": "逐项核对所引具体来源的日期与事件，文字为本站中英文简编；机构资料和二手百科的核对范围分别见sources.note。",
+      "text_sha256": {
+        "zh-CN": "b07ed80dad7a54b9690ec9801835eb26406d1464cfd391f3fc6d856a39d840a1",
+        "en": "f4b8871ec03ca400fc1f8fca6bd0125b13b14d410f0ff02848a12e533c45870e"
+      }
+    },
+    {
+      "id": "history-11-04-1946-unesco-constitution-in-force",
+      "month_day": "11-04",
+      "year": 1946,
+      "sources": [
+        {
+          "name": "UNESCO",
+          "url": "https://www.unesco.org/en/articles/75-years-ago-unescos-constitution-adopted",
+          "note": "机构/专题资料：核对“联合国教科文组织宪章生效”的1946年11月4日与正文事实；不冒充原始档案全文核验。"
+        }
+      ],
+      "review_note": "逐项核对所引具体来源的日期与事件，文字为本站中英文简编；机构资料和二手百科的核对范围分别见sources.note。",
+      "text_sha256": {
+        "zh-CN": "00bd589e503e36f3d5eaf7cf6654d2c18c8c92b336d1885f2979ed5d55d9dade",
+        "en": "8527dda7080ee60e881db1f477962b1eb1c8e7c0ff3df86cab0eadf07781f4bb"
+      }
+    },
+    {
+      "id": "history-11-04-1956-soviet-intervention-hungary",
+      "month_day": "11-04",
+      "year": 1956,
+      "sources": [
+        {
+          "name": "Wikipedia contributors",
+          "url": "https://en.wikipedia.org/wiki/Hungarian_Revolution_of_1956",
+          "note": "二手百科具体事件页：核对“苏军大规模进攻匈牙利”的1956年11月4日与正文事实。"
+        }
+      ],
+      "review_note": "逐项核对所引具体来源的日期与事件，文字为本站中英文简编；机构资料和二手百科的核对范围分别见sources.note。",
+      "text_sha256": {
+        "zh-CN": "ef49e8baa6caa3aaad32847fe4de8270a45f4de663aff96cd0a6f2c058ff062a",
+        "en": "45036a232bbf17d6970e2e0dd1b8e9c8fc09e329360b93839e8ed6ed49b0a8c4"
+      }
+    },
+    {
+      "id": "history-11-04-2008-obama-election",
+      "month_day": "11-04",
+      "year": 2008,
+      "sources": [
+        {
+          "name": "Wikipedia contributors",
+          "url": "https://en.wikipedia.org/wiki/2008_United_States_presidential_election",
+          "note": "二手百科具体事件页：核对“奥巴马赢得美国总统选举”的2008年11月4日与正文事实。"
+        }
+      ],
+      "review_note": "逐项核对所引具体来源的日期与事件，文字为本站中英文简编；机构资料和二手百科的核对范围分别见sources.note。",
+      "text_sha256": {
+        "zh-CN": "09d57ac56e3c4e49ba53035c71171f2b9eb815c20342411c6cb7fab8469eb25c",
+        "en": "3c7b440d15e91b2aba1169ab2a1f049dbbbf733676da1864d06837381fa6fac0"
+      }
+    },
+    {
+      "id": "history-11-05-2007",
+      "month_day": "11-05",
+      "year": 2007,
+      "sources": [
+        {
+          "name": "Wikipedia contributors",
+          "url": "https://en.wikipedia.org/wiki/Chang%27e_1",
+          "note": "二手百科具体事件页：核对“嫦娥一号进入环月轨道”的2007年11月5日与正文事实。"
+        }
+      ],
+      "review_note": "逐项核对所引具体来源的日期与事件，文字为本站中英文简编；机构资料和二手百科的核对范围分别见sources.note。",
+      "text_sha256": {
+        "zh-CN": "68b1a3def1cc3429070ea18d3d727745f454daef07a217f0799429009be84c74",
+        "en": "bcd17510e37fb4782946a4c4c4dd2ad941dddb421f17d6ce075d926994d01b55"
+      }
+    },
+    {
+      "id": "history-11-05-1605-gunpowder-plot-discovered",
+      "month_day": "11-05",
+      "year": 1605,
+      "sources": [
+        {
+          "name": "Wikipedia contributors",
+          "url": "https://en.wikipedia.org/wiki/Gunpowder_Plot",
+          "note": "二手百科具体事件页：核对“英国火药阴谋被发现”的1605年11月5日与正文事实。"
+        }
+      ],
+      "review_note": "逐项核对所引具体来源的日期与事件，文字为本站中英文简编；机构资料和二手百科的核对范围分别见sources.note。",
+      "text_sha256": {
+        "zh-CN": "cdaae5e35306046bc87f81f8e2db7c1091e40846140ecf203b8af350ead88abd",
+        "en": "acdc3aefea89ba542550ca3af566949723f1f1b1f08dd423b5b7fc74616c24be"
+      }
+    },
+    {
+      "id": "history-11-05-1872-susan-anthony-votes",
+      "month_day": "11-05",
+      "year": 1872,
+      "sources": [
+        {
+          "name": "Wikipedia contributors",
+          "url": "https://en.wikipedia.org/wiki/Trial_of_Susan_B._Anthony",
+          "note": "二手百科具体事件页：核对“苏珊·安东尼参加总统选举投票”的1872年11月5日与正文事实。"
+        }
+      ],
+      "review_note": "逐项核对所引具体来源的日期与事件，文字为本站中英文简编；机构资料和二手百科的核对范围分别见sources.note。",
+      "text_sha256": {
+        "zh-CN": "7670b2dddb32decc6227a09e1d2f8a80555857599b39aed5069a052b575b5357",
+        "en": "b0ecfaaccc64b6a50f44e5691ccf4d79af5e1173cd419e6cffc3bbedc6eb1d67"
+      }
+    },
+    {
+      "id": "history-11-05-1895-selden-road-engine-patent",
+      "month_day": "11-05",
+      "year": 1895,
+      "sources": [
+        {
+          "name": "Wikipedia contributors",
+          "url": "https://en.wikipedia.org/wiki/George_B._Selden",
+          "note": "二手百科具体事件页：核对“塞尔登获得道路发动机专利”的1895年11月5日与正文事实。"
+        }
+      ],
+      "review_note": "逐项核对所引具体来源的日期与事件，文字为本站中英文简编；机构资料和二手百科的核对范围分别见sources.note。",
+      "text_sha256": {
+        "zh-CN": "5bce2e3da51ed2fb2929ba7b1fc47c51cb3de2032140492054d7ed2f94391123",
+        "en": "7e40e04fb94eddaa7b743a2d5c0ab40b25b61513cd8f54eb633b4033ad5e5a7f"
+      }
+    },
+    {
+      "id": "history-11-05-1913-vivien-leigh-birth",
+      "month_day": "11-05",
+      "year": 1913,
+      "sources": [
+        {
+          "name": "Wikipedia contributors",
+          "url": "https://en.wikipedia.org/wiki/Vivien_Leigh",
+          "note": "二手百科具体事件页：核对“费雯·丽出生”的1913年11月5日与正文事实。"
+        }
+      ],
+      "review_note": "逐项核对所引具体来源的日期与事件，文字为本站中英文简编；机构资料和二手百科的核对范围分别见sources.note。",
+      "text_sha256": {
+        "zh-CN": "ff93927a4cfe7604eaf18ee847864e027a72abe4dac1f2dc187d42373016cfc6",
+        "en": "7eb936970e14c028816853e4b9ba57feaa8b42f7bd21ec2cec943eae6a407618"
+      }
+    },
+    {
+      "id": "history-11-05-1916-everett-massacre",
+      "month_day": "11-05",
+      "year": 1916,
+      "sources": [
+        {
+          "name": "Wikipedia contributors",
+          "url": "https://en.wikipedia.org/wiki/Everett_massacre",
+          "note": "二手百科具体事件页：核对“美国埃弗里特劳工冲突”的1916年11月5日与正文事实。"
+        }
+      ],
+      "review_note": "逐项核对所引具体来源的日期与事件，文字为本站中英文简编；机构资料和二手百科的核对范围分别见sources.note。",
+      "text_sha256": {
+        "zh-CN": "6192d3a93226d3c3be5a66a644abf427ea17972fb92655fdfe8d3ea900f9d8ef",
+        "en": "d92861e0374bf89b7ef6687098db79222e50e45f92b4655261782b268f66be14"
+      }
+    },
+    {
+      "id": "history-11-06-1962",
+      "month_day": "11-06",
+      "year": 1962,
+      "sources": [
+        {
+          "name": "UN General Assembly / UNHCR Refworld",
+          "url": "https://www.refworld.org/legal/resolution/unga/1962/9391",
+          "note": "机构/专题资料：核对“联合国大会谴责南非种族隔离”的1962年11月6日与正文事实；不冒充原始档案全文核验。"
+        }
+      ],
+      "review_note": "逐项核对所引具体来源的日期与事件，文字为本站中英文简编；机构资料和二手百科的核对范围分别见sources.note。",
+      "text_sha256": {
+        "zh-CN": "d1f2433b979ff73f5254381d9ee2567d89b9930dfe2369ee0a2796a96d0095d5",
+        "en": "437e6a0022a3cc55b61952b1aecf942423abceea10a689a56acfb26c3e4e3151"
+      }
+    },
+    {
+      "id": "history-11-06-1860-lincoln-elected",
+      "month_day": "11-06",
+      "year": 1860,
+      "sources": [
+        {
+          "name": "Wikipedia contributors",
+          "url": "https://en.wikipedia.org/wiki/1860_United_States_presidential_election",
+          "note": "二手百科具体事件页：核对“林肯当选美国总统”的1860年11月6日与正文事实。"
+        }
+      ],
+      "review_note": "逐项核对所引具体来源的日期与事件，文字为本站中英文简编；机构资料和二手百科的核对范围分别见sources.note。",
+      "text_sha256": {
+        "zh-CN": "c796375a5ed97cc40c97fa4661e583f0b6f75c6b5cad331f573d984f6b1ddfb6",
+        "en": "9af6b33dc56272fa3965d7adc2060907edb9b0917c1bd6e84483914499c39cd5"
+      }
+    },
+    {
+      "id": "history-11-06-1935-hurricane-first-flight",
+      "month_day": "11-06",
+      "year": 1935,
+      "sources": [
+        {
+          "name": "Wikipedia contributors",
+          "url": "https://en.wikipedia.org/wiki/Hawker_Hurricane",
+          "note": "二手百科具体事件页：核对““飓风”战斗机首次飞行”的1935年11月6日与正文事实。"
+        }
+      ],
+      "review_note": "逐项核对所引具体来源的日期与事件，文字为本站中英文简编；机构资料和二手百科的核对范围分别见sources.note。",
+      "text_sha256": {
+        "zh-CN": "073c11dfb1428d60f77659fe4a5a07476a112c89d70e563e3f2af1ec304a4d6e",
+        "en": "9e6ad7ce54232f3038a3c331a3a197ea5239f17389372f35ef0a110559b1a433"
+      }
+    },
+    {
+      "id": "history-11-06-1913-gandhi-south-africa-march",
+      "month_day": "11-06",
+      "year": 1913,
+      "sources": [
+        {
+          "name": "South African History Online",
+          "url": "https://sahistory.org.za/dated-event/mohandas-k-gandhi-arrested-he-leads-march-indian-miners-south-africa",
+          "note": "机构/专题资料：核对“甘地率领南非印度矿工游行”的1913年11月6日与正文事实；不冒充原始档案全文核验。"
+        }
+      ],
+      "review_note": "逐项核对所引具体来源的日期与事件，文字为本站中英文简编；机构资料和二手百科的核对范围分别见sources.note。",
+      "text_sha256": {
+        "zh-CN": "55bc17d6fae2a9e7b13b35ed56ef1ffafc2d5164f47eb7322d651a6d32e00044",
+        "en": "991269767ab29ece0544a8c6779b64ba053aa21f3f90c98513a5fc852f8e5fd6"
+      }
+    },
+    {
+      "id": "history-11-06-1985-colombia-palace-justice-siege",
+      "month_day": "11-06",
+      "year": 1985,
+      "sources": [
+        {
+          "name": "Wikipedia contributors",
+          "url": "https://en.wikipedia.org/wiki/Palace_of_Justice_siege",
+          "note": "二手百科具体事件页：核对“哥伦比亚司法宫事件开始”的1985年11月6日与正文事实。"
+        }
+      ],
+      "review_note": "逐项核对所引具体来源的日期与事件，文字为本站中英文简编；机构资料和二手百科的核对范围分别见sources.note。",
+      "text_sha256": {
+        "zh-CN": "e63d36c0fbe67414ba0839460a17157a632f8b0903f8216a68bc8d9fbd5c3390",
+        "en": "2ee2fad578003a2998e6f3cc757e4c023706d4d210d39e1a313d6e95b5171f8f"
+      }
+    },
+    {
+      "id": "history-11-06-1999-australia-republic-referendum",
+      "month_day": "11-06",
+      "year": 1999,
+      "sources": [
+        {
+          "name": "Stanford Deliberative Democracy Lab",
+          "url": "https://deliberation.stanford.edu/news/deliberative-pollingr-referendum-make-australia-republic",
+          "note": "机构/专题资料：核对“澳大利亚举行共和制公投”的1999年11月6日与正文事实；不冒充原始档案全文核验。"
+        },
+        {
+          "name": "Wikipedia contributors",
+          "url": "https://en.wikipedia.org/wiki/1999_Australian_republic_referendum",
+          "note": "二手百科具体事件页：核对“澳大利亚举行共和制公投”的1999年11月6日与正文事实。"
+        }
+      ],
+      "review_note": "逐项核对所引具体来源的日期与事件，文字为本站中英文简编；机构资料和二手百科的核对范围分别见sources.note。",
+      "text_sha256": {
+        "zh-CN": "54ca63a035b28430f900ed69173b6ed871ad93d5918992c31b6bfbe9dc6bcd64",
+        "en": "bf3eb725b1f856be546577ab0fed38c39ae8556d5c982270fafcf44a334d60bd"
+      }
+    },
+    {
+      "id": "history-11-07-1917-october-revolution",
+      "month_day": "11-07",
+      "year": 1917,
+      "sources": [
+        {
+          "name": "Wikipedia contributors",
+          "url": "https://en.wikipedia.org/wiki/October_Revolution",
+          "note": "具体事件页采用公历11月7日／儒略历10月25日为起义日期，并说明11月6日已有冲突、攻占冬宫在11月8日凌晨；正文概述起义结果，不将全部阶段压缩在一天。"
+        }
+      ],
+      "review_note": "逐项核对所引具体来源的日期与事件，文字为本站中英文简编；机构资料和二手百科的核对范围分别见sources.note。",
+      "text_sha256": {
+        "zh-CN": "dc414a472cc0b20d3834e241883fd486d8309525ffeab514c39d7ab6fb4f9d49",
+        "en": "06aaf740a94295dbd9811ea15c65e6f156c507f9cd22a01b0af88b7d28e62f0c"
+      }
+    },
+    {
+      "id": "history-11-07-1987",
+      "month_day": "11-07",
+      "year": 1987,
+      "sources": [
+        {
+          "name": "Singapore Ministry of Transport",
+          "url": "https://www.mot.gov.sg/what-we-do/public-transport/train/",
+          "note": "机构/专题资料：核对“新加坡地铁开始运营”的1987年11月7日与正文事实；不冒充原始档案全文核验。"
+        }
+      ],
+      "review_note": "逐项核对所引具体来源的日期与事件，文字为本站中英文简编；机构资料和二手百科的核对范围分别见sources.note。",
+      "text_sha256": {
+        "zh-CN": "2123ebbe6c831aa6055d7241b8e5de1ea7484bdc047b15917669a3c9227aadf0",
+        "en": "c2f3cb38bdd1018904ceeebe39464b2f22e85966c277e8d921df98fdb0b3aa5c"
+      }
+    },
+    {
+      "id": "history-11-07-1929-moma-opens",
+      "month_day": "11-07",
+      "year": 1929,
+      "sources": [
+        {
+          "name": "Wikipedia contributors",
+          "url": "https://en.wikipedia.org/wiki/Museum_of_Modern_Art",
+          "note": "二手百科具体事件页：核对“纽约现代艺术博物馆开馆”的1929年11月7日与正文事实。"
+        }
+      ],
+      "review_note": "逐项核对所引具体来源的日期与事件，文字为本站中英文简编；机构资料和二手百科的核对范围分别见sources.note。",
+      "text_sha256": {
+        "zh-CN": "96698bb4b22638107bfcb397f31ab81fbc72f2dc7a2166d20c06629969426018",
+        "en": "ce9e4415484605ff88a879fb2fdc6906d98c3ae266978d9d095df8707b148c7f"
+      }
+    },
+    {
+      "id": "history-11-07-1867-marie-curie-birth",
+      "month_day": "11-07",
+      "year": 1867,
+      "sources": [
+        {
+          "name": "Nobel Prize",
+          "url": "https://www.nobelprize.org/prizes/physics/1903/marie-curie/facts/",
+          "note": "机构/专题资料：核对“玛丽·居里出生”的1867年11月7日与正文事实；不冒充原始档案全文核验。"
+        }
+      ],
+      "review_note": "逐项核对所引具体来源的日期与事件，文字为本站中英文简编；机构资料和二手百科的核对范围分别见sources.note。",
+      "text_sha256": {
+        "zh-CN": "12122401b606cd3774b8c1c28b9b8a8a1c8c53ef9399f5631c8087aeb0646a63",
+        "en": "d5fc85f69df4c55ea73deeff3edc7c8cb4a13258fbfc76bf91eebca41c5dafa9"
+      }
+    },
+    {
+      "id": "history-11-07-1931-chinese-soviet-republic",
+      "month_day": "11-07",
+      "year": 1931,
+      "sources": [
+        {
+          "name": "Wikipedia contributors",
+          "url": "https://en.wikipedia.org/wiki/Chinese_Soviet_Republic",
+          "note": "二手百科具体事件页：核对“中华苏维埃共和国宣告成立”的1931年11月7日与正文事实。"
+        }
+      ],
+      "review_note": "逐项核对所引具体来源的日期与事件，文字为本站中英文简编；机构资料和二手百科的核对范围分别见sources.note。",
+      "text_sha256": {
+        "zh-CN": "80094c91cc6fb56c6bab2a3334e4e2eddf725091d558628994ef4cead408cf58",
+        "en": "f335381bfb520551ee3978e20fbd04fdca64fd872d4c45c9046c723a84a546bb"
+      }
+    },
+    {
+      "id": "history-11-07-1996-mars-global-surveyor-launch",
+      "month_day": "11-07",
+      "year": 1996,
+      "sources": [
+        {
+          "name": "NASA",
+          "url": "https://science.nasa.gov/mission/mars-global-surveyor/",
+          "note": "机构/专题资料：核对“火星全球勘测者号发射”的1996年11月7日与正文事实；不冒充原始档案全文核验。"
+        }
+      ],
+      "review_note": "逐项核对所引具体来源的日期与事件，文字为本站中英文简编；机构资料和二手百科的核对范围分别见sources.note。",
+      "text_sha256": {
+        "zh-CN": "f5b7bddf194ecc935600c3d8e3dcf24f215fc0e2c279b537e3e9facaa626f33b",
+        "en": "f7d8d29e28fabb6fa28e6b3834f99a3656e81e685a301e97a5e55d0202b585f9"
+      }
+    },
+    {
+      "id": "history-11-08-1895-x-rays",
+      "month_day": "11-08",
+      "year": 1895,
+      "sources": [
+        {
+          "name": "维基百科 · Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Wilhelm_R%C3%B6ntgen",
+          "note": "二手人物传记“Discovery of X-rays”节明确为1895年11月8日；此日为实验发现，不是12月的论文提交日。"
+        }
+      ],
+      "review_note": "2026-10-28逐条核对所引具体来源与日期；机构资料及二手百科的性质在来源备注中区分，不等于独立核验全部原始档案。",
+      "text_sha256": {
+        "zh-CN": "49edf9c8501c0992aa4e73283b8c0ee50ab9cd8ba4608e2862769c1fc783cbbd",
+        "en": "dadcc3c478bcbca5cc93057eeeceec8b0311604cc6a59ac9b587b34ce53509d8"
+      }
+    },
+    {
+      "id": "history-11-08-1937-young-journalists",
+      "month_day": "11-08",
+      "year": 1937,
+      "sources": [
+        {
+          "name": "共产党员网／央视新闻 · 12371.cn / CCTV",
+          "url": "https://www.12371.cn/2021/11/09/VIDE1636444081085268.shtml",
+          "note": "央视历史节目文字实际正文明确1937年11月8日在上海成立中国青年新闻记者协会，并解释11月8日与记者节的联系；2021年11月9日只是报道日。已用HTTPS直接读取正文核对。"
+        }
+      ],
+      "review_note": "2026-10-28逐条核对所引具体来源与日期；机构资料及二手百科的性质在来源备注中区分，不等于独立核验全部原始档案。",
+      "text_sha256": {
+        "zh-CN": "0725836b0f47f1aedbbf980eaf64fa36242d90c4b0da0b13552d949a6ccfb540",
+        "en": "c32cbf0d369cb2d3f98d26c1b0f222449b891e1eead0ff0db95068eaebaa2b3b"
+      }
+    },
+    {
+      "id": "history-11-08-2013",
+      "month_day": "11-08",
+      "year": 2013,
+      "sources": [
+        {
+          "name": "美国航空航天局 · NASA",
+          "url": "https://gpm.nasa.gov/applications/weather/super-typhoon-haiyan-hits-philippines",
+          "note": "官方当日报道日期为2013-11-08，正文记菲律宾当地清晨登陆；UTC为前一日，不据此把本条移到11月7日。"
+        }
+      ],
+      "review_note": "2026-10-28逐条核对所引具体来源与日期；机构资料及二手百科的性质在来源备注中区分，不等于独立核验全部原始档案。",
+      "text_sha256": {
+        "zh-CN": "17ad11076356ea7c08c3f3f2cadeff189d5c1880c039e3537d699ec3b68cc17e",
+        "en": "67896ef52968b61739b6c558cb832b8961ec228bccd9f43bade051218329f369"
+      }
+    },
+    {
+      "id": "history-11-08-1923-beer-hall-putsch",
+      "month_day": "11-08",
+      "year": 1923,
+      "sources": [
+        {
+          "name": "维基百科 · Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Beer_Hall_Putsch",
+          "note": "二手事件专页列1923年11月8日至9日；本条只纪念发动，不将次日街头冲突写成8日。"
+        }
+      ],
+      "review_note": "2026-10-28逐条核对所引具体来源与日期；机构资料及二手百科的性质在来源备注中区分，不等于独立核验全部原始档案。",
+      "text_sha256": {
+        "zh-CN": "aeb27c7787b95fa4a838f3d8455796cd2d7d1fd1d99a0d272a4d02268f3da551",
+        "en": "9905f1213924ea946221c3e946b87292cce9fd21a82c95542e165fef3eed71de"
+      }
+    },
+    {
+      "id": "history-11-08-1949-foreign-ministry-meeting",
+      "month_day": "11-08",
+      "year": 1949,
+      "sources": [
+        {
+          "name": "中华人民共和国外交部 · Ministry of Foreign Affairs of China",
+          "url": "https://www.mfa.gov.cn/ziliao_674904/historytoday_674971/200311/t20031108_9284670.shtml",
+          "note": "机构官网“外交史上的今天”明确1949年11月8日举行正式成立大会；仅写会议事实。"
+        }
+      ],
+      "review_note": "2026-10-28逐条核对所引具体来源与日期；机构资料及二手百科的性质在来源备注中区分，不等于独立核验全部原始档案。",
+      "text_sha256": {
+        "zh-CN": "1880d4fdbd8738c3e66d26f659026b06d0f164e3874e803d73381c4f027ba399",
+        "en": "d859be788e09b8b4ec3952a9bdbf4a088f647e373cf97131f12f05ba4d7f9c6b"
+      }
+    },
+    {
+      "id": "history-11-08-1960-us-election",
+      "month_day": "11-08",
+      "year": 1960,
+      "sources": [
+        {
+          "name": "维基百科 · Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/1960_United_States_presidential_election",
+          "note": "二手选举专页导言明确投票日1960年11月8日及胜出组合。"
+        }
+      ],
+      "review_note": "2026-10-28逐条核对所引具体来源与日期；机构资料及二手百科的性质在来源备注中区分，不等于独立核验全部原始档案。",
+      "text_sha256": {
+        "zh-CN": "9db5ac244a1a26f845091019026a25a436d8b0045a4b0f314ac8e5cfc2b7dfbf",
+        "en": "001aa8b120909cf95f1acbab6bc883c646140c378438907c616a4aac0fd4fe2f"
+      }
+    },
+    {
+      "id": "history-11-09-1989-berlin-wall",
+      "month_day": "11-09",
+      "year": 1989,
+      "sources": [
+        {
+          "name": "维基百科 · Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Fall_of_the_Berlin_Wall",
+          "note": "二手事件专页明确1989年11月9日晚开放检查站；不把德国1990年正式统一归为同日。"
+        }
+      ],
+      "review_note": "2026-10-28逐条核对所引具体来源与日期；机构资料及二手百科的性质在来源备注中区分，不等于独立核验全部原始档案。",
+      "text_sha256": {
+        "zh-CN": "a861be71367933af32f2dbb83e592e0a9e466bc664087e7b1996f6af5bfe2df6",
+        "en": "fd5be05bddc04c8e89060ad5bec4ca8ed5bbff438e689c1e0dd63e960abf635b"
+      }
+    },
+    {
+      "id": "history-11-09-1918",
+      "month_day": "11-09",
+      "year": 1918,
+      "sources": [
+        {
+          "name": "德国联邦议院 · Deutscher Bundestag",
+          "url": "https://www.bundestag.de/dokumente/textarchiv/1918-11-09-revolutionskalender-38-091118-574088",
+          "note": "官方革命日历明确1918年11月9日谢德曼宣布共和国，并说明演说逐字内容有争议；本条不引用演说原句。"
+        }
+      ],
+      "review_note": "2026-10-28逐条核对所引具体来源与日期；机构资料及二手百科的性质在来源备注中区分，不等于独立核验全部原始档案。",
+      "text_sha256": {
+        "zh-CN": "9f22aba84d8ebfdc321e713c63262e173a2624a20e81748160f864d6861ef3a1",
+        "en": "217935aa8e4488bc823c0acf8a0c09a85ea2208a682e0284312273982406b215"
+      }
+    },
+    {
+      "id": "history-11-09-1967-apollo-4",
+      "month_day": "11-09",
+      "year": 1967,
+      "sources": [
+        {
+          "name": "美国航空航天局 · NASA",
+          "url": "https://www.nasa.gov/mission/apollo-4/",
+          "note": "官方任务档案列发射及返回均为1967年11月9日，说明是首次三级整体试飞；不称载人任务。"
+        }
+      ],
+      "review_note": "2026-10-28逐条核对所引具体来源与日期；机构资料及二手百科的性质在来源备注中区分，不等于独立核验全部原始档案。",
+      "text_sha256": {
+        "zh-CN": "072f9d3c15d73ad7724ac4c31116ed6edcfdb1639ac539e1af8aa02554f08985",
+        "en": "ef0a12e10e96655eeacfd829f0b3239138e3ef5c8c0ddb1631fdf460696b55d1"
+      }
+    },
+    {
+      "id": "history-11-09-1799-brumaire",
+      "month_day": "11-09",
+      "year": 1799,
+      "sources": [
+        {
+          "name": "维基百科 · Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Coup_of_18_Brumaire",
+          "note": "二手事件专页明确1799年11月9日与共和历雾月十八日对应；行动跨9至10日，不压缩为一瞬间完成。"
+        }
+      ],
+      "review_note": "2026-10-28逐条核对所引具体来源与日期；机构资料及二手百科的性质在来源备注中区分，不等于独立核验全部原始档案。",
+      "text_sha256": {
+        "zh-CN": "de0d4b469acbcb5390c7ae055037372e0893ea4e1ec1f3e4ef83ad95e855eccd",
+        "en": "c9b03ab7b2c8eafa7327300b902693ebcc5caf74e1b69353bf63f75e2b028761"
+      }
+    },
+    {
+      "id": "history-11-09-1938-kristallnacht",
+      "month_day": "11-09",
+      "year": 1938,
+      "sources": [
+        {
+          "name": "美国大屠杀纪念馆 · United States Holocaust Memorial Museum",
+          "url": "https://encyclopedia.ushmm.org/content/en/article/kristallnacht",
+          "note": "专题博物馆页面明确1938年11月9日至10日及纳粹组织、平民参与；不沿用早期不完整伤亡数字。"
+        }
+      ],
+      "review_note": "2026-10-28逐条核对所引具体来源与日期；机构资料及二手百科的性质在来源备注中区分，不等于独立核验全部原始档案。",
+      "text_sha256": {
+        "zh-CN": "a564943048f16b02fe53ea18f671311e53150af7600923c73ff0eb276f973e87",
+        "en": "f57eaccc3e283a6fd740174c290581b4019ba098e097e56a93bb4ee8a1eec958"
+      }
+    },
+    {
+      "id": "history-11-09-1949-two-airlines",
+      "month_day": "11-09",
+      "year": 1949,
+      "sources": [
+        {
+          "name": "中国民用航空局 · Civil Aviation Administration of China",
+          "url": "https://www.caac.gov.cn/PHONE/XWZX/MHYW/201911/t20191108_199401.html",
+          "note": "民航局所载纪念报道明确事件1949年11月9日；报道发表于11月8日，不能把报道日误作事件日。"
+        }
+      ],
+      "review_note": "2026-10-28逐条核对所引具体来源与日期；机构资料及二手百科的性质在来源备注中区分，不等于独立核验全部原始档案。",
+      "text_sha256": {
+        "zh-CN": "69779e9187e8ed4b65239762dd9dc02ca611f0bf3cf80b3596bf4da999034c44",
+        "en": "016c73b511dd25debb5e22c94197113edc7210075e2bb3bc31102fa9ecb64307"
+      }
+    },
+    {
+      "id": "history-11-09-1953-cambodia",
+      "month_day": "11-09",
+      "year": 1953,
+      "sources": [
+        {
+          "name": "维基百科 · Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Independence_Day_(Cambodia)",
+          "note": "二手独立日专页明确1953年11月9日；不与1954年日内瓦会议混为一事。"
+        }
+      ],
+      "review_note": "2026-10-28逐条核对所引具体来源与日期；机构资料及二手百科的性质在来源备注中区分，不等于独立核验全部原始档案。",
+      "text_sha256": {
+        "zh-CN": "dbb4c8d2c5245886ee9f677d78b0c145d989b39afeaea89e08e1889d824ab26c",
+        "en": "900cca3e8f536d4013fcca4395cdb2a7c931f58eca6eccfd5cd5cc6fdacdfb6e"
+      }
+    },
+    {
+      "id": "history-11-10-1969",
+      "month_day": "11-10",
+      "year": 1969,
+      "sources": [
+        {
+          "name": "芝麻工作室 · Sesame Workshop",
+          "url": "https://sesameworkshop.org/about-us/news/five-things-you-may-not-know-about-sesame-street/",
+          "note": "制作机构回顾明确首集1969年11月10日播出；删除原条“PBS首播”和未经限定的极高收视率说法。"
+        }
+      ],
+      "review_note": "2026-10-28逐条核对所引具体来源与日期；机构资料及二手百科的性质在来源备注中区分，不等于独立核验全部原始档案。",
+      "text_sha256": {
+        "zh-CN": "38414e97d9b508ed488cafb463dfa9c1bb38bffbcca151ce5efe8f4b62513798",
+        "en": "a149c41321b2f38b698db21d7405f7ae66a7cddf2b4b22a4142c291a89e013b7"
+      }
+    },
+    {
+      "id": "history-11-10-1483-martin-luther",
+      "month_day": "11-10",
+      "year": 1483,
+      "sources": [
+        {
+          "name": "维基百科 · Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Martin_Luther",
+          "note": "二手传记明确1483年11月10日出生及宗教改革、德译圣经活动；沿用来源通行生日，不另作历法换算。"
+        }
+      ],
+      "review_note": "2026-10-28逐条核对所引具体来源与日期；机构资料及二手百科的性质在来源备注中区分，不等于独立核验全部原始档案。",
+      "text_sha256": {
+        "zh-CN": "edb950cf2e34eee9e369ba32195def4619fbcb254905907ec32442d1918c30b0",
+        "en": "089b23b60207aea4cc429c92c863347a825a854dae22b68fb22007ec23cdc461"
+      }
+    },
+    {
+      "id": "history-11-10-1970-luna-17-launch",
+      "month_day": "11-10",
+      "year": 1970,
+      "sources": [
+        {
+          "name": "美国航空航天局 · NASA",
+          "url": "https://science.nasa.gov/moon/missions/",
+          "note": "官方月球任务表列Luna 17发射1970-11-10、到达1970-11-17及搭载月球车；两事件分开记录。"
+        }
+      ],
+      "review_note": "2026-10-28逐条核对所引具体来源与日期；机构资料及二手百科的性质在来源备注中区分，不等于独立核验全部原始档案。",
+      "text_sha256": {
+        "zh-CN": "bb0984eb995687d80bcaf6a8c846242170634b57dc41a7d792260ff660812a29",
+        "en": "fad9503a14765c6c6ffc1ff0426925acc9c1ce82c9479cb2004573836418f6cb"
+      }
+    },
+    {
+      "id": "history-11-10-1928-hirohito-enthronement",
+      "month_day": "11-10",
+      "year": 1928,
+      "sources": [
+        {
+          "name": "维基百科 · Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Enthronement_of_the_Japanese_emperor",
+          "note": "二手仪式专页昭和天皇段明确1928年11月10日在京都御所举行；区分继承皇位与即位礼。"
+        }
+      ],
+      "review_note": "2026-10-28逐条核对所引具体来源与日期；机构资料及二手百科的性质在来源备注中区分，不等于独立核验全部原始档案。",
+      "text_sha256": {
+        "zh-CN": "98dac22cb9c53a2502e1c21310d9532590425f2b41d1613b69354eff62284179",
+        "en": "1339268e6289deb23654c146af0826fbe41f5edc21554de846a08eb10050cf74"
+      }
+    },
+    {
+      "id": "history-11-10-1938-ataturk",
+      "month_day": "11-10",
+      "year": 1938,
+      "sources": [
+        {
+          "name": "维基百科 · Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Death_and_state_funeral_of_Mustafa_Kemal_Atat%C3%BCrk",
+          "note": "二手逝世与国葬专页明确1938年11月10日死亡，11月21日国葬；不把1953年迁葬与死亡混淆。"
+        }
+      ],
+      "review_note": "2026-10-28逐条核对所引具体来源与日期；机构资料及二手百科的性质在来源备注中区分，不等于独立核验全部原始档案。",
+      "text_sha256": {
+        "zh-CN": "3e4a0554242f80b8760ebc0c67eb386ca356acd5fa22c9d4476ea84534ad90b0",
+        "en": "fa59df61194e4ffde264581d169bf270c82078e60a9b1ccf93a440f53b72e628"
+      }
+    },
+    {
+      "id": "history-11-10-1975-edmund-fitzgerald",
+      "month_day": "11-10",
+      "year": 1975,
+      "sources": [
+        {
+          "name": "维基百科 · Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/SS_Edmund_Fitzgerald",
+          "note": "二手船舶专页明确1975年11月10日沉没及29人遇难；沉没具体机制仍有争议，正文不选定某一假说。"
+        }
+      ],
+      "review_note": "2026-10-28逐条核对所引具体来源与日期；机构资料及二手百科的性质在来源备注中区分，不等于独立核验全部原始档案。",
+      "text_sha256": {
+        "zh-CN": "1e27e8cc3b9b58c48592c339ca18a2b043ad96e2784822026cf1c6bd90ee6c29",
+        "en": "cd36fccffc8f7cee6889385c680edcfa31d93d5a3a3e9954ee553624bc1bb3bd"
+      }
+    },
+    {
+      "id": "history-11-11-1918-armistice",
+      "month_day": "11-11",
+      "year": 1918,
+      "sources": [
+        {
+          "name": "维基百科 · Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Armistice_of_11_November_1918",
+          "note": "二手停战专页明确1918年11月11日签署并于11时生效；仅写西线停战，不称所有战线同时实现永久和平。"
+        }
+      ],
+      "review_note": "2026-10-28逐条核对所引具体来源与日期；机构资料及二手百科的性质在来源备注中区分，不等于独立核验全部原始档案。",
+      "text_sha256": {
+        "zh-CN": "67abbed4b4733d3c25742b0a834185a46434df213417d90f7cbe83307b443087",
+        "en": "2824dddeb4514ad02e7298853285b8b6e6a3be8250a0b006ad5ae4c9e0204958"
+      }
+    },
+    {
+      "id": "history-11-11-1949-pla-air-force",
+      "month_day": "11-11",
+      "year": 1949,
+      "sources": [
+        {
+          "name": "共产党员网／央视新闻 · 12371.cn / CCTV",
+          "url": "https://www.12371.cn/2021/11/12/VIDE1636699561710516.shtml",
+          "note": "央视历史节目文字明确1949年11月11日领导机构在北京成立及刘亚楼任首任司令员；不采用页面发布日期11月12日。"
+        }
+      ],
+      "review_note": "2026-10-28逐条核对所引具体来源与日期；机构资料及二手百科的性质在来源备注中区分，不等于独立核验全部原始档案。",
+      "text_sha256": {
+        "zh-CN": "ae3e74210d4ad11ae42f4decad1599bd10a71db448222fa23e2608e300d1accc",
+        "en": "4035d5971742c0e3d4e8c14457f586474781cc2b865eac530820f8a499cd3083"
+      }
+    },
+    {
+      "id": "history-11-11-1975-angola",
+      "month_day": "11-11",
+      "year": 1975,
+      "sources": [
+        {
+          "name": "维基百科 · Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Angola",
+          "note": "二手国别史页明确1975年11月11日为独立日，并记独立前后冲突；避免暗示当天实现和平统一。"
+        }
+      ],
+      "review_note": "2026-10-28逐条核对所引具体来源与日期；机构资料及二手百科的性质在来源备注中区分，不等于独立核验全部原始档案。",
+      "text_sha256": {
+        "zh-CN": "eb93c07e0bfa0cb9fdbaa36d0f1be9db1a0761ff0867a99f6bb7efd5e5c4ac95",
+        "en": "14ccf9fc57ac55ed395a8dc1d8511d8ad716346b62de5d6ce4834cb130d57af2"
+      }
+    },
+    {
+      "id": "history-11-11-1921-unknown-soldier",
+      "month_day": "11-11",
+      "year": 1921,
+      "sources": [
+        {
+          "name": "阿灵顿国家公墓 · Arlington National Cemetery",
+          "url": "https://www.arlingtoncemetery.mil/Explore/Monuments-and-Memorials/Tomb-of-the-Unknown-Soldier",
+          "note": "公墓官方历史页面明确1921年11月11日送葬和安葬仪式；后来的墓体扩建与其他战争无名战士安葬另有日期。"
+        }
+      ],
+      "review_note": "2026-10-28逐条核对所引具体来源与日期；机构资料及二手百科的性质在来源备注中区分，不等于独立核验全部原始档案。",
+      "text_sha256": {
+        "zh-CN": "004f4fa82e976033065e2b853e86797800c1d8a90313d9822b93ed88043e6d2a",
+        "en": "d042a4926e0d3f7f81a08d6ae6fac4608e39eea661aeb50f216e2fb57221a4b6"
+      }
+    },
+    {
+      "id": "history-11-11-1965",
+      "month_day": "11-11",
+      "year": 1965,
+      "sources": [
+        {
+          "name": "维基百科 · Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Rhodesia%27s_Unilateral_Declaration_of_Independence",
+          "note": "二手宣言专页明确1965年11月11日签署及白人少数派政府背景；补充不获普遍承认的性质限定。"
+        }
+      ],
+      "review_note": "2026-10-28逐条核对所引具体来源与日期；机构资料及二手百科的性质在来源备注中区分，不等于独立核验全部原始档案。",
+      "text_sha256": {
+        "zh-CN": "33555ff56e467e00226824ac494a70a076b3f92f845fdbd34f4abb6d0a238383",
+        "en": "0c3bdcf53129c31acd4f08d627c8972fed2280f0503b5796e239becd72094678"
+      }
+    },
+    {
+      "id": "history-11-11-1975-whitlam-dismissal",
+      "month_day": "11-11",
+      "year": 1975,
+      "sources": [
+        {
+          "name": "维基百科 · Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/1975_Australian_constitutional_crisis",
+          "note": "二手宪政危机专页导言明确1975年11月11日解职及看守政府任命；不把随后选举写成当天举行。"
+        }
+      ],
+      "review_note": "2026-10-28逐条核对所引具体来源与日期；机构资料及二手百科的性质在来源备注中区分，不等于独立核验全部原始档案。",
+      "text_sha256": {
+        "zh-CN": "b02610652cf9e39760441a1d7620828983fc73e609b037412b0914163212e0ad",
+        "en": "a3b5cd8363597b74877dc2203995c97aacc9dc5ef5ea02ed461cfcc6334976ff"
+      }
+    },
+    {
+      "id": "history-11-12-1866-sun-yat-sen",
+      "month_day": "11-12",
+      "year": 1866,
+      "sources": [
+        {
+          "name": "中山市南朗街道办事处 · Nanlang, Zhongshan City Government",
+          "url": "https://www.zs.gov.cn/nlz/zjnl/nlgk/lsmr/content/post_1308324.html",
+          "note": "人物介绍正文明确1866年11月12日生于香山县翠亨村，实际HTML日期中含空格；已通过HTTPS读取正文，不误把搜索器未匹配连续日期当作无正文。"
+        }
+      ],
+      "review_note": "2026-10-28逐条核对所引具体来源与日期；机构资料及二手百科的性质在来源备注中区分，不等于独立核验全部原始档案。",
+      "text_sha256": {
+        "zh-CN": "cb3dc00531fe100203cacb7b098d0f5f494dbb0b64fbbf3660b8ee431e197bd7",
+        "en": "c69647bf5add4c666589be2686b18fd62a96637e2dfb091b4d9d5a37f85180b1"
+      }
+    },
+    {
+      "id": "history-11-12-1936",
+      "month_day": "11-12",
+      "year": 1936,
+      "sources": [
+        {
+          "name": "美国联邦公路管理局 · Federal Highway Administration",
+          "url": "https://www.fhwa.dot.gov/infrastructure/2bridges.cfm",
+          "note": "官方公路史页面引当时工程刊物，明确1936年11月12日12时30分开桥；保留原ID，明确区别金门大桥。"
+        }
+      ],
+      "review_note": "2026-10-28逐条核对所引具体来源与日期；机构资料及二手百科的性质在来源备注中区分，不等于独立核验全部原始档案。",
+      "text_sha256": {
+        "zh-CN": "216f78fb2c24874ffdf6885380af5d584bbcbac1c743602756ab89468fd3385c",
+        "en": "f1733a28ae4b0de97babc17d61b8e08d3ea742feb5fb7e9d5ad678aea65eda1a"
+      }
+    },
+    {
+      "id": "history-11-12-2014-philae",
+      "month_day": "11-12",
+      "year": 2014,
+      "sources": [
+        {
+          "name": "美国航空航天局喷气推进实验室 · NASA/JPL",
+          "url": "https://www.jpl.nasa.gov/news/rosettas-philae-makes-historic-first-landing-on-a-comet/",
+          "note": "任务合作机构当日报道明确2014年11月12日着陆与目标彗星；弹跳情况另据具体飞行器专页复核。"
+        },
+        {
+          "name": "美国航空航天局喷气推进实验室 · NASA/JPL",
+          "url": "https://www.jpl.nasa.gov/news/rosettas-comet-lander-landed-three-times/",
+          "note": "2014年11月13日后续官方报道明确前一日11月12日首次接触表面后两次弹跳，第三次接触后停稳并有仪器发回数据；不把报道日当作着陆日。"
+        }
+      ],
+      "review_note": "2026-10-28逐条核对所引具体来源与日期；机构资料及二手百科的性质在来源备注中区分，不等于独立核验全部原始档案。",
+      "text_sha256": {
+        "zh-CN": "ecbde2589544c47723290846f342b4d46d8ac31d9c016393733552cd6734bf09",
+        "en": "d739d509d53865013c5cdf400ce71ee4a4a8ea405f8fcb5f64bf712e928406b8"
+      }
+    },
+    {
+      "id": "history-11-12-1910-hua-luogeng",
+      "month_day": "11-12",
+      "year": 1910,
+      "sources": [
+        {
+          "name": "中国科学院／学习时报 · Chinese Academy of Sciences / Study Times",
+          "url": "https://www.cas.cn/xzfc/202206/t20220608_4837332.shtml",
+          "note": "中科院所载《学习时报》人物回顾明确1910年11月12日生于金坛，正文记数论研究与优选法、统筹法推广；不引用夸饰性纪录。"
+        }
+      ],
+      "review_note": "2026-10-28逐条核对所引具体来源的日期、事件和人物身份；机构回顾与二手词典不等于全部原始档案核验。",
+      "text_sha256": {
+        "zh-CN": "107fbc9e43005703230bb59f3111aac226d3aff261ad14cfa72e95f2f6cd86e6",
+        "en": "8ea438f4faea139ad246706711dc4455e35c6f49b7c9deeb0ebc755a0a22045a"
+      }
+    },
+    {
+      "id": "history-11-12-1942-guadalcanal-naval",
+      "month_day": "11-12",
+      "year": 1942,
+      "sources": [
+        {
+          "name": "维基百科 · Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Naval_Battle_of_Guadalcanal",
+          "note": "二手战役专页明确1942年11月12日至15日；本条记系列海空交战开始，而非所有夜间舰炮战均发生在12日。"
+        }
+      ],
+      "review_note": "2026-10-28逐条核对所引具体来源与日期；机构资料及二手百科的性质在来源备注中区分，不等于独立核验全部原始档案。",
+      "text_sha256": {
+        "zh-CN": "3bbf785599f39ecbd2ff4b6cd5d7ad007d9e026280b9faba8f0f499f121576ef",
+        "en": "aaab0cfcad96811013497c9c77892079e0c06be5a266bd718aa4ab4f5a236899"
+      }
+    },
+    {
+      "id": "history-11-12-1980-voyager-saturn",
+      "month_day": "11-12",
+      "year": 1980,
+      "sources": [
+        {
+          "name": "美国航空航天局 · NASA",
+          "url": "https://science.nasa.gov/mission/voyager/voyager-1/",
+          "note": "官方任务档案明确最近点1980年11月12日23:46 UT；北京时间已为13日，正文明确采用世界时。"
+        }
+      ],
+      "review_note": "2026-10-28逐条核对所引具体来源与日期；机构资料及二手百科的性质在来源备注中区分，不等于独立核验全部原始档案。",
+      "text_sha256": {
+        "zh-CN": "8415c21edad38e3451d1068ed7e00f45431566c4235544c8e8ad3e5909c119ef",
+        "en": "72739abd7d49a579954c6daebd3960494c6ce526727b230e5488d72be59bf752"
+      }
+    },
+    {
+      "id": "history-11-12-1990-akihito-enthronement",
+      "month_day": "11-12",
+      "year": 1990,
+      "sources": [
+        {
+          "name": "维基百科 · Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Enthronement_of_the_Japanese_emperor",
+          "note": "二手仪式专页明确1990年11月12日在东京皇居举行；与1989年即位及稍后的大尝祭区分。"
+        }
+      ],
+      "review_note": "2026-10-28逐条核对所引具体来源与日期；机构资料及二手百科的性质在来源备注中区分，不等于独立核验全部原始档案。",
+      "text_sha256": {
+        "zh-CN": "e2a175ae932b070c5129549f43b5187ac4bc5c76d2b407c645e363f2b5006451",
+        "en": "98b8e3de6faf013c6f70a7ca97cb93a704d843de2bdf7fdd2c6cefbb85a2113d"
+      }
+    },
+    {
+      "id": "history-11-13-1927-huangma",
+      "month_day": "11-13",
+      "year": 1927,
+      "sources": [
+        {
+          "name": "维基百科 · Wikipedia",
+          "url": "https://zh.wikipedia.org/wiki/%E9%BB%84%E9%BA%BB%E8%B5%B7%E4%B9%89",
+          "note": "二手事件专页明确1927年11月13日；只记起义发动，不把后来改编或建立根据地全部归于当日。"
+        }
+      ],
+      "review_note": "2026-10-28逐条核对所引具体来源与日期；机构资料及二手百科的性质在来源备注中区分，不等于独立核验全部原始档案。",
+      "text_sha256": {
+        "zh-CN": "a81e4e175e4b42093138fad4c1f30577b92dc044fc8b25d540579fa342e97712",
+        "en": "d2499f5261efec70a9da65f149f8a80192cd3ae21e7de366dae993568bdd5fda"
+      }
+    },
+    {
+      "id": "history-11-13-1940",
+      "month_day": "11-13",
+      "year": 1940,
+      "sources": [
+        {
+          "name": "维基百科 · Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Fantasia_(1940_film)",
+          "note": "二手电影专页列1940年11月13日在纽约百老汇剧院首映；删去未经额外核查的“第一部商业立体声电影”纪录式断言。"
+        }
+      ],
+      "review_note": "2026-10-28逐条核对所引具体来源与日期；机构资料及二手百科的性质在来源备注中区分，不等于独立核验全部原始档案。",
+      "text_sha256": {
+        "zh-CN": "34919331dc612f9ceb747e8d9d1783dea69f8a15dd3794b559a3cac765cc9b77",
+        "en": "b540bf8637243a14191e8c34bcbf8f0d30712bd1d3f6e859904d4c150daedaa2"
+      }
+    },
+    {
+      "id": "history-11-13-1956-browder-gayle",
+      "month_day": "11-13",
+      "year": 1956,
+      "sources": [
+        {
+          "name": "维基百科 · Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Browder_v._Gayle",
+          "note": "二手判例专页明确最高法院1956年11月13日维持原判，区别6月下级法院判决及12月实际执行。"
+        }
+      ],
+      "review_note": "2026-10-28逐条核对所引具体来源与日期；机构资料及二手百科的性质在来源备注中区分，不等于独立核验全部原始档案。",
+      "text_sha256": {
+        "zh-CN": "af038705dffd18b6e5efd25680021233462bdd142b80c5bc39b77ddf2025e2cd",
+        "en": "306e92e4fc7c68c6dc507a1c9ac8027748dedc319cf3e29c56f83b4d32411c70"
+      }
+    },
+    {
+      "id": "history-11-13-1985-nevado-del-ruiz",
+      "month_day": "11-13",
+      "year": 1985,
+      "sources": [
+        {
+          "name": "美国地质调查局 · U.S. Geological Survey",
+          "url": "https://www.usgs.gov/observatories/hvo/news/volcano-watch-lessons-learned-armero-colombia-tragedy",
+          "note": "机构火山研究回顾明确1985年11月13日晚喷发、融冰与泥石流；按哥伦比亚当地日期，不采用不必要的精确伤亡统计。"
+        }
+      ],
+      "review_note": "2026-10-28逐条核对所引具体来源与日期；机构资料及二手百科的性质在来源备注中区分，不等于独立核验全部原始档案。",
+      "text_sha256": {
+        "zh-CN": "75d891623393b97e1d1b31ca1b335df55cead6723720b4f7e99a4dc3c6e82279",
+        "en": "13293804f2ad45c93db22f90e130a9d2e1b293b7c731519f1b0f0f40395fd7bf"
+      }
+    },
+    {
+      "id": "history-11-13-1994-sweden-eu",
+      "month_day": "11-13",
+      "year": 1994,
+      "sources": [
+        {
+          "name": "维基百科 · Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/1994_Swedish_European_Union_membership_referendum",
+          "note": "二手公投专页明确1994年11月13日投票，赞成约53%，并列随后入盟日；正文不用精细百分比。"
+        }
+      ],
+      "review_note": "2026-10-28逐条核对所引具体来源与日期；机构资料及二手百科的性质在来源备注中区分，不等于独立核验全部原始档案。",
+      "text_sha256": {
+        "zh-CN": "6d1145775cd5bd3e48225ceb9cf31b9e84ef40a1b016e4e07e64a9648034f3dc",
+        "en": "1ad063410734f3c27685d53b85a6ca51e4f12df07b4809576c0863785dad6e44"
+      }
+    },
+    {
+      "id": "history-11-13-2015-paris-attacks",
+      "month_day": "11-13",
+      "year": 2015,
+      "sources": [
+        {
+          "name": "维基百科 · Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/November_2015_Paris_attacks",
+          "note": "二手事件专页日期2015年11月13日夜，部分后续处置跨午夜；按法国当地日期，仅概述地点和袭击事实。"
+        }
+      ],
+      "review_note": "2026-10-28逐条核对所引具体来源与日期；机构资料及二手百科的性质在来源备注中区分，不等于独立核验全部原始档案。",
+      "text_sha256": {
+        "zh-CN": "14d67c0d83074f4eeec1f2be780a8ec6d6e12c379ed2966aa976ff8e463ff998",
+        "en": "e0c0df40c9dbd6b020dcbd35c5372b70be6fa9bedc2b8d450e750c680b78a06e"
+      }
+    },
+    {
+      "id": "history-11-14-1851-moby-dick",
+      "month_day": "11-14",
+      "year": 1851,
+      "sources": [
+        {
+          "name": "维基百科 · Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Moby-Dick",
+          "note": "二手文学专页列美国版1851年11月14日、英国版10月18日；仅记美国版，不笼统称全球首次出版。"
+        }
+      ],
+      "review_note": "2026-10-28逐条核对所引具体来源与日期；机构资料及二手百科的性质在来源备注中区分，不等于独立核验全部原始档案。",
+      "text_sha256": {
+        "zh-CN": "f77d29c7e3c18026a04105e414070432146ef1aed477b77c477c6bbd41b26e00",
+        "en": "20da4bbfb7f74a3719708f8ffa526855d9ac077bf505b14d58e2d24cb2149f03"
+      }
+    },
+    {
+      "id": "history-11-14-1889-nellie-bly",
+      "month_day": "11-14",
+      "year": 1889,
+      "sources": [
+        {
+          "name": "维基百科 · Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Nellie_Bly",
+          "note": "二手人物传记明确1889年11月14日登上Augusta Victoria及1890年1月25日返回；区别出发与完成日期。"
+        }
+      ],
+      "review_note": "2026-10-28逐条核对所引具体来源与日期；机构资料及二手百科的性质在来源备注中区分，不等于独立核验全部原始档案。",
+      "text_sha256": {
+        "zh-CN": "760d31694ac8bc60ee2b5d75ae1734752f6b59af53a9a0cf8d4d57fb415b52b4",
+        "en": "208e2545251ac86390940357c9febf7b845ccc18f0f4695eabece6c672693977"
+      }
+    },
+    {
+      "id": "history-11-14-2003",
+      "month_day": "11-14",
+      "year": 2003,
+      "sources": [
+        {
+          "name": "维基百科 · Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/90377_Sedna",
+          "note": "二手天体专页明确发现日期2003年11月14日及三位发现者；区分2004年公开宣布，不将分类争议简化为已确定行星。"
+        }
+      ],
+      "review_note": "2026-10-28逐条核对所引具体来源与日期；机构资料及二手百科的性质在来源备注中区分，不等于独立核验全部原始档案。",
+      "text_sha256": {
+        "zh-CN": "a55b677beaf1ae39258be2f0677a69299e40f0f9290e8a6497cec78f8c44adce",
+        "en": "726522c85edc82e7613e6adc55546b1ab40e3a5208a1596a05f854a0fc22298b"
+      }
+    },
+    {
+      "id": "history-11-14-1889-nehru",
+      "month_day": "11-14",
+      "year": 1889,
+      "sources": [
+        {
+          "name": "维基百科 · Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Jawaharlal_Nehru",
+          "note": "二手人物传记明确1889年11月14日出生，导言及职务表支持独立运动与首任总理身份。"
+        }
+      ],
+      "review_note": "2026-10-28逐条核对所引具体来源与日期；机构资料及二手百科的性质在来源备注中区分，不等于独立核验全部原始档案。",
+      "text_sha256": {
+        "zh-CN": "d41cd3369f68be297b481f71feedfbf8314a2a3912242a48a9bbc2eb769987e4",
+        "en": "a2a539fd91236b4a47208b1a2475ecd6f0d4c5ec9e3c79260db92bf56b3f353e"
+      }
+    },
+    {
+      "id": "history-11-14-1922-bbc-radio",
+      "month_day": "11-14",
+      "year": 1922,
+      "sources": [
+        {
+          "name": "英国国家科学与媒体博物馆 · National Science and Media Museum",
+          "url": "https://blog.scienceandmediamuseum.org.uk/this-week-in-broadcasting-history-the-bbc-began-daily-transmissions/",
+          "note": "博物馆广播史回顾明确1922年11月14日首播与2LO；当时是Company，避免将1927年Corporation成立时间提前。"
+        }
+      ],
+      "review_note": "2026-10-28逐条核对所引具体来源与日期；机构资料及二手百科的性质在来源备注中区分，不等于独立核验全部原始档案。",
+      "text_sha256": {
+        "zh-CN": "17d633f84e760c2e64b4c1debda9ef0c3cc1ded5ce56842e97cf107b0d95ff72",
+        "en": "2491cbe4b7f8e4e33dde054ed5d008b6bc6163e19e50f6c38237b7bc1d87fbcb"
+      }
+    },
+    {
+      "id": "history-11-14-1969-apollo-12-launch",
+      "month_day": "11-14",
+      "year": 1969,
+      "sources": [
+        {
+          "name": "美国航空航天局 · NASA",
+          "url": "https://www.nasa.gov/missions/apollo/apollo-12-the-pinpoint-mission/",
+          "note": "官方任务回顾明确1969年11月14日发射及两次雷击；这里只记发射，登月为11月19日。"
+        }
+      ],
+      "review_note": "2026-10-28逐条核对所引具体来源与日期；机构资料及二手百科的性质在来源备注中区分，不等于独立核验全部原始档案。",
+      "text_sha256": {
+        "zh-CN": "f84b041baaf60c56c6cefb7ba3aef9d375bb633b3871b3aac1256fe2eb2ee444",
+        "en": "d72215109238891599709853657f157b19c5f5e868870d719724f2b705030385"
+      }
+    },
+    {
+      "id": "history-11-15-1971-prc-un-delegation",
+      "month_day": "11-15",
+      "year": 1971,
+      "sources": [
+        {
+          "name": "中华人民共和国外交部 · Ministry of Foreign Affairs of China",
+          "url": "https://www.mfa.gov.cn/ziliao_674904/historytoday_674971/200311/t20031115_7949205.shtml",
+          "note": "机构官网明确1971年11月15日首次出席及乔冠华发言；与10月25日席位决议分开。"
+        }
+      ],
+      "review_note": "2026-10-28逐条核对所引具体来源与日期；机构资料及二手百科的性质在来源备注中区分，不等于独立核验全部原始档案。",
+      "text_sha256": {
+        "zh-CN": "4db884adca36fba6c77b30aa39520df8b3785bd7815fd125352db611551188e6",
+        "en": "d7854908aec92c791a6b96c94d7104d0c1057aac05852af2ed32a04f1c52de5a"
+      }
+    },
+    {
+      "id": "history-11-15-1889-brazil-republic",
+      "month_day": "11-15",
+      "year": 1889,
+      "sources": [
+        {
+          "name": "维基百科 · Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Proclamation_of_the_Republic_(Brazil)",
+          "note": "二手事件专页明确1889年11月15日及里约热内卢政变；不把后续宪法制定全部归在当日。"
+        }
+      ],
+      "review_note": "2026-10-28逐条核对所引具体来源与日期；机构资料及二手百科的性质在来源备注中区分，不等于独立核验全部原始档案。",
+      "text_sha256": {
+        "zh-CN": "2505b77d0a49ce9522fb3f3ec53c5bc4f9340e4a276adf42c3eeba10dd5ba945",
+        "en": "2e84409afc0febc39dffcbf69439aab615adefbe65b60086e294c7c8d4a3d4a2"
+      }
+    },
+    {
+      "id": "history-11-15-1988-buran",
+      "month_day": "11-15",
+      "year": 1988,
+      "sources": [
+        {
+          "name": "维基百科 · Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Buran_(spacecraft)",
+          "note": "二手航天器专页明确1988年11月15日03:00:02 UTC发射及唯一一次无人轨道飞行；不称载人首航。"
+        }
+      ],
+      "review_note": "2026-10-28逐条核对所引具体来源与日期；机构资料及二手百科的性质在来源备注中区分，不等于独立核验全部原始档案。",
+      "text_sha256": {
+        "zh-CN": "4ddb6cb161b92aaf69fabce499675b8b741303f08df21154da74cec9370db4ec",
+        "en": "c0123502872e16272a6cc883dd2e93266ddb9e60d4fb6d0b9fb6dd20a6cb0b7e"
+      }
+    },
+    {
+      "id": "history-11-15-1864",
+      "month_day": "11-15",
+      "year": 1864,
+      "sources": [
+        {
+          "name": "新佐治亚百科全书 · New Georgia Encyclopedia",
+          "url": "https://www.georgiaencyclopedia.org/articles/history-archaeology/shermans-march-to-the-sea/",
+          "note": "佐治亚州高校学者撰写的二手史学专文明确1864年11月15日起、12月21日止；原条不再把亚特兰大全部焚毁归为单日一举。"
+        }
+      ],
+      "review_note": "2026-10-28逐条核对所引具体来源与日期；机构资料及二手百科的性质在来源备注中区分，不等于独立核验全部原始档案。",
+      "text_sha256": {
+        "zh-CN": "79dd71669a969827327b372d3698aaa07d7c023b1ac4634f2bc66615e98fd33b",
+        "en": "6d1d07062818aab86b543d01975238b61a1bcdcfb36509874e45c1add7db6166"
+      }
+    },
+    {
+      "id": "history-11-15-1920-league-assembly",
+      "month_day": "11-15",
+      "year": 1920,
+      "sources": [
+        {
+          "name": "维基百科 · Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/League_of_Nations",
+          "note": "二手机构史页明确大会首次会议1920年11月15日在日内瓦Reformation Hall；区别1月16日理事会会议。"
+        }
+      ],
+      "review_note": "2026-10-28逐条核对所引具体来源与日期；机构资料及二手百科的性质在来源备注中区分，不等于独立核验全部原始档案。",
+      "text_sha256": {
+        "zh-CN": "2a06b91b1a679ebe093b5766517dded24c53838ac96d2d2c5ffae54a488a03a7",
+        "en": "09c8c16b30634df4855a67efdb4fcc3b1544050f2e11b104faadf4deec2a68b0"
+      }
+    },
+    {
+      "id": "history-11-15-1988-palestine-declaration",
+      "month_day": "11-15",
+      "year": 1988,
+      "sources": [
+        {
+          "name": "维基百科 · Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Palestinian_Declaration_of_Independence",
+          "note": "二手宣言专页明确1988年11月15日、阿尔及尔及宣读者；以文件通过与发表为事件，不把宣言等同实际领土独立已经完成。"
+        }
+      ],
+      "review_note": "2026-10-28逐条核对所引具体来源与日期；机构资料及二手百科的性质在来源备注中区分，不等于独立核验全部原始档案。",
+      "text_sha256": {
+        "zh-CN": "d5acd23e14f5096ce13857015365200ec0c56c27805bf2cdb7cefef2d092ba50",
+        "en": "a99ec3bd06d4b8c7c7d8e98ed5fae4597bed2d7c1f4da64ed6e6f083a7914e76"
+      }
+    },
+    {
+      "id": "history-11-16-1945-unesco-constitution",
+      "month_day": "11-16",
+      "year": 1945,
+      "sources": [
+        {
+          "name": "联合国教科文组织 · UNESCO",
+          "url": "https://www.unesco.org/en/legal-affairs/constitution",
+          "note": "机构组织法页面明确1945年11月16日在伦敦通过，Article XV说明生效须20国批准；区别1946年11月4日生效。"
+        }
+      ],
+      "review_note": "2026-10-28逐条核对所引具体来源与日期；机构资料及二手百科的性质在来源备注中区分，不等于独立核验全部原始档案。",
+      "text_sha256": {
+        "zh-CN": "21648b2874dff1d3b2b2f3a70fd816897167c52600fdce8f8234e865ce6d76f2",
+        "en": "12dcecf838307ddc77f954a2625039a9b4a2732fdd38745c8b4c94a856c1a996"
+      }
+    },
+    {
+      "id": "history-11-16-1974-arecibo-message",
+      "month_day": "11-16",
+      "year": 1974,
+      "sources": [
+        {
+          "name": "波多黎各大学阿雷西博行星宜居性实验室 · PHL, UPR Arecibo",
+          "url": "https://phl.upr.edu/message",
+          "note": "大学研究机构回顾明确1974年11月16日发送；二手百科另核内容指向M13及二进制，不称已收到外星回应。"
+        },
+        {
+          "name": "维基百科 · Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Arecibo_message",
+          "note": "二手消息专页明确目标M13、1679位数据及望远镜改造纪念场合；只概述内容，不复制完整消息。"
+        }
+      ],
+      "review_note": "2026-10-28逐条核对所引具体来源与日期；机构资料及二手百科的性质在来源备注中区分，不等于独立核验全部原始档案。",
+      "text_sha256": {
+        "zh-CN": "f8725d95f5137910bc4b09d36e1eb875a0542472766fdadb22018fbdf4f1fed6",
+        "en": "4b09fce880a54af573b7cf30bc8c48e863e0a1ae1ea43ad7cf03123a5d91c26b"
+      }
+    },
+    {
+      "id": "history-11-16-1892-guo-moruo",
+      "month_day": "11-16",
+      "year": 1892,
+      "sources": [
+        {
+          "name": "中国作家网 · China Writers Association",
+          "url": "https://www.chinawriter.com.cn/xdzj/302.shtml",
+          "note": "现代作家辞典标题明确1892.11.16生日，传记记出生地与诗歌、历史研究；另与四川大学档案馆生平回顾核对日期。"
+        },
+        {
+          "name": "四川大学档案馆 · Sichuan University Archives",
+          "url": "https://archives.scu.edu.cn/info/1015/1973.htm",
+          "note": "大学档案馆校友生平回顾明确1892年11月16日生于乐山沙湾；属机构历史回顾，并非当年出生登记。"
+        }
+      ],
+      "review_note": "2026-10-28逐条核对所引具体来源的日期、事件和人物身份；机构回顾与二手词典不等于全部原始档案核验。",
+      "text_sha256": {
+        "zh-CN": "5ee865add9d9d2de3556dbfacc383f3d1cc613d7ec0e6f2d1f71e5424ca48f3b",
+        "en": "d1a21559cbdfe0ab2bc09732ccd6342cc040964a69caa50bd393b76798c1d148"
+      }
+    },
+    {
+      "id": "history-11-16-1907-oklahoma",
+      "month_day": "11-16",
+      "year": 1907,
+      "sources": [
+        {
+          "name": "维基百科 · Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Oklahoma",
+          "note": "二手州史页明确1907年11月16日建州及两领地合并；不将原住民历史简化为此前无人定居。"
+        }
+      ],
+      "review_note": "2026-10-28逐条核对所引具体来源与日期；机构资料及二手百科的性质在来源备注中区分，不等于独立核验全部原始档案。",
+      "text_sha256": {
+        "zh-CN": "121bcaf8d131ff3f00da646866cc040689ea0ed35c6931fd6b9fa8fd7162c4e4",
+        "en": "fefb4ae9e574c61a2a1a40ad61f06175db3cde5e20091f3fe0f84d2fb4d62f47"
+      }
+    },
+    {
+      "id": "history-11-16-1933-us-soviet-recognition",
+      "month_day": "11-16",
+      "year": 1933,
+      "sources": [
+        {
+          "name": "美国国务院历史办公室 · U.S. Office of the Historian",
+          "url": "https://history.state.gov/milestones/1921-1936/ussr",
+          "note": "机构外交史回顾明确1933年11月16日承认苏联；不因次日新闻公布而改记17日。"
+        }
+      ],
+      "review_note": "2026-10-28逐条核对所引具体来源与日期；机构资料及二手百科的性质在来源备注中区分，不等于独立核验全部原始档案。",
+      "text_sha256": {
+        "zh-CN": "edaf3398e9022506cbe306f948041f34f6b4182a6baedab67eb272647302efff",
+        "en": "24790ca860f3282dfe152addd9f53f0572bfe70ca3b6f03c7d2fa867a9d7ebaf"
+      }
+    },
+    {
+      "id": "history-11-16-1988-estonian-sovereignty",
+      "month_day": "11-16",
+      "year": 1988,
+      "sources": [
+        {
+          "name": "维基百科 · Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Estonian_Sovereignty_Declaration",
+          "note": "二手文件专页明确1988年11月16日及法律优先主张；不把主权宣言写成1991年恢复独立已经发生。"
+        }
+      ],
+      "review_note": "2026-10-28逐条核对所引具体来源与日期；机构资料及二手百科的性质在来源备注中区分，不等于独立核验全部原始档案。",
+      "text_sha256": {
+        "zh-CN": "9f0b46a87310d86bece80964941bca7a11d749f2b017527b11bff1099738b798",
+        "en": "eb7554486e75e35cb09c15845947346ca966f376e367f957fc5fe6b5e9b986cd"
+      }
+    },
+    {
+      "id": "history-11-16-1992",
+      "month_day": "11-16",
+      "year": 1992,
+      "sources": [
+        {
+          "name": "维基百科 · Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Hoxne_Hoard",
+          "note": "二手考古专页明确1992年11月16日及发现过程；删除原条“帝国最大”等范围不清的纪录式形容。"
+        }
+      ],
+      "review_note": "2026-10-28逐条核对所引具体来源与日期；机构资料及二手百科的性质在来源备注中区分，不等于独立核验全部原始档案。",
+      "text_sha256": {
+        "zh-CN": "2d9f61e19e5670eba2d3a905c21b7f02f6ef38ec6a386b495b18831fe95bedf6",
+        "en": "b9cc567d6af996e573ebcdcdc1c78fa14c75c604210f537ae384c6f89eba2cdf"
+      }
+    },
+    {
+      "id": "history-11-17-1869-suez-canal",
+      "month_day": "11-17",
+      "year": 1869,
+      "sources": [
+        {
+          "name": "维基百科 · Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Suez_Canal",
+          "note": "二手运河专页明确1869年11月17日正式开通；开通庆典从15日晚开始，不以庆典开端代替通航日。"
+        }
+      ],
+      "review_note": "2026-10-28逐条核对所引具体来源与日期；机构资料及二手百科的性质在来源备注中区分，不等于独立核验全部原始档案。",
+      "text_sha256": {
+        "zh-CN": "24a9639525b389ffa12bd1d108e4d70483e853226ddbf95a8b4a7866345b4e20",
+        "en": "bcfa476d005260cd127fa90c9494ae529523fcd58325992f694b61fc66659eb7"
+      }
+    },
+    {
+      "id": "history-11-17-1970-luna-17-landing",
+      "month_day": "11-17",
+      "year": 1970,
+      "sources": [
+        {
+          "name": "美国航空航天局 · NASA",
+          "url": "https://science.nasa.gov/moon/missions/",
+          "note": "官方任务表明确1970年11月17日到达月面并运送Lunokhod 1；不把11月10日发射与着陆混同，正文不规定首次驶下坡道的精确时刻。"
+        }
+      ],
+      "review_note": "2026-10-28逐条核对所引具体来源与日期；机构资料及二手百科的性质在来源备注中区分，不等于独立核验全部原始档案。",
+      "text_sha256": {
+        "zh-CN": "eb06fef8321e2efe5a3dec34368e281eabda33e3813882993fa5f2df315e6c69",
+        "en": "4757e14c1dba7cc254d6f2af8b2fb69ce6807ed25bff59f1e7b64f22879d4ef7"
+      }
+    },
+    {
+      "id": "history-11-17-1989",
+      "month_day": "11-17",
+      "year": 1989,
+      "sources": [
+        {
+          "name": "维基百科 · Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Velvet_Revolution",
+          "note": "二手革命专页明确1989年11月17日学生示威及警方镇压；不把12月政治结果全写成17日完成。"
+        }
+      ],
+      "review_note": "2026-10-28逐条核对所引具体来源与日期；机构资料及二手百科的性质在来源备注中区分，不等于独立核验全部原始档案。",
+      "text_sha256": {
+        "zh-CN": "756a2c2e8f5116d588c579565daffcc5b609e77f9740f4576f2435c9f92bfd3a",
+        "en": "289255c811742a2cfd7187c4671f3732f798133be98fc28886ef0e5f9de438a7"
+      }
+    },
+    {
+      "id": "history-11-17-1917-rodin",
+      "month_day": "11-17",
+      "year": 1917,
+      "sources": [
+        {
+          "name": "维基百科 · Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Auguste_Rodin",
+          "note": "二手传记明确1917年11月17日逝世，出生为1840年11月12日；只作简短生平定位。"
+        }
+      ],
+      "review_note": "2026-10-28逐条核对所引具体来源与日期；机构资料及二手百科的性质在来源备注中区分，不等于独立核验全部原始档案。",
+      "text_sha256": {
+        "zh-CN": "47edb5da8ebd864cf6a5b567a83973abab2a66744e2f48db65a2ac89665a9e45",
+        "en": "055fe0d9c87d91e5c9728b3308301c69158b4bab3b2581094a799a612c1e9a8e"
+      }
+    },
+    {
+      "id": "history-11-17-1973-athens-polytechnic",
+      "month_day": "11-17",
+      "year": 1973,
+      "sources": [
+        {
+          "name": "维基百科 · Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Athens_Polytechnic_uprising",
+          "note": "二手事件专页明确1973年11月17日凌晨坦克破门，起义从14日开始；不采用有争议的校内死亡人数。"
+        }
+      ],
+      "review_note": "2026-10-28逐条核对所引具体来源与日期；机构资料及二手百科的性质在来源备注中区分，不等于独立核验全部原始档案。",
+      "text_sha256": {
+        "zh-CN": "3dc18d71a2eb58f8bc83f5e6d53aebf4b210ba84ec08b1261a6c90724e8e178b",
+        "en": "5425c6b7e1be8434ef1ecf2e4247ba630512bafbbce039852fafde102df95501"
+      }
+    },
+    {
+      "id": "history-11-17-1997-luxor",
+      "month_day": "11-17",
+      "year": 1997,
+      "sources": [
+        {
+          "name": "维基百科 · Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Luxor_massacre",
+          "note": "二手事件专页明确1997年11月17日、遗址与袭击对象；只概述事实，不延伸未独立核查的幕后指挥争议。"
+        }
+      ],
+      "review_note": "2026-10-28逐条核对所引具体来源与日期；机构资料及二手百科的性质在来源备注中区分，不等于独立核验全部原始档案。",
+      "text_sha256": {
+        "zh-CN": "43f4461f90c3e0ec0e0fd4980134918cea66ec2deaeb4a5fdd777395fc3e7f3d",
+        "en": "14c8b0074db5dd454d1f49c7e90fc70bec125d1a3658671ec59dabeff74c9c97"
+      }
+    },
+    {
+      "id": "history-11-18-1872",
+      "month_day": "11-18",
+      "year": 1872,
+      "sources": [
+        {
+          "name": "维基百科 · Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Susan_B._Anthony",
+          "note": "二手传记明确1872年11月18日逮捕；原条“试图参与投票”改为实际投票，不把次年罚款判决写在逮捕当天。"
+        }
+      ],
+      "review_note": "2026-10-28逐条核对所引具体来源与日期；机构资料及二手百科的性质在来源备注中区分，不等于独立核验全部原始档案。",
+      "text_sha256": {
+        "zh-CN": "0c5e1ffe7ddb0bafd751188045560f775bc75340f0b96dfa6104938c298d2373",
+        "en": "3a266a21d91e324cc8d99effb4550c733ba597447c59131ca5a96651742e7ec6"
+      }
+    },
+    {
+      "id": "history-11-18-1918-latvia",
+      "month_day": "11-18",
+      "year": 1918,
+      "sources": [
+        {
+          "name": "拉脱维亚总统府 · Chancery of the President of Latvia",
+          "url": "https://www.president.lv/en/history",
+          "note": "机构国家历史时间线明确1918年11月18日宣布共和国及临时政府；不将1920年和平条约或1922年宪法提前。"
+        }
+      ],
+      "review_note": "2026-10-28逐条核对所引具体来源与日期；机构资料及二手百科的性质在来源备注中区分，不等于独立核验全部原始档案。",
+      "text_sha256": {
+        "zh-CN": "06476e973941a96a5012964493a2c71b6ca34abd08809dff8129e89f72d786ec",
+        "en": "f74c496f98d7b816741ef823b6fbb03e7657d8edc327c034228d97da58008c60"
+      }
+    },
+    {
+      "id": "history-11-18-1928-steamboat-willie",
+      "month_day": "11-18",
+      "year": 1928,
+      "sources": [
+        {
+          "name": "维基百科 · Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Steamboat_Willie",
+          "note": "二手电影专页明确1928年11月18日在纽约Colony Theater公映；不笼统称世界第一部有声动画。"
+        }
+      ],
+      "review_note": "2026-10-28逐条核对所引具体来源与日期；机构资料及二手百科的性质在来源备注中区分，不等于独立核验全部原始档案。",
+      "text_sha256": {
+        "zh-CN": "92805dd795d2c6327c6c74c4dc696d8f38bb45b9c574b72198f1eb3542b82b2b",
+        "en": "75def2b04c6da372b339a60a777cedef71d8edad9c381113a5987fd3e1251ad2"
+      }
+    },
+    {
+      "id": "history-11-18-1903-panama-treaty",
+      "month_day": "11-18",
+      "year": 1903,
+      "sources": [
+        {
+          "name": "维基百科 · Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Hay%E2%80%93Bunau-Varilla_Treaty",
+          "note": "二手条约专页明确1903年11月18日签订、签署人与运河区内容；本条记签署，不将1914年运河通航提前。"
+        }
+      ],
+      "review_note": "2026-10-28逐条核对所引具体来源与日期；机构资料及二手百科的性质在来源备注中区分，不等于独立核验全部原始档案。",
+      "text_sha256": {
+        "zh-CN": "3e7c640164274208e32f927c7c4e6226a76ec9715f7a83c786bc5c1c69b7e6ea",
+        "en": "fd2aa7bb6cff63defd678f25aab223f55e4b332e0b1f0e92c07422b70ca800c7"
+      }
+    },
+    {
+      "id": "history-11-18-1963-touch-tone",
+      "month_day": "11-18",
+      "year": 1963,
+      "sources": [
+        {
+          "name": "维基百科 · Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Push-button_telephone",
+          "note": "二手电话技术史页明确1963年11月18日商业提供DTMF音频按键系统；此前已有试验，不称当天发明所有按键电话。"
+        }
+      ],
+      "review_note": "2026-10-28逐条核对所引具体来源与日期；机构资料及二手百科的性质在来源备注中区分，不等于独立核验全部原始档案。",
+      "text_sha256": {
+        "zh-CN": "c4c0d79646c45fb799b957b62a3e3f9ba93065e3d65ec93302c95f4a09409cad",
+        "en": "5c6180020b1fc53f09ba321800b315d1c9d859ad602bb80630584cfb5a1deb0e"
+      }
+    },
+    {
+      "id": "history-11-18-1978-jonestown",
+      "month_day": "11-18",
+      "year": 1978,
+      "sources": [
+        {
+          "name": "维基百科 · Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Jonestown",
+          "note": "二手事件专页明确1978年11月18日与相关机场枪击；不将儿童等受害者概括为全部自愿集体自杀。"
+        }
+      ],
+      "review_note": "2026-10-28逐条核对所引具体来源与日期；机构资料及二手百科的性质在来源备注中区分，不等于独立核验全部原始档案。",
+      "text_sha256": {
+        "zh-CN": "ead8a15d1a8ae7c20e434fb97f8234236b45464e378a2b2a23b37769ecc23ebd",
+        "en": "f130e3da0197df26212ef94c2a1165ec61cfedcde224421c60305664547fa2b6"
+      }
+    },
+    {
+      "id": "history-11-19-1863",
+      "month_day": "11-19",
+      "year": 1863,
+      "sources": [
+        {
+          "name": "美国国家公园管理局 · National Park Service",
+          "url": "https://www.nps.gov/liho/learn/historyculture/gettysburgaddress.htm",
+          "note": "机构页面列演说地点与1863年11月19日并提供全文；正文独立概述，不照录长段演说。"
+        }
+      ],
+      "review_note": "2026-10-28逐条核对所引具体来源与日期；机构资料及二手百科的性质在来源备注中区分，不等于独立核验全部原始档案。",
+      "text_sha256": {
+        "zh-CN": "bf6530c6de3cf729d73802c2e4ba6044f6a37c9ad6b7995f418a57eb9dd439bd",
+        "en": "c2550fe608a51dc7f16e381f3c92b7c1a0dadf93d39927dcb73c60f5d1fbc37a"
+      }
+    },
+    {
+      "id": "history-11-19-1931-xu-zhimo",
+      "month_day": "11-19",
+      "year": 1931,
+      "sources": [
+        {
+          "name": "中国作家网／天津日报 · China Writers Association / Tianjin Daily",
+          "url": "https://www.chinawriter.com.cn/2013/2013-07-29/168972.html",
+          "note": "报刊史料回顾明确1931年11月19日南京至北平途中遇难，并梳理《大公报》悼念报道；不沿用其他年表把周岁错写为36岁的说法。"
+        },
+        {
+          "name": "中国作家网 · China Writers Association",
+          "url": "https://www.chinawriter.com.cn/xdzj/724.shtml",
+          "note": "现代作家辞典标题列1931.11.19死亡日期，正文记1923年参与组织新月社，供双语人物定位复核。"
+        }
+      ],
+      "review_note": "2026-10-28逐条核对所引具体来源的日期、事件和人物身份；机构回顾与二手词典不等于全部原始档案核验。",
+      "text_sha256": {
+        "zh-CN": "31e823a930510af646aa09e7eaa5934e03406632c5bab33188dc1e8f094ad284",
+        "en": "ba7330f331ff1391e8e168015571971aee4202796bae39edbee583a959988583"
+      }
+    },
+    {
+      "id": "history-11-19-1942-uranus",
+      "month_day": "11-19",
+      "year": 1942,
+      "sources": [
+        {
+          "name": "维基百科 · Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Operation_Uranus",
+          "note": "二手军事史专页明确1942年11月19日开始、20日南翼行动；正文将包围写为随后结果，不说19日即全部完成。"
+        }
+      ],
+      "review_note": "2026-10-28逐条核对所引具体来源与日期；机构资料及二手百科的性质在来源备注中区分，不等于独立核验全部原始档案。",
+      "text_sha256": {
+        "zh-CN": "dc65b03662ff9a8680c12f63c378aa8e3229a0f9dc3f2370fde99ed5098c7bb1",
+        "en": "a0a9a1d13a555c80c04aef052edfd2fac302f1af6af22448793448281a76a0bc"
+      }
+    },
+    {
+      "id": "history-11-19-1493-puerto-rico",
+      "month_day": "11-19",
+      "year": 1493,
+      "sources": [
+        {
+          "name": "维基百科 · Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Puerto_Rico",
+          "note": "二手岛屿史页列1493年11月19日首次西班牙船队登陆，殖民开始另列1508年；沿用该页通行历史日期，不以“发现无人岛”措辞叙述。"
+        }
+      ],
+      "review_note": "2026-10-28逐条核对所引具体来源与日期；机构资料及二手百科的性质在来源备注中区分，不等于独立核验全部原始档案。",
+      "text_sha256": {
+        "zh-CN": "56b78c7b7f1b9a5179cac40d05caa47a0d041724da4c789a9752f29ad0e97bb5",
+        "en": "ca818c7623187f0eed98f18dc9a5b075ee04901bfac99e646dc92a4ec954e413"
+      }
+    },
+    {
+      "id": "history-11-19-1969-apollo-12-landing",
+      "month_day": "11-19",
+      "year": 1969,
+      "sources": [
+        {
+          "name": "美国航空航天局 · NASA",
+          "url": "https://nssdc.gsfc.nasa.gov/planetary/lunar/apolloland.html",
+          "note": "官方月球着陆表明确1969年11月19日、风暴洋；任务页面另核宇航员与Surveyor 3地点，不把11月14日发射当作着陆。"
+        },
+        {
+          "name": "美国航空航天局 · NASA",
+          "url": "https://www.nasa.gov/mission/apollo-12/",
+          "note": "官方任务说明列Conrad、Bean为月面人员，并说明在Surveyor 3附近精确着陆及考察。"
+        }
+      ],
+      "review_note": "2026-10-28逐条核对所引具体来源与日期；机构资料及二手百科的性质在来源备注中区分，不等于独立核验全部原始档案。",
+      "text_sha256": {
+        "zh-CN": "4c026ca5dc9c1fba1fb850cc70a6733ca652e02c93c97ea1e73994ac6270e482",
+        "en": "b131e82a529d54e2469faa38a8b02d2064fc57719ef3d894a2143dc33ea3ffb4"
+      }
+    },
+    {
+      "id": "history-11-19-1985-geneva-summit",
+      "month_day": "11-19",
+      "year": 1985,
+      "sources": [
+        {
+          "name": "维基百科 · Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Geneva_Summit_(1985)",
+          "note": "二手峰会专页明确1985年11月19日至21日及两人首次见面；不把后来签署的军控条约提前到此时。"
+        }
+      ],
+      "review_note": "2026-10-28逐条核对所引具体来源与日期；机构资料及二手百科的性质在来源备注中区分，不等于独立核验全部原始档案。",
+      "text_sha256": {
+        "zh-CN": "9d7bed67b7503fc1226f5cf162771c9c98161b8838bc6cc05eb217068e9c0fa4",
+        "en": "f0b05000360f8948dda0a21a81c84b2122fe8605c13d9425be83be1180d15020"
+      }
+    },
+    {
+      "id": "history-11-19-2006-wii",
+      "month_day": "11-19",
+      "year": 2006,
+      "sources": [
+        {
+          "name": "维基百科 · Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Wii",
+          "note": "二手产品史页明确北美2006年11月19日、其他主要地区12月上市；不把该日写成全球同步发售。"
+        }
+      ],
+      "review_note": "2026-10-28逐条核对所引具体来源与日期；机构资料及二手百科的性质在来源备注中区分，不等于独立核验全部原始档案。",
+      "text_sha256": {
+        "zh-CN": "075bb3d145a9ca12c016d2b530b75f4804840f34840bccbc04df066fca0912e8",
+        "en": "522e52f927d2b69f9486ae4999d3b77d0e2fd3b0abafcc152787bcda219f2ec4"
+      }
+    },
+    {
+      "id": "history-11-20-1998",
+      "month_day": "11-20",
+      "year": 1998,
+      "sources": [
+        {
+          "name": "美国国家航空航天局 NASA",
+          "url": "https://www.nasa.gov/history/20-years-ago-space-station-construction-begins/",
+          "note": "NASA回顾正文明确Nov. 20, 1998、Baikonur、Zarya为first element；保留原ID。"
+        }
+      ],
+      "review_note": "已查阅机构专题或回顾资料，核对所写年月日与具体事实；中英文为本站简短转述，不宣称完成原始档案核验。",
+      "text_sha256": {
+        "zh-CN": "0a691b707d96604c86a3a3af233d42ede9125e41a4fadf0fd1296374bc8a1c82",
+        "en": "384ef2506161a3ba7bdc5b828225b70b056def094ce05ab331ebbdacfa11f0e4"
+      }
+    },
+    {
+      "id": "history-11-20-1695-zumbi",
+      "month_day": "11-20",
+      "year": 1695,
+      "sources": [
+        {
+          "name": "巴西帕尔马雷斯文化基金会",
+          "url": "https://www.gov.br/palmares/pt-br/departamentos/protecao-preservacao-e-articulacao/serra-da-barriga-1/tour-pelo-parque/zumbi",
+          "note": "纪念地介绍明确记1695年11月20日被杀及帕尔马雷斯领导人身份；不采用关于死亡经过的争议细节。"
+        }
+      ],
+      "review_note": "已查阅机构专题或回顾资料，核对所写年月日与具体事实；中英文为本站简短转述，不宣称完成原始档案核验。",
+      "text_sha256": {
+        "zh-CN": "60b631b6fda153eb3b1f95bc862023c1e33c8b091e71431dcaa0155ee8feabbc",
+        "en": "fe4b6e1db354697fa8dcce7229b76699b6eb8e781f194b80e659cc849207cb8e"
+      }
+    },
+    {
+      "id": "history-11-20-1989-child-rights-convention",
+      "month_day": "11-20",
+      "year": 1989,
+      "sources": [
+        {
+          "name": "联合国儿童基金会",
+          "url": "https://www.unicef.org/child-rights-convention/convention-text",
+          "note": "公约正文明确1989年11月20日通过、1990年9月2日生效；本文只记通过，不将实际开放签署的活动也归到当天。"
+        }
+      ],
+      "review_note": "已查阅公约正文及文献说明，核对所写年月日与具体事实；中英文为本站简短转述，不宣称完成原始档案核验。",
+      "text_sha256": {
+        "zh-CN": "08662e1dcd0537ed6440d5ffb64dbb6d4c086b7cd59d35c66b5365fceba20949",
+        "en": "2bf3fa8854886def1d003d043986ba7ce984e7986427104ac2b91ccf76aaf92d"
+      }
+    },
+    {
+      "id": "history-11-20-1910-mexican-revolution",
+      "month_day": "11-20",
+      "year": 1910,
+      "sources": [
+        {
+          "name": "维基百科：墨西哥革命",
+          "url": "https://en.wikipedia.org/wiki/Mexican_Revolution",
+          "note": "具体事件页在战争日期及Madero计划段落均记20 November 1910；写作号召与通用起点，不声称全国各地同时起义。"
+        }
+      ],
+      "review_note": "已查阅二手百科事件页，核对所写年月日与具体事实；中英文为本站简短转述，不宣称完成原始档案核验。",
+      "text_sha256": {
+        "zh-CN": "812b3fa5580a6874162eab720d2cab0ccae9220bdb5b080d9feac52d7ede488d",
+        "en": "8c3b8e3ca3c96128e1cf911e37f15574c621e902641ee28820bf73ac0f973fdf"
+      }
+    },
+    {
+      "id": "history-11-20-1945-nuremberg-trial",
+      "month_day": "11-20",
+      "year": 1945,
+      "sources": [
+        {
+          "name": "美国国家二战博物馆",
+          "url": "https://www.nationalww2museum.org/war/topics/nuremberg-trials",
+          "note": "页面记1945年11月20日宣读起诉书、被告出庭，并说明四国法庭及各类罪名；本条不混同后续十二场审判。"
+        }
+      ],
+      "review_note": "已查阅机构专题或回顾资料，核对所写年月日与具体事实；中英文为本站简短转述，不宣称完成原始档案核验。",
+      "text_sha256": {
+        "zh-CN": "9a38d36f3f6244c3cffd748a2055e87e66efb44a80fee73305c60e8dc2807cb6",
+        "en": "c0248b76d9dee77d4d40e89dc485117d864669032d4d3440c7d6b6825bc5f4db"
+      }
+    },
+    {
+      "id": "history-11-20-1959-child-rights-declaration",
+      "month_day": "11-20",
+      "year": 1959,
+      "sources": [
+        {
+          "name": "联合国大会／UNHCR Refworld",
+          "url": "https://www.refworld.org/legal/resolution/unga/1959/17170",
+          "note": "文献元数据明确A/RES/1386(XIV)、20 November 1959；联合国背景页与UNICEF公约序言也交叉记载此日期。"
+        }
+      ],
+      "review_note": "已查阅联合国文献记录，核对所写年月日与具体事实；中英文为本站简短转述，不宣称完成原始档案核验。",
+      "text_sha256": {
+        "zh-CN": "5fda54cb9e42a3119e73cefac53186aedca6e7e70990fc80d44bdf8eebf03711",
+        "en": "f27fa187428a98a240388f70c609572a914caf4e2f4921e8fb8514345efb05ad"
+      }
+    },
+    {
+      "id": "history-11-20-1980-special-court-trial",
+      "month_day": "11-20",
+      "year": 1980,
+      "sources": [
+        {
+          "name": "最高人民法院／人民法院报",
+          "url": "https://www.court.gov.cn/zixun/xiangqing/122911.html",
+          "note": "2018年司法公开回顾明确审理期间为1980年11月20日至1981年1月25日；只写审理开始，不将结果提前到开庭日。"
+        }
+      ],
+      "review_note": "已查阅机构专题或回顾资料，核对所写年月日与具体事实；中英文为本站简短转述，不宣称完成原始档案核验。",
+      "text_sha256": {
+        "zh-CN": "70b63dd5b52103e48a59d3eaa50a737daee04314ef7a4bbe80e72e252470e403",
+        "en": "b55878551b0670d8d3aff8960feadc276b0948b3199c533d00825b699f255461"
+      }
+    },
+    {
+      "id": "history-11-21-1694-voltaire-born",
+      "month_day": "11-21",
+      "year": 1694,
+      "sources": [
+        {
+          "name": "维基百科：伏尔泰",
+          "url": "https://en.wikipedia.org/wiki/Voltaire",
+          "note": "信息框与开篇均记1694年11月21日出生；本条不将次日受洗日期混入。"
+        }
+      ],
+      "review_note": "已查阅二手百科人物页，核对所写年月日与具体事实；中英文为本站简短转述，不宣称完成原始档案核验。",
+      "text_sha256": {
+        "zh-CN": "d9581db177e26627e7a0cd9a4a21d18c0d3c32b48f51f44f8c532fecb36ce596",
+        "en": "c590fdc1e35813ba306835fb84885a556599acc6895ebe504e3b32b27dd1119b"
+      }
+    },
+    {
+      "id": "history-11-21-1783-balloon-free-flight",
+      "month_day": "11-21",
+      "year": 1783,
+      "sources": [
+        {
+          "name": "美国国家热气球博物馆",
+          "url": "https://www.nationalballoonmuseum.com/about/history-of-ballooning/",
+          "note": "馆方气球史明确November 21, 1783、Paris及两名乘客；限定为载人自由飞行，避免与此前系绳试飞混淆。"
+        }
+      ],
+      "review_note": "已查阅机构专题或回顾资料，核对所写年月日与具体事实；中英文为本站简短转述，不宣称完成原始档案核验。",
+      "text_sha256": {
+        "zh-CN": "5886389bec174c7246d9007ea90637ae63254f5228c5ed778d2a53e5c1ca0662",
+        "en": "5b2f239221f08662e0a8f85a7c1757708421e05bda4a4f8877163975bacdc9a9"
+      }
+    },
+    {
+      "id": "history-11-21-1894",
+      "month_day": "11-21",
+      "year": 1894,
+      "sources": [
+        {
+          "name": "维基百科：旅顺大屠杀",
+          "url": "https://en.wikipedia.org/wiki/Port_Arthur_massacre_(China)",
+          "note": "具体事件页明确从1894年11月21日持续三日，且展示多个伤亡估计；只采用共同的时间、地点及暴行事实，保留原ID。"
+        }
+      ],
+      "review_note": "已查阅二手百科事件页，核对所写年月日与具体事实；中英文为本站简短转述，不宣称完成原始档案核验。",
+      "text_sha256": {
+        "zh-CN": "ca1e3b2470567c06fec770caf8d051a125e69ad5a4f3b9368ccdb6425d1e2375",
+        "en": "895034023fd12150128ef1f570ca91a6775344a00cd86a86cda4558b3284e39b"
+      }
+    },
+    {
+      "id": "history-11-21-1920-bloody-sunday-dublin",
+      "month_day": "11-21",
+      "year": 1920,
+      "sources": [
+        {
+          "name": "维基百科：1920年血腥星期日",
+          "url": "https://en.wikipedia.org/wiki/Bloody_Sunday_(1920)",
+          "note": "开篇与两段事件信息框均记21 November 1920；简介保留先后次序，不采用存在不同口径的总死亡数。"
+        }
+      ],
+      "review_note": "已查阅二手百科事件页，核对所写年月日与具体事实；中英文为本站简短转述，不宣称完成原始档案核验。",
+      "text_sha256": {
+        "zh-CN": "de4327c4429b71de8382a1cb9c9eef566bb0e63ddcc32ff3a198e8418de5b7d1",
+        "en": "513bcd7b70c0023dbfaa020d86a74b539146d4a00a133733b53bfe418ac1d693"
+      }
+    },
+    {
+      "id": "history-11-21-1964-verrazzano-bridge",
+      "month_day": "11-21",
+      "year": 1964,
+      "sources": [
+        {
+          "name": "维基百科：韦拉扎诺海峡大桥",
+          "url": "https://en.wikipedia.org/wiki/Verrazzano-Narrows_Bridge",
+          "note": "信息框与Opening段明确1964年11月21日上层开放，1969年6月28日下层开放；避免将两层同时启用。"
+        }
+      ],
+      "review_note": "已查阅二手百科设施页，核对所写年月日与具体事实；中英文为本站简短转述，不宣称完成原始档案核验。",
+      "text_sha256": {
+        "zh-CN": "4a6b44f90764d19221e0841c8332dbb34323ca2f992b0e6411cc9e88ac8cd8f3",
+        "en": "3cb4038d72a88990f6c627f04465c32e67b1f90f5f533dc394883210dd1f03ba"
+      }
+    },
+    {
+      "id": "history-11-21-1995-dayton-initialled",
+      "month_day": "11-21",
+      "year": 1995,
+      "sources": [
+        {
+          "name": "维基百科：代顿协议",
+          "url": "https://en.wikipedia.org/wiki/Dayton_Agreement",
+          "note": "正文区分21 November 1995草签和14 December 1995巴黎签署；本条明确用“草签”。"
+        }
+      ],
+      "review_note": "已查阅二手百科协议页，核对所写年月日与具体事实；中英文为本站简短转述，不宣称完成原始档案核验。",
+      "text_sha256": {
+        "zh-CN": "7f672fd0aedf466d1b60834d8d36f4993b56bc849c6203d935d5dbd2ef6979be",
+        "en": "753df3bf4b7dc7393a193a2b07c8f2755e2e8edf16967a0ecb127a1ee10a64e2"
+      }
+    },
+    {
+      "id": "history-11-22-1635",
+      "month_day": "11-22",
+      "year": 1635,
+      "sources": [
+        {
+          "name": "维基百科：荷兰在台湾的军事行动",
+          "url": "https://en.wikipedia.org/wiki/Dutch_pacification_campaign_on_Formosa",
+          "note": "正文明确November 22, 1635出兵及当晚攻击Mattau；不用“平定”作为中立史实评价，保留原ID。"
+        }
+      ],
+      "review_note": "已查阅二手百科事件页，核对所写年月日与具体事实；中英文为本站简短转述，不宣称完成原始档案核验。",
+      "text_sha256": {
+        "zh-CN": "10a6adc4d69ca3d1d3e28980a9277fa04dce4b7534c8e459a6e5e9b92c2581da",
+        "en": "9c94acb5d3144b724a6bb271cb672f1ecccf48a7485f430d8b08bd34dd824626"
+      }
+    },
+    {
+      "id": "history-11-22-1928-bolero-premiere",
+      "month_day": "11-22",
+      "year": 1928,
+      "sources": [
+        {
+          "name": "维基百科：《波莱罗》",
+          "url": "https://en.wikipedia.org/wiki/Bol%C3%A9ro",
+          "note": "首演信息框及Premiere段明确22 November 1928、地点及指挥；区分1928首演和1929出版。"
+        }
+      ],
+      "review_note": "已查阅二手百科作品页，核对所写年月日与具体事实；中英文为本站简短转述，不宣称完成原始档案核验。",
+      "text_sha256": {
+        "zh-CN": "53d6d94500c9939d77837cef80767de545ecb1b10461a3d5d9e44ba9a3e3ecdd",
+        "en": "2afcaca157a99ed5afc977ccc094013f7fcf9459fa86487d729a6745b02c881d"
+      }
+    },
+    {
+      "id": "history-11-22-2005-merkel-chancellor",
+      "month_day": "11-22",
+      "year": 2005,
+      "sources": [
+        {
+          "name": "维基百科：安格拉·默克尔",
+          "url": "https://en.wikipedia.org/wiki/Angela_Merkel",
+          "note": "任期信息框及2005选举段明确22 November 2005当选总理及大联合政府组成。"
+        }
+      ],
+      "review_note": "已查阅二手百科人物页，核对所写年月日与具体事实；中英文为本站简短转述，不宣称完成原始档案核验。",
+      "text_sha256": {
+        "zh-CN": "f3165153d5d841ad36a00b4dadd336afe1f19d36eced56f123ced8cca05db16c",
+        "en": "51110ae65d222dfeeaff4e5574275cd1d32965a2046afb5442c6e851e1f8f559"
+      }
+    },
+    {
+      "id": "history-11-22-1916-jack-london-died",
+      "month_day": "11-22",
+      "year": 1916,
+      "sources": [
+        {
+          "name": "维基百科：杰克·伦敦",
+          "url": "https://en.wikipedia.org/wiki/Jack_London",
+          "note": "信息框、开篇及死亡段均记November 22, 1916；不采未经一致认定的死因推断。"
+        }
+      ],
+      "review_note": "已查阅二手百科人物页，核对所写年月日与具体事实；中英文为本站简短转述，不宣称完成原始档案核验。",
+      "text_sha256": {
+        "zh-CN": "7cd06fea02f80354ecdd361d2508a06b29dc3adc9555ec1c189978e0c4d4aabc",
+        "en": "791e836a5d647e2e297d9f70ec332da746ab711414a1a45171f071aa410dbf3d"
+      }
+    },
+    {
+      "id": "history-11-22-1943-lebanon-independence",
+      "month_day": "11-22",
+      "year": 1943,
+      "sources": [
+        {
+          "name": "维基百科：黎巴嫩独立日",
+          "url": "https://en.wikipedia.org/wiki/Lebanese_Independence_Day",
+          "note": "正文记1943年11月22日上午释放Rashaya囚禁领导人并成为独立日；不将1946军队撤离挪到本日。"
+        }
+      ],
+      "review_note": "已查阅二手百科历史页，核对所写年月日与具体事实；中英文为本站简短转述，不宣称完成原始档案核验。",
+      "text_sha256": {
+        "zh-CN": "27263a8549b825c1b5cd4cebcda0fb88a236677ac5b8307c279bd958901323b5",
+        "en": "142aa34e68c5ac770f8ef46ee32076fe5a3474ca51280232e3e514768c4d4edc"
+      }
+    },
+    {
+      "id": "history-11-22-1963-kennedy-assassination",
+      "month_day": "11-22",
+      "year": 1963,
+      "sources": [
+        {
+          "name": "肯尼迪总统图书馆与博物馆",
+          "url": "https://www.jfklibrary.org/learn/about-jfk/jfk-in-history/november-22-1963-death-of-the-president",
+          "note": "馆方专题标题与正文明确1963年11月22日及遇刺、约翰逊宣誓经过；沿用达拉斯当地日期。"
+        }
+      ],
+      "review_note": "已查阅机构专题或回顾资料，核对所写年月日与具体事实；中英文为本站简短转述，不宣称完成原始档案核验。",
+      "text_sha256": {
+        "zh-CN": "35674b5a5f9c18ee19b746e6bf9198f5deab4de6da9b49943e11aa0fcb0dbc5a",
+        "en": "ee97656af3037d34f8d7286586845b8936ba3e02c2ea88a036829bbc5e30963a"
+      }
+    },
+    {
+      "id": "history-11-23-1936-seven-national-salvation-leaders",
+      "month_day": "11-23",
+      "year": 1936,
+      "sources": [
+        {
+          "name": "中国共产党新闻网／人民网",
+          "url": "https://cpc.people.com.cn/GB/64162/64165/72301/72328/index.html",
+          "note": "1936年11月23日专题明确七人姓名、上海被捕与翌年7月获释；摘要未照搬评价性用语。"
+        }
+      ],
+      "review_note": "已查阅机构专题或回顾资料，核对所写年月日与具体事实；中英文为本站简短转述，不宣称完成原始档案核验。",
+      "text_sha256": {
+        "zh-CN": "e82a24a6b5e2a5e0fe24fa3107ef8f003a9176d45c5223a4d24cd7ff312d87d4",
+        "en": "0bd6ac18ce9f5c0b7b3a5203e57da875b2e788c8330d7efaa36ff875a5ef9396"
+      }
+    },
+    {
+      "id": "history-11-23-1903-caruso-met-debut",
+      "month_day": "11-23",
+      "year": 1903,
+      "sources": [
+        {
+          "name": "美国国会图书馆",
+          "url": "https://guides.loc.gov/chronicling-america-enrico-caruso",
+          "note": "图书馆报刊研究指南时间表明确November 23, 1903及Rigoletto首演；另检索到大都会档案CID 32000交叉吻合。"
+        }
+      ],
+      "review_note": "已查阅机构专题或回顾资料，核对所写年月日与具体事实；中英文为本站简短转述，不宣称完成原始档案核验。",
+      "text_sha256": {
+        "zh-CN": "17ffd105e203f7fc4a9aca145bb8f2503d1b82dbe6611deaa76ab779f43037db",
+        "en": "fe3630db7a99952a07d7519a050d04176e758800d7bf56309a86eb424cacb80d"
+      }
+    },
+    {
+      "id": "history-11-23-2001-budapest-convention",
+      "month_day": "11-23",
+      "year": 2001,
+      "sources": [
+        {
+          "name": "欧洲委员会",
+          "url": "https://www.coe.int/en/web/cybercrime/key-facts",
+          "note": "机构说明明确23 November 2001为opened for signature；区分此前通过和此后的生效。"
+        }
+      ],
+      "review_note": "已查阅机构专题或回顾资料，核对所写年月日与具体事实；中英文为本站简短转述，不宣称完成原始档案核验。",
+      "text_sha256": {
+        "zh-CN": "4aad14902ca02987b17e07cae5a95c3ca676d61fba6c469b1aaa036cce1f1664",
+        "en": "7782f86c1ad2acaa0d4760c600e7a29c46e56208be4e737eba0a6eaffd7bcbe4"
+      }
+    },
+    {
+      "id": "history-11-23-1863-orchard-knob",
+      "month_day": "11-23",
+      "year": 1863,
+      "sources": [
+        {
+          "name": "美国国家公园管理局 NPS",
+          "url": "https://www.nps.gov/chch/learn/historyculture/battles-for-chattanooga.htm",
+          "note": "NPS分日记事以November 23, 1863为小标题，明确当天夺取Orchard Knob；不是声称整个campaign于这天才开始。"
+        }
+      ],
+      "review_note": "已查阅机构专题或回顾资料，核对所写年月日与具体事实；中英文为本站简短转述，不宣称完成原始档案核验。",
+      "text_sha256": {
+        "zh-CN": "b38bc4d45988d8da9b9555f5a36050a79455c8b3695b22cf63f48bbc427f453f",
+        "en": "181c11b4473cb7108073f49cae24bf5e26a94096be82d733ae240319b6f5160e"
+      }
+    },
+    {
+      "id": "history-11-23-1963-doctor-who-debut",
+      "month_day": "11-23",
+      "year": 1963,
+      "sources": [
+        {
+          "name": "维基百科：《神秘博士》",
+          "url": "https://en.wikipedia.org/wiki/Doctor_Who",
+          "note": "播出信息框及开篇历史段明确23 November 1963；只写首次电视播出，不混同后来的复播与重启。"
+        }
+      ],
+      "review_note": "已查阅二手百科节目页，核对所写年月日与具体事实；中英文为本站简短转述，不宣称完成原始档案核验。",
+      "text_sha256": {
+        "zh-CN": "e61b359418c58fdd28c751dc9c0c0b423daf83e6345bd592fa82e59951ef502d",
+        "en": "b70eedfb3ffa5a9cfe556db33622805e8fc51d82ad95529555a4153c42733746"
+      }
+    },
+    {
+      "id": "history-11-23-1976-mayol-hundred-metres",
+      "month_day": "11-23",
+      "year": 1976,
+      "sources": [
+        {
+          "name": "维基百科：雅克·马约尔",
+          "url": "https://en.wikipedia.org/wiki/Jacques_Mayol",
+          "note": "Career段明确23 November 1976达100m，另说明no-limits可用weighted sleds和air balloons；省略同页100/101m口径差别中的多余精确值。"
+        }
+      ],
+      "review_note": "已查阅二手百科人物页，核对所写年月日与具体事实；中英文为本站简短转述，不宣称完成原始档案核验。",
+      "text_sha256": {
+        "zh-CN": "b2ce0db9f766eb6418511a3addf63d903a95d1c895171427c142aa8ba25f16a9",
+        "en": "24bbfa09311e986f06bc9f65ca37a8e79a3c79cd526638d7248d3e5defb21617"
+      }
+    },
+    {
+      "id": "history-11-24-1859",
+      "month_day": "11-24",
+      "year": 1859,
+      "sources": [
+        {
+          "name": "格林尼治皇家博物馆",
+          "url": "https://www.rmg.co.uk/stories/ocean/charles-darwin-one-britains-most-celebrated-naturalists",
+          "note": "馆方生平说明明确24 November 1859出版及自然选择论述；保留原ID，不采用“首日面向公众售罄”等易混口径。"
+        }
+      ],
+      "review_note": "已查阅机构专题或回顾资料，核对所写年月日与具体事实；中英文为本站简短转述，不宣称完成原始档案核验。",
+      "text_sha256": {
+        "zh-CN": "dc18c48b9cf167e153d2adc84fbeecc0a0ec93fcb4d601d88afb4b6cfb26f3ab",
+        "en": "5a9fdab09ada544872820aeea678409ccaaaf71c34798f46a497acf188951e44"
+      }
+    },
+    {
+      "id": "history-11-24-1894-revive-china-society",
+      "month_day": "11-24",
+      "year": 1894,
+      "sources": [
+        {
+          "name": "广州市委党史文献研究室／广州市地方志办公室",
+          "url": "https://www.gzsqw.org.cn/c/sdfzpc/gmfy/4008.jhtml",
+          "note": "正文明确1894年11月24日檀香山成立，与1895年2月21日香港总会分开。"
+        }
+      ],
+      "review_note": "已查阅机构专题或回顾资料，核对所写年月日与具体事实；中英文为本站简短转述，不宣称完成原始档案核验。",
+      "text_sha256": {
+        "zh-CN": "4514cf24fe62b5b1bf3137059e7800e7e930e075ad4d4d4a7b91a771af7e791d",
+        "en": "467f97188b2153526a2b9e7b7a48a562f04df71d243d02951f600d5b5451300d"
+      }
+    },
+    {
+      "id": "history-11-24-1974-lucy-found",
+      "month_day": "11-24",
+      "year": 1974,
+      "sources": [
+        {
+          "name": "伊利诺伊大学文理学院",
+          "url": "https://las.illinois.edu/news/2017-10-24/man-who-found-lucy",
+          "note": "大学人物专题明确November 24, 1974、两人、Hadar、后续发掘与约320万年；不把全部骨骼一天发掘完成。"
+        }
+      ],
+      "review_note": "已查阅机构专题或回顾资料，核对所写年月日与具体事实；中英文为本站简短转述，不宣称完成原始档案核验。",
+      "text_sha256": {
+        "zh-CN": "60ffce220ad66bf2fcad388bdf3ad613edf15b7dabeb16c01f1fce48b2b540a0",
+        "en": "3cfa98b07bdd33d8f96798c33fd1b030f775eea18e085c765b4398339ceb606a"
+      }
+    },
+    {
+      "id": "history-11-24-1642-tasman-tasmania",
+      "month_day": "11-24",
+      "year": 1642,
+      "sources": [
+        {
+          "name": "新西兰文化与遗产部 NZHistory",
+          "url": "https://nzhistory.govt.nz/abel-tasman-sights-the-southern-alps-becoming-the-first-european-to-see-nz",
+          "note": "该页虽以12月13日新西兰事件为题，正文明确1642年航程中的24 November望见Tasmania；不将已有人居住的岛屿称为无人发现。"
+        }
+      ],
+      "review_note": "已查阅机构专题或回顾资料，核对所写年月日与具体事实；中英文为本站简短转述，不宣称完成原始档案核验。",
+      "text_sha256": {
+        "zh-CN": "8c348f11c96d2e4c66ddbc60d6308a444a14f7a2d39f4b62047d1fa4bdf9fa0a",
+        "en": "a7974e43f9aec961c21698267aba2849229e200a19eefec5ac30f8aa7dd5aac7"
+      }
+    },
+    {
+      "id": "history-11-24-1969-apollo12-return",
+      "month_day": "11-24",
+      "year": 1969,
+      "sources": [
+        {
+          "name": "美国国家航空航天局 NASA",
+          "url": "https://www.nasa.gov/missions/apollo/apollo-12-the-pinpoint-mission/",
+          "note": "任务页Landing栏记November 24, 1969与Pacific Ocean；月面登陆与返地分开；本日沿用NASA任务日期（UTC也是11月24日）。"
+        }
+      ],
+      "review_note": "已查阅机构专题或回顾资料，核对所写年月日与具体事实；中英文为本站简短转述，不宣称完成原始档案核验。",
+      "text_sha256": {
+        "zh-CN": "d8235d37e392cf860ff6859c8df9e188e73d41a52d8da95bbfe5e831e4f8d6c2",
+        "en": "22cb0e9f2f6325ca32ffa8eeec8b694e161203abf34c6bdba5836cedca773ace"
+      }
+    },
+    {
+      "id": "history-11-24-2013-iran-joint-plan",
+      "month_day": "11-24",
+      "year": 2013,
+      "sources": [
+        {
+          "name": "英国外交部",
+          "url": "https://www.gov.uk/government/news/first-step-towards-implementation-of-interim-iran-nuclear-agreement",
+          "note": "英国外交部2014年1月12日公告明确《联合行动计划》agreed at Geneva on 24 November 2013，并区分后来落实协议；不依赖原欧盟PDF的机器人校验页。"
+        }
+      ],
+      "review_note": "已查阅当事方英国外交部公告，核对达成日期及日内瓦地点；中英文为本站简短转述，不宣称完成原始档案核验。",
+      "text_sha256": {
+        "zh-CN": "ce853b5624f8260d1d622780e38ce81cc071cc756d37a64f5a1686330eff9de0",
+        "en": "8c1d5c287f3fbc44d5d1337484f79cd788c37d47a0e2effc2e6745589eeb8612"
+      }
+    },
+    {
+      "id": "history-11-25-1915-einstein-field-equations",
+      "month_day": "11-25",
+      "year": 1915,
+      "sources": [
+        {
+          "name": "加州理工学院爱因斯坦文献项目",
+          "url": "https://www.einstein.caltech.edu/news/one-hundred-years-of-einsteins-field-equations-and-of-the-explanation-of-mercurys-perihelion",
+          "note": "项目说明明确25 November 1915提交场方程论文、同日发表此前水星近日点论文；正文区分提交与刊出。"
+        }
+      ],
+      "review_note": "已查阅机构专题或回顾资料，核对所写年月日与具体事实；中英文为本站简短转述，不宣称完成原始档案核验。",
+      "text_sha256": {
+        "zh-CN": "e6171482fb4336e53d2375ee2c81f4ee70e057040bb45a9d0793ca8307be59ca",
+        "en": "e3a12b8d5ea0fba164cd95536952b396ba43f869e30a231f03e6acabd2f5681a"
+      }
+    },
+    {
+      "id": "history-11-25-1952-mousetrap-london",
+      "month_day": "11-25",
+      "year": 1952,
+      "sources": [
+        {
+          "name": "Theatrecrafts 戏剧资料库",
+          "url": "https://theatrecrafts.com/pages/home/shows/the-mousetrap/",
+          "note": "作品档案明确1952年10月6日诺丁汉世界首演、11月25日伦敦开演；不是称11月25日为世界首演。"
+        }
+      ],
+      "review_note": "已查阅戏剧专业资料库，核对所写年月日与具体事实；中英文为本站简短转述，不宣称完成原始档案核验。",
+      "text_sha256": {
+        "zh-CN": "3c29d73711400fc92b49254bcff9d3ebd79866652ad4407bc703db2f41320aa2",
+        "en": "012022fb05fad9fb2574bb1d6565bc5e24a622a3ecb6e462cc9f952ca2f7fa9f"
+      }
+    },
+    {
+      "id": "history-11-25-1960-mirabal-sisters",
+      "month_day": "11-25",
+      "year": 1960,
+      "sources": [
+        {
+          "name": "联合国妇女署",
+          "url": "https://interactive.unwomen.org/multimedia/timeline/womenunite/en/index.html",
+          "note": "1960专题明确25 November 1960三姐妹遇害及后来纪念日由来；不把1999联合国设立纪念日的决定提前到1960。"
+        }
+      ],
+      "review_note": "已查阅机构专题或回顾资料，核对所写年月日与具体事实；中英文为本站简短转述，不宣称完成原始档案核验。",
+      "text_sha256": {
+        "zh-CN": "3bffb0b9364fb474338fdfcb1bb406b0788eb2070918d6f95070b351ca0f966d",
+        "en": "7a2345743fe0ef74d57c28972ed9a56cda28649b0169fc46cd441402a12b5d6d"
+      }
+    },
+    {
+      "id": "history-11-25-1940",
+      "month_day": "11-25",
+      "year": 1940,
+      "sources": [
+        {
+          "name": "英国皇家空军博物馆",
+          "url": "https://www.rafmuseum.org.uk/blog/moving-the-mosquito/",
+          "note": "馆方正文明确25 November 1940、W4050、Hatfield；“Post War”档案展说明木制高速设计及1941服役，保留原ID。"
+        }
+      ],
+      "review_note": "已查阅机构专题或回顾资料，核对所写年月日与具体事实；中英文为本站简短转述，不宣称完成原始档案核验。",
+      "text_sha256": {
+        "zh-CN": "fea9f5f79f1a3b76eaf47b69f28ac9cd3b1c27341ef20f9b02f54c1eb122e2ce",
+        "en": "1dc53733455ed68c0080cbc91d778a5c87e376dabc0770bbfa2d425344bbf83f"
+      }
+    },
+    {
+      "id": "history-11-25-1950-mao-anying-killed",
+      "month_day": "11-25",
+      "year": 1950,
+      "sources": [
+        {
+          "name": "中国共产党新闻网／人民网",
+          "url": "https://cpc.people.com.cn/GB/64162/64165/72301/72330/index.html",
+          "note": "专题明确1950年11月25日、大榆洞轰炸、俄文翻译及机要工作、28岁；另读国防部所载新华社传记检索正文交叉一致，不采用网传生活细节。"
+        }
+      ],
+      "review_note": "已查阅机构专题或回顾资料，核对所写年月日与具体事实；中英文为本站简短转述，不宣称完成原始档案核验。",
+      "text_sha256": {
+        "zh-CN": "daa583d6ddc71f696733dcee8dc4984d1e6a6a19be6c863039f8e55441413ec1",
+        "en": "816dc4c04f214a38599c435fbd6af25966552e88707209b4ce157ec9e5196eb9"
+      }
+    },
+    {
+      "id": "history-11-25-1975-suriname-independence",
+      "month_day": "11-25",
+      "year": 1975,
+      "sources": [
+        {
+          "name": "美国国务院历史办公室",
+          "url": "https://history.state.gov/countries/suriname",
+          "note": "Recognition段明确1975年11月25日首都独立宣告仪式，Summary说明从荷兰独立与此前自治。"
+        }
+      ],
+      "review_note": "已查阅机构专题或回顾资料，核对所写年月日与具体事实；中英文为本站简短转述，不宣称完成原始档案核验。",
+      "text_sha256": {
+        "zh-CN": "b0ac673fa18f87461a211c7443a385e91dd3b0c22555e8b493a133344bb42c4a",
+        "en": "c02bf6dfbd6b6f1632370cbaf2c523198eecf2442196cbdad34a326ecbba86ea"
+      }
+    },
+    {
+      "id": "history-11-26-1942",
+      "month_day": "11-26",
+      "year": 1942,
+      "sources": [
+        {
+          "name": "维基百科：《卡萨布兰卡》",
+          "url": "https://en.wikipedia.org/wiki/Casablanca_(film)",
+          "note": "信息框与Release段明确纽约首映November 26, 1942和全美发行January 23, 1943，保留原ID。"
+        }
+      ],
+      "review_note": "已查阅二手百科电影页，核对所写年月日与具体事实；中英文为本站简短转述，不宣称完成原始档案核验。",
+      "text_sha256": {
+        "zh-CN": "5c1117079e337fcc3962d0379bf1002caf490570a43c6cfde4a4057a8e5125b4",
+        "en": "5dbbba78243554277194e37589d19196795bed1096047480427efa27d723e208"
+      }
+    },
+    {
+      "id": "history-11-26-1949-india-constitution-adopted",
+      "month_day": "11-26",
+      "year": 1949,
+      "sources": [
+        {
+          "name": "印度法律与政策研究中心 Constitution of India",
+          "url": "https://www.constitutionofindia.net/stages-of-constitution-making/",
+          "note": "研究机构制宪分期Stage 10正文明确26 November 1949通过、24 January 1950签名、26 January 1950生效；另检索印度政府PIB发言稿确认相同日期。"
+        }
+      ],
+      "review_note": "已查阅法律史研究资料，核对所写年月日与具体事实；中英文为本站简短转述，不宣称完成原始档案核验。",
+      "text_sha256": {
+        "zh-CN": "854269183f2c8c2d4b39b1911688ee435a760eaa430eaa885b9730a29dcd428f",
+        "en": "89ad24e19d4c08bd129ed312349033f1b478bfa152bcfa0b85ec290a6539a133"
+      }
+    },
+    {
+      "id": "history-11-26-1990-shanghai-exchange-founded",
+      "month_day": "11-26",
+      "year": 1990,
+      "sources": [
+        {
+          "name": "上海证券交易所",
+          "url": "https://english.sse.com.cn/aboutsse/overview/",
+          "note": "交易所官方简介明确November 26, 1990成立、December 19开始formal operations，严分成立与开业。"
+        }
+      ],
+      "review_note": "已查阅机构专题或回顾资料，核对所写年月日与具体事实；中英文为本站简短转述，不宣称完成原始档案核验。",
+      "text_sha256": {
+        "zh-CN": "cefe112710b5e5dcf7767c5116cb2678df71ea711e24b4b48eea9ec8da5a08a5",
+        "en": "205f0ad6cd1fca103536e5d80b2a55d7587c1e401b4cad177c2b1fb72a04737a"
+      }
+    },
+    {
+      "id": "history-11-26-1922-tutankhamun-antechamber",
+      "month_day": "11-26",
+      "year": 1922,
+      "sources": [
+        {
+          "name": "维基百科：霍华德·卡特",
+          "url": "https://en.wikipedia.org/wiki/Howard_Carter",
+          "note": "具体人物页记1922年11月4日发现台阶、24日清理、26日在墓门开孔；后续段记埋葬室1923年开放，避免将各阶段全记作发现日。"
+        }
+      ],
+      "review_note": "已查阅二手百科考古人物页，核对所写年月日与具体事实；中英文为本站简短转述，不宣称完成原始档案核验。",
+      "text_sha256": {
+        "zh-CN": "3573048694d5c9ec3acb6864eb11d180e8ee5162b930364f5de93488a0d86fae",
+        "en": "36bd3f839d12602fa93c77781cb284127a75c8e029d99ba83bc1e49865075b29"
+      }
+    },
+    {
+      "id": "history-11-26-1965-asterix-launch",
+      "month_day": "11-26",
+      "year": 1965,
+      "sources": [
+        {
+          "name": "法国国家空间研究中心 CNES",
+          "url": "https://cnes.fr/actualites/y-50-ans-diamant-lancait-asterix-premier-satellite-francais",
+          "note": "CNES专题明确26 novembre 1965、Hammaguir、Diamant和A1/Astérix；不把入轨成功写成卫星无线电正常工作，原文注明天线受损。"
+        }
+      ],
+      "review_note": "已查阅机构专题或回顾资料，核对所写年月日与具体事实；中英文为本站简短转述，不宣称完成原始档案核验。",
+      "text_sha256": {
+        "zh-CN": "77b2e5db91dd6b2de1ed6c34b77e72852b0de9b1a6f5efaa08361ff7f4a53343",
+        "en": "7cbdab1006db6b79d143ebc69e06bcedfe9bb3143df11e2f9ca9a9ae7bfb488b"
+      }
+    },
+    {
+      "id": "history-11-26-2003-concorde-final-flight",
+      "month_day": "11-26",
+      "year": 2003,
+      "sources": [
+        {
+          "name": "布里斯托尔航空航天博物馆",
+          "url": "https://aerospacebristol.org/news/2017/2/7/concorde-completes-final-journey-to-new-19m-home",
+          "note": "收藏飞机的馆方明确Alpha Foxtrot/216为last Concorde ever to fly，最后于26 November 2003降落Filton；区分与此前商业航班终止。"
+        }
+      ],
+      "review_note": "已查阅机构专题或回顾资料，核对所写年月日与具体事实；中英文为本站简短转述，不宣称完成原始档案核验。",
+      "text_sha256": {
+        "zh-CN": "c93af8c44da27c98245d1b891292338f1e899ddc0a3e72a4a0ad17561d8314d5",
+        "en": "df4494eabf752a1fd4a1119fc6032f88dbfb9461788f4715564db8f6ff90b379"
+      }
+    },
+    {
+      "id": "history-11-27-1895",
+      "month_day": "11-27",
+      "year": 1895,
+      "sources": [
+        {
+          "name": "挪威诺贝尔研究所／诺贝尔和平奖官网",
+          "url": "https://www.nobelpeaceprize.org/nobels-fredspris/historie/alfred-nobels-testamente",
+          "note": "官网题为Alfred Nobels testamente，明确27. november 1895巴黎签署，并展示奖项分配遗嘱文本；颁奖始于1901，不提前为签署当天，保留原ID。"
+        }
+      ],
+      "review_note": "已查阅机构专题或回顾资料，核对所写年月日与具体事实；中英文为本站简短转述，不宣称完成原始档案核验。",
+      "text_sha256": {
+        "zh-CN": "da9e09c7801c44015f75bf1b2884c12c471e5615d7890f82ece463a1db7f82c6",
+        "en": "c91116432225c653f524ccf72da5656abe5d877a30d1d3cd0b59bddad49c173a"
+      }
+    },
+    {
+      "id": "history-11-27-1949-chongqing-prison-massacre",
+      "month_day": "11-27",
+      "year": 1949,
+      "sources": [
+        {
+          "name": "七一网／重庆党史资料",
+          "url": "https://m.12371.gov.cn/content/2024-11/30/content_478804.html",
+          "note": "回顾资料明确1949年11月27日在两处监狱屠杀，亦明确更长的杀戮期9月6日至11月29日；不将江竹筠（11月14日）或小萝卜头（9月6日）的死亡日期移到27日。"
+        }
+      ],
+      "review_note": "已查阅机构专题或回顾资料，核对所写年月日与具体事实；中英文为本站简短转述，不宣称完成原始档案核验。",
+      "text_sha256": {
+        "zh-CN": "5192883911d7c58cea78bc77e5cb05958ec81f860845987c312f9ea6dc9ee2fb",
+        "en": "c446be609819b5a868a68b531c95bc4edab3763c4207201d10f0c0bc49941047"
+      }
+    },
+    {
+      "id": "history-11-27-1896-zarathustra-premiere",
+      "month_day": "11-27",
+      "year": 1896,
+      "sources": [
+        {
+          "name": "波士顿交响乐团",
+          "url": "https://www.bso.org/works/strauss-also-sprach-zarathustra",
+          "note": "乐团作品说明明确November 27, 1896、Frankfurt、作曲家亲自指挥及尼采著作背景。"
+        }
+      ],
+      "review_note": "已查阅机构专题或回顾资料，核对所写年月日与具体事实；中英文为本站简短转述，不宣称完成原始档案核验。",
+      "text_sha256": {
+        "zh-CN": "a4ffab8d624614f77782a185c2a761aeec807251212906f95ff08693757d1848",
+        "en": "cbc55410ae205a12778fecb770f02dea4e57c567e0e6e84d01a2ce86acb1b3df"
+      }
+    },
+    {
+      "id": "history-11-27-1940-bruce-lee-born",
+      "month_day": "11-27",
+      "year": 1940,
+      "sources": [
+        {
+          "name": "维基百科：李小龙",
+          "url": "https://en.wikipedia.org/wiki/Bruce_Lee",
+          "note": "信息框、开篇和Early life段均记November 27, 1940及出生地，生平段支持香港成长与截拳道。"
+        }
+      ],
+      "review_note": "已查阅二手百科人物页，核对所写年月日与具体事实；中英文为本站简短转述，不宣称完成原始档案核验。",
+      "text_sha256": {
+        "zh-CN": "d2333b6f6792fc0186a63088970838dbb275d250d88ede918870d5dc16541ede",
+        "en": "44fd3f60f3a63c026b0c7603457ca87891540c076b963be5bd5fdc4824f23040"
+      }
+    },
+    {
+      "id": "history-11-27-1971-mars2-impact",
+      "month_day": "11-27",
+      "year": 1971,
+      "sources": [
+        {
+          "name": "NASA戈达德空间研究所",
+          "url": "https://www.giss.nasa.gov/tools/mars24/help/landers.html",
+          "note": "Mars24资料在Past Unsuccessful Landers下明确Nov. 27, 1971下降失败、impact与轨道器继续数月；不误称为首次成功软着陆。"
+        }
+      ],
+      "review_note": "已查阅机构专题或回顾资料，核对所写年月日与具体事实；中英文为本站简短转述，不宣称完成原始档案核验。",
+      "text_sha256": {
+        "zh-CN": "566fe1172665e1f048edf07e9c19a234e30af6158b642c700288c05704534e85",
+        "en": "e0f37c5432d0a491920dbe23240cb6880bfdc9874945be374440c9eace1d8f3b"
+      }
+    },
+    {
+      "id": "history-11-27-2005-partial-face-transplant",
+      "month_day": "11-27",
+      "year": 2005,
+      "sources": [
+        {
+          "name": "维基百科：伊莎贝尔·迪诺瓦",
+          "url": "https://en.wikipedia.org/wiki/Isabelle_Dinoire",
+          "note": "Surgery段明确27 November 2005、Amiens与手术范围，参考报道发表于30 November；不把新闻公布日当手术日。"
+        }
+      ],
+      "review_note": "已查阅二手百科人物及医疗史页，核对所写年月日与具体事实；中英文为本站简短转述，不宣称完成原始档案核验。",
+      "text_sha256": {
+        "zh-CN": "d1560f789ff346bd0fb78b222ff3cb2a1f338b7ea69a94e3c873068309dc6de4",
+        "en": "bfa4c6cd853b163f6d41c8d01ff0e148a13c6c101347b9d374486dbb5c95213e"
+      }
+    },
+    {
+      "id": "history-11-28-1660",
+      "month_day": "11-28",
+      "year": 1660,
+      "sources": [
+        {
+          "name": "英国皇家学会",
+          "url": "https://royalsociety.org/blog/2022/11/moving-house/",
+          "note": "学会历史专题明确28 November 1660创立于Gresham College；另读学会On this day说明此日创始会议而非11月30日周年典礼，保留原ID。"
+        }
+      ],
+      "review_note": "已查阅机构专题或回顾资料，核对所写年月日与具体事实；中英文为本站简短转述，不宣称完成原始档案核验。",
+      "text_sha256": {
+        "zh-CN": "cc434b52e682fb409d4f11dace915dac8558bcd74875a1bd6e297dcd57bd6aba",
+        "en": "2d78c9363d348300f0d5bc758eba2b46b61c2c007f5e92fb8bcec550d9722cfd"
+      }
+    },
+    {
+      "id": "history-11-28-1820-engels-born",
+      "month_day": "11-28",
+      "year": 1820,
+      "sources": [
+        {
+          "name": "维基百科：弗里德里希·恩格斯",
+          "url": "https://en.wikipedia.org/wiki/Friedrich_Engels",
+          "note": "信息框、开篇及Early life段明确28 November 1820和Barmen；同页概述共同著作与《资本论》编辑工作。"
+        }
+      ],
+      "review_note": "已查阅二手百科人物页，核对所写年月日与具体事实；中英文为本站简短转述，不宣称完成原始档案核验。",
+      "text_sha256": {
+        "zh-CN": "f425bff9601fc473a04b1752c79bee9c0d95b4999ffc26abbd48b6cb3c17f300",
+        "en": "58f70bdb58e279aeaa343f63422d9dda1d10f8ce8227a5f09f1ecbf78acc63ab"
+      }
+    },
+    {
+      "id": "history-11-28-1893-nz-women-vote",
+      "month_day": "11-28",
+      "year": 1893,
+      "sources": [
+        {
+          "name": "新西兰文化与遗产部 NZHistory",
+          "url": "https://nzhistory.govt.nz/page/women-vote-first-general-election",
+          "note": "机构日期页明确28 November 1893投票；关于毛利选区12月20日的限定另见具体选举/妇女选举权资料，区别授予权利与首次行使。"
+        }
+      ],
+      "review_note": "已查阅机构专题或回顾资料，核对所写年月日与具体事实；中英文为本站简短转述，不宣称完成原始档案核验。",
+      "text_sha256": {
+        "zh-CN": "91846f9b2440bd7019e654aefbd0d55d21c6a95a36ce6d859dd26b800e198bff",
+        "en": "b4849c5a8aee8c4cc7d5c9d6165fe1f3bf4dd9f47d65d37c1601325b9e8e5a9e"
+      }
+    },
+    {
+      "id": "history-11-28-1943-tehran-conference",
+      "month_day": "11-28",
+      "year": 1943,
+      "sources": [
+        {
+          "name": "美国国务院历史办公室",
+          "url": "https://history.state.gov/milestones/1937-1945/tehran-conf",
+          "note": "机构历史专题明确会议起止November 28–December 1, 1943，并说明三国领导人与作战、战后议题。"
+        }
+      ],
+      "review_note": "已查阅机构专题或回顾资料，核对所写年月日与具体事实；中英文为本站简短转述，不宣称完成原始档案核验。",
+      "text_sha256": {
+        "zh-CN": "ba1e5682863ab51bcbdac66a212c55dc54ec9f5378c48958cf6837881426d378",
+        "en": "5089465315a47ef16fcb84d57c340beb4959403a39011128877699dac685b44f"
+      }
+    },
+    {
+      "id": "history-11-28-1964-mariner4-launch",
+      "month_day": "11-28",
+      "year": 1964,
+      "sources": [
+        {
+          "name": "美国国家航空航天局 NASA",
+          "url": "https://science.nasa.gov/mission/mariner-4/",
+          "note": "NASA任务表明确Nov 28, 1964 /14:22:01 UT发射；只写次年飞掠，页面个别宣传段误写June而任务表和结果段为July，未沿用该误字。"
+        }
+      ],
+      "review_note": "已查阅机构专题或回顾资料，核对所写年月日与具体事实；中英文为本站简短转述，不宣称完成原始档案核验。",
+      "text_sha256": {
+        "zh-CN": "445a239db94927d9cd314b691fb346cafe8658fa6330bffa64a74d5b99894150",
+        "en": "84192501e0f9223eca1f3094bb2e736ca20fce0043998dee39925c481bde1343"
+      }
+    },
+    {
+      "id": "history-11-28-1967-pulsar-pulses",
+      "month_day": "11-28",
+      "year": 1967,
+      "sources": [
+        {
+          "name": "欧洲航天局 ESA",
+          "url": "https://www.esa.int/Science_Exploration/Space_Science/24_February",
+          "note": "ESA记28 November 1967发现、1968年2月24日论文发布；另已读剑桥大学访谈检索全文，明确8月6日早期痕迹与11月28日首次观察脉冲。"
+        },
+        {
+          "name": "剑桥大学：贝尔·伯内尔访谈",
+          "url": "https://www.cam.ac.uk/stories/journeysofdiscovery-pulsars",
+          "note": "访谈全文检索内容与图片说明明确28 November 1967首次观察脉冲、6 August 1967原始射电痕迹；直接访问一度403，内容已由索引服务返回。"
+        }
+      ],
+      "review_note": "已查阅机构专题或回顾资料，核对所写年月日与具体事实；中英文为本站简短转述，不宣称完成原始档案核验。",
+      "text_sha256": {
+        "zh-CN": "49ad0602bdfc69385bcfccd5d279c5c6cc27b1a42c198eb4b614b4e22b9e3a4f",
+        "en": "906d2437da7cb4ff04daf25bafbc19ad9d971a09d9cb5ebd7ac52d9fbb6773ac"
+      }
+    },
+    {
+      "id": "history-11-29-1814-times-mechanical-press",
+      "month_day": "11-29",
+      "year": 1814,
+      "sources": [
+        {
+          "name": "英国科学博物馆集团",
+          "url": "https://collection.sciencemuseumgroup.org.uk/objects/co37982",
+          "note": "馆藏说明明确29 November 1814首期机械印制报纸，机器为Koenig and Bauer；只说《泰晤士报》采用，避免无限扩大“世界第一”定义。"
+        }
+      ],
+      "review_note": "已查阅机构专题或回顾资料，核对所写年月日与具体事实；中英文为本站简短转述，不宣称完成原始档案核验。",
+      "text_sha256": {
+        "zh-CN": "2791bc6b20bf20c540a87dbfb076c0f968f1668e2f18c381817890e9b563166a",
+        "en": "d4407bdeb2a77f651f89403061bedfce9c3c2ff6e38f0a5d1a504d315fc5f658"
+      }
+    },
+    {
+      "id": "history-11-29-1947-un-palestine-partition",
+      "month_day": "11-29",
+      "year": 1947,
+      "sources": [
+        {
+          "name": "联合国大会／UNHCR Refworld",
+          "url": "https://www.refworld.org/legal/resolution/unga/1947/9440",
+          "note": "决议全文与元数据明确29 November 1947，正文用Recommends并列两国及Jerusalem特殊制度；不把分治建议写成当日实际建国。"
+        }
+      ],
+      "review_note": "已查阅联合国决议全文，核对所写年月日与具体事实；中英文为本站简短转述，不宣称完成原始档案核验。",
+      "text_sha256": {
+        "zh-CN": "c31b5bfa54a0a20ed742b839e02bd4c59b54f5c5b92ccf6f7c282551dc16e8e5",
+        "en": "dfabefe78058236acc53e51d5e9b2673f5fda25230ced1c0291b31c2d2983c20"
+      }
+    },
+    {
+      "id": "history-11-29-1899-barcelona-founded",
+      "month_day": "11-29",
+      "year": 1899,
+      "sources": [
+        {
+          "name": "巴塞罗那足球俱乐部",
+          "url": "https://www.fcbarcelona.com/en/club/news/4153324/125-years-since-the-ad-in-los-deportes",
+          "note": "俱乐部回顾正文明确29 November 1899在Solé gymnasium成立，并区分此前10月招募广告与正式成立会议。"
+        }
+      ],
+      "review_note": "已查阅机构专题或回顾资料，核对所写年月日与具体事实；中英文为本站简短转述，不宣称完成原始档案核验。",
+      "text_sha256": {
+        "zh-CN": "e91a78bf693e42866451ddf22437d3ecaf4525e36c43447deaa830e587c555aa",
+        "en": "7c3c5570aeb08b783f37d8c22d783d43e896fa4c3188f913b4e4427c1ea068d8"
+      }
+    },
+    {
+      "id": "history-11-29-1781-zong-massacre",
+      "month_day": "11-29",
+      "year": 1781,
+      "sources": [
+        {
+          "name": "维基百科：宗号大屠杀",
+          "url": "https://en.wikipedia.org/wiki/Zong_massacre",
+          "note": "开篇与Murder段明确从29 November 1781持续数日；只写保险诉讼背景，不把后来的案件当作凶手被控谋杀审判。"
+        }
+      ],
+      "review_note": "已查阅二手百科事件页，核对所写年月日与具体事实；中英文为本站简短转述，不宣称完成原始档案核验。",
+      "text_sha256": {
+        "zh-CN": "45ce7d1848efe9c96a43e4624c95ae0b4a39e17cc17378407a001697d4361f4d",
+        "en": "013275b475ea22891d2518a278173d9e6257db94345d3affd8b28c96e69da917"
+      }
+    },
+    {
+      "id": "history-11-29-1890",
+      "month_day": "11-29",
+      "year": 1890,
+      "sources": [
+        {
+          "name": "日本国立公文书馆",
+          "url": "https://www.archives.go.jp/ayumi/kobetsu/m23_1890_03.html",
+          "note": "馆方档案说明区分1890年11月25日首次帝国议会召集与11月29日开院式及宪法施行；本条记11月29日生效，不将1889年颁布混入。"
+        },
+        {
+          "name": "维基百科：明治宪法",
+          "url": "https://en.wikipedia.org/wiki/Meiji_Constitution",
+          "note": "信息框与Promulgation段明确November 29, 1890生效、February 11, 1889颁布，制度栏说明两院结构；保留原ID。"
+        }
+      ],
+      "review_note": "独立复核另读日本国立公文书馆资料，与所引百科共同核对颁布、生效及帝国议会阶段；本站双语简编，不声称原始档案全量审定。",
+      "text_sha256": {
+        "zh-CN": "62903fec7ae7ecb2e0632ec2f98cf31b11c6260f003bd2fb5e1f24f0f14c5241",
+        "en": "346c11853457f065b5d0f84b516045cd61c40f8a07c017613e217aca115a03de"
+      }
+    },
+    {
+      "id": "history-11-29-1961-enos-orbital-flight",
+      "month_day": "11-29",
+      "year": 1961,
+      "sources": [
+        {
+          "name": "美国国家航空航天局 NASA",
+          "url": "https://www.nasa.gov/history/60-years-ago-soviets-select-their-first-cosmonauts/",
+          "note": "NASA历史专题在Mercury段明确Nov. 29, 1961、two orbits和USS Stormes安全回收；不是首次动物太空飞行，也不把三圈计划写作完成。"
+        }
+      ],
+      "review_note": "已查阅机构专题或回顾资料，核对所写年月日与具体事实；中英文为本站简短转述，不宣称完成原始档案核验。",
+      "text_sha256": {
+        "zh-CN": "05d1fc3757fe881f53232ca36416cfa4bb01487516095f424ef6a059d4b54517",
+        "en": "142f0cccafb59ba7f8155e11739c88e9501e90187e5936cd6a2a26b785c2ddeb"
+      }
+    },
+    {
+      "id": "history-11-30-1949-chongqing-liberated",
+      "month_day": "11-30",
+      "year": 1949,
+      "sources": [
+        {
+          "name": "新华网",
+          "url": "https://www.xinhuanet.com/politics/2012-11/30/c_113839185.htm",
+          "note": "新华社历史回顾明确1949年11月30日重庆解放；另读重庆市档案馆《中国人民解放军重庆市军事管制委员会布告》索引正文，明确12月3日军管会成立，未提前到11月30日。"
+        }
+      ],
+      "review_note": "已查阅新华社回顾及档案馆文献说明，核对所写年月日与具体事实；中英文为本站简短转述，不宣称完成原始档案核验。",
+      "text_sha256": {
+        "zh-CN": "a852bdd5ad4413c48cc2c6eb55c626369f3ea15c9cd61b322eddada2407112c8",
+        "en": "e6714973b1eff7306cc5c61648a63ab4834a8ef08f872cad964267d65b9a9fff"
+      }
+    },
+    {
+      "id": "history-11-30-1835-mark-twain-born",
+      "month_day": "11-30",
+      "year": 1835,
+      "sources": [
+        {
+          "name": "维基百科：马克·吐温",
+          "url": "https://en.wikipedia.org/wiki/Mark_Twain",
+          "note": "信息框、开篇和Early life段明确November 30, 1835，Florida, Missouri；生平列作品与笔名；未把出生地Florida误写为佛罗里达州。"
+        }
+      ],
+      "review_note": "已查阅二手百科人物页，核对所写年月日与具体事实；中英文为本站简短转述，不宣称完成原始档案核验。",
+      "text_sha256": {
+        "zh-CN": "219433b7c40436944f1e65b33596cd9d87106de973dc4cd815bd9b9689be77ac",
+        "en": "e745fd771dbeeed267c0c06635bc40b7de183809a88260406ba9682064799a2d"
+      }
+    },
+    {
+      "id": "history-11-30-1872-scotland-england-match",
+      "month_day": "11-30",
+      "year": 1872,
+      "sources": [
+        {
+          "name": "苏格兰足球协会",
+          "url": "https://www.scottishfa.co.uk/en/news/scottish-fa-marks-150-years-since-first-international-football-game",
+          "note": "足协150周年回顾明确30 November 1872、地点、0–0及first official men’s international；不包含此前非正式场次，未采用有不同估计的观众人数。"
+        }
+      ],
+      "review_note": "已查阅机构专题或回顾资料，核对所写年月日与具体事实；中英文为本站简短转述，不宣称完成原始档案核验。",
+      "text_sha256": {
+        "zh-CN": "e1619e3112ae0939f9e1a655bea0ad90b599f8eafe1371eccf7ae37316e202d8",
+        "en": "17971bc52adc082ba1d22bdd2e0b258fb46e17e558f1b84d2c7ce672891a3baa"
+      }
+    },
+    {
+      "id": "history-11-30-1700",
+      "month_day": "11-30",
+      "year": 1700,
+      "sources": [
+        {
+          "name": "维基百科：1700年纳尔瓦战役",
+          "url": "https://en.wikipedia.org/wiki/Battle_of_Narva_(1700)",
+          "note": "信息框及注释同时给30 November新历、19 November俄旧历、20 November瑞典过渡历；正文用公历并明示旧历差别，保留原ID。"
+        }
+      ],
+      "review_note": "已查阅二手百科战役页，核对所写年月日与具体事实；中英文为本站简短转述，不宣称完成原始档案核验。",
+      "text_sha256": {
+        "zh-CN": "aea5e7ce704337ebc1ec7816b0e53cb18be55e45ecaecdb1373d3152810862f2",
+        "en": "490e1154fd65b97c6f834edb4e519549841973c6580c0b0bf11c6f9cf5dae13f"
+      }
+    },
+    {
+      "id": "history-11-30-1936-crystal-palace-fire",
+      "month_day": "11-30",
+      "year": 1936,
+      "sources": [
+        {
+          "name": "维基百科：水晶宫",
+          "url": "https://en.wikipedia.org/wiki/The_Crystal_Palace",
+          "note": "信息框及Fire段明确30 November 1936，历史段说明1851原址与1854迁建；不推断纵火等未定火灾原因。"
+        }
+      ],
+      "review_note": "已查阅二手百科建筑史页，核对所写年月日与具体事实；中英文为本站简短转述，不宣称完成原始档案核验。",
+      "text_sha256": {
+        "zh-CN": "a5d0c18ec1da5863d14e460aa8be9c99da98365416ee92247110bc785a5517ff",
+        "en": "a7d713e342a6889cd6ff870407db0721471148bf5456890608933ce38e13dfc6"
+      }
+    },
+    {
+      "id": "history-11-30-1939-winter-war",
+      "month_day": "11-30",
+      "year": 1939,
+      "sources": [
+        {
+          "name": "芬兰公共广播公司 Yle",
+          "url": "https://yle.fi/a/3-11081924",
+          "note": "回顾报道开篇明确November 30, 1939进攻及空袭；另读芬兰政府80周年回顾索引全文，记1939年11月30日至1940年3月13日及割让土地。"
+        }
+      ],
+      "review_note": "已查阅公共广播机构历史报道，核对所写年月日与具体事实；中英文为本站简短转述，不宣称完成原始档案核验。",
+      "text_sha256": {
+        "zh-CN": "0b6e2e8e73533254af897ff5adcddd3fe3fcf4aa0b00c9318a2c5e4e5a81926c",
+        "en": "1c6afd32a49301cf6948928e743753d402100766964922b72efe9c6069dcea27"
+      }
+    },
+    {
+      "id": "history-11-30-1966-barbados-independence",
+      "month_day": "11-30",
+      "year": 1966,
+      "sources": [
+        {
+          "name": "美国国务院历史办公室",
+          "url": "https://history.state.gov/countries/barbados",
+          "note": "机构Recognition段明确November 30, 1966独立并留在British Commonwealth；不将2021共和国成立混写为1966独立时已完成。"
+        }
+      ],
+      "review_note": "已查阅机构专题或回顾资料，核对所写年月日与具体事实；中英文为本站简短转述，不宣称完成原始档案核验。",
+      "text_sha256": {
+        "zh-CN": "52b8da194ae19da31aed6f29bbd5fd8db5dfda704f1f5bbf450b64916c9d5d47",
+        "en": "93194b2d613613b3f560b2b11669cfb80abcda49c256052a414c8e8c5bd53121"
+      }
+    }
+  ]
+}

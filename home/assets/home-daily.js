@@ -86,7 +86,8 @@
         const li = node('li','history-item'), body = node('div'), heading = node('h3');
         heading.append(link(item.url,text(item.title))); body.append(heading);
         if (text(item.text)) body.append(node('p','',text(item.text)));
-        const source = node('p','history-source'); source.append(link(item.url,item.source + ' ↗'));
+        const source = node('p','history-source'), references = item.references || [{name:item.source,url:item.url}];
+        references.forEach((reference,index) => { if (index) source.append(document.createTextNode(' · ')); source.append(link(reference.url,reference.name + ' ↗')); });
         const host = /^https:\/\/([a-z]+\.wikipedia\.org)\//.exec(item.source_page || '')?.[1];
         if (host && Number.isSafeInteger(item.source_revision)) source.append(document.createTextNode(' · '),link('https://' + host + '/wiki/Special:PermanentLink/' + item.source_revision,word('日期出处 ↗','Date source ↗')));
         body.append(source);
@@ -98,7 +99,7 @@
       fragment.append(list(items.slice(0,3)));
       if (items.length > 3) { const details = node('details','history-more'); details.append(node('summary','',word('更多这一天的历史','More events on this day')),list(items.slice(3))); fragment.append(details); }
     } else fragment.append(node('p','yl-note',word('这一天暂未收录资料。','No entries have been included for this date.')));
-    const notes = node('details','history-notes'); notes.append(node('summary','',word('资料说明 · 自动整理与译编','About this collection · compiled and adapted')),node('p','history-policy',text(historical.selection_policy)));
+    const notes = node('details','history-notes'); notes.append(node('summary','',word('资料说明 · 来源与编选','About this collection · sources and selection')),node('p','history-policy',text(historical.selection_policy)));
     const attribution = node('p','history-policy',text(historical.attribution) + ' ');
     attribution.append(link('https://creativecommons.org/licenses/by-sa/4.0/','CC BY-SA 4.0'),document.createTextNode(' · '),link('/assets/history-sources.md',word('完整来源说明','Full source notes')));
     fragment.append(notes,attribution); container.replaceChildren(fragment);

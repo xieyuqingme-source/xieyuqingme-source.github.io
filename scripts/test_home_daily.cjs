@@ -132,6 +132,15 @@ test('history is separate from news, retains original date evidence and advances
   const history={items:[item,{...item,id:'history-next',month_day:'10-28',title:{'zh-CN':'次日事件',en:'Next day'}}],attribution:{'zh-CN':'贡献者',en:'Contributors'},selection_policy:{'zh-CN':'自动整理',en:'Compiled'}};
   const h=harness({history}); assert.match(h.nodes['daily-history-list'].textContent,/历史事件/); assert.doesNotMatch(h.nodes['daily-feed'].textContent,/历史事件/); assert.match(h.nodes['daily-history-list'].textContent,/日期出处/); h.changeLanguage('en');assert.match(h.nodes['daily-history-list'].textContent,/Historical event/);h.tick('2026-10-27T16:01:00Z');assert.match(h.nodes['daily-history-list'].textContent,/Next day/);assert.doesNotMatch(h.nodes['daily-history-list'].textContent,/Historical event/);assert.match(h.nodes['history-date-note'].textContent,/2026-10-28/);h.dispose();
 });
+
+test('reviewed history renders all named sources without inventing Wikipedia date evidence',() => {
+  const references=[{name:'Museum & archive',url:'https://museum.example.org/event'},{name:'Research institute',url:'https://research.example.org/record'}];
+  const item={id:'reviewed-history',month_day:'10-28',year:1900,title:{'zh-CN':'核对事件',en:'Reviewed event'},text:{'zh-CN':'简短说明',en:'Short account'},source:references[0].name,url:references[0].url,references,verification:'source_review'};
+  const h=harness({now:'2026-10-28T04:00:00Z',history:{items:[item],attribution:{'zh-CN':'来源署名',en:'Sources credited'},selection_policy:{'zh-CN':'说明',en:'Notes'}}});
+  const sourceLinks=()=>h.nodes['daily-history-list'].children[1].children[0].children[1].children[2].children.filter(child=>child.tagName==='A');
+  assert.deepEqual(sourceLinks().map(link=>link.href),references.map(reference=>reference.url));assert.match(h.nodes['daily-history-list'].textContent,/Museum & archive.*Research institute/);assert.doesNotMatch(h.nodes['daily-history-list'].textContent,/日期出处/);
+  h.changeLanguage('en');assert.match(h.nodes['daily-history-list'].textContent,/Reviewed event/);assert.deepEqual(sourceLinks().map(link=>link.href),references.map(reference=>reference.url));h.dispose();
+});
 test('news keeps original titles, language, links and publication times; old and future entries do not get refreshed',() => {
   const item={id:'test',title:'Original headline',source:'Source',source_id:'source',category:'world',lang:'en',published:'2026-10-26T17:00:00Z',url:'https://news.example.org/story?id=42'};
   const snapshot={version:1,collected_at:'2026-10-26T17:01:00Z',items:[item,{...item,id:'old',published:'2026-10-22T00:00:00Z'},{...item,id:'future',published:'2026-10-30T00:00:00Z'}]};

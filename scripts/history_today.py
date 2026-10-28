@@ -12,7 +12,8 @@ CHINA = timezone(timedelta(hours=8))
 LANGUAGES = {"zh-CN", "en"}
 MONTHS = ("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December")
 ALL_DAYS = frozenset((date(2000, 1, 1) + timedelta(days=n)).strftime("%m-%d") for n in range(366))
-ITEM_FIELDS = {"id", "month_day", "year", "title", "text", "source", "url", "source_page", "source_revision", "verification"}
+ITEM_FIELDS = {"id", "month_day", "year", "title", "text", "source", "url", "verification"}
+ANNIVERSARY_FIELDS = {"source_page", "source_revision"}
 PRIVATE_PATH = re.compile(r"(?<![A-Za-z0-9])[A-Za-z]:[\\/]|\\\\[^\s\\]+[\\/]|/(?:Users|home|mnt)/", re.I)
 
 
@@ -31,7 +32,11 @@ def _localized(value, maximum=1200):
 
 
 def _public_url(value):
-    _text(value)
+    # A public site's path may legitimately contain /home/ or /Users/. Its
+    # scheme and host, rather than a filesystem-path pattern, define the boundary.
+    if (not isinstance(value, str) or not value.strip() or len(value) > 1200
+            or any(ord(c) < 32 or ord(c) == 127 for c in value)):
+        raise ValueError("History sources need short public URLs without controls.")
     if any(c.isspace() for c in value) or "\\" in value:
         raise ValueError("History sources must be public HTTPS URLs.")
     parts = urlsplit(value)
@@ -91,7 +96,8 @@ def validate_history(data):
         raise ValueError("History must cover all 366 calendar dates with at most ten events per date.")
     seen, counts = set(), {}
     for item in items:
-        if not isinstance(item, dict) or set(item) != ITEM_FIELDS:
+        if (not isinstance(item, dict) or not ITEM_FIELDS <= set(item)
+                or set(item) - ITEM_FIELDS - ANNIVERSARY_FIELDS - {"references"}):
             raise ValueError("History entry has missing or unsupported fields.")
         identifier = item["id"]
         if not isinstance(identifier, str) or not re.fullmatch(r"[a-z][a-z0-9-]{1,79}", identifier) or identifier in seen:
@@ -116,12 +122,37 @@ def validate_history(data):
         _localized(item["text"], 800)
         _text(item["source"], 240)
         _public_url(item["url"])
-        if _source_day(item["source_page"]) != month_day:
-            raise ValueError("History month_day disagrees with its anniversary source page.")
-        if type(item["source_revision"]) is not int or item["source_revision"] <= 0:
-            raise ValueError("History needs an explicit positive source-page revision.")
-        if not isinstance(item["verification"], str) or item["verification"] not in {"automated_import", "editorial_review"}:
+        anniversary = set(item) & ANNIVERSARY_FIELDS
+        if anniversary and anniversary != ANNIVERSARY_FIELDS:
+            raise ValueError("History anniversary sources need both their date page and revision.")
+        if anniversary:
+            if _source_day(item["source_page"]) != month_day:
+                raise ValueError("History month_day disagrees with its anniversary source page.")
+            if type(item["source_revision"]) is not int or item["source_revision"] <= 0:
+                raise ValueError("History needs an explicit positive source-page revision.")
+        references = item.get("references")
+        if "references" in item:
+            if not isinstance(references, list) or not 1 <= len(references) <= 5:
+                raise ValueError("History reviewed sources need between one and five references.")
+            urls = set()
+            for reference in references:
+                if not isinstance(reference, dict) or set(reference) != {"name", "url"}:
+                    raise ValueError("History references need only a source name and URL.")
+                _text(reference["name"], 240)
+                _public_url(reference["url"])
+                if reference["url"] in urls:
+                    raise ValueError("History references cannot repeat the same URL.")
+                urls.add(reference["url"])
+            if references[0] != {"name": item["source"], "url": item["url"]}:
+                raise ValueError("History primary source must match its first reference.")
+        if not anniversary and references is None:
+            raise ValueError("History needs anniversary provenance or reviewed references.")
+        if not isinstance(item["verification"], str) or item["verification"] not in {"automated_import", "editorial_review", "source_review"}:
             raise ValueError("History needs an honest import or editorial review status.")
+        if item["verification"] == "source_review" and references is None:
+            raise ValueError("History source review needs explicit reviewed references.")
+        if item["verification"] == "automated_import" and not anniversary:
+            raise ValueError("An imported history event must retain its anniversary revision.")
     if set(counts) != ALL_DAYS:
         raise ValueError("History is missing one or more of the 366 calendar dates.")
     return data
@@ -188,22 +219,25 @@ def render_history(data, language="zh-CN", today=None):
             article = escape(item["url"], quote=True)
             title = escape(item["title"][language])
             text = escape(item["text"][language])
-            source = escape(item["source"])
-            parts = urlsplit(item["source_page"])
-            revision_url = f"https://{parts.hostname}/wiki/Special:PermanentLink/{item['source_revision']}"
-            revision_label = "Date source" if english else "日期出处"
+            references = item.get("references", [{"name": item["source"], "url": item["url"]}])
+            sources = ' · '.join(f'<a href="{escape(reference["url"], quote=True)}" target="_blank" '
+                                 f'rel="noopener noreferrer">{escape(reference["name"])} ↗</a>' for reference in references)
+            if "source_page" in item:
+                parts = urlsplit(item["source_page"])
+                revision_url = f"https://{parts.hostname}/wiki/Special:PermanentLink/{item['source_revision']}"
+                revision_label = "Date source" if english else "日期出处"
+                sources += (f' · <a href="{escape(revision_url, quote=True)}" target="_blank" '
+                            f'rel="noopener noreferrer">{revision_label} ↗</a>')
             result.append(f'<li class="history-item"><span class="history-year">{item["year"]}</span>'
                           f'<div><h3><a href="{article}" target="_blank" rel="noopener noreferrer">{title}</a></h3>'
-                          f'<p>{text}</p><p class="history-source"><a href="{article}" target="_blank" '
-                          f'rel="noopener noreferrer">{source} ↗</a> · <a href="{escape(revision_url, quote=True)}" '
-                          f'target="_blank" rel="noopener noreferrer">{revision_label} ↗</a></p></div></li>')
+                          f'<p>{text}</p><p class="history-source">{sources}</p></div></li>')
         return '<ol class="history-list">' + "".join(result) + "</ol>"
 
     result = f'<p class="history-built-date" data-history-date="{date_label}">{escape(date_note)}</p>' + listing(entries[:3])
     if len(entries) > 3:
         more = "More from this date" if english else "更多这一天的历史"
         result += f'<details class="history-more"><summary>{more}</summary>{listing(entries[3:])}</details>'
-    note_label = "About this collection · compiled and adapted" if english else "资料说明 · 自动整理与译编"
+    note_label = "About this collection · sources and selection" if english else "资料说明 · 来源与编选"
     source_label = "Full source notes" if english else "完整来源说明"
     result += ('<details class="history-notes"><summary>' + note_label + '</summary><p class="history-policy">'
                + escape(data["selection_policy"][language]) + '</p></details><p class="history-policy">'

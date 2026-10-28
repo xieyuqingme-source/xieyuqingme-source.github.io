@@ -1,54 +1,260 @@
 # 历史上的今天：资料来源与校核范围
 
-这是一份覆盖全年 366 个日期的离线事件资料库，供 `/today/` 与 `/en/today/` 使用。首版每个日期一条，共 366 条，包含 `02-29`；没有用生日清单、当代节日名称或临近日期的事件补齐空缺。它是简短的纪念日读物，不是完整年表，也不表示事件重要性排名。
+本地双语资料库覆盖全年366个日期，包括02-29。首版为每天1条；2026年10月28日集中扩充10月28日至11月30日这34个日期，现有210条，逐日为6–7条。其余332个日期保持首版资料不变。当前全库共542条。
 
-## 来源与许可
+这是一份简短的历史纪念日读物，选材兼顾中国与世界、社会思想、科学技术和文学艺术，不是完整年表，也不表示客观的重要性排名。页面默认展示编选顺序中的前三条，其余可展开；读者可以点击标题或简短来源名称查看具体资料。
 
-取材时间：2026-10-28。通过维基百科的公开 MediaWiki Action API，分批读取中文 `Wikipedia:历史上的今天/月日` 与英文 `Wikipedia:Selected anniversaries/Month day` 页面。全年中英文各 366 个日期页均保存了读取时真实返回的修订版号。此次是一次性取材；网站构建和浏览器查询只读本地 `history.json`，不依赖 Wikifeeds 或其他每日在线历史接口。
+## 本批核对范围
 
-- 中文入口：[维基百科：历史上的今天](https://zh.wikipedia.org/wiki/Wikipedia:%E5%8E%86%E5%8F%B2%E4%B8%8A%E7%9A%84%E4%BB%8A%E5%A4%A9)。
-- 英文入口：[Wikipedia: Selected anniversaries](https://en.wikipedia.org/wiki/Wikipedia:Selected_anniversaries)。此栏目按条目质量与主题多样性选材，不能当作客观重要性排行榜。
-- 数据访问说明：[MediaWiki Action API](https://www.mediawiki.org/wiki/API:Main_page)。
-- 文字署名：Wikipedia contributors / 维基百科贡献者。事件原文链接与日期页的真实修订版号均随条目保留；下方索引另列中英文取材版本。
-- 本资料集及其简编、翻译依 [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) 提供。遵循[维基媒体使用条款中的文字再利用说明](https://foundation.wikimedia.org/wiki/Policy:Terms_of_Use#7._Licensing_of_Content)。这项许可只说明此资料集，不改变网站其他文章、图片或代码原有的许可。资料中不包含图片。
+本批条目逐项阅读了所引具体事件资料，并核对年月日、事件阶段和简短描述；中英文为本站整理的短文。资料包括当事机构与政府文献、博物馆与图书馆、研究机构和专业专题，以及维基百科的具体事件条目。二手百科是事实核对的起点之一，不能冒充原始档案。
 
-## 哪些做过检查
+本批210条均标记为`source_review`，意为核对了列出的具体来源，**不等于全部经过原始史料审定**。逐条索引说明引用页面支持哪一天及哪些事实；同一事件有多个来源时一并保留。没有用另一张聚合日期清单替代具体事件核对。
 
-自动步骤包括：读取日期页与版号；提取带年份的事件；对照中英文条目名称及语言链接；检查事件年份出现在对应日期页；核对具体条目链接是否存在；保证全年 366 个日期恰有记录、字段完整、网址公开、日期格式正确。链接存在和两个百科版本写法一致都不等于史实已被原始档案证明。
+其余332条保留首版核对状态：329条为`automated_import`（日期页整理与完整性检查），3条为`editorial_review`（首版另核机构资料）。结构校验通过、链接存在或中英百科一致，都不能单独证明史实正确。发现来源分歧时应说明采用口径、缩小断言，或换用当天另有可靠出处的事件。
 
-编辑步骤包括：优先选科学、文化、思想、教育、公共设施及社会事件；缩写过长的结果叙述；统一简体中文；补写缺少对应英文短句的条目；清除图片提示、模板标记及若干明显错误。174 条英文采用本站短译或重写，192 条依据英文日期页简编。两种语言可能在细节多寡上不同，但指向同一日期的同一事件；不增加来源未载的数字、因果或评价。
+首版另核的三项为：1月2日月球1号发射（不是1月4日掠月）；6月26日联合国宪章签署（不是10月24日生效）；9月14日LIGO两台探测器记录首个直接引力波信号。它们及其他范围外记录本轮未改动。
 
-**未对 366 条逐条查找并核验原始史料。** 其中 363 条标记为 `automated_import`，表示以开放百科日期资料为起点，经过结构检查和编辑简编，仍有二手资料出错的可能；这不应在页面上改写成“全部已核实”。只有以下 3 条另与发布机构的官方资料核对，标记为 `editorial_review`：
+## 来源、署名与许可
 
-| 日期 | 另核的事实 | 官方依据 |
-| --- | --- | --- |
-| 01-02 / 1959 | 月球1号于1月2日发射，1月4日才掠月；本条只写发射 | [NASA：Moon Missions](https://science.nasa.gov/moon/missions/) |
-| 06-26 / 1945 | 联合国宪章在旧金山签署；宪章10月24日生效，不能把6月26日写成联合国正式成立 | [United Nations Charter](https://www.un.org/en/about-us/un-charter/) |
-| 09-14 / 2015 | 首次直接引力波信号由LIGO的两台探测器记录，不把当时未参与观测的Virgo探测器加进去 | [LIGO Laboratory：Detection](https://www.ligo.caltech.edu/detection) |
-
-其他改写只缩小原有断言或替换候选，并不冒充原始史料核验。例如：不将月球着陆与稍后的首次踏上月面混为同一时刻；不把后来发生的软着陆、首驾月球车、正式独立等结果全部写成发射或投票当天已经完成；不把“获得当日奖项”写成生日；删去随时间变化的票房、最高纪录和不必要的伤亡数字。发现原句明显有误、难以确定含义或主要是争议性传闻时，换成该日有明确出处的其他事件。
+- 首版通过公开MediaWiki API读取中文与英文纪念日期页，并保留实际返回的修订号；未扩充日期的取材版本见文末索引。
+- 维基百科相关摘编署名Wikipedia contributors／维基百科贡献者。新版机构、研究及其他具体来源按各条链接署名；新条目不伪造维基日期页或修订号。
+- 本资料集与本站译编依[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)提供；原始来源各自的文字、图片和其他材料权利不因此改变。本资料库不搬运来源图片或长篇正文。
+- 维基百科再利用说明见[维基媒体使用条款](https://foundation.wikimedia.org/wiki/Policy:Terms_of_Use#7._Licensing_of_Content)。具体来源的短文整理不代表来源机构为本站编选结果背书。
 
 ## 日期与历法
 
-- 网站的“今天”按北京时间确定，资料以 `MM-DD` 查找；历史事件的月日沿用所引纪念日页面的记法，不将历史日期当作UTC时间戳自动换日。
-- 有些航天事件按UTC纪念，部分事件按发生地日期记载；例如阿波罗11号着陆保留来源的7月20日UTC日期，并在条目中明说。因而“北京时间今天”表示查询日，不表示所有历史事件都已换算成北京时间。
-- 较早事件可能采用儒略历或纪念资料换算后的公历；没有逐条重新进行历法换算，不能声称全库已统一为一种历史历法。引用时如需精确时刻，应继续查原条目与史料。
-- `02-29`独立保留，本版采用1940年奥斯卡颁奖事件；只在闰日查询，不挪到2月28日或3月1日。用闰年2000检查366个键的完整性。
-- 同一对象可以在不同日期有不同事件，例如探测器发射和着陆；这不是把同一事件重复填充。
+网站用北京时间的月日决定当天显示哪一组资料；历史事件的月日遵从明确引用的来源记法，并非将世界各地的历史时刻全部换算成北京时间。必要的当地日期、UTC或历法限定写在正文和逐条说明中。
+
+例如ARPANET首条主机消息沿用加州当地10月29日，十月革命采用公历11月7日；海燕首次登陆菲律宾采用菲律宾当地11月8日。日期核对还应区分签署与生效、首次发表与后来出版、发射与着陆、仪式与实际就任。不能只因一个年份或日期出现在页面的参考文献中，就认定正文事件发生于该日。
+
+02-29有独立记录，只在闰日查询，不挪用邻日条目。当前数据格式沿用公元后年份；本批没有引入公元前纪年。较早事件可能涉及来源采用的旧历，不能声称全库已统一重新换算成一种历法。
 
 ## 维护方式
 
-日常不需要修改。可集中按季度或年度补充、纠错；增加条目时保留来源、版号与实际核验状态，不每天重新抓取并覆盖已有事实。若改动某条的日期、年份或事实，应同时更新中英文与证据说明；只有做过额外事实核对才改为 `editorial_review`。
+日常浏览与构建只读本站资料，不请求外部历史API，也不需要每天手改。可以按时间段集中扩充与纠错。新增或改动时同步中英文、具体来源和核对记录；范围外条目不会因为日期变化自动被改写。
 
-`scripts/history_today.py` 提供纯本地校验、`MM-DD`查询与服务端渲染；默认显示前3条，更多内容使用原生`details`展开。`scripts/test_history_today.py` 检查全年覆盖、闰日、日期页一致性、双语字段、非法网址、路径边界、输出转义与北京时间换日。
+`home/brief/history.json`保存阅读数据；`home/brief/history-review.json`记录本批的来源支持说明、核对方法及中英文标题和正文的SHA-256指纹，用于发现后续误改，不是史实正确性的密码学证明。源码检查覆盖全年日期、来源格式、范围内记录对应、双语输出和前三条／更多的展示；网页按北京时间跨日切换。
 
-本版运行时只需要Python标准库。取材时用的简繁转换与中间缓存属于本地校核工具，不是网站运行依赖，也没有在资料文件中加入本机路径或访问令牌。
+## 本批逐条出处与核对说明
 
-## 逐日取材版本索引
+| 日期 | 年份与事件 | 具体来源 | 核对说明 |
+| --- | --- | --- | --- |
+| 10-28 | 1886 · 自由女神像举行落成典礼 | [US National Park Service](<https://home.nps.gov/stli/learn/statue-of-liberty-facts.htm>) | 机构/专题资料：核对“自由女神像举行落成典礼”的1886年10月28日与正文事实；不冒充原始档案全文核验。 |
+| 10-28 | 1928 · 印度尼西亚青年誓言 | [Wikipedia contributors](<https://en.wikipedia.org/wiki/Youth_Pledge>) | 二手百科具体事件页：核对“印度尼西亚青年誓言”的1928年10月28日与正文事实。 |
+| 10-28 | 1962 · 赫鲁晓夫宣布撤除古巴导弹 | [Wikipedia contributors](<https://en.wikipedia.org/wiki/Cuban_Missile_Crisis>) | 二手百科具体事件页：核对“赫鲁晓夫宣布撤除古巴导弹”的1962年10月28日与正文事实。 |
+| 10-28 | 1918 · 捷克斯洛伐克宣布独立 | [Czech Ministry of Foreign Affairs](<https://mzv.gov.cz/jnp/en/issues_and_press/archive/events_and_issues/x2011/czechoslovak_independence_day.mobi>) | 机构/专题资料：核对“捷克斯洛伐克宣布独立”的1918年10月28日与正文事实；不冒充原始档案全文核验。 |
+| 10-28 | 1919 · 美国国会推翻禁酒执法法案否决 | [United States Senate](<https://www.senate.gov/artandhistory/history/minute/Volstead_Act.htm>) | 机构/专题资料：核对“美国国会推翻禁酒执法法案否决”的1919年10月28日与正文事实；不冒充原始档案全文核验。此日为国会推翻否决、法案成为法律；全国禁酒正式实施为1920年1月。 |
+| 10-28 | 1940 · 希腊拒绝意大利最后通牒 | [Wikipedia contributors](<https://en.wikipedia.org/wiki/Ohi_Day>) | 二手百科具体事件页：核对“希腊拒绝意大利最后通牒”的1940年10月28日与正文事实。 |
+| 10-29 | 1929 · 华尔街“黑色星期二” | [Wikipedia contributors](<https://en.wikipedia.org/wiki/Wall_Street_Crash_of_1929>) | 二手百科具体事件页：核对“华尔街“黑色星期二””的1929年10月29日与正文事实。 |
+| 10-29 | 1969 · ARPANET首次主机间通信 | [Internet Society](<https://news.internetsociety.org/the-invisible-internet/>)；[Wikipedia contributors](<https://en.wikipedia.org/wiki/ARPANET>) | 机构/专题资料：核对“ARPANET首次主机间通信”的1969年10月29日与正文事实；不冒充原始档案全文核验。采用加州当地10月29日；UTC已是10月30日。；二手百科具体事件页：核对“ARPANET首次主机间通信”的1969年10月29日与正文事实。 |
+| 10-29 | 1863 · 日内瓦会议通过红十字救护决议 | [Wikipedia contributors](<https://en.wikipedia.org/wiki/International_Committee_of_the_Red_Cross>) | 二手百科具体事件页：核对“日内瓦会议通过红十字救护决议”的1863年10月29日与正文事实。所记为会议通过救护原则与共同标志决议，不把国际委员会2月成立或次年日内瓦公约混作本日。 |
+| 10-29 | 1923 · 土耳其共和国成立 | [Wikipedia contributors](<https://en.wikipedia.org/wiki/Republic_Day_(Turkey)>) | 二手百科具体事件页：核对“土耳其共和国成立”的1923年10月29日与正文事实。 |
+| 10-29 | 1956 · 苏伊士危机中的西奈进攻开始 | [Wikipedia contributors](<https://en.wikipedia.org/wiki/Suez_Crisis>) | 二手百科具体事件页：核对“苏伊士危机中的西奈进攻开始”的1956年10月29日与正文事实。 |
+| 10-29 | 1991 · 伽利略号飞掠加斯普拉 | [NASA](<https://science.nasa.gov/mission/galileo/>) | 机构/专题资料：核对“伽利略号飞掠加斯普拉”的1991年10月29日与正文事实；不冒充原始档案全文核验。 |
+| 10-30 | 1938 · 广播剧《世界大战》播出 | [Wikipedia contributors](<https://en.wikipedia.org/wiki/The_War_of_the_Worlds_(1938_radio_drama)>) | 二手百科具体事件页：核对“广播剧《世界大战》播出”的1938年10月30日与正文事实。 |
+| 10-30 | 1989 · 希望工程启动 | [中国青年网](<https://qnzz.youth.cn/zhuanti/kszt/xdemo_128647/09/xdemo_127402/08/201702/t20170217_9134114.htm>) | 机构/专题资料：核对“希望工程启动”的1989年10月30日与正文事实；不冒充原始档案全文核验。 |
+| 10-30 | 1973 · 博斯普鲁斯大桥通车 | [Wikipedia contributors](<https://en.wikipedia.org/wiki/Bosphorus_Bridge>) | 二手百科具体事件页：核对“博斯普鲁斯大桥通车”的1973年10月30日与正文事实。 |
+| 10-30 | 1945 · 印度成为联合国创始会员国 | [Wikipedia contributors](<https://en.wikipedia.org/wiki/India_and_the_United_Nations>) | 二手百科具体事件页：核对“印度成为联合国创始会员国”的1945年10月30日与正文事实。 |
+| 10-30 | 1961 · 苏联试爆“沙皇炸弹” | [Wikipedia contributors](<https://en.wikipedia.org/wiki/Tsar_Bomba>) | 二手百科具体事件页：核对“苏联试爆“沙皇炸弹””的1961年10月30日与正文事实。 |
+| 10-30 | 1995 · 魁北克举行主权公投 | [Wikipedia contributors](<https://en.wikipedia.org/wiki/1995_Quebec_referendum>) | 二手百科具体事件页：核对“魁北克举行主权公投”的1995年10月30日与正文事实。 |
+| 10-31 | 2010 · 上海世博会闭幕 | [Wikipedia contributors](<https://en.wikipedia.org/wiki/Expo_2010>) | 二手百科具体事件页：核对“上海世博会闭幕”的2010年10月31日与正文事实。 |
+| 10-31 | 1941 · 拉什莫尔山雕刻工程结束 | [US National Park Service](<https://www.nps.gov/moru/learn/historyculture/memorial-history.htm>) | NPS工程史记1941年10月31日结束；资金及美国即将卷入第二次世界大战的形势影响原方案，并非称世界大战尚未发生。 |
+| 10-31 | 1940 · 不列颠空战的英国官方终日 | [Wikipedia contributors](<https://en.wikipedia.org/wiki/Battle_of_Britain>) | 二手百科具体事件页：核对“不列颠空战的英国官方终日”的1940年10月31日与正文事实。10月31日为英国官方采用的战役终日；来源说明其他历史叙述可能采用不同分期。 |
+| 10-31 | 1864 · 内华达成为美国第36州 | [Wikipedia contributors](<https://en.wikipedia.org/wiki/Nevada>) | 二手百科具体事件页：核对“内华达成为美国第36州”的1864年10月31日与正文事实。 |
+| 10-31 | 1926 · 魔术师胡迪尼逝世 | [Wikipedia contributors](<https://en.wikipedia.org/wiki/Harry_Houdini>) | 二手百科具体事件页：核对“魔术师胡迪尼逝世”的1926年10月31日与正文事实。 |
+| 10-31 | 1984 · 英迪拉·甘地遇刺 | [Wikipedia contributors](<https://en.wikipedia.org/wiki/Assassination_of_Indira_Gandhi>) | 二手百科具体事件页：核对“英迪拉·甘地遇刺”的1984年10月31日与正文事实。 |
+| 11-01 | 1993 · 《马斯特里赫特条约》生效 | [European Union](<https://european-union.europa.eu/principles-countries-history/history-eu/1990-99_en>) | 机构/专题资料：核对“《马斯特里赫特条约》生效”的1993年11月1日与正文事实；不冒充原始档案全文核验。 |
+| 11-01 | 1512 · 西斯廷礼拜堂新天顶画揭幕 | [Vatican Museums](<https://www.museivaticani.va/content/museivaticani/en/collezioni/musei/cappella-sistina/storia-cappella-sistina.html>) | 机构/专题资料：核对“西斯廷礼拜堂新天顶画揭幕”的1512年11月1日与正文事实；不冒充原始档案全文核验。 |
+| 11-01 | 1949 · 中国科学院成立 | [中国科学院地质与地球物理研究所](<https://igg.cas.cn/gkjj/lsyg/>) | 机构/专题资料：核对“中国科学院成立”的1949年11月1日与正文事实；不冒充原始档案全文核验。 |
+| 11-01 | 1755 · 里斯本大地震 | [Wikipedia contributors](<https://en.wikipedia.org/wiki/1755_Lisbon_earthquake>) | 二手百科具体事件页：核对“里斯本大地震”的1755年11月1日与正文事实。 |
+| 11-01 | 1952 · 美国进行“常春藤麦克”试验 | [Wikipedia contributors](<https://en.wikipedia.org/wiki/Ivy_Mike>) | 二手百科具体事件页：核对“美国进行“常春藤麦克”试验”的1952年11月1日与正文事实。采用马绍尔群岛当地日期；不自动换算为北京时间。 |
+| 11-01 | 1928 · 土耳其通过新字母法 | [Wikipedia contributors](<https://en.wikipedia.org/wiki/Turkish_alphabet>) | 二手百科具体事件页：核对“土耳其通过新字母法”的1928年11月1日与正文事实。 |
+| 11-02 | 2000 · 国际空间站迎来首批常驻乘员 | [NASA](<https://www.nasa.gov/history/space-station-20th-expedition-1-arrives-at-the-international-space-station/>) | 机构/专题资料：核对“国际空间站迎来首批常驻乘员”的2000年11月2日与正文事实；不冒充原始档案全文核验。 |
+| 11-02 | 1936 · BBC开始定期电视广播 | [Wikipedia contributors](<https://en.wikipedia.org/wiki/BBC_Television_Service>) | 二手百科具体事件页：核对“BBC开始定期电视广播”的1936年11月2日与正文事实。 |
+| 11-02 | 1948 · 辽沈战役结束 | [Wikipedia contributors](<https://en.wikipedia.org/wiki/Liaoshen_campaign>) | 二手百科具体事件页：核对“辽沈战役结束”的1948年11月2日与正文事实。 |
+| 11-02 | 1917 · 《贝尔福宣言》签发 | [Wikipedia contributors](<https://en.wikipedia.org/wiki/Balfour_Declaration>) | 所引具体事件页区分11月2日信函署期与11月9日报刊公开；本条记签发信函，并简述民族家园及既有社群权利条款。 |
+| 11-02 | 1983 · 马丁·路德·金纪念假日立法 | [Wikipedia contributors](<https://en.wikipedia.org/wiki/Martin_Luther_King_Jr._Day>) | 二手百科具体事件页：核对“马丁·路德·金纪念假日立法”的1983年11月2日与正文事实。 |
+| 11-02 | 1988 · 莫里斯蠕虫在互联网传播 | [Federal Bureau of Investigation](<https://www.fbi.gov/news/stories/morris-worm-30-years-since-first-major-attack-on-internet-110218>) | 机构/专题资料：核对“莫里斯蠕虫在互联网传播”的1988年11月2日与正文事实；不冒充原始档案全文核验。 |
+| 11-03 | 1957 · 莱卡进入地球轨道 | [NASA](<https://www.nasa.gov/history/65-years-ago-sputnik-ushers-in-the-space-age/>) | 机构/专题资料：核对“莱卡进入地球轨道”的1957年11月3日与正文事实；不冒充原始档案全文核验。 |
+| 11-03 | 1838 · 《印度时报》前身创刊 | [Wikipedia contributors](<https://en.wikipedia.org/wiki/The_Times_of_India>) | 二手百科具体事件页：核对“《印度时报》前身创刊”的1838年11月3日与正文事实。 |
+| 11-03 | 2016 · 长征五号首次发射 | [Wikipedia contributors](<https://en.wikipedia.org/wiki/Long_March_5>) | 二手百科具体事件页：核对“长征五号首次发射”的2016年11月3日与正文事实。 |
+| 11-03 | 1903 · 巴拿马脱离哥伦比亚 | [Wikipedia contributors](<https://en.wikipedia.org/wiki/Separation_of_Panama_from_Colombia>) | 二手百科具体事件页：核对“巴拿马脱离哥伦比亚”的1903年11月3日与正文事实。 |
+| 11-03 | 1911 · 雪佛兰汽车公司成立 | [Wikipedia contributors](<https://en.wikipedia.org/wiki/Chevrolet>) | 二手百科具体事件页：核对“雪佛兰汽车公司成立”的1911年11月3日与正文事实。 |
+| 11-03 | 1978 · 多米尼克独立 | [Wikipedia contributors](<https://en.wikipedia.org/wiki/Dominica>) | 二手百科具体事件页：核对“多米尼克独立”的1978年11月3日与正文事实。 |
+| 11-04 | 2016 · 《巴黎协定》生效 | [Wikipedia contributors](<https://en.wikipedia.org/wiki/Paris_Agreement>) | 二手百科具体事件页：核对“《巴黎协定》生效”的2016年11月4日与正文事实。 |
+| 11-04 | 1922 · 图坦卡蒙陵墓入口阶梯被发现 | [Wikipedia contributors](<https://en.wikipedia.org/wiki/Discovery_of_the_tomb_of_Tutankhamun>) | 二手百科具体事件页：核对“图坦卡蒙陵墓入口阶梯被发现”的1922年11月4日与正文事实。所记为第一层入口阶梯被发现；后来打开前室、墓室是其他日期。 |
+| 11-04 | 1995 · 拉宾在和平集会后遇刺 | [Nobel Prize](<https://www.nobelprize.org/prizes/peace/1994/rabin/facts/>)；[Wikipedia contributors](<https://en.wikipedia.org/wiki/Assassination_of_Yitzhak_Rabin>) | 机构/专题资料：核对“拉宾在和平集会后遇刺”的1995年11月4日与正文事实；不冒充原始档案全文核验。；二手百科具体事件页：核对“拉宾在和平集会后遇刺”的1995年11月4日与正文事实。 |
+| 11-04 | 1946 · 联合国教科文组织宪章生效 | [UNESCO](<https://www.unesco.org/en/articles/75-years-ago-unescos-constitution-adopted>) | 机构/专题资料：核对“联合国教科文组织宪章生效”的1946年11月4日与正文事实；不冒充原始档案全文核验。 |
+| 11-04 | 1956 · 苏军大规模进攻匈牙利 | [Wikipedia contributors](<https://en.wikipedia.org/wiki/Hungarian_Revolution_of_1956>) | 二手百科具体事件页：核对“苏军大规模进攻匈牙利”的1956年11月4日与正文事实。 |
+| 11-04 | 2008 · 奥巴马赢得美国总统选举 | [Wikipedia contributors](<https://en.wikipedia.org/wiki/2008_United_States_presidential_election>) | 二手百科具体事件页：核对“奥巴马赢得美国总统选举”的2008年11月4日与正文事实。 |
+| 11-05 | 2007 · 嫦娥一号进入环月轨道 | [Wikipedia contributors](<https://en.wikipedia.org/wiki/Chang%27e_1>) | 二手百科具体事件页：核对“嫦娥一号进入环月轨道”的2007年11月5日与正文事实。 |
+| 11-05 | 1605 · 英国火药阴谋被发现 | [Wikipedia contributors](<https://en.wikipedia.org/wiki/Gunpowder_Plot>) | 二手百科具体事件页：核对“英国火药阴谋被发现”的1605年11月5日与正文事实。 |
+| 11-05 | 1872 · 苏珊·安东尼参加总统选举投票 | [Wikipedia contributors](<https://en.wikipedia.org/wiki/Trial_of_Susan_B._Anthony>) | 二手百科具体事件页：核对“苏珊·安东尼参加总统选举投票”的1872年11月5日与正文事实。 |
+| 11-05 | 1895 · 塞尔登获得道路发动机专利 | [Wikipedia contributors](<https://en.wikipedia.org/wiki/George_B._Selden>) | 二手百科具体事件页：核对“塞尔登获得道路发动机专利”的1895年11月5日与正文事实。 |
+| 11-05 | 1913 · 费雯·丽出生 | [Wikipedia contributors](<https://en.wikipedia.org/wiki/Vivien_Leigh>) | 二手百科具体事件页：核对“费雯·丽出生”的1913年11月5日与正文事实。 |
+| 11-05 | 1916 · 美国埃弗里特劳工冲突 | [Wikipedia contributors](<https://en.wikipedia.org/wiki/Everett_massacre>) | 二手百科具体事件页：核对“美国埃弗里特劳工冲突”的1916年11月5日与正文事实。 |
+| 11-06 | 1962 · 联合国大会谴责南非种族隔离 | [UN General Assembly / UNHCR Refworld](<https://www.refworld.org/legal/resolution/unga/1962/9391>) | 机构/专题资料：核对“联合国大会谴责南非种族隔离”的1962年11月6日与正文事实；不冒充原始档案全文核验。 |
+| 11-06 | 1860 · 林肯当选美国总统 | [Wikipedia contributors](<https://en.wikipedia.org/wiki/1860_United_States_presidential_election>) | 二手百科具体事件页：核对“林肯当选美国总统”的1860年11月6日与正文事实。 |
+| 11-06 | 1935 · “飓风”战斗机首次飞行 | [Wikipedia contributors](<https://en.wikipedia.org/wiki/Hawker_Hurricane>) | 二手百科具体事件页：核对““飓风”战斗机首次飞行”的1935年11月6日与正文事实。 |
+| 11-06 | 1913 · 甘地率领南非印度矿工游行 | [South African History Online](<https://sahistory.org.za/dated-event/mohandas-k-gandhi-arrested-he-leads-march-indian-miners-south-africa>) | 机构/专题资料：核对“甘地率领南非印度矿工游行”的1913年11月6日与正文事实；不冒充原始档案全文核验。 |
+| 11-06 | 1985 · 哥伦比亚司法宫事件开始 | [Wikipedia contributors](<https://en.wikipedia.org/wiki/Palace_of_Justice_siege>) | 二手百科具体事件页：核对“哥伦比亚司法宫事件开始”的1985年11月6日与正文事实。 |
+| 11-06 | 1999 · 澳大利亚举行共和制公投 | [Stanford Deliberative Democracy Lab](<https://deliberation.stanford.edu/news/deliberative-pollingr-referendum-make-australia-republic>)；[Wikipedia contributors](<https://en.wikipedia.org/wiki/1999_Australian_republic_referendum>) | 机构/专题资料：核对“澳大利亚举行共和制公投”的1999年11月6日与正文事实；不冒充原始档案全文核验。；二手百科具体事件页：核对“澳大利亚举行共和制公投”的1999年11月6日与正文事实。 |
+| 11-07 | 1917 · 十月革命在彼得格勒展开 | [Wikipedia contributors](<https://en.wikipedia.org/wiki/October_Revolution>) | 具体事件页采用公历11月7日／儒略历10月25日为起义日期，并说明11月6日已有冲突、攻占冬宫在11月8日凌晨；正文概述起义结果，不将全部阶段压缩在一天。 |
+| 11-07 | 1987 · 新加坡地铁开始运营 | [Singapore Ministry of Transport](<https://www.mot.gov.sg/what-we-do/public-transport/train/>) | 机构/专题资料：核对“新加坡地铁开始运营”的1987年11月7日与正文事实；不冒充原始档案全文核验。 |
+| 11-07 | 1929 · 纽约现代艺术博物馆开馆 | [Wikipedia contributors](<https://en.wikipedia.org/wiki/Museum_of_Modern_Art>) | 二手百科具体事件页：核对“纽约现代艺术博物馆开馆”的1929年11月7日与正文事实。 |
+| 11-07 | 1867 · 玛丽·居里出生 | [Nobel Prize](<https://www.nobelprize.org/prizes/physics/1903/marie-curie/facts/>) | 机构/专题资料：核对“玛丽·居里出生”的1867年11月7日与正文事实；不冒充原始档案全文核验。 |
+| 11-07 | 1931 · 中华苏维埃共和国宣告成立 | [Wikipedia contributors](<https://en.wikipedia.org/wiki/Chinese_Soviet_Republic>) | 二手百科具体事件页：核对“中华苏维埃共和国宣告成立”的1931年11月7日与正文事实。 |
+| 11-07 | 1996 · 火星全球勘测者号发射 | [NASA](<https://science.nasa.gov/mission/mars-global-surveyor/>) | 机构/专题资料：核对“火星全球勘测者号发射”的1996年11月7日与正文事实；不冒充原始档案全文核验。 |
+| 11-08 | 1895 · 伦琴发现X射线 | [维基百科 · Wikipedia](<https://en.wikipedia.org/wiki/Wilhelm_R%C3%B6ntgen>) | 二手人物传记“Discovery of X-rays”节明确为1895年11月8日；此日为实验发现，不是12月的论文提交日。 |
+| 11-08 | 1937 · 中国青年新闻记者协会成立 | [共产党员网／央视新闻 · 12371.cn / CCTV](<https://www.12371.cn/2021/11/09/VIDE1636444081085268.shtml>) | 央视历史节目文字实际正文明确1937年11月8日在上海成立中国青年新闻记者协会，并解释11月8日与记者节的联系；2021年11月9日只是报道日。已用HTTPS直接读取正文核对。 |
+| 11-08 | 2013 · 台风海燕在菲律宾登陆 | [美国航空航天局 · NASA](<https://gpm.nasa.gov/applications/weather/super-typhoon-haiyan-hits-philippines>) | 官方当日报道日期为2013-11-08，正文记菲律宾当地清晨登陆；UTC为前一日，不据此把本条移到11月7日。 |
+| 11-08 | 1923 · 啤酒馆政变开始 | [维基百科 · Wikipedia](<https://en.wikipedia.org/wiki/Beer_Hall_Putsch>) | 二手事件专页列1923年11月8日至9日；本条只纪念发动，不将次日街头冲突写成8日。 |
+| 11-08 | 1949 · 新中国外交部举行成立大会 | [中华人民共和国外交部 · Ministry of Foreign Affairs of China](<https://www.mfa.gov.cn/ziliao_674904/historytoday_674971/200311/t20031108_9284670.shtml>) | 机构官网“外交史上的今天”明确1949年11月8日举行正式成立大会；仅写会议事实。 |
+| 11-08 | 1960 · 肯尼迪赢得美国总统选举 | [维基百科 · Wikipedia](<https://en.wikipedia.org/wiki/1960_United_States_presidential_election>) | 二手选举专页导言明确投票日1960年11月8日及胜出组合。 |
+| 11-09 | 1989 · 柏林墙边境通道开放 | [维基百科 · Wikipedia](<https://en.wikipedia.org/wiki/Fall_of_the_Berlin_Wall>) | 二手事件专页明确1989年11月9日晚开放检查站；不把德国1990年正式统一归为同日。 |
+| 11-09 | 1918 · 谢德曼宣布德国为共和国 | [德国联邦议院 · Deutscher Bundestag](<https://www.bundestag.de/dokumente/textarchiv/1918-11-09-revolutionskalender-38-091118-574088>) | 官方革命日历明确1918年11月9日谢德曼宣布共和国，并说明演说逐字内容有争议；本条不引用演说原句。 |
+| 11-09 | 1967 · 阿波罗4号首次试飞土星5号 | [美国航空航天局 · NASA](<https://www.nasa.gov/mission/apollo-4/>) | 官方任务档案列发射及返回均为1967年11月9日，说明是首次三级整体试飞；不称载人任务。 |
+| 11-09 | 1799 · 雾月政变开始 | [维基百科 · Wikipedia](<https://en.wikipedia.org/wiki/Coup_of_18_Brumaire>) | 二手事件专页明确1799年11月9日与共和历雾月十八日对应；行动跨9至10日，不压缩为一瞬间完成。 |
+| 11-09 | 1938 · “水晶之夜”反犹暴行开始 | [美国大屠杀纪念馆 · United States Holocaust Memorial Museum](<https://encyclopedia.ushmm.org/content/en/article/kristallnacht>) | 专题博物馆页面明确1938年11月9日至10日及纳粹组织、平民参与；不沿用早期不完整伤亡数字。 |
+| 11-09 | 1949 · “两航”起义 | [中国民用航空局 · Civil Aviation Administration of China](<https://www.caac.gov.cn/PHONE/XWZX/MHYW/201911/t20191108_199401.html>) | 民航局所载纪念报道明确事件1949年11月9日；报道发表于11月8日，不能把报道日误作事件日。 |
+| 11-09 | 1953 · 柬埔寨独立 | [维基百科 · Wikipedia](<https://en.wikipedia.org/wiki/Independence_Day_(Cambodia)>) | 二手独立日专页明确1953年11月9日；不与1954年日内瓦会议混为一事。 |
+| 11-10 | 1969 · 《芝麻街》首播 | [芝麻工作室 · Sesame Workshop](<https://sesameworkshop.org/about-us/news/five-things-you-may-not-know-about-sesame-street/>) | 制作机构回顾明确首集1969年11月10日播出；删除原条“PBS首播”和未经限定的极高收视率说法。 |
+| 11-10 | 1483 · 马丁·路德诞生 | [维基百科 · Wikipedia](<https://en.wikipedia.org/wiki/Martin_Luther>) | 二手传记明确1483年11月10日出生及宗教改革、德译圣经活动；沿用来源通行生日，不另作历法换算。 |
+| 11-10 | 1970 · 月球17号发射 | [美国航空航天局 · NASA](<https://science.nasa.gov/moon/missions/>) | 官方月球任务表列Luna 17发射1970-11-10、到达1970-11-17及搭载月球车；两事件分开记录。 |
+| 11-10 | 1928 · 裕仁举行即位礼 | [维基百科 · Wikipedia](<https://en.wikipedia.org/wiki/Enthronement_of_the_Japanese_emperor>) | 二手仪式专页昭和天皇段明确1928年11月10日在京都御所举行；区分继承皇位与即位礼。 |
+| 11-10 | 1938 · 阿塔图尔克逝世 | [维基百科 · Wikipedia](<https://en.wikipedia.org/wiki/Death_and_state_funeral_of_Mustafa_Kemal_Atat%C3%BCrk>) | 二手逝世与国葬专页明确1938年11月10日死亡，11月21日国葬；不把1953年迁葬与死亡混淆。 |
+| 11-10 | 1975 · “埃德蒙·菲茨杰拉德”号沉没 | [维基百科 · Wikipedia](<https://en.wikipedia.org/wiki/SS_Edmund_Fitzgerald>) | 二手船舶专页明确1975年11月10日沉没及29人遇难；沉没具体机制仍有争议，正文不选定某一假说。 |
+| 11-11 | 1918 · 第一次世界大战西线停战 | [维基百科 · Wikipedia](<https://en.wikipedia.org/wiki/Armistice_of_11_November_1918>) | 二手停战专页明确1918年11月11日签署并于11时生效；仅写西线停战，不称所有战线同时实现永久和平。 |
+| 11-11 | 1949 · 中国人民解放军空军领导机构成立 | [共产党员网／央视新闻 · 12371.cn / CCTV](<https://www.12371.cn/2021/11/12/VIDE1636699561710516.shtml>) | 央视历史节目文字明确1949年11月11日领导机构在北京成立及刘亚楼任首任司令员；不采用页面发布日期11月12日。 |
+| 11-11 | 1975 · 安哥拉独立 | [维基百科 · Wikipedia](<https://en.wikipedia.org/wiki/Angola>) | 二手国别史页明确1975年11月11日为独立日，并记独立前后冲突；避免暗示当天实现和平统一。 |
+| 11-11 | 1921 · 美国无名战士墓举行安葬仪式 | [阿灵顿国家公墓 · Arlington National Cemetery](<https://www.arlingtoncemetery.mil/Explore/Monuments-and-Memorials/Tomb-of-the-Unknown-Soldier>) | 公墓官方历史页面明确1921年11月11日送葬和安葬仪式；后来的墓体扩建与其他战争无名战士安葬另有日期。 |
+| 11-11 | 1965 · 罗得西亚单方面宣布独立 | [维基百科 · Wikipedia](<https://en.wikipedia.org/wiki/Rhodesia%27s_Unilateral_Declaration_of_Independence>) | 二手宣言专页明确1965年11月11日签署及白人少数派政府背景；补充不获普遍承认的性质限定。 |
+| 11-11 | 1975 · 澳大利亚总督解职惠特拉姆 | [维基百科 · Wikipedia](<https://en.wikipedia.org/wiki/1975_Australian_constitutional_crisis>) | 二手宪政危机专页导言明确1975年11月11日解职及看守政府任命；不把随后选举写成当天举行。 |
+| 11-12 | 1866 · 孙中山诞生 | [中山市南朗街道办事处 · Nanlang, Zhongshan City Government](<https://www.zs.gov.cn/nlz/zjnl/nlgk/lsmr/content/post_1308324.html>) | 人物介绍正文明确1866年11月12日生于香山县翠亨村，实际HTML日期中含空格；已通过HTTPS读取正文，不误把搜索器未匹配连续日期当作无正文。 |
+| 11-12 | 1936 · 旧金山—奥克兰海湾大桥通车 | [美国联邦公路管理局 · Federal Highway Administration](<https://www.fhwa.dot.gov/infrastructure/2bridges.cfm>) | 官方公路史页面引当时工程刊物，明确1936年11月12日12时30分开桥；保留原ID，明确区别金门大桥。 |
+| 11-12 | 2014 · 菲莱探测器着陆彗星 | [美国航空航天局喷气推进实验室 · NASA/JPL](<https://www.jpl.nasa.gov/news/rosettas-philae-makes-historic-first-landing-on-a-comet/>)；[美国航空航天局喷气推进实验室 · NASA/JPL](<https://www.jpl.nasa.gov/news/rosettas-comet-lander-landed-three-times/>) | 任务合作机构当日报道明确2014年11月12日着陆与目标彗星；弹跳情况另据具体飞行器专页复核。；2014年11月13日后续官方报道明确前一日11月12日首次接触表面后两次弹跳，第三次接触后停稳并有仪器发回数据；不把报道日当作着陆日。 |
+| 11-12 | 1910 · 华罗庚诞生 | [中国科学院／学习时报 · Chinese Academy of Sciences / Study Times](<https://www.cas.cn/xzfc/202206/t20220608_4837332.shtml>) | 中科院所载《学习时报》人物回顾明确1910年11月12日生于金坛，正文记数论研究与优选法、统筹法推广；不引用夸饰性纪录。 |
+| 11-12 | 1942 · 瓜达尔卡纳尔海战开始 | [维基百科 · Wikipedia](<https://en.wikipedia.org/wiki/Naval_Battle_of_Guadalcanal>) | 二手战役专页明确1942年11月12日至15日；本条记系列海空交战开始，而非所有夜间舰炮战均发生在12日。 |
+| 11-12 | 1980 · 旅行者1号飞掠土星 | [美国航空航天局 · NASA](<https://science.nasa.gov/mission/voyager/voyager-1/>) | 官方任务档案明确最近点1980年11月12日23:46 UT；北京时间已为13日，正文明确采用世界时。 |
+| 11-12 | 1990 · 明仁举行即位礼 | [维基百科 · Wikipedia](<https://en.wikipedia.org/wiki/Enthronement_of_the_Japanese_emperor>) | 二手仪式专页明确1990年11月12日在东京皇居举行；与1989年即位及稍后的大尝祭区分。 |
+| 11-13 | 1927 · 黄麻起义 | [维基百科 · Wikipedia](<https://zh.wikipedia.org/wiki/%E9%BB%84%E9%BA%BB%E8%B5%B7%E4%B9%89>) | 二手事件专页明确1927年11月13日；只记起义发动，不把后来改编或建立根据地全部归于当日。 |
+| 11-13 | 1940 · 《幻想曲》在纽约首映 | [维基百科 · Wikipedia](<https://en.wikipedia.org/wiki/Fantasia_(1940_film)>) | 二手电影专页列1940年11月13日在纽约百老汇剧院首映；删去未经额外核查的“第一部商业立体声电影”纪录式断言。 |
+| 11-13 | 1956 · 美国最高法院维持公交反隔离裁决 | [维基百科 · Wikipedia](<https://en.wikipedia.org/wiki/Browder_v._Gayle>) | 二手判例专页明确最高法院1956年11月13日维持原判，区别6月下级法院判决及12月实际执行。 |
+| 11-13 | 1985 · 鲁伊斯火山喷发与阿尔梅罗灾难 | [美国地质调查局 · U.S. Geological Survey](<https://www.usgs.gov/observatories/hvo/news/volcano-watch-lessons-learned-armero-colombia-tragedy>) | 机构火山研究回顾明确1985年11月13日晚喷发、融冰与泥石流；按哥伦比亚当地日期，不采用不必要的精确伤亡统计。 |
+| 11-13 | 1994 · 瑞典举行加入欧盟公投 | [维基百科 · Wikipedia](<https://en.wikipedia.org/wiki/1994_Swedish_European_Union_membership_referendum>) | 二手公投专页明确1994年11月13日投票，赞成约53%，并列随后入盟日；正文不用精细百分比。 |
+| 11-13 | 2015 · 巴黎发生系列恐怖袭击 | [维基百科 · Wikipedia](<https://en.wikipedia.org/wiki/November_2015_Paris_attacks>) | 二手事件专页日期2015年11月13日夜，部分后续处置跨午夜；按法国当地日期，仅概述地点和袭击事实。 |
+| 11-14 | 1851 · 《白鲸》美国版出版 | [维基百科 · Wikipedia](<https://en.wikipedia.org/wiki/Moby-Dick>) | 二手文学专页列美国版1851年11月14日、英国版10月18日；仅记美国版，不笼统称全球首次出版。 |
+| 11-14 | 1889 · 娜莉·布莱开始环球旅行 | [维基百科 · Wikipedia](<https://en.wikipedia.org/wiki/Nellie_Bly>) | 二手人物传记明确1889年11月14日登上Augusta Victoria及1890年1月25日返回；区别出发与完成日期。 |
+| 11-14 | 2003 · 赛德娜被发现 | [维基百科 · Wikipedia](<https://en.wikipedia.org/wiki/90377_Sedna>) | 二手天体专页明确发现日期2003年11月14日及三位发现者；区分2004年公开宣布，不将分类争议简化为已确定行星。 |
+| 11-14 | 1889 · 贾瓦哈拉尔·尼赫鲁诞生 | [维基百科 · Wikipedia](<https://en.wikipedia.org/wiki/Jawaharlal_Nehru>) | 二手人物传记明确1889年11月14日出生，导言及职务表支持独立运动与首任总理身份。 |
+| 11-14 | 1922 · BBC开始每日广播 | [英国国家科学与媒体博物馆 · National Science and Media Museum](<https://blog.scienceandmediamuseum.org.uk/this-week-in-broadcasting-history-the-bbc-began-daily-transmissions/>) | 博物馆广播史回顾明确1922年11月14日首播与2LO；当时是Company，避免将1927年Corporation成立时间提前。 |
+| 11-14 | 1969 · 阿波罗12号发射 | [美国航空航天局 · NASA](<https://www.nasa.gov/missions/apollo/apollo-12-the-pinpoint-mission/>) | 官方任务回顾明确1969年11月14日发射及两次雷击；这里只记发射，登月为11月19日。 |
+| 11-15 | 1971 · 中华人民共和国代表团首次出席联大 | [中华人民共和国外交部 · Ministry of Foreign Affairs of China](<https://www.mfa.gov.cn/ziliao_674904/historytoday_674971/200311/t20031115_7949205.shtml>) | 机构官网明确1971年11月15日首次出席及乔冠华发言；与10月25日席位决议分开。 |
+| 11-15 | 1889 · 巴西宣布成立共和国 | [维基百科 · Wikipedia](<https://en.wikipedia.org/wiki/Proclamation_of_the_Republic_(Brazil)>) | 二手事件专页明确1889年11月15日及里约热内卢政变；不把后续宪法制定全部归在当日。 |
+| 11-15 | 1988 · “暴风雪”号完成无人轨道飞行 | [维基百科 · Wikipedia](<https://en.wikipedia.org/wiki/Buran_(spacecraft)>) | 二手航天器专页明确1988年11月15日03:00:02 UTC发射及唯一一次无人轨道飞行；不称载人首航。 |
+| 11-15 | 1864 · 谢尔曼“向大海进军”开始 | [新佐治亚百科全书 · New Georgia Encyclopedia](<https://www.georgiaencyclopedia.org/articles/history-archaeology/shermans-march-to-the-sea/>) | 佐治亚州高校学者撰写的二手史学专文明确1864年11月15日起、12月21日止；原条不再把亚特兰大全部焚毁归为单日一举。 |
+| 11-15 | 1920 · 国际联盟首次大会开幕 | [维基百科 · Wikipedia](<https://en.wikipedia.org/wiki/League_of_Nations>) | 二手机构史页明确大会首次会议1920年11月15日在日内瓦Reformation Hall；区别1月16日理事会会议。 |
+| 11-15 | 1988 · 巴勒斯坦独立宣言发表 | [维基百科 · Wikipedia](<https://en.wikipedia.org/wiki/Palestinian_Declaration_of_Independence>) | 二手宣言专页明确1988年11月15日、阿尔及尔及宣读者；以文件通过与发表为事件，不把宣言等同实际领土独立已经完成。 |
+| 11-16 | 1945 · 联合国教科文组织组织法通过 | [联合国教科文组织 · UNESCO](<https://www.unesco.org/en/legal-affairs/constitution>) | 机构组织法页面明确1945年11月16日在伦敦通过，Article XV说明生效须20国批准；区别1946年11月4日生效。 |
+| 11-16 | 1974 · 阿雷西博信息发向太空 | [波多黎各大学阿雷西博行星宜居性实验室 · PHL, UPR Arecibo](<https://phl.upr.edu/message>)；[维基百科 · Wikipedia](<https://en.wikipedia.org/wiki/Arecibo_message>) | 大学研究机构回顾明确1974年11月16日发送；二手百科另核内容指向M13及二进制，不称已收到外星回应。；二手消息专页明确目标M13、1679位数据及望远镜改造纪念场合；只概述内容，不复制完整消息。 |
+| 11-16 | 1892 · 郭沫若诞生 | [中国作家网 · China Writers Association](<https://www.chinawriter.com.cn/xdzj/302.shtml>)；[四川大学档案馆 · Sichuan University Archives](<https://archives.scu.edu.cn/info/1015/1973.htm>) | 现代作家辞典标题明确1892.11.16生日，传记记出生地与诗歌、历史研究；另与四川大学档案馆生平回顾核对日期。；大学档案馆校友生平回顾明确1892年11月16日生于乐山沙湾；属机构历史回顾，并非当年出生登记。 |
+| 11-16 | 1907 · 俄克拉何马州加入美国 | [维基百科 · Wikipedia](<https://en.wikipedia.org/wiki/Oklahoma>) | 二手州史页明确1907年11月16日建州及两领地合并；不将原住民历史简化为此前无人定居。 |
+| 11-16 | 1933 · 美国承认苏联并建立外交关系 | [美国国务院历史办公室 · U.S. Office of the Historian](<https://history.state.gov/milestones/1921-1936/ussr>) | 机构外交史回顾明确1933年11月16日承认苏联；不因次日新闻公布而改记17日。 |
+| 11-16 | 1988 · 爱沙尼亚通过主权宣言 | [维基百科 · Wikipedia](<https://en.wikipedia.org/wiki/Estonian_Sovereignty_Declaration>) | 二手文件专页明确1988年11月16日及法律优先主张；不把主权宣言写成1991年恢复独立已经发生。 |
+| 11-16 | 1992 · 霍克森窖藏被发现 | [维基百科 · Wikipedia](<https://en.wikipedia.org/wiki/Hoxne_Hoard>) | 二手考古专页明确1992年11月16日及发现过程；删除原条“帝国最大”等范围不清的纪录式形容。 |
+| 11-17 | 1869 · 苏伊士运河正式通航 | [维基百科 · Wikipedia](<https://en.wikipedia.org/wiki/Suez_Canal>) | 二手运河专页明确1869年11月17日正式开通；开通庆典从15日晚开始，不以庆典开端代替通航日。 |
+| 11-17 | 1970 · 月球17号运送月球车1号着陆 | [美国航空航天局 · NASA](<https://science.nasa.gov/moon/missions/>) | 官方任务表明确1970年11月17日到达月面并运送Lunokhod 1；不把11月10日发射与着陆混同，正文不规定首次驶下坡道的精确时刻。 |
+| 11-17 | 1989 · 布拉格学生示威遭镇压 | [维基百科 · Wikipedia](<https://en.wikipedia.org/wiki/Velvet_Revolution>) | 二手革命专页明确1989年11月17日学生示威及警方镇压；不把12月政治结果全写成17日完成。 |
+| 11-17 | 1917 · 奥古斯特·罗丹逝世 | [维基百科 · Wikipedia](<https://en.wikipedia.org/wiki/Auguste_Rodin>) | 二手传记明确1917年11月17日逝世，出生为1840年11月12日；只作简短生平定位。 |
+| 11-17 | 1973 · 雅典理工学院抗议遭武力镇压 | [维基百科 · Wikipedia](<https://en.wikipedia.org/wiki/Athens_Polytechnic_uprising>) | 二手事件专页明确1973年11月17日凌晨坦克破门，起义从14日开始；不采用有争议的校内死亡人数。 |
+| 11-17 | 1997 · 卢克索游客遇袭 | [维基百科 · Wikipedia](<https://en.wikipedia.org/wiki/Luxor_massacre>) | 二手事件专页明确1997年11月17日、遗址与袭击对象；只概述事实，不延伸未独立核查的幕后指挥争议。 |
+| 11-18 | 1872 · 苏珊·安东尼因投票被捕 | [维基百科 · Wikipedia](<https://en.wikipedia.org/wiki/Susan_B._Anthony>) | 二手传记明确1872年11月18日逮捕；原条“试图参与投票”改为实际投票，不把次年罚款判决写在逮捕当天。 |
+| 11-18 | 1918 · 拉脱维亚共和国宣布成立 | [拉脱维亚总统府 · Chancery of the President of Latvia](<https://www.president.lv/en/history>) | 机构国家历史时间线明确1918年11月18日宣布共和国及临时政府；不将1920年和平条约或1922年宪法提前。 |
+| 11-18 | 1928 · 《汽船威利号》公映 | [维基百科 · Wikipedia](<https://en.wikipedia.org/wiki/Steamboat_Willie>) | 二手电影专页明确1928年11月18日在纽约Colony Theater公映；不笼统称世界第一部有声动画。 |
+| 11-18 | 1903 · 《海约—比诺—瓦里亚条约》签署 | [维基百科 · Wikipedia](<https://en.wikipedia.org/wiki/Hay%E2%80%93Bunau-Varilla_Treaty>) | 二手条约专页明确1903年11月18日签订、签署人与运河区内容；本条记签署，不将1914年运河通航提前。 |
+| 11-18 | 1963 · 按键式音频拨号电话投入商业服务 | [维基百科 · Wikipedia](<https://en.wikipedia.org/wiki/Push-button_telephone>) | 二手电话技术史页明确1963年11月18日商业提供DTMF音频按键系统；此前已有试验，不称当天发明所有按键电话。 |
+| 11-18 | 1978 · 琼斯镇惨案 | [维基百科 · Wikipedia](<https://en.wikipedia.org/wiki/Jonestown>) | 二手事件专页明确1978年11月18日与相关机场枪击；不将儿童等受害者概括为全部自愿集体自杀。 |
+| 11-19 | 1863 · 林肯发表葛底斯堡演说 | [美国国家公园管理局 · National Park Service](<https://www.nps.gov/liho/learn/historyculture/gettysburgaddress.htm>) | 机构页面列演说地点与1863年11月19日并提供全文；正文独立概述，不照录长段演说。 |
+| 11-19 | 1931 · 徐志摩遇空难逝世 | [中国作家网／天津日报 · China Writers Association / Tianjin Daily](<https://www.chinawriter.com.cn/2013/2013-07-29/168972.html>)；[中国作家网 · China Writers Association](<https://www.chinawriter.com.cn/xdzj/724.shtml>) | 报刊史料回顾明确1931年11月19日南京至北平途中遇难，并梳理《大公报》悼念报道；不沿用其他年表把周岁错写为36岁的说法。；现代作家辞典标题列1931.11.19死亡日期，正文记1923年参与组织新月社，供双语人物定位复核。 |
+| 11-19 | 1942 · 苏军“天王星行动”开始 | [维基百科 · Wikipedia](<https://en.wikipedia.org/wiki/Operation_Uranus>) | 二手军事史专页明确1942年11月19日开始、20日南翼行动；正文将包围写为随后结果，不说19日即全部完成。 |
+| 11-19 | 1493 · 哥伦布船队抵达波多黎各 | [维基百科 · Wikipedia](<https://en.wikipedia.org/wiki/Puerto_Rico>) | 二手岛屿史页列1493年11月19日首次西班牙船队登陆，殖民开始另列1508年；沿用该页通行历史日期，不以“发现无人岛”措辞叙述。 |
+| 11-19 | 1969 · 阿波罗12号登月舱着陆 | [美国航空航天局 · NASA](<https://nssdc.gsfc.nasa.gov/planetary/lunar/apolloland.html>)；[美国航空航天局 · NASA](<https://www.nasa.gov/mission/apollo-12/>) | 官方月球着陆表明确1969年11月19日、风暴洋；任务页面另核宇航员与Surveyor 3地点，不把11月14日发射当作着陆。；官方任务说明列Conrad、Bean为月面人员，并说明在Surveyor 3附近精确着陆及考察。 |
+| 11-19 | 1985 · 里根与戈尔巴乔夫日内瓦会谈开始 | [维基百科 · Wikipedia](<https://en.wikipedia.org/wiki/Geneva_Summit_(1985)>) | 二手峰会专页明确1985年11月19日至21日及两人首次见面；不把后来签署的军控条约提前到此时。 |
+| 11-19 | 2006 · Wii在北美上市 | [维基百科 · Wikipedia](<https://en.wikipedia.org/wiki/Wii>) | 二手产品史页明确北美2006年11月19日、其他主要地区12月上市；不把该日写成全球同步发售。 |
+| 11-20 | 1998 · 国际空间站首个部件升空 | [美国国家航空航天局 NASA](<https://www.nasa.gov/history/20-years-ago-space-station-construction-begins/>) | NASA回顾正文明确Nov. 20, 1998、Baikonur、Zarya为first element；保留原ID。 |
+| 11-20 | 1695 · 祖姆比遇害 | [巴西帕尔马雷斯文化基金会](<https://www.gov.br/palmares/pt-br/departamentos/protecao-preservacao-e-articulacao/serra-da-barriga-1/tour-pelo-parque/zumbi>) | 纪念地介绍明确记1695年11月20日被杀及帕尔马雷斯领导人身份；不采用关于死亡经过的争议细节。 |
+| 11-20 | 1989 · 《儿童权利公约》获通过 | [联合国儿童基金会](<https://www.unicef.org/child-rights-convention/convention-text>) | 公约正文明确1989年11月20日通过、1990年9月2日生效；本文只记通过，不将实际开放签署的活动也归到当天。 |
+| 11-20 | 1910 · 墨西哥革命的起点 | [维基百科：墨西哥革命](<https://en.wikipedia.org/wiki/Mexican_Revolution>) | 具体事件页在战争日期及Madero计划段落均记20 November 1910；写作号召与通用起点，不声称全国各地同时起义。 |
+| 11-20 | 1945 · 纽伦堡国际军事法庭开庭 | [美国国家二战博物馆](<https://www.nationalww2museum.org/war/topics/nuremberg-trials>) | 页面记1945年11月20日宣读起诉书、被告出庭，并说明四国法庭及各类罪名；本条不混同后续十二场审判。 |
+| 11-20 | 1959 · 《儿童权利宣言》获通过 | [联合国大会／UNHCR Refworld](<https://www.refworld.org/legal/resolution/unga/1959/17170>) | 文献元数据明确A/RES/1386(XIV)、20 November 1959；联合国背景页与UNICEF公约序言也交叉记载此日期。 |
+| 11-20 | 1980 · 特别法庭开始审理两案 | [最高人民法院／人民法院报](<https://www.court.gov.cn/zixun/xiangqing/122911.html>) | 2018年司法公开回顾明确审理期间为1980年11月20日至1981年1月25日；只写审理开始，不将结果提前到开庭日。 |
+| 11-21 | 1694 · 伏尔泰诞生 | [维基百科：伏尔泰](<https://en.wikipedia.org/wiki/Voltaire>) | 信息框与开篇均记1694年11月21日出生；本条不将次日受洗日期混入。 |
+| 11-21 | 1783 · 首次载人热气球自由飞行 | [美国国家热气球博物馆](<https://www.nationalballoonmuseum.com/about/history-of-ballooning/>) | 馆方气球史明确November 21, 1783、Paris及两名乘客；限定为载人自由飞行，避免与此前系绳试飞混淆。 |
+| 11-21 | 1894 · 旅顺大屠杀开始 | [维基百科：旅顺大屠杀](<https://en.wikipedia.org/wiki/Port_Arthur_massacre_(China)>) | 具体事件页明确从1894年11月21日持续三日，且展示多个伤亡估计；只采用共同的时间、地点及暴行事实，保留原ID。 |
+| 11-21 | 1920 · 都柏林“血腥星期日” | [维基百科：1920年血腥星期日](<https://en.wikipedia.org/wiki/Bloody_Sunday_(1920)>) | 开篇与两段事件信息框均记21 November 1920；简介保留先后次序，不采用存在不同口径的总死亡数。 |
+| 11-21 | 1964 · 韦拉扎诺海峡大桥通车 | [维基百科：韦拉扎诺海峡大桥](<https://en.wikipedia.org/wiki/Verrazzano-Narrows_Bridge>) | 信息框与Opening段明确1964年11月21日上层开放，1969年6月28日下层开放；避免将两层同时启用。 |
+| 11-21 | 1995 · 代顿和平协议草签 | [维基百科：代顿协议](<https://en.wikipedia.org/wiki/Dayton_Agreement>) | 正文区分21 November 1995草签和14 December 1995巴黎签署；本条明确用“草签”。 |
+| 11-22 | 1635 · 荷兰殖民军在台湾发动军事行动 | [维基百科：荷兰在台湾的军事行动](<https://en.wikipedia.org/wiki/Dutch_pacification_campaign_on_Formosa>) | 正文明确November 22, 1635出兵及当晚攻击Mattau；不用“平定”作为中立史实评价，保留原ID。 |
+| 11-22 | 1928 · 拉威尔《波莱罗》首演 | [维基百科：《波莱罗》](<https://en.wikipedia.org/wiki/Bol%C3%A9ro>) | 首演信息框及Premiere段明确22 November 1928、地点及指挥；区分1928首演和1929出版。 |
+| 11-22 | 2005 · 默克尔就任德国总理 | [维基百科：安格拉·默克尔](<https://en.wikipedia.org/wiki/Angela_Merkel>) | 任期信息框及2005选举段明确22 November 2005当选总理及大联合政府组成。 |
+| 11-22 | 1916 · 杰克·伦敦逝世 | [维基百科：杰克·伦敦](<https://en.wikipedia.org/wiki/Jack_London>) | 信息框、开篇及死亡段均记November 22, 1916；不采未经一致认定的死因推断。 |
+| 11-22 | 1943 · 黎巴嫩独立纪念日的由来 | [维基百科：黎巴嫩独立日](<https://en.wikipedia.org/wiki/Lebanese_Independence_Day>) | 正文记1943年11月22日上午释放Rashaya囚禁领导人并成为独立日；不将1946军队撤离挪到本日。 |
+| 11-22 | 1963 · 肯尼迪在达拉斯遇刺 | [肯尼迪总统图书馆与博物馆](<https://www.jfklibrary.org/learn/about-jfk/jfk-in-history/november-22-1963-death-of-the-president>) | 馆方专题标题与正文明确1963年11月22日及遇刺、约翰逊宣誓经过；沿用达拉斯当地日期。 |
+| 11-23 | 1936 · “七君子事件” | [中国共产党新闻网／人民网](<https://cpc.people.com.cn/GB/64162/64165/72301/72328/index.html>) | 1936年11月23日专题明确七人姓名、上海被捕与翌年7月获释；摘要未照搬评价性用语。 |
+| 11-23 | 1903 · 卡鲁索在大都会歌剧院首演 | [美国国会图书馆](<https://guides.loc.gov/chronicling-america-enrico-caruso>) | 图书馆报刊研究指南时间表明确November 23, 1903及Rigoletto首演；另检索到大都会档案CID 32000交叉吻合。 |
+| 11-23 | 2001 · 《网络犯罪公约》开放签署 | [欧洲委员会](<https://www.coe.int/en/web/cybercrime/key-facts>) | 机构说明明确23 November 2001为opened for signature；区分此前通过和此后的生效。 |
+| 11-23 | 1863 · 果园岭战斗 | [美国国家公园管理局 NPS](<https://www.nps.gov/chch/learn/historyculture/battles-for-chattanooga.htm>) | NPS分日记事以November 23, 1863为小标题，明确当天夺取Orchard Knob；不是声称整个campaign于这天才开始。 |
+| 11-23 | 1963 · 《神秘博士》首次播出 | [维基百科：《神秘博士》](<https://en.wikipedia.org/wiki/Doctor_Who>) | 播出信息框及开篇历史段明确23 November 1963；只写首次电视播出，不混同后来的复播与重启。 |
+| 11-23 | 1976 · 马约尔突破百米自由潜水 | [维基百科：雅克·马约尔](<https://en.wikipedia.org/wiki/Jacques_Mayol>) | Career段明确23 November 1976达100m，另说明no-limits可用weighted sleds和air balloons；省略同页100/101m口径差别中的多余精确值。 |
+| 11-24 | 1859 · 《物种起源》首次出版 | [格林尼治皇家博物馆](<https://www.rmg.co.uk/stories/ocean/charles-darwin-one-britains-most-celebrated-naturalists>) | 馆方生平说明明确24 November 1859出版及自然选择论述；保留原ID，不采用“首日面向公众售罄”等易混口径。 |
+| 11-24 | 1894 · 兴中会在檀香山成立 | [广州市委党史文献研究室／广州市地方志办公室](<https://www.gzsqw.org.cn/c/sdfzpc/gmfy/4008.jhtml>) | 正文明确1894年11月24日檀香山成立，与1895年2月21日香港总会分开。 |
+| 11-24 | 1974 · “露西”化石被发现 | [伊利诺伊大学文理学院](<https://las.illinois.edu/news/2017-10-24/man-who-found-lucy>) | 大学人物专题明确November 24, 1974、两人、Hadar、后续发掘与约320万年；不把全部骨骼一天发掘完成。 |
+| 11-24 | 1642 · 塔斯曼望见塔斯马尼亚 | [新西兰文化与遗产部 NZHistory](<https://nzhistory.govt.nz/abel-tasman-sights-the-southern-alps-becoming-the-first-european-to-see-nz>) | 该页虽以12月13日新西兰事件为题，正文明确1642年航程中的24 November望见Tasmania；不将已有人居住的岛屿称为无人发现。 |
+| 11-24 | 1969 · 阿波罗12号返回地球 | [美国国家航空航天局 NASA](<https://www.nasa.gov/missions/apollo/apollo-12-the-pinpoint-mission/>) | 任务页Landing栏记November 24, 1969与Pacific Ocean；月面登陆与返地分开；本日沿用NASA任务日期（UTC也是11月24日）。 |
+| 11-24 | 2013 · 伊朗核问题达成阶段协议 | [英国外交部](<https://www.gov.uk/government/news/first-step-towards-implementation-of-interim-iran-nuclear-agreement>) | 英国外交部2014年1月12日公告明确《联合行动计划》agreed at Geneva on 24 November 2013，并区分后来落实协议；不依赖原欧盟PDF的机器人校验页。 |
+| 11-25 | 1915 · 爱因斯坦提交引力场方程 | [加州理工学院爱因斯坦文献项目](<https://www.einstein.caltech.edu/news/one-hundred-years-of-einsteins-field-equations-and-of-the-explanation-of-mercurys-perihelion>) | 项目说明明确25 November 1915提交场方程论文、同日发表此前水星近日点论文；正文区分提交与刊出。 |
+| 11-25 | 1952 · 《捕鼠器》在伦敦首演 | [Theatrecrafts 戏剧资料库](<https://theatrecrafts.com/pages/home/shows/the-mousetrap/>) | 作品档案明确1952年10月6日诺丁汉世界首演、11月25日伦敦开演；不是称11月25日为世界首演。 |
+| 11-25 | 1960 · 米拉瓦尔三姐妹遇害 | [联合国妇女署](<https://interactive.unwomen.org/multimedia/timeline/womenunite/en/index.html>) | 1960专题明确25 November 1960三姐妹遇害及后来纪念日由来；不把1999联合国设立纪念日的决定提前到1960。 |
+| 11-25 | 1940 · 蚊式飞机首次试飞 | [英国皇家空军博物馆](<https://www.rafmuseum.org.uk/blog/moving-the-mosquito/>) | 馆方正文明确25 November 1940、W4050、Hatfield；“Post War”档案展说明木制高速设计及1941服役，保留原ID。 |
+| 11-25 | 1950 · 毛岸英在朝鲜战场牺牲 | [中国共产党新闻网／人民网](<https://cpc.people.com.cn/GB/64162/64165/72301/72330/index.html>) | 专题明确1950年11月25日、大榆洞轰炸、俄文翻译及机要工作、28岁；另读国防部所载新华社传记检索正文交叉一致，不采用网传生活细节。 |
+| 11-25 | 1975 · 苏里南独立 | [美国国务院历史办公室](<https://history.state.gov/countries/suriname>) | Recognition段明确1975年11月25日首都独立宣告仪式，Summary说明从荷兰独立与此前自治。 |
+| 11-26 | 1942 · 《卡萨布兰卡》纽约首映 | [维基百科：《卡萨布兰卡》](<https://en.wikipedia.org/wiki/Casablanca_(film)>) | 信息框与Release段明确纽约首映November 26, 1942和全美发行January 23, 1943，保留原ID。 |
+| 11-26 | 1949 · 印度制宪会议通过宪法 | [印度法律与政策研究中心 Constitution of India](<https://www.constitutionofindia.net/stages-of-constitution-making/>) | 研究机构制宪分期Stage 10正文明确26 November 1949通过、24 January 1950签名、26 January 1950生效；另检索印度政府PIB发言稿确认相同日期。 |
+| 11-26 | 1990 · 上海证券交易所成立 | [上海证券交易所](<https://english.sse.com.cn/aboutsse/overview/>) | 交易所官方简介明确November 26, 1990成立、December 19开始formal operations，严分成立与开业。 |
+| 11-26 | 1922 · 卡特窥见图坦卡蒙墓前室 | [维基百科：霍华德·卡特](<https://en.wikipedia.org/wiki/Howard_Carter>) | 具体人物页记1922年11月4日发现台阶、24日清理、26日在墓门开孔；后续段记埋葬室1923年开放，避免将各阶段全记作发现日。 |
+| 11-26 | 1965 · 法国首颗卫星入轨 | [法国国家空间研究中心 CNES](<https://cnes.fr/actualites/y-50-ans-diamant-lancait-asterix-premier-satellite-francais>) | CNES专题明确26 novembre 1965、Hammaguir、Diamant和A1/Astérix；不把入轨成功写成卫星无线电正常工作，原文注明天线受损。 |
+| 11-26 | 2003 · 协和式客机最后一次飞行 | [布里斯托尔航空航天博物馆](<https://aerospacebristol.org/news/2017/2/7/concorde-completes-final-journey-to-new-19m-home>) | 收藏飞机的馆方明确Alpha Foxtrot/216为last Concorde ever to fly，最后于26 November 2003降落Filton；区分与此前商业航班终止。 |
+| 11-27 | 1895 · 诺贝尔签署最后遗嘱 | [挪威诺贝尔研究所／诺贝尔和平奖官网](<https://www.nobelpeaceprize.org/nobels-fredspris/historie/alfred-nobels-testamente>) | 官网题为Alfred Nobels testamente，明确27. november 1895巴黎签署，并展示奖项分配遗嘱文本；颁奖始于1901，不提前为签署当天，保留原ID。 |
+| 11-27 | 1949 · 重庆“11·27”大屠杀 | [七一网／重庆党史资料](<https://m.12371.gov.cn/content/2024-11/30/content_478804.html>) | 回顾资料明确1949年11月27日在两处监狱屠杀，亦明确更长的杀戮期9月6日至11月29日；不将江竹筠（11月14日）或小萝卜头（9月6日）的死亡日期移到27日。 |
+| 11-27 | 1896 · 《查拉图斯特拉如是说》首演 | [波士顿交响乐团](<https://www.bso.org/works/strauss-also-sprach-zarathustra>) | 乐团作品说明明确November 27, 1896、Frankfurt、作曲家亲自指挥及尼采著作背景。 |
+| 11-27 | 1940 · 李小龙诞生 | [维基百科：李小龙](<https://en.wikipedia.org/wiki/Bruce_Lee>) | 信息框、开篇和Early life段均记November 27, 1940及出生地，生平段支持香港成长与截拳道。 |
+| 11-27 | 1971 · 火星2号着陆器坠毁 | [NASA戈达德空间研究所](<https://www.giss.nasa.gov/tools/mars24/help/landers.html>) | Mars24资料在Past Unsuccessful Landers下明确Nov. 27, 1971下降失败、impact与轨道器继续数月；不误称为首次成功软着陆。 |
+| 11-27 | 2005 · 首例部分面部移植手术 | [维基百科：伊莎贝尔·迪诺瓦](<https://en.wikipedia.org/wiki/Isabelle_Dinoire>) | Surgery段明确27 November 2005、Amiens与手术范围，参考报道发表于30 November；不把新闻公布日当手术日。 |
+| 11-28 | 1660 · 皇家学会的创始集会 | [英国皇家学会](<https://royalsociety.org/blog/2022/11/moving-house/>) | 学会历史专题明确28 November 1660创立于Gresham College；另读学会On this day说明此日创始会议而非11月30日周年典礼，保留原ID。 |
+| 11-28 | 1820 · 恩格斯诞生 | [维基百科：弗里德里希·恩格斯](<https://en.wikipedia.org/wiki/Friedrich_Engels>) | 信息框、开篇及Early life段明确28 November 1820和Barmen；同页概述共同著作与《资本论》编辑工作。 |
+| 11-28 | 1893 · 新西兰女性首次参加议会普选 | [新西兰文化与遗产部 NZHistory](<https://nzhistory.govt.nz/page/women-vote-first-general-election>) | 机构日期页明确28 November 1893投票；关于毛利选区12月20日的限定另见具体选举/妇女选举权资料，区别授予权利与首次行使。 |
+| 11-28 | 1943 · 德黑兰会议开幕 | [美国国务院历史办公室](<https://history.state.gov/milestones/1937-1945/tehran-conf>) | 机构历史专题明确会议起止November 28–December 1, 1943，并说明三国领导人与作战、战后议题。 |
+| 11-28 | 1964 · 水手4号启程前往火星 | [美国国家航空航天局 NASA](<https://science.nasa.gov/mission/mariner-4/>) | NASA任务表明确Nov 28, 1964 /14:22:01 UT发射；只写次年飞掠，页面个别宣传段误写June而任务表和结果段为July，未沿用该误字。 |
+| 11-28 | 1967 · 首次清晰记录脉冲星脉冲 | [欧洲航天局 ESA](<https://www.esa.int/Science_Exploration/Space_Science/24_February>)；[剑桥大学：贝尔·伯内尔访谈](<https://www.cam.ac.uk/stories/journeysofdiscovery-pulsars>) | ESA记28 November 1967发现、1968年2月24日论文发布；另已读剑桥大学访谈检索全文，明确8月6日早期痕迹与11月28日首次观察脉冲。；访谈全文检索内容与图片说明明确28 November 1967首次观察脉冲、6 August 1967原始射电痕迹；直接访问一度403，内容已由索引服务返回。 |
+| 11-29 | 1814 · 《泰晤士报》采用机械印刷 | [英国科学博物馆集团](<https://collection.sciencemuseumgroup.org.uk/objects/co37982>) | 馆藏说明明确29 November 1814首期机械印制报纸，机器为Koenig and Bauer；只说《泰晤士报》采用，避免无限扩大“世界第一”定义。 |
+| 11-29 | 1947 · 联合国大会通过巴勒斯坦分治建议 | [联合国大会／UNHCR Refworld](<https://www.refworld.org/legal/resolution/unga/1947/9440>) | 决议全文与元数据明确29 November 1947，正文用Recommends并列两国及Jerusalem特殊制度；不把分治建议写成当日实际建国。 |
+| 11-29 | 1899 · 巴塞罗那足球俱乐部成立 | [巴塞罗那足球俱乐部](<https://www.fcbarcelona.com/en/club/news/4153324/125-years-since-the-ad-in-los-deportes>) | 俱乐部回顾正文明确29 November 1899在Solé gymnasium成立，并区分此前10月招募广告与正式成立会议。 |
+| 11-29 | 1781 · “宗号”奴隶船屠杀开始 | [维基百科：宗号大屠杀](<https://en.wikipedia.org/wiki/Zong_massacre>) | 开篇与Murder段明确从29 November 1781持续数日；只写保险诉讼背景，不把后来的案件当作凶手被控谋杀审判。 |
+| 11-29 | 1890 · 明治宪法生效 | [日本国立公文书馆](<https://www.archives.go.jp/ayumi/kobetsu/m23_1890_03.html>)；[维基百科：明治宪法](<https://en.wikipedia.org/wiki/Meiji_Constitution>) | 馆方档案说明区分1890年11月25日首次帝国议会召集与11月29日开院式及宪法施行；本条记11月29日生效，不将1889年颁布混入。；信息框与Promulgation段明确November 29, 1890生效、February 11, 1889颁布，制度栏说明两院结构；保留原ID。 |
+| 11-29 | 1961 · 黑猩猩“伊诺斯”完成轨道飞行 | [美国国家航空航天局 NASA](<https://www.nasa.gov/history/60-years-ago-soviets-select-their-first-cosmonauts/>) | NASA历史专题在Mercury段明确Nov. 29, 1961、two orbits和USS Stormes安全回收；不是首次动物太空飞行，也不把三圈计划写作完成。 |
+| 11-30 | 1949 · 人民解放军进入重庆 | [新华网](<https://www.xinhuanet.com/politics/2012-11/30/c_113839185.htm>) | 新华社历史回顾明确1949年11月30日重庆解放；另读重庆市档案馆《中国人民解放军重庆市军事管制委员会布告》索引正文，明确12月3日军管会成立，未提前到11月30日。 |
+| 11-30 | 1835 · 马克·吐温诞生 | [维基百科：马克·吐温](<https://en.wikipedia.org/wiki/Mark_Twain>) | 信息框、开篇和Early life段明确November 30, 1835，Florida, Missouri；生平列作品与笔名；未把出生地Florida误写为佛罗里达州。 |
+| 11-30 | 1872 · 苏格兰与英格兰首场正式国际足球赛 | [苏格兰足球协会](<https://www.scottishfa.co.uk/en/news/scottish-fa-marks-150-years-since-first-international-football-game>) | 足协150周年回顾明确30 November 1872、地点、0–0及first official men’s international；不包含此前非正式场次，未采用有不同估计的观众人数。 |
+| 11-30 | 1700 · 纳尔瓦战役 | [维基百科：1700年纳尔瓦战役](<https://en.wikipedia.org/wiki/Battle_of_Narva_(1700)>) | 信息框及注释同时给30 November新历、19 November俄旧历、20 November瑞典过渡历；正文用公历并明示旧历差别，保留原ID。 |
+| 11-30 | 1936 · 伦敦水晶宫毁于大火 | [维基百科：水晶宫](<https://en.wikipedia.org/wiki/The_Crystal_Palace>) | 信息框及Fire段明确30 November 1936，历史段说明1851原址与1854迁建；不推断纵火等未定火灾原因。 |
+| 11-30 | 1939 · 苏芬冬季战争爆发 | [芬兰公共广播公司 Yle](<https://yle.fi/a/3-11081924>) | 回顾报道开篇明确November 30, 1939进攻及空袭；另读芬兰政府80周年回顾索引全文，记1939年11月30日至1940年3月13日及割让土地。 |
+| 11-30 | 1966 · 巴巴多斯独立 | [美国国务院历史办公室](<https://history.state.gov/countries/barbados>) | 机构Recognition段明确November 30, 1966独立并留在British Commonwealth；不将2021共和国成立混写为1966独立时已完成。 |
 
-以下为真实页面修订版的永久链接。中文和英文列对应一次性取得的候选资料；“直接出处”对应JSON中实际引用的日期页修订版本，另核官方来源的3条仍保留原始日期页，以便追踪取材过程。英文直接简编所用的版本也在索引内保留。
+## 首版未扩充日期的取材修订索引
 
-| 月日 | 年份与条目 | 中文候选日期页 | 英文候选日期页 | 数据直接日期出处 | 核验状态 |
+下表仅保留范围外332个日期的原取材修订信息；它们仍属于首版资料，并未在本次被逐项重新审定。
+
+| 日期 | 首版事件 | 中文日期页 | 英文日期页 | 取材日期页 | 核对状态 |
 | --- | --- | --- | --- | --- | --- |
 | 01-01 | 1801 · 大不列颠及爱尔兰联合王国 | [版 90976589](https://zh.wikipedia.org/wiki/Special:PermanentLink/90976589) | [版 1376470724](https://en.wikipedia.org/wiki/Special:PermanentLink/1376470724) | [日期页原版](https://zh.wikipedia.org/wiki/Special:PermanentLink/90976589) | automated_import |
 | 01-02 | 1959 · 月球1号 | [版 90976597](https://zh.wikipedia.org/wiki/Special:PermanentLink/90976597) | [版 1331982653](https://en.wikipedia.org/wiki/Special:PermanentLink/1331982653) | [日期页原版](https://zh.wikipedia.org/wiki/Special:PermanentLink/90976597) | editorial_review |
@@ -351,40 +557,6 @@
 | 10-25 | 1760 · 乔治三世 | [版 95278098](https://zh.wikipedia.org/wiki/Special:PermanentLink/95278098) | [版 1382087261](https://en.wikipedia.org/wiki/Special:PermanentLink/1382087261) | [日期页原版](https://en.wikipedia.org/wiki/Special:PermanentLink/1382087261) | automated_import |
 | 10-26 | 1909 · 伊藤博文 | [版 91021802](https://zh.wikipedia.org/wiki/Special:PermanentLink/91021802) | [版 1381653140](https://en.wikipedia.org/wiki/Special:PermanentLink/1381653140) | [日期页原版](https://zh.wikipedia.org/wiki/Special:PermanentLink/91021802) | automated_import |
 | 10-27 | 2017 · 加泰隆尼亚共和国 | [版 91021808](https://zh.wikipedia.org/wiki/Special:PermanentLink/91021808) | [版 1382253514](https://en.wikipedia.org/wiki/Special:PermanentLink/1382253514) | [日期页原版](https://zh.wikipedia.org/wiki/Special:PermanentLink/91021808) | automated_import |
-| 10-28 | 1886 · 自由女神像 | [版 91021827](https://zh.wikipedia.org/wiki/Special:PermanentLink/91021827) | [版 1382216557](https://en.wikipedia.org/wiki/Special:PermanentLink/1382216557) | [日期页原版](https://en.wikipedia.org/wiki/Special:PermanentLink/1382216557) | automated_import |
-| 10-29 | 1991 · 加斯普拉星 | [版 84604834](https://zh.wikipedia.org/wiki/Special:PermanentLink/84604834) | [版 1382311175](https://en.wikipedia.org/wiki/Special:PermanentLink/1382311175) | [日期页原版](https://en.wikipedia.org/wiki/Special:PermanentLink/1382311175) | automated_import |
-| 10-30 | 1938 · 世界大战 | [版 84604806](https://zh.wikipedia.org/wiki/Special:PermanentLink/84604806) | [版 1382077586](https://en.wikipedia.org/wiki/Special:PermanentLink/1382077586) | [日期页原版](https://zh.wikipedia.org/wiki/Special:PermanentLink/84604806) | automated_import |
-| 10-31 | 1941 · 拉什莫尔山 | [版 84604818](https://zh.wikipedia.org/wiki/Special:PermanentLink/84604818) | [版 1382142516](https://en.wikipedia.org/wiki/Special:PermanentLink/1382142516) | [日期页原版](https://zh.wikipedia.org/wiki/Special:PermanentLink/84604818) | automated_import |
-| 11-01 | 1993 · 欧洲联盟 | [版 91031073](https://zh.wikipedia.org/wiki/Special:PermanentLink/91031073) | [版 1382234196](https://en.wikipedia.org/wiki/Special:PermanentLink/1382234196) | [日期页原版](https://zh.wikipedia.org/wiki/Special:PermanentLink/91031073) | automated_import |
-| 11-02 | 2000 · 国际空间站 | [版 91031080](https://zh.wikipedia.org/wiki/Special:PermanentLink/91031080) | [版 1364402619](https://en.wikipedia.org/wiki/Special:PermanentLink/1364402619) | [日期页原版](https://en.wikipedia.org/wiki/Special:PermanentLink/1364402619) | automated_import |
-| 11-03 | 1957 · 莱卡 | [版 91031427](https://zh.wikipedia.org/wiki/Special:PermanentLink/91031427) | [版 1372748746](https://en.wikipedia.org/wiki/Special:PermanentLink/1372748746) | [日期页原版](https://en.wikipedia.org/wiki/Special:PermanentLink/1372748746) | automated_import |
-| 11-04 | 1995 · 伊扎克·拉宾 | [版 91031095](https://zh.wikipedia.org/wiki/Special:PermanentLink/91031095) | [版 1381278011](https://en.wikipedia.org/wiki/Special:PermanentLink/1381278011) | [日期页原版](https://en.wikipedia.org/wiki/Special:PermanentLink/1381278011) | automated_import |
-| 11-05 | 2007 · 嫦娥一号 | [版 91031104](https://zh.wikipedia.org/wiki/Special:PermanentLink/91031104) | [版 1357394940](https://en.wikipedia.org/wiki/Special:PermanentLink/1357394940) | [日期页原版](https://zh.wikipedia.org/wiki/Special:PermanentLink/91031104) | automated_import |
-| 11-06 | 1962 · 南非种族隔离 | [版 94053569](https://zh.wikipedia.org/wiki/Special:PermanentLink/94053569) | [版 1362863938](https://en.wikipedia.org/wiki/Special:PermanentLink/1362863938) | [日期页原版](https://zh.wikipedia.org/wiki/Special:PermanentLink/94053569) | automated_import |
-| 11-07 | 1987 · 新加坡地铁 | [版 91031328](https://zh.wikipedia.org/wiki/Special:PermanentLink/91031328) | [版 1362863096](https://en.wikipedia.org/wiki/Special:PermanentLink/1362863096) | [日期页原版](https://en.wikipedia.org/wiki/Special:PermanentLink/1362863096) | automated_import |
-| 11-08 | 2013 · 台风海燕 | [版 91031129](https://zh.wikipedia.org/wiki/Special:PermanentLink/91031129) | [版 1364196506](https://en.wikipedia.org/wiki/Special:PermanentLink/1364196506) | [日期页原版](https://zh.wikipedia.org/wiki/Special:PermanentLink/91031129) | automated_import |
-| 11-09 | 1918 · 魏玛共和国 | [版 91032022](https://zh.wikipedia.org/wiki/Special:PermanentLink/91032022) | [版 1365279690](https://en.wikipedia.org/wiki/Special:PermanentLink/1365279690) | [日期页原版](https://zh.wikipedia.org/wiki/Special:PermanentLink/91032022) | automated_import |
-| 11-10 | 1969 · 芝麻街 | [版 91031151](https://zh.wikipedia.org/wiki/Special:PermanentLink/91031151) | [版 1379763942](https://en.wikipedia.org/wiki/Special:PermanentLink/1379763942) | [日期页原版](https://en.wikipedia.org/wiki/Special:PermanentLink/1379763942) | automated_import |
-| 11-11 | 1965 · 伊恩·史密斯 | [版 84906009](https://zh.wikipedia.org/wiki/Special:PermanentLink/84906009) | [版 1351735056](https://en.wikipedia.org/wiki/Special:PermanentLink/1351735056) | [日期页原版](https://en.wikipedia.org/wiki/Special:PermanentLink/1351735056) | automated_import |
-| 11-12 | 1936 · 旧金山—奥克兰海湾大桥 | [版 93710843](https://zh.wikipedia.org/wiki/Special:PermanentLink/93710843) | [版 1375765929](https://en.wikipedia.org/wiki/Special:PermanentLink/1375765929) | [日期页原版](https://zh.wikipedia.org/wiki/Special:PermanentLink/93710843) | automated_import |
-| 11-13 | 1940 · 幻想曲 | [版 91031176](https://zh.wikipedia.org/wiki/Special:PermanentLink/91031176) | [版 1374615361](https://en.wikipedia.org/wiki/Special:PermanentLink/1374615361) | [日期页原版](https://en.wikipedia.org/wiki/Special:PermanentLink/1374615361) | automated_import |
-| 11-14 | 2003 · 赛德娜 | [版 91031192](https://zh.wikipedia.org/wiki/Special:PermanentLink/91031192) | [版 1323067563](https://en.wikipedia.org/wiki/Special:PermanentLink/1323067563) | [日期页原版](https://en.wikipedia.org/wiki/Special:PermanentLink/1323067563) | automated_import |
-| 11-15 | 1864 · 舍曼向大海进军 | [版 91031455](https://zh.wikipedia.org/wiki/Special:PermanentLink/91031455) | [版 1366595343](https://en.wikipedia.org/wiki/Special:PermanentLink/1366595343) | [日期页原版](https://en.wikipedia.org/wiki/Special:PermanentLink/1366595343) | automated_import |
-| 11-16 | 1992 · 霍克森宝藏 | [版 91031214](https://zh.wikipedia.org/wiki/Special:PermanentLink/91031214) | [版 1356765107](https://en.wikipedia.org/wiki/Special:PermanentLink/1356765107) | [日期页原版](https://en.wikipedia.org/wiki/Special:PermanentLink/1356765107) | automated_import |
-| 11-17 | 1989 · 天鹅绒革命 | [版 91031228](https://zh.wikipedia.org/wiki/Special:PermanentLink/91031228) | [版 1362854524](https://en.wikipedia.org/wiki/Special:PermanentLink/1362854524) | [日期页原版](https://zh.wikipedia.org/wiki/Special:PermanentLink/91031228) | automated_import |
-| 11-18 | 1872 · 苏珊·安东尼 | [版 91031235](https://zh.wikipedia.org/wiki/Special:PermanentLink/91031235) | [版 1362854872](https://en.wikipedia.org/wiki/Special:PermanentLink/1362854872) | [日期页原版](https://en.wikipedia.org/wiki/Special:PermanentLink/1362854872) | automated_import |
-| 11-19 | 1863 · 葛底斯堡演说 | [版 91031395](https://zh.wikipedia.org/wiki/Special:PermanentLink/91031395) | [版 1363805711](https://en.wikipedia.org/wiki/Special:PermanentLink/1363805711) | [日期页原版](https://en.wikipedia.org/wiki/Special:PermanentLink/1363805711) | automated_import |
-| 11-20 | 1998 · 国际空间站 | [版 85039458](https://zh.wikipedia.org/wiki/Special:PermanentLink/85039458) | [版 1366225238](https://en.wikipedia.org/wiki/Special:PermanentLink/1366225238) | [日期页原版](https://zh.wikipedia.org/wiki/Special:PermanentLink/85039458) | automated_import |
-| 11-21 | 1894 · 旅顺大屠杀 | [版 91031254](https://zh.wikipedia.org/wiki/Special:PermanentLink/91031254) | [版 1365269215](https://en.wikipedia.org/wiki/Special:PermanentLink/1365269215) | [日期页原版](https://zh.wikipedia.org/wiki/Special:PermanentLink/91031254) | automated_import |
-| 11-22 | 1635 · 荷兰在台湾之平定行动 | [版 91031346](https://zh.wikipedia.org/wiki/Special:PermanentLink/91031346) | [版 1382226028](https://en.wikipedia.org/wiki/Special:PermanentLink/1382226028) | [日期页原版](https://en.wikipedia.org/wiki/Special:PermanentLink/1382226028) | automated_import |
-| 11-23 | 1644 · 论出版自由 | [版 90235613](https://zh.wikipedia.org/wiki/Special:PermanentLink/90235613) | [版 1380047452](https://en.wikipedia.org/wiki/Special:PermanentLink/1380047452) | [日期页原版](https://en.wikipedia.org/wiki/Special:PermanentLink/1380047452) | automated_import |
-| 11-24 | 1859 · 物种起源 | [版 91031274](https://zh.wikipedia.org/wiki/Special:PermanentLink/91031274) | [版 1376830795](https://en.wikipedia.org/wiki/Special:PermanentLink/1376830795) | [日期页原版](https://zh.wikipedia.org/wiki/Special:PermanentLink/91031274) | automated_import |
-| 11-25 | 1940 · 蚊式轰炸机 | [版 91031285](https://zh.wikipedia.org/wiki/Special:PermanentLink/91031285) | [版 1324107217](https://en.wikipedia.org/wiki/Special:PermanentLink/1324107217) | [日期页原版](https://en.wikipedia.org/wiki/Special:PermanentLink/1324107217) | automated_import |
-| 11-26 | 1942 · 北非谍影 | [版 91031411](https://zh.wikipedia.org/wiki/Special:PermanentLink/91031411) | [版 1370748494](https://en.wikipedia.org/wiki/Special:PermanentLink/1370748494) | [日期页原版](https://en.wikipedia.org/wiki/Special:PermanentLink/1370748494) | automated_import |
-| 11-27 | 1895 · 诺贝尔奖 | [版 91031519](https://zh.wikipedia.org/wiki/Special:PermanentLink/91031519) | [版 1366234065](https://en.wikipedia.org/wiki/Special:PermanentLink/1366234065) | [日期页原版](https://en.wikipedia.org/wiki/Special:PermanentLink/1366234065) | automated_import |
-| 11-28 | 1660 · 皇家学会 | [版 91031301](https://zh.wikipedia.org/wiki/Special:PermanentLink/91031301) | [版 1362852356](https://en.wikipedia.org/wiki/Special:PermanentLink/1362852356) | [日期页原版](https://en.wikipedia.org/wiki/Special:PermanentLink/1362852356) | automated_import |
-| 11-29 | 1890 · 大日本帝国宪法 | [版 91031305](https://zh.wikipedia.org/wiki/Special:PermanentLink/91031305) | [版 1362859668](https://en.wikipedia.org/wiki/Special:PermanentLink/1362859668) | [日期页原版](https://zh.wikipedia.org/wiki/Special:PermanentLink/91031305) | automated_import |
-| 11-30 | 1700 · 大北方战争 | [版 91031535](https://zh.wikipedia.org/wiki/Special:PermanentLink/91031535) | [版 1371377191](https://en.wikipedia.org/wiki/Special:PermanentLink/1371377191) | [日期页原版](https://zh.wikipedia.org/wiki/Special:PermanentLink/91031535) | automated_import |
 | 12-01 | 1934 · 谢尔盖·基洛夫 | [版 91031832](https://zh.wikipedia.org/wiki/Special:PermanentLink/91031832) | [版 1333375637](https://en.wikipedia.org/wiki/Special:PermanentLink/1333375637) | [日期页原版](https://zh.wikipedia.org/wiki/Special:PermanentLink/91031832) | automated_import |
 | 12-02 | 1942 · 芝加哥1号堆 | [版 91031570](https://zh.wikipedia.org/wiki/Special:PermanentLink/91031570) | [版 1365814275](https://en.wikipedia.org/wiki/Special:PermanentLink/1365814275) | [日期页原版](https://zh.wikipedia.org/wiki/Special:PermanentLink/91031570) | automated_import |
 | 12-03 | 1967 · 首次成功的人类心脏移植 | [版 91031575](https://zh.wikipedia.org/wiki/Special:PermanentLink/91031575) | [版 1381722308](https://en.wikipedia.org/wiki/Special:PermanentLink/1381722308) | [日期页原版](https://en.wikipedia.org/wiki/Special:PermanentLink/1381722308) | automated_import |
