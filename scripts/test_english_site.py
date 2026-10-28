@@ -144,10 +144,6 @@ class EnglishPublicationTests(unittest.TestCase):
         self.news_now = timestamp(self.snapshot["collected_at"])
         self.history = load_history(self.root, build_site.linked_directory)
         self.history_day = date(2026, 10, 28)
-        original = next(article for article in blog.articles if article.source == self.source)
-        self.own_quotes = build_site.home_quote_items(blog, [(original,
-            "这是完整的第一段，图像与链接必须原样保留。",
-            "This is the complete first paragraph; images and link targets must be preserved.")])
         projects = build_site.load_projects()
         # This fixture calls the English publisher directly, so supply the same
         # homepage inputs that the unified builder normally passes to it.
@@ -168,8 +164,8 @@ class EnglishPublicationTests(unittest.TestCase):
             "home_article_links": build_site.home_article_links(blog), "home_article_links_en": build_site.home_article_links(blog, "en"),
             "home_avatar": build_site.render_home_avatar(), "home_avatar_en": build_site.render_home_avatar("en"),
             "brief_rules_data": safe_json(extras["rules"]), "brief_holidays_data": safe_json(extras["holidays"]),
-            "brief_bottom_cards": render_brief_bottom(daily_content, extras, own_quote=build_site.render_quote_section(self.own_quotes)),
-            "brief_bottom_cards_en": render_brief_bottom(daily_content, extras, "en", own_quote=build_site.render_quote_section(self.own_quotes, "en")),
+            "brief_bottom_cards": render_brief_bottom(daily_content, extras),
+            "brief_bottom_cards_en": render_brief_bottom(daily_content, extras, "en"),
             "home_recent_articles": build_site.render_home_recent(blog),
             "home_recent_articles_en": build_site.render_home_recent(blog, "en"),
             "home_project_cards": build_site.render_home_projects(projects),
@@ -177,8 +173,7 @@ class EnglishPublicationTests(unittest.TestCase):
             "home_photo_src": "/assets/home-ink.webp",
             "home_photo_alt": "合成首页水墨背景", "home_photo_alt_en": "Synthetic homepage ink background",
             "home_photo_caption": "合成公开首页", "home_photo_caption_en": "Synthetic public homepage",
-            "home_photo_srcset": "/assets/home-ink.webp 2172w", "own_quotes_data": safe_json(self.own_quotes),
-            "home_quote_section": "", "home_quote_section_en": "", "home_picks_section": "", "home_picks_section_en": "",
+            "home_photo_srcset": "/assets/home-ink.webp 2172w",
             "site_notes": build_site.render_site_notes(blog.waline, blog.config["repository_url"]),
             "site_notes_en": build_site.render_site_notes(blog.waline, blog.config["repository_url"], "en"),
         })
@@ -195,7 +190,7 @@ class EnglishPublicationTests(unittest.TestCase):
         self.english_report = build_english_site(blog, self.output, "https://public.test", projects, build_site.load_about(), values)
         return blog
 
-    def test_bilingual_today_has_readable_original_news_history_and_two_reading_cards_without_scripts(self):
+    def test_bilingual_today_has_readable_news_history_and_one_reading_card_without_scripts(self):
         blog = self.build_fixture()
         _, daily_content = load_daily(self.root, build_site.linked_directory)
         for language, route in (("zh-CN", "today/index.html"), ("en", "en/today/index.html")):
@@ -203,8 +198,7 @@ class EnglishPublicationTests(unittest.TestCase):
                 text = (self.output / route).read_text(encoding="utf-8")
                 self.assertNotIn("{{", text)
                 for element_id, expected in (("news-snapshot-data", self.snapshot), ("news-sources-data", self.public_news_sources),
-                                             ("daily-history-data", self.history), ("daily-content-data", daily_content),
-                                             ("own-quotes-data", self.own_quotes)):
+                                             ("daily-history-data", self.history), ("daily-content-data", daily_content)):
                     script = re.search(r'<script id="' + element_id + r'"[^>]*>(.*?)</script>', text, re.S)
                     self.assertIsNotNone(script)
                     self.assertEqual(json.loads(script[1]), expected)
@@ -231,9 +225,8 @@ class EnglishPublicationTests(unittest.TestCase):
                     self.assertIn(escape(item["title"][language]), history)
                     self.assertIn(escape(item["url"], quote=True), history)
                 self.assertIn('id="daily-quotation-card"', text)
-                self.assertIn('id="daily-own-quote-card"', text)
+                self.assertNotIn('own-quote', text)
                 self.assertIn('id="daily-quote-button"', text)
-                self.assertIn('id="own-quote-button"', text)
                 self.assertNotIn('id="daily-meme-card"', text)
                 self.assertNotIn('id="daily-concept-title"', text)
                 self.assertIn('/assets/daily-reading.js', text)

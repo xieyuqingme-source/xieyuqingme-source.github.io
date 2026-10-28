@@ -347,17 +347,17 @@ def render_brief(data, language="zh-CN"):
     return "\n".join(cards)
 
 
-def render_brief_bottom(content, extras, language="zh-CN", today=None, own_quote=""):
-    """A source-backed quotation and one line from the author's essays."""
+def render_brief_bottom(content, extras, language="zh-CN", today=None):
+    """One source-backed quotation, shared by the static fallback and live reader."""
     language = "en" if language == "en" else "zh-CN"
     content = validate_content(content)
     today = today or datetime.now(CHINA).date()
     quote = content["quotes"][(today - date(1970, 1, 1)).days % len(content["quotes"])]
     text = lambda value: escape(value[language] if isinstance(value, dict) else value)
-    title = "Red quotations" if language == "en" else "红色语录"
+    title = "Marxist quotations" if language == "en" else "马克思主义名句"
     another = "Another quote" if language == "en" else "换一句"
     note = "Quotation notes" if language == "en" else "引文说明"
     quote_url = escape(quote["url"][language] if isinstance(quote["url"], dict) else quote["url"], quote=True)
     source_language = quote.get("source_language", {}).get(language, language)
     card = f'''<article class="yl-daily-card" id="daily-quotation-card" aria-labelledby="daily-quotation-title"><div class="reading-heading"><h3 id="daily-quotation-title">{title}</h3><button class="quote-change" id="daily-quote-button" type="button" aria-label="{another} · {title}" hidden>{another}</button></div><blockquote id="daily-quote"><p class="yl-quote" id="daily-quote-text">{text(quote["text"])}</p><p class="yl-small yl-quote-source" id="daily-quote-source"><span id="daily-quote-author">{text(quote["author"])}</span> · <a id="daily-quote-work" href="{quote_url}" hreflang="{source_language}" lang="{language}" target="_blank" rel="noopener noreferrer">{text(quote["work"])} ↗</a></p></blockquote><details class="quote-note"><summary>{note}</summary><p id="daily-quote-note">{text(quote["translation_note"])}</p></details></article>'''
-    return '<div class="yl-bottomline" id="brief-bottom">' + card + own_quote + '</div>'
+    return '<div class="yl-bottomline" id="brief-bottom">' + card + '</div>'

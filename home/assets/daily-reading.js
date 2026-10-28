@@ -1,4 +1,4 @@
-/* Local quotation decks: a Beijing-date opening line, then a non-repeating shuffle. */
+/* Local quotations: a Beijing-date opening line, then a non-repeating shuffle. */
 (function (root, factory) {
   'use strict';
   const api = factory();
@@ -41,10 +41,6 @@
     if (typeof value !== 'string' || !/^https:\/\//.test(value) || /[\s\u0000-\u001f<>\\]/.test(value)) return false;
     try { const url = new URL(value); return url.protocol === 'https:' && !!url.hostname && !url.username && !url.password; } catch (_) { return false; }
   }
-  function safeArticle(value) {
-    if (typeof value !== 'string' || !/^\/(?:en\/)?articles\/(?!\/)/.test(value) || /[\s\u0000-\u001f<>\\]/.test(value)) return false;
-    try { const url = new URL(value,'https://reading.invalid'); return url.origin === 'https://reading.invalid' && /^\/(?:en\/)?articles\/(?!\/)/.test(url.pathname); } catch (_) { return false; }
-  }
   function quotations(value) {
     const seen = new Set();
     return (value?.version === 1 && Array.isArray(value.quotes) ? value.quotes : []).filter(item => {
@@ -54,29 +50,21 @@
       seen.add(item.id); return true;
     });
   }
-  function essayLines(value) {
-    const seen = new Set();
-    return (Array.isArray(value) ? value : []).filter(item => {
-      if (!item || !bilingual(item.text) || !bilingual(item.title) || !bilingual(item.url) || !['zh-CN','en'].every(language => safeArticle(item.url[language]))) return false;
-      const identity = JSON.stringify(item.text); if (seen.has(identity)) return false; seen.add(identity); return true;
-    });
-  }
   function mount(options = {}) {
     const win = options.window, doc = options.document;
     if (!win || !doc?.getElementById) return {destroy() {}};
     const find = id => doc.getElementById(id), read = id => { try { return JSON.parse(find(id)?.textContent || 'null'); } catch (_) { return null; } };
     const classic = find('daily-quote-text') ? quotations(read('daily-content-data')) : [];
-    const own = find('own-quote-text') ? essayLines(read('own-quotes-data')) : [];
     const now = options.now || (() => new Date()), random = options.random || Math.random;
     const lang = () => String(win.SiteI18n?.lang?.() || doc.documentElement?.lang || 'zh-CN').startsWith('en') ? 'en' : 'zh-CN';
     // The persistent document element survives progressive page replacement.
     // This one-use handoff is only created by the language control, never saved.
     const carrier = doc.documentElement, handoff = carrier?.__dailyReadingTransfer;
     if (carrier) delete carrier.__dailyReadingTransfer;
-    const poolKey = JSON.stringify([classic.map(item => item.id),own.map(item => item.text)]);
+    const poolKey = JSON.stringify(classic.map(item => item.id));
     const carried = handoff?.poolKey === poolKey && handoff.day === dayNumber(now()) && handoff.language === lang()
       && Number.isFinite(handoff.created) && now().getTime()-handoff.created >= 0 && now().getTime()-handoff.created < 120000 ? handoff : null;
-    let disposed = false, today, language, classicDeck, ownDeck;
+    let disposed = false, today, language, classicDeck;
     const cleanups = [];
     function listen(target,type,handler,settings) { if (!target?.addEventListener) return; target.addEventListener(type,handler,settings); cleanups.push(() => target.removeEventListener(type,handler,settings)); }
     function write(id,value) { const element = find(id); if (element) element.textContent = value; }
@@ -87,40 +75,26 @@
     }
     function renderClassic() {
       const item = classic[classicDeck?.current()]; if (!item) return;
-      write('daily-quotation-title',language === 'en' ? 'Red quotations' : '红色语录');
+      write('daily-quotation-title',language === 'en' ? 'Marxist quotations' : '马克思主义名句');
       write('daily-quote-text',item.text[language]); write('daily-quote-author',item.author[language]); write('daily-quote-note',item.translation_note[language]);
       const link = find('daily-quote-work'); if (link) { link.href = typeof item.url === 'string' ? item.url : item.url[language]; link.textContent = item.work[language]+' ↗'; link.target = '_blank'; link.rel = 'noopener noreferrer'; link.setAttribute('hreflang',item.source_language?.[language] || language); link.setAttribute('lang',language); }
       if (find('daily-quote')) find('daily-quote').dataset.quoteId = item.id;
-      renderButton('daily-quote-button','daily-quotation-title',language === 'en' ? 'Red quotations' : '红色语录');
-    }
-    function renderOwn() {
-      const index = ownDeck?.current(), item = own[index]; if (!item) return;
-      write('own-quote-text',item.text[language]);
-      const source = find('own-quote-source');
-      if (source) {
-        const dash = doc.createElement('span'); dash.setAttribute('aria-hidden','true'); dash.textContent = language === 'en' ? '—' : '——';
-        const link = doc.createElement('a'); link.href = item.url[language]; link.textContent = language === 'en' ? item.title.en : '《'+item.title['zh-CN']+'》';
-        const nodes = [dash,doc.createTextNode(' '),link];
-        if (typeof item.date === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(item.date)) { const time = doc.createElement('time'); time.dateTime = item.date; time.textContent = item.date.replaceAll('-','.'); nodes.push(doc.createTextNode(' '),time); }
-        source.replaceChildren(...nodes);
-      }
-      if (find('own-quote')) find('own-quote').dataset.quoteIndex = String(index);
-      renderButton('own-quote-button','quote-title',language === 'en' ? 'A line from my essays' : '旧文一句');
+      renderButton('daily-quote-button','daily-quotation-title',language === 'en' ? 'Marxist quotations' : '马克思主义名句');
     }
     function refresh(force) {
       if (disposed) return;
       const day = dayNumber(now()), selectedLanguage = lang();
-      if (today !== day) { today = day; classicDeck = createDeck(classic.length,day,random,carried?.day === day ? carried.classic : null); ownDeck = createDeck(own.length,day,random,carried?.day === day ? carried.own : null); force = true; }
-      if (force || language !== selectedLanguage) { language = selectedLanguage; renderClassic(); renderOwn(); }
+      if (today !== day) { today = day; classicDeck = createDeck(classic.length,day,random,carried?.day === day ? carried.classic : null); force = true; }
+      if (force || language !== selectedLanguage) { language = selectedLanguage; renderClassic(); }
     }
-    for (const [id,items,deck,render] of [['daily-quote-button',classic,() => classicDeck,renderClassic],['own-quote-button',own,() => ownDeck,renderOwn]]) {
-      const button = find(id); if (!button) continue;
-      button.hidden = items.length < 2;
-      if (items.length > 1) listen(button,'click',() => { if (disposed) return; refresh(false); deck().next(); render(); });
+    const button = find('daily-quote-button');
+    if (button) {
+      button.hidden = classic.length < 2;
+      if (classic.length > 1) listen(button,'click',() => { if (disposed) return; refresh(false); classicDeck.next(); renderClassic(); });
     }
     refresh(true);
     let timer = null;
-    if (classic.length || own.length) {
+    if (classic.length) {
       timer = win.setInterval(() => refresh(false),60000);
       listen(doc,'visibilitychange',() => { if (!doc.hidden) refresh(false); });
       listen(doc,'click',event => {
@@ -130,7 +104,7 @@
         if (win.SiteI18n?.page?.().switchMode === 'history') return;
         refresh(false);
         const requested = control.getAttribute('data-site-language-switch'), target = ['zh-CN','en'].includes(requested) ? requested : language === 'en' ? 'zh-CN' : 'en';
-        if (carrier && target !== language) carrier.__dailyReadingTransfer = {poolKey,day:today,language:target,created:now().getTime(),classic:classicDeck.snapshot(),own:ownDeck.snapshot()};
+        if (carrier && target !== language) carrier.__dailyReadingTransfer = {poolKey,day:today,language:target,created:now().getTime(),classic:classicDeck.snapshot()};
       },true);
       const unsubscribe = win.SiteI18n?.onChange?.(() => refresh(true)); if (typeof unsubscribe === 'function') cleanups.push(unsubscribe);
     }
@@ -138,5 +112,5 @@
     win.SiteNavigation?.own?.(destroy);
     return {destroy};
   }
-  return {dayNumber,createDeck,quotations,essayLines,mount};
+  return {dayNumber,createDeck,quotations,mount};
 });

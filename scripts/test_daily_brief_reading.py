@@ -85,7 +85,7 @@ class DailyBriefReadingTests(unittest.TestCase):
 
     def test_no_script_cards_render_each_entry_and_its_own_language_link(self):
         for index, item in enumerate(self.content["quotes"]):
-            for language, heading in (("zh-CN", "红色语录"), ("en", "Red quotations")):
+            for language, heading in (("zh-CN", "马克思主义名句"), ("en", "Marxist quotations")):
                 with self.subTest(id=item["id"], language=language):
                     # Exercise every card without re-embedding the entire 430-card JSON on every iteration.
                     html = render_brief_bottom({"version": 1, "quotes": [item]}, {}, language, date(1970, 1, 1))
@@ -144,14 +144,13 @@ class DailyBriefReadingTests(unittest.TestCase):
             html = render_brief_bottom(self.content, {}, "zh-CN", date(1970, 1, 1) + timedelta(days=day))
             self.assertIn(expected["text"]["zh-CN"], html)
 
-    def test_quote_text_is_escaped_and_essay_card_is_preserved(self):
+    def test_quote_text_is_escaped_and_retired_card_is_absent(self):
         content = copy.deepcopy(self.content)
         content["quotes"][0]["text"]["en"] = '<script>alert("quotation")</script>'
-        own = '<article id="daily-own-quote-card">An essay line</article>'
-        html = render_brief_bottom(content, {}, "en", date(1970, 1, 1), own_quote=own)
+        html = render_brief_bottom(content, {}, "en", date(1970, 1, 1))
         self.assertIn("&lt;script&gt;", html)
         self.assertNotIn('<script>alert', html)
-        self.assertIn(own, html)
+        self.assertNotIn("own-quote", html)
 
 
 if __name__ == "__main__":

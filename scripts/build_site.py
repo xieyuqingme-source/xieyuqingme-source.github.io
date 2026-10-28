@@ -4,7 +4,7 @@ from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import unquote, urlsplit, urlunsplit
 from xml.etree import ElementTree as ET
-from datetime import date, datetime
+from datetime import datetime
 import argparse
 import json
 import ipaddress
@@ -50,7 +50,6 @@ HOME_DAILY_ASSETS = ("home-daily.css", "home-daily.js", "daily-reading.js", "wea
                      "vendor/d3-7.9.0.min.js", "vendor/D3-LICENSE",
                      "vendor/lunar-javascript-1.7.7.js", "vendor/lunar-javascript-1.7.7.LICENSE")
 HOME_PHOTO = "/photos/images/p-71f77ab6511ec1ce656a58a3-18000666287e1d55-640.webp"
-HOME_PICKS = "home/home-picks.json"
 TODAY_TITLES = {"zh-CN": "今天 · 谢雨卿", "en": "Today · Xie Yuqing"}
 TODAY_DESCRIPTIONS = {
     "zh-CN": "从此刻地球与天气，到历史、每日阅读和重点新闻。",
@@ -204,7 +203,7 @@ def render_site_notes(waline, repository, language="zh-CN"):
         items = ['Pages are generated with Python and use system fonts only, with no external font files.',
                  'The Today page presents Earth, weather, history, reading and news, in that order. The calendar and globe are calculated live; historical events and reading rotate from local collections using Beijing time. The homepage shows only the date, solar term and a small globe.',
                  'Weather comes from Open-Meteo. City searches send the name you enter to its geocoding service; choosing a point on the map sends its coordinates for weather. The page never requests your device location, and saves your selected city or coordinates and the latest weather only in your browser. The homepage makes no weather request.',
-                 'News follows source newsroom selections and preset rules, with original headlines, publication times and links. Red quotations cite works in the Marxists Internet Archive, dated diaries from the Lei Feng Memorial Hall, and published translations of How the Steel Was Tempered. Edition notes distinguish published excerpts from translations prepared for this site. The reading collections are stored locally; browsing them makes no automatic request to the sources.',
+                 'News follows source newsroom selections and preset rules, with original headlines, publication times and links. Marxist quotations cite works in the Marxists Internet Archive, dated diaries from the Lei Feng Memorial Hall, and published translations of How the Steel Was Tempered. Edition notes distinguish published excerpts from translations prepared for this site. The reading collections are stored locally; browsing them makes no automatic request to the sources.',
                  'Article view counts and comments use Waline. These requests send your IP address and browser information to the Waline backend and its providers'
                  + (f' (hosting: {host}; database: {database})' if host and database else '') + '. The comment area explains what is shown publicly.',
                  'Map geography comes from Natural Earth (public domain). Project screenshots and other third-party sources are credited in each project.']
@@ -213,7 +212,7 @@ def render_site_notes(waline, repository, language="zh-CN"):
         items = ['页面用 Python 生成。全站使用设备自带的字体，不加载外部字体文件。',
                  '「今天」页依次展示地球、天气、历史、阅读和新闻。日历和地球实时计算，历史事件与阅读内容从本地资料库按北京时间轮换。首页只放日期、节气和一个小地球。',
                  '天气来自 Open-Meteo；搜索城市会向其地名服务发送输入的城市名，地图选点会发送所选坐标以查询天气，不读取设备定位。页面仅在浏览器里保存所选城市或坐标及最近一次天气。首页不请求天气。',
-                 '新闻按来源媒体选题和预设规则自动汇集，保留原题、原文发布时间与链接。红色语录的来源包括马克思主义者网原著页、雷锋纪念馆日记及《钢铁是怎样炼成的》出版译本；版本说明区分原文摘录与本站节译。阅读资料随本站保存，浏览和换句时不自动请求来源网站。',
+                 '新闻按来源媒体选题和预设规则自动汇集，保留原题、原文发布时间与链接。马克思主义名句的来源包括马克思主义者网原著页、雷锋纪念馆日记及《钢铁是怎样炼成的》出版译本；版本说明区分原文摘录与本站节译。阅读资料随本站保存，浏览和换句时不自动请求来源网站。',
                  '文章的浏览量和留言由 Waline 提供：相关请求会把 IP 和浏览器信息发送给 Waline 后端及其托管商'
                  + (f'（服务托管：{host}；数据库：{database}）' if host and database else '') + '。留言区另有说明。',
                  '足迹地图的底图来自 Natural Earth（公有领域）；作品截图与其他第三方来源见各项目说明。']
@@ -388,115 +387,6 @@ def render_home_projects(projects, language="zh-CN"):
         label = "Open tool →" if language == "en" else "打开体验 →"
         cards.append(f'<article class="yl-project"><a href="{url}" aria-label="{text["title"]}"><img src="{text["screenshot"]}" width="{width}" height="{height}" alt="{text["screenshot_alt"]}" loading="lazy" decoding="async"></a><div><h3><a href="{url}">{text["title"]}</a></h3><p>{text["summary"]}</p><a class="yl-link" href="{url}">{label}</a></div></article>')
     return "\n".join(cards)
-
-
-def plain_markdown(text):
-    """Article text without emphasis markers or footnote references, for quote checks."""
-    return re.sub(r"\*\*|\[\^[^\]]+\]", "", text)
-
-
-def load_home_picks(blog):
-    """Featured essays and verbatim one-line quotes, all tied to published articles."""
-    source = ROOT / HOME_PICKS
-    if source.is_symlink():
-        raise ValueError("Homepage picks cannot be a symlink.")
-    data = json.loads(source.read_text(encoding="utf-8"))
-    if not isinstance(data, dict) or set(data) != {"featured", "quotes"}:
-        raise ValueError("home/home-picks.json needs only featured and quotes lists.")
-    by_source = {article.source.relative_to(blog.source_root).as_posix(): article for article in blog.articles}
-    featured, quotes = [], []
-    if not isinstance(data["featured"], list) or not 1 <= len(data["featured"]) <= 6:
-        raise ValueError("Feature between one and six essays on the homepage.")
-    for item in data["featured"]:
-        if not isinstance(item, dict) or set(item) != {"source", "note"} or not isinstance(item.get("source"), str):
-            raise ValueError(f"Featured essays need a source and a note: {item!r}")
-        if item["source"] not in by_source:
-            continue  # Checked against the real archive by test_build_site.py.
-        note = item["note"]
-        if (not isinstance(note, dict) or set(note) != {"zh-CN", "en"}
-                or any(not isinstance(value, str) or not value.strip() or len(value) > 200 or PRIVATE_PATH.search(value) for value in note.values())):
-            raise ValueError("Each featured essay needs a short Chinese and English note.")
-        featured.append((by_source[item["source"]], note))
-    if not isinstance(data["quotes"], list) or not 1 <= len(data["quotes"]) <= 365:
-        raise ValueError("Keep between 1 and 365 homepage quotes.")
-    for item in data["quotes"]:
-        if not isinstance(item, dict) or set(item) != {"source", "text", "en"} or not isinstance(item.get("source"), str):
-            raise ValueError(f"Quotes need a source, text and English rendering: {item!r}")
-        if item["source"] not in by_source:
-            continue
-        article = by_source[item["source"]]
-        text, english = item["text"], item["en"]
-        if not isinstance(text, str) or not 4 <= len(text) <= 120 or text not in plain_markdown(article.source.read_text(encoding="utf-8-sig")):
-            raise ValueError(f"A homepage quote must appear verbatim in its article: {str(text)[:24]}")
-        if not isinstance(english, str) or not english.strip() or len(english) > 320:
-            raise ValueError("Each homepage quote needs a short English rendering.")
-        quotes.append((article, text, english))
-    return featured, quotes
-
-
-def article_link(blog, article, language):
-    """Title, URL and language to show for an article: its English translation on English pages."""
-    from english_site import english_article_url
-    if language == "en":
-        translated = blog.translations.get(article.source.relative_to(blog.source_root).as_posix())
-        if translated is not None:
-            return translated.title, english_article_url(blog, article), "en"
-    return article.title, blog.href(article.destination), article.language
-
-
-def render_home_picks(blog, featured, language="zh-CN"):
-    from english_site import TOPICS
-    cards = []
-    for article, note in featured:
-        title, url, lang = article_link(blog, article, language)
-        topic = blog.topic(article)
-        if language == "en":
-            topic = TOPICS.get(topic, topic)
-        stamp = escape(article.published.replace("-", ".")) if article.published else ""
-        cards.append(f'<article class="pick"><p class="pick-meta"><span>{escape(topic)}</span><time datetime="{escape(article.published, quote=True)}">{stamp}</time></p>'
-                     f'<h3 lang="{escape(lang, quote=True)}"><a href="{escape(url, quote=True)}">{escape(title)}</a></h3>'
-                     f'<p class="pick-note">{escape(note[language])}</p></article>')
-    return "\n".join(cards)
-
-
-def home_quote_items(blog, quotes):
-    items = []
-    for article, text, english in quotes:
-        zh_title, zh_url, _ = article_link(blog, article, "zh-CN")
-        en_title, en_url, _ = article_link(blog, article, "en")
-        items.append({"text": {"zh-CN": text, "en": english}, "title": {"zh-CN": zh_title, "en": en_title},
-                      "url": {"zh-CN": zh_url, "en": en_url}, "date": article.published or ""})
-    return items
-
-
-def render_home_quote(item, language="zh-CN"):
-    """No-script default; live reading rotation follows Beijing time."""
-    title = item["title"][language]
-    label = title if language == "en" else "《" + title + "》"
-    stamp = escape(item["date"].replace("-", ".")) if item["date"] else ""
-    text = escape(item["text"][language])
-    source = (f'<span aria-hidden="true">{"—" if language == "en" else "——"}</span> <a href="{escape(item["url"][language], quote=True)}">{escape(label)}</a>'
-              + (f' <time datetime="{escape(item["date"], quote=True)}">{stamp}</time>' if stamp else ""))
-    return text, source
-
-
-def render_quote_section(items, language="zh-CN"):
-    if not items:
-        return ""
-    item = items[(datetime.now(CHINA).date() - date(1970, 1, 1)).days % len(items)]
-    text, source = render_home_quote(item, language)
-    title = "A line from my essays" if language == "en" else "旧文一句"
-    another = "Another quote" if language == "en" else "换一句"
-    return (f'<article class="yl-daily-card" id="daily-own-quote-card" aria-labelledby="quote-title"><div class="reading-heading"><h3 id="quote-title">{title}</h3><button class="quote-change" id="own-quote-button" type="button" aria-label="{another} · {title}" hidden>{another}</button></div>'
-            f'<blockquote id="own-quote"><p id="own-quote-text">{text}</p><p class="quote-source" id="own-quote-source">{source}</p></blockquote></article>')
-
-
-def render_picks_section(blog, featured, language="zh-CN"):
-    if not featured:
-        return ""
-    title = "Start with these" if language == "en" else ("先读这三篇" if len(featured) == 3 else "先读这几篇")
-    return (f'<section class="home-section home-picks" id="picks" aria-labelledby="picks-title"><div class="section-head"><h2 id="picks-title">{title}</h2></div>'
-            f'<div class="pick-grid">{render_home_picks(blog, featured, language)}</div></section>')
 
 
 def daily_asset_sources():
@@ -803,14 +693,9 @@ def build_site(address, map_preview_source=None):
         "home_photo_caption": "小清河公园在社科大东边一公里左右，那时常来这里散步。" if has_home_photo else "在主题之间，慢慢探索。",
         "home_photo_caption_en": "Xiaoqinghe Park, about a kilometre east of my university in Beijing. I often walked here." if has_home_photo else "Explore at your own pace.",
     })
-    featured, quotes = load_home_picks(blog)
-    quote_items = home_quote_items(blog, quotes)
     values.update({
-        "own_quotes_data": safe_json(quote_items),
-        "brief_bottom_cards": render_brief_bottom(daily_content, brief_extras, own_quote=render_quote_section(quote_items)),
-        "brief_bottom_cards_en": render_brief_bottom(daily_content, brief_extras, "en", own_quote=render_quote_section(quote_items, "en")),
-        "home_quote_section": render_quote_section(quote_items), "home_quote_section_en": render_quote_section(quote_items, "en"),
-        "home_picks_section": render_picks_section(blog, featured), "home_picks_section_en": render_picks_section(blog, featured, "en"),
+        "brief_bottom_cards": render_brief_bottom(daily_content, brief_extras),
+        "brief_bottom_cards_en": render_brief_bottom(daily_content, brief_extras, "en"),
         "site_notes_en": render_site_notes(blog.waline, blog.config["repository_url"], "en"),
     })
     for name, value in values.items(): home = home.replace("{{" + name + "}}", value)

@@ -1,4 +1,4 @@
-# 红色语录来源与版本说明
+# 马克思主义名句来源与版本说明
 
 核对日期：2026-10-28。数据：`home/daily-content.json`；逐条校对记录：`home/brief/quotes-review.json`。共 **430 条**，按作者交错排列。
 

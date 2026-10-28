@@ -616,32 +616,18 @@ class DailyHomepageTests(unittest.TestCase):
             for field in ("author", "work", "translation_note"):
                 self.assertTrue(all(item[field][language].strip() for language in ("zh-CN", "en")))
 
-    def test_homepage_picks_and_quotes_resolve_to_published_articles(self):
-        from build_blog import Blog
-        blog = Blog("https://xieyuqing.me/articles")
-        blog.source_root = ROOT
-        blog.collect()
-        data = json.loads((ROOT / "home/home-picks.json").read_text(encoding="utf-8"))
-        featured, quotes = build_site.load_home_picks(blog)
-        self.assertEqual(len(featured), len(data["featured"]), "Every featured essay must name a published article.")
-        self.assertEqual(len(quotes), len(data["quotes"]), "Every quote must name a published article.")
-        for article, text, english in quotes:
-            self.assertIn(text, build_site.plain_markdown(article.source.read_text(encoding="utf-8-sig")))
-            self.assertTrue(english.strip())
-        items = build_site.home_quote_items(blog, quotes)
+    def test_daily_reading_contains_one_red_quotation_without_retired_article_data(self):
+        self.assertFalse((ROOT / "home/home-picks.json").exists())
         for language in ("zh-CN", "en"):
-            quote_card = build_site.render_quote_section(items, language)
-            self.assertIn('id="daily-own-quote-card"', quote_card)
-            self.assertIn('id="own-quote-text"', quote_card)
-            self.assertIn('id="own-quote-source"', quote_card)
-            self.assertEqual(sum(tag == "h3" for tag, _ in Elements(quote_card).elements), 1)
-            self.assertIn('id="own-quote-button"', quote_card)
-            cards = render_brief_bottom(self.content, self.extras, language, own_quote=quote_card)
-            self.assertIn(quote_card, cards)
-            self.assertEqual(sum(tag == "article" for tag, _ in Elements(cards).elements), 2)
+            cards = render_brief_bottom(self.content, self.extras, language)
+            elements = Elements(cards).elements
+            self.assertEqual(sum(tag == "article" for tag, _ in elements), 1)
+            self.assertEqual(sum(tag == "h3" for tag, _ in elements), 1)
             self.assertIn('id="daily-quote-button"', cards)
+            self.assertIn('id="daily-quote-work"', cards)
+            self.assertNotIn('own-quote', cards)
             self.assertNotIn('id="daily-meme-card"', cards)
-            self.assertNotIn('class="home-quote"', cards)
+
 
     def test_recent_writing_uses_original_dates_and_direct_available_language_links(self):
         from build_blog import Article

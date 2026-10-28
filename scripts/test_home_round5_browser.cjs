@@ -258,8 +258,9 @@ async function fullContent(page, language, width) {
   assert((await page.locator('#daily-weather-details').textContent()).trim());
   assert.equal(await page.locator('#brief-bottom > article').count(), 3 + Number(memes.length > 0));
   assert.equal(await page.locator('#brief-bottom > article > h2').count(), 3 + Number(memes.length > 0));
-  assert.equal(await page.locator('#brief-bottom #own-quote').count(), 1);
-  assert((await page.locator('#own-quote-text').textContent()).trim());
+  assert.equal(await page.locator('#brief-bottom .yl-daily-card').count(), 1);
+  assert((await page.locator('#daily-quote-text').textContent()).trim());
+  assert.equal(await page.locator('[id^="own-quote"]').count(), 0);
   const issues = await page.evaluate(() => {
     const internal = [], clipped = [];
     for (const node of document.querySelectorAll('*')) {
