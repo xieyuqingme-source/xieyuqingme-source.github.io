@@ -55,8 +55,8 @@ a:focus-visible,button:focus-visible,summary:focus-visible,select:focus-visible,
 /* Footer: the same on every page. */
 .site-footer.container{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:end;gap:18px 40px;margin-top:24px;padding-block:32px calc(36px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--line);color:var(--muted);font:400 var(--fs-small)/1.7 var(--sans)}
 .site-footer .footer-sign{display:grid;gap:4px;min-width:0}
-.site-footer .footer-brand{margin:0;display:flex;align-items:baseline;gap:10px;color:var(--ink);font:650 17px/1.4 var(--sans);letter-spacing:.02em}
-.site-footer .footer-yuliao{font-weight:500;font-size:var(--fs-small);color:var(--accent)}
+.site-footer .footer-brand{margin:0;display:flex;align-items:center;gap:8px;color:var(--ink);font:650 17px/1.4 var(--sans);letter-spacing:.02em}
+.site-footer .footer-mark{display:block;width:20px;height:20px;flex:none}
 .site-footer .footer-note{margin:0;font-family:var(--sans)}
 .site-footer .footer-links{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:4px 20px;font-size:var(--fs-small)}
 .site-footer .footer-meta{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:4px 20px;margin:0;padding-top:14px;border-top:1px dashed var(--line);font-size:var(--fs-meta);font-family:var(--sans)}

@@ -69,10 +69,10 @@ async function publicNavigation(page,language='zh-CN') {
   assert.equal(await entries.count(),4);
   for(const label of await entries.allTextContents())assert.doesNotMatch(label,/学英语|英语角|Learn English|English Corner/);
   const links=page.locator('.site-nav [data-nav-group="projects"] .nav-menu>a');
-  assert.equal(await links.count(),4);
-  assert.equal(await links.nth(2).getAttribute('href'),'/english/');
-  assert.equal((await links.nth(2).textContent()).trim(),language==='en'?'Learn English (中文)':'学英语');
-  assert.equal(await links.nth(3).getAttribute('href'),'/marx/');
+  assert.equal(await links.count(),5);
+  assert.equal(await links.nth(1).getAttribute('href'),'/english/');
+  assert.equal((await links.nth(1).textContent()).trim(),language==='en'?'Learn English (中文)':'学英语');
+  assert.equal(await links.nth(2).getAttribute('href'),'/marx/');
   assert.equal(await page.locator('.site-footer nav a[href="/english/"]').count(),1);
   assert.equal((await page.locator('.site-footer nav a[href="/english/"]').textContent()).trim(),language==='en'?'Learn English (中文)':'学英语');
 }
@@ -135,7 +135,7 @@ async function screenshot(page,name,selector=null,fullPage=true) { const filenam
       const projects=page.locator('.site-nav [data-nav-group="projects"]');
       assert(await projects.evaluate(node=>node.classList.contains('is-current')));
       await projects.locator('summary').press('Enter');
-      assert(await projects.locator('.nav-menu>a').nth(2).isVisible());
+      assert(await projects.locator('.nav-menu>a').nth(1).isVisible());
       await projects.locator('summary').press('Enter');
       for(const card of cards){
         await go(page,'/english/'+card.slug+'/');

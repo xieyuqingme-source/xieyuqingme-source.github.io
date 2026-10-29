@@ -176,7 +176,8 @@ class MarkdownRenderingTests(unittest.TestCase):
         self.assertEqual(brand["icons"], [])
         self.assertEqual("".join(brand["text"]).count("谢雨卿"), 1)
         primary = page.split('<nav class="site-nav"', 1)[1].split('</nav>', 1)[0]
-        self.assertEqual(primary.count('<a '), 9)
+        self.assertEqual(primary.count('<a '), 10)
+        self.assertIn('href="/today/"', primary)
         self.assertIn('href="/anthology/"', primary)
         self.assertIn('href="/english/"', primary)
         self.assertIn('href="/marx/"', primary)

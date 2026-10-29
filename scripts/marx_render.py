@@ -3,7 +3,9 @@ from collections import Counter, defaultdict
 from datetime import datetime
 from html import escape
 from pathlib import Path
+from urllib.parse import unquote
 import json
+import re
 import shutil
 
 from markdown_it import MarkdownIt
@@ -11,6 +13,12 @@ from marx_engels import ASSETS, AI_NOTE, BRANCHES, CHINA, LEVELS, source_path
 from site_i18n import localize_page
 
 AUTHOR = {"marx": "马克思", "engels": "恩格斯", "marx-engels": "马克思、恩格斯"}
+# The three tiers are a joke; the note keeps them from reading as verdicts on the works.
+LEVEL_NOTE = "难度由浅到深：" + " → ".join(LEVELS.values()) + "。只是玩笑式的分档，不评价任何作品的立场。"
+
+
+def difficulty(level):
+    return "难度：" + LEVELS[level]
 
 
 def link(url, label, external=False, attrs=""):
@@ -34,7 +42,7 @@ def bookcase(data):
               5: "资本论·第一卷", 6: "资本论·第二卷", 7: "资本论·第三卷", 8: "资本论·手稿选编", 9: "反杜林论·自然辩证法", 10: "马克思恩格斯书信"}
     for volume in data["wenji"]["volumes"]:
         no = volume["no"]
-        spines.append(f'<a class="me-spine{" is-capital" if 5 <= no <= 8 else ""}" href="/marx/wenji/{no}/" aria-label="第{no}卷：{escape(volume["span"], quote=True)}">'
+        spines.append(f'<a class="me-spine" href="/marx/wenji/{no}/" aria-label="第{no}卷：{escape(volume["span"], quote=True)}">'
                       f'<span class="me-volume">第{no}卷</span><strong>{escape(labels[no])}</strong></a>')
     return '<nav class="me-bookcase" aria-label="文集十卷书架">' + ''.join(spines) + '</nav>'
 
@@ -79,7 +87,7 @@ def render_work_list(data, works):
     rows = []
     for work in works:
         facts = [AUTHOR[work["author"]], str(work["year"]) if work["year"] is not None else "", page_range(work["pages"]),
-                 "节选" if work["excerpt"] else "", LEVELS[work["level"]], " / ".join(BRANCHES[b] for b in work["branch"])]
+                 "节选" if work["excerpt"] else "", difficulty(work["level"]), " / ".join(BRANCHES[b] for b in work["branch"])]
         title = ("★ " if work["editor_title"] else "") + work["title"]
         guide = work_route(data, work["id"])
         actions = link(work["mia"], "读原文", True)
@@ -129,7 +137,10 @@ def render_wenji_volume(data, volume):
         out += '</div>'
         if volume.get("timeline"):
             out += '<section class="me-section"><h2>年表</h2><p>' + link(volume["timeline"]["mia"], volume["timeline"]["title"], True) + '</p></section>'
-    return out + '<p class="me-editorial">目录据中马库本卷整理。标注为目录页码的数字只帮助找到篇目，不能代替引文逐页核对。</p>'
+    note = '目录据中马库本卷整理。标注为目录页码的数字只帮助找到篇目，不能代替引文逐页核对。'
+    if no not in (5, 6, 7) and volume.get("works"):
+        note += LEVEL_NOTE
+    return out + '<p class="me-editorial">' + note + '</p>'
 
 
 def render_capital_toc(data, volume):
@@ -160,10 +171,41 @@ def render_capital_toc(data, volume):
     return out
 
 
-def render_qa(data, volume=None, chapter=None):
-    items = [i for i in data["qa"] if (volume is None or i["volume"] == volume) and (chapter is None or i["chapter"] in (None, chapter))]
-    return ('<p class="me-meta">谢雨卿原有读书文章，保留作者自己的提问与表达。</p><ul class="me-qa">'
-            + ''.join('<li>' + link(item["article"], item["title"]) + '</li>' for item in items) + '</ul>') if items else '<p>本章尚无问对录专题，可先读' + link('/marx/capital/', '《资本论》总览') + '。</p>'
+def qa_date(article):
+    found = re.search(r'/(\d{4}-\d{2}-\d{2})-', unquote(article))
+    return found.group(1) if found else ''
+
+
+def render_qa_index(data):
+    # A quiet directory: the reading notes stay in their original articles and are only grouped here.
+    out = header("问对录", "读《资本论》时写下的问答笔记，按章节归类。")
+    groups = defaultdict(list)
+    for item in data["qa"]:
+        groups[(item["volume"], item["chapter"])].append(item)
+    for (volume, chapter), items in sorted(groups.items(), key=lambda pair: (pair[0][0], pair[0][1] or 0)):
+        ident = f'qa-{volume}-' + (f'ch{chapter:02}' if chapter else 'general')
+        extra = ''
+        if chapter is None:
+            title = f'《资本论》第{volume}卷 · 序言、跋与总览'
+        else:
+            record = data["chapters"][(volume, chapter)]
+            title = f'《资本论》第{volume}卷第{chapter}章 · {record["title"]}'
+            guide = next((i["route"] for i in data["items"].values() if i["kind"] == "guides" and i["status"] == "published"
+                          and i["volume"] == volume and i["chapter"] == chapter), None)
+            extra = '<span class="me-actions">' + (link(guide, '本章导读 →') if guide else '') + link(record["mia"], '中文原文', True) + '</span>'
+        out += f'<section class="me-section" aria-labelledby="{ident}">' + heading(ident, title, extra)
+        sections = defaultdict(list)
+        for item in items:
+            sections[item["section"]].append(item)
+        for section, entries in sorted(sections.items(), key=lambda pair: pair[0] or 0):
+            if section is not None:
+                subsections = data["chapters"][(volume, chapter)]["sections"]
+                out += '<h3>' + escape(subsections[section - 1]["title"] if section <= len(subsections) else f'第{section}节') + '</h3>'
+            out += '<ul class="me-qa">' + ''.join('<li>' + link(item["article"], item["title"])
+                                                   + (f' <small class="me-meta">{qa_date(item["article"])}</small>' if qa_date(item["article"]) else '')
+                                                   + '</li>' for item in entries) + '</ul>'
+        out += '</section>'
+    return out + '<p class="me-editorial">问对录是本站原有的读书文章，原文与署名都在文章里；这里只按章节归类。</p>'
 
 
 def render_capital_index(data):
@@ -173,7 +215,7 @@ def render_capital_index(data):
             + '<nav class="me-flow" aria-label="资本论三卷">' + flow + '</nav><section class="me-section"><h2>从哪里开始</h2><p>'
             + link('/marx/capital/routes/', '三条阅读路线 →') + '</p><p>' + link('/marx/capital/english/', '第一卷中英章节对应 →')
             + '</p></section><aside class="me-section"><h2>写成这本书之前</h2><p>《文集》第8卷选录1857—1858年、1861—1863年和1863—1865年的经济学手稿，可以沿着手稿看问题怎样形成。手稿与后来定稿各有语境，阅读时保留版本的区别。</p><p>'
-            + link('/marx/wenji/8/', '第8卷：经济学手稿 →') + '</p></aside><section class="me-section"><h2>问对录</h2>' + render_qa(data) + '</section>')
+            + link('/marx/wenji/8/', '第8卷：经济学手稿 →') + '</p></aside>')
 
 
 def render_capital_volume(data, volume):
@@ -183,10 +225,7 @@ def render_capital_volume(data, volume):
     out += '<div class="me-actions">' + link(volume["mia"], "本卷中文原文目录", True) + link('/marx/capital/routes/', '阅读路线 →')
     if no == 1:
         out += link('/marx/capital/english/', '中英章节对应 →')
-    out += '</div>' + render_capital_toc(data, volume)
-    if no == 1:
-        out += '<section class="me-section"><h2>问对录</h2>' + render_qa(data, 1) + '</section>'
-    return out
+    return out + '</div>' + render_capital_toc(data, volume)
 
 
 def render_english_comparison(data):
@@ -252,7 +291,7 @@ def render_content(data, item):
     category, kind = item["category"], item["kind"]
     breadcrumb = [("/marx/capital/", "资本论")] if kind == "guides" else []
     out = '<div class="me-reading">' + header(item["title"], item["summary"], breadcrumb)
-    out += '<p class="me-meta">' + escape(LEVELS[item["level"]] + ' · ' + ' / '.join(BRANCHES[b] for b in item["branch"])) + '</p>'
+    out += '<p class="me-meta">' + escape(difficulty(item["level"]) + ' · ' + ' / '.join(BRANCHES[b] for b in item["branch"])) + '</p>'
     if category == "myths":
         out += '<p><span class="me-verdict">' + escape(item["verdict"]) + '</span></p>'
     parser = MarkdownIt("commonmark", {"html": False}).enable("table")
@@ -275,7 +314,6 @@ def render_content(data, item):
         out += '<p>' + link(work["mia"], '读这篇原著', True) + '</p>'
     if kind == "guides":
         chapter = data["chapters"][(item["volume"], item["chapter"])]
-        out += '<section class="me-section"><h2>问对录</h2>' + render_qa(data, item["volume"], item["chapter"]) + '</section>'
         out += '<section class="me-section"><h2>英文对应</h2><ul class="me-qa">' + ''.join('<li lang="en">' + link(e["url"], f'Chapter {e["no"]}: {e["title"]}', True) + '</li>' for e in chapter.get("en", [])) + '</ul></section>'
         out += '<p>' + link(chapter["mia"], '读本章中文原文', True) + ' · ' + link('/marx/capital/english/', '完整中英章号对应 →') + '</p>'
     if item.get("sources"):
@@ -304,6 +342,8 @@ def render_sources(data):
             '<section><h2>短引文与本站解读</h2><p>每条引文不超过150字，每页总引文不超过600字且不超过解读正文的一半；同一作品在本栏的累计引用不超过2500字及原文的十分之一，少于3000字的短作品以三分之一为限。《资本论》每卷累计上限为10000字，同时受原文比例限制。重复显示也累计计算。</p>'
             '<p>这些是本站的编辑限额，不是法律授权或适用所有作品的法律标准。短引文服务于讨论，完整作品请读原著。省略不改变主旨，不把多个版本拼成一句；引用作者转述他人的话时，注明是谁在说。下方校勘表的原字与正字另外统计，并保守计入来源页和相关作品的摘录额度；电子页的错字不当作作者原话。</p>'
             '<p>导读、概念解释和例子为本站编写，有AI辅助，所引中文逐字核对所链原文。现代例子只帮助理解，不充当马克思、恩格斯当年的例证；作品的题注、索引和年表只用于背景转述。现有问对录属于谢雨卿原有文章，保留原文和署名。</p></section>'
+            '<section><h2>和「马克思主义名句」的关系</h2><p>「今天」页每天一句的马克思主义名句是另一套资料：除马克思、恩格斯外，还收列宁、毛泽东等人的名句，有自己的选句和出处规则。读马恩只收马恩，引文以《文集》为准，所以同一句话在两边的版本或链接可能不同。</p><p>'
+            + link('/today/#daily-quotation-card', '去「今天」页读名句 →') + ' · ' + link('/assets/quotes-sources.md', '名句的逐条出处') + '</p></section>'
             '<section><h2>怎样核对与阅读</h2><p>每条引用保留作品、版本、定位和核查日期，核查记录与公开文字使用指纹对应。指纹能发现文字或记录变化，不能替代思想内容和语境的审读。关于社会历史的分析，可从恩格斯致布洛赫的书信进入，同时回到作品讨论的具体条件。</p><p>'
             + link('https://www.marxists.org/chinese/marx-engels2/10/240.htm', '恩格斯致约瑟夫·布洛赫（1890年9月21—22日）', True)
             + '</p><p>构建只读仓库内已整理的资料；浏览、换卡和筛选不会自动请求中马库。只有主动打开原文链接才会前往外站。本栏不保存阅读偏好，不需要账号。</p></section></div>')
@@ -331,7 +371,8 @@ def day_seed(key):
 
 def render_index(data):
     intro = data["intro"]
-    out = '<header class="me-intro"><p class="me-kicker">从原著出发</p><h1>' + escape(intro["name"]) + '</h1><p class="me-lead">' + escape(intro["intro"]) + '</p><p class="me-basis">' + escape(intro["basis"]) + '</p></header>'
+    out = ('<header class="me-intro"><p class="me-kicker">从原著出发</p><h1>' + escape(intro["name"]) + '</h1><p class="me-lead">' + escape(intro["intro"]) + '</p><p class="me-basis">' + escape(intro["basis"]) + '</p>'
+           + '<p class="me-quote-entry">' + link('/today/#daily-quotation-card', '每天一句马克思主义名句，在「今天」页 →') + '</p></header>')
     out += ('<section aria-labelledby="two-doors"><h2 id="two-doors">从两扇门进去</h2><div class="me-doors"><article class="me-door"><h3>'
             + link(work_route(data, 'german-ideology'), '人们怎样生活，怎样创造历史') + '</h3><p>先从现实的人怎样生产、交往和生活读起，再看制度与观念的变化。这扇门通向唯物史观。</p></article><article class="me-door"><h3>'
             + link('/marx/capital/', '资本怎样增殖') + '</h3><p>从商品和劳动走向剩余价值，再看生产、流通与分配的联系。这扇门通向《资本论》。</p></article></div><p class="me-meta">两扇门的概括据恩格斯'
@@ -361,15 +402,17 @@ def render_index(data):
     out += '</div><p class="me-meta">一周路线：' + ' → '.join(link(work_route(data, work), data['works'][work]['title'], work_route(data, work).startswith('https:')) for work in ('manifesto', 'wage-labour-capital', 'value-price-profit')) + '。</p></section>'
     out += '<section class="me-section" aria-labelledby="directory"><h2 id="directory">带着问题读</h2><div class="me-filters" data-me-filters hidden><fieldset><legend>理论分支</legend><button type="button" data-me-branch="all" aria-pressed="true">全部</button>'
     out += ''.join(f'<button type="button" data-me-branch="{key}" aria-pressed="false">{label}</button>' for key, label in BRANCHES.items()) + '</fieldset><fieldset><legend>难度</legend><button type="button" data-me-level="all" aria-pressed="true">全部</button>'
-    out += ''.join(f'<button type="button" data-me-level="{key}" aria-pressed="false">{label}</button>' for key, label in LEVELS.items()) + '</fieldset></div><p class="me-meta" data-me-count role="status"></p><p data-me-empty hidden>这个组合暂时没有卡片，试试其他分支或难度。</p><div class="me-directory">'
+    out += ''.join(f'<button type="button" data-me-level="{key}" aria-pressed="false">{label}</button>' for key, label in LEVELS.items()) + '</fieldset></div><p class="me-meta me-level-note">' + LEVEL_NOTE + '</p><p class="me-meta" data-me-count role="status"></p><p data-me-empty hidden>这个组合暂时没有卡片，试试其他分支或难度。</p><div class="me-directory">'
     for column in data['catalog']['columns']:
         out += '<section class="me-directory-group" data-me-group><h2>' + escape(column['title']) + '</h2><p class="me-meta">' + escape(column['description']) + '</p>'
         for card in cards:
             if card['column'] != column['id']:
                 continue
-            out += '<article class="me-row" data-me-row data-branch="' + ' '.join(card['branch']) + '" data-level="' + str(card['level']) + '"><h3>' + link(card['route'], card['title'], attrs=' data-me-card-link') + '</h3><p>' + escape(card['summary']) + '</p><p class="me-meta">' + escape(LEVELS[card['level']] + ' · ' + ' / '.join(card['tags'])) + '</p></article>'
+            out += '<article class="me-row" data-me-row data-branch="' + ' '.join(card['branch']) + '" data-level="' + str(card['level']) + '"><h3>' + link(card['route'], card['title'], attrs=' data-me-card-link') + '</h3><p>' + escape(card['summary']) + '</p><p class="me-meta">' + escape(difficulty(card['level']) + ' · ' + ' / '.join(card['tags'])) + '</p></article>'
         out += '</section>'
-    out += '</div></section><section class="me-section"><h2>问对录</h2>' + render_qa(data) + '</section>'
+    out += '</div></section>'
+    # 问对录 stays low-key: one small button to its own directory page.
+    out += '<p class="me-minor-links"><a class="me-minor-link" href="/marx/qa/">问对录</a></p>'
     return out + '<p class="me-editorial">本站整理与解读有AI辅助，中文引文逐字核对所链原文。' + link('/marx/sources/', '版本、引文与校勘说明 →') + '</p>'
 
 
@@ -381,12 +424,14 @@ def build_pages(root, output, address, data):
              ('/marx/capital/', '《资本论》', '生产、流通、总过程：资本论三卷导航。', render_capital_index(data)),
              ('/marx/capital/english/', '第一卷中英章节对应', '把中文25章与英文33章按实际内容对应。', render_english_comparison(data)),
              ('/marx/capital/routes/', '资本论阅读路线', '据原著说明整理的三条资本论阅读路线。', render_routes(data)),
-             ('/marx/sources/', '版本、引文与校勘', '读马恩的中文版本、引文边界、核对方法与电子录入校勘。', render_sources(data))]
+             ('/marx/sources/', '版本、引文与校勘', '读马恩的中文版本、引文边界、核对方法与电子录入校勘。', render_sources(data)),
+             ('/marx/qa/', '问对录', '《资本论》读书问答，按章节归类的目录。', render_qa_index(data))]
     pages.extend((f'/marx/wenji/{v["no"]}/', f'文集第{v["no"]}卷', v['summary'], render_wenji_volume(data, v)) for v in data['wenji']['volumes'])
     pages.extend((f'/marx/capital/{v["no"]}/', f'资本论第{v["no"]}卷', v['title'], render_capital_volume(data, v)) for v in data['capital']['volumes'])
     pages.extend((item['route'], item['title'], item['summary'], render_content(data, item)) for item in data['items'].values() if item['status'] == 'published')
     for route, title, description, content in pages:
-        if route != '/marx/' and AI_NOTE not in content:
+        # The 问对录 directory only lists the author's own articles, so it carries no AI note.
+        if route not in ('/marx/', '/marx/qa/') and AI_NOTE not in content:
             content += '<p class="me-editorial">目录与说明据所链原文整理，包含AI辅助。' + link('/marx/sources/', '版本与核对说明 →') + '</p>'
         page_title = title if route == '/marx/' else title + ' · ' + data['intro']['name']
         page = template

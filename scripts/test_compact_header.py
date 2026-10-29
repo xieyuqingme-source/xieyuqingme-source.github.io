@@ -63,13 +63,13 @@ class CompactHeaderTests(unittest.TestCase):
                 self.assertEqual(entries[-1]["attrs"]["href"], ("/en" if language == "en" else "") + "/about/")
 
     def test_each_native_menu_contains_its_two_destinations_and_keeps_original_links(self):
-        for language, labels in [("zh-CN", [["我的文章", "古今名作"], ["AI应用", "小游戏", "学英语", "读马恩"], ["我的足迹", "我的照片"]]),
-                                 ("en", [["My articles", "Literary classics"], ["AI applications", "Games", "Learn English (中文)", "Reading Marx & Engels (中文)"], ["My footprints", "My photos"]])]:
+        for language, labels in [("zh-CN", [["我的文章", "古今名作"], ["今天", "学英语", "读马恩", "AI应用", "小游戏"], ["我的足迹", "我的照片"]]),
+                                 ("en", [["My articles", "Literary classics"], ["Today", "Learn English (中文)", "Reading Marx & Engels (中文)", "AI applications", "Games"], ["My footprints", "My photos"]])]:
             tree = self.render(language=language)
             nav = tree.find(lambda node: node["tag"] == "nav")[0]
             groups = tree.find(lambda node: node["tag"] == "details", nav)
             self.assertEqual(len(groups), 3)
-            expected = [["/articles/", "/anthology/"], ["/projects/", "/game/", "/english/", "/marx/"], ["/map/", "/photos/"]]
+            expected = [["/articles/", "/anthology/"], ["/today/", "/english/", "/marx/", "/projects/", "/game/"], ["/map/", "/photos/"]]
             for group, routes, names in zip(groups, expected, labels):
                 links = tree.find(lambda node: node["tag"] == "a" and "data-preserve-language-link" not in node["attrs"], group)
                 self.assertEqual([node["attrs"]["href"] for node in links], [("/en" if language == "en" and route not in ("/english/", "/marx/") else "") + route for route in routes])
@@ -94,7 +94,7 @@ class CompactHeaderTests(unittest.TestCase):
 
     def test_nested_destinations_highlight_their_section_and_keep_tools(self):
         for route, section in [("/articles/中文文章/example.html", "articles"),
-                               ("/game/ranking/", "projects"), ("/photos/", "map")]:
+                               ("/game/ranking/", "projects"), ("/today/", "projects"), ("/photos/", "map")]:
             with self.subTest(route=route):
                 tree = self.render(route)
                 selected = tree.find(lambda node: node["attrs"].get("class") == "nav-item is-current")
@@ -116,6 +116,12 @@ class CompactHeaderTests(unittest.TestCase):
                 footers = tree.find(lambda node: node["tag"] == "footer")
                 self.assertEqual(len(footers), 1)
                 self.assertNotIn("Old footer", footers[0]["text"])
+                brand = tree.find(lambda node: node["attrs"].get("class") == "footer-brand", footers[0])[0]
+                self.assertEqual(brand["text"], "谢雨卿")
+                marks = tree.find(lambda node: node["tag"] == "img", brand)
+                self.assertEqual([(mark["attrs"].get("class"), mark["attrs"].get("src"), mark["attrs"].get("alt")) for mark in marks],
+                                 [("footer-mark", "/assets/favicon.svg?v=qinghuan-1", "")])
+                self.assertEqual(tree.find(lambda node: node["attrs"].get("class") == "footer-yuliao"), [])
                 links = [node["attrs"]["href"] for node in tree.find(lambda node: node["tag"] == "a", footers[0])]
                 for route in ("/today/", "/articles/", "/projects/", "/map/", "/photos/", "/about/"):
                     self.assertIn(prefix + route, links)

@@ -15,7 +15,9 @@ from marx_engels import (AI_NOTE, ASSETS, BASIS, INTRO, HEADINGS, BRANCHES, load
                         validate_wenji, validate_capital, validate_citations, validate_catalog,
                         validate_qa, quotation_budgets, source_url, source_path, text_hash,
                         markdown_sections, build_marx_engels)
-from marx_render import day_seed, render_index, render_content
+from marx_engels import LEVELS, RESERVED
+from marx_render import (LEVEL_NOTE, bookcase, day_seed, render_capital_index, render_capital_volume, render_content,
+                         render_index, render_qa_index, render_sources, render_wenji_volume)
 from site_i18n import FEATURES, localized_path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -228,6 +230,52 @@ class ContentTests(unittest.TestCase):
         self.assertNotIn('source_body_sha256', html)
         self.assertNotIn('quote_sha256', html)
 
+    def test_bookcase_treats_all_ten_volumes_alike(self):
+        html = bookcase(self.data)
+        self.assertEqual(html.count('class="me-spine"'), 10)
+        self.assertNotIn('is-capital', html)
+
+    def test_qa_is_a_quiet_subpage_reached_by_one_small_button(self):
+        index = render_index(self.data)
+        self.assertEqual(index.count('href="/marx/qa/"'), 1)
+        self.assertIn('class="me-minor-link" href="/marx/qa/"', index)
+        self.assertNotIn('<h2>问对录</h2>', index)
+        for item in self.data['qa']:
+            self.assertNotIn(item['article'], index)
+        self.assertNotIn('问对录', render_capital_index(self.data))
+        self.assertNotIn('问对录', render_capital_volume(self.data, self.data['capital']['volumes'][0]))
+        for item in self.data['items'].values():
+            if item['kind'] == 'guides':
+                self.assertNotIn('<h2>问对录</h2>', render_content(self.data, item))
+        directory = render_qa_index(self.data)
+        for item in self.data['qa']:
+            self.assertEqual(directory.count('href="' + item['article'] + '"'), 1)
+        self.assertIn('id="qa-1-general"', directory)
+        self.assertIn('id="qa-1-ch01"', directory)
+        self.assertIn('/marx/capital/1/ch01/', directory)
+        self.assertNotIn(AI_NOTE, directory)
+        self.assertIn('qa', RESERVED)
+
+    def test_marxist_quotations_and_reading_link_both_ways(self):
+        self.assertIn('href="/today/#daily-quotation-card"', render_index(self.data))
+        sources = render_sources(self.data)
+        self.assertIn('href="/today/#daily-quotation-card"', sources)
+        self.assertIn('href="/assets/quotes-sources.md"', sources)
+        self.assertTrue((ROOT / 'home/brief/quotes-sources.md').is_file())
+
+    def test_joke_difficulty_names_are_always_marked_as_difficulty(self):
+        self.assertEqual(LEVELS, {1: '唯心主义', 2: '形而上学', 3: '修正主义'})
+        index = render_index(self.data)
+        self.assertIn(LEVEL_NOTE, index)
+        for label in LEVELS.values():
+            self.assertIn(f'aria-pressed="false">{label}</button>', index)
+            self.assertNotIn('<p class="me-meta">' + label, index)
+        for item in self.data['items'].values():
+            self.assertIn('<p class="me-meta">难度：' + LEVELS[item['level']] + ' · ', render_content(self.data, item))
+        volume = render_wenji_volume(self.data, self.data['wenji']['volumes'][0])
+        self.assertIn('难度：', volume)
+        self.assertIn(LEVEL_NOTE, volume)
+
     def test_qa_paths_are_real_and_cannot_drift_to_guessed_routes(self):
         routes = {i['article'] for i in self.data['qa']}
         validate_qa(read('qa-index'), routes, self.data['chapters'])
@@ -241,7 +289,7 @@ class PublicationTests(unittest.TestCase):
     def test_all_routes_metadata_navigation_and_sitemap(self):
         data = load_marx_engels(ROOT)
         output = ROOT / '_site_unified'
-        routes = {'/marx/', '/marx/wenji/', '/marx/capital/', '/marx/capital/english/', '/marx/capital/routes/', '/marx/sources/'}
+        routes = {'/marx/', '/marx/wenji/', '/marx/capital/', '/marx/capital/english/', '/marx/capital/routes/', '/marx/sources/', '/marx/qa/'}
         routes.update(f'/marx/wenji/{no}/' for no in range(1, 11))
         routes.update(f'/marx/capital/{no}/' for no in range(1, 4))
         routes.update(i['route'] for i in data['items'].values() if i['status'] == 'published')

@@ -203,7 +203,8 @@ def version_shared_assets(page, root):
 
 
 NAV_GROUPS = (('/articles/', 'articles', [('/articles/', 'myArticles'), ('/anthology/', 'classics')], ['/articles/', '/anthology/']),
-              ('/projects/', 'projects', [('/projects/', 'aiApps'), ('/game/', 'games'), ('/english/', 'english'), ('/marx/', 'marx')], ['/projects/', '/game/', '/english/', '/marx/']),
+              ('/projects/', 'projects', [('/today/', 'today'), ('/english/', 'english'), ('/marx/', 'marx'), ('/projects/', 'aiApps'), ('/game/', 'games')],
+               ['/today/', '/english/', '/marx/', '/projects/', '/game/']),
               ('/map/', 'map', [('/map/', 'myFootprints'), ('/photos/', 'myPhotos')], ['/map/', '/photos/']),
               ('/about/', 'about', [], ['/about/']))
 NAV_REQUIRED = (*NAV_KEYS.values(), "myArticles", "classics", "aiApps", "myFootprints", "myPhotos", "footprints",
@@ -256,7 +257,7 @@ def unified_footer(page, route, language="zh-CN"):
     links = ' '.join(link(path, key) for path, key in FOOTER_LINKS)
     footer = (f'<footer class="site-footer container" lang="{language}">'
               '<div class="footer-sign"><p class="footer-brand"><span data-i18n="common.brandName">谢雨卿</span>'
-              '<span class="footer-yuliao" data-i18n="common.footer.yuliao"></span></p>'
+              '<img class="footer-mark" src="/assets/favicon.svg?v=qinghuan-1" alt="" width="20" height="20" decoding="async"></p>'
               '<p class="footer-note" data-i18n="common.signature.2"></p></div>'
               f'<nav class="footer-links" aria-label="页脚导航" data-i18n-aria-label="common.footer.label">{links}</nav>'
               '<p class="footer-meta"><span data-i18n="common.footer.wechat"></span>'

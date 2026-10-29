@@ -128,8 +128,8 @@ async function contrasts(page,route,theme,width){
       const prefix=language==='en'?'/en':'';await go(page,prefix+'/projects/');
       assert.equal(await page.locator('.site-nav .nav-entry').count(),4);
       await page.locator('.site-nav [data-nav-group="projects"]>details>summary').press('Enter');
-      const entries=page.locator('.site-nav [data-nav-group="projects"] .nav-menu>a');assert.equal(await entries.count(),4);
-      assert.equal(await entries.nth(2).getAttribute('href'),'/english/');assert.equal(await entries.nth(3).getAttribute('href'),'/marx/');
+      const entries=page.locator('.site-nav [data-nav-group="projects"] .nav-menu>a');
+      assert.deepEqual(await entries.evaluateAll(nodes=>nodes.map(node=>node.getAttribute('href'))),[prefix+'/today/','/english/','/marx/',prefix+'/projects/',prefix+'/game/']);
       assert.equal(await page.locator('main a.section-entry[href="/marx/"]').count(),1);
       assert.equal(await page.locator('.site-footer nav a[href="/marx/"]').count(),1);
       await go(page,prefix+'/today/');const entry=page.locator('#marx-reading-entry');
@@ -163,7 +163,7 @@ async function contrasts(page,route,theme,width){
     }
   }));
   await check('two themes and all required widths, with no overflow, clipped reading or inner scroll area',async()=>{
-    const routes=['/marx/','/marx/sources/','/marx/wenji/','/marx/wenji/1/','/marx/wenji/5/','/marx/wenji/10/','/marx/capital/','/marx/capital/1/','/marx/capital/english/','/marx/capital/routes/','/marx/capital/1/ch01/','/marx/works/manifesto/','/marx/commodity/','/marx/human-essence/','/today/','/en/today/'];
+    const routes=['/marx/','/marx/sources/','/marx/qa/','/marx/wenji/','/marx/wenji/1/','/marx/wenji/5/','/marx/wenji/10/','/marx/capital/','/marx/capital/1/','/marx/capital/english/','/marx/capital/routes/','/marx/capital/1/ch01/','/marx/works/manifesto/','/marx/commodity/','/marx/human-essence/','/today/','/en/today/'];
     for(const theme of ['light','dark'])for(const width of widths){
       await using({width,theme},async page=>{
         for(const route of routes){

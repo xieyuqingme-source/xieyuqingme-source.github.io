@@ -102,13 +102,25 @@ class LearningReaderTests(unittest.TestCase):
         self.assertNotIn(intro["intro"], inspect.getsource(render_index))
         self.assertIn(intro["intro"], render_index(load_english_corner(ROOT)))
 
+    def test_difficulty_names_follow_familiar_english_exams(self):
+        from english_corner import LEVELS
+        self.assertEqual(LEVELS, {1: "高考", 2: "四六级", 3: "雅思"})
+        corner = load_english_corner(ROOT)
+        html = render_index(corner)
+        for label in LEVELS.values():
+            self.assertIn(f'aria-pressed="false">{label}</button>', html)
+        for retired in ("入门", "进阶", "挑战"):
+            self.assertNotIn(f'>{retired}</button>', html)
+        card = corner["cards"][0]
+        self.assertIn(" · " + LEVELS[card["level"]] + " · ", render_card(card, corner))
+
     def test_works_menu_owns_the_learning_entrance(self):
         self.assertEqual(len(NAV_GROUPS), 4)
         self.assertFalse(any(group[0] in ("/english/", "/marx/") for group in NAV_GROUPS))
         projects = next(group for group in NAV_GROUPS if group[0] == "/projects/")
-        self.assertEqual(projects[2], [("/projects/", "aiApps"), ("/game/", "games"),
-                                       ("/english/", "english"), ("/marx/", "marx")])
-        self.assertEqual(projects[3], ["/projects/", "/game/", "/english/", "/marx/"])
+        self.assertEqual(projects[2], [("/today/", "today"), ("/english/", "english"), ("/marx/", "marx"),
+                                       ("/projects/", "aiApps"), ("/game/", "games")])
+        self.assertEqual(projects[3], ["/today/", "/english/", "/marx/", "/projects/", "/game/"])
         self.assertEqual([(path, key) for path, key in FOOTER_LINKS
                           if path in ("/english/", "/marx/")],
                          [("/english/", "english"), ("/marx/", "marx")])

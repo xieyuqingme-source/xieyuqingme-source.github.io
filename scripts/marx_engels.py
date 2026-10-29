@@ -13,12 +13,12 @@ from markdown_it import MarkdownIt
 CHINA = timezone(timedelta(hours=8))
 ASSETS = ("marx.css", "marx.js")
 BRANCHES = {"philosophy": "哲学", "economics": "政治经济学", "socialism": "科学社会主义"}
-LEVELS = {1: "入门", 2: "进阶", 3: "挑战"}
+LEVELS = {1: "唯心主义", 2: "形而上学", 3: "修正主义"}
 VERDICTS = {"真", "假", "存疑", "部分正确", "张冠李戴"}
 SLUG = re.compile(r"[a-z][a-z0-9-]{1,79}")
 HEX = re.compile(r"[a-f0-9]{64}")
 PRIVATE = re.compile(r"(?<![A-Za-z0-9])[A-Za-z]:[\\/]|\\\\[^\s\\]+[\\/]|Obsidian Vault|/(?:Users|mnt)/", re.I)
-RESERVED = {"wenji", "works", "capital", "sources", "tools", "play", "read", "quotes", "life", "lab", "topics"}
+RESERVED = {"wenji", "works", "capital", "sources", "qa", "tools", "play", "read", "quotes", "life", "lab", "topics"}
 INTRO = "原著好啊，原著得读，我也想读原著。"
 BASIS = "以《马克思恩格斯文集》（人民出版社，2009）为准；《资本论》第一卷在线文本据《马克思恩格斯全集》第23卷（1972）。"
 AI_NOTE = "本站解读由 AI 辅助起草，引文逐字核对过所链原文"
@@ -586,7 +586,7 @@ def validate_catalog(data, bodies, citations, works, chapters):
             raise ValueError("读马恩：相关卡片指向未知路径。")
         if item["status"] == "published" and any(items[i]["status"] != "published" for i in item["related"]):
             raise ValueError("读马恩：已发布内容不能指向草稿。")
-        known_routes = {"/marx/", "/marx/wenji/", "/marx/capital/", "/marx/capital/english/", "/marx/capital/routes/", "/marx/sources/"}
+        known_routes = {"/marx/", "/marx/wenji/", "/marx/capital/", "/marx/capital/english/", "/marx/capital/routes/", "/marx/sources/", "/marx/qa/"}
         known_routes.update(f"/marx/wenji/{no}/" for no in range(1, 11))
         known_routes.update(f"/marx/capital/{no}/" for no in range(1, 4))
         known_routes.update(i["route"] for i in items.values() if i["status"] == "published" or item["status"] == "draft")

@@ -19,7 +19,7 @@ from reading_annotations import mark_reviewed_terms
 
 CHINA = timezone(timedelta(hours=8))
 COLUMNS = {"words", "classics", "between", "myths", "mistakes"}
-LEVELS = {1: "入门", 2: "进阶", 3: "挑战"}
+LEVELS = {1: "高考", 2: "四六级", 3: "雅思"}
 SECTIONS = {"words": ("故事", "可以这样用"), "classics": ("导读", "原文", "可以这样用"),
             "between": ("对照", "为什么", "可以这样用"), "myths": ("流行说法", "证据", "结论"),
             "mistakes": ("错句", "对句", "为什么")}
