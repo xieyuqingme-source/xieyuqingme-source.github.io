@@ -102,8 +102,8 @@ class BibliographyTests(unittest.TestCase):
                       'https://www.marxists.org/chinese/x.htm%0a<script>'):
             with self.subTest(value=value), self.assertRaises(ValueError): source_url(value, 'zh')
         with self.assertRaises(ValueError): source_path(ROOT, '../private.md')
-        with TemporaryDirectory(dir=ROOT / '.local-checks') as temporary:
-            root = Path(temporary)
+        with TemporaryDirectory(prefix='marx-path-boundary-', dir=ROOT) as temporary:
+            root = Path(temporary).resolve()
             (root / 'safe').mkdir()
             self.assertEqual(source_path(root, 'safe/file.md'), root / 'safe/file.md')
 
