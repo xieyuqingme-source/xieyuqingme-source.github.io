@@ -28,6 +28,21 @@ from news_snapshot import load_snapshot, load_sources, timestamp, visible_items
 from history_today import load_history, history_items
 
 
+def copy_corner_fixture(root):
+    """The project/cache fixture has one synthetic article, not the real reading catalog."""
+    folder = root / "english-corner"
+    folder.mkdir()
+    columns = json.loads((ROOT / "english-corner/catalog.json").read_text(encoding="utf-8"))["columns"]
+    (folder / "catalog.json").write_text(json.dumps({"version":1,"columns":columns,"cards":[]},ensure_ascii=False),encoding="utf-8")
+    (folder / "notes.json").write_text('{"version":1,"works":{}}',encoding="utf-8")
+    quotes = root / "home/brief/english-quotes.json"
+    if quotes.is_file():
+        data = json.loads(quotes.read_text(encoding="utf-8"))
+        for item in data["quotes"]:
+            item.pop("related",None)
+        quotes.write_text(json.dumps(data,ensure_ascii=False),encoding="utf-8")
+
+
 class UnifiedPublicationTests(unittest.TestCase):
     def test_root_url_normalization(self):
         self.assertEqual(site_root("https://xieyuqingme-source.github.io/"),
@@ -723,6 +738,7 @@ class ProjectPublicationTests(unittest.TestCase):
             memes.write_text(json.dumps(public, ensure_ascii=False), encoding="utf-8")
             shutil.copytree(ROOT / "map", root / "map")
             shutil.copytree(ROOT / "anthology", root / "anthology")
+            copy_corner_fixture(root)
             output = root / "_site_unified"
             snapshot = load_snapshot(root)
             sources = load_sources(root)
@@ -764,7 +780,7 @@ class ProjectPublicationTests(unittest.TestCase):
                 self.assertTrue(any(tag == "meta" and attrs.get("property") == "og:url"
                                     and attrs.get("content") == "https://xieyuqing.me/projects/" for tag, attrs in tags))
                 sitemap = [node.text for node in ET.parse(output / "sitemap.xml").findall(".//{*}loc")]
-                expected_routes = {'/', '/today/', '/en/today/', '/projects/', '/about/', '/map/', '/en/map/', '/en/', '/en/about/', '/en/projects/', '/en/articles/',
+                expected_routes = {'/', '/today/', '/en/today/', '/english/', '/english/tools/numbers/', '/projects/', '/about/', '/map/', '/en/map/', '/en/', '/en/about/', '/en/projects/', '/en/articles/',
                                    '/game/', '/en/game/', '/game/ranking/', '/en/game/ranking/', '/game/footprints/', '/en/game/footprints/', '/articles/index.html', '/articles/synthetic.html'}
                 for feature in (report['anthology'], report['english_features']['anthology'], report['photography'], report['english_features']['photography']):
                     expected_routes.update('/' + route.strip('/') + '/' for route in feature['routes'])
@@ -868,6 +884,7 @@ class ProjectPublicationTests(unittest.TestCase):
             memes.write_text(json.dumps(public, ensure_ascii=False), encoding="utf-8")
             shutil.copytree(ROOT / "map", root / "map")
             shutil.copytree(ROOT / "anthology", root / "anthology")
+            copy_corner_fixture(root)
             output = root / "_site_unified"
             cached = output / "articles/assets/responsive-images"
             cached.mkdir(parents=True)

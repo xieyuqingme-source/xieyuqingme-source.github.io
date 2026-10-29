@@ -63,7 +63,7 @@
           </div>
         </section>
         <section class="today-history" id="today-history" aria-labelledby="history-heading"><div class="today-section-heading"><h2 class="brief-panel-heading" id="history-heading">历史上的今天</h2><p class="yl-small">这一天，曾经发生过什么。</p></div><div id="daily-history-list">{{history_today}}</div><p class="yl-small history-date-note" id="history-date-note"></p></section>
-        <section class="today-reading" aria-labelledby="reading-heading"><h2 class="brief-panel-heading" id="reading-heading">每日阅读</h2>{{brief_bottom_cards}}</section>
+        <section class="today-reading" id="today-reading" aria-labelledby="reading-heading"><h2 class="brief-panel-heading" id="reading-heading">每日阅读</h2>{{brief_bottom_cards}}</section>
         <section class="yl-news today-news" id="today-news" aria-labelledby="daily-news-title"><div class="today-section-heading"><h2 class="brief-panel-heading" id="daily-news-title">重点新闻</h2><p class="yl-small" id="daily-edition">{{news_checked_label}}</p></div><div id="daily-feed" aria-live="polite">{{news_snapshot_feed}}</div><p class="yl-note" id="daily-brief-notice">依据来源媒体选题与预设规则汇集；点击标题，直达原始报道。</p><details class="news-sources"><summary>新闻源入口</summary><div id="news-source-links">{{news_source_links}}</div></details></section>
       </div>
       <noscript><p class="yl-no-script">新闻、语录和来源链接可以直接阅读。历史事件显示明确标注的生成日期；启用 JavaScript 后按当天轮换，并显示实时天气与地球。</p></noscript>
@@ -74,6 +74,7 @@
   <script id="news-sources-data" type="application/json">{{news_sources_data}}</script>
   <script id="daily-history-data" type="application/json">{{history_data}}</script>
   <script id="daily-content-data" type="application/json">{{daily_content_data}}</script>
+  <script id="english-quotes-data" type="application/json">{{english_quotes_data}}</script>
   <script id="daily-rules-data" type="application/json">{{brief_rules_data}}</script>
   <script id="daily-holidays-data" type="application/json">{{brief_holidays_data}}</script>
   <script src="/assets/daily-reading.js" defer></script>

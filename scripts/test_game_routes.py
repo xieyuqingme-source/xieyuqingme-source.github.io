@@ -55,6 +55,15 @@ class GamePublicationTests(unittest.TestCase):
         self.addCleanup(temporary.cleanup)
         root = Path(temporary.name)
         shutil.copytree(ROOT / "home", root / "home")
+        folder = root / 'english-corner'
+        folder.mkdir()
+        columns = json.loads((ROOT/'english-corner/catalog.json').read_text(encoding='utf-8'))['columns']
+        (folder/'catalog.json').write_text(json.dumps({'version':1,'columns':columns,'cards':[]},ensure_ascii=False),encoding='utf-8')
+        (folder/'notes.json').write_text('{"version":1,"works":{}}',encoding='utf-8')
+        quotations_path = root/'home/brief/english-quotes.json'
+        quotations = json.loads(quotations_path.read_text(encoding='utf-8'))
+        for item in quotations['quotes']: item.pop('related',None)
+        quotations_path.write_text(json.dumps(quotations,ensure_ascii=False),encoding='utf-8')
         memes = root / "home/brief/memes.json"
         public = json.loads(memes.read_text(encoding="utf-8"))
         for item in public["items"]:
@@ -92,6 +101,8 @@ class GamePublicationTests(unittest.TestCase):
                            "/articles/index.html", "/articles/synthetic.html"} | english_routes
         for module in (report["photography"], report["anthology"]):
             expected_routes.update("/" + route.strip("/") + "/" for route in module["routes"])
+        self.assertEqual(set(report['english_corner']['routes']),{'/english/','/english/tools/numbers/'})
+        expected_routes.update(report['english_corner']['routes'])
         self.assertEqual(set(sitemap), {origin + route for route in expected_routes})
         self.assertEqual(len(sitemap), len(expected_routes), "Every canonical route must occur exactly once.")
         self.assertEqual(report["metadata"]["canonical_pages"], len(expected_routes))
@@ -193,9 +204,9 @@ class GamePublicationTests(unittest.TestCase):
                 nav = html.split('class="site-nav"', 1)[1].split("</nav>", 1)[0]
                 links = [attrs.get("href") for tag, attrs in Elements(nav).elements if tag == "a"]
                 self.assertTrue(any(tag == "a" and attrs.get("class") == "brand" and attrs.get("href") == "/" for tag, attrs in Elements(html).elements))
-                self.assertEqual(nav.count('class="nav-item'), 4)
+                self.assertEqual(nav.count('class="nav-item'), 5)
                 self.assertEqual(nav.count('class="nav-group'), 3)
-                self.assertCountEqual(links, ("/articles/", "/projects/", "/game/", "/about/", "/photos/", "/anthology/", "/map/"))
+                self.assertCountEqual(links, ("/articles/", "/english/", "/projects/", "/game/", "/about/", "/photos/", "/anthology/", "/map/"))
                 self.assertEqual(sum(tag == "summary" for tag, _ in Elements(nav).elements), 3)
         home = (output / "index.html").read_text(encoding="utf-8")
         self.assertIn('id="glance-title"><a href="/today/">今天</a></h2>', home)

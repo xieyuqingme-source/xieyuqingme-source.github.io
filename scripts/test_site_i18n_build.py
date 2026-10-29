@@ -20,12 +20,26 @@ ROOT = Path(__file__).resolve().parent.parent
 REFERENCE = Path(os.environ.get("I18N_TEST_REFERENCE_ROOT", ROOT))
 
 
+def copy_corner_fixture(root):
+    """Only the Chinese-first index/tool belong to this two-article contract fixture."""
+    folder = root/'english-corner'
+    folder.mkdir()
+    columns = json.loads((ROOT/'english-corner/catalog.json').read_text(encoding='utf-8'))['columns']
+    (folder/'catalog.json').write_text(json.dumps({'version':1,'columns':columns,'cards':[]},ensure_ascii=False),encoding='utf-8')
+    (folder/'notes.json').write_text('{"version":1,"works":{}}',encoding='utf-8')
+    quotes = root/'home/brief/english-quotes.json'
+    data = json.loads(quotes.read_text(encoding='utf-8'))
+    for item in data['quotes']: item.pop('related',None)
+    quotes.write_text(json.dumps(data,ensure_ascii=False),encoding='utf-8')
+
+
 class BilingualBuildContractTests(unittest.TestCase):
     def test_two_languages_share_assets_and_cover_complete_sitemap(self):
         with TemporaryDirectory(prefix="i18n-build-fixture-", dir=ROOT) as temporary:
             root = Path(temporary)
             output = root / '_site_unified'
             shutil.copytree(REFERENCE / 'home', root / 'home')
+            copy_corner_fixture(root)
             memes = root / 'home/brief/memes.json'
             public = json.loads(memes.read_text(encoding='utf-8'))
             for item in public['items']:
@@ -94,6 +108,11 @@ class BilingualBuildContractTests(unittest.TestCase):
             self.assertEqual(len(sitemap), len(set(sitemap)))
             for route in ('/en/today/', '/en/photos/', '/en/map/', '/en/anthology/', '/en/game/', '/en/game/ranking/'):
                 self.assertIn('https://site.test' + route, sitemap)
+            self.assertIn('https://site.test/english/',sitemap)
+            self.assertIn('https://site.test/english/tools/numbers/',sitemap)
+            self.assertNotIn('https://site.test/en/english/',sitemap)
+            self.assertFalse((output/'en/english').exists())
+            self.assertIn('href="/english/"',english_home)
             rss = ET.parse(output/'articles/feed.xml').findall('./channel/item')
             self.assertEqual(len(rss), 2)
             self.assertFalse(any('/en/articles/' in item.findtext('link') for item in rss))

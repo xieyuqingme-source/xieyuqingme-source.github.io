@@ -1,0 +1,2066 @@
+{
+  "version": 1,
+  "quotes": [
+    {
+      "id": "shakespeare-01",
+      "text": "there is nothing either good or bad but thinking makes it so.",
+      "translation": "事情本无所谓好坏，是思想使它如此。",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "莎士比亚",
+      "author_en": "William Shakespeare",
+      "work_zh": "《哈姆雷特》",
+      "work_en": "Hamlet",
+      "locator_zh": "第二幕第二场，哈姆雷特台词中的分句",
+      "first_published": 1603,
+      "author_died": 1616,
+      "url": "https://www.gutenberg.org/cache/epub/100/pg100-images.html#sceneII_8.2",
+      "note": "这是哈姆雷特对丹麦如同牢狱的感受；理解为人物在此刻的判断，不当作客观伦理定律。"
+    },
+    {
+      "id": "austen-01",
+      "text": "I could easily forgive his pride, if he had not mortified mine.",
+      "translation": "要不是他的傲慢伤了我的自尊，我本来很容易原谅他。",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "简·奥斯汀",
+      "author_en": "Jane Austen",
+      "work_zh": "《傲慢与偏见》",
+      "work_en": "Pride and Prejudice",
+      "locator_zh": "第五章，伊丽莎白台词",
+      "first_published": 1813,
+      "author_died": 1817,
+      "url": "https://www.gutenberg.org/cache/epub/1342/pg1342-images.html#CHAPTER_V",
+      "note": "mortify在此是伤害自尊；反事实条件句把两人的“傲慢”巧妙地接在一起。"
+    },
+    {
+      "id": "dickens-01",
+      "text": "It was the best of times, it was the worst of times,",
+      "translation": "那是最好的时代，也是最坏的时代。",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "查尔斯·狄更斯",
+      "author_en": "Charles Dickens",
+      "work_zh": "《双城记》",
+      "work_en": "A Tale of Two Cities",
+      "locator_zh": "第一部第一章，开篇分句",
+      "first_published": 1859,
+      "author_died": 1870,
+      "url": "https://www.gutenberg.org/cache/epub/98/pg98-images.html#link2H_4_0002",
+      "note": "并列相反评价制造时代的张力；这里是开篇长句的前两个分句。"
+    },
+    {
+      "id": "bronte-01",
+      "text": "I am no bird; and no net ensnares me; I am a free human being with an independent will,",
+      "translation": "我不是鸟，也没有网能把我困住；我是拥有独立意志的自由的人。",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "夏洛蒂·勃朗特",
+      "author_en": "Charlotte Brontë",
+      "work_zh": "《简·爱》",
+      "work_en": "Jane Eyre",
+      "locator_zh": "第二十三章，简的台词节选",
+      "first_published": 1847,
+      "author_died": 1855,
+      "url": "https://www.gutenberg.org/cache/epub/1260/pg1260-images.html#id-7050114306024519729",
+      "note": "这是简拒绝被人摆布的声明；ensnare指用网捕获，也可比喻使人陷入束缚。"
+    },
+    {
+      "id": "eliot-01",
+      "text": "What do we live for, if it is not to make life less difficult to each other?",
+      "translation": "我们活着，若不是为了让彼此的生活少一点艰难，又是为了什么呢？",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "乔治·艾略特",
+      "author_en": "George Eliot",
+      "work_zh": "《米德尔马契》",
+      "work_en": "Middlemarch",
+      "locator_zh": "第七十二章，多萝西娅台词",
+      "first_published": 1871,
+      "author_died": 1880,
+      "url": "https://www.gutenberg.org/cache/epub/145/pg145-images.html#chap72",
+      "note": "这里的to each other接在less difficult后，表达彼此相待的关系。"
+    },
+    {
+      "id": "carroll-01",
+      "text": "Who in the world am I? Ah, that’s the great puzzle!",
+      "translation": "我到底是谁？啊，这才是大难题！",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "刘易斯·卡罗尔",
+      "author_en": "Lewis Carroll",
+      "work_zh": "《爱丽丝漫游奇境记》",
+      "work_en": "Alice’s Adventures in Wonderland",
+      "locator_zh": "第二章，爱丽丝的自问",
+      "first_published": 1865,
+      "author_died": 1898,
+      "url": "https://www.gutenberg.org/cache/epub/11/pg11-images.html#chap02",
+      "note": "in the world在疑问句中加强语气，类似中文“到底”。"
+    },
+    {
+      "id": "wilde-01",
+      "text": "All art is quite useless.",
+      "translation": "一切艺术都是全然无用的。",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "奥斯卡·王尔德",
+      "author_en": "Oscar Wilde",
+      "work_zh": "《道林·格雷的画像》",
+      "work_en": "The Picture of Dorian Gray",
+      "locator_zh": "序言末句",
+      "first_published": 1891,
+      "author_died": 1900,
+      "url": "https://www.gutenberg.org/cache/epub/174/pg174-images.html#chap00",
+      "note": "这是关于艺术独立性的悖论式宣言；useless在这里不是说艺术没有价值。"
+    },
+    {
+      "id": "stevenson-01",
+      "text": "Extreme busyness, whether at school or college, kirk or market, is a symptom of deficient vitality;",
+      "translation": "极端忙碌，无论在学校、教堂还是市场，都是活力不足的症状。",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "罗伯特·路易斯·史蒂文森",
+      "author_en": "Robert Louis Stevenson",
+      "work_zh": "《为闲人辩护》",
+      "work_en": "An Apology for Idlers",
+      "locator_zh": "《为闲人辩护》，分句",
+      "first_published": 1877,
+      "author_died": 1894,
+      "url": "https://www.gutenberg.org/cache/epub/69825/pg69825-images.html",
+      "note": "这是作者有意逆转常识的辩论；kirk是苏格兰语中的教堂，不是现代英语的常用词。"
+    },
+    {
+      "id": "blake-01",
+      "text": "The bird a nest, the spider a web, man friendship.",
+      "translation": "鸟有巢，蜘蛛有网，人有友谊。",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "威廉·布莱克",
+      "author_en": "William Blake",
+      "work_zh": "《天堂与地狱的婚姻》",
+      "work_en": "The Marriage of Heaven and Hell",
+      "locator_zh": "“地狱的箴言”",
+      "first_published": 1790,
+      "author_died": 1827,
+      "url": "https://www.gutenberg.org/cache/epub/45315/pg45315-images.html#Page_16",
+      "note": "三个并列短语都省略动词，以最短的结构把友谊写成人的栖身之所。"
+    },
+    {
+      "id": "wordsworth-01",
+      "text": "I wandered lonely as a Cloud That floats on high o’er Vales and Hills,",
+      "translation": "我孤独地漫游，如一片高高飘过山谷和群山的云。",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "威廉·华兹华斯",
+      "author_en": "William Wordsworth",
+      "work_zh": "《诗二卷集》第二卷",
+      "work_en": "Poems, in Two Volumes, Volume II",
+      "locator_zh": "《我孤独地漫游，如一片云》首两行",
+      "first_published": 1807,
+      "author_died": 1850,
+      "url": "https://www.gutenberg.org/cache/epub/8824/pg8824-images.html#id00116",
+      "note": "此处依据1807年版本；as引出明喻，Cloud、Vales、Hills的大小写保留所引版本。"
+    },
+    {
+      "id": "coleridge-01",
+      "text": "In Xanadu did Kubla Khan A stately pleasure-dome decree:",
+      "translation": "在上都，忽必烈汗下令建造一座宏伟的游乐宫殿。",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "塞缪尔·泰勒·柯勒律治",
+      "author_en": "Samuel Taylor Coleridge",
+      "work_zh": "《忽必烈汗》",
+      "work_en": "Kubla Khan",
+      "locator_zh": "《忽必烈汗》首两行",
+      "first_published": 1816,
+      "author_died": 1834,
+      "url": "https://www.gutenberg.org/cache/epub/11101/pg11101-images.html#id00417",
+      "note": "did ... decree采用诗句倒装；现代常用语序为Kubla Khan decreed。Xanadu关联元上都，引用原诗而非歌曲。",
+      "related": "/english/coleridge-kubla-khan/"
+    },
+    {
+      "id": "shelley-01",
+      "text": "If Winter comes, can Spring be far behind?",
+      "translation": "冬天若已到来，春天还会远吗？",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "珀西·比希·雪莱",
+      "author_en": "Percy Bysshe Shelley",
+      "work_zh": "《雪莱诗集》第二卷",
+      "work_en": "The Complete Poetical Works, Volume II",
+      "locator_zh": "《西风颂》末行",
+      "first_published": 1820,
+      "author_died": 1822,
+      "url": "https://www.gutenberg.org/cache/epub/4798/pg4798-images.html#id00805",
+      "note": "Winter、Spring的大写保留本版；以季节问句结束全诗，属于希望的诗性表达。"
+    },
+    {
+      "id": "keats-01",
+      "text": "Beauty is truth, truth beauty,",
+      "translation": "美即是真，真即是美。",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "约翰·济慈",
+      "author_en": "John Keats",
+      "work_zh": "《希腊古瓮颂》",
+      "work_en": "Ode on a Grecian Urn",
+      "locator_zh": "《希腊古瓮颂》第49行，句中引语",
+      "first_published": 1820,
+      "author_died": 1821,
+      "url": "https://www.gutenberg.org/cache/epub/23684/pg23684-images.html#id-4987274095954744633",
+      "note": "这是古瓮对人的话，结尾的声音和含义历来有解释分歧；不当作无争议的哲学等式。"
+    },
+    {
+      "id": "dickinson-01",
+      "text": "Hope is the thing with feathers That perches in the soul,",
+      "translation": "希望是长着羽毛的东西，栖息在灵魂中。",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "艾米莉·狄金森",
+      "author_en": "Emily Dickinson",
+      "work_zh": "《狄金森诗集》",
+      "work_en": "Poems by Emily Dickinson, Three Series",
+      "locator_zh": "第二辑，Life第VI首，前两行",
+      "first_published": 1891,
+      "author_died": 1886,
+      "url": "https://www.gutenberg.org/cache/epub/12242/pg12242-images.html#Hope_is_the_thing_with_feathers",
+      "note": "采用1891年第二辑的编辑文本，标点并非后来手稿整理版；perch指鸟停栖。"
+    },
+    {
+      "id": "whitman-01",
+      "text": "I am large, I contain multitudes.",
+      "translation": "我广阔，我容纳着无数个自我。",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "沃尔特·惠特曼",
+      "author_en": "Walt Whitman",
+      "work_zh": "《草叶集》",
+      "work_en": "Leaves of Grass",
+      "locator_zh": "《自我之歌》第51节，括号内句子",
+      "first_published": 1855,
+      "author_died": 1892,
+      "url": "https://www.gutenberg.org/cache/epub/1322/pg1322-images.html#link2H_4_0027",
+      "note": "multitudes本义为众多的人；这里表达自我包含复杂性，采用1891—1892年版措辞。"
+    },
+    {
+      "id": "yeats-01",
+      "text": "When you are old and gray and full of sleep, And nodding by the fire, take down this book,",
+      "translation": "当你老去，鬓发灰白、睡意沉沉，在炉边打盹，请取下这本书。",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "威廉·巴特勒·叶芝",
+      "author_en": "William Butler Yeats",
+      "work_zh": "《当你老了》",
+      "work_en": "When You Are Old",
+      "locator_zh": "《当你老了》首两行",
+      "first_published": 1892,
+      "author_died": 1939,
+      "url": "https://www.gutenberg.org/cache/epub/49608/pg49608-images.html#Page_158",
+      "note": "采用所引版gray拼写；不使用中文改编歌词。1892年已收入《凯瑟琳伯爵夫人及其他传奇与抒情诗》。",
+      "related": "/english/yeats-when-you-are-old/"
+    },
+    {
+      "id": "franklin-01",
+      "text": "Resolve to perform what you ought; perform without fail what you resolve.",
+      "translation": "决心做该做的事；决心要做的事，务必做到。",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "本杰明·富兰克林",
+      "author_en": "Benjamin Franklin",
+      "work_zh": "《富兰克林自传》",
+      "work_en": "Autobiography",
+      "locator_zh": "第二部分，十三项德目之“决心”",
+      "first_published": 1818,
+      "author_died": 1790,
+      "url": "https://www.gutenberg.org/cache/epub/20203/pg20203-images.html#IX",
+      "note": "ought与resolve两次呼应，把判断、决心和行动连在一起。"
+    },
+    {
+      "id": "emerson-01",
+      "text": "Trust thyself: every heart vibrates to that iron string.",
+      "translation": "相信你自己：每颗心都会随那根铁弦振动。",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "拉尔夫·沃尔多·爱默生",
+      "author_en": "Ralph Waldo Emerson",
+      "work_zh": "《论自立》",
+      "work_en": "Self-Reliance",
+      "locator_zh": "《论自立》",
+      "first_published": 1841,
+      "author_died": 1882,
+      "url": "https://www.gutenberg.org/cache/epub/16643/pg16643-images.html#Page_81",
+      "note": "thyself是yourself的古式；铁弦的比喻使抽象的自信变得可以听见。"
+    },
+    {
+      "id": "thoreau-01",
+      "text": "The mass of men lead lives of quiet desperation.",
+      "translation": "大多数人过着默默绝望的生活。",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "亨利·戴维·梭罗",
+      "author_en": "Henry David Thoreau",
+      "work_zh": "《瓦尔登湖》",
+      "work_en": "Walden",
+      "locator_zh": "第一章“经济”",
+      "first_published": 1854,
+      "author_died": 1862,
+      "url": "https://www.gutenberg.org/cache/epub/205/pg205-images.html#chap02",
+      "note": "lead a life表示过某种生活；quiet在此写出外表平静与内心困境的落差。"
+    },
+    {
+      "id": "douglass-01",
+      "text": "From that moment, I understood the pathway from slavery to freedom.",
+      "translation": "从那一刻起，我明白了从奴役通向自由的道路。",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "弗雷德里克·道格拉斯",
+      "author_en": "Frederick Douglass",
+      "work_zh": "《道格拉斯自述》",
+      "work_en": "Narrative of the Life of Frederick Douglass",
+      "locator_zh": "第六章",
+      "first_published": 1845,
+      "author_died": 1895,
+      "url": "https://www.gutenberg.org/cache/epub/23/pg23-images.html#link2HCH0006",
+      "note": "禁止他学习的言论，反使他看清读写能力的意义；pathway在此为道路的比喻。"
+    },
+    {
+      "id": "keller-01",
+      "text": "That living word awakened my soul, gave it light, hope, joy, set it free!",
+      "translation": "那个鲜活的词唤醒了我的灵魂，给它光明、希望与喜悦，使它获得自由！",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "海伦·凯勒",
+      "author_en": "Helen Keller",
+      "work_zh": "《我的一生》",
+      "work_en": "The Story of My Life",
+      "locator_zh": "第一部分第四章",
+      "first_published": 1903,
+      "author_died": 1968,
+      "url": "https://www.gutenberg.org/cache/epub/2397/pg2397-images.html#link2HCH0004",
+      "note": "that living word指water；这是她把手指拼写与流水联系起来的回忆。",
+      "related": "/english/keller-water/"
+    },
+    {
+      "id": "chesterton-01",
+      "text": "An adventure is only an inconvenience rightly considered.",
+      "translation": "冒险，不过是被正确看待的不便。",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "吉尔伯特·基思·切斯特顿",
+      "author_en": "G. K. Chesterton",
+      "work_zh": "《追逐自己的帽子》",
+      "work_en": "On Running after One’s Hat",
+      "locator_zh": "《追逐自己的帽子》末段",
+      "first_published": 1908,
+      "author_died": 1936,
+      "url": "https://www.gutenberg.org/cache/epub/11505/pg11505-images.html#chap04",
+      "note": "rightly considered是过去分词短语，修饰inconvenience；幽默来自观察角度的倒转。",
+      "related": "/english/chesterton-hat/"
+    },
+    {
+      "id": "twain-01",
+      "text": "We are creatures of outside influences; as a rule we do not think, we only imitate.",
+      "translation": "我们是外界影响的产物；通常，我们不思考，只模仿。",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "马克·吐温",
+      "author_en": "Mark Twain",
+      "work_zh": "《玉米饼意见》",
+      "work_en": "Corn-Pone Opinions",
+      "locator_zh": "《玉米饼意见》",
+      "first_published": 1923,
+      "author_died": 1910,
+      "url": "https://www.gutenberg.org/cache/epub/68604/pg68604-images.html#Page_402",
+      "note": "as a rule表示通常；文章讽刺从众，不是说人完全不可能独立思考。",
+      "related": "/english/twain-corn-pone/"
+    },
+    {
+      "id": "lamb-01",
+      "text": "Lawyers, I suppose, were children once.",
+      "translation": "律师们，我想，也曾经是孩子。",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "查尔斯·兰姆",
+      "author_en": "Charles Lamb",
+      "work_zh": "《伊利亚随笔》",
+      "work_en": "Essays of Elia",
+      "locator_zh": "《内殿的老律师们》",
+      "first_published": 1821,
+      "author_died": 1834,
+      "url": "https://www.gutenberg.org/cache/epub/10343/pg10343-images.html#id00326",
+      "note": "轻轻一句I suppose，把严肃的职业形象拉回童年；这不是对职业能力的贬低。"
+    },
+    {
+      "id": "shakespeare-02",
+      "text": "We are such stuff As dreams are made on, and our little life Is rounded with a sleep.",
+      "translation": "我们由梦一般的材料构成，短短一生也以一场睡眠收尾。",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "莎士比亚",
+      "author_en": "William Shakespeare",
+      "work_zh": "《暴风雨》",
+      "work_en": "The Tempest",
+      "locator_zh": "第四幕第一场，普洛斯彼罗台词",
+      "first_published": 1623,
+      "author_died": 1616,
+      "url": "https://www.gutenberg.org/cache/epub/100/pg100-images.html#sceneIV_32.1",
+      "note": "stuff在这里是“材料”；made on是此处旧式表达，现代英语常说made of。"
+    },
+    {
+      "id": "austen-02",
+      "text": "To be fond of dancing was a certain step towards falling in love;",
+      "translation": "喜欢跳舞，便是迈向坠入爱河的稳稳一步。",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "简·奥斯汀",
+      "author_en": "Jane Austen",
+      "work_zh": "《傲慢与偏见》",
+      "work_en": "Pride and Prejudice",
+      "locator_zh": "第三章，叙述者的分句",
+      "first_published": 1813,
+      "author_died": 1817,
+      "url": "https://www.gutenberg.org/cache/epub/1342/pg1342-images.html#page_11",
+      "note": "这是叙述者带讽刺意味的社交观察；be fond of表示喜欢，不能把玩笑读成规律。"
+    },
+    {
+      "id": "dickens-02",
+      "text": "A wonderful fact to reflect upon, that every human creature is constituted to be that profound secret and mystery to every other.",
+      "translation": "值得深思的奇妙事实是：每一个人，对别人来说，都是那样深刻的秘密与谜团。",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "查尔斯·狄更斯",
+      "author_en": "Charles Dickens",
+      "work_zh": "《双城记》",
+      "work_en": "A Tale of Two Cities",
+      "locator_zh": "第一部第三章，开篇",
+      "first_published": 1859,
+      "author_died": 1870,
+      "url": "https://www.gutenberg.org/cache/epub/98/pg98-images.html#link2H_4_0004",
+      "note": "reflect upon表示思考；叙述者由夜间城市转向人与人之间无法完全看透的内心。"
+    },
+    {
+      "id": "bronte-02",
+      "text": "Life appears to me too short to be spent in nursing animosity or registering wrongs.",
+      "translation": "在我看来，人生太短，不该用来滋养怨恨或记下每一次伤害。",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "夏洛蒂·勃朗特",
+      "author_en": "Charlotte Brontë",
+      "work_zh": "《简·爱》",
+      "work_en": "Jane Eyre",
+      "locator_zh": "第六章，海伦·彭斯台词",
+      "first_published": 1847,
+      "author_died": 1855,
+      "url": "https://www.gutenberg.org/cache/epub/1260/pg1260-images.html#id-5447535297528119587",
+      "note": "nurse在这里作动词，指怀着、滋长某种情绪；这是海伦的处世态度。"
+    },
+    {
+      "id": "eliot-02",
+      "text": "it is a narrow mind which cannot look at a subject from various points of view.",
+      "translation": "不能从不同角度看问题的，是狭隘的心灵。",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "乔治·艾略特",
+      "author_en": "George Eliot",
+      "work_zh": "《米德尔马契》",
+      "work_en": "Middlemarch",
+      "locator_zh": "第七章，句中分句",
+      "first_published": 1871,
+      "author_died": 1880,
+      "url": "https://www.gutenberg.org/cache/epub/145/pg145-images.html#chap07",
+      "note": "point of view是看问题的角度；结合布鲁克先生的自我辩解阅读，能看出讽刺。"
+    },
+    {
+      "id": "carroll-02",
+      "text": "it’s no use going back to yesterday, because I was a different person then.",
+      "translation": "回到昨天没有用，因为那时的我已是另一个人。",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "刘易斯·卡罗尔",
+      "author_en": "Lewis Carroll",
+      "work_zh": "《爱丽丝漫游奇境记》",
+      "work_en": "Alice’s Adventures in Wonderland",
+      "locator_zh": "第十章，爱丽丝台词中的分句",
+      "first_published": 1865,
+      "author_died": 1898,
+      "url": "https://www.gutenberg.org/cache/epub/11/pg11-images.html#chap10",
+      "note": "It’s no use doing ...表示做某事没有用；保留原句中小写。故事把身份变化变成了奇遇。"
+    },
+    {
+      "id": "wilde-02",
+      "text": "Those who find beautiful meanings in beautiful things are the cultivated. For these there is hope.",
+      "translation": "能在美的事物中发现美好意义的人，才是有修养的人；他们还有希望。",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "奥斯卡·王尔德",
+      "author_en": "Oscar Wilde",
+      "work_zh": "《道林·格雷的画像》",
+      "work_en": "The Picture of Dorian Gray",
+      "locator_zh": "序言",
+      "first_published": 1891,
+      "author_died": 1900,
+      "url": "https://www.gutenberg.org/cache/epub/174/pg174-images.html#chap00",
+      "note": "cultivated可形容人有教养、有修养，和土地“被耕作”的本义相呼应。"
+    },
+    {
+      "id": "stevenson-02",
+      "text": "There is no duty we so much underrate as the duty of being happy.",
+      "translation": "没有哪种责任，比让自己快乐的责任更被我们低估。",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "罗伯特·路易斯·史蒂文森",
+      "author_en": "Robert Louis Stevenson",
+      "work_zh": "《为闲人辩护》",
+      "work_en": "An Apology for Idlers",
+      "locator_zh": "《为闲人辩护》",
+      "first_published": 1877,
+      "author_died": 1894,
+      "url": "https://www.gutenberg.org/cache/epub/69825/pg69825-images.html#page_26",
+      "note": "underrate是低估；这篇随笔重新衡量快乐给周围人的益处。"
+    },
+    {
+      "id": "blake-02",
+      "text": "No bird soars too high if he soars with his own wings.",
+      "translation": "只要凭自己的翅膀飞翔，就没有哪只鸟飞得过高。",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "威廉·布莱克",
+      "author_en": "William Blake",
+      "work_zh": "《天堂与地狱的婚姻》",
+      "work_en": "The Marriage of Heaven and Hell",
+      "locator_zh": "“地狱的箴言”",
+      "first_published": 1790,
+      "author_died": 1827,
+      "url": "https://www.gutenberg.org/cache/epub/45315/pg45315-images.html#Page_14",
+      "note": "soar指高飞；这是借鸟写独立力量的格言，不是鸟类学判断。"
+    },
+    {
+      "id": "wordsworth-02",
+      "text": "Earth has not any thing to shew more fair:",
+      "translation": "大地再没有什么，能展现更美的景象。",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "威廉·华兹华斯",
+      "author_en": "William Wordsworth",
+      "work_zh": "《诗二卷集》第一卷",
+      "work_en": "Poems, in Two Volumes, Volume I",
+      "locator_zh": "《威斯敏斯特桥上》首行",
+      "first_published": 1807,
+      "author_died": 1850,
+      "url": "https://www.gutenberg.org/cache/epub/8774/pg8774-images.html#id00315",
+      "note": "shew是show的旧拼写；any thing按本版分写。诗人此处描写清晨的伦敦。"
+    },
+    {
+      "id": "coleridge-02",
+      "text": "Water, water, every where Nor any drop to drink.",
+      "translation": "到处都是水，却没有一滴能喝。",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "塞缪尔·泰勒·柯勒律治",
+      "author_en": "Samuel Taylor Coleridge",
+      "work_zh": "《古舟子咏》",
+      "work_en": "The Rime of the Ancient Mariner",
+      "locator_zh": "第二部分，第121—122行",
+      "first_published": 1798,
+      "author_died": 1834,
+      "url": "https://www.gutenberg.org/cache/epub/11101/pg11101-images.html#id00177",
+      "note": "every where按本版分写；海水围绕却无法饮用，产生了强烈反差。"
+    },
+    {
+      "id": "shelley-02",
+      "text": "Look on my works, ye Mighty, and despair!",
+      "translation": "强者们啊，看看我的功业，绝望吧！",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "珀西·比希·雪莱",
+      "author_en": "Percy Bysshe Shelley",
+      "work_zh": "《雪莱诗集》第二卷",
+      "work_en": "The Complete Poetical Works, Volume II",
+      "locator_zh": "《奥兹曼迪亚斯》第11行",
+      "first_published": 1818,
+      "author_died": 1822,
+      "url": "https://www.gutenberg.org/cache/epub/4798/pg4798-images.html#id00495",
+      "note": "这是残破雕像上君王夸耀的铭文；四周荒沙使夸口反过来成为讽刺。"
+    },
+    {
+      "id": "keats-02",
+      "text": "Heard melodies are sweet, but those unheard Are sweeter;",
+      "translation": "听见的旋律甜美，未听见的却更甜美。",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "约翰·济慈",
+      "author_en": "John Keats",
+      "work_zh": "《希腊古瓮颂》",
+      "work_en": "Ode on a Grecian Urn",
+      "locator_zh": "《希腊古瓮颂》第11—12行",
+      "first_published": 1820,
+      "author_died": 1821,
+      "url": "https://www.gutenberg.org/cache/epub/23684/pg23684-images.html#id-6628757086229031098",
+      "note": "诗中描绘器物上静止的吹奏者；unheard把想象中的音乐与真实听觉相对照。"
+    },
+    {
+      "id": "dickinson-02",
+      "text": "If I can stop one heart from breaking, I shall not live in vain;",
+      "translation": "若能使一颗心免于破碎，我便没有白活。",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "艾米莉·狄金森",
+      "author_en": "Emily Dickinson",
+      "work_zh": "《狄金森诗集》",
+      "work_en": "Poems by Emily Dickinson, Three Series",
+      "locator_zh": "第一辑，Life第VI首，前两行",
+      "first_published": 1890,
+      "author_died": 1886,
+      "url": "https://www.gutenberg.org/cache/epub/12242/pg12242-images.html#If_I_can_stop_one_heart_from_breaking",
+      "note": "in vain表示徒劳；本版为早期出版编辑文本，不冒称作者手稿的原始标点。"
+    },
+    {
+      "id": "whitman-02",
+      "text": "I exist as I am, that is enough,",
+      "translation": "我以本来的样子存在，这就足够。",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "沃尔特·惠特曼",
+      "author_en": "Walt Whitman",
+      "work_zh": "《草叶集》",
+      "work_en": "Leaves of Grass",
+      "locator_zh": "《自我之歌》第20节，诗行",
+      "first_published": 1855,
+      "author_died": 1892,
+      "url": "https://www.gutenberg.org/cache/epub/1322/pg1322-images.html#link2H_4_0027",
+      "note": "that is enough把存在本身作为肯定；保留此版行末逗号。"
+    },
+    {
+      "id": "yeats-02",
+      "text": "But one man loved the pilgrim soul in you, And loved the sorrows of your changing face.",
+      "translation": "可有一个人爱你那朝圣者般的灵魂，也爱你日渐改变的脸上所有忧愁。",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "威廉·巴特勒·叶芝",
+      "author_en": "William Butler Yeats",
+      "work_zh": "《当你老了》",
+      "work_en": "When You Are Old",
+      "locator_zh": "《当你老了》第7—8行",
+      "first_published": 1892,
+      "author_died": 1939,
+      "url": "https://www.gutenberg.org/cache/epub/49608/pg49608-images.html#Page_158",
+      "note": "pilgrim soul是诗的比喻，不必理解成实际的宗教身份；保留所引版句号。",
+      "related": "/english/yeats-when-you-are-old/"
+    },
+    {
+      "id": "franklin-02",
+      "text": "Speak not but what may benefit others or yourself; avoid trifling conversation.",
+      "translation": "只说对别人或自己有益的话；避免琐碎无益的闲谈。",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "本杰明·富兰克林",
+      "author_en": "Benjamin Franklin",
+      "work_zh": "《富兰克林自传》",
+      "work_en": "Autobiography",
+      "locator_zh": "第二部分，十三项德目之“寡言”",
+      "first_published": 1818,
+      "author_died": 1790,
+      "url": "https://www.gutenberg.org/cache/epub/20203/pg20203-images.html#IX",
+      "note": "but在这里相当于except；trifling指无足轻重的。"
+    },
+    {
+      "id": "emerson-02",
+      "text": "Whoso would be a man must be a nonconformist.",
+      "translation": "一个人若要成为真正独立的人，就不能随波逐流。",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "拉尔夫·沃尔多·爱默生",
+      "author_en": "Ralph Waldo Emerson",
+      "work_zh": "《论自立》",
+      "work_en": "Self-Reliance",
+      "locator_zh": "《论自立》",
+      "first_published": 1841,
+      "author_died": 1882,
+      "url": "https://www.gutenberg.org/cache/epub/16643/pg16643-images.html#Page_83",
+      "note": "Whoso是whoever的旧式；nonconformist指不盲从通行规则的人。"
+    },
+    {
+      "id": "thoreau-02",
+      "text": "Our life is frittered away by detail.",
+      "translation": "我们的生命被细枝末节一点点消耗。",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "亨利·戴维·梭罗",
+      "author_en": "Henry David Thoreau",
+      "work_zh": "《瓦尔登湖》",
+      "work_en": "Walden",
+      "locator_zh": "第二章“我生活的地方；我为何生活”",
+      "first_published": 1854,
+      "author_died": 1862,
+      "url": "https://www.gutenberg.org/cache/epub/205/pg205-images.html#chap03",
+      "note": "fritter away表示一点点挥霍掉，常接时间、金钱等。"
+    },
+    {
+      "id": "douglass-02",
+      "text": "The more I read, the more I was led to abhor and detest my enslavers.",
+      "translation": "我读得越多，就越憎恶那些奴役我的人。",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "弗雷德里克·道格拉斯",
+      "author_en": "Frederick Douglass",
+      "work_zh": "《道格拉斯自述》",
+      "work_en": "Narrative of the Life of Frederick Douglass",
+      "locator_zh": "第七章",
+      "first_published": 1845,
+      "author_died": 1895,
+      "url": "https://www.gutenberg.org/cache/epub/23/pg23-images.html#link2HCH0007",
+      "note": "the more ... the more ...是递进比较结构；两种近义动词强调认识改变后的愤怒。",
+      "related": "/english/douglass-reading/"
+    },
+    {
+      "id": "keller-02",
+      "text": "There were barriers still, it is true, but barriers that could in time be swept away.",
+      "translation": "障碍确实仍在，但那是终能被扫除的障碍。",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "海伦·凯勒",
+      "author_en": "Helen Keller",
+      "work_zh": "《我的一生》",
+      "work_en": "The Story of My Life",
+      "locator_zh": "第一部分第四章",
+      "first_published": 1903,
+      "author_died": 1968,
+      "url": "https://www.gutenberg.org/cache/epub/2397/pg2397-images.html#link2HCH0004",
+      "note": "it is true先承认现实困难，再以but转向希望；in time表示终有一天。",
+      "related": "/english/keller-water/"
+    },
+    {
+      "id": "chesterton-02",
+      "text": "An inconvenience is only an adventure wrongly considered.",
+      "translation": "不便，不过是被错误看待的冒险。",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "吉尔伯特·基思·切斯特顿",
+      "author_en": "G. K. Chesterton",
+      "work_zh": "《追逐自己的帽子》",
+      "work_en": "On Running after One’s Hat",
+      "locator_zh": "《追逐自己的帽子》末段",
+      "first_published": 1908,
+      "author_died": 1936,
+      "url": "https://www.gutenberg.org/cache/epub/11505/pg11505-images.html#chap04",
+      "note": "与前句形成回环，把adventure和inconvenience互换位置。",
+      "related": "/english/chesterton-hat/"
+    },
+    {
+      "id": "twain-02",
+      "text": "We all do no end of feeling, and we mistake it for thinking.",
+      "translation": "我们有没完没了的感受，却把它误当成思考。",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "马克·吐温",
+      "author_en": "Mark Twain",
+      "work_zh": "《玉米饼意见》",
+      "work_en": "Corn-Pone Opinions",
+      "locator_zh": "《玉米饼意见》末段",
+      "first_published": 1923,
+      "author_died": 1910,
+      "url": "https://www.gutenberg.org/cache/epub/68604/pg68604-images.html#Page_406",
+      "note": "no end of表示许多、无穷无尽；mistake A for B表示把A错当作B。",
+      "related": "/english/twain-corn-pone/"
+    },
+    {
+      "id": "lamb-02",
+      "text": "I love to lose myself in other men’s minds.",
+      "translation": "我喜欢在别人的思想中忘记自己。",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "查尔斯·兰姆",
+      "author_en": "Charles Lamb",
+      "work_zh": "《最后的伊利亚随笔·读书杂感》",
+      "work_en": "Last Essays of Elia: Detached Thoughts on Books and Reading",
+      "locator_zh": "《读书杂感》",
+      "first_published": 1822,
+      "author_died": 1834,
+      "url": "https://www.gutenberg.org/cache/epub/10343/pg10343-images.html#id00611",
+      "note": "lose oneself in表示沉浸于；此文1822年先刊杂志，1833年收入《最后的伊利亚随笔》。"
+    },
+    {
+      "id": "shakespeare-03",
+      "text": "The course of true love never did run smooth.",
+      "translation": "真爱的道路从来不会一帆风顺。",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "莎士比亚",
+      "author_en": "William Shakespeare",
+      "work_zh": "《仲夏夜之梦》",
+      "work_en": "A Midsummer Night’s Dream",
+      "locator_zh": "第一幕第一场，拉山德台词",
+      "first_published": 1600,
+      "author_died": 1616,
+      "url": "https://www.gutenberg.org/cache/epub/100/pg100-images.html#sceneI_24.1",
+      "note": "course在此指进程；never did run用助动词加强否定语气。"
+    },
+    {
+      "id": "austen-03",
+      "text": "I declare, after all, there is no enjoyment like reading!",
+      "translation": "我还是要说，没有哪种乐趣比得上读书！",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "简·奥斯汀",
+      "author_en": "Jane Austen",
+      "work_zh": "《傲慢与偏见》",
+      "work_en": "Pride and Prejudice",
+      "locator_zh": "第十一章，宾利小姐台词",
+      "first_published": 1813,
+      "author_died": 1817,
+      "url": "https://www.gutenberg.org/cache/epub/1342/pg1342-images.html#page_71",
+      "note": "宾利小姐此时想吸引达西注意，随后便搁下书；这句有名的“读书宣言”带着反讽。"
+    },
+    {
+      "id": "dickens-03",
+      "text": "A multitude of people, and yet a solitude!",
+      "translation": "人群熙攘，却仍是一片孤独！",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "查尔斯·狄更斯",
+      "author_en": "Charles Dickens",
+      "work_zh": "《双城记》",
+      "work_en": "A Tale of Two Cities",
+      "locator_zh": "第二部第六章，达尔奈台词",
+      "first_published": 1859,
+      "author_died": 1870,
+      "url": "https://www.gutenberg.org/cache/epub/98/pg98-images.html#link2H_4_0014",
+      "note": "multitude与solitude押尾韵；达尔奈听见街上的人群脚步声，却看不见一个人。"
+    },
+    {
+      "id": "bronte-03",
+      "text": "I would always rather be happy than dignified;",
+      "translation": "我总宁愿快活，也不愿只顾体面。",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "夏洛蒂·勃朗特",
+      "author_en": "Charlotte Brontë",
+      "work_zh": "《简·爱》",
+      "work_en": "Jane Eyre",
+      "locator_zh": "第三十四章，简的内心叙述",
+      "first_published": 1847,
+      "author_died": 1855,
+      "url": "https://www.gutenberg.org/cache/epub/1260/pg1260-images.html#id-9112509753362559240",
+      "note": "would rather ... than ...表示宁愿；dignified在这里强调端着尊严和体面。"
+    },
+    {
+      "id": "eliot-03",
+      "text": "what loneliness is more lonely than distrust?",
+      "translation": "有什么孤独，比互不信任更孤独？",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "乔治·艾略特",
+      "author_en": "George Eliot",
+      "work_zh": "《米德尔马契》",
+      "work_en": "Middlemarch",
+      "locator_zh": "第四十四章，句中分句",
+      "first_published": 1871,
+      "author_died": 1880,
+      "url": "https://www.gutenberg.org/cache/epub/145/pg145-images.html#chap44",
+      "note": "distrust不是一个人独处，而是亲近的人之间失去信任。保留句中原有小写。"
+    },
+    {
+      "id": "carroll-03",
+      "text": "we’re all mad here.",
+      "translation": "这里人人都疯。",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "刘易斯·卡罗尔",
+      "author_en": "Lewis Carroll",
+      "work_zh": "《爱丽丝漫游奇境记》",
+      "work_en": "Alice’s Adventures in Wonderland",
+      "locator_zh": "第六章，柴郡猫台词中的分句",
+      "first_published": 1865,
+      "author_died": 1898,
+      "url": "https://www.gutenberg.org/cache/epub/11/pg11-images.html#chap06",
+      "note": "mad在这里是发疯；保留句中小写。柴郡猫的判断属于这个颠倒常理的故事世界。"
+    },
+    {
+      "id": "wilde-03",
+      "text": "Nowadays people know the price of everything and the value of nothing.",
+      "translation": "如今的人知道一切东西的价格，却不懂任何东西的价值。",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "奥斯卡·王尔德",
+      "author_en": "Oscar Wilde",
+      "work_zh": "《道林·格雷的画像》",
+      "work_en": "The Picture of Dorian Gray",
+      "locator_zh": "第四章，亨利勋爵台词",
+      "first_published": 1891,
+      "author_died": 1900,
+      "url": "https://www.gutenberg.org/cache/epub/174/pg174-images.html#chap04",
+      "note": "price与value构成对比；这是角色的机智讽刺，不能把他的每句话都当作作者赞同的主张。"
+    },
+    {
+      "id": "stevenson-03",
+      "text": "A happy man or woman is a better thing to find than a five-pound note.",
+      "translation": "遇见一个快乐的人，比捡到一张五英镑纸币还好。",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "罗伯特·路易斯·史蒂文森",
+      "author_en": "Robert Louis Stevenson",
+      "work_zh": "《为闲人辩护》",
+      "work_en": "An Apology for Idlers",
+      "locator_zh": "《为闲人辩护》",
+      "first_published": 1877,
+      "author_died": 1894,
+      "url": "https://www.gutenberg.org/cache/epub/69825/pg69825-images.html#page_27",
+      "note": "这是幽默的价值比较；a ... note是某面额的纸币，注意pound用单数作定语。"
+    },
+    {
+      "id": "blake-03",
+      "text": "What is now proved was once only imagined.",
+      "translation": "如今被证实的，曾经也只是想象。",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "威廉·布莱克",
+      "author_en": "William Blake",
+      "work_zh": "《天堂与地狱的婚姻》",
+      "work_en": "The Marriage of Heaven and Hell",
+      "locator_zh": "“地狱的箴言”",
+      "first_published": 1790,
+      "author_died": 1827,
+      "url": "https://www.gutenberg.org/cache/epub/45315/pg45315-images.html#Page_16",
+      "note": "格言把证明与想象接起来，不能推成“想象都能被证明”；拼写保留所引排印版。"
+    },
+    {
+      "id": "wordsworth-03",
+      "text": "The world is too much with us; late and soon, Getting and spending, we lay waste our powers:",
+      "translation": "尘世过分占据了我们；日夜忙于获取与花费，我们耗损着自己的力量。",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "威廉·华兹华斯",
+      "author_en": "William Wordsworth",
+      "work_zh": "《诗二卷集》第一卷",
+      "work_en": "Poems, in Two Volumes, Volume I",
+      "locator_zh": "《尘世过分占据了我们》首两行",
+      "first_published": 1807,
+      "author_died": 1850,
+      "url": "https://www.gutenberg.org/cache/epub/8774/pg8774-images.html#id00323",
+      "note": "lay waste表示摧残、耗尽；getting and spending把消费生活压缩成两个动作。"
+    },
+    {
+      "id": "coleridge-03",
+      "text": "Alone, alone, all, all alone, Alone on the wide, wide sea!",
+      "translation": "孤独，孤独，彻底孤独，独自漂在那广阔的大海上！",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "塞缪尔·泰勒·柯勒律治",
+      "author_en": "Samuel Taylor Coleridge",
+      "work_zh": "《古舟子咏》",
+      "work_en": "The Rime of the Ancient Mariner",
+      "locator_zh": "第四部分，第232—233行",
+      "first_published": 1798,
+      "author_died": 1834,
+      "url": "https://www.gutenberg.org/cache/epub/11101/pg11101-images.html#id00222",
+      "note": "反复的alone和wide使孤立感成为听得见的节奏。"
+    },
+    {
+      "id": "shelley-03",
+      "text": "Our sweetest songs are those that tell of saddest thought.",
+      "translation": "我们最甜美的歌，诉说的却是最悲伤的思绪。",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "珀西·比希·雪莱",
+      "author_en": "Percy Bysshe Shelley",
+      "work_zh": "《雪莱诗集》第二卷",
+      "work_en": "The Complete Poetical Works, Volume II",
+      "locator_zh": "《致云雀》第90行",
+      "first_published": 1820,
+      "author_died": 1822,
+      "url": "https://www.gutenberg.org/cache/epub/4798/pg4798-images.html#id01084",
+      "note": "sweetest与saddest形成对照；这里引自原诗，未取任何音乐改编版本。"
+    },
+    {
+      "id": "keats-03",
+      "text": "Season of mists and mellow fruitfulness, Close bosom-friend of the maturing sun;",
+      "translation": "雾气与醇熟果实的季节，催熟万物的太阳的亲密伙伴。",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "约翰·济慈",
+      "author_en": "John Keats",
+      "work_zh": "《秋颂》",
+      "work_en": "To Autumn",
+      "locator_zh": "《秋颂》首两行",
+      "first_published": 1820,
+      "author_died": 1821,
+      "url": "https://www.gutenberg.org/cache/epub/23684/pg23684-images.html#id-2659893139361286649",
+      "note": "mellow写成熟、柔润；maturing sun指催熟果实的太阳。bosom-friend是知心朋友，以此将秋与太阳人格化。"
+    },
+    {
+      "id": "dickinson-03",
+      "text": "Success is counted sweetest By those who ne’er succeed.",
+      "translation": "从未成功的人，最能体会成功的甜美。",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "艾米莉·狄金森",
+      "author_en": "Emily Dickinson",
+      "work_zh": "《狄金森诗集》",
+      "work_en": "Poems by Emily Dickinson, Three Series",
+      "locator_zh": "第一辑，Life第I首，前两行",
+      "first_published": 1864,
+      "author_died": 1886,
+      "url": "https://www.gutenberg.org/cache/epub/12242/pg12242-images.html#Success_is_counted_sweetest",
+      "note": "counted在这里是被认为；保留所引早期出版版本的措辞。此诗1864年已刊出。"
+    },
+    {
+      "id": "whitman-03",
+      "text": "Not I, not any one else can travel that road for you, You must travel it for yourself.",
+      "translation": "我不能，别人也不能替你走那条路；你必须自己去走。",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "沃尔特·惠特曼",
+      "author_en": "Walt Whitman",
+      "work_zh": "《草叶集》",
+      "work_en": "Leaves of Grass",
+      "locator_zh": "《自我之歌》第46节，诗行",
+      "first_published": 1855,
+      "author_died": 1892,
+      "url": "https://www.gutenberg.org/cache/epub/1322/pg1322-images.html#link2H_4_0027",
+      "note": "for yourself在此是亲自、为自己；这是一段面向读者的旅途比喻。"
+    },
+    {
+      "id": "yeats-03",
+      "text": "Tread softly because you tread on my dreams.",
+      "translation": "请轻轻踏步，因为你踏着我的梦。",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "威廉·巴特勒·叶芝",
+      "author_en": "William Butler Yeats",
+      "work_zh": "《他愿以天国的锦缎相赠》",
+      "work_en": "Aedh Wishes for the Cloths of Heaven",
+      "locator_zh": "《他愿以天国的锦缎相赠》末行",
+      "first_published": 1899,
+      "author_died": 1939,
+      "url": "https://www.gutenberg.org/cache/epub/32233/pg32233-images.html#Page_60",
+      "note": "tread是踩、踏；本条来自《苇间风》中的原诗，诗人以梦代替无法相赠的锦缎。"
+    },
+    {
+      "id": "franklin-03",
+      "text": "Let all your things have their places; let each part of your business have its time.",
+      "translation": "让每件东西各有其位，让每项事务各有其时。",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "本杰明·富兰克林",
+      "author_en": "Benjamin Franklin",
+      "work_zh": "《富兰克林自传》",
+      "work_en": "Autobiography",
+      "locator_zh": "第二部分，十三项德目之“秩序”",
+      "first_published": 1818,
+      "author_died": 1790,
+      "url": "https://www.gutenberg.org/cache/epub/20203/pg20203-images.html#IX",
+      "note": "两个let祈使结构平行；business在这里是事务，不只指商业。"
+    },
+    {
+      "id": "emerson-03",
+      "text": "Nothing is at last sacred but the integrity of your own mind.",
+      "translation": "归根结底，神圣的只有你自己心灵的完整。",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "拉尔夫·沃尔多·爱默生",
+      "author_en": "Ralph Waldo Emerson",
+      "work_zh": "《论自立》",
+      "work_en": "Self-Reliance",
+      "locator_zh": "《论自立》",
+      "first_published": 1841,
+      "author_died": 1882,
+      "url": "https://www.gutenberg.org/cache/epub/16643/pg16643-images.html#Page_83",
+      "note": "integrity兼有正直、完整之意；这里强调保持独立判断。"
+    },
+    {
+      "id": "thoreau-03",
+      "text": "Rather than love, than money, than fame, give me truth.",
+      "translation": "比起爱情、金钱和名声，我要真理。",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "亨利·戴维·梭罗",
+      "author_en": "Henry David Thoreau",
+      "work_zh": "《瓦尔登湖》",
+      "work_en": "Walden",
+      "locator_zh": "第十八章“结束语”",
+      "first_published": 1854,
+      "author_died": 1862,
+      "url": "https://www.gutenberg.org/cache/epub/205/pg205-images.html#chap19",
+      "note": "rather than表示取舍；三个than并列加强了比较的力度。"
+    },
+    {
+      "id": "douglass-03",
+      "text": "I would at times feel that learning to read had been a curse rather than a blessing.",
+      "translation": "有时我觉得，学会阅读竟像是诅咒，而不是祝福。",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "弗雷德里克·道格拉斯",
+      "author_en": "Frederick Douglass",
+      "work_zh": "《道格拉斯自述》",
+      "work_en": "Narrative of the Life of Frederick Douglass",
+      "locator_zh": "第七章",
+      "first_published": 1845,
+      "author_died": 1895,
+      "url": "https://www.gutenberg.org/cache/epub/23/pg23-images.html#link2HCH0007",
+      "note": "下文说明知识让他看清困境，却暂时看不到出路；这不是劝人放弃阅读。",
+      "related": "/english/douglass-reading/"
+    },
+    {
+      "id": "keller-03",
+      "text": "Everything had a name, and each name gave birth to a new thought.",
+      "translation": "万物都有名字，而每个名字都孕育出一个新思想。",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "海伦·凯勒",
+      "author_en": "Helen Keller",
+      "work_zh": "《我的一生》",
+      "work_en": "The Story of My Life",
+      "locator_zh": "第一部分第四章",
+      "first_published": 1903,
+      "author_died": 1968,
+      "url": "https://www.gutenberg.org/cache/epub/2397/pg2397-images.html#link2HCH0004",
+      "note": "give birth to除生育外，也可表示产生、孕育；这里写语言开启新认知。",
+      "related": "/english/keller-water/"
+    },
+    {
+      "id": "chesterton-03",
+      "text": "everything depends upon the emotional point of view.",
+      "translation": "一切取决于情感上的观看角度。",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "吉尔伯特·基思·切斯特顿",
+      "author_en": "G. K. Chesterton",
+      "work_zh": "《追逐自己的帽子》",
+      "work_en": "On Running after One’s Hat",
+      "locator_zh": "《追逐自己的帽子》，句中分句",
+      "first_published": 1908,
+      "author_died": 1936,
+      "url": "https://www.gutenberg.org/cache/epub/11505/pg11505-images.html#chap04",
+      "note": "作者谈等车、追帽子等小麻烦，不是把所有现实困境都归结为心态。",
+      "related": "/english/chesterton-hat/"
+    },
+    {
+      "id": "twain-03",
+      "text": "Self-approval is acquired mainly from the approval of other people.",
+      "translation": "自我认可，主要是从别人的认可中获得的。",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "马克·吐温",
+      "author_en": "Mark Twain",
+      "work_zh": "《玉米饼意见》",
+      "work_en": "Corn-Pone Opinions",
+      "locator_zh": "《玉米饼意见》",
+      "first_published": 1923,
+      "author_died": 1910,
+      "url": "https://www.gutenberg.org/cache/epub/68604/pg68604-images.html#Page_404",
+      "note": "approval两次出现，显出“自我”判断也可能来自他人的悖论。",
+      "related": "/english/twain-corn-pone/"
+    },
+    {
+      "id": "lamb-03",
+      "text": "I am in love with this green earth; the face of town and country; the unspeakable rural solitudes, and the sweet security of streets.",
+      "translation": "我爱这绿色的大地、城镇与乡野的面貌、难以言说的田园幽静，以及街道中甜美的安稳。",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "查尔斯·兰姆",
+      "author_en": "Charles Lamb",
+      "work_zh": "《伊利亚随笔》",
+      "work_en": "Essays of Elia",
+      "locator_zh": "《除夕》",
+      "first_published": 1821,
+      "author_died": 1834,
+      "url": "https://www.gutenberg.org/cache/epub/10343/pg10343-images.html#id00127",
+      "note": "be in love with也可用于热爱某种事物；乡野的solitudes与街道的security并置。"
+    },
+    {
+      "id": "shakespeare-04",
+      "text": "All that glisters is not gold,",
+      "translation": "闪光的并不全是金子。",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "莎士比亚",
+      "author_en": "William Shakespeare",
+      "work_zh": "《威尼斯商人》",
+      "work_en": "The Merchant of Venice",
+      "locator_zh": "第二幕第七场，金匣中纸卷的首行",
+      "first_published": 1600,
+      "author_died": 1616,
+      "url": "https://www.gutenberg.org/cache/epub/100/pg100-images.html#sceneII_22.7",
+      "note": "glister是glitter的旧形式。保留本版逗号；all ... not在此表达“不全是”。"
+    },
+    {
+      "id": "austen-04",
+      "text": "Till this moment, I never knew myself.",
+      "translation": "直到这一刻，我才认识了自己。",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "简·奥斯汀",
+      "author_en": "Jane Austen",
+      "work_zh": "《傲慢与偏见》",
+      "work_en": "Pride and Prejudice",
+      "locator_zh": "第三十六章，伊丽莎白的反省",
+      "first_published": 1813,
+      "author_died": 1817,
+      "url": "https://www.gutenberg.org/cache/epub/1342/pg1342-images.html#page_259",
+      "note": "读信后，她重新审视自己的成见。till this moment把理解发生的时刻突出出来。"
+    },
+    {
+      "id": "dickens-04",
+      "text": "I wish you to know that you have been the last dream of my soul.",
+      "translation": "我希望你知道，你是我心灵最后的梦想。",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "查尔斯·狄更斯",
+      "author_en": "Charles Dickens",
+      "work_zh": "《双城记》",
+      "work_en": "A Tale of Two Cities",
+      "locator_zh": "第二部第十三章，卡顿对露西说",
+      "first_published": 1859,
+      "author_died": 1870,
+      "url": "https://www.gutenberg.org/cache/epub/98/pg98-images.html#link2H_4_0021",
+      "note": "wish someone to know是较正式的表达；这句话属于卡顿的告白，具有特定人物关系。"
+    },
+    {
+      "id": "bronte-04",
+      "text": "The more solitary, the more friendless, the more unsustained I am, the more I will respect myself.",
+      "translation": "我越是孤独、无友、无所依靠，就越要尊重自己。",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "夏洛蒂·勃朗特",
+      "author_en": "Charlotte Brontë",
+      "work_zh": "《简·爱》",
+      "work_en": "Jane Eyre",
+      "locator_zh": "第二十七章，简的内心回答",
+      "first_published": 1847,
+      "author_died": 1855,
+      "url": "https://www.gutenberg.org/cache/epub/1260/pg1260-images.html#id-5219489442405865509",
+      "note": "the more ... the more ...表达“越……越……”；unsustained在此指没有支持。"
+    },
+    {
+      "id": "eliot-04",
+      "text": "We are all of us born in moral stupidity, taking the world as an udder to feed our supreme selves:",
+      "translation": "我们生来都带着道德上的愚钝，把世界当作供养至高自我的乳房。",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "乔治·艾略特",
+      "author_en": "George Eliot",
+      "work_zh": "《米德尔马契》",
+      "work_en": "Middlemarch",
+      "locator_zh": "第二十一章，叙述者的分句",
+      "first_published": 1871,
+      "author_died": 1880,
+      "url": "https://www.gutenberg.org/cache/epub/145/pg145-images.html#chap21",
+      "note": "udder本义为乳房；这是对自我中心的尖锐比喻，随后写多萝西娅逐渐超越它。"
+    },
+    {
+      "id": "carroll-04",
+      "text": "Everything’s got a moral, if only you can find it.",
+      "translation": "每件事都有个寓意，只要你找得出来。",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "刘易斯·卡罗尔",
+      "author_en": "Lewis Carroll",
+      "work_zh": "《爱丽丝漫游奇境记》",
+      "work_en": "Alice’s Adventures in Wonderland",
+      "locator_zh": "第九章，公爵夫人台词",
+      "first_published": 1865,
+      "author_died": 1898,
+      "url": "https://www.gutenberg.org/cache/epub/11/pg11-images.html#chap09",
+      "note": "moral作名词指寓意；公爵夫人强行讲道理的习惯本身也是笑料。"
+    },
+    {
+      "id": "wilde-04",
+      "text": "The books that the world calls immoral are books that show the world its own shame.",
+      "translation": "被世人称作不道德的书，正是把世人的羞耻展示给他们看的书。",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "奥斯卡·王尔德",
+      "author_en": "Oscar Wilde",
+      "work_zh": "《道林·格雷的画像》",
+      "work_en": "The Picture of Dorian Gray",
+      "locator_zh": "第十九章，亨利勋爵台词",
+      "first_published": 1891,
+      "author_died": 1900,
+      "url": "https://www.gutenberg.org/cache/epub/174/pg174-images.html#chap19",
+      "note": "两个that从句分别修饰books；注意这是亨利的辩论式口吻。"
+    },
+    {
+      "id": "stevenson-04",
+      "text": "Books are good enough in their own way, but they are a mighty bloodless substitute for life.",
+      "translation": "书有书的好处，但若拿它来代替生活，实在太没有生气了。",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "罗伯特·路易斯·史蒂文森",
+      "author_en": "Robert Louis Stevenson",
+      "work_zh": "《为闲人辩护》",
+      "work_en": "An Apology for Idlers",
+      "locator_zh": "《为闲人辩护》",
+      "first_published": 1877,
+      "author_died": 1894,
+      "url": "https://www.gutenberg.org/cache/epub/69825/pg69825-images.html#page_12",
+      "note": "in their own way先承认另一面的价值；substitute for表示某物的替代品。"
+    },
+    {
+      "id": "blake-04",
+      "text": "I was angry with my friend: I told my wrath, my wrath did end.",
+      "translation": "我对朋友生气；把怒气说出来，怒气便消散了。",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "威廉·布莱克",
+      "author_en": "William Blake",
+      "work_zh": "《经验之歌·一棵毒树》",
+      "work_en": "Songs of Experience: A Poison Tree",
+      "locator_zh": "《一棵毒树》首两行",
+      "first_published": 1794,
+      "author_died": 1827,
+      "url": "https://www.gutenberg.org/cache/epub/574/pg574-images.html#id00214",
+      "note": "wrath比anger更强烈；后文转向对敌人隐藏怒气的危险，诗题提示了这一比喻。"
+    },
+    {
+      "id": "wordsworth-04",
+      "text": "She was a Phantom of delight When first she gleam’d upon my sight;",
+      "translation": "她初次映入眼帘时，宛如一个令人欢喜的幻影。",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "威廉·华兹华斯",
+      "author_en": "William Wordsworth",
+      "work_zh": "《诗二卷集》第一卷",
+      "work_en": "Poems, in Two Volumes, Volume I",
+      "locator_zh": "《她是令人欢喜的幻影》首两行",
+      "first_published": 1807,
+      "author_died": 1850,
+      "url": "https://www.gutenberg.org/cache/epub/8774/pg8774-images.html#id00114",
+      "note": "phantom在这里是诗意的幻影；并不是恐怖故事中的鬼魂。"
+    },
+    {
+      "id": "coleridge-04",
+      "text": "A sadder and a wiser man, He rose the morrow morn.",
+      "translation": "他在次日清晨起身，心中多了悲伤，也多了智慧。",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "塞缪尔·泰勒·柯勒律治",
+      "author_en": "Samuel Taylor Coleridge",
+      "work_zh": "《古舟子咏》",
+      "work_en": "The Rime of the Ancient Mariner",
+      "locator_zh": "第七部分，末两行",
+      "first_published": 1798,
+      "author_died": 1834,
+      "url": "https://www.gutenberg.org/cache/epub/11101/pg11101-images.html#id00346",
+      "note": "morrow morn是古旧的“第二天早晨”；这里写的是听完故事的婚宴客人。"
+    },
+    {
+      "id": "shelley-04",
+      "text": "The fountains mingle with the river And the rivers with the Ocean,",
+      "translation": "泉水汇入河流，河流汇入海洋。",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "珀西·比希·雪莱",
+      "author_en": "Percy Bysshe Shelley",
+      "work_zh": "《雪莱诗集》第二卷",
+      "work_en": "The Complete Poetical Works, Volume II",
+      "locator_zh": "《爱的哲学》首两行",
+      "first_published": 1819,
+      "author_died": 1822,
+      "url": "https://www.gutenberg.org/cache/epub/4798/pg4798-images.html#id00862",
+      "note": "mingle with表示交融；诗以自然界的相融展开求爱辩说。"
+    },
+    {
+      "id": "keats-04",
+      "text": "Thou wast not born for death, immortal Bird!",
+      "translation": "你不是为死亡而生的，不朽的鸟！",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "约翰·济慈",
+      "author_en": "John Keats",
+      "work_zh": "《夜莺颂》",
+      "work_en": "Ode to a Nightingale",
+      "locator_zh": "《夜莺颂》第61行",
+      "first_published": 1819,
+      "author_died": 1821,
+      "url": "https://www.gutenberg.org/cache/epub/23684/pg23684-images.html#Nightingale_ln60",
+      "note": "Thou wast是you were的古式；“不朽”指向歌声与诗的想象，不是鸟类个体不会死亡。"
+    },
+    {
+      "id": "dickinson-04",
+      "text": "There is no frigate like a book To take us lands away,",
+      "translation": "没有哪艘巡航舰能像书一样，带我们远赴异乡。",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "艾米莉·狄金森",
+      "author_en": "Emily Dickinson",
+      "work_zh": "《狄金森诗集》",
+      "work_en": "Poems by Emily Dickinson, Three Series",
+      "locator_zh": "第三辑，Life第XVI首，前两行",
+      "first_published": 1896,
+      "author_died": 1886,
+      "url": "https://www.gutenberg.org/cache/epub/12242/pg12242-images.html#There_is_no_frigate_like_a_book",
+      "note": "frigate是一种军舰；早期编辑本用书与船作远行的比喻。"
+    },
+    {
+      "id": "whitman-04",
+      "text": "That the powerful play goes on, and you may contribute a verse.",
+      "translation": "这场有力的戏仍在继续，而你可以贡献自己的一行诗。",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "沃尔特·惠特曼",
+      "author_en": "Walt Whitman",
+      "work_zh": "《草叶集》",
+      "work_en": "Leaves of Grass",
+      "locator_zh": "《啊，我！啊，人生！》末行",
+      "first_published": 1867,
+      "author_died": 1892,
+      "url": "https://www.gutenberg.org/cache/epub/1322/pg1322-images.html#link2H_4_0121",
+      "note": "play与verse把生活比作仍在上演的戏；本条采用原诗，不取影视改写。"
+    },
+    {
+      "id": "yeats-04",
+      "text": "I will arise and go now, and go to Innisfree,",
+      "translation": "我要起身出发，现在就去茵尼斯弗利。",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "威廉·巴特勒·叶芝",
+      "author_en": "William Butler Yeats",
+      "work_zh": "《茵尼斯弗利湖心岛》",
+      "work_en": "The Lake Isle of Innisfree",
+      "locator_zh": "《茵尼斯弗利湖心岛》首行",
+      "first_published": 1890,
+      "author_died": 1939,
+      "url": "https://www.gutenberg.org/cache/epub/49608/pg49608-images.html#Page_154",
+      "note": "arise比rise更有书面色彩；重复go把离开城市、返回小岛的愿望化为节奏。"
+    },
+    {
+      "id": "franklin-04",
+      "text": "Make no expense but to do good to others or yourself; i. e., waste nothing.",
+      "translation": "花费只用于有益于别人或自己的事；也就是说，不浪费。",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "本杰明·富兰克林",
+      "author_en": "Benjamin Franklin",
+      "work_zh": "《富兰克林自传》",
+      "work_en": "Autobiography",
+      "locator_zh": "第二部分，十三项德目之“节俭”",
+      "first_published": 1818,
+      "author_died": 1790,
+      "url": "https://www.gutenberg.org/cache/epub/20203/pg20203-images.html",
+      "note": "expense是花费；保留此版i. e.的排印，表示“也就是说”。"
+    },
+    {
+      "id": "emerson-04",
+      "text": "A foolish consistency is the hobgoblin of little minds, adored by little statesmen and philosophers and divines.",
+      "translation": "愚蠢的一贯性，是狭小心灵的妖怪，小政客、哲学家和神学家却把它奉若神明。",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "拉尔夫·沃尔多·爱默生",
+      "author_en": "Ralph Waldo Emerson",
+      "work_zh": "《论自立》",
+      "work_en": "Self-Reliance",
+      "locator_zh": "《论自立》",
+      "first_published": 1841,
+      "author_died": 1882,
+      "url": "https://www.gutenberg.org/cache/epub/16643/pg16643-images.html#Page_89",
+      "note": "限定词foolish不可删：作者反对的是僵化的一贯性，而不是任何言行一致。"
+    },
+    {
+      "id": "thoreau-04",
+      "text": "If a man does not keep pace with his companions, perhaps it is because he hears a different drummer.",
+      "translation": "一个人若跟不上伙伴的步伐，也许是因为他听见了不同的鼓点。",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "亨利·戴维·梭罗",
+      "author_en": "Henry David Thoreau",
+      "work_zh": "《瓦尔登湖》",
+      "work_en": "Walden",
+      "locator_zh": "第十八章“结束语”",
+      "first_published": 1854,
+      "author_died": 1862,
+      "url": "https://www.gutenberg.org/cache/epub/205/pg205-images.html#chap19",
+      "note": "keep pace with表示与……并驾齐驱；different drummer后来成为独立行事的常见意象。"
+    },
+    {
+      "id": "douglass-04",
+      "text": "The silver trump of freedom had roused my soul to eternal wakefulness.",
+      "translation": "自由那银色的号角，已把我的灵魂唤醒，使它再也无法沉睡。",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "弗雷德里克·道格拉斯",
+      "author_en": "Frederick Douglass",
+      "work_zh": "《道格拉斯自述》",
+      "work_en": "Narrative of the Life of Frederick Douglass",
+      "locator_zh": "第七章",
+      "first_published": 1845,
+      "author_died": 1895,
+      "url": "https://www.gutenberg.org/cache/epub/23/pg23-images.html#link2HCH0007",
+      "note": "trump在这里是trumpet的诗性旧用法；自由觉醒后再也无法回到无知。",
+      "related": "/english/douglass-reading/"
+    },
+    {
+      "id": "keller-04",
+      "text": "literature is my Utopia.",
+      "translation": "文学是我的乌托邦。",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "海伦·凯勒",
+      "author_en": "Helen Keller",
+      "work_zh": "《我的一生》",
+      "work_en": "The Story of My Life",
+      "locator_zh": "第一部分第二十一章，句中分句",
+      "first_published": 1903,
+      "author_died": 1968,
+      "url": "https://www.gutenberg.org/cache/epub/2397/pg2397-images.html#link2HCH0021",
+      "note": "Utopia指理想国；保留句中小写。作者下文写自己在书中的自由，不能理解为否认现实。"
+    },
+    {
+      "id": "chesterton-04",
+      "text": "The same people run much more eagerly after an uninteresting little leather ball than they will after a nice silk hat.",
+      "translation": "同样这些人追起无聊的小皮球，却比追一顶漂亮的丝绸帽子热心得多。",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "吉尔伯特·基思·切斯特顿",
+      "author_en": "G. K. Chesterton",
+      "work_zh": "《追逐自己的帽子》",
+      "work_en": "On Running after One’s Hat",
+      "locator_zh": "《追逐自己的帽子》",
+      "first_published": 1908,
+      "author_died": 1936,
+      "url": "https://www.gutenberg.org/cache/epub/11505/pg11505-images.html#chap04",
+      "note": "run after指追逐；将运动和追帽子并置，让所谓“丢脸”的感觉显得可笑。",
+      "related": "/english/chesterton-hat/"
+    },
+    {
+      "id": "twain-04",
+      "text": "It is our nature to conform; it is a force which not many can successfully resist.",
+      "translation": "随众是我们的天性；这是一种少有人能成功抵抗的力量。",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "马克·吐温",
+      "author_en": "Mark Twain",
+      "work_zh": "《玉米饼意见》",
+      "work_en": "Corn-Pone Opinions",
+      "locator_zh": "《玉米饼意见》",
+      "first_published": 1923,
+      "author_died": 1910,
+      "url": "https://www.gutenberg.org/cache/epub/68604/pg68604-images.html#Page_401",
+      "note": "conform是遵从、随众；文章在检视从众的机制，不是在鼓励放弃独立判断。",
+      "related": "/english/twain-corn-pone/"
+    },
+    {
+      "id": "lamb-04",
+      "text": "“Presents,” I often say, “endear Absents.”",
+      "translation": "我常说：“礼物能让不在身边的人更亲近。”",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "查尔斯·兰姆",
+      "author_en": "Charles Lamb",
+      "work_zh": "《烤猪论》",
+      "work_en": "A Dissertation upon Roast Pig",
+      "locator_zh": "《烤猪论》",
+      "first_published": 1822,
+      "author_died": 1834,
+      "url": "https://www.gutenberg.org/cache/epub/10343/pg10343-images.html#id00451",
+      "note": "Presents与Absents构成声音和意义的双关；后者在此是“不在场的人”，话题由美食转到分享。",
+      "related": "/english/lamb-roast-pig/"
+    },
+    {
+      "id": "shakespeare-05",
+      "text": "This above all: to thine own self be true;",
+      "translation": "最重要的是：忠于你自己。",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "莎士比亚",
+      "author_en": "William Shakespeare",
+      "work_zh": "《哈姆雷特》",
+      "work_en": "Hamlet",
+      "locator_zh": "第一幕第三场，波洛涅斯的告诫",
+      "first_published": 1603,
+      "author_died": 1616,
+      "url": "https://www.gutenberg.org/cache/epub/100/pg100-images.html#sceneI_8.3",
+      "note": "thine是thy在元音前的旧式形式；这是角色给儿子的劝告，保留其戏剧语境。"
+    },
+    {
+      "id": "austen-05",
+      "text": "For what do we live, but to make sport for our neighbours, and laugh at them in our turn?",
+      "translation": "我们活着，除了给邻居当笑料，再轮到自己笑他们，还为了什么呢？",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "简·奥斯汀",
+      "author_en": "Jane Austen",
+      "work_zh": "《傲慢与偏见》",
+      "work_en": "Pride and Prejudice",
+      "locator_zh": "第五十七章，班纳特先生台词",
+      "first_published": 1813,
+      "author_died": 1817,
+      "url": "https://www.gutenberg.org/cache/epub/1342/pg1342-images.html#page_447",
+      "note": "make sport for在此是供人取笑；班纳特先生以挖苦回应社交传闻，不是作者提出的人生准则。"
+    },
+    {
+      "id": "dickens-05",
+      "text": "It is a far, far better thing that I do, than I have ever done; it is a far, far better rest that I go to than I have ever known.",
+      "translation": "我现在所做的，远比我以往所做的一切更好；我将得到的安息，也远比我曾有过的更好。",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "查尔斯·狄更斯",
+      "author_en": "Charles Dickens",
+      "work_zh": "《双城记》",
+      "work_en": "A Tale of Two Cities",
+      "locator_zh": "第三部第十五章，结尾",
+      "first_published": 1859,
+      "author_died": 1870,
+      "url": "https://www.gutenberg.org/cache/epub/98/pg98-images.html#link2H_4_0048",
+      "note": "小说以假想的临终感言收尾；rest在此指死亡后的安息，far加强比较级。"
+    },
+    {
+      "id": "bronte-05",
+      "text": "Conventionality is not morality. Self-righteousness is not religion.",
+      "translation": "墨守成规不等于道德，自以为义不等于信仰。",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "夏洛蒂·勃朗特",
+      "author_en": "Charlotte Brontë",
+      "work_zh": "《简·爱》",
+      "work_en": "Jane Eyre",
+      "locator_zh": "第二版序言（1848）",
+      "first_published": 1848,
+      "author_died": 1855,
+      "url": "https://www.gutenberg.org/cache/epub/1260/pg1260-images.html#id-6588747706750457341",
+      "note": "此处是作者的序言，不是简的台词；self-righteousness带有自以为道德高尚的贬义。"
+    },
+    {
+      "id": "eliot-05",
+      "text": "If we had a keen vision and feeling of all ordinary human life, it would be like hearing the grass grow and the squirrel’s heart beat, and we should die of that roar which lies on the other side of silence.",
+      "translation": "若能敏锐地看见并感受一切普通人的生活，就如听见草长、松鼠心跳；我们会死于那寂静彼岸的轰鸣。",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "乔治·艾略特",
+      "author_en": "George Eliot",
+      "work_zh": "《米德尔马契》",
+      "work_en": "Middlemarch",
+      "locator_zh": "第二十章，叙述者的议论",
+      "first_published": 1871,
+      "author_died": 1880,
+      "url": "https://www.gutenberg.org/cache/epub/145/pg145-images.html#chap20",
+      "note": "听见草生长是夸张：作者用听觉比喻说明，对他人生活的完整感受可能超出人的承受力。"
+    },
+    {
+      "id": "carroll-05",
+      "text": "Take care of the sense, and the sounds will take care of themselves.",
+      "translation": "照顾好意思，声音自会照顾好自己。",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "刘易斯·卡罗尔",
+      "author_en": "Lewis Carroll",
+      "work_zh": "《爱丽丝漫游奇境记》",
+      "work_en": "Alice’s Adventures in Wonderland",
+      "locator_zh": "第九章，公爵夫人台词",
+      "first_published": 1865,
+      "author_died": 1898,
+      "url": "https://www.gutenberg.org/cache/epub/11/pg11-images.html#chap09",
+      "note": "这句改写了节约小钱的英语谚语；sense与sounds的近音让劝告变成文字游戏。"
+    },
+    {
+      "id": "wilde-05",
+      "text": "The basis of optimism is sheer terror.",
+      "translation": "乐观的根基，是十足的恐惧。",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "奥斯卡·王尔德",
+      "author_en": "Oscar Wilde",
+      "work_zh": "《道林·格雷的画像》",
+      "work_en": "The Picture of Dorian Gray",
+      "locator_zh": "第六章，亨利勋爵台词",
+      "first_published": 1891,
+      "author_died": 1900,
+      "url": "https://www.gutenberg.org/cache/epub/174/pg174-images.html#chap06",
+      "note": "sheer加强名词，表示纯粹、十足；句子的妙处在于把optimism与terror意外相连。"
+    },
+    {
+      "id": "stevenson-05",
+      "text": "Perpetual devotion to what a man calls his business, is only to be sustained by perpetual neglect of many other things.",
+      "translation": "对所谓事业永不停歇的投入，只能靠永不停歇地忽略其他许多事来维持。",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "罗伯特·路易斯·史蒂文森",
+      "author_en": "Robert Louis Stevenson",
+      "work_zh": "《为闲人辩护》",
+      "work_en": "An Apology for Idlers",
+      "locator_zh": "《为闲人辩护》",
+      "first_published": 1877,
+      "author_died": 1894,
+      "url": "https://www.gutenberg.org/cache/epub/69825/pg69825-images.html#page_23",
+      "note": "devotion与neglect相对；作者在这里提醒人们，忙碌也意味着注意力的取舍。"
+    },
+    {
+      "id": "blake-05",
+      "text": "How can the bird that is born for joy Sit in a cage and sing?",
+      "translation": "天生为了欢乐的鸟，怎能坐在笼里歌唱？",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "威廉·布莱克",
+      "author_en": "William Blake",
+      "work_zh": "《经验之歌·学童》",
+      "work_en": "Songs of Experience: The Schoolboy",
+      "locator_zh": "《学童》第四节，前两行",
+      "first_published": 1789,
+      "author_died": 1827,
+      "url": "https://www.gutenberg.org/cache/epub/574/pg574-images.html#id00237",
+      "note": "以鸟笼比喻压抑儿童的教育；这里引用原诗，而非任何后来的谱曲或改编歌词。"
+    },
+    {
+      "id": "wordsworth-05",
+      "text": "Who, not content that former worth stand fast, Looks forward, persevering to the last,",
+      "translation": "他不满足于守住过去的优点，而是向前看，坚持到最后。",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "威廉·华兹华斯",
+      "author_en": "William Wordsworth",
+      "work_zh": "《诗二卷集》第一卷",
+      "work_en": "Poems, in Two Volumes, Volume I",
+      "locator_zh": "《快乐的战士的品格》，分句",
+      "first_published": 1807,
+      "author_died": 1850,
+      "url": "https://www.gutenberg.org/cache/epub/8774/pg8774-images.html#id00148",
+      "note": "persevering表示坚持不懈；这是描写人物品格的关系从句节选。"
+    },
+    {
+      "id": "coleridge-05",
+      "text": "The fair breeze blew, the white foam flew, The furrow followed free;",
+      "translation": "和风吹来，白沫飞溅，船后水痕畅然延伸。",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "塞缪尔·泰勒·柯勒律治",
+      "author_en": "Samuel Taylor Coleridge",
+      "work_zh": "《古舟子咏》",
+      "work_en": "The Rime of the Ancient Mariner",
+      "locator_zh": "第二部分，第103—104行",
+      "first_published": 1798,
+      "author_died": 1834,
+      "url": "https://www.gutenberg.org/cache/epub/11101/pg11101-images.html#id00171",
+      "note": "b、f音密集重复，示范头韵；furrow本义为犁沟，在此写船划开的水路。"
+    },
+    {
+      "id": "shelley-05",
+      "text": "Music, when soft voices die, Vibrates in the memory—",
+      "translation": "柔声消逝之时，音乐仍在记忆中回响。",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "珀西·比希·雪莱",
+      "author_en": "Percy Bysshe Shelley",
+      "work_zh": "《雪莱诗集》第二卷",
+      "work_en": "The Complete Poetical Works, Volume II",
+      "locator_zh": "《当柔声消逝》首两行",
+      "first_published": 1824,
+      "author_died": 1822,
+      "url": "https://www.gutenberg.org/cache/epub/4798/pg4798-images.html#id01426",
+      "note": "排印双连字符统一显示为长横线；本条来自1824年刊出的原诗，不是后来谱曲的歌词。"
+    },
+    {
+      "id": "keats-05",
+      "text": "tender is the night, And haply the Queen-Moon is on her throne,",
+      "translation": "夜色温柔，也许月亮女王正坐在宝座上。",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "约翰·济慈",
+      "author_en": "John Keats",
+      "work_zh": "《夜莺颂》",
+      "work_en": "Ode to a Nightingale",
+      "locator_zh": "《夜莺颂》第35—36行，句中节选",
+      "first_published": 1819,
+      "author_died": 1821,
+      "url": "https://www.gutenberg.org/cache/epub/23684/pg23684-images.html#Nightingale_ln30",
+      "note": "haply是“或许”的旧词；保留原句中小写。Queen-Moon把月亮拟人为女王，后世小说借用首句作题名。"
+    },
+    {
+      "id": "dickinson-05",
+      "text": "I’m nobody! Who are you? Are you nobody, too?",
+      "translation": "我是无名小卒！你是谁？你也是无名小卒吗？",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "艾米莉·狄金森",
+      "author_en": "Emily Dickinson",
+      "work_zh": "《狄金森诗集》",
+      "work_en": "Poems by Emily Dickinson, Three Series",
+      "locator_zh": "第二辑，Life第I首，前三行",
+      "first_published": 1891,
+      "author_died": 1886,
+      "url": "https://www.gutenberg.org/cache/epub/12242/pg12242-images.html#Im_nobody_Who_are_you",
+      "note": "nobody既可指没有人，也可指无名小卒；诗把不出名写成一种可以共享的自在。"
+    },
+    {
+      "id": "whitman-05",
+      "text": "I bequeath myself to the dirt to grow from the grass I love, If you want me again look for me under your boot-soles.",
+      "translation": "我把自己留给泥土，从心爱的草中生长；若想再找我，就到你的鞋底下寻找。",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "沃尔特·惠特曼",
+      "author_en": "Walt Whitman",
+      "work_zh": "《草叶集》",
+      "work_en": "Leaves of Grass",
+      "locator_zh": "《自我之歌》第52节，诗行",
+      "first_published": 1855,
+      "author_died": 1892,
+      "url": "https://www.gutenberg.org/cache/epub/1322/pg1322-images.html#link2H_4_0027",
+      "note": "bequeath指遗赠；草把个体生命与自然循环连在一起。"
+    },
+    {
+      "id": "yeats-05",
+      "text": "And I shall have some peace there, for peace comes dropping slow,",
+      "translation": "在那里，我会得到些许安宁，因为安宁缓缓滴落。",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "威廉·巴特勒·叶芝",
+      "author_en": "William Butler Yeats",
+      "work_zh": "《茵尼斯弗利湖心岛》",
+      "work_en": "The Lake Isle of Innisfree",
+      "locator_zh": "《茵尼斯弗利湖心岛》第5行",
+      "first_published": 1890,
+      "author_died": 1939,
+      "url": "https://www.gutenberg.org/cache/epub/49608/pg49608-images.html#Page_154",
+      "note": "把peace写成一点点滴下来的东西，是具体而柔缓的诗性比喻。"
+    },
+    {
+      "id": "franklin-05",
+      "text": "In short, I conceive that great part of the miseries of mankind are brought upon them by the false estimates they have made of the value of things, and by their giving too much for their whistles.",
+      "translation": "总之，我想，人类很大一部分痛苦来自对事物价值的错误估量，以及为自己的“哨子”付出太多。",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "本杰明·富兰克林",
+      "author_en": "Benjamin Franklin",
+      "work_zh": "《哨子》",
+      "work_en": "The Whistle",
+      "locator_zh": "《哨子》1921年节录本末句",
+      "first_published": 1921,
+      "author_died": 1790,
+      "url": "https://www.gutenberg.org/cache/epub/78663/pg78663-images.html",
+      "note": "所引为1921年重印节录本，源自1779年致布里永夫人的信；不冒称原信全文。",
+      "related": "/english/franklin-whistle/"
+    },
+    {
+      "id": "emerson-05",
+      "text": "To be great is to be misunderstood.",
+      "translation": "伟大，也就意味着会被误解。",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "拉尔夫·沃尔多·爱默生",
+      "author_en": "Ralph Waldo Emerson",
+      "work_zh": "《论自立》",
+      "work_en": "Self-Reliance",
+      "locator_zh": "《论自立》",
+      "first_published": 1841,
+      "author_died": 1882,
+      "url": "https://www.gutenberg.org/cache/epub/16643/pg16643-images.html#Page_90",
+      "note": "这是鼓励独立思考的修辞性概括，不能反推凡被误解的人都伟大。"
+    },
+    {
+      "id": "thoreau-05",
+      "text": "How many a man has dated a new era in his life from the reading of a book.",
+      "translation": "多少人从读到一本书起，为自己的人生划出了一个新时代。",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "亨利·戴维·梭罗",
+      "author_en": "Henry David Thoreau",
+      "work_zh": "《瓦尔登湖》",
+      "work_en": "Walden",
+      "locator_zh": "第三章“阅读”",
+      "first_published": 1854,
+      "author_died": 1862,
+      "url": "https://www.gutenberg.org/cache/epub/205/pg205-images.html#chap04",
+      "note": "date ... from ...在这里表示以某时为开端；many a后接单数名词。"
+    },
+    {
+      "id": "douglass-05",
+      "text": "to make a contented slave, it is necessary to make a thoughtless one.",
+      "translation": "要让一个被奴役的人安于处境，就必须让他不去思考。",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "弗雷德里克·道格拉斯",
+      "author_en": "Frederick Douglass",
+      "work_zh": "《道格拉斯自述》",
+      "work_en": "Narrative of the Life of Frederick Douglass",
+      "locator_zh": "第十章，句中分句",
+      "first_published": 1845,
+      "author_died": 1895,
+      "url": "https://www.gutenberg.org/cache/epub/23/pg23-images.html#fnref-1",
+      "note": "这是作者对奴役制度控制思想的揭露；保留原句中小写，contented表示满足于现状。"
+    },
+    {
+      "id": "keller-05",
+      "text": "In a thousand ways they have turned my limitations into beautiful privileges,",
+      "translation": "他们以千百种方式，把我的局限变成美好的机缘。",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "海伦·凯勒",
+      "author_en": "Helen Keller",
+      "work_zh": "《我的一生》",
+      "work_en": "The Story of My Life",
+      "locator_zh": "第一部分第二十三章，末句中的分句",
+      "first_published": 1903,
+      "author_died": 1968,
+      "url": "https://www.gutenberg.org/cache/epub/2397/pg2397-images.html#link2HCH0023",
+      "note": "they指帮助作者的朋友；turn A into B表示把A转变成B。privileges在此写朋友所提供的珍贵机会。"
+    },
+    {
+      "id": "chesterton-05",
+      "text": "The whole happiness of fairyland hangs upon a thread, upon one thread.",
+      "translation": "仙境的全部幸福都悬在一根线上，仅仅一根线上。",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "吉尔伯特·基思·切斯特顿",
+      "author_en": "G. K. Chesterton",
+      "work_zh": "《童话》",
+      "work_en": "Fairy Tales",
+      "locator_zh": "《童话》",
+      "first_published": 1908,
+      "author_died": 1936,
+      "url": "https://www.gutenberg.org/cache/epub/11505/pg11505-images.html#chap31",
+      "note": "hang upon a thread即悬于一线；下文用灰姑娘必须按时回家等条件解释童话的规则。"
+    },
+    {
+      "id": "twain-05",
+      "text": "Its name is Public Opinion. It is held in reverence. It settles everything.",
+      "translation": "它的名字叫公众意见。人们敬畏它，一切都由它裁定。",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "马克·吐温",
+      "author_en": "Mark Twain",
+      "work_zh": "《玉米饼意见》",
+      "work_en": "Corn-Pone Opinions",
+      "locator_zh": "《玉米饼意见》末段",
+      "first_published": 1923,
+      "author_died": 1910,
+      "url": "https://www.gutenberg.org/cache/epub/68604/pg68604-images.html#Page_406",
+      "note": "held in reverence表示受到敬畏；这是讽刺从众的总结，不能反读成作者鼓吹盲从。",
+      "related": "/english/twain-corn-pone/"
+    },
+    {
+      "id": "lamb-05",
+      "text": "By such slow degrees, concludes the manuscript, do the most useful, and seemingly the most obvious arts, make their way among mankind.",
+      "translation": "据那份手稿总结，最有用、看似也最显而易见的技艺，正是如此缓慢地在人类中推广的。",
+      "translation_source": {
+        "type": "site"
+      },
+      "author_zh": "查尔斯·兰姆",
+      "author_en": "Charles Lamb",
+      "work_zh": "《烤猪论》",
+      "work_en": "A Dissertation upon Roast Pig",
+      "locator_zh": "《烤猪论》",
+      "first_published": 1822,
+      "author_died": 1834,
+      "url": "https://www.gutenberg.org/cache/epub/10343/pg10343-images.html#id00438",
+      "note": "兰姆假托古代中国的手稿，戏说人们为烤猪而烧房子；这是讽刺性虚构故事，不能当中国历史。",
+      "related": "/english/lamb-roast-pig/"
+    }
+  ]
+}

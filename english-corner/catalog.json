@@ -1,0 +1,1012 @@
+{
+  "version": 1,
+  "columns": [
+    {
+      "id": "words",
+      "title": "词的身世",
+      "english": "Word Stories",
+      "description": "一个词从哪来，路上经过了哪些语言。"
+    },
+    {
+      "id": "classics",
+      "title": "经典一页",
+      "english": "One Page of the Classics",
+      "description": "一页公版英文经典，配中文导读和难词说明。"
+    },
+    {
+      "id": "between",
+      "title": "中英之间",
+      "english": "Between Chinese and English",
+      "description": "换一种语言，看熟悉的事物怎样表达。"
+    },
+    {
+      "id": "myths",
+      "title": "考据",
+      "english": "Fact-check",
+      "description": "流传很广的英语冷知识，经得起核对吗？"
+    }
+  ],
+  "cards": [
+    {
+      "slug": "ketchup",
+      "column": "words",
+      "title": "ketchup 原来不一定是番茄酱？",
+      "level": 1,
+      "tags": [
+        "借词",
+        "饮食",
+        "东南亚"
+      ],
+      "summary": "是的。英语 ketchup 的词源与闽南语鱼汁有关，可能经过马来语；它到了欧洲以后，原料还经历过蘑菇、核桃等变化。词的身世和今天瓶子里的东西，不一定相同。",
+      "sources": [
+        {
+          "label": "Merriam-Webster：ketchup",
+          "url": "https://www.merriam-webster.com/dictionary/ketchup",
+          "checked_on": "2026-10-29"
+        },
+        {
+          "label": "Etymonline：ketchup",
+          "url": "https://www.etymonline.com/word/ketchup",
+          "checked_on": "2026-10-29"
+        }
+      ],
+      "related": [
+        "tea-and-cha",
+        "amok"
+      ],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true,
+      "headword": "ketchup",
+      "journey": [
+        {
+          "language": "闽南语",
+          "form": "kôe-chiap / kê-chiap",
+          "period": ""
+        },
+        {
+          "language": "马来语（可能中介）",
+          "form": "kecap",
+          "period": ""
+        },
+        {
+          "language": "英语",
+          "form": "ketchup",
+          "period": "约1690年已有记录"
+        }
+      ]
+    },
+    {
+      "slug": "tea-and-cha",
+      "column": "words",
+      "title": "tea 和 cha：一片茶叶，两条语言路线",
+      "level": 1,
+      "tags": [
+        "借词",
+        "茶",
+        "贸易"
+      ],
+      "summary": "两种词形最终都与汉语有关。WALS 的茶词地图区分 cha 系与闽南语 te 系；荷兰商人与厦门的联系，帮助 te 一路变成了欧洲许多语言里的茶。海陆二分只是便于记忆的概括。",
+      "sources": [
+        {
+          "label": "WALS Online 第138章：Tea（Östen Dahl）",
+          "url": "https://wals.info/chapter/138",
+          "checked_on": "2026-10-29"
+        },
+        {
+          "label": "Merriam-Webster：tea",
+          "url": "https://www.merriam-webster.com/dictionary/tea",
+          "checked_on": "2026-10-29"
+        }
+      ],
+      "related": [
+        "ketchup",
+        "long-time-no-see"
+      ],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true,
+      "headword": "tea",
+      "journey": [
+        {
+          "language": "闽南语",
+          "form": "te",
+          "period": ""
+        },
+        {
+          "language": "荷兰语",
+          "form": "thee",
+          "period": ""
+        },
+        {
+          "language": "英语",
+          "form": "tea",
+          "period": ""
+        }
+      ]
+    },
+    {
+      "slug": "gung-ho",
+      "column": "words",
+      "title": "gung-ho：英语里的“工合”怎么这么有干劲？",
+      "level": 2,
+      "tags": [
+        "借词",
+        "中国",
+        "语义变化"
+      ],
+      "summary": "gung-ho 与中国工业合作社简称“工合”有关。美军采用这个口号以后，它在英语里变成了“热情十足、干劲很大”，有时也带“热心得过了头”的意味。",
+      "sources": [
+        {
+          "label": "Merriam-Webster：gung ho",
+          "url": "https://www.merriam-webster.com/dictionary/gung%20ho",
+          "checked_on": "2026-10-29"
+        },
+        {
+          "label": "Etymonline：gung ho",
+          "url": "https://www.etymonline.com/word/gung%20ho",
+          "checked_on": "2026-10-29"
+        }
+      ],
+      "related": [
+        "kowtow",
+        "tycoon"
+      ],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true,
+      "headword": "gung-ho",
+      "journey": [
+        {
+          "language": "汉语",
+          "form": "工合",
+          "period": ""
+        },
+        {
+          "language": "英语",
+          "form": "gung-ho",
+          "period": "1942年已有记录"
+        }
+      ]
+    },
+    {
+      "slug": "kowtow",
+      "column": "words",
+      "title": "kowtow：从叩头动作到不肯低头",
+      "level": 2,
+      "tags": [
+        "借词",
+        "语气",
+        "中国"
+      ],
+      "summary": "kowtow 源自汉语“叩头”。英语既保留跪拜的动作义，也发展出“卑躬屈膝、迎合权势”的意思；日常看到 kowtow to，常常已经没有人真的跪下来。",
+      "sources": [
+        {
+          "label": "Merriam-Webster：kowtow",
+          "url": "https://www.merriam-webster.com/dictionary/kowtow",
+          "checked_on": "2026-10-29"
+        },
+        {
+          "label": "Etymonline：kowtow",
+          "url": "https://www.etymonline.com/word/kowtow",
+          "checked_on": "2026-10-29"
+        }
+      ],
+      "related": [
+        "gung-ho",
+        "long-time-no-see"
+      ],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true,
+      "headword": "kowtow",
+      "journey": [
+        {
+          "language": "汉语",
+          "form": "叩头 koutou",
+          "period": ""
+        },
+        {
+          "language": "英语",
+          "form": "kowtow",
+          "period": ""
+        }
+      ]
+    },
+    {
+      "slug": "tycoon",
+      "column": "words",
+      "title": "tycoon：日本“大君”为何成了商业大亨？",
+      "level": 1,
+      "tags": [
+        "借词",
+        "日本",
+        "商业"
+      ],
+      "summary": "tycoon 来自日语 taikun，即“大君”，早期用于称呼日本将军。英语后来把政治权势的称谓移到商界；今天常见的 oil tycoon 就是石油大亨。",
+      "sources": [
+        {
+          "label": "Merriam-Webster：tycoon",
+          "url": "https://www.merriam-webster.com/dictionary/tycoon",
+          "checked_on": "2026-10-29"
+        },
+        {
+          "label": "Etymonline：tycoon",
+          "url": "https://www.etymonline.com/word/tycoon",
+          "checked_on": "2026-10-29"
+        }
+      ],
+      "related": [
+        "gung-ho",
+        "serendipity"
+      ],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true,
+      "headword": "tycoon",
+      "journey": [
+        {
+          "language": "日语",
+          "form": "大君 taikun",
+          "period": ""
+        },
+        {
+          "language": "英语",
+          "form": "tycoon",
+          "period": "1857年已有记录"
+        }
+      ]
+    },
+    {
+      "slug": "amok",
+      "column": "words",
+      "title": "run amok：英语里也有马来语的足迹",
+      "level": 2,
+      "tags": [
+        "借词",
+        "马来语",
+        "习语"
+      ],
+      "summary": "amok 来自马来语。英语 run amok 今天既能指暴力失控，也能用来形容事物不受控制地蔓延；它的历史用法不应该被拿来给某个族群贴标签。",
+      "sources": [
+        {
+          "label": "Merriam-Webster：amok",
+          "url": "https://www.merriam-webster.com/dictionary/amok",
+          "checked_on": "2026-10-29"
+        },
+        {
+          "label": "Etymonline：amok",
+          "url": "https://www.etymonline.com/word/amok",
+          "checked_on": "2026-10-29"
+        }
+      ],
+      "related": [
+        "ketchup",
+        "tea-and-cha"
+      ],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true,
+      "headword": "amok",
+      "journey": [
+        {
+          "language": "马来语",
+          "form": "amuk / amok",
+          "period": ""
+        },
+        {
+          "language": "英语",
+          "form": "amok",
+          "period": "17世纪已有记录"
+        }
+      ]
+    },
+    {
+      "slug": "serendipity",
+      "column": "words",
+      "title": "serendipity：不是随便一件幸运事",
+      "level": 2,
+      "tags": [
+        "造词",
+        "文学",
+        "发现"
+      ],
+      "summary": "serendipity 指没有刻意寻找，却意外发现了有价值的东西。霍勒斯·沃波尔借《塞伦迪普三王子》的故事造出这个词；Serendip 与今天的斯里兰卡有关。",
+      "sources": [
+        {
+          "label": "Merriam-Webster：serendipity",
+          "url": "https://www.merriam-webster.com/dictionary/serendipity",
+          "checked_on": "2026-10-29"
+        },
+        {
+          "label": "Etymonline：serendipity",
+          "url": "https://www.etymonline.com/word/serendipity",
+          "checked_on": "2026-10-29"
+        }
+      ],
+      "related": [
+        "tycoon",
+        "chesterton-hat"
+      ],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true,
+      "headword": "serendipity",
+      "journey": [
+        {
+          "language": "故事中的地名",
+          "form": "Serendip",
+          "period": ""
+        },
+        {
+          "language": "英语新词",
+          "form": "serendipity",
+          "period": "1754年"
+        }
+      ]
+    },
+    {
+      "slug": "long-time-no-see",
+      "column": "words",
+      "title": "long time no see：像中文，就能断定来自中文吗？",
+      "level": 1,
+      "tags": [
+        "借词",
+        "证据",
+        "问候"
+      ],
+      "summary": "它确实让人想到“好久不见”，但传播路径没有简单到一句话就能定案。英国文化教育协会介绍了中国接触英语和北美相关记录两条线索；历史上的模仿性对白，也不等于真实口语录音。",
+      "sources": [
+        {
+          "label": "British Council：Phrase-ology，第27页的来源讨论",
+          "url": "https://www.britishcouncil.org/sites/default/files/wed_ebook_final_web_artwork.pdf#page=27",
+          "checked_on": "2026-10-29"
+        },
+        {
+          "label": "David Crystal：On long time no see",
+          "url": "https://david-crystal.blogspot.com/2010/07/on-long-time-no-see.html",
+          "checked_on": "2026-10-29"
+        }
+      ],
+      "related": [
+        "tea-and-cha",
+        "posh"
+      ],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true,
+      "headword": "long time no see",
+      "journey": [
+        {
+          "language": "英语",
+          "form": "long time no see",
+          "period": "具体传播路径仍有争论"
+        }
+      ]
+    },
+    {
+      "slug": "keller-water",
+      "column": "classics",
+      "title": "海伦·凯勒：原来，一个词能让世界亮起来",
+      "level": 1,
+      "tags": [
+        "自传",
+        "学习",
+        "感官"
+      ],
+      "summary": "井边的水流过一只手，老师在另一只手上拼词。海伦·凯勒写理解 water 的那一刻，也写后来对摔坏娃娃的悔意。抽象的“学会语言”，被写成了可以触摸的场景。",
+      "sources": [
+        {
+          "label": "Project Gutenberg #2397：原文第四章",
+          "url": "https://www.gutenberg.org/files/2397/2397-h/2397-h.htm#link2HCH0004",
+          "checked_on": "2026-10-29"
+        },
+        {
+          "label": "Project Gutenberg：书目与作者生卒年",
+          "url": "https://www.gutenberg.org/ebooks/2397",
+          "checked_on": "2026-10-29"
+        }
+      ],
+      "related": [
+        "douglass-reading",
+        "franklin-whistle"
+      ],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true,
+      "work": {
+        "author_zh": "海伦·凯勒",
+        "author_en": "Helen Keller",
+        "title_zh": "《我的一生》",
+        "title_en": "The Story of My Life",
+        "first_published": 1903,
+        "author_died": 1968,
+        "range": "第一部分第四章章末连续节选，从 We walked… 至 longed for a new day to come.",
+        "edition": "1903年文本，Project Gutenberg #2397（阅读分段）",
+        "edition_url": "https://www.gutenberg.org/files/2397/2397-h/2397-h.htm#link2HCH0004",
+        "excerpt_words": 334,
+        "excerpt_sha256_lf": "a64ad81205fa8a3c0471c41034092fe05c001b3cafa12d98939b413d9c6e231f"
+      }
+    },
+    {
+      "slug": "franklin-whistle",
+      "column": "classics",
+      "title": "富兰克林的哨子：快乐有没有买贵？",
+      "level": 1,
+      "tags": [
+        "书信",
+        "选择",
+        "消费"
+      ],
+      "summary": "七岁的富兰克林把所有铜钱换了一个哨子，后来得知付了太高的价钱。这个童年小故事，变成了成年后衡量各种选择的一句提醒：别为哨子付出太多。",
+      "sources": [
+        {
+          "label": "Project Gutenberg #78663：1921年节录本正文与扉页",
+          "url": "https://www.gutenberg.org/cache/epub/78663/pg78663-images.html",
+          "checked_on": "2026-10-29"
+        },
+        {
+          "label": "Project Gutenberg：书目、1921年版本和作者信息",
+          "url": "https://www.gutenberg.org/ebooks/78663",
+          "checked_on": "2026-10-29"
+        }
+      ],
+      "related": [
+        "keller-water",
+        "qian-and-wan"
+      ],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true,
+      "work": {
+        "author_zh": "本杰明·富兰克林",
+        "author_en": "Benjamin Franklin",
+        "title_zh": "《哨子》",
+        "title_en": "The Whistle",
+        "first_published": 1921,
+        "author_died": 1790,
+        "range": "1921年书信节录本开头，从 When I was… 至成年生活总括句",
+        "edition": "Brad Stephens & Company，Boston，1921；Project Gutenberg #78663",
+        "edition_url": "https://www.gutenberg.org/cache/epub/78663/pg78663-images.html",
+        "excerpt_words": 225,
+        "excerpt_sha256_lf": "9ab953a9d8d9dfa450e33e1facee72e15bced93fe4f860f99ed3cc7e17072700"
+      }
+    },
+    {
+      "slug": "chesterton-hat",
+      "column": "classics",
+      "title": "切斯特顿：拉不开的抽屉，也能是一场冒险？",
+      "level": 3,
+      "tags": [
+        "散文",
+        "幽默",
+        "日常"
+      ],
+      "summary": "抽屉卡住了，有人气得骂它，切斯特顿却建议把拉抽屉想象成救生艇或拔河。他不是教修家具，而是在演示：怎样用一个夸张比喻，把小麻烦写成幽默文章。",
+      "sources": [
+        {
+          "label": "Project Gutenberg #11505：所据1915年版本正文",
+          "url": "https://www.gutenberg.org/cache/epub/11505/pg11505-images.html",
+          "checked_on": "2026-10-29"
+        },
+        {
+          "label": "Wikisource：All Things Considered，1908年版本目录",
+          "url": "https://en.wikisource.org/wiki/All_Things_Considered",
+          "checked_on": "2026-10-29"
+        },
+        {
+          "label": "Project Gutenberg：作者生卒年",
+          "url": "https://www.gutenberg.org/ebooks/11505",
+          "checked_on": "2026-10-29"
+        }
+      ],
+      "related": [
+        "serendipity",
+        "lamb-roast-pig"
+      ],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true,
+      "work": {
+        "author_zh": "G. K. 切斯特顿",
+        "author_en": "G. K. Chesterton",
+        "title_zh": "《追帽子》",
+        "title_en": "On Running after One’s Hat",
+        "first_published": 1908,
+        "author_died": 1936,
+        "range": "从 The same principle… 至篇末最后一段之前",
+        "edition": "All Things Considered，1915年版；Project Gutenberg #11505",
+        "edition_url": "https://www.gutenberg.org/cache/epub/11505/pg11505-images.html",
+        "excerpt_words": 381,
+        "excerpt_sha256_lf": "6f148f39d0945c79970e5cbbae4ee0f9ce72f27582d7c379226f876221d78cbd"
+      }
+    },
+    {
+      "slug": "twain-corn-pone",
+      "column": "classics",
+      "title": "马克·吐温：为什么大家忽然都喜欢同一条裙子？",
+      "level": 2,
+      "tags": [
+        "散文",
+        "群体",
+        "时尚"
+      ],
+      "summary": "新式裙子刚来时被笑话，半年后又被欣赏。马克·吐温借服装和酒杯追问：改变的是理由，还是我们希望与别人一致的心？读者也可以用一个反例回应他。",
+      "sources": [
+        {
+          "label": "Project Gutenberg #68604：原书电子文本",
+          "url": "https://www.gutenberg.org/files/68604/68604-h/68604-h.htm",
+          "checked_on": "2026-10-29"
+        },
+        {
+          "label": "Project Gutenberg：1923年出版信息及作者生卒年",
+          "url": "https://www.gutenberg.org/ebooks/68604",
+          "checked_on": "2026-10-29"
+        }
+      ],
+      "related": [
+        "posh",
+        "douglass-reading"
+      ],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true,
+      "work": {
+        "author_zh": "马克·吐温",
+        "author_en": "Mark Twain",
+        "title_zh": "《玉米饼式的意见》",
+        "title_en": "Corn-Pone Opinions",
+        "first_published": 1923,
+        "author_died": 1910,
+        "range": "原书第401–402页服装与酒杯段落",
+        "edition": "Europe and Elsewhere，Harper & Brothers，1923；Project Gutenberg #68604",
+        "edition_url": "https://www.gutenberg.org/files/68604/68604-h/68604-h.htm",
+        "excerpt_words": 451,
+        "excerpt_sha256_lf": "0aab84114aeacb04dba91a768a0262e4738522eb098ab01cd0da71d739d404bd"
+      }
+    },
+    {
+      "slug": "douglass-reading",
+      "column": "classics",
+      "title": "道格拉斯：用面包换来的阅读课",
+      "level": 2,
+      "tags": [
+        "自传",
+        "阅读",
+        "自由"
+      ],
+      "summary": "被禁止学习的道格拉斯，把跑腿空隙和随身面包变成识字的机会。故事里的“面包”既是食物，也变成知识的比喻；最后的对话把读书带向了自由的问题。",
+      "sources": [
+        {
+          "label": "Project Gutenberg #23：第七章正文",
+          "url": "https://www.gutenberg.org/files/23/23-h/23-h.htm#link2HCH0007",
+          "checked_on": "2026-10-29"
+        },
+        {
+          "label": "Project Gutenberg：作品与作者生卒年",
+          "url": "https://www.gutenberg.org/ebooks/23",
+          "checked_on": "2026-10-29"
+        }
+      ],
+      "related": [
+        "keller-water",
+        "twain-corn-pone"
+      ],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true,
+      "work": {
+        "author_zh": "弗雷德里克·道格拉斯",
+        "author_en": "Frederick Douglass",
+        "title_zh": "《一个美国奴隶的生平自述》",
+        "title_en": "Narrative of the Life of Frederick Douglass, an American Slave",
+        "first_published": 1845,
+        "author_died": 1895,
+        "range": "第七章，从 From this time… 至 something would occur…",
+        "edition": "Boston，Anti-Slavery Office，1845；Project Gutenberg #23",
+        "edition_url": "https://www.gutenberg.org/files/23/23-h/23-h.htm#link2HCH0007",
+        "excerpt_words": 405,
+        "excerpt_sha256_lf": "5d7cd0f480771a056bf4d406abd61fcd4b1a3103fbaf9456b4d6ecfaa5ad9e24"
+      }
+    },
+    {
+      "slug": "yeats-when-you-are-old",
+      "column": "classics",
+      "title": "《当你老了》：熟悉的歌名，回到叶芝原诗",
+      "level": 2,
+      "tags": [
+        "诗歌",
+        "爱尔兰",
+        "中国钩子"
+      ],
+      "summary": "中文听众可能先认识同名歌曲，再认识叶芝。这里回到公版英语原诗：它想象爱人年老后读书回忆，不仅赞美容貌，也追问人怎样爱一个不断变化的灵魂。只收原诗，不收歌词。",
+      "sources": [
+        {
+          "label": "Project Gutenberg #49608：1908年版原诗及扉页",
+          "url": "https://www.gutenberg.org/cache/epub/49608/pg49608-images.html",
+          "checked_on": "2026-10-29"
+        },
+        {
+          "label": "爱尔兰国家图书馆：原诗发表年份1892",
+          "url": "https://www.nli.ie/news/yeats-nobel-centenary-video-series",
+          "checked_on": "2026-10-29"
+        },
+        {
+          "label": "中新网：2015年春晚与原诗改编关系",
+          "url": "https://www.chinanews.com/yl/2015/02-26/7081632.shtml",
+          "checked_on": "2026-10-29"
+        },
+        {
+          "label": "Project Gutenberg：作者生卒年",
+          "url": "https://www.gutenberg.org/ebooks/49608",
+          "checked_on": "2026-10-29"
+        }
+      ],
+      "related": [
+        "coleridge-kubla-khan",
+        "keller-water"
+      ],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true,
+      "work": {
+        "author_zh": "W. B. 叶芝",
+        "author_en": "William Butler Yeats",
+        "title_zh": "《当你老了》",
+        "title_en": "When You Are Old",
+        "first_published": 1892,
+        "author_died": 1939,
+        "range": "全诗12行，采用1908年卷一文本",
+        "edition": "Poems Lyrical and Narrative，Shakespeare Head Press，1908；Project Gutenberg #49608",
+        "edition_url": "https://www.gutenberg.org/cache/epub/49608/pg49608-images.html",
+        "excerpt_words": 100,
+        "excerpt_sha256_lf": "41de3567427438cc2f085d41a996f739279b3e4ea376359d25d05c7a47124e82"
+      }
+    },
+    {
+      "slug": "coleridge-kubla-khan",
+      "column": "classics",
+      "title": "Xanadu 原来是上都：英国诗人的中国梦境",
+      "level": 3,
+      "tags": [
+        "诗歌",
+        "元上都",
+        "中国钩子"
+      ],
+      "summary": "Xanadu 与忽必烈的上都相连。柯勒律治把这个地名写进梦境般的诗：宫殿、河流、花园和洞窟。读前11行，可以练习区分真实地点与文学想象。",
+      "sources": [
+        {
+          "label": "Project Gutenberg #29090：1912年版原诗",
+          "url": "https://www.gutenberg.org/files/29090/29090-h/29090-h.htm#stcvol1_Kubla_Khan",
+          "checked_on": "2026-10-29"
+        },
+        {
+          "label": "UNESCO：Site of Xanadu（元上都遗址）",
+          "url": "https://whc.unesco.org/en/list/1389",
+          "checked_on": "2026-10-29"
+        },
+        {
+          "label": "British Library Journal：1816年首次出版与手稿研究",
+          "url": "https://bl.iro.bl.uk/entities/publication/3c49a895-ca2d-4b97-ab04-2a50917a3595",
+          "checked_on": "2026-10-29"
+        },
+        {
+          "label": "Project Gutenberg：作者生卒年",
+          "url": "https://www.gutenberg.org/ebooks/29090",
+          "checked_on": "2026-10-29"
+        }
+      ],
+      "related": [
+        "yeats-when-you-are-old",
+        "lamb-roast-pig"
+      ],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true,
+      "work": {
+        "author_zh": "塞缪尔·泰勒·柯勒律治",
+        "author_en": "Samuel Taylor Coleridge",
+        "title_zh": "《忽必烈汗》",
+        "title_en": "Kubla Khan",
+        "first_published": 1816,
+        "author_died": 1834,
+        "range": "前11行",
+        "edition": "The Complete Poetical Works，1912年版卷一；Project Gutenberg #29090",
+        "edition_url": "https://www.gutenberg.org/files/29090/29090-h/29090-h.htm#stcvol1_Kubla_Khan",
+        "excerpt_words": 66,
+        "excerpt_sha256_lf": "0f95029611bb8a9eb8f7884a2658c454f910467abdfddc97fe57606d02c085af"
+      }
+    },
+    {
+      "slug": "lamb-roast-pig",
+      "column": "classics",
+      "title": "查尔斯·兰姆：这篇“烤猪起源”可别当历史",
+      "level": 3,
+      "tags": [
+        "散文",
+        "幽默",
+        "中国钩子"
+      ],
+      "summary": "兰姆假托中国故事，写一个失火后意外尝到脆猪皮的孩子。这是幽默散文，不是烹饪发明史；奇怪人名和假古书都服务于夸张。读故事，也练习识别叙述的游戏。",
+      "sources": [
+        {
+          "label": "Project Gutenberg #10343：原文与原刊1822年说明",
+          "url": "https://www.gutenberg.org/cache/epub/10343/pg10343.html#id00432",
+          "checked_on": "2026-10-29"
+        },
+        {
+          "label": "Project Gutenberg：作者信息与文集书目",
+          "url": "https://www.gutenberg.org/ebooks/10343",
+          "checked_on": "2026-10-29"
+        }
+      ],
+      "related": [
+        "chesterton-hat",
+        "ketchup"
+      ],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true,
+      "work": {
+        "author_zh": "查尔斯·兰姆",
+        "author_en": "Charles Lamb",
+        "title_zh": "《烤猪论》",
+        "title_en": "A Dissertation upon Roast Pig",
+        "first_published": 1822,
+        "author_died": 1834,
+        "range": "从 The swine-herd, Ho-ti… 至首次 tasted—crackling!",
+        "edition": "The Works of Charles and Mary Lamb，卷二，E. V. Lucas编；Project Gutenberg #10343（仅取兰姆正文）",
+        "edition_url": "https://www.gutenberg.org/cache/epub/10343/pg10343.html#id00432",
+        "excerpt_words": 363,
+        "excerpt_sha256_lf": "881c08ee08d86af230aaeaa5509ad4f28075a58070a98b3612eeb73eb078119b"
+      }
+    },
+    {
+      "slug": "qian-and-wan",
+      "column": "between",
+      "title": "14亿为什么是 1.4 billion？",
+      "level": 1,
+      "tags": [
+        "数字",
+        "表达",
+        "小工具"
+      ],
+      "summary": "先别心算英语长句，把单位对齐：亿是100,000,000，billion是1,000,000,000，所以14亿就是1.4 billion。汉语常以万、亿分组，现代英语常以thousand、million、billion分组。",
+      "sources": [
+        {
+          "label": "NIST：Metric (SI) Prefixes（英语数量级对照）",
+          "url": "https://www.nist.gov/pml/owm/metric-si-prefixes",
+          "checked_on": "2026-10-29"
+        },
+        {
+          "label": "Merriam-Webster：billion",
+          "url": "https://www.merriam-webster.com/dictionary/billion",
+          "checked_on": "2026-10-29"
+        }
+      ],
+      "related": [
+        "/articles/%E4%B8%AD%E6%96%87%E6%96%87%E7%AB%A0/2026-09-24-%E8%8B%B1%E8%AF%AD%E7%9A%84%E5%8D%83%E5%92%8C%E6%B1%89%E8%AF%AD%E7%9A%84%E4%B8%87.html",
+        "uncle"
+      ],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true
+    },
+    {
+      "slug": "uncle",
+      "column": "between",
+      "title": "叔伯舅都叫 uncle，英语就分不清了吗？",
+      "level": 1,
+      "tags": [
+        "亲属",
+        "翻译",
+        "语境"
+      ],
+      "summary": "一个 uncle 可以对应叔叔、伯父、舅舅等不同亲属关系，但英语并非没有办法细说。需要时说 my mother’s brother 或 my father’s older brother；词典中的分类宽，表达仍然可以精确。",
+      "sources": [
+        {
+          "label": "Merriam-Webster：uncle",
+          "url": "https://www.merriam-webster.com/dictionary/uncle",
+          "checked_on": "2026-10-29"
+        }
+      ],
+      "related": [
+        "qian-and-wan",
+        "weekdays"
+      ],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true
+    },
+    {
+      "slug": "weekdays",
+      "column": "between",
+      "title": "Wednesday 里藏着谁的名字？",
+      "level": 2,
+      "tags": [
+        "历法",
+        "词源",
+        "拼写"
+      ],
+      "summary": "Wednesday 的旧英语祖先意为“沃登之日”。Woden 与北欧传统中的 Odin 相联系；星期三这个日常词，保留了古老命名的痕迹。记词源可以帮助拼写，发音仍要另外听。",
+      "sources": [
+        {
+          "label": "Merriam-Webster：Wednesday",
+          "url": "https://www.merriam-webster.com/dictionary/Wednesday",
+          "checked_on": "2026-10-29"
+        },
+        {
+          "label": "Etymonline：Wednesday",
+          "url": "https://www.etymonline.com/word/Wednesday",
+          "checked_on": "2026-10-29"
+        }
+      ],
+      "related": [
+        "september",
+        "tea-and-cha"
+      ],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true
+    },
+    {
+      "slug": "september",
+      "column": "between",
+      "title": "September 明明是九月，为什么词根是七？",
+      "level": 1,
+      "tags": [
+        "历法",
+        "月份",
+        "拉丁语"
+      ],
+      "summary": "因为名字留下了旧历法的编号。September 来自拉丁语中与“七”有关的形式；在以三月开年的古罗马历法背景里，它排第七。今天的九月继承了旧名字，不需要把它翻译成七月。",
+      "sources": [
+        {
+          "label": "Merriam-Webster：September",
+          "url": "https://www.merriam-webster.com/dictionary/September",
+          "checked_on": "2026-10-29"
+        },
+        {
+          "label": "Etymonline：September",
+          "url": "https://www.etymonline.com/word/September",
+          "checked_on": "2026-10-29"
+        }
+      ],
+      "related": [
+        "weekdays",
+        "qian-and-wan"
+      ],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true
+    },
+    {
+      "slug": "sos",
+      "column": "myths",
+      "title": "SOS 真是 Save Our Souls 的缩写吗？",
+      "level": 1,
+      "tags": [
+        "缩写",
+        "航海",
+        "民间词源"
+      ],
+      "summary": "假。把 SOS 解释成 Save Our Souls 是后来附会的记忆法。它作为求救信号，关键在摩尔斯码容易发送和识别；记住一个解释，不等于找到了词的起源。",
+      "sources": [
+        {
+          "label": "Oxford Learner’s Dictionaries：SOS，Word Origin",
+          "url": "https://www.oxfordlearnersdictionaries.com/definition/english/sos",
+          "checked_on": "2026-10-29"
+        },
+        {
+          "label": "ITU：Overview of ITU’s History，Radio",
+          "url": "https://www.itu.int/en/history/pages/itushistory-page-2.aspx",
+          "checked_on": "2026-10-29"
+        }
+      ],
+      "related": [
+        "posh",
+        "ok"
+      ],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true,
+      "verdict": "假"
+    },
+    {
+      "slug": "posh",
+      "column": "myths",
+      "title": "posh 是豪华船舱的四个首字母吗？",
+      "level": 2,
+      "tags": [
+        "民间词源",
+        "缩写",
+        "证据"
+      ],
+      "summary": "存疑的是 posh 的真正来历；“Port Out, Starboard Home”说缺乏证据。韦氏仍标来源不明，Etymonline 也提醒这个航海缩写故事并未获得可靠支持。",
+      "sources": [
+        {
+          "label": "Merriam-Webster：posh",
+          "url": "https://www.merriam-webster.com/dictionary/posh",
+          "checked_on": "2026-10-29"
+        },
+        {
+          "label": "Etymonline：posh",
+          "url": "https://www.etymonline.com/word/posh",
+          "checked_on": "2026-10-29"
+        }
+      ],
+      "related": [
+        "sos",
+        "salary-salt"
+      ],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true,
+      "verdict": "存疑"
+    },
+    {
+      "slug": "ok",
+      "column": "myths",
+      "title": "OK 的起点，真是一场拼写玩笑？",
+      "level": 1,
+      "tags": [
+        "缩写",
+        "美国",
+        "词源"
+      ],
+      "summary": "真。较有根据的解释把 OK 连到1839年波士顿报纸中的 oll korrect，即故意拼错的 all correct；后来的 Old Kinderhook 竞选口号帮助传播，却不应被倒过来当作最初来源。",
+      "sources": [
+        {
+          "label": "Merriam-Webster：OK",
+          "url": "https://www.merriam-webster.com/dictionary/OK",
+          "checked_on": "2026-10-29"
+        },
+        {
+          "label": "Cambridge Dictionary Blog：It’s All OK（里德考证与传播）",
+          "url": "https://dictionaryblog.cambridge.org/2011/02/11/its-all-ok/",
+          "checked_on": "2026-10-29"
+        }
+      ],
+      "related": [
+        "posh",
+        "sos"
+      ],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true,
+      "verdict": "真"
+    },
+    {
+      "slug": "salary-salt",
+      "column": "myths",
+      "title": "salary 与盐有关，就等于古罗马用盐发工资？",
+      "level": 2,
+      "tags": [
+        "拉丁语",
+        "证据",
+        "工作"
+      ],
+      "summary": "部分正确。salary 的词源确实与拉丁语的盐有关，但“士兵直接领盐作工资”，甚至“专门发钱买盐”，都不能仅凭词根就当成已证实的制度。",
+      "sources": [
+        {
+          "label": "Merriam-Webster：salary",
+          "url": "https://www.merriam-webster.com/dictionary/salary",
+          "checked_on": "2026-10-29"
+        },
+        {
+          "label": "Etymonline：salary",
+          "url": "https://www.etymonline.com/word/salary",
+          "checked_on": "2026-10-29"
+        }
+      ],
+      "related": [
+        "posh",
+        "qian-and-wan"
+      ],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true,
+      "verdict": "部分正确"
+    }
+  ]
+}

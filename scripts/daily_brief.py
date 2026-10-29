@@ -5,6 +5,8 @@ import ipaddress
 import json
 import re
 from urllib.parse import unquote, urlsplit
+from english_corner import (public_url, public_domain, word_count, text_hash, public_text,
+                            exact_fields, source_path, iso_date)
 
 
 LANGUAGES = {"zh-CN", "en"}
@@ -171,6 +173,101 @@ def validate_content(data):
         else:
             _url(item["url"])
     return data
+
+
+def validate_english_quotes(data, card_routes=None, today=None):
+    """A single bilingual display payload, with independent public-domain evidence."""
+    exact_fields(data, ("version", "quotes"))
+    if type(data["version"]) is not int or data["version"] != 1:
+        raise ValueError("Unsupported English quotation version.")
+    required = {"id", "text", "translation", "translation_source", "author_zh", "author_en", "work_zh", "work_en", "locator_zh", "first_published", "author_died", "url", "note"}
+    _entries(data["quotes"], required, {"related"}, maximum=1000)
+    seen = set()
+    for item in data["quotes"]:
+        for key in required - {"translation_source", "first_published", "author_died", "url"}:
+            public_text(item[key], 2000)
+        if len(item["text"]) > 300 or word_count(item["text"]) > 45 or len(item["translation"]) > 120 or len(item["note"]) > 160:
+            raise ValueError("English quotations and notes must remain short.")
+        normalized = re.sub(r"[\W_]+", "", item["text"]).casefold()
+        if not normalized or normalized in seen:
+            raise ValueError("English quotation originals must be distinct.")
+        seen.add(normalized)
+        public_url(item["url"])
+        public_domain(item["first_published"], item["author_died"], today)
+        source = item["translation_source"]
+        if not isinstance(source, dict):
+            raise ValueError("English quotation translations need an explicit source.")
+        if source.get("type") == "site":
+            exact_fields(source, ("type",))
+        elif source.get("type") == "published":
+            exact_fields(source, ("type", "name", "url", "translator_died"))
+            public_text(source["name"], 250)
+            public_url(source["url"])
+            cutoff = (today or datetime.now(CHINA).date()).year - 51
+            if type(source["translator_died"]) is not int or not 1 <= source["translator_died"] <= cutoff:
+                raise ValueError("Published Chinese translations must also be in the public domain.")
+        else:
+            raise ValueError("Unknown quotation translation source.")
+        if "related" in item:
+            if not isinstance(item["related"], str) or not re.fullmatch(r"/english/[a-z][a-z0-9-]{1,63}/", item["related"]) or item["related"] == "/english/tools/":
+                raise ValueError("Quotation extensions must name an English Corner card.")
+            if card_routes is not None and item["related"] not in card_routes:
+                raise ValueError("Quotation related reading must exist.")
+    return data
+
+
+def load_english_quotes(root, card_routes, today=None):
+    folder = "home/brief/"
+    data = validate_english_quotes(json.loads(source_path(root, folder + "english-quotes.json").read_text(encoding="utf-8")), card_routes, today)
+    review = json.loads(source_path(root, folder + "english-quotes-review.json").read_text(encoding="utf-8"))
+    exact_fields(review, ("version", "quotes"))
+    if type(review["version"]) is not int or review["version"] != 1 or not isinstance(review["quotes"], list):
+        raise ValueError("English quotation review must use version 1.")
+    records = {}
+    for record in review["quotes"]:
+        exact_fields(record, ("id", "text_sha256_lf", "source_url", "locator", "checked_on", "method", "source_sha256_lf", "misattribution_check", "public_domain"), ("bibliography_urls",))
+        if record["id"] in records:
+            raise ValueError("Duplicate quotation review ID.")
+        records[record["id"]] = record
+        public_url(record["source_url"])
+        iso_date(record["checked_on"])
+        for key in ("locator", "method", "misattribution_check"):
+            public_text(record[key], 2000)
+        if not all(isinstance(record[key], str) and re.fullmatch(r"[0-9a-f]{64}", record[key]) for key in ("text_sha256_lf", "source_sha256_lf")):
+            raise ValueError("Review needs actual LF-normalized content fingerprints.")
+        for url in record.get("bibliography_urls", []):
+            public_url(url)
+        exact_fields(record["public_domain"], ("first_published", "author_died", "basis"))
+        public_text(record["public_domain"]["basis"], 2000)
+    if set(records) != {q["id"] for q in data["quotes"]}:
+        raise ValueError("Every English quotation requires exactly one source review.")
+    for item in data["quotes"]:
+        record = records[item["id"]]
+        if (record["text_sha256_lf"] != text_hash(item["text"]) or record["source_url"] != item["url"]
+                or any(record["public_domain"][key] != item[key] for key in ("first_published", "author_died"))):
+            raise ValueError("English quotation changed: review its original and evidence again.")
+    source_path(root, folder + "english-quotes-sources.md").read_text(encoding="utf-8")
+    return data
+
+
+def english_quote_note(item):
+    source = item["translation_source"]
+    translation = "中文为本站译文（AI 辅助，逐句核对意思）。" if source["type"] == "site" else "中文采用公版译本：" + source["name"] + "。"
+    return item["work_en"] + " · " + item["locator_zh"] + "。" + item["note"] + " " + translation
+
+
+def render_english_quote(data, language="zh-CN", today=None):
+    data = validate_english_quotes(data, today=today)
+    day = (today or datetime.now(CHINA).date()) - date(1970,1,1)
+    item = data["quotes"][day.days % len(data["quotes"])]
+    title, button, note, entry = (("English quotations", "Another quote", "Quotation notes", "English Corner (in Chinese) →") if language == "en" else ("英语名句", "换一句", "引文说明", "去英语角看看 →"))
+    source = item["author_zh"] + "（" + item["author_en"] + "） · " + item["work_zh"] + item["locator_zh"]
+    related = item.get("related")
+    link = f'<a id="english-quote-related" href="{escape(related,quote=True)}" lang="zh-CN">延伸阅读：英语角相关卡片 →</a>' if related else '<a id="english-quote-related" hidden></a>'
+    published = f'<a id="english-quote-translation-source" href="{escape(item["translation_source"]["url"],quote=True)}" target="_blank" rel="noopener noreferrer">译文版本 ↗</a>' if item["translation_source"]["type"] == "published" else '<a id="english-quote-translation-source" hidden></a>'
+    return (f'<article class="yl-daily-card yl-quote--en" id="english-quotation-card" aria-labelledby="english-quotation-title"><div class="reading-heading"><h3 id="english-quotation-title">{title}</h3><button class="quote-change" id="english-quote-button" type="button" aria-label="{button} · {title}" hidden>{button}</button></div>'
+            f'<blockquote id="english-quote" data-quote-id="{item["id"]}"><p class="yl-quote" id="english-quote-text" lang="en">{escape(item["text"])}</p><p class="yl-quote-translation" id="english-quote-translation" lang="zh-CN">{escape(item["translation"])}</p><p class="yl-small yl-quote-source" id="english-quote-source" lang="zh-CN"><a id="english-quote-work" href="{escape(item["url"],quote=True)}" target="_blank" rel="noopener noreferrer" hreflang="en">{escape(source)} ↗</a></p></blockquote>'
+            f'<div class="yl-reading-footer"><details class="quote-note"><summary>{note}</summary><p id="english-quote-note" lang="zh-CN">{escape(english_quote_note(item))}</p>{published}{link}</details><a class="yl-corner-entry" href="/english/">{entry}</a></div></article>')
 
 
 def _collection(data, required, optional=frozenset(), *, minimum=1):
@@ -366,4 +463,5 @@ def render_brief_bottom(content, extras, language="zh-CN", today=None):
     quote_url = escape(quote["url"][language] if isinstance(quote["url"], dict) else quote["url"], quote=True)
     source_language = quote.get("source_language", {}).get(language, language)
     card = f'''<article class="yl-daily-card" id="daily-quotation-card" aria-labelledby="daily-quotation-title"><div class="reading-heading"><h3 id="daily-quotation-title">{title}</h3><button class="quote-change" id="daily-quote-button" type="button" aria-label="{another} · {title}" hidden>{another}</button></div><blockquote id="daily-quote"><p class="yl-quote" id="daily-quote-text">{text(quote["text"])}</p><p class="yl-small yl-quote-source" id="daily-quote-source"><span id="daily-quote-author">{text(quote["author"])}</span> · <a id="daily-quote-work" href="{quote_url}" hreflang="{source_language}" lang="{language}" target="_blank" rel="noopener noreferrer">{text(quote["work"])} ↗</a></p></blockquote><details class="quote-note"><summary>{note}</summary><p id="daily-quote-note">{text(quote["translation_note"])}</p></details></article>'''
-    return '<div class="yl-bottomline" id="brief-bottom">' + card + '</div>'
+    english = render_english_quote(extras["english_quotes"], language, today) if extras.get("english_quotes") else ""
+    return '<div class="yl-bottomline" id="brief-bottom">' + card + english + '</div>'

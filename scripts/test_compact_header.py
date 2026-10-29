@@ -50,14 +50,15 @@ class CompactHeaderTests(unittest.TestCase):
         return Nodes(localize_page(PAGE, ROOT, "https://example.test", route, language))
 
     def test_three_section_names_are_menu_buttons_and_about_remains_a_link(self):
-        for language, labels in [("zh-CN", ["文章", "作品", "足迹", "关于"]),
-                                 ("en", ["Articles", "Projects", "Footprints", "About"])]:
+        for language, labels in [("zh-CN", ["文章", "英语角", "作品", "足迹", "关于"]),
+                                 ("en", ["Articles", "English Corner (中文)", "Projects", "Footprints", "About"])]:
             with self.subTest(language=language):
                 tree = self.render(language=language)
                 entries = tree.find(lambda node: node["attrs"].get("class") == "nav-entry")
                 self.assertEqual([node["text"].replace("⌄", "") for node in entries], labels)
-                self.assertEqual([node["tag"] for node in entries], ["summary", "summary", "summary", "a"])
-                for entry in entries[:3]:
+                self.assertEqual([node["tag"] for node in entries], ["summary", "a", "summary", "summary", "a"])
+                self.assertEqual(entries[1]["attrs"]["href"], "/english/")
+                for entry in (entries[0], entries[2], entries[3]):
                     self.assertNotIn("href", entry["attrs"])
                     self.assertEqual(tree.find(lambda node: node["tag"] in {"a", "button"}, entry), [])
                 self.assertEqual(entries[-1]["attrs"]["href"], ("/en" if language == "en" else "") + "/about/")

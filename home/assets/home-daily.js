@@ -77,7 +77,7 @@
   }
   function renderDaily(date) {
     if (glance || !historical || !find('daily-history-list')) return;
-    const stamp = dayStamp(date).slice(5), items = (historical.items || []).filter(item => item.month_day === stamp);
+    const stamp = dayStamp(date).slice(5), items = (historical.items || []).filter(item => item.month_day === stamp).sort((a,b)=>a.year-b.year);
     const container = find('daily-history-list'), fragment = document.createDocumentFragment();
     const dated = node('p','history-built-date',word('北京时间 · ','Beijing date · ') + dayStamp(date)); dated.dataset.historyDate = dayStamp(date); fragment.append(dated);
     const list = rows => {
@@ -96,8 +96,9 @@
       return ol;
     };
     if (items.length) {
-      fragment.append(list(items.slice(0,3)));
-      if (items.length > 3) { const details = node('details','history-more'); details.append(node('summary','',word('更多这一天的历史','More events on this day')),list(items.slice(3))); fragment.append(details); }
+      const timeline=node('div','history-timeline');timeline.append(list(items.slice(0,3)));
+      if (items.length > 3) { const details = node('details','history-more'); details.append(node('summary','',word('更多这一天的历史','More events on this day')),list(items.slice(3))); timeline.append(details); }
+      fragment.append(timeline);
     } else fragment.append(node('p','yl-note',word('这一天暂未收录资料。','No entries have been included for this date.')));
     const notes = node('details','history-notes'); notes.append(node('summary','',word('资料说明 · 来源与编选','About this collection · sources and selection')),node('p','history-policy',text(historical.selection_policy)));
     const attribution = node('p','history-policy',text(historical.attribution) + ' ');

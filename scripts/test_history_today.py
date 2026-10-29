@@ -186,6 +186,23 @@ class HistoryTodayTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             render_history(data, today=datetime(2026, 1, 1))
 
+    def test_earliest_three_start_a_single_chronological_timeline(self):
+        data = fixture()
+        base = deepcopy(data["items"][0])
+        for i, year in enumerate((1969, 1863, 1923, 1956, 1991)):
+            data["items"].append({**deepcopy(base), "id": "chronology-" + str(i), "year": year})
+        original = deepcopy(data["items"])
+        expected = sorted(item["year"] for item in data["items"] if item["month_day"] == "01-01")
+        for language in ("zh-CN", "en"):
+            html = render_history(data, language, date(2026, 1, 1))
+            years = [int(value) for value in __import__("re").findall(r'class="history-year">(\d+)', html)]
+            self.assertEqual(years, expected)
+            first, more = html.split('<details class="history-more">')
+            self.assertEqual([int(value) for value in __import__("re").findall(r'class="history-year">(\d+)',first)], expected[:3])
+            self.assertEqual([int(value) for value in __import__("re").findall(r'class="history-year">(\d+)',more)], expected[3:])
+            self.assertEqual(html.count('class="history-timeline"'), 1)
+        self.assertEqual(data["items"], original)
+
     def test_loader_rejects_duplicate_json_keys_and_linked_paths(self):
         with TemporaryDirectory(prefix="history-test-", dir=ROOT) as temporary:
             root = Path(temporary)

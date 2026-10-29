@@ -5,9 +5,11 @@ from html.parser import HTMLParser
 import json
 import hashlib
 from pathlib import Path
+from tempfile import TemporaryDirectory
 import unittest
 
-from daily_brief import render_brief_bottom, validate_content
+from daily_brief import (render_brief_bottom, validate_content, validate_english_quotes,
+                         load_english_quotes, render_english_quote)
 
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -195,6 +197,122 @@ class DailyBriefReadingTests(unittest.TestCase):
         self.assertIn("&lt;script&gt;", html)
         self.assertNotIn('<script>alert', html)
         self.assertNotIn("own-quote", html)
+
+
+def english_fixture():
+    return {"version": 1, "quotes": [{"id": "fixture-quotation", "text": "All that glisters is not gold;",
+            "translation": "闪光的未必都是金子。", "translation_source": {"type": "site"},
+            "author_zh": "莎士比亚", "author_en": "William Shakespeare", "work_zh": "《威尼斯商人》",
+            "work_en": "The Merchant of Venice", "locator_zh": "第二幕第七场", "first_published": 1600,
+            "author_died": 1616, "url": "https://example.org/public-original", "note": "这是合成测试资料，非出处核对记录。"}]}
+
+
+class EnglishQuotationTests(unittest.TestCase):
+    def test_original_or_source_changes_require_a_new_review(self):
+        data=english_fixture()
+        item=data["quotes"][0]
+        record={"id":item["id"],"text_sha256_lf":hashlib.sha256(item["text"].encode()).hexdigest(),
+                "source_url":item["url"],"locator":"Synthetic fixture position", "checked_on":"2026-10-29",
+                "method":"Synthetic fixture; not source evidence", "source_sha256_lf":"0"*64,
+                "misattribution_check":"Synthetic direct-text fixture", "public_domain":{"first_published":1600,"author_died":1616,"basis":"Synthetic fixed-year test"}}
+        with TemporaryDirectory(prefix="english-review-fixture-",dir=ROOT) as temporary:
+            root=Path(temporary)
+            folder=root/"home/brief";folder.mkdir(parents=True)
+            (folder/"english-quotes-review.json").write_text(json.dumps({"version":1,"quotes":[record]}),encoding="utf-8")
+            (folder/"english-quotes-sources.md").write_text("Synthetic fixture source index.",encoding="utf-8")
+            path=folder/"english-quotes.json"
+            path.write_text(json.dumps(data),encoding="utf-8")
+            self.assertEqual(load_english_quotes(root,set(),today=date(2026,10,29)),data)
+            for key,value in (("text","A different public-domain sentence."),("url","https://example.org/different-original")):
+                changed=copy.deepcopy(data);changed["quotes"][0][key]=value
+                path.write_text(json.dumps(changed),encoding="utf-8")
+                with self.subTest(key=key),self.assertRaisesRegex(ValueError,"review"):
+                    load_english_quotes(root,set(),today=date(2026,10,29))
+
+    def test_fixed_year_public_domain_boundaries_and_types(self):
+        data = english_fixture()
+        data["quotes"][0].update(first_published=1930, author_died=1975)
+        self.assertIs(validate_english_quotes(data, today=date(2026,10,29)), data)
+        with self.assertRaises(ValueError):
+            validate_english_quotes(data, today=date(2025,10,29))
+        for field, value in (("first_published",1931),("author_died",1976),("author_died",True),("first_published",0)):
+            invalid = copy.deepcopy(data)
+            invalid["quotes"][0][field] = value
+            with self.subTest(field=field,value=value), self.assertRaises(ValueError):
+                validate_english_quotes(invalid,today=date(2026,10,29))
+
+    def test_strict_fields_and_text_limits(self):
+        for change in (lambda d:d.update(unknown=True),lambda d:d.update(version=True),
+                       lambda d:d["quotes"][0].update(unknown=True),lambda d:d["quotes"][0].pop("translation_source"),
+                       lambda d:d["quotes"][0].update(text="word "*46),lambda d:d["quotes"][0].update(translation="字"*121),
+                       lambda d:d["quotes"][0].update(note="字"*161),lambda d:d["quotes"][0].update(note="D:/private/notes")):
+            data = english_fixture()
+            change(data)
+            with self.assertRaises(ValueError):
+                validate_english_quotes(data, today=date(2026,10,29))
+
+    def test_unsafe_sources_and_normalized_duplicate_originals(self):
+        for url in ("http://example.org", "https://user:password@example.org/", "https://127.0.0.1/a",
+                    "https://[::1]/a", "https://example.local/a", "https://example.org/%0Aevil", "https://example.org/?token=secret"):
+            data = english_fixture()
+            data["quotes"][0]["url"] = url
+            with self.subTest(url=url), self.assertRaises(ValueError):
+                validate_english_quotes(data)
+        data = english_fixture()
+        data["quotes"].append({**data["quotes"][0],"id":"different-id","text":"ALL that glisters is not gold!"})
+        with self.assertRaisesRegex(ValueError,"distinct"):
+            validate_english_quotes(data)
+
+    def test_related_card_must_exist_and_published_translator_must_qualify(self):
+        data=english_fixture()
+        data["quotes"][0]["related"]="/english/fixture-card/"
+        validate_english_quotes(data,{"/english/fixture-card/"})
+        with self.assertRaises(ValueError):
+            validate_english_quotes(data,set())
+        source={"type":"published","name":"Synthetic old translation","url":"https://example.org/translation","translator_died":1975}
+        data["quotes"][0]["translation_source"]=source
+        validate_english_quotes(data,today=date(2026,10,29))
+        source["translator_died"]=1976
+        with self.assertRaises(ValueError):
+            validate_english_quotes(data,today=date(2026,10,29))
+
+    def test_both_languages_share_content_with_hidden_small_buttons_and_language_tags(self):
+        data=english_fixture()
+        for language in ("zh-CN","en"):
+            html=render_english_quote(data,language,date(2026,10,29))
+            self.assertIn(data["quotes"][0]["text"],html)
+            self.assertIn(data["quotes"][0]["translation"],html)
+            self.assertIn('id="english-quote-text" lang="en"',html)
+            self.assertIn('id="english-quote-translation" lang="zh-CN"',html)
+            self.assertIn('class="quote-change"',html)
+            self.assertIn('hidden>',html)
+            self.assertIn("本站译文（AI 辅助",html)
+            self.assertIn('href="/english/"',html)
+        self.assertIn("English Corner (in Chinese)",render_english_quote(data,"en"))
+
+    def test_two_cards_remain_independent_and_html_is_escaped(self):
+        classic=json.loads((ROOT/"home/daily-content.json").read_text(encoding="utf-8"))
+        english=english_fixture()
+        english["quotes"][0]["text"]="<script>alert('test')</script>"
+        html=render_brief_bottom(classic,{"english_quotes":english},today=date(2026,10,29))
+        self.assertEqual(html.count('<article class="yl-daily-card'),2)
+        self.assertIn("&lt;script&gt;",html)
+        self.assertLess(html.index('id="daily-quotation-card"'),html.index('id="english-quotation-card"'))
+        self.assertIn('id="daily-quote-button"',html)
+        self.assertIn('id="english-quote-button"',html)
+
+    def test_production_pool_review_and_author_diversity(self):
+        from english_corner import load_english_corner
+        from collections import Counter
+        corner=load_english_corner(ROOT,today=date(2026,10,29))
+        routes={"/english/"+c["slug"]+"/" for c in corner["cards"]}
+        data=load_english_quotes(ROOT,routes,today=date(2026,10,29))
+        self.assertGreaterEqual(len(data["quotes"]),100)
+        counts=Counter(q["author_en"] for q in data["quotes"])
+        self.assertGreaterEqual(len(counts),12)
+        self.assertLessEqual(max(counts.values()),12)
+        for q in data["quotes"]:
+            self.assertIn(q["translation_source"]["type"],{"site","published"})
 
 
 if __name__ == "__main__":

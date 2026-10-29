@@ -17,7 +17,8 @@ from xml.etree import ElementTree as ET
 import build_blog
 import build_site
 from build_blog import Blog
-from daily_brief import load_daily, load_brief_extras, render_brief_bottom, safe_json
+from daily_brief import load_daily, load_brief_extras, load_english_quotes, render_brief_bottom, safe_json
+from english_corner import load_english_corner, build_english_corner
 from news_snapshot import load_snapshot, load_sources, render_snapshot, timestamp, visible_items, CHINA
 from history_today import load_history, render_history, history_items
 from english_site import (build_english_site, check_english_publication, collect_translations,
@@ -102,6 +103,19 @@ class EnglishPublicationTests(unittest.TestCase):
         for name in ("projects.json", "about.json", "daily-content.json"):
             shutil.copy2(REFERENCE / "home" / name, self.root / "home" / name)
         shutil.copytree(REFERENCE / "home/brief", self.root / "home/brief")
+        # This fixture publishes only the English Corner index and tool; it does
+        # not copy the production reading catalog or invent translated routes.
+        (self.root/'english-corner').mkdir()
+        columns = json.loads((ROOT/'english-corner/catalog.json').read_text(encoding='utf-8'))['columns']
+        (self.root/'english-corner/catalog.json').write_text(json.dumps({'version':1,'columns':columns,'cards':[]},ensure_ascii=False),encoding='utf-8')
+        (self.root/'english-corner/notes.json').write_text('{"version":1,"works":{}}',encoding='utf-8')
+        for name in ('english-corner.css','english-corner.js','english-numbers.js'):
+            shutil.copy2(ROOT/'home/assets'/name,self.root/'home/assets'/name)
+        shutil.copy2(ROOT/'home/english-corner.template.html',self.root/'home/english-corner.template.html')
+        quotes_path = self.root/'home/brief/english-quotes.json'
+        quotations = json.loads(quotes_path.read_text(encoding='utf-8'))
+        for item in quotations['quotes']: item.pop('related',None)
+        quotes_path.write_text(json.dumps(quotations,ensure_ascii=False),encoding='utf-8')
         memes = self.root / "home/brief/memes.json"
         public = json.loads(memes.read_text(encoding="utf-8"))
         for item in public["items"]:
@@ -138,6 +152,9 @@ class EnglishPublicationTests(unittest.TestCase):
         values = {"site_url": "https://public.test", "project_total": "5", "article_total": "3", "chinese_total": "2", "english_total": "1", "photo_album_total": "0", "photo_total": "0", "anthology_total": "0"}
         brief, daily_content = load_daily(self.root, build_site.linked_directory)
         extras = load_brief_extras(self.root, build_site.linked_directory)
+        self.english_quotes = load_english_quotes(self.root,set())
+        extras['english_quotes'] = self.english_quotes
+        build_english_corner(self.root,self.output,'https://public.test',load_english_corner(self.root))
         self.snapshot = load_snapshot(self.root)
         self.news_sources = load_sources(self.root)
         self.public_news_sources = {"sources": [{"name": source["name"], "home_url": source["home_url"]} for source in self.news_sources["sources"]]}
@@ -150,6 +167,7 @@ class EnglishPublicationTests(unittest.TestCase):
         values.update({
             "today_date_title": "2026年10月28日", "today_date_title_en": "28 October 2026",
             "daily_content_data": safe_json(daily_content),
+            "english_quotes_data": safe_json(self.english_quotes),
             "news_snapshot_data": safe_json(self.snapshot), "news_sources_data": safe_json(self.public_news_sources),
             "news_snapshot_feed": render_snapshot(self.snapshot, "zh-CN", self.news_sources, now=self.news_now, include_sources=False, include_stamp=False),
             "news_snapshot_feed_en": render_snapshot(self.snapshot, "en", self.news_sources, now=self.news_now, include_sources=False, include_stamp=False),
@@ -164,8 +182,8 @@ class EnglishPublicationTests(unittest.TestCase):
             "home_article_links": build_site.home_article_links(blog), "home_article_links_en": build_site.home_article_links(blog, "en"),
             "home_avatar": build_site.render_home_avatar(), "home_avatar_en": build_site.render_home_avatar("en"),
             "brief_rules_data": safe_json(extras["rules"]), "brief_holidays_data": safe_json(extras["holidays"]),
-            "brief_bottom_cards": render_brief_bottom(daily_content, extras),
-            "brief_bottom_cards_en": render_brief_bottom(daily_content, extras, "en"),
+            "brief_bottom_cards": render_brief_bottom(daily_content, extras, today=self.history_day),
+            "brief_bottom_cards_en": render_brief_bottom(daily_content, extras, "en", today=self.history_day),
             "home_recent_articles": build_site.render_home_recent(blog),
             "home_recent_articles_en": build_site.render_home_recent(blog, "en"),
             "home_project_cards": build_site.render_home_projects(projects),
@@ -190,7 +208,7 @@ class EnglishPublicationTests(unittest.TestCase):
         self.english_report = build_english_site(blog, self.output, "https://public.test", projects, build_site.load_about(), values)
         return blog
 
-    def test_bilingual_today_has_readable_news_history_and_one_reading_card_without_scripts(self):
+    def test_bilingual_today_has_readable_news_history_and_two_reading_cards_without_scripts(self):
         blog = self.build_fixture()
         _, daily_content = load_daily(self.root, build_site.linked_directory)
         for language, route in (("zh-CN", "today/index.html"), ("en", "en/today/index.html")):
@@ -198,7 +216,8 @@ class EnglishPublicationTests(unittest.TestCase):
                 text = (self.output / route).read_text(encoding="utf-8")
                 self.assertNotIn("{{", text)
                 for element_id, expected in (("news-snapshot-data", self.snapshot), ("news-sources-data", self.public_news_sources),
-                                             ("daily-history-data", self.history), ("daily-content-data", daily_content)):
+                                             ("daily-history-data", self.history), ("daily-content-data", daily_content),
+                                             ("english-quotes-data",self.english_quotes)):
                     script = re.search(r'<script id="' + element_id + r'"[^>]*>(.*?)</script>', text, re.S)
                     self.assertIsNotNone(script)
                     self.assertEqual(json.loads(script[1]), expected)
@@ -227,6 +246,10 @@ class EnglishPublicationTests(unittest.TestCase):
                 self.assertIn('id="daily-quotation-card"', text)
                 self.assertNotIn('own-quote', text)
                 self.assertIn('id="daily-quote-button"', text)
+                self.assertIn('id="english-quotation-card"',text)
+                self.assertIn('id="english-quote-button"',text)
+                self.assertIn('id="english-quote-translation" lang="zh-CN"',text)
+                self.assertEqual(text.count('class="yl-daily-card'),2)
                 self.assertNotIn('id="daily-meme-card"', text)
                 self.assertNotIn('id="daily-concept-title"', text)
                 self.assertIn('/assets/daily-reading.js', text)

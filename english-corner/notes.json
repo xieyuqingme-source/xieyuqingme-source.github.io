@@ -1,0 +1,189 @@
+{
+  "version": 1,
+  "works": {
+    "keller-water": [
+      {
+        "term": "spout",
+        "meaning": "这里是水流出来的管口，不是说话滔滔不绝的动词义。",
+        "source_label": "Merriam-Webster：spout",
+        "source_url": "https://www.merriam-webster.com/dictionary/spout",
+        "checked_on": "2026-10-29"
+      },
+      {
+        "term": "quiver",
+        "meaning": "轻微颤动；文中写触摸的物体仿佛充满生命。",
+        "source_label": "Merriam-Webster：quiver",
+        "source_url": "https://www.merriam-webster.com/dictionary/quiver",
+        "checked_on": "2026-10-29"
+      },
+      {
+        "term": "repentance",
+        "meaning": "对自己做错的事产生悔意；此处关联摔坏娃娃。",
+        "source_label": "Merriam-Webster：repentance",
+        "source_url": "https://www.merriam-webster.com/dictionary/repentance",
+        "checked_on": "2026-10-29"
+      }
+    ],
+    "franklin-whistle": [
+      {
+        "term": "coppers",
+        "meaning": "铜币或小额铜钱；这里不是金属材料的泛称。",
+        "source_label": "Merriam-Webster：copper",
+        "source_url": "https://www.merriam-webster.com/dictionary/copper",
+        "checked_on": "2026-10-29"
+      },
+      {
+        "term": "vexation",
+        "meaning": "恼火、烦恼。",
+        "source_label": "Merriam-Webster：vexation",
+        "source_url": "https://www.merriam-webster.com/dictionary/vexation",
+        "checked_on": "2026-10-29"
+      },
+      {
+        "term": "chagrin",
+        "meaning": "由于失望、失败或难堪而感到的懊恼。",
+        "source_label": "Merriam-Webster：chagrin",
+        "source_url": "https://www.merriam-webster.com/dictionary/chagrin",
+        "checked_on": "2026-10-29"
+      }
+    ],
+    "chesterton-hat": [
+      {
+        "term": "exasperating",
+        "meaning": "使人强烈恼火、烦躁的。",
+        "source_label": "Merriam-Webster：exasperating",
+        "source_url": "https://www.merriam-webster.com/dictionary/exasperating",
+        "checked_on": "2026-10-29"
+      },
+      {
+        "term": "tugging",
+        "meaning": "用力拉、拽；文中把拉抽屉想象成救援。",
+        "source_label": "Merriam-Webster：tug",
+        "source_url": "https://www.merriam-webster.com/dictionary/tug",
+        "checked_on": "2026-10-29"
+      },
+      {
+        "term": "fanciful",
+        "meaning": "富于想象、可能脱离实际的。",
+        "source_label": "Merriam-Webster：fanciful",
+        "source_url": "https://www.merriam-webster.com/dictionary/fanciful",
+        "checked_on": "2026-10-29"
+      }
+    ],
+    "twain-corn-pone": [
+      {
+        "term": "hoopskirt",
+        "meaning": "用圈状裙撑撑起的裙子。",
+        "source_label": "Merriam-Webster：hoopskirt",
+        "source_url": "https://www.merriam-webster.com/dictionary/hoopskirt",
+        "checked_on": "2026-10-29"
+      },
+      {
+        "term": "conformity",
+        "meaning": "与群体或规范保持一致；文中主要谈从众。",
+        "source_label": "Merriam-Webster：conformity",
+        "source_url": "https://www.merriam-webster.com/dictionary/conformity",
+        "checked_on": "2026-10-29"
+      },
+      {
+        "term": "resented",
+        "meaning": "对某事感到不满或反感，resent 的过去式。",
+        "source_label": "Merriam-Webster：resent",
+        "source_url": "https://www.merriam-webster.com/dictionary/resent",
+        "checked_on": "2026-10-29"
+      }
+    ],
+    "douglass-reading": [
+      {
+        "term": "urchins",
+        "meaning": "旧用法，指常衣着破旧的穷孩子；这里不是海胆。",
+        "source_label": "Merriam-Webster：urchin",
+        "source_url": "https://www.merriam-webster.com/dictionary/urchin",
+        "checked_on": "2026-10-29"
+      },
+      {
+        "term": "prudence",
+        "meaning": "考虑危险与后果的谨慎。",
+        "source_label": "Merriam-Webster：prudence",
+        "source_url": "https://www.merriam-webster.com/dictionary/prudence",
+        "checked_on": "2026-10-29"
+      },
+      {
+        "term": "errands",
+        "meaning": "为别人出门办的小差事；本页旧结构按上下文理解。",
+        "source_label": "Merriam-Webster：errand",
+        "source_url": "https://www.merriam-webster.com/dictionary/errand",
+        "checked_on": "2026-10-29"
+      }
+    ],
+    "yeats-when-you-are-old": [
+      {
+        "term": "nodding",
+        "meaning": "因困倦而不由自主地点头；这里不是表示同意。",
+        "source_label": "Merriam-Webster：nod",
+        "source_url": "https://www.merriam-webster.com/dictionary/nod",
+        "checked_on": "2026-10-29"
+      },
+      {
+        "term": "pilgrim",
+        "meaning": "行旅者或朝圣者；原诗把它用来形容灵魂。",
+        "source_label": "Merriam-Webster：pilgrim",
+        "source_url": "https://www.merriam-webster.com/dictionary/pilgrim",
+        "checked_on": "2026-10-29"
+      },
+      {
+        "term": "Murmur",
+        "meaning": "轻声低语；注意此处是让想象中的人说话。",
+        "source_label": "Merriam-Webster：murmur",
+        "source_url": "https://www.merriam-webster.com/dictionary/murmur",
+        "checked_on": "2026-10-29"
+      }
+    ],
+    "coleridge-kubla-khan": [
+      {
+        "term": "stately",
+        "meaning": "宏伟、庄严的；此处形容建筑。",
+        "source_label": "Merriam-Webster：stately",
+        "source_url": "https://www.merriam-webster.com/dictionary/stately",
+        "checked_on": "2026-10-29"
+      },
+      {
+        "term": "caverns",
+        "meaning": "大洞穴；复数在诗中营造深远空间。",
+        "source_label": "Merriam-Webster：cavern",
+        "source_url": "https://www.merriam-webster.com/dictionary/cavern",
+        "checked_on": "2026-10-29"
+      },
+      {
+        "term": "sinuous",
+        "meaning": "蜿蜒、弯曲的；这里形容细流。",
+        "source_label": "Merriam-Webster：sinuous",
+        "source_url": "https://www.merriam-webster.com/dictionary/sinuous",
+        "checked_on": "2026-10-29"
+      }
+    ],
+    "lamb-roast-pig": [
+      {
+        "term": "mast",
+        "meaning": "林木结的橡实等果实，可作动物饲料；这里不是桅杆。",
+        "source_label": "Merriam-Webster：mast",
+        "source_url": "https://www.merriam-webster.com/dictionary/mast",
+        "checked_on": "2026-10-29"
+      },
+      {
+        "term": "consternation",
+        "meaning": "惊愕、惶恐，以至一时不知所措。",
+        "source_label": "Merriam-Webster：consternation",
+        "source_url": "https://www.merriam-webster.com/dictionary/consternation",
+        "checked_on": "2026-10-29"
+      },
+      {
+        "term": "crackling",
+        "meaning": "烤制后香脆的猪皮；这里不是单纯的噼啪声。",
+        "source_label": "Merriam-Webster：crackling",
+        "source_url": "https://www.merriam-webster.com/dictionary/crackling",
+        "checked_on": "2026-10-29"
+      }
+    ]
+  }
+}

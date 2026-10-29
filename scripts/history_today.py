@@ -184,9 +184,9 @@ def load_history(root, linked=None):
 
 
 def history_items(data, month_day):
-    """Return this date's entries in the explicit editorial order, without fallback dates."""
+    """Return this date's entries from earlier to later, without fallback dates."""
     _month_day(month_day)
-    return [item for item in data["items"] if item["month_day"] == month_day]
+    return sorted((item for item in data["items"] if item["month_day"] == month_day), key=lambda item: item["year"])
 
 
 def _beijing_date(today):
@@ -233,10 +233,11 @@ def render_history(data, language="zh-CN", today=None):
                           f'<p>{text}</p><p class="history-source">{sources}</p></div></li>')
         return '<ol class="history-list">' + "".join(result) + "</ol>"
 
-    result = f'<p class="history-built-date" data-history-date="{date_label}">{escape(date_note)}</p>' + listing(entries[:3])
+    result = f'<p class="history-built-date" data-history-date="{date_label}">{escape(date_note)}</p><div class="history-timeline">' + listing(entries[:3])
     if len(entries) > 3:
         more = "More from this date" if english else "更多这一天的历史"
         result += f'<details class="history-more"><summary>{more}</summary>{listing(entries[3:])}</details>'
+    result += '</div>'
     note_label = "About this collection · sources and selection" if english else "资料说明 · 来源与编选"
     source_label = "Full source notes" if english else "完整来源说明"
     result += ('<details class="history-notes"><summary>' + note_label + '</summary><p class="history-policy">'

@@ -1,0 +1,2190 @@
+{
+  "version": 1,
+  "quotes": [
+    {
+      "id": "shakespeare-01",
+      "text_sha256_lf": "087afe9278e89ce2d19fd3b41b096262691e8053f25dcbeb33e6becdde202ccb",
+      "source_url": "https://www.gutenberg.org/cache/epub/100/pg100-images.html#sceneII_8.2",
+      "locator": "第二幕第二场，哈姆雷特台词中的分句",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "88ad4e03109839ba7992b14e4f1446bf56d77576a54410f5b98d9821c579be57",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1603,
+        "author_died": 1616,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1603，作者卒于1616；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/100",
+        "https://www.folger.edu/explore/shakespeares-works/hamlet/"
+      ]
+    },
+    {
+      "id": "austen-01",
+      "text_sha256_lf": "cf6772a32e0fc2e152819018118103d61e981a9b49d26777d1ede23cc9855477",
+      "source_url": "https://www.gutenberg.org/cache/epub/1342/pg1342-images.html#CHAPTER_V",
+      "locator": "第五章，伊丽莎白台词",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "f0b019c9164a53c21fda1bf2938b96b014016a6eb4a627039cebd0d9a07c42f9",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1813,
+        "author_died": 1817,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1813，作者卒于1817；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/1342"
+      ]
+    },
+    {
+      "id": "dickens-01",
+      "text_sha256_lf": "775fce11d4fec218d105cec874901a5225b78c02eb6e86d8d4832464368c332a",
+      "source_url": "https://www.gutenberg.org/cache/epub/98/pg98-images.html#link2H_4_0002",
+      "locator": "第一部第一章，开篇分句",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "e427456f426cf51c23e294e07f4ed3014a74dcfdeb9ae20fc8adcf8910b08107",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1859,
+        "author_died": 1870,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1859，作者卒于1870；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/98"
+      ]
+    },
+    {
+      "id": "bronte-01",
+      "text_sha256_lf": "4c97c49e605e76ccdc0877e548b95f745a218f353f8b64ff9304e3c07f3d8809",
+      "source_url": "https://www.gutenberg.org/cache/epub/1260/pg1260-images.html#id-7050114306024519729",
+      "locator": "第二十三章，简的台词节选",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "0bc6419204218b6379e5c174a6b93076897cc7ef40bd230f73fbe1e35366eef7",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1847,
+        "author_died": 1855,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1847，作者卒于1855；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/1260"
+      ]
+    },
+    {
+      "id": "eliot-01",
+      "text_sha256_lf": "4321505e8c0f5ef2e47784619811c4568b17cb0171859ee102761819ef1615ce",
+      "source_url": "https://www.gutenberg.org/cache/epub/145/pg145-images.html#chap72",
+      "locator": "第七十二章，多萝西娅台词",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "1147a2687e4f27a08e44cee2a9b7f9f3dee33a05fc4ad5c26e51988ce61c2cf4",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1871,
+        "author_died": 1880,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1871，作者卒于1880；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/145",
+        "https://old-digitalcollections.nypl.org/collections/middlemarch"
+      ]
+    },
+    {
+      "id": "carroll-01",
+      "text_sha256_lf": "f2038ea6c6b0e1544ffd0f01c0c6d0f816f6fb98f3fbdb3726f517349185ff4b",
+      "source_url": "https://www.gutenberg.org/cache/epub/11/pg11-images.html#chap02",
+      "locator": "第二章，爱丽丝的自问",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "3c1aa77747293cfb82f6f211b2a7a7f3652a18cb62a5a93b76a6fa121a428151",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1865,
+        "author_died": 1898,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1865，作者卒于1898；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/11"
+      ]
+    },
+    {
+      "id": "wilde-01",
+      "text_sha256_lf": "7c82f43cb6305a1cf4ff3850fa484d3a60998ae29b76242674fbb915f4f7b780",
+      "source_url": "https://www.gutenberg.org/cache/epub/174/pg174-images.html#chap00",
+      "locator": "序言末句",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "180f7f7e3245c75b140766464068596936eafd06a6266e83d9c71c18d617aed9",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1891,
+        "author_died": 1900,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1891，作者卒于1900；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/174"
+      ]
+    },
+    {
+      "id": "stevenson-01",
+      "text_sha256_lf": "73974e34b38b918145c3ae5b72a71dd6db5aac02c9e3cc77e50ec602855df316",
+      "source_url": "https://www.gutenberg.org/cache/epub/69825/pg69825-images.html",
+      "locator": "《为闲人辩护》，分句",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "4b046e047725281c31f8c4a1311624ce6aa21a5a5c964ac23cea56751be2c359",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1877,
+        "author_died": 1894,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1877，作者卒于1894；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/69825",
+        "https://robert-louis-stevenson.org/works-chronology/"
+      ]
+    },
+    {
+      "id": "blake-01",
+      "text_sha256_lf": "8660ed5400ccf30a365ea71485b81119cf529ee5b031d69cbc1adbe76103d11b",
+      "source_url": "https://www.gutenberg.org/cache/epub/45315/pg45315-images.html#Page_16",
+      "locator": "“地狱的箴言”",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "9ad612a43dc945ff82822fe346782537944894eeff0a037062ba09b586a06e81",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1790,
+        "author_died": 1827,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1790，作者卒于1827；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/45315"
+      ]
+    },
+    {
+      "id": "wordsworth-01",
+      "text_sha256_lf": "cc667312cf971dbc71be6ffd2c0a423ddcdba8beda05a45c13b24d82a70c7b1f",
+      "source_url": "https://www.gutenberg.org/cache/epub/8824/pg8824-images.html#id00116",
+      "locator": "《我孤独地漫游，如一片云》首两行",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "fab5c744bea5439e703c63f2d58d92e66b5e9509b8f04bf72ab922d77ea938ea",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1807,
+        "author_died": 1850,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1807，作者卒于1850；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/8824"
+      ]
+    },
+    {
+      "id": "coleridge-01",
+      "text_sha256_lf": "10f3f7fcac1f9441a5f662f601800ea1c5a2442611e80c051b70e253c490b500",
+      "source_url": "https://www.gutenberg.org/cache/epub/11101/pg11101-images.html#id00417",
+      "locator": "《忽必烈汗》首两行",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "fe5e45092e669683ba54816b7e59582dc5b4a07f52820c2ec09e65942cd7a300",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1816,
+        "author_died": 1834,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1816，作者卒于1834；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/11101"
+      ]
+    },
+    {
+      "id": "shelley-01",
+      "text_sha256_lf": "cec104fd8d9f90de4a0b544b2ddeafa2cf20645faa67eddca5104f870cb3d1ec",
+      "source_url": "https://www.gutenberg.org/cache/epub/4798/pg4798-images.html#id00805",
+      "locator": "《西风颂》末行",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "2e38a421a1fab35981b4112e82274127156d1ea57944d7d302885f40c1e7a96f",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1820,
+        "author_died": 1822,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1820，作者卒于1822；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/4798"
+      ]
+    },
+    {
+      "id": "keats-01",
+      "text_sha256_lf": "8119d966bbc6909e2ff6268f816bebe8f86fb8a9dc63811b6d7451c29b0bf58a",
+      "source_url": "https://www.gutenberg.org/cache/epub/23684/pg23684-images.html#id-4987274095954744633",
+      "locator": "《希腊古瓮颂》第49行，句中引语",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "3e2c304ce25cc28e0d64cb3cf29a3967199e21f4cf69d4c156be47467ded839e",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1820,
+        "author_died": 1821,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1820，作者卒于1821；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/23684"
+      ]
+    },
+    {
+      "id": "dickinson-01",
+      "text_sha256_lf": "45762a97d7ecd9d2278fb1d7f30b85bbedcea4ca9cf3b955306c3c2b70e61b33",
+      "source_url": "https://www.gutenberg.org/cache/epub/12242/pg12242-images.html#Hope_is_the_thing_with_feathers",
+      "locator": "第二辑，Life第VI首，前两行",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "b194f3696e8a7601f4e07d80a2269cba076b92f6bf4cf6359b7fe0e1343ee516",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1891,
+        "author_died": 1886,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1891，作者卒于1886；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/12242"
+      ]
+    },
+    {
+      "id": "whitman-01",
+      "text_sha256_lf": "c7f12a5dc3807ba2cb34b83b76e2ba8c45c1a7a9a9b93eaf3ba4cac82ea3e6af",
+      "source_url": "https://www.gutenberg.org/cache/epub/1322/pg1322-images.html#link2H_4_0027",
+      "locator": "《自我之歌》第51节，括号内句子",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "83ff007816c704fda33bde4219885d26cc5791dbf58e644391d32c64cd222d18",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1855,
+        "author_died": 1892,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1855，作者卒于1892；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/1322"
+      ]
+    },
+    {
+      "id": "yeats-01",
+      "text_sha256_lf": "bf6882512df73db5a2331293e008a378a361bd5a1feb337bf9869266a445a395",
+      "source_url": "https://www.gutenberg.org/cache/epub/49608/pg49608-images.html#Page_158",
+      "locator": "《当你老了》首两行",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "6c3e5e0fe6b13c0efb9c5f97eff24b063e6eca044d57b22eb02a25a6c1413183",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1892,
+        "author_died": 1939,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1892，作者卒于1939；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/49608",
+        "https://www.nli.ie/news/yeats-nobel-centenary-video-series"
+      ]
+    },
+    {
+      "id": "franklin-01",
+      "text_sha256_lf": "227183d03a1b0d0a263724bde30fe2299956ab0819f697bf09f760d865695f1f",
+      "source_url": "https://www.gutenberg.org/cache/epub/20203/pg20203-images.html#IX",
+      "locator": "第二部分，十三项德目之“决心”",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "bdd5d8f2a90ac8e993362805462bc64cb9c8b25e1e9198777a4ab39e631b0333",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1818,
+        "author_died": 1790,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1818，作者卒于1790；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/20203",
+        "https://guides.loc.gov/finding-benjamin-franklin/autobiography"
+      ]
+    },
+    {
+      "id": "emerson-01",
+      "text_sha256_lf": "9d86a5554fc58993d00216169a363f20a819d0b17e7bdab1a8589fda8c20ce30",
+      "source_url": "https://www.gutenberg.org/cache/epub/16643/pg16643-images.html#Page_81",
+      "locator": "《论自立》",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "84a04da2e744e934db8c0a2a7b316d5afd6f464fd8e599ce8a58ced45249ee98",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1841,
+        "author_died": 1882,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1841，作者卒于1882；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/16643"
+      ]
+    },
+    {
+      "id": "thoreau-01",
+      "text_sha256_lf": "0047e28431645c58baab1a2547901477506bfa392ced9de97d5f96a3cbead164",
+      "source_url": "https://www.gutenberg.org/cache/epub/205/pg205-images.html#chap02",
+      "locator": "第一章“经济”",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "512f4fa4703b7d8baed186ba001b036a58c37034b038560a07b1d26ea88b96ea",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1854,
+        "author_died": 1862,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1854，作者卒于1862；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/205"
+      ]
+    },
+    {
+      "id": "douglass-01",
+      "text_sha256_lf": "0b387661153dd8230418a444636fb090d85625e04b9a7edc4e5c19b668002df4",
+      "source_url": "https://www.gutenberg.org/cache/epub/23/pg23-images.html#link2HCH0006",
+      "locator": "第六章",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "2e8c91f2f6b3ceb04a44df965637b641cea246424e2629156fe9df3b66ef5256",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1845,
+        "author_died": 1895,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1845，作者卒于1895；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/23"
+      ]
+    },
+    {
+      "id": "keller-01",
+      "text_sha256_lf": "82a0f9e50daece6823aa398c9e9474208b2782c70582f488d402e42df8cb6cc0",
+      "source_url": "https://www.gutenberg.org/cache/epub/2397/pg2397-images.html#link2HCH0004",
+      "locator": "第一部分第四章",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "3fbe2d3f289e6b6b62bf3c80b597315844f9ce03a1cc444ae815773044d18754",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1903,
+        "author_died": 1968,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1903，作者卒于1968；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/2397"
+      ]
+    },
+    {
+      "id": "chesterton-01",
+      "text_sha256_lf": "b3fbf85a200f966ebdf47a7a298e25485ff5b0d9a64c45f8acb63bdc5ceb66ba",
+      "source_url": "https://www.gutenberg.org/cache/epub/11505/pg11505-images.html#chap04",
+      "locator": "《追逐自己的帽子》末段",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "c25b6fcc5004aadc1711c5275c46c426cedcaeef463179a5483080376d34c1af",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1908,
+        "author_died": 1936,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1908，作者卒于1936；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/11505"
+      ]
+    },
+    {
+      "id": "twain-01",
+      "text_sha256_lf": "e3d75bbcd73527d185e137efc484f78786406743efd7281d10499a74baa57ec9",
+      "source_url": "https://www.gutenberg.org/cache/epub/68604/pg68604-images.html#Page_402",
+      "locator": "《玉米饼意见》",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "85246632b85681faa58bb794d722a5aa514b0f7cb5fe6b9e6f104937461f0722",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1923,
+        "author_died": 1910,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1923，作者卒于1910；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/68604"
+      ]
+    },
+    {
+      "id": "lamb-01",
+      "text_sha256_lf": "2a31b68c8d8ead751e792789a6154b27153c97efdaf27a8b9404216d46407643",
+      "source_url": "https://www.gutenberg.org/cache/epub/10343/pg10343-images.html#id00326",
+      "locator": "《内殿的老律师们》",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "d2b4ef43d8bd01ea7b5ad0b3076d1641b8ff46ce6600e88c7701959092b10346",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1821,
+        "author_died": 1834,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1821，作者卒于1834；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/10343"
+      ]
+    },
+    {
+      "id": "shakespeare-02",
+      "text_sha256_lf": "af6bf6c66bedfa9d524f00991b177c4e446830fe95fd7164e26f5a2faaabe0d3",
+      "source_url": "https://www.gutenberg.org/cache/epub/100/pg100-images.html#sceneIV_32.1",
+      "locator": "第四幕第一场，普洛斯彼罗台词",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "88ad4e03109839ba7992b14e4f1446bf56d77576a54410f5b98d9821c579be57",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1623,
+        "author_died": 1616,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1623，作者卒于1616；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/100",
+        "https://www.folger.edu/explore/shakespeares-works/the-tempest/"
+      ]
+    },
+    {
+      "id": "austen-02",
+      "text_sha256_lf": "f638a93864d4f02237e5fc9bf8fd02c5e3d33b61b20270c03124738aeea875aa",
+      "source_url": "https://www.gutenberg.org/cache/epub/1342/pg1342-images.html#page_11",
+      "locator": "第三章，叙述者的分句",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "f0b019c9164a53c21fda1bf2938b96b014016a6eb4a627039cebd0d9a07c42f9",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1813,
+        "author_died": 1817,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1813，作者卒于1817；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/1342"
+      ]
+    },
+    {
+      "id": "dickens-02",
+      "text_sha256_lf": "c13d8247d11f2342e0512e88decf25ff2785c124ba82af177ef0e26f1902271b",
+      "source_url": "https://www.gutenberg.org/cache/epub/98/pg98-images.html#link2H_4_0004",
+      "locator": "第一部第三章，开篇",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "e427456f426cf51c23e294e07f4ed3014a74dcfdeb9ae20fc8adcf8910b08107",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1859,
+        "author_died": 1870,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1859，作者卒于1870；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/98"
+      ]
+    },
+    {
+      "id": "bronte-02",
+      "text_sha256_lf": "8811995268545022cf9c9347cb9d66a09512821896d284223331a0794e99be88",
+      "source_url": "https://www.gutenberg.org/cache/epub/1260/pg1260-images.html#id-5447535297528119587",
+      "locator": "第六章，海伦·彭斯台词",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "0bc6419204218b6379e5c174a6b93076897cc7ef40bd230f73fbe1e35366eef7",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1847,
+        "author_died": 1855,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1847，作者卒于1855；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/1260"
+      ]
+    },
+    {
+      "id": "eliot-02",
+      "text_sha256_lf": "5c3d014e6efe5fa7a743be9dee5fe1b356b8a254747ec5f43887048f75eb6f65",
+      "source_url": "https://www.gutenberg.org/cache/epub/145/pg145-images.html#chap07",
+      "locator": "第七章，句中分句",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "1147a2687e4f27a08e44cee2a9b7f9f3dee33a05fc4ad5c26e51988ce61c2cf4",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1871,
+        "author_died": 1880,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1871，作者卒于1880；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/145",
+        "https://old-digitalcollections.nypl.org/collections/middlemarch"
+      ]
+    },
+    {
+      "id": "carroll-02",
+      "text_sha256_lf": "da66ec1d032c11fd1bbc50ef0a413acba2716affd78559db695d7e80d1de3090",
+      "source_url": "https://www.gutenberg.org/cache/epub/11/pg11-images.html#chap10",
+      "locator": "第十章，爱丽丝台词中的分句",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "3c1aa77747293cfb82f6f211b2a7a7f3652a18cb62a5a93b76a6fa121a428151",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1865,
+        "author_died": 1898,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1865，作者卒于1898；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/11"
+      ]
+    },
+    {
+      "id": "wilde-02",
+      "text_sha256_lf": "64e0f43d0e355847c2f34347479c9a188291d3394586ddfbb60c3283e2977cea",
+      "source_url": "https://www.gutenberg.org/cache/epub/174/pg174-images.html#chap00",
+      "locator": "序言",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "180f7f7e3245c75b140766464068596936eafd06a6266e83d9c71c18d617aed9",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1891,
+        "author_died": 1900,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1891，作者卒于1900；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/174"
+      ]
+    },
+    {
+      "id": "stevenson-02",
+      "text_sha256_lf": "32d32c2f96fc7584c3ce705e9c0141322bcd0c60973a2609337197ed26ffc33c",
+      "source_url": "https://www.gutenberg.org/cache/epub/69825/pg69825-images.html#page_26",
+      "locator": "《为闲人辩护》",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "4b046e047725281c31f8c4a1311624ce6aa21a5a5c964ac23cea56751be2c359",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1877,
+        "author_died": 1894,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1877，作者卒于1894；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/69825",
+        "https://robert-louis-stevenson.org/works-chronology/"
+      ]
+    },
+    {
+      "id": "blake-02",
+      "text_sha256_lf": "d60fb45504aaf893c70c2d01f4718d3c1ede039c1170684ade2a7542b06adac7",
+      "source_url": "https://www.gutenberg.org/cache/epub/45315/pg45315-images.html#Page_14",
+      "locator": "“地狱的箴言”",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "9ad612a43dc945ff82822fe346782537944894eeff0a037062ba09b586a06e81",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1790,
+        "author_died": 1827,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1790，作者卒于1827；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/45315"
+      ]
+    },
+    {
+      "id": "wordsworth-02",
+      "text_sha256_lf": "3601f04db2534604ea2cec2408166ac59f6c0a48fc9ce5dcfd6731c91f613cd7",
+      "source_url": "https://www.gutenberg.org/cache/epub/8774/pg8774-images.html#id00315",
+      "locator": "《威斯敏斯特桥上》首行",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "3c93ef04e87a39e800d98c057dd13a39a74df63535df0e1a2d10f2a59659868b",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1807,
+        "author_died": 1850,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1807，作者卒于1850；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/8774"
+      ]
+    },
+    {
+      "id": "coleridge-02",
+      "text_sha256_lf": "96978a0bd9641577eab1f79d20555417f6a6c5a34d418effcdcd773143c7dde3",
+      "source_url": "https://www.gutenberg.org/cache/epub/11101/pg11101-images.html#id00177",
+      "locator": "第二部分，第121—122行",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "fe5e45092e669683ba54816b7e59582dc5b4a07f52820c2ec09e65942cd7a300",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1798,
+        "author_died": 1834,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1798，作者卒于1834；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/11101"
+      ]
+    },
+    {
+      "id": "shelley-02",
+      "text_sha256_lf": "abad6725614d2fe5ea8ab22fb58cc75e8e51162b7bbff0f620ac13e1d1fd6dc9",
+      "source_url": "https://www.gutenberg.org/cache/epub/4798/pg4798-images.html#id00495",
+      "locator": "《奥兹曼迪亚斯》第11行",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "2e38a421a1fab35981b4112e82274127156d1ea57944d7d302885f40c1e7a96f",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1818,
+        "author_died": 1822,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1818，作者卒于1822；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/4798"
+      ]
+    },
+    {
+      "id": "keats-02",
+      "text_sha256_lf": "086c76cb3ed772143aad1eca4222d0fd5b31ced6c799d32ce0a7bc2ec9c709e4",
+      "source_url": "https://www.gutenberg.org/cache/epub/23684/pg23684-images.html#id-6628757086229031098",
+      "locator": "《希腊古瓮颂》第11—12行",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "3e2c304ce25cc28e0d64cb3cf29a3967199e21f4cf69d4c156be47467ded839e",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1820,
+        "author_died": 1821,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1820，作者卒于1821；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/23684"
+      ]
+    },
+    {
+      "id": "dickinson-02",
+      "text_sha256_lf": "55f151fa1670925b9ca86bb0d3af2ced952c349478b62b6fdbe5747ebf63c4ba",
+      "source_url": "https://www.gutenberg.org/cache/epub/12242/pg12242-images.html#If_I_can_stop_one_heart_from_breaking",
+      "locator": "第一辑，Life第VI首，前两行",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "b194f3696e8a7601f4e07d80a2269cba076b92f6bf4cf6359b7fe0e1343ee516",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1890,
+        "author_died": 1886,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1890，作者卒于1886；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/12242"
+      ]
+    },
+    {
+      "id": "whitman-02",
+      "text_sha256_lf": "0d5e355edaedee7f84d0bc27898d02204c4dba9002067abad6aa35c56dfa3e47",
+      "source_url": "https://www.gutenberg.org/cache/epub/1322/pg1322-images.html#link2H_4_0027",
+      "locator": "《自我之歌》第20节，诗行",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "83ff007816c704fda33bde4219885d26cc5791dbf58e644391d32c64cd222d18",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1855,
+        "author_died": 1892,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1855，作者卒于1892；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/1322"
+      ]
+    },
+    {
+      "id": "yeats-02",
+      "text_sha256_lf": "9370e389a998fc7f4fa6f8e74d9fe34aefedafe7af571366189dd165d1e5aace",
+      "source_url": "https://www.gutenberg.org/cache/epub/49608/pg49608-images.html#Page_158",
+      "locator": "《当你老了》第7—8行",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "6c3e5e0fe6b13c0efb9c5f97eff24b063e6eca044d57b22eb02a25a6c1413183",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1892,
+        "author_died": 1939,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1892，作者卒于1939；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/49608",
+        "https://www.nli.ie/news/yeats-nobel-centenary-video-series"
+      ]
+    },
+    {
+      "id": "franklin-02",
+      "text_sha256_lf": "ba8efff7601d5ba3fdb3f198cde9e9c6036a33b123a117a430381620c9ba8f57",
+      "source_url": "https://www.gutenberg.org/cache/epub/20203/pg20203-images.html#IX",
+      "locator": "第二部分，十三项德目之“寡言”",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "bdd5d8f2a90ac8e993362805462bc64cb9c8b25e1e9198777a4ab39e631b0333",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1818,
+        "author_died": 1790,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1818，作者卒于1790；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/20203",
+        "https://guides.loc.gov/finding-benjamin-franklin/autobiography"
+      ]
+    },
+    {
+      "id": "emerson-02",
+      "text_sha256_lf": "d98a119a54851ed85dd84ba7a6af62e5ec6937ccfd408d3bb36d45fc73c3acf6",
+      "source_url": "https://www.gutenberg.org/cache/epub/16643/pg16643-images.html#Page_83",
+      "locator": "《论自立》",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "84a04da2e744e934db8c0a2a7b316d5afd6f464fd8e599ce8a58ced45249ee98",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1841,
+        "author_died": 1882,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1841，作者卒于1882；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/16643"
+      ]
+    },
+    {
+      "id": "thoreau-02",
+      "text_sha256_lf": "7708a9c0534d918d15c00dd1122c9e09540937fff46fb931ba43722457c7ad57",
+      "source_url": "https://www.gutenberg.org/cache/epub/205/pg205-images.html#chap03",
+      "locator": "第二章“我生活的地方；我为何生活”",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "512f4fa4703b7d8baed186ba001b036a58c37034b038560a07b1d26ea88b96ea",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1854,
+        "author_died": 1862,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1854，作者卒于1862；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/205"
+      ]
+    },
+    {
+      "id": "douglass-02",
+      "text_sha256_lf": "1935b12a0fb36b5ca6cc0d6950cca31ca515e3a7188f2786ccd274e23271e1f7",
+      "source_url": "https://www.gutenberg.org/cache/epub/23/pg23-images.html#link2HCH0007",
+      "locator": "第七章",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "2e8c91f2f6b3ceb04a44df965637b641cea246424e2629156fe9df3b66ef5256",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1845,
+        "author_died": 1895,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1845，作者卒于1895；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/23"
+      ]
+    },
+    {
+      "id": "keller-02",
+      "text_sha256_lf": "201b9e17243e75de5b07a779494ac919af835fba12e1450128ec9d33d6d8da92",
+      "source_url": "https://www.gutenberg.org/cache/epub/2397/pg2397-images.html#link2HCH0004",
+      "locator": "第一部分第四章",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "3fbe2d3f289e6b6b62bf3c80b597315844f9ce03a1cc444ae815773044d18754",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1903,
+        "author_died": 1968,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1903，作者卒于1968；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/2397"
+      ]
+    },
+    {
+      "id": "chesterton-02",
+      "text_sha256_lf": "375a370a3dfbbd4b8f2e56a57e79b89c67c2c30b58ebc27fb9215d010a184615",
+      "source_url": "https://www.gutenberg.org/cache/epub/11505/pg11505-images.html#chap04",
+      "locator": "《追逐自己的帽子》末段",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "c25b6fcc5004aadc1711c5275c46c426cedcaeef463179a5483080376d34c1af",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1908,
+        "author_died": 1936,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1908，作者卒于1936；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/11505"
+      ]
+    },
+    {
+      "id": "twain-02",
+      "text_sha256_lf": "b2d6559fc8be86f34400be20a7a0de237d3d86a05806ddae5471f1ba0db1b1a5",
+      "source_url": "https://www.gutenberg.org/cache/epub/68604/pg68604-images.html#Page_406",
+      "locator": "《玉米饼意见》末段",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "85246632b85681faa58bb794d722a5aa514b0f7cb5fe6b9e6f104937461f0722",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1923,
+        "author_died": 1910,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1923，作者卒于1910；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/68604"
+      ]
+    },
+    {
+      "id": "lamb-02",
+      "text_sha256_lf": "44553f56a23fb010a5e635b934a62cd59e8337657f068836df62f4aba0e78a4a",
+      "source_url": "https://www.gutenberg.org/cache/epub/10343/pg10343-images.html#id00611",
+      "locator": "《读书杂感》",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "d2b4ef43d8bd01ea7b5ad0b3076d1641b8ff46ce6600e88c7701959092b10346",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1822,
+        "author_died": 1834,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1822，作者卒于1834；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/10343"
+      ]
+    },
+    {
+      "id": "shakespeare-03",
+      "text_sha256_lf": "05d158757ca18501250a8f47072029c1dfa8c63004a9801642ffb078e4385c82",
+      "source_url": "https://www.gutenberg.org/cache/epub/100/pg100-images.html#sceneI_24.1",
+      "locator": "第一幕第一场，拉山德台词",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "88ad4e03109839ba7992b14e4f1446bf56d77576a54410f5b98d9821c579be57",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1600,
+        "author_died": 1616,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1600，作者卒于1616；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/100",
+        "https://www.folger.edu/explore/shakespeares-works/a-midsummer-nights-dream/"
+      ]
+    },
+    {
+      "id": "austen-03",
+      "text_sha256_lf": "9b4124e4b874c7153d1847f715f7ff32e46fb1a504bcfc7a05ae157b9a4b67f8",
+      "source_url": "https://www.gutenberg.org/cache/epub/1342/pg1342-images.html#page_71",
+      "locator": "第十一章，宾利小姐台词",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "f0b019c9164a53c21fda1bf2938b96b014016a6eb4a627039cebd0d9a07c42f9",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1813,
+        "author_died": 1817,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1813，作者卒于1817；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/1342"
+      ]
+    },
+    {
+      "id": "dickens-03",
+      "text_sha256_lf": "c724dbc273747bfe2a9de3a4b42182eb82a986f47f6ab84047ac604b2b30e2fa",
+      "source_url": "https://www.gutenberg.org/cache/epub/98/pg98-images.html#link2H_4_0014",
+      "locator": "第二部第六章，达尔奈台词",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "e427456f426cf51c23e294e07f4ed3014a74dcfdeb9ae20fc8adcf8910b08107",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1859,
+        "author_died": 1870,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1859，作者卒于1870；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/98"
+      ]
+    },
+    {
+      "id": "bronte-03",
+      "text_sha256_lf": "cfca62d40bbc643bb9c0f142172404fbc98cbf6950cf4abe4020ec082bf94f99",
+      "source_url": "https://www.gutenberg.org/cache/epub/1260/pg1260-images.html#id-9112509753362559240",
+      "locator": "第三十四章，简的内心叙述",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "0bc6419204218b6379e5c174a6b93076897cc7ef40bd230f73fbe1e35366eef7",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1847,
+        "author_died": 1855,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1847，作者卒于1855；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/1260"
+      ]
+    },
+    {
+      "id": "eliot-03",
+      "text_sha256_lf": "3b61e58739c44c272e159fa06acf55d9707e5f05a84eb64c006667c6096b4fdf",
+      "source_url": "https://www.gutenberg.org/cache/epub/145/pg145-images.html#chap44",
+      "locator": "第四十四章，句中分句",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "1147a2687e4f27a08e44cee2a9b7f9f3dee33a05fc4ad5c26e51988ce61c2cf4",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1871,
+        "author_died": 1880,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1871，作者卒于1880；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/145",
+        "https://old-digitalcollections.nypl.org/collections/middlemarch"
+      ]
+    },
+    {
+      "id": "carroll-03",
+      "text_sha256_lf": "fd5fa5fe363eee84f51a90084487c9a27582be34ac2444166842d09c867ad889",
+      "source_url": "https://www.gutenberg.org/cache/epub/11/pg11-images.html#chap06",
+      "locator": "第六章，柴郡猫台词中的分句",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "3c1aa77747293cfb82f6f211b2a7a7f3652a18cb62a5a93b76a6fa121a428151",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1865,
+        "author_died": 1898,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1865，作者卒于1898；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/11"
+      ]
+    },
+    {
+      "id": "wilde-03",
+      "text_sha256_lf": "8038df0e9e22981815ef2e4c1d2b398c39149d885616f7841607cba6c68ed434",
+      "source_url": "https://www.gutenberg.org/cache/epub/174/pg174-images.html#chap04",
+      "locator": "第四章，亨利勋爵台词",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "180f7f7e3245c75b140766464068596936eafd06a6266e83d9c71c18d617aed9",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1891,
+        "author_died": 1900,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1891，作者卒于1900；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/174"
+      ]
+    },
+    {
+      "id": "stevenson-03",
+      "text_sha256_lf": "0df42d8bde02e4ba80f7c9e10a1bb7052894f2393dc5e715693ee405acb7f1e0",
+      "source_url": "https://www.gutenberg.org/cache/epub/69825/pg69825-images.html#page_27",
+      "locator": "《为闲人辩护》",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "4b046e047725281c31f8c4a1311624ce6aa21a5a5c964ac23cea56751be2c359",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1877,
+        "author_died": 1894,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1877，作者卒于1894；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/69825",
+        "https://robert-louis-stevenson.org/works-chronology/"
+      ]
+    },
+    {
+      "id": "blake-03",
+      "text_sha256_lf": "dd3fb6d7ae62230610165b3422c2f8399012965f75472e901884830babc2d708",
+      "source_url": "https://www.gutenberg.org/cache/epub/45315/pg45315-images.html#Page_16",
+      "locator": "“地狱的箴言”",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "9ad612a43dc945ff82822fe346782537944894eeff0a037062ba09b586a06e81",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1790,
+        "author_died": 1827,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1790，作者卒于1827；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/45315"
+      ]
+    },
+    {
+      "id": "wordsworth-03",
+      "text_sha256_lf": "a6e1531258c1e3778290c25bd236670a8f1964fe5afca1cfc21ad2ff8ef94f2d",
+      "source_url": "https://www.gutenberg.org/cache/epub/8774/pg8774-images.html#id00323",
+      "locator": "《尘世过分占据了我们》首两行",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "3c93ef04e87a39e800d98c057dd13a39a74df63535df0e1a2d10f2a59659868b",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1807,
+        "author_died": 1850,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1807，作者卒于1850；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/8774"
+      ]
+    },
+    {
+      "id": "coleridge-03",
+      "text_sha256_lf": "6c086e735a33a1be80c9abdd2a634c7f5938106254f829ce88288911aec3d55c",
+      "source_url": "https://www.gutenberg.org/cache/epub/11101/pg11101-images.html#id00222",
+      "locator": "第四部分，第232—233行",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "fe5e45092e669683ba54816b7e59582dc5b4a07f52820c2ec09e65942cd7a300",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1798,
+        "author_died": 1834,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1798，作者卒于1834；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/11101"
+      ]
+    },
+    {
+      "id": "shelley-03",
+      "text_sha256_lf": "ce141b365b3849fb8f8216ff7d273452fc32c6a4d83533be70329f95d83b5264",
+      "source_url": "https://www.gutenberg.org/cache/epub/4798/pg4798-images.html#id01084",
+      "locator": "《致云雀》第90行",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "2e38a421a1fab35981b4112e82274127156d1ea57944d7d302885f40c1e7a96f",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1820,
+        "author_died": 1822,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1820，作者卒于1822；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/4798"
+      ]
+    },
+    {
+      "id": "keats-03",
+      "text_sha256_lf": "ef10f42c053ab619723970778b9de8e4d28729e0530e13752e895ab2e03382cb",
+      "source_url": "https://www.gutenberg.org/cache/epub/23684/pg23684-images.html#id-2659893139361286649",
+      "locator": "《秋颂》首两行",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "3e2c304ce25cc28e0d64cb3cf29a3967199e21f4cf69d4c156be47467ded839e",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1820,
+        "author_died": 1821,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1820，作者卒于1821；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/23684"
+      ]
+    },
+    {
+      "id": "dickinson-03",
+      "text_sha256_lf": "5d20bf1aa9f32415db2cbf59ee914ed314b17507bb890fa58aa63f8e3eb5ca54",
+      "source_url": "https://www.gutenberg.org/cache/epub/12242/pg12242-images.html#Success_is_counted_sweetest",
+      "locator": "第一辑，Life第I首，前两行",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "b194f3696e8a7601f4e07d80a2269cba076b92f6bf4cf6359b7fe0e1343ee516",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1864,
+        "author_died": 1886,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1864，作者卒于1886；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/12242",
+        "https://blogs.loc.gov/catbird/2017/12/success-is-counted-sweetest-on-emily-dickinsons-187th-birthday/"
+      ]
+    },
+    {
+      "id": "whitman-03",
+      "text_sha256_lf": "11ab753e4e54947c0ec7ca800ff72e996c0514747ef9e62306d23d17ffbdd1a6",
+      "source_url": "https://www.gutenberg.org/cache/epub/1322/pg1322-images.html#link2H_4_0027",
+      "locator": "《自我之歌》第46节，诗行",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "83ff007816c704fda33bde4219885d26cc5791dbf58e644391d32c64cd222d18",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1855,
+        "author_died": 1892,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1855，作者卒于1892；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/1322"
+      ]
+    },
+    {
+      "id": "yeats-03",
+      "text_sha256_lf": "334c7cdd7ac5fa5fe4e876fc620d7bddf2b87f666fda5a52622909b5e40784b3",
+      "source_url": "https://www.gutenberg.org/cache/epub/32233/pg32233-images.html#Page_60",
+      "locator": "《他愿以天国的锦缎相赠》末行",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "ab7e3a20395bcf4dec510d6a97943905702e054a16e206933ef264250c7d9b76",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1899,
+        "author_died": 1939,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1899，作者卒于1939；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/32233",
+        "https://www.nli.ie/news/yeats-nobel-centenary-video-series"
+      ]
+    },
+    {
+      "id": "franklin-03",
+      "text_sha256_lf": "71b1b71205ecafb9ba0de6e9ed0960434fb6e25a2bbc4134b5584e6e261ec4fb",
+      "source_url": "https://www.gutenberg.org/cache/epub/20203/pg20203-images.html#IX",
+      "locator": "第二部分，十三项德目之“秩序”",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "bdd5d8f2a90ac8e993362805462bc64cb9c8b25e1e9198777a4ab39e631b0333",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1818,
+        "author_died": 1790,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1818，作者卒于1790；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/20203",
+        "https://guides.loc.gov/finding-benjamin-franklin/autobiography"
+      ]
+    },
+    {
+      "id": "emerson-03",
+      "text_sha256_lf": "6c4619f79605f160bceb4fa0f77cd5b6008ce4a464c058fca61589ff55fe1bc6",
+      "source_url": "https://www.gutenberg.org/cache/epub/16643/pg16643-images.html#Page_83",
+      "locator": "《论自立》",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "84a04da2e744e934db8c0a2a7b316d5afd6f464fd8e599ce8a58ced45249ee98",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1841,
+        "author_died": 1882,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1841，作者卒于1882；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/16643"
+      ]
+    },
+    {
+      "id": "thoreau-03",
+      "text_sha256_lf": "6ffdb44d7f0cb0bc58f4023b34ff6af0c523988ba48637b52305040282597860",
+      "source_url": "https://www.gutenberg.org/cache/epub/205/pg205-images.html#chap19",
+      "locator": "第十八章“结束语”",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "512f4fa4703b7d8baed186ba001b036a58c37034b038560a07b1d26ea88b96ea",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1854,
+        "author_died": 1862,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1854，作者卒于1862；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/205"
+      ]
+    },
+    {
+      "id": "douglass-03",
+      "text_sha256_lf": "72f17eec8d916710f98a09d0c2f583718c8acf054d1c535eab70bd4040dd772b",
+      "source_url": "https://www.gutenberg.org/cache/epub/23/pg23-images.html#link2HCH0007",
+      "locator": "第七章",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "2e8c91f2f6b3ceb04a44df965637b641cea246424e2629156fe9df3b66ef5256",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1845,
+        "author_died": 1895,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1845，作者卒于1895；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/23"
+      ]
+    },
+    {
+      "id": "keller-03",
+      "text_sha256_lf": "02b0b2ecd30bde1fe85e8dd383ecda8df54b25aedafa1ca5436702b1f1360da4",
+      "source_url": "https://www.gutenberg.org/cache/epub/2397/pg2397-images.html#link2HCH0004",
+      "locator": "第一部分第四章",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "3fbe2d3f289e6b6b62bf3c80b597315844f9ce03a1cc444ae815773044d18754",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1903,
+        "author_died": 1968,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1903，作者卒于1968；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/2397"
+      ]
+    },
+    {
+      "id": "chesterton-03",
+      "text_sha256_lf": "ca42c3f5df5c4e70d495388a4031a207e8cc87e4896bb548576fa5742da89a72",
+      "source_url": "https://www.gutenberg.org/cache/epub/11505/pg11505-images.html#chap04",
+      "locator": "《追逐自己的帽子》，句中分句",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "c25b6fcc5004aadc1711c5275c46c426cedcaeef463179a5483080376d34c1af",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1908,
+        "author_died": 1936,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1908，作者卒于1936；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/11505"
+      ]
+    },
+    {
+      "id": "twain-03",
+      "text_sha256_lf": "017285fac1d997d8105f401fa040fd8b18650a8cd384766bf519ccfec2eafcd4",
+      "source_url": "https://www.gutenberg.org/cache/epub/68604/pg68604-images.html#Page_404",
+      "locator": "《玉米饼意见》",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "85246632b85681faa58bb794d722a5aa514b0f7cb5fe6b9e6f104937461f0722",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1923,
+        "author_died": 1910,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1923，作者卒于1910；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/68604"
+      ]
+    },
+    {
+      "id": "lamb-03",
+      "text_sha256_lf": "30fe08cb38ccda1d247a8e901ac5b49a4c7e404c99956837fba18f44d601ee8e",
+      "source_url": "https://www.gutenberg.org/cache/epub/10343/pg10343-images.html#id00127",
+      "locator": "《除夕》",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "d2b4ef43d8bd01ea7b5ad0b3076d1641b8ff46ce6600e88c7701959092b10346",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1821,
+        "author_died": 1834,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1821，作者卒于1834；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/10343"
+      ]
+    },
+    {
+      "id": "shakespeare-04",
+      "text_sha256_lf": "ab4aa85be879666089a36949c799df52975b3e491b9c26f497f44e59faaa1268",
+      "source_url": "https://www.gutenberg.org/cache/epub/100/pg100-images.html#sceneII_22.7",
+      "locator": "第二幕第七场，金匣中纸卷的首行",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "88ad4e03109839ba7992b14e4f1446bf56d77576a54410f5b98d9821c579be57",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1600,
+        "author_died": 1616,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1600，作者卒于1616；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/100",
+        "https://www.folger.edu/explore/shakespeares-works/the-merchant-of-venice/"
+      ]
+    },
+    {
+      "id": "austen-04",
+      "text_sha256_lf": "cecd2441e27cfff3c344c2957e8c10214e920cd72c8bb440d5bc3e8713818eaa",
+      "source_url": "https://www.gutenberg.org/cache/epub/1342/pg1342-images.html#page_259",
+      "locator": "第三十六章，伊丽莎白的反省",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "f0b019c9164a53c21fda1bf2938b96b014016a6eb4a627039cebd0d9a07c42f9",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1813,
+        "author_died": 1817,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1813，作者卒于1817；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/1342"
+      ]
+    },
+    {
+      "id": "dickens-04",
+      "text_sha256_lf": "08847043decf4b0d8689f2012d66488e7da96776a351cb8f9a97fe2a483f5fc8",
+      "source_url": "https://www.gutenberg.org/cache/epub/98/pg98-images.html#link2H_4_0021",
+      "locator": "第二部第十三章，卡顿对露西说",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "e427456f426cf51c23e294e07f4ed3014a74dcfdeb9ae20fc8adcf8910b08107",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1859,
+        "author_died": 1870,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1859，作者卒于1870；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/98"
+      ]
+    },
+    {
+      "id": "bronte-04",
+      "text_sha256_lf": "8056c0cfdfe4ee1c33f33a4c4efd77870b395a2bea16b4f611c4c2270982af66",
+      "source_url": "https://www.gutenberg.org/cache/epub/1260/pg1260-images.html#id-5219489442405865509",
+      "locator": "第二十七章，简的内心回答",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "0bc6419204218b6379e5c174a6b93076897cc7ef40bd230f73fbe1e35366eef7",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1847,
+        "author_died": 1855,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1847，作者卒于1855；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/1260"
+      ]
+    },
+    {
+      "id": "eliot-04",
+      "text_sha256_lf": "f3f6636dd8db19f3201ea504dd0d672ff1e757b95c6e23e1372398ec1c9e025f",
+      "source_url": "https://www.gutenberg.org/cache/epub/145/pg145-images.html#chap21",
+      "locator": "第二十一章，叙述者的分句",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "1147a2687e4f27a08e44cee2a9b7f9f3dee33a05fc4ad5c26e51988ce61c2cf4",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1871,
+        "author_died": 1880,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1871，作者卒于1880；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/145",
+        "https://old-digitalcollections.nypl.org/collections/middlemarch"
+      ]
+    },
+    {
+      "id": "carroll-04",
+      "text_sha256_lf": "079e6242b40452b8c3ab89ea719d70e6a1dc4c266e803f08101e5b2e47a616bc",
+      "source_url": "https://www.gutenberg.org/cache/epub/11/pg11-images.html#chap09",
+      "locator": "第九章，公爵夫人台词",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "3c1aa77747293cfb82f6f211b2a7a7f3652a18cb62a5a93b76a6fa121a428151",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1865,
+        "author_died": 1898,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1865，作者卒于1898；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/11"
+      ]
+    },
+    {
+      "id": "wilde-04",
+      "text_sha256_lf": "2f6a8fed88e7b2fc5e87c3c85671968c407123cce3c9b1c7a383403cd12078a1",
+      "source_url": "https://www.gutenberg.org/cache/epub/174/pg174-images.html#chap19",
+      "locator": "第十九章，亨利勋爵台词",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "180f7f7e3245c75b140766464068596936eafd06a6266e83d9c71c18d617aed9",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1891,
+        "author_died": 1900,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1891，作者卒于1900；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/174"
+      ]
+    },
+    {
+      "id": "stevenson-04",
+      "text_sha256_lf": "49c1aed63edb6b67bb19b20cab2eae4d06757215ba8c30c5ab7034252ec742ed",
+      "source_url": "https://www.gutenberg.org/cache/epub/69825/pg69825-images.html#page_12",
+      "locator": "《为闲人辩护》",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "4b046e047725281c31f8c4a1311624ce6aa21a5a5c964ac23cea56751be2c359",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1877,
+        "author_died": 1894,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1877，作者卒于1894；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/69825",
+        "https://robert-louis-stevenson.org/works-chronology/"
+      ]
+    },
+    {
+      "id": "blake-04",
+      "text_sha256_lf": "d5d26d64e48183f25ae4b1558da031d07fef8202e0535b77b6092a806ebe3db4",
+      "source_url": "https://www.gutenberg.org/cache/epub/574/pg574-images.html#id00214",
+      "locator": "《一棵毒树》首两行",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "fd2aca59e8d04c868b683a77859005deffdcddfcd1ff5da9716cd6178c5f44e2",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1794,
+        "author_died": 1827,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1794，作者卒于1827；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/574"
+      ]
+    },
+    {
+      "id": "wordsworth-04",
+      "text_sha256_lf": "06b3e791445cb1fa117f9ee0ba1f3253c6e2db307ad5ac21ab7f139395050e37",
+      "source_url": "https://www.gutenberg.org/cache/epub/8774/pg8774-images.html#id00114",
+      "locator": "《她是令人欢喜的幻影》首两行",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "3c93ef04e87a39e800d98c057dd13a39a74df63535df0e1a2d10f2a59659868b",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1807,
+        "author_died": 1850,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1807，作者卒于1850；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/8774"
+      ]
+    },
+    {
+      "id": "coleridge-04",
+      "text_sha256_lf": "12082e30b80b497a4ebb1b27024b2a6e05e1149e1951f535dba454ad64af21c0",
+      "source_url": "https://www.gutenberg.org/cache/epub/11101/pg11101-images.html#id00346",
+      "locator": "第七部分，末两行",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "fe5e45092e669683ba54816b7e59582dc5b4a07f52820c2ec09e65942cd7a300",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1798,
+        "author_died": 1834,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1798，作者卒于1834；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/11101"
+      ]
+    },
+    {
+      "id": "shelley-04",
+      "text_sha256_lf": "fe35b176710c3041674829a35f6e0de33192e40a1473f6aad134eccc3b328db0",
+      "source_url": "https://www.gutenberg.org/cache/epub/4798/pg4798-images.html#id00862",
+      "locator": "《爱的哲学》首两行",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "2e38a421a1fab35981b4112e82274127156d1ea57944d7d302885f40c1e7a96f",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1819,
+        "author_died": 1822,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1819，作者卒于1822；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/4798"
+      ]
+    },
+    {
+      "id": "keats-04",
+      "text_sha256_lf": "c3b19c16597bd83c662e6666da4cbf8a8b38f010ba275f6c59809c9b499c2ba3",
+      "source_url": "https://www.gutenberg.org/cache/epub/23684/pg23684-images.html#Nightingale_ln60",
+      "locator": "《夜莺颂》第61行",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "3e2c304ce25cc28e0d64cb3cf29a3967199e21f4cf69d4c156be47467ded839e",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1819,
+        "author_died": 1821,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1819，作者卒于1821；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/23684"
+      ]
+    },
+    {
+      "id": "dickinson-04",
+      "text_sha256_lf": "c494787b693dcab50a73fb7afcc04150edd16c62d5ee94c160a8a064c1f48116",
+      "source_url": "https://www.gutenberg.org/cache/epub/12242/pg12242-images.html#There_is_no_frigate_like_a_book",
+      "locator": "第三辑，Life第XVI首，前两行",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "b194f3696e8a7601f4e07d80a2269cba076b92f6bf4cf6359b7fe0e1343ee516",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1896,
+        "author_died": 1886,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1896，作者卒于1886；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/12242"
+      ]
+    },
+    {
+      "id": "whitman-04",
+      "text_sha256_lf": "7b6ca3e159397488dff6269e5ad614118b726ec0d2377518ca70297e2faacf45",
+      "source_url": "https://www.gutenberg.org/cache/epub/1322/pg1322-images.html#link2H_4_0121",
+      "locator": "《啊，我！啊，人生！》末行",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "83ff007816c704fda33bde4219885d26cc5791dbf58e644391d32c64cd222d18",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1867,
+        "author_died": 1892,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1867，作者卒于1892；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/1322"
+      ]
+    },
+    {
+      "id": "yeats-04",
+      "text_sha256_lf": "f6f89bc83fe7a274f19b43d6b0e21d2313553ae5263793f3df22342782683b32",
+      "source_url": "https://www.gutenberg.org/cache/epub/49608/pg49608-images.html#Page_154",
+      "locator": "《茵尼斯弗利湖心岛》首行",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "6c3e5e0fe6b13c0efb9c5f97eff24b063e6eca044d57b22eb02a25a6c1413183",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1890,
+        "author_died": 1939,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1890，作者卒于1939；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/49608",
+        "https://www.nli.ie/news/yeats-nobel-centenary-video-series"
+      ]
+    },
+    {
+      "id": "franklin-04",
+      "text_sha256_lf": "82f21ea204af4dfdc6a75c23a921023bf9d812ed13d9fb6b46b2c3b91cd019f4",
+      "source_url": "https://www.gutenberg.org/cache/epub/20203/pg20203-images.html",
+      "locator": "第二部分，十三项德目之“节俭”",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "bdd5d8f2a90ac8e993362805462bc64cb9c8b25e1e9198777a4ab39e631b0333",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1818,
+        "author_died": 1790,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1818，作者卒于1790；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/20203",
+        "https://guides.loc.gov/finding-benjamin-franklin/autobiography"
+      ]
+    },
+    {
+      "id": "emerson-04",
+      "text_sha256_lf": "7f424e7aa3eea8e482034188660141e403915842c5757cbf7f6c350d7b9da0d1",
+      "source_url": "https://www.gutenberg.org/cache/epub/16643/pg16643-images.html#Page_89",
+      "locator": "《论自立》",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "84a04da2e744e934db8c0a2a7b316d5afd6f464fd8e599ce8a58ced45249ee98",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1841,
+        "author_died": 1882,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1841，作者卒于1882；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/16643"
+      ]
+    },
+    {
+      "id": "thoreau-04",
+      "text_sha256_lf": "b0c919051f1917f009c5ed641a6dd70b69d13a92ef5f056df25ff1e30539d9c8",
+      "source_url": "https://www.gutenberg.org/cache/epub/205/pg205-images.html#chap19",
+      "locator": "第十八章“结束语”",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "512f4fa4703b7d8baed186ba001b036a58c37034b038560a07b1d26ea88b96ea",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1854,
+        "author_died": 1862,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1854，作者卒于1862；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/205"
+      ]
+    },
+    {
+      "id": "douglass-04",
+      "text_sha256_lf": "9badc88561cfb71acb22d3f2cdc18df5f43a7e0e0f415b3e0f5a2a2c3fee5581",
+      "source_url": "https://www.gutenberg.org/cache/epub/23/pg23-images.html#link2HCH0007",
+      "locator": "第七章",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "2e8c91f2f6b3ceb04a44df965637b641cea246424e2629156fe9df3b66ef5256",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1845,
+        "author_died": 1895,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1845，作者卒于1895；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/23"
+      ]
+    },
+    {
+      "id": "keller-04",
+      "text_sha256_lf": "177bf330103e41cdd60b343a40a5ca5b06edd0b80503c5554c8b7feb07ec56f2",
+      "source_url": "https://www.gutenberg.org/cache/epub/2397/pg2397-images.html#link2HCH0021",
+      "locator": "第一部分第二十一章，句中分句",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "3fbe2d3f289e6b6b62bf3c80b597315844f9ce03a1cc444ae815773044d18754",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1903,
+        "author_died": 1968,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1903，作者卒于1968；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/2397"
+      ]
+    },
+    {
+      "id": "chesterton-04",
+      "text_sha256_lf": "a89b1306a42094ddbcd60326e178d58736c6c9deb44fef36258a2ddad3462deb",
+      "source_url": "https://www.gutenberg.org/cache/epub/11505/pg11505-images.html#chap04",
+      "locator": "《追逐自己的帽子》",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "c25b6fcc5004aadc1711c5275c46c426cedcaeef463179a5483080376d34c1af",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1908,
+        "author_died": 1936,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1908，作者卒于1936；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/11505"
+      ]
+    },
+    {
+      "id": "twain-04",
+      "text_sha256_lf": "467dc73df0e729fc4fafb6b7cd39b63e83dcd2c67a4eaff5c767af2dfb0bea7c",
+      "source_url": "https://www.gutenberg.org/cache/epub/68604/pg68604-images.html#Page_401",
+      "locator": "《玉米饼意见》",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "85246632b85681faa58bb794d722a5aa514b0f7cb5fe6b9e6f104937461f0722",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1923,
+        "author_died": 1910,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1923，作者卒于1910；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/68604"
+      ]
+    },
+    {
+      "id": "lamb-04",
+      "text_sha256_lf": "18a2d2812e62a624a8ccda7958ecd52a2346a84bb800d619f81636511ecbec92",
+      "source_url": "https://www.gutenberg.org/cache/epub/10343/pg10343-images.html#id00451",
+      "locator": "《烤猪论》",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "d2b4ef43d8bd01ea7b5ad0b3076d1641b8ff46ce6600e88c7701959092b10346",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1822,
+        "author_died": 1834,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1822，作者卒于1834；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/10343"
+      ]
+    },
+    {
+      "id": "shakespeare-05",
+      "text_sha256_lf": "77cf9dec46bdf5c550b672fab990a9596c30803072f89af79ad9f085250e245c",
+      "source_url": "https://www.gutenberg.org/cache/epub/100/pg100-images.html#sceneI_8.3",
+      "locator": "第一幕第三场，波洛涅斯的告诫",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "88ad4e03109839ba7992b14e4f1446bf56d77576a54410f5b98d9821c579be57",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1603,
+        "author_died": 1616,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1603，作者卒于1616；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/100",
+        "https://www.folger.edu/explore/shakespeares-works/hamlet/"
+      ]
+    },
+    {
+      "id": "austen-05",
+      "text_sha256_lf": "abd4cc3cc60af8c5d0346274a053db457f89b354a116d48d1dd489ea5127e3aa",
+      "source_url": "https://www.gutenberg.org/cache/epub/1342/pg1342-images.html#page_447",
+      "locator": "第五十七章，班纳特先生台词",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "f0b019c9164a53c21fda1bf2938b96b014016a6eb4a627039cebd0d9a07c42f9",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1813,
+        "author_died": 1817,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1813，作者卒于1817；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/1342"
+      ]
+    },
+    {
+      "id": "dickens-05",
+      "text_sha256_lf": "185b8ac48114a7d5cf2414118e05b67698deb0008f638bafb09ff5c8cfc322b6",
+      "source_url": "https://www.gutenberg.org/cache/epub/98/pg98-images.html#link2H_4_0048",
+      "locator": "第三部第十五章，结尾",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "e427456f426cf51c23e294e07f4ed3014a74dcfdeb9ae20fc8adcf8910b08107",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1859,
+        "author_died": 1870,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1859，作者卒于1870；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/98"
+      ]
+    },
+    {
+      "id": "bronte-05",
+      "text_sha256_lf": "dcb8e8b5e206f56397b438c763a2277dc10a166f88c313c8b96014d93b473a52",
+      "source_url": "https://www.gutenberg.org/cache/epub/1260/pg1260-images.html#id-6588747706750457341",
+      "locator": "第二版序言（1848）",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "0bc6419204218b6379e5c174a6b93076897cc7ef40bd230f73fbe1e35366eef7",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1848,
+        "author_died": 1855,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1848，作者卒于1855；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/1260"
+      ]
+    },
+    {
+      "id": "eliot-05",
+      "text_sha256_lf": "16696a9402dd1d9862f487008c0fe3d75d2db4d7cf1b1594b7746e2f57048339",
+      "source_url": "https://www.gutenberg.org/cache/epub/145/pg145-images.html#chap20",
+      "locator": "第二十章，叙述者的议论",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "1147a2687e4f27a08e44cee2a9b7f9f3dee33a05fc4ad5c26e51988ce61c2cf4",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1871,
+        "author_died": 1880,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1871，作者卒于1880；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/145",
+        "https://old-digitalcollections.nypl.org/collections/middlemarch"
+      ]
+    },
+    {
+      "id": "carroll-05",
+      "text_sha256_lf": "7827f03d14135e59de13627f232927ab423005828463b2e3adeeb8fe4d6d86b7",
+      "source_url": "https://www.gutenberg.org/cache/epub/11/pg11-images.html#chap09",
+      "locator": "第九章，公爵夫人台词",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "3c1aa77747293cfb82f6f211b2a7a7f3652a18cb62a5a93b76a6fa121a428151",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1865,
+        "author_died": 1898,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1865，作者卒于1898；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/11"
+      ]
+    },
+    {
+      "id": "wilde-05",
+      "text_sha256_lf": "3355541ab82f05df8d0c70c0b9a81ba203312b997a30ced71bf02b4c84d30480",
+      "source_url": "https://www.gutenberg.org/cache/epub/174/pg174-images.html#chap06",
+      "locator": "第六章，亨利勋爵台词",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "180f7f7e3245c75b140766464068596936eafd06a6266e83d9c71c18d617aed9",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1891,
+        "author_died": 1900,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1891，作者卒于1900；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/174"
+      ]
+    },
+    {
+      "id": "stevenson-05",
+      "text_sha256_lf": "2d94cee4cfa98217dedcaeb7e5d3cec820b0d6b09f1c072f1d6237b973632b45",
+      "source_url": "https://www.gutenberg.org/cache/epub/69825/pg69825-images.html#page_23",
+      "locator": "《为闲人辩护》",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "4b046e047725281c31f8c4a1311624ce6aa21a5a5c964ac23cea56751be2c359",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1877,
+        "author_died": 1894,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1877，作者卒于1894；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/69825",
+        "https://robert-louis-stevenson.org/works-chronology/"
+      ]
+    },
+    {
+      "id": "blake-05",
+      "text_sha256_lf": "df3ca9613d5ead90fba60f66a25baa99252f29f0008b852d972f29bc1166f9e1",
+      "source_url": "https://www.gutenberg.org/cache/epub/574/pg574-images.html#id00237",
+      "locator": "《学童》第四节，前两行",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "fd2aca59e8d04c868b683a77859005deffdcddfcd1ff5da9716cd6178c5f44e2",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1789,
+        "author_died": 1827,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1789，作者卒于1827；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/574"
+      ]
+    },
+    {
+      "id": "wordsworth-05",
+      "text_sha256_lf": "d1303640d55ef521e8b827f5849b249a45bd728a82d3200427dce0263e882f4b",
+      "source_url": "https://www.gutenberg.org/cache/epub/8774/pg8774-images.html#id00148",
+      "locator": "《快乐的战士的品格》，分句",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "3c93ef04e87a39e800d98c057dd13a39a74df63535df0e1a2d10f2a59659868b",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1807,
+        "author_died": 1850,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1807，作者卒于1850；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/8774"
+      ]
+    },
+    {
+      "id": "coleridge-05",
+      "text_sha256_lf": "5926d4db6674cba7d1264167d4c632fc56f7b752046d931fda85472bb9218b5b",
+      "source_url": "https://www.gutenberg.org/cache/epub/11101/pg11101-images.html#id00171",
+      "locator": "第二部分，第103—104行",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "fe5e45092e669683ba54816b7e59582dc5b4a07f52820c2ec09e65942cd7a300",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1798,
+        "author_died": 1834,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1798，作者卒于1834；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/11101"
+      ]
+    },
+    {
+      "id": "shelley-05",
+      "text_sha256_lf": "05bd9b5289cba5c7b7a5852c1cecd23255744a15ba018a789ef2cb62aa292fc1",
+      "source_url": "https://www.gutenberg.org/cache/epub/4798/pg4798-images.html#id01426",
+      "locator": "《当柔声消逝》首两行",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "2e38a421a1fab35981b4112e82274127156d1ea57944d7d302885f40c1e7a96f",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1824,
+        "author_died": 1822,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1824，作者卒于1822；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/4798"
+      ]
+    },
+    {
+      "id": "keats-05",
+      "text_sha256_lf": "d5ea3fd46feaca0d23549d1d96de6f548d7ed8b3f78be4547ff62606b6a9b1dd",
+      "source_url": "https://www.gutenberg.org/cache/epub/23684/pg23684-images.html#Nightingale_ln30",
+      "locator": "《夜莺颂》第35—36行，句中节选",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "3e2c304ce25cc28e0d64cb3cf29a3967199e21f4cf69d4c156be47467ded839e",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1819,
+        "author_died": 1821,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1819，作者卒于1821；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/23684"
+      ]
+    },
+    {
+      "id": "dickinson-05",
+      "text_sha256_lf": "6b692fc3dafaf8824b41f1a8a4e1375e8adc6b04ab3d1a67c0210313c9feca16",
+      "source_url": "https://www.gutenberg.org/cache/epub/12242/pg12242-images.html#Im_nobody_Who_are_you",
+      "locator": "第二辑，Life第I首，前三行",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "b194f3696e8a7601f4e07d80a2269cba076b92f6bf4cf6359b7fe0e1343ee516",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1891,
+        "author_died": 1886,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1891，作者卒于1886；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/12242"
+      ]
+    },
+    {
+      "id": "whitman-05",
+      "text_sha256_lf": "11d995e7da96c5c7ca9654a61bdc217c9f84e83ac4935a11ec375970b6cdbc14",
+      "source_url": "https://www.gutenberg.org/cache/epub/1322/pg1322-images.html#link2H_4_0027",
+      "locator": "《自我之歌》第52节，诗行",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "83ff007816c704fda33bde4219885d26cc5791dbf58e644391d32c64cd222d18",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1855,
+        "author_died": 1892,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1855，作者卒于1892；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/1322"
+      ]
+    },
+    {
+      "id": "yeats-05",
+      "text_sha256_lf": "7bd5e329a27af84ee825fd1702103496e1dd0325b90ed413a73263fb21d84c21",
+      "source_url": "https://www.gutenberg.org/cache/epub/49608/pg49608-images.html#Page_154",
+      "locator": "《茵尼斯弗利湖心岛》第5行",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "6c3e5e0fe6b13c0efb9c5f97eff24b063e6eca044d57b22eb02a25a6c1413183",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1890,
+        "author_died": 1939,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1890，作者卒于1939；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/49608",
+        "https://www.nli.ie/news/yeats-nobel-centenary-video-series"
+      ]
+    },
+    {
+      "id": "franklin-05",
+      "text_sha256_lf": "0ee5890871773ba3ded81dfd7f9aa2c8331bddcb978aa6dd7113775fa7b1c3eb",
+      "source_url": "https://www.gutenberg.org/cache/epub/78663/pg78663-images.html",
+      "locator": "《哨子》1921年节录本末句",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "bc07b4e99ba4ceb51a25194b52d99a9ea20a80796ba93c311efab9a661a8b44c",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1921,
+        "author_died": 1790,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1921，作者卒于1790；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/78663"
+      ]
+    },
+    {
+      "id": "emerson-05",
+      "text_sha256_lf": "0871e1cc734400ea450d81919e28e86b26213c8ba6035d97acc5ab8239f2cc12",
+      "source_url": "https://www.gutenberg.org/cache/epub/16643/pg16643-images.html#Page_90",
+      "locator": "《论自立》",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "84a04da2e744e934db8c0a2a7b316d5afd6f464fd8e599ce8a58ced45249ee98",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1841,
+        "author_died": 1882,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1841，作者卒于1882；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/16643"
+      ]
+    },
+    {
+      "id": "thoreau-05",
+      "text_sha256_lf": "f47b6ca152aa6650c192cdc93ad1ef983caf3c8b7840d71f91a1d6d26f8301c0",
+      "source_url": "https://www.gutenberg.org/cache/epub/205/pg205-images.html#chap04",
+      "locator": "第三章“阅读”",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "512f4fa4703b7d8baed186ba001b036a58c37034b038560a07b1d26ea88b96ea",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1854,
+        "author_died": 1862,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1854，作者卒于1862；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/205"
+      ]
+    },
+    {
+      "id": "douglass-05",
+      "text_sha256_lf": "7ecfe61dbb3e61612e9b443718247c4e46b31f5bb6f2a7108fd552485f6d42e6",
+      "source_url": "https://www.gutenberg.org/cache/epub/23/pg23-images.html#fnref-1",
+      "locator": "第十章，句中分句",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "2e8c91f2f6b3ceb04a44df965637b641cea246424e2629156fe9df3b66ef5256",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1845,
+        "author_died": 1895,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1845，作者卒于1895；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/23"
+      ]
+    },
+    {
+      "id": "keller-05",
+      "text_sha256_lf": "b2f1cea4a2598b3fc364a0d5d8acc3fe58ce861deb6e58fe95749d6d6aab8134",
+      "source_url": "https://www.gutenberg.org/cache/epub/2397/pg2397-images.html#link2HCH0023",
+      "locator": "第一部分第二十三章，末句中的分句",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "3fbe2d3f289e6b6b62bf3c80b597315844f9ce03a1cc444ae815773044d18754",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1903,
+        "author_died": 1968,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1903，作者卒于1968；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/2397"
+      ]
+    },
+    {
+      "id": "chesterton-05",
+      "text_sha256_lf": "1f7979de3319f72042da41d7a449ca4d1db3ef18221c25e0263ae0f2caf18caa",
+      "source_url": "https://www.gutenberg.org/cache/epub/11505/pg11505-images.html#chap31",
+      "locator": "《童话》",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "c25b6fcc5004aadc1711c5275c46c426cedcaeef463179a5483080376d34c1af",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1908,
+        "author_died": 1936,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1908，作者卒于1936；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/11505"
+      ]
+    },
+    {
+      "id": "twain-05",
+      "text_sha256_lf": "5fc944cb212e3082ce0ea3c5d2654870f9a143010708e23c46ed2d58dc93b030",
+      "source_url": "https://www.gutenberg.org/cache/epub/68604/pg68604-images.html#Page_406",
+      "locator": "《玉米饼意见》末段",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "85246632b85681faa58bb794d722a5aa514b0f7cb5fe6b9e6f104937461f0722",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1923,
+        "author_died": 1910,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1923，作者卒于1910；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/68604"
+      ]
+    },
+    {
+      "id": "lamb-05",
+      "text_sha256_lf": "4b21f750a07d0a4a64e0bc4b8baeb6e3ebc93be490304aa0c9c86aa955b17f2f",
+      "source_url": "https://www.gutenberg.org/cache/epub/10343/pg10343-images.html#id00438",
+      "locator": "《烤猪论》",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "source_sha256_lf": "d2b4ef43d8bd01ea7b5ad0b3076d1641b8ff46ce6600e88c7701959092b10346",
+      "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
+      "public_domain": {
+        "first_published": 1822,
+        "author_died": 1834,
+        "basis": "本栏目2026年编选门槛为出版年不晚于1930、作者卒年不晚于1975。本条作品/所引节录版本年为1822，作者卒于1834；仅采用公版原作正文，不收现代导言、注释、歌词。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/10343"
+      ]
+    }
+  ]
+}

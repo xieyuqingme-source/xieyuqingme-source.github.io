@@ -121,7 +121,7 @@
 .yl-time-ends{display:flex;justify-content:space-between;font-size:12px;color:var(--muted)}
 .yl-earth-source{font-size:12px;color:var(--muted);margin-top:12px!important;line-height:1.8}
 .yl-earth-source a{text-decoration:underline;text-underline-offset:3px}
-.yl-bottomline{display:grid;grid-template-columns:minmax(0,1fr);margin-top:36px}
+.yl-bottomline{display:grid;grid-template-columns:minmax(0,1fr);gap:20px;margin-top:36px}
 .yl-daily-card{min-width:0;padding:20px;border:1px solid var(--line);border-radius:var(--radius);background:var(--surface)}
 
 .yl-daily-card h3{font:600 19px/1.6 var(--sans);margin-bottom:8px}
@@ -215,6 +215,11 @@
 .history-item:before{content:"";position:absolute;left:1px;top:9px;width:7px;height:7px;border-radius:50%;background:var(--accent)}
 .history-item:after{content:"";position:absolute;left:4px;top:22px;bottom:-13px;width:1px;background:var(--line)}
 .history-item:last-child:after{display:none}
+.history-timeline{position:relative}
+.history-timeline:before{content:"";position:absolute;left:4px;top:9px;bottom:12px;width:1px;background:var(--line)}
+.history-timeline .history-item:after{display:none}
+.history-timeline .history-item:before{z-index:1}
+.history-timeline .history-more>summary{margin-left:20px}
 .history-year{font-size:21px;font-weight:400;line-height:1.5;color:var(--accent);font-variant-numeric:tabular-nums}
 .history-item h3{font-size:17px;line-height:1.8;font-weight:600;margin-bottom:4px}
 .history-item p{font-size:14px;line-height:1.9}
@@ -239,6 +244,14 @@
 .today-reading .yl-quote{font:500 18px/1.9 var(--sans)}
 .quote-note{font-size:12px;color:var(--muted);margin-top:12px}
 .quote-note p{font-size:12px!important;line-height:1.8}
+.today-reading .yl-quote--en .yl-quote{font:400 21px/1.6 Georgia,"Times New Roman",serif;hyphens:none;text-wrap:pretty}
+.yl-quote-translation{font:400 15px/1.9 var(--sans)!important;color:var(--muted);margin-top:8px!important}
+.yl-reading-footer{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:start;gap:10px 20px;margin-top:12px}
+.yl-reading-footer .quote-note{margin-top:0;min-width:0}.yl-reading-footer .quote-note>p{overflow-wrap:anywhere}
+.yl-corner-entry{font-size:13px!important;color:var(--accent);text-decoration:none;line-height:1.8;padding-block:5px}
+.yl-corner-entry:hover,.yl-corner-entry:focus-visible{text-decoration:underline;text-underline-offset:4px}
+@media(max-width:760px){.yl-bottomline{gap:16px}}
+@media(max-width:380px){.yl-reading-footer{grid-template-columns:minmax(0,1fr)}.yl-corner-entry{justify-self:start}.today-reading .yl-quote--en .yl-quote{font-size:20px}}
 
 @media(max-width:720px){.today-earth-grid{grid-template-columns:minmax(0,1fr);gap:26px}.today-a .news-row:nth-child(-n+2) h3{font-size:19px}.today-earth-grid .yl-globe-wrap{max-width:340px}.history-item{grid-template-columns:58px minmax(0,1fr);gap:10px;padding-left:17px}.history-year{font-size:18px}.today-section-heading{margin-bottom:16px}.today-a .today-intro h1{margin-bottom:14px}}
 @media(pointer:coarse){.daily-home .quote-change{min-height:44px;padding-block:10px}.news-sources>summary,.history-more>summary{min-height:44px}}

@@ -51,3 +51,6 @@
 关于页下方摄影图亦有行内最大宽度兜底；页脚链接之间保留空白，使外部样式失效时的英文导航也能自然换行。手机二维码最终宽度在`portfolio.css`设置，避免被旧样式覆盖。
 
 阅读区现为单栏通栏布局。旧文摘句的卡片、脚本分支、样式选择器、构建函数及专用数据文件已删除，马克思主义名句430条及其来源记录保持原样。
+# 英语角与英语名句（2026-10-29）
+
+`english-corner.css`、`english-corner.js`和`english-numbers.js`是本地栏目资源，采用当前全站浅色/深色变量与系统字体，不使用图片、CDN或在线转换服务。英语名句复用`home-daily.css`及`daily-reading.js`的小按钮与独立牌组，英文原句仅用设备衬线字体。公版原文、AI辅助中文译文、版本与核对记录见`home/brief/english-quotes-sources.md`；卡片来源与难词依据分别记录在`english-corner/catalog.json`及`notes.json`。构建只读取这些公开副本，不读取私人阅读笔记。

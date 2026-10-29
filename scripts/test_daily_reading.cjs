@@ -6,15 +6,17 @@ const data = JSON.parse(fs.readFileSync(path.join(__dirname,'../home/daily-conte
 class Element {
   constructor() { this.dataset={};this.attributes={};this.events=new Map();this.hidden=false;this.textContent=''; }
   setAttribute(name,value) { this.attributes[name]=String(value); }
+  removeAttribute(name) { delete this.attributes[name]; }
   addEventListener(type,handler) { if(!this.events.has(type))this.events.set(type,new Set());this.events.get(type).add(handler); }
   removeEventListener(type,handler) { this.events.get(type)?.delete(handler); }
   fire(type,event={}) { for(const handler of this.events.get(type)||[])handler({target:this,...event}); }
 }
-function harness({classic=data,day='2026-10-28T02:00:00Z',language='zh-CN',carrier=null}={}) {
+function harness({classic=data,english=null,day='2026-10-28T02:00:00Z',language='zh-CN',carrier=null}={}) {
   const elements=Object.fromEntries(['daily-content-data','daily-quote','daily-quote-text','daily-quote-author','daily-quote-work','daily-quote-note','daily-quote-button','daily-quotation-title'].map(id=>[id,new Element()]));
   elements['daily-content-data'].textContent=typeof classic==='string'?classic:JSON.stringify(classic);
   elements['daily-quote-text'].textContent='Server-rendered fallback';elements['daily-quote-button'].hidden=true;
   elements['daily-quotation-title'].textContent='马克思主义名句';
+  if(english!==null){for(const id of ['english-quotes-data','english-quote','english-quote-text','english-quote-translation','english-quote-work','english-quote-note','english-quote-related','english-quote-translation-source','english-quote-button','english-quotation-title'])elements[id]=new Element();elements['english-quotes-data'].textContent=typeof english==='string'?english:JSON.stringify(english);elements['english-quote-text'].textContent='English fallback';elements['english-quote-button'].hidden=true;}
   const doc=new Element();doc.documentElement=carrier||{lang:language};doc.documentElement.lang=language;doc.hidden=false;doc.getElementById=id=>elements[id]||null;
   const timers=new Map(),cleanups=[],changes=new Set();let time=new Date(day),selectedLanguage=language,unsubscribed=0;
   const win={setInterval(fn,delay){const id=timers.size+1;timers.set(id,{fn,delay});return id;},clearInterval(id){timers.delete(id);},fetch(){throw Error('Quotes must not be fetched');},localStorage:{getItem(){throw Error('Quotes must not read storage');}},SiteNavigation:{own(fn){cleanups.push(fn);}},SiteI18n:{lang:()=>selectedLanguage,page:()=>({switchMode:'navigate'}),onChange(fn){changes.add(fn);return()=>{changes.delete(fn);unsubscribed++;};}}};
@@ -105,4 +107,35 @@ test('sources use the card language with only the two explicitly allowed transla
     if(expected['zh-CN']===expected.en)assert(item.translation_note[expected.en==='en'?'zh-CN':'en'].includes('AI'));
     else assert.notEqual(item.url['zh-CN'],item.url.en);
   }
+});
+
+function englishFixture(){return{version:1,quotes:Array.from({length:5},(_,i)=>({id:'fixture-english-'+i,text:'A public original sentence '+i+'.',translation:'中文自译'+i+'。',translation_source:{type:'site'},author_zh:'测试作者',author_en:'Synthetic Author',work_zh:'合成作品',work_en:'Synthetic Work',locator_zh:'合成位置',first_published:1900,author_died:1950,url:'https://example.org/original-'+i,note:'合成测试说明。',...(i%2?{related:'/english/fixture-card/'}:{})}))};}
+test('English display validation rejects unknown fields, unsafe URLs, excess lengths and non-public-domain editions',()=>{
+  const valid=englishFixture(),quote=valid.quotes[0];assert.equal(R.englishQuotations(valid,new Date('2026-10-29')).length,5);
+  for(const changes of [{extra:true},{id:'UPPER'},{url:'https://localhost/path'},{url:'https://127.0.0.1/path'},{url:'https://[::1]/path'},{url:'https://user:secret@example.org/'},{url:'https://example.org/?token=secret'},{url:'javascript:alert(1)'},{text:'word '.repeat(46)},{translation:'字'.repeat(121)},{note:'字'.repeat(161)},{first_published:1931},{author_died:1976},{first_published:true},{translation_source:{type:'site',extra:true}},{translation_source:{type:'published',name:'Modern translation',url:'https://example.org/',translator_died:2000}},{related:'/english/tools/'}])assert.equal(R.englishQuotations({version:1,quotes:[{...quote,...changes}]},new Date('2026-10-29')).length,0,JSON.stringify(changes));
+  const edge={...quote,first_published:1930,author_died:1975};assert.equal(R.englishQuotations({version:1,quotes:[edge]},new Date('2026-10-29')).length,1);assert.equal(R.englishQuotations({version:1,quotes:[edge]},new Date('2025-10-29')).length,0);
+  assert.equal(R.englishQuotations({version:1,quotes:[quote,{...quote,id:'other-id',text:quote.text.toUpperCase()}]}).length,1);
+});
+test('English and Marxist controls advance only their own deck and refresh every display field together',()=>{
+  const english=englishFixture(),h=harness({english}),e=h.elements,classic=e['daily-quote'].dataset.quoteId,opening=e['english-quote'].dataset.quoteId;
+  e['english-quote-button'].fire('click');assert.equal(e['daily-quote'].dataset.quoteId,classic);assert.notEqual(e['english-quote'].dataset.quoteId,opening);
+  const selected=english.quotes.find(q=>q.id===e['english-quote'].dataset.quoteId);assert.equal(e['english-quote-text'].textContent,selected.text);assert.equal(e['english-quote-translation'].textContent,selected.translation);assert.equal(e['english-quote-work'].href,selected.url);assert(e['english-quote-note'].textContent.includes(selected.note));assert(e['english-quote-note'].textContent.includes('本站译文（AI 辅助'));assert.equal(e['english-quote-related'].hidden,!selected.related);
+  const current=e['english-quote'].dataset.quoteId;e['daily-quote-button'].fire('click');assert.equal(e['english-quote'].dataset.quoteId,current);h.tick();assert.equal(e['english-quote'].dataset.quoteId,current);h.cleanups[0]();
+});
+test('English content is identical in both UI languages and the compact button label follows the UI',()=>{
+  const h=harness({english:englishFixture()}),e=h.elements;e['english-quote-button'].fire('click');const content=['english-quote-text','english-quote-translation','english-quote-work','english-quote-note'].map(id=>e[id].textContent),id=e['english-quote'].dataset.quoteId;
+  h.language('en');assert.equal(e['english-quote'].dataset.quoteId,id);assert.deepEqual(['english-quote-text','english-quote-translation','english-quote-work','english-quote-note'].map(id=>e[id].textContent),content);assert.equal(e['english-quote-button'].attributes['aria-label'],'Another quote · English quotations');h.cleanups[0]();
+});
+test('both independent remaining bags survive a language navigation without storage or repetition',()=>{
+  const english=englishFixture(),a=harness({english}),seen=[a.elements['english-quote'].dataset.quoteId];a.elements['english-quote-button'].fire('click');seen.push(a.elements['english-quote'].dataset.quoteId);a.elements['daily-quote-button'].fire('click');const selected=a.elements['daily-quote'].dataset.quoteId,carrier=a.doc.documentElement;
+  a.doc.fire('click',{button:0,target:{closest:()=>({getAttribute:name=>name==='data-site-language-switch'?'en':null})}});assert(carrier.__dailyReadingTransfer.english);a.cleanups[0]();const b=harness({english,language:'en',carrier});assert.equal(b.elements['daily-quote'].dataset.quoteId,selected);assert.equal(b.elements['english-quote'].dataset.quoteId,seen.at(-1));for(let i=seen.length;i<english.quotes.length;i++){b.elements['english-quote-button'].fire('click');seen.push(b.elements['english-quote'].dataset.quoteId);}assert.equal(new Set(seen).size,english.quotes.length);b.cleanups[0]();
+});
+test('English midnight reset and PageScope disposal retain the existing reading lifecycle',()=>{
+  const english=englishFixture(),h=harness({english,day:'2026-10-28T15:59:59Z'}),e=h.elements;e['english-quote-button'].fire('click');h.advance('2026-10-28T16:00:00Z');h.tick();const day=R.dayNumber(new Date('2026-10-28T16:00:00Z'));assert.equal(e['english-quote'].dataset.quoteId,english.quotes[day%english.quotes.length].id);const before=e['english-quote'].dataset.quoteId;h.cleanups[0]();e['english-quote-button'].fire('click');assert.equal(e['english-quote'].dataset.quoteId,before);assert.equal(h.timers.size,0);assert.equal(h.changes.size,0);
+});
+test('invalid English display data preserves its static fallback without disabling the other deck',()=>{
+  for(const english of ['{broken',{version:1,quotes:[]},null]){const h=harness({english:english===null?'null':english});assert.equal(h.elements['english-quote-text'].textContent,'English fallback');assert(h.elements['english-quote-button'].hidden);const before=h.elements['daily-quote'].dataset.quoteId;h.elements['daily-quote-button'].fire('click');assert.notEqual(h.elements['daily-quote'].dataset.quoteId,before);h.cleanups[0]();}
+});
+test('the production English pool is source-backed, complete and traversable before repetition',()=>{
+  const english=JSON.parse(fs.readFileSync(path.join(__dirname,'../home/brief/english-quotes.json'),'utf8'));assert(english.quotes.length>=100);assert.equal(R.englishQuotations(english,new Date('2026-10-29')).length,english.quotes.length);const h=harness({english}),seen=new Set([h.elements['english-quote'].dataset.quoteId]);for(let i=1;i<english.quotes.length;i++){h.elements['english-quote-button'].fire('click');seen.add(h.elements['english-quote'].dataset.quoteId);}assert.equal(seen.size,english.quotes.length);const last=h.elements['english-quote'].dataset.quoteId;h.elements['english-quote-button'].fire('click');assert.notEqual(h.elements['english-quote'].dataset.quoteId,last);h.cleanups[0]();
 });

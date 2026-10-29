@@ -82,10 +82,12 @@ class PersonalMapTests(unittest.TestCase):
     def test_three_menu_buttons_keep_section_destinations_and_bilingual_brand(self):
         page=localize_page((ROOT/'home/map.template.html').read_text(encoding='utf-8'),ROOT,'https://example.test','/map/','en',modules=('map',))
         header=page.split('<header',1)[1].split('</header>',1)[0]
-        self.assertEqual(header.count('class="nav-item'),4)
+        self.assertEqual(header.count('class="nav-item'),5)
         self.assertEqual(header.count('class="nav-group'),3)
         for route in ['/articles/','/anthology/','/projects/','/photos/','/map/','/about/','/game/']:
             self.assertIn('href="/en'+route+'"',header)
+        self.assertIn('href="/english/"',header)
+        self.assertNotIn('href="/en/english/"',header)
         self.assertIn('Xie Yuqing · Carl',header)
         self.assertEqual(header.count('<summary class="nav-entry"'),3)
         self.assertIn('data-nav-group="map"',header)

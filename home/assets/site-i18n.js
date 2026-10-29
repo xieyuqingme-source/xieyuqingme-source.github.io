@@ -7,7 +7,7 @@
   const preferenceKey = "xieyuqing-site-language";
   const feature = /^\/(?:today|about|projects|photos|map|game|anthology)(?:\/|$)/;
   const resource = /\/(?:assets|images|data)(?:\/|$)|\.(?:png|jpe?g|webp|gif|svg|json|css|js|xml|mp4|webm)$/i;
-  const navKeys = { "/": "home", "/today/": "today", "/articles/": "articles", "/anthology/": "anthology", "/projects/": "projects", "/photos/": "photos", "/map/": "map", "/game/": "games", "/about/": "about" };
+  const navKeys = { "/": "home", "/today/": "today", "/articles/": "articles", "/english/": "english", "/anthology/": "anthology", "/projects/": "projects", "/photos/": "photos", "/map/": "map", "/game/": "games", "/about/": "about" };
   let page = {};
   let current = document.documentElement.lang?.toLowerCase().startsWith("en") ? "en" : "zh-CN";
   if (/^\/en(?:\/|$)/.test(window.location.pathname)) current = "en";
