@@ -1,16 +1,6 @@
 .anthology-note-guide { margin: 14px 0 0; color: var(--muted); font: .76rem/1.8 var(--sans); }
-.anthology-annotation { text-decoration-line: underline; text-decoration-style: dashed; text-decoration-color: var(--line); text-decoration-thickness: 1px; text-underline-offset: .24em; cursor: help; }
-.anthology-annotation:hover { text-decoration-color: var(--accent); }
-.anthology-annotation { text-decoration-color: color-mix(in srgb, var(--accent) 50%, var(--surface)); }
-.anthology-annotation:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
 .anthology-selection { position: fixed; z-index: 30; left: 50%; bottom: max(20px, env(safe-area-inset-bottom)); transform: translateX(-50%); display: flex; align-items: center; flex-wrap: wrap; justify-content: center; gap: 6px; width: max-content; max-width: calc(100% - 32px); padding: 7px; border: 1px solid var(--line); border-radius: 9px; background: var(--surface); color: var(--ink); box-shadow: 0 6px 25px #0002; font: .86rem/1.5 var(--sans); }
-.anthology-selection button, .anthology-note-popup button { min-height: 44px; padding: 8px 14px; border: 1px solid var(--line); border-radius: 5px; background: var(--surface); color: var(--accent); font: inherit; }
+.anthology-selection button { min-height: 44px; padding: 8px 14px; border: 1px solid var(--line); border-radius: 5px; background: var(--surface); color: var(--accent); font: inherit; }
 .anthology-selection small { margin-left: 5px; color: var(--muted); font-size: .68rem; }
 .anthology-selection-status:empty { display: none; }
 .anthology-selection-status { padding-inline: 8px; font-size: .75rem; color: var(--muted); }
-.anthology-note-popup { position: fixed; z-index: 25; bottom: max(20px, env(safe-area-inset-bottom)); left: 50%; transform: translateX(-50%); width: min(460px, calc(100% - 32px)); max-height: 55vh; overflow-y: auto; overscroll-behavior: contain; padding: 22px; background: var(--surface); color: var(--ink); border: 1px solid var(--line); border-radius: 12px; box-shadow: 0 10px 45px #0003; font: .88rem/1.85 var(--sans); }
-.anthology-note-popup header { display: flex; align-items: center; justify-content: space-between; gap: 18px; }
-.anthology-note-popup h2 { margin: 0; font: 550 1.15rem/1.5 var(--serif); }
-.anthology-note-popup p { margin: 12px 0; }
-.anthology-note-popup a { display: inline-block; padding-block: 8px; color: var(--accent); }
-.anthology-note-popup:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }

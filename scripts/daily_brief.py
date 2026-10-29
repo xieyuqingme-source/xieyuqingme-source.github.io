@@ -6,7 +6,7 @@ import json
 import re
 from urllib.parse import unquote, urlsplit
 from english_corner import (public_url, public_domain, word_count, text_hash, public_text,
-                            exact_fields, source_path, iso_date)
+                            exact_fields, source_path, iso_date, RESERVED_SLUGS)
 
 
 LANGUAGES = {"zh-CN", "en"}
@@ -185,7 +185,9 @@ def validate_english_quotes(data, card_routes=None, today=None):
     seen = set()
     for item in data["quotes"]:
         for key in required - {"translation_source", "first_published", "author_died", "url"}:
-            public_text(item[key], 2000)
+            public_text(item[key], 2000, multiline=key in {"text", "translation"})
+        validate_english_quote_display(item["text"])
+        validate_english_quote_lines(item["translation"])
         if len(item["text"]) > 300 or word_count(item["text"]) > 45 or len(item["translation"]) > 120 or len(item["note"]) > 160:
             raise ValueError("English quotations and notes must remain short.")
         normalized = re.sub(r"[\W_]+", "", item["text"]).casefold()
@@ -209,11 +211,23 @@ def validate_english_quotes(data, card_routes=None, today=None):
         else:
             raise ValueError("Unknown quotation translation source.")
         if "related" in item:
-            if not isinstance(item["related"], str) or not re.fullmatch(r"/english/[a-z][a-z0-9-]{1,63}/", item["related"]) or item["related"] == "/english/tools/":
-                raise ValueError("Quotation extensions must name an English Corner card.")
+            if not isinstance(item["related"], str) or not re.fullmatch(r"/english/[a-z][a-z0-9-]{1,63}/", item["related"]) or item["related"].split("/")[2] in RESERVED_SLUGS:
+                raise ValueError("Quotation extensions must name a Learn English card.")
             if card_routes is not None and item["related"] not in card_routes:
                 raise ValueError("Quotation related reading must exist.")
     return data
+
+
+def validate_english_quote_lines(text):
+    if "\r" in text or "\t" in text or len(text.split("\n")) > 4 or any(not line.strip() for line in text.split("\n")):
+        raise ValueError("Quotations use at most four nonempty LF lines, without tabs or CR.")
+
+
+def validate_english_quote_display(text):
+    validate_english_quote_lines(text)
+    if (text != text.strip() or not re.match(r'^[A-Z“‘"\'…]', text)
+            or not re.search(r'[.!?…“”‘’"\']$', text)):
+        raise ValueError("A quotation needs a clear sentence boundary and at most four verse lines.")
 
 
 def load_english_quotes(root, card_routes, today=None):
@@ -225,7 +239,7 @@ def load_english_quotes(root, card_routes, today=None):
         raise ValueError("English quotation review must use version 1.")
     records = {}
     for record in review["quotes"]:
-        exact_fields(record, ("id", "text_sha256_lf", "source_url", "locator", "checked_on", "method", "source_sha256_lf", "misattribution_check", "public_domain"), ("bibliography_urls",))
+        exact_fields(record, ("id", "text_sha256_lf", "source_url", "locator", "checked_on", "method", "source_sha256_lf", "misattribution_check", "public_domain"), ("bibliography_urls", "source_text", "display_note"))
         if record["id"] in records:
             raise ValueError("Duplicate quotation review ID.")
         records[record["id"]] = record
@@ -239,10 +253,18 @@ def load_english_quotes(root, card_routes, today=None):
             public_url(url)
         exact_fields(record["public_domain"], ("first_published", "author_died", "basis"))
         public_text(record["public_domain"]["basis"], 2000)
+        if "source_text" in record:
+            public_text(record["source_text"], 2000, multiline=True)
+        if "display_note" in record:
+            public_text(record["display_note"], 500)
     if set(records) != {q["id"] for q in data["quotes"]}:
         raise ValueError("Every English quotation requires exactly one source review.")
     for item in data["quotes"]:
         record = records[item["id"]]
+        if "source_text" in record:
+            normalize = lambda value: re.sub(r"\s+", " ", value).strip(" …")
+            if normalize(record["source_text"]) != normalize(item["text"]):
+                raise ValueError("Display may add boundary ellipses and verse spacing, not rewrite source words.")
         if (record["text_sha256_lf"] != text_hash(item["text"]) or record["source_url"] != item["url"]
                 or any(record["public_domain"][key] != item[key] for key in ("first_published", "author_died"))):
             raise ValueError("English quotation changed: review its original and evidence again.")
@@ -260,14 +282,14 @@ def render_english_quote(data, language="zh-CN", today=None):
     data = validate_english_quotes(data, today=today)
     day = (today or datetime.now(CHINA).date()) - date(1970,1,1)
     item = data["quotes"][day.days % len(data["quotes"])]
-    title, button, note, entry = (("English quotations", "Another quote", "Quotation notes", "English Corner (in Chinese) →") if language == "en" else ("英语名句", "换一句", "引文说明", "去英语角看看 →"))
+    title, button, note, entry = (("English quotations", "Another quote", "Quotation notes", "Learn English (in Chinese) →") if language == "en" else ("英语名句", "换一句", "引文说明", "去学英语 →"))
     source = item["author_zh"] + "（" + item["author_en"] + "） · " + item["work_zh"] + item["locator_zh"]
     related = item.get("related")
-    link = f'<a id="english-quote-related" href="{escape(related,quote=True)}" lang="zh-CN">延伸阅读：英语角相关卡片 →</a>' if related else '<a id="english-quote-related" hidden></a>'
+    link = f'<a id="english-quote-related" href="{escape(related,quote=True)}" lang="zh-CN">延伸阅读：学英语相关卡片 →</a>' if related else '<a id="english-quote-related" hidden></a>'
     published = f'<a id="english-quote-translation-source" href="{escape(item["translation_source"]["url"],quote=True)}" target="_blank" rel="noopener noreferrer">译文版本 ↗</a>' if item["translation_source"]["type"] == "published" else '<a id="english-quote-translation-source" hidden></a>'
     return (f'<article class="yl-daily-card yl-quote--en" id="english-quotation-card" aria-labelledby="english-quotation-title"><div class="reading-heading"><h3 id="english-quotation-title">{title}</h3><button class="quote-change" id="english-quote-button" type="button" aria-label="{button} · {title}" hidden>{button}</button></div>'
-            f'<blockquote id="english-quote" data-quote-id="{item["id"]}"><p class="yl-quote" id="english-quote-text" lang="en">{escape(item["text"])}</p><p class="yl-quote-translation" id="english-quote-translation" lang="zh-CN">{escape(item["translation"])}</p><p class="yl-small yl-quote-source" id="english-quote-source" lang="zh-CN"><a id="english-quote-work" href="{escape(item["url"],quote=True)}" target="_blank" rel="noopener noreferrer" hreflang="en">{escape(source)} ↗</a></p></blockquote>'
-            f'<div class="yl-reading-footer"><details class="quote-note"><summary>{note}</summary><p id="english-quote-note" lang="zh-CN">{escape(english_quote_note(item))}</p>{published}{link}</details><a class="yl-corner-entry" href="/english/">{entry}</a></div></article>')
+            f'<blockquote id="english-quote" data-quote-id="{item["id"]}"><p class="yl-quote" id="english-quote-text" lang="en">{escape(item["text"]).replace(chr(10),"<br>")}</p><p class="yl-quote-translation" id="english-quote-translation" lang="zh-CN">{escape(item["translation"]).replace(chr(10),"<br>")}</p><p class="yl-small yl-quote-source" id="english-quote-source" lang="zh-CN"><a id="english-quote-work" href="{escape(item["url"],quote=True)}" target="_blank" rel="noopener noreferrer" hreflang="en">{escape(source)} ↗</a></p></blockquote>'
+            f'<div class="yl-reading-footer"><details class="quote-note"><summary>{note}</summary><p id="english-quote-note" lang="zh-CN">{escape(english_quote_note(item))}</p>{published}{link}<p><a id="english-quote-library-link" href="/english/quotes/">{"Browse quotations (in Chinese) →" if language == "en" else "名句库 →"}</a></p></details><a class="yl-corner-entry" href="/english/">{entry}</a></div></article>')
 
 
 def _collection(data, required, optional=frozenset(), *, minimum=1):

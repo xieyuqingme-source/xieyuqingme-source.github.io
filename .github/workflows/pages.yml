@@ -97,9 +97,20 @@ jobs:
           python scripts/test_anthology_i18n.py
           node --check home/assets/anthology-selection.js
           node scripts/test_anthology_selection.cjs
-      - name: Check English Corner and exact number conversion
+      - name: Check Learn English and exact number conversion
         run: |
           python scripts/test_english_corner.py
+          python scripts/test_english_v2.py
+          python scripts/test_english_quiz.py
+          node --test scripts/test_english_play.cjs
+          node --test scripts/test_english_quotes.cjs
+          node --test scripts/test_english_word_map.cjs
+          node --check home/assets/english-word-map.js
+          python scripts/test_reading_annotations.py
+          node --test scripts/test_reading_annotations.cjs
+          node --test scripts/test_english_speech.cjs
+          node --check home/assets/reading-annotations.js
+          node --check home/assets/english-speech.js
           node scripts/test_english_numbers.cjs
           node --check home/assets/english-corner.js
           node --check home/assets/english-numbers.js
@@ -111,6 +122,8 @@ jobs:
         run: |
           node --test scripts/test_ranking_logic.cjs
           node --test scripts/test_ranking_i18n.cjs
+          node --test scripts/test_ranking_template_storage.cjs
+          node --test scripts/test_ranking_dark.cjs
       - name: Check local image normalization and crop geometry
         run: node --test scripts/test_ranking_images.cjs
       - name: Check theme preference and system fallback

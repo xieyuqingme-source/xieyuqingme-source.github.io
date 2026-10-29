@@ -1,0 +1,529 @@
+{
+  "version": 1,
+  "questions": [
+    {
+      "id": "etym-ketchup-tomato",
+      "mode": "etymology",
+      "text": "ketchup 从进入英语开始，就专门指今天这种番茄酱。",
+      "choices": [
+        "真",
+        "假",
+        "存疑",
+        "部分正确"
+      ],
+      "answer": "假",
+      "explanation": "今天菜单上的 ketchup 通常指番茄酱，但这不是它全部的历史。卡片的词源资料还记有鱼汁、蘑菇、核桃等不同配方。一个名称可以留下来，里面的原料却改变；不能把现代最熟悉的意思，直接当成这个词从来只有的意思。",
+      "card": "ketchup",
+      "sources": [
+        {
+          "label": "Merriam-Webster：ketchup",
+          "url": "https://www.merriam-webster.com/dictionary/ketchup",
+          "checked_on": "2026-10-29"
+        },
+        {
+          "label": "Etymonline：ketchup",
+          "url": "https://www.etymonline.com/word/ketchup",
+          "checked_on": "2026-10-29"
+        }
+      ]
+    },
+    {
+      "id": "etym-tea-sea-land",
+      "mode": "etymology",
+      "text": "茶名 te/cha 的分布与贸易路线有关，因此“海路都用 tea、陆路都用 cha”是一条没有例外的规律。",
+      "choices": [
+        "真",
+        "假",
+        "存疑",
+        "部分正确"
+      ],
+      "answer": "部分正确",
+      "explanation": "贸易路线确实能帮助理解许多茶名的分布，这部分有语言地图资料支持；绝对化的海陆口诀却不成立。WALS 提到葡萄牙人经澳门贸易，葡萄牙语仍用 chá。可靠的概括可以指出主要联系，同时给例外留位置，不必把它写成无条件的规律。",
+      "card": "tea-and-cha",
+      "sources": [
+        {
+          "label": "WALS Online 第138章：Tea（Östen Dahl）",
+          "url": "https://wals.info/chapter/138",
+          "checked_on": "2026-10-29"
+        }
+      ]
+    },
+    {
+      "id": "etym-gung-ho-cooperative",
+      "mode": "etymology",
+      "text": "gung-ho 的身世与中国工业合作社简称“工合”以及后来采用它的美军口号有关。",
+      "choices": [
+        "真",
+        "假",
+        "存疑",
+        "部分正确"
+      ],
+      "answer": "真",
+      "explanation": "韦氏词典把这个表达连到“工合”，即中国工业合作社的简称，并说明部分美国海军陆战队采用它作口号。后来它在日常英语中形容干劲十足。组织简称、军事口号、日常形容词是这段传播中的不同位置，不能只看今天的意思猜它原来属于哪个领域。",
+      "card": "gung-ho",
+      "sources": [
+        {
+          "label": "Merriam-Webster：gung ho",
+          "url": "https://www.merriam-webster.com/dictionary/gung%20ho",
+          "checked_on": "2026-10-29"
+        }
+      ]
+    },
+    {
+      "id": "etym-kowtow-literal",
+      "mode": "etymology",
+      "text": "kowtow 来自“叩头”，所以现在的英语里每一次使用它，都表示真的跪下磕头。",
+      "choices": [
+        "真",
+        "假",
+        "存疑",
+        "部分正确"
+      ],
+      "answer": "假",
+      "explanation": "词源能解释一个词从哪里来，却不能规定它永远只剩下最早的动作。kowtow 既保留跪拜义，也能指卑躬屈膝、迎合权势。卡片里的 kowtow to pressure 说的是向压力低头，通常没有人真的跪在地上；理解时要把词源与句中现义分开。",
+      "card": "kowtow",
+      "sources": [
+        {
+          "label": "Merriam-Webster：kowtow",
+          "url": "https://www.merriam-webster.com/dictionary/kowtow",
+          "checked_on": "2026-10-29"
+        }
+      ]
+    },
+    {
+      "id": "etym-tycoon-new-field",
+      "mode": "etymology",
+      "text": "tycoon 较早与日本的政治称谓有关，后来才把这种权势色彩带到商业大亨身上。",
+      "choices": [
+        "真",
+        "假",
+        "存疑",
+        "部分正确"
+      ],
+      "answer": "真",
+      "explanation": "韦氏词典保留了 tycoon 的日本将军义，词源则列日语 taikun。今天熟悉的商业大亨义展示了领域的变化：词从政治称谓走进商业报道，仍强调财富、权势和影响力。它不是某种普通职业的名称，也不能只因现代商界常用，就猜它原本属于商界。",
+      "card": "tycoon",
+      "sources": [
+        {
+          "label": "Merriam-Webster：tycoon",
+          "url": "https://www.merriam-webster.com/dictionary/tycoon",
+          "checked_on": "2026-10-29"
+        },
+        {
+          "label": "Etymonline：tycoon",
+          "url": "https://www.etymonline.com/word/tycoon",
+          "checked_on": "2026-10-29"
+        }
+      ]
+    },
+    {
+      "id": "etym-amok-running",
+      "mode": "etymology",
+      "text": "run amok 里的 run 必须按字面理解，因此这个短语只能形容正在跑步的人。",
+      "choices": [
+        "真",
+        "假",
+        "存疑",
+        "部分正确"
+      ],
+      "answer": "假",
+      "explanation": "卡片说明，run amok 既可能出现在失控暴力的严重情境里，也能形容事物不受约束、乱了套。谣言失控传播不需要长出腿，孩子闹翻大厅也不等于每次都涉及暴力。读一个固定搭配时，要看整体用法，不能把其中一个熟词的字面意思当作全部解释。",
+      "card": "amok",
+      "sources": [
+        {
+          "label": "Merriam-Webster：amok",
+          "url": "https://www.merriam-webster.com/dictionary/amok",
+          "checked_on": "2026-10-29"
+        }
+      ]
+    },
+    {
+      "id": "etym-serendipity-luck",
+      "mode": "etymology",
+      "text": "只要是一件幸运的事，就一定能准确地叫 serendipity。",
+      "choices": [
+        "真",
+        "假",
+        "存疑",
+        "部分正确"
+      ],
+      "answer": "假",
+      "explanation": "serendipity 不只是笼统的幸运，还强调没有刻意寻找，却意外发现了有价值或令人愉快的东西。卡片用找教材时意外发现好书来说明这一层。单纯抽奖中奖当然可以叫 luck；如果没有偶然发现这一层意思，就不必为了使用一个长词而把两者完全等同。",
+      "card": "serendipity",
+      "sources": [
+        {
+          "label": "Merriam-Webster：serendipity",
+          "url": "https://www.merriam-webster.com/dictionary/serendipity",
+          "checked_on": "2026-10-29"
+        }
+      ]
+    },
+    {
+      "id": "etym-long-time-no-see-route",
+      "mode": "etymology",
+      "text": "long time no see 是由汉语“好久不见”沿一条唯一的路线传入英语。",
+      "choices": [
+        "真",
+        "假",
+        "存疑",
+        "部分正确"
+      ],
+      "answer": "存疑",
+      "explanation": "表达与汉语的相似很值得研究，但还不足以证明唯一路线。卡片所引的语言学家大卫·克里斯特尔同时提到北美相关书面材料和汉英接触情境，并认为来源未能完全确定。旧记录证明某时有人这样写，不能自动证明某个群体最先创造，更不该把仍有争论的路径变成唯一答案。",
+      "card": "long-time-no-see",
+      "sources": [
+        {
+          "label": "David Crystal：On long time no see",
+          "url": "https://david-crystal.blogspot.com/2010/07/on-long-time-no-see.html",
+          "checked_on": "2026-10-29"
+        }
+      ]
+    },
+    {
+      "id": "etym-sos-backronym",
+      "mode": "etymology",
+      "text": "SOS 最初就是 Save Our Souls 这句英语的首字母缩写，后来才拿来设计摩尔斯信号。",
+      "choices": [
+        "真",
+        "假",
+        "存疑",
+        "部分正确"
+      ],
+      "answer": "假",
+      "explanation": "牛津学习词典把 Save Our Souls 的展开式列作民间词源；字母的选择与摩尔斯码容易发送和辨认有关。卡片提醒：救援信号先有了，贴切的英语解释是后来配上的。它可以帮助记忆，但好用的记忆法和真实的命名经过不是同一件事。",
+      "card": "sos",
+      "sources": [
+        {
+          "label": "Oxford Learner’s Dictionaries：SOS，Word Origin",
+          "url": "https://www.oxfordlearnersdictionaries.com/definition/english/sos",
+          "checked_on": "2026-10-29"
+        }
+      ]
+    },
+    {
+      "id": "etym-posh-cabins",
+      "mode": "etymology",
+      "text": "posh 的词源是远洋船舱安排 Port Out, Starboard Home 的首字母。",
+      "choices": [
+        "真",
+        "假",
+        "存疑",
+        "部分正确"
+      ],
+      "answer": "存疑",
+      "explanation": "这套船舱故事很流行，却不能因此当作已经坐实的来源。韦氏词典把 posh 标为来源不明，Etymonline 也说没有证据支持常见的首字母解释。本题保留存疑，是不把一个缺少早期凭据的故事写成事实；并不是说多转述几次，就能补上缺失的历史材料。",
+      "card": "posh",
+      "sources": [
+        {
+          "label": "Merriam-Webster：posh",
+          "url": "https://www.merriam-webster.com/dictionary/posh",
+          "checked_on": "2026-10-29"
+        },
+        {
+          "label": "Etymonline：posh",
+          "url": "https://www.etymonline.com/word/posh",
+          "checked_on": "2026-10-29"
+        }
+      ]
+    },
+    {
+      "id": "etym-ok-election",
+      "mode": "etymology",
+      "text": "因为1840年 Old Kinderhook 竞选口号使用了 O.K.，所以它就是这两个字母最早出现的原因。",
+      "choices": [
+        "真",
+        "假",
+        "存疑",
+        "部分正确"
+      ],
+      "answer": "假",
+      "explanation": "卡片所引考证把波士顿报纸中的 O.K. 记录追到1839年，比1840年的竞选用法更早。较有根据的解释是故意把 all correct 拼成 oll korrect 的文字玩笑。竞选可以帮助一个表达传播，却不能倒过来成为它此前已经出现的原因；时间先后在这里很关键。",
+      "card": "ok",
+      "sources": [
+        {
+          "label": "Merriam-Webster：OK",
+          "url": "https://www.merriam-webster.com/dictionary/OK",
+          "checked_on": "2026-10-29"
+        },
+        {
+          "label": "Cambridge Dictionary Blog：It’s All OK（里德考证与传播）",
+          "url": "https://dictionaryblog.cambridge.org/2011/02/11/its-all-ok/",
+          "checked_on": "2026-10-29"
+        }
+      ]
+    },
+    {
+      "id": "etym-salary-salt-pay",
+      "mode": "etymology",
+      "text": "salary 的词族确实与盐有关，因此可以断言古罗马士兵一律直接领盐当工资。",
+      "choices": [
+        "真",
+        "假",
+        "存疑",
+        "部分正确"
+      ],
+      "answer": "部分正确",
+      "explanation": "词形联系有依据：salary 的拉丁语祖先 salarium 与 sal“盐”同属一个词族。但从词根直接跳到军饷发放制度，证据还不够。韦氏词典甚至指出，常见的购盐津贴解释也缺乏古代文献根据。联系盐这一半成立，具体怎样发工资却不能靠一个词替史料补全。",
+      "card": "salary-salt",
+      "sources": [
+        {
+          "label": "Merriam-Webster：salary",
+          "url": "https://www.merriam-webster.com/dictionary/salary",
+          "checked_on": "2026-10-29"
+        }
+      ]
+    },
+    {
+      "id": "origin-ketchup-min",
+      "mode": "origins",
+      "text": "韦氏词典列作 ketchup 较早来源的 kôe-chiap / kê-chiap，属于哪一种语言？",
+      "choices": [
+        "闽南语",
+        "日语",
+        "荷兰语",
+        "阿拉伯语"
+      ],
+      "answer": "闽南语",
+      "explanation": "这里问的是较早的来源词形，不是现代 ketchup 已经属于哪种语言。韦氏词典把这两个词形分别连到厦门、漳州一带的闽南语，解释其构成与腌鱼或贝类汁液有关。它同时保留直接借入或经马来语中转两种路径，认出祖先形式并不等于已经证明唯一中转路线。",
+      "card": "ketchup",
+      "sources": [
+        {
+          "label": "Merriam-Webster：ketchup",
+          "url": "https://www.merriam-webster.com/dictionary/ketchup",
+          "checked_on": "2026-10-29"
+        }
+      ]
+    },
+    {
+      "id": "origin-ketchup-possible-malay",
+      "mode": "origins",
+      "text": "词源研究认为 kecap 可能是 ketchup 进入英语的一个中介。kecap 是哪种语言的词形？",
+      "choices": [
+        "马来语",
+        "法语",
+        "古英语",
+        "日语"
+      ],
+      "answer": "马来语",
+      "explanation": "本题特意保留“可能中介”，没有把完整传播路线改成定论。韦氏词典的说明是可以直接借入，也可能经过马来语 kecap；因此，kecap 这个阶段属于马来语，与是否每一条实际传播都经过它，是两种不同的问题。把路径的不确定性写在题干里，才能准确地作答。",
+      "card": "ketchup",
+      "sources": [
+        {
+          "label": "Merriam-Webster：ketchup",
+          "url": "https://www.merriam-webster.com/dictionary/ketchup",
+          "checked_on": "2026-10-29"
+        }
+      ]
+    },
+    {
+      "id": "origin-tea-dutch-stage",
+      "mode": "origins",
+      "text": "茶名传播中的中转形式 thee，属于哪一种语言？",
+      "choices": [
+        "荷兰语",
+        "葡萄牙语",
+        "拉丁语",
+        "马来语"
+      ],
+      "answer": "荷兰语",
+      "explanation": "WALS 的茶词章节说，荷兰商人与厦门的贸易联系，使他们采用了 thee 这个词形，再把它带到欧洲许多地区。本题定位在中转站，不是问茶名最终从何而来，也不是问茶叶植物产于何处。商品、读音和借词阶段可以放在一起看，却不能把它们混成一个问题。",
+      "card": "tea-and-cha",
+      "sources": [
+        {
+          "label": "WALS Online 第138章：Tea（Östen Dahl）",
+          "url": "https://wals.info/chapter/138",
+          "checked_on": "2026-10-29"
+        }
+      ]
+    },
+    {
+      "id": "origin-tea-min-stage",
+      "mode": "origins",
+      "text": "茶名 te 一系，起源于汉语中的哪一种地方语言？",
+      "choices": [
+        "闽南语",
+        "粤语",
+        "日语",
+        "荷兰语"
+      ],
+      "answer": "闽南语",
+      "explanation": "WALS 把许多茶名区分为 cha 一系、闽南语 te 一系与其他来源，并说明差异在汉语内部已经存在。卡片所列 te 的位置就是这个较早阶段；荷兰语 thee 是后面另一个位置。问地方语言时，不能把欧洲的中转语言或现代英语 tea 反过来当作祖先。",
+      "card": "tea-and-cha",
+      "sources": [
+        {
+          "label": "WALS Online 第138章：Tea（Östen Dahl）",
+          "url": "https://wals.info/chapter/138",
+          "checked_on": "2026-10-29"
+        }
+      ]
+    },
+    {
+      "id": "origin-portuguese-cha",
+      "mode": "origins",
+      "text": "葡萄牙语 chá 的词源，联系着哪一种汉语地方语言的 cha？",
+      "choices": [
+        "粤语",
+        "闽南语",
+        "阿拉伯语",
+        "拉丁语"
+      ],
+      "answer": "粤语",
+      "explanation": "WALS 在说明海陆口诀的例外时，写到葡萄牙人的贸易路线经过澳门，因此葡萄牙语采用 chá，并把它连到粤语 cha。它和荷兰商人与厦门之间的 te/thee 联系是不同的一路。这里只核对这一条明确写出的联系，不把所有 cha 都说成来自同一个现代地方。",
+      "card": "tea-and-cha",
+      "sources": [
+        {
+          "label": "WALS Online 第138章：Tea（Östen Dahl）",
+          "url": "https://wals.info/chapter/138",
+          "checked_on": "2026-10-29"
+        }
+      ]
+    },
+    {
+      "id": "origin-gung-ho-chinese",
+      "mode": "origins",
+      "text": "英语 gung-ho 所借入的“工合”这个简称，来自哪种语言？",
+      "choices": [
+        "汉语",
+        "日语",
+        "马来语",
+        "荷兰语"
+      ],
+      "answer": "汉语",
+      "explanation": "韦氏词典将 gung-ho 连到汉语“工合”，并具体说明它是中国工业合作社名称的简称。后来采用它的美国军队是传播中的一个阶段，不能因为在那里出现了醒目的口号，就把这个较早词形的语言来源也改成英语。借入语言、使用地点与今天的词性要分别辨认。",
+      "card": "gung-ho",
+      "sources": [
+        {
+          "label": "Merriam-Webster：gung ho",
+          "url": "https://www.merriam-webster.com/dictionary/gung%20ho",
+          "checked_on": "2026-10-29"
+        }
+      ]
+    },
+    {
+      "id": "origin-kowtow-chinese",
+      "mode": "origins",
+      "text": "kowtow 的来源形式 kòutóu（叩头），属于哪种语言？",
+      "choices": [
+        "汉语",
+        "法语",
+        "古英语",
+        "马来语"
+      ],
+      "answer": "汉语",
+      "explanation": "韦氏词典把 kowtow 的名词、动词都连到汉语 kòutóu，并分析为与“叩”和“头”有关的构成。本题问来源语言，所以不受今天句子里究竟说实际跪拜还是迎合权势的影响。同一个借词可以保留身体动作，也可以发展出比喻义；这些变化不会把来源词形换一种语言。",
+      "card": "kowtow",
+      "sources": [
+        {
+          "label": "Merriam-Webster：kowtow",
+          "url": "https://www.merriam-webster.com/dictionary/kowtow",
+          "checked_on": "2026-10-29"
+        }
+      ]
+    },
+    {
+      "id": "origin-tycoon-japanese",
+      "mode": "origins",
+      "text": "英语 tycoon 借入的 taikun（大君），属于哪一种语言？",
+      "choices": [
+        "日语",
+        "汉语",
+        "荷兰语",
+        "波斯语"
+      ],
+      "answer": "日语",
+      "explanation": "韦氏词典在词源栏列日语 taikun，儿童释义还明确联系日本将军。汉字写作“大君”，不等于英语在这一步直接从现代汉语借入。判断具体的借词阶段，需要看资料指明的语言和读音，而不能只凭几个汉字；后来的商业大亨义又是另一个发展阶段。",
+      "card": "tycoon",
+      "sources": [
+        {
+          "label": "Merriam-Webster：tycoon",
+          "url": "https://www.merriam-webster.com/dictionary/tycoon",
+          "checked_on": "2026-10-29"
+        }
+      ]
+    },
+    {
+      "id": "origin-amok-malay",
+      "mode": "origins",
+      "text": "韦氏词典把英语 amok 的名词来源连到哪种语言的 amok？",
+      "choices": [
+        "马来语",
+        "日语",
+        "拉丁语",
+        "荷兰语"
+      ],
+      "answer": "马来语",
+      "explanation": "词源栏把 amok 的名词列为从马来语借入，并把英语副词、形容词用法和这个名词联系起来。本题只问这一来源，不是给现代使用者划定国籍。今天在英语句子里形容失控或不受约束的活动，也不意味着句中人物一定来自那个借词最早接触的地区。",
+      "card": "amok",
+      "sources": [
+        {
+          "label": "Merriam-Webster：amok",
+          "url": "https://www.merriam-webster.com/dictionary/amok",
+          "checked_on": "2026-10-29"
+        }
+      ]
+    },
+    {
+      "id": "origin-wednesday-old-english",
+      "mode": "origins",
+      "text": "Wednesday 的祖先形式 wōdnesdæg，属于哪个语言阶段？",
+      "choices": [
+        "古英语",
+        "现代法语",
+        "拉丁语",
+        "马来语"
+      ],
+      "answer": "古英语",
+      "explanation": "韦氏词典把 Wednesday 经中古英语追到古英语 wōdnesdæg，字面与 Woden 之日有关。Woden 又与北欧传统中的 Odin 相联系，但神名有亲缘联系，不等于这个具体词形就是从某种现代北欧语言直接搬来的。题干给出了祖先的拼写，答案也要定位到这一阶段。",
+      "card": "weekdays",
+      "sources": [
+        {
+          "label": "Merriam-Webster：Wednesday",
+          "url": "https://www.merriam-webster.com/dictionary/Wednesday",
+          "checked_on": "2026-10-29"
+        }
+      ]
+    },
+    {
+      "id": "origin-september-septem",
+      "mode": "origins",
+      "text": "September 名字里表示“七”的 septem，来自哪种语言？",
+      "choices": [
+        "拉丁语",
+        "古英语",
+        "日语",
+        "荷兰语"
+      ],
+      "answer": "拉丁语",
+      "explanation": "韦氏词典把 September 的名称追到拉丁语 septem“七”，并用古罗马以三月起算的旧编号说明联系。本题问的是这个数词，不是让人把现代九月改成七月。古老名称可以保留下来，历法位置却已经变化；认出词根与正确使用今天的月份，是可以同时做到的。",
+      "card": "september",
+      "sources": [
+        {
+          "label": "Merriam-Webster：September",
+          "url": "https://www.merriam-webster.com/dictionary/September",
+          "checked_on": "2026-10-29"
+        }
+      ]
+    },
+    {
+      "id": "origin-salary-salarium",
+      "mode": "origins",
+      "text": "salary 词史中表示公职或军职报酬的 salarium，属于哪种语言？",
+      "choices": [
+        "拉丁语",
+        "现代英语",
+        "马来语",
+        "日语"
+      ],
+      "answer": "拉丁语",
+      "explanation": "韦氏词典把 salarium 标为拉丁语，并说明英语还经过中古英语和早期法语等阶段。题干锁定的是 salarium，所以不能用某个更晚中转站来代替答案。这个词与盐的词族联系另有讨论，但认出语言来源，本身并不能证明古罗马实际用什么物品发军饷。",
+      "card": "salary-salt",
+      "sources": [
+        {
+          "label": "Merriam-Webster：salary",
+          "url": "https://www.merriam-webster.com/dictionary/salary",
+          "checked_on": "2026-10-29"
+        }
+      ]
+    }
+  ]
+}

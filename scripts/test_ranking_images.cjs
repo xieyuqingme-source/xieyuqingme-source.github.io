@@ -77,6 +77,15 @@ test('built-in image paths only allow known fixed local WebP assets', () => {
   assert.throws(() => Images.builtinPhotoPath('../hotpot', { '../hotpot': { photo: '/assets/foods/../hotpot.webp' } }), /路径无效/);
 });
 
+test('all book paintings can enter the crop editor only through their exact fixed local WebP paths', () => {
+  const Model=require('../home/assets/ranking-model.js');
+  assert.equal(Object.keys(Model.BOOK_ART).length,20);
+  for (const [key,entry] of Object.entries(Model.BOOK_ART)) assert.equal(Images.builtinPhotoPath(key),entry.photo);
+  for (const photo of ['https://example.com/book-moby-dick.webp','/assets/books/other.webp','/assets/books/../book-moby-dick.webp','/assets/books/book-moby-dick.svg','/assets/books/book-moby-dick.webp?x=1']) {
+    assert.throws(()=>Images.builtinPhotoPath('book-moby-dick',{'book-moby-dick':{photo}}),/路径无效/);
+  }
+});
+
 test('aborted image preparation never reads the file', async () => {
   const controller = new AbortController(); controller.abort(); let reads = 0;
   await assert.rejects(Images.prepareFile({ type: 'image/webp', size: 1, arrayBuffer: async () => { reads++; } }, { signal: controller.signal }), { name: 'AbortError' });

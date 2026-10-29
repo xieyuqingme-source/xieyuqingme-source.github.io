@@ -200,7 +200,7 @@ class DailyBriefReadingTests(unittest.TestCase):
 
 
 def english_fixture():
-    return {"version": 1, "quotes": [{"id": "fixture-quotation", "text": "All that glisters is not gold;",
+    return {"version": 1, "quotes": [{"id": "fixture-quotation", "text": "All that glisters is not gold.",
             "translation": "闪光的未必都是金子。", "translation_source": {"type": "site"},
             "author_zh": "莎士比亚", "author_en": "William Shakespeare", "work_zh": "《威尼斯商人》",
             "work_en": "The Merchant of Venice", "locator_zh": "第二幕第七场", "first_published": 1600,
@@ -288,18 +288,32 @@ class EnglishQuotationTests(unittest.TestCase):
             self.assertIn('hidden>',html)
             self.assertIn("本站译文（AI 辅助",html)
             self.assertIn('href="/english/"',html)
-        self.assertIn("English Corner (in Chinese)",render_english_quote(data,"en"))
+        self.assertIn("Learn English (in Chinese)",render_english_quote(data,"en"))
 
     def test_two_cards_remain_independent_and_html_is_escaped(self):
         classic=json.loads((ROOT/"home/daily-content.json").read_text(encoding="utf-8"))
         english=english_fixture()
-        english["quotes"][0]["text"]="<script>alert('test')</script>"
+        english["quotes"][0]["text"]="A <script>alert('test')</script>."
         html=render_brief_bottom(classic,{"english_quotes":english},today=date(2026,10,29))
         self.assertEqual(html.count('<article class="yl-daily-card'),2)
         self.assertIn("&lt;script&gt;",html)
         self.assertLess(html.index('id="daily-quotation-card"'),html.index('id="english-quotation-card"'))
         self.assertIn('id="daily-quote-button"',html)
         self.assertIn('id="english-quote-button"',html)
+
+    def test_server_rendering_keeps_reviewed_poetry_lines(self):
+        data=english_fixture()
+        data["quotes"][0].update(text="First line,\nSecond line.",translation="第一行，\n第二行。")
+        html=render_english_quote(data,today=date(2026,10,29))
+        self.assertIn("First line,<br>Second line.",html)
+        self.assertIn("第一行，<br>第二行。",html)
+
+    def test_quotation_whitespace_matches_browser_rules(self):
+        for field,value in [('text','A\tliteral sentence.'),('text','First line,\r\nSecond line.'),
+                            ('translation','甲\r\n乙'),('translation','甲\t乙'),('translation','甲\r乙\r丙\r丁\r戊')]:
+            data=english_fixture();data['quotes'][0][field]=value
+            with self.subTest(field=field,value=value),self.assertRaises(ValueError):
+                validate_english_quotes(data)
 
     def test_production_pool_review_and_author_diversity(self):
         from english_corner import load_english_corner

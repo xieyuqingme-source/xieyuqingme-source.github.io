@@ -268,3 +268,5 @@
 .today-news{margin-top:38px;padding-top:28px;border-top:1px solid var(--line)}
 .today-river .today-news .today-section-heading{margin-bottom:16px}
 @media(max-width:760px){.today-river .today-intro{grid-template-columns:minmax(0,1fr);gap:18px}.today-river .today-timeline{justify-self:start;max-width:440px}.today-river .today-intro h1{font-size:clamp(23px,5vw,31px)}}
+
+#english-quote-text,#english-quote-translation{white-space:pre-line}

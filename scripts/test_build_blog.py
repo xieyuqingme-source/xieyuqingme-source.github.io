@@ -179,7 +179,7 @@ class MarkdownRenderingTests(unittest.TestCase):
         self.assertEqual(primary.count('<a '), 8)
         self.assertIn('href="/anthology/"', primary)
         self.assertIn('href="/english/"', primary)
-        self.assertEqual(primary.count('class="nav-item'), 5)
+        self.assertEqual(primary.count('class="nav-item'), 4)
         self.assertEqual(primary.count('class="nav-group'), 3)
         header = page.split('<header', 1)[1].split('</header>', 1)[0]
         self.assertIn('class="header-tools"', header)

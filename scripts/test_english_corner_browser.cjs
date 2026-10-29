@@ -11,6 +11,8 @@ const {chromium} = require(path.join(os.homedir(),'.cache/codex-runtimes/codex-p
 const reading = require('../home/assets/daily-reading.js');
 const catalog = JSON.parse(fs.readFileSync(path.join(root,'english-corner/catalog.json'),'utf8'));
 const cards = catalog.cards.filter(card=>card.status==='published');
+const columns = catalog.columns.map(column=>column.id);
+const mistakes = cards.filter(card=>card.column==='mistakes');
 const english = JSON.parse(fs.readFileSync(path.join(root,'home/brief/english-quotes.json'),'utf8')).quotes;
 const classic = JSON.parse(fs.readFileSync(path.join(root,'home/daily-content.json'),'utf8')).quotes;
 const historyItems = JSON.parse(fs.readFileSync(path.join(root,'home/brief/history.json'),'utf8')).items;
@@ -62,6 +64,17 @@ async function ready(page) {
   await page.evaluate(()=>document.fonts.ready);
 }
 async function go(page,route) { await page.goto(origin+route);await ready(page); }
+async function publicNavigation(page,language='zh-CN') {
+  const entries=page.locator('.site-nav .nav-entry');
+  assert.equal(await entries.count(),4);
+  for(const label of await entries.allTextContents())assert.doesNotMatch(label,/学英语|英语角|Learn English|English Corner/);
+  const links=page.locator('.site-nav [data-nav-group="projects"] .nav-menu>a');
+  assert.equal(await links.count(),3);
+  assert.equal(await links.nth(2).getAttribute('href'),'/english/');
+  assert.equal((await links.nth(2).textContent()).trim(),language==='en'?'Learn English (中文)':'学英语');
+  assert.equal(await page.locator('.site-footer nav a[href="/english/"]').count(),1);
+  assert.equal((await page.locator('.site-footer nav a[href="/english/"]').textContent()).trim(),language==='en'?'Learn English (中文)':'学英语');
+}
 async function noOverflow(page) {
   const geometry = await page.evaluate(()=>({width:innerWidth,scroll:document.documentElement.scrollWidth,
     internal:[...document.querySelectorAll('main *')].filter(node=>node.getClientRects().length&&/^(?:auto|scroll)$/.test(getComputedStyle(node).overflowY)&&node.scrollHeight>node.clientHeight+2).map(node=>node.id||node.className),
@@ -69,10 +82,12 @@ async function noOverflow(page) {
   assert(geometry.scroll<=geometry.width+1,JSON.stringify(geometry));assert.deepEqual(geometry.internal,[]);assert.deepEqual(geometry.clipped,[]);return geometry;
 }
 async function quoteState(page) {
-  return page.evaluate(()=>({id:document.querySelector('#english-quote')?.dataset.quoteId,text:document.querySelector('#english-quote-text')?.textContent,
-    translation:document.querySelector('#english-quote-translation')?.textContent,source:document.querySelector('#english-quote-work')?.textContent,
+  return page.evaluate(()=>{
+    const lines=id=>{const node=document.getElementById(id)?.cloneNode(true);if(!node)return undefined;for(const br of node.querySelectorAll('br'))br.replaceWith('\n');return node.textContent;};
+    return {id:document.querySelector('#english-quote')?.dataset.quoteId,text:lines('english-quote-text'),
+    translation:lines('english-quote-translation'),source:document.querySelector('#english-quote-work')?.textContent,
     href:document.querySelector('#english-quote-work')?.getAttribute('href'),note:document.querySelector('#english-quote-note')?.textContent,
-    related:document.querySelector('#english-quote-related')?.getAttribute('href')}));
+    related:document.querySelector('#english-quote-related')?.getAttribute('href')};});
 }
 async function assertQuote(page,state) {
   const item=english.find(item=>item.id===state.id);assert(item,'Displayed quote belongs to reviewed corpus');
@@ -94,18 +109,47 @@ async function contrasts(page,selectors) {
   for(const sample of samples)assert(sample.ratio>=4.5,`${sample.selector}: contrast ${sample.ratio}`);
   return samples;
 }
-async function screenshot(page,name,selector=null) { const filename=name+'.png';if(selector)await page.locator(selector).screenshot({path:path.join(out,filename)});else await page.screenshot({path:path.join(out,filename),fullPage:true});report.screenshots.push(filename); }
+async function screenshot(page,name,selector=null,fullPage=true) { const filename=name+'.png';if(selector)await page.locator(selector).screenshot({path:path.join(out,filename)});else await page.screenshot({path:path.join(out,filename),fullPage});report.screenshots.push(filename); }
 
 (async()=>{try {
   browser=await chromium.launch({channel:'chrome',headless:true,args:['--disable-gpu','--disable-gpu-compositing'],downloadsPath:path.join(temporary,'downloads'),env:{...process.env,TEMP:temporary,TMP:temporary}});
   await check('reviewed routes are public, Chinese-first and in the main sitemap',async()=>{
-    assert(cards.length>=24);assert(english.length>=100);
+    assert(cards.length>=40);assert(english.length>=200);assert(mistakes.length>=8);
+    assert.deepEqual([...columns].sort(),['between','classics','mistakes','myths','words']);
     const xml=fs.readFileSync(path.join(site,'sitemap.xml'),'utf8');
     for(const route of ['/english/','/english/tools/numbers/',...cards.map(c=>'/english/'+c.slug+'/')]){
       assert(fs.existsSync(path.join(site,route,'index.html')),route);assert(xml.includes('https://xieyuqing.me'+route));
     }
     assert(!xml.includes('/en/english/'));assert(!fs.existsSync(path.join(site,'en/english')));
-    return {cards:cards.length,quotes:english.length,routes:cards.length+2};
+    return {cards:cards.length,quotes:english.length,columns:columns.length,mistakes:mistakes.length,routes:cards.length+2};
+  });
+  await check('Learn English has exact public metadata, a projects-menu entry and no author self-introduction in cards',async()=>{
+    const ctx=await context(),page=await ctx.newPage();try{
+      await go(page,'/english/');
+      assert.equal(await page.title(),'学英语');
+      assert.equal(await page.locator('meta[property="og:title"]').getAttribute('content'),'学英语');
+      assert.equal(await page.locator('.ec-intro h1').textContent(),'学英语');
+      assert.equal(await page.locator('.ec-intro .ec-lead').textContent(),'英语好啊，英语得学，我也想学英语。');
+      await publicNavigation(page);
+      const projects=page.locator('.site-nav [data-nav-group="projects"]');
+      assert(await projects.evaluate(node=>node.classList.contains('is-current')));
+      await projects.locator('summary').press('Enter');
+      assert(await projects.locator('.nav-menu>a').nth(2).isVisible());
+      await projects.locator('summary').press('Enter');
+      for(const card of cards){
+        await go(page,'/english/'+card.slug+'/');
+        const expected=card.title+' · 学英语';
+        assert.equal(await page.title(),expected);
+        assert.equal(await page.locator('meta[property="og:title"]').getAttribute('content'),expected);
+        const main=await page.locator('main').textContent();
+        assert.doesNotMatch(main,/中国钩子|钩子|本站编写|雨聊英语角|英语角|English Corner/);
+        // Literary first-person text and authored teaching examples remain legitimate.
+        assert.doesNotMatch(main,/谢雨卿|站长|我的文章|英语专业|补课/);
+        await publicNavigation(page);
+      }
+      await go(page,'/en/today/');await publicNavigation(page,'en');
+      return {cards:cards.length,indexTitle:'学英语',primaryEntries:4,projectsPosition:3};
+    }finally{await ctx.close();}
   });
   await check('keyboard filters preserve column and difficulty through detail and return links',async()=>{
     const ctx=await context(),page=await ctx.newPage();try{
@@ -127,12 +171,16 @@ async function screenshot(page,name,selector=null) { const filename=name+'.png';
       await page.locator('[data-ec-filter=all]').press('Enter');await page.locator('[data-ec-level=all]').press('Enter');
       assert.equal(await page.locator('[data-ec-row]:visible').count(),cards.length);
       await page.locator('[data-ec-column=classics]').press('Enter');assert.equal(new URL(page.url()).searchParams.get('column'),'classics');
-      return {visibleAfterReturn:expected.length};
+      await page.locator('[data-ec-filter=mistakes]').press('Enter');
+      assert.equal(new URL(page.url()).searchParams.get('column'),'mistakes');
+      assert.equal(await page.locator('[data-ec-row]:visible').count(),mistakes.length);
+      for(const row of await page.locator('[data-ec-row]:visible').all())assert.equal(await row.getAttribute('data-column'),'mistakes');
+      return {visibleAfterReturn:expected.length,mistakeFilterCount:mistakes.length};
     }finally{await ctx.close();}
   });
-  await check('all four card kinds render readable sources and contextual vocabulary',async()=>{
+  await check('all five card kinds render readable sources and contextual vocabulary',async()=>{
     const ctx=await context({width:390}),page=await ctx.newPage();try{
-      for(const column of ['words','classics','between','myths']){
+      for(const column of columns){
         const card=cards.find(c=>c.column===column);await go(page,'/english/'+card.slug+'/');
         assert.equal(await page.locator('h1').textContent(),card.title);assert.equal(await page.locator('main img').count(),0);
         assert.equal(await page.locator('.ec-sources ol a').count(),card.sources.length);
@@ -143,6 +191,27 @@ async function screenshot(page,name,selector=null) { const filename=name+'.png';
       }
     }finally{await ctx.close();}
   });
+  await check('all Common Mistakes cards keep four ordered reading sections and one notice of each kind',async()=>{
+    const ctx=await context({width:390}),page=await ctx.newPage();try{
+      for(const card of mistakes){
+        await go(page,'/english/'+card.slug+'/');
+        assert.deepEqual(await page.locator('main .ec-prose>.ec-section>h2,main>.ec-sources>h2').allTextContents(),['错句','对句','为什么','来源']);
+        assert.equal(await page.locator('main .ec-example-note').count(),1);
+        assert.equal(await page.locator('main .ec-prose>.ec-section').first().locator('.ec-example-note').textContent(),'例句为编写的示例。');
+        const main=await page.locator('main').textContent();
+        assert.equal((main.match(/AI 辅助/g)||[]).length,1);
+        assert.equal((main.match(/例句为编写的示例。/g)||[]).length,1);
+        assert.deepEqual(await page.locator('.ec-sources ol a').evaluateAll(nodes=>nodes.map(node=>node.getAttribute('href'))),card.sources.map(source=>source.url));
+        await noOverflow(page);
+      }
+      await go(page,'/english/bored-boring/');
+      assert((await page.locator('.ec-prose').textContent()).includes('这句话未必违反语法'));
+      await screenshot(page,'english-mistake-bored-boring-390-light');
+      await go(page,'/english/how-do-you-say/');
+      assert((await page.locator('.ec-prose').textContent()).includes('口语还可能省略'));
+      return {cards:mistakes.length,orderedSections:4,exampleNoticesPerPage:1,aiNoticesPerPage:1};
+    }finally{await ctx.close();}
+  });
   await check('number examples, exact fixed-point precision and accessible errors work by keyboard',async()=>{
     const ctx=await context({width:390}),page=await ctx.newPage();try{
       await go(page,'/english/tools/numbers/');assert.equal(await page.locator('#english-number-results').getAttribute('aria-live'),'polite');
@@ -151,7 +220,21 @@ async function screenshot(page,name,selector=null) { const filename=name+'.png';
         const rows=await page.locator('#english-number-results dd').allTextContents();assert.equal(rows[4],expected);assert.equal(await page.locator('#english-number-input').inputValue(),input);
       }
       await page.locator('#english-number-input').fill('9999999999999999.9999');
-      await page.waitForFunction(()=>document.querySelector('#english-number-results').textContent.includes('9,999,999,999,999,999.9999'));
+      await page.waitForFunction(()=>Array.from(document.querySelectorAll('#english-number-results dd:first-of-type .english-number-group b')).map(n=>n.textContent).join('')==='9999999999999999.9999');
+      await page.locator('#english-number-input').fill('12345678');
+      await page.waitForFunction(()=>document.querySelector('#english-number-results').textContent.includes('1234万5678'));
+      const definitions=page.locator('#english-number-results dd');
+      assert.deepEqual(await definitions.nth(0).locator('.english-number-group b').allTextContents(),['12','345','678']);
+      assert.deepEqual(await definitions.nth(0).locator('.english-number-group small').allTextContents(),['million','thousand','ones']);
+      assert.deepEqual(await definitions.nth(1).locator('.english-number-group b').allTextContents(),['1234','5678']);
+      assert.deepEqual(await definitions.nth(1).locator('.english-number-group small').allTextContents(),['万','个']);
+      assert.equal(await definitions.nth(2).evaluate(node=>{const copy=node.cloneNode(true);copy.querySelectorAll('small').forEach(child=>child.remove());return copy.textContent;}),'1234万5678');
+      assert.equal(await definitions.nth(2).locator('small.english-number-approx').textContent(),'约1235万');
+      for(const group of await definitions.locator('.english-number-group').all()){
+        const sizes=await group.evaluate(node=>({digits:parseFloat(getComputedStyle(node.querySelector('b')).fontSize),label:parseFloat(getComputedStyle(node.querySelector('small')).fontSize)}));
+        assert(sizes.label<sizes.digits);
+      }
+      await noOverflow(page);await screenshot(page,'english-numbers-12345678-390-light','main');
       await page.locator('#english-number-input').fill('１４億');
       await page.waitForFunction(()=>document.querySelector('#english-number-error').textContent.trim());
       assert.equal(await page.locator('#english-number-input').getAttribute('aria-invalid'),'true');
@@ -177,6 +260,24 @@ async function screenshot(page,name,selector=null) { const filename=name+'.png';
       return {english:seenEnglish.size,classic:seenClassic.size,buttons:sizes};
     }finally{await ctx.close();}
   });
+  await check('a real multiline poem keeps explicit line breaks after the change-quotation button',async()=>{
+    const poem=english.find(item=>item.text.includes('\n'));
+    assert(poem,'The reviewed corpus must contain an actual multiline poem.');
+    const ctx=await context({width:390}),page=await ctx.newPage();try{
+      await go(page,'/today/');
+      let changed=0,state;
+      do{await page.locator('#english-quote-button').press('Enter');changed++;state=await quoteState(page);}while(state.id!==poem.id&&changed<english.length*2);
+      assert.equal(state.id,poem.id);assert(changed>0,'Exercise the JavaScript change button rather than only the server opening quote.');
+      await assertQuote(page,state);
+      for(const [selector,expected]of [['#english-quote-text',poem.text],['#english-quote-translation',poem.translation]]){
+        const rendering=await page.locator(selector).evaluate(node=>({text:node.textContent,whiteSpace:getComputedStyle(node).whiteSpace}));
+        assert.equal(rendering.text,expected);assert.equal(rendering.whiteSpace,'pre-line');
+        if(expected.includes('\n'))assert.equal(rendering.text.split('\n').length,expected.split('\n').length);
+      }
+      await noOverflow(page);await screenshot(page,'reading-poem-zh-390-light','.today-reading');
+      return {id:poem.id,lines:poem.text.split('\n').length,buttonChanges:changed};
+    }finally{await ctx.close();}
+  });
   await check('language navigation retains both current quotations and their remaining shuffle order',async()=>{
     const ctx=await context(),page=await ctx.newPage();try{
       const day=reading.dayNumber(new Date(epoch)),englishDeck=reading.createDeck(english.length,day,()=>0.371),classicDeck=reading.createDeck(classic.length,day,()=>0.371);
@@ -188,7 +289,7 @@ async function screenshot(page,name,selector=null) { const filename=name+'.png';
       assert.deepEqual(await quoteState(page),englishBefore);assert.equal(await page.locator('#daily-quote').getAttribute('data-quote-id'),classicBefore);
       assert.equal(await page.locator('#english-quotation-title').textContent(),'English quotations');
       assert.equal(await page.locator('#english-quote-button').getAttribute('aria-label'),'Another quote · English quotations');
-      assert.equal(await page.locator('#english-quotation-card a[href="/english/"]').textContent(),'English Corner (in Chinese) →');
+      assert.equal(await page.locator('#english-quotation-card a[href="/english/"]').textContent(),'Learn English (in Chinese) →');
       await page.locator('#english-quote-button').click();englishDeck.next();assert.equal((await quoteState(page)).id,english[englishDeck.current()].id);
       await page.locator('#daily-quote-button').click();classicDeck.next();assert.equal(await page.locator('#daily-quote').getAttribute('data-quote-id'),classic[classicDeck.current()].id);
       await page.locator('.header-tools .site-language-switch').click();await page.waitForURL(url=>url.pathname==='/today/');await ready(page);
@@ -211,8 +312,11 @@ async function screenshot(page,name,selector=null) { const filename=name+'.png';
   await check('without JavaScript the whole directory, classic, number table and two daily quotations remain readable',async()=>{
     const ctx=await context({width:320,javascript:false}),page=await ctx.newPage();try{
       await page.goto(origin+'/english/');assert.equal(await page.locator('[data-ec-row]:visible').count(),cards.length);assert.equal(await page.locator('[data-ec-filters]').isVisible(),false);
-      for(const column of ['words','classics','between','myths'])assert.equal(await page.locator(`[data-ec-column="${column}"]`).getAttribute('href'),'#column-'+column);
+      for(const column of columns)assert.equal(await page.locator(`[data-ec-column="${column}"]`).getAttribute('href'),'#column-'+column);
       await noOverflow(page);await page.goto(origin+'/english/'+cards.find(c=>c.column==='classics').slug+'/');assert((await page.locator('.ec-original').innerText()).length>30);assert(await page.locator('.ec-vocabulary').isVisible());await noOverflow(page);
+      await page.goto(origin+'/english/'+mistakes[0].slug+'/');
+      assert.deepEqual(await page.locator('main .ec-prose>.ec-section>h2,main>.ec-sources>h2').allTextContents(),['错句','对句','为什么','来源']);
+      assert.equal(await page.locator('main .ec-example-note').count(),1);await noOverflow(page);
       await page.goto(origin+'/english/tools/numbers/');assert((await page.locator('noscript').innerText()).includes('转换需要 JavaScript'));assert.equal(await page.locator('main table tbody tr').count(),6);await noOverflow(page);
       let first;
       for(const route of ['/today/','/en/today/']){await page.goto(origin+route);const state=await quoteState(page);await assertQuote(page,state);if(first)assert.deepEqual(state,first);else first=state;assert.equal(await page.locator('#english-quote-button').isVisible(),false);assert.equal(await page.locator('#daily-quote-button').isVisible(),false);await noOverflow(page);}
@@ -262,17 +366,25 @@ async function screenshot(page,name,selector=null) { const filename=name+'.png';
     return {measured,events:expected.length,earliest:expected[0].year};
   });
   await check('five widths and the two current themes keep every new page readable and the header within the viewport',async()=>{
-    const routes=['/english/',...['words','classics','between','myths'].map(column=>'/english/'+cards.find(c=>c.column===column).slug+'/'),'/english/tools/numbers/','/today/','/en/today/'];
+    const routes=['/english/',...columns.map(column=>'/english/'+cards.find(c=>c.column===column).slug+'/'),'/english/tools/numbers/','/today/','/en/today/'];
     let layouts=0;
     for(const width of widths)for(const theme of ['light','dark']){
       console.log(`  layout ${width}px ${theme}`);const ctx=await context({width,theme}),page=await ctx.newPage();try{
         for(const route of routes){await go(page,route);await noOverflow(page);assert.equal(await page.locator('html').getAttribute('data-theme'),theme);assert.equal(await page.locator('html').getAttribute('data-skin'),null);
-          assert.equal(await page.locator('.site-nav .nav-entry').count(),5);
-          if(route.startsWith('/english/')){assert.equal(await page.locator('.site-language-switch').count(),0);assert(await page.locator('.site-nav a[href="/english/"]').isVisible());}
+          await publicNavigation(page,route.startsWith('/en/')?'en':'zh-CN');
+          if(route.startsWith('/english/'))assert.equal(await page.locator('.site-language-switch').count(),0);
+          if(route==='/english/'){
+            assert.equal(await page.locator('.ec-columns [data-ec-column]:visible').count(),5);
+            const bounds=await page.locator('.ec-columns [data-ec-column]').evaluateAll(nodes=>nodes.map(node=>{const box=node.getBoundingClientRect();return {left:box.left,right:box.right,width:box.width,heading:node.querySelector('h2').textContent};}));
+            for(const box of bounds)assert(box.width>0&&box.left>=-1&&box.right<=width+1,JSON.stringify(box));
+            assert(bounds.some(box=>box.heading==='别说错'));
+          }
           const samples=await contrasts(page,route.endsWith('/today/')?['#english-quote-translation','.yl-quote-source','.quote-change']:['.ec-lead','.ec-meta','.ec-row p','.ec-sources']);
           report.contrasts.push({route,width,theme,samples});report.layouts.push({route,width,theme});layouts++;
           if(width===1440&&theme==='light'&&route==='/today/')await screenshot(page,'reading-zh-1440-light','.today-reading');
           if(width===390&&route==='/english/'&&theme==='light')await screenshot(page,'english-index-390-light');
+          if([320,390].includes(width)&&route==='/english/'&&theme==='light')await screenshot(page,`english-index-${width}-fold-light`,null,false);
+          if(width===320&&route==='/english/'+mistakes[0].slug+'/'&&theme==='dark')await screenshot(page,'english-mistake-320-dark');
           if(width===390&&route==='/english/'+cards.find(c=>c.column==='classics').slug+'/'&&theme==='dark')await screenshot(page,'english-classic-390-dark');
         }
       }finally{await ctx.close();}

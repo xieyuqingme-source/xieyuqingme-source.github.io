@@ -12,6 +12,7 @@ import re
 import shutil
 
 from PIL import Image
+from game_assets import GAME_BOOK_ASSETS
 
 from build_blog import Blog, ROOT
 from photo_pages import build_photos, validate_catalog as validate_photo_catalog, _safe_path as safe_photo_path
@@ -205,7 +206,7 @@ def render_site_notes(waline, repository, language="zh-CN"):
                  'The Today page presents Earth, weather, history, reading and news, in that order. The calendar and globe are calculated live; historical events and reading rotate from local collections using Beijing time. Historical entries link to their sources, with selection and review coverage explained on the Today page. The homepage shows only the date, solar term and a small globe.',
                  'Weather comes from Open-Meteo. City searches send the name you enter to its geocoding service; choosing a point on the map sends its coordinates for weather. The page never requests your device location, and saves your selected city or coordinates and the latest weather only in your browser. The homepage makes no weather request.',
                  'News follows source newsroom selections and preset rules, with original headlines, publication times and links. Chinese quotations from Marx, Engels, Lenin and Mao quote the Chinese Marxists Internet Archive texts; English quotations use independent English texts. Edition notes explicitly label the permitted AI translations of some Lei Feng English and Che Guevara Chinese entries. Other sources include the Lei Feng Memorial Hall and published translations of How the Steel Was Tempered. The reading collections are stored locally; browsing them makes no automatic request to the sources.',
-                 'English Corner is written for Chinese readers, with word stories, public-domain classics, language comparisons, source checks and a local number converter. Its English quotations show the same original and Chinese translation on both Today pages. Sources, version details and AI-assisted writing or site translations are identified in each entry; neither reading nor conversion sends your input to a service.',
+                 'Learn English is written for Chinese readers, with word stories, public-domain classics, language comparisons, common mistakes, quizzes, a quotation library, an illustrative word map and local number practice. Device-local English voices are optional; annotations share the anthology reader’s mechanism. Its English quotations show the same original and Chinese translation on both Today pages. Sources, version details and AI-assisted writing or site translations are identified in each entry; neither reading nor conversion sends your input to a service.',
                  'Article view counts and comments use Waline. These requests send your IP address and browser information to the Waline backend and its providers'
                  + (f' (hosting: {host}; database: {database})' if host and database else '') + '. The comment area explains what is shown publicly.',
                  'Map geography comes from Natural Earth (public domain). Project screenshots and other third-party sources are credited in each project.']
@@ -215,7 +216,7 @@ def render_site_notes(waline, repository, language="zh-CN"):
                  '「今天」页依次展示地球、天气、历史、阅读和新闻。日历和地球实时计算，历史事件与阅读内容从本地资料库按北京时间轮换。历史条目附具体出处，编选与核查范围见今天页资料说明。首页只放日期、节气和一个小地球。',
                  '天气来自 Open-Meteo；搜索城市会向其地名服务发送输入的城市名，地图选点会发送所选坐标以查询天气，不读取设备定位。页面仅在浏览器里保存所选城市或坐标及最近一次天气。首页不请求天气。',
                  '新闻按来源媒体选题和预设规则自动汇集，保留原题、原文发布时间与链接。马克思主义名句中，马恩列毛中文直接采用马克思主义者网（中马库）中文原文，英文分别采用英文文本；部分雷锋英文和切·格瓦拉中文按保留规则使用本站AI译文，并在版本说明中明确标注。其他来源包括雷锋纪念馆日记与《钢铁是怎样炼成的》出版译本。阅读资料随本站保存，浏览和换句时不自动请求来源网站。',
-                 '雨聊英语角面向中文读者，包含词源故事、公版经典、中英对照、考据和本地数字转换器。「今天」页另有英语名句，中英文页面展示同一英文原句与中文译文。每项附来源和版本说明，本站译文与AI辅助整理如实标注；阅读和数字转换不向外部服务发送输入内容。',
+                 '学英语面向中文读者，包含词源故事、公版经典、中英对照、考据、常见用法、小测验、名句库、单词示意地图和数字练习。经典批注沿用文选的共享机制；英语朗读使用设备自带的本地语音，没有可用语音时隐藏入口。「今天」页另有英语名句，中英文页面展示同一英文原句与中文译文。每项附来源和版本说明，本站译文与AI辅助整理如实标注；阅读和数字转换不向外部服务发送输入内容。',
                  '文章的浏览量和留言由 Waline 提供：相关请求会把 IP 和浏览器信息发送给 Waline 后端及其托管商'
                  + (f'（服务托管：{host}；数据库：{database}）' if host and database else '') + '。留言区另有说明。',
                  '足迹地图的底图来自 Natural Earth（公有领域）；作品截图与其他第三方来源见各项目说明。']
@@ -606,6 +607,16 @@ def game_sport_sources():
     return game_photo_sources("sports", GAME_SPORT_ASSETS, "sport")
 
 
+def game_book_sources():
+    sources = game_photo_sources("books", GAME_BOOK_ASSETS, "book")
+    for source in sources:
+        with Image.open(source) as image:
+            if image.format != "WEBP" or image.width != image.height or not 256 <= image.width <= 1024:
+                raise ValueError("Book artwork must be a registered square local WebP: " + source.name)
+            image.verify()
+    return sources
+
+
 def copy_game_photo_assets(photo_sets):
     if linked_directory(OUTPUT / "assets"):
         raise ValueError("Generated game asset directory symlinks or junctions are not supported.")
@@ -632,7 +643,8 @@ def build_site(address, map_preview_source=None):
     brief_extras = load_brief_extras(ROOT, linked_directory)
     daily_sources = daily_asset_sources()
     # Every template's complete photo set must pass before any output is generated.
-    photo_sets = (("foods", "food", game_food_sources()), ("sports", "sport", game_sport_sources()))
+    photo_sets = (("foods", "food", game_food_sources()), ("sports", "sport", game_sport_sources()),
+                  ("books", "book", game_book_sources()))
     news_sources = load_sources(ROOT)
     news_snapshot = load_snapshot(ROOT)
     history_data = load_history(ROOT, linked_directory)
@@ -643,6 +655,8 @@ def build_site(address, map_preview_source=None):
     load_glossary(ROOT, anthology_works)
     english_corner = load_english_corner(ROOT)  # Only the reviewed public copies; never the private Vault.
     english_quotes = load_english_quotes(ROOT, {"/english/" + card["slug"] + "/" for card in english_corner["cards"]})
+    from english_quiz import build_quiz_pools
+    english_corner["quiz_pools"] = build_quiz_pools(english_quotes, english_corner["quiz"])
     brief_extras["english_quotes"] = english_quotes
     expected_output = "_site_map_preview" if map_preview_source else "_site_unified"
     if OUTPUT.is_symlink() or OUTPUT.resolve() != ROOT.resolve() / expected_output:
@@ -734,7 +748,7 @@ def build_site(address, map_preview_source=None):
     (OUTPUT / "about").mkdir(exist_ok=True)
     (OUTPUT / "about/index.html").write_text(localize_page(about_page, ROOT, address, "/about/"), encoding="utf-8")
     anthology_report = build_anthology(ROOT, OUTPUT, address, language="zh-CN")
-    corner_report = build_english_corner(ROOT, OUTPUT, address, english_corner)
+    corner_report = build_english_corner(ROOT, OUTPUT, address, english_corner, english_quotes)
     from english_site import build_english_site
     english_report = build_english_site(blog, OUTPUT, address, projects, about_data, values)
     photo_english_report = build_photos(ROOT, OUTPUT, address, allow_local_map_preview=bool(map_preview_source), language="en")

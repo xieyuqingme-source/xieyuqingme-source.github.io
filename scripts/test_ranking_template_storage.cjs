@@ -211,3 +211,36 @@ test('clear deletes current and every registry template atomically and retains u
   assert.equal(await store.load(), null);
   for (const id of Object.keys(Model.TEMPLATES)) assert.equal(await store.loadTemplate(id), null);
 });
+
+test('book JSON and its independent archive preserve food, sports and user edits across resets and restores',async()=>{
+  const driver=atomicIndexedDB(),store=Storage.createStore({indexedDB:driver});
+  const food=Model.createDefaultState('food'),sport=Model.createDefaultState('sport'),book=Model.createDefaultState('book');
+  Model.setTitle(food,'保留的美食');Model.setTitle(sport,'保留的运动');
+  await store.save(food);await store.save(sport);
+  const foodBytes=driver.values.get('template:food'),sportBytes=driver.values.get('template:sport');
+  Model.setTitle(book,'读过的小说');Model.setSkin(book,'tech');Model.moveItem(book,book.rows[0].itemIds[0],'pool');
+  const custom=Model.addItem(book,{name:'自选作品'},book.rows[1].id);await store.save(book);
+  const backup=Model.serialize(book);assert.equal(JSON.parse(backup).templateId,'book');
+  assert.equal((await store.load()).items[custom].name,'自选作品');
+  assert.deepEqual(await store.loadTemplate('book'),book);
+  assert.equal(driver.values.get('current'),driver.values.get('template:book'));
+  const reset=Model.createDefaultState('book');Model.setSkin(reset,book.skin);await store.save(reset);
+  assert.equal(Object.keys((await store.loadTemplate('book')).items).length,20);
+  await store.save(Model.deserialize(backup));assert.deepEqual(await store.load(),book);
+  assert.equal(driver.values.get('template:food'),foodBytes);assert.equal(driver.values.get('template:sport'),sportBytes);
+  assert.deepEqual(await store.loadTemplate('food'),food);assert.deepEqual(await store.loadTemplate('sport'),sport);
+  assert.deepEqual(driver.opens,[{name:'xieyuqing-ranking-v1',version:1}]);
+});
+
+test('a damaged book archive stays protected until its own explicit repair, including when current is damaged',async()=>{
+  const driver=atomicIndexedDB(),store=Storage.createStore({indexedDB:driver});
+  const food=Model.serialize(Model.createDefaultState('food')),sport=Model.serialize(Model.createDefaultState('sport'));
+  driver.values.set('current','{damaged current');driver.values.set('template:book','{damaged book');
+  driver.values.set('template:food',food);driver.values.set('template:sport',sport);
+  const before=new Map(driver.values);await assert.rejects(store.loadTemplate('book'),error=>error.code==='corrupt');
+  assert.deepEqual(driver.values,before);assert.equal(driver.writes.length,0);
+  const book=Model.createDefaultState('book');await store.saveTemplate(book);
+  assert.deepEqual(await store.loadTemplate('book'),book);assert.equal(driver.values.get('current'),before.get('current'));
+  assert.equal(driver.values.get('template:food'),food);assert.equal(driver.values.get('template:sport'),sport);
+  assert.deepEqual(driver.transactions.filter(entry=>entry.mode==='readwrite').map(entry=>entry.keys),[['template:book']]);
+});

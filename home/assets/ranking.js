@@ -62,7 +62,7 @@
     const button = node('button','card-main'); button.type = 'button'; M.uiAttr(button,'aria-label', '编辑或移动：' + itemName);
     const art = node('span','card-art');
     const builtIn=item.art?(M.BUILTIN_ART || M.FOOD_ART)[item.art]:null,source=item.image||builtIn?.photo;
-    if (source) { const image = node('img');image.alt='';image.draggable=false;image.loading='lazy';image.decoding='async';if(item.image&&item.crop){const crop=item.crop;image.className='cropped-image';image.onload=()=>{image.style.width=(image.naturalWidth/crop.size*100)+'%';image.style.height=(image.naturalHeight/crop.size*100)+'%';image.style.left=(-crop.x/crop.size*100)+'%';image.style.top=(-crop.y/crop.size*100)+'%';};}else if(builtIn)image.className='builtin-photo';image.src=source;art.append(image); }
+    if (source) { const image = node('img');image.alt='';if(!item.image&&builtIn?.alt_zh)M.uiAttr(image,'alt',() => M.displayArtAlt(item.art));image.draggable=false;image.loading='lazy';image.decoding='async';if(item.image&&item.crop){const crop=item.crop;image.className='cropped-image';image.onload=()=>{image.style.width=(image.naturalWidth/crop.size*100)+'%';image.style.height=(image.naturalHeight/crop.size*100)+'%';image.style.left=(-crop.x/crop.size*100)+'%';image.style.top=(-crop.y/crop.size*100)+'%';};}else if(builtIn)image.className='builtin-photo';image.src=source;art.append(image); }
     else if (item.art) { art.textContent = Array.from(itemName).slice(0,2).join('');art.classList.add('text-art'); }
     else { art.classList.add('text-art'); art.textContent = Array.from(itemName).slice(0,2).join(''); }
     art.setAttribute('aria-hidden','true'); button.append(art, node('span','card-name',itemName));
@@ -88,7 +88,8 @@
     document.body.dataset.rankingSkin=state.skin;$('ranking-skin').value=state.skin;
     document.body.dataset.rankingTemplate=state.templateId;$('ranking-template').value=state.templateId;
     M.uiText($('reset-ranking'),'恢复默认'+templateLabel());
-    M.uiText($('template-note'),state.templateId==='sport'?'运动示例仅为个人偏好，不构成健康或训练建议。':'示例仅供个人演示，不代表权威评价。');
+    M.uiText($('template-note'),() => M.templateNote(state.templateId));
+    const readingLink=$('book-reading-link');if(readingLink)readingLink.hidden=state.templateId!=='book';
     $('add-row').disabled = state.rows.length >= M.LIMITS.rows;
     $('clear-items').disabled=Object.keys(state.items).length===0;$('undo-clear').hidden=!undoSnapshot;M.uiText($('undo-clear'),undoKind==='template'?'撤销切换模板':undoKind==='reset'?'撤销恢复默认':'撤销清空');
     view?.refresh(state.pool.length);

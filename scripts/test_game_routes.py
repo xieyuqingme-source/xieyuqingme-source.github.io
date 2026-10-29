@@ -4,6 +4,8 @@ from http.server import ThreadingHTTPServer
 from pathlib import Path
 from tempfile import TemporaryDirectory
 from threading import Thread
+from hashlib import sha256
+from urllib.parse import urlsplit
 from xml.etree import ElementTree as ET
 from unittest.mock import patch
 import base64
@@ -13,6 +15,7 @@ import shutil
 import subprocess
 import sys
 import unittest
+from PIL import Image
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
@@ -39,12 +42,17 @@ EXPECTED_SPORTS = ("walking.webp", "hiking.webp", "running.webp", "weight-traini
                    "swimming.webp", "badminton.webp", "cycling.webp", "football.webp",
                    "tennis.webp", "table-tennis.webp", "combat-training.webp", "tree-climbing.webp",
                    "skydiving.webp", "rock-climbing.webp", "diving.webp", "golf.webp", "gaming.webp")
+EXPECTED_BOOKS = tuple("book-" + slug + ".webp" for slug in (
+    "pride-and-prejudice", "jane-eyre", "wuthering-heights", "a-tale-of-two-cities", "great-expectations",
+    "robinson-crusoe", "gullivers-travels", "frankenstein", "alice-in-wonderland", "treasure-island",
+    "sherlock-holmes", "dorian-gray", "moby-dick", "tom-sawyer", "huckleberry-finn", "little-women",
+    "the-great-gatsby", "hamlet", "romeo-and-juliet", "walden"))
 
 
 def art_registries(source):
     """Read the actual exported model registries without evaluating them as Python or HTML."""
     result = subprocess.run(["node", "-e",
-        "const m=require(process.argv[1]);process.stdout.write(JSON.stringify({food:m.FOOD_ART,sport:m.SPORT_ART,builtin:m.BUILTIN_ART}));",
+        "const m=require(process.argv[1]);process.stdout.write(JSON.stringify({food:m.FOOD_ART,sport:m.SPORT_ART,book:m.BOOK_ART,builtin:m.BUILTIN_ART}));",
         str(source)], check=True, capture_output=True, text=True, encoding="utf-8", timeout=10)
     return json.loads(result.stdout)
 
@@ -60,6 +68,7 @@ class GamePublicationTests(unittest.TestCase):
         columns = json.loads((ROOT/'english-corner/catalog.json').read_text(encoding='utf-8'))['columns']
         (folder/'catalog.json').write_text(json.dumps({'version':1,'columns':columns,'cards':[]},ensure_ascii=False),encoding='utf-8')
         (folder/'notes.json').write_text('{"version":1,"works":{}}',encoding='utf-8')
+        (folder/'quiz.json').write_text('{"version":1,"questions":[]}',encoding='utf-8')
         quotations_path = root/'home/brief/english-quotes.json'
         quotations = json.loads(quotations_path.read_text(encoding='utf-8'))
         for item in quotations['quotes']: item.pop('related',None)
@@ -101,7 +110,7 @@ class GamePublicationTests(unittest.TestCase):
                            "/articles/index.html", "/articles/synthetic.html"} | english_routes
         for module in (report["photography"], report["anthology"]):
             expected_routes.update("/" + route.strip("/") + "/" for route in module["routes"])
-        self.assertEqual(set(report['english_corner']['routes']),{'/english/','/english/tools/numbers/'})
+        self.assertEqual(set(report['english_corner']['routes']),{'/english/','/english/tools/numbers/','/english/play/','/english/quotes/','/english/map/'})
         expected_routes.update(report['english_corner']['routes'])
         self.assertEqual(set(sitemap), {origin + route for route in expected_routes})
         self.assertEqual(len(sitemap), len(expected_routes), "Every canonical route must occur exactly once.")
@@ -160,13 +169,16 @@ class GamePublicationTests(unittest.TestCase):
                         self.assertTrue((output / "assets" / imported).is_file(), f"Missing module: {imported}")
         ranking = Elements((output / "game/ranking/index.html").read_text(encoding="utf-8")).elements
         scripts = [attrs.get("src") for tag, attrs in ranking if tag == "script" and attrs.get("src")]
+        script_paths = [urlsplit(src).path for src in scripts]
         styles = [attrs.get("href") for tag, attrs in ranking if tag == "link" and attrs.get("rel") == "stylesheet"]
         for name in ("ranking-model.js", "ranking-storage.js", "ranking-export.js", "ranking-images.js", "ranking-view.js", "ranking.js"):
-            self.assertIn("/assets/" + name, scripts)
-        self.assertLess(scripts.index("/assets/ranking-images.js"), scripts.index("/assets/ranking.js"))
-        self.assertLess(scripts.index("/assets/ranking-view.js"), scripts.index("/assets/ranking.js"))
-        self.assertEqual(scripts.count("/assets/site-i18n.js"), 1)
-        self.assertLess(scripts.index("/assets/site-i18n.js"), scripts.index("/assets/ranking-model.js"))
+            self.assertIn("/assets/" + name, script_paths)
+            digest = sha256((ROOT / "home/assets" / name).read_bytes()).hexdigest()[:12]
+            self.assertIn("/assets/" + name + "?v=" + digest, scripts)
+        self.assertLess(script_paths.index("/assets/ranking-images.js"), script_paths.index("/assets/ranking.js"))
+        self.assertLess(script_paths.index("/assets/ranking-view.js"), script_paths.index("/assets/ranking.js"))
+        self.assertEqual(script_paths.count("/assets/site-i18n.js"), 1)
+        self.assertLess(script_paths.index("/assets/site-i18n.js"), script_paths.index("/assets/ranking-model.js"))
         for name in ("portal.css", "game.css", "ranking-skins.css"):
             self.assertIn("/assets/" + name, [href.partition("?")[0] for href in styles])
         english_ranking = Elements((output / "en/game/ranking/index.html").read_text(encoding="utf-8")).elements
@@ -182,7 +194,8 @@ class GamePublicationTests(unittest.TestCase):
         self.assertEqual(build_site.GAME_FOOD_ASSETS, EXPECTED_FOODS)
         self.assertEqual(build_site.GAME_SPORT_ASSETS, EXPECTED_SPORTS)
         registries = art_registries(output / "assets/ranking-model.js")
-        for directory, registry, expected in (("foods", "food", EXPECTED_FOODS), ("sports", "sport", EXPECTED_SPORTS)):
+        self.assertEqual(build_site.GAME_BOOK_ASSETS, EXPECTED_BOOKS)
+        for directory, registry, expected in (("foods", "food", EXPECTED_FOODS), ("sports", "sport", EXPECTED_SPORTS), ("books", "book", EXPECTED_BOOKS)):
             self.assertEqual({path.name for path in (output / "assets" / directory).iterdir()}, set(expected),
                              "Only fixed public photos should be copied; source notes and previews stay out.")
             photo_paths = [entry["photo"] for entry in registries[registry].values()]
@@ -194,7 +207,7 @@ class GamePublicationTests(unittest.TestCase):
                     self.assertEqual(photo.read_bytes(), (ROOT / "home/assets" / directory / name).read_bytes())
                     header = photo.read_bytes()[:12]
                     self.assertEqual((header[:4], header[8:12]), (b"RIFF", b"WEBP"))
-        self.assertEqual(registries["builtin"], {**registries["food"], **registries["sport"]})
+        self.assertEqual(registries["builtin"], {**registries["food"], **registries["sport"], **registries["book"]})
 
     def test_new_and_existing_navigation_preserve_public_entries(self):
         output, _ = self.build_fixture()
@@ -204,7 +217,7 @@ class GamePublicationTests(unittest.TestCase):
                 nav = html.split('class="site-nav"', 1)[1].split("</nav>", 1)[0]
                 links = [attrs.get("href") for tag, attrs in Elements(nav).elements if tag == "a"]
                 self.assertTrue(any(tag == "a" and attrs.get("class") == "brand" and attrs.get("href") == "/" for tag, attrs in Elements(html).elements))
-                self.assertEqual(nav.count('class="nav-item'), 5)
+                self.assertEqual(nav.count('class="nav-item'), 4)
                 self.assertEqual(nav.count('class="nav-group'), 3)
                 self.assertCountEqual(links, ("/articles/", "/english/", "/projects/", "/game/", "/about/", "/photos/", "/anthology/", "/map/"))
                 self.assertEqual(sum(tag == "summary" for tag, _ in Elements(nav).elements), 3)
@@ -297,6 +310,51 @@ class GameFoodPreflightTests(unittest.TestCase):
                     build_site.game_food_sources()
 
 
+class GameBookResourceTests(unittest.TestCase):
+    def test_every_missing_book_fails_before_generation(self):
+        with TemporaryDirectory(prefix="game-book-missing-",dir=ROOT) as temporary:
+            root=Path(temporary)
+            folder=root/"home/assets/books"
+            folder.mkdir(parents=True)
+            for name in EXPECTED_BOOKS: (folder/name).write_bytes(b"test-only placeholder")
+            output=root/"_site_unified"
+            output.mkdir()
+            sentinel=output/"preserve.txt"
+            sentinel.write_text("An earlier publication must survive.",encoding="utf-8")
+            for missing in EXPECTED_BOOKS:
+                (folder/missing).unlink()
+                with self.subTest(missing=missing), patch.object(build_site,"ROOT",root), patch.object(build_site,"OUTPUT",output), \
+                     patch.object(build_site,"load_projects",return_value=[]), patch.object(build_site,"load_about",return_value={}), \
+                     patch.object(build_site,"load_home_photos",return_value=[]), patch.object(build_site,"load_daily",return_value=({},{})), \
+                     patch.object(build_site,"load_brief_extras",return_value={}), patch.object(build_site,"daily_asset_sources",return_value=[]), \
+                     patch.object(build_site,"game_food_sources",return_value=[]), patch.object(build_site,"game_sport_sources",return_value=[]), \
+                     patch.object(build_site,"Blog") as blog, self.assertRaisesRegex(ValueError,"Missing required game book photo"):
+                    build_site.build_site("https://preview.example")
+                blog.assert_not_called()
+                self.assertEqual([p.name for p in output.iterdir()],["preserve.txt"])
+                self.assertEqual(sentinel.read_text(encoding="utf-8"),"An earlier publication must survive.")
+                (folder/missing).write_bytes(b"test-only placeholder")
+
+    def test_webp_format_square_size_and_only_registered_copy(self):
+        with TemporaryDirectory(prefix="game-book-format-",dir=ROOT) as temporary:
+            root=Path(temporary);folder=root/"home/assets/books";folder.mkdir(parents=True)
+            fixture=folder/EXPECTED_BOOKS[0]
+            Image.new("RGB",(256,256),"#557777").save(fixture,format="WEBP")
+            payload=fixture.read_bytes()
+            for name in EXPECTED_BOOKS: (folder/name).write_bytes(payload)
+            (folder/"not-registered.webp").write_bytes(b"not a public image")
+            output=root/"_site_unified";(output/"assets").mkdir(parents=True)
+            with patch.object(build_site,"ROOT",root),patch.object(build_site,"OUTPUT",output):
+                sources=build_site.game_book_sources()
+                self.assertEqual([p.name for p in sources],list(EXPECTED_BOOKS))
+                build_site.copy_game_photo_assets((("books","book",sources),))
+                self.assertEqual({p.name for p in (output/"assets/books").iterdir()},set(EXPECTED_BOOKS))
+                for size,format in [((256,256),"PNG"),((256,300),"WEBP"),((64,64),"WEBP")]:
+                    Image.new("RGB",size,"white").save(fixture,format=format)
+                    with self.subTest(size=size,format=format),self.assertRaisesRegex(ValueError,"square local WebP"):
+                        build_site.game_book_sources()
+
+
 class GameSportResourceTests(unittest.TestCase):
     def test_sport_photos_copy_only_the_fixed_names_using_temporary_fixtures(self):
         with TemporaryDirectory(prefix="game-sport-fixture-", dir=ROOT) as temporary:
@@ -382,17 +440,20 @@ class GameSportResourceTests(unittest.TestCase):
 
 
 class GameArtRegistryTests(unittest.TestCase):
-    def test_model_registries_match_all_thirty_nine_foods_and_seventeen_sports_without_photo_fixtures(self):
+    def test_model_registries_match_all_foods_sports_and_books_without_photo_fixtures(self):
         registries = art_registries(ROOT / "home/assets/ranking-model.js")
         self.assertEqual(build_site.GAME_FOOD_ASSETS, EXPECTED_FOODS)
         self.assertEqual(build_site.GAME_SPORT_ASSETS, EXPECTED_SPORTS)
-        food, sport = registries["food"], registries["sport"]
+        self.assertEqual(build_site.GAME_BOOK_ASSETS, EXPECTED_BOOKS)
+        food, sport, book = registries["food"], registries["sport"], registries["book"]
         self.assertEqual(set(food), {Path(name).stem for name in EXPECTED_FOODS})
         self.assertEqual(set(sport), {Path(name).stem for name in EXPECTED_SPORTS})
         self.assertTrue(set(food).isdisjoint(sport))
-        self.assertEqual(registries["builtin"], {**food, **sport})
-        self.assertEqual(len(registries["builtin"]), 56)
-        for directory, registry in (("foods", food), ("sports", sport)):
+        self.assertEqual(set(book), {Path(name).stem for name in EXPECTED_BOOKS})
+        self.assertTrue(set(book).isdisjoint({*food, *sport}))
+        self.assertEqual(registries["builtin"], {**food, **sport, **book})
+        self.assertEqual(len(registries["builtin"]), 76)
+        for directory, registry in (("foods", food), ("sports", sport), ("books", book)):
             for key, entry in registry.items():
                 self.assertEqual(entry["photo"], "/assets/" + directory + "/" + key + ".webp")
 

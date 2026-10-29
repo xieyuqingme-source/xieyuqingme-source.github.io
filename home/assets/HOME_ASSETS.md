@@ -51,6 +51,8 @@
 关于页下方摄影图亦有行内最大宽度兜底；页脚链接之间保留空白，使外部样式失效时的英文导航也能自然换行。手机二维码最终宽度在`portfolio.css`设置，避免被旧样式覆盖。
 
 阅读区现为单栏通栏布局。旧文摘句的卡片、脚本分支、样式选择器、构建函数及专用数据文件已删除，马克思主义名句430条及其来源记录保持原样。
-# 英语角与英语名句（2026-10-29）
+# 学英语与英语名句（2026-10-29）
 
-`english-corner.css`、`english-corner.js`和`english-numbers.js`是本地栏目资源，采用当前全站浅色/深色变量与系统字体，不使用图片、CDN或在线转换服务。英语名句复用`home-daily.css`及`daily-reading.js`的小按钮与独立牌组，英文原句仅用设备衬线字体。公版原文、AI辅助中文译文、版本与核对记录见`home/brief/english-quotes-sources.md`；卡片来源与难词依据分别记录在`english-corner/catalog.json`及`notes.json`。构建只读取这些公开副本，不读取私人阅读笔记。
+`english-corner.css`、`english-corner.js`和`english-numbers.js`是本地栏目资源，采用当前全站浅色/深色变量与系统字体，不使用CDN或在线转换服务；学习正文仅接受显式登记的books本地WebP。英语名句复用`home-daily.css`及`daily-reading.js`的小按钮与独立牌组，英文原句仅用设备衬线字体。公版原文、AI辅助中文译文、版本与核对记录见`home/brief/english-quotes-sources.md`；卡片来源与难词依据分别记录在`english-corner/catalog.json`及`notes.json`。构建只读取这些公开副本，不读取私人阅读笔记。
+
+第二版另有`english-play.js`、`english-quotes.js`、`english-word-map.js`、`english-speech.js`及共享`reading-annotations.js/.css`，均随静态站本地发布并带内容版本号。地图沿用原D3与Natural Earth陆地数据，代表地点依据见`english-corner/MAP_SOURCES.md`，没有新增第三方运行库。语音只使用设备本地English voice，未安装时隐藏入口，不连接朗读服务。书图20张、640×640 WebP、总约2.05MiB；AI生成与书目、提示词说明见`books/SOURCES.md`。共享批注由文选和学英语共同使用，不含公版正文副本。

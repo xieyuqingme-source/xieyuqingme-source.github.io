@@ -1,4 +1,4 @@
-"""Offline English Corner validation and publication checks; no private sources or network."""
+"""Offline Learn English validation and publication checks; no private sources or network."""
 from collections import Counter
 from copy import deepcopy
 from datetime import date
@@ -11,7 +11,7 @@ import sys
 import unittest
 import xml.etree.ElementTree as ET
 
-from english_corner import (ASSETS, SECTIONS, build_english_corner, lf, load_english_corner,
+from english_corner import (ASSETS, MAP_ASSETS, SECTIONS, build_english_corner, lf, load_english_corner,
                             public_domain, public_url, related_route, render_card, render_index,
                             sections, source_path, text_hash, validate_corner, word_count)
 from site_i18n import FEATURES, localized_path
@@ -35,7 +35,7 @@ class Tags(HTMLParser):
 
 def fixture():
     """Synthetic provenance values test rules without masquerading as researched content."""
-    titles = {'words': '词的身世', 'classics': '经典一页', 'between': '中英之间', 'myths': '考据'}
+    titles = {'words': '词的身世', 'classics': '经典一页', 'between': '中英之间', 'myths': '考据', 'mistakes': '别说错'}
     columns = [{'id': key, 'title': title, 'english': 'Synthetic column ' + key, 'description': 'Synthetic test description.'}
                for key, title in titles.items()]
     bodies = {
@@ -51,7 +51,7 @@ def fixture():
                 'tags': ['测试'], 'summary': 'Synthetic public summary.', 'sources': [deepcopy(source)],
                 'related': [], 'added': '2026-10-29', 'status': 'published', 'ai_assisted': True}
         if column == 'words':
-            card.update(headword='book', journey=[{'language': 'Synthetic language', 'form': 'book', 'period': ''}])
+            card.update(headword='book', journey=[{'language': 'Synthetic language', 'form': 'book', 'period': '', 'place_zh':'Synthetic representative region', 'lon':0, 'lat':10, 'approximate':True}])
         elif column == 'classics':
             excerpt = sections(bodies[slug])['原文']
             card['work'] = {'author_zh': '测试作者', 'author_en': 'Synthetic Author', 'title_zh': '测试作品',
@@ -76,10 +76,10 @@ class CornerValidationTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             validate_corner(data, bodies, notes, today=TODAY)
 
-    def test_valid_four_column_fixture_and_drafts_are_explicit(self):
+    def test_valid_five_column_fixture_and_drafts_are_explicit(self):
         data, bodies, notes = fixture()
         corner = validate_corner(data, bodies, notes, today=TODAY)
-        self.assertEqual(Counter(c['column'] for c in corner['cards']), Counter(dict.fromkeys(SECTIONS, 1)))
+        self.assertEqual(Counter(c['column'] for c in corner['cards']), Counter({'words':1,'classics':1,'between':1,'myths':1}))
         data['cards'][0]['status'] = 'draft'
         corner = validate_corner(data, bodies, notes, today=TODAY)
         self.assertNotIn('fixture-word', [c['slug'] for c in corner['cards']])
@@ -103,7 +103,7 @@ class CornerValidationTests(unittest.TestCase):
         self.assert_bad(lambda n: n.update(version=True), location='notes')
 
     def test_column_and_slug_boundaries(self):
-        for slug in ['tools', 'a', '../private', 'Word', 'bad_slug', 'a' * 65]:
+        for slug in ['tools', 'play', 'quotes', 'map', 'a', '../private', 'Word', 'bad_slug', 'a' * 65]:
             with self.subTest(slug=slug): self.assert_bad(lambda d: d['cards'][0].update(slug=slug))
         self.assert_bad(lambda d: d['cards'][1].update(slug=d['cards'][0]['slug']))
         self.assert_bad(lambda d: d['columns'][1].update(id='words'))
@@ -139,6 +139,30 @@ class CornerValidationTests(unittest.TestCase):
                      '## 故事\n\n```text\n## 可以这样用\n```', '# Unexpected title\n\n## 故事\n\nStory.\n\n## 可以这样用\n\nExample.']:
             with self.subTest(body=body): self.assert_bad(lambda b: b.update({'fixture-word': body}), location='bodies')
         self.assert_bad(lambda b: b.pop('fixture-word'), location='bodies')
+
+    def test_mistakes_render_context_examples_explanation_then_one_source_section(self):
+        data,bodies,notes=fixture()
+        card=deepcopy(data['cards'][2]);card.update(slug='fixture-mistake',column='mistakes',related=[])
+        body='## 错句\n\nI very like books.\n\n## 对句\n\nI really like books.\n\n## 为什么\n\nSynthetic contextual explanation.'
+        data['cards'].append(card);bodies[card['slug']]=body
+        corner=validate_corner(data,bodies,notes,today=TODAY)
+        html=render_card(corner['cards'][-1],corner)
+        positions=[html.index('<h2>'+heading+'</h2>') for heading in ['错句','对句','为什么','来源']]
+        self.assertEqual(positions,sorted(positions))
+        self.assertEqual(html.count('例句为编写的示例。'),1)
+        self.assertEqual(html.count('<h2>来源</h2>'),1)
+        parts=sections(body)
+        for missing in ['错句','对句','为什么']:
+            changed=deepcopy(bodies)
+            changed[card['slug']]='\n\n'.join('## '+heading+'\n\n'+text for heading,text in parts.items() if heading!=missing)
+            with self.subTest(missing=missing),self.assertRaises(ValueError):
+                validate_corner(data,changed,notes,today=TODAY)
+
+    def test_journey_requires_bounded_finite_coordinates_and_an_explicit_schematic_label(self):
+        for key,value in [('lon',181),('lon',float('nan')),('lon',True),('lat',-91),('lat',float('inf')),('lat','20'),('approximate',False),('approximate',1),('place_zh','')]:
+            with self.subTest(key=key,value=value):
+                self.assert_bad(lambda d:d['cards'][0]['journey'][0].update({key:value}))
+        self.assert_bad(lambda d:d['cards'][0]['journey'][0].pop('approximate'))
 
     def test_original_hash_and_word_count_protect_reviewed_excerpt(self):
         self.assert_bad(lambda b: b.update({'fixture-classic': b['fixture-classic'].replace('Bright light','A different light')}), location='bodies')
@@ -183,7 +207,7 @@ class CornerValidationTests(unittest.TestCase):
         self.assert_bad(lambda n: n['works']['fixture-classic'].pop(),location='notes')
         self.assert_bad(lambda n: n['works'].update({'fixture-word':deepcopy(n['works']['fixture-classic'])}),location='notes')
 
-    def test_raw_html_is_escaped_and_images_are_excluded(self):
+    def test_raw_html_is_escaped_and_unregistered_images_are_excluded(self):
         data,bodies,notes = fixture()
         bodies['fixture-word'] = bodies['fixture-word'].replace('Synthetic story.','<script>alert(1)</script> <img src="https://example.org/a.png">')
         data['cards'][0]['title'] = 'A <b>title</b> & "quote"'
@@ -192,6 +216,14 @@ class CornerValidationTests(unittest.TestCase):
         self.assertNotIn('<script>',html); self.assertNotIn('<img ',html)
         self.assertIn('&lt;script&gt;',html); self.assertIn('&lt;b&gt;title&lt;/b&gt;',html)
         self.assert_bad(lambda b: b.update({'fixture-word':b['fixture-word'] + '\n\n![remote image](https://example.org/a.png)'}),location='bodies')
+
+    def test_only_explicit_local_book_images_with_alt_are_allowed(self):
+        data,bodies,notes=fixture()
+        bodies['fixture-word'] += '\n\n![A country estate](/assets/books/book-pride-and-prejudice.webp)'
+        self.assertEqual(len(validate_corner(data,bodies,notes,today=TODAY)['cards']),4)
+        for path in ['/assets/books/not-registered.webp','/assets/books/../foods/hotpot.webp','/assets/books/book-pride-and-prejudice.webp?remote=1','https://example.org/book.webp']:
+            self.assert_bad(lambda b: b.update({'fixture-word':b['fixture-word']+'\n\n![A scene]('+path+')'}),location='bodies')
+        self.assert_bad(lambda b: b.update({'fixture-word':b['fixture-word']+'\n\n![](/assets/books/book-pride-and-prejudice.webp)'}),location='bodies')
 
     def test_explicit_source_paths_do_not_escape_repository(self):
         self.assertEqual(source_path(Path('.'),'public-file.md'),Path.cwd().resolve()/'public-file.md')
@@ -207,10 +239,13 @@ class CornerValidationTests(unittest.TestCase):
             with self.assertRaises(ValueError): load_english_corner(root,TODAY)
             (root/'home/assets').mkdir(parents=True)
             (root/'home/english-corner.template.html').write_text('Synthetic template',encoding='utf-8')
-            for name in ASSETS: (root/'home/assets'/name).write_text('Synthetic local asset',encoding='utf-8')
+            (root/'home/english-intro.json').write_text((ROOT/'home/english-intro.json').read_text(encoding='utf-8'),encoding='utf-8')
+            for name in (*ASSETS,*MAP_ASSETS):
+                path=root/'home/assets'/name;path.parent.mkdir(parents=True,exist_ok=True);path.write_text('Synthetic local asset',encoding='utf-8')
             (root/'english-corner/cards').mkdir(parents=True)
             (root/'english-corner/catalog.json').write_text(json.dumps(data),encoding='utf-8')
             (root/'english-corner/notes.json').write_text(json.dumps(notes),encoding='utf-8')
+            (root/'english-corner/quiz.json').write_text('{"version":1,"questions":[]}',encoding='utf-8')
             for slug,body in bodies.items(): (root/'english-corner/cards'/f'{slug}.md').write_text(body,encoding='utf-8')
             (root/'english-corner/cards/not-catalogued.md').write_text('Unpublished fixture; not a card.',encoding='utf-8')
             loaded = load_english_corner(root,TODAY)
@@ -224,7 +259,7 @@ class CornerValidationTests(unittest.TestCase):
             output = Path(directory)
             report = build_english_corner(ROOT,output,'https://public.test',corner)
             self.assertEqual(report['cards'],4)
-            self.assertEqual(set(report['routes']),{'/english/','/english/tools/numbers/',*('/english/'+c['slug']+'/' for c in corner['cards'])})
+            self.assertEqual(set(report['routes']),{'/english/','/english/tools/numbers/','/english/play/','/english/quotes/','/english/map/',*('/english/'+c['slug']+'/' for c in corner['cards'])})
             for route in report['routes']:
                 html = (output/route.strip('/')/'index.html').read_text(encoding='utf-8')
                 tags = Tags(html).nodes
@@ -243,8 +278,8 @@ class CornerProductionTests(unittest.TestCase):
     def test_public_inventory_and_reviewed_classic_notes(self):
         corner = load_english_corner(ROOT)
         counts = Counter(c['column'] for c in corner['cards'])
-        self.assertGreaterEqual(len(corner['cards']),24)
-        for column,minimum in [('words',8),('classics',8),('between',4),('myths',4)]: self.assertGreaterEqual(counts[column],minimum,column)
+        self.assertGreaterEqual(len(corner['cards']),40)
+        for column,minimum in [('words',8),('classics',8),('between',4),('myths',4),('mistakes',8)]: self.assertGreaterEqual(counts[column],minimum,column)
         self.assertTrue(all(c['ai_assisted'] for c in corner['cards']))
         for card in corner['cards']:
             with self.subTest(slug=card['slug']):
@@ -259,13 +294,13 @@ class CornerProductionTests(unittest.TestCase):
         corner = load_english_corner(ROOT)
         html = render_index(corner)
         self.assertEqual(html.count('data-ec-row '),len(corner['cards']))
-        self.assertEqual(html.count('data-ec-column='),4)
+        self.assertEqual(html.count('data-ec-column='),5)
         self.assertIn('AI 辅助',html)
 
     @unittest.skipUnless(PUBLICATION,'Use --publication after the final local build.')
     def test_final_publication_sitemap_metadata_and_navigation(self):
         output = ROOT/'_site_unified'; corner = load_english_corner(ROOT)
-        routes = ['/english/','/english/tools/numbers/',*('/english/'+c['slug']+'/' for c in corner['cards'])]
+        routes = ['/english/','/english/tools/numbers/','/english/play/','/english/quotes/','/english/map/',*('/english/'+c['slug']+'/' for c in corner['cards'])]
         locations = {urlsplit(loc.text).path for loc in ET.parse(output/'sitemap.xml').findall('.//{*}loc')}
         self.assertTrue(set(routes).issubset(locations))
         self.assertFalse(any(route.startswith('/en/english') for route in locations))

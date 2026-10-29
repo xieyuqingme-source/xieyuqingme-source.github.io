@@ -110,6 +110,16 @@ test('sources use the card language with only the two explicitly allowed transla
 });
 
 function englishFixture(){return{version:1,quotes:Array.from({length:5},(_,i)=>({id:'fixture-english-'+i,text:'A public original sentence '+i+'.',translation:'中文自译'+i+'。',translation_source:{type:'site'},author_zh:'测试作者',author_en:'Synthetic Author',work_zh:'合成作品',work_en:'Synthetic Work',locator_zh:'合成位置',first_published:1900,author_died:1950,url:'https://example.org/original-'+i,note:'合成测试说明。',...(i%2?{related:'/english/fixture-card/'}:{})}))};}
+test('English display keeps verified verse lines and requires explicit quotation boundaries',()=>{
+  const quote=englishFixture().quotes[0],accepted=text=>R.englishQuotations({version:1,quotes:[{...quote,text}]},new Date('2026-10-29')).length;
+  for(const text of ['A full sentence.','…a bounded excerpt…','“A quotation.”','First line,\nSecond line.'])assert.equal(accepted(text),1,text);
+  for(const text of ['a hidden fragment.','A dangling clause,',' A sentence.','A\n\nB.','A\nB\nC\nD\nE.'])assert.equal(accepted(text),0,text);
+  for(const text of ['A\tliteral sentence.','First line,\r\nSecond line.'])assert.equal(accepted(text),0,text);
+  for(const translation of ['甲\r\n乙','甲\t乙','甲\r乙\r丙\r丁\r戊'])assert.equal(R.englishQuotations({version:1,quotes:[{...quote,translation}]},new Date('2026-10-29')).length,0,translation);
+  const english=englishFixture();english.quotes[0].text='First line,\nSecond line.';english.quotes[0].translation='第一行，\n第二行。';
+  const h=harness({english});for(let i=0;i<english.quotes.length;i++)h.elements['english-quote-button'].fire('click');
+  const selected=english.quotes.find(q=>q.id===h.elements['english-quote'].dataset.quoteId);assert.equal(h.elements['english-quote-text'].textContent,selected.text);
+});
 test('English display validation rejects unknown fields, unsafe URLs, excess lengths and non-public-domain editions',()=>{
   const valid=englishFixture(),quote=valid.quotes[0];assert.equal(R.englishQuotations(valid,new Date('2026-10-29')).length,5);
   for(const changes of [{extra:true},{id:'UPPER'},{url:'https://localhost/path'},{url:'https://127.0.0.1/path'},{url:'https://[::1]/path'},{url:'https://user:secret@example.org/'},{url:'https://example.org/?token=secret'},{url:'javascript:alert(1)'},{text:'word '.repeat(46)},{translation:'字'.repeat(121)},{note:'字'.repeat(161)},{first_published:1931},{author_died:1976},{first_published:true},{translation_source:{type:'site',extra:true}},{translation_source:{type:'published',name:'Modern translation',url:'https://example.org/',translator_died:2000}},{related:'/english/tools/'}])assert.equal(R.englishQuotations({version:1,quotes:[{...quote,...changes}]},new Date('2026-10-29')).length,0,JSON.stringify(changes));

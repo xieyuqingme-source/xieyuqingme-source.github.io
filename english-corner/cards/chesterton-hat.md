@@ -1,10 +1,10 @@
 ## 导读
 
-标题说追帽子，本页却从餐桌和抽屉开始，因为选的是文章后段。作者先写一个常见烦恼，再把“拉不开”换成“正在与强敌拔河”，最后想象朋友每天对着抽屉奋勇作战。笑点来自写法与事情大小的不相称，读者知道他在夸张，不必把想象当成朋友的真实后续。
+标题说追帽子，这段却从餐桌和抽屉说起。切斯特顿让人换一副眼光：桌面太小，可以想成荒岛；抽屉拉不开，可以想成与强敌拔河。原来的小麻烦没有消失，叙述里却突然响起了英雄冒险的配乐。
 
-特别值得看的是句子怎样从抽象判断落回身体动作：拉住把手、脸涨红、眼里有斗志、仿佛听见掌声。写自己的小不便，也可以试着换一个具体画面，少用几个笼统的“很烦”。
+最好笑的是那位与抽屉作战的朋友。把手、涨红的脸、眼里的斗志、想象中的掌声，全都很具体。事情越琐碎，写得越壮烈，反差就越大。只说“他很烦”，远没有这个场面鲜活。
 
-结尾对洪水影响的轻描淡写属于作者当时的判断，本页不把它当作灾情报告，更不建议用这个玩笑处理真正的伤害。所选为1908年作品的1915年版本，保留 crevass 等旧拼写；现代例句另行编写。
+The same principle can be applied to 把一个想法带到下一件小事，rest upon the assumption that 则指出抱怨背后的假设。文末对洪水的轻描淡写也有这种夸张；读它，可以欣赏写法，也可以保留对轻松过头之处的不同感受。
 
 ## 原文
 
@@ -18,10 +18,8 @@ So I do not think that it is altogether fanciful or incredible to suppose that e
 
 ## 可以这样用
 
-| 原文表达 | 用途 | 现代例句（本站编写） |
+| 原文表达 | 用途 | 例句 |
 | --- | --- | --- |
 | The same principle can be applied to… | 把一个想法用于另一场景 | The same principle can be applied to a slow queue. |
 | rest upon the assumption that… | 指出判断背后的假设 | The complaint rests upon the assumption that speed is everything. |
 | point out that… | 清楚提出提醒 | She pointed out that a delay could also be a break. |
-
-这些例句是本站编写的现代用法示例，不是作者原文。可以选一个表达，换上自己的例子试说；不必一次记住整页。

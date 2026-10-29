@@ -1,0 +1,14 @@
+:is(.anthology-annotation,.reading-annotation) { text-decoration-line: underline; text-decoration-style: dashed; text-decoration-color: var(--line); text-decoration-thickness: 1px; text-underline-offset: .24em; cursor: help; }
+:is(.anthology-annotation,.reading-annotation):hover { text-decoration-color: var(--accent); }
+:is(.anthology-annotation,.reading-annotation) { text-decoration-color: color-mix(in srgb, var(--accent) 50%, var(--surface)); }
+:is(.anthology-annotation,.reading-annotation):focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+/* Native focus scrolling is immediate; ordinary anchor links keep their smooth scroll. */
+html:has(.reading-annotation:focus),html:has(.anthology-annotation:focus) { scroll-behavior: auto; }
+:is(.anthology-note-popup,.reading-note-popup) button { min-height: 44px; padding: 8px 14px; border: 1px solid var(--line); border-radius: 5px; background: var(--surface); color: var(--accent); font: inherit; }
+:is(.anthology-note-popup,.reading-note-popup) { position: fixed; z-index: 25; bottom: max(20px, env(safe-area-inset-bottom)); left: 50%; transform: translateX(-50%); width: min(460px, calc(100% - 32px)); max-height: 55vh; overflow-y: auto; overscroll-behavior: contain; padding: 22px; background: var(--surface); color: var(--ink); border: 1px solid var(--line); border-radius: 12px; box-shadow: 0 10px 45px #0003; font: .88rem/1.85 var(--sans); }
+:is(.anthology-note-popup,.reading-note-popup) header { display: flex; align-items: center; justify-content: space-between; gap: 18px; }
+:is(.anthology-note-popup,.reading-note-popup) h2 { margin: 0; font: 550 1.15rem/1.5 var(--serif); }
+:is(.anthology-note-popup,.reading-note-popup) p { margin: 12px 0; }
+:is(.anthology-note-popup,.reading-note-popup) a { display: inline-block; padding-block: 8px; color: var(--accent); }
+:is(.anthology-note-popup,.reading-note-popup):focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+:is(.reading-note-popup,.anthology-note-popup)[hidden]{display:none!important} :is(.reading-note-popup,.anthology-note-popup){box-sizing:border-box;overflow-wrap:anywhere} .reading-note-popup h2{font-family:var(--sans)}

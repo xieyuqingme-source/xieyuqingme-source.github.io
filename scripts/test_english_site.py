@@ -103,15 +103,19 @@ class EnglishPublicationTests(unittest.TestCase):
         for name in ("projects.json", "about.json", "daily-content.json"):
             shutil.copy2(REFERENCE / "home" / name, self.root / "home" / name)
         shutil.copytree(REFERENCE / "home/brief", self.root / "home/brief")
-        # This fixture publishes only the English Corner index and tool; it does
+        # This fixture publishes only the Learn English index and tool; it does
         # not copy the production reading catalog or invent translated routes.
         (self.root/'english-corner').mkdir()
         columns = json.loads((ROOT/'english-corner/catalog.json').read_text(encoding='utf-8'))['columns']
         (self.root/'english-corner/catalog.json').write_text(json.dumps({'version':1,'columns':columns,'cards':[]},ensure_ascii=False),encoding='utf-8')
         (self.root/'english-corner/notes.json').write_text('{"version":1,"works":{}}',encoding='utf-8')
-        for name in ('english-corner.css','english-corner.js','english-numbers.js'):
+        (self.root/'english-corner/quiz.json').write_text('{"version":1,"questions":[]}',encoding='utf-8')
+        from english_corner import ASSETS, MAP_ASSETS
+        for name in (*ASSETS,*MAP_ASSETS):
+            (self.root/'home/assets'/name).parent.mkdir(parents=True,exist_ok=True)
             shutil.copy2(ROOT/'home/assets'/name,self.root/'home/assets'/name)
         shutil.copy2(ROOT/'home/english-corner.template.html',self.root/'home/english-corner.template.html')
+        shutil.copy2(ROOT/'home/english-intro.json',self.root/'home/english-intro.json')
         quotes_path = self.root/'home/brief/english-quotes.json'
         quotations = json.loads(quotes_path.read_text(encoding='utf-8'))
         for item in quotations['quotes']: item.pop('related',None)

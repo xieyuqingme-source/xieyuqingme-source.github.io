@@ -27,6 +27,7 @@ def copy_corner_fixture(root):
     columns = json.loads((ROOT/'english-corner/catalog.json').read_text(encoding='utf-8'))['columns']
     (folder/'catalog.json').write_text(json.dumps({'version':1,'columns':columns,'cards':[]},ensure_ascii=False),encoding='utf-8')
     (folder/'notes.json').write_text('{"version":1,"works":{}}',encoding='utf-8')
+    (folder/'quiz.json').write_text('{"version":1,"questions":[]}',encoding='utf-8')
     quotes = root/'home/brief/english-quotes.json'
     data = json.loads(quotes.read_text(encoding='utf-8'))
     for item in data['quotes']: item.pop('related',None)

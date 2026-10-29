@@ -18,6 +18,9 @@ const DEFAULT_ART_ORDER = ['sichuan-hotpot', 'mianyang-rice-noodles', 'jiaxing-z
   'pizza', 'cake', 'tea', 'loofah-noodles', 'mooncake', 'egg-tart', 'bread', 'lanzhou-noodles'];
 const SPORT_ART_ORDER = ['walking', 'hiking', 'tree-climbing', 'gaming', 'running', 'weight-training', 'combat-training',
   'swimming', 'badminton', 'cycling', 'table-tennis', 'football', 'tennis', 'skydiving', 'rock-climbing', 'diving', 'golf'];
+const BOOK_ART_ORDER = ['alice-in-wonderland','tom-sawyer','treasure-island','sherlock-holmes',
+  'little-women','robinson-crusoe','jane-eyre','the-great-gatsby','pride-and-prejudice','great-expectations','frankenstein','dorian-gray',
+  'a-tale-of-two-cities','gullivers-travels','huckleberry-finn','wuthering-heights','moby-dick','walden','hamlet','romeo-and-juliet'].map(slug=>'book-'+slug);
 const LEGACY_SPORT_ORDER = ['walking', 'hiking', 'running', 'weight-training', 'swimming', 'badminton', 'cycling', 'football'];
 const clone = state => JSON.parse(JSON.stringify(state));
 function asVersion1(state) {
@@ -315,6 +318,27 @@ test('sport template has the exact 17 activities, five tiers, stable IDs and fix
   assertConserved(state, SPORT_ART_ORDER.map(key => 'sport-' + key));
 });
 
+test('book template has exactly twenty classics in five entertainment tiers with fixed bilingual scene metadata', () => {
+  const state=Model.createDefaultState('book');
+  assert.equal(state.version,3);assert.equal(state.templateId,'book');assert.equal(state.title,'名著从夯到拉');
+  assert.equal(state.skin,'classic');assert.deepEqual(state.pool,[]);
+  assert.deepEqual(state.rows.map(row=>row.name),['夯','顶级','人上人','NPC','拉完了']);
+  assert.deepEqual(state.rows.map(row=>row.itemIds.length),[4,4,4,4,4]);
+  assert.deepEqual(state.rows.flatMap(row=>row.itemIds).map(id=>state.items[id].art),BOOK_ART_ORDER);
+  assert.deepEqual(Object.keys(Model.BOOK_ART).sort(),BOOK_ART_ORDER.slice().sort());
+  assertConserved(state,BOOK_ART_ORDER.map(key=>'book-'+key));
+  for (const key of BOOK_ART_ORDER) {
+    const art=Model.BOOK_ART[key],item=state.items['book-'+key];
+    assert.equal(art.photo,'/assets/books/'+key+'.webp');assert.ok(art.alt_zh&&art.alt_en);
+    assert.match(art.source,/^https:\/\/www\.gutenberg\.org\/ebooks\/\d+$/);
+    assert.ok(Array.from(item.name).length<=80);assert.match(item.name,/ · /);
+    assert.equal(item.image,null);assert.equal(item.crop,null);assert.equal(Object.hasOwn(item,'photo'),false);
+  }
+  assert.match(Model.templateNote('book'),/只是娱乐，不是文学评价/);
+  assert.deepEqual(Model.deserialize(Model.serialize(state)),state);
+  assert.equal(Model.serialize(state).includes('/assets/books/'),false,'JSON retains only stable art keys');
+});
+
 test('saved eight-activity sport rankings retain all edits and optional sixth row without adding new defaults', () => {
   const original = createOldEightSportFixture();
   Model.setTitle(original, '我的八项旧运动排行');
@@ -379,11 +403,13 @@ test('template and art registries are deeply frozen and fresh states remain inde
   assertFrozen(Model.TEMPLATES);
   assertFrozen(Model.BUILTIN_ART);
   assertFrozen(Model.SPORT_ART);
-  assert.equal(Object.keys(Model.BUILTIN_ART).length, 56);
+  assertFrozen(Model.BOOK_ART);
+  assert.equal(Object.keys(Model.BUILTIN_ART).length, 76);
   assert.equal(Model.TEMPLATES.food.label, '美食排行');
   assert.equal(Model.TEMPLATES.sport.label, '运动排行');
   Object.keys(Model.FOOD_ART).forEach(key => assert.equal(Model.BUILTIN_ART[key], Model.FOOD_ART[key]));
   Object.keys(Model.SPORT_ART).forEach(key => assert.equal(Model.BUILTIN_ART[key], Model.SPORT_ART[key]));
+  Object.keys(Model.BOOK_ART).forEach(key => assert.equal(Model.BUILTIN_ART[key], Model.BOOK_ART[key]));
   assert.throws(() => Model.TEMPLATES.sport.rows[0].artKeys.push('football'), TypeError);
   assert.throws(() => { Model.TEMPLATES.food.rows[0].name = '修改'; }, TypeError);
   assert.equal(Model.FOOD_ART.noodles.name, '面条');
@@ -1112,7 +1138,7 @@ test('classic Canvas draws a two-pixel square table grid and tech keeps thin row
   }
 });
 
-test('Canvas exports food, sport and legacy photos using only fixed local paths and centered square cover', async () => {
+test('Canvas exports food, sports, both book skins and legacy photos using only fixed local paths and centered square cover', async () => {
   const savedDocument = global.document;
   const savedImage = global.Image;
   const sources = [];
@@ -1143,6 +1169,8 @@ test('Canvas exports food, sport and legacy photos using only fixed local paths 
     const cases = [
       { state: Model.createDefaultState('food'), keys: DEFAULT_ART_ORDER, folder: 'foods' },
       { state: Model.createDefaultState('sport'), keys: SPORT_ART_ORDER, folder: 'sports' },
+      { state: Model.createDefaultState('book'), keys: BOOK_ART_ORDER, folder: 'books' },
+      { state: Model.setSkin(Model.createDefaultState('book'),'tech'), keys: BOOK_ART_ORDER, folder: 'books' },
       { state: createOldEighteenFoodFixture(), keys: LEGACY_FOOD_18_ORDER, folder: 'foods' },
       { state: createOldThirtyTwoFoodFixture(), keys: LEGACY_FOOD_32_ORDER, folder: 'foods' },
       { state: createOldTenFoodFixture(), keys: ['hotpot', 'noodles', 'dumpling', 'burger', 'watermelon', 'chicken', 'sushi', 'pizza', 'cake', 'tea'], folder: 'foods' }
@@ -1157,7 +1185,8 @@ test('Canvas exports food, sport and legacy photos using only fixed local paths 
         assert.equal(draw.crossOrigin, 'anonymous');
         assert.equal(draw.args.length, 8, 'cover uses the nine-argument drawImage overload');
         assert.deepEqual(draw.args.slice(0, 4), draw.width > draw.height ? [2, 0, 8, 8] : [0, 2, 8, 8]);
-        assert.deepEqual(draw.args.slice(-2), [100, 100]);
+        const imageSize=state.skin==='tech'?112:100;
+        assert.deepEqual(draw.args.slice(-2), [imageSize, imageSize]);
       });
       Object.values(Model.BUILTIN_ART).forEach(art => assert.ok(!texts.includes(art.emoji), 'photos replace emoji rendering'));
       assert.equal(Model.serialize(state), before, 'export never embeds photos or mutates the ranking');

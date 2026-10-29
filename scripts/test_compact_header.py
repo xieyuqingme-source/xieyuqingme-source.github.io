@@ -50,30 +50,29 @@ class CompactHeaderTests(unittest.TestCase):
         return Nodes(localize_page(PAGE, ROOT, "https://example.test", route, language))
 
     def test_three_section_names_are_menu_buttons_and_about_remains_a_link(self):
-        for language, labels in [("zh-CN", ["文章", "英语角", "作品", "足迹", "关于"]),
-                                 ("en", ["Articles", "English Corner (中文)", "Projects", "Footprints", "About"])]:
+        for language, labels in [("zh-CN", ["文章", "作品", "足迹", "关于"]),
+                                 ("en", ["Articles", "Projects", "Footprints", "About"])]:
             with self.subTest(language=language):
                 tree = self.render(language=language)
                 entries = tree.find(lambda node: node["attrs"].get("class") == "nav-entry")
                 self.assertEqual([node["text"].replace("⌄", "") for node in entries], labels)
-                self.assertEqual([node["tag"] for node in entries], ["summary", "a", "summary", "summary", "a"])
-                self.assertEqual(entries[1]["attrs"]["href"], "/english/")
-                for entry in (entries[0], entries[2], entries[3]):
+                self.assertEqual([node["tag"] for node in entries], ["summary", "summary", "summary", "a"])
+                for entry in entries[:3]:
                     self.assertNotIn("href", entry["attrs"])
                     self.assertEqual(tree.find(lambda node: node["tag"] in {"a", "button"}, entry), [])
                 self.assertEqual(entries[-1]["attrs"]["href"], ("/en" if language == "en" else "") + "/about/")
 
     def test_each_native_menu_contains_its_two_destinations_and_keeps_original_links(self):
-        for language, labels in [("zh-CN", [["我的文章", "古今名作"], ["AI应用", "小游戏"], ["我的足迹", "我的照片"]]),
-                                 ("en", [["My articles", "Literary classics"], ["AI applications", "Games"], ["My footprints", "My photos"]])]:
+        for language, labels in [("zh-CN", [["我的文章", "古今名作"], ["AI应用", "小游戏", "学英语"], ["我的足迹", "我的照片"]]),
+                                 ("en", [["My articles", "Literary classics"], ["AI applications", "Games", "Learn English (中文)"], ["My footprints", "My photos"]])]:
             tree = self.render(language=language)
             nav = tree.find(lambda node: node["tag"] == "nav")[0]
             groups = tree.find(lambda node: node["tag"] == "details", nav)
             self.assertEqual(len(groups), 3)
-            expected = [["/articles/", "/anthology/"], ["/projects/", "/game/"], ["/map/", "/photos/"]]
+            expected = [["/articles/", "/anthology/"], ["/projects/", "/game/", "/english/"], ["/map/", "/photos/"]]
             for group, routes, names in zip(groups, expected, labels):
                 links = tree.find(lambda node: node["tag"] == "a" and "data-preserve-language-link" not in node["attrs"], group)
-                self.assertEqual([node["attrs"]["href"] for node in links], [("/en" if language == "en" else "") + route for route in routes])
+                self.assertEqual([node["attrs"]["href"] for node in links], [("/en" if language == "en" and route != "/english/" else "") + route for route in routes])
                 self.assertEqual([node["text"] for node in links], names)
                 summary = tree.find(lambda node: node["tag"] == "summary", group)[0]
                 self.assertTrue(summary["attrs"]["aria-label"].strip())

@@ -58,7 +58,7 @@
   function englishQuotations(value, date = new Date()) {
     const required = ['id','text','translation','translation_source','author_zh','author_en','work_zh','work_en','locator_zh','first_published','author_died','url','note'];
     const sameKeys = (item,keys,optional=[]) => item && typeof item==='object' && !Array.isArray(item) && keys.every(key=>Object.hasOwn(item,key)) && Object.keys(item).every(key=>keys.includes(key)||optional.includes(key));
-    const publicText = (text,maximum) => typeof text==='string' && text.trim() && text.length<=maximum && !/[\u0000-\u001f\u007f]|(?<![A-Za-z0-9])[A-Za-z]:[\\/]|Obsidian Vault/i.test(text);
+    const publicText = (text,maximum,multiline=false) => typeof text==='string' && text.trim() && text.length<=maximum && !/[\u0000-\u001f\u007f]|(?<![A-Za-z0-9])[A-Za-z]:[\\/]|Obsidian Vault/i.test(multiline?text.replace(/\n/g,''):text);
     function publicSource(value) {
       if (!safeSource(value)) return false;
       try {
@@ -74,7 +74,8 @@
     if (!sameKeys(value,['version','quotes']) || value.version!==1 || !Array.isArray(value.quotes) || value.quotes.length>1000) return [];
     const year=Number(new Intl.DateTimeFormat('en-GB',{timeZone:'Asia/Shanghai',year:'numeric'}).format(date)),ids=new Set(),texts=new Set();
     return value.quotes.filter(item=>{
-      if(!sameKeys(item,required,['related'])||!required.filter(key=>!['translation_source','first_published','author_died','url'].includes(key)).every(key=>publicText(item[key],2000)))return false;
+      if(!sameKeys(item,required,['related'])||!required.filter(key=>!['translation_source','first_published','author_died','url'].includes(key)).every(key=>publicText(item[key],2000,['text','translation'].includes(key))))return false;
+      if(item.text!==item.text.trim()||!/[A-Z“‘"'…]/.test(item.text[0])||!/[.!?…“”‘’"']$/.test(item.text)||['text','translation'].some(key=>item[key].split('\n').length>4||item[key].split('\n').some(line=>!line.trim())))return false;
       const normalized=item.text.replace(/[^\p{L}\p{N}]+/gu,'').toLowerCase();
       if(!/^[a-z][a-z0-9-]{1,63}$/.test(item.id)||ids.has(item.id)||!normalized||texts.has(normalized)||item.text.length>300||(item.text.match(/[A-Za-z]+(?:[’'-][A-Za-z]+)*/g)||[]).length>45||item.translation.length>120||item.note.length>160||!publicSource(item.url))return false;
       if(!Number.isInteger(item.first_published)||item.first_published<1||item.first_published>year-96||!Number.isInteger(item.author_died)||item.author_died<1||item.author_died>year-51)return false;
@@ -82,7 +83,7 @@
       if(source?.type==='site'){if(!sameKeys(source,['type']))return false;}
       else if(source?.type==='published'){if(!sameKeys(source,['type','name','url','translator_died'])||!publicText(source.name,250)||!publicSource(source.url)||!Number.isInteger(source.translator_died)||source.translator_died<1||source.translator_died>year-51)return false;}
       else return false;
-      if(item.related!==undefined&&(!/^\/english\/[a-z][a-z0-9-]{1,63}\/$/.test(item.related)||item.related==='/english/tools/'))return false;
+      if(item.related!==undefined&&(typeof item.related!=='string'||!/^\/english\/[a-z][a-z0-9-]{1,63}\/$/.test(item.related)||['tools','play','quotes','map'].includes(item.related.split('/')[2])))return false;
       ids.add(item.id);texts.add(normalized);return true;
     });
   }
@@ -122,12 +123,13 @@
     function renderEnglish() {
       const item=english[englishDeck?.current()];if(!item)return;
       write('english-quotation-title',language==='en'?'English quotations':'英语名句');
+      write('english-quote-library-link',language==='en'?'Browse quotations (in Chinese) →':'名句库 →');
       write('english-quote-text',item.text);write('english-quote-translation',item.translation);
       const link=find('english-quote-work');
       if(link){link.href=item.url;link.textContent=item.author_zh+'（'+item.author_en+'） · '+item.work_zh+item.locator_zh+' ↗';link.target='_blank';link.rel='noopener noreferrer';link.setAttribute('hreflang','en');}
       const source=item.translation_source;
       write('english-quote-note',item.work_en+' · '+item.locator_zh+'。'+item.note+' '+(source.type==='site'?'中文为本站译文（AI 辅助，逐句核对意思）。':'中文采用公版译本：'+source.name+'。'));
-      const related=find('english-quote-related');if(related){related.hidden=!item.related;if(item.related){related.href=item.related;related.textContent='延伸阅读：英语角相关卡片 →';}else related.removeAttribute?.('href');}
+      const related=find('english-quote-related');if(related){related.hidden=!item.related;if(item.related){related.href=item.related;related.textContent='延伸阅读：学英语相关卡片 →';}else related.removeAttribute?.('href');}
       const translation=find('english-quote-translation-source');if(translation){translation.hidden=source.type!=='published';if(source.type==='published'){translation.href=source.url;translation.textContent='译文版本 ↗';}else translation.removeAttribute?.('href');}
       if(find('english-quote'))find('english-quote').dataset.quoteId=item.id;
       renderButton('english-quote-button','english-quotation-title',language==='en'?'English quotations':'英语名句');

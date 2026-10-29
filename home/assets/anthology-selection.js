@@ -29,7 +29,7 @@
   let selectedText = '', suppressed = '', dragging = false, moved = false, pointerStart, statusKey = '';
   const clearStatus = () => { statusKey = ''; status.textContent = ''; };
   let languageRepaint = false;
-  let selectionTimer, noteTimer, pointerMode = false, trigger = null, skipFocus = false, menuReturn = null;
+  let selectionTimer, menuReturn = null;
 
   function selection() {
     const selected = window.getSelection();
@@ -43,16 +43,10 @@
     if (restore && menuReturn?.isConnected) menuReturn.focus({ preventScroll: true });
     menuReturn = null;
   }
-  function closeNote(restore = false) {
-    clearTimeout(noteTimer); popup.hidden = true;
-    if (restore && trigger?.isConnected && popup.contains(document.activeElement)) {
-      skipFocus = true; trigger.focus({ preventScroll: true }); skipFocus = false;
-    }
-  }
   function showMenu() {
     const text = selection();
     if (!text) { if (!menu.contains(document.activeElement)) closeMenu(); return; }
-    closeNote();
+    notes.close();
     if (dragging || text === suppressed) return;
     if (text !== selectedText || menu.hidden) clearStatus();
     selectedText = text; menu.hidden = false;
@@ -66,36 +60,23 @@
       entry.page ? tr('page', { page: entry.page }) : '', tr('verified')].filter(Boolean).join(' · ');
     document.getElementById('anthology-note-source-link').href = entry.source_url;
   }
+  const notes = window.ReadingAnnotations?.create({
+    window, document, area: article, popup,
+    closeButton: document.getElementById('anthology-note-close'),
+    markers: article.querySelectorAll('[data-note-index]'),
+    getEntry: marker => entries[Number(marker.dataset.noteIndex)],
+    paint: paintNote, beforeOpen: closeMenu, isBlocked: selection,
+    keepOpenOnPointer: event => Boolean(event.target.closest?.('.site-language-switch, [data-site-language-switch]') || menu.contains(event.target)),
+    ignoreScroll: event => languageRepaint || (event.target instanceof Node && menu.contains(event.target))
+  }) || { close() {}, refresh() {} };
   window.addEventListener("site:beforelanguagechange", () => { languageRepaint = true; });
   i18n.onChange(() => {
     languageRepaint = true;
     requestAnimationFrame(() => requestAnimationFrame(() => { languageRepaint = false; }));
     if (statusKey) status.textContent = tr(statusKey);
-    if (!popup.hidden && trigger) paintNote(entries[Number(trigger.dataset.noteIndex)]);
-  });
-  function showNote(marker, focus = false) {
-    const entry = entries[Number(marker.dataset.noteIndex)];
-    if (!entry) return;
-    closeMenu(); trigger = marker;
-    paintNote(entry);
-    popup.hidden = false;
-    if (focus) popup.focus({ preventScroll: true });
-  }
-  article.querySelectorAll('[data-note-index]').forEach(marker => {
-    marker.addEventListener('focus', () => {
-      if (!skipFocus && !pointerMode && !selection()) showNote(marker);
-    });
-    marker.addEventListener('click', () => {
-      clearTimeout(noteTimer);
-      if (moved || selection()) return;
-      noteTimer = setTimeout(() => { if (!selection()) showNote(marker); }, 240);
-    });
-    marker.addEventListener('keydown', event => {
-      if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); showNote(marker, true); }
-    });
+    notes.refresh();
   });
   document.addEventListener('selectionchange', () => {
-    if (selection()) closeNote();
     clearTimeout(selectionTimer); selectionTimer = setTimeout(showMenu, 160);
   });
   document.addEventListener('pointerdown', event => {
@@ -103,9 +84,8 @@
       if (selection()) event.preventDefault();
       return;
     }
-    pointerMode = true;
     if (menu.contains(event.target) || popup.contains(event.target)) return;
-    closeMenu(); closeNote(); moved = false;
+    closeMenu(); moved = false;
     dragging = article.contains(event.target);
     pointerStart = dragging ? [event.clientX, event.clientY] : null;
   });
@@ -118,29 +98,24 @@
   });
   document.addEventListener('pointercancel', () => { dragging = false; suppressed = ''; selectionTimer = setTimeout(showMenu, 180); });
   document.addEventListener('dblclick', event => {
-    if (article.contains(event.target)) { closeNote(); suppressed = ''; showMenu(); }
+    if (article.contains(event.target)) { notes.close(); suppressed = ''; showMenu(); }
   });
   document.addEventListener('keydown', event => {
-    pointerMode = false;
-    if (event.key === 'Escape') { closeMenu(true); closeNote(true); }
+    if (event.key === 'Escape') closeMenu(true);
     if (event.key === 'Tab' && !menu.hidden && !menu.contains(document.activeElement) && selection()) {
       event.preventDefault(); menuReturn = document.activeElement;
       (event.shiftKey ? search : copy).focus({ preventScroll: true });
     }
   });
-  document.addEventListener('focusin', event => {
-    if (!popup.hidden && !popup.contains(event.target) && event.target !== trigger) closeNote();
-  });
   document.addEventListener('keyup', event => {
     if (event.shiftKey && article.contains(document.activeElement)) { suppressed = ''; showMenu(); }
   });
-  document.getElementById('anthology-note-close').addEventListener('click', () => closeNote(true));
   window.addEventListener('scroll', event => {
     if (languageRepaint) return;
     if (event.target instanceof Node && (popup.contains(event.target) || menu.contains(event.target))) return;
-    closeMenu(); closeNote();
+    closeMenu();
   }, { passive: true, capture: true });
-  window.addEventListener('pagehide', () => { closeMenu(); closeNote(); });
+  window.addEventListener('pagehide', () => closeMenu());
   copy.addEventListener('click', async () => {
     const text = selectedText;
     try { await copyText(text, document, navigator); if (selectedText === text && !menu.hidden) { statusKey = 'copied'; status.textContent = tr(statusKey); } }

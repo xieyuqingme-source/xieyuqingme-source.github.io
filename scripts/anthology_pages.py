@@ -5,13 +5,13 @@ from html import escape
 from pathlib import Path
 from urllib.parse import urlencode, urlsplit
 import ipaddress
-from markdown_it.token import Token
 import json
 import re
 import shutil
 import unicodedata
 
 from markdown_it import MarkdownIt
+from reading_annotations import mark_reviewed_terms
 
 LANGUAGES = {"zh-CN": "中文", "en": "English", "fr": "Français"}
 
@@ -157,31 +157,10 @@ def render_work(work, notes=()):
             identifier = "section-" + str(len(sections))
             token.attrSet("id", identifier)
             sections.append((identifier, tokens[i + 1].content))
-    # Mark only the reviewed occurrence in its exact context, preserving all text.
-    marked = set()
-    for token in tokens:
-        if not token.children: continue
-        for child in token.children:
-            if child.type != 'text': continue
-            spans = []
-            for index, entry in enumerate(notes):
-                if index in marked: continue
-                context = entry.get('context') or entry['term']
-                at = child.content.find(context)
-                offset = context.find(entry['term'])
-                if at < 0 or offset < 0: continue
-                start, end = at + offset, at + offset + len(entry['term'])
-                if any(start < b and end > a for a, b, _ in spans): continue
-                spans.append((start, end, index)); marked.add(index)
-            if spans:
-                original, parts, cursor = child.content, [], 0
-                for start, end, index in sorted(spans):
-                    text = original[start:end]
-                    label_attr = (f' data-i18n-aria-label="{escape(notes[index]["_key"], quote=True)}.label"' if notes[index].get("_key") else "")
-                    parts += [escape(original[cursor:start]), f'<span class="anthology-annotation" role="button" tabindex="0" aria-haspopup="dialog" aria-controls="anthology-note" aria-label="查看{escape(text, quote=True)}注释" data-note-index="{index}"{label_attr}>{escape(text)}</span>']
-                    cursor = end
-                parts.append(escape(original[cursor:]))
-                child.type = 'html_inline'; child.content = ''.join(parts)
+    def marker(text,index,entry):
+        label_attr = (f' data-i18n-aria-label="{escape(entry["_key"], quote=True)}.label"' if entry.get("_key") else "")
+        return f'<span class="anthology-annotation" role="button" tabindex="0" aria-haspopup="dialog" aria-controls="anthology-note" aria-label="查看{escape(text, quote=True)}注释" data-note-index="{index}"{label_attr}>{escape(text)}</span>'
+    mark_reviewed_terms(tokens,notes,marker)
     body = parser.renderer.render(tokens, parser.options, {})
     return body, sections
 
@@ -275,6 +254,6 @@ def build_anthology(root, output, address, language="zh-CN"):
 <section class="anthology-note-popup" id="anthology-note" role="dialog" aria-modal="false" aria-labelledby="anthology-note-title" tabindex="-1" hidden><header><h2 id="anthology-note-title"></h2><button type="button" id="anthology-note-close" data-i18n-aria-label="anthology.closeNote" aria-label="{escape(tr('closeNote'),quote=True)}">{node('close')}</button></header>{node('noteProvenance','p',' class="anthology-note"')}<p id="anthology-note-explanation"></p><p class="anthology-note" id="anthology-note-source"></p><a id="anthology-note-source-link" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer">{node('dictionarySource')} ↗</a></section>'''
         write(route(w),'work.'+slug+'.pageTitle','work.'+slug+'.guide',content)
     (output/'assets').mkdir(exist_ok=True)
-    for name in ('anthology.css','anthology.js','anthology-selection.css','anthology-selection.js'):
+    for name in ('anthology.css','anthology.js','anthology-selection.css','anthology-selection.js','reading-annotations.css','reading-annotations.js'):
         shutil.copyfile(root/'home/assets'/name,output/'assets'/name)
     return {'glossary_entries':glossary_total,'glossary_works':len(glossary),'works':len(works),'collections':len(categories),'routes':[localized_path(p,language) for p in ['/anthology/',*map(route,works)]]}

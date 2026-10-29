@@ -92,14 +92,33 @@ test('English PNG default tier words fit narrow columns and custom long labels r
 });
 
 test('dynamic template disclaimers use the same translatable catalogue phrases as the initial page',()=>{
- const controller=fs.readFileSync(path.join(__dirname,'../home/assets/ranking.js'),'utf8');
- const match=controller.match(/M\.uiText\(\$\('template-note'\),state\.templateId==='sport'\?'([^']+)':'([^']+)'\)/);
- assert.ok(match,'both dynamic template disclaimers are available for regression coverage');
- const expected=['The sports example reflects personal preferences, not health or training advice.','A personal example, not an authoritative assessment.'];
- for(const [index,source] of match.slice(1).entries()){
+ const expected={food:'A personal example, not an authoritative assessment.',sport:'The sports example reflects personal preferences, not health or training advice.',book:'An informal ranking of the experience of reading the English originals. Just for fun, not a literary assessment.'};
+ for(const [templateId,english] of Object.entries(expected)){
+  const source=M.templateNote(templateId);
   const element={isConnected:true,textContent:''};
-  change('en');M.uiText(element,source);assert.equal(element.textContent,expected[index]);
+  change('en');M.uiText(element,() => M.templateNote(templateId));assert.equal(element.textContent,english);
   change('zh-CN');assert.equal(element.textContent,source);
-  change('en');assert.equal(element.textContent,expected[index]);
+  change('en');assert.equal(element.textContent,english);
  }
+});
+
+test('book display names, scene alternatives and PNG layouts translate without changing raw saves',()=>{
+ const state=M.createDefaultState('book'),before=M.serialize(state),key='book-alice-in-wonderland',item=state.items['book-'+key];
+ change('en');assert.equal(M.displayTitle(state),'Classic Books: Rank It Your Way');
+ assert.equal(M.displayItemName(item),'Alice’s Adventures in Wonderland');
+ assert.equal(M.displayArtAlt(key),M.BOOK_ART[key].alt_en);
+ const image={isConnected:true,setAttribute(name,value){this[name]=value;}};
+ M.uiAttr(image,'alt',()=>M.displayArtAlt(key));assert.equal(image.alt,M.BOOK_ART[key].alt_en);
+ change('zh-CN');assert.equal(image.alt,M.BOOK_ART[key].alt_zh);assert.equal(M.displayItemName(item),item.name);
+ assert.equal(M.displayArtAlt('unknown'),'');assert.equal(M.displayArtAlt('__proto__'),'');
+ for(const language of ['en','zh-CN'])for(const skin of ['classic','tech']){
+  change(language);const input=M.deserialize(before);M.setSkin(input,skin);const raw=M.serialize(input),layout=E.planLayout(input);
+  assert.equal(layout.rows.flatMap(row=>row.cards).length,20);assert.equal(M.serialize(input),raw);
+  const first=layout.rows[0].cards[0];assert.equal(first.lines.join(''),language==='en'?'Alice’s Adventures in Wonderland':item.name);
+ }
+ assert.equal(M.serialize(state),before);
+ change('en');assert.equal(M.displayItemName({...item,id:'custom-book'}),item.name);
+ assert.equal(M.displayItemName({...item,name:'个人阅读笔记'}),'个人阅读笔记');
+ assert.match(M.localize('恢复默认名著排行'),/Reset books example/);
+ assert.match(M.localize('导入“名著排行”备份？将替换此模板的内容，其他模板内容保留。请先导出 JSON 备份。'),/Import the books example backup/);
 });

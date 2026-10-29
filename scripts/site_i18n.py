@@ -188,7 +188,7 @@ def appearance_bootstrap():
 def version_shared_assets(page, root):
     """Refresh shared UI after local/production updates without flushing user data."""
     import hashlib
-    sources = {name: Path(root) / 'home/assets' / name for name in ['site-themes.css', 'portal.css', 'portfolio.css', 'photos.css', 'anthology.css', 'anthology-selection.css', 'game.css', 'ranking-skins.css', 'site-nav.css', 'site-music.css', 'portal.js', 'site-navigation.js', 'site-music.js', 'home-daily.css', 'home-daily.js', 'daily-reading.js', 'weather-map.js', 'weather-map.css', 'home-earth.js', 'astronomy-solar.js', 'english-corner.css', 'english-corner.js', 'english-numbers.js']}
+    sources = {name: Path(root) / 'home/assets' / name for name in ['site-themes.css', 'portal.css', 'portfolio.css', 'photos.css', 'anthology.css', 'anthology.js', 'anthology-selection.css', 'anthology-selection.js', 'game.css', 'ranking-skins.css', 'ranking-model.js', 'ranking-storage.js', 'ranking-export.js', 'ranking-images.js', 'ranking-view.js', 'ranking.js', 'site-nav.css', 'site-music.css', 'portal.js', 'site-navigation.js', 'site-music.js', 'home-daily.css', 'home-daily.js', 'daily-reading.js', 'weather-map.js', 'weather-map.css', 'home-earth.js', 'astronomy-solar.js', 'english-corner.css', 'english-corner.js', 'english-numbers.js', 'english-play.js', 'english-quotes.js', 'english-word-map.js', 'reading-annotations.css', 'reading-annotations.js', 'english-speech.js']}
     sources['style.css'] = Path(root) / 'blog/style.css'
     for name in ('d3-7.9.0.min.js', 'lunar-javascript-1.7.7.js'):
         sources[name] = Path(root) / 'home/assets/vendor' / name
@@ -199,12 +199,11 @@ def version_shared_assets(page, root):
         if source.is_symlink():
             raise ValueError('Shared UI assets cannot be symlinks.')
         return match.group(1) + route + '?v=' + hashlib.sha256(source.read_bytes()).hexdigest()[:12] + match.group(3)
-    return re.sub(r'((?:src|href)=["\'])(/(?:(?:articles/)?assets)/(?:site-themes|portal|portfolio|photos|anthology|anthology-selection|game|ranking-skins|site-nav|site-music|site-navigation|home-daily|daily-reading|weather-map|home-earth|astronomy-solar|english-corner|english-numbers|style|vendor/(?:d3-7\.9\.0\.min|lunar-javascript-1\.7\.7))\.(?:css|js))(?:\?[^"\']*)?(["\'])', version, page)
+    return re.sub(r'((?:src|href)=["\'])(/(?:(?:articles/)?assets)/(?:site-themes|portal|portfolio|photos|anthology|anthology-selection|game|ranking-skins|ranking-model|ranking-storage|ranking-export|ranking-images|ranking-view|ranking|site-nav|site-music|site-navigation|home-daily|daily-reading|weather-map|home-earth|astronomy-solar|english-corner|english-numbers|english-play|english-quotes|english-word-map|reading-annotations|english-speech|style|vendor/(?:d3-7\.9\.0\.min|lunar-javascript-1\.7\.7))\.(?:css|js))(?:\?[^"\']*)?(["\'])', version, page)
 
 
 NAV_GROUPS = (('/articles/', 'articles', [('/articles/', 'myArticles'), ('/anthology/', 'classics')], ['/articles/', '/anthology/']),
-              ('/english/', 'english', [], ['/english/']),
-              ('/projects/', 'projects', [('/projects/', 'aiApps'), ('/game/', 'games')], ['/projects/', '/game/']),
+              ('/projects/', 'projects', [('/projects/', 'aiApps'), ('/game/', 'games'), ('/english/', 'english')], ['/projects/', '/game/', '/english/']),
               ('/map/', 'map', [('/map/', 'myFootprints'), ('/photos/', 'myPhotos')], ['/map/', '/photos/']),
               ('/about/', 'about', [], ['/about/']))
 NAV_REQUIRED = (*NAV_KEYS.values(), "myArticles", "classics", "aiApps", "myFootprints", "myPhotos", "footprints",

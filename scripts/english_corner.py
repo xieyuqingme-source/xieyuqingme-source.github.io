@@ -1,4 +1,4 @@
-"""Offline, Chinese-first English Corner: reviewed cards, never private notes."""
+"""Offline, Chinese-first Learn English: reviewed cards, never private notes."""
 from collections import Counter
 from datetime import date, datetime, timedelta, timezone
 from hashlib import sha256
@@ -6,6 +6,7 @@ from html import escape
 from pathlib import Path
 from urllib.parse import quote, unquote, urlsplit
 import json
+import math
 import re
 import shutil
 import unicodedata
@@ -13,15 +14,20 @@ import unicodedata
 from markdown_it import MarkdownIt
 from history_today import _public_url
 from site_i18n import localize_page
+from game_assets import LEARNING_IMAGE_PATHS
+from reading_annotations import mark_reviewed_terms
 
 CHINA = timezone(timedelta(hours=8))
-COLUMNS = {"words", "classics", "between", "myths"}
+COLUMNS = {"words", "classics", "between", "myths", "mistakes"}
 LEVELS = {1: "入门", 2: "进阶", 3: "挑战"}
 SECTIONS = {"words": ("故事", "可以这样用"), "classics": ("导读", "原文", "可以这样用"),
-            "between": ("对照", "为什么", "可以这样用"), "myths": ("流行说法", "证据", "结论")}
+            "between": ("对照", "为什么", "可以这样用"), "myths": ("流行说法", "证据", "结论"),
+            "mistakes": ("错句", "对句", "为什么")}
 SLUG = re.compile(r"[a-z][a-z0-9-]{1,63}")
+RESERVED_SLUGS = {"tools", "play", "quotes", "map"}
 PRIVATE = re.compile(r"(?<![A-Za-z0-9])[A-Za-z]:[\\/]|\\\\[^\s\\]+[\\/]|Obsidian Vault|/(?:Users|mnt)/", re.I)
-ASSETS = ("english-corner.css", "english-corner.js", "english-numbers.js")
+ASSETS = ("english-corner.css", "english-corner.js", "english-numbers.js", "english-play.js", "english-quotes.js", "english-word-map.js", "reading-annotations.css", "reading-annotations.js", "english-speech.js")
+MAP_ASSETS = ("map-land.json", "vendor/d3-7.9.0.min.js", "vendor/D3-LICENSE")
 
 
 def lf(text):
@@ -39,20 +45,20 @@ def word_count(text):
 def public_text(value, maximum=2000, multiline=False):
     if (not isinstance(value, str) or not value.strip() or len(value) > maximum or PRIVATE.search(value)
             or any((ord(c) < 32 and not (multiline and c in "\n\r\t")) or ord(c) == 127 for c in value)):
-        raise ValueError("English Corner needs public text without private paths or control characters.")
+        raise ValueError("Learn English needs public text without private paths or control characters.")
     return value
 
 
 def public_url(value):
     parts = _public_url(value)
     if not parts.hostname or "." not in parts.hostname and ":" not in parts.hostname or "Obsidian Vault" in unquote(value) or re.search(r"[<>\\\x00-\x1f\x7f]", unquote(value)):
-        raise ValueError("English Corner sources need safe public HTTPS URLs.")
+        raise ValueError("Learn English sources need safe public HTTPS URLs.")
     return value
 
 
 def exact_fields(value, required, optional=()):
     if not isinstance(value, dict) or not set(required).issubset(value) or set(value) - set(required) - set(optional):
-        raise ValueError("Incomplete or unknown English Corner fields.")
+        raise ValueError("Incomplete or unknown Learn English fields.")
 
 
 def iso_date(value):
@@ -72,11 +78,11 @@ def source_path(root, relative):
     root = Path(root).resolve()
     path = root / relative
     if not path.resolve().is_relative_to(root):
-        raise ValueError("English Corner sources must stay in the public repository.")
+        raise ValueError("Learn English sources must stay in the public repository.")
     current = path
     while current != root:
         if current.is_symlink() or (hasattr(current, "is_junction") and current.is_junction()):
-            raise ValueError("Linked English Corner paths are not supported.")
+            raise ValueError("Linked Learn English paths are not supported.")
         current = current.parent
     return path
 
@@ -113,23 +119,23 @@ def related_route(value, known, article_routes):
 def validate_corner(data, bodies, notes, article_routes=(), today=None):
     exact_fields(data, ("version", "columns", "cards"))
     if type(data["version"]) is not int or data["version"] != 1 or not isinstance(data["columns"], list) or not isinstance(data["cards"], list):
-        raise ValueError("Unsupported English Corner catalog.")
+        raise ValueError("Unsupported Learn English catalog.")
     seen_columns = set()
     for column in data["columns"]:
         exact_fields(column, ("id", "title", "english", "description"))
         if column["id"] not in COLUMNS or column["id"] in seen_columns:
-            raise ValueError("English Corner needs four unique known columns.")
+            raise ValueError("Learn English needs unique known columns.")
         seen_columns.add(column["id"])
         for key in ("title", "english", "description"):
             public_text(column[key], 160)
     if seen_columns != COLUMNS:
-        raise ValueError("English Corner needs all four columns.")
+        raise ValueError("Learn English needs all configured columns.")
     seen, cards = set(), []
     required = {"slug", "column", "title", "level", "tags", "summary", "sources", "related", "added", "status", "ai_assisted"}
     for item in data["cards"]:
         exact_fields(item, required, ("headword", "journey", "work", "verdict"))
         slug, column = item["slug"], item["column"]
-        if not isinstance(slug, str) or not SLUG.fullmatch(slug) or slug == "tools" or slug in seen or column not in COLUMNS:
+        if not isinstance(slug, str) or not SLUG.fullmatch(slug) or slug in RESERVED_SLUGS or slug in seen or column not in COLUMNS:
             raise ValueError("Card slugs and columns must be unique, public and known.")
         seen.add(slug)
         if type(item["level"]) is not int or item["level"] not in LEVELS or type(item["ai_assisted"]) is not bool:
@@ -157,7 +163,8 @@ def validate_corner(data, bodies, notes, article_routes=(), today=None):
         for token in MarkdownIt("commonmark", {"html": False}).parse(body):
             for child in token.children or ():
                 if child.type == "image":
-                    raise ValueError("The first English Corner release uses no images.")
+                    if child.attrGet("src") not in LEARNING_IMAGE_PATHS or not child.content.strip():
+                        raise ValueError("Learning images need alt text and an explicitly registered local book WebP.")
                 if child.type == "link_open":
                     href = child.attrGet("href") or ""
                     if href.startswith("https://"):
@@ -176,9 +183,12 @@ def validate_corner(data, bodies, notes, article_routes=(), today=None):
             if not isinstance(journey, list) or len(journey) > 8:
                 raise ValueError("Invalid word journey.")
             for stop in journey:
-                exact_fields(stop, ("language", "form", "period"))
+                exact_fields(stop, ("language", "form", "period", "place_zh", "lon", "lat", "approximate"))
                 public_text(stop["language"], 60)
                 public_text(stop["form"], 80)
+                public_text(stop["place_zh"], 80)
+                if stop["approximate"] is not True or any(type(stop[k]) not in (int,float) or not math.isfinite(stop[k]) or abs(stop[k]) > limit for k,limit in (("lon",180),("lat",90))):
+                    raise ValueError("Word-map coordinates must be finite, bounded representative points marked approximate.")
                 if stop["period"] != "":
                     public_text(stop["period"], 60)
         elif any(key in item for key in ("headword", "journey")):
@@ -230,14 +240,14 @@ def validate_corner(data, bodies, notes, article_routes=(), today=None):
 
 def load_english_corner(root, today=None):
     root = Path(root)
-    for relative in ("home/english-corner.template.html", *("home/assets/" + name for name in ASSETS)):
+    for relative in ("home/english-corner.template.html", *("home/assets/" + name for name in (*ASSETS,*MAP_ASSETS))):
         if not source_path(root, relative).is_file():
-            raise ValueError("Missing English Corner template or local asset.")
+            raise ValueError("Missing Learn English template or local asset.")
     catalog = json.loads(source_path(root, "english-corner/catalog.json").read_text(encoding="utf-8"))
     bodies = {}
     for card in catalog.get("cards", []):
         slug = card.get("slug")
-        if not isinstance(slug, str) or not SLUG.fullmatch(slug) or slug == "tools":
+        if not isinstance(slug, str) or not SLUG.fullmatch(slug) or slug in RESERVED_SLUGS:
             raise ValueError("Invalid explicit card path.")
         bodies[slug] = source_path(root, "english-corner/cards/" + slug + ".md").read_text(encoding="utf-8")
     notes = json.loads(source_path(root, "english-corner/notes.json").read_text(encoding="utf-8"))
@@ -246,7 +256,23 @@ def load_english_corner(root, today=None):
         for path in (root / directory).rglob("*.md"):
             if not any(part.startswith(".") for part in path.relative_to(root).parts):
                 articles.add("/articles/" + quote(path.relative_to(root).with_suffix(".html").as_posix(), safe="/"))
-    return validate_corner(catalog, bodies, notes, articles, today)
+    corner = validate_corner(catalog, bodies, notes, articles, today)
+    corner["intro"] = load_intro(root)
+    from english_quiz import load_quiz
+    corner["quiz"] = load_quiz(root, corner["cards"])
+    return corner
+
+
+def load_intro(root):
+    data = json.loads(source_path(root, "home/english-intro.json").read_text(encoding="utf-8"))
+    exact_fields(data, ("version", "name", "english_name", "intro", "description", "editorial", "contact"))
+    if type(data["version"]) is not int or data["version"] != 1:
+        raise ValueError("Unsupported learning introduction.")
+    for key in ("name", "english_name", "intro", "description", "editorial"):
+        public_text(data[key], 500)
+    if data["contact"] != "xieyuqing.me@gmail.com":
+        raise ValueError("Use the public site contact address.")
+    return data
 
 
 def external(url, label):
@@ -265,74 +291,205 @@ def render_index(corner):
                 continue
             rows.append(f'<article class="ec-row" id="card-{card["slug"]}" data-ec-row data-column="{card["column"]}" data-level="{card["level"]}"><div class="ec-row-heading"><h3><a data-ec-card href="/english/{card["slug"]}/">{escape(card["title"])}</a></h3><span class="ec-meta">{LEVELS[card["level"]]} · {escape(" / ".join(card["tags"]))}</span></div><p>{escape(card["summary"])}</p></article>')
         groups.append(f'<section data-ec-group id="column-{column["id"]}"><h2>{escape(column["title"])}</h2>{"".join(rows)}</section>')
-    return ('<header class="ec-intro"><p class="ec-eyebrow" lang="en">English Corner</p><h1>雨聊英语角</h1><p class="ec-lead">英语专业毕业，英语不太行。现在开始补课，顺便带你逛逛英语世界：词从哪来，经典里写了什么，中英文差在哪。</p><a href="/today/#today-reading">每天一句英语名句，在「今天」页 →</a></header>'
-            + '<nav class="ec-columns" aria-label="英语角栏目">' + columns + '</nav>' + filters
+    intro = corner.get("intro")
+    heading = ('<header class="ec-intro"><p class="ec-eyebrow" lang="en">' + escape(intro["english_name"]) + '</p><h1>' + escape(intro["name"]) + '</h1><p class="ec-lead">' + escape(intro["intro"]) + '</p><a href="/today/#today-reading">每天一句英语名句，在「今天」页 →</a></header>') if intro else ''
+    editorial = ('<details class="ec-editorial"><summary>这一栏是怎么写的</summary><p>' + escape(intro["editorial"]) + '<a href="mailto:' + escape(intro["contact"],quote=True) + '">反馈问题</a>。</p></details>') if intro else ''
+    return (heading
+            + '<nav class="ec-columns" aria-label="学英语栏目">' + columns + '</nav>' + filters
             + '<p data-ec-count class="ec-meta" role="status" aria-live="polite"></p><p data-ec-empty hidden>这个组合暂时没有卡片，试试其他栏目或难度。</p>'
             + '<div class="ec-directory">' + ''.join(groups) + '</div>'
+            + '<section class="ec-play-entry"><p class="ec-eyebrow">玩一会儿</p><h2><a href="/english/play/">英语小测验 →</a></h2><p>认作家、辨词源、猜语言，每轮十题，不计时。</p><h2><a href="/game/ranking/">名著从夯到拉 →</a></h2><p>在排行工具里选择「名著排行」模板，排一排阅读偏好。只是娱乐，不是文学评价。</p><p class="ec-meta">配图为 AI 生成的油画风格意象。</p></section>'
+            + '<section class="ec-tool-entry"><p class="ec-eyebrow">慢慢读</p><h2><a href="/english/quotes/">英语名句库 →</a></h2><p>按作者或年代，找一句想读的话。</p></section>'
+            + '<section class="ec-tool-entry"><p class="ec-eyebrow">在地图上看</p><h2><a href="/english/map/">单词足迹地图 →</a></h2><p>选一个词，看看语言与故事之间的联系。</p></section>'
             + '<section class="ec-tool-entry"><p class="ec-eyebrow">小工具</p><h2><a href="/english/tools/numbers/">中英数字转换器</a></h2><p>14亿是多少 billion？把万、亿和 thousand、million 放在一起看。</p></section>'
-            + '<details class="ec-editorial"><summary>这一栏是怎么写的</summary><p>初稿有 AI 辅助，事实逐条核对公开来源；原文只收公版作品，自编例句明确标注。难词释义按语境整理，不是词典逐字引文。发现错误请<a href="mailto:xieyuqing.me@gmail.com">写信告诉我</a>。</p></details>')
+            + editorial)
+
+
+def speech_button(text=None, target=None):
+    value = ' data-speech-text="'+escape(text,quote=True)+'"' if text is not None else ' data-speech-target="'+escape(target,quote=True)+'"'
+    return '<button class="ec-speech-button" type="button" data-english-speech'+value+' aria-pressed="false" aria-label="朗读英文，再次点击停止" hidden>朗读</button>'
+
+
+def speech_notice():
+    return '<p class="ec-meta ec-speech-note" data-english-speech-note hidden>朗读使用设备自带的本地英语语音，再次点击可停止。</p>'
+
+
+def reading_popup(notes):
+    from daily_brief import safe_json
+    entries=[{"term":n["term"],"explanation":n["meaning"],"source":n["source_label"],"source_url":n["source_url"],"checked_on":n["checked_on"]} for n in notes]
+    return ('<script type="application/json" data-reading-notes>'+safe_json(entries)+'</script>'
+        '<section class="reading-note-popup" id="reading-note" data-reading-note-popup role="dialog" aria-modal="false" aria-labelledby="reading-note-title" aria-describedby="reading-note-explanation" tabindex="-1" hidden>'
+        '<header><h2 id="reading-note-title" data-reading-note-title></h2><button type="button" data-reading-note-close>关闭</button></header>'
+        '<p id="reading-note-explanation" data-reading-note-explanation></p><p class="ec-meta" data-reading-note-source></p>'
+        '<a data-reading-note-link target="_blank" rel="noopener noreferrer">词典依据 ↗</a></section>')
 
 
 def render_card(card, corner):
     column = next(c for c in corner["columns"] if c["id"] == card["column"])
-    breadcrumb = f'<nav class="ec-breadcrumb" aria-label="面包屑"><a data-ec-return href="/english/#card-{card["slug"]}">英语角</a><span aria-hidden="true"> / </span><a data-ec-return href="/english/?column={card["column"]}#card-{card["slug"]}">{escape(column["title"])}</a></nav>'
+    breadcrumb = f'<nav class="ec-breadcrumb" aria-label="面包屑"><a data-ec-return href="/english/#card-{card["slug"]}">学英语</a><span aria-hidden="true"> / </span><a data-ec-return href="/english/?column={card["column"]}#card-{card["slug"]}">{escape(column["title"])}</a></nav>'
     header = f'<header class="ec-card-intro"><h1>{escape(card["title"])}</h1><p class="ec-meta">{escape(column["title"])} · {LEVELS[card["level"]]} · {escape(" / ".join(card["tags"]))}</p></header><aside class="ec-summary"><h2>30秒版</h2><p>{escape(card["summary"])}</p></aside>'
     special = ''
     if card["column"] == "words" and card.get("journey"):
         stamps = '<span aria-hidden="true"> → </span>'.join('<span class="ec-stamp"><small>' + escape(s["language"]) + '</small><strong lang="en">' + escape(s["form"]) + '</strong>' + ('<small>' + escape(s["period"]) + '</small>' if s["period"] else '') + '</span>' for s in card["journey"])
-        special = '<section class="ec-passport"><h2>单词护照 · <span lang="en">' + escape(card["headword"]) + '</span></h2><div>' + stamps + '</div></section>'
+        special = '<section class="ec-passport"><h2>单词护照 · <span lang="en">' + escape(card["headword"]) + '</span> '+speech_button(text=card["headword"])+'</h2><div>' + stamps + '</div><p><a href="/english/map/?word=' + card["slug"] + '">在单词地图上看看 →</a></p></section>'
+    elif card["column"] == "words":
+        special = '<p class="ec-headword"><span lang="en">'+escape(card["headword"])+'</span> '+speech_button(text=card["headword"])+ '</p>'
     elif card["column"] == "myths":
         special = '<p class="ec-verdict">判定：<strong>' + escape(card["verdict"]) + '</strong></p>'
     elif card["column"] == "classics":
         w = card["work"]
-        special = ('<aside class="ec-edition"><p>' + escape(w["author_zh"]) + '（<span lang="en">' + escape(w["author_en"]) + '</span>） · ' + escape(w["title_zh"]) + ' <span lang="en">' + escape(w["title_en"]) + '</span></p><p>' + str(w["first_published"]) + '年首刊 · ' + escape(w["range"]) + '</p><p>' + external(w["edition_url"], w["edition"]) + '</p></aside>')
+        special = ('<aside class="ec-edition"><p>' + escape(w["author_zh"]) + '（<span lang="en">' + escape(w["author_en"]) + '</span>） · ' + escape(w["title_zh"]) + ' <span lang="en">' + escape(w["title_en"]) + '</span></p><p>' + '作品/所引版本：' + str(w["first_published"]) + '年 · ' + escape(w["range"]) + '</p><p>' + external(w["edition_url"], w["edition"]) + '</p></aside>')
     parser = MarkdownIt("commonmark", {"html": False, "breaks": True}).enable("table")
     content = []
     for i, (heading, body) in enumerate(card["sections"].items()):
         original = card["column"] == "classics" and heading == "原文"
         heading_language = ' lang="zh-CN"' if original else ''
-        content.append(f'<section class="ec-section{" ec-original" if original else ""}" id="reading-{i}"' + (' lang="en"' if original else '') + f'><h2{heading_language}>{escape(heading)}</h2>{parser.render(body)}</section>')
+        example_note = '<p class="ec-example-note">例句为编写的示例。</p>' if heading == "可以这样用" or card["column"] == "mistakes" and heading == "错句" else ''
+        rendered = parser.render(body)
         if original:
-            rows = ''.join('<tr><th scope="row" lang="en">' + escape(n["term"]) + '</th><td>' + escape(n["meaning"]) + '</td><td>' + external(n["source_url"],n["source_label"]) + '<small> · ' + escape(n["checked_on"]) + '</small></td></tr>' for n in corner["notes"][card["slug"]])
-            content.append('<section class="ec-vocabulary"><h2>难词，放回这段话里看</h2><div class="ec-table"><table><thead><tr><th>词语</th><th>本段含义</th><th>词典依据</th></tr></thead><tbody>' + rows + '</tbody></table></div></section>')
-    sources = '<section class="ec-sources"><h2>来源与版本</h2><ol>' + ''.join('<li>' + external(s["url"], s["label"]) + '<small> · 核对于 ' + escape(s["checked_on"]) + '</small></li>' for s in card["sources"]) + '</ol>'
+            tokens=parser.parse(body)
+            def marker(text,index,entry):
+                return '<span class="reading-annotation" data-reading-note-index="'+str(index)+'" role="button" tabindex="0" aria-haspopup="dialog" aria-controls="reading-note" aria-label="查看'+escape(text,quote=True)+'释义">'+escape(text)+'</span>'
+            mark_reviewed_terms(tokens,corner["notes"][card["slug"]],marker)
+            rendered='<div id="english-classic-text" data-reading-area>'+parser.renderer.render(tokens,parser.options,{})+'</div>'
+        listen = ' '+speech_button(target="english-classic-text") if original else ''
+        content.append(f'<section class="ec-section{" ec-original" if original else ""}" id="reading-{i}"' + (' lang="en"' if original else '') + f'><h2{heading_language}>{escape(heading)}{listen}</h2>{example_note}{rendered}</section>')
+        if original:
+            rows = ''.join('<tr><th scope="row" lang="en">' + escape(n["term"]) + '</th><td>' + escape(n["meaning"]) + '</td><td><span title="核对于' + escape(n["checked_on"],quote=True) + '">' + external(n["source_url"],n["source_label"]) + '</span></td></tr>' for n in corner["notes"][card["slug"]])
+            content.append('<details class="ec-vocabulary"><summary>难词，放回这段话里看</summary><div class="ec-table"><table><thead><tr><th>词语</th><th>本段含义</th><th>词典依据</th></tr></thead><tbody>' + rows + '</tbody></table></div></details>')
+    source_heading = "来源" if card["column"] == "mistakes" else "来源与版本"
+    sources = '<section class="ec-sources"><h2>' + source_heading + '</h2><ol>' + ''.join('<li>' + external(s["url"], s["label"]) + '<small> · 核对于 ' + escape(s["checked_on"]) + '</small></li>' for s in card["sources"]) + '</ol>'
     if card["column"] == "classics":
-        sources += '<p>公版范围：所引原文首刊于' + str(card["work"]["first_published"]) + '年，作者卒于' + str(card["work"]["author_died"]) + '年；按首刊满96年、作者去世满51年的保守门槛筛选。只取作品正文，不含现代编者导言或注释。</p>'
+        sources += '<p>公版范围：所引作品/版本年为' + str(card["work"]["first_published"]) + '年，作者卒于' + str(card["work"]["author_died"]) + '年；按出版年份差至少96年、作者卒年差至少51年的保守门槛筛选。只取作品正文，不含现代编者导言或注释。</p>'
     sources += ('<p>本文初稿与自编例句有 AI 辅助；事实与引文按上述来源核对，中文释义为本站整理。</p>' if card["ai_assisted"] else '') + '</section>'
     titles = {c["slug"]: c["title"] for c in corner["cards"]}
-    related = '<aside class="ec-related"><h2>接着逛逛</h2><ul>' + ''.join('<li><a href="' + escape(related_route(r,titles,{r} if r.startswith('/articles/') else set()),quote=True) + '">' + escape(titles.get(r, "谢雨卿的《英语的千和汉语的万》")) + ' →</a></li>' for r in card["related"]) + '</ul></aside>' if card["related"] else ''
+    related = '<aside class="ec-related"><h2>接着逛逛</h2><ul>' + ''.join('<li><a href="' + escape(related_route(r,titles,{r} if r.startswith('/articles/') else set()),quote=True) + '">延伸阅读：' + escape(titles.get(r, "《英语的千和汉语的万》")) + ' →</a></li>' for r in card["related"]) + '</ul></aside>' if card["related"] else ''
     index = corner["cards"].index(card)
     previous_next = '<nav class="ec-adjacent" aria-label="相邻卡片">'
     if index:
         previous_next += f'<a href="/english/{corner["cards"][index-1]["slug"]}/">← {escape(corner["cards"][index-1]["title"])}</a>'
     if index + 1 < len(corner["cards"]):
         previous_next += f'<a href="/english/{corner["cards"][index+1]["slug"]}/">{escape(corner["cards"][index+1]["title"])} →</a>'
-    return breadcrumb + header + special + '<div class="ec-prose">' + ''.join(content) + '</div>' + sources + related + previous_next + '</nav>'
+    classic = card["column"] == "classics"
+    prose = '<div class="ec-prose"'+(' data-reading-annotations' if classic else '')+'>'+''.join(content)+(reading_popup(corner["notes"][card["slug"]]) if classic else '')+'</div>'
+    return breadcrumb + header + special + (speech_notice() if card["column"] in {"words","classics"} else '') + prose + sources + related + previous_next + '</nav>'
+
+
+def quote_lines(value):
+    return escape(value).replace("\n", "<br>")
+
+
+def render_quote_library(data):
+    from daily_brief import english_quote_note
+    quotes = sorted(data["quotes"], key=lambda q:(q["first_published"],q["author_en"],q["id"]))
+    authors = sorted({q["author_zh"]:q["author_en"] for q in quotes}.items(),key=lambda item:item[1])
+    periods = sorted({q["first_published"]//100*100 for q in quotes})
+    author_options = ''.join('<option value="'+escape(zh,quote=True)+'">'+escape(zh+'（'+en+'）')+'</option>' for zh,en in authors)
+    period_options = ''.join('<option value="'+str(year)+'">'+str(year)+'–'+str(year+99)+'年</option>' for year in periods)
+    rows = []
+    for q in quotes:
+        source = q["author_zh"]+'（'+q["author_en"]+'） · '+q["work_zh"]+' · '+q["locator_zh"]
+        published = '<p>'+external(q["translation_source"]["url"],"译文版本")+'</p>' if q["translation_source"]["type"] == "published" else ''
+        related = '<p><a href="'+escape(q["related"],quote=True)+'">读读相关卡片 →</a></p>' if q.get("related") else ''
+        rows.append('<article class="ec-library-quote" data-english-quote-row id="quote-'+q["id"]+'" data-author="'+escape(q["author_zh"],quote=True)+'" data-period="'+str(q["first_published"]//100*100)+'">'
+            '<blockquote><p class="ec-library-original" id="english-quote-text-'+q["id"]+'" lang="en">'+quote_lines(q["text"])+'</p>'+speech_button(target="english-quote-text-"+q["id"])+'<p class="ec-library-translation" lang="zh-CN">'+quote_lines(q["translation"])+'</p></blockquote>'
+            '<p class="ec-meta">'+external(q["url"],source)+' · 作品/所引版本：'+str(q["first_published"])+'年</p>'
+            '<details class="ec-library-note"><summary>这句话里有什么</summary><p>'+escape(english_quote_note(q))+'</p>'+published+related+'</details></article>')
+    return ('<nav class="ec-breadcrumb" aria-label="面包屑"><a href="/english/">学英语</a> / 慢慢读</nav>'
+        '<header class="ec-card-intro"><p class="ec-eyebrow" lang="en">A few words, a wider world</p><h1>英语名句库</h1><p class="ec-lead">留意一个词、一种句法，或一句话背后的场景。</p><a href="/english/play/">猜猜这句话出自哪位作家 →</a></header>'
+        '<section data-english-quote-library><form class="ec-quote-tools" data-english-quote-filters hidden><label for="ec-quote-author">作者 <select id="ec-quote-author"><option value="all">全部作者</option>'+author_options+'</select></label>'
+        '<label for="ec-quote-period">作品/版本时期 <select id="ec-quote-period"><option value="all">全部时期</option>'+period_options+'</select></label></form>'
+        '<p id="ec-quote-count" class="ec-meta" role="status" aria-live="polite">共'+str(len(quotes))+'句</p><p id="ec-quote-empty" hidden>这个组合暂时没有句子，换个作者或时期看看。</p>'
+        '<div class="ec-quote-list">'+''.join(rows)+'</div>'+speech_notice()+'</section>')
+
+
+def render_play(corner, quotes):
+    from english_quiz import build_quiz_pools
+    from daily_brief import safe_json
+    knowledge = corner.get("quiz",[])
+    pools = corner.get("quiz_pools")
+    if pools is None:
+        pools = build_quiz_pools(quotes,knowledge)
+    cards = {c["slug"]:c for c in corner["cards"]}
+    slugs = list(dict.fromkeys(q["card"] for q in knowledge)) or list(cards)[:8]
+    links = ''.join('<li><a href="/english/'+slug+'/">'+escape(cards[slug]["title"])+'</a></li>' for slug in slugs)
+    return ('<nav class="ec-breadcrumb" aria-label="面包屑"><a href="/english/">学英语</a> / 玩一会儿</nav>'
+        '<header class="ec-card-intro"><p class="ec-eyebrow" lang="en">A little curiosity</p><h1>英语小测验</h1><p class="ec-lead">认作家、辨词源、猜语言。每轮十题，不计时，答完就能看看来龙去脉。</p></header>'
+        '<section class="ec-quiz" data-english-play><div data-quiz-ui hidden><div class="ec-quiz-modes" role="group" aria-label="选择玩法">'
+        '<button type="button" data-quiz-mode="authors">这句话谁写的？</button><button type="button" data-quiz-mode="etymology">这个词源是真的吗？</button><button type="button" data-quiz-mode="origins">这个词从哪里来？</button></div>'
+        '<p class="ec-meta" data-quiz-progress>选一种玩法，开始吧。</p><h2 data-quiz-prompt tabindex="-1"></h2><blockquote class="ec-quiz-english" data-quiz-english lang="en" hidden></blockquote>'
+        '<div class="ec-quiz-choices" data-quiz-choices role="group" aria-label="答案选项"></div><section class="ec-quiz-feedback" data-quiz-feedback tabindex="-1" aria-live="polite" hidden></section>'
+        '<button class="ec-quiz-action" type="button" data-quiz-next hidden>下一题</button><section class="ec-quiz-results" data-quiz-results tabindex="-1" aria-live="polite" hidden></section>'
+        '<button class="ec-quiz-action" type="button" data-quiz-restart hidden>再来一轮</button></div><p data-quiz-error role="status" hidden></p>'
+        '<noscript><p>小测验需要 JavaScript，可以先读这些卡片：</p><ul>'+links+'</ul><p><a href="/english/quotes/">完整英语名句库 →</a></p></noscript>'
+        '<script type="application/json" id="english-quiz-data">'+safe_json(pools)+'</script></section>'
+        '<p class="ec-editorial">题干与解释为编写内容，整理有 AI 辅助，依据题后来源核对。</p>')
+
+
+def render_number_practice():
+    return ('<section class="ec-number-practice" data-number-practice hidden><h2>练一练</h2><p class="ec-meta">换一种单位写出同一个数。这里练数字加单位，不练英文全拼；不计分、不保存答案。</p>'
+        '<div class="ec-practice-modes" role="group" aria-label="练习方向"><button type="button" data-number-practice-mode="zh-en" aria-pressed="true">中文 → 英文</button><button type="button" data-number-practice-mode="en-zh" aria-pressed="false">英文 → 中文</button></div>'
+        '<p class="ec-practice-question" data-number-practice-question></p><label for="number-practice-answer">你的答案</label><input id="number-practice-answer" data-number-practice-answer type="text" autocomplete="off" spellcheck="false" aria-describedby="number-practice-help number-practice-feedback">'
+        '<p class="ec-meta" id="number-practice-help">英文用 thousand / million / billion / trillion；中文用万或亿，例如 1.4 billion 或 14亿。</p>'
+        '<div class="ec-practice-actions"><button type="button" data-number-practice-check>检查答案</button><button type="button" data-number-practice-next>下一题</button></div><p id="number-practice-feedback" data-number-practice-feedback role="status" aria-live="polite"></p></section>')
 
 
 def render_numbers():
-    return '''<nav class="ec-breadcrumb" aria-label="面包屑"><a href="/english/">英语角</a> / 小工具</nav><header class="ec-card-intro"><p class="ec-eyebrow" lang="en">Numbers, in two rhythms</p><h1>中英数字转换器</h1><p class="ec-lead">中文四位一进，英文三位一进。同一个数，换种分法就看明白了。</p></header><section class="ec-number-tool" data-english-numbers><label for="english-number-input">输入一个数</label><input id="english-number-input" type="text" inputmode="text" value="14亿" autocomplete="off" spellcheck="false" aria-describedby="english-number-help english-number-error"><p id="english-number-help" class="ec-meta">支持阿拉伯数字、数字加万/亿或 thousand/million/billion/trillion，最多4位小数；范围为0至10¹⁶（不含）。暂不支持纯汉字数词及含义不同的“兆”。</p><div class="ec-examples" aria-label="换算示例"><span>试一试</span><button type="button" data-number-example="14亿">14亿</button><button type="button" data-number-example="960万">960万</button><button type="button" data-number-example="8300万">8300万</button><button type="button" data-number-example="48.6万">48.6万</button><button type="button" data-number-example="1.4 billion">1.4 billion</button></div><p id="english-number-error" role="status"></p><div id="english-number-results" aria-live="polite" aria-atomic="true"></div><noscript><p>转换需要 JavaScript。下方对照表仍可直接阅读。</p></noscript></section><section class="ec-prose"><h2>先记住这几个台阶</h2><div class="ec-table"><table><thead><tr><th>中文</th><th>英文</th><th>数值</th></tr></thead><tbody><tr><td>万</td><td lang="en">ten thousand</td><td>10,000</td></tr><tr><td>十万</td><td lang="en">a hundred thousand</td><td>100,000</td></tr><tr><td>百万</td><td lang="en">a million</td><td>1,000,000</td></tr><tr><td>千万</td><td lang="en">ten million</td><td>10,000,000</td></tr><tr><td>亿</td><td lang="en">a hundred million</td><td>100,000,000</td></tr><tr><td>十亿</td><td lang="en">a billion</td><td>1,000,000,000</td></tr></tbody></table></div><h2>读数的小习惯</h2><p>英文全拼采用美式写法，不加 and；英式常在百位后加 and，例如 one hundred and five。21至99的十位与个位之间用连字符。四位分节只用于观察中文单位，是演示写法，不当作英文标点规范。</p><p>示例只演示数字换算，不另外断言人口或面积。为什么中文和英文的台阶不同？读<a href="/english/qian-and-wan/">《英语的千和汉语的万》→</a></p><h2>参考</h2><p>单位与英语写法参见 <a href="https://dictionaryblog.cambridge.org/2016/08/31/one-thousand-one-hundred-and-ninety-three-how-to-say-numbers-1/" target="_blank" rel="noopener noreferrer">Cambridge Dictionary：怎样读数字 ↗</a>；另参见 <a href="https://www.uoc.edu/en/services/language/style/numbers" target="_blank" rel="noopener noreferrer">UOC 英语风格指南：数词、连字符和短标度 ↗</a>（核对于2026-10-29）。本工具说明与示例整理有 AI 辅助。</p></section>'''
+    return '''<nav class="ec-breadcrumb" aria-label="面包屑"><a href="/english/">学英语</a> / 小工具</nav><header class="ec-card-intro"><p class="ec-eyebrow" lang="en">Numbers, in two rhythms</p><h1>中英数字转换器</h1><p class="ec-lead">中文四位一进，英文三位一进。同一个数，换种分法就看明白了。</p></header><section class="ec-number-tool" data-english-numbers><label for="english-number-input">输入一个数</label><input id="english-number-input" type="text" inputmode="text" value="14亿" autocomplete="off" spellcheck="false" aria-describedby="english-number-help english-number-error"><p id="english-number-help" class="ec-meta">支持阿拉伯数字、数字加万/亿或 thousand/million/billion/trillion，最多4位小数；范围为0至10¹⁶（不含）。暂不支持纯汉字数词及含义不同的“兆”。</p><div class="ec-examples" aria-label="换算示例"><span>试一试</span><button type="button" data-number-example="14亿">14亿</button><button type="button" data-number-example="960万">960万</button><button type="button" data-number-example="8300万">8300万</button><button type="button" data-number-example="48.6万">48.6万</button><button type="button" data-number-example="1.4 billion">1.4 billion</button></div><p id="english-number-error" role="status"></p><div id="english-number-results" aria-live="polite" aria-atomic="true"></div><noscript><p>转换需要 JavaScript。下方对照表仍可直接阅读。</p></noscript></section>''' + render_number_practice() + '''<section class="ec-prose"><h2>先记住这几个台阶</h2><div class="ec-table"><table><thead><tr><th>中文</th><th>英文</th><th>数值</th></tr></thead><tbody><tr><td>万</td><td lang="en">ten thousand</td><td>10,000</td></tr><tr><td>十万</td><td lang="en">a hundred thousand</td><td>100,000</td></tr><tr><td>百万</td><td lang="en">a million</td><td>1,000,000</td></tr><tr><td>千万</td><td lang="en">ten million</td><td>10,000,000</td></tr><tr><td>亿</td><td lang="en">a hundred million</td><td>100,000,000</td></tr><tr><td>十亿</td><td lang="en">a billion</td><td>1,000,000,000</td></tr></tbody></table></div><h2>读数的小习惯</h2><p>英文全拼采用美式写法，不加 and；英式常在百位后加 and，例如 one hundred and five。21至99的十位与个位之间用连字符。四位分节只用于观察中文单位，是演示写法，不当作英文标点规范。</p><p>示例只演示数字换算，不另外断言人口或面积。为什么中文和英文的台阶不同？读<a href="/english/qian-and-wan/">《英语的千和汉语的万》→</a></p><h2>参考</h2><p>单位与英语写法参见 <a href="https://dictionaryblog.cambridge.org/2016/08/31/one-thousand-one-hundred-and-ninety-three-how-to-say-numbers-1/" target="_blank" rel="noopener noreferrer">Cambridge Dictionary：怎样读数字 ↗</a>；另参见 <a href="https://www.uoc.edu/en/services/language/style/numbers" target="_blank" rel="noopener noreferrer">UOC 英语风格指南：数词、连字符和短标度 ↗</a>（核对于2026-10-29）。本工具说明与示例整理有 AI 辅助。</p></section>'''
 
 
-def build_english_corner(root, output, address, corner):
+def word_map_data(corner):
+    return {"version":1,"words":[{key:card[key] for key in ("slug","headword","title","summary","journey")} | {"reading":"/english/"+card["slug"]+"/"} for card in corner["cards"] if card.get("journey")]}
+
+
+def render_word_map(corner):
+    from daily_brief import safe_json
+    words = word_map_data(corner)["words"]
+    buttons = ''.join('<button type="button" data-word-map-slug="'+word["slug"]+'" aria-pressed="false" lang="en">'+escape(word["headword"])+'</button>' for word in words)
+    fallback = []
+    for word in words:
+        stops = ''.join('<li><strong>'+escape(stop["language"])+'</strong> · <span lang="en">'+escape(stop["form"])+'</span><br><small>'+escape(stop["place_zh"])+((' · '+escape(stop["period"])) if stop["period"] else '')+'</small></li>' for stop in word["journey"])
+        fallback.append('<article><h3><a href="'+word["reading"]+'">'+escape(word["headword"]+' · '+word["title"])+' →</a></h3><p>'+escape(word["summary"])+'</p><ol>'+stops+'</ol></article>')
+    return ('<nav class="ec-breadcrumb" aria-label="面包屑"><a href="/english/">学英语</a> / 在地图上看</nav>'
+        '<header class="ec-card-intro"><p class="ec-eyebrow" lang="en">Words across the world</p><h1>单词足迹地图</h1><p class="ec-lead">选一个词，看看语言与故事之间的联系。</p></header>'
+        '<section class="ec-word-map" data-english-word-map><p class="ec-word-map-notice" data-word-map-notice>地点与弧线均为语言或故事关联的代表地区示意，不能据此推断真实旅行、具体年代或精确传播线路。具体词源与争议请读对应词卡。</p>'
+        '<div data-word-map-ui hidden><nav class="ec-word-map-words" data-word-map-words aria-label="选择单词">'+buttons+'</nav><div class="ec-word-map-panel"><svg data-word-map-svg tabindex="0" role="img" aria-label="单词关联地区示意图" aria-describedby="word-map-help"></svg>'
+        '<div class="ec-word-map-controls"><button type="button" data-word-map-zoom="in" aria-label="放大地图">＋</button><button type="button" data-word-map-zoom="out" aria-label="缩小地图">−</button><button type="button" data-word-map-zoom="reset">复位</button></div>'
+        '<p class="ec-meta" id="word-map-help">可横向拖动；方向键平移，＋ / − 缩放，Home 复位。手机纵向滑动仍可滚动页面。</p><section class="ec-word-map-route" data-word-map-route aria-live="polite"></section></div></div>'
+        '<p data-word-map-status role="status" hidden></p><section class="ec-word-map-fallback" data-word-map-fallback><h2>词语与关联地区</h2>'+(''.join(fallback) or '<p>暂时没有可显示的词卡。</p>')+'</section>'
+        '<script type="application/json" id="english-word-map-data">'+safe_json(word_map_data(corner))+'</script></section>'
+        '<p class="ec-editorial">底图为 Natural Earth 公版陆地轮廓；代表地点坐标取自其居民点数据，仅作制图示意。<a href="https://github.com/nvkelso/natural-earth-vector/blob/master/geojson/ne_10m_populated_places_simple.geojson" target="_blank" rel="noopener noreferrer">坐标来源 ↗</a>。词源整理有 AI 辅助，事实依据见各词卡。</p>')
+
+
+def build_english_corner(root, output, address, corner, english_quotes=None):
     root, output = Path(root), Path(output)
+    corner = {**corner, "intro": load_intro(root)}
+    intro = corner["intro"]
+    if english_quotes is None:
+        from daily_brief import load_english_quotes
+        english_quotes = load_english_quotes(root,None)
     template = source_path(root, "home/english-corner.template.html").read_text(encoding="utf-8")
-    pages = [("/english/", "雨聊英语角", "从词源故事到公版经典，给中文读者的英语知识与阅读。", render_index(corner)),
+    pages = [("/english/", intro["name"], intro["description"], render_index(corner)),
              ("/english/tools/numbers/", "中英数字转换器", "用万、亿和 thousand、million、billion 看同一个数。", render_numbers().replace('/english/qian-and-wan/', '/english/qian-and-wan/' if any(c['slug'] == 'qian-and-wan' for c in corner['cards']) else '/english/'))]
     pages.extend(("/english/" + card["slug"] + "/", card["title"], card["summary"], render_card(card,corner)) for card in corner["cards"])
+    pages.extend([("/english/quotes/", "英语名句库", "按作者和作品版本浏览英语名句。", render_quote_library(english_quotes)),
+                  ("/english/play/", "英语小测验", "认作家、辨词源、猜语言，每轮十题，不计时。", render_play(corner,english_quotes)),
+                  ("/english/map/", "单词足迹地图", "语言与故事关联地区的示意地图。", render_word_map(corner))])
     routes = []
     for route, title, description, content in pages:
         page = template
-        for key, value in {"site_url":escape(address,quote=True),"route":route,"title":escape(title),"description":escape(description,quote=True),"content":content}.items():
+        page = page.replace("{{map_scripts}}", '<script src="/assets/vendor/d3-7.9.0.min.js" defer></script><script src="/assets/english-word-map.js" defer></script>' if route == "/english/map/" else '')
+        page_title = title if route == "/english/" else title + " · " + intro["name"]
+        for key, value in {"site_url":escape(address,quote=True),"route":route,"title":escape(page_title),"description":escape(description,quote=True),"content":content,"columns":" ".join(c["id"] for c in corner["columns"])}.items():
             page = page.replace("{{" + key + "}}",value)
         if "{{" in page:
-            raise ValueError("Unresolved English Corner template placeholder.")
-        page = localize_page(page,root,address,route,"zh-CN",title=title + " · 谢雨卿",description=description)
+            raise ValueError("Unresolved Learn English template placeholder.")
+        page = localize_page(page,root,address,route,"zh-CN",title=page_title,description=description)
         folder = output / route.strip("/")
         current = folder
         while current != output:
             if current.is_symlink() or (hasattr(current,"is_junction") and current.is_junction()):
-                raise ValueError("Linked English Corner output is not supported.")
+                raise ValueError("Linked Learn English output is not supported.")
             current = current.parent
         folder.mkdir(parents=True,exist_ok=True)
         destination = folder / "index.html"
@@ -341,9 +498,15 @@ def build_english_corner(root, output, address, corner):
         destination.write_text(page,encoding="utf-8")
         routes.append(route)
     (output / "assets").mkdir(exist_ok=True)
-    for name in ASSETS:
+    for name in (*ASSETS,*MAP_ASSETS):
         destination = output / "assets" / name
+        current = destination.parent
+        while current != output:
+            if current.is_symlink() or (hasattr(current,"is_junction") and current.is_junction()):
+                raise ValueError("Linked generated Learn English asset directory is not supported.")
+            current = current.parent
         if destination.is_symlink():
-            raise ValueError("Linked generated English Corner assets are not supported.")
+            raise ValueError("Linked generated Learn English assets are not supported.")
+        destination.parent.mkdir(parents=True,exist_ok=True)
         shutil.copy2(source_path(root,"home/assets/" + name),destination)
     return {"cards":len(corner["cards"]),"columns":dict(Counter(c["column"] for c in corner["cards"])),"routes":routes,"language":"zh-CN"}

@@ -3,11 +3,11 @@
   "quotes": [
     {
       "id": "shakespeare-01",
-      "text_sha256_lf": "087afe9278e89ce2d19fd3b41b096262691e8053f25dcbeb33e6becdde202ccb",
+      "text_sha256_lf": "2a1fada17739c631fcd2b0ae5eb7985d092999e91b9f1c3aeb11e3dc6f27c6aa",
       "source_url": "https://www.gutenberg.org/cache/epub/100/pg100-images.html#sceneII_8.2",
-      "locator": "第二幕第二场，哈姆雷特台词中的分句",
+      "locator": "第二幕第二场，哈姆雷特",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "88ad4e03109839ba7992b14e4f1446bf56d77576a54410f5b98d9821c579be57",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -18,15 +18,17 @@
       "bibliography_urls": [
         "https://www.gutenberg.org/ebooks/100",
         "https://www.folger.edu/explore/shakespeares-works/hamlet/"
-      ]
+      ],
+      "source_text": "there is nothing either good or bad but thinking makes it so.",
+      "display_note": "省略号为本站所加，表示未引的上下文。"
     },
     {
       "id": "austen-01",
       "text_sha256_lf": "cf6772a32e0fc2e152819018118103d61e981a9b49d26777d1ede23cc9855477",
       "source_url": "https://www.gutenberg.org/cache/epub/1342/pg1342-images.html#CHAPTER_V",
-      "locator": "第五章，伊丽莎白台词",
+      "locator": "第五章，伊丽莎白",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "f0b019c9164a53c21fda1bf2938b96b014016a6eb4a627039cebd0d9a07c42f9",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -40,11 +42,11 @@
     },
     {
       "id": "dickens-01",
-      "text_sha256_lf": "775fce11d4fec218d105cec874901a5225b78c02eb6e86d8d4832464368c332a",
+      "text_sha256_lf": "89a9720fcd06198b7768b77535198015a4dde4d500aa73006ab05a2f7a01969b",
       "source_url": "https://www.gutenberg.org/cache/epub/98/pg98-images.html#link2H_4_0002",
-      "locator": "第一部第一章，开篇分句",
+      "locator": "第一部第一章，开篇",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "e427456f426cf51c23e294e07f4ed3014a74dcfdeb9ae20fc8adcf8910b08107",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -54,15 +56,17 @@
       },
       "bibliography_urls": [
         "https://www.gutenberg.org/ebooks/98"
-      ]
+      ],
+      "source_text": "It was the best of times, it was the worst of times",
+      "display_note": "省略号为本站所加，表示未引的上下文；依同版原文调整截取范围。"
     },
     {
       "id": "bronte-01",
-      "text_sha256_lf": "4c97c49e605e76ccdc0877e548b95f745a218f353f8b64ff9304e3c07f3d8809",
+      "text_sha256_lf": "ca1ea7e39b9f26a8847fca42a2c73d3a88862f918f557427a24963a71d2e1ca5",
       "source_url": "https://www.gutenberg.org/cache/epub/1260/pg1260-images.html#id-7050114306024519729",
-      "locator": "第二十三章，简的台词节选",
+      "locator": "第二十三章，简",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "0bc6419204218b6379e5c174a6b93076897cc7ef40bd230f73fbe1e35366eef7",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -72,15 +76,17 @@
       },
       "bibliography_urls": [
         "https://www.gutenberg.org/ebooks/1260"
-      ]
+      ],
+      "source_text": "I am no bird; and no net ensnares me; I am a free human being with an independent will, which I now exert to leave you.",
+      "display_note": "依同版原文调整截取范围。"
     },
     {
       "id": "eliot-01",
       "text_sha256_lf": "4321505e8c0f5ef2e47784619811c4568b17cb0171859ee102761819ef1615ce",
       "source_url": "https://www.gutenberg.org/cache/epub/145/pg145-images.html#chap72",
-      "locator": "第七十二章，多萝西娅台词",
+      "locator": "第七十二章，多萝西娅",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "1147a2687e4f27a08e44cee2a9b7f9f3dee33a05fc4ad5c26e51988ce61c2cf4",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -99,7 +105,7 @@
       "source_url": "https://www.gutenberg.org/cache/epub/11/pg11-images.html#chap02",
       "locator": "第二章，爱丽丝的自问",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "3c1aa77747293cfb82f6f211b2a7a7f3652a18cb62a5a93b76a6fa121a428151",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -117,7 +123,7 @@
       "source_url": "https://www.gutenberg.org/cache/epub/174/pg174-images.html#chap00",
       "locator": "序言末句",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "180f7f7e3245c75b140766464068596936eafd06a6266e83d9c71c18d617aed9",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -131,11 +137,11 @@
     },
     {
       "id": "stevenson-01",
-      "text_sha256_lf": "73974e34b38b918145c3ae5b72a71dd6db5aac02c9e3cc77e50ec602855df316",
+      "text_sha256_lf": "534893f80da341aa7176e2c4eb96de65359d57c83d68d96186ed3f0b4726479f",
       "source_url": "https://www.gutenberg.org/cache/epub/69825/pg69825-images.html",
-      "locator": "《为闲人辩护》，分句",
+      "locator": "《为闲人辩护》",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "4b046e047725281c31f8c4a1311624ce6aa21a5a5c964ac23cea56751be2c359",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -146,7 +152,9 @@
       "bibliography_urls": [
         "https://www.gutenberg.org/ebooks/69825",
         "https://robert-louis-stevenson.org/works-chronology/"
-      ]
+      ],
+      "source_text": "Extreme busyness, whether at school or college, kirk or market, is a symptom of deficient vitality; and a faculty for idleness implies a catholic appetite and a strong sense of personal identity.",
+      "display_note": "依同版原文调整截取范围。"
     },
     {
       "id": "blake-01",
@@ -154,7 +162,7 @@
       "source_url": "https://www.gutenberg.org/cache/epub/45315/pg45315-images.html#Page_16",
       "locator": "“地狱的箴言”",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "9ad612a43dc945ff82822fe346782537944894eeff0a037062ba09b586a06e81",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -168,11 +176,11 @@
     },
     {
       "id": "wordsworth-01",
-      "text_sha256_lf": "cc667312cf971dbc71be6ffd2c0a423ddcdba8beda05a45c13b24d82a70c7b1f",
+      "text_sha256_lf": "6d0df3344f64faca6d1bdd8919c8ba724f6301db429312ce8823760fc02f3eb3",
       "source_url": "https://www.gutenberg.org/cache/epub/8824/pg8824-images.html#id00116",
       "locator": "《我孤独地漫游，如一片云》首两行",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "fab5c744bea5439e703c63f2d58d92e66b5e9509b8f04bf72ab922d77ea938ea",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -182,15 +190,17 @@
       },
       "bibliography_urls": [
         "https://www.gutenberg.org/ebooks/8824"
-      ]
+      ],
+      "source_text": "I wandered lonely as a Cloud\nThat floats on high o’er Vales and Hills",
+      "display_note": "按所引版本恢复诗行；省略号为本站所加，表示未引的上下文；依同版原文调整截取范围。"
     },
     {
       "id": "coleridge-01",
-      "text_sha256_lf": "10f3f7fcac1f9441a5f662f601800ea1c5a2442611e80c051b70e253c490b500",
+      "text_sha256_lf": "9f636e900c67d8d96b0c6250bc408bfe1b35dce4c0cc59739e8eef8be8b36538",
       "source_url": "https://www.gutenberg.org/cache/epub/11101/pg11101-images.html#id00417",
       "locator": "《忽必烈汗》首两行",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "fe5e45092e669683ba54816b7e59582dc5b4a07f52820c2ec09e65942cd7a300",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -200,7 +210,9 @@
       },
       "bibliography_urls": [
         "https://www.gutenberg.org/ebooks/11101"
-      ]
+      ],
+      "source_text": "In Xanadu did Kubla Khan\nA stately pleasure-dome decree",
+      "display_note": "按所引版本恢复诗行；省略号为本站所加，表示未引的上下文；依同版原文调整截取范围。"
     },
     {
       "id": "shelley-01",
@@ -208,7 +220,7 @@
       "source_url": "https://www.gutenberg.org/cache/epub/4798/pg4798-images.html#id00805",
       "locator": "《西风颂》末行",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "2e38a421a1fab35981b4112e82274127156d1ea57944d7d302885f40c1e7a96f",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -222,11 +234,11 @@
     },
     {
       "id": "keats-01",
-      "text_sha256_lf": "8119d966bbc6909e2ff6268f816bebe8f86fb8a9dc63811b6d7451c29b0bf58a",
+      "text_sha256_lf": "9e6f88dbe15f5c6bf969c8e24ed079e3b790fdfe8e8ed3d0159409a55bdeddb2",
       "source_url": "https://www.gutenberg.org/cache/epub/23684/pg23684-images.html#id-4987274095954744633",
-      "locator": "《希腊古瓮颂》第49行，句中引语",
+      "locator": "《希腊古瓮颂》第49—50行",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "3e2c304ce25cc28e0d64cb3cf29a3967199e21f4cf69d4c156be47467ded839e",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -236,15 +248,17 @@
       },
       "bibliography_urls": [
         "https://www.gutenberg.org/ebooks/23684"
-      ]
+      ],
+      "source_text": "“Beauty is truth, truth beauty,”—that is all\nYe know on earth, and all ye need to know.",
+      "display_note": "按所引版本恢复诗行；省略号为本站所加，表示未引的上下文；依同版原文调整截取范围。"
     },
     {
       "id": "dickinson-01",
-      "text_sha256_lf": "45762a97d7ecd9d2278fb1d7f30b85bbedcea4ca9cf3b955306c3c2b70e61b33",
+      "text_sha256_lf": "5eedb6331392c5b9d55b56dc0655d04e583763844e7f1e8818eb2ed60148e1be",
       "source_url": "https://www.gutenberg.org/cache/epub/12242/pg12242-images.html#Hope_is_the_thing_with_feathers",
       "locator": "第二辑，Life第VI首，前两行",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "b194f3696e8a7601f4e07d80a2269cba076b92f6bf4cf6359b7fe0e1343ee516",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -254,15 +268,17 @@
       },
       "bibliography_urls": [
         "https://www.gutenberg.org/ebooks/12242"
-      ]
+      ],
+      "source_text": "Hope is the thing with feathers\nThat perches in the soul",
+      "display_note": "按所引版本恢复诗行；省略号为本站所加，表示未引的上下文；依同版原文调整截取范围。"
     },
     {
       "id": "whitman-01",
       "text_sha256_lf": "c7f12a5dc3807ba2cb34b83b76e2ba8c45c1a7a9a9b93eaf3ba4cac82ea3e6af",
       "source_url": "https://www.gutenberg.org/cache/epub/1322/pg1322-images.html#link2H_4_0027",
-      "locator": "《自我之歌》第51节，括号内句子",
+      "locator": "《自我之歌》第51节",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "83ff007816c704fda33bde4219885d26cc5791dbf58e644391d32c64cd222d18",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -276,11 +292,11 @@
     },
     {
       "id": "yeats-01",
-      "text_sha256_lf": "bf6882512df73db5a2331293e008a378a361bd5a1feb337bf9869266a445a395",
+      "text_sha256_lf": "316a00018ba8892cb11734f6e8c0c33ceb635f9867c3a2e6ca5271339e545292",
       "source_url": "https://www.gutenberg.org/cache/epub/49608/pg49608-images.html#Page_158",
       "locator": "《当你老了》首两行",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "6c3e5e0fe6b13c0efb9c5f97eff24b063e6eca044d57b22eb02a25a6c1413183",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -291,7 +307,9 @@
       "bibliography_urls": [
         "https://www.gutenberg.org/ebooks/49608",
         "https://www.nli.ie/news/yeats-nobel-centenary-video-series"
-      ]
+      ],
+      "source_text": "When you are old and gray and full of sleep,\nAnd nodding by the fire, take down this book",
+      "display_note": "按所引版本恢复诗行；省略号为本站所加，表示未引的上下文；依同版原文调整截取范围。"
     },
     {
       "id": "franklin-01",
@@ -299,7 +317,7 @@
       "source_url": "https://www.gutenberg.org/cache/epub/20203/pg20203-images.html#IX",
       "locator": "第二部分，十三项德目之“决心”",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "bdd5d8f2a90ac8e993362805462bc64cb9c8b25e1e9198777a4ab39e631b0333",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -318,7 +336,7 @@
       "source_url": "https://www.gutenberg.org/cache/epub/16643/pg16643-images.html#Page_81",
       "locator": "《论自立》",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "84a04da2e744e934db8c0a2a7b316d5afd6f464fd8e599ce8a58ced45249ee98",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -336,7 +354,7 @@
       "source_url": "https://www.gutenberg.org/cache/epub/205/pg205-images.html#chap02",
       "locator": "第一章“经济”",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "512f4fa4703b7d8baed186ba001b036a58c37034b038560a07b1d26ea88b96ea",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -354,7 +372,7 @@
       "source_url": "https://www.gutenberg.org/cache/epub/23/pg23-images.html#link2HCH0006",
       "locator": "第六章",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "2e8c91f2f6b3ceb04a44df965637b641cea246424e2629156fe9df3b66ef5256",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -372,7 +390,7 @@
       "source_url": "https://www.gutenberg.org/cache/epub/2397/pg2397-images.html#link2HCH0004",
       "locator": "第一部分第四章",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "3fbe2d3f289e6b6b62bf3c80b597315844f9ce03a1cc444ae815773044d18754",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -390,7 +408,7 @@
       "source_url": "https://www.gutenberg.org/cache/epub/11505/pg11505-images.html#chap04",
       "locator": "《追逐自己的帽子》末段",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "c25b6fcc5004aadc1711c5275c46c426cedcaeef463179a5483080376d34c1af",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -408,7 +426,7 @@
       "source_url": "https://www.gutenberg.org/cache/epub/68604/pg68604-images.html#Page_402",
       "locator": "《玉米饼意见》",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "85246632b85681faa58bb794d722a5aa514b0f7cb5fe6b9e6f104937461f0722",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -426,7 +444,7 @@
       "source_url": "https://www.gutenberg.org/cache/epub/10343/pg10343-images.html#id00326",
       "locator": "《内殿的老律师们》",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "d2b4ef43d8bd01ea7b5ad0b3076d1641b8ff46ce6600e88c7701959092b10346",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -439,12 +457,163 @@
       ]
     },
     {
-      "id": "shakespeare-02",
-      "text_sha256_lf": "af6bf6c66bedfa9d524f00991b177c4e446830fe95fd7164e26f5a2faaabe0d3",
-      "source_url": "https://www.gutenberg.org/cache/epub/100/pg100-images.html#sceneIV_32.1",
-      "locator": "第四幕第一场，普洛斯彼罗台词",
+      "id": "mary-shelley-01",
+      "text_sha256_lf": "2c5522e02e6ffbc2d5ee07d549c16fb655b73e51d94766f2d4f4ef1fe9383830",
+      "source_url": "https://www.gutenberg.org/cache/epub/42324/pg42324-images.html",
+      "locator": "第十章，造物对弗兰肯斯坦",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "回到具体公版原著HTML逐字核对完整句，核人物、章节与前后语境；仅统一引号、排印横线和空白，不改原词或大小写。",
+      "source_sha256_lf": "29c2d7ae90b667345019d4f52e27a041013a783ec61f918a625527abba9d672a",
+      "misattribution_check": "不采用网传改写。小说人物言语与叙述者议论依原文位置分别标明；原句中的分号、从句和引语叙述保留。",
+      "public_domain": {
+        "first_published": 1831,
+        "author_died": 1851,
+        "basis": "按栏目2026年出版≤1930、作者卒年≤1975的双重门槛筛选公版原作正文。PG正文页首明确标Original publication ... 1831，转录说明采用1831年版影印本，版权页题年1831；原小说1818首版，元数据在此按所引1831版记录。作者卒年1851见PG书目页与RDF。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/42324"
+      ]
+    },
+    {
+      "id": "stoker-01",
+      "text_sha256_lf": "4f74be202c8271e1475a89189ac74553c0feb6d85b722be6b72a447672a7d8c8",
+      "source_url": "https://www.gutenberg.org/cache/epub/345/pg345-images.html#chap02",
+      "locator": "第二章，德古拉伯爵",
+      "checked_on": "2026-10-29",
+      "method": "回到具体公版原著HTML逐字核对完整句，核人物、章节与前后语境；仅统一引号、排印横线和空白，不改原词或大小写。",
+      "source_sha256_lf": "3cc528ea3717c3a9c057e49b593762c2537e6cd0bd6b8c46f731dcbe8c8ec714",
+      "misattribution_check": "不采用网传改写。小说人物言语与叙述者议论依原文位置分别标明；原句中的分号、从句和引语叙述保留。",
+      "public_domain": {
+        "first_published": 1897,
+        "author_died": 1912,
+        "basis": "按栏目2026年出版≤1930、作者卒年≤1975的双重门槛筛选公版原作正文。PG正文版权页标Copyright, 1897 ... by Bram Stoker；作者卒年1912见PG书目页与RDF。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/345"
+      ]
+    },
+    {
+      "id": "doyle-01",
+      "text_sha256_lf": "a5defbe9d825f550eeb308f459e58c05cf28b84f682f2ae82c13073c18a7fb29",
+      "source_url": "https://www.gutenberg.org/cache/epub/1661/pg1661-images.html#chap01",
+      "locator": "《波希米亚丑闻》，福尔摩斯",
+      "checked_on": "2026-10-29",
+      "method": "回到具体公版原著HTML逐字核对完整句，核人物、章节与前后语境；仅统一引号、排印横线和空白，不改原词或大小写。",
+      "source_sha256_lf": "43bd3ed49637642e432f9e939904c1b23ee69bee2329afb9f07aa59218e63b5d",
+      "misattribution_check": "不采用网传改写。小说人物言语与叙述者议论依原文位置分别标明；原句中的分号、从句和引语叙述保留。",
+      "public_domain": {
+        "first_published": 1892,
+        "author_died": 1930,
+        "basis": "按栏目2026年出版≤1930、作者卒年≤1975的双重门槛筛选公版原作正文。Morgan Library首版馆藏PML147450书目列London: George Newnes1892；元数据采用所引书集1892年。作者卒年1930亦见PG书目与Morgan馆藏。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/1661",
+        "https://www.themorgan.org/printed-books/372941",
+        "https://www.merriam-webster.com/dictionary/capital"
+      ]
+    },
+    {
+      "id": "melville-01",
+      "text_sha256_lf": "458f3ceeeec730139693560ecf66c9c22d9c7bc7dcb0599e8e10b667dfeac043",
+      "source_url": "https://www.gutenberg.org/cache/epub/15/pg15-images.html#chap01",
+      "locator": "第一章，开篇",
+      "checked_on": "2026-10-29",
+      "method": "回到具体公版原著HTML逐字核对完整句，核人物、章节与前后语境；仅统一引号、排印横线和空白，不改原词或大小写。",
+      "source_sha256_lf": "e54ff4d136a1c5fd923db854e023db017be955b77ab42d6dc3bc6b4b97ba6adf",
+      "misattribution_check": "不采用网传改写。小说人物言语与叙述者议论依原文位置分别标明；原句中的分号、从句和引语叙述保留。",
+      "public_domain": {
+        "first_published": 1851,
+        "author_died": 1891,
+        "basis": "按栏目2026年出版≤1930、作者卒年≤1975的双重门槛筛选公版原作正文。所引PG#15正文原版题名页及版权页均标1851；作者卒年1891见PG书目与RDF。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/15"
+      ]
+    },
+    {
+      "id": "hawthorne-01",
+      "text_sha256_lf": "5b571d11f79737bc0156c8c48bf8e06f575bd98899471a228b95f307a90ea908",
+      "source_url": "https://www.gutenberg.org/cache/epub/33/pg33-images.html#chap20",
+      "locator": "第二十章",
+      "checked_on": "2026-10-29",
+      "method": "回到具体公版原著HTML逐字核对完整句，核人物、章节与前后语境；仅统一引号、排印横线和空白，不改原词或大小写。",
+      "source_sha256_lf": "9fdc74daa5804a7e9b0fa86eb3db0f841339bd6bd3fa33c38c79812dbb5791cb",
+      "misattribution_check": "不采用网传改写。小说人物言语与叙述者议论依原文位置分别标明；原句中的分号、从句和引语叙述保留。",
+      "public_domain": {
+        "first_published": 1850,
+        "author_died": 1864,
+        "basis": "按栏目2026年出版≤1930、作者卒年≤1975的双重门槛筛选公版原作正文。Library of Congress馆藏07003785列Boston: Ticknor, Reed, and Fields1850；作者卒年1864在该馆藏、PG书目与RDF中一致。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/33",
+        "https://www.loc.gov/item/07003785/"
+      ]
+    },
+    {
+      "id": "maugham-01",
+      "text_sha256_lf": "429aaa3affddc8392a711bbb95f03fc15bc122740d610829274b7dab5b3a2545",
+      "source_url": "https://www.gutenberg.org/cache/epub/222/pg222-images.html#chap41",
+      "locator": "第四十一章，叙述者的议论",
+      "checked_on": "2026-10-29",
+      "method": "回到具体公版原著HTML逐字核对完整句，核人物、章节与前后语境；仅统一引号、排印横线和空白，不改原词或大小写。",
+      "source_sha256_lf": "fe9eaf7a3586137446e65b0cd09d4894665109222122701a57071470e958f319",
+      "misattribution_check": "不采用网传改写。小说人物言语与叙述者议论依原文位置分别标明；原句中的分号、从句和引语叙述保留。",
+      "public_domain": {
+        "first_published": 1919,
+        "author_died": 1965,
+        "basis": "按栏目2026年出版≤1930、作者卒年≤1975的双重门槛筛选公版原作正文。Morgan Library首版馆藏PML135864列London: William Heinemann1919；作者卒年1965在该馆藏、PG书目与RDF中一致。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/222",
+        "https://www.themorgan.org/printed-books/85276",
+        "https://www.oxfordlearnersdictionaries.com/definition/english/concerned"
+      ]
+    },
+    {
+      "id": "forster-01",
+      "text_sha256_lf": "eb760cacd2c3b8246faf97fd5083c492e09dbb0f368958703992ff8948fbc5e8",
+      "source_url": "https://www.gutenberg.org/cache/epub/2946/pg2946-images.html#link2HCH0022",
+      "locator": "第二十二章，玛格丽特的想法",
+      "checked_on": "2026-10-29",
+      "method": "回到具体公版原著HTML逐字核对完整句，核人物、章节与前后语境；仅统一引号、排印横线和空白，不改原词或大小写。",
+      "source_sha256_lf": "3352ceda9a36aa2d2e7a029384a68e47dd7c5b79fe886c8942551a183887bdd2",
+      "misattribution_check": "不采用网传改写。小说人物言语与叙述者议论依原文位置分别标明；原句中的分号、从句和引语叙述保留。",
+      "public_domain": {
+        "first_published": 1910,
+        "author_died": 1970,
+        "basis": "按栏目2026年出版≤1930、作者卒年≤1975的双重门槛筛选公版原作正文。Penguin Random House该书产品介绍明确First published in1910，作者简介列1879–1970；PG书目与RDF卒年一致。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/2946",
+        "https://www.penguinrandomhouse.com/books/54698/howards-end-by-e-m-forster/"
+      ]
+    },
+    {
+      "id": "alcott-01",
+      "text_sha256_lf": "4c135542b640b4159ceb106e82a3729bc55837a912f67fa08a5b54d117f3fd92",
+      "source_url": "https://www.gutenberg.org/cache/epub/514/pg514-images.html#chap44",
+      "locator": "第二部，第四十四章，艾米",
+      "checked_on": "2026-10-29",
+      "method": "回到具体公版原著HTML逐字核对完整句，核人物、章节与前后语境；仅统一引号、排印横线和空白，不改原词或大小写。",
+      "source_sha256_lf": "66a9592f4f279d84b1f144e390d8e0f955fed5bef87fea60e95829834b2e7a03",
+      "misattribution_check": "不采用网传改写。小说人物言语与叙述者议论依原文位置分别标明；原句中的分号、从句和引语叙述保留。",
+      "public_domain": {
+        "first_published": 1869,
+        "author_died": 1888,
+        "basis": "按栏目2026年出版≤1930、作者卒年≤1975的双重门槛筛选公版原作正文。Library of Congress11月29日人物资料明确1868出版第一部、次年出版Part Second；按所引第一/二部分别记1868/1869；作者卒年1888见PG书目与RDF。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/514",
+        "https://www.loc.gov/item/today-in-history/november-29/"
+      ]
+    },
+    {
+      "id": "shakespeare-02",
+      "text_sha256_lf": "bd551a6dc24cff5dfcbc990ff34e339a9ef0ca289347bdf55fc9724723f1b965",
+      "source_url": "https://www.gutenberg.org/cache/epub/100/pg100-images.html#sceneIV_32.1",
+      "locator": "第四幕第一场，普洛斯彼罗",
+      "checked_on": "2026-10-29",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "88ad4e03109839ba7992b14e4f1446bf56d77576a54410f5b98d9821c579be57",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -455,15 +624,17 @@
       "bibliography_urls": [
         "https://www.gutenberg.org/ebooks/100",
         "https://www.folger.edu/explore/shakespeares-works/the-tempest/"
-      ]
+      ],
+      "source_text": "We are such stuff\nAs dreams are made on, and our little life\nIs rounded with a sleep.",
+      "display_note": "按所引版本恢复诗行。"
     },
     {
       "id": "austen-02",
-      "text_sha256_lf": "f638a93864d4f02237e5fc9bf8fd02c5e3d33b61b20270c03124738aeea875aa",
+      "text_sha256_lf": "e995410efe29c481001fc43ac9de6444ddff43b4ec13e8a84a4ac08d003ee22f",
       "source_url": "https://www.gutenberg.org/cache/epub/1342/pg1342-images.html#page_11",
-      "locator": "第三章，叙述者的分句",
+      "locator": "第三章",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "f0b019c9164a53c21fda1bf2938b96b014016a6eb4a627039cebd0d9a07c42f9",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -473,7 +644,9 @@
       },
       "bibliography_urls": [
         "https://www.gutenberg.org/ebooks/1342"
-      ]
+      ],
+      "source_text": "To be fond of dancing was a certain step towards falling in love; and very lively hopes of Mr. Bingley’s heart were entertained.",
+      "display_note": "依同版原文调整截取范围。"
     },
     {
       "id": "dickens-02",
@@ -481,7 +654,7 @@
       "source_url": "https://www.gutenberg.org/cache/epub/98/pg98-images.html#link2H_4_0004",
       "locator": "第一部第三章，开篇",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "e427456f426cf51c23e294e07f4ed3014a74dcfdeb9ae20fc8adcf8910b08107",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -497,9 +670,9 @@
       "id": "bronte-02",
       "text_sha256_lf": "8811995268545022cf9c9347cb9d66a09512821896d284223331a0794e99be88",
       "source_url": "https://www.gutenberg.org/cache/epub/1260/pg1260-images.html#id-5447535297528119587",
-      "locator": "第六章，海伦·彭斯台词",
+      "locator": "第六章，海伦·彭斯",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "0bc6419204218b6379e5c174a6b93076897cc7ef40bd230f73fbe1e35366eef7",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -513,11 +686,11 @@
     },
     {
       "id": "eliot-02",
-      "text_sha256_lf": "5c3d014e6efe5fa7a743be9dee5fe1b356b8a254747ec5f43887048f75eb6f65",
+      "text_sha256_lf": "0df522e5f678dae270002bec57f0ee44c11d40ffc5cd1bbbd8873c7ad373857b",
       "source_url": "https://www.gutenberg.org/cache/epub/145/pg145-images.html#chap07",
-      "locator": "第七章，句中分句",
+      "locator": "第七章",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "1147a2687e4f27a08e44cee2a9b7f9f3dee33a05fc4ad5c26e51988ce61c2cf4",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -528,15 +701,17 @@
       "bibliography_urls": [
         "https://www.gutenberg.org/ebooks/145",
         "https://old-digitalcollections.nypl.org/collections/middlemarch"
-      ]
+      ],
+      "source_text": "it is a narrow mind which cannot look at a subject from various points of view.",
+      "display_note": "省略号为本站所加，表示未引的上下文。"
     },
     {
       "id": "carroll-02",
-      "text_sha256_lf": "da66ec1d032c11fd1bbc50ef0a413acba2716affd78559db695d7e80d1de3090",
+      "text_sha256_lf": "cb607c7cf4a5b0da986c368faa4df6cb3af21c90105e5a23f4c32d66ecea2f53",
       "source_url": "https://www.gutenberg.org/cache/epub/11/pg11-images.html#chap10",
-      "locator": "第十章，爱丽丝台词中的分句",
+      "locator": "第十章，爱丽丝",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "3c1aa77747293cfb82f6f211b2a7a7f3652a18cb62a5a93b76a6fa121a428151",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -546,7 +721,9 @@
       },
       "bibliography_urls": [
         "https://www.gutenberg.org/ebooks/11"
-      ]
+      ],
+      "source_text": "it’s no use going back to yesterday, because I was a different person then.",
+      "display_note": "省略号为本站所加，表示未引的上下文。"
     },
     {
       "id": "wilde-02",
@@ -554,7 +731,7 @@
       "source_url": "https://www.gutenberg.org/cache/epub/174/pg174-images.html#chap00",
       "locator": "序言",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "180f7f7e3245c75b140766464068596936eafd06a6266e83d9c71c18d617aed9",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -572,7 +749,7 @@
       "source_url": "https://www.gutenberg.org/cache/epub/69825/pg69825-images.html#page_26",
       "locator": "《为闲人辩护》",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "4b046e047725281c31f8c4a1311624ce6aa21a5a5c964ac23cea56751be2c359",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -591,7 +768,7 @@
       "source_url": "https://www.gutenberg.org/cache/epub/45315/pg45315-images.html#Page_14",
       "locator": "“地狱的箴言”",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "9ad612a43dc945ff82822fe346782537944894eeff0a037062ba09b586a06e81",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -605,11 +782,11 @@
     },
     {
       "id": "wordsworth-02",
-      "text_sha256_lf": "3601f04db2534604ea2cec2408166ac59f6c0a48fc9ce5dcfd6731c91f613cd7",
+      "text_sha256_lf": "c3da5ac6fc91ecf211991f24749e0102f405ddb32e36b5526cd93e7cdc0e4ddb",
       "source_url": "https://www.gutenberg.org/cache/epub/8774/pg8774-images.html#id00315",
       "locator": "《威斯敏斯特桥上》首行",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "3c93ef04e87a39e800d98c057dd13a39a74df63535df0e1a2d10f2a59659868b",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -619,15 +796,17 @@
       },
       "bibliography_urls": [
         "https://www.gutenberg.org/ebooks/8774"
-      ]
+      ],
+      "source_text": "Earth has not any thing to shew more fair",
+      "display_note": "省略号为本站所加，表示未引的上下文；依同版原文调整截取范围。"
     },
     {
       "id": "coleridge-02",
-      "text_sha256_lf": "96978a0bd9641577eab1f79d20555417f6a6c5a34d418effcdcd773143c7dde3",
+      "text_sha256_lf": "0eadae59ed2e9a31c420c35dc7525ae89aa515138d830c2ad527b72285aaf068",
       "source_url": "https://www.gutenberg.org/cache/epub/11101/pg11101-images.html#id00177",
-      "locator": "第二部分，第121—122行",
+      "locator": "第二部分，第119—122行",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "fe5e45092e669683ba54816b7e59582dc5b4a07f52820c2ec09e65942cd7a300",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -637,15 +816,17 @@
       },
       "bibliography_urls": [
         "https://www.gutenberg.org/ebooks/11101"
-      ]
+      ],
+      "source_text": "Water, water, every where,\nAnd all the boards did shrink;\nWater, water, every where\nNor any drop to drink.",
+      "display_note": "按所引版本恢复诗行；依同版原文调整截取范围。"
     },
     {
       "id": "shelley-02",
-      "text_sha256_lf": "abad6725614d2fe5ea8ab22fb58cc75e8e51162b7bbff0f620ac13e1d1fd6dc9",
+      "text_sha256_lf": "2839817bfe5c140bc70b539d75534f8967d18f61a0f576e43c08705b75519597",
       "source_url": "https://www.gutenberg.org/cache/epub/4798/pg4798-images.html#id00495",
-      "locator": "《奥兹曼迪亚斯》第11行",
+      "locator": "《奥兹曼迪亚斯》第10—11行，雕像铭文",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "2e38a421a1fab35981b4112e82274127156d1ea57944d7d302885f40c1e7a96f",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -655,15 +836,17 @@
       },
       "bibliography_urls": [
         "https://www.gutenberg.org/ebooks/4798"
-      ]
+      ],
+      "source_text": "My name is Ozymandias, king of kings:\nLook on my works, ye Mighty, and despair!",
+      "display_note": "按所引版本恢复诗行；依同版原文调整截取范围。"
     },
     {
       "id": "keats-02",
-      "text_sha256_lf": "086c76cb3ed772143aad1eca4222d0fd5b31ced6c799d32ce0a7bc2ec9c709e4",
+      "text_sha256_lf": "508d1d514a62066df5622be23fda0fab658bfd1ac6997f499a268fb4f72ba4cb",
       "source_url": "https://www.gutenberg.org/cache/epub/23684/pg23684-images.html#id-6628757086229031098",
       "locator": "《希腊古瓮颂》第11—12行",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "3e2c304ce25cc28e0d64cb3cf29a3967199e21f4cf69d4c156be47467ded839e",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -673,15 +856,17 @@
       },
       "bibliography_urls": [
         "https://www.gutenberg.org/ebooks/23684"
-      ]
+      ],
+      "source_text": "Heard melodies are sweet, but those unheard\nAre sweeter",
+      "display_note": "按所引版本恢复诗行；省略号为本站所加，表示未引的上下文；依同版原文调整截取范围。"
     },
     {
       "id": "dickinson-02",
-      "text_sha256_lf": "55f151fa1670925b9ca86bb0d3af2ced952c349478b62b6fdbe5747ebf63c4ba",
+      "text_sha256_lf": "8746e39a2a3374a0cc5213d388ce3ad9a6b8fff0b34c666d3dfc0f49d108bd67",
       "source_url": "https://www.gutenberg.org/cache/epub/12242/pg12242-images.html#If_I_can_stop_one_heart_from_breaking",
       "locator": "第一辑，Life第VI首，前两行",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "b194f3696e8a7601f4e07d80a2269cba076b92f6bf4cf6359b7fe0e1343ee516",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -691,15 +876,17 @@
       },
       "bibliography_urls": [
         "https://www.gutenberg.org/ebooks/12242"
-      ]
+      ],
+      "source_text": "If I can stop one heart from breaking,\nI shall not live in vain",
+      "display_note": "按所引版本恢复诗行；省略号为本站所加，表示未引的上下文；依同版原文调整截取范围。"
     },
     {
       "id": "whitman-02",
-      "text_sha256_lf": "0d5e355edaedee7f84d0bc27898d02204c4dba9002067abad6aa35c56dfa3e47",
+      "text_sha256_lf": "f8054001b3bd85ab4231d0337ad3d51cfdbd36d2779ba5e6e7b46cebe0bf198f",
       "source_url": "https://www.gutenberg.org/cache/epub/1322/pg1322-images.html#link2H_4_0027",
-      "locator": "《自我之歌》第20节，诗行",
+      "locator": "《自我之歌》第20节",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "83ff007816c704fda33bde4219885d26cc5791dbf58e644391d32c64cd222d18",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -709,15 +896,17 @@
       },
       "bibliography_urls": [
         "https://www.gutenberg.org/ebooks/1322"
-      ]
+      ],
+      "source_text": "I exist as I am, that is enough,\nIf no other in the world be aware I sit content,\nAnd if each and all be aware I sit content.",
+      "display_note": "按所引版本恢复诗行；依同版原文调整截取范围。"
     },
     {
       "id": "yeats-02",
-      "text_sha256_lf": "9370e389a998fc7f4fa6f8e74d9fe34aefedafe7af571366189dd165d1e5aace",
+      "text_sha256_lf": "c0b61aa664fd1e5f7e975dcb2351c2b95e72fb62ee3a93e4c64bf07d4133c32c",
       "source_url": "https://www.gutenberg.org/cache/epub/49608/pg49608-images.html#Page_158",
-      "locator": "《当你老了》第7—8行",
+      "locator": "《当你老了》第5—8行",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "6c3e5e0fe6b13c0efb9c5f97eff24b063e6eca044d57b22eb02a25a6c1413183",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -728,7 +917,9 @@
       "bibliography_urls": [
         "https://www.gutenberg.org/ebooks/49608",
         "https://www.nli.ie/news/yeats-nobel-centenary-video-series"
-      ]
+      ],
+      "source_text": "How many loved your moments of glad grace,\nAnd loved your beauty with love false or true;\nBut one man loved the pilgrim soul in you,\nAnd loved the sorrows of your changing face.",
+      "display_note": "按所引版本恢复诗行；依同版原文调整截取范围。"
     },
     {
       "id": "franklin-02",
@@ -736,7 +927,7 @@
       "source_url": "https://www.gutenberg.org/cache/epub/20203/pg20203-images.html#IX",
       "locator": "第二部分，十三项德目之“寡言”",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "bdd5d8f2a90ac8e993362805462bc64cb9c8b25e1e9198777a4ab39e631b0333",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -755,7 +946,7 @@
       "source_url": "https://www.gutenberg.org/cache/epub/16643/pg16643-images.html#Page_83",
       "locator": "《论自立》",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "84a04da2e744e934db8c0a2a7b316d5afd6f464fd8e599ce8a58ced45249ee98",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -773,7 +964,7 @@
       "source_url": "https://www.gutenberg.org/cache/epub/205/pg205-images.html#chap03",
       "locator": "第二章“我生活的地方；我为何生活”",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "512f4fa4703b7d8baed186ba001b036a58c37034b038560a07b1d26ea88b96ea",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -791,7 +982,7 @@
       "source_url": "https://www.gutenberg.org/cache/epub/23/pg23-images.html#link2HCH0007",
       "locator": "第七章",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "2e8c91f2f6b3ceb04a44df965637b641cea246424e2629156fe9df3b66ef5256",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -809,7 +1000,7 @@
       "source_url": "https://www.gutenberg.org/cache/epub/2397/pg2397-images.html#link2HCH0004",
       "locator": "第一部分第四章",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "3fbe2d3f289e6b6b62bf3c80b597315844f9ce03a1cc444ae815773044d18754",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -827,7 +1018,7 @@
       "source_url": "https://www.gutenberg.org/cache/epub/11505/pg11505-images.html#chap04",
       "locator": "《追逐自己的帽子》末段",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "c25b6fcc5004aadc1711c5275c46c426cedcaeef463179a5483080376d34c1af",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -845,7 +1036,7 @@
       "source_url": "https://www.gutenberg.org/cache/epub/68604/pg68604-images.html#Page_406",
       "locator": "《玉米饼意见》末段",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "85246632b85681faa58bb794d722a5aa514b0f7cb5fe6b9e6f104937461f0722",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -863,7 +1054,7 @@
       "source_url": "https://www.gutenberg.org/cache/epub/10343/pg10343-images.html#id00611",
       "locator": "《读书杂感》",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "d2b4ef43d8bd01ea7b5ad0b3076d1641b8ff46ce6600e88c7701959092b10346",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -876,12 +1067,161 @@
       ]
     },
     {
+      "id": "mary-shelley-02",
+      "text_sha256_lf": "f79049e0e90c80cb7fba0021ab0f19acc6e96e4560d7f32b9aa1bbc73c67d144",
+      "source_url": "https://www.gutenberg.org/cache/epub/42324/pg42324-images.html",
+      "locator": "第二十三章，弗兰肯斯坦的回忆",
+      "checked_on": "2026-10-29",
+      "method": "回到具体公版原著HTML逐字核对完整句，核人物、章节与前后语境；仅统一引号、排印横线和空白，不改原词或大小写。",
+      "source_sha256_lf": "29c2d7ae90b667345019d4f52e27a041013a783ec61f918a625527abba9d672a",
+      "misattribution_check": "不采用网传改写。小说人物言语与叙述者议论依原文位置分别标明；原句中的分号、从句和引语叙述保留。",
+      "public_domain": {
+        "first_published": 1831,
+        "author_died": 1851,
+        "basis": "按栏目2026年出版≤1930、作者卒年≤1975的双重门槛筛选公版原作正文。PG正文页首明确标Original publication ... 1831，转录说明采用1831年版影印本，版权页题年1831；原小说1818首版，元数据在此按所引1831版记录。作者卒年1851见PG书目页与RDF。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/42324"
+      ]
+    },
+    {
+      "id": "stoker-02",
+      "text_sha256_lf": "f85cf944a2b3edc80ef421f76df7a99768ecf99a5de9557c2ca398f416b2842f",
+      "source_url": "https://www.gutenberg.org/cache/epub/345/pg345-images.html#chap14",
+      "locator": "第十四章，范海辛对米娜",
+      "checked_on": "2026-10-29",
+      "method": "回到具体公版原著HTML逐字核对完整句，核人物、章节与前后语境；仅统一引号、排印横线和空白，不改原词或大小写。",
+      "source_sha256_lf": "3cc528ea3717c3a9c057e49b593762c2537e6cd0bd6b8c46f731dcbe8c8ec714",
+      "misattribution_check": "不采用网传改写。小说人物言语与叙述者议论依原文位置分别标明；原句中的分号、从句和引语叙述保留。",
+      "public_domain": {
+        "first_published": 1897,
+        "author_died": 1912,
+        "basis": "按栏目2026年出版≤1930、作者卒年≤1975的双重门槛筛选公版原作正文。PG正文版权页标Copyright, 1897 ... by Bram Stoker；作者卒年1912见PG书目页与RDF。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/345"
+      ]
+    },
+    {
+      "id": "doyle-02",
+      "text_sha256_lf": "b08926387a58bba4f5611ffecaa0cc8fe4e089252f2acf9bc805d1fae2077c96",
+      "source_url": "https://www.gutenberg.org/cache/epub/1661/pg1661-images.html#chap01",
+      "locator": "《波希米亚丑闻》，福尔摩斯对华生",
+      "checked_on": "2026-10-29",
+      "method": "回到具体公版原著HTML逐字核对完整句，核人物、章节与前后语境；仅统一引号、排印横线和空白，不改原词或大小写。",
+      "source_sha256_lf": "43bd3ed49637642e432f9e939904c1b23ee69bee2329afb9f07aa59218e63b5d",
+      "misattribution_check": "不采用网传改写。小说人物言语与叙述者议论依原文位置分别标明；原句中的分号、从句和引语叙述保留。",
+      "public_domain": {
+        "first_published": 1892,
+        "author_died": 1930,
+        "basis": "按栏目2026年出版≤1930、作者卒年≤1975的双重门槛筛选公版原作正文。Morgan Library首版馆藏PML147450书目列London: George Newnes1892；元数据采用所引书集1892年。作者卒年1930亦见PG书目与Morgan馆藏。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/1661",
+        "https://www.themorgan.org/printed-books/372941"
+      ]
+    },
+    {
+      "id": "melville-02",
+      "text_sha256_lf": "9906be6eeb9ff392b523e12da20653df0fe331e8ad6d35a682a3671ed04c7411",
+      "source_url": "https://www.gutenberg.org/cache/epub/15/pg15-images.html#chap12",
+      "locator": "第十二章，叙述者介绍魁魁格的故乡",
+      "checked_on": "2026-10-29",
+      "method": "回到具体公版原著HTML逐字核对完整句，核人物、章节与前后语境；仅统一引号、排印横线和空白，不改原词或大小写。",
+      "source_sha256_lf": "e54ff4d136a1c5fd923db854e023db017be955b77ab42d6dc3bc6b4b97ba6adf",
+      "misattribution_check": "不采用网传改写。小说人物言语与叙述者议论依原文位置分别标明；原句中的分号、从句和引语叙述保留。",
+      "public_domain": {
+        "first_published": 1851,
+        "author_died": 1891,
+        "basis": "按栏目2026年出版≤1930、作者卒年≤1975的双重门槛筛选公版原作正文。所引PG#15正文原版题名页及版权页均标1851；作者卒年1891见PG书目与RDF。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/15"
+      ]
+    },
+    {
+      "id": "hawthorne-02",
+      "text_sha256_lf": "08e6755e00c4c74ea1dc1a5e3cd4be5de45c40c73bf9051bd01a5eff7259e7ba",
+      "source_url": "https://www.gutenberg.org/cache/epub/33/pg33-images.html#chap24",
+      "locator": "第二十四章，结尾",
+      "checked_on": "2026-10-29",
+      "method": "回到具体公版原著HTML逐字核对完整句，核人物、章节与前后语境；仅统一引号、排印横线和空白，不改原词或大小写。",
+      "source_sha256_lf": "9fdc74daa5804a7e9b0fa86eb3db0f841339bd6bd3fa33c38c79812dbb5791cb",
+      "misattribution_check": "不采用网传改写。小说人物言语与叙述者议论依原文位置分别标明；原句中的分号、从句和引语叙述保留。",
+      "public_domain": {
+        "first_published": 1850,
+        "author_died": 1864,
+        "basis": "按栏目2026年出版≤1930、作者卒年≤1975的双重门槛筛选公版原作正文。Library of Congress馆藏07003785列Boston: Ticknor, Reed, and Fields1850；作者卒年1864在该馆藏、PG书目与RDF中一致。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/33",
+        "https://www.loc.gov/item/07003785/"
+      ]
+    },
+    {
+      "id": "maugham-02",
+      "text_sha256_lf": "539a93af6ea7d4d17c4eeb7583755ed0aab740c41829533206461a6a0fd2c931",
+      "source_url": "https://www.gutenberg.org/cache/epub/222/pg222-images.html#chap17",
+      "locator": "第十七章，叙述者的议论",
+      "checked_on": "2026-10-29",
+      "method": "回到具体公版原著HTML逐字核对完整句，核人物、章节与前后语境；仅统一引号、排印横线和空白，不改原词或大小写。",
+      "source_sha256_lf": "fe9eaf7a3586137446e65b0cd09d4894665109222122701a57071470e958f319",
+      "misattribution_check": "不采用网传改写。小说人物言语与叙述者议论依原文位置分别标明；原句中的分号、从句和引语叙述保留。",
+      "public_domain": {
+        "first_published": 1919,
+        "author_died": 1965,
+        "basis": "按栏目2026年出版≤1930、作者卒年≤1975的双重门槛筛选公版原作正文。Morgan Library首版馆藏PML135864列London: William Heinemann1919；作者卒年1965在该馆藏、PG书目与RDF中一致。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/222",
+        "https://www.themorgan.org/printed-books/85276"
+      ]
+    },
+    {
+      "id": "forster-02",
+      "text_sha256_lf": "636a5ec6f7d4eff3cd23df177eeb040724a309443e6c99a31196d05f959abcb3",
+      "source_url": "https://www.gutenberg.org/cache/epub/2946/pg2946-images.html#link2HCH0027",
+      "locator": "第二十七章，海伦的想法",
+      "checked_on": "2026-10-29",
+      "method": "回到具体公版原著HTML逐字核对完整句，核人物、章节与前后语境；仅统一引号、排印横线和空白，不改原词或大小写。",
+      "source_sha256_lf": "3352ceda9a36aa2d2e7a029384a68e47dd7c5b79fe886c8942551a183887bdd2",
+      "misattribution_check": "不采用网传改写。小说人物言语与叙述者议论依原文位置分别标明；原句中的分号、从句和引语叙述保留。",
+      "public_domain": {
+        "first_published": 1910,
+        "author_died": 1970,
+        "basis": "按栏目2026年出版≤1930、作者卒年≤1975的双重门槛筛选公版原作正文。Penguin Random House该书产品介绍明确First published in1910，作者简介列1879–1970；PG书目与RDF卒年一致。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/2946",
+        "https://www.penguinrandomhouse.com/books/54698/howards-end-by-e-m-forster/"
+      ]
+    },
+    {
+      "id": "alcott-02",
+      "text_sha256_lf": "b33cbd9445b3fb1efba56c80cf274e0426b44825c009643f623f56855ab17c25",
+      "source_url": "https://www.gutenberg.org/cache/epub/514/pg514-images.html#chap04",
+      "locator": "第一部，第四章，乔",
+      "checked_on": "2026-10-29",
+      "method": "回到具体公版原著HTML逐字核对完整句，核人物、章节与前后语境；仅统一引号、排印横线和空白，不改原词或大小写。",
+      "source_sha256_lf": "66a9592f4f279d84b1f144e390d8e0f955fed5bef87fea60e95829834b2e7a03",
+      "misattribution_check": "不采用网传改写。小说人物言语与叙述者议论依原文位置分别标明；原句中的分号、从句和引语叙述保留。",
+      "public_domain": {
+        "first_published": 1868,
+        "author_died": 1888,
+        "basis": "按栏目2026年出版≤1930、作者卒年≤1975的双重门槛筛选公版原作正文。Library of Congress11月29日人物资料明确1868出版第一部、次年出版Part Second；按所引第一/二部分别记1868/1869；作者卒年1888见PG书目与RDF。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/514",
+        "https://www.loc.gov/item/today-in-history/november-29/"
+      ]
+    },
+    {
       "id": "shakespeare-03",
       "text_sha256_lf": "05d158757ca18501250a8f47072029c1dfa8c63004a9801642ffb078e4385c82",
       "source_url": "https://www.gutenberg.org/cache/epub/100/pg100-images.html#sceneI_24.1",
-      "locator": "第一幕第一场，拉山德台词",
+      "locator": "第一幕第一场，拉山德",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "88ad4e03109839ba7992b14e4f1446bf56d77576a54410f5b98d9821c579be57",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -898,9 +1238,9 @@
       "id": "austen-03",
       "text_sha256_lf": "9b4124e4b874c7153d1847f715f7ff32e46fb1a504bcfc7a05ae157b9a4b67f8",
       "source_url": "https://www.gutenberg.org/cache/epub/1342/pg1342-images.html#page_71",
-      "locator": "第十一章，宾利小姐台词",
+      "locator": "第十一章，宾利小姐",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "f0b019c9164a53c21fda1bf2938b96b014016a6eb4a627039cebd0d9a07c42f9",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -916,9 +1256,9 @@
       "id": "dickens-03",
       "text_sha256_lf": "c724dbc273747bfe2a9de3a4b42182eb82a986f47f6ab84047ac604b2b30e2fa",
       "source_url": "https://www.gutenberg.org/cache/epub/98/pg98-images.html#link2H_4_0014",
-      "locator": "第二部第六章，达尔奈台词",
+      "locator": "第二部第六章，达尔奈",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "e427456f426cf51c23e294e07f4ed3014a74dcfdeb9ae20fc8adcf8910b08107",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -932,11 +1272,11 @@
     },
     {
       "id": "bronte-03",
-      "text_sha256_lf": "cfca62d40bbc643bb9c0f142172404fbc98cbf6950cf4abe4020ec082bf94f99",
+      "text_sha256_lf": "9a28feade8c56cbe352ef87b321d6b15853014627bcde2fc3f5a5cb0a31d1c1f",
       "source_url": "https://www.gutenberg.org/cache/epub/1260/pg1260-images.html#id-9112509753362559240",
       "locator": "第三十四章，简的内心叙述",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "0bc6419204218b6379e5c174a6b93076897cc7ef40bd230f73fbe1e35366eef7",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -946,15 +1286,17 @@
       },
       "bibliography_urls": [
         "https://www.gutenberg.org/ebooks/1260"
-      ]
+      ],
+      "source_text": "I have not much pride under such circumstances: I would always rather be happy than dignified; and I ran after him—he stood at the foot of the stairs.",
+      "display_note": "依同版原文调整截取范围。"
     },
     {
       "id": "eliot-03",
-      "text_sha256_lf": "3b61e58739c44c272e159fa06acf55d9707e5f05a84eb64c006667c6096b4fdf",
+      "text_sha256_lf": "8c99607b151b4f08cfdf98afab18b2100e6dc2e4c1b9492489e64d00bc772dc9",
       "source_url": "https://www.gutenberg.org/cache/epub/145/pg145-images.html#chap44",
-      "locator": "第四十四章，句中分句",
+      "locator": "第四十四章",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "1147a2687e4f27a08e44cee2a9b7f9f3dee33a05fc4ad5c26e51988ce61c2cf4",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -965,15 +1307,17 @@
       "bibliography_urls": [
         "https://www.gutenberg.org/ebooks/145",
         "https://old-digitalcollections.nypl.org/collections/middlemarch"
-      ]
+      ],
+      "source_text": "what loneliness is more lonely than distrust?",
+      "display_note": "省略号为本站所加，表示未引的上下文。"
     },
     {
       "id": "carroll-03",
-      "text_sha256_lf": "fd5fa5fe363eee84f51a90084487c9a27582be34ac2444166842d09c867ad889",
+      "text_sha256_lf": "e54fff57007728739ebba73f74145f04ecf1ea0651e8c4e999abc94aedac4599",
       "source_url": "https://www.gutenberg.org/cache/epub/11/pg11-images.html#chap06",
-      "locator": "第六章，柴郡猫台词中的分句",
+      "locator": "第六章，柴郡猫",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "3c1aa77747293cfb82f6f211b2a7a7f3652a18cb62a5a93b76a6fa121a428151",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -983,15 +1327,17 @@
       },
       "bibliography_urls": [
         "https://www.gutenberg.org/ebooks/11"
-      ]
+      ],
+      "source_text": "we’re all mad here.",
+      "display_note": "省略号为本站所加，表示未引的上下文。"
     },
     {
       "id": "wilde-03",
       "text_sha256_lf": "8038df0e9e22981815ef2e4c1d2b398c39149d885616f7841607cba6c68ed434",
       "source_url": "https://www.gutenberg.org/cache/epub/174/pg174-images.html#chap04",
-      "locator": "第四章，亨利勋爵台词",
+      "locator": "第四章，亨利勋爵",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "180f7f7e3245c75b140766464068596936eafd06a6266e83d9c71c18d617aed9",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -1009,7 +1355,7 @@
       "source_url": "https://www.gutenberg.org/cache/epub/69825/pg69825-images.html#page_27",
       "locator": "《为闲人辩护》",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "4b046e047725281c31f8c4a1311624ce6aa21a5a5c964ac23cea56751be2c359",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -1028,7 +1374,7 @@
       "source_url": "https://www.gutenberg.org/cache/epub/45315/pg45315-images.html#Page_16",
       "locator": "“地狱的箴言”",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "9ad612a43dc945ff82822fe346782537944894eeff0a037062ba09b586a06e81",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -1042,11 +1388,11 @@
     },
     {
       "id": "wordsworth-03",
-      "text_sha256_lf": "a6e1531258c1e3778290c25bd236670a8f1964fe5afca1cfc21ad2ff8ef94f2d",
+      "text_sha256_lf": "2893368ed340be560fda5d134ab9e0f0e16bfbc9235f8e13a9c1f48736bc9255",
       "source_url": "https://www.gutenberg.org/cache/epub/8774/pg8774-images.html#id00323",
       "locator": "《尘世过分占据了我们》首两行",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "3c93ef04e87a39e800d98c057dd13a39a74df63535df0e1a2d10f2a59659868b",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -1056,15 +1402,17 @@
       },
       "bibliography_urls": [
         "https://www.gutenberg.org/ebooks/8774"
-      ]
+      ],
+      "source_text": "The world is too much with us; late and soon,\nGetting and spending, we lay waste our powers",
+      "display_note": "按所引版本恢复诗行；省略号为本站所加，表示未引的上下文；依同版原文调整截取范围。"
     },
     {
       "id": "coleridge-03",
-      "text_sha256_lf": "6c086e735a33a1be80c9abdd2a634c7f5938106254f829ce88288911aec3d55c",
+      "text_sha256_lf": "f6803e7731dba27b1de6eb6f8f8b037ea1f94efca5ce6b62c5b5880d370aa8c1",
       "source_url": "https://www.gutenberg.org/cache/epub/11101/pg11101-images.html#id00222",
       "locator": "第四部分，第232—233行",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "fe5e45092e669683ba54816b7e59582dc5b4a07f52820c2ec09e65942cd7a300",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -1074,15 +1422,17 @@
       },
       "bibliography_urls": [
         "https://www.gutenberg.org/ebooks/11101"
-      ]
+      ],
+      "source_text": "Alone, alone, all, all alone,\nAlone on the wide, wide sea!",
+      "display_note": "按所引版本恢复诗行。"
     },
     {
       "id": "shelley-03",
-      "text_sha256_lf": "ce141b365b3849fb8f8216ff7d273452fc32c6a4d83533be70329f95d83b5264",
+      "text_sha256_lf": "3b330229ef04c3063ccb3c0233b5c97d10a1c0312031b224114172f990bf3c7a",
       "source_url": "https://www.gutenberg.org/cache/epub/4798/pg4798-images.html#id01084",
       "locator": "《致云雀》第90行",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "2e38a421a1fab35981b4112e82274127156d1ea57944d7d302885f40c1e7a96f",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -1092,15 +1442,17 @@
       },
       "bibliography_urls": [
         "https://www.gutenberg.org/ebooks/4798"
-      ]
+      ],
+      "source_text": "Our sweetest songs are those that tell of saddest thought.",
+      "display_note": "省略号为本站所加，表示未引的上下文。"
     },
     {
       "id": "keats-03",
-      "text_sha256_lf": "ef10f42c053ab619723970778b9de8e4d28729e0530e13752e895ab2e03382cb",
+      "text_sha256_lf": "531b476eb135a1d16b663a76da917ce59773c0178e12bd17da1ecc5032dd9e27",
       "source_url": "https://www.gutenberg.org/cache/epub/23684/pg23684-images.html#id-2659893139361286649",
       "locator": "《秋颂》首两行",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "3e2c304ce25cc28e0d64cb3cf29a3967199e21f4cf69d4c156be47467ded839e",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -1110,15 +1462,17 @@
       },
       "bibliography_urls": [
         "https://www.gutenberg.org/ebooks/23684"
-      ]
+      ],
+      "source_text": "Season of mists and mellow fruitfulness,\nClose bosom-friend of the maturing sun",
+      "display_note": "按所引版本恢复诗行；省略号为本站所加，表示未引的上下文；依同版原文调整截取范围。"
     },
     {
       "id": "dickinson-03",
-      "text_sha256_lf": "5d20bf1aa9f32415db2cbf59ee914ed314b17507bb890fa58aa63f8e3eb5ca54",
+      "text_sha256_lf": "0cef2cde2bb2a08199c1905b4027ecce9566fbb178461964b8d4606f8c723f70",
       "source_url": "https://www.gutenberg.org/cache/epub/12242/pg12242-images.html#Success_is_counted_sweetest",
       "locator": "第一辑，Life第I首，前两行",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "b194f3696e8a7601f4e07d80a2269cba076b92f6bf4cf6359b7fe0e1343ee516",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -1129,15 +1483,17 @@
       "bibliography_urls": [
         "https://www.gutenberg.org/ebooks/12242",
         "https://blogs.loc.gov/catbird/2017/12/success-is-counted-sweetest-on-emily-dickinsons-187th-birthday/"
-      ]
+      ],
+      "source_text": "Success is counted sweetest\nBy those who ne’er succeed.",
+      "display_note": "按所引版本恢复诗行。"
     },
     {
       "id": "whitman-03",
-      "text_sha256_lf": "11ab753e4e54947c0ec7ca800ff72e996c0514747ef9e62306d23d17ffbdd1a6",
+      "text_sha256_lf": "2a2489dad1c0611c382baf8e56809da6d416adac2ae8e2be156003768c8c4b66",
       "source_url": "https://www.gutenberg.org/cache/epub/1322/pg1322-images.html#link2H_4_0027",
-      "locator": "《自我之歌》第46节，诗行",
+      "locator": "《自我之歌》第46节",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "83ff007816c704fda33bde4219885d26cc5791dbf58e644391d32c64cd222d18",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -1147,15 +1503,17 @@
       },
       "bibliography_urls": [
         "https://www.gutenberg.org/ebooks/1322"
-      ]
+      ],
+      "source_text": "Not I, not any one else can travel that road for you,\nYou must travel it for yourself.",
+      "display_note": "按所引版本恢复诗行。"
     },
     {
       "id": "yeats-03",
-      "text_sha256_lf": "334c7cdd7ac5fa5fe4e876fc620d7bddf2b87f666fda5a52622909b5e40784b3",
+      "text_sha256_lf": "1d373c40458d4963a31217722b6d38b2797255effde1fec547327eab7b1f6086",
       "source_url": "https://www.gutenberg.org/cache/epub/32233/pg32233-images.html#Page_60",
       "locator": "《他愿以天国的锦缎相赠》末行",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "ab7e3a20395bcf4dec510d6a97943905702e054a16e206933ef264250c7d9b76",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -1166,7 +1524,9 @@
       "bibliography_urls": [
         "https://www.gutenberg.org/ebooks/32233",
         "https://www.nli.ie/news/yeats-nobel-centenary-video-series"
-      ]
+      ],
+      "source_text": "Tread softly because you tread on my dreams.",
+      "display_note": "省略号为本站所加，表示未引的上下文。"
     },
     {
       "id": "franklin-03",
@@ -1174,7 +1534,7 @@
       "source_url": "https://www.gutenberg.org/cache/epub/20203/pg20203-images.html#IX",
       "locator": "第二部分，十三项德目之“秩序”",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "bdd5d8f2a90ac8e993362805462bc64cb9c8b25e1e9198777a4ab39e631b0333",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -1193,7 +1553,7 @@
       "source_url": "https://www.gutenberg.org/cache/epub/16643/pg16643-images.html#Page_83",
       "locator": "《论自立》",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "84a04da2e744e934db8c0a2a7b316d5afd6f464fd8e599ce8a58ced45249ee98",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -1211,7 +1571,7 @@
       "source_url": "https://www.gutenberg.org/cache/epub/205/pg205-images.html#chap19",
       "locator": "第十八章“结束语”",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "512f4fa4703b7d8baed186ba001b036a58c37034b038560a07b1d26ea88b96ea",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -1229,7 +1589,7 @@
       "source_url": "https://www.gutenberg.org/cache/epub/23/pg23-images.html#link2HCH0007",
       "locator": "第七章",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "2e8c91f2f6b3ceb04a44df965637b641cea246424e2629156fe9df3b66ef5256",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -1247,7 +1607,7 @@
       "source_url": "https://www.gutenberg.org/cache/epub/2397/pg2397-images.html#link2HCH0004",
       "locator": "第一部分第四章",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "3fbe2d3f289e6b6b62bf3c80b597315844f9ce03a1cc444ae815773044d18754",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -1261,11 +1621,11 @@
     },
     {
       "id": "chesterton-03",
-      "text_sha256_lf": "ca42c3f5df5c4e70d495388a4031a207e8cc87e4896bb548576fa5742da89a72",
+      "text_sha256_lf": "7d23267f91732f2ea6b3c487e2139cfd055ba851fa90f86ea675365fa4516e71",
       "source_url": "https://www.gutenberg.org/cache/epub/11505/pg11505-images.html#chap04",
-      "locator": "《追逐自己的帽子》，句中分句",
+      "locator": "《追逐自己的帽子》",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "c25b6fcc5004aadc1711c5275c46c426cedcaeef463179a5483080376d34c1af",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -1275,7 +1635,9 @@
       },
       "bibliography_urls": [
         "https://www.gutenberg.org/ebooks/11505"
-      ]
+      ],
+      "source_text": "But in the case of all such annoyances, as I have said, everything depends upon the emotional point of view.",
+      "display_note": "依同版原文调整截取范围。"
     },
     {
       "id": "twain-03",
@@ -1283,7 +1645,7 @@
       "source_url": "https://www.gutenberg.org/cache/epub/68604/pg68604-images.html#Page_404",
       "locator": "《玉米饼意见》",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "85246632b85681faa58bb794d722a5aa514b0f7cb5fe6b9e6f104937461f0722",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -1301,7 +1663,7 @@
       "source_url": "https://www.gutenberg.org/cache/epub/10343/pg10343-images.html#id00127",
       "locator": "《除夕》",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "d2b4ef43d8bd01ea7b5ad0b3076d1641b8ff46ce6600e88c7701959092b10346",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -1314,12 +1676,162 @@
       ]
     },
     {
+      "id": "mary-shelley-03",
+      "text_sha256_lf": "c0285a7092efdf37524c08c22d5309497b3d2567ef397d7148249a9ba75b7e21",
+      "source_url": "https://www.gutenberg.org/cache/epub/42324/pg42324-images.html",
+      "locator": "第二十章，造物对弗兰肯斯坦",
+      "checked_on": "2026-10-29",
+      "method": "回到具体公版原著HTML逐字核对完整句，核人物、章节与前后语境；仅统一引号、排印横线和空白，不改原词或大小写。",
+      "source_sha256_lf": "29c2d7ae90b667345019d4f52e27a041013a783ec61f918a625527abba9d672a",
+      "misattribution_check": "不采用网传改写。小说人物言语与叙述者议论依原文位置分别标明；原句中的分号、从句和引语叙述保留。",
+      "public_domain": {
+        "first_published": 1831,
+        "author_died": 1851,
+        "basis": "按栏目2026年出版≤1930、作者卒年≤1975的双重门槛筛选公版原作正文。PG正文页首明确标Original publication ... 1831，转录说明采用1831年版影印本，版权页题年1831；原小说1818首版，元数据在此按所引1831版记录。作者卒年1851见PG书目页与RDF。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/42324"
+      ]
+    },
+    {
+      "id": "stoker-03",
+      "text_sha256_lf": "2f0a7fd9ed7f17aced94b2329836d70712d70d883d3d40dd1a176b161dd14759",
+      "source_url": "https://www.gutenberg.org/cache/epub/345/pg345-images.html#chap10",
+      "locator": "第十章，范海辛对西沃德医生",
+      "checked_on": "2026-10-29",
+      "method": "回到具体公版原著HTML逐字核对完整句，核人物、章节与前后语境；仅统一引号、排印横线和空白，不改原词或大小写。",
+      "source_sha256_lf": "3cc528ea3717c3a9c057e49b593762c2537e6cd0bd6b8c46f731dcbe8c8ec714",
+      "misattribution_check": "不采用网传改写。小说人物言语与叙述者议论依原文位置分别标明；原句中的分号、从句和引语叙述保留。",
+      "public_domain": {
+        "first_published": 1897,
+        "author_died": 1912,
+        "basis": "按栏目2026年出版≤1930、作者卒年≤1975的双重门槛筛选公版原作正文。PG正文版权页标Copyright, 1897 ... by Bram Stoker；作者卒年1912见PG书目页与RDF。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/345"
+      ]
+    },
+    {
+      "id": "doyle-03",
+      "text_sha256_lf": "4caa79bb366f7c8f72b45b30c12fdcc25d5e72825116202f3478a8c0b6f2a53e",
+      "source_url": "https://www.gutenberg.org/cache/epub/1661/pg1661-images.html#chap04",
+      "locator": "《博斯科姆溪谷谜案》，福尔摩斯",
+      "checked_on": "2026-10-29",
+      "method": "回到具体公版原著HTML逐字核对完整句，核人物、章节与前后语境；仅统一引号、排印横线和空白，不改原词或大小写。",
+      "source_sha256_lf": "43bd3ed49637642e432f9e939904c1b23ee69bee2329afb9f07aa59218e63b5d",
+      "misattribution_check": "不采用网传改写。小说人物言语与叙述者议论依原文位置分别标明；原句中的分号、从句和引语叙述保留。",
+      "public_domain": {
+        "first_published": 1892,
+        "author_died": 1930,
+        "basis": "按栏目2026年出版≤1930、作者卒年≤1975的双重门槛筛选公版原作正文。Morgan Library首版馆藏PML147450书目列London: George Newnes1892；元数据采用所引书集1892年。作者卒年1930亦见PG书目与Morgan馆藏。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/1661",
+        "https://www.themorgan.org/printed-books/372941"
+      ]
+    },
+    {
+      "id": "melville-03",
+      "text_sha256_lf": "e896f1f3bc9d420ecaf7874d05c1a5450001e657625225815a4003e0b24cd41f",
+      "source_url": "https://www.gutenberg.org/cache/epub/15/pg15-images.html#chap87",
+      "locator": "第八十七章",
+      "checked_on": "2026-10-29",
+      "method": "回到具体公版原著HTML逐字核对完整句，核人物、章节与前后语境；仅统一引号、排印横线和空白，不改原词或大小写。",
+      "source_sha256_lf": "e54ff4d136a1c5fd923db854e023db017be955b77ab42d6dc3bc6b4b97ba6adf",
+      "misattribution_check": "不采用网传改写。小说人物言语与叙述者议论依原文位置分别标明；原句中的分号、从句和引语叙述保留。",
+      "public_domain": {
+        "first_published": 1851,
+        "author_died": 1891,
+        "basis": "按栏目2026年出版≤1930、作者卒年≤1975的双重门槛筛选公版原作正文。所引PG#15正文原版题名页及版权页均标1851；作者卒年1891见PG书目与RDF。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/15",
+        "https://www.merriam-webster.com/dictionary/gally"
+      ]
+    },
+    {
+      "id": "hawthorne-03",
+      "text_sha256_lf": "1f97bec0637fd1ef79b2e31a6b9c3bd27fdaeb04c861755a240e48769e7eb1d8",
+      "source_url": "https://www.gutenberg.org/cache/epub/33/pg33-images.html#chap18",
+      "locator": "第十八章",
+      "checked_on": "2026-10-29",
+      "method": "回到具体公版原著HTML逐字核对完整句，核人物、章节与前后语境；仅统一引号、排印横线和空白，不改原词或大小写。",
+      "source_sha256_lf": "9fdc74daa5804a7e9b0fa86eb3db0f841339bd6bd3fa33c38c79812dbb5791cb",
+      "misattribution_check": "不采用网传改写。小说人物言语与叙述者议论依原文位置分别标明；原句中的分号、从句和引语叙述保留。",
+      "public_domain": {
+        "first_published": 1850,
+        "author_died": 1864,
+        "basis": "按栏目2026年出版≤1930、作者卒年≤1975的双重门槛筛选公版原作正文。Library of Congress馆藏07003785列Boston: Ticknor, Reed, and Fields1850；作者卒年1864在该馆藏、PG书目与RDF中一致。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/33",
+        "https://www.loc.gov/item/07003785/"
+      ]
+    },
+    {
+      "id": "maugham-03",
+      "text_sha256_lf": "d5d85246fdd67963baa2a443ac43d20850770f67680f4ec126c9ab6151caf6a6",
+      "source_url": "https://www.gutenberg.org/cache/epub/222/pg222-images.html#chap01",
+      "locator": "第一章，叙述者的议论",
+      "checked_on": "2026-10-29",
+      "method": "回到具体公版原著HTML逐字核对完整句，核人物、章节与前后语境；仅统一引号、排印横线和空白，不改原词或大小写。",
+      "source_sha256_lf": "fe9eaf7a3586137446e65b0cd09d4894665109222122701a57071470e958f319",
+      "misattribution_check": "不采用网传改写。小说人物言语与叙述者议论依原文位置分别标明；原句中的分号、从句和引语叙述保留。",
+      "public_domain": {
+        "first_published": 1919,
+        "author_died": 1965,
+        "basis": "按栏目2026年出版≤1930、作者卒年≤1975的双重门槛筛选公版原作正文。Morgan Library首版馆藏PML135864列London: William Heinemann1919；作者卒年1965在该馆藏、PG书目与RDF中一致。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/222",
+        "https://www.themorgan.org/printed-books/85276"
+      ]
+    },
+    {
+      "id": "forster-03",
+      "text_sha256_lf": "556dae363be58d345ae067c9faaae0db65fb277a6279bf7b97e7173d5273694f",
+      "source_url": "https://www.gutenberg.org/cache/epub/2946/pg2946-images.html#link2HCH0012",
+      "locator": "第十二章",
+      "checked_on": "2026-10-29",
+      "method": "回到具体公版原著HTML逐字核对完整句，核人物、章节与前后语境；仅统一引号、排印横线和空白，不改原词或大小写。",
+      "source_sha256_lf": "3352ceda9a36aa2d2e7a029384a68e47dd7c5b79fe886c8942551a183887bdd2",
+      "misattribution_check": "不采用网传改写。小说人物言语与叙述者议论依原文位置分别标明；原句中的分号、从句和引语叙述保留。",
+      "public_domain": {
+        "first_published": 1910,
+        "author_died": 1970,
+        "basis": "按栏目2026年出版≤1930、作者卒年≤1975的双重门槛筛选公版原作正文。Penguin Random House该书产品介绍明确First published in1910，作者简介列1879–1970；PG书目与RDF卒年一致。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/2946",
+        "https://www.penguinrandomhouse.com/books/54698/howards-end-by-e-m-forster/"
+      ]
+    },
+    {
+      "id": "alcott-03",
+      "text_sha256_lf": "d5e6d79871d08872e3b1bbaf258bc28644dd7c857f2bc44478d22369d1ba9aed",
+      "source_url": "https://www.gutenberg.org/cache/epub/514/pg514-images.html#chap24",
+      "locator": "第二部，第二十四章",
+      "checked_on": "2026-10-29",
+      "method": "回到具体公版原著HTML逐字核对完整句，核人物、章节与前后语境；仅统一引号、排印横线和空白，不改原词或大小写。",
+      "source_sha256_lf": "66a9592f4f279d84b1f144e390d8e0f955fed5bef87fea60e95829834b2e7a03",
+      "misattribution_check": "不采用网传改写。小说人物言语与叙述者议论依原文位置分别标明；原句中的分号、从句和引语叙述保留。",
+      "public_domain": {
+        "first_published": 1869,
+        "author_died": 1888,
+        "basis": "按栏目2026年出版≤1930、作者卒年≤1975的双重门槛筛选公版原作正文。Library of Congress11月29日人物资料明确1868出版第一部、次年出版Part Second；按所引第一/二部分别记1868/1869；作者卒年1888见PG书目与RDF。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/514",
+        "https://www.loc.gov/item/today-in-history/november-29/"
+      ]
+    },
+    {
       "id": "shakespeare-04",
-      "text_sha256_lf": "ab4aa85be879666089a36949c799df52975b3e491b9c26f497f44e59faaa1268",
+      "text_sha256_lf": "e77c9a2c42689ae1fc3700a8bee8fa6d1881fa04f884b7aa48215d62f612d74c",
       "source_url": "https://www.gutenberg.org/cache/epub/100/pg100-images.html#sceneII_22.7",
       "locator": "第二幕第七场，金匣中纸卷的首行",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "88ad4e03109839ba7992b14e4f1446bf56d77576a54410f5b98d9821c579be57",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -1330,7 +1842,9 @@
       "bibliography_urls": [
         "https://www.gutenberg.org/ebooks/100",
         "https://www.folger.edu/explore/shakespeares-works/the-merchant-of-venice/"
-      ]
+      ],
+      "source_text": "All that glisters is not gold",
+      "display_note": "省略号为本站所加，表示未引的上下文；依同版原文调整截取范围。"
     },
     {
       "id": "austen-04",
@@ -1338,7 +1852,7 @@
       "source_url": "https://www.gutenberg.org/cache/epub/1342/pg1342-images.html#page_259",
       "locator": "第三十六章，伊丽莎白的反省",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "f0b019c9164a53c21fda1bf2938b96b014016a6eb4a627039cebd0d9a07c42f9",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -1356,7 +1870,7 @@
       "source_url": "https://www.gutenberg.org/cache/epub/98/pg98-images.html#link2H_4_0021",
       "locator": "第二部第十三章，卡顿对露西说",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "e427456f426cf51c23e294e07f4ed3014a74dcfdeb9ae20fc8adcf8910b08107",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -1374,7 +1888,7 @@
       "source_url": "https://www.gutenberg.org/cache/epub/1260/pg1260-images.html#id-5219489442405865509",
       "locator": "第二十七章，简的内心回答",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "0bc6419204218b6379e5c174a6b93076897cc7ef40bd230f73fbe1e35366eef7",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -1388,11 +1902,11 @@
     },
     {
       "id": "eliot-04",
-      "text_sha256_lf": "f3f6636dd8db19f3201ea504dd0d672ff1e757b95c6e23e1372398ec1c9e025f",
+      "text_sha256_lf": "168b1d83feacd3b30759c0598bc7d9ff191b8fbb78cce1c31524def426ce2d37",
       "source_url": "https://www.gutenberg.org/cache/epub/145/pg145-images.html#chap21",
-      "locator": "第二十一章，叙述者的分句",
+      "locator": "第二十一章",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "1147a2687e4f27a08e44cee2a9b7f9f3dee33a05fc4ad5c26e51988ce61c2cf4",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -1403,15 +1917,17 @@
       "bibliography_urls": [
         "https://www.gutenberg.org/ebooks/145",
         "https://old-digitalcollections.nypl.org/collections/middlemarch"
-      ]
+      ],
+      "source_text": "We are all of us born in moral stupidity, taking the world as an udder to feed our supreme selves",
+      "display_note": "省略号为本站所加，表示未引的上下文；依同版原文调整截取范围。"
     },
     {
       "id": "carroll-04",
       "text_sha256_lf": "079e6242b40452b8c3ab89ea719d70e6a1dc4c266e803f08101e5b2e47a616bc",
       "source_url": "https://www.gutenberg.org/cache/epub/11/pg11-images.html#chap09",
-      "locator": "第九章，公爵夫人台词",
+      "locator": "第九章，公爵夫人",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "3c1aa77747293cfb82f6f211b2a7a7f3652a18cb62a5a93b76a6fa121a428151",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -1427,9 +1943,9 @@
       "id": "wilde-04",
       "text_sha256_lf": "2f6a8fed88e7b2fc5e87c3c85671968c407123cce3c9b1c7a383403cd12078a1",
       "source_url": "https://www.gutenberg.org/cache/epub/174/pg174-images.html#chap19",
-      "locator": "第十九章，亨利勋爵台词",
+      "locator": "第十九章，亨利勋爵",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "180f7f7e3245c75b140766464068596936eafd06a6266e83d9c71c18d617aed9",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -1447,7 +1963,7 @@
       "source_url": "https://www.gutenberg.org/cache/epub/69825/pg69825-images.html#page_12",
       "locator": "《为闲人辩护》",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "4b046e047725281c31f8c4a1311624ce6aa21a5a5c964ac23cea56751be2c359",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -1462,11 +1978,11 @@
     },
     {
       "id": "blake-04",
-      "text_sha256_lf": "d5d26d64e48183f25ae4b1558da031d07fef8202e0535b77b6092a806ebe3db4",
+      "text_sha256_lf": "63dec0e119c438f13b57e0d4fffae31d7c479c3f189ab720cd99e7e499be4805",
       "source_url": "https://www.gutenberg.org/cache/epub/574/pg574-images.html#id00214",
       "locator": "《一棵毒树》首两行",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "fd2aca59e8d04c868b683a77859005deffdcddfcd1ff5da9716cd6178c5f44e2",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -1476,15 +1992,17 @@
       },
       "bibliography_urls": [
         "https://www.gutenberg.org/ebooks/574"
-      ]
+      ],
+      "source_text": "I was angry with my friend:\nI told my wrath, my wrath did end.",
+      "display_note": "按所引版本恢复诗行。"
     },
     {
       "id": "wordsworth-04",
-      "text_sha256_lf": "06b3e791445cb1fa117f9ee0ba1f3253c6e2db307ad5ac21ab7f139395050e37",
+      "text_sha256_lf": "29138f02f1fc84f6c5ef3a68768d39541b944a82b43b5db9fff55507afc87718",
       "source_url": "https://www.gutenberg.org/cache/epub/8774/pg8774-images.html#id00114",
       "locator": "《她是令人欢喜的幻影》首两行",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "3c93ef04e87a39e800d98c057dd13a39a74df63535df0e1a2d10f2a59659868b",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -1494,15 +2012,17 @@
       },
       "bibliography_urls": [
         "https://www.gutenberg.org/ebooks/8774"
-      ]
+      ],
+      "source_text": "She was a Phantom of delight\nWhen first she gleam’d upon my sight",
+      "display_note": "按所引版本恢复诗行；省略号为本站所加，表示未引的上下文；依同版原文调整截取范围。"
     },
     {
       "id": "coleridge-04",
-      "text_sha256_lf": "12082e30b80b497a4ebb1b27024b2a6e05e1149e1951f535dba454ad64af21c0",
+      "text_sha256_lf": "7b2b42d28b10936881845aaefad799e2275259c1f98cc5a8f054f8257c21107d",
       "source_url": "https://www.gutenberg.org/cache/epub/11101/pg11101-images.html#id00346",
-      "locator": "第七部分，末两行",
+      "locator": "第七部分，第622—625行",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "fe5e45092e669683ba54816b7e59582dc5b4a07f52820c2ec09e65942cd7a300",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -1512,15 +2032,17 @@
       },
       "bibliography_urls": [
         "https://www.gutenberg.org/ebooks/11101"
-      ]
+      ],
+      "source_text": "He went like one that hath been stunned,\nAnd is of sense forlorn:\nA sadder and a wiser man,\nHe rose the morrow morn.",
+      "display_note": "按所引版本恢复诗行；依同版原文调整截取范围。"
     },
     {
       "id": "shelley-04",
-      "text_sha256_lf": "fe35b176710c3041674829a35f6e0de33192e40a1473f6aad134eccc3b328db0",
+      "text_sha256_lf": "4cf310c0de95285bd7b0bbfca2811aae6939eb4be1ae5aa685cc0fafa539c49c",
       "source_url": "https://www.gutenberg.org/cache/epub/4798/pg4798-images.html#id00862",
       "locator": "《爱的哲学》首两行",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "2e38a421a1fab35981b4112e82274127156d1ea57944d7d302885f40c1e7a96f",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -1530,7 +2052,9 @@
       },
       "bibliography_urls": [
         "https://www.gutenberg.org/ebooks/4798"
-      ]
+      ],
+      "source_text": "The fountains mingle with the river\nAnd the rivers with the Ocean",
+      "display_note": "按所引版本恢复诗行；省略号为本站所加，表示未引的上下文；依同版原文调整截取范围。"
     },
     {
       "id": "keats-04",
@@ -1538,7 +2062,7 @@
       "source_url": "https://www.gutenberg.org/cache/epub/23684/pg23684-images.html#Nightingale_ln60",
       "locator": "《夜莺颂》第61行",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "3e2c304ce25cc28e0d64cb3cf29a3967199e21f4cf69d4c156be47467ded839e",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -1552,11 +2076,11 @@
     },
     {
       "id": "dickinson-04",
-      "text_sha256_lf": "c494787b693dcab50a73fb7afcc04150edd16c62d5ee94c160a8a064c1f48116",
+      "text_sha256_lf": "de1e4d15302809bbf032038f1ae8e64808dcbd74fbaa950b0dd8249c3439c18b",
       "source_url": "https://www.gutenberg.org/cache/epub/12242/pg12242-images.html#There_is_no_frigate_like_a_book",
-      "locator": "第三辑，Life第XVI首，前两行",
+      "locator": "第三辑，Life第XVI首，首四行",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "b194f3696e8a7601f4e07d80a2269cba076b92f6bf4cf6359b7fe0e1343ee516",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -1566,15 +2090,17 @@
       },
       "bibliography_urls": [
         "https://www.gutenberg.org/ebooks/12242"
-      ]
+      ],
+      "source_text": "There is no frigate like a book\nTo take us lands away,\nNor any coursers like a page\nOf prancing poetry.",
+      "display_note": "按所引版本恢复诗行；依同版原文调整截取范围。"
     },
     {
       "id": "whitman-04",
-      "text_sha256_lf": "7b6ca3e159397488dff6269e5ad614118b726ec0d2377518ca70297e2faacf45",
+      "text_sha256_lf": "a20abb572ea1d970b067c0fa3facb97b246da15a3912bf46ee1ea854dd77049b",
       "source_url": "https://www.gutenberg.org/cache/epub/1322/pg1322-images.html#link2H_4_0121",
-      "locator": "《啊，我！啊，人生！》末行",
+      "locator": "《啊，我！啊，人生！》末两行",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "83ff007816c704fda33bde4219885d26cc5791dbf58e644391d32c64cd222d18",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -1584,15 +2110,17 @@
       },
       "bibliography_urls": [
         "https://www.gutenberg.org/ebooks/1322"
-      ]
+      ],
+      "source_text": "That you are here—that life exists and identity,\nThat the powerful play goes on, and you may contribute a verse.",
+      "display_note": "按所引版本恢复诗行；依同版原文调整截取范围。"
     },
     {
       "id": "yeats-04",
-      "text_sha256_lf": "f6f89bc83fe7a274f19b43d6b0e21d2313553ae5263793f3df22342782683b32",
+      "text_sha256_lf": "2b220f4879543eda12673f8f8f936937405a7359ba6204ca1b9c50aa10c40d6a",
       "source_url": "https://www.gutenberg.org/cache/epub/49608/pg49608-images.html#Page_154",
       "locator": "《茵尼斯弗利湖心岛》首行",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "6c3e5e0fe6b13c0efb9c5f97eff24b063e6eca044d57b22eb02a25a6c1413183",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -1603,7 +2131,9 @@
       "bibliography_urls": [
         "https://www.gutenberg.org/ebooks/49608",
         "https://www.nli.ie/news/yeats-nobel-centenary-video-series"
-      ]
+      ],
+      "source_text": "I will arise and go now, and go to Innisfree",
+      "display_note": "省略号为本站所加，表示未引的上下文；依同版原文调整截取范围。"
     },
     {
       "id": "franklin-04",
@@ -1611,7 +2141,7 @@
       "source_url": "https://www.gutenberg.org/cache/epub/20203/pg20203-images.html",
       "locator": "第二部分，十三项德目之“节俭”",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "bdd5d8f2a90ac8e993362805462bc64cb9c8b25e1e9198777a4ab39e631b0333",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -1630,7 +2160,7 @@
       "source_url": "https://www.gutenberg.org/cache/epub/16643/pg16643-images.html#Page_89",
       "locator": "《论自立》",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "84a04da2e744e934db8c0a2a7b316d5afd6f464fd8e599ce8a58ced45249ee98",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -1648,7 +2178,7 @@
       "source_url": "https://www.gutenberg.org/cache/epub/205/pg205-images.html#chap19",
       "locator": "第十八章“结束语”",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "512f4fa4703b7d8baed186ba001b036a58c37034b038560a07b1d26ea88b96ea",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -1666,7 +2196,7 @@
       "source_url": "https://www.gutenberg.org/cache/epub/23/pg23-images.html#link2HCH0007",
       "locator": "第七章",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "2e8c91f2f6b3ceb04a44df965637b641cea246424e2629156fe9df3b66ef5256",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -1680,11 +2210,11 @@
     },
     {
       "id": "keller-04",
-      "text_sha256_lf": "177bf330103e41cdd60b343a40a5ca5b06edd0b80503c5554c8b7feb07ec56f2",
+      "text_sha256_lf": "5f21060956abd22edd7b04cebae09a31b656d676d5dd88df99060258f0281b7c",
       "source_url": "https://www.gutenberg.org/cache/epub/2397/pg2397-images.html#link2HCH0021",
-      "locator": "第一部分第二十一章，句中分句",
+      "locator": "第一部分第二十一章",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "3fbe2d3f289e6b6b62bf3c80b597315844f9ce03a1cc444ae815773044d18754",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -1694,7 +2224,9 @@
       },
       "bibliography_urls": [
         "https://www.gutenberg.org/ebooks/2397"
-      ]
+      ],
+      "source_text": "In a word, literature is my Utopia.",
+      "display_note": "依同版原文调整截取范围。"
     },
     {
       "id": "chesterton-04",
@@ -1702,7 +2234,7 @@
       "source_url": "https://www.gutenberg.org/cache/epub/11505/pg11505-images.html#chap04",
       "locator": "《追逐自己的帽子》",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "c25b6fcc5004aadc1711c5275c46c426cedcaeef463179a5483080376d34c1af",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -1720,7 +2252,7 @@
       "source_url": "https://www.gutenberg.org/cache/epub/68604/pg68604-images.html#Page_401",
       "locator": "《玉米饼意见》",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "85246632b85681faa58bb794d722a5aa514b0f7cb5fe6b9e6f104937461f0722",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -1738,7 +2270,7 @@
       "source_url": "https://www.gutenberg.org/cache/epub/10343/pg10343-images.html#id00451",
       "locator": "《烤猪论》",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "d2b4ef43d8bd01ea7b5ad0b3076d1641b8ff46ce6600e88c7701959092b10346",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -1752,11 +2284,11 @@
     },
     {
       "id": "shakespeare-05",
-      "text_sha256_lf": "77cf9dec46bdf5c550b672fab990a9596c30803072f89af79ad9f085250e245c",
+      "text_sha256_lf": "81433d775d03e1f6b5eb9e8bf8d0db10c7e598a92e6f4f33d7701f360d209b71",
       "source_url": "https://www.gutenberg.org/cache/epub/100/pg100-images.html#sceneI_8.3",
-      "locator": "第一幕第三场，波洛涅斯的告诫",
+      "locator": "第一幕第三场，波洛涅斯对雷欧提斯",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "88ad4e03109839ba7992b14e4f1446bf56d77576a54410f5b98d9821c579be57",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -1767,15 +2299,17 @@
       "bibliography_urls": [
         "https://www.gutenberg.org/ebooks/100",
         "https://www.folger.edu/explore/shakespeares-works/hamlet/"
-      ]
+      ],
+      "source_text": "This above all: to thine own self be true;\nAnd it must follow, as the night the day,\nThou canst not then be false to any man.",
+      "display_note": "按所引版本恢复诗行；依同版原文调整截取范围。"
     },
     {
       "id": "austen-05",
       "text_sha256_lf": "abd4cc3cc60af8c5d0346274a053db457f89b354a116d48d1dd489ea5127e3aa",
       "source_url": "https://www.gutenberg.org/cache/epub/1342/pg1342-images.html#page_447",
-      "locator": "第五十七章，班纳特先生台词",
+      "locator": "第五十七章，班纳特先生",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "f0b019c9164a53c21fda1bf2938b96b014016a6eb4a627039cebd0d9a07c42f9",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -1793,7 +2327,7 @@
       "source_url": "https://www.gutenberg.org/cache/epub/98/pg98-images.html#link2H_4_0048",
       "locator": "第三部第十五章，结尾",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "e427456f426cf51c23e294e07f4ed3014a74dcfdeb9ae20fc8adcf8910b08107",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -1811,7 +2345,7 @@
       "source_url": "https://www.gutenberg.org/cache/epub/1260/pg1260-images.html#id-6588747706750457341",
       "locator": "第二版序言（1848）",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "0bc6419204218b6379e5c174a6b93076897cc7ef40bd230f73fbe1e35366eef7",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -1829,7 +2363,7 @@
       "source_url": "https://www.gutenberg.org/cache/epub/145/pg145-images.html#chap20",
       "locator": "第二十章，叙述者的议论",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "1147a2687e4f27a08e44cee2a9b7f9f3dee33a05fc4ad5c26e51988ce61c2cf4",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -1846,9 +2380,9 @@
       "id": "carroll-05",
       "text_sha256_lf": "7827f03d14135e59de13627f232927ab423005828463b2e3adeeb8fe4d6d86b7",
       "source_url": "https://www.gutenberg.org/cache/epub/11/pg11-images.html#chap09",
-      "locator": "第九章，公爵夫人台词",
+      "locator": "第九章，公爵夫人",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "3c1aa77747293cfb82f6f211b2a7a7f3652a18cb62a5a93b76a6fa121a428151",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -1864,9 +2398,9 @@
       "id": "wilde-05",
       "text_sha256_lf": "3355541ab82f05df8d0c70c0b9a81ba203312b997a30ced71bf02b4c84d30480",
       "source_url": "https://www.gutenberg.org/cache/epub/174/pg174-images.html#chap06",
-      "locator": "第六章，亨利勋爵台词",
+      "locator": "第六章，亨利勋爵",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "180f7f7e3245c75b140766464068596936eafd06a6266e83d9c71c18d617aed9",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -1884,7 +2418,7 @@
       "source_url": "https://www.gutenberg.org/cache/epub/69825/pg69825-images.html#page_23",
       "locator": "《为闲人辩护》",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "4b046e047725281c31f8c4a1311624ce6aa21a5a5c964ac23cea56751be2c359",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -1899,11 +2433,11 @@
     },
     {
       "id": "blake-05",
-      "text_sha256_lf": "df3ca9613d5ead90fba60f66a25baa99252f29f0008b852d972f29bc1166f9e1",
+      "text_sha256_lf": "6a040ec669bee42033fb87f53a47b4d9959374f1e55aeecc5b9afec9cfc4c3b3",
       "source_url": "https://www.gutenberg.org/cache/epub/574/pg574-images.html#id00237",
       "locator": "《学童》第四节，前两行",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "fd2aca59e8d04c868b683a77859005deffdcddfcd1ff5da9716cd6178c5f44e2",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -1913,15 +2447,17 @@
       },
       "bibliography_urls": [
         "https://www.gutenberg.org/ebooks/574"
-      ]
+      ],
+      "source_text": "How can the bird that is born for joy\nSit in a cage and sing?",
+      "display_note": "按所引版本恢复诗行。"
     },
     {
       "id": "wordsworth-05",
-      "text_sha256_lf": "d1303640d55ef521e8b827f5849b249a45bd728a82d3200427dce0263e882f4b",
+      "text_sha256_lf": "a7177f8cb6e9a4e5bac1117d96aa42c421a6b02d4834cc18418100af0ca6cff4",
       "source_url": "https://www.gutenberg.org/cache/epub/8774/pg8774-images.html#id00148",
-      "locator": "《快乐的战士的品格》，分句",
+      "locator": "《快乐的战士的品格》",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "3c93ef04e87a39e800d98c057dd13a39a74df63535df0e1a2d10f2a59659868b",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -1931,15 +2467,17 @@
       },
       "bibliography_urls": [
         "https://www.gutenberg.org/ebooks/8774"
-      ]
+      ],
+      "source_text": "Who, not content that former worth stand fast,\nLooks forward, persevering to the last",
+      "display_note": "按所引版本恢复诗行；省略号为本站所加，表示未引的上下文；依同版原文调整截取范围。"
     },
     {
       "id": "coleridge-05",
-      "text_sha256_lf": "5926d4db6674cba7d1264167d4c632fc56f7b752046d931fda85472bb9218b5b",
+      "text_sha256_lf": "c8de28b8f1999b133886bfc2797f2428c24ca56bffa84809116a4cb865100434",
       "source_url": "https://www.gutenberg.org/cache/epub/11101/pg11101-images.html#id00171",
-      "locator": "第二部分，第103—104行",
+      "locator": "第二部分，第103—106行",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "fe5e45092e669683ba54816b7e59582dc5b4a07f52820c2ec09e65942cd7a300",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -1949,15 +2487,17 @@
       },
       "bibliography_urls": [
         "https://www.gutenberg.org/ebooks/11101"
-      ]
+      ],
+      "source_text": "The fair breeze blew, the white foam flew,\nThe furrow followed free;\nWe were the first that ever burst\nInto that silent sea.",
+      "display_note": "按所引版本恢复诗行；依同版原文调整截取范围。"
     },
     {
       "id": "shelley-05",
-      "text_sha256_lf": "05bd9b5289cba5c7b7a5852c1cecd23255744a15ba018a789ef2cb62aa292fc1",
+      "text_sha256_lf": "117b533ada1601daf773cc312dad1e85e62658bbc7b0d4a27d6337718ea44be0",
       "source_url": "https://www.gutenberg.org/cache/epub/4798/pg4798-images.html#id01426",
-      "locator": "《当柔声消逝》首两行",
+      "locator": "《当柔声消逝》首四行",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "2e38a421a1fab35981b4112e82274127156d1ea57944d7d302885f40c1e7a96f",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -1967,15 +2507,17 @@
       },
       "bibliography_urls": [
         "https://www.gutenberg.org/ebooks/4798"
-      ]
+      ],
+      "source_text": "Music, when soft voices die,\nVibrates in the memory—\nOdours, when sweet violets sicken,\nLive within the sense they quicken.",
+      "display_note": "按所引版本恢复诗行；依同版原文调整截取范围。"
     },
     {
       "id": "keats-05",
-      "text_sha256_lf": "d5ea3fd46feaca0d23549d1d96de6f548d7ed8b3f78be4547ff62606b6a9b1dd",
+      "text_sha256_lf": "a5157f807ff37be80d58ad589bd7cff73c55e14d16562c848caa5125e5c46d32",
       "source_url": "https://www.gutenberg.org/cache/epub/23684/pg23684-images.html#Nightingale_ln30",
-      "locator": "《夜莺颂》第35—36行，句中节选",
+      "locator": "《夜莺颂》第35—36行",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "3e2c304ce25cc28e0d64cb3cf29a3967199e21f4cf69d4c156be47467ded839e",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -1985,15 +2527,17 @@
       },
       "bibliography_urls": [
         "https://www.gutenberg.org/ebooks/23684"
-      ]
+      ],
+      "source_text": "tender is the night,\nAnd haply the Queen-Moon is on her throne",
+      "display_note": "按所引版本恢复诗行；省略号为本站所加，表示未引的上下文；依同版原文调整截取范围。"
     },
     {
       "id": "dickinson-05",
-      "text_sha256_lf": "6b692fc3dafaf8824b41f1a8a4e1375e8adc6b04ab3d1a67c0210313c9feca16",
+      "text_sha256_lf": "9e630d521e621c22762fba28ac9a02c16e2ef28d9f32ffc3749c8d4dc8a1f706",
       "source_url": "https://www.gutenberg.org/cache/epub/12242/pg12242-images.html#Im_nobody_Who_are_you",
-      "locator": "第二辑，Life第I首，前三行",
+      "locator": "第二辑，Life第I首，首两行",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "b194f3696e8a7601f4e07d80a2269cba076b92f6bf4cf6359b7fe0e1343ee516",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -2003,15 +2547,17 @@
       },
       "bibliography_urls": [
         "https://www.gutenberg.org/ebooks/12242"
-      ]
+      ],
+      "source_text": "I’m nobody! Who are you?\nAre you nobody, too?",
+      "display_note": "按所引版本恢复诗行。"
     },
     {
       "id": "whitman-05",
-      "text_sha256_lf": "11d995e7da96c5c7ca9654a61bdc217c9f84e83ac4935a11ec375970b6cdbc14",
+      "text_sha256_lf": "f8d67cd3e2b7d0b30ef206d44f7bec3dbc2167c14910f8ad5a692f6609dcfccf",
       "source_url": "https://www.gutenberg.org/cache/epub/1322/pg1322-images.html#link2H_4_0027",
-      "locator": "《自我之歌》第52节，诗行",
+      "locator": "《自我之歌》第52节",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "83ff007816c704fda33bde4219885d26cc5791dbf58e644391d32c64cd222d18",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -2021,15 +2567,17 @@
       },
       "bibliography_urls": [
         "https://www.gutenberg.org/ebooks/1322"
-      ]
+      ],
+      "source_text": "I bequeath myself to the dirt to grow from the grass I love,\nIf you want me again look for me under your boot-soles.",
+      "display_note": "按所引版本恢复诗行。"
     },
     {
       "id": "yeats-05",
-      "text_sha256_lf": "7bd5e329a27af84ee825fd1702103496e1dd0325b90ed413a73263fb21d84c21",
+      "text_sha256_lf": "6225876216ca9bb8daf398fdd99ac8b68f93ba71d2a7c82b87723e639e416746",
       "source_url": "https://www.gutenberg.org/cache/epub/49608/pg49608-images.html#Page_154",
       "locator": "《茵尼斯弗利湖心岛》第5行",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "6c3e5e0fe6b13c0efb9c5f97eff24b063e6eca044d57b22eb02a25a6c1413183",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -2040,7 +2588,9 @@
       "bibliography_urls": [
         "https://www.gutenberg.org/ebooks/49608",
         "https://www.nli.ie/news/yeats-nobel-centenary-video-series"
-      ]
+      ],
+      "source_text": "And I shall have some peace there, for peace comes dropping slow",
+      "display_note": "省略号为本站所加，表示未引的上下文；依同版原文调整截取范围。"
     },
     {
       "id": "franklin-05",
@@ -2048,7 +2598,7 @@
       "source_url": "https://www.gutenberg.org/cache/epub/78663/pg78663-images.html",
       "locator": "《哨子》1921年节录本末句",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "bc07b4e99ba4ceb51a25194b52d99a9ea20a80796ba93c311efab9a661a8b44c",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -2066,7 +2616,7 @@
       "source_url": "https://www.gutenberg.org/cache/epub/16643/pg16643-images.html#Page_90",
       "locator": "《论自立》",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "84a04da2e744e934db8c0a2a7b316d5afd6f464fd8e599ce8a58ced45249ee98",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -2084,7 +2634,7 @@
       "source_url": "https://www.gutenberg.org/cache/epub/205/pg205-images.html#chap04",
       "locator": "第三章“阅读”",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "512f4fa4703b7d8baed186ba001b036a58c37034b038560a07b1d26ea88b96ea",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -2098,11 +2648,11 @@
     },
     {
       "id": "douglass-05",
-      "text_sha256_lf": "7ecfe61dbb3e61612e9b443718247c4e46b31f5bb6f2a7108fd552485f6d42e6",
+      "text_sha256_lf": "06f1eea72f28cc5e97f7d8a03af45ee2801465a0e88b0e985fbce305d04d628f",
       "source_url": "https://www.gutenberg.org/cache/epub/23/pg23-images.html#fnref-1",
-      "locator": "第十章，句中分句",
+      "locator": "第十章",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "2e8c91f2f6b3ceb04a44df965637b641cea246424e2629156fe9df3b66ef5256",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -2112,15 +2662,17 @@
       },
       "bibliography_urls": [
         "https://www.gutenberg.org/ebooks/23"
-      ]
+      ],
+      "source_text": "I have found that, to make a contented slave, it is necessary to make a thoughtless one.",
+      "display_note": "依同版原文调整截取范围。"
     },
     {
       "id": "keller-05",
-      "text_sha256_lf": "b2f1cea4a2598b3fc364a0d5d8acc3fe58ce861deb6e58fe95749d6d6aab8134",
+      "text_sha256_lf": "f49dd36bf9c9a6d0af0729bf5dcff5b2eb9aa3d9de484e31063fd02c369b448f",
       "source_url": "https://www.gutenberg.org/cache/epub/2397/pg2397-images.html#link2HCH0023",
-      "locator": "第一部分第二十三章，末句中的分句",
+      "locator": "第一部分第二十三章，结尾",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "3fbe2d3f289e6b6b62bf3c80b597315844f9ce03a1cc444ae815773044d18754",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -2130,7 +2682,9 @@
       },
       "bibliography_urls": [
         "https://www.gutenberg.org/ebooks/2397"
-      ]
+      ],
+      "source_text": "In a thousand ways they have turned my limitations into beautiful privileges, and enabled me to walk serene and happy in the shadow cast by my deprivation.",
+      "display_note": "依同版原文调整截取范围。"
     },
     {
       "id": "chesterton-05",
@@ -2138,7 +2692,7 @@
       "source_url": "https://www.gutenberg.org/cache/epub/11505/pg11505-images.html#chap31",
       "locator": "《童话》",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "c25b6fcc5004aadc1711c5275c46c426cedcaeef463179a5483080376d34c1af",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -2156,7 +2710,7 @@
       "source_url": "https://www.gutenberg.org/cache/epub/68604/pg68604-images.html#Page_406",
       "locator": "《玉米饼意见》末段",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "85246632b85681faa58bb794d722a5aa514b0f7cb5fe6b9e6f104937461f0722",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -2174,7 +2728,7 @@
       "source_url": "https://www.gutenberg.org/cache/epub/10343/pg10343-images.html#id00438",
       "locator": "《烤猪论》",
       "checked_on": "2026-10-29",
-      "method": "同版公版HTML正文匹配并核上下文；比对仅统一排版空白、引号/横线、斜体标记与编辑脚注号，不更改词句。",
+      "method": "同版公版HTML正文匹配；原有上下文核对保留，新增截取范围及诗行另核。比对只统一排印空白、引号、横线及编辑行号，不改变原作大小写。",
       "source_sha256_lf": "d2b4ef43d8bd01ea7b5ad0b3076d1641b8ff46ce6600e88c7701959092b10346",
       "misattribution_check": "直接回到作者作品正文核对，不以网传名言署名代替出处；戏剧/小说台词注明说话者或语境，分句节选明示。",
       "public_domain": {
@@ -2184,6 +2738,1049 @@
       },
       "bibliography_urls": [
         "https://www.gutenberg.org/ebooks/10343"
+      ]
+    },
+    {
+      "id": "shakespeare-06",
+      "text_sha256_lf": "37b6b60802dc2ada0f94bf6306ab4ac67360247c99a05c7cbb9216109b4d7ddc",
+      "source_url": "https://www.gutenberg.org/cache/epub/100/pg100-images.html#sceneII_8.2",
+      "locator": "第二幕第二场，波洛涅斯",
+      "checked_on": "2026-10-29",
+      "method": "真实同版HTML正文逐字匹配；仅统一引号、横线、排印空白和页码/行号。上下文和真实章节锚点另录于候选证据。",
+      "source_sha256_lf": "88ad4e03109839ba7992b14e4f1446bf56d77576a54410f5b98d9821c579be57",
+      "misattribution_check": "回原著核对，不采用网络转引的改写句；角色台词按实际语境署明。",
+      "public_domain": {
+        "first_published": 1603,
+        "author_died": 1616,
+        "basis": "沿用第一版已核的原作/所引版本年与作者卒年：1603年、1616年；2026年公版门槛为1930年及1975年，仅取原作正文。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/100",
+        "https://www.folger.edu/explore/shakespeares-works/hamlet/"
+      ],
+      "source_text": "Therefore, since brevity is the soul of wit,\nAnd tediousness the limbs and outward flourishes,\nI will be brief.",
+      "display_note": "按所引版本恢复诗行。"
+    },
+    {
+      "id": "austen-06",
+      "text_sha256_lf": "d483f84521bf3333c82ab1164aef74771e6743d64320ce98bed1f7d922b06e0f",
+      "source_url": "https://www.gutenberg.org/cache/epub/1342/pg1342-images.html",
+      "locator": "第一章，开篇",
+      "checked_on": "2026-10-29",
+      "method": "真实同版HTML正文逐字匹配；仅统一引号、横线、排印空白和页码/行号。上下文和真实章节锚点另录于候选证据。",
+      "source_sha256_lf": "f0b019c9164a53c21fda1bf2938b96b014016a6eb4a627039cebd0d9a07c42f9",
+      "misattribution_check": "回原著核对，不采用网络转引的改写句；角色台词按实际语境署明。",
+      "public_domain": {
+        "first_published": 1813,
+        "author_died": 1817,
+        "basis": "沿用第一版已核的原作/所引版本年与作者卒年：1813年、1817年；2026年公版门槛为1930年及1975年，仅取原作正文。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/1342"
+      ]
+    },
+    {
+      "id": "bronte-06",
+      "text_sha256_lf": "d561bfcf5a48815839f98c40f130093c1d68873e192d98ff107580eb9f7eb28a",
+      "source_url": "https://www.gutenberg.org/cache/epub/1260/pg1260-images.html",
+      "locator": "第二十四章，简",
+      "checked_on": "2026-10-29",
+      "method": "真实同版HTML正文逐字匹配；仅统一引号、横线、排印空白和页码/行号。上下文和真实章节锚点另录于候选证据。",
+      "source_sha256_lf": "0bc6419204218b6379e5c174a6b93076897cc7ef40bd230f73fbe1e35366eef7",
+      "misattribution_check": "回原著核对，不采用网络转引的改写句；角色台词按实际语境署明。",
+      "public_domain": {
+        "first_published": 1847,
+        "author_died": 1855,
+        "basis": "沿用第一版已核的原作/所引版本年与作者卒年：1847年、1855年；2026年公版门槛为1930年及1975年，仅取原作正文。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/1260"
+      ]
+    },
+    {
+      "id": "carroll-06",
+      "text_sha256_lf": "8f7bf9297eb26b6f61c271bfec14468e450b562eed57e1efd231523596516b9a",
+      "source_url": "https://www.gutenberg.org/cache/epub/11/pg11-images.html#chap12",
+      "locator": "第十二章，国王",
+      "checked_on": "2026-10-29",
+      "method": "真实同版HTML正文逐字匹配；仅统一引号、横线、排印空白和页码/行号。上下文和真实章节锚点另录于候选证据。",
+      "source_sha256_lf": "3c1aa77747293cfb82f6f211b2a7a7f3652a18cb62a5a93b76a6fa121a428151",
+      "misattribution_check": "回原著核对，不采用网络转引的改写句；角色台词按实际语境署明。",
+      "public_domain": {
+        "first_published": 1865,
+        "author_died": 1898,
+        "basis": "沿用第一版已核的原作/所引版本年与作者卒年：1865年、1898年；2026年公版门槛为1930年及1975年，仅取原作正文。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/11"
+      ]
+    },
+    {
+      "id": "wilde-06",
+      "text_sha256_lf": "8b9d0cb55d6fdd027f167e8efdeb9bee33f81f41f714ca294ab4163c1d0e7ffd",
+      "source_url": "https://www.gutenberg.org/cache/epub/174/pg174-images.html#chap02",
+      "locator": "第二章，亨利勋爵",
+      "checked_on": "2026-10-29",
+      "method": "真实同版HTML正文逐字匹配；仅统一引号、横线、排印空白和页码/行号。上下文和真实章节锚点另录于候选证据。",
+      "source_sha256_lf": "180f7f7e3245c75b140766464068596936eafd06a6266e83d9c71c18d617aed9",
+      "misattribution_check": "回原著核对，不采用网络转引的改写句；角色台词按实际语境署明。",
+      "public_domain": {
+        "first_published": 1891,
+        "author_died": 1900,
+        "basis": "沿用第一版已核的原作/所引版本年与作者卒年：1891年、1900年；2026年公版门槛为1930年及1975年，仅取原作正文。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/174"
+      ]
+    },
+    {
+      "id": "blake-06",
+      "text_sha256_lf": "74f0cd6768afef49e6ecdc3cf490e198e723ef9621d0bb93e34790e78c555d92",
+      "source_url": "https://www.gutenberg.org/cache/epub/45315/pg45315-images.html#PROVERBS_OF_HELL",
+      "locator": "“地狱的箴言”",
+      "checked_on": "2026-10-29",
+      "method": "真实同版HTML正文逐字匹配；仅统一引号、横线、排印空白和页码/行号。上下文和真实章节锚点另录于候选证据。",
+      "source_sha256_lf": "9ad612a43dc945ff82822fe346782537944894eeff0a037062ba09b586a06e81",
+      "misattribution_check": "回原著核对，不采用网络转引的改写句；角色台词按实际语境署明。",
+      "public_domain": {
+        "first_published": 1790,
+        "author_died": 1827,
+        "basis": "沿用第一版已核的原作/所引版本年与作者卒年：1790年、1827年；2026年公版门槛为1930年及1975年，仅取原作正文。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/45315"
+      ]
+    },
+    {
+      "id": "keats-06",
+      "text_sha256_lf": "f82d14caafb3269bbb51f31c78555b32ffbe6e1a55d73b632a2dc44ccff03be0",
+      "source_url": "https://www.gutenberg.org/cache/epub/23684/pg23684-images.html#Page_41",
+      "locator": "《拉米亚》第二部，第229—230行",
+      "checked_on": "2026-10-29",
+      "method": "真实同版HTML正文逐字匹配；仅统一引号、横线、排印空白和页码/行号。上下文和真实章节锚点另录于候选证据。",
+      "source_sha256_lf": "3e2c304ce25cc28e0d64cb3cf29a3967199e21f4cf69d4c156be47467ded839e",
+      "misattribution_check": "回原著核对，不采用网络转引的改写句；角色台词按实际语境署明。",
+      "public_domain": {
+        "first_published": 1820,
+        "author_died": 1821,
+        "basis": "沿用第一版已核的原作/所引版本年与作者卒年：1820年、1821年；2026年公版门槛为1930年及1975年，仅取原作正文。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/23684"
+      ],
+      "source_text": "Do not all charms fly\nAt the mere touch of cold philosophy?",
+      "display_note": "按所引版本恢复诗行。"
+    },
+    {
+      "id": "whitman-06",
+      "text_sha256_lf": "a5474090c26caa54c68537e0301b04b9b61643a51f0e06df36495f487686a1e3",
+      "source_url": "https://www.gutenberg.org/cache/epub/1322/pg1322-images.html#link2H_4_0027",
+      "locator": "《自我之歌》第1节",
+      "checked_on": "2026-10-29",
+      "method": "真实同版HTML正文逐字匹配；仅统一引号、横线、排印空白和页码/行号。上下文和真实章节锚点另录于候选证据。",
+      "source_sha256_lf": "83ff007816c704fda33bde4219885d26cc5791dbf58e644391d32c64cd222d18",
+      "misattribution_check": "回原著核对，不采用网络转引的改写句；角色台词按实际语境署明。",
+      "public_domain": {
+        "first_published": 1855,
+        "author_died": 1892,
+        "basis": "沿用第一版已核的原作/所引版本年与作者卒年：1855年、1892年；2026年公版门槛为1930年及1975年，仅取原作正文。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/1322"
+      ],
+      "source_text": "I celebrate myself, and sing myself,\nAnd what I assume you shall assume,\nFor every atom belonging to me as good belongs to you.",
+      "display_note": "按所引版本恢复诗行。"
+    },
+    {
+      "id": "franklin-06",
+      "text_sha256_lf": "49de89f571cdf9ee316baa497092e0ffdc0f2f2b09d4efc36dbbbb55e2253864",
+      "source_url": "https://www.gutenberg.org/cache/epub/20203/pg20203-images.html#IX",
+      "locator": "第二部分，十三项德目之“节制”",
+      "checked_on": "2026-10-29",
+      "method": "真实同版HTML正文逐字匹配；仅统一引号、横线、排印空白和页码/行号。上下文和真实章节锚点另录于候选证据。",
+      "source_sha256_lf": "bdd5d8f2a90ac8e993362805462bc64cb9c8b25e1e9198777a4ab39e631b0333",
+      "misattribution_check": "回原著核对，不采用网络转引的改写句；角色台词按实际语境署明。",
+      "public_domain": {
+        "first_published": 1818,
+        "author_died": 1790,
+        "basis": "沿用第一版已核的原作/所引版本年与作者卒年：1818年、1790年；2026年公版门槛为1930年及1975年，仅取原作正文。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/20203",
+        "https://guides.loc.gov/finding-benjamin-franklin/autobiography"
+      ]
+    },
+    {
+      "id": "emerson-06",
+      "text_sha256_lf": "c4fabb89d1cf8c6d4da7276fdef2df48970f9c02984fe275a689991f86bdb33a",
+      "source_url": "https://www.gutenberg.org/cache/epub/16643/pg16643-images.html#SELF-RELIANCE",
+      "locator": "《论自立》结尾",
+      "checked_on": "2026-10-29",
+      "method": "真实同版HTML正文逐字匹配；仅统一引号、横线、排印空白和页码/行号。上下文和真实章节锚点另录于候选证据。",
+      "source_sha256_lf": "84a04da2e744e934db8c0a2a7b316d5afd6f464fd8e599ce8a58ced45249ee98",
+      "misattribution_check": "回原著核对，不采用网络转引的改写句；角色台词按实际语境署明。",
+      "public_domain": {
+        "first_published": 1841,
+        "author_died": 1882,
+        "basis": "沿用第一版已核的原作/所引版本年与作者卒年：1841年、1882年；2026年公版门槛为1930年及1975年，仅取原作正文。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/16643"
+      ]
+    },
+    {
+      "id": "thoreau-06",
+      "text_sha256_lf": "ccda6833726c0e263bf3c929a1c31f067123165ed24395427405d2571e3addd8",
+      "source_url": "https://www.gutenberg.org/cache/epub/205/pg205-images.html#chap03",
+      "locator": "第二章“我生活的地方；我为何生活”",
+      "checked_on": "2026-10-29",
+      "method": "真实同版HTML正文逐字匹配；仅统一引号、横线、排印空白和页码/行号。上下文和真实章节锚点另录于候选证据。",
+      "source_sha256_lf": "512f4fa4703b7d8baed186ba001b036a58c37034b038560a07b1d26ea88b96ea",
+      "misattribution_check": "回原著核对，不采用网络转引的改写句；角色台词按实际语境署明。",
+      "public_domain": {
+        "first_published": 1854,
+        "author_died": 1862,
+        "basis": "沿用第一版已核的原作/所引版本年与作者卒年：1854年、1862年；2026年公版门槛为1930年及1975年，仅取原作正文。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/205"
+      ]
+    },
+    {
+      "id": "shakespeare-07",
+      "text_sha256_lf": "2d65d35809fe26967b76cdcea2db9048b0a78937ae5372d99095b73233551b52",
+      "source_url": "https://www.gutenberg.org/cache/epub/100/pg100-images.html#sceneI_32.2",
+      "locator": "第一幕第二场，爱丽儿转述斐迪南",
+      "checked_on": "2026-10-29",
+      "method": "真实同版HTML正文逐字匹配；仅统一引号、横线、排印空白和页码/行号。上下文和真实章节锚点另录于候选证据。",
+      "source_sha256_lf": "88ad4e03109839ba7992b14e4f1446bf56d77576a54410f5b98d9821c579be57",
+      "misattribution_check": "回原著核对，不采用网络转引的改写句；角色台词按实际语境署明。",
+      "public_domain": {
+        "first_published": 1623,
+        "author_died": 1616,
+        "basis": "沿用第一版已核的原作/所引版本年与作者卒年：1623年、1616年；2026年公版门槛为1930年及1975年，仅取原作正文。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/100",
+        "https://www.folger.edu/explore/shakespeares-works/the-tempest/"
+      ],
+      "source_text": "Hell is empty,\nAnd all the devils are here.",
+      "display_note": "按所引版本恢复诗行。"
+    },
+    {
+      "id": "austen-07",
+      "text_sha256_lf": "aaa66fc3ddbf7d3e204f06e760513076c0e5f9f3f4e9393141aa9bd49dc80258",
+      "source_url": "https://www.gutenberg.org/cache/epub/1342/pg1342-images.html#CHAPTER_LVIII",
+      "locator": "第五十八章，达西",
+      "checked_on": "2026-10-29",
+      "method": "真实同版HTML正文逐字匹配；仅统一引号、横线、排印空白和页码/行号。上下文和真实章节锚点另录于候选证据。",
+      "source_sha256_lf": "f0b019c9164a53c21fda1bf2938b96b014016a6eb4a627039cebd0d9a07c42f9",
+      "misattribution_check": "回原著核对，不采用网络转引的改写句；角色台词按实际语境署明。",
+      "public_domain": {
+        "first_published": 1813,
+        "author_died": 1817,
+        "basis": "沿用第一版已核的原作/所引版本年与作者卒年：1813年、1817年；2026年公版门槛为1930年及1975年，仅取原作正文。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/1342"
+      ]
+    },
+    {
+      "id": "bronte-07",
+      "text_sha256_lf": "4f6320b73a0cfd5cfb94573b2ab755e5b617c1c92750e64c21444c1f35e682d3",
+      "source_url": "https://www.gutenberg.org/cache/epub/1260/pg1260-images.html",
+      "locator": "第四章，年幼的简",
+      "checked_on": "2026-10-29",
+      "method": "真实同版HTML正文逐字匹配；仅统一引号、横线、排印空白和页码/行号。上下文和真实章节锚点另录于候选证据。",
+      "source_sha256_lf": "0bc6419204218b6379e5c174a6b93076897cc7ef40bd230f73fbe1e35366eef7",
+      "misattribution_check": "回原著核对，不采用网络转引的改写句；角色台词按实际语境署明。",
+      "public_domain": {
+        "first_published": 1847,
+        "author_died": 1855,
+        "basis": "沿用第一版已核的原作/所引版本年与作者卒年：1847年、1855年；2026年公版门槛为1930年及1975年，仅取原作正文。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/1260"
+      ]
+    },
+    {
+      "id": "carroll-07",
+      "text_sha256_lf": "e5af2be7e2e5244d8845cc616ad809e68e1206102625f338a5dfece26507a297",
+      "source_url": "https://www.gutenberg.org/cache/epub/11/pg11-images.html#chap12",
+      "locator": "第十二章，爱丽丝",
+      "checked_on": "2026-10-29",
+      "method": "真实同版HTML正文逐字匹配；仅统一引号、横线、排印空白和页码/行号。上下文和真实章节锚点另录于候选证据。",
+      "source_sha256_lf": "3c1aa77747293cfb82f6f211b2a7a7f3652a18cb62a5a93b76a6fa121a428151",
+      "misattribution_check": "回原著核对，不采用网络转引的改写句；角色台词按实际语境署明。",
+      "public_domain": {
+        "first_published": 1865,
+        "author_died": 1898,
+        "basis": "沿用第一版已核的原作/所引版本年与作者卒年：1865年、1898年；2026年公版门槛为1930年及1975年，仅取原作正文。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/11"
+      ]
+    },
+    {
+      "id": "wilde-07",
+      "text_sha256_lf": "fc83c6189a0934efe0ed401b91431ef72ead8891a9199c5aa0aef6c4b88aa10e",
+      "source_url": "https://www.gutenberg.org/cache/epub/174/pg174-images.html#chap01",
+      "locator": "第一章，亨利勋爵",
+      "checked_on": "2026-10-29",
+      "method": "真实同版HTML正文逐字匹配；仅统一引号、横线、排印空白和页码/行号。上下文和真实章节锚点另录于候选证据。",
+      "source_sha256_lf": "180f7f7e3245c75b140766464068596936eafd06a6266e83d9c71c18d617aed9",
+      "misattribution_check": "回原著核对，不采用网络转引的改写句；角色台词按实际语境署明。",
+      "public_domain": {
+        "first_published": 1891,
+        "author_died": 1900,
+        "basis": "沿用第一版已核的原作/所引版本年与作者卒年：1891年、1900年；2026年公版门槛为1930年及1975年，仅取原作正文。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/174"
+      ]
+    },
+    {
+      "id": "blake-07",
+      "text_sha256_lf": "4a07bada4efcadf4fc987822335347343d7136442f4af9c9d3f146918e6a2118",
+      "source_url": "https://www.gutenberg.org/cache/epub/45315/pg45315-images.html#Page_17",
+      "locator": "“地狱的箴言”",
+      "checked_on": "2026-10-29",
+      "method": "真实同版HTML正文逐字匹配；仅统一引号、横线、排印空白和页码/行号。上下文和真实章节锚点另录于候选证据。",
+      "source_sha256_lf": "9ad612a43dc945ff82822fe346782537944894eeff0a037062ba09b586a06e81",
+      "misattribution_check": "回原著核对，不采用网络转引的改写句；角色台词按实际语境署明。",
+      "public_domain": {
+        "first_published": 1790,
+        "author_died": 1827,
+        "basis": "沿用第一版已核的原作/所引版本年与作者卒年：1790年、1827年；2026年公版门槛为1930年及1975年，仅取原作正文。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/45315"
+      ]
+    },
+    {
+      "id": "keats-07",
+      "text_sha256_lf": "d704c62aa132b8698149d876f047db30e551f4e1c512fe37815b9b93169a1da0",
+      "source_url": "https://www.gutenberg.org/cache/epub/23684/pg23684-images.html#Nightingale_ln70",
+      "locator": "《夜莺颂》第79—80行",
+      "checked_on": "2026-10-29",
+      "method": "真实同版HTML正文逐字匹配；仅统一引号、横线、排印空白和页码/行号。上下文和真实章节锚点另录于候选证据。",
+      "source_sha256_lf": "3e2c304ce25cc28e0d64cb3cf29a3967199e21f4cf69d4c156be47467ded839e",
+      "misattribution_check": "回原著核对，不采用网络转引的改写句；角色台词按实际语境署明。",
+      "public_domain": {
+        "first_published": 1819,
+        "author_died": 1821,
+        "basis": "沿用第一版已核的原作/所引版本年与作者卒年：1819年、1821年；2026年公版门槛为1930年及1975年，仅取原作正文。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/23684"
+      ],
+      "source_text": "Was it a vision, or a waking dream?\nFled is that music:—Do I wake or sleep?",
+      "display_note": "按所引版本恢复诗行。"
+    },
+    {
+      "id": "whitman-07",
+      "text_sha256_lf": "11583541707ecedb53a450c227aa33648592f3c548e7e3ce12bc1ba52e190ac4",
+      "source_url": "https://www.gutenberg.org/cache/epub/1322/pg1322-images.html#link2H_4_0027",
+      "locator": "《自我之歌》第52节",
+      "checked_on": "2026-10-29",
+      "method": "真实同版HTML正文逐字匹配；仅统一引号、横线、排印空白和页码/行号。上下文和真实章节锚点另录于候选证据。",
+      "source_sha256_lf": "83ff007816c704fda33bde4219885d26cc5791dbf58e644391d32c64cd222d18",
+      "misattribution_check": "回原著核对，不采用网络转引的改写句；角色台词按实际语境署明。",
+      "public_domain": {
+        "first_published": 1855,
+        "author_died": 1892,
+        "basis": "沿用第一版已核的原作/所引版本年与作者卒年：1855年、1892年；2026年公版门槛为1930年及1975年，仅取原作正文。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/1322"
+      ],
+      "source_text": "I too am not a bit tamed, I too am untranslatable,\nI sound my barbaric yawp over the roofs of the world.",
+      "display_note": "按所引版本恢复诗行。"
+    },
+    {
+      "id": "franklin-07",
+      "text_sha256_lf": "c53ab364258997e13c75d0fe839476985354c889419fd50dd2544def8b676430",
+      "source_url": "https://www.gutenberg.org/cache/epub/20203/pg20203-images.html#IX",
+      "locator": "第二部分，十三项德目之“诚恳”",
+      "checked_on": "2026-10-29",
+      "method": "真实同版HTML正文逐字匹配；仅统一引号、横线、排印空白和页码/行号。上下文和真实章节锚点另录于候选证据。",
+      "source_sha256_lf": "bdd5d8f2a90ac8e993362805462bc64cb9c8b25e1e9198777a4ab39e631b0333",
+      "misattribution_check": "回原著核对，不采用网络转引的改写句；角色台词按实际语境署明。",
+      "public_domain": {
+        "first_published": 1818,
+        "author_died": 1790,
+        "basis": "沿用第一版已核的原作/所引版本年与作者卒年：1818年、1790年；2026年公版门槛为1930年及1975年，仅取原作正文。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/20203",
+        "https://guides.loc.gov/finding-benjamin-franklin/autobiography"
+      ]
+    },
+    {
+      "id": "emerson-07",
+      "text_sha256_lf": "f8e2401453d1e784ff5f3b858dd4bf601003303edc5fb1c87e8837604d1644da",
+      "source_url": "https://www.gutenberg.org/cache/epub/16643/pg16643-images.html#SELF-RELIANCE",
+      "locator": "《论自立》",
+      "checked_on": "2026-10-29",
+      "method": "真实同版HTML正文逐字匹配；仅统一引号、横线、排印空白和页码/行号。上下文和真实章节锚点另录于候选证据。",
+      "source_sha256_lf": "84a04da2e744e934db8c0a2a7b316d5afd6f464fd8e599ce8a58ced45249ee98",
+      "misattribution_check": "回原著核对，不采用网络转引的改写句；角色台词按实际语境署明。",
+      "public_domain": {
+        "first_published": 1841,
+        "author_died": 1882,
+        "basis": "沿用第一版已核的原作/所引版本年与作者卒年：1841年、1882年；2026年公版门槛为1930年及1975年，仅取原作正文。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/16643"
+      ]
+    },
+    {
+      "id": "thoreau-07",
+      "text_sha256_lf": "fc6676ca82ba11f90309a89c64e49100c2d2d7f3ecbf77a513145ea25f1f79a3",
+      "source_url": "https://www.gutenberg.org/cache/epub/205/pg205-images.html#chap19",
+      "locator": "第十八章“结束语”",
+      "checked_on": "2026-10-29",
+      "method": "真实同版HTML正文逐字匹配；仅统一引号、横线、排印空白和页码/行号。上下文和真实章节锚点另录于候选证据。",
+      "source_sha256_lf": "512f4fa4703b7d8baed186ba001b036a58c37034b038560a07b1d26ea88b96ea",
+      "misattribution_check": "回原著核对，不采用网络转引的改写句；角色台词按实际语境署明。",
+      "public_domain": {
+        "first_published": 1854,
+        "author_died": 1862,
+        "basis": "沿用第一版已核的原作/所引版本年与作者卒年：1854年、1862年；2026年公版门槛为1930年及1975年，仅取原作正文。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/205"
+      ]
+    },
+    {
+      "id": "shakespeare-08",
+      "text_sha256_lf": "cad90117b5da66b2297df26ae4f4dbdad97d3ab3e7d2386ab000c46cc3e7aba7",
+      "source_url": "https://www.gutenberg.org/cache/epub/100/pg100-images.html#sceneII_32.2",
+      "locator": "第二幕第二场，特林鸠罗",
+      "checked_on": "2026-10-29",
+      "method": "真实同版HTML正文逐字匹配；仅统一引号、横线、排印空白和页码/行号。上下文和真实章节锚点另录于候选证据。",
+      "source_sha256_lf": "88ad4e03109839ba7992b14e4f1446bf56d77576a54410f5b98d9821c579be57",
+      "misattribution_check": "回原著核对，不采用网络转引的改写句；角色台词按实际语境署明。",
+      "public_domain": {
+        "first_published": 1623,
+        "author_died": 1616,
+        "basis": "沿用第一版已核的原作/所引版本年与作者卒年：1623年、1616年；2026年公版门槛为1930年及1975年，仅取原作正文。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/100",
+        "https://www.folger.edu/explore/shakespeares-works/the-tempest/"
+      ]
+    },
+    {
+      "id": "austen-08",
+      "text_sha256_lf": "04f1eb267599c16639bb8bf8af1435ca63e5692367c29f24e2b8fcb7da43fcbe",
+      "source_url": "https://www.gutenberg.org/cache/epub/1342/pg1342-images.html#CHAPTER_XXXI",
+      "locator": "第三十一章，伊丽莎白",
+      "checked_on": "2026-10-29",
+      "method": "真实同版HTML正文逐字匹配；仅统一引号、横线、排印空白和页码/行号。上下文和真实章节锚点另录于候选证据。",
+      "source_sha256_lf": "f0b019c9164a53c21fda1bf2938b96b014016a6eb4a627039cebd0d9a07c42f9",
+      "misattribution_check": "回原著核对，不采用网络转引的改写句；角色台词按实际语境署明。",
+      "public_domain": {
+        "first_published": 1813,
+        "author_died": 1817,
+        "basis": "沿用第一版已核的原作/所引版本年与作者卒年：1813年、1817年；2026年公版门槛为1930年及1975年，仅取原作正文。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/1342"
+      ]
+    },
+    {
+      "id": "bronte-08",
+      "text_sha256_lf": "5123f75866a2ba6c30df7850c43bfb61ba283a21f322b61af84c47fa8b33bdbb",
+      "source_url": "https://www.gutenberg.org/cache/epub/1260/pg1260-images.html",
+      "locator": "第三十八章，开篇",
+      "checked_on": "2026-10-29",
+      "method": "真实同版HTML正文逐字匹配；仅统一引号、横线、排印空白和页码/行号。上下文和真实章节锚点另录于候选证据。",
+      "source_sha256_lf": "0bc6419204218b6379e5c174a6b93076897cc7ef40bd230f73fbe1e35366eef7",
+      "misattribution_check": "回原著核对，不采用网络转引的改写句；角色台词按实际语境署明。",
+      "public_domain": {
+        "first_published": 1847,
+        "author_died": 1855,
+        "basis": "沿用第一版已核的原作/所引版本年与作者卒年：1847年、1855年；2026年公版门槛为1930年及1975年，仅取原作正文。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/1260"
+      ]
+    },
+    {
+      "id": "carroll-08",
+      "text_sha256_lf": "5cf16255b3a81415ed823cf28a13e5dd778748374656d6b776a69f027dc8f84e",
+      "source_url": "https://www.gutenberg.org/cache/epub/11/pg11-images.html#chap06",
+      "locator": "第六章，爱丽丝与柴郡猫",
+      "checked_on": "2026-10-29",
+      "method": "真实同版HTML正文逐字匹配；仅统一引号、横线、排印空白和页码/行号。上下文和真实章节锚点另录于候选证据。",
+      "source_sha256_lf": "3c1aa77747293cfb82f6f211b2a7a7f3652a18cb62a5a93b76a6fa121a428151",
+      "misattribution_check": "回原著核对，不采用网络转引的改写句；角色台词按实际语境署明。",
+      "public_domain": {
+        "first_published": 1865,
+        "author_died": 1898,
+        "basis": "沿用第一版已核的原作/所引版本年与作者卒年：1865年、1898年；2026年公版门槛为1930年及1975年，仅取原作正文。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/11"
+      ]
+    },
+    {
+      "id": "wilde-08",
+      "text_sha256_lf": "c49765c136fb0f36d07ce14ce7a80dbdaf3a00133319f258846fffcb86eab14d",
+      "source_url": "https://www.gutenberg.org/cache/epub/174/pg174-images.html#chap02",
+      "locator": "第二章，亨利勋爵",
+      "checked_on": "2026-10-29",
+      "method": "真实同版HTML正文逐字匹配；仅统一引号、横线、排印空白和页码/行号。上下文和真实章节锚点另录于候选证据。",
+      "source_sha256_lf": "180f7f7e3245c75b140766464068596936eafd06a6266e83d9c71c18d617aed9",
+      "misattribution_check": "回原著核对，不采用网络转引的改写句；角色台词按实际语境署明。",
+      "public_domain": {
+        "first_published": 1891,
+        "author_died": 1900,
+        "basis": "沿用第一版已核的原作/所引版本年与作者卒年：1891年、1900年；2026年公版门槛为1930年及1975年，仅取原作正文。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/174"
+      ]
+    },
+    {
+      "id": "blake-08",
+      "text_sha256_lf": "35ffc98bb386615dc97f0261284343629117c99580e18993be6f0b1b7b00f6ab",
+      "source_url": "https://www.gutenberg.org/cache/epub/45315/pg45315-images.html#Page_9",
+      "locator": "“魔鬼之声”第三条",
+      "checked_on": "2026-10-29",
+      "method": "真实同版HTML正文逐字匹配；仅统一引号、横线、排印空白和页码/行号。上下文和真实章节锚点另录于候选证据。",
+      "source_sha256_lf": "9ad612a43dc945ff82822fe346782537944894eeff0a037062ba09b586a06e81",
+      "misattribution_check": "回原著核对，不采用网络转引的改写句；角色台词按实际语境署明。",
+      "public_domain": {
+        "first_published": 1790,
+        "author_died": 1827,
+        "basis": "沿用第一版已核的原作/所引版本年与作者卒年：1790年、1827年；2026年公版门槛为1930年及1975年，仅取原作正文。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/45315"
+      ]
+    },
+    {
+      "id": "franklin-08",
+      "text_sha256_lf": "838d68d0fad415f1950f23da62843ef67ae1e7b8ead87f8fe1fda850f391d0d0",
+      "source_url": "https://www.gutenberg.org/cache/epub/20203/pg20203-images.html#IX",
+      "locator": "第二部分，十三项德目之“公正”",
+      "checked_on": "2026-10-29",
+      "method": "真实同版HTML正文逐字匹配；仅统一引号、横线、排印空白和页码/行号。上下文和真实章节锚点另录于候选证据。",
+      "source_sha256_lf": "bdd5d8f2a90ac8e993362805462bc64cb9c8b25e1e9198777a4ab39e631b0333",
+      "misattribution_check": "回原著核对，不采用网络转引的改写句；角色台词按实际语境署明。",
+      "public_domain": {
+        "first_published": 1818,
+        "author_died": 1790,
+        "basis": "沿用第一版已核的原作/所引版本年与作者卒年：1818年、1790年；2026年公版门槛为1930年及1975年，仅取原作正文。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/20203",
+        "https://guides.loc.gov/finding-benjamin-franklin/autobiography"
+      ]
+    },
+    {
+      "id": "emerson-08",
+      "text_sha256_lf": "b8fc5cbfc44f7f05f6df79db7c8580a1c28671bd62551e3a888ac37383139514",
+      "source_url": "https://www.gutenberg.org/cache/epub/16643/pg16643-images.html#SELF-RELIANCE",
+      "locator": "《论自立》",
+      "checked_on": "2026-10-29",
+      "method": "真实同版HTML正文逐字匹配；仅统一引号、横线、排印空白和页码/行号。上下文和真实章节锚点另录于候选证据。",
+      "source_sha256_lf": "84a04da2e744e934db8c0a2a7b316d5afd6f464fd8e599ce8a58ced45249ee98",
+      "misattribution_check": "回原著核对，不采用网络转引的改写句；角色台词按实际语境署明。",
+      "public_domain": {
+        "first_published": 1841,
+        "author_died": 1882,
+        "basis": "沿用第一版已核的原作/所引版本年与作者卒年：1841年、1882年；2026年公版门槛为1930年及1975年，仅取原作正文。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/16643"
+      ]
+    },
+    {
+      "id": "thoreau-08",
+      "text_sha256_lf": "24a810632b07cf03bf828f8cc4ba5cf4de1ec7dc5c4421214d487860800cfb74",
+      "source_url": "https://www.gutenberg.org/cache/epub/205/pg205-images.html#chap19",
+      "locator": "第十八章“结束语”",
+      "checked_on": "2026-10-29",
+      "method": "真实同版HTML正文逐字匹配；仅统一引号、横线、排印空白和页码/行号。上下文和真实章节锚点另录于候选证据。",
+      "source_sha256_lf": "512f4fa4703b7d8baed186ba001b036a58c37034b038560a07b1d26ea88b96ea",
+      "misattribution_check": "回原著核对，不采用网络转引的改写句；角色台词按实际语境署明。",
+      "public_domain": {
+        "first_published": 1854,
+        "author_died": 1862,
+        "basis": "沿用第一版已核的原作/所引版本年与作者卒年：1854年、1862年；2026年公版门槛为1930年及1975年，仅取原作正文。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/205"
+      ]
+    },
+    {
+      "id": "shakespeare-09",
+      "text_sha256_lf": "a13137102824e8a8cf6d40a12ef02cc03d46348e4ed5057b952156c99eaa4455",
+      "source_url": "https://www.gutenberg.org/cache/epub/100/pg100-images.html#sceneV_32.1",
+      "locator": "第五幕第一场，米兰达",
+      "checked_on": "2026-10-29",
+      "method": "真实同版HTML正文逐字匹配；仅统一引号、横线、排印空白和页码/行号。上下文和真实章节锚点另录于候选证据。",
+      "source_sha256_lf": "88ad4e03109839ba7992b14e4f1446bf56d77576a54410f5b98d9821c579be57",
+      "misattribution_check": "回原著核对，不采用网络转引的改写句；角色台词按实际语境署明。",
+      "public_domain": {
+        "first_published": 1623,
+        "author_died": 1616,
+        "basis": "沿用第一版已核的原作/所引版本年与作者卒年：1623年、1616年；2026年公版门槛为1930年及1975年，仅取原作正文。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/100",
+        "https://www.folger.edu/explore/shakespeares-works/the-tempest/"
+      ],
+      "source_text": "O brave new world\nThat has such people in ’t!",
+      "display_note": "按所引版本恢复诗行。"
+    },
+    {
+      "id": "austen-09",
+      "text_sha256_lf": "fae485a9e95e6b05c85a3f15f801d6bc68b426ca8f63739aeb83e9b33003ca55",
+      "source_url": "https://www.gutenberg.org/cache/epub/1342/pg1342-images.html#CHAPTER_V",
+      "locator": "第五章，玛丽",
+      "checked_on": "2026-10-29",
+      "method": "真实同版HTML正文逐字匹配；仅统一引号、横线、排印空白和页码/行号。上下文和真实章节锚点另录于候选证据。",
+      "source_sha256_lf": "f0b019c9164a53c21fda1bf2938b96b014016a6eb4a627039cebd0d9a07c42f9",
+      "misattribution_check": "回原著核对，不采用网络转引的改写句；角色台词按实际语境署明。",
+      "public_domain": {
+        "first_published": 1813,
+        "author_died": 1817,
+        "basis": "沿用第一版已核的原作/所引版本年与作者卒年：1813年、1817年；2026年公版门槛为1930年及1975年，仅取原作正文。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/1342"
+      ]
+    },
+    {
+      "id": "bronte-09",
+      "text_sha256_lf": "67530f520964de48cc8bc546a8b87d51444057e394f34f6bf8dc8645920b64e4",
+      "source_url": "https://www.gutenberg.org/cache/epub/1260/pg1260-images.html",
+      "locator": "第十二章，简",
+      "checked_on": "2026-10-29",
+      "method": "真实同版HTML正文逐字匹配；仅统一引号、横线、排印空白和页码/行号。上下文和真实章节锚点另录于候选证据。",
+      "source_sha256_lf": "0bc6419204218b6379e5c174a6b93076897cc7ef40bd230f73fbe1e35366eef7",
+      "misattribution_check": "回原著核对，不采用网络转引的改写句；角色台词按实际语境署明。",
+      "public_domain": {
+        "first_published": 1847,
+        "author_died": 1855,
+        "basis": "沿用第一版已核的原作/所引版本年与作者卒年：1847年、1855年；2026年公版门槛为1930年及1975年，仅取原作正文。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/1260"
+      ]
+    },
+    {
+      "id": "wilde-09",
+      "text_sha256_lf": "a7fc26d7068a42d9a75969bd03150e7d2d4ae5d1a043631be21683b93124fd05",
+      "source_url": "https://www.gutenberg.org/cache/epub/174/pg174-images.html#chap04",
+      "locator": "第四章，亨利勋爵的思绪",
+      "checked_on": "2026-10-29",
+      "method": "真实同版HTML正文逐字匹配；仅统一引号、横线、排印空白和页码/行号。上下文和真实章节锚点另录于候选证据。",
+      "source_sha256_lf": "180f7f7e3245c75b140766464068596936eafd06a6266e83d9c71c18d617aed9",
+      "misattribution_check": "回原著核对，不采用网络转引的改写句；角色台词按实际语境署明。",
+      "public_domain": {
+        "first_published": 1891,
+        "author_died": 1900,
+        "basis": "沿用第一版已核的原作/所引版本年与作者卒年：1891年、1900年；2026年公版门槛为1930年及1975年，仅取原作正文。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/174"
+      ]
+    },
+    {
+      "id": "franklin-09",
+      "text_sha256_lf": "9cf45aa8f11c4cf0d2145f2b9d44f98b844be07a5dade130e39ac1c13da9abef",
+      "source_url": "https://www.gutenberg.org/cache/epub/20203/pg20203-images.html#IX",
+      "locator": "第二部分，十三项德目之“镇静”",
+      "checked_on": "2026-10-29",
+      "method": "真实同版HTML正文逐字匹配；仅统一引号、横线、排印空白和页码/行号。上下文和真实章节锚点另录于候选证据。",
+      "source_sha256_lf": "bdd5d8f2a90ac8e993362805462bc64cb9c8b25e1e9198777a4ab39e631b0333",
+      "misattribution_check": "回原著核对，不采用网络转引的改写句；角色台词按实际语境署明。",
+      "public_domain": {
+        "first_published": 1818,
+        "author_died": 1790,
+        "basis": "沿用第一版已核的原作/所引版本年与作者卒年：1818年、1790年；2026年公版门槛为1930年及1975年，仅取原作正文。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/20203",
+        "https://guides.loc.gov/finding-benjamin-franklin/autobiography"
+      ]
+    },
+    {
+      "id": "emerson-09",
+      "text_sha256_lf": "7e9d8f263f20338637ee4b336a5f20e6998614c5e8736bdcb70c50f3a2aeeccb",
+      "source_url": "https://www.gutenberg.org/cache/epub/16643/pg16643-images.html#SELF-RELIANCE",
+      "locator": "《论自立》",
+      "checked_on": "2026-10-29",
+      "method": "真实同版HTML正文逐字匹配；仅统一引号、横线、排印空白和页码/行号。上下文和真实章节锚点另录于候选证据。",
+      "source_sha256_lf": "84a04da2e744e934db8c0a2a7b316d5afd6f464fd8e599ce8a58ced45249ee98",
+      "misattribution_check": "回原著核对，不采用网络转引的改写句；角色台词按实际语境署明。",
+      "public_domain": {
+        "first_published": 1841,
+        "author_died": 1882,
+        "basis": "沿用第一版已核的原作/所引版本年与作者卒年：1841年、1882年；2026年公版门槛为1930年及1975年，仅取原作正文。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/16643"
+      ]
+    },
+    {
+      "id": "thoreau-09",
+      "text_sha256_lf": "a5736021367cdc5e165c74f19e2de5d4e06d2ad1209fc8668750049b4012c057",
+      "source_url": "https://www.gutenberg.org/cache/epub/205/pg205-images.html#chap02",
+      "locator": "第一章“经济”",
+      "checked_on": "2026-10-29",
+      "method": "真实同版HTML正文逐字匹配；仅统一引号、横线、排印空白和页码/行号。上下文和真实章节锚点另录于候选证据。",
+      "source_sha256_lf": "512f4fa4703b7d8baed186ba001b036a58c37034b038560a07b1d26ea88b96ea",
+      "misattribution_check": "回原著核对，不采用网络转引的改写句；角色台词按实际语境署明。",
+      "public_domain": {
+        "first_published": 1854,
+        "author_died": 1862,
+        "basis": "沿用第一版已核的原作/所引版本年与作者卒年：1854年、1862年；2026年公版门槛为1930年及1975年，仅取原作正文。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/205"
+      ]
+    },
+    {
+      "id": "shakespeare-10",
+      "text_sha256_lf": "797518a97277ceaa91a923cde7a5957cd90b42089070fa7040d18ce052ffc959",
+      "source_url": "https://www.gutenberg.org/cache/epub/100/pg100-images.html#sceneI_24.1",
+      "locator": "第一幕第一场，海伦娜",
+      "checked_on": "2026-10-29",
+      "method": "真实同版HTML正文逐字匹配；仅统一引号、横线、排印空白和页码/行号。上下文和真实章节锚点另录于候选证据。",
+      "source_sha256_lf": "88ad4e03109839ba7992b14e4f1446bf56d77576a54410f5b98d9821c579be57",
+      "misattribution_check": "回原著核对，不采用网络转引的改写句；角色台词按实际语境署明。",
+      "public_domain": {
+        "first_published": 1600,
+        "author_died": 1616,
+        "basis": "沿用第一版已核的原作/所引版本年与作者卒年：1600年、1616年；2026年公版门槛为1930年及1975年，仅取原作正文。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/100",
+        "https://www.folger.edu/explore/shakespeares-works/a-midsummer-nights-dream/"
+      ],
+      "source_text": "Love looks not with the eyes, but with the mind;\nAnd therefore is wing’d Cupid painted blind.",
+      "display_note": "按所引版本恢复诗行。"
+    },
+    {
+      "id": "austen-10",
+      "text_sha256_lf": "a0e04b339f0351830576e4658bb326c96e30ea2134fe5d6b1ba47b2b29826327",
+      "source_url": "https://www.gutenberg.org/cache/epub/1342/pg1342-images.html#CHAPTER_XXXIV",
+      "locator": "第三十四章，达西",
+      "checked_on": "2026-10-29",
+      "method": "真实同版HTML正文逐字匹配；仅统一引号、横线、排印空白和页码/行号。上下文和真实章节锚点另录于候选证据。",
+      "source_sha256_lf": "f0b019c9164a53c21fda1bf2938b96b014016a6eb4a627039cebd0d9a07c42f9",
+      "misattribution_check": "回原著核对，不采用网络转引的改写句；角色台词按实际语境署明。",
+      "public_domain": {
+        "first_published": 1813,
+        "author_died": 1817,
+        "basis": "沿用第一版已核的原作/所引版本年与作者卒年：1813年、1817年；2026年公版门槛为1930年及1975年，仅取原作正文。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/1342"
+      ]
+    },
+    {
+      "id": "bronte-10",
+      "text_sha256_lf": "9a6353ce8423062bb698e1f0e81201f37354bc99462105f96b2079360b174177",
+      "source_url": "https://www.gutenberg.org/cache/epub/1260/pg1260-images.html",
+      "locator": "第十章，简",
+      "checked_on": "2026-10-29",
+      "method": "真实同版HTML正文逐字匹配；仅统一引号、横线、排印空白和页码/行号。上下文和真实章节锚点另录于候选证据。",
+      "source_sha256_lf": "0bc6419204218b6379e5c174a6b93076897cc7ef40bd230f73fbe1e35366eef7",
+      "misattribution_check": "回原著核对，不采用网络转引的改写句；角色台词按实际语境署明。",
+      "public_domain": {
+        "first_published": 1847,
+        "author_died": 1855,
+        "basis": "沿用第一版已核的原作/所引版本年与作者卒年：1847年、1855年；2026年公版门槛为1930年及1975年，仅取原作正文。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/1260"
+      ],
+      "source_text": "now I remembered that the real world was wide, and that a varied field of hopes and fears, of sensations and excitements, awaited those who had courage to go forth into its expanse, to seek real knowledge of life amidst its perils.",
+      "display_note": "省略号为本站所加，表示未引的上下文。"
+    },
+    {
+      "id": "wilde-10",
+      "text_sha256_lf": "07fda9323abd720325ab09bb1eb0a96cb2a6a69265c552f6495d10047a0a5705",
+      "source_url": "https://www.gutenberg.org/cache/epub/174/pg174-images.html#chap02",
+      "locator": "第二章，亨利勋爵",
+      "checked_on": "2026-10-29",
+      "method": "真实同版HTML正文逐字匹配；仅统一引号、横线、排印空白和页码/行号。上下文和真实章节锚点另录于候选证据。",
+      "source_sha256_lf": "180f7f7e3245c75b140766464068596936eafd06a6266e83d9c71c18d617aed9",
+      "misattribution_check": "回原著核对，不采用网络转引的改写句；角色台词按实际语境署明。",
+      "public_domain": {
+        "first_published": 1891,
+        "author_died": 1900,
+        "basis": "沿用第一版已核的原作/所引版本年与作者卒年：1891年、1900年；2026年公版门槛为1930年及1975年，仅取原作正文。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/174"
+      ]
+    },
+    {
+      "id": "emerson-10",
+      "text_sha256_lf": "7fc855f25aa1e9067e85a63ea6b26e928b3c08848a7d37a88942223a7068b31c",
+      "source_url": "https://www.gutenberg.org/cache/epub/16643/pg16643-images.html#SELF-RELIANCE",
+      "locator": "《论自立》",
+      "checked_on": "2026-10-29",
+      "method": "真实同版HTML正文逐字匹配；仅统一引号、横线、排印空白和页码/行号。上下文和真实章节锚点另录于候选证据。",
+      "source_sha256_lf": "84a04da2e744e934db8c0a2a7b316d5afd6f464fd8e599ce8a58ced45249ee98",
+      "misattribution_check": "回原著核对，不采用网络转引的改写句；角色台词按实际语境署明。",
+      "public_domain": {
+        "first_published": 1841,
+        "author_died": 1882,
+        "basis": "沿用第一版已核的原作/所引版本年与作者卒年：1841年、1882年；2026年公版门槛为1930年及1975年，仅取原作正文。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/16643"
+      ]
+    },
+    {
+      "id": "thoreau-10",
+      "text_sha256_lf": "eb7729c0e3f5ddbea208af41baffbeaf68d8521791a96c913a4c326c0523805f",
+      "source_url": "https://www.gutenberg.org/cache/epub/205/pg205-images.html#chap02",
+      "locator": "第一章“经济”",
+      "checked_on": "2026-10-29",
+      "method": "真实同版HTML正文逐字匹配；仅统一引号、横线、排印空白和页码/行号。上下文和真实章节锚点另录于候选证据。",
+      "source_sha256_lf": "512f4fa4703b7d8baed186ba001b036a58c37034b038560a07b1d26ea88b96ea",
+      "misattribution_check": "回原著核对，不采用网络转引的改写句；角色台词按实际语境署明。",
+      "public_domain": {
+        "first_published": 1854,
+        "author_died": 1862,
+        "basis": "沿用第一版已核的原作/所引版本年与作者卒年：1854年、1862年；2026年公版门槛为1930年及1975年，仅取原作正文。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/205"
+      ],
+      "source_text": "the cost of a thing is the amount of what I will call life which is required to be exchanged for it, immediately or in the long run.",
+      "display_note": "省略号为本站所加，表示未引的上下文。"
+    },
+    {
+      "id": "shakespeare-11",
+      "text_sha256_lf": "ade3b792dfed954bea885c94c18104ce3cb643e8af98db6945eb49da570b1ad7",
+      "source_url": "https://www.gutenberg.org/cache/epub/100/pg100-images.html#sceneIII_32.2",
+      "locator": "第三幕第二场，卡利班",
+      "checked_on": "2026-10-29",
+      "method": "真实同版HTML正文逐字匹配；仅统一引号、横线、排印空白和页码/行号。上下文和真实章节锚点另录于候选证据。",
+      "source_sha256_lf": "88ad4e03109839ba7992b14e4f1446bf56d77576a54410f5b98d9821c579be57",
+      "misattribution_check": "回原著核对，不采用网络转引的改写句；角色台词按实际语境署明。",
+      "public_domain": {
+        "first_published": 1623,
+        "author_died": 1616,
+        "basis": "沿用第一版已核的原作/所引版本年与作者卒年：1623年、1616年；2026年公版门槛为1930年及1975年，仅取原作正文。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/100",
+        "https://www.folger.edu/explore/shakespeares-works/the-tempest/"
+      ],
+      "source_text": "Be not afeard. The isle is full of noises,\nSounds, and sweet airs, that give delight, and hurt not.",
+      "display_note": "按所引版本恢复诗行。"
+    },
+    {
+      "id": "austen-11",
+      "text_sha256_lf": "4fd8125c7770d9ab3e8b52df38c8a04290a5c2b5b2a1427b2db2fca6009ba7a2",
+      "source_url": "https://www.gutenberg.org/cache/epub/1342/pg1342-images.html#CHAPTER_XLV",
+      "locator": "第四十五章，叙述者",
+      "checked_on": "2026-10-29",
+      "method": "真实同版HTML正文逐字匹配；仅统一引号、横线、排印空白和页码/行号。上下文和真实章节锚点另录于候选证据。",
+      "source_sha256_lf": "f0b019c9164a53c21fda1bf2938b96b014016a6eb4a627039cebd0d9a07c42f9",
+      "misattribution_check": "回原著核对，不采用网络转引的改写句；角色台词按实际语境署明。",
+      "public_domain": {
+        "first_published": 1813,
+        "author_died": 1817,
+        "basis": "沿用第一版已核的原作/所引版本年与作者卒年：1813年、1817年；2026年公版门槛为1930年及1975年，仅取原作正文。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/1342"
+      ]
+    },
+    {
+      "id": "bronte-11",
+      "text_sha256_lf": "5751a41de66745d7a118af7e917972b51034f31e5c6a542bada1e21f7d12c43e",
+      "source_url": "https://www.gutenberg.org/cache/epub/1260/pg1260-images.html",
+      "locator": "第二十九章，简",
+      "checked_on": "2026-10-29",
+      "method": "真实同版HTML正文逐字匹配；仅统一引号、横线、排印空白和页码/行号。上下文和真实章节锚点另录于候选证据。",
+      "source_sha256_lf": "0bc6419204218b6379e5c174a6b93076897cc7ef40bd230f73fbe1e35366eef7",
+      "misattribution_check": "回原著核对，不采用网络转引的改写句；角色台词按实际语境署明。",
+      "public_domain": {
+        "first_published": 1847,
+        "author_died": 1855,
+        "basis": "沿用第一版已核的原作/所引版本年与作者卒年：1847年、1855年；2026年公版门槛为1930年及1975年，仅取原作正文。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/1260"
+      ]
+    },
+    {
+      "id": "wilde-11",
+      "text_sha256_lf": "47ff543c50d61d920b3f1cfaa168b0e861306af190a0136433edbab7b45ea93d",
+      "source_url": "https://www.gutenberg.org/cache/epub/174/pg174-images.html#chap04",
+      "locator": "第四章，亨利勋爵",
+      "checked_on": "2026-10-29",
+      "method": "真实同版HTML正文逐字匹配；仅统一引号、横线、排印空白和页码/行号。上下文和真实章节锚点另录于候选证据。",
+      "source_sha256_lf": "180f7f7e3245c75b140766464068596936eafd06a6266e83d9c71c18d617aed9",
+      "misattribution_check": "回原著核对，不采用网络转引的改写句；角色台词按实际语境署明。",
+      "public_domain": {
+        "first_published": 1891,
+        "author_died": 1900,
+        "basis": "沿用第一版已核的原作/所引版本年与作者卒年：1891年、1900年；2026年公版门槛为1930年及1975年，仅取原作正文。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/174"
+      ]
+    },
+    {
+      "id": "emerson-11",
+      "text_sha256_lf": "818f352aed2fa35a43991597cc355a18fc1dba77ba6b6a0ef4ecb4ad66d0c6d9",
+      "source_url": "https://www.gutenberg.org/cache/epub/16643/pg16643-images.html#SELF-RELIANCE",
+      "locator": "《论自立》",
+      "checked_on": "2026-10-29",
+      "method": "真实同版HTML正文逐字匹配；仅统一引号、横线、排印空白和页码/行号。上下文和真实章节锚点另录于候选证据。",
+      "source_sha256_lf": "84a04da2e744e934db8c0a2a7b316d5afd6f464fd8e599ce8a58ced45249ee98",
+      "misattribution_check": "回原著核对，不采用网络转引的改写句；角色台词按实际语境署明。",
+      "public_domain": {
+        "first_published": 1841,
+        "author_died": 1882,
+        "basis": "沿用第一版已核的原作/所引版本年与作者卒年：1841年、1882年；2026年公版门槛为1930年及1975年，仅取原作正文。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/16643"
+      ]
+    },
+    {
+      "id": "thoreau-11",
+      "text_sha256_lf": "f8862fda8b9dda9bea21d49ef63e5176c495848a857838f81ab8bbc86417d5f1",
+      "source_url": "https://www.gutenberg.org/cache/epub/205/pg205-images.html#chap04",
+      "locator": "第三章“阅读”",
+      "checked_on": "2026-10-29",
+      "method": "真实同版HTML正文逐字匹配；仅统一引号、横线、排印空白和页码/行号。上下文和真实章节锚点另录于候选证据。",
+      "source_sha256_lf": "512f4fa4703b7d8baed186ba001b036a58c37034b038560a07b1d26ea88b96ea",
+      "misattribution_check": "回原著核对，不采用网络转引的改写句；角色台词按实际语境署明。",
+      "public_domain": {
+        "first_published": 1854,
+        "author_died": 1862,
+        "basis": "沿用第一版已核的原作/所引版本年与作者卒年：1854年、1862年；2026年公版门槛为1930年及1975年，仅取原作正文。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/205"
+      ]
+    },
+    {
+      "id": "shakespeare-12",
+      "text_sha256_lf": "31d8352b018fae69e3e0e74092aa256cc4bc906b17795f98d453de0bd41438aa",
+      "source_url": "https://www.gutenberg.org/cache/epub/100/pg100-images.html#sceneIV_32.1",
+      "locator": "第四幕第一场，普洛斯彼罗对斐迪南",
+      "checked_on": "2026-10-29",
+      "method": "真实同版HTML正文逐字匹配；仅统一引号、横线、排印空白和页码/行号。上下文和真实章节锚点另录于候选证据。",
+      "source_sha256_lf": "88ad4e03109839ba7992b14e4f1446bf56d77576a54410f5b98d9821c579be57",
+      "misattribution_check": "回原著核对，不采用网络转引的改写句；角色台词按实际语境署明。",
+      "public_domain": {
+        "first_published": 1623,
+        "author_died": 1616,
+        "basis": "沿用第一版已核的原作/所引版本年与作者卒年：1623年、1616年；2026年公版门槛为1930年及1975年，仅取原作正文。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/100",
+        "https://www.folger.edu/explore/shakespeares-works/the-tempest/"
+      ],
+      "source_text": "You do look, my son, in a mov’d sort,\nAs if you were dismay’d: be cheerful, sir:\nOur revels now are ended.",
+      "display_note": "按所引版本恢复诗行。"
+    },
+    {
+      "id": "austen-12",
+      "text_sha256_lf": "6c9979515e4e6ebe319e8daf42b095bdde71c51aecbd17e9d063d1c0f9bac275",
+      "source_url": "https://www.gutenberg.org/cache/epub/1342/pg1342-images.html#CHAPTER_XI",
+      "locator": "第十一章，达西",
+      "checked_on": "2026-10-29",
+      "method": "真实同版HTML正文逐字匹配；仅统一引号、横线、排印空白和页码/行号。上下文和真实章节锚点另录于候选证据。",
+      "source_sha256_lf": "f0b019c9164a53c21fda1bf2938b96b014016a6eb4a627039cebd0d9a07c42f9",
+      "misattribution_check": "回原著核对，不采用网络转引的改写句；角色台词按实际语境署明。",
+      "public_domain": {
+        "first_published": 1813,
+        "author_died": 1817,
+        "basis": "沿用第一版已核的原作/所引版本年与作者卒年：1813年、1817年；2026年公版门槛为1930年及1975年，仅取原作正文。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/1342"
+      ]
+    },
+    {
+      "id": "bronte-12",
+      "text_sha256_lf": "bf4d3777d601ffd0c799257893ec213cc33271c894374f6ddd1fe3df51f5015b",
+      "source_url": "https://www.gutenberg.org/cache/epub/1260/pg1260-images.html",
+      "locator": "第三十六章，简",
+      "checked_on": "2026-10-29",
+      "method": "真实同版HTML正文逐字匹配；仅统一引号、横线、排印空白和页码/行号。上下文和真实章节锚点另录于候选证据。",
+      "source_sha256_lf": "0bc6419204218b6379e5c174a6b93076897cc7ef40bd230f73fbe1e35366eef7",
+      "misattribution_check": "回原著核对，不采用网络转引的改写句；角色台词按实际语境署明。",
+      "public_domain": {
+        "first_published": 1847,
+        "author_died": 1855,
+        "basis": "沿用第一版已核的原作/所引版本年与作者卒年：1847年、1855年；2026年公版门槛为1930年及1975年，仅取原作正文。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/1260"
+      ]
+    },
+    {
+      "id": "wilde-12",
+      "text_sha256_lf": "364cb9d19e0c2b240fad1ca706a44e22d9b5524ea45ed9ef0287b36916f05891",
+      "source_url": "https://www.gutenberg.org/cache/epub/174/pg174-images.html#chap02",
+      "locator": "第二章，亨利勋爵",
+      "checked_on": "2026-10-29",
+      "method": "真实同版HTML正文逐字匹配；仅统一引号、横线、排印空白和页码/行号。上下文和真实章节锚点另录于候选证据。",
+      "source_sha256_lf": "180f7f7e3245c75b140766464068596936eafd06a6266e83d9c71c18d617aed9",
+      "misattribution_check": "回原著核对，不采用网络转引的改写句；角色台词按实际语境署明。",
+      "public_domain": {
+        "first_published": 1891,
+        "author_died": 1900,
+        "basis": "沿用第一版已核的原作/所引版本年与作者卒年：1891年、1900年；2026年公版门槛为1930年及1975年，仅取原作正文。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/174"
+      ]
+    },
+    {
+      "id": "emerson-12",
+      "text_sha256_lf": "8647b57d2c98b4e4a035db7b4e546902696c1de791df9beea3225b7472ea3280",
+      "source_url": "https://www.gutenberg.org/cache/epub/16643/pg16643-images.html#SELF-RELIANCE",
+      "locator": "《论自立》",
+      "checked_on": "2026-10-29",
+      "method": "真实同版HTML正文逐字匹配；仅统一引号、横线、排印空白和页码/行号。上下文和真实章节锚点另录于候选证据。",
+      "source_sha256_lf": "84a04da2e744e934db8c0a2a7b316d5afd6f464fd8e599ce8a58ced45249ee98",
+      "misattribution_check": "回原著核对，不采用网络转引的改写句；角色台词按实际语境署明。",
+      "public_domain": {
+        "first_published": 1841,
+        "author_died": 1882,
+        "basis": "沿用第一版已核的原作/所引版本年与作者卒年：1841年、1882年；2026年公版门槛为1930年及1975年，仅取原作正文。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/16643"
+      ]
+    },
+    {
+      "id": "thoreau-12",
+      "text_sha256_lf": "036ad64cf0371f4f15b30443493387b3a803d4b7958fc04b59731eb537eb8fd5",
+      "source_url": "https://www.gutenberg.org/cache/epub/205/pg205-images.html#chap17",
+      "locator": "第十六章“冬天的湖”",
+      "checked_on": "2026-10-29",
+      "method": "真实同版HTML正文逐字匹配；仅统一引号、横线、排印空白和页码/行号。上下文和真实章节锚点另录于候选证据。",
+      "source_sha256_lf": "512f4fa4703b7d8baed186ba001b036a58c37034b038560a07b1d26ea88b96ea",
+      "misattribution_check": "回原著核对，不采用网络转引的改写句；角色台词按实际语境署明。",
+      "public_domain": {
+        "first_published": 1854,
+        "author_died": 1862,
+        "basis": "沿用第一版已核的原作/所引版本年与作者卒年：1854年、1862年；2026年公版门槛为1930年及1975年，仅取原作正文。"
+      },
+      "bibliography_urls": [
+        "https://www.gutenberg.org/ebooks/205"
       ]
     }
   ]

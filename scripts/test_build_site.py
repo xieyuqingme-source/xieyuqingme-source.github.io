@@ -35,6 +35,7 @@ def copy_corner_fixture(root):
     columns = json.loads((ROOT / "english-corner/catalog.json").read_text(encoding="utf-8"))["columns"]
     (folder / "catalog.json").write_text(json.dumps({"version":1,"columns":columns,"cards":[]},ensure_ascii=False),encoding="utf-8")
     (folder / "notes.json").write_text('{"version":1,"works":{}}',encoding="utf-8")
+    (folder / "quiz.json").write_text('{"version":1,"questions":[]}',encoding="utf-8")
     quotes = root / "home/brief/english-quotes.json"
     if quotes.is_file():
         data = json.loads(quotes.read_text(encoding="utf-8"))
@@ -780,7 +781,7 @@ class ProjectPublicationTests(unittest.TestCase):
                 self.assertTrue(any(tag == "meta" and attrs.get("property") == "og:url"
                                     and attrs.get("content") == "https://xieyuqing.me/projects/" for tag, attrs in tags))
                 sitemap = [node.text for node in ET.parse(output / "sitemap.xml").findall(".//{*}loc")]
-                expected_routes = {'/', '/today/', '/en/today/', '/english/', '/english/tools/numbers/', '/projects/', '/about/', '/map/', '/en/map/', '/en/', '/en/about/', '/en/projects/', '/en/articles/',
+                expected_routes = {'/', '/today/', '/en/today/', '/english/', '/english/tools/numbers/', '/english/play/', '/english/quotes/', '/english/map/', '/projects/', '/about/', '/map/', '/en/map/', '/en/', '/en/about/', '/en/projects/', '/en/articles/',
                                    '/game/', '/en/game/', '/game/ranking/', '/en/game/ranking/', '/game/footprints/', '/en/game/footprints/', '/articles/index.html', '/articles/synthetic.html'}
                 for feature in (report['anthology'], report['english_features']['anthology'], report['photography'], report['english_features']['photography']):
                     expected_routes.update('/' + route.strip('/') + '/' for route in feature['routes'])

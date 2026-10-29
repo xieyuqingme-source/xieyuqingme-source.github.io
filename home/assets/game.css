@@ -228,3 +228,10 @@ html[lang="en"] body .tier-label strong { font-size: 1rem; max-width: 100%; }
 
 /* The second game feature uses the existing real footprints screenshot. */
 .footprints-feature{margin-top:28px}.footprints-feature .game-cover{display:grid;place-items:center;min-width:0;padding:24px}.footprints-feature .game-cover img{display:block;width:100%;max-width:100%;height:auto;object-fit:contain;border:1px solid var(--line);border-radius:var(--radius)}
+
+/* Book names need enough room for whole English words in both ranking skins. */
+body.ranking-page[data-ranking-template="book"][data-ranking-skin] .ranking-workspace .rank-card{flex-basis:92px;width:92px}
+body.ranking-page[data-ranking-template="book"] .ranking-workspace .card-name{word-break:normal;overflow-wrap:break-word;hyphens:none}
+body.ranking-page[data-ranking-template="book"].presentation .pool-footnote{display:block}
+body.ranking-page[data-ranking-template="book"].presentation .pool-list:empty{display:none}
+body.ranking-page[data-ranking-template="book"].presentation .pool-panel:has(.pool-list:empty) .pool-heading{display:none}

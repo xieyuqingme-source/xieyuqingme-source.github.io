@@ -5,7 +5,7 @@
   if (!root) return;
   const cleanups = [], listen = (target,type,fn) => { target.addEventListener(type,fn);cleanups.push(()=>target.removeEventListener(type,fn)); };
   const rows = [...root.querySelectorAll('[data-ec-row]')], controls = root.querySelector('[data-ec-filters]');
-  const columns = new Set(['words','classics','between','myths']);
+  const columns = new Set((root.dataset.englishColumns || 'words classics between myths').split(/\s+/).filter(Boolean));
   const params = new URLSearchParams(location.search);
   let column = columns.has(params.get('column')) ? params.get('column') : 'all', level = ['1','2','3'].includes(params.get('level')) ? params.get('level') : 'all';
   function query() { const values=new URLSearchParams();if(column!=='all')values.set('column',column);if(level!=='all')values.set('level',level);return values.size?'?'+values:''; }
