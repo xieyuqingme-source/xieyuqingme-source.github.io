@@ -63,16 +63,7 @@ class GamePublicationTests(unittest.TestCase):
         self.addCleanup(temporary.cleanup)
         root = Path(temporary.name)
         shutil.copytree(ROOT / "home", root / "home")
-        folder = root / 'english-corner'
-        folder.mkdir()
-        columns = json.loads((ROOT/'english-corner/catalog.json').read_text(encoding='utf-8'))['columns']
-        (folder/'catalog.json').write_text(json.dumps({'version':1,'columns':columns,'cards':[]},ensure_ascii=False),encoding='utf-8')
-        (folder/'notes.json').write_text('{"version":1,"works":{}}',encoding='utf-8')
-        (folder/'quiz.json').write_text('{"version":1,"questions":[]}',encoding='utf-8')
-        quotations_path = root/'home/brief/english-quotes.json'
-        quotations = json.loads(quotations_path.read_text(encoding='utf-8'))
-        for item in quotations['quotes']: item.pop('related',None)
-        quotations_path.write_text(json.dumps(quotations,ensure_ascii=False),encoding='utf-8')
+        test_build_site.copy_corner_fixture(root)
         memes = root / "home/brief/memes.json"
         public = json.loads(memes.read_text(encoding="utf-8"))
         for item in public["items"]:
@@ -108,7 +99,9 @@ class GamePublicationTests(unittest.TestCase):
             english_routes.update(routes)
         expected_routes = {"/", "/today/", "/about/", "/projects/", "/map/", "/game/", "/game/ranking/", "/game/footprints/",
                            "/articles/index.html", "/articles/synthetic.html"} | english_routes
-        for module in (report["photography"], report["anthology"]):
+        self.assertIn("/marx/", report["marx_engels"]["routes"])
+        self.assertEqual(report["marx_engels"]["language"], "zh-CN")
+        for module in (report["photography"], report["anthology"], report["marx_engels"]):
             expected_routes.update("/" + route.strip("/") + "/" for route in module["routes"])
         self.assertEqual(set(report['english_corner']['routes']),{'/english/','/english/tools/numbers/','/english/play/','/english/quotes/','/english/map/'})
         expected_routes.update(report['english_corner']['routes'])
@@ -219,8 +212,22 @@ class GamePublicationTests(unittest.TestCase):
                 self.assertTrue(any(tag == "a" and attrs.get("class") == "brand" and attrs.get("href") == "/" for tag, attrs in Elements(html).elements))
                 self.assertEqual(nav.count('class="nav-item'), 4)
                 self.assertEqual(nav.count('class="nav-group'), 3)
-                self.assertCountEqual(links, ("/articles/", "/english/", "/projects/", "/game/", "/about/", "/photos/", "/anthology/", "/map/"))
+                self.assertCountEqual(links, ("/articles/", "/english/", "/marx/", "/projects/", "/game/", "/about/", "/photos/", "/anthology/", "/map/"))
                 self.assertEqual(sum(tag == "summary" for tag, _ in Elements(nav).elements), 3)
+                footer = html.rsplit("<footer", 1)[1].split("</footer>", 1)[0]
+                self.assertEqual([attrs.get("href") for tag, attrs in Elements(footer).elements
+                                  if tag == "a" and attrs.get("data-i18n") == "common.nav.marx"], ["/marx/"])
+        for relative in ("en/index.html", "en/game/index.html", "en/game/ranking/index.html"):
+            with self.subTest(page=relative):
+                html = (output / relative).read_text(encoding="utf-8")
+                nav = html.split('class="site-nav"', 1)[1].split("</nav>", 1)[0]
+                self.assertCountEqual([attrs.get("href") for tag, attrs in Elements(nav).elements if tag == "a"],
+                                      ("/en/articles/", "/english/", "/marx/", "/en/projects/", "/en/game/",
+                                       "/en/about/", "/en/photos/", "/en/anthology/", "/en/map/"))
+                self.assertIn('<span data-i18n="common.nav.marx">Reading Marx &amp; Engels (中文)</span>', nav)
+                footer = html.rsplit("<footer", 1)[1].split("</footer>", 1)[0]
+                self.assertEqual([attrs.get("href") for tag, attrs in Elements(footer).elements
+                                  if tag == "a" and attrs.get("data-i18n") == "common.nav.marx"], ["/marx/"])
         home = (output / "index.html").read_text(encoding="utf-8")
         self.assertIn('id="glance-title"><a href="/today/">今天</a></h2>', home)
         self.assertIn('data-brief-mode="glance"', home)

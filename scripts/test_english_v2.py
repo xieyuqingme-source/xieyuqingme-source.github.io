@@ -7,7 +7,7 @@ import unittest
 
 from english_corner import load_english_corner, load_intro, render_card, render_index, render_play, render_quote_library, render_word_map, word_map_data, render_numbers
 from daily_brief import load_english_quotes, validate_english_quote_display
-from site_i18n import NAV_GROUPS
+from site_i18n import NAV_GROUPS, FOOTER_LINKS
 from site_i18n import version_shared_assets
 from hashlib import sha256
 
@@ -104,10 +104,14 @@ class LearningReaderTests(unittest.TestCase):
 
     def test_works_menu_owns_the_learning_entrance(self):
         self.assertEqual(len(NAV_GROUPS), 4)
-        self.assertFalse(any(group[0] == "/english/" for group in NAV_GROUPS))
+        self.assertFalse(any(group[0] in ("/english/", "/marx/") for group in NAV_GROUPS))
         projects = next(group for group in NAV_GROUPS if group[0] == "/projects/")
-        self.assertEqual(projects[2][-1], ("/english/", "english"))
-        self.assertIn("/english/", projects[3])
+        self.assertEqual(projects[2], [("/projects/", "aiApps"), ("/game/", "games"),
+                                       ("/english/", "english"), ("/marx/", "marx")])
+        self.assertEqual(projects[3], ["/projects/", "/game/", "/english/", "/marx/"])
+        self.assertEqual([(path, key) for path, key in FOOTER_LINKS
+                          if path in ("/english/", "/marx/")],
+                         [("/english/", "english"), ("/marx/", "marx")])
 
     def test_cards_explain_subjects_without_internal_or_author_copy(self):
         corner = load_english_corner(ROOT)

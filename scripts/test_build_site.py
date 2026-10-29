@@ -42,6 +42,11 @@ def copy_corner_fixture(root):
         for item in data["quotes"]:
             item.pop("related",None)
         quotes.write_text(json.dumps(data,ensure_ascii=False),encoding="utf-8")
+    # This integration fixture publishes one synthetic article. The reviewed
+    # Marx content still builds in full, with its real article index tested by
+    # test_marx_engels instead of pointing this isolated build at absent essays.
+    shutil.copytree(ROOT / "marx-engels", root / "marx-engels")
+    (root / "marx-engels/qa-index.json").write_text('{"version":1,"items":[]}', encoding="utf-8")
 
 
 class UnifiedPublicationTests(unittest.TestCase):
@@ -783,7 +788,7 @@ class ProjectPublicationTests(unittest.TestCase):
                 sitemap = [node.text for node in ET.parse(output / "sitemap.xml").findall(".//{*}loc")]
                 expected_routes = {'/', '/today/', '/en/today/', '/english/', '/english/tools/numbers/', '/english/play/', '/english/quotes/', '/english/map/', '/projects/', '/about/', '/map/', '/en/map/', '/en/', '/en/about/', '/en/projects/', '/en/articles/',
                                    '/game/', '/en/game/', '/game/ranking/', '/en/game/ranking/', '/game/footprints/', '/en/game/footprints/', '/articles/index.html', '/articles/synthetic.html'}
-                for feature in (report['anthology'], report['english_features']['anthology'], report['photography'], report['english_features']['photography']):
+                for feature in (report['anthology'], report['english_features']['anthology'], report['photography'], report['english_features']['photography'], report['marx_engels']):
                     expected_routes.update('/' + route.strip('/') + '/' for route in feature['routes'])
                 self.assertEqual(set(sitemap), {'https://xieyuqing.me' + route for route in expected_routes})
                 self.assertEqual(len(sitemap), len(set(sitemap)))

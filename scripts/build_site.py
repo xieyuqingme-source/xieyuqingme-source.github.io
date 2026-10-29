@@ -19,6 +19,7 @@ from photo_pages import build_photos, validate_catalog as validate_photo_catalog
 from map_pages import load_map, build_map
 from anthology_pages import load_anthology, load_glossary, build_anthology
 from english_corner import load_english_corner, build_english_corner
+from marx_engels import load_marx_engels, build_marx_engels
 from site_i18n import localize_page, localized_path, load_catalogues, check_site_languages
 from news_snapshot import load_sources, load_snapshot, render_snapshot
 from history_today import load_history, render_history
@@ -207,6 +208,7 @@ def render_site_notes(waline, repository, language="zh-CN"):
                  'Weather comes from Open-Meteo. City searches send the name you enter to its geocoding service; choosing a point on the map sends its coordinates for weather. The page never requests your device location, and saves your selected city or coordinates and the latest weather only in your browser. The homepage makes no weather request.',
                  'News follows source newsroom selections and preset rules, with original headlines, publication times and links. Chinese quotations from Marx, Engels, Lenin and Mao quote the Chinese Marxists Internet Archive texts; English quotations use independent English texts. Edition notes explicitly label the permitted AI translations of some Lei Feng English and Che Guevara Chinese entries. Other sources include the Lei Feng Memorial Hall and published translations of How the Steel Was Tempered. The reading collections are stored locally; browsing them makes no automatic request to the sources.',
                  'Learn English is written for Chinese readers, with word stories, public-domain classics, language comparisons, common mistakes, quizzes, a quotation library, an illustrative word map and local number practice. Device-local English voices are optional; annotations share the anthology reader’s mechanism. Its English quotations show the same original and Chinese translation on both Today pages. Sources, version details and AI-assisted writing or site translations are identified in each entry; neither reading nor conversion sends your input to a service.',
+                 'Reading Marx & Engels is a Chinese-only section based on the 2009 ten-volume collection. Its Capital Volume I links use the 1972 Chinese collected-works text. Short quotations link directly to Chinese originals; AI-assisted reading guides, edition notes and verified transcription corrections are identified separately. Reading, filtering and changing cards use local files, with no automatic request to the archive.',
                  'Article view counts and comments use Waline. These requests send your IP address and browser information to the Waline backend and its providers'
                  + (f' (hosting: {host}; database: {database})' if host and database else '') + '. The comment area explains what is shown publicly.',
                  'Map geography comes from Natural Earth (public domain). Project screenshots and other third-party sources are credited in each project.']
@@ -217,6 +219,7 @@ def render_site_notes(waline, repository, language="zh-CN"):
                  '天气来自 Open-Meteo；搜索城市会向其地名服务发送输入的城市名，地图选点会发送所选坐标以查询天气，不读取设备定位。页面仅在浏览器里保存所选城市或坐标及最近一次天气。首页不请求天气。',
                  '新闻按来源媒体选题和预设规则自动汇集，保留原题、原文发布时间与链接。马克思主义名句中，马恩列毛中文直接采用马克思主义者网（中马库）中文原文，英文分别采用英文文本；部分雷锋英文和切·格瓦拉中文按保留规则使用本站AI译文，并在版本说明中明确标注。其他来源包括雷锋纪念馆日记与《钢铁是怎样炼成的》出版译本。阅读资料随本站保存，浏览和换句时不自动请求来源网站。',
                  '学英语面向中文读者，包含词源故事、公版经典、中英对照、考据、常见用法、小测验、名句库、单词示意地图和数字练习。经典批注沿用文选的共享机制；英语朗读使用设备自带的本地语音，没有可用语音时隐藏入口。「今天」页另有英语名句，中英文页面展示同一英文原句与中文译文。每项附来源和版本说明，本站译文与AI辅助整理如实标注；阅读和数字转换不向外部服务发送输入内容。',
+                 '「读马恩」为中文原著阅读栏目，以2009年《马克思恩格斯文集》为准；《资本论》第一卷链接1972年《全集》第23卷中文本。短引文附中文原著出处，本站导读与解读标明AI辅助，版本与已核电子录入校勘另有说明。目录、筛选和换卡只使用本地资料，浏览时不自动请求中马库。',
                  '文章的浏览量和留言由 Waline 提供：相关请求会把 IP 和浏览器信息发送给 Waline 后端及其托管商'
                  + (f'（服务托管：{host}；数据库：{database}）' if host and database else '') + '。留言区另有说明。',
                  '足迹地图的底图来自 Natural Earth（公有领域）；作品截图与其他第三方来源见各项目说明。']
@@ -658,6 +661,7 @@ def build_site(address, map_preview_source=None):
     from english_quiz import build_quiz_pools
     english_corner["quiz_pools"] = build_quiz_pools(english_quotes, english_corner["quiz"])
     brief_extras["english_quotes"] = english_quotes
+    marx_engels = load_marx_engels(ROOT)  # Reviewed public records only; never the research cache.
     expected_output = "_site_map_preview" if map_preview_source else "_site_unified"
     if OUTPUT.is_symlink() or OUTPUT.resolve() != ROOT.resolve() / expected_output:
         raise ValueError("Unsafe unified output path.")
@@ -749,6 +753,7 @@ def build_site(address, map_preview_source=None):
     (OUTPUT / "about/index.html").write_text(localize_page(about_page, ROOT, address, "/about/"), encoding="utf-8")
     anthology_report = build_anthology(ROOT, OUTPUT, address, language="zh-CN")
     corner_report = build_english_corner(ROOT, OUTPUT, address, english_corner, english_quotes)
+    marx_report = build_marx_engels(ROOT, OUTPUT, address, marx_engels)
     from english_site import build_english_site
     english_report = build_english_site(blog, OUTPUT, address, projects, about_data, values)
     photo_english_report = build_photos(ROOT, OUTPUT, address, allow_local_map_preview=bool(map_preview_source), language="en")
@@ -823,6 +828,7 @@ def build_site(address, map_preview_source=None):
     ET.SubElement(ET.SubElement(sitemap, "url"), "loc").text = address + "/about/"
     feature_routes = ["/today/", "/map/", "/en/map/", *game_routes,
                       *corner_report["routes"],
+                      *marx_report["routes"],
                       *anthology_report["routes"], *anthology_english_report["routes"],
                       *photo_report["routes"], *photo_english_report["routes"]]
     for route in feature_routes:
@@ -846,6 +852,7 @@ def build_site(address, map_preview_source=None):
     report["english"] = english_report
     report["anthology"] = anthology_report
     report["english_corner"] = corner_report
+    report["marx_engels"] = marx_report
     report["english_features"] = {"photography": photo_english_report, "footprints": map_english_report,
                                   "anthology": anthology_english_report, "games": game_routes[1::2]}
     report["localization"] = check_site_languages(OUTPUT, address)

@@ -27,6 +27,7 @@ This repository contains the source and public content for my personal website, 
 | 个人主页 | [首页](https://xieyuqing.me/) | `home/index.template.html`；五块精简首页，保留「今天」轻量入口及文章、照片、作品和小游戏入口，数量由构建器生成 |
 | 今天 | [今天](https://xieyuqing.me/today/) | `home/today.template.html`、`home/brief/`；依次为地球、地图选点天气、历史上的今天、每日阅读、重点新闻 |
 | 学英语 | [学英语](https://xieyuqing.me/english/)、[数字转换器](https://xieyuqing.me/english/tools/numbers/) | `english-corner/`；词的身世、经典一页、中英之间与考据，仅做中文版 |
+| 读马恩 | [读马恩](https://xieyuqing.me/marx/) | `marx-engels/`；文集十卷、《资本论》目录、中文原著短引与43篇解读，仅做中文版 |
 | 中英文文章 | [文章](https://xieyuqing.me/articles/) | `中文文章/`、`English Articles/`、`blog/` |
 | 作品展示 | [作品](https://xieyuqing.me/projects/) | `home/projects.json`、`home/projects.template.html` |
 | 摄影相册 | [摄影](https://xieyuqing.me/photos/) | `photos/catalog.json`、`photos/images/`；只使用已选定的公开导出 |
@@ -38,6 +39,7 @@ This repository contains the source and public content for my personal website, 
 
 - **足迹地图**：`/map/` 展示作者的真实城市足迹、原始注释、相关城市相册和地图动画。独立的 `/game/footprints/` 提供访客添加、导入、编辑及图片/视频制作。两者数据隔离，访客草稿主动保存后才写入浏览器，不上传。
 - **从夯到拉排行**：美食与运动示例、自定义图片、等级与排序编辑、展示模式、PNG 导出及 JSON 备份。榜单与图片保存在当前浏览器的 IndexedDB 中，不提供跨设备同步；清理浏览器数据前请导出备份。小游戏入口同时提供排行与足迹地图制作工具。
+- **读马恩**：从作品下拉菜单、页脚或今天页马克思主义名句卡片进入，提供十卷书架、资本论三卷目录和阅读路线、12篇核心篇目导读、20张概念卡、8张考据卡及第一卷前三章导读。中文直接引用中文原著，解读与出处分开，普通构建和阅读不联网采集。增改与核文方法见[读马恩维护](blog/读马恩维护.md)。
 - **今天**：页首显示北京时间日期，旁边为简洁的静态时间轴，下方依次展示地球、天气、历史、阅读和新闻。天气可在本地地图上选点，也可选择或搜索城市；首页轻量入口不请求天气。每日阅读依次展示通栏的「马克思主义名句」和「英语名句」，可各自随时换句；英语名句200条，英文原句配明确标注的本站中文译文，进入学英语可读40张知识卡片（含「别说错」），并使用数字转换与练习、小测验、名句库、单词示意地图和可选设备本地朗读；马克思主义名句收录430条，马恩列毛中文直接摘录中马库中文原文，英文分别引用英文文献；仅雷锋部分英文、切·格瓦拉部分中文按保留规则使用并明示AI译文。新闻由独立流程每天检查三次，点击原标题直达来源；历史与阅读按日期在本地轮换；历史库共542条，10月28日至11月30日已扩充为每天6–7条，其余日期保留首版资料。实际维护方式与来源限制见[今天页维护](blog/今日简报维护.md)。
 - **独立仓库工具**：作品页中的[雨聊公众号排版](https://github.com/xieyuqingme-source/yuliao-wechat-editor)、[Coze 论文速记工作流](https://github.com/xieyuqingme-source/coze-paper-quick-reference)和[雨聊壁纸](https://github.com/xieyuqingme-source/yuliao-wallpaper)分别在各自仓库维护。本仓库保存其展示资料、截图与链接，不包含这些工具的完整源码，也不代表它们都能在本站在线运行。公众号排版为本地工具，Coze 工作流需导入平台配置，壁纸为 Windows 测试版；具体使用方法和限制以各项目说明为准。
 
@@ -45,6 +47,7 @@ This repository contains the source and public content for my personal website, 
 
 - 访问者可直接从上表打开网站。地图使用见[地图说明](blog/足迹地图维护.md)，排行使用见[小游戏与排行说明](home/GAME_MAINTENANCE.md)。
 - 维护者先读[网站使用说明](blog/使用说明.md)，再按任务查阅[网站与作品维护](blog/网站与作品维护.md)、[摄影相册维护](blog/摄影相册维护.md)或[Waline 接入说明](blog/Waline接入说明.md)。[单仓库迁移与回滚](blog/单仓库迁移与回滚.md)是历史记录，无需重复迁移。
+- 学习栏目的内容与来源分别见[学英语维护](blog/学英语维护.md)和[读马恩维护](blog/读马恩维护.md)。
 - 站点使用 Python 构建静态页面，交互由本地 JavaScript 资源提供。Node.js 用于相关检查；GitHub Actions 统一构建并发布 `_site_unified/`。
 
 在仓库根目录、使用 Python 3.10+ 和已安装所需依赖的解释器运行：
@@ -206,6 +209,7 @@ English essays and writing practice will be added here.
 | `blog/` | 文章配置、样式、交互、依赖及全站维护文档 |
 | `photos/` | 可公开的相册目录与压缩图片，不是私人摄影原图库 |
 | `map/` | 可公开的足迹目录、格式示例及底图来源说明 |
+| `marx-engels/` | 读马恩的公开目录、解读、短引文、核对记录与勘误 |
 | `scripts/` | 全站构建、校验、预览、相册导出、地图更新与测试 |
 | `.github/workflows/pages.yml` | `main` 推送后的统一构建与 GitHub Pages 发布流程 |
 

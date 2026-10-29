@@ -115,6 +115,7 @@
     function renderClassic() {
       const item = classic[classicDeck?.current()]; if (!item) return;
       write('daily-quotation-title',language === 'en' ? 'Marxist quotations' : '马克思主义名句');
+      write('marx-reading-entry',language === 'en' ? 'Read Marx & Engels (in Chinese) →' : '去读马恩 →');
       write('daily-quote-text',item.text[language]); write('daily-quote-author',item.author[language]); write('daily-quote-note',item.translation_note[language]);
       const link = find('daily-quote-work'); if (link) { link.href = typeof item.url === 'string' ? item.url : item.url[language]; link.textContent = item.work[language]+' ↗'; link.target = '_blank'; link.rel = 'noopener noreferrer'; link.setAttribute('hreflang',item.source_language?.[language] || language); link.setAttribute('lang',language); }
       if (find('daily-quote')) find('daily-quote').dataset.quoteId = item.id;

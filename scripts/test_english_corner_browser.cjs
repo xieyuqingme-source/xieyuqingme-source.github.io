@@ -69,9 +69,10 @@ async function publicNavigation(page,language='zh-CN') {
   assert.equal(await entries.count(),4);
   for(const label of await entries.allTextContents())assert.doesNotMatch(label,/学英语|英语角|Learn English|English Corner/);
   const links=page.locator('.site-nav [data-nav-group="projects"] .nav-menu>a');
-  assert.equal(await links.count(),3);
+  assert.equal(await links.count(),4);
   assert.equal(await links.nth(2).getAttribute('href'),'/english/');
   assert.equal((await links.nth(2).textContent()).trim(),language==='en'?'Learn English (中文)':'学英语');
+  assert.equal(await links.nth(3).getAttribute('href'),'/marx/');
   assert.equal(await page.locator('.site-footer nav a[href="/english/"]').count(),1);
   assert.equal((await page.locator('.site-footer nav a[href="/english/"]').textContent()).trim(),language==='en'?'Learn English (中文)':'学英语');
 }

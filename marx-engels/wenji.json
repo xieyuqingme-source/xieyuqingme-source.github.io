@@ -1,0 +1,6688 @@
+{
+  "version": 1,
+  "edition": {
+    "name": "马克思恩格斯文集",
+    "compiler": "中共中央马克思恩格斯列宁斯大林著作编译局",
+    "publisher": "人民出版社",
+    "year": 2009,
+    "capital_note": "以《马克思恩格斯文集》（人民出版社，2009）为准；《资本论》第一卷在线文本据《马克思恩格斯全集》第23卷（1972）。",
+    "mia": "https://www.marxists.org/chinese/marx-engels2/index.htm"
+  },
+  "volumes": [
+    {
+      "no": 1,
+      "title": "第1卷",
+      "span": "1843—1848年著作",
+      "summary": "早期哲学批判、经济学手稿与共产主义论著；15篇，部分为节选。",
+      "mia": "https://www.marxists.org/chinese/marx-engels2/01/index.htm",
+      "works": [
+        {
+          "id": "v01-01",
+          "title": "《黑格尔法哲学批判》导言",
+          "author": "marx",
+          "year": null,
+          "pages": [
+            3,
+            18
+          ],
+          "excerpt": false,
+          "editor_title": false,
+          "branch": [
+            "philosophy"
+          ],
+          "level": 2,
+          "mia": "https://www.marxists.org/chinese/marx-engels2/01/01.htm",
+          "kind": "work",
+          "sections": [],
+          "year_note": "文集第10卷年表记1844年发表；原页写作日期存疑，未用发表年倒填写作年。"
+        },
+        {
+          "id": "v01-02",
+          "title": "论犹太人问题",
+          "author": "marx",
+          "year": 1843,
+          "pages": [
+            21,
+            55
+          ],
+          "excerpt": false,
+          "editor_title": false,
+          "branch": [
+            "philosophy"
+          ],
+          "level": 2,
+          "mia": "https://www.marxists.org/chinese/marx-engels2/01/02.htm",
+          "kind": "work",
+          "sections": [
+            {
+              "title": "一 布鲁诺·鲍威尔：《犹太人问题》1843年不伦瑞克版",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/01/02.htm",
+              "pages": [
+                21,
+                null
+              ]
+            },
+            {
+              "title": "二 布鲁诺·鲍威尔：《现代犹太人和基督徒获得自由的能力》（《二十一印张》第56—71页）",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/01/02.htm",
+              "pages": [
+                47,
+                null
+              ]
+            }
+          ],
+          "year_note": "据原页写作说明。"
+        },
+        {
+          "id": "v01-03",
+          "title": "国民经济学批判大纲",
+          "author": "engels",
+          "year": null,
+          "pages": [
+            56,
+            86
+          ],
+          "excerpt": false,
+          "editor_title": false,
+          "branch": [
+            "economics"
+          ],
+          "level": 2,
+          "mia": "https://www.marxists.org/chinese/marx-engels2/01/03.htm",
+          "kind": "work",
+          "sections": [],
+          "year_note": "原页含跨年写作或多个版本的日期，按各节区分，不合并为单一年份。"
+        },
+        {
+          "id": "v01-04",
+          "title": "英国状况十八世纪",
+          "author": "engels",
+          "year": 1844,
+          "pages": [
+            87,
+            108
+          ],
+          "excerpt": false,
+          "editor_title": false,
+          "branch": [
+            "philosophy"
+          ],
+          "level": 2,
+          "mia": "https://www.marxists.org/chinese/marx-engels2/01/04.htm",
+          "kind": "work",
+          "sections": [],
+          "year_note": "据原页写作说明。"
+        },
+        {
+          "id": "manuscripts-1844",
+          "title": "1844年经济学哲学手稿",
+          "author": "marx",
+          "year": 1844,
+          "pages": [
+            109,
+            248
+          ],
+          "excerpt": false,
+          "editor_title": true,
+          "branch": [
+            "philosophy"
+          ],
+          "level": 3,
+          "mia": "https://www.marxists.org/chinese/marx-engels2/01/05.htm",
+          "kind": "work",
+          "sections": [
+            {
+              "title": "序言",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/01/05.htm#1",
+              "pages": [
+                111,
+                null
+              ]
+            },
+            {
+              "title": "笔记本 Ⅰ",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/01/05.htm#2",
+              "pages": [
+                115,
+                null
+              ]
+            },
+            {
+              "title": "工资",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/01/05.htm#3",
+              "pages": [
+                115,
+                null
+              ]
+            },
+            {
+              "title": "资本的利润",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/01/05.htm#4",
+              "pages": [
+                129,
+                null
+              ]
+            },
+            {
+              "title": "地租",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/01/05.htm#5",
+              "pages": [
+                142,
+                null
+              ]
+            },
+            {
+              "title": "［异化劳动和私有财产］",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/01/05.htm#6",
+              "pages": [
+                155,
+                null
+              ]
+            },
+            {
+              "title": "［笔记本Ⅱ］",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/01/05.htm#7",
+              "pages": [
+                170,
+                null
+              ]
+            },
+            {
+              "title": "［私有财产的关系］",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/01/05.htm#8",
+              "pages": [
+                170,
+                null
+              ]
+            },
+            {
+              "title": "［笔记本Ⅲ］",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/01/05.htm#9",
+              "pages": [
+                178,
+                null
+              ]
+            },
+            {
+              "title": "［对笔记本Ⅱ第XXXVI页的补充］",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/01/05.htm#10",
+              "pages": [
+                178,
+                null
+              ]
+            },
+            {
+              "title": "［私有财产和劳动］",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/01/05.htm#11",
+              "pages": [
+                178,
+                null
+              ]
+            },
+            {
+              "title": "［对笔记本II第XXXIX页的补充］",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/01/05.htm#12",
+              "pages": [
+                182,
+                null
+              ]
+            },
+            {
+              "title": "［私有财产和共产主义］",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/01/05.htm#13",
+              "pages": [
+                182,
+                null
+              ]
+            },
+            {
+              "title": "［对黑格尔的辩证法和整个哲学的批判］",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/01/05.htm#14",
+              "pages": [
+                197,
+                null
+              ]
+            },
+            {
+              "title": "［私有财产和需要］",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/01/05.htm#15",
+              "pages": [
+                223,
+                null
+              ]
+            },
+            {
+              "title": "［增补］",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/01/05.htm#16",
+              "pages": [
+                230,
+                null
+              ]
+            },
+            {
+              "title": "［片断］",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/01/05.htm#17",
+              "pages": [
+                236,
+                null
+              ]
+            },
+            {
+              "title": "［分工］",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/01/05.htm#18",
+              "pages": [
+                236,
+                null
+              ]
+            },
+            {
+              "title": "［货币］",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/01/05.htm#19",
+              "pages": [
+                242,
+                null
+              ]
+            }
+          ],
+          "year_note": "据原页写作说明。",
+          "guide": "manuscripts-1844"
+        },
+        {
+          "id": "v01-06",
+          "title": "神圣家族，或对批判的批判所做的批判 驳布鲁诺·鲍威尔及其伙伴（节选）",
+          "author": "marx-engels",
+          "year": 1844,
+          "pages": [
+            249,
+            359
+          ],
+          "excerpt": true,
+          "editor_title": false,
+          "branch": [
+            "philosophy"
+          ],
+          "level": 2,
+          "mia": "https://www.marxists.org/chinese/marx-engels2/01/06.htm",
+          "kind": "work",
+          "sections": [
+            {
+              "title": "序言",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/01/06.htm#1",
+              "pages": [
+                253,
+                null
+              ]
+            },
+            {
+              "title": "第四章体现为认识的宁静的批判的批判或埃德加先生所体现的批判的批判",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/01/06.htm#2",
+              "pages": [
+                255,
+                null
+              ]
+            },
+            {
+              "title": "（4）蒲鲁东（马克思）",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/01/06.htm",
+              "pages": [
+                255,
+                null
+              ]
+            },
+            {
+              "title": "批判性的评注 1",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/01/06.htm",
+              "pages": [
+                255,
+                null
+              ]
+            },
+            {
+              "title": "批判性的评注 2",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/01/06.htm",
+              "pages": [
+                259,
+                null
+              ]
+            },
+            {
+              "title": "批判性的评注 3",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/01/06.htm",
+              "pages": [
+                263,
+                null
+              ]
+            },
+            {
+              "title": "批判性的评注4",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/01/06.htm",
+              "pages": [
+                268,
+                null
+              ]
+            },
+            {
+              "title": "批判性的评注5",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/01/06.htm",
+              "pages": [
+                271,
+                null
+              ]
+            },
+            {
+              "title": "第五章 贩卖秘密的商人所体现的批判的批判或塞利加先生所体现的批判的批判（马克思）",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/01/06.htm",
+              "pages": [
+                276,
+                null
+              ]
+            },
+            {
+              "title": "（2）思辨结构的秘密",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/01/06.htm",
+              "pages": [
+                276,
+                null
+              ]
+            },
+            {
+              "title": "第六章 绝对的批判的批判或布鲁诺先生所体现的批判的批判",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/01/06.htm",
+              "pages": [
+                282,
+                null
+              ]
+            },
+            {
+              "title": "（1）绝对批判的第一次征讨（马克思）",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/01/06.htm",
+              "pages": [
+                282,
+                null
+              ]
+            },
+            {
+              "title": "（a）\"精神\"和\"群众\"",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/01/06.htm",
+              "pages": [
+                282,
+                null
+              ]
+            },
+            {
+              "title": "（2）绝对批判的第二次征讨",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/01/06.htm#5",
+              "pages": [
+                294,
+                null
+              ]
+            },
+            {
+              "title": "（a）欣里克斯，第二号。\"批判\"和\"费尔巴哈\"。对哲学的谴责（恩格斯）",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/01/06.htm",
+              "pages": [
+                294,
+                null
+              ]
+            },
+            {
+              "title": "（b）犹太人问题，第二号。关于社会主义、法学和政治学（民族问题）的批判的发现（马克思）",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/01/06.htm",
+              "pages": [
+                297,
+                null
+              ]
+            },
+            {
+              "title": "（3）绝对批判的第三次征讨",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/01/06.htm#6",
+              "pages": [
+                303,
+                null
+              ]
+            },
+            {
+              "title": "（b）犹太人问题，第二号",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/01/06.htm",
+              "pages": [
+                303,
+                null
+              ]
+            },
+            {
+              "title": "（c）对法国革命的批判的战斗",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/01/06.htm",
+              "pages": [
+                319,
+                null
+              ]
+            },
+            {
+              "title": "（d）对法国唯物主义的批判的战斗",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/01/06.htm",
+              "pages": [
+                326,
+                null
+              ]
+            },
+            {
+              "title": "（f）绝对批判的思辨循环和自我意识的哲学",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/01/06.htm",
+              "pages": [
+                338,
+                null
+              ]
+            },
+            {
+              "title": "第七章 批判的批判的通信",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/01/06.htm",
+              "pages": [
+                348,
+                null
+              ]
+            },
+            {
+              "title": "（2）\" 非批判的群众\"和\"批判的批判\"",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/01/06.htm",
+              "pages": [
+                348,
+                null
+              ]
+            },
+            {
+              "title": "（a）\"顽固不化的群众\"和\"不满意的群众\"（马克思）",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/01/06.htm",
+              "pages": [
+                348,
+                null
+              ]
+            },
+            {
+              "title": "（b）\"软心肠的\"和\"需要解救的\"群众（恩格斯）",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/01/06.htm",
+              "pages": [
+                352,
+                null
+              ]
+            },
+            {
+              "title": "第八章 批判的批判走进尘寰并改变形象，或盖罗尔施泰因公爵鲁道夫所体现的批判的批判（马克思）",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/01/06.htm",
+              "pages": [
+                356,
+                null
+              ]
+            },
+            {
+              "title": "（4）被揭露了的有关\"观点\"的秘密\"",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/01/06.htm",
+              "pages": [
+                356,
+                null
+              ]
+            }
+          ],
+          "year_note": "据原页写作说明。"
+        },
+        {
+          "id": "v01-07",
+          "title": "英国工人阶级状况 根据亲身观察和可靠材料（节选）",
+          "author": "engels",
+          "year": null,
+          "pages": [
+            361,
+            null
+          ],
+          "excerpt": true,
+          "editor_title": false,
+          "branch": [
+            "socialism"
+          ],
+          "level": 2,
+          "mia": "https://www.marxists.org/chinese/marx-engels2/01/07.htm",
+          "kind": "work",
+          "sections": [
+            {
+              "title": "1892年德文第二版序言",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/01/07.htm",
+              "pages": [
+                365,
+                null
+              ]
+            },
+            {
+              "title": "英国工人阶级状况",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/01/08.htm",
+              "pages": [
+                382,
+                null
+              ]
+            },
+            {
+              "title": "致大不列颠工人阶级.",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/01/08.htm",
+              "pages": [
+                382,
+                null
+              ]
+            },
+            {
+              "title": "序言",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/01/09.htm",
+              "pages": [
+                385,
+                null
+              ]
+            },
+            {
+              "title": "导言",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/01/10.htm",
+              "pages": [
+                388,
+                null
+              ]
+            },
+            {
+              "title": "工业无产阶级",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/01/11.htm",
+              "pages": [
+                405,
+                null
+              ]
+            },
+            {
+              "title": "结果",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/01/12.htm",
+              "pages": [
+                408,
+                null
+              ]
+            },
+            {
+              "title": "工人运动",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/01/13.htm",
+              "pages": [
+                448,
+                null
+              ]
+            },
+            {
+              "title": "资产阶级对无产阶级的态度",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/01/14.htm",
+              "pages": [
+                476,
+                null
+              ]
+            }
+          ],
+          "year_note": "原页含跨年写作或多个版本的日期，按各节区分，不合并为单一年份。"
+        },
+        {
+          "id": "theses-feuerbach",
+          "title": "关于费尔巴哈的提纲",
+          "author": "marx",
+          "year": 1845,
+          "pages": [
+            499,
+            506
+          ],
+          "excerpt": false,
+          "editor_title": false,
+          "branch": [
+            "philosophy"
+          ],
+          "level": 2,
+          "mia": "https://www.marxists.org/chinese/marx-engels2/01/15.htm",
+          "kind": "work",
+          "sections": [
+            {
+              "title": "1．关于费尔巴哈（1845年稿本）",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/01/15.htm",
+              "pages": [
+                499,
+                null
+              ]
+            },
+            {
+              "title": "马克思论费尔巴哈（恩格斯1888年发表稿）",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/01/15.htm",
+              "pages": [
+                503,
+                null
+              ]
+            }
+          ],
+          "year_note": "据原页写作说明。",
+          "guide": "theses-feuerbach"
+        },
+        {
+          "id": "german-ideology",
+          "title": "德意志意识形态 对费尔巴哈、布·鲍威尔和施蒂纳所代表的现代德国哲学以及各式各样先知所代表的德国社会主义的批判（节选）",
+          "author": "marx-engels",
+          "year": null,
+          "pages": [
+            507,
+            591
+          ],
+          "excerpt": true,
+          "editor_title": false,
+          "branch": [
+            "philosophy"
+          ],
+          "level": 3,
+          "mia": "https://www.marxists.org/chinese/marx-engels2/01/16.htm",
+          "kind": "work",
+          "sections": [
+            {
+              "title": "第一卷 对费尔巴哈、布·鲍威尔和施蒂纳所代表的现代德国哲学的批判",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/01/16.htm",
+              "pages": [
+                509,
+                null
+              ]
+            },
+            {
+              "title": "序言",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/01/16.htm",
+              "pages": [
+                509,
+                null
+              ]
+            },
+            {
+              "title": "第一章 费尔巴哈唯物主义观点和唯心主义观点的对立",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/01/16.htm",
+              "pages": [
+                512,
+                null
+              ]
+            },
+            {
+              "title": "［Ⅰ］",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/01/16.htm",
+              "pages": [
+                512,
+                null
+              ]
+            },
+            {
+              "title": "一费尔巴哈",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/01/16.htm",
+              "pages": [
+                514,
+                null
+              ]
+            },
+            {
+              "title": "A. 一般意识形态，特别是德意志意识形态",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/01/16.htm",
+              "pages": [
+                514,
+                null
+              ]
+            },
+            {
+              "title": "1.一般意识形态，特别是德国哲学",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/01/16.htm",
+              "pages": [
+                516,
+                null
+              ]
+            },
+            {
+              "title": "［Ⅱ］",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/01/16.htm",
+              "pages": [
+                526,
+                null
+              ]
+            },
+            {
+              "title": "［Ⅲ］",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/01/16.htm",
+              "pages": [
+                550,
+                null
+              ]
+            },
+            {
+              "title": "［IV］",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/01/16.htm",
+              "pages": [
+                555,
+                null
+              ]
+            },
+            {
+              "title": "国家和法同所有制的关系",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/01/16.htm",
+              "pages": [
+                583,
+                null
+              ]
+            },
+            {
+              "title": "第二卷 对各式各样先知所代表的德国社会主义的批判",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/01/16.htm",
+              "pages": [
+                588,
+                null
+              ]
+            },
+            {
+              "title": "\"真正的社会主义\"-",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/01/16.htm",
+              "pages": [
+                588,
+                null
+              ]
+            }
+          ],
+          "year_note": "原页含跨年写作或多个版本的日期，按各节区分，不合并为单一年份。",
+          "guide": "german-ideology"
+        },
+        {
+          "id": "v01-17",
+          "title": "哲学的贫困：答蒲鲁东先生的《贫困的哲学》（节选）",
+          "author": "marx",
+          "year": 1847,
+          "pages": [
+            593,
+            656
+          ],
+          "excerpt": true,
+          "editor_title": false,
+          "branch": [
+            "philosophy"
+          ],
+          "level": 2,
+          "mia": "https://www.marxists.org/chinese/marx-engels2/01/17.htm",
+          "kind": "work",
+          "sections": [
+            {
+              "title": "第二章 政治经济学的形而上学",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/01/17.htm",
+              "pages": [
+                597,
+                null
+              ]
+            },
+            {
+              "title": "第一节 方法",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/01/17.htm",
+              "pages": [
+                597,
+                null
+              ]
+            },
+            {
+              "title": "第一个说明",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/01/17.htm",
+              "pages": [
+                598,
+                null
+              ]
+            },
+            {
+              "title": "第二个说明",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/01/17.htm",
+              "pages": [
+                602,
+                null
+              ]
+            },
+            {
+              "title": "第三个说明",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/01/17.htm",
+              "pages": [
+                603,
+                null
+              ]
+            },
+            {
+              "title": "第四个说明",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/01/17.htm",
+              "pages": [
+                604,
+                null
+              ]
+            },
+            {
+              "title": "第五个说明",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/01/17.htm",
+              "pages": [
+                606,
+                null
+              ]
+            },
+            {
+              "title": "第六个说明",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/01/17.htm",
+              "pages": [
+                608,
+                null
+              ]
+            },
+            {
+              "title": "第七个即最后一个说明",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/01/17.htm",
+              "pages": [
+                612,
+                null
+              ]
+            },
+            {
+              "title": "第二节 分工和机器",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/01/17.htm",
+              "pages": [
+                617,
+                null
+              ]
+            },
+            {
+              "title": "第三节 竞争和垄断",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/01/17.htm",
+              "pages": [
+                630,
+                null
+              ]
+            },
+            {
+              "title": "第四节 所有权或租",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/01/17.htm",
+              "pages": [
+                638,
+                null
+              ]
+            },
+            {
+              "title": "第五节 罢工和工人同盟",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/01/17.htm",
+              "pages": [
+                649,
+                null
+              ]
+            }
+          ],
+          "year_note": "写作与首版均为1847年，见文集第10卷年表；原页页尾“1843”有误，未采用。"
+        },
+        {
+          "id": "v01-18",
+          "title": "共产主义者和卡尔-海因岑",
+          "author": "engels",
+          "year": 1847,
+          "pages": [
+            657,
+            675
+          ],
+          "excerpt": false,
+          "editor_title": false,
+          "branch": [
+            "socialism"
+          ],
+          "level": 2,
+          "mia": "https://www.marxists.org/chinese/marx-engels2/01/18.htm",
+          "kind": "work",
+          "sections": [],
+          "year_note": "据原页写作说明。"
+        },
+        {
+          "id": "v01-19",
+          "title": "共产主义原理",
+          "author": "engels",
+          "year": 1847,
+          "pages": [
+            676,
+            693
+          ],
+          "excerpt": false,
+          "editor_title": false,
+          "branch": [
+            "socialism"
+          ],
+          "level": 2,
+          "mia": "https://www.marxists.org/chinese/marx-engels2/01/19.htm",
+          "kind": "work",
+          "sections": [],
+          "year_note": "据原页写作说明。"
+        },
+        {
+          "id": "v01-20",
+          "title": "关于波兰的演说",
+          "author": "marx-engels",
+          "year": null,
+          "pages": [
+            694,
+            697
+          ],
+          "excerpt": false,
+          "editor_title": true,
+          "branch": [
+            "socialism"
+          ],
+          "level": 2,
+          "mia": "https://www.marxists.org/chinese/marx-engels2/01/20.htm",
+          "kind": "work",
+          "sections": [
+            {
+              "title": "马克思的演说",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/01/20.htm",
+              "pages": [
+                694,
+                null
+              ]
+            },
+            {
+              "title": "恩格斯的演说",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/01/20.htm",
+              "pages": [
+                696,
+                null
+              ]
+            }
+          ],
+          "year_note": "原页另有发表或版本日期，未据此倒填写作年份。"
+        },
+        {
+          "id": "wage-labour-capital",
+          "title": "雇佣劳动与资本",
+          "author": "marx",
+          "year": null,
+          "pages": [
+            699,
+            743
+          ],
+          "excerpt": false,
+          "editor_title": false,
+          "branch": [
+            "economics"
+          ],
+          "level": 1,
+          "mia": "https://www.marxists.org/chinese/marx-engels2/01/21.htm",
+          "kind": "work",
+          "sections": [
+            {
+              "title": "恩格斯写的1891 年单行本导言",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/01/21.htm",
+              "pages": [
+                701,
+                null
+              ]
+            },
+            {
+              "title": "雇佣劳动与资本",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/01/21.htm",
+              "pages": [
+                711,
+                null
+              ]
+            }
+          ],
+          "year_note": "以1847年讲演为基础，1849年连载；未用发表年倒填写作年，恩格斯1891年导言另列。",
+          "guide": "wage-labour-capital"
+        },
+        {
+          "id": "v01-22",
+          "title": "关于自由贸易问题的演说",
+          "author": "marx",
+          "year": null,
+          "pages": [
+            744,
+            759
+          ],
+          "excerpt": false,
+          "editor_title": false,
+          "branch": [
+            "economics"
+          ],
+          "level": 2,
+          "mia": "https://www.marxists.org/chinese/marx-engels2/01/22.htm",
+          "kind": "work",
+          "sections": [],
+          "year_note": "写作时间暂不标单一年份，详见原文。"
+        }
+      ]
+    },
+    {
+      "no": 2,
+      "title": "第2卷",
+      "span": "1848—1859年著作",
+      "summary": "1848年革命、政治经济学与亚洲问题；25篇。",
+      "mia": "https://www.marxists.org/chinese/marx-engels2/02/index.htm",
+      "works": [
+        {
+          "id": "manifesto",
+          "title": "共产党宣言",
+          "author": "marx-engels",
+          "year": null,
+          "pages": [
+            3,
+            null
+          ],
+          "excerpt": false,
+          "editor_title": false,
+          "branch": [
+            "socialism"
+          ],
+          "level": 1,
+          "mia": "https://www.marxists.org/chinese/marx-engels2/02/01.htm",
+          "kind": "work",
+          "sections": [
+            {
+              "title": "1872年德文版序言",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/02/01.htm#1",
+              "pages": [
+                5,
+                null
+              ]
+            },
+            {
+              "title": "1882年俄文版序言",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/02/01.htm#2",
+              "pages": [
+                7,
+                null
+              ]
+            },
+            {
+              "title": "1883年德文版序言",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/02/01.htm#3",
+              "pages": [
+                9,
+                null
+              ]
+            },
+            {
+              "title": "1888年英文版序言",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/02/01.htm#4",
+              "pages": [
+                11,
+                null
+              ]
+            },
+            {
+              "title": "1890年德文版序言",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/02/01.htm#5",
+              "pages": [
+                17,
+                null
+              ]
+            },
+            {
+              "title": "1892年波兰文版序言",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/02/01.htm#6",
+              "pages": [
+                23,
+                null
+              ]
+            },
+            {
+              "title": "1893年意大利文版序言",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/02/01.htm#7",
+              "pages": [
+                25,
+                null
+              ]
+            },
+            {
+              "title": "共产党宣言",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/02/01.htm#8",
+              "pages": [
+                30,
+                null
+              ]
+            },
+            {
+              "title": "一资产者和无产者",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/02/01.htm#9",
+              "pages": [
+                31,
+                null
+              ]
+            },
+            {
+              "title": "二无产者和共产党人",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/02/01.htm#10",
+              "pages": [
+                44,
+                null
+              ]
+            },
+            {
+              "title": "三社会主义的和共产主义的文献",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/02/01.htm#11",
+              "pages": [
+                54,
+                null
+              ]
+            },
+            {
+              "title": "1．反动的社会主义",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/02/01.htm",
+              "pages": [
+                54,
+                null
+              ]
+            },
+            {
+              "title": "（甲）封建的社会主义",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/02/01.htm",
+              "pages": [
+                54,
+                null
+              ]
+            },
+            {
+              "title": "（乙）小资产阶级的社会主义",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/02/01.htm",
+              "pages": [
+                56,
+                null
+              ]
+            },
+            {
+              "title": "（丙）德国的或“真正的”社会主义",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/02/01.htm",
+              "pages": [
+                57,
+                null
+              ]
+            },
+            {
+              "title": "2．保守的或资产阶级的社会主义",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/02/01.htm",
+              "pages": [
+                60,
+                null
+              ]
+            },
+            {
+              "title": "3．批判的空想的社会主义和共产主义",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/02/01.htm",
+              "pages": [
+                62,
+                null
+              ]
+            },
+            {
+              "title": "四共产党人对各种反对党派的态度",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/02/01.htm#12",
+              "pages": [
+                65,
+                null
+              ]
+            }
+          ],
+          "year_note": "正文写于1847年12月至1848年1月，1848年发表；后加各版序言分别列出。",
+          "guide": "manifesto"
+        },
+        {
+          "id": "v02-02",
+          "title": "危机和反革命",
+          "author": "marx",
+          "year": 1848,
+          "pages": [
+            68,
+            null
+          ],
+          "excerpt": false,
+          "editor_title": false,
+          "branch": [
+            "socialism"
+          ],
+          "level": 2,
+          "mia": "https://www.marxists.org/chinese/marx-engels2/02/02.htm",
+          "kind": "work",
+          "sections": [],
+          "year_note": "据原页写作说明。"
+        },
+        {
+          "id": "v02-03",
+          "title": "资产阶级和反革命",
+          "author": "marx",
+          "year": 1848,
+          "pages": [
+            72,
+            null
+          ],
+          "excerpt": false,
+          "editor_title": false,
+          "branch": [
+            "socialism"
+          ],
+          "level": 2,
+          "mia": "https://www.marxists.org/chinese/marx-engels2/02/03.htm",
+          "kind": "work",
+          "sections": [],
+          "year_note": "据原页写作说明。"
+        },
+        {
+          "id": "v02-04",
+          "title": "1848年至1850年的 法兰西阶级斗争",
+          "author": "marx",
+          "year": null,
+          "pages": [
+            77,
+            null
+          ],
+          "excerpt": false,
+          "editor_title": false,
+          "branch": [
+            "socialism"
+          ],
+          "level": 2,
+          "mia": "https://www.marxists.org/chinese/marx-engels2/02/04.htm",
+          "kind": "work",
+          "sections": [
+            {
+              "title": "一 1848年的六月失败",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/02/04.htm",
+              "pages": [
+                80,
+                null
+              ]
+            },
+            {
+              "title": "二 1849年6月13日",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/02/04.htm",
+              "pages": [
+                106,
+                null
+              ]
+            },
+            {
+              "title": "三 1849年六月十三日事件的后果",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/02/04.htm",
+              "pages": [
+                138,
+                null
+              ]
+            },
+            {
+              "title": "四 1850年普选权的废除",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/02/04.htm",
+              "pages": [
+                173,
+                null
+              ]
+            }
+          ],
+          "year_note": "原页含跨年写作或多个版本的日期，按各节区分，不合并为单一年份。"
+        },
+        {
+          "id": "v02-05",
+          "title": "共产主义者同盟中央委员会告同盟书",
+          "author": "marx-engels",
+          "year": 1850,
+          "pages": [
+            188,
+            null
+          ],
+          "excerpt": false,
+          "editor_title": false,
+          "branch": [
+            "socialism"
+          ],
+          "level": 2,
+          "mia": "https://www.marxists.org/chinese/marx-engels2/02/05.htm",
+          "kind": "work",
+          "sections": [],
+          "year_note": "据原页写作说明。"
+        },
+        {
+          "id": "v02-06",
+          "title": "德国农民战争",
+          "author": "engels",
+          "year": null,
+          "pages": [
+            201,
+            null
+          ],
+          "excerpt": false,
+          "editor_title": false,
+          "branch": [
+            "socialism"
+          ],
+          "level": 2,
+          "mia": "https://www.marxists.org/chinese/marx-engels2/02/06.htm",
+          "kind": "work",
+          "sections": [
+            {
+              "title": "1870年第二版序言",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/02/06.htm",
+              "pages": [
+                203,
+                null
+              ]
+            },
+            {
+              "title": "1870年第二版序言的补充",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/02/06.htm",
+              "pages": [
+                213,
+                null
+              ]
+            },
+            {
+              "title": "德国农民战争",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/02/06.htm",
+              "pages": [
+                220,
+                null
+              ]
+            },
+            {
+              "title": "一",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/02/06.htm",
+              "pages": [
+                221,
+                null
+              ]
+            },
+            {
+              "title": "二",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/02/06.htm",
+              "pages": [
+                234,
+                null
+              ]
+            },
+            {
+              "title": "三",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/02/06.htm",
+              "pages": [
+                255,
+                null
+              ]
+            },
+            {
+              "title": "四",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/02/06.htm",
+              "pages": [
+                271,
+                null
+              ]
+            },
+            {
+              "title": "五",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/02/06.htm",
+              "pages": [
+                276,
+                null
+              ]
+            },
+            {
+              "title": "六",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/02/06.htm",
+              "pages": [
+                303,
+                null
+              ]
+            },
+            {
+              "title": "七",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/02/06.htm",
+              "pages": [
+                314,
+                null
+              ]
+            }
+          ],
+          "year_note": "原页含跨年写作或多个版本的日期，按各节区分，不合并为单一年份。"
+        },
+        {
+          "id": "v02-07",
+          "title": "1852年神圣同盟对法战争的条件与前景",
+          "author": "engels",
+          "year": 1851,
+          "pages": [
+            320,
+            null
+          ],
+          "excerpt": false,
+          "editor_title": false,
+          "branch": [
+            "socialism"
+          ],
+          "level": 2,
+          "mia": "https://www.marxists.org/chinese/marx-engels2/02/07.htm",
+          "kind": "work",
+          "sections": [
+            {
+              "title": "一",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/02/07.htm",
+              "pages": [
+                320,
+                null
+              ]
+            },
+            {
+              "title": "二",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/02/07.htm",
+              "pages": [
+                325,
+                null
+              ]
+            },
+            {
+              "title": "三",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/02/07.htm",
+              "pages": [
+                329,
+                null
+              ]
+            },
+            {
+              "title": "四",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/02/07.htm",
+              "pages": [
+                336,
+                null
+              ]
+            },
+            {
+              "title": "五",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/02/07.htm",
+              "pages": [
+                344,
+                null
+              ]
+            }
+          ],
+          "year_note": "据原页写作说明。"
+        },
+        {
+          "id": "v02-08",
+          "title": "德国的革命和反革命",
+          "author": "engels",
+          "year": null,
+          "pages": [
+            349,
+            null
+          ],
+          "excerpt": false,
+          "editor_title": false,
+          "branch": [
+            "socialism"
+          ],
+          "level": 2,
+          "mia": "https://www.marxists.org/chinese/marx-engels2/02/08.htm",
+          "kind": "work",
+          "sections": [
+            {
+              "title": "［一 革命前夕的德国］",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/02/08.htm",
+              "pages": [
+                351,
+                null
+              ]
+            },
+            {
+              "title": "［二 普鲁士邦］",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/02/08.htm",
+              "pages": [
+                360,
+                null
+              ]
+            },
+            {
+              "title": "［三 德国其他各邦］",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/02/08.htm",
+              "pages": [
+                370,
+                null
+              ]
+            },
+            {
+              "title": "［四 奥地利］",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/02/08.htm",
+              "pages": [
+                375,
+                null
+              ]
+            },
+            {
+              "title": "［五 维也纳起义］",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/02/08.htm",
+              "pages": [
+                382,
+                null
+              ]
+            },
+            {
+              "title": "［六 柏林起义］",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/02/08.htm",
+              "pages": [
+                386,
+                null
+              ]
+            },
+            {
+              "title": "［七 法兰克福国民议会］",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/02/08.htm",
+              "pages": [
+                391,
+                null
+              ]
+            },
+            {
+              "title": "［八 波兰人、捷克人和德意志人］",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/02/08.htm",
+              "pages": [
+                396,
+                null
+              ]
+            },
+            {
+              "title": "［九 泛斯拉夫主义。 石勒苏益格―荷尔斯泰因的战争］",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/02/08.htm",
+              "pages": [
+                401,
+                null
+              ]
+            },
+            {
+              "title": "［十 巴黎起义。法兰克福议会］",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/02/08.htm",
+              "pages": [
+                406,
+                null
+              ]
+            },
+            {
+              "title": "［十一 维也纳起义］",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/02/08.htm",
+              "pages": [
+                410,
+                null
+              ]
+            },
+            {
+              "title": "［十二 对维也纳的攻击。对维也纳的背叛］",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/02/08.htm",
+              "pages": [
+                416,
+                null
+              ]
+            },
+            {
+              "title": "［十三 普鲁士制宪议会。国民议会］",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/02/08.htm",
+              "pages": [
+                424,
+                null
+              ]
+            },
+            {
+              "title": "［十四 秩序的恢复。议会和议院］",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/02/08.htm",
+              "pages": [
+                429,
+                null
+              ]
+            },
+            {
+              "title": "［十五 普鲁士的胜利］",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/02/08.htm",
+              "pages": [
+                435,
+                null
+              ]
+            },
+            {
+              "title": "［十六 国民议会和各邦政府］",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/02/08.htm",
+              "pages": [
+                440,
+                null
+              ]
+            },
+            {
+              "title": "［十七 起义］",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/02/08.htm",
+              "pages": [
+                444,
+                null
+              ]
+            },
+            {
+              "title": "［十八 小资产阶级］",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/02/08.htm",
+              "pages": [
+                449,
+                null
+              ]
+            },
+            {
+              "title": "［十九 起义的终结］",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/02/08.htm",
+              "pages": [
+                454,
+                null
+              ]
+            }
+          ],
+          "year_note": "原页含跨年写作或多个版本的日期，按各节区分，不合并为单一年份。"
+        },
+        {
+          "id": "eighteenth-brumaire",
+          "title": "路易·波拿巴的雾月十八日",
+          "author": "marx",
+          "year": null,
+          "pages": [
+            461,
+            null
+          ],
+          "excerpt": false,
+          "editor_title": false,
+          "branch": [
+            "socialism"
+          ],
+          "level": 2,
+          "mia": "https://www.marxists.org/chinese/marx-engels2/02/09.htm",
+          "kind": "work",
+          "sections": [
+            {
+              "title": "1869年第二版序言",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/02/09.htm",
+              "pages": [
+                465,
+                null
+              ]
+            },
+            {
+              "title": "恩格斯写的1885年第三版序言",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/02/09.htm",
+              "pages": [
+                468,
+                null
+              ]
+            },
+            {
+              "title": "路易·波拿巴的雾月十八日",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/02/09.htm",
+              "pages": [
+                470,
+                null
+              ]
+            },
+            {
+              "title": "一",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/02/09.htm",
+              "pages": [
+                470,
+                null
+              ]
+            },
+            {
+              "title": "二",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/02/09.htm",
+              "pages": [
+                481,
+                null
+              ]
+            },
+            {
+              "title": "三",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/02/09.htm",
+              "pages": [
+                494,
+                null
+              ]
+            },
+            {
+              "title": "四",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/02/09.htm",
+              "pages": [
+                510,
+                null
+              ]
+            },
+            {
+              "title": "五",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/02/09.htm",
+              "pages": [
+                521,
+                null
+              ]
+            },
+            {
+              "title": "六",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/02/09.htm",
+              "pages": [
+                540,
+                null
+              ]
+            },
+            {
+              "title": "七",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/02/09.htm",
+              "pages": [
+                560,
+                null
+              ]
+            }
+          ],
+          "year_note": "原页含跨年写作或多个版本的日期，按各节区分，不合并为单一年份。",
+          "guide": "eighteenth-brumaire"
+        },
+        {
+          "id": "v02-10",
+          "title": "在《人民报》创刊纪念会上的演说",
+          "author": "marx",
+          "year": null,
+          "pages": [
+            579,
+            null
+          ],
+          "excerpt": false,
+          "editor_title": false,
+          "branch": [
+            "socialism"
+          ],
+          "level": 2,
+          "mia": "https://www.marxists.org/chinese/marx-engels2/02/10.htm",
+          "kind": "work",
+          "sections": [],
+          "year_note": "原页另有发表或版本日期，未据此倒填写作年份。"
+        },
+        {
+          "id": "v02-11",
+          "title": "法国的动产信用公司",
+          "author": "marx",
+          "year": 1856,
+          "pages": [
+            582,
+            null
+          ],
+          "excerpt": false,
+          "editor_title": false,
+          "branch": [
+            "economics"
+          ],
+          "level": 2,
+          "mia": "https://www.marxists.org/chinese/marx-engels2/02/11.htm",
+          "kind": "work",
+          "sections": [],
+          "year_note": "据原页写作说明。"
+        },
+        {
+          "id": "critique-preface",
+          "title": "《政治经济学批判》序言",
+          "author": "marx",
+          "year": 1859,
+          "pages": [
+            588,
+            null
+          ],
+          "excerpt": false,
+          "editor_title": false,
+          "branch": [
+            "economics"
+          ],
+          "level": 2,
+          "mia": "https://www.marxists.org/chinese/marx-engels2/02/12.htm",
+          "kind": "work",
+          "sections": [],
+          "year_note": "据原页写作说明。",
+          "guide": "critique-preface"
+        },
+        {
+          "id": "v02-13",
+          "title": "卡尔·马克思《政治经济学批判。 第一分册》",
+          "author": "engels",
+          "year": 1859,
+          "pages": [
+            595,
+            null
+          ],
+          "excerpt": false,
+          "editor_title": false,
+          "branch": [
+            "economics"
+          ],
+          "level": 2,
+          "mia": "https://www.marxists.org/chinese/marx-engels2/02/13.htm",
+          "kind": "work",
+          "sections": [
+            {
+              "title": "一",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/02/13.htm",
+              "pages": [
+                595,
+                null
+              ]
+            },
+            {
+              "title": "二",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/02/13.htm",
+              "pages": [
+                600,
+                null
+              ]
+            }
+          ],
+          "year_note": "据原页写作说明。"
+        },
+        {
+          "id": "v02-14",
+          "title": "中国革命和欧洲革命",
+          "author": "marx",
+          "year": 1853,
+          "pages": [
+            607,
+            null
+          ],
+          "excerpt": false,
+          "editor_title": false,
+          "branch": [
+            "socialism"
+          ],
+          "level": 2,
+          "mia": "https://www.marxists.org/chinese/marx-engels2/02/14.htm",
+          "kind": "work",
+          "sections": [],
+          "year_note": "据原页写作说明。"
+        },
+        {
+          "id": "v02-15",
+          "title": "俄国的对华贸易",
+          "author": "marx",
+          "year": 1857,
+          "pages": [
+            615,
+            null
+          ],
+          "excerpt": false,
+          "editor_title": false,
+          "branch": [
+            "economics"
+          ],
+          "level": 2,
+          "mia": "https://www.marxists.org/chinese/marx-engels2/02/15.htm",
+          "kind": "work",
+          "sections": [],
+          "year_note": "据原页写作说明。"
+        },
+        {
+          "id": "v02-16",
+          "title": "英人在华的残暴行动",
+          "author": "marx",
+          "year": 1857,
+          "pages": [
+            618,
+            null
+          ],
+          "excerpt": false,
+          "editor_title": false,
+          "branch": [
+            "socialism"
+          ],
+          "level": 2,
+          "mia": "https://www.marxists.org/chinese/marx-engels2/02/16.htm",
+          "kind": "work",
+          "sections": [],
+          "year_note": "据原页写作说明。"
+        },
+        {
+          "id": "v02-17",
+          "title": "波斯和中国",
+          "author": "engels",
+          "year": 1857,
+          "pages": [
+            622,
+            null
+          ],
+          "excerpt": false,
+          "editor_title": false,
+          "branch": [
+            "socialism"
+          ],
+          "level": 2,
+          "mia": "https://www.marxists.org/chinese/marx-engels2/02/17.htm",
+          "kind": "work",
+          "sections": [],
+          "year_note": "据原页写作说明。"
+        },
+        {
+          "id": "v02-18",
+          "title": "鸦片贸易史",
+          "author": "marx",
+          "year": 1858,
+          "pages": [
+            629,
+            null
+          ],
+          "excerpt": false,
+          "editor_title": false,
+          "branch": [
+            "economics"
+          ],
+          "level": 2,
+          "mia": "https://www.marxists.org/chinese/marx-engels2/02/18.htm",
+          "kind": "work",
+          "sections": [
+            {
+              "title": "一",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/02/18.htm",
+              "pages": [
+                629,
+                null
+              ]
+            },
+            {
+              "title": "二",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/02/18.htm",
+              "pages": [
+                633,
+                null
+              ]
+            }
+          ],
+          "year_note": "据原页写作说明。"
+        },
+        {
+          "id": "v02-19",
+          "title": "英中条约",
+          "author": "marx",
+          "year": 1858,
+          "pages": [
+            637,
+            null
+          ],
+          "excerpt": false,
+          "editor_title": false,
+          "branch": [
+            "socialism"
+          ],
+          "level": 2,
+          "mia": "https://www.marxists.org/chinese/marx-engels2/02/19.htm",
+          "kind": "work",
+          "sections": [],
+          "year_note": "据原页写作说明。"
+        },
+        {
+          "id": "v02-20",
+          "title": "中国和英国的条约",
+          "author": "marx",
+          "year": 1858,
+          "pages": [
+            643,
+            null
+          ],
+          "excerpt": false,
+          "editor_title": false,
+          "branch": [
+            "socialism"
+          ],
+          "level": 2,
+          "mia": "https://www.marxists.org/chinese/marx-engels2/02/20.htm",
+          "kind": "work",
+          "sections": [],
+          "year_note": "据原页写作说明。"
+        },
+        {
+          "id": "v02-21",
+          "title": "俄国在远东的成功",
+          "author": "engels",
+          "year": 1858,
+          "pages": [
+            649,
+            null
+          ],
+          "excerpt": false,
+          "editor_title": false,
+          "branch": [
+            "socialism"
+          ],
+          "level": 2,
+          "mia": "https://www.marxists.org/chinese/marx-engels2/02/21.htm",
+          "kind": "work",
+          "sections": [],
+          "year_note": "据原页写作说明。"
+        },
+        {
+          "id": "v02-22",
+          "title": "新的对华战争",
+          "author": "marx",
+          "year": 1859,
+          "pages": [
+            654,
+            null
+          ],
+          "excerpt": false,
+          "editor_title": false,
+          "branch": [
+            "socialism"
+          ],
+          "level": 2,
+          "mia": "https://www.marxists.org/chinese/marx-engels2/02/22.htm",
+          "kind": "work",
+          "sections": [
+            {
+              "title": "一",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/02/22.htm",
+              "pages": [
+                654,
+                null
+              ]
+            },
+            {
+              "title": "二",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/02/22.htm",
+              "pages": [
+                658,
+                null
+              ]
+            },
+            {
+              "title": "三",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/02/22.htm",
+              "pages": [
+                663,
+                null
+              ]
+            },
+            {
+              "title": "四",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/02/22.htm",
+              "pages": [
+                668,
+                null
+              ]
+            }
+          ],
+          "year_note": "据原页写作说明。"
+        },
+        {
+          "id": "v02-23",
+          "title": "对华贸易",
+          "author": "marx",
+          "year": 1859,
+          "pages": [
+            672,
+            null
+          ],
+          "excerpt": false,
+          "editor_title": false,
+          "branch": [
+            "economics"
+          ],
+          "level": 2,
+          "mia": "https://www.marxists.org/chinese/marx-engels2/02/23.htm",
+          "kind": "work",
+          "sections": [],
+          "year_note": "据原页写作说明。"
+        },
+        {
+          "id": "v02-24",
+          "title": "不列颠在印度的统治",
+          "author": "marx",
+          "year": 1853,
+          "pages": [
+            677,
+            null
+          ],
+          "excerpt": false,
+          "editor_title": false,
+          "branch": [
+            "socialism"
+          ],
+          "level": 2,
+          "mia": "https://www.marxists.org/chinese/marx-engels2/02/24.htm",
+          "kind": "work",
+          "sections": [],
+          "year_note": "据原页写作说明。"
+        },
+        {
+          "id": "v02-25",
+          "title": "不列颠在印度统治的未来结果",
+          "author": "marx",
+          "year": 1853,
+          "pages": [
+            685,
+            null
+          ],
+          "excerpt": false,
+          "editor_title": false,
+          "branch": [
+            "socialism"
+          ],
+          "level": 2,
+          "mia": "https://www.marxists.org/chinese/marx-engels2/02/25.htm",
+          "kind": "work",
+          "sections": [],
+          "year_note": "据原页写作说明。"
+        }
+      ]
+    },
+    {
+      "no": 3,
+      "title": "第3卷",
+      "span": "1864—1883年著作",
+      "summary": "国际工人协会、巴黎公社及科学社会主义；25篇与3篇附录。",
+      "mia": "https://www.marxists.org/chinese/marx-engels2/03/index.htm",
+      "works": [
+        {
+          "id": "v03-01",
+          "title": "国际工人协会成立宣言",
+          "author": "marx",
+          "year": 1864,
+          "pages": [
+            3,
+            15
+          ],
+          "excerpt": false,
+          "editor_title": false,
+          "branch": [
+            "socialism"
+          ],
+          "level": 2,
+          "mia": "https://www.marxists.org/chinese/marx-engels2/03/01.htm",
+          "kind": "work",
+          "sections": [],
+          "year_note": "据原页写作说明。"
+        },
+        {
+          "id": "v03-02",
+          "title": "论蒲鲁东",
+          "author": "marx",
+          "year": 1865,
+          "pages": [
+            16,
+            null
+          ],
+          "excerpt": false,
+          "editor_title": false,
+          "branch": [
+            "socialism"
+          ],
+          "level": 2,
+          "mia": "https://www.marxists.org/chinese/marx-engels2/03/02.htm",
+          "kind": "work",
+          "sections": [],
+          "year_note": "据原页写作说明。"
+        },
+        {
+          "id": "value-price-profit",
+          "title": "工资、价格和利润",
+          "author": "marx",
+          "year": 1865,
+          "pages": [
+            25,
+            null
+          ],
+          "excerpt": false,
+          "editor_title": true,
+          "branch": [
+            "economics"
+          ],
+          "level": 2,
+          "mia": "https://www.marxists.org/chinese/marx-engels2/03/03.htm",
+          "kind": "work",
+          "sections": [
+            {
+              "title": "［引言］",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/03/03.htm",
+              "pages": [
+                25,
+                null
+              ]
+            },
+            {
+              "title": "1．［生产和工资］",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/03/03.htm",
+              "pages": [
+                26,
+                null
+              ]
+            },
+            {
+              "title": "2．［生产、工资、利润］",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/03/03.htm",
+              "pages": [
+                28,
+                null
+              ]
+            },
+            {
+              "title": "3．［工资和通货］",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/03/03.htm",
+              "pages": [
+                37,
+                null
+              ]
+            },
+            {
+              "title": "4．［供给和需求］",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/03/03.htm",
+              "pages": [
+                41,
+                null
+              ]
+            },
+            {
+              "title": "［5．工资和价格］",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/03/03.htm",
+              "pages": [
+                43,
+                null
+              ]
+            },
+            {
+              "title": "6．［价值和劳动］",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/03/03.htm",
+              "pages": [
+                45,
+                null
+              ]
+            },
+            {
+              "title": "7．劳动力",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/03/03.htm",
+              "pages": [
+                53,
+                null
+              ]
+            },
+            {
+              "title": "8．剩余价值的生产",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/03/03.htm",
+              "pages": [
+                56,
+                null
+              ]
+            },
+            {
+              "title": "9．劳动的价值",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/03/03.htm",
+              "pages": [
+                58,
+                null
+              ]
+            },
+            {
+              "title": "10．利润是按照商品的价值 出卖商品获得的",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/03/03.htm",
+              "pages": [
+                60,
+                null
+              ]
+            },
+            {
+              "title": "11．剩余价值分解成的各个部分",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/03/03.htm",
+              "pages": [
+                61,
+                null
+              ]
+            },
+            {
+              "title": "12．利润、工资和价格的一般关系",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/03/03.htm",
+              "pages": [
+                64,
+                null
+              ]
+            },
+            {
+              "title": "13．争取提高工资或反对降低 工资的几个主要场合",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/03/03.htm",
+              "pages": [
+                66,
+                null
+              ]
+            },
+            {
+              "title": "14．资本和劳动的斗争及其结果",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/03/03.htm",
+              "pages": [
+                72,
+                null
+              ]
+            }
+          ],
+          "year_note": "据原页写作说明。",
+          "guide": "value-price-profit"
+        },
+        {
+          "id": "v03-04",
+          "title": "卡·马克思《资本论》第一卷书评――为《民主周报》作",
+          "author": "engels",
+          "year": 1868,
+          "pages": [
+            79,
+            null
+          ],
+          "excerpt": false,
+          "editor_title": true,
+          "branch": [
+            "socialism"
+          ],
+          "level": 2,
+          "mia": "https://www.marxists.org/chinese/marx-engels2/03/04.htm",
+          "kind": "work",
+          "sections": [
+            {
+              "title": "一",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/03/04.htm",
+              "pages": [
+                79,
+                null
+              ]
+            },
+            {
+              "title": "二",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/03/04.htm",
+              "pages": [
+                84,
+                null
+              ]
+            }
+          ],
+          "year_note": "据原页写作说明。"
+        },
+        {
+          "id": "v03-05",
+          "title": "总委员会关于继承权的报告",
+          "author": "marx",
+          "year": 1869,
+          "pages": [
+            88,
+            null
+          ],
+          "excerpt": false,
+          "editor_title": false,
+          "branch": [
+            "economics"
+          ],
+          "level": 2,
+          "mia": "https://www.marxists.org/chinese/marx-engels2/03/05.htm",
+          "kind": "work",
+          "sections": [],
+          "year_note": "据原页写作说明。"
+        },
+        {
+          "id": "v03-06",
+          "title": "致国际工人协会西班牙联合会委员会",
+          "author": "engels",
+          "year": 1871,
+          "pages": [
+            91,
+            null
+          ],
+          "excerpt": false,
+          "editor_title": false,
+          "branch": [
+            "socialism"
+          ],
+          "level": 2,
+          "mia": "https://www.marxists.org/chinese/marx-engels2/03/06.htm",
+          "kind": "work",
+          "sections": [],
+          "year_note": "据原页写作说明。"
+        },
+        {
+          "id": "civil-war-france",
+          "title": "法兰西内战",
+          "author": "marx",
+          "year": 1871,
+          "pages": [
+            95,
+            null
+          ],
+          "excerpt": false,
+          "editor_title": false,
+          "branch": [
+            "socialism"
+          ],
+          "level": 2,
+          "mia": "https://www.marxists.org/chinese/marx-engels2/03/07.htm",
+          "kind": "work",
+          "sections": [
+            {
+              "title": "恩格斯写的1891年版导言",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/03/07.htm",
+              "pages": [
+                99,
+                null
+              ]
+            },
+            {
+              "title": "国际工人协会总委员会关于 普法战争的第一篇宣言",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/03/07.htm",
+              "pages": [
+                113,
+                null
+              ]
+            },
+            {
+              "title": "国际工人协会总委员会关于 普法战争的第二篇宣言",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/03/07.htm",
+              "pages": [
+                120,
+                null
+              ]
+            },
+            {
+              "title": "法兰西内战",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/03/07.htm",
+              "pages": [
+                131,
+                null
+              ]
+            },
+            {
+              "title": "一",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/03/07.htm",
+              "pages": [
+                131,
+                null
+              ]
+            },
+            {
+              "title": "二",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/03/07.htm",
+              "pages": [
+                142,
+                null
+              ]
+            },
+            {
+              "title": "三",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/03/07.htm",
+              "pages": [
+                151,
+                null
+              ]
+            },
+            {
+              "title": "四",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/03/07.htm",
+              "pages": [
+                168,
+                null
+              ]
+            },
+            {
+              "title": "附录",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/03/07.htm",
+              "pages": [
+                183,
+                null
+              ]
+            },
+            {
+              "title": "一",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/03/07.htm",
+              "pages": [
+                183,
+                null
+              ]
+            },
+            {
+              "title": "二",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/03/07.htm",
+              "pages": [
+                184,
+                null
+              ]
+            },
+            {
+              "title": "《法兰西内战》初稿（摘录）",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/03/07.htm",
+              "pages": [
+                187,
+                null
+              ]
+            },
+            {
+              "title": "公社",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/03/07.htm",
+              "pages": [
+                187,
+                null
+              ]
+            },
+            {
+              "title": "公社的产生和中央委员会",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/03/07.htm",
+              "pages": [
+                187,
+                null
+              ]
+            },
+            {
+              "title": "公社的性质",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/03/07.htm",
+              "pages": [
+                191,
+                null
+              ]
+            },
+            {
+              "title": "农民",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/03/07.htm",
+              "pages": [
+                199,
+                null
+              ]
+            },
+            {
+              "title": "共和联盟（共和同盟）",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/03/07.htm",
+              "pages": [
+                203,
+                null
+              ]
+            },
+            {
+              "title": "代表着社会中一切不靠他人劳动生活的 阶级的公社革命",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/03/07.htm",
+              "pages": [
+                203,
+                null
+              ]
+            },
+            {
+              "title": "共和国只有公开宣布为 社会共和国才可能存在",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/03/07.htm",
+              "pages": [
+                205,
+                null
+              ]
+            },
+            {
+              "title": "工人和孔德",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/03/07.htm",
+              "pages": [
+                206,
+                null
+              ]
+            },
+            {
+              "title": "公社（社会措施）",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/03/07.htm",
+              "pages": [
+                207,
+                null
+              ]
+            },
+            {
+              "title": "乡绅的地方分权和公社",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/03/07.htm",
+              "pages": [
+                211,
+                null
+              ]
+            },
+            {
+              "title": "孔德派的观点",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/03/07.htm",
+              "pages": [
+                214,
+                null
+              ]
+            },
+            {
+              "title": "《法兰西内战》二稿（摘录）",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/03/07.htm",
+              "pages": [
+                217,
+                null
+              ]
+            },
+            {
+              "title": "（6）公社",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/03/07.htm",
+              "pages": [
+                217,
+                null
+              ]
+            }
+          ],
+          "year_note": "主文1871年；本篇还收录1870年宣言、草稿及1891年导言。",
+          "guide": "civil-war-france"
+        },
+        {
+          "id": "v03-08",
+          "title": "关于工人阶级的政治行动",
+          "author": "engels",
+          "year": null,
+          "pages": [
+            224,
+            null
+          ],
+          "excerpt": false,
+          "editor_title": true,
+          "branch": [
+            "socialism"
+          ],
+          "level": 2,
+          "mia": "https://www.marxists.org/chinese/marx-engels2/03/08.htm",
+          "kind": "work",
+          "sections": [],
+          "year_note": "写作时间暂不标单一年份，详见原文。"
+        },
+        {
+          "id": "v03-09",
+          "title": "国际工人协会共同章程",
+          "author": "marx",
+          "year": null,
+          "pages": [
+            226,
+            null
+          ],
+          "excerpt": false,
+          "editor_title": false,
+          "branch": [
+            "socialism"
+          ],
+          "level": 2,
+          "mia": "https://www.marxists.org/chinese/marx-engels2/03/09.htm",
+          "kind": "work",
+          "sections": [],
+          "year_note": "写作时间暂不标单一年份，详见原文。"
+        },
+        {
+          "id": "v03-10",
+          "title": "论土地国有化",
+          "author": "marx",
+          "year": 1872,
+          "pages": [
+            230,
+            null
+          ],
+          "excerpt": false,
+          "editor_title": false,
+          "branch": [
+            "economics"
+          ],
+          "level": 2,
+          "mia": "https://www.marxists.org/chinese/marx-engels2/03/10.htm",
+          "kind": "work",
+          "sections": [],
+          "year_note": "据原页写作说明。"
+        },
+        {
+          "id": "v03-11",
+          "title": "论住宅问题",
+          "author": "engels",
+          "year": null,
+          "pages": [
+            235,
+            null
+          ],
+          "excerpt": false,
+          "editor_title": false,
+          "branch": [
+            "economics"
+          ],
+          "level": 2,
+          "mia": "https://www.marxists.org/chinese/marx-engels2/03/11.htm",
+          "kind": "work",
+          "sections": [
+            {
+              "title": "1887年第二版序言",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/03/11.htm",
+              "pages": [
+                239,
+                null
+              ]
+            },
+            {
+              "title": "论住宅问题",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/03/11.htm",
+              "pages": [
+                250,
+                null
+              ]
+            },
+            {
+              "title": "第一篇 蒲鲁东怎样解决住宅问题",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/03/11.htm",
+              "pages": [
+                250,
+                null
+              ]
+            },
+            {
+              "title": "第二篇 资产阶级怎样解决住宅问题",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/03/11.htm",
+              "pages": [
+                272,
+                null
+              ]
+            },
+            {
+              "title": "一",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/03/11.htm",
+              "pages": [
+                272,
+                null
+              ]
+            },
+            {
+              "title": "二",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/03/11.htm",
+              "pages": [
+                286,
+                null
+              ]
+            },
+            {
+              "title": "三",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/03/11.htm",
+              "pages": [
+                302,
+                null
+              ]
+            },
+            {
+              "title": "第三篇 再论蒲鲁东和住宅问题",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/03/11.htm",
+              "pages": [
+                308,
+                null
+              ]
+            },
+            {
+              "title": "一",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/03/11.htm",
+              "pages": [
+                308,
+                null
+              ]
+            },
+            {
+              "title": "二",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/03/11.htm",
+              "pages": [
+                314,
+                null
+              ]
+            },
+            {
+              "title": "三",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/03/11.htm",
+              "pages": [
+                323,
+                null
+              ]
+            },
+            {
+              "title": "四",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/03/11.htm",
+              "pages": [
+                328,
+                null
+              ]
+            }
+          ],
+          "year_note": "原页含跨年写作或多个版本的日期，按各节区分，不合并为单一年份。"
+        },
+        {
+          "id": "v03-12",
+          "title": "论权威",
+          "author": "engels",
+          "year": null,
+          "pages": [
+            335,
+            null
+          ],
+          "excerpt": false,
+          "editor_title": false,
+          "branch": [
+            "socialism"
+          ],
+          "level": 2,
+          "mia": "https://www.marxists.org/chinese/marx-engels2/03/12.htm",
+          "kind": "work",
+          "sections": [],
+          "year_note": "原页含跨年写作或多个版本的日期，按各节区分，不合并为单一年份。"
+        },
+        {
+          "id": "v03-13",
+          "title": "政治冷淡主义",
+          "author": "marx",
+          "year": null,
+          "pages": [
+            339,
+            null
+          ],
+          "excerpt": false,
+          "editor_title": false,
+          "branch": [
+            "socialism"
+          ],
+          "level": 2,
+          "mia": "https://www.marxists.org/chinese/marx-engels2/03/13.htm",
+          "kind": "work",
+          "sections": [],
+          "year_note": "原页含跨年写作或多个版本的日期，按各节区分，不合并为单一年份。"
+        },
+        {
+          "id": "v03-14",
+          "title": "流亡者文献",
+          "author": "engels",
+          "year": null,
+          "pages": [
+            347,
+            null
+          ],
+          "excerpt": false,
+          "editor_title": false,
+          "branch": [
+            "socialism"
+          ],
+          "level": 2,
+          "mia": "https://www.marxists.org/chinese/marx-engels2/03/14.htm",
+          "kind": "work",
+          "sections": [
+            {
+              "title": "一 波兰人的声明",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/03/14.htm",
+              "pages": [
+                349,
+                null
+              ]
+            },
+            {
+              "title": "二 公社的布朗基派流亡者的纲领",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/03/14.htm",
+              "pages": [
+                357,
+                null
+              ]
+            },
+            {
+              "title": "三",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/03/14.htm",
+              "pages": [
+                366,
+                null
+              ]
+            },
+            {
+              "title": "四",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/03/14.htm",
+              "pages": [
+                377,
+                null
+              ]
+            },
+            {
+              "title": "五 论俄国的社会问题",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/03/14.htm",
+              "pages": [
+                389,
+                null
+              ]
+            }
+          ],
+          "year_note": "原页含跨年写作或多个版本的日期，按各节区分，不合并为单一年份。"
+        },
+        {
+          "id": "v03-15",
+          "title": "巴枯宁《国家制度和无政府状态》一书摘要（摘录）",
+          "author": "marx",
+          "year": null,
+          "pages": [
+            403,
+            null
+          ],
+          "excerpt": true,
+          "editor_title": true,
+          "branch": [
+            "socialism"
+          ],
+          "level": 2,
+          "mia": "https://www.marxists.org/chinese/marx-engels2/03/15.htm",
+          "kind": "work",
+          "sections": [],
+          "year_note": "原页含跨年写作或多个版本的日期，按各节区分，不合并为单一年份。"
+        },
+        {
+          "id": "v03-16",
+          "title": "给奥·倍倍尔的信",
+          "author": "engels",
+          "year": 1875,
+          "pages": [
+            410,
+            null
+          ],
+          "excerpt": false,
+          "editor_title": false,
+          "branch": [
+            "socialism"
+          ],
+          "level": 2,
+          "mia": "https://www.marxists.org/chinese/marx-engels2/03/16.htm",
+          "kind": "work",
+          "sections": [],
+          "year_note": "据原页写作说明。"
+        },
+        {
+          "id": "gotha-critique",
+          "title": "哥达纲领批判",
+          "author": "marx",
+          "year": 1875,
+          "pages": [
+            419,
+            null
+          ],
+          "excerpt": false,
+          "editor_title": false,
+          "branch": [
+            "socialism"
+          ],
+          "level": 2,
+          "mia": "https://www.marxists.org/chinese/marx-engels2/03/17.htm",
+          "kind": "work",
+          "sections": [
+            {
+              "title": "恩格斯写的1891年版序言",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/03/17.htm",
+              "pages": [
+                423,
+                null
+              ]
+            },
+            {
+              "title": "给威廉·白拉克的信",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/03/17.htm",
+              "pages": [
+                425,
+                null
+              ]
+            },
+            {
+              "title": "德国工人党纲领批注",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/03/17.htm",
+              "pages": [
+                428,
+                null
+              ]
+            },
+            {
+              "title": "一",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/03/17.htm",
+              "pages": [
+                428,
+                null
+              ]
+            },
+            {
+              "title": "二",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/03/17.htm",
+              "pages": [
+                440,
+                null
+              ]
+            },
+            {
+              "title": "三",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/03/17.htm",
+              "pages": [
+                442,
+                null
+              ]
+            },
+            {
+              "title": "四",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/03/17.htm",
+              "pages": [
+                443,
+                null
+              ]
+            }
+          ],
+          "year_note": "据原页写作说明。",
+          "guide": "gotha-critique"
+        },
+        {
+          "id": "v03-18",
+          "title": "卡尔·马克思",
+          "author": "engels",
+          "year": 1877,
+          "pages": [
+            451,
+            null
+          ],
+          "excerpt": false,
+          "editor_title": false,
+          "branch": [
+            "socialism"
+          ],
+          "level": 2,
+          "mia": "https://www.marxists.org/chinese/marx-engels2/03/18.htm",
+          "kind": "work",
+          "sections": [],
+          "year_note": "据原页写作说明。"
+        },
+        {
+          "id": "v03-19",
+          "title": "给《祖国纪事》杂志编辑部的信",
+          "author": "marx",
+          "year": 1877,
+          "pages": [
+            463,
+            null
+          ],
+          "excerpt": false,
+          "editor_title": true,
+          "branch": [
+            "socialism"
+          ],
+          "level": 2,
+          "mia": "https://www.marxists.org/chinese/marx-engels2/03/19.htm",
+          "kind": "work",
+          "sections": [
+            {
+              "title": "二",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/03/19.htm",
+              "pages": [
+                465,
+                null
+              ]
+            }
+          ],
+          "year_note": "据原页写作说明。"
+        },
+        {
+          "id": "v03-20",
+          "title": "给奥·倍倍尔、威·李卜克内西、威·白拉克等人的通告信",
+          "author": "marx-engels",
+          "year": 1879,
+          "pages": [
+            468,
+            null
+          ],
+          "excerpt": false,
+          "editor_title": true,
+          "branch": [
+            "socialism"
+          ],
+          "level": 2,
+          "mia": "https://www.marxists.org/chinese/marx-engels2/03/20.htm",
+          "kind": "work",
+          "sections": [
+            {
+              "title": "一 同卡·希尔施的谈判",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/03/20.htm",
+              "pages": [
+                468,
+                null
+              ]
+            },
+            {
+              "title": "二 给报纸确定的立场",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/03/20.htm",
+              "pages": [
+                473,
+                null
+              ]
+            },
+            {
+              "title": "三 三个苏黎世人的宣言",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/03/20.htm",
+              "pages": [
+                477,
+                null
+              ]
+            }
+          ],
+          "year_note": "据原页写作说明。"
+        },
+        {
+          "id": "utopian-scientific",
+          "title": "社会主义从空想到科学的发展",
+          "author": "engels",
+          "year": 1880,
+          "pages": [
+            487,
+            null
+          ],
+          "excerpt": false,
+          "editor_title": false,
+          "branch": [
+            "socialism"
+          ],
+          "level": 1,
+          "mia": "https://www.marxists.org/chinese/marx-engels2/03/21.htm",
+          "kind": "work",
+          "sections": [
+            {
+              "title": "马克思写的 1880年法文版前言",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/03/21.htm",
+              "pages": [
+                491,
+                null
+              ]
+            },
+            {
+              "title": "1882年德文第一版序言",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/03/21.htm",
+              "pages": [
+                494,
+                null
+              ]
+            },
+            {
+              "title": "1891年德文第四版序言",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/03/21.htm",
+              "pages": [
+                497,
+                null
+              ]
+            },
+            {
+              "title": "1892年英文版导言",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/03/21.htm",
+              "pages": [
+                499,
+                null
+              ]
+            },
+            {
+              "title": "社会主义从空想到科学的发展",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/03/21.htm",
+              "pages": [
+                523,
+                null
+              ]
+            },
+            {
+              "title": "一",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/03/21.htm",
+              "pages": [
+                523,
+                null
+              ]
+            },
+            {
+              "title": "二",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/03/21.htm",
+              "pages": [
+                538,
+                null
+              ]
+            },
+            {
+              "title": "三",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/03/21.htm",
+              "pages": [
+                547,
+                null
+              ]
+            }
+          ],
+          "year_note": "正文改编写于1880年，首个法文发表、单行本同年；后加序言、导言另列。",
+          "guide": "utopian-scientific"
+        },
+        {
+          "id": "v03-22",
+          "title": "法国工人党纲领导言（草案）",
+          "author": "marx",
+          "year": 1880,
+          "pages": [
+            568,
+            null
+          ],
+          "excerpt": false,
+          "editor_title": true,
+          "branch": [
+            "socialism"
+          ],
+          "level": 2,
+          "mia": "https://www.marxists.org/chinese/marx-engels2/03/22.htm",
+          "kind": "work",
+          "sections": [],
+          "year_note": "据原页写作说明。"
+        },
+        {
+          "id": "v03-23",
+          "title": "给维·伊·查苏利奇的复信",
+          "author": "marx",
+          "year": 1881,
+          "pages": [
+            570,
+            null
+          ],
+          "excerpt": false,
+          "editor_title": true,
+          "branch": [
+            "socialism"
+          ],
+          "level": 2,
+          "mia": "https://www.marxists.org/chinese/marx-engels2/03/23.htm",
+          "kind": "work",
+          "sections": [
+            {
+              "title": "［初稿］",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/03/23.htm",
+              "pages": [
+                570,
+                null
+              ]
+            },
+            {
+              "title": "［三稿］",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/03/23.htm",
+              "pages": [
+                583,
+                null
+              ]
+            },
+            {
+              "title": "［复信］",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/03/23.htm",
+              "pages": [
+                589,
+                null
+              ]
+            }
+          ],
+          "year_note": "据原页写作说明。"
+        },
+        {
+          "id": "v03-24",
+          "title": "布鲁诺·鲍威尔和原始基督教",
+          "author": "engels",
+          "year": 1882,
+          "pages": [
+            591,
+            null
+          ],
+          "excerpt": false,
+          "editor_title": false,
+          "branch": [
+            "socialism"
+          ],
+          "level": 2,
+          "mia": "https://www.marxists.org/chinese/marx-engels2/03/24.htm",
+          "kind": "work",
+          "sections": [],
+          "year_note": "据原页写作说明。"
+        },
+        {
+          "id": "funeral-speech",
+          "title": "在马克思墓前的讲话",
+          "author": "engels",
+          "year": 1883,
+          "pages": [
+            601,
+            null
+          ],
+          "excerpt": false,
+          "editor_title": true,
+          "branch": [
+            "socialism"
+          ],
+          "level": 1,
+          "mia": "https://www.marxists.org/chinese/marx-engels2/03/25.htm",
+          "kind": "work",
+          "sections": [],
+          "year_note": "据原页写作说明。",
+          "guide": "funeral-speech"
+        },
+        {
+          "id": "v03-26",
+          "title": "关于巴黎公社的发言记录",
+          "author": "marx",
+          "year": null,
+          "pages": [
+            607,
+            null
+          ],
+          "excerpt": false,
+          "editor_title": true,
+          "branch": [
+            "socialism"
+          ],
+          "level": 2,
+          "mia": "https://www.marxists.org/chinese/marx-engels2/03/26.htm",
+          "kind": "appendix",
+          "sections": [],
+          "year_note": "原页另有发表或版本日期，未据此倒填写作年份。"
+        },
+        {
+          "id": "v03-27",
+          "title": "同《世界报》记者谈话的记录",
+          "author": "marx",
+          "year": null,
+          "pages": [
+            609,
+            null
+          ],
+          "excerpt": false,
+          "editor_title": true,
+          "branch": [
+            "socialism"
+          ],
+          "level": 2,
+          "mia": "https://www.marxists.org/chinese/marx-engels2/03/27.htm",
+          "kind": "appendix",
+          "sections": [],
+          "year_note": "原页另有发表或版本日期，未据此倒填写作年份。"
+        },
+        {
+          "id": "v03-28",
+          "title": "纪念国际成立七周年",
+          "author": "marx",
+          "year": null,
+          "pages": [
+            618,
+            null
+          ],
+          "excerpt": false,
+          "editor_title": true,
+          "branch": [
+            "socialism"
+          ],
+          "level": 2,
+          "mia": "https://www.marxists.org/chinese/marx-engels2/03/28.htm",
+          "kind": "appendix",
+          "sections": [],
+          "year_note": "原页另有发表或版本日期，未据此倒填写作年份。"
+        }
+      ]
+    },
+    {
+      "no": 4,
+      "title": "第4卷",
+      "span": "恩格斯1884—1895年著作",
+      "summary": "恩格斯晚年关于历史、国家与工人运动的著作；25篇与1篇附录。",
+      "mia": "https://www.marxists.org/chinese/marx-engels2/04/index.htm",
+      "works": [
+        {
+          "id": "v04-01",
+          "title": "马克思和《新莱茵报》（1848―1849年）",
+          "author": "engels",
+          "year": 1884,
+          "pages": [
+            3,
+            null
+          ],
+          "excerpt": false,
+          "editor_title": false,
+          "branch": [
+            "socialism"
+          ],
+          "level": 2,
+          "mia": "https://www.marxists.org/chinese/marx-engels2/04/01.htm",
+          "kind": "work",
+          "sections": [],
+          "year_note": "据原页写作说明。"
+        },
+        {
+          "id": "v04-02",
+          "title": "家庭、私有制和国家的起源",
+          "author": "engels",
+          "year": null,
+          "pages": [
+            13,
+            null
+          ],
+          "excerpt": false,
+          "editor_title": false,
+          "branch": [
+            "socialism"
+          ],
+          "level": 2,
+          "mia": "https://www.marxists.org/chinese/marx-engels2/04/02.htm",
+          "kind": "work",
+          "sections": [
+            {
+              "title": "1884年第一版序言",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/04/02.htm",
+              "pages": [
+                15,
+                null
+              ]
+            },
+            {
+              "title": "1891年第四版序言",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/04/02.htm",
+              "pages": [
+                18,
+                null
+              ]
+            },
+            {
+              "title": "家庭、私有制和国家的起源",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/04/02.htm",
+              "pages": [
+                32,
+                null
+              ]
+            },
+            {
+              "title": "一 史前各文化阶段",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/04/02.htm",
+              "pages": [
+                32,
+                null
+              ]
+            },
+            {
+              "title": "1．蒙昧时代",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/04/02.htm",
+              "pages": [
+                33,
+                null
+              ]
+            },
+            {
+              "title": "2．野蛮时代",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/04/02.htm",
+              "pages": [
+                34,
+                null
+              ]
+            },
+            {
+              "title": "二 家庭",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/04/02.htm",
+              "pages": [
+                39,
+                null
+              ]
+            },
+            {
+              "title": "三 易洛魁人的氏族",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/04/02.htm",
+              "pages": [
+                98,
+                null
+              ]
+            },
+            {
+              "title": "四 希腊人的氏族",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/04/02.htm",
+              "pages": [
+                114,
+                null
+              ]
+            },
+            {
+              "title": "五 雅典国家的产生",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/04/02.htm",
+              "pages": [
+                126,
+                null
+              ]
+            },
+            {
+              "title": "六 罗马的氏族和国家",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/04/02.htm",
+              "pages": [
+                137,
+                null
+              ]
+            },
+            {
+              "title": "七 凯尔特人和德意志人的氏族",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/04/02.htm",
+              "pages": [
+                148,
+                null
+              ]
+            },
+            {
+              "title": "八 德意志人国家的形成",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/04/02.htm",
+              "pages": [
+                165,
+                null
+              ]
+            },
+            {
+              "title": "九 野蛮时代和文明时代",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/04/02.htm",
+              "pages": [
+                177,
+                null
+              ]
+            }
+          ],
+          "year_note": "原页含跨年写作或多个版本的日期，按各节区分，不合并为单一年份。"
+        },
+        {
+          "id": "v04-03",
+          "title": "马克思和洛贝尔图斯",
+          "author": "engels",
+          "year": 1884,
+          "pages": [
+            199,
+            null
+          ],
+          "excerpt": false,
+          "editor_title": false,
+          "branch": [
+            "socialism"
+          ],
+          "level": 2,
+          "mia": "https://www.marxists.org/chinese/marx-engels2/04/03.htm",
+          "kind": "work",
+          "sections": [],
+          "year_note": "据原页写作说明。"
+        },
+        {
+          "id": "v04-04",
+          "title": "论封建制度的瓦解和民族国家的产生",
+          "author": "engels",
+          "year": 1884,
+          "pages": [
+            215,
+            null
+          ],
+          "excerpt": false,
+          "editor_title": true,
+          "branch": [
+            "philosophy",
+            "socialism"
+          ],
+          "level": 2,
+          "mia": "https://www.marxists.org/chinese/marx-engels2/04/04.htm",
+          "kind": "work",
+          "sections": [],
+          "year_note": "据原页写作说明。"
+        },
+        {
+          "id": "v04-05",
+          "title": "关于共产主义者同盟的历史",
+          "author": "engels",
+          "year": 1885,
+          "pages": [
+            226,
+            null
+          ],
+          "excerpt": false,
+          "editor_title": false,
+          "branch": [
+            "socialism"
+          ],
+          "level": 2,
+          "mia": "https://www.marxists.org/chinese/marx-engels2/04/05.htm",
+          "kind": "work",
+          "sections": [],
+          "year_note": "据原页写作说明。"
+        },
+        {
+          "id": "v04-06",
+          "title": "关于普鲁士农民的历史",
+          "author": "engels",
+          "year": 1885,
+          "pages": [
+            247,
+            null
+          ],
+          "excerpt": false,
+          "editor_title": false,
+          "branch": [
+            "socialism"
+          ],
+          "level": 2,
+          "mia": "https://www.marxists.org/chinese/marx-engels2/04/06.htm",
+          "kind": "work",
+          "sections": [],
+          "year_note": "据原页写作说明。"
+        },
+        {
+          "id": "v04-07",
+          "title": "路德维希·费尔巴哈和德国古典哲学的终结",
+          "author": "engels",
+          "year": 1886,
+          "pages": [
+            261,
+            null
+          ],
+          "excerpt": false,
+          "editor_title": false,
+          "branch": [
+            "philosophy",
+            "socialism"
+          ],
+          "level": 2,
+          "mia": "https://www.marxists.org/chinese/marx-engels2/04/07.htm",
+          "kind": "work",
+          "sections": [
+            {
+              "title": "1888年单行本序言",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/04/07.htm",
+              "pages": [
+                265,
+                null
+              ]
+            },
+            {
+              "title": "路德维希·费尔巴哈和德国古典哲学的终结",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/04/07.htm",
+              "pages": [
+                267,
+                null
+              ]
+            },
+            {
+              "title": "一",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/04/07.htm",
+              "pages": [
+                267,
+                null
+              ]
+            },
+            {
+              "title": "二",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/04/07.htm",
+              "pages": [
+                277,
+                null
+              ]
+            },
+            {
+              "title": "三",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/04/07.htm",
+              "pages": [
+                287,
+                null
+              ]
+            },
+            {
+              "title": "四",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/04/07.htm",
+              "pages": [
+                296,
+                null
+              ]
+            }
+          ],
+          "year_note": "正文写于1886年；1888年单行本序言另列。原页一处序言日期有复制疑误。"
+        },
+        {
+          "id": "v04-08",
+          "title": "纪念巴黎公社十五周年",
+          "author": "engels",
+          "year": 1886,
+          "pages": [
+            314,
+            null
+          ],
+          "excerpt": false,
+          "editor_title": true,
+          "branch": [
+            "socialism"
+          ],
+          "level": 2,
+          "mia": "https://www.marxists.org/chinese/marx-engels2/04/08.htm",
+          "kind": "work",
+          "sections": [],
+          "year_note": "据原页写作说明。"
+        },
+        {
+          "id": "v04-09",
+          "title": "美国工人运动",
+          "author": "engels",
+          "year": 1887,
+          "pages": [
+            316,
+            null
+          ],
+          "excerpt": false,
+          "editor_title": false,
+          "branch": [
+            "socialism"
+          ],
+          "level": 2,
+          "mia": "https://www.marxists.org/chinese/marx-engels2/04/09.htm",
+          "kind": "work",
+          "sections": [],
+          "year_note": "原为1887年美国版《英国工人阶级状况》序言，同年以此题发表。"
+        },
+        {
+          "id": "v04-10",
+          "title": "波克罕《纪念1806―1807年德意志极端爱国主义者》一书引言",
+          "author": "engels",
+          "year": 1887,
+          "pages": [
+            326,
+            null
+          ],
+          "excerpt": false,
+          "editor_title": false,
+          "branch": [
+            "socialism"
+          ],
+          "level": 2,
+          "mia": "https://www.marxists.org/chinese/marx-engels2/04/10.htm",
+          "kind": "work",
+          "sections": [],
+          "year_note": "据原页写作说明。"
+        },
+        {
+          "id": "v04-11",
+          "title": "保护关税制度和自由贸易",
+          "author": "engels",
+          "year": 1888,
+          "pages": [
+            333,
+            null
+          ],
+          "excerpt": false,
+          "editor_title": false,
+          "branch": [
+            "socialism"
+          ],
+          "level": 2,
+          "mia": "https://www.marxists.org/chinese/marx-engels2/04/11.htm",
+          "kind": "work",
+          "sections": [],
+          "year_note": "据原页写作说明。"
+        },
+        {
+          "id": "v04-12",
+          "title": "俄国沙皇政府的对外政策",
+          "author": "engels",
+          "year": null,
+          "pages": [
+            351,
+            null
+          ],
+          "excerpt": false,
+          "editor_title": false,
+          "branch": [
+            "socialism"
+          ],
+          "level": 2,
+          "mia": "https://www.marxists.org/chinese/marx-engels2/04/12.htm",
+          "kind": "work",
+          "sections": [
+            {
+              "title": "一",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/04/12.htm",
+              "pages": [
+                353,
+                null
+              ]
+            },
+            {
+              "title": "二",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/04/12.htm",
+              "pages": [
+                363,
+                null
+              ]
+            },
+            {
+              "title": "三",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/04/12.htm",
+              "pages": [
+                372,
+                null
+              ]
+            }
+          ],
+          "year_note": "原页含跨年写作或多个版本的日期，按各节区分，不合并为单一年份。"
+        },
+        {
+          "id": "v04-13",
+          "title": "给《萨克森工人报》编辑部的答复",
+          "author": "engels",
+          "year": 1890,
+          "pages": [
+            395,
+            null
+          ],
+          "excerpt": false,
+          "editor_title": false,
+          "branch": [
+            "socialism"
+          ],
+          "level": 2,
+          "mia": "https://www.marxists.org/chinese/marx-engels2/04/13.htm",
+          "kind": "work",
+          "sections": [],
+          "year_note": "据原页写作说明。"
+        },
+        {
+          "id": "v04-14",
+          "title": "给《社会民主党人报》读者的告别信",
+          "author": "engels",
+          "year": 1890,
+          "pages": [
+            398,
+            null
+          ],
+          "excerpt": false,
+          "editor_title": true,
+          "branch": [
+            "socialism"
+          ],
+          "level": 2,
+          "mia": "https://www.marxists.org/chinese/marx-engels2/04/14.htm",
+          "kind": "work",
+          "sections": [],
+          "year_note": "据原页写作说明。"
+        },
+        {
+          "id": "v04-15",
+          "title": "1891年社会民主党纲领草案批判",
+          "author": "engels",
+          "year": 1891,
+          "pages": [
+            403,
+            null
+          ],
+          "excerpt": false,
+          "editor_title": false,
+          "branch": [
+            "socialism"
+          ],
+          "level": 2,
+          "mia": "https://www.marxists.org/chinese/marx-engels2/04/15.htm",
+          "kind": "work",
+          "sections": [
+            {
+              "title": "一 绪论共十段",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/04/15.htm",
+              "pages": [
+                407,
+                null
+              ]
+            },
+            {
+              "title": "二 政治要求",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/04/15.htm",
+              "pages": [
+                413,
+                null
+              ]
+            },
+            {
+              "title": "三 经济要求",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/04/15.htm",
+              "pages": [
+                419,
+                null
+              ]
+            },
+            {
+              "title": "第一部分 附件",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/04/15.htm",
+              "pages": [
+                420,
+                null
+              ]
+            }
+          ],
+          "year_note": "据原页写作说明。"
+        },
+        {
+          "id": "v04-16",
+          "title": "德国的社会主义",
+          "author": "engels",
+          "year": null,
+          "pages": [
+            423,
+            null
+          ],
+          "excerpt": false,
+          "editor_title": false,
+          "branch": [
+            "socialism"
+          ],
+          "level": 2,
+          "mia": "https://www.marxists.org/chinese/marx-engels2/04/16.htm",
+          "kind": "work",
+          "sections": [
+            {
+              "title": "一",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/04/16.htm",
+              "pages": [
+                426,
+                null
+              ]
+            },
+            {
+              "title": "二",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/04/16.htm",
+              "pages": [
+                431,
+                null
+              ]
+            }
+          ],
+          "year_note": "原页含跨年写作或多个版本的日期，按各节区分，不合并为单一年份。"
+        },
+        {
+          "id": "v04-17",
+          "title": "答可尊敬的乔万尼·博维奥",
+          "author": "engels",
+          "year": 1892,
+          "pages": [
+            442,
+            null
+          ],
+          "excerpt": false,
+          "editor_title": false,
+          "branch": [
+            "socialism"
+          ],
+          "level": 2,
+          "mia": "https://www.marxists.org/chinese/marx-engels2/04/17.htm",
+          "kind": "work",
+          "sections": [],
+          "year_note": "据原页写作说明。"
+        },
+        {
+          "id": "v04-18",
+          "title": "致国际社会主义者大学生代表大会",
+          "author": "engels",
+          "year": 1893,
+          "pages": [
+            446,
+            null
+          ],
+          "excerpt": false,
+          "editor_title": true,
+          "branch": [
+            "socialism"
+          ],
+          "level": 2,
+          "mia": "https://www.marxists.org/chinese/marx-engels2/04/18.htm",
+          "kind": "work",
+          "sections": [],
+          "year_note": "据原页写作说明。"
+        },
+        {
+          "id": "v04-19",
+          "title": "《〈人民国家报〉国际问题论文集（1871―1875）》序",
+          "author": "engels",
+          "year": 1894,
+          "pages": [
+            447,
+            null
+          ],
+          "excerpt": false,
+          "editor_title": false,
+          "branch": [
+            "socialism"
+          ],
+          "level": 2,
+          "mia": "https://www.marxists.org/chinese/marx-engels2/04/19.htm",
+          "kind": "work",
+          "sections": [],
+          "year_note": "据原页写作说明。"
+        },
+        {
+          "id": "v04-20",
+          "title": "《论俄国的社会问题》跋",
+          "author": "engels",
+          "year": 1894,
+          "pages": [
+            451,
+            null
+          ],
+          "excerpt": false,
+          "editor_title": false,
+          "branch": [
+            "socialism"
+          ],
+          "level": 2,
+          "mia": "https://www.marxists.org/chinese/marx-engels2/04/20.htm",
+          "kind": "work",
+          "sections": [],
+          "year_note": "据原页写作说明。"
+        },
+        {
+          "id": "v04-21",
+          "title": "未来的意大利革命和社会党",
+          "author": "engels",
+          "year": 1894,
+          "pages": [
+            468,
+            null
+          ],
+          "excerpt": false,
+          "editor_title": true,
+          "branch": [
+            "socialism"
+          ],
+          "level": 2,
+          "mia": "https://www.marxists.org/chinese/marx-engels2/04/21.htm",
+          "kind": "work",
+          "sections": [],
+          "year_note": "据原页写作说明。"
+        },
+        {
+          "id": "v04-22",
+          "title": "论原始基督教的历史",
+          "author": "engels",
+          "year": 1894,
+          "pages": [
+            473,
+            null
+          ],
+          "excerpt": false,
+          "editor_title": false,
+          "branch": [
+            "socialism"
+          ],
+          "level": 2,
+          "mia": "https://www.marxists.org/chinese/marx-engels2/04/22.htm",
+          "kind": "work",
+          "sections": [
+            {
+              "title": "一",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/04/22.htm",
+              "pages": [
+                475,
+                null
+              ]
+            },
+            {
+              "title": "二",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/04/22.htm",
+              "pages": [
+                482,
+                null
+              ]
+            },
+            {
+              "title": "三",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/04/22.htm",
+              "pages": [
+                492,
+                null
+              ]
+            }
+          ],
+          "year_note": "据原页写作说明。"
+        },
+        {
+          "id": "v04-23",
+          "title": "国际社会主义和意大利社会主义",
+          "author": "engels",
+          "year": 1894,
+          "pages": [
+            504,
+            null
+          ],
+          "excerpt": false,
+          "editor_title": false,
+          "branch": [
+            "socialism"
+          ],
+          "level": 2,
+          "mia": "https://www.marxists.org/chinese/marx-engels2/04/23.htm",
+          "kind": "work",
+          "sections": [],
+          "year_note": "据原页写作说明。"
+        },
+        {
+          "id": "v04-24",
+          "title": "法德农民问题",
+          "author": "engels",
+          "year": 1894,
+          "pages": [
+            507,
+            null
+          ],
+          "excerpt": false,
+          "editor_title": false,
+          "branch": [
+            "socialism"
+          ],
+          "level": 2,
+          "mia": "https://www.marxists.org/chinese/marx-engels2/04/24.htm",
+          "kind": "work",
+          "sections": [
+            {
+              "title": "一",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/04/24.htm",
+              "pages": [
+                511,
+                null
+              ]
+            },
+            {
+              "title": "二",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/04/24.htm",
+              "pages": [
+                523,
+                null
+              ]
+            }
+          ],
+          "year_note": "据原页写作说明。"
+        },
+        {
+          "id": "v04-25",
+          "title": "卡·马克思《1848年至1850年的法兰西阶级斗争》一书导言",
+          "author": "engels",
+          "year": 1895,
+          "pages": [
+            532,
+            null
+          ],
+          "excerpt": false,
+          "editor_title": false,
+          "branch": [
+            "socialism"
+          ],
+          "level": 2,
+          "mia": "https://www.marxists.org/chinese/marx-engels2/04/25.htm",
+          "kind": "work",
+          "sections": [],
+          "year_note": "据原页写作说明。"
+        },
+        {
+          "id": "v04-26",
+          "title": "弗·恩格斯1893年5月11日对法国《费加罗报》记者的谈话",
+          "author": "engels",
+          "year": null,
+          "pages": [
+            557,
+            null
+          ],
+          "excerpt": false,
+          "editor_title": true,
+          "branch": [
+            "socialism"
+          ],
+          "level": 2,
+          "mia": "https://www.marxists.org/chinese/marx-engels2/04/26.htm",
+          "kind": "appendix",
+          "sections": [],
+          "year_note": "原页另有发表或版本日期，未据此倒填写作年份。"
+        }
+      ]
+    },
+    {
+      "no": 5,
+      "title": "第5卷",
+      "span": "马克思《资本论》第一卷",
+      "summary": "《资本论》第一卷：资本的生产过程。在线目录另据1972年中文本。",
+      "mia": "https://www.marxists.org/chinese/marx-engels2/05/index.htm",
+      "works": [
+        {
+          "id": "capital-1",
+          "title": "资本论 第1卷",
+          "author": "marx",
+          "year": null,
+          "pages": null,
+          "excerpt": false,
+          "editor_title": false,
+          "branch": [
+            "economics"
+          ],
+          "level": 3,
+          "mia": "https://www.marxists.org/chinese/marx/capital/index.htm",
+          "kind": "work",
+          "sections": [],
+          "year_note": "德文初版1867年；手稿写作跨多个时期，未以出版年倒填写作年。"
+        }
+      ]
+    },
+    {
+      "no": 6,
+      "title": "第6卷",
+      "span": "马克思《资本论》第二卷",
+      "summary": "《资本论》第二卷：资本的流通过程，三篇21章。",
+      "mia": "https://www.marxists.org/chinese/marx-engels2/06/index.htm",
+      "works": [
+        {
+          "id": "capital-2",
+          "title": "资本论 第2卷",
+          "author": "marx",
+          "year": null,
+          "pages": null,
+          "excerpt": false,
+          "editor_title": false,
+          "branch": [
+            "economics"
+          ],
+          "level": 3,
+          "mia": "https://www.marxists.org/chinese/marx-engels2/06/index.htm",
+          "kind": "work",
+          "sections": [],
+          "year_note": "德文初版1885年；手稿写作跨多个时期，未以出版年倒填写作年。"
+        }
+      ]
+    },
+    {
+      "no": 7,
+      "title": "第7卷",
+      "span": "马克思《资本论》第三卷",
+      "summary": "《资本论》第三卷：资本主义生产的总过程，七篇52章及恩格斯增补。",
+      "mia": "https://www.marxists.org/chinese/marx-engels2/07/index.htm",
+      "works": [
+        {
+          "id": "capital-3",
+          "title": "资本论 第3卷",
+          "author": "marx",
+          "year": null,
+          "pages": null,
+          "excerpt": false,
+          "editor_title": false,
+          "branch": [
+            "economics"
+          ],
+          "level": 3,
+          "mia": "https://www.marxists.org/chinese/marx-engels2/07/index.htm",
+          "kind": "work",
+          "sections": [],
+          "year_note": "德文初版1894年；手稿写作跨多个时期，未以出版年倒填写作年。"
+        }
+      ]
+    },
+    {
+      "no": 8,
+      "title": "第8卷",
+      "span": "马克思《资本论》手稿选编",
+      "summary": "按1857—1858、1861—1863、1863—1865三个手稿时期选编。",
+      "mia": "https://www.marxists.org/chinese/marx-engels2/08/index.htm",
+      "works": [
+        {
+          "id": "v08-01",
+          "title": "1857—1858年经济学手稿摘选",
+          "author": "marx",
+          "year": null,
+          "pages": null,
+          "excerpt": true,
+          "editor_title": false,
+          "branch": [
+            "economics"
+          ],
+          "level": 3,
+          "mia": "https://www.marxists.org/chinese/marx-engels2/08/01.htm",
+          "kind": "work",
+          "sections": [
+            {
+              "title": "导言",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/08/01.htm",
+              "sections": [
+                {
+                  "title": "I．生产、消费、分配、交换（流通）",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/08/02.htm",
+                  "sections": [
+                    {
+                      "title": "1．生 产",
+                      "mia": "https://www.marxists.org/chinese/marx-engels2/08/02.htm"
+                    },
+                    {
+                      "title": "2．生产与分配、交换、消费的一般关系",
+                      "mia": "https://www.marxists.org/chinese/marx-engels2/08/02.htm"
+                    },
+                    {
+                      "title": "（a）［生产和消费］",
+                      "mia": "https://www.marxists.org/chinese/marx-engels2/08/02.htm"
+                    },
+                    {
+                      "title": "（b）［生产和分配］",
+                      "mia": "https://www.marxists.org/chinese/marx-engels2/08/02.htm"
+                    },
+                    {
+                      "title": "（c）最后，交换和流通",
+                      "mia": "https://www.marxists.org/chinese/marx-engels2/08/02.htm"
+                    },
+                    {
+                      "title": "3．政治经济学的方法",
+                      "mia": "https://www.marxists.org/chinese/marx-engels2/08/02.htm"
+                    },
+                    {
+                      "title": "4．生产。生产资料和生产关系。生产关系和交往关系。",
+                      "mia": "https://www.marxists.org/chinese/marx-engels2/08/02.htm"
+                    },
+                    {
+                      "title": "国家形式和意识形式同生产关系和交往关系的关系。",
+                      "mia": "https://www.marxists.org/chinese/marx-engels2/08/02.htm"
+                    },
+                    {
+                      "title": "法的关系。家庭关系",
+                      "mia": "https://www.marxists.org/chinese/marx-engels2/08/02.htm"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "《政治经济学批判（1857—1858年手稿）》摘选",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/08/03.htm",
+              "sections": [
+                {
+                  "title": "［货币的产生和本质］",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/08/03.htm"
+                },
+                {
+                  "title": "［交换价值和社会交换关系的性质］",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/08/04.htm"
+                },
+                {
+                  "title": "［资本的历史使命］",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/08/05.htm"
+                },
+                {
+                  "title": "［劳动和资本在生产过程中的作用］",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/08/06.htm"
+                },
+                {
+                  "title": "［资本的二重倾向：扩大所使用的活劳动和缩小必要劳动］",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/08/07.htm"
+                },
+                {
+                  "title": "［资本主义生产的作用及其界限］",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/08/08.htm"
+                },
+                {
+                  "title": "［异化劳动和资本。资本的再生产和积累。原始积累］",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/08/09.htm"
+                },
+                {
+                  "title": "［资本主义生产以前的各种形式］",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/08/10.htm",
+                  "sections": [
+                    {
+                      "title": "［亚细亚所有制形式］",
+                      "mia": "https://www.marxists.org/chinese/marx-engels2/08/10.htm"
+                    },
+                    {
+                      "title": "［古代的所有制形式］",
+                      "mia": "https://www.marxists.org/chinese/marx-engels2/08/10.htm"
+                    },
+                    {
+                      "title": "［日耳曼的所有制形式］",
+                      "mia": "https://www.marxists.org/chinese/marx-engels2/08/10.htm"
+                    },
+                    {
+                      "title": "［公社制的生产关系的局限性］",
+                      "mia": "https://www.marxists.org/chinese/marx-engels2/08/10.htm"
+                    },
+                    {
+                      "title": "［蒲鲁东对财产的起源问题的错误看法］",
+                      "mia": "https://www.marxists.org/chinese/marx-engels2/08/10.htm"
+                    },
+                    {
+                      "title": "［公社和以公社为基础的所有制解体的原因］",
+                      "mia": "https://www.marxists.org/chinese/marx-engels2/08/10.htm"
+                    },
+                    {
+                      "title": "［资本主义关系的原始形成］",
+                      "mia": "https://www.marxists.org/chinese/marx-engels2/08/10.htm"
+                    }
+                  ]
+                },
+                {
+                  "title": "［资本主义生产和交换的普遍性趋势］",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/08/11.htm"
+                },
+                {
+                  "title": "［剥削社会中的劳动和真正自由的劳动］",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/08/12.htm"
+                },
+                {
+                  "title": "［资本主义社会中的个人自由］",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/08/13.htm"
+                },
+                {
+                  "title": "［机器体系和科学发展以及资本主义劳动过程的变化］",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/08/14.htm"
+                },
+                {
+                  "title": "［资本主义条件下和共产主义条件下的社会生产力］",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/08/15.htm"
+                }
+              ]
+            }
+          ],
+          "year_note": "按原目录手稿时期分组；不把一个时期压成单一年份。"
+        },
+        {
+          "id": "v08-16",
+          "title": "1861—1863年经济学手稿摘选",
+          "author": "marx",
+          "year": null,
+          "pages": null,
+          "excerpt": true,
+          "editor_title": false,
+          "branch": [
+            "economics"
+          ],
+          "level": 3,
+          "mia": "https://www.marxists.org/chinese/marx-engels2/08/16.htm",
+          "kind": "work",
+          "sections": [
+            {
+              "title": "《政治经济学批判（1861—1863年手稿）》摘选",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/08/16.htm",
+              "sections": [
+                {
+                  "title": "［生产劳动和非生产劳动的区分问题］",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/08/16.htm"
+                },
+                {
+                  "title": "［危机问题］",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/08/17.htm"
+                },
+                {
+                  "title": "机器。自然力和科学的应用（蒸汽、电、机械的和化学的因素）",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/08/18.htm",
+                  "sections": [
+                    {
+                      "title": "［资本主义应用机器的前提和后果］",
+                      "mia": "https://www.marxists.org/chinese/marx-engels2/08/18.htm"
+                    },
+                    {
+                      "title": "分工和机械工厂。工具和机器",
+                      "mia": "https://www.marxists.org/chinese/marx-engels2/08/18.htm"
+                    },
+                    {
+                      "title": "［机器。工厂制度。工人状况］",
+                      "mia": "https://www.marxists.org/chinese/marx-engels2/08/18.htm"
+                    },
+                    {
+                      "title": "［机器大生产和农业］",
+                      "mia": "https://www.marxists.org/chinese/marx-engels2/08/18.htm"
+                    }
+                  ]
+                },
+                {
+                  "title": "［劳动对资本的形式上的从属和实际上的从属］",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/08/19.htm",
+                  "sections": [
+                    {
+                      "title": "［（a）劳动对资本的形式上的从属］",
+                      "mia": "https://www.marxists.org/chinese/marx-engels2/08/19.htm"
+                    },
+                    {
+                      "title": "［（b）］劳动对资本的实际上的从属",
+                      "mia": "https://www.marxists.org/chinese/marx-engels2/08/19.htm"
+                    }
+                  ]
+                },
+                {
+                  "title": "［资本的生产性。生产劳动和非生产劳动］",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/08/20.htm",
+                  "sections": [
+                    {
+                      "title": "［（a）资本的生产力是社会劳动生产力的资本主义表现］",
+                      "mia": "https://www.marxists.org/chinese/marx-engels2/08/20.htm"
+                    },
+                    {
+                      "title": "［（b）资本主义生产体系中的生产劳动］",
+                      "mia": "https://www.marxists.org/chinese/marx-engels2/08/20.htm"
+                    },
+                    {
+                      "title": "［（c）在资本同劳动的交换中两个本质上不同的环节］",
+                      "mia": "https://www.marxists.org/chinese/marx-engels2/08/20.htm"
+                    },
+                    {
+                      "title": "［（d）生产劳动对资本的特殊使用价值］",
+                      "mia": "https://www.marxists.org/chinese/marx-engels2/08/20.htm"
+                    },
+                    {
+                      "title": "［（e）非生产劳动是提供服务的劳动。资本主义条件下对服务的购买。",
+                      "mia": "https://www.marxists.org/chinese/marx-engels2/08/20.htm"
+                    },
+                    {
+                      "title": "把资本和劳动的关系看成服务的交换的庸俗观点］",
+                      "mia": "https://www.marxists.org/chinese/marx-engels2/08/20.htm"
+                    },
+                    {
+                      "title": "［（f）资本主义社会中手工业者和农民的劳动］",
+                      "mia": "https://www.marxists.org/chinese/marx-engels2/08/20.htm"
+                    },
+                    {
+                      "title": "［（g）关于生产劳动的补充规定：生产劳动是实现在物质财富中的劳动］",
+                      "mia": "https://www.marxists.org/chinese/marx-engels2/08/20.htm"
+                    },
+                    {
+                      "title": "［（h）非物质生产领域中的资本主义表现］",
+                      "mia": "https://www.marxists.org/chinese/marx-engels2/08/20.htm"
+                    },
+                    {
+                      "title": "［（i）从物质生产总过程的角度看生产劳动问题］",
+                      "mia": "https://www.marxists.org/chinese/marx-engels2/08/20.htm"
+                    },
+                    {
+                      "title": "［（k）运输业是一个物质生产领域。运输业中的生产劳动］",
+                      "mia": "https://www.marxists.org/chinese/marx-engels2/08/20.htm"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "year_note": "按原目录手稿时期分组；不把一个时期压成单一年份。"
+        },
+        {
+          "id": "v08-21",
+          "title": "1863—1865年经济学手稿摘选",
+          "author": "marx",
+          "year": null,
+          "pages": null,
+          "excerpt": true,
+          "editor_title": false,
+          "branch": [
+            "economics"
+          ],
+          "level": 3,
+          "mia": "https://www.marxists.org/chinese/marx-engels2/08/21.htm",
+          "kind": "work",
+          "sections": [
+            {
+              "title": "［第一册］第六章 直接生产过程的结果",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/08/21.htm",
+              "sections": [
+                {
+                  "title": "（1）商品作为资本的产物",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/08/21.htm"
+                },
+                {
+                  "title": "（2）资本主义生产是剩余价值的生产",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/08/22.htm",
+                  "sections": [
+                    {
+                      "title": "劳动对资本的形式上的从属",
+                      "mia": "https://www.marxists.org/chinese/marx-engels2/08/22.htm"
+                    },
+                    {
+                      "title": "劳动对资本的实际上的从属或特殊资本主义生产方式",
+                      "mia": "https://www.marxists.org/chinese/marx-engels2/08/22.htm"
+                    },
+                    {
+                      "title": "〔关于劳动对资本的形式上的从属的补充",
+                      "mia": "https://www.marxists.org/chinese/marx-engels2/08/22.htm"
+                    },
+                    {
+                      "title": "劳动对资本的实际上的从属",
+                      "mia": "https://www.marxists.org/chinese/marx-engels2/08/22.htm"
+                    },
+                    {
+                      "title": "生产劳动和非生产劳动",
+                      "mia": "https://www.marxists.org/chinese/marx-engels2/08/22.htm"
+                    },
+                    {
+                      "title": "总产品和纯产品",
+                      "mia": "https://www.marxists.org/chinese/marx-engels2/08/22.htm"
+                    },
+                    {
+                      "title": "资本的神秘性等等",
+                      "mia": "https://www.marxists.org/chinese/marx-engels2/08/22.htm"
+                    }
+                  ]
+                },
+                {
+                  "title": "（3）［资本主义生产是特殊资本主义生产关系的生产和再生产］",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/08/23.htm"
+                }
+              ]
+            },
+            {
+              "title": "第二册［第I稿］第三章 流通和再生产",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/08/24.htm",
+              "sections": [
+                {
+                  "title": "［（3）固定资本在再生产过程中的作用］",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/08/24.htm"
+                },
+                {
+                  "title": "（5）积累或规模扩大的再生产",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/08/25.htm"
+                },
+                {
+                  "title": "（6）对积累起中介作用的货币流通",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/08/26.htm"
+                },
+                {
+                  "title": "（7）再生产过程的平行性、相继性、上升序列、循环",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/08/27.htm"
+                },
+                {
+                  "title": "（8）必要劳动和剩余劳动（剩余产品）",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/08/28.htm"
+                },
+                {
+                  "title": "（9）再生产过程中的干扰",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/08/29.htm"
+                }
+              ]
+            }
+          ],
+          "year_note": "按原目录手稿时期分组；不把一个时期压成单一年份。"
+        }
+      ]
+    },
+    {
+      "no": 9,
+      "title": "第9卷",
+      "span": "恩格斯《反杜林论》《自然辩证法》",
+      "summary": "《反杜林论》及其附加材料、《自然辩证法》节选。",
+      "mia": "https://www.marxists.org/chinese/marx-engels2/09/index.htm",
+      "works": [
+        {
+          "id": "anti-duhring",
+          "title": "反杜林论",
+          "author": "engels",
+          "year": null,
+          "pages": null,
+          "excerpt": false,
+          "editor_title": false,
+          "branch": [
+            "philosophy",
+            "economics",
+            "socialism"
+          ],
+          "level": 3,
+          "mia": "https://www.marxists.org/chinese/marx-engels2/09/01.htm",
+          "kind": "work",
+          "sections": [
+            {
+              "title": "三个版本的序言",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/09/01.htm",
+              "sections": [
+                {
+                  "title": "一",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/09/01.htm"
+                },
+                {
+                  "title": "二",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/09/01.htm"
+                },
+                {
+                  "title": "三",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/09/01.htm"
+                }
+              ]
+            },
+            {
+              "title": "引论",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/09/02.htm",
+              "sections": [
+                {
+                  "title": "一 概论",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/09/02.htm"
+                },
+                {
+                  "title": "二 杜林先生许下了什么诺言",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/09/02.htm"
+                }
+              ]
+            },
+            {
+              "title": "第一编 哲学",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/09/03.htm",
+              "sections": [
+                {
+                  "title": "三分类。先验主义",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/09/03.htm#3"
+                },
+                {
+                  "title": "四世界模式论",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/09/03.htm#4"
+                },
+                {
+                  "title": "五自然哲学。时间和空间",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/09/03.htm#5"
+                },
+                {
+                  "title": "六自然哲学。天体演化学，物理学，化学",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/09/03.htm#6"
+                },
+                {
+                  "title": "七自然哲学。有机界",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/09/03.htm#7"
+                },
+                {
+                  "title": "八自然哲学。有机界（续完）",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/09/03.htm#8"
+                },
+                {
+                  "title": "九道德和法。永恒真理",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/09/03.htm#9"
+                },
+                {
+                  "title": "十道德和法。平等",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/09/03.htm#10"
+                },
+                {
+                  "title": "十一道德和法。自由和必然",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/09/03.htm#11"
+                },
+                {
+                  "title": "十二辩证法。量和质",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/09/03.htm#12"
+                },
+                {
+                  "title": "十三辩证法。否定的否定",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/09/03.htm#13"
+                },
+                {
+                  "title": "十四结论",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/09/03.htm#14"
+                }
+              ]
+            },
+            {
+              "title": "第二编 政治经济学",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/09/04.htm",
+              "sections": [
+                {
+                  "title": "一对象和方法",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/09/04.htm#1"
+                },
+                {
+                  "title": "二暴力论",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/09/04.htm#2"
+                },
+                {
+                  "title": "三暴力论（续）",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/09/04.htm#3"
+                },
+                {
+                  "title": "四暴力论（续完）",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/09/04.htm#4"
+                },
+                {
+                  "title": "五价值论",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/09/04.htm#5"
+                },
+                {
+                  "title": "六简单劳动和复合劳动",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/09/04.htm#6"
+                },
+                {
+                  "title": "七资本和剩余价值",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/09/04.htm#7"
+                },
+                {
+                  "title": "八资本和剩余价值（续完）",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/09/04.htm#8"
+                },
+                {
+                  "title": "九经济的自然规律。地租",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/09/04.htm#9"
+                },
+                {
+                  "title": "十 《批判史》论述",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/09/04.htm#10"
+                }
+              ]
+            },
+            {
+              "title": "第三编 社会主义",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/09/05.htm",
+              "sections": [
+                {
+                  "title": "一历史",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/09/05.htm#1"
+                },
+                {
+                  "title": "二理论",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/09/05.htm#2"
+                },
+                {
+                  "title": "三生产",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/09/05.htm#3"
+                },
+                {
+                  "title": "四分配",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/09/05.htm#4"
+                },
+                {
+                  "title": "五国家，家庭，教育",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/09/05.htm#5"
+                }
+              ]
+            },
+            {
+              "title": "［《反杜林论》的准备材料］",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/09/06.htm",
+              "sections": [
+                {
+                  "title": "第一部分",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/09/06.htm#1"
+                },
+                {
+                  "title": "第二部分",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/09/06.htm#2"
+                }
+              ]
+            },
+            {
+              "title": "步兵战术及其物质基础",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/09/07.htm"
+            },
+            {
+              "title": "恩格斯在《社会主义从空想到科学的发展》中对《反杜林论》正文所作的补充和修改",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/09/08.htm",
+              "sections": [
+                {
+                  "title": "《引论》第一章",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/09/08.htm"
+                },
+                {
+                  "title": "第三编第一章",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/09/08.htm"
+                },
+                {
+                  "title": "第三编第二章",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/09/08.htm"
+                }
+              ]
+            }
+          ],
+          "year_note": "正文分编写于1876—1878年，首个单行本1878年；后加序言和材料另列。"
+        },
+        {
+          "id": "dialectics-nature",
+          "title": "自然辩证法（节选）",
+          "author": "engels",
+          "year": null,
+          "pages": null,
+          "excerpt": true,
+          "editor_title": false,
+          "branch": [
+            "philosophy",
+            "economics",
+            "socialism"
+          ],
+          "level": 3,
+          "mia": "https://www.marxists.org/chinese/marx-engels2/09/09.htm",
+          "kind": "work",
+          "sections": [
+            {
+              "title": "［1878年的计划］",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/09/09.htm"
+            },
+            {
+              "title": "［历史导论］",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/09/10.htm",
+              "sections": [
+                {
+                  "title": "［历史］",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/09/10.htm"
+                },
+                {
+                  "title": "［导 言］",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/09/10.htm"
+                },
+                {
+                  "title": "［札记和片断］",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/09/10.htm"
+                }
+              ]
+            },
+            {
+              "title": "［黑格尔以来的理论发展进程。哲学和自然科学］",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/09/11.htm",
+              "sections": [
+                {
+                  "title": "《反杜林论》旧序。论辩证法",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/09/11.htm"
+                },
+                {
+                  "title": "神灵世界中的自然研究",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/09/11.htm"
+                },
+                {
+                  "title": "［札记和片断］",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/09/11.htm"
+                }
+              ]
+            },
+            {
+              "title": "［辩证法作为科学］",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/09/12.htm",
+              "sections": [
+                {
+                  "title": "辩证法",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/09/12.htm"
+                },
+                {
+                  "title": "［札记和片断］",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/09/12.htm"
+                }
+              ]
+            },
+            {
+              "title": "［物质的运动形式以及各门科学的联系］",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/09/13.htm"
+            },
+            {
+              "title": "［各门科学的辩证内容］",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/09/14.htm",
+              "sections": [
+                {
+                  "title": "［运动的基本形式］",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/09/14.htm"
+                },
+                {
+                  "title": "［札记和片断］",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/09/14.htm"
+                },
+                {
+                  "title": "［数学］",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/09/14.htm"
+                },
+                {
+                  "title": "［物理学］",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/09/14.htm"
+                },
+                {
+                  "title": "［生物学］",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/09/14.htm"
+                }
+              ]
+            },
+            {
+              "title": "［自然界和社会］",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/09/15.htm",
+              "sections": [
+                {
+                  "title": "劳动在从猿到人的转变中的作用",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/09/15.htm"
+                }
+              ]
+            }
+          ],
+          "year_note": "手稿写于1873—1882年；此卷收录节选。"
+        }
+      ]
+    },
+    {
+      "no": 10,
+      "title": "第10卷",
+      "span": "马克思恩格斯书信选编",
+      "summary": "280封书信，按原目录年份编排；附生平大事年表。",
+      "mia": "https://www.marxists.org/chinese/marx-engels2/10/index.htm",
+      "works": [],
+      "letters": [
+        {
+          "no": 1,
+          "year": 1842,
+          "title": "马克思致阿尔诺德·卢格",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/001.htm"
+        },
+        {
+          "no": 2,
+          "year": 1843,
+          "title": "马克思致阿尔诺德·卢格",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/002.htm"
+        },
+        {
+          "no": 3,
+          "year": 1843,
+          "title": "马克思致阿尔诺德·卢格",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/003.htm"
+        },
+        {
+          "no": 4,
+          "year": 1843,
+          "title": "马克思致路德维希·费尔巴哈",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/004.htm"
+        },
+        {
+          "no": 5,
+          "year": 1844,
+          "title": "马克思致路德维希·费尔巴哈",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/005.htm"
+        },
+        {
+          "no": 6,
+          "year": 1844,
+          "title": "恩格斯致马克思",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/006.htm"
+        },
+        {
+          "no": 7,
+          "year": 1844,
+          "title": "恩格斯致马克思",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/007.htm"
+        },
+        {
+          "no": 8,
+          "year": 1845,
+          "title": "恩格斯致马克思",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/008.htm"
+        },
+        {
+          "no": 9,
+          "year": 1846,
+          "title": "马克思致皮埃尔·约瑟夫·蒲鲁东",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/009.htm"
+        },
+        {
+          "no": 10,
+          "year": 1846,
+          "title": "恩格斯致布鲁塞尔共产主义通讯委员会",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/010.htm"
+        },
+        {
+          "no": 11,
+          "year": 1846,
+          "title": "恩格斯致马克思",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/011.htm"
+        },
+        {
+          "no": 12,
+          "year": 1846,
+          "title": "恩格斯致布鲁塞尔共产主义通讯委员会",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/012.htm"
+        },
+        {
+          "no": 13,
+          "year": 1846,
+          "title": "马克思致帕维尔·瓦西里耶维奇·安年科夫",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/013.htm"
+        },
+        {
+          "no": 14,
+          "year": 1847,
+          "title": "恩格斯致马克思",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/014.htm"
+        },
+        {
+          "no": 15,
+          "year": 1847,
+          "title": "恩格斯致马克思",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/015.htm"
+        },
+        {
+          "no": 16,
+          "year": 1848,
+          "title": "恩格斯致埃米尔·布兰克",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/016.htm"
+        },
+        {
+          "no": 17,
+          "year": 1849,
+          "title": "恩格斯致燕妮·马克思",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/017.htm"
+        },
+        {
+          "no": 18,
+          "year": 1849,
+          "title": "马克思致约瑟夫·魏德迈",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/018.htm"
+        },
+        {
+          "no": 19,
+          "year": 1851,
+          "title": "马克思致恩格斯",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/019.htm"
+        },
+        {
+          "no": 20,
+          "year": 1851,
+          "title": "恩格斯致马克思",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/020.htm"
+        },
+        {
+          "no": 21,
+          "year": 1851,
+          "title": "马克思致恩格斯",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/021.htm"
+        },
+        {
+          "no": 22,
+          "year": 1851,
+          "title": "恩格斯致马克思",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/022.htm"
+        },
+        {
+          "no": 23,
+          "year": 1851,
+          "title": "恩格斯致约瑟夫·魏德迈",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/023.htm"
+        },
+        {
+          "no": 24,
+          "year": 1851,
+          "title": "恩格斯致马克思",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/024.htm"
+        },
+        {
+          "no": 25,
+          "year": 1851,
+          "title": "恩格斯致马克思",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/025.htm"
+        },
+        {
+          "no": 26,
+          "year": 1851,
+          "title": "马克思致恩格斯",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/026.htm"
+        },
+        {
+          "no": 27,
+          "year": 1851,
+          "title": "恩格斯致马克思",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/027.htm"
+        },
+        {
+          "no": 28,
+          "year": 1851,
+          "title": "马克思致约瑟夫·魏德迈",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/028.htm"
+        },
+        {
+          "no": 29,
+          "year": 1851,
+          "title": "恩格斯致马克思",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/029.htm"
+        },
+        {
+          "no": 30,
+          "year": 1851,
+          "title": "恩格斯致马克思",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/030.htm"
+        },
+        {
+          "no": 31,
+          "year": 1851,
+          "title": "恩格斯致马克思",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/031.htm"
+        },
+        {
+          "no": 32,
+          "year": 1852,
+          "title": "马克思致约瑟夫·魏德迈",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/032.htm"
+        },
+        {
+          "no": 33,
+          "year": 1852,
+          "title": "恩格斯致马克思",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/033.htm"
+        },
+        {
+          "no": 34,
+          "year": 1853,
+          "title": "恩格斯致约瑟夫·魏德迈",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/034.htm"
+        },
+        {
+          "no": 35,
+          "year": 1853,
+          "title": "马克思致恩格斯",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/035.htm"
+        },
+        {
+          "no": 36,
+          "year": 1853,
+          "title": "恩格斯致马克思",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/036.htm"
+        },
+        {
+          "no": 37,
+          "year": 1853,
+          "title": "马克思致恩格斯",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/037.htm"
+        },
+        {
+          "no": 38,
+          "year": 1853,
+          "title": "马克思致阿道夫·克路斯",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/038.htm"
+        },
+        {
+          "no": 39,
+          "year": 1853,
+          "title": "马克思致阿道夫·克路斯",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/039.htm"
+        },
+        {
+          "no": 40,
+          "year": 1854,
+          "title": "恩格斯致亨利·约翰·林肯",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/040.htm"
+        },
+        {
+          "no": 41,
+          "year": 1855,
+          "title": "马克思致恩格斯",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/041.htm"
+        },
+        {
+          "no": 42,
+          "year": 1856,
+          "title": "马克思致恩格斯",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/042.htm"
+        },
+        {
+          "no": 43,
+          "year": 1856,
+          "title": "恩格斯致马克思",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/043.htm"
+        },
+        {
+          "no": 44,
+          "year": 1857,
+          "title": "马克思致恩格斯",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/044.htm"
+        },
+        {
+          "no": 45,
+          "year": 1857,
+          "title": "马克思致恩格斯",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/045.htm"
+        },
+        {
+          "no": 46,
+          "year": 1857,
+          "title": "马克思致恩格斯",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/046.htm"
+        },
+        {
+          "no": 47,
+          "year": 1858,
+          "title": "马克思致恩格斯",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/047.htm"
+        },
+        {
+          "no": 48,
+          "year": 1858,
+          "title": "马克思致恩格斯",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/048.htm"
+        },
+        {
+          "no": 49,
+          "year": 1858,
+          "title": "马克思致斐迪南·拉萨尔",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/049.htm"
+        },
+        {
+          "no": 50,
+          "year": 1858,
+          "title": "马克思致恩格斯",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/050.htm"
+        },
+        {
+          "no": 51,
+          "year": 1858,
+          "title": "恩格斯致马克思",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/051.htm"
+        },
+        {
+          "no": 52,
+          "year": 1858,
+          "title": "马克思致恩格斯",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/052.htm"
+        },
+        {
+          "no": 53,
+          "year": 1858,
+          "title": "马克思致恩格斯",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/053.htm"
+        },
+        {
+          "no": 54,
+          "year": 1858,
+          "title": "恩格斯致马克思",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/054.htm"
+        },
+        {
+          "no": 55,
+          "year": 1858,
+          "title": "恩格斯致马克思",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/055.htm"
+        },
+        {
+          "no": 56,
+          "year": 1858,
+          "title": "马克思致恩格斯",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/056.htm"
+        },
+        {
+          "no": 57,
+          "year": 1858,
+          "title": "马克思致斐迪南·拉萨尔",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/057.htm"
+        },
+        {
+          "no": 58,
+          "year": 1859,
+          "title": "马克思致斐迪南·拉萨尔",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/058.htm"
+        },
+        {
+          "no": 59,
+          "year": 1859,
+          "title": "恩格斯致斐迪南·拉萨尔",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/059.htm"
+        },
+        {
+          "no": 60,
+          "year": 1859,
+          "title": "马克思致恩格斯",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/060.htm"
+        },
+        {
+          "no": 61,
+          "year": 1861,
+          "title": "马克思致斐迪南·拉萨尔",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/061.htm"
+        },
+        {
+          "no": 62,
+          "year": 1862,
+          "title": "马克思致斐迪南·拉萨尔",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/062.htm"
+        },
+        {
+          "no": 63,
+          "year": 1862,
+          "title": "恩格斯致马克思",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/063.htm"
+        },
+        {
+          "no": 64,
+          "year": 1862,
+          "title": "马克思致恩格斯",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/064.htm"
+        },
+        {
+          "no": 65,
+          "year": 1862,
+          "title": "马克思致恩格斯",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/065.htm"
+        },
+        {
+          "no": 66,
+          "year": 1862,
+          "title": "马克思致恩格斯",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/066.htm"
+        },
+        {
+          "no": 67,
+          "year": 1862,
+          "title": "马克思致恩格斯",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/067.htm"
+        },
+        {
+          "no": 68,
+          "year": 1862,
+          "title": "恩格斯致马克思",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/068.htm"
+        },
+        {
+          "no": 69,
+          "year": 1862,
+          "title": "马克思致路德维希·库格曼",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/069.htm"
+        },
+        {
+          "no": 70,
+          "year": 1863,
+          "title": "马克思致恩格斯",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/070.htm"
+        },
+        {
+          "no": 71,
+          "year": 1863,
+          "title": "马克思致恩格斯",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/071.htm"
+        },
+        {
+          "no": 72,
+          "year": 1863,
+          "title": "恩格斯致马克思",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/072.htm"
+        },
+        {
+          "no": 73,
+          "year": 1863,
+          "title": "马克思致恩格斯",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/073.htm"
+        },
+        {
+          "no": 74,
+          "year": 1864,
+          "title": "马克思致恩格斯",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/074.htm"
+        },
+        {
+          "no": 75,
+          "year": 1865,
+          "title": "马克思致恩格斯",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/075.htm"
+        },
+        {
+          "no": 76,
+          "year": 1865,
+          "title": "马克思致路德维希·库格曼",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/076.htm"
+        },
+        {
+          "no": 77,
+          "year": 1865,
+          "title": "恩格斯致弗里德里希·阿尔伯特·朗格",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/077.htm"
+        },
+        {
+          "no": 78,
+          "year": 1865,
+          "title": "马克思致恩格斯",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/078.htm"
+        },
+        {
+          "no": 79,
+          "year": 1865,
+          "title": "马克思致恩格斯",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/079.htm"
+        },
+        {
+          "no": 80,
+          "year": 1865,
+          "title": "马克思致恩格斯",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/080.htm"
+        },
+        {
+          "no": 81,
+          "year": 1866,
+          "title": "马克思致路德维希·库格曼",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/081.htm"
+        },
+        {
+          "no": 82,
+          "year": 1866,
+          "title": "马克思致恩格斯",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/082.htm"
+        },
+        {
+          "no": 83,
+          "year": 1866,
+          "title": "马克思致恩格斯",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/083.htm"
+        },
+        {
+          "no": 84,
+          "year": 1866,
+          "title": "恩格斯致马克思",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/084.htm"
+        },
+        {
+          "no": 85,
+          "year": 1866,
+          "title": "马克思致恩格斯",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/085.htm"
+        },
+        {
+          "no": 86,
+          "year": 1866,
+          "title": "恩格斯致马克思",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/086.htm"
+        },
+        {
+          "no": 87,
+          "year": 1866,
+          "title": "马克思致路德维希·库格曼",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/087.htm"
+        },
+        {
+          "no": 88,
+          "year": 1866,
+          "title": "马克思致路德维希·库格曼",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/088.htm"
+        },
+        {
+          "no": 89,
+          "year": 1867,
+          "title": "恩格斯致马克思",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/089.htm"
+        },
+        {
+          "no": 90,
+          "year": 1867,
+          "title": "马克思致齐格弗里德·迈耶尔",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/090.htm"
+        },
+        {
+          "no": 91,
+          "year": 1867,
+          "title": "马克思致恩格斯",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/091.htm"
+        },
+        {
+          "no": 92,
+          "year": 1867,
+          "title": "恩格斯致马克思",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/092.htm"
+        },
+        {
+          "no": 93,
+          "year": 1867,
+          "title": "马克思致恩格斯",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/093.htm"
+        },
+        {
+          "no": 94,
+          "year": 1867,
+          "title": "马克思致恩格斯",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/094.htm"
+        },
+        {
+          "no": 95,
+          "year": 1867,
+          "title": "恩格斯致马克思",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/095.htm"
+        },
+        {
+          "no": 96,
+          "year": 1867,
+          "title": "马克思致恩格斯",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/096.htm"
+        },
+        {
+          "no": 97,
+          "year": 1867,
+          "title": "恩格斯致马克思",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/097.htm"
+        },
+        {
+          "no": 98,
+          "year": 1867,
+          "title": "马克思致恩格斯",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/098.htm"
+        },
+        {
+          "no": 99,
+          "year": 1867,
+          "title": "马克思致路德维希·库格曼",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/099.htm"
+        },
+        {
+          "no": 100,
+          "year": 1868,
+          "title": "马克思致恩格斯",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/100.htm"
+        },
+        {
+          "no": 101,
+          "year": 1868,
+          "title": "恩格斯致马克思",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/101.htm"
+        },
+        {
+          "no": 102,
+          "year": 1868,
+          "title": "马克思致路德维希·库格曼",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/102.htm"
+        },
+        {
+          "no": 103,
+          "year": 1868,
+          "title": "马克思致恩格斯",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/103.htm"
+        },
+        {
+          "no": 104,
+          "year": 1868,
+          "title": "马克思致恩格斯",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/104.htm"
+        },
+        {
+          "no": 105,
+          "year": 1868,
+          "title": "马克思致路德维希·库格曼",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/105.htm"
+        },
+        {
+          "no": 106,
+          "year": 1868,
+          "title": "马克思致约瑟夫·狄慈根",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/106.htm"
+        },
+        {
+          "no": 107,
+          "year": 1868,
+          "title": "马克思致路德维希·库格曼",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/107.htm"
+        },
+        {
+          "no": 108,
+          "year": 1868,
+          "title": "马克思致恩格斯",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/108.htm"
+        },
+        {
+          "no": 109,
+          "year": 1868,
+          "title": "马克思致约翰·巴蒂斯特·施韦泽",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/109.htm"
+        },
+        {
+          "no": 110,
+          "year": 1868,
+          "title": "恩格斯致马克思",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/110.htm"
+        },
+        {
+          "no": 111,
+          "year": 1868,
+          "title": "马克思致恩格斯",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/111.htm"
+        },
+        {
+          "no": 112,
+          "year": 1868,
+          "title": "马克思致路德维希·库格曼",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/112.htm"
+        },
+        {
+          "no": 113,
+          "year": 1869,
+          "title": "马克思致恩格斯",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/113.htm"
+        },
+        {
+          "no": 114,
+          "year": 1869,
+          "title": "马克思致恩格斯",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/114.htm"
+        },
+        {
+          "no": 115,
+          "year": 1869,
+          "title": "恩格斯致马克思",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/115.htm"
+        },
+        {
+          "no": 116,
+          "year": 1869,
+          "title": "马克思致恩格斯",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/116.htm"
+        },
+        {
+          "no": 117,
+          "year": 1869,
+          "title": "马克思致路德维希·库格曼",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/117.htm"
+        },
+        {
+          "no": 118,
+          "year": 1869,
+          "title": "马克思致恩格斯",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/118.htm"
+        },
+        {
+          "no": 119,
+          "year": 1870,
+          "title": "马克思致路德维希·库格曼",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/119.htm"
+        },
+        {
+          "no": 120,
+          "year": 1870,
+          "title": "马克思致劳拉·拉法格和保尔·拉法格",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/120.htm"
+        },
+        {
+          "no": 121,
+          "year": 1870,
+          "title": "马克思致齐格弗里德·迈耶尔和奥古斯特·福格特",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/121.htm"
+        },
+        {
+          "no": 122,
+          "year": 1870,
+          "title": "马克思致保尔·拉法格和劳拉·拉法格",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/122.htm"
+        },
+        {
+          "no": 123,
+          "year": 1870,
+          "title": "马克思致路德维希·库格曼",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/123.htm"
+        },
+        {
+          "no": 124,
+          "year": 1870,
+          "title": "恩格斯致马克思",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/124.htm"
+        },
+        {
+          "no": 125,
+          "year": 1870,
+          "title": "恩格斯致马克思",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/125.htm"
+        },
+        {
+          "no": 126,
+          "year": 1870,
+          "title": "马克思致爱德华·斯宾塞·比斯利",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/126.htm"
+        },
+        {
+          "no": 127,
+          "year": 1870,
+          "title": "马克思致路德维希·库格曼",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/127.htm"
+        },
+        {
+          "no": 128,
+          "year": 1871,
+          "title": "马克思致威廉·李卜克内西",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/128.htm"
+        },
+        {
+          "no": 129,
+          "year": 1871,
+          "title": "马克思致路德维希·库格曼",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/129.htm"
+        },
+        {
+          "no": 130,
+          "year": 1871,
+          "title": "马克思致路德维希·库格曼",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/130.htm"
+        },
+        {
+          "no": 131,
+          "year": 1871,
+          "title": "马克思致莱奥·弗兰克尔和路易·欧仁·瓦尔兰",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/131.htm"
+        },
+        {
+          "no": 132,
+          "year": 1871,
+          "title": "马克思致爱德华·斯宾塞·比斯利",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/132.htm"
+        },
+        {
+          "no": 133,
+          "year": 1871,
+          "title": "恩格斯致卡洛·卡菲埃罗",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/133.htm"
+        },
+        {
+          "no": 134,
+          "year": 1871,
+          "title": "恩格斯致伊丽莎白·恩格斯",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/134.htm"
+        },
+        {
+          "no": 135,
+          "year": 1871,
+          "title": "马克思致弗里德里希·波尔特",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/135.htm"
+        },
+        {
+          "no": 136,
+          "year": 1871,
+          "title": "恩格斯致保尔·拉法格",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/136.htm"
+        },
+        {
+          "no": 137,
+          "year": 1872,
+          "title": "恩格斯致卡洛·特尔察吉",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/137.htm"
+        },
+        {
+          "no": 138,
+          "year": 1872,
+          "title": "恩格斯致泰奥多尔·库诺",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/138.htm"
+        },
+        {
+          "no": 139,
+          "year": 1873,
+          "title": "恩格斯致莫里斯·拉沙特尔",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/139.htm"
+        },
+        {
+          "no": 140,
+          "year": 1873,
+          "title": "恩格斯致马克思",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/140.htm"
+        },
+        {
+          "no": 141,
+          "year": 1873,
+          "title": "马克思致恩格斯",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/141.htm"
+        },
+        {
+          "no": 142,
+          "year": 1873,
+          "title": "恩格斯致奥古斯特·倍倍尔",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/142.htm"
+        },
+        {
+          "no": 143,
+          "year": 1873,
+          "title": "恩格斯致路德维希·库格曼",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/143.htm"
+        },
+        {
+          "no": 144,
+          "year": 1873,
+          "title": "马克思致弗里德里希·阿道夫·左尔格",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/144.htm"
+        },
+        {
+          "no": 145,
+          "year": 1874,
+          "title": "恩格斯致弗里德里希·阿道夫·左尔格",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/145.htm"
+        },
+        {
+          "no": 146,
+          "year": 1874,
+          "title": "恩格斯致马克思",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/146.htm"
+        },
+        {
+          "no": 147,
+          "year": 1875,
+          "title": "马克思致玛蒂尔达·贝瑟姆―爱德华兹",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/147.htm"
+        },
+        {
+          "no": 148,
+          "year": 1875,
+          "title": "恩格斯致奥古斯特·倍倍尔",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/148.htm"
+        },
+        {
+          "no": 149,
+          "year": 1875,
+          "title": "恩格斯致奥古斯特·倍倍尔",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/149.htm"
+        },
+        {
+          "no": 150,
+          "year": 1875,
+          "title": "恩格斯致彼得·拉甫罗维奇·拉甫罗夫",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/150.htm"
+        },
+        {
+          "no": 151,
+          "year": 1876,
+          "title": "恩格斯致马克思",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/151.htm"
+        },
+        {
+          "no": 152,
+          "year": 1876,
+          "title": "恩格斯致马克思",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/152.htm"
+        },
+        {
+          "no": 153,
+          "year": 1877,
+          "title": "恩格斯致威廉·李卜克内西",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/153.htm"
+        },
+        {
+          "no": 154,
+          "year": 1877,
+          "title": "马克思致弗里德里希·阿道夫·左尔格",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/154.htm"
+        },
+        {
+          "no": 155,
+          "year": 1877,
+          "title": "马克思致西格蒙德·肖特",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/155.htm"
+        },
+        {
+          "no": 156,
+          "year": 1877,
+          "title": "马克思致威廉·布洛斯",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/156.htm"
+        },
+        {
+          "no": 157,
+          "year": 1878,
+          "title": "恩格斯致威廉·白拉克",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/157.htm"
+        },
+        {
+          "no": 158,
+          "year": 1878,
+          "title": "马克思致尼古拉·弗兰策维奇·丹尼尔逊",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/158.htm"
+        },
+        {
+          "no": 159,
+          "year": 1879,
+          "title": "马克思致马克西姆·马克西莫维奇·柯瓦列夫斯基",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/159.htm"
+        },
+        {
+          "no": 160,
+          "year": 1879,
+          "title": "马克思致尼古拉·弗兰策维奇·丹尼尔逊",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/160.htm"
+        },
+        {
+          "no": 161,
+          "year": 1879,
+          "title": "恩格斯致爱德华·伯恩施坦",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/161.htm"
+        },
+        {
+          "no": 162,
+          "year": 1879,
+          "title": "马克思致卡洛·卡菲埃罗",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/162.htm"
+        },
+        {
+          "no": 163,
+          "year": 1879,
+          "title": "恩格斯致奥古斯特·倍倍尔",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/163.htm"
+        },
+        {
+          "no": 164,
+          "year": 1879,
+          "title": "恩格斯致奥古斯特·倍倍尔",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/164.htm"
+        },
+        {
+          "no": 165,
+          "year": 1879,
+          "title": "恩格斯致奥古斯特·倍倍尔",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/165.htm"
+        },
+        {
+          "no": 166,
+          "year": 1880,
+          "title": "恩格斯致约翰·菲力浦·贝克尔",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/166.htm"
+        },
+        {
+          "no": 167,
+          "year": 1880,
+          "title": "马克思致斐迪南·多梅拉·纽文胡斯",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/167.htm"
+        },
+        {
+          "no": 168,
+          "year": 1880,
+          "title": "恩格斯致敏娜·卡尔洛夫娜·哥尔布诺娃",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/168.htm"
+        },
+        {
+          "no": 169,
+          "year": 1880,
+          "title": "马克思致弗里德里希·阿道夫·左尔格",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/169.htm"
+        },
+        {
+          "no": 170,
+          "year": 1881,
+          "title": "恩格斯致卡尔·考茨基",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/170.htm"
+        },
+        {
+          "no": 171,
+          "year": 1881,
+          "title": "马克思致斐迪南·多梅拉·纽文胡斯",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/171.htm"
+        },
+        {
+          "no": 172,
+          "year": 1881,
+          "title": "恩格斯致爱德华·伯恩施坦",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/172.htm"
+        },
+        {
+          "no": 173,
+          "year": 1881,
+          "title": "马克思致弗里德里希·阿道夫·左尔格",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/173.htm"
+        },
+        {
+          "no": 174,
+          "year": 1881,
+          "title": "恩格斯致马克思",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/174.htm"
+        },
+        {
+          "no": 175,
+          "year": 1881,
+          "title": "恩格斯致爱德华·伯恩施坦",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/175.htm"
+        },
+        {
+          "no": 176,
+          "year": 1882,
+          "title": "恩格斯致爱德华·伯恩施坦",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/176.htm"
+        },
+        {
+          "no": 177,
+          "year": 1882,
+          "title": "恩格斯致卡尔·考茨基",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/177.htm"
+        },
+        {
+          "no": 178,
+          "year": 1882,
+          "title": "恩格斯致约翰·菲力浦·贝克尔",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/178.htm"
+        },
+        {
+          "no": 179,
+          "year": 1882,
+          "title": "恩格斯致奥古斯特·倍倍尔",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/179.htm"
+        },
+        {
+          "no": 180,
+          "year": 1882,
+          "title": "恩格斯致卡尔·考茨基",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/180.htm"
+        },
+        {
+          "no": 181,
+          "year": 1882,
+          "title": "恩格斯致爱德华·伯恩施坦",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/181.htm"
+        },
+        {
+          "no": 182,
+          "year": 1882,
+          "title": "恩格斯致奥古斯特·倍倍尔",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/182.htm"
+        },
+        {
+          "no": 183,
+          "year": 1882,
+          "title": "恩格斯致爱德华·伯恩施坦",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/183.htm"
+        },
+        {
+          "no": 184,
+          "year": 1882,
+          "title": "恩格斯致马克思",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/184.htm"
+        },
+        {
+          "no": 185,
+          "year": 1882,
+          "title": "马克思致恩格斯",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/185.htm"
+        },
+        {
+          "no": 186,
+          "year": 1882,
+          "title": "恩格斯致爱德华·伯恩施坦",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/186.htm"
+        },
+        {
+          "no": 187,
+          "year": 1882,
+          "title": "恩格斯致马克思",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/187.htm"
+        },
+        {
+          "no": 188,
+          "year": 1883,
+          "title": "恩格斯致爱德华·伯恩施坦",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/188.htm"
+        },
+        {
+          "no": 189,
+          "year": 1883,
+          "title": "恩格斯致爱德华·伯恩施坦",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/189.htm"
+        },
+        {
+          "no": 190,
+          "year": 1883,
+          "title": "恩格斯致爱德华·伯恩施坦",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/190.htm"
+        },
+        {
+          "no": 191,
+          "year": 1883,
+          "title": "恩格斯致爱德华·伯恩施坦",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/191.htm"
+        },
+        {
+          "no": 192,
+          "year": 1883,
+          "title": "恩格斯致爱德华·伯恩施坦",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/192.htm"
+        },
+        {
+          "no": 193,
+          "year": 1883,
+          "title": "恩格斯致威廉·李卜克内西",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/193.htm"
+        },
+        {
+          "no": 194,
+          "year": 1883,
+          "title": "恩格斯致弗里德里希·阿道夫·左尔格",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/194.htm"
+        },
+        {
+          "no": 195,
+          "year": 1883,
+          "title": "恩格斯致菲力浦·范派顿",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/195.htm"
+        },
+        {
+          "no": 196,
+          "year": 1883,
+          "title": "恩格斯致奥古斯特·倍倍尔",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/196.htm"
+        },
+        {
+          "no": 197,
+          "year": 1883,
+          "title": "恩格斯致约翰·菲力浦·贝克尔",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/197.htm"
+        },
+        {
+          "no": 198,
+          "year": 1883,
+          "title": "恩格斯致爱德华·伯恩施坦",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/198.htm"
+        },
+        {
+          "no": 199,
+          "year": 1884,
+          "title": "恩格斯致卡尔·考茨基",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/199.htm"
+        },
+        {
+          "no": 200,
+          "year": 1884,
+          "title": "恩格斯致卡尔·考茨基",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/200.htm"
+        },
+        {
+          "no": 201,
+          "year": 1884,
+          "title": "恩格斯致爱德华·伯恩施坦",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/201.htm"
+        },
+        {
+          "no": 202,
+          "year": 1884,
+          "title": "恩格斯致卡尔·考茨基",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/202.htm"
+        },
+        {
+          "no": 203,
+          "year": 1884,
+          "title": "恩格斯致爱德华·伯恩施坦",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/203.htm"
+        },
+        {
+          "no": 204,
+          "year": 1884,
+          "title": "恩格斯致爱德华·伯恩施坦",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/204.htm"
+        },
+        {
+          "no": 205,
+          "year": 1884,
+          "title": "恩格斯致爱德华·伯恩施坦",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/205.htm"
+        },
+        {
+          "no": 206,
+          "year": 1884,
+          "title": "恩格斯致卡尔·考茨基",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/206.htm"
+        },
+        {
+          "no": 207,
+          "year": 1884,
+          "title": "恩格斯致约翰·菲力浦·贝克尔",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/207.htm"
+        },
+        {
+          "no": 208,
+          "year": 1884,
+          "title": "恩格斯致卡尔·考茨基",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/208.htm"
+        },
+        {
+          "no": 209,
+          "year": 1884,
+          "title": "恩格斯致奥古斯特·倍倍尔",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/209.htm"
+        },
+        {
+          "no": 210,
+          "year": 1885,
+          "title": "恩格斯致劳拉·拉法格",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/210.htm"
+        },
+        {
+          "no": 211,
+          "year": 1885,
+          "title": "恩格斯致维拉·伊万诺夫娜·查苏利奇",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/211.htm"
+        },
+        {
+          "no": 212,
+          "year": 1885,
+          "title": "恩格斯致弗里德里希·阿道夫·左尔格",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/212.htm"
+        },
+        {
+          "no": 213,
+          "year": 1885,
+          "title": "恩格斯致盖尔特鲁黛·吉约姆―沙克",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/213.htm"
+        },
+        {
+          "no": 214,
+          "year": 1885,
+          "title": "恩格斯致奥古斯特·倍倍尔",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/214.htm"
+        },
+        {
+          "no": 215,
+          "year": 1885,
+          "title": "恩格斯致尼古拉·弗兰策维奇·丹尼尔逊",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/215.htm"
+        },
+        {
+          "no": 216,
+          "year": 1885,
+          "title": "恩格斯致保尔·拉法格",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/216.htm"
+        },
+        {
+          "no": 217,
+          "year": 1885,
+          "title": "恩格斯致明娜·考茨基",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/217.htm"
+        },
+        {
+          "no": 218,
+          "year": 1886,
+          "title": "恩格斯致奥古斯特·倍倍尔",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/218.htm"
+        },
+        {
+          "no": 219,
+          "year": 1886,
+          "title": "恩格斯致爱德华·皮斯",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/219.htm"
+        },
+        {
+          "no": 220,
+          "year": 1886,
+          "title": "恩格斯致弗洛伦斯·凯利―威士涅威茨基",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/220.htm"
+        },
+        {
+          "no": 221,
+          "year": 1886,
+          "title": "恩格斯致奥古斯特·倍倍尔",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/221.htm"
+        },
+        {
+          "no": 222,
+          "year": 1886,
+          "title": "恩格斯致弗洛伦斯·凯利―威士涅威茨基",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/222.htm"
+        },
+        {
+          "no": 223,
+          "year": 1886,
+          "title": "恩格斯致劳拉―拉法格",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/223.htm"
+        },
+        {
+          "no": 224,
+          "year": 1886,
+          "title": "恩格斯致奥古斯特·倍倍尔",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/224.htm"
+        },
+        {
+          "no": 225,
+          "year": 1886,
+          "title": "恩格斯致弗里德里希·阿道夫·左尔格",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/225.htm"
+        },
+        {
+          "no": 226,
+          "year": 1886,
+          "title": "恩格斯致弗洛伦斯·凯利―威士涅威茨基",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/226.htm"
+        },
+        {
+          "no": 227,
+          "year": 1887,
+          "title": "恩格斯致弗洛伦斯·凯利―威士涅威茨基",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/227.htm"
+        },
+        {
+          "no": 228,
+          "year": 1887,
+          "title": "恩格斯致布鲁诺·舍恩兰克",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/228.htm"
+        },
+        {
+          "no": 229,
+          "year": 1888,
+          "title": "恩格斯致若安·纳杰日杰",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/229.htm"
+        },
+        {
+          "no": 230,
+          "year": 1888,
+          "title": "恩格斯致玛格丽特·哈克奈斯",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/230.htm"
+        },
+        {
+          "no": 231,
+          "year": 1889,
+          "title": "恩格斯致卡尔·考茨基",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/231.htm"
+        },
+        {
+          "no": 232,
+          "year": 1889,
+          "title": "恩格斯致卡尔·考茨基",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/232.htm"
+        },
+        {
+          "no": 233,
+          "year": 1889,
+          "title": "恩格斯致弗里德里希·阿道夫·左尔格",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/233.htm"
+        },
+        {
+          "no": 234,
+          "year": 1889,
+          "title": "恩格斯致格尔松·特里尔",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/234.htm"
+        },
+        {
+          "no": 235,
+          "year": 1890,
+          "title": "恩格斯致威廉·李卜克内西",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/235.htm"
+        },
+        {
+          "no": 236,
+          "year": 1890,
+          "title": "恩格斯致保尔·恩斯特",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/236.htm"
+        },
+        {
+          "no": 237,
+          "year": 1890,
+          "title": "恩格斯致康拉德·施米特",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/237.htm"
+        },
+        {
+          "no": 238,
+          "year": 1890,
+          "title": "恩格斯致奥托·冯·伯尼克",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/238.htm"
+        },
+        {
+          "no": 239,
+          "year": 1890,
+          "title": "恩格斯致保尔·拉法格",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/239.htm"
+        },
+        {
+          "no": 240,
+          "year": 1890,
+          "title": "恩格斯致约瑟夫·布洛赫",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/240.htm"
+        },
+        {
+          "no": 241,
+          "year": 1890,
+          "title": "恩格斯致康拉德·施米特",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/241.htm"
+        },
+        {
+          "no": 242,
+          "year": 1891,
+          "title": "恩格斯致卡尔·考茨基",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/242.htm"
+        },
+        {
+          "no": 243,
+          "year": 1891,
+          "title": "恩格斯致麦克斯·奥本海姆",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/243.htm"
+        },
+        {
+          "no": 244,
+          "year": 1891,
+          "title": "恩格斯致奥古斯特·倍倍尔",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/244.htm"
+        },
+        {
+          "no": 245,
+          "year": 1891,
+          "title": "恩格斯致卡尔·考茨基",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/245.htm"
+        },
+        {
+          "no": 246,
+          "year": 1891,
+          "title": "恩格斯致康拉德·施米特",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/246.htm"
+        },
+        {
+          "no": 247,
+          "year": 1891,
+          "title": "恩格斯致卡尔·考茨基",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/247.htm"
+        },
+        {
+          "no": 248,
+          "year": 1891,
+          "title": "恩格斯致奥古斯特·倍倍尔",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/248.htm"
+        },
+        {
+          "no": 249,
+          "year": 1891,
+          "title": "恩格斯致康拉德·施米特",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/249.htm"
+        },
+        {
+          "no": 250,
+          "year": 1892,
+          "title": "恩格斯致尼古拉·弗兰策维奇·丹尼尔逊",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/250.htm"
+        },
+        {
+          "no": 251,
+          "year": 1892,
+          "title": "恩格斯致维克多·阿德勒",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/251.htm"
+        },
+        {
+          "no": 252,
+          "year": 1892,
+          "title": "恩格斯致卡尔·考茨基",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/252.htm"
+        },
+        {
+          "no": 253,
+          "year": 1892,
+          "title": "恩格斯致尼古拉·弗兰策维奇·丹尼尔逊",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/253.htm"
+        },
+        {
+          "no": 254,
+          "year": 1892,
+          "title": "恩格斯致弗兰茨·梅林",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/254.htm"
+        },
+        {
+          "no": 255,
+          "year": 1892,
+          "title": "恩格斯致弗里德里希·阿道夫·左尔格",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/255.htm"
+        },
+        {
+          "no": 256,
+          "year": 1893,
+          "title": "恩格斯致弗里德里希·阿道夫·左尔格",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/256.htm"
+        },
+        {
+          "no": 257,
+          "year": 1893,
+          "title": "恩格斯致奥古斯特·倍倍尔",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/257.htm"
+        },
+        {
+          "no": 258,
+          "year": 1893,
+          "title": "恩格斯致弗拉基米尔·雅柯夫列维奇·施穆伊洛夫",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/258.htm"
+        },
+        {
+          "no": 259,
+          "year": 1893,
+          "title": "恩格斯致尼古拉·弗兰策维奇·丹尼尔逊",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/259.htm"
+        },
+        {
+          "no": 260,
+          "year": 1893,
+          "title": "恩格斯致弗·维森",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/260.htm"
+        },
+        {
+          "no": 261,
+          "year": 1893,
+          "title": "恩格斯致弗里德里希·阿道夫·左尔格",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/261.htm"
+        },
+        {
+          "no": 262,
+          "year": 1893,
+          "title": "恩格斯致保尔·拉法格",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/262.htm"
+        },
+        {
+          "no": 263,
+          "year": 1893,
+          "title": "恩格斯致弗兰茨·梅林",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/263.htm"
+        },
+        {
+          "no": 264,
+          "year": 1893,
+          "title": "恩格斯致尼古拉·弗兰策维奇·丹尼尔逊",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/264.htm"
+        },
+        {
+          "no": 265,
+          "year": 1894,
+          "title": "恩格斯致朱泽培·卡内帕",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/265.htm"
+        },
+        {
+          "no": 266,
+          "year": 1894,
+          "title": "恩格斯致瓦尔特·博尔吉乌斯",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/266.htm"
+        },
+        {
+          "no": 267,
+          "year": 1894,
+          "title": "恩格斯致保尔·拉法格",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/267.htm"
+        },
+        {
+          "no": 268,
+          "year": 1894,
+          "title": "恩格斯致弗里德里希·阿道夫·左尔格",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/268.htm"
+        },
+        {
+          "no": 269,
+          "year": 1894,
+          "title": "恩格斯致劳拉·拉法格和爱琳娜·马克思―艾威林",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/269.htm"
+        },
+        {
+          "no": 270,
+          "year": 1894,
+          "title": "恩格斯致威廉·李卜克内西",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/270.htm"
+        },
+        {
+          "no": 271,
+          "year": 1894,
+          "title": "恩格斯致劳拉·拉法格",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/271.htm"
+        },
+        {
+          "no": 272,
+          "year": 1895,
+          "title": "恩格斯致保尔·施土姆普弗",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/272.htm"
+        },
+        {
+          "no": 273,
+          "year": 1895,
+          "title": "恩格斯致理查·费舍",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/273.htm"
+        },
+        {
+          "no": 274,
+          "year": 1895,
+          "title": "恩格斯致理查·费舍",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/274.htm"
+        },
+        {
+          "no": 275,
+          "year": 1895,
+          "title": "恩格斯致韦尔纳―桑巴特",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/275.htm"
+        },
+        {
+          "no": 276,
+          "year": 1895,
+          "title": "恩格斯致康拉德·施米特",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/276.htm"
+        },
+        {
+          "no": 277,
+          "year": 1895,
+          "title": "恩格斯致维克多·阿德勒",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/277.htm"
+        },
+        {
+          "no": 278,
+          "year": 1895,
+          "title": "恩格斯致卡尔·考茨基",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/278.htm"
+        },
+        {
+          "no": 279,
+          "year": 1895,
+          "title": "恩格斯致保尔·拉法格",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/279.htm"
+        },
+        {
+          "no": 280,
+          "year": 1895,
+          "title": "恩格斯致理查·费舍",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/10/280.htm"
+        }
+      ],
+      "timeline": {
+        "title": "马克思恩格斯生平大事年表",
+        "mia": "https://www.marxists.org/chinese/marx-engels2/10/287.htm"
+      }
+    }
+  ]
+}

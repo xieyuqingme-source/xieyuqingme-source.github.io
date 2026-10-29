@@ -32,6 +32,10 @@ def copy_corner_fixture(root):
     data = json.loads(quotes.read_text(encoding='utf-8'))
     for item in data['quotes']: item.pop('related',None)
     quotes.write_text(json.dumps(data,ensure_ascii=False),encoding='utf-8')
+    shutil.copytree(ROOT/'marx-engels',root/'marx-engels')
+    # This fixture has two synthetic essays. Real QA targets are verified in
+    # test_marx_engels; no link here should point to an absent real article.
+    (root/'marx-engels/qa-index.json').write_text('{"version":1,"items":[]}',encoding='utf-8')
 
 
 class BilingualBuildContractTests(unittest.TestCase):
@@ -113,6 +117,9 @@ class BilingualBuildContractTests(unittest.TestCase):
             self.assertIn('https://site.test/english/tools/numbers/',sitemap)
             self.assertNotIn('https://site.test/en/english/',sitemap)
             self.assertFalse((output/'en/english').exists())
+            self.assertIn('https://site.test/marx/',sitemap)
+            self.assertNotIn('https://site.test/en/marx/',sitemap)
+            self.assertFalse((output/'en/marx').exists())
             self.assertIn('href="/english/"',english_home)
             rss = ET.parse(output/'articles/feed.xml').findall('./channel/item')
             self.assertEqual(len(rss), 2)

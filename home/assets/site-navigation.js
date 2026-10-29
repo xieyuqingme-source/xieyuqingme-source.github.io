@@ -50,7 +50,15 @@
   const target=document.getElementById(id);if(!target)return false;
   target.scrollIntoView({behavior:'instant',block:'start'});if(focus)focusTarget(target===document.body?document.querySelector('main')||target:target);return true;
  }
- function syncHeader(next){const header=document.querySelector('.site-header'),source=next.querySelector('.site-header');for(const selector of ['.brand','.site-nav','.site-language-switch']){const old=header.querySelector(selector),fresh=source.querySelector(selector);if(old&&fresh)old.replaceWith(fresh);}const skip=document.querySelector('.skip-link'),fresh=next.querySelector('.skip-link');if(skip&&fresh)skip.replaceWith(fresh);document.querySelector('#site-music')?.removeAttribute('open');}
+ function syncHeader(next){
+  const header=document.querySelector('.site-header'),source=next.querySelector('.site-header'),language=source.querySelector('.site-language-switch');
+  for(const selector of ['.brand','.site-nav']){const old=header.querySelector(selector),fresh=source.querySelector(selector);if(old&&fresh)old.replaceWith(fresh);}
+  const oldLanguage=header.querySelector('.site-language-switch');
+  if(!language)oldLanguage?.remove();
+  else if(oldLanguage&&oldLanguage!==language)oldLanguage.replaceWith(language);
+  else if(!oldLanguage)(header.querySelector('.header-tools')||header).prepend(language);
+  const skip=document.querySelector('.skip-link'),fresh=next.querySelector('.skip-link');if(skip&&fresh)skip.replaceWith(fresh);document.querySelector('#site-music')?.removeAttribute('open');
+ }
  async function styles(next){
   const target=[...next.head.querySelectorAll('link[rel="stylesheet"]')],old=[...document.head.querySelectorAll('link[rel="stylesheet"]')],href=node=>new URL(node.getAttribute('href'),location.href).href;
   await Promise.all(target.map(node=>{if(old.some(x=>href(x)===href(node)))return;const item=document.importNode(node,true);item.href=href(node);return new Promise(resolve=>{item.onload=resolve;item.onerror=resolve;native.timeout(resolve,4000);document.head.append(item);});}));

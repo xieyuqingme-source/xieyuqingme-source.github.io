@@ -1,0 +1,1438 @@
+{
+  "version": 1,
+  "columns": [
+    {
+      "id": "terms",
+      "title": "概念的身世",
+      "description": "从原著位置理解概念，再看看它怎样帮助提出问题。"
+    },
+    {
+      "id": "myths",
+      "title": "考据",
+      "description": "找回流行说法的出处、版本和上下文。"
+    }
+  ],
+  "cards": [
+    {
+      "slug": "commodity",
+      "title": "商品一定是买来的东西吗？",
+      "summary": "商品不是一切有用物。第一章分析的是为交换而生产、同时具有使用价值和价值的劳动产品。",
+      "level": 1,
+      "branch": [
+        "economics"
+      ],
+      "tags": [
+        "第一章",
+        "商品"
+      ],
+      "citations": [
+        "c-capital-1-ch01-commodity"
+      ],
+      "related": [
+        "use-value-and-value",
+        "commodity-fetishism"
+      ],
+      "references": [],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true,
+      "column": "terms",
+      "sources": [],
+      "term": "商品"
+    },
+    {
+      "slug": "use-value-and-value",
+      "title": "东西好用，为什么还不能说明它的价值？",
+      "summary": "使用价值回答能满足什么需要，价值涉及商品中凝结的社会劳动；交换价值则是价值的表现形式。",
+      "level": 1,
+      "branch": [
+        "economics"
+      ],
+      "tags": [
+        "第一章",
+        "价值"
+      ],
+      "citations": [
+        "c-capital-1-ch01-usevalue"
+      ],
+      "related": [
+        "commodity",
+        "dual-character-labour",
+        "value-form"
+      ],
+      "references": [
+        {
+          "level": 1,
+          "label": "《资本论》第一卷第3章：货币或商品流通（1972年版在线文本）",
+          "url": "https://www.marxists.org/chinese/marx/capital/03.htm",
+          "checked_on": "2026-10-29"
+        }
+      ],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true,
+      "column": "terms",
+      "sources": [],
+      "term": "使用价值和价值"
+    },
+    {
+      "slug": "dual-character-labour",
+      "title": "一次劳动，为什么要从两个方面看？",
+      "summary": "具体劳动与抽象劳动不是前后两次劳动，而是生产商品的同一劳动的两种规定。",
+      "level": 2,
+      "branch": [
+        "economics"
+      ],
+      "tags": [
+        "第一章",
+        "劳动二重性"
+      ],
+      "citations": [
+        "c-capital-1-ch01-abstract",
+        "c-capital-1-ch01-concrete"
+      ],
+      "related": [
+        "use-value-and-value",
+        "socially-necessary-labour"
+      ],
+      "references": [],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true,
+      "column": "terms",
+      "sources": [],
+      "term": "劳动二重性"
+    },
+    {
+      "slug": "socially-necessary-labour",
+      "title": "做得越慢，商品就越有价值吗？",
+      "summary": "决定价值量的是社会必要劳动时间，不是某个生产者实际耗费的全部时间。",
+      "level": 1,
+      "branch": [
+        "economics"
+      ],
+      "tags": [
+        "第一章",
+        "劳动时间"
+      ],
+      "citations": [
+        "c-capital-1-ch01-social-time"
+      ],
+      "related": [
+        "dual-character-labour",
+        "labour-time-myth"
+      ],
+      "references": [
+        {
+          "level": 1,
+          "label": "《资本论》第一卷第7章：剩余价值率（1972年版在线文本）",
+          "url": "https://www.marxists.org/chinese/marx/capital/07.htm",
+          "checked_on": "2026-10-29"
+        }
+      ],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true,
+      "column": "terms",
+      "sources": [],
+      "term": "社会必要劳动时间"
+    },
+    {
+      "slug": "value-form",
+      "title": "价值看不见，为什么能表现出来？",
+      "summary": "价值形式研究商品怎样借另一商品表现自己的价值，从简单形式逐步展开到货币形式。",
+      "level": 2,
+      "branch": [
+        "economics"
+      ],
+      "tags": [
+        "第一章",
+        "价值形式"
+      ],
+      "citations": [
+        "c-capital-1-ch01-value-form"
+      ],
+      "related": [
+        "use-value-and-value",
+        "money"
+      ],
+      "references": [
+        {
+          "level": 1,
+          "label": "《资本论》第一卷第2章：交换过程（1972年版在线文本）",
+          "url": "https://www.marxists.org/chinese/marx/capital/02.htm",
+          "checked_on": "2026-10-29"
+        }
+      ],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true,
+      "column": "terms",
+      "sources": [],
+      "term": "价值形式"
+    },
+    {
+      "slug": "commodity-fetishism",
+      "title": "商品拜物教，只是在说人爱买东西吗？",
+      "summary": "它首先指生产者的社会关系采取了物与物的关系的形式，不能简单等同于购物欲。",
+      "level": 2,
+      "branch": [
+        "economics",
+        "philosophy"
+      ],
+      "tags": [
+        "第一章",
+        "社会关系"
+      ],
+      "citations": [
+        "c-capital-1-ch01-fetish"
+      ],
+      "related": [
+        "commodity",
+        "value-form"
+      ],
+      "references": [],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true,
+      "column": "terms",
+      "sources": [],
+      "term": "商品拜物教"
+    },
+    {
+      "slug": "money",
+      "title": "货币只是让交换方便一点吗？",
+      "summary": "第三章分别研究价值尺度、流通手段和货币的其他职能；同一货币在不同关系中承担不同作用。",
+      "level": 1,
+      "branch": [
+        "economics"
+      ],
+      "tags": [
+        "第三章",
+        "货币"
+      ],
+      "citations": [
+        "c-capital-1-ch03-money"
+      ],
+      "related": [
+        "value-form",
+        "capital-relation"
+      ],
+      "references": [
+        {
+          "level": 1,
+          "label": "《资本论》第一卷第1章：商品（1972年版在线文本）",
+          "url": "https://www.marxists.org/chinese/marx/capital/01.htm",
+          "checked_on": "2026-10-29"
+        },
+        {
+          "level": 1,
+          "label": "《资本论》第一卷第2章：交换过程（1972年版在线文本）",
+          "url": "https://www.marxists.org/chinese/marx/capital/02.htm",
+          "checked_on": "2026-10-29"
+        }
+      ],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true,
+      "column": "terms",
+      "sources": [],
+      "term": "货币"
+    },
+    {
+      "slug": "capital-relation",
+      "title": "资本是一笔钱，还是一种关系？",
+      "summary": "资本不能只按物品外形辨认。第四章从价值增殖的运动入手，《雇佣劳动与资本》进一步强调社会关系。",
+      "level": 1,
+      "branch": [
+        "economics"
+      ],
+      "tags": [
+        "第四章",
+        "资本"
+      ],
+      "citations": [
+        "c-capital-1-ch25-relation",
+        "c-wage-labour-capital-relation"
+      ],
+      "related": [
+        "money",
+        "labour-power",
+        "surplus-value"
+      ],
+      "references": [
+        {
+          "level": 1,
+          "label": "《资本论》第一卷第4章：货币转化为资本（1972年版在线文本）",
+          "url": "https://www.marxists.org/chinese/marx/capital/04.htm",
+          "checked_on": "2026-10-29"
+        }
+      ],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true,
+      "column": "terms",
+      "sources": [],
+      "term": "资本"
+    },
+    {
+      "slug": "labour-power",
+      "title": "买的是劳动，还是劳动力？",
+      "summary": "劳动力是人的劳动能力，劳动是这种能力的实际使用。区分两者，是理解剩余价值的关键。",
+      "level": 1,
+      "branch": [
+        "economics"
+      ],
+      "tags": [
+        "第四章",
+        "劳动力"
+      ],
+      "citations": [
+        "c-capital-1-ch04-labour-power"
+      ],
+      "related": [
+        "capital-relation",
+        "surplus-value"
+      ],
+      "references": [
+        {
+          "level": 1,
+          "label": "《资本论》第一卷第5章：劳动过程和价值增殖过程（1972年版在线文本）",
+          "url": "https://www.marxists.org/chinese/marx/capital/05.htm",
+          "checked_on": "2026-10-29"
+        },
+        {
+          "level": 1,
+          "label": "《文集》第1卷：《雇佣劳动与资本》及恩格斯写的1891年单行本导言",
+          "url": "https://www.marxists.org/chinese/marx-engels2/01/21.htm",
+          "checked_on": "2026-10-29"
+        }
+      ],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true,
+      "column": "terms",
+      "sources": [],
+      "term": "劳动力"
+    },
+    {
+      "slug": "surplus-value",
+      "title": "按价值买卖，为什么还会有剩余价值？",
+      "summary": "劳动力的价值与使用劳动力所创造的价值可以不同。剩余价值率用剩余价值同可变资本比较，不等于利润率。",
+      "level": 2,
+      "branch": [
+        "economics"
+      ],
+      "tags": [
+        "第五章",
+        "第七章",
+        "剩余价值"
+      ],
+      "citations": [
+        "c-capital-1-ch07-surplus-rate"
+      ],
+      "related": [
+        "labour-power",
+        "constant-variable-capital",
+        "working-day"
+      ],
+      "references": [
+        {
+          "level": 1,
+          "label": "《资本论》第一卷第5章：劳动过程和价值增殖过程（1972年版在线文本）",
+          "url": "https://www.marxists.org/chinese/marx/capital/05.htm",
+          "checked_on": "2026-10-29"
+        },
+        {
+          "level": 1,
+          "label": "《资本论》第一卷第6章：不变资本和可变资本（1972年版在线文本）",
+          "url": "https://www.marxists.org/chinese/marx/capital/06.htm",
+          "checked_on": "2026-10-29"
+        }
+      ],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true,
+      "column": "terms",
+      "sources": [],
+      "term": "剩余价值和剩余价值率"
+    },
+    {
+      "slug": "constant-variable-capital",
+      "title": "不变资本，难道永远不会涨价吗？",
+      "summary": "不变与可变依据它们在价值增殖中的不同作用划分，不是依据市场价格是否波动，也不是固定资本与流动资本的另一套叫法。",
+      "level": 2,
+      "branch": [
+        "economics"
+      ],
+      "tags": [
+        "第六章",
+        "资本区分"
+      ],
+      "citations": [
+        "c-capital-1-ch06-value-transfer",
+        "c-capital-2-ch08-categories"
+      ],
+      "related": [
+        "surplus-value",
+        "labour-power"
+      ],
+      "references": [],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true,
+      "column": "terms",
+      "sources": [],
+      "term": "不变资本和可变资本"
+    },
+    {
+      "slug": "working-day",
+      "title": "一个工作日有多长，为什么不能只靠合同说明？",
+      "summary": "第八章分析工作日的身体与社会界限，并以历史材料说明正常工作日怎样在冲突和斗争中形成。",
+      "level": 1,
+      "branch": [
+        "economics"
+      ],
+      "tags": [
+        "第八章",
+        "工作日"
+      ],
+      "citations": [
+        "c-capital-1-ch08-right"
+      ],
+      "related": [
+        "surplus-value",
+        "relative-surplus-value"
+      ],
+      "references": [
+        {
+          "level": 1,
+          "label": "《资本论》第一卷第7章：剩余价值率（1972年版在线文本）",
+          "url": "https://www.marxists.org/chinese/marx/capital/07.htm",
+          "checked_on": "2026-10-29"
+        }
+      ],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true,
+      "column": "terms",
+      "sources": [],
+      "term": "工作日"
+    },
+    {
+      "slug": "relative-surplus-value",
+      "title": "工作日没变，剩余价值为什么还可能增加？",
+      "summary": "相对剩余价值通过缩短必要劳动时间、改变工作日内部比例来说明，不等同于直接延长工作日或把工资压到劳动力价值以下。",
+      "level": 2,
+      "branch": [
+        "economics"
+      ],
+      "tags": [
+        "第十章",
+        "生产力"
+      ],
+      "citations": [
+        "c-capital-1-ch10-relative"
+      ],
+      "related": [
+        "working-day",
+        "surplus-value",
+        "socially-necessary-labour"
+      ],
+      "references": [],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true,
+      "column": "terms",
+      "sources": [],
+      "term": "相对剩余价值"
+    },
+    {
+      "slug": "reserve-army",
+      "title": "产业后备军，是说人口绝对太多吗？",
+      "summary": "相对过剩人口是相对于资本增殖所需要的劳动力而言，不能等同于人口相对自然资源的绝对过多。",
+      "level": 2,
+      "branch": [
+        "economics"
+      ],
+      "tags": [
+        "第二十三章",
+        "积累"
+      ],
+      "citations": [
+        "c-capital-1-ch23-reserve"
+      ],
+      "related": [
+        "constant-variable-capital",
+        "relative-surplus-value"
+      ],
+      "references": [],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true,
+      "column": "terms",
+      "sources": [],
+      "term": "产业后备军"
+    },
+    {
+      "slug": "primitive-accumulation",
+      "title": "原始积累，就是先省下一笔本钱吗？",
+      "summary": "第二十四章研究使资本关系成为可能的历史过程：生产者同生产资料分离，而不只是个人储蓄的故事。",
+      "level": 1,
+      "branch": [
+        "economics"
+      ],
+      "tags": [
+        "第二十四章",
+        "原始积累"
+      ],
+      "citations": [
+        "c-capital-1-ch24-primitive"
+      ],
+      "related": [
+        "capital-relation",
+        "labour-power"
+      ],
+      "references": [],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true,
+      "column": "terms",
+      "sources": [],
+      "term": "原始积累"
+    },
+    {
+      "slug": "practice",
+      "title": "实践，只是亲身试过一次吗？",
+      "summary": "《提纲》把实践理解为现实的、感性的人的活动，并把认识、环境与人的改变联系起来。",
+      "level": 1,
+      "branch": [
+        "philosophy"
+      ],
+      "tags": [
+        "提纲",
+        "实践"
+      ],
+      "citations": [
+        "c-theses-feuerbach-1845-viii"
+      ],
+      "related": [
+        "human-essence",
+        "thesis-eleven",
+        "productive-forces-relations"
+      ],
+      "references": [],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true,
+      "column": "terms",
+      "sources": [],
+      "term": "实践"
+    },
+    {
+      "slug": "productive-forces-relations",
+      "title": "生产力和生产关系，为什么要一起看？",
+      "summary": "生产力涉及生产的能力与条件，生产关系涉及人们在社会生产中形成的关系；二者的矛盾是《序言》分析社会变革的重要线索。",
+      "level": 1,
+      "branch": [
+        "philosophy",
+        "economics"
+      ],
+      "tags": [
+        "序言",
+        "唯物史观"
+      ],
+      "citations": [
+        "c-critique-preface-relations"
+      ],
+      "related": [
+        "base-superstructure",
+        "practice"
+      ],
+      "references": [
+        {
+          "level": 1,
+          "label": "《文集》第1卷：《德意志意识形态》",
+          "url": "https://www.marxists.org/chinese/marx-engels2/01/16.htm",
+          "checked_on": "2026-10-29"
+        }
+      ],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true,
+      "column": "terms",
+      "sources": [],
+      "term": "生产力与生产关系"
+    },
+    {
+      "slug": "base-superstructure",
+      "title": "经济基础决定一切，就不用研究政治和思想了吗？",
+      "summary": "《序言》把生产关系的总和称作经济结构；恩格斯致布洛赫信强调，归根到底的决定作用不等于经济是唯一因素。",
+      "level": 2,
+      "branch": [
+        "philosophy"
+      ],
+      "tags": [
+        "序言",
+        "书信",
+        "唯物史观"
+      ],
+      "citations": [
+        "c-critique-preface-base"
+      ],
+      "related": [
+        "productive-forces-relations",
+        "economic-determinism"
+      ],
+      "references": [
+        {
+          "level": 1,
+          "label": "《文集》第10卷第240封：恩格斯致约瑟夫·布洛赫",
+          "url": "https://www.marxists.org/chinese/marx-engels2/10/240.htm",
+          "checked_on": "2026-10-29"
+        }
+      ],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true,
+      "column": "terms",
+      "sources": [],
+      "term": "经济基础与上层建筑"
+    },
+    {
+      "slug": "alienated-labour",
+      "title": "异化劳动，就是觉得工作不开心吗？",
+      "summary": "《1844年经济学哲学手稿》分析劳动者同产品、活动、类本质和他人的关系，不能缩成一种个人心情。",
+      "level": 2,
+      "branch": [
+        "philosophy",
+        "economics"
+      ],
+      "tags": [
+        "1844年手稿",
+        "异化"
+      ],
+      "citations": [
+        "c-manuscripts-1844-alienation"
+      ],
+      "related": [
+        "labour-power",
+        "capital-relation",
+        "human-essence"
+      ],
+      "references": [],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true,
+      "column": "terms",
+      "sources": [],
+      "term": "异化劳动"
+    },
+    {
+      "slug": "necessity-freedom",
+      "title": "自由王国，是再也不用劳动了吗？",
+      "summary": "两部原著分别讨论社会关系的自觉控制与人的能力自由发展；自由并不意味着物质生活的必要条件消失。",
+      "level": 2,
+      "branch": [
+        "philosophy",
+        "socialism"
+      ],
+      "tags": [
+        "反杜林论",
+        "资本论第三卷",
+        "自由"
+      ],
+      "citations": [
+        "c-anti-duhring-iii-ii-leap",
+        "c-capital-3-ch48-freedom"
+      ],
+      "related": [
+        "working-day",
+        "freedom-kingdom"
+      ],
+      "references": [],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true,
+      "column": "terms",
+      "sources": [],
+      "term": "必然王国与自由王国"
+    },
+    {
+      "slug": "manifesto-property",
+      "title": "《宣言》主张消灭所有个人占有吗？",
+      "summary": "第二章区分资产阶级所有制与个人占有社会产品；把批判对象扩大成一切个人占有，会改变原文的意思。",
+      "level": 1,
+      "branch": [
+        "socialism",
+        "economics"
+      ],
+      "tags": [
+        "宣言",
+        "所有制"
+      ],
+      "citations": [
+        "c-manifesto-property"
+      ],
+      "related": [
+        "capital-relation",
+        "commodity"
+      ],
+      "references": [],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true,
+      "column": "myths",
+      "sources": [],
+      "verdict": "假"
+    },
+    {
+      "slug": "human-essence",
+      "title": "原著说的是人，还是人的本质？",
+      "summary": "《提纲》第六条的主语是人的本质，并有现实性上的限定；简写成关于个人的一条万能定义，会丢失论证对象。",
+      "level": 1,
+      "branch": [
+        "philosophy"
+      ],
+      "tags": [
+        "提纲",
+        "人的本质"
+      ],
+      "citations": [
+        "c-theses-feuerbach-1845-vi"
+      ],
+      "related": [
+        "practice",
+        "alienated-labour"
+      ],
+      "references": [],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true,
+      "column": "myths",
+      "sources": [],
+      "verdict": "部分正确"
+    },
+    {
+      "slug": "opium-context",
+      "title": "宗教与鸦片：原文前后还说了什么？",
+      "summary": "这个说法确实见于《〈黑格尔法哲学批判〉导言》；原文同时讨论苦难的表现、抗议与产生慰藉需要的现实处境。",
+      "level": 1,
+      "branch": [
+        "philosophy"
+      ],
+      "tags": [
+        "宗教批判",
+        "语境"
+      ],
+      "citations": [
+        "c-hegel-intro-opium-context",
+        "c-hegel-intro-opium"
+      ],
+      "related": [
+        "practice",
+        "base-superstructure"
+      ],
+      "references": [],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true,
+      "column": "myths",
+      "sources": [],
+      "verdict": "真"
+    },
+    {
+      "slug": "not-a-marxist",
+      "title": "那句不是马克思主义者的话，来自谁的记录？",
+      "summary": "文集第十卷有恩格斯的转述，谈到的是特定历史语境中的称号；不能据此推出马克思否认自己的全部研究。",
+      "level": 1,
+      "branch": [
+        "philosophy"
+      ],
+      "tags": [
+        "书信",
+        "署名与语境"
+      ],
+      "citations": [
+        "c-letter-237-not-marxist"
+      ],
+      "related": [
+        "economic-determinism",
+        "critique-preface"
+      ],
+      "references": [],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true,
+      "column": "myths",
+      "sources": [],
+      "verdict": "部分正确"
+    },
+    {
+      "slug": "thesis-eleven",
+      "title": "《提纲》第十一条，真的只有一种写法吗？",
+      "summary": "文集并列两个稿本，第十一条的措辞有差别；引用时应分清马克思原稿与恩格斯发表稿。",
+      "level": 1,
+      "branch": [
+        "philosophy"
+      ],
+      "tags": [
+        "提纲",
+        "稿本"
+      ],
+      "citations": [
+        "c-theses-feuerbach-1845-xi",
+        "c-theses-feuerbach-1888-xi"
+      ],
+      "related": [
+        "practice",
+        "human-essence"
+      ],
+      "references": [],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true,
+      "column": "myths",
+      "sources": [],
+      "verdict": "假"
+    },
+    {
+      "slug": "economic-determinism",
+      "title": "唯物史观，只允许一个经济原因吗？",
+      "summary": "恩格斯致布洛赫信明确反对把经济因素说成唯一决定因素，强调具体历史中的相互作用。",
+      "level": 1,
+      "branch": [
+        "philosophy"
+      ],
+      "tags": [
+        "书信",
+        "唯物史观"
+      ],
+      "citations": [
+        "c-letter-240-history"
+      ],
+      "related": [
+        "base-superstructure",
+        "productive-forces-relations"
+      ],
+      "references": [],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true,
+      "column": "myths",
+      "sources": [],
+      "verdict": "假"
+    },
+    {
+      "slug": "labour-time-myth",
+      "title": "劳动价值论，会奖励做得更慢的人吗？",
+      "summary": "第一章明确采用社会必要劳动时间，并主动反驳把个人耗时越长理解为价值越大的推论。",
+      "level": 1,
+      "branch": [
+        "economics"
+      ],
+      "tags": [
+        "第一章",
+        "必要限定"
+      ],
+      "citations": [
+        "c-capital-1-ch01-social-time"
+      ],
+      "related": [
+        "socially-necessary-labour",
+        "dual-character-labour"
+      ],
+      "references": [],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true,
+      "column": "myths",
+      "sources": [],
+      "verdict": "假"
+    },
+    {
+      "slug": "freedom-kingdom",
+      "title": "必然王国和自由王国，只能署马克思吗？",
+      "summary": "恩格斯《反杜林论》与马克思《资本论》第三卷都有相关论述，但常见的飞跃表述与各自论证应分别定位。",
+      "level": 1,
+      "branch": [
+        "philosophy",
+        "socialism"
+      ],
+      "tags": [
+        "署名",
+        "反杜林论",
+        "资本论第三卷"
+      ],
+      "citations": [
+        "c-anti-duhring-iii-ii-leap",
+        "c-capital-3-ch48-freedom"
+      ],
+      "related": [
+        "necessity-freedom",
+        "working-day"
+      ],
+      "references": [],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true,
+      "column": "myths",
+      "sources": [],
+      "verdict": "部分正确"
+    }
+  ],
+  "works": [
+    {
+      "slug": "funeral-speech",
+      "title": "《在马克思墓前的讲话》",
+      "summary": "从恩格斯的悼词，认识两项理论发现和马克思的公共活动。",
+      "level": 1,
+      "branch": [
+        "philosophy",
+        "economics",
+        "socialism"
+      ],
+      "tags": [
+        "恩格斯",
+        "唯物史观",
+        "剩余价值"
+      ],
+      "citations": [
+        "c-funeral-speech-revolutionary",
+        "c-funeral-speech-history",
+        "c-funeral-speech-surplus"
+      ],
+      "related": [
+        "surplus-value",
+        "base-superstructure",
+        "utopian-scientific"
+      ],
+      "references": [
+        {
+          "level": 3,
+          "label": "《文集》第3卷题注325：《在马克思墓前的讲话》",
+          "url": "https://www.marxists.org/chinese/marx-engels2/03/29.htm",
+          "checked_on": "2026-10-29"
+        }
+      ],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true,
+      "work": "funeral-speech"
+    },
+    {
+      "slug": "manifesto",
+      "title": "《共产党宣言》",
+      "summary": "沿四章结构，读历史分析、政治纲领和当时的论战。",
+      "level": 1,
+      "branch": [
+        "socialism"
+      ],
+      "tags": [
+        "马克思",
+        "恩格斯",
+        "阶级",
+        "所有制"
+      ],
+      "citations": [
+        "c-manifesto-ch1-history",
+        "c-manifesto-property"
+      ],
+      "related": [
+        "manifesto-property",
+        "utopian-scientific",
+        "capital-relation"
+      ],
+      "references": [
+        {
+          "level": 3,
+          "label": "《文集》第2卷题注1：《共产党宣言》",
+          "url": "https://www.marxists.org/chinese/marx-engels2/02/26.htm",
+          "checked_on": "2026-10-29"
+        }
+      ],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true,
+      "work": "manifesto"
+    },
+    {
+      "slug": "theses-feuerbach",
+      "title": "《关于费尔巴哈的提纲》",
+      "summary": "十一条研究笔记，怎样把实践带进认识和历史。",
+      "level": 2,
+      "branch": [
+        "philosophy"
+      ],
+      "tags": [
+        "马克思",
+        "实践",
+        "费尔巴哈"
+      ],
+      "citations": [
+        "c-theses-feuerbach-1845-viii",
+        "c-theses-feuerbach-1845-xi"
+      ],
+      "related": [
+        "practice",
+        "human-essence",
+        "thesis-eleven"
+      ],
+      "references": [
+        {
+          "level": 3,
+          "label": "《文集》第1卷题注180：《关于费尔巴哈的提纲》",
+          "url": "https://www.marxists.org/chinese/marx-engels2/01/23.htm",
+          "checked_on": "2026-10-29"
+        }
+      ],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true,
+      "work": "theses-feuerbach"
+    },
+    {
+      "slug": "manuscripts-1844",
+      "title": "《1844年经济学哲学手稿》",
+      "summary": "从未完成的研究笔记中，认识异化劳动提出的问题。",
+      "level": 3,
+      "branch": [
+        "philosophy",
+        "economics"
+      ],
+      "tags": [
+        "马克思",
+        "异化劳动",
+        "手稿"
+      ],
+      "citations": [
+        "c-manuscripts-1844-alienation"
+      ],
+      "related": [
+        "alienated-labour",
+        "labour-power",
+        "german-ideology"
+      ],
+      "references": [
+        {
+          "level": 3,
+          "label": "《文集》第1卷题注61：《1844年经济学哲学手稿》",
+          "url": "https://www.marxists.org/chinese/marx-engels2/01/23.htm",
+          "checked_on": "2026-10-29"
+        }
+      ],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true,
+      "work": "manuscripts-1844"
+    },
+    {
+      "slug": "german-ideology",
+      "title": "《德意志意识形态》（节选）",
+      "summary": "从现实的个人和生产活动出发，理解历史观的转变。",
+      "level": 3,
+      "branch": [
+        "philosophy",
+        "socialism"
+      ],
+      "tags": [
+        "马克思",
+        "恩格斯",
+        "唯物史观",
+        "分工"
+      ],
+      "citations": [
+        "c-german-ideology-life"
+      ],
+      "related": [
+        "productive-forces-relations",
+        "base-superstructure",
+        "practice"
+      ],
+      "references": [
+        {
+          "level": 3,
+          "label": "《文集》第1卷题注182：《德意志意识形态》",
+          "url": "https://www.marxists.org/chinese/marx-engels2/01/23.htm",
+          "checked_on": "2026-10-29"
+        }
+      ],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true,
+      "work": "german-ideology"
+    },
+    {
+      "slug": "wage-labour-capital",
+      "title": "《雇佣劳动与资本》",
+      "summary": "用一篇面向工人的通俗讲演，进入工资与资本的关系。",
+      "level": 1,
+      "branch": [
+        "economics"
+      ],
+      "tags": [
+        "马克思",
+        "工资",
+        "劳动力",
+        "资本"
+      ],
+      "citations": [
+        "c-wage-labour-capital-relation"
+      ],
+      "related": [
+        "labour-power",
+        "capital-relation",
+        "value-price-profit"
+      ],
+      "references": [
+        {
+          "level": 3,
+          "label": "《文集》第1卷题注233：《雇佣劳动与资本》",
+          "url": "https://www.marxists.org/chinese/marx-engels2/01/23.htm",
+          "checked_on": "2026-10-29"
+        }
+      ],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true,
+      "work": "wage-labour-capital"
+    },
+    {
+      "slug": "critique-preface",
+      "title": "《〈政治经济学批判〉序言》",
+      "summary": "把高度浓缩的历史观，放回马克思的研究经历。",
+      "level": 2,
+      "branch": [
+        "philosophy",
+        "economics"
+      ],
+      "tags": [
+        "马克思",
+        "唯物史观",
+        "经济基础",
+        "生产关系"
+      ],
+      "citations": [
+        "c-critique-preface-being",
+        "c-critique-preface-relations"
+      ],
+      "related": [
+        "productive-forces-relations",
+        "base-superstructure",
+        "economic-determinism"
+      ],
+      "references": [
+        {
+          "level": 1,
+          "label": "《文集》第10卷第240封：恩格斯致约瑟夫·布洛赫",
+          "url": "https://www.marxists.org/chinese/marx-engels2/10/240.htm",
+          "checked_on": "2026-10-29"
+        },
+        {
+          "level": 3,
+          "label": "《文集》第2卷题注348：《〈政治经济学批判〉序言》",
+          "url": "https://www.marxists.org/chinese/marx-engels2/02/26.htm",
+          "checked_on": "2026-10-29"
+        }
+      ],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true,
+      "work": "critique-preface"
+    },
+    {
+      "slug": "eighteenth-brumaire",
+      "title": "《路易·波拿巴的雾月十八日》",
+      "summary": "把政变放进阶级、制度和政治表象的共同运动中。",
+      "level": 2,
+      "branch": [
+        "philosophy",
+        "socialism"
+      ],
+      "tags": [
+        "马克思",
+        "法国",
+        "历史",
+        "国家"
+      ],
+      "citations": [
+        "c-eighteenth-brumaire-history"
+      ],
+      "related": [
+        "base-superstructure",
+        "civil-war-france",
+        "productive-forces-relations"
+      ],
+      "references": [
+        {
+          "level": 3,
+          "label": "《文集》第2卷题注279：《路易·波拿巴的雾月十八日》",
+          "url": "https://www.marxists.org/chinese/marx-engels2/02/26.htm",
+          "checked_on": "2026-10-29"
+        }
+      ],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true,
+      "work": "eighteenth-brumaire"
+    },
+    {
+      "slug": "value-price-profit",
+      "title": "《工资、价格和利润》",
+      "summary": "从一次工资争论，读价值、劳动力和工人组织。",
+      "level": 1,
+      "branch": [
+        "economics",
+        "socialism"
+      ],
+      "tags": [
+        "马克思",
+        "工资",
+        "价值",
+        "工会"
+      ],
+      "citations": [
+        "c-value-price-profit-wages"
+      ],
+      "related": [
+        "labour-power",
+        "surplus-value",
+        "wage-labour-capital"
+      ],
+      "references": [
+        {
+          "level": 3,
+          "label": "《文集》第3卷题注22：《工资、价格和利润》",
+          "url": "https://www.marxists.org/chinese/marx-engels2/03/29.htm",
+          "checked_on": "2026-10-29"
+        }
+      ],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true,
+      "work": "value-price-profit"
+    },
+    {
+      "slug": "civil-war-france",
+      "title": "《法兰西内战》",
+      "summary": "从巴黎公社经验，追问国家机器与社会解放的关系。",
+      "level": 2,
+      "branch": [
+        "socialism"
+      ],
+      "tags": [
+        "马克思",
+        "巴黎公社",
+        "国家"
+      ],
+      "citations": [
+        "c-civil-war-france-machine"
+      ],
+      "related": [
+        "eighteenth-brumaire",
+        "manifesto",
+        "gotha-critique"
+      ],
+      "references": [
+        {
+          "level": 3,
+          "label": "《文集》第3卷题注44：《法兰西内战》",
+          "url": "https://www.marxists.org/chinese/marx-engels2/03/29.htm",
+          "checked_on": "2026-10-29"
+        }
+      ],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true,
+      "work": "civil-war-france"
+    },
+    {
+      "slug": "gotha-critique",
+      "title": "《哥达纲领批判》",
+      "summary": "逐条检验漂亮词语背后的生产、分配和国家问题。",
+      "level": 2,
+      "branch": [
+        "economics",
+        "socialism"
+      ],
+      "tags": [
+        "马克思",
+        "分配",
+        "权利",
+        "国家"
+      ],
+      "citations": [
+        "c-gotha-critique-wealth",
+        "c-gotha-critique-movement"
+      ],
+      "related": [
+        "use-value-and-value",
+        "productive-forces-relations",
+        "civil-war-france"
+      ],
+      "references": [
+        {
+          "level": 3,
+          "label": "《文集》第3卷题注211：《哥达纲领批判》",
+          "url": "https://www.marxists.org/chinese/marx-engels2/03/29.htm",
+          "checked_on": "2026-10-29"
+        }
+      ],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true,
+      "work": "gotha-critique"
+    },
+    {
+      "slug": "utopian-scientific",
+      "title": "《社会主义从空想到科学的发展》",
+      "summary": "沿三章线索，理解思想来源、辩证法和资本主义矛盾。",
+      "level": 1,
+      "branch": [
+        "philosophy",
+        "socialism"
+      ],
+      "tags": [
+        "恩格斯",
+        "社会主义",
+        "辩证法"
+      ],
+      "citations": [
+        "c-utopian-scientific-science"
+      ],
+      "related": [
+        "necessity-freedom",
+        "reserve-army",
+        "manifesto"
+      ],
+      "references": [
+        {
+          "level": 3,
+          "label": "《文集》第3卷题注252：《社会主义从空想到科学的发展》",
+          "url": "https://www.marxists.org/chinese/marx-engels2/03/29.htm",
+          "checked_on": "2026-10-29"
+        }
+      ],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true,
+      "work": "utopian-scientific"
+    }
+  ],
+  "guides": [
+    {
+      "slug": "capital-1-ch01",
+      "title": "第一章：商品",
+      "summary": "从商品的两因素，经过劳动二重性和价值形式，读到商品拜物教。",
+      "level": 3,
+      "branch": [
+        "economics"
+      ],
+      "tags": [
+        "资本论",
+        "商品",
+        "价值",
+        "劳动"
+      ],
+      "citations": [
+        "c-capital-1-ch01-commodity",
+        "c-capital-1-ch01-abstract",
+        "c-capital-1-ch01-fetish"
+      ],
+      "related": [
+        "commodity",
+        "dual-character-labour",
+        "value-form",
+        "commodity-fetishism"
+      ],
+      "references": [
+        {
+          "level": 1,
+          "label": "《资本论》第一卷第一章第2节：体现在商品中的劳动的二重性（1972年版在线文本）",
+          "url": "https://www.marxists.org/chinese/marx/capital/01.htm",
+          "checked_on": "2026-10-29"
+        }
+      ],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true,
+      "volume": 1,
+      "chapter": 1
+    },
+    {
+      "slug": "capital-1-ch02",
+      "title": "第二章：交换过程",
+      "summary": "从商品走到商品所有者，理解交换关系和货币的形成。",
+      "level": 2,
+      "branch": [
+        "economics"
+      ],
+      "tags": [
+        "资本论",
+        "交换",
+        "货币",
+        "法权"
+      ],
+      "citations": [
+        "c-capital-1-ch02-exchange"
+      ],
+      "related": [
+        "commodity",
+        "value-form",
+        "money",
+        "capital-1-ch01",
+        "capital-1-ch03"
+      ],
+      "references": [
+        {
+          "level": 1,
+          "label": "《资本论》第一卷第1章：商品（1972年版在线文本）",
+          "url": "https://www.marxists.org/chinese/marx/capital/01.htm",
+          "checked_on": "2026-10-29"
+        }
+      ],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true,
+      "volume": 1,
+      "chapter": 2
+    },
+    {
+      "slug": "capital-1-ch03",
+      "title": "第三章：货币或商品流通",
+      "summary": "分清标价、买卖、贮藏和支付，顺着职能阅读货币。",
+      "level": 2,
+      "branch": [
+        "economics"
+      ],
+      "tags": [
+        "资本论",
+        "货币",
+        "流通",
+        "支付"
+      ],
+      "citations": [
+        "c-capital-1-ch03-money"
+      ],
+      "related": [
+        "money",
+        "value-form",
+        "capital-relation",
+        "capital-1-ch02"
+      ],
+      "references": [
+        {
+          "level": 1,
+          "label": "《资本论》第一卷第4章：货币转化为资本（1972年版在线文本）",
+          "url": "https://www.marxists.org/chinese/marx/capital/04.htm",
+          "checked_on": "2026-10-29"
+        }
+      ],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true,
+      "volume": 1,
+      "chapter": 3
+    }
+  ]
+}

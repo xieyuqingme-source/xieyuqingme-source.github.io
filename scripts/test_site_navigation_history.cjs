@@ -4,7 +4,7 @@ const fs=require('node:fs'),path=require('node:path'),vm=require('node:vm'),asse
 const {test}=require('node:test');
 const source=fs.readFileSync(path.join(__dirname,'../home/assets/site-navigation.js'),'utf8');
 
-function harness({initial='/articles/example.html',bodyId='top',feature=false}={}){
+function harness({initial='/articles/example.html',bodyId='top',feature=false,languageSwitcher=false}={}){
  const windowEvents=new Map(),documentEvents=new Map(),timers=new Map(),requests=[],assigned=[];
  let timerId=0,currentURL=new URL(initial,'https://example.test'),position=[0,0],document;
  const listen=(events,type,fn,options)=>{if(!events.has(type))events.set(type,[]);events.get(type).push({fn,once:!!options?.once});};
@@ -21,6 +21,7 @@ function harness({initial='/articles/example.html',bodyId='top',feature=false}={
   querySelectorAll(selector){const found=[];for(const node of this.childNodes){if(node.matches?.(selector))found.push(node);if(node.querySelectorAll)found.push(...node.querySelectorAll(selector));}return found;}
   querySelector(selector){return this.querySelectorAll(selector)[0]||null;}
   append(node){node.remove();node.parentNode=this;this.childNodes.push(node);}
+  prepend(node){node.remove();node.parentNode=this;this.childNodes.unshift(node);}
   remove(){if(this.parentNode){this.parentNode.childNodes=this.parentNode.childNodes.filter(node=>node!==this);this.parentNode=null;}}
   replaceWith(node){const parent=this.parentNode;if(!parent)return;const index=parent.childNodes.indexOf(this);node.remove();parent.childNodes[index]=node;node.parentNode=parent;this.parentNode=null;}
   cloneNode(deep){const copy=new Element(this.tagName,this.attributes);copy.textContent=this.textContent;copy.y=this.y;if(deep)for(const child of this.childNodes)copy.append(child.cloneNode(true));return copy;}
@@ -30,6 +31,7 @@ function harness({initial='/articles/example.html',bodyId='top',feature=false}={
  function page(url='/',id=''){
   const doc={readyState:'complete',title:'test'};doc.head=new Element('head');doc.body=new Element('body',{id});doc.documentElement=new Element('html');doc.documentElement.lang='zh-CN';
   const header=new Element('header',{class:'site-header'}),main=new Element('main',{id:'main'}),a=new Element('h2',{id:'section-a'}),b=new Element('h2',{id:'section-b'}),data=new Element('script',{id:'site-i18n-data'});
+  if(languageSwitcher){const tools=new Element('div',{class:'header-tools'});tools.append(new Element('button',{id:'theme-toggle'}));header.append(tools);if(!url.startsWith('/marx/')&&!url.startsWith('/english/'))tools.prepend(new Element('a',{class:'site-language-switch',href:'/en/about/'}));}
   a.y=1200;b.y=2400;main.append(a);main.append(b);data.textContent=JSON.stringify({page:{route:url,switchMode:'navigate'}});doc.body.append(header);doc.body.append(main);doc.body.append(data);
   doc.querySelectorAll=selector=>[...doc.head.querySelectorAll(selector),...doc.body.querySelectorAll(selector)];doc.querySelector=selector=>doc.querySelectorAll(selector)[0]||null;
   doc.getElementById=id=>doc.body.id===id?doc.body:doc.querySelector('#'+id);
@@ -70,4 +72,16 @@ test('malformed or missing fragments are safe, and a bare same-page link returns
 });
 test('same-feature language history keeps application state and does not fetch a replacement page',async()=>{
  const ui=harness({initial:'/map/',bodyId:'',feature:true});ui.setPosition(0,420);const state=ui.history.state;ui.history.pushState(state,'','/en/map/');ui.emitLanguage();await ui.pop(-1);assert.equal(ui.requests.length,0);assert.deepEqual(ui.position,[0,420]);assert.equal(ui.history.state,state);assert.equal(ui.rendered,ui.location.href);
+});
+test('a Chinese-only reader removes the prior switch, and returning restores exactly one switch',async()=>{
+ const ui=harness({initial:'/about/',bodyId:'',languageSwitcher:true});
+ const theme=ui.document.querySelector('#theme-toggle');
+ assert.equal(ui.document.querySelectorAll('.site-language-switch').length,1);
+ await ui.visit('/marx/');assert.equal(ui.document.querySelectorAll('.site-language-switch').length,0);
+ await ui.visit('/marx/commodity/');assert.equal(ui.document.querySelectorAll('.site-language-switch').length,0);
+ await ui.visit('/about/');assert.equal(ui.document.querySelectorAll('.site-language-switch').length,1);
+ assert.equal(ui.document.querySelector('#theme-toggle'),theme);
+ assert.equal(ui.document.querySelectorAll('#theme-toggle').length,1);
+ await ui.visit('/english/');assert.equal(ui.document.querySelectorAll('.site-language-switch').length,0);
+ await ui.visit('/about/');assert.equal(ui.document.querySelectorAll('.site-language-switch').length,1);
 });

@@ -1,0 +1,113 @@
+{
+  "version": 1,
+  "items": [
+    {
+      "id": "e-preface-rhine",
+      "url": "https://www.marxists.org/chinese/marx-engels2/02/12.htm",
+      "wrong": "莱窗省议会",
+      "right": "莱茵省议会",
+      "basis": "另一中文本在同一林木盗窃/地产析分语境作莱茵省议会；只改明显形近字。",
+      "evidence_url": "https://www.marxists.org/chinese/marx/06.htm",
+      "checked_on": "2026-10-29"
+    },
+    {
+      "id": "e-preface-entrance",
+      "url": "https://www.marxists.org/chinese/marx-engels2/02/12.htm",
+      "wrong": "地狱的人口处",
+      "right": "地狱的入口处",
+      "basis": "另一中文本在相同科学入口/但丁引句的前文作入口；改正人/入录入错误。",
+      "evidence_url": "https://www.marxists.org/chinese/marx/06.htm",
+      "checked_on": "2026-10-29"
+    },
+    {
+      "id": "e-preface-stray-bracket",
+      "url": "https://www.marxists.org/chinese/marx-engels2/02/12.htm",
+      "wrong": "反〉对",
+      "right": "反对",
+      "basis": "另一中文本同一与奥格斯堡报纸争论的段落没有此孤立右括号；删除多入字符。",
+      "evidence_url": "https://www.marxists.org/chinese/marx/06.htm",
+      "checked_on": "2026-10-29"
+    },
+    {
+      "id": "e-manifesto-np",
+      "url": "https://www.marxists.org/chinese/marx-engels2/02/01.htm",
+      "wrong": "NP小工业家",
+      "right": "即小工业家",
+      "basis": "另一中文本在中间等级下层的同一列举处作即小工业家；不改其余译词。",
+      "evidence_url": "https://www.marxists.org/chinese/marx/01.htm",
+      "checked_on": "2026-10-29"
+    },
+    {
+      "id": "e-manifesto-and",
+      "url": "https://www.marxists.org/chinese/marx-engels2/02/01.htm",
+      "wrong": "遥远的国家如地带",
+      "right": "遥远的国家和地带",
+      "basis": "另一中文本在世界市场段落相同上下文作国家和地带；只改明显连词录入错误。",
+      "evidence_url": "https://www.marxists.org/chinese/marx/01.htm",
+      "checked_on": "2026-10-29"
+    },
+    {
+      "id": "e-manifesto-already",
+      "url": "https://www.marxists.org/chinese/marx-engels2/02/01.htm",
+      "wrong": "我己收入本版",
+      "right": "我已收入本版",
+      "basis": "同一1890年德文版序言的另一中文本作我已收入本版；不把序言当作1848年正文。",
+      "evidence_url": "https://www.marxists.org/chinese/marx/01.htm",
+      "checked_on": "2026-10-29"
+    },
+    {
+      "id": "e-theses-viii-enter",
+      "url": "https://www.marxists.org/chinese/marx-engels2/01/15.htm",
+      "wrong": "诱人神秘主义",
+      "right": "诱入神秘主义",
+      "basis": "已目视同版文集第一卷印本第505页（PDF第527页），1888年《马克思论费尔巴哈》第八条为诱入；PDF文字层也有OCR误字，依据页面图像而非文字层，未借1845年稿替换。",
+      "evidence_url": "https://www.marxists.org/chinese/pdf/marx-engels/mea01.pdf#page=527",
+      "checked_on": "2026-10-29"
+    },
+    {
+      "id": "e-theses-running-header",
+      "url": "https://www.marxists.org/chinese/marx-engels2/01/15.htm",
+      "wrong": "神秘 关于费尔巴哈的提纲东西",
+      "right": "神秘东西",
+      "basis": "已目视同版印本第505—506页（PDF第527—528页）：神秘在前页正文末，东西在次页正文首；关于费尔巴哈的提纲是第506页页眉，删除混入正文的页眉与空格。只限1888年第八条。",
+      "evidence_url": "https://www.marxists.org/chinese/pdf/marx-engels/mea01.pdf#page=528",
+      "checked_on": "2026-10-29"
+    },
+    {
+      "id": "e-funeral-revolutionary",
+      "url": "https://www.marxists.org/chinese/marx-engels2/03/25.htm",
+      "wrong": "是—个革命家",
+      "right": "是一个革命家",
+      "basis": "另一中文版本同句作是一个革命家；此处长横应为一，不属于破折号用法，不改该中文别本的其他译法。",
+      "evidence_url": "https://www.marxists.org/chinese/engels/mia-chinese-engels-18830317.htm",
+      "checked_on": "2026-10-29"
+    },
+    {
+      "id": "e-bloch-circumstances",
+      "url": "https://www.marxists.org/chinese/marx-engels2/10/240.htm",
+      "wrong": "隋况",
+      "right": "情况",
+      "basis": "对照同信勃兰登堡掌握普鲁士而卷入波兰事件的同一段，另一中文本作这样一个情况；不是以该页其他无关情况一词作证。",
+      "evidence_url": "https://www.marxists.org/chinese/marx-engels/37/220.htm",
+      "checked_on": "2026-10-29"
+    },
+    {
+      "id": "e-outline-title",
+      "url": "https://www.marxists.org/chinese/marx-engels2/01/index.htm",
+      "wrong": "国民经济学批判大钢",
+      "right": "国民经济学批判大纲",
+      "basis": "同卷正文篇名为国民经济学批判大纲，卷一目录钢为录入错误；只校正规范篇名。",
+      "evidence_url": "https://www.marxists.org/chinese/marx-engels2/01/03.htm",
+      "checked_on": "2026-10-29"
+    },
+    {
+      "id": "e-schmidt-date-month",
+      "url": "https://www.marxists.org/chinese/marx-engels2/10/237.htm",
+      "wrong": "1890年8只5日",
+      "right": "1890年8月5日",
+      "basis": "同信另一中文本标题明确1890年8月5日；日期中的只不是合法月份单位。信是致施米特，所引段没有拉法格收话人信息。",
+      "evidence_url": "https://www.marxists.org/chinese/engels/marxist.org-chinese-engels-1890-8-5.htm",
+      "checked_on": "2026-10-29"
+    }
+  ]
+}

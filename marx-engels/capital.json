@@ -1,0 +1,2459 @@
+{
+  "version": 1,
+  "volumes": [
+    {
+      "no": 1,
+      "title": "资本的生产过程",
+      "wenji_volume": 5,
+      "mia": "https://www.marxists.org/chinese/marx/capital/index.htm",
+      "parts": [
+        {
+          "no": 1,
+          "title": "商品和货币",
+          "chapters": [
+            {
+              "no": 1,
+              "title": "商品",
+              "mia": "https://www.marxists.org/chinese/marx/capital/01.htm",
+              "sections": [
+                {
+                  "title": "1、商品的两个因素：使用价值和价值(价值实体，价值量)",
+                  "mia": "https://www.marxists.org/chinese/marx/capital/01.htm#1"
+                },
+                {
+                  "title": "2、体现在商品中的劳动的二重性",
+                  "mia": "https://www.marxists.org/chinese/marx/capital/01.htm#2"
+                },
+                {
+                  "title": "3、价值形式或交换价值",
+                  "mia": "https://www.marxists.org/chinese/marx/capital/01.htm#3"
+                },
+                {
+                  "title": "4、商品的拜物教性质及其秘密",
+                  "mia": "https://www.marxists.org/chinese/marx/capital/01.htm#20"
+                }
+              ],
+              "en": [
+                {
+                  "no": 1,
+                  "title": "Commodities",
+                  "url": "https://www.marxists.org/archive/marx/works/1867-c1/ch01.htm"
+                }
+              ]
+            },
+            {
+              "no": 2,
+              "title": "交换过程",
+              "mia": "https://www.marxists.org/chinese/marx/capital/02.htm",
+              "sections": [],
+              "en": [
+                {
+                  "no": 2,
+                  "title": "Exchange",
+                  "url": "https://www.marxists.org/archive/marx/works/1867-c1/ch02.htm"
+                }
+              ]
+            },
+            {
+              "no": 3,
+              "title": "货币或商品流通",
+              "mia": "https://www.marxists.org/chinese/marx/capital/03.htm",
+              "sections": [
+                {
+                  "title": "1、价值尺度",
+                  "mia": "https://www.marxists.org/chinese/marx/capital/03.htm#1"
+                },
+                {
+                  "title": "2、流通手段",
+                  "mia": "https://www.marxists.org/chinese/marx/capital/03.htm#2"
+                },
+                {
+                  "title": "3、货 币",
+                  "mia": "https://www.marxists.org/chinese/marx/capital/03.htm#6"
+                }
+              ],
+              "en": [
+                {
+                  "no": 3,
+                  "title": "Money, or the Circulation of Commodities",
+                  "url": "https://www.marxists.org/archive/marx/works/1867-c1/ch03.htm"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "no": 2,
+          "title": "货币转化为资本",
+          "chapters": [
+            {
+              "no": 4,
+              "title": "货币转化为资本",
+              "mia": "https://www.marxists.org/chinese/marx/capital/04.htm",
+              "sections": [
+                {
+                  "title": "1、资本的总公式",
+                  "mia": "https://www.marxists.org/chinese/marx/capital/04.htm#1",
+                  "en": [
+                    {
+                      "no": 4,
+                      "title": "The General Formula for Capital",
+                      "url": "https://www.marxists.org/archive/marx/works/1867-c1/ch04.htm"
+                    }
+                  ]
+                },
+                {
+                  "title": "2、总公式的矛盾",
+                  "mia": "https://www.marxists.org/chinese/marx/capital/04.htm#2",
+                  "en": [
+                    {
+                      "no": 5,
+                      "title": "Contradictions in the General Formula of Capital",
+                      "url": "https://www.marxists.org/archive/marx/works/1867-c1/ch05.htm"
+                    }
+                  ]
+                },
+                {
+                  "title": "3、劳动力的买和卖",
+                  "mia": "https://www.marxists.org/chinese/marx/capital/04.htm#3",
+                  "en": [
+                    {
+                      "no": 6,
+                      "title": "The Buying and Selling of Labour-Power",
+                      "url": "https://www.marxists.org/archive/marx/works/1867-c1/ch06.htm"
+                    }
+                  ]
+                }
+              ],
+              "en": [
+                {
+                  "no": 4,
+                  "title": "The General Formula for Capital",
+                  "url": "https://www.marxists.org/archive/marx/works/1867-c1/ch04.htm"
+                },
+                {
+                  "no": 5,
+                  "title": "Contradictions in the General Formula of Capital",
+                  "url": "https://www.marxists.org/archive/marx/works/1867-c1/ch05.htm"
+                },
+                {
+                  "no": 6,
+                  "title": "The Buying and Selling of Labour-Power",
+                  "url": "https://www.marxists.org/archive/marx/works/1867-c1/ch06.htm"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "no": 3,
+          "title": "绝对剩余价值的生产",
+          "chapters": [
+            {
+              "no": 5,
+              "title": "劳动过程和价值增殖过程",
+              "mia": "https://www.marxists.org/chinese/marx/capital/05.htm",
+              "sections": [
+                {
+                  "title": "1、劳动过程",
+                  "mia": "https://www.marxists.org/chinese/marx/capital/05.htm#1"
+                },
+                {
+                  "title": "2、价值增殖过程",
+                  "mia": "https://www.marxists.org/chinese/marx/capital/05.htm#2"
+                }
+              ],
+              "en": [
+                {
+                  "no": 7,
+                  "title": "The Labour-Process and the Process of Producing Surplus-Value",
+                  "url": "https://www.marxists.org/archive/marx/works/1867-c1/ch07.htm"
+                }
+              ]
+            },
+            {
+              "no": 6,
+              "title": "不变资本和可变资本",
+              "mia": "https://www.marxists.org/chinese/marx/capital/06.htm",
+              "sections": [],
+              "en": [
+                {
+                  "no": 8,
+                  "title": "Constant Capital and Variable Capital",
+                  "url": "https://www.marxists.org/archive/marx/works/1867-c1/ch08.htm"
+                }
+              ]
+            },
+            {
+              "no": 7,
+              "title": "剩余价值率",
+              "mia": "https://www.marxists.org/chinese/marx/capital/07.htm",
+              "sections": [
+                {
+                  "title": "1、劳动力的剥削程度",
+                  "mia": "https://www.marxists.org/chinese/marx/capital/07.htm#1"
+                },
+                {
+                  "title": "2、产品价值在产品相应部分上的表现",
+                  "mia": "https://www.marxists.org/chinese/marx/capital/07.htm#2"
+                },
+                {
+                  "title": "3、西尼耳的“最后一小时”",
+                  "mia": "https://www.marxists.org/chinese/marx/capital/07.htm#3"
+                },
+                {
+                  "title": "4、剩余产品",
+                  "mia": "https://www.marxists.org/chinese/marx/capital/07.htm#4"
+                }
+              ],
+              "en": [
+                {
+                  "no": 9,
+                  "title": "The Rate of Surplus-Value",
+                  "url": "https://www.marxists.org/archive/marx/works/1867-c1/ch09.htm"
+                }
+              ]
+            },
+            {
+              "no": 8,
+              "title": "工作日",
+              "mia": "https://www.marxists.org/chinese/marx/capital/08.htm",
+              "sections": [
+                {
+                  "title": "1、工作日的界限",
+                  "mia": "https://www.marxists.org/chinese/marx/capital/08.htm#1"
+                },
+                {
+                  "title": "2、对剩余劳动的贪欲。工厂主和领主",
+                  "mia": "https://www.marxists.org/chinese/marx/capital/08.htm#2"
+                },
+                {
+                  "title": "3、在剥削上不受法律限制的英国工业部门",
+                  "mia": "https://www.marxists.org/chinese/marx/capital/08.htm#3"
+                },
+                {
+                  "title": "4、日工和夜工。换班制度",
+                  "mia": "https://www.marxists.org/chinese/marx/capital/08.htm#4"
+                },
+                {
+                  "title": "5、争取正常工作日的斗争。十四世纪中叶至十七世纪末叶关于延长工作日的强制性法律",
+                  "mia": "https://www.marxists.org/chinese/marx/capital/08.htm#5"
+                },
+                {
+                  "title": "6、争取正常工作日的斗争。对劳动时间的强制的法律限制。1833—1864年英国的工厂立法",
+                  "mia": "https://www.marxists.org/chinese/marx/capital/08.htm#6"
+                },
+                {
+                  "title": "7、争取正常工作日的斗争。英国工厂立法对其他国家的影响",
+                  "mia": "https://www.marxists.org/chinese/marx/capital/08.htm#7"
+                }
+              ],
+              "en": [
+                {
+                  "no": 10,
+                  "title": "The Working-Day",
+                  "url": "https://www.marxists.org/archive/marx/works/1867-c1/ch10.htm"
+                }
+              ]
+            },
+            {
+              "no": 9,
+              "title": "剩余价值率和剩余价值量",
+              "mia": "https://www.marxists.org/chinese/marx/capital/09.htm",
+              "sections": [],
+              "en": [
+                {
+                  "no": 11,
+                  "title": "Rate and Mass of Surplus-Value",
+                  "url": "https://www.marxists.org/archive/marx/works/1867-c1/ch11.htm"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "no": 4,
+          "title": "相对剩余价值的生产",
+          "chapters": [
+            {
+              "no": 10,
+              "title": "相对剩余价值的概念",
+              "mia": "https://www.marxists.org/chinese/marx/capital/10.htm",
+              "sections": [],
+              "en": [
+                {
+                  "no": 12,
+                  "title": "The Concept of Relative Surplus-Value",
+                  "url": "https://www.marxists.org/archive/marx/works/1867-c1/ch12.htm"
+                }
+              ]
+            },
+            {
+              "no": 11,
+              "title": "协作",
+              "mia": "https://www.marxists.org/chinese/marx/capital/11.htm",
+              "sections": [],
+              "en": [
+                {
+                  "no": 13,
+                  "title": "Co-operation",
+                  "url": "https://www.marxists.org/archive/marx/works/1867-c1/ch13.htm"
+                }
+              ]
+            },
+            {
+              "no": 12,
+              "title": "分工和工场手工业",
+              "mia": "https://www.marxists.org/chinese/marx/capital/12.htm",
+              "sections": [
+                {
+                  "title": "1、工场手工业的二重起源",
+                  "mia": "https://www.marxists.org/chinese/marx/capital/12.htm"
+                },
+                {
+                  "title": "2、局部工人及其工具",
+                  "mia": "https://www.marxists.org/chinese/marx/capital/12.htm"
+                },
+                {
+                  "title": "3、工场手工业的两种基本形式――混成的工场手工业和有机的工场手工业",
+                  "mia": "https://www.marxists.org/chinese/marx/capital/12.htm"
+                },
+                {
+                  "title": "4、工场手工业内部的分工和社会内部的分工",
+                  "mia": "https://www.marxists.org/chinese/marx/capital/12.htm"
+                },
+                {
+                  "title": "5、工场手工业的资本主义性质",
+                  "mia": "https://www.marxists.org/chinese/marx/capital/12.htm"
+                }
+              ],
+              "en": [
+                {
+                  "no": 14,
+                  "title": "Division of Labour and Manufacture",
+                  "url": "https://www.marxists.org/archive/marx/works/1867-c1/ch14.htm"
+                }
+              ]
+            },
+            {
+              "no": 13,
+              "title": "机器和大工业",
+              "mia": "https://www.marxists.org/chinese/marx/capital/13.htm",
+              "sections": [
+                {
+                  "title": "1、机器的发展",
+                  "mia": "https://www.marxists.org/chinese/marx/capital/13.htm#1"
+                },
+                {
+                  "title": "2、机器的价值向产品的转移",
+                  "mia": "https://www.marxists.org/chinese/marx/capital/13.htm#2"
+                },
+                {
+                  "title": "3、机器生产对工人的直接影响",
+                  "mia": "https://www.marxists.org/chinese/marx/capital/13.htm#3"
+                },
+                {
+                  "title": "4、工 厂",
+                  "mia": "https://www.marxists.org/chinese/marx/capital/13.htm#4"
+                },
+                {
+                  "title": "5、工人和机器之间的斗争",
+                  "mia": "https://www.marxists.org/chinese/marx/capital/13.htm#5"
+                },
+                {
+                  "title": "6、关于被机器排挤的工人会得到补偿的理论",
+                  "mia": "https://www.marxists.org/chinese/marx/capital/13.htm#6"
+                },
+                {
+                  "title": "7、工人随机器生产的发展而被排斥和吸引。棉纺织业的危机",
+                  "mia": "https://www.marxists.org/chinese/marx/capital/13.htm#7"
+                },
+                {
+                  "title": "8、大工业所引起的工场手工业、手工业和家庭劳动的革命",
+                  "mia": "https://www.marxists.org/chinese/marx/capital/13.htm#8"
+                },
+                {
+                  "title": "9、工厂法(卫生条款和教育条款)。它在英国的普遍实行",
+                  "mia": "https://www.marxists.org/chinese/marx/capital/13.htm#9"
+                },
+                {
+                  "title": "10、大工业和农业",
+                  "mia": "https://www.marxists.org/chinese/marx/capital/13.htm#10"
+                }
+              ],
+              "en": [
+                {
+                  "no": 15,
+                  "title": "Machinery and Modern Industry",
+                  "url": "https://www.marxists.org/archive/marx/works/1867-c1/ch15.htm"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "no": 5,
+          "title": "绝对剩余价值和相对剩余价值的生产",
+          "chapters": [
+            {
+              "no": 14,
+              "title": "绝对剩余价值和相对剩余价值",
+              "mia": "https://www.marxists.org/chinese/marx/capital/14.htm",
+              "sections": [],
+              "en": [
+                {
+                  "no": 16,
+                  "title": "Absolute and Relative Surplus-Value",
+                  "url": "https://www.marxists.org/archive/marx/works/1867-c1/ch16.htm"
+                }
+              ]
+            },
+            {
+              "no": 15,
+              "title": "劳动力价格和剩余价值的量的变化",
+              "mia": "https://www.marxists.org/chinese/marx/capital/15.htm",
+              "sections": [
+                {
+                  "title": "I、工作日的长度和劳动强度不变(已定)，劳动生产力可变",
+                  "mia": "https://www.marxists.org/chinese/marx/capital/15.htm"
+                },
+                {
+                  "title": "II、工作日和劳动生产力不变，劳动强度可变",
+                  "mia": "https://www.marxists.org/chinese/marx/capital/15.htm"
+                },
+                {
+                  "title": "III、劳动生产力和劳动强度不变，工作日可变",
+                  "mia": "https://www.marxists.org/chinese/marx/capital/15.htm"
+                },
+                {
+                  "title": "IV、劳动的持续时间、劳动生产力和劳动强度同时变化",
+                  "mia": "https://www.marxists.org/chinese/marx/capital/15.htm"
+                }
+              ],
+              "en": [
+                {
+                  "no": 17,
+                  "title": "Changes of Magnitude in the Price of Labour-Power and in Surplus-Value",
+                  "url": "https://www.marxists.org/archive/marx/works/1867-c1/ch17.htm"
+                }
+              ]
+            },
+            {
+              "no": 16,
+              "title": "剩余价值率的各种公式",
+              "mia": "https://www.marxists.org/chinese/marx/capital/16.htm",
+              "sections": [],
+              "en": [
+                {
+                  "no": 18,
+                  "title": "Various Formula for the Rate of Surplus-Value",
+                  "url": "https://www.marxists.org/archive/marx/works/1867-c1/ch18.htm"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "no": 6,
+          "title": "工资",
+          "chapters": [
+            {
+              "no": 17,
+              "title": "劳动力的价值或价格转化为工资",
+              "mia": "https://www.marxists.org/chinese/marx/capital/17.htm",
+              "sections": [],
+              "en": [
+                {
+                  "no": 19,
+                  "title": "The Transformation of the Value (and Respective Price) of Labour-Power into Wages",
+                  "url": "https://www.marxists.org/archive/marx/works/1867-c1/ch19.htm"
+                }
+              ]
+            },
+            {
+              "no": 18,
+              "title": "计时工资",
+              "mia": "https://www.marxists.org/chinese/marx/capital/18.htm",
+              "sections": [],
+              "en": [
+                {
+                  "no": 20,
+                  "title": "Time-Wages",
+                  "url": "https://www.marxists.org/archive/marx/works/1867-c1/ch20.htm"
+                }
+              ]
+            },
+            {
+              "no": 19,
+              "title": "计件工资",
+              "mia": "https://www.marxists.org/chinese/marx/capital/19.htm",
+              "sections": [],
+              "en": [
+                {
+                  "no": 21,
+                  "title": "Piece-Wages",
+                  "url": "https://www.marxists.org/archive/marx/works/1867-c1/ch21.htm"
+                }
+              ]
+            },
+            {
+              "no": 20,
+              "title": "工资的国民差异",
+              "mia": "https://www.marxists.org/chinese/marx/capital/20.htm",
+              "sections": [],
+              "en": [
+                {
+                  "no": 22,
+                  "title": "National Differences of Wages",
+                  "url": "https://www.marxists.org/archive/marx/works/1867-c1/ch22.htm"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "no": 7,
+          "title": "资本的积累过程",
+          "chapters": [
+            {
+              "no": 21,
+              "title": "简单再生产",
+              "mia": "https://www.marxists.org/chinese/marx/capital/21.htm",
+              "sections": [],
+              "en": [
+                {
+                  "no": 23,
+                  "title": "Simple Reproduction",
+                  "url": "https://www.marxists.org/archive/marx/works/1867-c1/ch23.htm"
+                }
+              ]
+            },
+            {
+              "no": 22,
+              "title": "剩余价值转化为资本",
+              "mia": "https://www.marxists.org/chinese/marx/capital/22.htm",
+              "sections": [
+                {
+                  "title": "1、规模扩大的资本主义生产过程。商品生产所有权规律转变为资本主义占有规律",
+                  "mia": "https://www.marxists.org/chinese/marx/capital/22.htm"
+                },
+                {
+                  "title": "2、政治经济学关于规模扩大的再生产的错误见解",
+                  "mia": "https://www.marxists.org/chinese/marx/capital/22.htm"
+                },
+                {
+                  "title": "3、剩余价值分为资本和收入。节欲论",
+                  "mia": "https://www.marxists.org/chinese/marx/capital/22.htm"
+                },
+                {
+                  "title": "4、几种同剩余价值分为资本和收入的比例无关但决定积累量的情况：",
+                  "mia": "https://www.marxists.org/chinese/marx/capital/22.htm"
+                },
+                {
+                  "title": "5、所谓劳动基金",
+                  "mia": "https://www.marxists.org/chinese/marx/capital/22.htm"
+                }
+              ],
+              "en": [
+                {
+                  "no": 24,
+                  "title": "Conversion of Surplus-Value into Capital",
+                  "url": "https://www.marxists.org/archive/marx/works/1867-c1/ch24.htm"
+                }
+              ]
+            },
+            {
+              "no": 23,
+              "title": "资本主义积累的一般规律",
+              "mia": "https://www.marxists.org/chinese/marx/capital/23.htm",
+              "sections": [
+                {
+                  "title": "1、资本构成不变，对劳动力的需求随积累的增长而增长",
+                  "mia": "https://www.marxists.org/chinese/marx/capital/23.htm"
+                },
+                {
+                  "title": "2、在积累和伴随积累的积聚的进程中资本可变部分相对减少",
+                  "mia": "https://www.marxists.org/chinese/marx/capital/23.htm"
+                },
+                {
+                  "title": "3、相对过剩人口或产业后备军的累进生产",
+                  "mia": "https://www.marxists.org/chinese/marx/capital/23.htm"
+                },
+                {
+                  "title": "4、相对过剩人口的各种存在形式。资本主义积累的一般规律",
+                  "mia": "https://www.marxists.org/chinese/marx/capital/23.htm"
+                },
+                {
+                  "title": "5、资本主义积累一般规律的例证",
+                  "mia": "https://www.marxists.org/chinese/marx/capital/23.htm"
+                }
+              ],
+              "en": [
+                {
+                  "no": 25,
+                  "title": "The General Law of Capitalist Accumulation",
+                  "url": "https://www.marxists.org/archive/marx/works/1867-c1/ch25.htm"
+                }
+              ]
+            },
+            {
+              "no": 24,
+              "title": "所谓原始积累",
+              "mia": "https://www.marxists.org/chinese/marx/capital/24.htm",
+              "sections": [
+                {
+                  "title": "1、原始积累的秘密",
+                  "mia": "https://www.marxists.org/chinese/marx/capital/24.htm",
+                  "en": [
+                    {
+                      "no": 26,
+                      "title": "The Secret of Primitive Accumulation",
+                      "url": "https://www.marxists.org/archive/marx/works/1867-c1/ch26.htm"
+                    }
+                  ]
+                },
+                {
+                  "title": "2、对农村居民土地的剥夺",
+                  "mia": "https://www.marxists.org/chinese/marx/capital/24.htm",
+                  "en": [
+                    {
+                      "no": 27,
+                      "title": "Expropriation of the Agricultural Population from the Land",
+                      "url": "https://www.marxists.org/archive/marx/works/1867-c1/ch27.htm"
+                    }
+                  ]
+                },
+                {
+                  "title": "3、十五世纪末以来惩治被剥夺者的血腥立法。压低工资的法律",
+                  "mia": "https://www.marxists.org/chinese/marx/capital/24.htm",
+                  "en": [
+                    {
+                      "no": 28,
+                      "title": "Bloody Legislation against the Expropriated, from the End of the 15th Century. Forcing down of Wages by Acts of Parliament",
+                      "url": "https://www.marxists.org/archive/marx/works/1867-c1/ch28.htm"
+                    }
+                  ]
+                },
+                {
+                  "title": "4、资本主义租地农场主的产生",
+                  "mia": "https://www.marxists.org/chinese/marx/capital/24.htm",
+                  "en": [
+                    {
+                      "no": 29,
+                      "title": "Genesis of the Capitalist Farmer",
+                      "url": "https://www.marxists.org/archive/marx/works/1867-c1/ch29.htm"
+                    }
+                  ]
+                },
+                {
+                  "title": "5、农业革命对工业的反作用。工业资本的国内市场的形成",
+                  "mia": "https://www.marxists.org/chinese/marx/capital/24.htm",
+                  "en": [
+                    {
+                      "no": 30,
+                      "title": "Reaction of the Agricultural Revolution on Industry. Creation of the Home-Market for Industrial Capital",
+                      "url": "https://www.marxists.org/archive/marx/works/1867-c1/ch30.htm"
+                    }
+                  ]
+                },
+                {
+                  "title": "6、工业资本家的产生",
+                  "mia": "https://www.marxists.org/chinese/marx/capital/24.htm",
+                  "en": [
+                    {
+                      "no": 31,
+                      "title": "Genesis of the Industrial Capitalist",
+                      "url": "https://www.marxists.org/archive/marx/works/1867-c1/ch31.htm"
+                    }
+                  ]
+                },
+                {
+                  "title": "7、资本主义积累的历史趋势",
+                  "mia": "https://www.marxists.org/chinese/marx/capital/24.htm",
+                  "en": [
+                    {
+                      "no": 32,
+                      "title": "Historical Tendency of Capitalist Accumulation",
+                      "url": "https://www.marxists.org/archive/marx/works/1867-c1/ch32.htm"
+                    }
+                  ]
+                }
+              ],
+              "en": [
+                {
+                  "no": 26,
+                  "title": "The Secret of Primitive Accumulation",
+                  "url": "https://www.marxists.org/archive/marx/works/1867-c1/ch26.htm"
+                },
+                {
+                  "no": 27,
+                  "title": "Expropriation of the Agricultural Population from the Land",
+                  "url": "https://www.marxists.org/archive/marx/works/1867-c1/ch27.htm"
+                },
+                {
+                  "no": 28,
+                  "title": "Bloody Legislation against the Expropriated, from the End of the 15th Century. Forcing down of Wages by Acts of Parliament",
+                  "url": "https://www.marxists.org/archive/marx/works/1867-c1/ch28.htm"
+                },
+                {
+                  "no": 29,
+                  "title": "Genesis of the Capitalist Farmer",
+                  "url": "https://www.marxists.org/archive/marx/works/1867-c1/ch29.htm"
+                },
+                {
+                  "no": 30,
+                  "title": "Reaction of the Agricultural Revolution on Industry. Creation of the Home-Market for Industrial Capital",
+                  "url": "https://www.marxists.org/archive/marx/works/1867-c1/ch30.htm"
+                },
+                {
+                  "no": 31,
+                  "title": "Genesis of the Industrial Capitalist",
+                  "url": "https://www.marxists.org/archive/marx/works/1867-c1/ch31.htm"
+                },
+                {
+                  "no": 32,
+                  "title": "Historical Tendency of Capitalist Accumulation",
+                  "url": "https://www.marxists.org/archive/marx/works/1867-c1/ch32.htm"
+                }
+              ]
+            },
+            {
+              "no": 25,
+              "title": "现代殖民理论",
+              "mia": "https://www.marxists.org/chinese/marx/capital/25.htm",
+              "sections": [],
+              "en": [
+                {
+                  "no": 33,
+                  "title": "The Modern Theory of Colonisation",
+                  "url": "https://www.marxists.org/archive/marx/works/1867-c1/ch33.htm"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "front_matter": [
+        {
+          "title": "第一版序言",
+          "mia": "https://www.marxists.org/chinese/marx/capital/00.htm#1"
+        },
+        {
+          "title": "第二版跋",
+          "mia": "https://www.marxists.org/chinese/marx/capital/00.htm#2"
+        },
+        {
+          "title": "法文版序言",
+          "mia": "https://www.marxists.org/chinese/marx/capital/00.htm#3"
+        },
+        {
+          "title": "法文版跋",
+          "mia": "https://www.marxists.org/chinese/marx/capital/00.htm#4"
+        },
+        {
+          "title": "第三版序言",
+          "mia": "https://www.marxists.org/chinese/marx/capital/00.htm#5"
+        },
+        {
+          "title": "英文版序言",
+          "mia": "https://www.marxists.org/chinese/marx/capital/00.htm#6"
+        },
+        {
+          "title": "第四版序言",
+          "mia": "https://www.marxists.org/chinese/marx/capital/00.htm#7"
+        }
+      ],
+      "en": {
+        "title": "Capital, Volume I",
+        "url": "https://www.marxists.org/archive/marx/works/1867-c1/index.htm",
+        "translator": "Samuel Moore and Edward Aveling；Frederick Engels 编校",
+        "published": 1887,
+        "note": "1887年英文首版以德文第三版为底本（恩格斯1886年英文版序言）；MIA另说明按标记收入德文第四版更改，部分拼写现代化。英文八篇33章，不套用中文25章编号。"
+      }
+    },
+    {
+      "no": 2,
+      "title": "资本的流通过程",
+      "wenji_volume": 6,
+      "mia": "https://www.marxists.org/chinese/marx-engels2/06/index.htm",
+      "parts": [
+        {
+          "no": 1,
+          "title": "资本形态变化及其循环",
+          "chapters": [
+            {
+              "no": 1,
+              "title": "货币资本的循环",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/06/01.htm",
+              "sections": [
+                {
+                  "title": "I．第一阶段 G—W",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/06/01.htm"
+                },
+                {
+                  "title": "II．第二阶段 生产资本的职能",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/06/01.htm"
+                },
+                {
+                  "title": "III．第三阶段 W′―G′",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/06/01.htm"
+                },
+                {
+                  "title": "IV.总循环",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/06/01.htm"
+                }
+              ],
+              "en": [
+                {
+                  "no": 1,
+                  "title": "The Circuit of Money-Capital",
+                  "url": "https://www.marxists.org/archive/marx/works/1885-c2/ch01.htm"
+                }
+              ]
+            },
+            {
+              "no": 2,
+              "title": "生产资本的循环",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/06/02.htm",
+              "sections": [
+                {
+                  "title": "I．简单再生产",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/06/02.htm"
+                },
+                {
+                  "title": "II．积累和规模扩大的再生产",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/06/02.htm"
+                },
+                {
+                  "title": "III．货币积累",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/06/02.htm"
+                },
+                {
+                  "title": "IV．准备金",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/06/02.htm"
+                }
+              ],
+              "en": [
+                {
+                  "no": 2,
+                  "title": "The Circuit of Productive Capital",
+                  "url": "https://www.marxists.org/archive/marx/works/1885-c2/ch02.htm"
+                }
+              ]
+            },
+            {
+              "no": 3,
+              "title": "商品资本的循环",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/06/03.htm",
+              "sections": [],
+              "en": [
+                {
+                  "no": 3,
+                  "title": "The Circuit of Commodity-Capital",
+                  "url": "https://www.marxists.org/archive/marx/works/1885-c2/ch03.htm"
+                }
+              ]
+            },
+            {
+              "no": 4,
+              "title": "循环过程的三个公式",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/06/04.htm",
+              "sections": [
+                {
+                  "title": "自然经济、货币经济和信用经济",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/06/04.htm"
+                },
+                {
+                  "title": "需求和供给相抵",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/06/04.htm"
+                }
+              ],
+              "en": [
+                {
+                  "no": 4,
+                  "title": "The Three Formulas of the Circuit",
+                  "url": "https://www.marxists.org/archive/marx/works/1885-c2/ch04.htm"
+                }
+              ]
+            },
+            {
+              "no": 5,
+              "title": "流通时间",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/06/05.htm",
+              "sections": [],
+              "en": [
+                {
+                  "no": 5,
+                  "title": "The Time of Circulation",
+                  "url": "https://www.marxists.org/archive/marx/works/1885-c2/ch05.htm"
+                }
+              ]
+            },
+            {
+              "no": 6,
+              "title": "流通费用",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/06/06.htm",
+              "sections": [
+                {
+                  "title": "Ⅰ．纯粹的流通费用",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/06/06.htm",
+                  "sections": [
+                    {
+                      "title": "1．买卖时间",
+                      "mia": "https://www.marxists.org/chinese/marx-engels2/06/06.htm"
+                    },
+                    {
+                      "title": "2．簿记",
+                      "mia": "https://www.marxists.org/chinese/marx-engels2/06/06.htm"
+                    },
+                    {
+                      "title": "3．货币",
+                      "mia": "https://www.marxists.org/chinese/marx-engels2/06/06.htm"
+                    }
+                  ]
+                },
+                {
+                  "title": "Ⅱ．保管费用",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/06/06.htm",
+                  "sections": [
+                    {
+                      "title": "1．储备形成一般",
+                      "mia": "https://www.marxists.org/chinese/marx-engels2/06/06.htm"
+                    },
+                    {
+                      "title": "2．真正的商品储备",
+                      "mia": "https://www.marxists.org/chinese/marx-engels2/06/06.htm"
+                    }
+                  ]
+                },
+                {
+                  "title": "Ⅲ．运输费用",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/06/06.htm"
+                }
+              ],
+              "en": [
+                {
+                  "no": 6,
+                  "title": "The Costs of Circulation",
+                  "url": "https://www.marxists.org/archive/marx/works/1885-c2/ch06.htm"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "no": 2,
+          "title": "资本周转",
+          "chapters": [
+            {
+              "no": 7,
+              "title": "周转时间和周转次数",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/06/07.htm",
+              "sections": [],
+              "en": [
+                {
+                  "no": 7,
+                  "title": "The Turnover Time and Number of Turnovers",
+                  "url": "https://www.marxists.org/archive/marx/works/1885-c2/ch07.htm"
+                }
+              ]
+            },
+            {
+              "no": 8,
+              "title": "固定资本和流动资本",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/06/08.htm",
+              "sections": [
+                {
+                  "title": "Ⅰ．形式区别",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/06/08.htm"
+                },
+                {
+                  "title": "Ⅱ．固定资本的组成部分、补偿、修理和积累",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/06/08.htm"
+                }
+              ],
+              "en": [
+                {
+                  "no": 8,
+                  "title": "Fixed Capital and Circulating Capital",
+                  "url": "https://www.marxists.org/archive/marx/works/1885-c2/ch08.htm"
+                }
+              ]
+            },
+            {
+              "no": 9,
+              "title": "预付资本的总周转。周转的周期",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/06/09.htm",
+              "sections": [],
+              "en": [
+                {
+                  "no": 9,
+                  "title": "The Aggregate Turnover of the Capital Advanced. Cycles of Turnover",
+                  "url": "https://www.marxists.org/archive/marx/works/1885-c2/ch09.htm"
+                }
+              ]
+            },
+            {
+              "no": 10,
+              "title": "关于固定资本和流动资本的理论。重农学派和亚当·斯密",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/06/10.htm",
+              "sections": [],
+              "en": [
+                {
+                  "no": 10,
+                  "title": "Theories of Fixed and Circulating Capital",
+                  "url": "https://www.marxists.org/archive/marx/works/1885-c2/ch10.htm"
+                }
+              ]
+            },
+            {
+              "no": 11,
+              "title": "关于固定资本和流动资本的理论。李嘉图",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/06/11.htm",
+              "sections": [],
+              "en": [
+                {
+                  "no": 11,
+                  "title": "Theories of Fixed and Circulating Capital. Ricardo",
+                  "url": "https://www.marxists.org/archive/marx/works/1885-c2/ch11.htm"
+                }
+              ]
+            },
+            {
+              "no": 12,
+              "title": "劳动期间",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/06/12.htm",
+              "sections": [],
+              "en": [
+                {
+                  "no": 12,
+                  "title": "The Working Period",
+                  "url": "https://www.marxists.org/archive/marx/works/1885-c2/ch12.htm"
+                }
+              ]
+            },
+            {
+              "no": 13,
+              "title": "生产时间",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/06/13.htm",
+              "sections": [],
+              "en": [
+                {
+                  "no": 13,
+                  "title": "The Time of Production",
+                  "url": "https://www.marxists.org/archive/marx/works/1885-c2/ch13.htm"
+                }
+              ]
+            },
+            {
+              "no": 14,
+              "title": "流通时间",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/06/14.htm",
+              "sections": [],
+              "en": [
+                {
+                  "no": 14,
+                  "title": "The Time of Circulation",
+                  "url": "https://www.marxists.org/archive/marx/works/1885-c2/ch14.htm"
+                }
+              ]
+            },
+            {
+              "no": 15,
+              "title": "周转时间对预付资本量的影响",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/06/15.htm",
+              "sections": [
+                {
+                  "title": "Ⅰ．劳动期间和流通期间相等",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/06/15.htm"
+                },
+                {
+                  "title": "II．劳动期间大于流通期间",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/06/15.htm"
+                },
+                {
+                  "title": "III．劳动期间小于流通期间",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/06/15.htm"
+                },
+                {
+                  "title": "IV．结论",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/06/15.htm"
+                },
+                {
+                  "title": "V．价格变动的影响",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/06/15.htm"
+                }
+              ],
+              "en": [
+                {
+                  "no": 15,
+                  "title": "Effect of Turnover Time on Magnitude of Advanced Capital",
+                  "url": "https://www.marxists.org/archive/marx/works/1885-c2/ch15.htm"
+                }
+              ]
+            },
+            {
+              "no": 16,
+              "title": "可变资本的周转",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/06/16.htm",
+              "sections": [
+                {
+                  "title": "Ⅰ．年剩余价值率",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/06/16.htm"
+                },
+                {
+                  "title": "II．单个可变资本的周转",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/06/16.htm"
+                },
+                {
+                  "title": "III．从社会的角度考察的可变资本的周转",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/06/16.htm"
+                }
+              ],
+              "en": [
+                {
+                  "no": 16,
+                  "title": "The Turnover of Variable Capital",
+                  "url": "https://www.marxists.org/archive/marx/works/1885-c2/ch16.htm"
+                }
+              ]
+            },
+            {
+              "no": 17,
+              "title": "剩余价值的流通",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/06/17.htm",
+              "sections": [
+                {
+                  "title": "I．简单再生产",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/06/17.htm"
+                },
+                {
+                  "title": "II．积累和扩大再生产",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/06/17.htm"
+                }
+              ],
+              "en": [
+                {
+                  "no": 17,
+                  "title": "The Circulation of Surplus-Value",
+                  "url": "https://www.marxists.org/archive/marx/works/1885-c2/ch17.htm"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "no": 3,
+          "title": "社会总资本的再生产和流通",
+          "chapters": [
+            {
+              "no": 18,
+              "title": "导言",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/06/18.htm",
+              "sections": [
+                {
+                  "title": "Ⅰ．研究的对象",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/06/18.htm"
+                },
+                {
+                  "title": "II．货币资本的作用",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/06/18.htm"
+                }
+              ],
+              "en": [
+                {
+                  "no": 18,
+                  "title": "Introduction",
+                  "url": "https://www.marxists.org/archive/marx/works/1885-c2/ch18.htm"
+                }
+              ]
+            },
+            {
+              "no": 19,
+              "title": "前人对这个问题的阐述",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/06/19.htm",
+              "sections": [
+                {
+                  "title": "I．重农学派",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/06/19.htm"
+                },
+                {
+                  "title": "II．亚当·斯密",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/06/19.htm",
+                  "sections": [
+                    {
+                      "title": "1．斯密的一般观点",
+                      "mia": "https://www.marxists.org/chinese/marx-engels2/06/19.htm"
+                    },
+                    {
+                      "title": "2．斯密把交换价值分解为v＋m",
+                      "mia": "https://www.marxists.org/chinese/marx-engels2/06/19.htm"
+                    },
+                    {
+                      "title": "3．不变资本部分",
+                      "mia": "https://www.marxists.org/chinese/marx-engels2/06/19.htm"
+                    },
+                    {
+                      "title": "4．亚·斯密所说的资本和收入",
+                      "mia": "https://www.marxists.org/chinese/marx-engels2/06/19.htm"
+                    },
+                    {
+                      "title": "5．总结",
+                      "mia": "https://www.marxists.org/chinese/marx-engels2/06/19.htm"
+                    }
+                  ]
+                },
+                {
+                  "title": "III．以后的经济学家",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/06/19.htm"
+                }
+              ],
+              "en": [
+                {
+                  "no": 19,
+                  "title": "Former Presentations of the Subject",
+                  "url": "https://www.marxists.org/archive/marx/works/1885-c2/ch19.htm"
+                }
+              ]
+            },
+            {
+              "no": 20,
+              "title": "简单再生产",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/06/20.htm",
+              "sections": [
+                {
+                  "title": "I．问题的提出",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/06/20.htm"
+                },
+                {
+                  "title": "II．社会生产的两个部类",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/06/20.htm"
+                },
+                {
+                  "title": "III．两个部类之间的交换：I（v＋m）和IIc的交换",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/06/20.htm"
+                },
+                {
+                  "title": "IV．第II部类内部的交换。必要生活资料和奢侈品",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/06/20.htm"
+                },
+                {
+                  "title": "V．货币流通在交换中的中介作用",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/06/20.htm"
+                },
+                {
+                  "title": "VI．第I部类的不变资本",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/06/20.htm"
+                },
+                {
+                  "title": "VII．两个部类的可变资本和剩余价值",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/06/20.htm"
+                },
+                {
+                  "title": "VIII．两个部类的不变资本",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/06/20.htm"
+                },
+                {
+                  "title": "IX．对于亚·斯密、施托尔希和拉姆赛的回顾",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/06/20.htm"
+                },
+                {
+                  "title": "X．资本和收入：可变资本和工资",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/06/20.htm"
+                },
+                {
+                  "title": "XI．固定资本的补偿",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/06/20.htm",
+                  "sections": [
+                    {
+                      "title": "1．损耗的价值部分在货币形式上的补偿",
+                      "mia": "https://www.marxists.org/chinese/marx-engels2/06/20.htm"
+                    },
+                    {
+                      "title": "2．固定资本的实物补偿",
+                      "mia": "https://www.marxists.org/chinese/marx-engels2/06/20.htm"
+                    },
+                    {
+                      "title": "3．结论",
+                      "mia": "https://www.marxists.org/chinese/marx-engels2/06/20.htm"
+                    }
+                  ]
+                },
+                {
+                  "title": "XII．货币材料的再生产",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/06/20.htm"
+                },
+                {
+                  "title": "XIII．德斯杜特·德·特拉西的再生产理论",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/06/20.htm"
+                }
+              ],
+              "en": [
+                {
+                  "no": 20,
+                  "title": "Simple Reproduction (Part 1 of 4)",
+                  "url": "https://www.marxists.org/archive/marx/works/1885-c2/ch20_01.htm"
+                },
+                {
+                  "no": 20,
+                  "title": "Simple Reproduction (Part 2 of 4)",
+                  "url": "https://www.marxists.org/archive/marx/works/1885-c2/ch20_02.htm"
+                },
+                {
+                  "no": 20,
+                  "title": "Simple Reproduction (Part 3 of 4)",
+                  "url": "https://www.marxists.org/archive/marx/works/1885-c2/ch20_03.htm"
+                },
+                {
+                  "no": 20,
+                  "title": "Simple Reproduction (Part 4 of 4)",
+                  "url": "https://www.marxists.org/archive/marx/works/1885-c2/ch20_04.htm"
+                }
+              ]
+            },
+            {
+              "no": 21,
+              "title": "积累和扩大再生产",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/06/21.htm",
+              "sections": [
+                {
+                  "title": "I．第I部类的积累",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/06/21.htm",
+                  "sections": [
+                    {
+                      "title": "1．货币贮藏",
+                      "mia": "https://www.marxists.org/chinese/marx-engels2/06/21.htm"
+                    },
+                    {
+                      "title": "2．追加的不变资本",
+                      "mia": "https://www.marxists.org/chinese/marx-engels2/06/21.htm"
+                    },
+                    {
+                      "title": "3．追加的可变资本",
+                      "mia": "https://www.marxists.org/chinese/marx-engels2/06/21.htm"
+                    }
+                  ]
+                },
+                {
+                  "title": "II．第II部类的积累",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/06/21.htm"
+                },
+                {
+                  "title": "III．用公式来说明积累",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/06/21.htm",
+                  "sections": [
+                    {
+                      "title": "1．第一例",
+                      "mia": "https://www.marxists.org/chinese/marx-engels2/06/21.htm"
+                    },
+                    {
+                      "title": "2．第二例",
+                      "mia": "https://www.marxists.org/chinese/marx-engels2/06/21.htm"
+                    },
+                    {
+                      "title": "3．积累时IIc的交换",
+                      "mia": "https://www.marxists.org/chinese/marx-engels2/06/21.htm"
+                    }
+                  ]
+                },
+                {
+                  "title": "IV.补充说明",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/06/21.htm"
+                }
+              ],
+              "en": [
+                {
+                  "no": 21,
+                  "title": "Accumulation and Reproduction on an Expanded Scale (part 1 of 2)",
+                  "url": "https://www.marxists.org/archive/marx/works/1885-c2/ch21_01.htm"
+                },
+                {
+                  "no": 21,
+                  "title": "Accumulation and Reproduction on an Expanded Scale (part 2 of 2)",
+                  "url": "https://www.marxists.org/archive/marx/works/1885-c2/ch21_02.htm"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "front_matter": [
+        {
+          "title": "第六卷说明",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/06/00a.htm"
+        },
+        {
+          "title": "弗·恩格斯 序言",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/06/00b.htm"
+        },
+        {
+          "title": "弗·恩格斯 第二版序言",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/06/00c.htm"
+        }
+      ],
+      "en": {
+        "title": "Capital, Volume II",
+        "url": "https://www.marxists.org/archive/marx/works/1885-c2/index.htm",
+        "translator": "I. Lasker",
+        "published": 1956,
+        "note": "源页据Progress Publishers, Moscow 1956英译；注明底本为1893修订二版。逻辑21章与中文一致，第20/21章在网站拆为4/2个文件。"
+      }
+    },
+    {
+      "no": 3,
+      "title": "资本主义生产的总过程",
+      "wenji_volume": 7,
+      "mia": "https://www.marxists.org/chinese/marx-engels2/07/index.htm",
+      "parts": [
+        {
+          "no": 1,
+          "title": "剩余价值转化为利润和 剩余价值率转化为利润率",
+          "chapters": [
+            {
+              "no": 1,
+              "title": "成本价格和利润",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/07/01.htm",
+              "sections": [],
+              "en": [
+                {
+                  "no": 1,
+                  "title": "Cost-Price and Profit",
+                  "url": "https://www.marxists.org/archive/marx/works/1894-c3/ch01.htm"
+                }
+              ]
+            },
+            {
+              "no": 2,
+              "title": "利润率",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/07/02.htm",
+              "sections": [],
+              "en": [
+                {
+                  "no": 2,
+                  "title": "The Rate of Profit",
+                  "url": "https://www.marxists.org/archive/marx/works/1894-c3/ch02.htm"
+                }
+              ]
+            },
+            {
+              "no": 3,
+              "title": "利润率和剩余价值率的关系",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/07/03.htm",
+              "sections": [],
+              "en": [
+                {
+                  "no": 3,
+                  "title": "The Relation of the Rate of Profit to the Rate of Surplus-Value",
+                  "url": "https://www.marxists.org/archive/marx/works/1894-c3/ch03.htm"
+                }
+              ]
+            },
+            {
+              "no": 4,
+              "title": "周转对利润率的影响",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/07/04.htm",
+              "sections": [],
+              "en": [
+                {
+                  "no": 4,
+                  "title": "The Effect of the Turnover on the Rate of Profit",
+                  "url": "https://www.marxists.org/archive/marx/works/1894-c3/ch04.htm"
+                }
+              ]
+            },
+            {
+              "no": 5,
+              "title": "不变资本使用上的节约",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/07/05.htm",
+              "sections": [
+                {
+                  "title": "I．概论",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/07/05.htm"
+                },
+                {
+                  "title": "II．靠牺牲工人而实现的劳动条件的节约",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/07/05.htm"
+                },
+                {
+                  "title": "III．动力生产、动力传送和建筑物的节约",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/07/05.htm"
+                },
+                {
+                  "title": "IV．生产排泄物的利用",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/07/05.htm"
+                },
+                {
+                  "title": "V．由于发明而产生的节约",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/07/05.htm"
+                }
+              ],
+              "en": [
+                {
+                  "no": 5,
+                  "title": "Economy in the Employment of Constant Capital",
+                  "url": "https://www.marxists.org/archive/marx/works/1894-c3/ch05.htm"
+                }
+              ]
+            },
+            {
+              "no": 6,
+              "title": "价格变动的影响",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/07/06.htm",
+              "sections": [
+                {
+                  "title": "I．原料价格的波动及其对利润率的直接影响",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/07/06.htm"
+                },
+                {
+                  "title": "II．资本的增值和贬值、游离和束缚",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/07/06.htm"
+                },
+                {
+                  "title": "III．一般的例证：1861―1865年的棉业危机前史（1845―1860年）",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/07/06.htm"
+                },
+                {
+                  "title": "1861―1864年。美国南北战争70。棉荒。生产过程由于原料缺乏和昂贵而中断的最明显的例子",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/07/06.htm"
+                },
+                {
+                  "title": "废棉。东印度棉（苏拉特棉）。对工人工资的影响。机器的改良。用淀粉和矿物代替棉花。淀粉浆纱对工人的影响。细纱纺纱业主。工厂主的欺诈",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/07/06.htm"
+                },
+                {
+                  "title": "在无价值体上做实验",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/07/06.htm"
+                }
+              ],
+              "en": [
+                {
+                  "no": 6,
+                  "title": "The Effect of Price Fluctuations",
+                  "url": "https://www.marxists.org/archive/marx/works/1894-c3/ch06.htm"
+                }
+              ]
+            },
+            {
+              "no": 7,
+              "title": "补充说明",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/07/07.htm",
+              "sections": [],
+              "en": [
+                {
+                  "no": 7,
+                  "title": "Supplementary Remarks",
+                  "url": "https://www.marxists.org/archive/marx/works/1894-c3/ch07.htm"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "no": 2,
+          "title": "利润转化为平均利润",
+          "chapters": [
+            {
+              "no": 8,
+              "title": "不同生产部门的资本的不同构成和由此引起的利润率的差别",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/07/08.htm",
+              "sections": [],
+              "en": [
+                {
+                  "no": 8,
+                  "title": "Different Compositions of Capitals in Different Branches of Production and Resulting Differences in Rates of Profit",
+                  "url": "https://www.marxists.org/archive/marx/works/1894-c3/ch08.htm"
+                }
+              ]
+            },
+            {
+              "no": 9,
+              "title": "一般利润率（平均利润率）的形成和商品价值转化为生产价格",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/07/09.htm",
+              "sections": [],
+              "en": [
+                {
+                  "no": 9,
+                  "title": "Formation of a General Rate of Profit (Average Rate of Profit) and Transformation of the Values of Commodities into Prices of Production",
+                  "url": "https://www.marxists.org/archive/marx/works/1894-c3/ch09.htm"
+                }
+              ]
+            },
+            {
+              "no": 10,
+              "title": "一般利润率通过竞争而平均化。市场价格和市场价值。超额利润",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/07/10.htm",
+              "sections": [],
+              "en": [
+                {
+                  "no": 10,
+                  "title": "Equalisation of the General Rate of Profit Through Competition. Market-Prices and Market-Values. Surplus-Profit.",
+                  "url": "https://www.marxists.org/archive/marx/works/1894-c3/ch10.htm"
+                }
+              ]
+            },
+            {
+              "no": 11,
+              "title": "工资的一般变动对生产价格的影响",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/07/11.htm",
+              "sections": [],
+              "en": [
+                {
+                  "no": 11,
+                  "title": "Effects of General Wage Fluctuations on Prices of Production",
+                  "url": "https://www.marxists.org/archive/marx/works/1894-c3/ch11.htm"
+                }
+              ]
+            },
+            {
+              "no": 12,
+              "title": "补充说明",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/07/12.htm",
+              "sections": [
+                {
+                  "title": "I．引起生产价格变化的原因",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/07/12.htm"
+                },
+                {
+                  "title": "II．中等构成的商品的生产价格",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/07/12.htm"
+                },
+                {
+                  "title": "III．资本家的补偿理由",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/07/12.htm"
+                }
+              ],
+              "en": [
+                {
+                  "no": 12,
+                  "title": "Supplementary Remarks",
+                  "url": "https://www.marxists.org/archive/marx/works/1894-c3/ch12.htm"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "no": 3,
+          "title": "利润率趋向下降的规律",
+          "chapters": [
+            {
+              "no": 13,
+              "title": "规律本身",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/07/13.htm",
+              "sections": [],
+              "en": [
+                {
+                  "no": 13,
+                  "title": "The Law as Such",
+                  "url": "https://www.marxists.org/archive/marx/works/1894-c3/ch13.htm"
+                }
+              ]
+            },
+            {
+              "no": 14,
+              "title": "起反作用的各种原因",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/07/14.htm",
+              "sections": [
+                {
+                  "title": "I．劳动剥削程度的提高",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/07/14.htm"
+                },
+                {
+                  "title": "II．工资被压低到劳动力的价值以下",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/07/14.htm"
+                },
+                {
+                  "title": "III．不变资本各要素变得便宜",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/07/14.htm"
+                },
+                {
+                  "title": "IV．相对过剩人口",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/07/14.htm"
+                },
+                {
+                  "title": "V．对外贸易",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/07/14.htm"
+                },
+                {
+                  "title": "VI．股份资本的增加",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/07/14.htm"
+                }
+              ],
+              "en": [
+                {
+                  "no": 14,
+                  "title": "Counteracting Influences",
+                  "url": "https://www.marxists.org/archive/marx/works/1894-c3/ch14.htm"
+                }
+              ]
+            },
+            {
+              "no": 15,
+              "title": "规律的内部矛盾的展开",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/07/15.htm",
+              "sections": [
+                {
+                  "title": "I．概论",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/07/15.htm"
+                },
+                {
+                  "title": "II．生产扩大和价值增殖之间的冲突",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/07/15.htm"
+                },
+                {
+                  "title": "III．人口过剩时的资本过剩",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/07/15.htm"
+                },
+                {
+                  "title": "IV．补充说明",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/07/15.htm"
+                }
+              ],
+              "en": [
+                {
+                  "no": 15,
+                  "title": "Exposition of the Internal Contradictions of the Law",
+                  "url": "https://www.marxists.org/archive/marx/works/1894-c3/ch15.htm"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "no": 4,
+          "title": "商品资本和货币资本转化为 商品经营资本和货币经营资本（商人资本）",
+          "chapters": [
+            {
+              "no": 16,
+              "title": "商品经营资本",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/07/16.htm",
+              "sections": [],
+              "en": [
+                {
+                  "no": 16,
+                  "title": "Commercial Capital",
+                  "url": "https://www.marxists.org/archive/marx/works/1894-c3/ch16.htm"
+                }
+              ]
+            },
+            {
+              "no": 17,
+              "title": "商业利润",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/07/17.htm",
+              "sections": [],
+              "en": [
+                {
+                  "no": 17,
+                  "title": "Commercial Profit",
+                  "url": "https://www.marxists.org/archive/marx/works/1894-c3/ch17.htm"
+                }
+              ]
+            },
+            {
+              "no": 18,
+              "title": "商人资本的周转。价格",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/07/18.htm",
+              "sections": [],
+              "en": [
+                {
+                  "no": 18,
+                  "title": "The Turnover of Merchant's Capital",
+                  "url": "https://www.marxists.org/archive/marx/works/1894-c3/ch18.htm"
+                }
+              ]
+            },
+            {
+              "no": 19,
+              "title": "货币经营资本",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/07/19.htm",
+              "sections": [],
+              "en": [
+                {
+                  "no": 19,
+                  "title": "Money-Dealing Capital",
+                  "url": "https://www.marxists.org/archive/marx/works/1894-c3/ch19.htm"
+                }
+              ]
+            },
+            {
+              "no": 20,
+              "title": "关于商人资本的历史考察",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/07/20.htm",
+              "sections": [],
+              "en": [
+                {
+                  "no": 20,
+                  "title": "Historical Facts about Merchant's Capital",
+                  "url": "https://www.marxists.org/archive/marx/works/1894-c3/ch20.htm"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "no": 5,
+          "title": "利润分为利息和企业主收入。 生息资本",
+          "chapters": [
+            {
+              "no": 21,
+              "title": "生息资本",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/07/21.htm",
+              "sections": [],
+              "en": [
+                {
+                  "no": 21,
+                  "title": "Interest-Bearing Capital",
+                  "url": "https://www.marxists.org/archive/marx/works/1894-c3/ch21.htm"
+                }
+              ]
+            },
+            {
+              "no": 22,
+              "title": "利润的分割。利息率。“自然”利息率",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/07/22.htm",
+              "sections": [],
+              "en": [
+                {
+                  "no": 22,
+                  "title": "Division of Profit. Rate of Interest. Natural Rate of Interest.",
+                  "url": "https://www.marxists.org/archive/marx/works/1894-c3/ch22.htm"
+                }
+              ]
+            },
+            {
+              "no": 23,
+              "title": "利息和企业主收入",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/07/23.htm",
+              "sections": [],
+              "en": [
+                {
+                  "no": 23,
+                  "title": "Interest and Profit of Enterprise",
+                  "url": "https://www.marxists.org/archive/marx/works/1894-c3/ch23.htm"
+                }
+              ]
+            },
+            {
+              "no": 24,
+              "title": "资本关系在生息资本形式上的外表化",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/07/24.htm",
+              "sections": [],
+              "en": [
+                {
+                  "no": 24,
+                  "title": "Externalisation of the Relations of Capital in the Form of Interest-Bearing Capital",
+                  "url": "https://www.marxists.org/archive/marx/works/1894-c3/ch24.htm"
+                }
+              ]
+            },
+            {
+              "no": 25,
+              "title": "信用和虚拟资本",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/07/25.htm",
+              "sections": [],
+              "en": [
+                {
+                  "no": 25,
+                  "title": "Credit and Fictitious Capital",
+                  "url": "https://www.marxists.org/archive/marx/works/1894-c3/ch25.htm"
+                }
+              ]
+            },
+            {
+              "no": 26,
+              "title": "货币资本的积累，它对利息率的影响",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/07/26.htm",
+              "sections": [],
+              "en": [
+                {
+                  "no": 26,
+                  "title": "Accumulation of Money-Capital. Its Influence on the Interest Rate.",
+                  "url": "https://www.marxists.org/archive/marx/works/1894-c3/ch26.htm"
+                }
+              ]
+            },
+            {
+              "no": 27,
+              "title": "信用在资本主义生产中的作用",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/07/27.htm",
+              "sections": [],
+              "en": [
+                {
+                  "no": 27,
+                  "title": "The Role of Credit in Capitalist Production",
+                  "url": "https://www.marxists.org/archive/marx/works/1894-c3/ch27.htm"
+                }
+              ]
+            },
+            {
+              "no": 28,
+              "title": "流通手段和资本。图克和富拉顿的见解",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/07/28.htm",
+              "sections": [],
+              "en": [
+                {
+                  "no": 28,
+                  "title": "Medium of Circulation and Capital; Views of Tooke and Fullarton",
+                  "url": "https://www.marxists.org/archive/marx/works/1894-c3/ch28.htm"
+                }
+              ]
+            },
+            {
+              "no": 29,
+              "title": "银行资本的组成部分",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/07/29.htm",
+              "sections": [],
+              "en": [
+                {
+                  "no": 29,
+                  "title": "Component Parts of Bank Capital",
+                  "url": "https://www.marxists.org/archive/marx/works/1894-c3/ch29.htm"
+                }
+              ]
+            },
+            {
+              "no": 30,
+              "title": "货币资本和现实资本。I",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/07/30.htm",
+              "sections": [],
+              "en": [
+                {
+                  "no": 30,
+                  "title": "Money-Capital and Real Capital. I",
+                  "url": "https://www.marxists.org/archive/marx/works/1894-c3/ch30.htm"
+                }
+              ]
+            },
+            {
+              "no": 31,
+              "title": "货币资本和现实资本。II（续）",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/07/31.htm",
+              "sections": [
+                {
+                  "title": "1．货币转化为借贷资本",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/07/31.htm"
+                },
+                {
+                  "title": "2．资本或收入转化为货币，这种货币再转化为借贷资本",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/07/31.htm"
+                }
+              ],
+              "en": [
+                {
+                  "no": 31,
+                  "title": "Money-Capital and Real Capital. II",
+                  "url": "https://www.marxists.org/archive/marx/works/1894-c3/ch31.htm"
+                }
+              ]
+            },
+            {
+              "no": 32,
+              "title": "货币资本和现实资本。III（续完）",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/07/32.htm",
+              "sections": [],
+              "en": [
+                {
+                  "no": 32,
+                  "title": "Money-Capital and Real Capital. III",
+                  "url": "https://www.marxists.org/archive/marx/works/1894-c3/ch32.htm"
+                }
+              ]
+            },
+            {
+              "no": 33,
+              "title": "信用制度下的流通手段",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/07/33.htm",
+              "sections": [],
+              "en": [
+                {
+                  "no": 33,
+                  "title": "The Medium of Circulation in the Credit System",
+                  "url": "https://www.marxists.org/archive/marx/works/1894-c3/ch33.htm"
+                }
+              ]
+            },
+            {
+              "no": 34,
+              "title": "通货原理和1844年英国的银行立法",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/07/34.htm",
+              "sections": [],
+              "en": [
+                {
+                  "no": 34,
+                  "title": "The Currency Principle and the English Bank Legislation of 1844",
+                  "url": "https://www.marxists.org/archive/marx/works/1894-c3/ch34.htm"
+                }
+              ]
+            },
+            {
+              "no": 35,
+              "title": "贵金属和汇兑率",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/07/35.htm",
+              "sections": [
+                {
+                  "title": "I．金贮藏的变动",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/07/35.htm"
+                },
+                {
+                  "title": "II．汇兑率",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/07/35.htm"
+                },
+                {
+                  "title": "对亚洲的汇兑率",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/07/35.htm"
+                },
+                {
+                  "title": "英国的贸易差额",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/07/35.htm"
+                }
+              ],
+              "en": [
+                {
+                  "no": 35,
+                  "title": "Precious Metal and Rate of Exchange",
+                  "url": "https://www.marxists.org/archive/marx/works/1894-c3/ch35.htm"
+                }
+              ]
+            },
+            {
+              "no": 36,
+              "title": "资本主义以前的状态",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/07/36.htm",
+              "sections": [
+                {
+                  "title": "中世纪的利息",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/07/36.htm"
+                },
+                {
+                  "title": "教会由禁止取息得到的好处",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/07/36.htm"
+                }
+              ],
+              "en": [
+                {
+                  "no": 36,
+                  "title": "Pre-Capitalist Relationships",
+                  "url": "https://www.marxists.org/archive/marx/works/1894-c3/ch36.htm"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "no": 6,
+          "title": "超额利润转化为地租",
+          "chapters": [
+            {
+              "no": 37,
+              "title": "导论",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/07/37.htm",
+              "sections": [],
+              "en": [
+                {
+                  "no": 37,
+                  "title": "Introduction",
+                  "url": "https://www.marxists.org/archive/marx/works/1894-c3/ch37.htm"
+                }
+              ]
+            },
+            {
+              "no": 38,
+              "title": "级差地租：概论",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/07/38.htm",
+              "sections": [],
+              "en": [
+                {
+                  "no": 38,
+                  "title": "Differential Rent: General Remarks",
+                  "url": "https://www.marxists.org/archive/marx/works/1894-c3/ch38.htm"
+                }
+              ]
+            },
+            {
+              "no": 39,
+              "title": "级差地租的第一形式（级差地租I）",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/07/39.htm",
+              "sections": [],
+              "en": [
+                {
+                  "no": 39,
+                  "title": "First Form of Differential Rent (Differential Rent I)",
+                  "url": "https://www.marxists.org/archive/marx/works/1894-c3/ch39.htm"
+                }
+              ]
+            },
+            {
+              "no": 40,
+              "title": "级差地租的第二形式（级差地租II）",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/07/40.htm",
+              "sections": [],
+              "en": [
+                {
+                  "no": 40,
+                  "title": "Second Form of Differential Rent (Differential Rent II)",
+                  "url": "https://www.marxists.org/archive/marx/works/1894-c3/ch40.htm"
+                }
+              ]
+            },
+            {
+              "no": 41,
+              "title": "级差地租II――第一种情况：生产价格不变",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/07/41.htm",
+              "sections": [],
+              "en": [
+                {
+                  "no": 41,
+                  "title": "Differential Rent II — First Case: Constant Price of Production",
+                  "url": "https://www.marxists.org/archive/marx/works/1894-c3/ch41.htm"
+                }
+              ]
+            },
+            {
+              "no": 42,
+              "title": "级差地租II――第二种情况：生产价格下降",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/07/42.htm",
+              "sections": [
+                {
+                  "title": "I．追加投资的生产率不变",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/07/42.htm"
+                },
+                {
+                  "title": "II．追加资本的生产率降低",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/07/42.htm"
+                },
+                {
+                  "title": "III．追加资本的生产率提高",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/07/42.htm"
+                }
+              ],
+              "en": [
+                {
+                  "no": 42,
+                  "title": "Differential Rent II — Second Case: Falling Price of Production",
+                  "url": "https://www.marxists.org/archive/marx/works/1894-c3/ch42.htm"
+                }
+              ]
+            },
+            {
+              "no": 43,
+              "title": "级差地租II――第三种情况：生产价格上涨。结论",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/07/43.htm",
+              "sections": [],
+              "en": [
+                {
+                  "no": 43,
+                  "title": "Differential Rent II — Third Case: Rising Price of Production",
+                  "url": "https://www.marxists.org/archive/marx/works/1894-c3/ch43.htm"
+                }
+              ]
+            },
+            {
+              "no": 44,
+              "title": "最坏耕地也有级差地租",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/07/44.htm",
+              "sections": [],
+              "en": [
+                {
+                  "no": 44,
+                  "title": "Differential Rent Also on the Worst Cultivated Soil",
+                  "url": "https://www.marxists.org/archive/marx/works/1894-c3/ch44.htm"
+                }
+              ]
+            },
+            {
+              "no": 45,
+              "title": "绝对地租",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/07/45.htm",
+              "sections": [],
+              "en": [
+                {
+                  "no": 45,
+                  "title": "Absolute Ground-Rent",
+                  "url": "https://www.marxists.org/archive/marx/works/1894-c3/ch45.htm"
+                }
+              ]
+            },
+            {
+              "no": 46,
+              "title": "建筑地段的地租。矿山地租。土地价格",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/07/46.htm",
+              "sections": [],
+              "en": [
+                {
+                  "no": 46,
+                  "title": "Building Site Rent. Rent in Mining. Price of Land",
+                  "url": "https://www.marxists.org/archive/marx/works/1894-c3/ch46.htm"
+                }
+              ]
+            },
+            {
+              "no": 47,
+              "title": "资本主义地租的起源",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/07/47.htm",
+              "sections": [
+                {
+                  "title": "I．导论",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/07/47.htm"
+                },
+                {
+                  "title": "II．劳动地租",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/07/47.htm"
+                },
+                {
+                  "title": "III．产品地租",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/07/47.htm"
+                },
+                {
+                  "title": "IV．货币地租",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/07/47.htm"
+                },
+                {
+                  "title": "V．分成制和农民的小块土地所有制",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/07/47.htm"
+                }
+              ],
+              "en": [
+                {
+                  "no": 47,
+                  "title": "Genesis of Capitalist Ground-Rent",
+                  "url": "https://www.marxists.org/archive/marx/works/1894-c3/ch47.htm"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "no": 7,
+          "title": "各种收入及其源泉",
+          "chapters": [
+            {
+              "no": 48,
+              "title": "三位一体的公式",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/07/48.htm",
+              "sections": [
+                {
+                  "title": "I",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/07/48.htm"
+                },
+                {
+                  "title": "II",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/07/48.htm"
+                },
+                {
+                  "title": "III",
+                  "mia": "https://www.marxists.org/chinese/marx-engels2/07/48.htm"
+                }
+              ],
+              "en": [
+                {
+                  "no": 48,
+                  "title": "The Trinity Formula",
+                  "url": "https://www.marxists.org/archive/marx/works/1894-c3/ch48.htm"
+                }
+              ]
+            },
+            {
+              "no": 49,
+              "title": "关于生产过程的分析",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/07/49.htm",
+              "sections": [],
+              "en": [
+                {
+                  "no": 49,
+                  "title": "Concerning the Analysis of the Process of Production",
+                  "url": "https://www.marxists.org/archive/marx/works/1894-c3/ch49.htm"
+                }
+              ]
+            },
+            {
+              "no": 50,
+              "title": "竞争的假象",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/07/50.htm",
+              "sections": [],
+              "en": [
+                {
+                  "no": 50,
+                  "title": "Illusions Created by Competition",
+                  "url": "https://www.marxists.org/archive/marx/works/1894-c3/ch50.htm"
+                }
+              ]
+            },
+            {
+              "no": 51,
+              "title": "分配关系和生产关系",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/07/51.htm",
+              "sections": [],
+              "en": [
+                {
+                  "no": 51,
+                  "title": "Distribution Relations and Production Relations",
+                  "url": "https://www.marxists.org/archive/marx/works/1894-c3/ch51.htm"
+                }
+              ]
+            },
+            {
+              "no": 52,
+              "title": "阶级",
+              "mia": "https://www.marxists.org/chinese/marx-engels2/07/52.htm",
+              "sections": [],
+              "en": [
+                {
+                  "no": 52,
+                  "title": "Classes",
+                  "url": "https://www.marxists.org/archive/marx/works/1894-c3/ch52.htm"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "front_matter": [
+        {
+          "title": "第七卷说明",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/07/00a.htm"
+        },
+        {
+          "title": "弗·恩格斯 序言",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/07/00b.htm"
+        }
+      ],
+      "supplements": [
+        {
+          "title": "弗·恩格斯 《资本论》第三册增补",
+          "mia": "https://www.marxists.org/chinese/marx-engels2/07/53.htm"
+        }
+      ],
+      "en": {
+        "title": "Capital, Volume III",
+        "url": "https://www.marxists.org/archive/marx/works/1894-c3/index.htm",
+        "translator": "源页未标明译者",
+        "published": null,
+        "note": "原作1894年首次出版；源页列苏联马克思列宁主义研究院1959文本及International Publishers, NY（未注明年份）。未把1894或1959当作所引英译本出版年。52章与中文章号一致。"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "id": "marx-recommended",
+      "title": "马克思推荐版",
+      "summary": "先从工作日、劳动组织和原始积累读起，再回到商品。本信使用当时节名，现行中文章号对应由本站整理。",
+      "basis": {
+        "work": "letter-099",
+        "locator": "1867年11月30日致库格曼信，给库格曼夫人的读书建议",
+        "url": "https://www.marxists.org/chinese/marx-engels2/10/099.htm"
+      },
+      "steps": [
+        {
+          "title": "工作日",
+          "volume": 1,
+          "chapter": 8,
+          "note": "按信中节名对应到现行中文第8章。"
+        },
+        {
+          "title": "协作",
+          "volume": 1,
+          "chapter": 11,
+          "note": "按信中节名对应到现行中文第11章。"
+        },
+        {
+          "title": "分工和工场手工业",
+          "volume": 1,
+          "chapter": 12,
+          "note": "按信中节名对应到现行中文第12章。"
+        },
+        {
+          "title": "机器和大工业",
+          "volume": 1,
+          "chapter": 13,
+          "note": "按信中节名对应到现行中文第13章。"
+        },
+        {
+          "title": "所谓原始积累",
+          "volume": 1,
+          "chapter": 24,
+          "note": "按信中节名对应到现行中文第24章。"
+        },
+        {
+          "title": "回到商品",
+          "volume": 1,
+          "chapter": 1,
+          "note": "前面几篇有了整体印象后，再回到第一章；这一步是本站补充的安排。"
+        }
+      ]
+    },
+    {
+      "id": "in-order",
+      "title": "顺读版",
+      "summary": "先读序言和跋，再沿第一卷目录前进。法文版序言提醒前几章较难；这里的台阶由本站整理。",
+      "basis": {
+        "work": "capital-1",
+        "locator": "法文版序言（1872年3月18日）",
+        "url": "https://www.marxists.org/chinese/marx/capital/00.htm#3"
+      },
+      "steps": [
+        {
+          "title": "序言和跋",
+          "work": "capital-1",
+          "section": "序言和跋",
+          "note": "先了解写作目的、方法与版本关系。"
+        },
+        {
+          "title": "商品",
+          "volume": 1,
+          "chapter": 1,
+          "note": "第一章概念密集，可以分四节读，不急着一口气读完。"
+        },
+        {
+          "title": "交换过程",
+          "volume": 1,
+          "chapter": 2,
+          "note": "接着看商品所有者怎样发生交换。"
+        },
+        {
+          "title": "货币或商品流通",
+          "volume": 1,
+          "chapter": 3,
+          "note": "把商品、交换与货币的关系接起来。"
+        },
+        {
+          "title": "沿后续目录继续",
+          "work": "capital-1",
+          "note": "按中文第4章至第25章的顺序继续；遇难点可先标记，再回看。"
+        }
+      ]
+    },
+    {
+      "id": "stepping-stones",
+      "title": "台阶版",
+      "summary": "先读两篇较短的经济学论著与恩格斯的书评，再进入第一卷。这是本站编排，不是马恩给出的固定书单。",
+      "basis": {
+        "work": "v03-04",
+        "locator": "恩格斯为《民主周报》写的《资本论》第一卷书评",
+        "url": "https://www.marxists.org/chinese/marx-engels2/03/04.htm"
+      },
+      "steps": [
+        {
+          "title": "雇佣劳动与资本",
+          "work": "wage-labour-capital",
+          "note": "先抓住工资劳动与资本的关系，同时分清1849年正文和1891年导言。"
+        },
+        {
+          "title": "工资、价格和利润",
+          "work": "value-price-profit",
+          "note": "沿工资、价值与利润的问题进一步读下去。"
+        },
+        {
+          "title": "恩格斯的第一卷书评",
+          "work": "v03-04",
+          "note": "借助书评把握第一卷的问题，再核对原著。"
+        },
+        {
+          "title": "进入第一卷",
+          "volume": 1,
+          "chapter": 1,
+          "note": "带着前面的几个问题读商品章，再顺着目录向前。"
+        }
+      ]
+    }
+  ]
+}
