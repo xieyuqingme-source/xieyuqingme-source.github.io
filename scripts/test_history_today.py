@@ -41,7 +41,7 @@ class HistoryTodayTests(unittest.TestCase):
         expanded = [item for item in data["items"] if "10-28" <= item["month_day"] <= "11-30"]
         records = {record["id"]: record for record in audit["items"]}
         self.assertEqual(len(records), len(audit["items"]))
-        self.assertEqual(set(records), {item["id"] for item in expanded})
+        self.assertEqual(set(records), {item["id"] for item in data["items"] if item["verification"] == "source_review"})
         stamps = sorted({item["month_day"] for item in expanded})
         self.assertEqual(len(stamps), 34)
         for stamp in stamps:
@@ -63,6 +63,19 @@ class HistoryTodayTests(unittest.TestCase):
             for language in ("zh-CN", "en"):
                 fingerprint = hashlib.sha256((item["title"][language] + "\n" + item["text"][language]).encode("utf-8")).hexdigest()
                 self.assertEqual(record["text_sha256"][language], fingerprint)
+
+    def test_all_reviewed_events_keep_matching_bilingual_provenance(self):
+        data = load_history(ROOT)
+        audit = json.loads((ROOT / "home/brief/history-review.json").read_text(encoding="utf-8"))
+        records = {record["id"]: record for record in audit["items"]}
+        selected = [item for item in data["items"] if item["verification"] == "source_review"]
+        self.assertEqual(set(records), {item["id"] for item in selected})
+        for item in selected:
+            record=records[item["id"]]
+            self.assertEqual((record["month_day"],record["year"]),(item["month_day"],item["year"]))
+            self.assertEqual([{key: source[key] for key in ("name","url")} for source in record["sources"]],item["references"])
+            for language in ("zh-CN","en"):
+                self.assertEqual(record["text_sha256"][language],hashlib.sha256((item["title"][language]+"\n"+item["text"][language]).encode("utf-8")).hexdigest())
 
     def test_reviewed_institutional_sources_do_not_require_a_wikipedia_revision(self):
         data = fixture()

@@ -1,0 +1,1755 @@
+{
+  "version": 1,
+  "items": [
+    {
+      "id": "marx-social-practice",
+      "work": "关于费尔巴哈的提纲",
+      "author": "marx",
+      "year": 1845,
+      "work_id": "theses-feuerbach"
+    },
+    {
+      "id": "engels-communism-conditions",
+      "work": "共产主义原理",
+      "author": "engels",
+      "year": 1847,
+      "work_id": "v01-19"
+    },
+    {
+      "id": "marx-engels-reading-001",
+      "work": "共产党宣言",
+      "author": "marx-engels",
+      "year": 1848,
+      "work_id": "manifesto"
+    },
+    {
+      "id": "marx-science-road",
+      "work": "资本论·第一卷",
+      "author": "marx",
+      "year": 1867,
+      "work_id": "capital-1"
+    },
+    {
+      "id": "engels-labour-humanity",
+      "work": "劳动在从猿到人转变过程中的作用",
+      "author": "engels",
+      "year": 1876,
+      "work_id": "dialectics-nature"
+    },
+    {
+      "id": "marx-engels-reading-002",
+      "work": "共产党宣言",
+      "author": "marx-engels",
+      "year": 1848,
+      "work_id": "manifesto"
+    },
+    {
+      "id": "marx-making-history",
+      "work": "路易·波拿巴的雾月十八日",
+      "author": "marx",
+      "year": 1852,
+      "work_id": "eighteenth-brumaire"
+    },
+    {
+      "id": "engels-research-processes",
+      "work": "路德维希·费尔巴哈和德国古典哲学的终结",
+      "author": "engels",
+      "year": 1886,
+      "work_id": "v04-07"
+    },
+    {
+      "id": "marx-engels-reading-003",
+      "work": "共产党宣言",
+      "author": "marx-engels",
+      "year": 1848,
+      "work_id": "manifesto"
+    },
+    {
+      "id": "marx-solvable-tasks",
+      "work": "〈政治经济学批判〉序言",
+      "author": "marx",
+      "year": 1859,
+      "work_id": "critique-preface"
+    },
+    {
+      "id": "engels-read-originals",
+      "work": "致约瑟夫·布洛赫的信",
+      "author": "engels",
+      "year": 1890,
+      "work_id": "letter-240"
+    },
+    {
+      "id": "marx-engels-reading-004",
+      "work": "共产党宣言",
+      "author": "marx-engels",
+      "year": 1848,
+      "work_id": "manifesto"
+    },
+    {
+      "id": "marx-theory-material-force",
+      "work": "〈黑格尔法哲学批判〉导言",
+      "author": "marx",
+      "year": 1843,
+      "work_id": "v01-01"
+    },
+    {
+      "id": "engels-marx-personal-foes",
+      "work": "在马克思墓前的讲话",
+      "author": "engels",
+      "year": 1883,
+      "work_id": "funeral-speech"
+    },
+    {
+      "id": "marx-engels-reading-005",
+      "work": "共产党宣言",
+      "author": "marx-engels",
+      "year": 1848,
+      "work_id": "manifesto"
+    },
+    {
+      "id": "marx-reading-001",
+      "work": "青年在选择职业时的考虑",
+      "author": "marx",
+      "year": 1835,
+      "work_id": null
+    },
+    {
+      "id": "engels-reading-001",
+      "work": "国民经济学批判大纲",
+      "author": "engels",
+      "year": null,
+      "work_id": "v01-03"
+    },
+    {
+      "id": "marx-engels-reading-006",
+      "work": "共产党宣言",
+      "author": "marx-engels",
+      "year": 1848,
+      "work_id": "manifesto"
+    },
+    {
+      "id": "marx-reading-002",
+      "work": "青年在选择职业时的考虑",
+      "author": "marx",
+      "year": 1835,
+      "work_id": null
+    },
+    {
+      "id": "engels-reading-002",
+      "work": "共产主义原理",
+      "author": "engels",
+      "year": 1847,
+      "work_id": "v01-19"
+    },
+    {
+      "id": "marx-engels-reading-007",
+      "work": "共产党宣言",
+      "author": "marx-engels",
+      "year": 1848,
+      "work_id": "manifesto"
+    },
+    {
+      "id": "marx-reading-003",
+      "work": "致阿尔诺德·卢格的信",
+      "author": "marx",
+      "year": 1843,
+      "work_id": "letter-003"
+    },
+    {
+      "id": "engels-reading-003",
+      "work": "在伦敦举行的波兰纪念大会上的演说",
+      "author": "engels",
+      "year": 1847,
+      "work_id": "v01-20"
+    },
+    {
+      "id": "marx-engels-reading-008",
+      "work": "共产党宣言",
+      "author": "marx-engels",
+      "year": 1848,
+      "work_id": "manifesto"
+    },
+    {
+      "id": "marx-reading-004",
+      "work": "致阿尔诺德·卢格的信",
+      "author": "marx",
+      "year": 1843,
+      "work_id": "letter-003"
+    },
+    {
+      "id": "engels-reading-004",
+      "work": "论权威",
+      "author": "engels",
+      "year": 1872,
+      "work_id": "v03-12"
+    },
+    {
+      "id": "marx-engels-reading-009",
+      "work": "共产党宣言",
+      "author": "marx-engels",
+      "year": 1848,
+      "work_id": "manifesto"
+    },
+    {
+      "id": "marx-reading-005",
+      "work": "致阿尔诺德·卢格的信",
+      "author": "marx",
+      "year": 1843,
+      "work_id": "letter-003"
+    },
+    {
+      "id": "engels-reading-005",
+      "work": "劳动在从猿到人转变过程中的作用",
+      "author": "engels",
+      "year": 1876,
+      "work_id": "dialectics-nature"
+    },
+    {
+      "id": "marx-engels-reading-010",
+      "work": "共产党宣言",
+      "author": "marx-engels",
+      "year": 1848,
+      "work_id": "manifesto"
+    },
+    {
+      "id": "marx-reading-006",
+      "work": "〈黑格尔法哲学批判〉导言",
+      "author": "marx",
+      "year": 1843,
+      "work_id": "v01-01"
+    },
+    {
+      "id": "engels-reading-006",
+      "work": "劳动在从猿到人转变过程中的作用",
+      "author": "engels",
+      "year": 1876,
+      "work_id": "dialectics-nature"
+    },
+    {
+      "id": "marx-engels-reading-011",
+      "work": "共产党宣言",
+      "author": "marx-engels",
+      "year": 1848,
+      "work_id": "manifesto"
+    },
+    {
+      "id": "marx-reading-007",
+      "work": "〈黑格尔法哲学批判〉导言",
+      "author": "marx",
+      "year": 1843,
+      "work_id": "v01-01"
+    },
+    {
+      "id": "engels-reading-007",
+      "work": "反杜林论",
+      "author": "engels",
+      "year": 1878,
+      "work_id": "anti-duhring"
+    },
+    {
+      "id": "marx-engels-reading-012",
+      "work": "共产党宣言",
+      "author": "marx-engels",
+      "year": 1848,
+      "work_id": "manifesto"
+    },
+    {
+      "id": "marx-reading-008",
+      "work": "〈黑格尔法哲学批判〉导言",
+      "author": "marx",
+      "year": 1843,
+      "work_id": "v01-01"
+    },
+    {
+      "id": "engels-reading-008",
+      "work": "反杜林论",
+      "author": "engels",
+      "year": 1878,
+      "work_id": "anti-duhring"
+    },
+    {
+      "id": "marx-engels-reading-013",
+      "work": "共产党宣言",
+      "author": "marx-engels",
+      "year": 1848,
+      "work_id": "manifesto"
+    },
+    {
+      "id": "marx-reading-009",
+      "work": "詹姆斯·穆勒〈政治经济学原理〉一书摘要",
+      "author": "marx",
+      "year": 1844,
+      "work_id": null
+    },
+    {
+      "id": "engels-reading-009",
+      "work": "反杜林论",
+      "author": "engels",
+      "year": 1878,
+      "work_id": "anti-duhring"
+    },
+    {
+      "id": "marx-engels-reading-014",
+      "work": "共产党宣言",
+      "author": "marx-engels",
+      "year": 1848,
+      "work_id": "manifesto"
+    },
+    {
+      "id": "marx-reading-010",
+      "work": "1844年经济学哲学手稿",
+      "author": "marx",
+      "year": 1844,
+      "work_id": "manuscripts-1844"
+    },
+    {
+      "id": "engels-reading-010",
+      "work": "反杜林论",
+      "author": "engels",
+      "year": 1878,
+      "work_id": "anti-duhring"
+    },
+    {
+      "id": "marx-engels-reading-015",
+      "work": "共产党宣言",
+      "author": "marx-engels",
+      "year": 1848,
+      "work_id": "manifesto"
+    },
+    {
+      "id": "marx-reading-011",
+      "work": "1844年经济学哲学手稿",
+      "author": "marx",
+      "year": 1844,
+      "work_id": "manuscripts-1844"
+    },
+    {
+      "id": "engels-reading-011",
+      "work": "反杜林论",
+      "author": "engels",
+      "year": 1878,
+      "work_id": "anti-duhring"
+    },
+    {
+      "id": "marx-engels-reading-016",
+      "work": "共产党宣言",
+      "author": "marx-engels",
+      "year": 1848,
+      "work_id": "manifesto"
+    },
+    {
+      "id": "marx-reading-012",
+      "work": "1844年经济学哲学手稿",
+      "author": "marx",
+      "year": 1844,
+      "work_id": "manuscripts-1844"
+    },
+    {
+      "id": "engels-reading-012",
+      "work": "自然辩证法",
+      "author": "engels",
+      "year": 1873,
+      "work_id": "dialectics-nature"
+    },
+    {
+      "id": "marx-engels-reading-017",
+      "work": "共产党宣言",
+      "author": "marx-engels",
+      "year": 1848,
+      "work_id": "manifesto"
+    },
+    {
+      "id": "marx-reading-013",
+      "work": "关于费尔巴哈的提纲",
+      "author": "marx",
+      "year": 1845,
+      "work_id": "theses-feuerbach"
+    },
+    {
+      "id": "engels-reading-013",
+      "work": "自然辩证法",
+      "author": "engels",
+      "year": 1873,
+      "work_id": "dialectics-nature"
+    },
+    {
+      "id": "marx-engels-reading-018",
+      "work": "共产党宣言",
+      "author": "marx-engels",
+      "year": 1848,
+      "work_id": "manifesto"
+    },
+    {
+      "id": "marx-reading-014",
+      "work": "关于费尔巴哈的提纲",
+      "author": "marx",
+      "year": 1845,
+      "work_id": "theses-feuerbach"
+    },
+    {
+      "id": "engels-reading-014",
+      "work": "必要的和多余的社会阶级",
+      "author": "engels",
+      "year": 1881,
+      "work_id": null
+    },
+    {
+      "id": "marx-engels-reading-019",
+      "work": "共产党宣言",
+      "author": "marx-engels",
+      "year": 1848,
+      "work_id": "manifesto"
+    },
+    {
+      "id": "marx-reading-015",
+      "work": "关于费尔巴哈的提纲",
+      "author": "marx",
+      "year": 1845,
+      "work_id": "theses-feuerbach"
+    },
+    {
+      "id": "engels-reading-015",
+      "work": "在马克思墓前的讲话",
+      "author": "engels",
+      "year": 1883,
+      "work_id": "funeral-speech"
+    },
+    {
+      "id": "marx-engels-reading-020",
+      "work": "共产党宣言",
+      "author": "marx-engels",
+      "year": 1848,
+      "work_id": "manifesto"
+    },
+    {
+      "id": "marx-reading-016",
+      "work": "致帕·瓦·安年科夫的信",
+      "author": "marx",
+      "year": 1846,
+      "work_id": null
+    },
+    {
+      "id": "engels-reading-016",
+      "work": "自然辩证法",
+      "author": "engels",
+      "year": 1873,
+      "work_id": "dialectics-nature"
+    },
+    {
+      "id": "marx-engels-reading-021",
+      "work": "共产党宣言",
+      "author": "marx-engels",
+      "year": 1848,
+      "work_id": "manifesto"
+    },
+    {
+      "id": "marx-reading-017",
+      "work": "哲学的贫困",
+      "author": "marx",
+      "year": 1847,
+      "work_id": null
+    },
+    {
+      "id": "engels-reading-017",
+      "work": "自然辩证法",
+      "author": "engels",
+      "year": 1873,
+      "work_id": "dialectics-nature"
+    },
+    {
+      "id": "marx-engels-reading-022",
+      "work": "共产党宣言",
+      "author": "marx-engels",
+      "year": 1848,
+      "work_id": "manifesto"
+    },
+    {
+      "id": "marx-reading-018",
+      "work": "哲学的贫困",
+      "author": "marx",
+      "year": 1847,
+      "work_id": null
+    },
+    {
+      "id": "engels-reading-018",
+      "work": "关于共产主义者同盟的历史",
+      "author": "engels",
+      "year": 1885,
+      "work_id": "v04-05"
+    },
+    {
+      "id": "marx-engels-reading-023",
+      "work": "共产党宣言",
+      "author": "marx-engels",
+      "year": 1848,
+      "work_id": "manifesto"
+    },
+    {
+      "id": "marx-reading-019",
+      "work": "哲学的贫困",
+      "author": "marx",
+      "year": 1847,
+      "work_id": null
+    },
+    {
+      "id": "engels-reading-019",
+      "work": "路德维希·费尔巴哈和德国古典哲学的终结",
+      "author": "engels",
+      "year": 1886,
+      "work_id": "v04-07"
+    },
+    {
+      "id": "marx-engels-reading-024",
+      "work": "共产党宣言",
+      "author": "marx-engels",
+      "year": 1848,
+      "work_id": "manifesto"
+    },
+    {
+      "id": "marx-reading-020",
+      "work": "哲学的贫困",
+      "author": "marx",
+      "year": 1847,
+      "work_id": null
+    },
+    {
+      "id": "engels-reading-020",
+      "work": "致约瑟夫·布洛赫的信",
+      "author": "engels",
+      "year": 1890,
+      "work_id": "letter-240"
+    },
+    {
+      "id": "marx-engels-reading-025",
+      "work": "共产党宣言",
+      "author": "marx-engels",
+      "year": 1848,
+      "work_id": "manifesto"
+    },
+    {
+      "id": "marx-reading-021",
+      "work": "雇佣劳动与资本",
+      "author": "marx",
+      "year": 1849,
+      "work_id": "wage-labour-capital"
+    },
+    {
+      "id": "engels-reading-021",
+      "work": "致奥托·冯·伯尼克的信",
+      "author": "engels",
+      "year": 1890,
+      "work_id": "letter-238"
+    },
+    {
+      "id": "marx-engels-reading-026",
+      "work": "共产党宣言",
+      "author": "marx-engels",
+      "year": 1848,
+      "work_id": "manifesto"
+    },
+    {
+      "id": "marx-reading-022",
+      "work": "雇佣劳动与资本",
+      "author": "marx",
+      "year": 1849,
+      "work_id": "wage-labour-capital"
+    },
+    {
+      "id": "engels-reading-022",
+      "work": "致瓦尔特·博尔吉乌斯的信",
+      "author": "engels",
+      "year": 1894,
+      "work_id": "letter-266"
+    },
+    {
+      "id": "marx-engels-reading-027",
+      "work": "共产党宣言",
+      "author": "marx-engels",
+      "year": 1848,
+      "work_id": "manifesto"
+    },
+    {
+      "id": "marx-reading-023",
+      "work": "路易·波拿巴的雾月十八日",
+      "author": "marx",
+      "year": 1852,
+      "work_id": "eighteenth-brumaire"
+    },
+    {
+      "id": "engels-reading-023",
+      "work": "社会主义从空想到科学的发展",
+      "author": "engels",
+      "year": 1880,
+      "work_id": "utopian-scientific"
+    },
+    {
+      "id": "marx-engels-reading-028",
+      "work": "共产党宣言",
+      "author": "marx-engels",
+      "year": 1848,
+      "work_id": "manifesto"
+    },
+    {
+      "id": "marx-reading-024",
+      "work": "路易·波拿巴的雾月十八日",
+      "author": "marx",
+      "year": 1852,
+      "work_id": "eighteenth-brumaire"
+    },
+    {
+      "id": "engels-reading-024",
+      "work": "社会主义从空想到科学的发展",
+      "author": "engels",
+      "year": 1880,
+      "work_id": "utopian-scientific"
+    },
+    {
+      "id": "marx-engels-reading-029",
+      "work": "共产党宣言",
+      "author": "marx-engels",
+      "year": 1848,
+      "work_id": "manifesto"
+    },
+    {
+      "id": "marx-reading-025",
+      "work": "在〈人民报〉创刊纪念会上的演说",
+      "author": "marx",
+      "year": 1856,
+      "work_id": null
+    },
+    {
+      "id": "engels-reading-025",
+      "work": "社会主义从空想到科学的发展",
+      "author": "engels",
+      "year": 1880,
+      "work_id": "utopian-scientific"
+    },
+    {
+      "id": "marx-engels-reading-030",
+      "work": "共产党宣言",
+      "author": "marx-engels",
+      "year": 1848,
+      "work_id": "manifesto"
+    },
+    {
+      "id": "marx-reading-026",
+      "work": "〈政治经济学批判〉导言",
+      "author": "marx",
+      "year": 1857,
+      "work_id": null
+    },
+    {
+      "id": "engels-reading-026",
+      "work": "社会主义从空想到科学的发展",
+      "author": "engels",
+      "year": 1880,
+      "work_id": "utopian-scientific"
+    },
+    {
+      "id": "marx-engels-reading-031",
+      "work": "共产党宣言",
+      "author": "marx-engels",
+      "year": 1848,
+      "work_id": "manifesto"
+    },
+    {
+      "id": "marx-reading-027",
+      "work": "〈政治经济学批判〉导言",
+      "author": "marx",
+      "year": 1857,
+      "work_id": null
+    },
+    {
+      "id": "engels-reading-027",
+      "work": "社会主义从空想到科学的发展",
+      "author": "engels",
+      "year": 1880,
+      "work_id": "utopian-scientific"
+    },
+    {
+      "id": "marx-engels-reading-032",
+      "work": "共产党宣言",
+      "author": "marx-engels",
+      "year": 1848,
+      "work_id": "manifesto"
+    },
+    {
+      "id": "marx-reading-028",
+      "work": "1857—1858年经济学手稿",
+      "author": "marx",
+      "year": 1857,
+      "work_id": null
+    },
+    {
+      "id": "engels-reading-028",
+      "work": "社会主义从空想到科学的发展",
+      "author": "engels",
+      "year": 1880,
+      "work_id": "utopian-scientific"
+    },
+    {
+      "id": "marx-engels-reading-033",
+      "work": "共产党宣言",
+      "author": "marx-engels",
+      "year": 1848,
+      "work_id": "manifesto"
+    },
+    {
+      "id": "marx-reading-029",
+      "work": "1857—1858年经济学手稿",
+      "author": "marx",
+      "year": 1857,
+      "work_id": null
+    },
+    {
+      "id": "engels-reading-029",
+      "work": "社会主义从空想到科学的发展",
+      "author": "engels",
+      "year": 1880,
+      "work_id": "utopian-scientific"
+    },
+    {
+      "id": "marx-engels-reading-034",
+      "work": "共产党宣言",
+      "author": "marx-engels",
+      "year": 1848,
+      "work_id": "manifesto"
+    },
+    {
+      "id": "marx-reading-030",
+      "work": "〈政治经济学批判〉序言",
+      "author": "marx",
+      "year": 1859,
+      "work_id": "critique-preface"
+    },
+    {
+      "id": "engels-reading-030",
+      "work": "社会主义从空想到科学的发展",
+      "author": "engels",
+      "year": 1880,
+      "work_id": "utopian-scientific"
+    },
+    {
+      "id": "marx-engels-reading-035",
+      "work": "共产党宣言",
+      "author": "marx-engels",
+      "year": 1848,
+      "work_id": "manifesto"
+    },
+    {
+      "id": "marx-reading-031",
+      "work": "〈政治经济学批判〉序言",
+      "author": "marx",
+      "year": 1859,
+      "work_id": "critique-preface"
+    },
+    {
+      "id": "engels-reading-031",
+      "work": "社会主义从空想到科学的发展",
+      "author": "engels",
+      "year": 1880,
+      "work_id": "utopian-scientific"
+    },
+    {
+      "id": "marx-engels-reading-036",
+      "work": "共产党宣言",
+      "author": "marx-engels",
+      "year": 1848,
+      "work_id": "manifesto"
+    },
+    {
+      "id": "marx-reading-032",
+      "work": "〈政治经济学批判〉序言",
+      "author": "marx",
+      "year": 1859,
+      "work_id": "critique-preface"
+    },
+    {
+      "id": "engels-reading-032",
+      "work": "社会主义从空想到科学的发展",
+      "author": "engels",
+      "year": 1880,
+      "work_id": "utopian-scientific"
+    },
+    {
+      "id": "marx-engels-reading-037",
+      "work": "共产党宣言",
+      "author": "marx-engels",
+      "year": 1848,
+      "work_id": "manifesto"
+    },
+    {
+      "id": "marx-reading-033",
+      "work": "〈政治经济学批判〉序言",
+      "author": "marx",
+      "year": 1859,
+      "work_id": "critique-preface"
+    },
+    {
+      "id": "engels-reading-033",
+      "work": "社会主义从空想到科学的发展",
+      "author": "engels",
+      "year": 1880,
+      "work_id": "utopian-scientific"
+    },
+    {
+      "id": "marx-engels-reading-038",
+      "work": "共产党宣言",
+      "author": "marx-engels",
+      "year": 1848,
+      "work_id": "manifesto"
+    },
+    {
+      "id": "marx-reading-034",
+      "work": "〈政治经济学批判〉序言",
+      "author": "marx",
+      "year": 1859,
+      "work_id": "critique-preface"
+    },
+    {
+      "id": "engels-reading-034",
+      "work": "社会主义从空想到科学的发展",
+      "author": "engels",
+      "year": 1880,
+      "work_id": "utopian-scientific"
+    },
+    {
+      "id": "marx-engels-reading-039",
+      "work": "共产党宣言",
+      "author": "marx-engels",
+      "year": 1848,
+      "work_id": "manifesto"
+    },
+    {
+      "id": "marx-reading-035",
+      "work": "致斐迪南·弗莱里格拉特的信",
+      "author": "marx",
+      "year": 1860,
+      "work_id": null
+    },
+    {
+      "id": "engels-reading-035",
+      "work": "社会主义从空想到科学的发展",
+      "author": "engels",
+      "year": 1880,
+      "work_id": "utopian-scientific"
+    },
+    {
+      "id": "marx-engels-reading-040",
+      "work": "共产党宣言",
+      "author": "marx-engels",
+      "year": 1848,
+      "work_id": "manifesto"
+    },
+    {
+      "id": "marx-reading-036",
+      "work": "剩余价值理论",
+      "author": "marx",
+      "year": 1861,
+      "work_id": null
+    },
+    {
+      "id": "engels-reading-036",
+      "work": "社会主义从空想到科学的发展",
+      "author": "engels",
+      "year": 1880,
+      "work_id": "utopian-scientific"
+    },
+    {
+      "id": "marx-engels-reading-041",
+      "work": "共产党宣言",
+      "author": "marx-engels",
+      "year": 1848,
+      "work_id": "manifesto"
+    },
+    {
+      "id": "marx-reading-037",
+      "work": "致路德维希·库格曼的信",
+      "author": "marx",
+      "year": 1868,
+      "work_id": null
+    },
+    {
+      "id": "engels-reading-037",
+      "work": "社会主义从空想到科学的发展",
+      "author": "engels",
+      "year": 1880,
+      "work_id": "utopian-scientific"
+    },
+    {
+      "id": "marx-engels-reading-042",
+      "work": "共产党宣言",
+      "author": "marx-engels",
+      "year": 1848,
+      "work_id": "manifesto"
+    },
+    {
+      "id": "marx-reading-038",
+      "work": "法兰西内战",
+      "author": "marx",
+      "year": 1871,
+      "work_id": "civil-war-france"
+    },
+    {
+      "id": "engels-reading-038",
+      "work": "社会主义从空想到科学的发展",
+      "author": "engels",
+      "year": 1880,
+      "work_id": "utopian-scientific"
+    },
+    {
+      "id": "marx-engels-reading-043",
+      "work": "共产党宣言",
+      "author": "marx-engels",
+      "year": 1848,
+      "work_id": "manifesto"
+    },
+    {
+      "id": "marx-reading-039",
+      "work": "法兰西内战",
+      "author": "marx",
+      "year": 1871,
+      "work_id": "civil-war-france"
+    },
+    {
+      "id": "engels-reading-039",
+      "work": "社会主义从空想到科学的发展",
+      "author": "engels",
+      "year": 1880,
+      "work_id": "utopian-scientific"
+    },
+    {
+      "id": "marx-engels-reading-044",
+      "work": "共产党宣言",
+      "author": "marx-engels",
+      "year": 1848,
+      "work_id": "manifesto"
+    },
+    {
+      "id": "marx-reading-040",
+      "work": "资本论·第一卷",
+      "author": "marx",
+      "year": 1867,
+      "work_id": "capital-1"
+    },
+    {
+      "id": "engels-reading-040",
+      "work": "社会主义从空想到科学的发展",
+      "author": "engels",
+      "year": 1880,
+      "work_id": "utopian-scientific"
+    },
+    {
+      "id": "marx-engels-reading-045",
+      "work": "共产党宣言",
+      "author": "marx-engels",
+      "year": 1848,
+      "work_id": "manifesto"
+    },
+    {
+      "id": "marx-reading-041",
+      "work": "资本论·第一卷",
+      "author": "marx",
+      "year": 1867,
+      "work_id": "capital-1"
+    },
+    {
+      "id": "engels-reading-041",
+      "work": "社会主义从空想到科学的发展",
+      "author": "engels",
+      "year": 1880,
+      "work_id": "utopian-scientific"
+    },
+    {
+      "id": "marx-engels-reading-046",
+      "work": "共产党宣言",
+      "author": "marx-engels",
+      "year": 1848,
+      "work_id": "manifesto"
+    },
+    {
+      "id": "marx-reading-042",
+      "work": "哥达纲领批判",
+      "author": "marx",
+      "year": 1875,
+      "work_id": "gotha-critique"
+    },
+    {
+      "id": "engels-reading-042",
+      "work": "社会主义从空想到科学的发展",
+      "author": "engels",
+      "year": 1880,
+      "work_id": "utopian-scientific"
+    },
+    {
+      "id": "marx-engels-reading-047",
+      "work": "共产党宣言",
+      "author": "marx-engels",
+      "year": 1848,
+      "work_id": "manifesto"
+    },
+    {
+      "id": "marx-reading-043",
+      "work": "哥达纲领批判",
+      "author": "marx",
+      "year": 1875,
+      "work_id": "gotha-critique"
+    },
+    {
+      "id": "engels-reading-043",
+      "work": "社会主义从空想到科学的发展",
+      "author": "engels",
+      "year": 1880,
+      "work_id": "utopian-scientific"
+    },
+    {
+      "id": "marx-engels-reading-048",
+      "work": "共产党宣言",
+      "author": "marx-engels",
+      "year": 1848,
+      "work_id": "manifesto"
+    },
+    {
+      "id": "marx-reading-044",
+      "work": "哥达纲领批判",
+      "author": "marx",
+      "year": 1875,
+      "work_id": "gotha-critique"
+    },
+    {
+      "id": "engels-reading-044",
+      "work": "社会主义从空想到科学的发展",
+      "author": "engels",
+      "year": 1880,
+      "work_id": "utopian-scientific"
+    },
+    {
+      "id": "marx-engels-reading-049",
+      "work": "共产党宣言",
+      "author": "marx-engels",
+      "year": 1848,
+      "work_id": "manifesto"
+    },
+    {
+      "id": "marx-reading-045",
+      "work": "致威廉·白拉克的信",
+      "author": "marx",
+      "year": 1875,
+      "work_id": null
+    },
+    {
+      "id": "engels-reading-045",
+      "work": "社会主义从空想到科学的发展",
+      "author": "engels",
+      "year": 1880,
+      "work_id": "utopian-scientific"
+    },
+    {
+      "id": "marx-engels-reading-050",
+      "work": "共产党宣言",
+      "author": "marx-engels",
+      "year": 1848,
+      "work_id": "manifesto"
+    },
+    {
+      "id": "marx-reading-046",
+      "work": "致维拉·查苏利奇的信",
+      "author": "marx",
+      "year": 1881,
+      "work_id": null
+    },
+    {
+      "id": "engels-reading-046",
+      "work": "社会主义从空想到科学的发展",
+      "author": "engels",
+      "year": 1880,
+      "work_id": "utopian-scientific"
+    },
+    {
+      "id": "marx-engels-reading-051",
+      "work": "共产党宣言",
+      "author": "marx-engels",
+      "year": 1848,
+      "work_id": "manifesto"
+    },
+    {
+      "id": "marx-reading-047",
+      "work": "评阿道夫·瓦格纳的〈政治经济学教科书〉",
+      "author": "marx",
+      "year": 1879,
+      "work_id": null
+    },
+    {
+      "id": "engels-reading-047",
+      "work": "社会主义从空想到科学的发展",
+      "author": "engels",
+      "year": 1880,
+      "work_id": "utopian-scientific"
+    },
+    {
+      "id": "marx-engels-reading-052",
+      "work": "共产党宣言",
+      "author": "marx-engels",
+      "year": 1848,
+      "work_id": "manifesto"
+    },
+    {
+      "id": "marx-reading-048",
+      "work": "资本论·第三卷",
+      "author": "marx",
+      "year": 1894,
+      "work_id": "capital-3"
+    },
+    {
+      "id": "engels-reading-048",
+      "work": "社会主义从空想到科学的发展",
+      "author": "engels",
+      "year": 1880,
+      "work_id": "utopian-scientific"
+    },
+    {
+      "id": "marx-engels-reading-053",
+      "work": "共产党宣言",
+      "author": "marx-engels",
+      "year": 1848,
+      "work_id": "manifesto"
+    },
+    {
+      "id": "marx-reading-049",
+      "work": "资本论·第一卷",
+      "author": "marx",
+      "year": 1867,
+      "work_id": "capital-1"
+    },
+    {
+      "id": "engels-reading-049",
+      "work": "社会主义从空想到科学的发展",
+      "author": "engels",
+      "year": 1880,
+      "work_id": "utopian-scientific"
+    },
+    {
+      "id": "marx-engels-reading-054",
+      "work": "共产党宣言",
+      "author": "marx-engels",
+      "year": 1848,
+      "work_id": "manifesto"
+    },
+    {
+      "id": "marx-reading-050",
+      "work": "资本论·第一卷",
+      "author": "marx",
+      "year": 1867,
+      "work_id": "capital-1"
+    },
+    {
+      "id": "engels-reading-050",
+      "work": "社会主义从空想到科学的发展",
+      "author": "engels",
+      "year": 1880,
+      "work_id": "utopian-scientific"
+    },
+    {
+      "id": "marx-engels-reading-055",
+      "work": "共产党宣言",
+      "author": "marx-engels",
+      "year": 1848,
+      "work_id": "manifesto"
+    },
+    {
+      "id": "marx-reading-051",
+      "work": "资本论·第一卷",
+      "author": "marx",
+      "year": 1867,
+      "work_id": "capital-1"
+    },
+    {
+      "id": "engels-reading-051",
+      "work": "社会主义从空想到科学的发展",
+      "author": "engels",
+      "year": 1880,
+      "work_id": "utopian-scientific"
+    },
+    {
+      "id": "marx-engels-reading-056",
+      "work": "共产党宣言",
+      "author": "marx-engels",
+      "year": 1848,
+      "work_id": "manifesto"
+    },
+    {
+      "id": "marx-reading-052",
+      "work": "资本论·第一卷",
+      "author": "marx",
+      "year": 1867,
+      "work_id": "capital-1"
+    },
+    {
+      "id": "engels-reading-052",
+      "work": "社会主义从空想到科学的发展",
+      "author": "engels",
+      "year": 1880,
+      "work_id": "utopian-scientific"
+    },
+    {
+      "id": "marx-engels-reading-057",
+      "work": "共产党宣言",
+      "author": "marx-engels",
+      "year": 1848,
+      "work_id": "manifesto"
+    },
+    {
+      "id": "marx-reading-053",
+      "work": "资本论·第一卷",
+      "author": "marx",
+      "year": 1867,
+      "work_id": "capital-1"
+    },
+    {
+      "id": "engels-reading-053",
+      "work": "社会主义从空想到科学的发展",
+      "author": "engels",
+      "year": 1880,
+      "work_id": "utopian-scientific"
+    },
+    {
+      "id": "marx-engels-reading-058",
+      "work": "共产党宣言",
+      "author": "marx-engels",
+      "year": 1848,
+      "work_id": "manifesto"
+    },
+    {
+      "id": "marx-reading-054",
+      "work": "资本论·第一卷",
+      "author": "marx",
+      "year": 1867,
+      "work_id": "capital-1"
+    },
+    {
+      "id": "engels-reading-054",
+      "work": "社会主义从空想到科学的发展",
+      "author": "engels",
+      "year": 1880,
+      "work_id": "utopian-scientific"
+    },
+    {
+      "id": "marx-engels-reading-059",
+      "work": "共产党宣言",
+      "author": "marx-engels",
+      "year": 1848,
+      "work_id": "manifesto"
+    },
+    {
+      "id": "marx-reading-055",
+      "work": "资本论·第一卷",
+      "author": "marx",
+      "year": 1867,
+      "work_id": "capital-1"
+    },
+    {
+      "id": "engels-reading-055",
+      "work": "社会主义从空想到科学的发展",
+      "author": "engels",
+      "year": 1880,
+      "work_id": "utopian-scientific"
+    },
+    {
+      "id": "marx-engels-reading-060",
+      "work": "共产党宣言",
+      "author": "marx-engels",
+      "year": 1848,
+      "work_id": "manifesto"
+    },
+    {
+      "id": "marx-reading-056",
+      "work": "资本论·第一卷",
+      "author": "marx",
+      "year": 1867,
+      "work_id": "v03-04"
+    },
+    {
+      "id": "marx-engels-reading-061",
+      "work": "共产党宣言",
+      "author": "marx-engels",
+      "year": 1848,
+      "work_id": "manifesto"
+    },
+    {
+      "id": "marx-reading-057",
+      "work": "资本论·第一卷",
+      "author": "marx",
+      "year": 1867,
+      "work_id": "capital-1"
+    },
+    {
+      "id": "marx-engels-reading-062",
+      "work": "共产党宣言",
+      "author": "marx-engels",
+      "year": 1848,
+      "work_id": "manifesto"
+    },
+    {
+      "id": "marx-reading-058",
+      "work": "资本论·第一卷",
+      "author": "marx",
+      "year": 1867,
+      "work_id": "capital-1"
+    },
+    {
+      "id": "marx-engels-reading-063",
+      "work": "共产党宣言",
+      "author": "marx-engels",
+      "year": 1848,
+      "work_id": "manifesto"
+    },
+    {
+      "id": "marx-reading-059",
+      "work": "资本论·第一卷",
+      "author": "marx",
+      "year": 1867,
+      "work_id": "capital-1"
+    },
+    {
+      "id": "marx-engels-reading-064",
+      "work": "共产党宣言",
+      "author": "marx-engels",
+      "year": 1848,
+      "work_id": "manifesto"
+    },
+    {
+      "id": "marx-reading-060",
+      "work": "资本论·第一卷",
+      "author": "marx",
+      "year": 1867,
+      "work_id": "capital-1"
+    },
+    {
+      "id": "marx-engels-reading-065",
+      "work": "共产党宣言",
+      "author": "marx-engels",
+      "year": 1848,
+      "work_id": "manifesto"
+    },
+    {
+      "id": "marx-reading-061",
+      "work": "资本论·第一卷",
+      "author": "marx",
+      "year": 1867,
+      "work_id": "capital-1"
+    },
+    {
+      "id": "marx-engels-reading-066",
+      "work": "共产党宣言",
+      "author": "marx-engels",
+      "year": 1848,
+      "work_id": "manifesto"
+    },
+    {
+      "id": "marx-reading-062",
+      "work": "资本论·第一卷",
+      "author": "marx",
+      "year": 1867,
+      "work_id": "capital-1"
+    },
+    {
+      "id": "marx-engels-reading-067",
+      "work": "共产党宣言",
+      "author": "marx-engels",
+      "year": 1848,
+      "work_id": "manifesto"
+    },
+    {
+      "id": "marx-reading-063",
+      "work": "资本论·第一卷",
+      "author": "marx",
+      "year": 1867,
+      "work_id": "capital-1"
+    },
+    {
+      "id": "marx-engels-reading-068",
+      "work": "共产党宣言",
+      "author": "marx-engels",
+      "year": 1848,
+      "work_id": "manifesto"
+    },
+    {
+      "id": "marx-reading-064",
+      "work": "资本论·第一卷",
+      "author": "marx",
+      "year": 1867,
+      "work_id": "capital-1"
+    },
+    {
+      "id": "marx-engels-reading-069",
+      "work": "共产党宣言",
+      "author": "marx-engels",
+      "year": 1848,
+      "work_id": "manifesto"
+    },
+    {
+      "id": "marx-reading-065",
+      "work": "资本论·第一卷",
+      "author": "marx",
+      "year": 1867,
+      "work_id": "capital-1"
+    },
+    {
+      "id": "marx-engels-reading-070",
+      "work": "共产党宣言",
+      "author": "marx-engels",
+      "year": 1848,
+      "work_id": "manifesto"
+    },
+    {
+      "id": "marx-reading-066",
+      "work": "资本论·第一卷",
+      "author": "marx",
+      "year": 1867,
+      "work_id": "capital-1"
+    },
+    {
+      "id": "marx-engels-reading-071",
+      "work": "共产党宣言",
+      "author": "marx-engels",
+      "year": 1848,
+      "work_id": "manifesto"
+    },
+    {
+      "id": "marx-reading-067",
+      "work": "资本论·第一卷",
+      "author": "marx",
+      "year": 1867,
+      "work_id": "capital-1"
+    },
+    {
+      "id": "marx-engels-reading-072",
+      "work": "共产党宣言",
+      "author": "marx-engels",
+      "year": 1848,
+      "work_id": "manifesto"
+    },
+    {
+      "id": "marx-reading-068",
+      "work": "资本论·第一卷",
+      "author": "marx",
+      "year": 1867,
+      "work_id": "capital-1"
+    },
+    {
+      "id": "marx-engels-reading-073",
+      "work": "共产党宣言",
+      "author": "marx-engels",
+      "year": 1848,
+      "work_id": "manifesto"
+    },
+    {
+      "id": "marx-reading-069",
+      "work": "资本论·第一卷",
+      "author": "marx",
+      "year": 1867,
+      "work_id": "capital-1"
+    },
+    {
+      "id": "marx-engels-reading-074",
+      "work": "共产党宣言",
+      "author": "marx-engels",
+      "year": 1848,
+      "work_id": "manifesto"
+    },
+    {
+      "id": "marx-reading-070",
+      "work": "资本论·第一卷",
+      "author": "marx",
+      "year": 1867,
+      "work_id": "capital-1"
+    },
+    {
+      "id": "marx-engels-reading-075",
+      "work": "共产党宣言",
+      "author": "marx-engels",
+      "year": 1848,
+      "work_id": "manifesto"
+    },
+    {
+      "id": "marx-reading-071",
+      "work": "资本论·第一卷",
+      "author": "marx",
+      "year": 1867,
+      "work_id": "capital-1"
+    },
+    {
+      "id": "marx-engels-reading-076",
+      "work": "共产党宣言",
+      "author": "marx-engels",
+      "year": 1848,
+      "work_id": "manifesto"
+    },
+    {
+      "id": "marx-reading-072",
+      "work": "资本论·第一卷",
+      "author": "marx",
+      "year": 1867,
+      "work_id": "capital-1"
+    },
+    {
+      "id": "marx-engels-reading-077",
+      "work": "共产党宣言",
+      "author": "marx-engels",
+      "year": 1848,
+      "work_id": "manifesto"
+    },
+    {
+      "id": "marx-reading-073",
+      "work": "资本论·第一卷",
+      "author": "marx",
+      "year": 1867,
+      "work_id": "capital-1"
+    },
+    {
+      "id": "marx-engels-reading-078",
+      "work": "共产党宣言",
+      "author": "marx-engels",
+      "year": 1848,
+      "work_id": "manifesto"
+    },
+    {
+      "id": "marx-reading-074",
+      "work": "资本论·第一卷",
+      "author": "marx",
+      "year": 1867,
+      "work_id": "capital-1"
+    },
+    {
+      "id": "marx-engels-reading-079",
+      "work": "共产党宣言",
+      "author": "marx-engels",
+      "year": 1848,
+      "work_id": "manifesto"
+    },
+    {
+      "id": "marx-reading-075",
+      "work": "资本论·第一卷",
+      "author": "marx",
+      "year": 1867,
+      "work_id": "capital-1"
+    },
+    {
+      "id": "marx-engels-reading-080",
+      "work": "共产党宣言",
+      "author": "marx-engels",
+      "year": 1848,
+      "work_id": "manifesto"
+    },
+    {
+      "id": "marx-reading-076",
+      "work": "资本论·第一卷",
+      "author": "marx",
+      "year": 1867,
+      "work_id": "capital-1"
+    },
+    {
+      "id": "marx-reading-077",
+      "work": "资本论·第一卷",
+      "author": "marx",
+      "year": 1867,
+      "work_id": "capital-1"
+    },
+    {
+      "id": "marx-reading-078",
+      "work": "资本论·第一卷",
+      "author": "marx",
+      "year": 1867,
+      "work_id": "capital-1"
+    },
+    {
+      "id": "marx-reading-079",
+      "work": "资本论·第一卷",
+      "author": "marx",
+      "year": 1867,
+      "work_id": "capital-1"
+    },
+    {
+      "id": "marx-reading-080",
+      "work": "资本论·第一卷",
+      "author": "marx",
+      "year": 1867,
+      "work_id": "capital-1"
+    },
+    {
+      "id": "marx-reading-081",
+      "work": "资本论·第一卷",
+      "author": "marx",
+      "year": 1867,
+      "work_id": "capital-1"
+    },
+    {
+      "id": "marx-reading-082",
+      "work": "资本论·第一卷",
+      "author": "marx",
+      "year": 1867,
+      "work_id": "capital-1"
+    },
+    {
+      "id": "marx-reading-083",
+      "work": "资本论·第一卷",
+      "author": "marx",
+      "year": 1867,
+      "work_id": "v03-04"
+    },
+    {
+      "id": "marx-reading-084",
+      "work": "资本论·第一卷",
+      "author": "marx",
+      "year": 1867,
+      "work_id": "capital-1"
+    },
+    {
+      "id": "marx-reading-085",
+      "work": "资本论·第一卷",
+      "author": "marx",
+      "year": 1867,
+      "work_id": "capital-1"
+    },
+    {
+      "id": "marx-reading-086",
+      "work": "资本论·第一卷",
+      "author": "marx",
+      "year": 1867,
+      "work_id": "v03-04"
+    },
+    {
+      "id": "marx-reading-087",
+      "work": "资本论·第一卷",
+      "author": "marx",
+      "year": 1867,
+      "work_id": "capital-1"
+    },
+    {
+      "id": "marx-reading-088",
+      "work": "资本论·第一卷",
+      "author": "marx",
+      "year": 1867,
+      "work_id": "capital-1"
+    },
+    {
+      "id": "marx-reading-089",
+      "work": "资本论·第一卷",
+      "author": "marx",
+      "year": 1867,
+      "work_id": "capital-1"
+    },
+    {
+      "id": "marx-reading-090",
+      "work": "资本论·第一卷",
+      "author": "marx",
+      "year": 1867,
+      "work_id": "capital-1"
+    },
+    {
+      "id": "marx-reading-091",
+      "work": "资本论·第一卷",
+      "author": "marx",
+      "year": 1867,
+      "work_id": "capital-1"
+    },
+    {
+      "id": "marx-reading-092",
+      "work": "资本论·第一卷",
+      "author": "marx",
+      "year": 1867,
+      "work_id": "capital-1"
+    },
+    {
+      "id": "marx-reading-093",
+      "work": "资本论·第一卷",
+      "author": "marx",
+      "year": 1867,
+      "work_id": "capital-1"
+    },
+    {
+      "id": "marx-reading-094",
+      "work": "资本论·第一卷",
+      "author": "marx",
+      "year": 1867,
+      "work_id": "capital-1"
+    },
+    {
+      "id": "marx-reading-095",
+      "work": "资本论·第一卷",
+      "author": "marx",
+      "year": 1867,
+      "work_id": "capital-1"
+    },
+    {
+      "id": "marx-reading-096",
+      "work": "资本论·第一卷",
+      "author": "marx",
+      "year": 1867,
+      "work_id": "capital-1"
+    },
+    {
+      "id": "marx-reading-097",
+      "work": "资本论·第一卷",
+      "author": "marx",
+      "year": 1867,
+      "work_id": "capital-1"
+    },
+    {
+      "id": "marx-reading-098",
+      "work": "资本论·第一卷",
+      "author": "marx",
+      "year": 1867,
+      "work_id": "capital-1"
+    },
+    {
+      "id": "marx-reading-099",
+      "work": "资本论·第一卷",
+      "author": "marx",
+      "year": 1867,
+      "work_id": "v03-04"
+    },
+    {
+      "id": "marx-reading-100",
+      "work": "资本论·第一卷",
+      "author": "marx",
+      "year": 1867,
+      "work_id": "capital-1"
+    },
+    {
+      "id": "marx-reading-101",
+      "work": "资本论·第一卷",
+      "author": "marx",
+      "year": 1867,
+      "work_id": "capital-1"
+    },
+    {
+      "id": "marx-reading-102",
+      "work": "资本论·第一卷",
+      "author": "marx",
+      "year": 1867,
+      "work_id": "capital-1"
+    },
+    {
+      "id": "marx-reading-103",
+      "work": "资本论·第一卷",
+      "author": "marx",
+      "year": 1867,
+      "work_id": "capital-1"
+    },
+    {
+      "id": "marx-reading-104",
+      "work": "资本论·第一卷",
+      "author": "marx",
+      "year": 1867,
+      "work_id": "capital-1"
+    },
+    {
+      "id": "marx-reading-105",
+      "work": "资本论·第一卷",
+      "author": "marx",
+      "year": 1867,
+      "work_id": "capital-1"
+    }
+  ]
+}

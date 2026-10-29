@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "reviewed_at": "2026-10-28",
+  "reviewed_at": "2026-10-29",
   "scope": {
     "start": "10-28",
     "end": "11-30",
@@ -3325,23 +3325,6 @@
       }
     },
     {
-      "id": "history-11-28-1820-engels-born",
-      "month_day": "11-28",
-      "year": 1820,
-      "sources": [
-        {
-          "name": "维基百科：弗里德里希·恩格斯",
-          "url": "https://en.wikipedia.org/wiki/Friedrich_Engels",
-          "note": "信息框、开篇及Early life段明确28 November 1820和Barmen；同页概述共同著作与《资本论》编辑工作。"
-        }
-      ],
-      "review_note": "已查阅二手百科人物页，核对所写年月日与具体事实；中英文为本站简短转述，不宣称完成原始档案核验。",
-      "text_sha256": {
-        "zh-CN": "f425bff9601fc473a04b1752c79bee9c0d95b4999ffc26abbd48b6cb3c17f300",
-        "en": "58f70bdb58e279aeaa343f63422d9dda1d10f8ce8227a5f09f1ecbf78acc63ab"
-      }
-    },
-    {
       "id": "history-11-28-1893-nz-women-vote",
       "month_day": "11-28",
       "year": 1893,
@@ -3639,6 +3622,969 @@
         "zh-CN": "52b8da194ae19da31aed6f29bbd5fd8db5dfda704f1f5bbf450b64916c9d5d47",
         "en": "93194b2d613613b3f560b2b11669cfb80abcda49c256052a414c8e8c5bd53121"
       }
+    },
+    {
+      "id": "history-marx-v2-1818-05-05",
+      "month_day": "05-05",
+      "year": 1818,
+      "sources": [
+        {
+          "name": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+          "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+          "note": "1818年条：马克思出生；原文日期精度日；按年表核对日期及所述事实；中文转述，英文为本站译文（AI辅助）。"
+        }
+      ],
+      "review_note": "逐项核对文集编者年表，不冒充逐条原始档案审定；仅采用精确到日的条目。",
+      "text_sha256": {
+        "zh-CN": "3834f66e11b950146b4dd8aa79395a42164f9d0c95371a0f1660534ac11a1907",
+        "en": "4dc47236d4a749614662ee26ea545136cb23b37e00ef22b32bdbd4996ddb03b2"
+      },
+      "checked_on": "2026-10-29"
+    },
+    {
+      "id": "history-11-28-1820-engels-born",
+      "month_day": "11-28",
+      "year": 1820,
+      "sources": [
+        {
+          "name": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+          "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+          "note": "1820年条：恩格斯出生；原文日期精度日；按年表核对日期及所述事实；中文转述，英文为本站译文（AI辅助）。"
+        },
+        {
+          "name": "维基百科：弗里德里希·恩格斯",
+          "url": "https://en.wikipedia.org/wiki/Friedrich_Engels",
+          "note": "1820年条：恩格斯出生；原文日期精度日；按年表核对日期及所述事实；中文转述，英文为本站译文（AI辅助）。"
+        }
+      ],
+      "review_note": "逐项核对文集编者年表，不冒充逐条原始档案审定；仅采用精确到日的条目。",
+      "text_sha256": {
+        "zh-CN": "04d66d6da880325e4dff0ea94123fc5cd91fd47e3fa77e945a2f193949fe3b74",
+        "en": "703c94157adb318ef22deaf31cd682f93d262a714542bc8afa7d9ce2d1dceea4"
+      },
+      "checked_on": "2026-10-29"
+    },
+    {
+      "id": "history-marx-v2-1835-10-15",
+      "month_day": "10-15",
+      "year": 1835,
+      "sources": [
+        {
+          "name": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+          "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+          "note": "1835年条：到波恩学习法律；原文日期精度日；按年表核对日期及所述事实；中文转述，英文为本站译文（AI辅助）。"
+        }
+      ],
+      "review_note": "逐项核对文集编者年表，不冒充逐条原始档案审定；仅采用精确到日的条目。",
+      "text_sha256": {
+        "zh-CN": "f68d492471dca3b5dd4865629c7047fd9fcde984ce1c53708c647ad87b48c91b",
+        "en": "9cd79ed303fab69ebae483a0b333fdfbae3a5b7b1bd42ff5ac071854688a8800"
+      },
+      "checked_on": "2026-10-29"
+    },
+    {
+      "id": "history-marx-v2-1841-04-15",
+      "month_day": "04-15",
+      "year": 1841,
+      "sources": [
+        {
+          "name": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+          "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+          "note": "1841年条：获得博士学位；原文日期精度日；按年表核对日期及所述事实；中文转述，英文为本站译文（AI辅助）。"
+        }
+      ],
+      "review_note": "逐项核对文集编者年表，不冒充逐条原始档案审定；仅采用精确到日的条目。",
+      "text_sha256": {
+        "zh-CN": "9b1ca417390ff41542d7893559274073ca34399a22ac8eaf493348c3bf80d68e",
+        "en": "4445e8d5bf1e4fc59dd01f88cf67d5d0fd0750947e38d6a5a13538f7f4775cd4"
+      },
+      "checked_on": "2026-10-29"
+    },
+    {
+      "id": "history-marx-v2-1842-10-15",
+      "month_day": "10-15",
+      "year": 1842,
+      "sources": [
+        {
+          "name": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+          "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+          "note": "1842年条：承担《莱茵报》编辑工作；原文日期精度日；按年表核对日期及所述事实；中文转述，英文为本站译文（AI辅助）。"
+        }
+      ],
+      "review_note": "逐项核对文集编者年表，不冒充逐条原始档案审定；仅采用精确到日的条目。",
+      "text_sha256": {
+        "zh-CN": "fce99b098597b37276e16b537aef19b87de23f552e083b9fbc6df81f6f37b94b",
+        "en": "19a2518b45910e89fb030e9c41e701ce68d6f27a111617c837fb882b88a7bf7c"
+      },
+      "checked_on": "2026-10-29"
+    },
+    {
+      "id": "history-marx-v2-1843-03-17",
+      "month_day": "03-17",
+      "year": 1843,
+      "sources": [
+        {
+          "name": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+          "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+          "note": "1843年条：退出《莱茵报》编辑部；原文日期精度日；按年表核对日期及所述事实；中文转述，英文为本站译文（AI辅助）。"
+        }
+      ],
+      "review_note": "逐项核对文集编者年表，不冒充逐条原始档案审定；仅采用精确到日的条目。",
+      "text_sha256": {
+        "zh-CN": "9c2be99b4d56580ef4320e87e3ff7eb3895f49539749977bc042a19f46922e19",
+        "en": "5f2cb9dd5d478fa77016c5aebd646d2bf2628df857269204979b01854a5a4430"
+      },
+      "checked_on": "2026-10-29"
+    },
+    {
+      "id": "history-marx-v2-1843-06-19",
+      "month_day": "06-19",
+      "year": 1843,
+      "sources": [
+        {
+          "name": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+          "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+          "note": "1843年条：与燕妮结婚；原文日期精度日；按年表核对日期及所述事实；中文转述，英文为本站译文（AI辅助）。"
+        }
+      ],
+      "review_note": "逐项核对文集编者年表，不冒充逐条原始档案审定；仅采用精确到日的条目。",
+      "text_sha256": {
+        "zh-CN": "6ca96c287f0840c22ba15fd31c200fe822fd58982b30793130b83eb38a382872",
+        "en": "1dafff1c605f3b376dba188ef8e502443e473bcbdae74c35ec23d6bab42439fb"
+      },
+      "checked_on": "2026-10-29"
+    },
+    {
+      "id": "history-marx-v2-1845-02-03",
+      "month_day": "02-03",
+      "year": 1845,
+      "sources": [
+        {
+          "name": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+          "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+          "note": "1845年条：迁往布鲁塞尔；原文日期精度日；按年表核对日期及所述事实；中文转述，英文为本站译文（AI辅助）。"
+        }
+      ],
+      "review_note": "逐项核对文集编者年表，不冒充逐条原始档案审定；仅采用精确到日的条目。",
+      "text_sha256": {
+        "zh-CN": "b56def1eb3eabc881a494e87f11de2154bb130dd38e641655dc3245bc527b0dd",
+        "en": "fec7a7687a4341aaa86b64d9da5b4070c51360f477a3520d27c1651201074afc"
+      },
+      "checked_on": "2026-10-29"
+    },
+    {
+      "id": "history-marx-v2-1846-12-28",
+      "month_day": "12-28",
+      "year": 1846,
+      "sources": [
+        {
+          "name": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+          "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+          "note": "1846年条：写信讨论蒲鲁东；原文日期精度日；按年表核对日期及所述事实；中文转述，英文为本站译文（AI辅助）。"
+        }
+      ],
+      "review_note": "逐项核对文集编者年表，不冒充逐条原始档案审定；仅采用精确到日的条目。",
+      "text_sha256": {
+        "zh-CN": "0c111c4e0e2ad2e8fcc9876d5168c601287aa854e8532bfefeb1fdb75693c585",
+        "en": "03ee0bdd0eff86585f5d64941b60756f86ff4c427b9f3eddc11f607b4469a455"
+      },
+      "checked_on": "2026-10-29"
+    },
+    {
+      "id": "history-marx-v2-1847-08-05",
+      "month_day": "08-05",
+      "year": 1847,
+      "sources": [
+        {
+          "name": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+          "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+          "note": "1847年条：布鲁塞尔同盟组织成立；原文日期精度日；按年表核对日期及所述事实；中文转述，英文为本站译文（AI辅助）。"
+        }
+      ],
+      "review_note": "逐项核对文集编者年表，不冒充逐条原始档案审定；仅采用精确到日的条目。",
+      "text_sha256": {
+        "zh-CN": "0dc15557cfd8181414428ef16de7c3de00274b53504186496888e27c00eaa28a",
+        "en": "afe67d90bf19677170e9ef7a282bc26f01ba944c91bbdd61b8b90051afdb9654"
+      },
+      "checked_on": "2026-10-29"
+    },
+    {
+      "id": "history-marx-v2-1847-11-29",
+      "month_day": "11-29",
+      "year": 1847,
+      "sources": [
+        {
+          "name": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+          "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+          "note": "1847年条：参加波兰纪念大会；原文日期精度日；按年表核对日期及所述事实；中文转述，英文为本站译文（AI辅助）。"
+        }
+      ],
+      "review_note": "逐项核对文集编者年表，不冒充逐条原始档案审定；仅采用精确到日的条目。",
+      "text_sha256": {
+        "zh-CN": "6c9c762b1f4d24bb44d716c5673d9b024a4bd11ceae969f4690eef318f501578",
+        "en": "6a46ebdaa7782ebaa4404c84e868a242b548959b101d5aa6be3f955ef08e7578"
+      },
+      "checked_on": "2026-10-29"
+    },
+    {
+      "id": "history-marx-v2-1848-03-11",
+      "month_day": "03-11",
+      "year": 1848,
+      "sources": [
+        {
+          "name": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+          "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+          "note": "1848年条：巴黎的同盟中央委员会；原文日期精度日；按年表核对日期及所述事实；中文转述，英文为本站译文（AI辅助）。"
+        }
+      ],
+      "review_note": "逐项核对文集编者年表，不冒充逐条原始档案审定；仅采用精确到日的条目。",
+      "text_sha256": {
+        "zh-CN": "d562a7938ae16241113cabc84b73ba55c7dd7d9b42ed19402b90fd2cfd2b44aa",
+        "en": "bd2f21a6865a0d82dd48f4980b02d680c845709b124c7a60dfe127d537597a98"
+      },
+      "checked_on": "2026-10-29"
+    },
+    {
+      "id": "history-marx-v2-1848-04-11",
+      "month_day": "04-11",
+      "year": 1848,
+      "sources": [
+        {
+          "name": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+          "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+          "note": "1848年条：到科隆筹办新报；原文日期精度日；按年表核对日期及所述事实；中文转述，英文为本站译文（AI辅助）。"
+        }
+      ],
+      "review_note": "逐项核对文集编者年表，不冒充逐条原始档案审定；仅采用精确到日的条目。",
+      "text_sha256": {
+        "zh-CN": "24bcfd23f2f11cced693721bb608776f792d41ffe21f759298c200a374e1a95a",
+        "en": "ac322c611eba00964cd4e93fb7e903aac14f35d81d6194214622aa78d804dd0b"
+      },
+      "checked_on": "2026-10-29"
+    },
+    {
+      "id": "history-marx-v2-1849-02-07",
+      "month_day": "02-07",
+      "year": 1849,
+      "sources": [
+        {
+          "name": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+          "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+          "note": "1849年条：《新莱茵报》案件开庭；原文日期精度日；按年表核对日期及所述事实；中文转述，英文为本站译文（AI辅助）。"
+        }
+      ],
+      "review_note": "逐项核对文集编者年表，不冒充逐条原始档案审定；仅采用精确到日的条目。",
+      "text_sha256": {
+        "zh-CN": "b903197429152cdffd5e309ece43f7591d9a579f331883af9b89ed1f957f967e",
+        "en": "5a17d62734e8cb9f08f3829d2055388037af7407a03230ab6b601c4ff65cad20"
+      },
+      "checked_on": "2026-10-29"
+    },
+    {
+      "id": "history-marx-v2-1849-05-19",
+      "month_day": "05-19",
+      "year": 1849,
+      "sources": [
+        {
+          "name": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+          "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+          "note": "1849年条：报纸最后一号；原文日期精度日；按年表核对日期及所述事实；中文转述，英文为本站译文（AI辅助）。"
+        }
+      ],
+      "review_note": "逐项核对文集编者年表，不冒充逐条原始档案审定；仅采用精确到日的条目。",
+      "text_sha256": {
+        "zh-CN": "b952b2d34276c0c2c9bd8c2007a364c6ac4a12e67e1a2cd720d15b107e8f853e",
+        "en": "330e6575c3bb63c4bafdee276d4d33d68c3b63f46cbf1ca7de730043d7806315"
+      },
+      "checked_on": "2026-10-29"
+    },
+    {
+      "id": "history-marx-v2-1849-08-24",
+      "month_day": "08-24",
+      "year": 1849,
+      "sources": [
+        {
+          "name": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+          "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+          "note": "1849年条：离开巴黎赴伦敦；原文日期精度日；按年表核对日期及所述事实；中文转述，英文为本站译文（AI辅助）。"
+        }
+      ],
+      "review_note": "逐项核对文集编者年表，不冒充逐条原始档案审定；仅采用精确到日的条目。",
+      "text_sha256": {
+        "zh-CN": "6f2227622a28f1d10a67f917787328131b014d1c3fae6337d25795d5de9347d7",
+        "en": "0eef782ad5ef416900abd249867e54c772648dc1df5a3d4aaa8269a8f1ba7a3b"
+      },
+      "checked_on": "2026-10-29"
+    },
+    {
+      "id": "history-marx-v2-1850-09-15",
+      "month_day": "09-15",
+      "year": 1850,
+      "sources": [
+        {
+          "name": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+          "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+          "note": "1850年条：同盟中央委员会发生分裂；原文日期精度日；按年表核对日期及所述事实；中文转述，英文为本站译文（AI辅助）。"
+        }
+      ],
+      "review_note": "逐项核对文集编者年表，不冒充逐条原始档案审定；仅采用精确到日的条目。",
+      "text_sha256": {
+        "zh-CN": "4b5079b227c55725091b060d693383c3dbc50f1d9a38fa4ed60a5e5aae2b4db5",
+        "en": "2aee676740cd50063f6a0673b4cabe3963552ee29b86ca03f9bf9f4d80a12392"
+      },
+      "checked_on": "2026-10-29"
+    },
+    {
+      "id": "history-marx-v2-1851-08-08",
+      "month_day": "08-08",
+      "year": 1851,
+      "sources": [
+        {
+          "name": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+          "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+          "note": "1851年条：收到《论坛报》邀稿；原文日期精度日；按年表核对日期及所述事实；中文转述，英文为本站译文（AI辅助）。"
+        }
+      ],
+      "review_note": "逐项核对文集编者年表，不冒充逐条原始档案审定；仅采用精确到日的条目。",
+      "text_sha256": {
+        "zh-CN": "9d9fb5a4604eb63472e8eccc4bbffc30c37380bcd8e89aa1cf7f9ba95b3beb07",
+        "en": "ecad848693b4275e49ad315f6213d8b02a319d0fc1f11a8aaef0b945cb11b0ef"
+      },
+      "checked_on": "2026-10-29"
+    },
+    {
+      "id": "history-marx-v2-1852-11-17",
+      "month_day": "11-17",
+      "year": 1852,
+      "sources": [
+        {
+          "name": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+          "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+          "note": "1852年条：提出解散同盟；原文日期精度日；按年表核对日期及所述事实；中文转述，英文为本站译文（AI辅助）。"
+        }
+      ],
+      "review_note": "逐项核对文集编者年表，不冒充逐条原始档案审定；仅采用精确到日的条目。",
+      "text_sha256": {
+        "zh-CN": "4f9b82342c82a169164239e8032f710de2c5aa2f8a49d9396e2841fb48d08453",
+        "en": "04c6eaf17ebabdce8b091f7f82cc05dfa4779cc37a6b761fa4a5808f62d55fb4"
+      },
+      "checked_on": "2026-10-29"
+    },
+    {
+      "id": "history-marx-v2-1853-06-14",
+      "month_day": "06-14",
+      "year": 1853,
+      "sources": [
+        {
+          "name": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+          "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+          "note": "1853年条：论中国革命的文章发表；原文日期精度日；按年表核对日期及所述事实；中文转述，英文为本站译文（AI辅助）。"
+        }
+      ],
+      "review_note": "逐项核对文集编者年表，不冒充逐条原始档案审定；仅采用精确到日的条目。",
+      "text_sha256": {
+        "zh-CN": "803b93e14f312e1536782c412651ecaac0266a284a7923224ff8eadaf684d4ec",
+        "en": "75afb7fcdbc0b44c4789c9166bb48f5212404b7565afea7c239a4932b8c7bf83"
+      },
+      "checked_on": "2026-10-29"
+    },
+    {
+      "id": "history-marx-v2-1856-04-14",
+      "month_day": "04-14",
+      "year": 1856,
+      "sources": [
+        {
+          "name": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+          "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+          "note": "1856年条：《人民报》纪念会演说；原文日期精度日；按年表核对日期及所述事实；中文转述，英文为本站译文（AI辅助）。"
+        }
+      ],
+      "review_note": "逐项核对文集编者年表，不冒充逐条原始档案审定；仅采用精确到日的条目。",
+      "text_sha256": {
+        "zh-CN": "289f11b2786f921af97b81127b801e2149a079c286cc2bd17c872b8480efaa3b",
+        "en": "3736e957124d45e2f37e0fb3c30eadaa326689c794928b8be145d9d161884533"
+      },
+      "checked_on": "2026-10-29"
+    },
+    {
+      "id": "history-marx-v2-1858-04-02",
+      "month_day": "04-02",
+      "year": 1858,
+      "sources": [
+        {
+          "name": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+          "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+          "note": "1858年条：说明经济学写作纲要；原文日期精度日；按年表核对日期及所述事实；中文转述，英文为本站译文（AI辅助）。"
+        }
+      ],
+      "review_note": "逐项核对文集编者年表，不冒充逐条原始档案审定；仅采用精确到日的条目。",
+      "text_sha256": {
+        "zh-CN": "32b84786099a949754447ceb8dec8fec8bf147350d69f76e6e45811f932be39a",
+        "en": "5e52fdb14ef95a27c9417a66cc38f8dc61b27bff99dbe01c52e380f1d3d6bab3"
+      },
+      "checked_on": "2026-10-29"
+    },
+    {
+      "id": "history-marx-v2-1859-02-23",
+      "month_day": "02-23",
+      "year": 1859,
+      "sources": [
+        {
+          "name": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+          "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+          "note": "1859年条：寄出《序言》；原文日期精度日；按年表核对日期及所述事实；中文转述，英文为本站译文（AI辅助）。"
+        }
+      ],
+      "review_note": "逐项核对文集编者年表，不冒充逐条原始档案审定；仅采用精确到日的条目。",
+      "text_sha256": {
+        "zh-CN": "89bbdfb8a14db0e9d9884a7f1b9d2db716fd66b570a8797dae310149a63fd9d6",
+        "en": "6771b1cc4ef7591f2eb3e8b842b50cd4ce91cfd05e2bdd6961b17e25d699b025"
+      },
+      "checked_on": "2026-10-29"
+    },
+    {
+      "id": "history-marx-v2-1859-12-12",
+      "month_day": "12-12",
+      "year": 1859,
+      "sources": [
+        {
+          "name": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+          "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+          "note": "1859年条：通信谈达尔文；原文日期精度日；按年表核对日期及所述事实；中文转述，英文为本站译文（AI辅助）。"
+        }
+      ],
+      "review_note": "逐项核对文集编者年表，不冒充逐条原始档案审定；仅采用精确到日的条目。",
+      "text_sha256": {
+        "zh-CN": "2fa2da31b09131f3a2facd928730957ca9d97f453dc0c61d2ae5b45dd24c37f3",
+        "en": "6ddbdcba582c3993daef1eedc135297c4f75697d1c04eae13f02f320f56e85b2"
+      },
+      "checked_on": "2026-10-29"
+    },
+    {
+      "id": "history-marx-v2-1862-12-28",
+      "month_day": "12-28",
+      "year": 1862,
+      "sources": [
+        {
+          "name": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+          "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+          "note": "1862年条：确定《资本论》书名计划；原文日期精度日；按年表核对日期及所述事实；中文转述，英文为本站译文（AI辅助）。"
+        }
+      ],
+      "review_note": "逐项核对文集编者年表，不冒充逐条原始档案审定；仅采用精确到日的条目。",
+      "text_sha256": {
+        "zh-CN": "b01c758a1b55ca0a149b52184a91c4276b28d292d0f8e52120e19d3c8b6d01c6",
+        "en": "b0a38324975e4af854b27b24ade748fae89af45b527500d08fdd3fac76a5c82a"
+      },
+      "checked_on": "2026-10-29"
+    },
+    {
+      "id": "history-marx-v2-1863-01-28",
+      "month_day": "01-28",
+      "year": 1863,
+      "sources": [
+        {
+          "name": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+          "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+          "note": "1863年条：通信讨论机器；原文日期精度日；按年表核对日期及所述事实；中文转述，英文为本站译文（AI辅助）。"
+        }
+      ],
+      "review_note": "逐项核对文集编者年表，不冒充逐条原始档案审定；仅采用精确到日的条目。",
+      "text_sha256": {
+        "zh-CN": "70347ba89cbd6a9df02e0415500231a85f8f4cd9f3fdce2cb1b1e28ca3a998b4",
+        "en": "ece9556029d63d38af10f65c6ddbb2c88929455ac9dc65d0ff37afadf173267b"
+      },
+      "checked_on": "2026-10-29"
+    },
+    {
+      "id": "history-marx-v2-1864-09-28",
+      "month_day": "09-28",
+      "year": 1864,
+      "sources": [
+        {
+          "name": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+          "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+          "note": "1864年条：第一国际成立会议；原文日期精度日；按年表核对日期及所述事实；中文转述，英文为本站译文（AI辅助）。"
+        }
+      ],
+      "review_note": "逐项核对文集编者年表，不冒充逐条原始档案审定；仅采用精确到日的条目。",
+      "text_sha256": {
+        "zh-CN": "f4daba799a0a7fb57b50ebecc7d914c30c87170c5faf0beef4f50cbe2e7760d4",
+        "en": "aa14087d71f4e22f6bd5a52e5243667a308c347ad6baedacd82e4a6041d166c7"
+      },
+      "checked_on": "2026-10-29"
+    },
+    {
+      "id": "history-marx-v2-1865-06-20",
+      "month_day": "06-20",
+      "year": 1865,
+      "sources": [
+        {
+          "name": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+          "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+          "note": "1865年条：开始工资问题报告；原文日期精度日；按年表核对日期及所述事实；中文转述，英文为本站译文（AI辅助）。"
+        }
+      ],
+      "review_note": "逐项核对文集编者年表，不冒充逐条原始档案审定；仅采用精确到日的条目。",
+      "text_sha256": {
+        "zh-CN": "f1f71a3512f946118dda3b319394bc8eccef0d3950d0dd5afa1d04221d63962c",
+        "en": "6ce95d3adef16dfc49ee6840e993d6dc32fe27feadec3cee20263c041cb98925"
+      },
+      "checked_on": "2026-10-29"
+    },
+    {
+      "id": "history-marx-v2-1867-07-25",
+      "month_day": "07-25",
+      "year": 1867,
+      "sources": [
+        {
+          "name": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+          "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+          "note": "1867年条：第一卷序言写成；原文日期精度日；按年表核对日期及所述事实；中文转述，英文为本站译文（AI辅助）。"
+        }
+      ],
+      "review_note": "逐项核对文集编者年表，不冒充逐条原始档案审定；仅采用精确到日的条目。",
+      "text_sha256": {
+        "zh-CN": "4e8f70fb31de2156579434a14de2e1defc1787ccffb7649dbb9cbe17bf61b737",
+        "en": "ca63c3e7f4364e3f39db3621863127edc14e8d01e2fa69d005d9dcfb95980c03"
+      },
+      "checked_on": "2026-10-29"
+    },
+    {
+      "id": "history-marx-v2-1867-08-16",
+      "month_day": "08-16",
+      "year": 1867,
+      "sources": [
+        {
+          "name": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+          "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+          "note": "1867年条：校完第一卷最后印张；原文日期精度日；按年表核对日期及所述事实；中文转述，英文为本站译文（AI辅助）。"
+        }
+      ],
+      "review_note": "逐项核对文集编者年表，不冒充逐条原始档案审定；仅采用精确到日的条目。",
+      "text_sha256": {
+        "zh-CN": "bd42a7e10f9a8c5027964d9f042a51b86173e64fd324e1f588b172ab792d71ab",
+        "en": "1115c259c00d56845d0ce1184c695b357387ecc5d99edd79561edf96bd6f1bd9"
+      },
+      "checked_on": "2026-10-29"
+    },
+    {
+      "id": "history-marx-v2-1869-06-30",
+      "month_day": "06-30",
+      "year": 1869,
+      "sources": [
+        {
+          "name": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+          "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+          "note": "1869年条：结束公司的工作；原文日期精度日；按年表核对日期及所述事实；中文转述，英文为本站译文（AI辅助）。"
+        }
+      ],
+      "review_note": "逐项核对文集编者年表，不冒充逐条原始档案审定；仅采用精确到日的条目。",
+      "text_sha256": {
+        "zh-CN": "74dfe9ea69611ab525bb286fce44c6da251d44895b1766a21a85b286e01d38c1",
+        "en": "3af30ecaf1746d9f4b2050de80787ecce7b156c0d6fa09ce5794f1d9e5e09f6f"
+      },
+      "checked_on": "2026-10-29"
+    },
+    {
+      "id": "history-marx-v2-1870-09-20",
+      "month_day": "09-20",
+      "year": 1870,
+      "sources": [
+        {
+          "name": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+          "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+          "note": "1870年条：迁居伦敦；原文日期精度日；按年表核对日期及所述事实；中文转述，英文为本站译文（AI辅助）。"
+        }
+      ],
+      "review_note": "逐项核对文集编者年表，不冒充逐条原始档案审定；仅采用精确到日的条目。",
+      "text_sha256": {
+        "zh-CN": "3c4eabe4d9483f2b4dff9eb64cf4b508c3a69ef6642c720b0b2d79c8af573b02",
+        "en": "4645f4bb3b2e871b1a1b5f3ed49e2c2bb8c639a0b91b4197431876e4012b5218"
+      },
+      "checked_on": "2026-10-29"
+    },
+    {
+      "id": "history-marx-v2-1871-05-30",
+      "month_day": "05-30",
+      "year": 1871,
+      "sources": [
+        {
+          "name": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+          "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+          "note": "1871年条：《法兰西内战》获通过；原文日期精度日；按年表核对日期及所述事实；中文转述，英文为本站译文（AI辅助）。"
+        }
+      ],
+      "review_note": "逐项核对文集编者年表，不冒充逐条原始档案审定；仅采用精确到日的条目。",
+      "text_sha256": {
+        "zh-CN": "6a2c2e184ff1add0bd4b3b174469c328fa3a02f929635cc63377c9e136fd5fd1",
+        "en": "1b949a5b1f794a794291bca03fb203fb8e40b9e3f1aba26429d4451789107717"
+      },
+      "checked_on": "2026-10-29"
+    },
+    {
+      "id": "history-marx-v2-1871-09-24",
+      "month_day": "09-24",
+      "year": 1871,
+      "sources": [
+        {
+          "name": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+          "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+          "note": "1871年条：国际成立七周年讲话；原文日期精度日；按年表核对日期及所述事实；中文转述，英文为本站译文（AI辅助）。"
+        }
+      ],
+      "review_note": "逐项核对文集编者年表，不冒充逐条原始档案审定；仅采用精确到日的条目。",
+      "text_sha256": {
+        "zh-CN": "826c28039c86b16978fb45f96a41397aff27dc42bcba37b4cb2c67451d861f00",
+        "en": "fa2b7d1ab47fd54f8a0f3548c2fc835db332133bcf6f6bc2bfa250cae22cae4a"
+      },
+      "checked_on": "2026-10-29"
+    },
+    {
+      "id": "history-marx-v2-1872-06-24",
+      "month_day": "06-24",
+      "year": 1872,
+      "sources": [
+        {
+          "name": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+          "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+          "note": "1872年条：重读《宣言》的序言；原文日期精度日；按年表核对日期及所述事实；中文转述，英文为本站译文（AI辅助）。"
+        }
+      ],
+      "review_note": "逐项核对文集编者年表，不冒充逐条原始档案审定；仅采用精确到日的条目。",
+      "text_sha256": {
+        "zh-CN": "27ddcf7f58f1215f2f2795ac60013d6298b7dd8bae3d159a6de1e08dd3603b98",
+        "en": "ab85f7771d7649fae539eebef817dc0b41f9143202a2c331955834aebaf5579b"
+      },
+      "checked_on": "2026-10-29"
+    },
+    {
+      "id": "history-marx-v2-1873-01-24",
+      "month_day": "01-24",
+      "year": 1873,
+      "sources": [
+        {
+          "name": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+          "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+          "note": "1873年条：第一卷第二版跋；原文日期精度日；按年表核对日期及所述事实；中文转述，英文为本站译文（AI辅助）。"
+        }
+      ],
+      "review_note": "逐项核对文集编者年表，不冒充逐条原始档案审定；仅采用精确到日的条目。",
+      "text_sha256": {
+        "zh-CN": "04118b983b054fd452d0e8e6301959887945c71308575227d618ec4061c41e52",
+        "en": "afd733781b0f49f835a1985ef2b027d972e2fcef966956de2c36e534654472cb"
+      },
+      "checked_on": "2026-10-29"
+    },
+    {
+      "id": "history-marx-v2-1873-05-30",
+      "month_day": "05-30",
+      "year": 1873,
+      "sources": [
+        {
+          "name": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+          "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+          "note": "1873年条：讨论自然辩证法构思；原文日期精度日；按年表核对日期及所述事实；中文转述，英文为本站译文（AI辅助）。"
+        }
+      ],
+      "review_note": "逐项核对文集编者年表，不冒充逐条原始档案审定；仅采用精确到日的条目。",
+      "text_sha256": {
+        "zh-CN": "006dd9084c97e387e5739c842b797ee102f47e6ee7c08b31f0cee5e1b169d783",
+        "en": "7a4d145b41eaee09e2a472891e90e4d88c1a5de087ca25d16b8d601214cb92a6"
+      },
+      "checked_on": "2026-10-29"
+    },
+    {
+      "id": "history-marx-v2-1876-05-28",
+      "month_day": "05-28",
+      "year": 1876,
+      "sources": [
+        {
+          "name": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+          "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+          "note": "1876年条：说明批判杜林的计划；原文日期精度日；按年表核对日期及所述事实；中文转述，英文为本站译文（AI辅助）。"
+        }
+      ],
+      "review_note": "逐项核对文集编者年表，不冒充逐条原始档案审定；仅采用精确到日的条目。",
+      "text_sha256": {
+        "zh-CN": "0292c39f95eded81a7421fb5c8bcafed6cbcbbd6193ab7549be8503ea55c5fbb",
+        "en": "7f5cfa730d4d287b1a1b02aba56fb529e8cf6973cf68bda2dadf460c1344420d"
+      },
+      "checked_on": "2026-10-29"
+    },
+    {
+      "id": "history-marx-v2-1881-03-08",
+      "month_day": "03-08",
+      "year": 1881,
+      "sources": [
+        {
+          "name": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+          "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+          "note": "1881年条：答复查苏利奇；原文日期精度日；按年表核对日期及所述事实；中文转述，英文为本站译文（AI辅助）。"
+        }
+      ],
+      "review_note": "逐项核对文集编者年表，不冒充逐条原始档案审定；仅采用精确到日的条目。",
+      "text_sha256": {
+        "zh-CN": "7ecdefe51080a6e5626ca6dd21bf5d109cf1a739471ac16e19348d3de45c3180",
+        "en": "906fffa53ae557c69ed68da11cced147887335d6d920457d692d9daa3a1e00f6"
+      },
+      "checked_on": "2026-10-29"
+    },
+    {
+      "id": "history-marx-v2-1881-12-02",
+      "month_day": "12-02",
+      "year": 1881,
+      "sources": [
+        {
+          "name": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+          "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+          "note": "1881年条：燕妮·马克思逝世；原文日期精度日；按年表核对日期及所述事实；中文转述，英文为本站译文（AI辅助）。"
+        }
+      ],
+      "review_note": "逐项核对文集编者年表，不冒充逐条原始档案审定；仅采用精确到日的条目。",
+      "text_sha256": {
+        "zh-CN": "624474023fb280b458607e21bd0b10cb424c060e5bb2e457354be986a561853b",
+        "en": "07d6a9be731c592fcd64afd9d9893666c1931ddb66e2d58fae87875bd7ef0b28"
+      },
+      "checked_on": "2026-10-29"
+    },
+    {
+      "id": "history-marx-v2-1882-01-21",
+      "month_day": "01-21",
+      "year": 1882,
+      "sources": [
+        {
+          "name": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+          "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+          "note": "1882年条：《宣言》俄文版序言；原文日期精度日；按年表核对日期及所述事实；中文转述，英文为本站译文（AI辅助）。"
+        }
+      ],
+      "review_note": "逐项核对文集编者年表，不冒充逐条原始档案审定；仅采用精确到日的条目。",
+      "text_sha256": {
+        "zh-CN": "4fdd07b5c61b74e3f6891d5b91b3a1c8b071a7621fa704bcb0ebf6d7e05b11ac",
+        "en": "857210e90044a803ba575264406a23aafd429a21040442dd3183a0875fc943d6"
+      },
+      "checked_on": "2026-10-29"
+    },
+    {
+      "id": "history-marx-v2-1883-03-14",
+      "month_day": "03-14",
+      "year": 1883,
+      "sources": [
+        {
+          "name": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+          "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+          "note": "1883年条：马克思在伦敦逝世；原文日期精度日；按年表核对日期及所述事实；中文转述，英文为本站译文（AI辅助）。"
+        }
+      ],
+      "review_note": "逐项核对文集编者年表，不冒充逐条原始档案审定；仅采用精确到日的条目。",
+      "text_sha256": {
+        "zh-CN": "17b53a65ba08c94c910d3eeed2412b49a229fd2f19e85b992133bce05091e56f",
+        "en": "4d1cf1d335a6aaad117bd57491a91f6e37b5370761bd0c0798c2a3445ae3066f"
+      },
+      "checked_on": "2026-10-29"
+    },
+    {
+      "id": "history-marx-v2-1885-05-05",
+      "month_day": "05-05",
+      "year": 1885,
+      "sources": [
+        {
+          "name": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+          "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+          "note": "1885年条：第二卷序言完成；原文日期精度日；按年表核对日期及所述事实；中文转述，英文为本站译文（AI辅助）。"
+        }
+      ],
+      "review_note": "逐项核对文集编者年表，不冒充逐条原始档案审定；仅采用精确到日的条目。",
+      "text_sha256": {
+        "zh-CN": "7440cee12d6a6b01493476abda3117ac7e33a3a7e374633d79b4fa5a9795a822",
+        "en": "d648b68ed8993101551e8ec96366e5251c3f53bd3c40750dc4b7ffdfade51339"
+      },
+      "checked_on": "2026-10-29"
+    },
+    {
+      "id": "history-marx-v2-1886-11-05",
+      "month_day": "11-05",
+      "year": 1886,
+      "sources": [
+        {
+          "name": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+          "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+          "note": "1886年条：第一卷英文版序言；原文日期精度日；按年表核对日期及所述事实；中文转述，英文为本站译文（AI辅助）。"
+        }
+      ],
+      "review_note": "逐项核对文集编者年表，不冒充逐条原始档案审定；仅采用精确到日的条目。",
+      "text_sha256": {
+        "zh-CN": "232ebbdeaf3eb09d6f189e90af9fce7f7d958235a07ed4b00f0640080b7af2ef",
+        "en": "9ff30dbed3894c6328a28552cd7a80d4c6a910e2529970f4be26f95fc543fe21"
+      },
+      "checked_on": "2026-10-29"
+    },
+    {
+      "id": "history-marx-v2-1888-01-30",
+      "month_day": "01-30",
+      "year": 1888,
+      "sources": [
+        {
+          "name": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+          "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+          "note": "1888年条：《宣言》英文版序言；原文日期精度日；按年表核对日期及所述事实；中文转述，英文为本站译文（AI辅助）。"
+        }
+      ],
+      "review_note": "逐项核对文集编者年表，不冒充逐条原始档案审定；仅采用精确到日的条目。",
+      "text_sha256": {
+        "zh-CN": "0272aac3aa531aa2cbd2360f5f76a976713ccae3a086bed179f5db1db7ee88ab",
+        "en": "f40c6cc437c74aec70fafd04bb9ed200ac587c649edd0939434470f9074773a1"
+      },
+      "checked_on": "2026-10-29"
+    },
+    {
+      "id": "history-marx-v2-1890-05-04",
+      "month_day": "05-04",
+      "year": 1890,
+      "sources": [
+        {
+          "name": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+          "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+          "note": "1890年条：参加伦敦五一活动；原文日期精度日；按年表核对日期及所述事实；中文转述，英文为本站译文（AI辅助）。"
+        }
+      ],
+      "review_note": "逐项核对文集编者年表，不冒充逐条原始档案审定；仅采用精确到日的条目。",
+      "text_sha256": {
+        "zh-CN": "6032eb8087702c904af3077de2743f33c6f51755d883c382a16d5bc9273866b6",
+        "en": "4ac7bc737a06049f145ee3d5db7fdab7125c1229cceb7e6e6b0d7d09c7c155ba"
+      },
+      "checked_on": "2026-10-29"
+    },
+    {
+      "id": "history-marx-v2-1891-04-30",
+      "month_day": "04-30",
+      "year": 1891,
+      "sources": [
+        {
+          "name": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+          "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+          "note": "1891年条：《雇佣劳动与资本》导言；原文日期精度日；按年表核对日期及所述事实；中文转述，英文为本站译文（AI辅助）。"
+        }
+      ],
+      "review_note": "逐项核对文集编者年表，不冒充逐条原始档案审定；仅采用精确到日的条目。",
+      "text_sha256": {
+        "zh-CN": "830b338ea26cfc21f3a0924667d6627f1fbabccaf83a5c34fc624feeeac38ef2",
+        "en": "85edf6d5be06ee7d16b34eab43a2a624b8511c515ce0f86adb11154631ea30cc"
+      },
+      "checked_on": "2026-10-29"
+    },
+    {
+      "id": "history-marx-v2-1894-10-04",
+      "month_day": "10-04",
+      "year": 1894,
+      "sources": [
+        {
+          "name": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+          "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+          "note": "1894年条：第三卷序言完成；原文日期精度日；按年表核对日期及所述事实；中文转述，英文为本站译文（AI辅助）。"
+        }
+      ],
+      "review_note": "逐项核对文集编者年表，不冒充逐条原始档案审定；仅采用精确到日的条目。",
+      "text_sha256": {
+        "zh-CN": "ed866ae894026eade050e4123fab792abc914890541ecd58c23d272a5d724838",
+        "en": "31d42bd56876561a9b71a5def05141979f0a53f6c67b8a988ba9cbcc0169bce0"
+      },
+      "checked_on": "2026-10-29"
+    },
+    {
+      "id": "history-marx-v2-1895-08-05",
+      "month_day": "08-05",
+      "year": 1895,
+      "sources": [
+        {
+          "name": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+          "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+          "note": "1895年条：恩格斯在伦敦逝世；原文日期精度日；按年表核对日期及所述事实；中文转述，英文为本站译文（AI辅助）。"
+        }
+      ],
+      "review_note": "逐项核对文集编者年表，不冒充逐条原始档案审定；仅采用精确到日的条目。",
+      "text_sha256": {
+        "zh-CN": "ed6c9d0646da031b4f689fd2588403f5a3c66db509c40453abbc149ec4b420d4",
+        "en": "7ef5fa7ecc31b1030ccc17163f52b17f31793c44bcd397f5a9fd3d060bb252d3"
+      },
+      "checked_on": "2026-10-29"
+    },
+    {
+      "id": "history-marx-v2-1883-03-17",
+      "month_day": "03-17",
+      "year": 1883,
+      "sources": [
+        {
+          "name": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+          "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+          "note": "1883年3月17日条：马克思葬仪与恩格斯讲话；另见文集第3卷《在马克思墓前的讲话》。中文转述，英文本站译文（AI辅助）。"
+        }
+      ],
+      "review_note": "逐项核对文集编者年表，不冒充逐条原始档案审定；仅采用精确到日的条目。",
+      "text_sha256": {
+        "zh-CN": "6f2ac3f1f05cc410e60c7c28b340985c5e173a58dc20133c06ffbdc7a913708c",
+        "en": "8a8b34207d26e267107800e2172cff44fff91c839d4d03e068c938745cbc71d0"
+      },
+      "checked_on": "2026-10-29"
+    }
+  ],
+  "additional_scopes": [
+    {
+      "id": "marx-engels-v2",
+      "description": "文集第十卷年表中50条精确到日的生平、著作与组织活动，包含原条目来源升级。",
+      "ids": [
+        "history-marx-v2-1818-05-05",
+        "history-11-28-1820-engels-born",
+        "history-marx-v2-1835-10-15",
+        "history-marx-v2-1841-04-15",
+        "history-marx-v2-1842-10-15",
+        "history-marx-v2-1843-03-17",
+        "history-marx-v2-1843-06-19",
+        "history-marx-v2-1845-02-03",
+        "history-marx-v2-1846-12-28",
+        "history-marx-v2-1847-08-05",
+        "history-marx-v2-1847-11-29",
+        "history-marx-v2-1848-03-11",
+        "history-marx-v2-1848-04-11",
+        "history-marx-v2-1849-02-07",
+        "history-marx-v2-1849-05-19",
+        "history-marx-v2-1849-08-24",
+        "history-marx-v2-1850-09-15",
+        "history-marx-v2-1851-08-08",
+        "history-marx-v2-1852-11-17",
+        "history-marx-v2-1853-06-14",
+        "history-marx-v2-1856-04-14",
+        "history-marx-v2-1858-04-02",
+        "history-marx-v2-1859-02-23",
+        "history-marx-v2-1859-12-12",
+        "history-marx-v2-1862-12-28",
+        "history-marx-v2-1863-01-28",
+        "history-marx-v2-1864-09-28",
+        "history-marx-v2-1865-06-20",
+        "history-marx-v2-1867-07-25",
+        "history-marx-v2-1867-08-16",
+        "history-marx-v2-1869-06-30",
+        "history-marx-v2-1870-09-20",
+        "history-marx-v2-1871-05-30",
+        "history-marx-v2-1871-09-24",
+        "history-marx-v2-1872-06-24",
+        "history-marx-v2-1873-01-24",
+        "history-marx-v2-1873-05-30",
+        "history-marx-v2-1876-05-28",
+        "history-marx-v2-1881-03-08",
+        "history-marx-v2-1881-12-02",
+        "history-marx-v2-1882-01-21",
+        "history-marx-v2-1883-03-14",
+        "history-marx-v2-1885-05-05",
+        "history-marx-v2-1886-11-05",
+        "history-marx-v2-1888-01-30",
+        "history-marx-v2-1890-05-04",
+        "history-marx-v2-1891-04-30",
+        "history-marx-v2-1894-10-04",
+        "history-marx-v2-1895-08-05",
+        "history-marx-v2-1883-03-17"
+      ]
     }
   ]
 }

@@ -86,7 +86,7 @@
       "quote_sha256": "a0c591de9a70347801b152d3c19596e77c1308955709d37858bd86128b4f3760",
       "source_body_sha256": "da0635ad7817ed3afcba73149d4c5a3dcb9011a01d517e88373cc5c35a64daa9",
       "locator": "第四章第3节：劳动力的买和卖；劳动力价值的决定",
-      "method": "核对原始HTML字节SHA后按声明gb2312用兼容gbk严格解码（无替代字符），排除导航/现代编辑注/印刷注释，逐字比对连续原著段落；保留源标点及字形。",
+      "method": "核对原始HTML字节SHA后按声明gb2312用兼容gbk严格解码（无替代字符），排除导航/现代编辑注/印刷注释，逐字比对连续原著段落；保留源标点及字形。 英文按所链MIA历史译本逐词核对，合并HTML换行空白；英文正文SHA-256：0308d8e151779585c02d7b39777b9754f2f022f211e2a81aa286d0bc4a1240fb。",
       "errata": []
     },
     {
@@ -94,7 +94,7 @@
       "quote_sha256": "9778a39aaf77325b531217f713f625ebb86bf0e25375ebd3855627ec0b00927b",
       "source_body_sha256": "d1bf49237802e17eb09c76d51dd6ad32e009748da8a14af90dbfe450fa01cf71",
       "locator": "第七章第1节：劳动力的剥削程度；剩余价值率的定义",
-      "method": "核对原始HTML字节SHA后按声明gb2312用兼容gbk严格解码（无替代字符），排除导航/现代编辑注/印刷注释，逐字比对连续原著段落；保留源标点及字形。",
+      "method": "核对原始HTML字节SHA后按声明gb2312用兼容gbk严格解码（无替代字符），排除导航/现代编辑注/印刷注释，逐字比对连续原著段落；保留源标点及字形。 英文按所链MIA历史译本逐词核对，合并HTML换行空白；英文正文SHA-256：c7a02a3081bd1de0f095d9b2a924d7d15b281aba5af0fa9f6c3972459e3f726f。",
       "errata": []
     },
     {
@@ -134,7 +134,7 @@
       "quote_sha256": "ba801620a59eb307a6bc49961caf6e32254caee4dd83d01b2edabe91a9584f6d",
       "source_body_sha256": "a669ba7fb6857cf58de19515d64f48615ac0641c0ef972b13775f2d8edef9441",
       "locator": "第二十三章第3节：相对过剩人口或产业后备军的累进生产",
-      "method": "核对原始HTML字节SHA后按声明gb2312用兼容gbk严格解码（无替代字符），排除导航/现代编辑注/印刷注释，逐字比对连续原著段落；保留源标点及字形。展示首尾……是本站省略标记，主体选段连续，不拼接。",
+      "method": "核对原始HTML字节SHA后按声明gb2312用兼容gbk严格解码（无替代字符），排除导航/现代编辑注/印刷注释，逐字比对连续原著段落；保留源标点及字形。展示首尾……是本站省略标记，主体选段连续，不拼接。 英文按所链MIA历史译本逐词核对，合并HTML换行空白；英文正文SHA-256：f2b5f0852fe1e72cb4117652e97bb4c0ded2165b92ee95efc0bb5b719feceb02。",
       "errata": []
     },
     {
@@ -362,6 +362,166 @@
       "locator": "《路易·波拿巴的雾月十八日》正文第一章开头；后文接既定历史条件的限定",
       "method": "核对原始HTML字节SHA后按声明gb2312用兼容gbk严格解码（无替代字符），排除导航/现代编辑注/印刷注释，逐字比对连续原著段落；保留源标点及字形。展示首尾……是本站省略标记，主体选段连续，不拼接。",
       "errata": []
+    },
+    {
+      "id": "c-v2-capital-1-ch11",
+      "quote_sha256": "c2e134063c7f977a13c87030f9bc5f1c85de4897032c752b17417594d1d07e40",
+      "source_body_sha256": "de43ebf001256dcc953bca8b2a0c175a43707a3434b40419c77ecacb49eb3732",
+      "locator": "第11章：协作结尾",
+      "method": "重新读取所链1972年中文电子文本，按声明GB2312以GB18030解码；核对连续字句、所在章和上下文。完整缓存仅存本地忽略目录。",
+      "errata": []
+    },
+    {
+      "id": "c-v2-capital-1-ch12",
+      "quote_sha256": "c7f4ff31366db56975b0180817125fa9bb9e67eb543d0e63d1ae6dd40d38d63c",
+      "source_body_sha256": "4752d6f45c201eefa2f016652b530e384acd24b485e3997856b3884a987e3ec6",
+      "locator": "第12章：本章正文；以分工为基础的协作，在工场手工业上取",
+      "method": "重新读取所链1972年中文电子文本，按声明GB2312以GB18030解码；核对连续字句、所在章和上下文。完整缓存仅存本地忽略目录。",
+      "errata": []
+    },
+    {
+      "id": "c-v2-capital-1-ch13",
+      "quote_sha256": "f770648c2f650e06f9dc8ea9c176b6cd60f68011f360c788aaa071ecf6c9cb95",
+      "source_body_sha256": "f5bdeffb81ea0cb16f9f1ace27b1988d9ad3cdbd65c0fe00d0842b495b177338",
+      "locator": "第13章：本章正文；机器是生产剩余价值的手段。",
+      "method": "重新读取所链1972年中文电子文本，按声明GB2312以GB18030解码；核对连续字句、所在章和上下文。完整缓存仅存本地忽略目录。",
+      "errata": []
+    },
+    {
+      "id": "c-v2-capital-1-ch05",
+      "quote_sha256": "84d86af00049701e357fb09ef3aadd380f121e298130c66648135c82f20b5831",
+      "source_body_sha256": "abdcace4c394b33bdfe2c513fe25fc1e297c7598194fda90b9dba88c546e0b77",
+      "locator": "第5章：劳动过程开头",
+      "method": "重新读取所链1972年中文电子文本，按声明GB2312以GB18030解码；核对连续字句、所在章和上下文。完整缓存仅存本地忽略目录。",
+      "errata": []
+    },
+    {
+      "id": "c-v2-capital-1-ch09",
+      "quote_sha256": "103243cbdcee1c40cd7d42a226dbbf7cbd661006f7fa480122a7c1cf4d6dd029",
+      "source_body_sha256": "4324a89c5caedeea88256dc37c7cef74321f66d77fc6d8b3325e7b2a8f8ae4eb",
+      "locator": "第9章：本章正文；在这一章里，也同前面一样，假定劳动力",
+      "method": "重新读取所链1972年中文电子文本，按声明GB2312以GB18030解码；核对连续字句、所在章和上下文。完整缓存仅存本地忽略目录。",
+      "errata": []
+    },
+    {
+      "id": "c-v2-capital-1-ch14",
+      "quote_sha256": "228627c7f6fe6836d77761a045399c054c317942af96c4c0cc069b5a18f9df55",
+      "source_body_sha256": "76d71c60568d09e007e42042c722b6564d0e2d7af6072d10b85233d73da2e7d6",
+      "locator": "第14章：本章正文；资本主义生产不仅是商品的生产，它实质",
+      "method": "重新读取所链1972年中文电子文本，按声明GB2312以GB18030解码；核对连续字句、所在章和上下文。完整缓存仅存本地忽略目录。",
+      "errata": []
+    },
+    {
+      "id": "c-v2-capital-1-ch15",
+      "quote_sha256": "96db1353acef83ba7ce8415e8ce6b3500b9037679677b206ffa3e9ce62214273",
+      "source_body_sha256": "15a27468ab39f3be003e5cbc3070ad9f14754841dbe167b54356cce93cfb2aa1",
+      "locator": "第15章：本章正文；劳动力价值是由平均工人通常必需的生活",
+      "method": "重新读取所链1972年中文电子文本，按声明GB2312以GB18030解码；核对连续字句、所在章和上下文。完整缓存仅存本地忽略目录。",
+      "errata": []
+    },
+    {
+      "id": "c-v2-capital-1-ch16",
+      "quote_sha256": "9f8fd7deff43957cacae4556a32938b76033f2935efc678fccd3718393f704d5",
+      "source_body_sha256": "079c21bc8ac1005b9146539c9fe994efd7a137d32b3fdf02738afd5293d6f67d",
+      "locator": "第16章：本章正文；这些互相替代的公式在概念上是严格的。",
+      "method": "重新读取所链1972年中文电子文本，按声明GB2312以GB18030解码；核对连续字句、所在章和上下文。完整缓存仅存本地忽略目录。",
+      "errata": []
+    },
+    {
+      "id": "c-v2-capital-1-ch17",
+      "quote_sha256": "5cd99361e39b2f3b999e7a74ab38ece221c326efc58da0b91e0b0de886d90ecc",
+      "source_body_sha256": "87d57a8ff2e9f3a51547f5d61ec0c87967a13df4af5f997527d0fb3f9897e39a",
+      "locator": "第17章：本章正文；实际上，在商品市场上同货币所有者直接",
+      "method": "重新读取所链1972年中文电子文本，按声明GB2312以GB18030解码；核对连续字句、所在章和上下文。完整缓存仅存本地忽略目录。",
+      "errata": []
+    },
+    {
+      "id": "c-v2-capital-1-ch18",
+      "quote_sha256": "fc6691faedaf4352576135c6eea8060c152d756f609f183870846a040a8b10b0",
+      "source_body_sha256": "8ad91600c42e7eab86888fec733e2dd35fb83a5f9f167cbbb88e93dd76e0a444",
+      "locator": "第18章：本章正文；即使劳动价格不断下降，日工资、周工资",
+      "method": "重新读取所链1972年中文电子文本，按声明GB2312以GB18030解码；核对连续字句、所在章和上下文。完整缓存仅存本地忽略目录。",
+      "errata": []
+    },
+    {
+      "id": "c-v2-capital-1-ch19",
+      "quote_sha256": "ed3992872fd63876c531d8bac473c6c011776012e3e9d80dc0776e3567dbb790",
+      "source_body_sha256": "d27c8fd9d07b0aaef46f296aafbc8dc5c976551b46e6f2508c07d8db21de3cb9",
+      "locator": "第19章：本章正文；计件工资无非是计时工资的转化形式，正",
+      "method": "重新读取所链1972年中文电子文本，按声明GB2312以GB18030解码；核对连续字句、所在章和上下文。完整缓存仅存本地忽略目录。",
+      "errata": []
+    },
+    {
+      "id": "c-v2-capital-1-ch20",
+      "quote_sha256": "38613f7e70666c5a66f52a789cfccec6e2aaad3588110c206005680c047dbb0e",
+      "source_body_sha256": "b728313d17b64ecb89ed3ac2be11aada061983501f0760948a1d3655a330e05c",
+      "locator": "第20章：本章正文；每一个国家都有一个中等的劳动强度",
+      "method": "重新读取所链1972年中文电子文本，按声明GB2312以GB18030解码；核对连续字句、所在章和上下文。完整缓存仅存本地忽略目录。",
+      "errata": []
+    },
+    {
+      "id": "c-v2-capital-1-ch21",
+      "quote_sha256": "0ae4804f7de98ae05d989e5043d21167f838764d123fd2e9fbc8ae9736b11243",
+      "source_body_sha256": "fdf0c630c404deb36e83f7000743cebfd0dc6b86f7c331234eed9096ab787704",
+      "locator": "第21章：本章正文；每一个社会生产过程，从经常的联系和它",
+      "method": "重新读取所链1972年中文电子文本，按声明GB2312以GB18030解码；核对连续字句、所在章和上下文。完整缓存仅存本地忽略目录。",
+      "errata": []
+    },
+    {
+      "id": "c-v2-capital-1-ch22",
+      "quote_sha256": "82048832d4f81eb7c097edf72153d59240a32623befb9cd0eb437c7bde507e6d",
+      "source_body_sha256": "cfe7046ffc7844566849cbcb0b22131391732adc50c04c43f73a8870925d9bf2",
+      "locator": "第22章：本章正文；把剩余价值当作资本使用，或者说，把剩",
+      "method": "重新读取所链1972年中文电子文本，按声明GB2312以GB18030解码；核对连续字句、所在章和上下文。完整缓存仅存本地忽略目录。",
+      "errata": []
+    },
+    {
+      "id": "c-v2-manifesto-spectre",
+      "quote_sha256": "71a75c07dc59df7f9df39b468df3df9e57ff91dc079685c9238ef4b9a4b9d2a6",
+      "source_body_sha256": "188b8a8a7c23982d4d26ea68e95a761b296814fac72bc16b5ff14eca8e76533f",
+      "locator": "《共产党宣言》正文开头第一句；不是各版序言",
+      "method": "2026-10-29重新读取正文，声明GB2312按GB18030严格解码；逐字匹配连续短引，核对前后段与正文位置，不把编者注当作作者原话。 英文按所链MIA历史译本逐词核对，合并HTML换行空白；英文正文SHA-256：e7e096b4caaa07390e72e94472669cf3894e00453e1e5aca35ade488912f19d9。",
+      "errata": []
+    },
+    {
+      "id": "c-v2-capital-preface-abstract",
+      "quote_sha256": "e13a06ccfed6c104030cdab15e852f1d1107b211800527053e27ff6da00bff3a",
+      "source_body_sha256": "ee9d8df50e0d6fef0761af8494fceafae832305e89f9a7cc3015b917e2cdff7a",
+      "locator": "第一版序言：商品价值形式分析与身体细胞比喻",
+      "method": "2026-10-29重新读取正文，声明GB2312按GB18030严格解码；逐字匹配连续短引，核对前后段与正文位置，不把编者注当作作者原话。",
+      "errata": []
+    },
+    {
+      "id": "c-v2-capital-table",
+      "quote_sha256": "07048736e86efdba98f21406589ece034799fdc9eeafca4138ab8b6dfc8ddadf",
+      "source_body_sha256": "68e8fd89f92c4f185bdb58b90197a62d57cd625c26fc9afe7544ae53124f9322",
+      "locator": "第一章第4节：木桌成为商品，随后排除使用价值等作为神秘性来源",
+      "method": "2026-10-29重新读取正文，声明GB2312按GB18030严格解码；逐字匹配连续短引，核对前后段与正文位置，不把编者注当作作者原话。",
+      "errata": []
+    },
+    {
+      "id": "c-v2-nature-consequences",
+      "quote_sha256": "b9afdb25db3a9a45b9f91e0dab084a1048195a294819e83a8b67d0364978c061",
+      "source_body_sha256": "9bf24c754d20d4d94bd8485e88342f54dbf54591cb6c950fe4d2c90061ba1661",
+      "locator": "［自然界和社会］·劳动在从猿到人的转变中的作用：人有目的地改变自然之后的转折",
+      "method": "2026-10-29重新读取正文，声明GB2312按GB18030严格解码；逐字匹配连续短引，核对前后段与正文位置，不把编者注当作作者原话。",
+      "errata": []
+    },
+    {
+      "id": "c-v2-manifesto-melts",
+      "quote_sha256": "f4e26f7ec758e6bcc7b0289291636c3302fd7550c0978b4171f08326dd0a7657",
+      "source_body_sha256": "188b8a8a7c23982d4d26ea68e95a761b296814fac72bc16b5ff14eca8e76533f",
+      "locator": "正文第一章：生产与社会关系不断变动的段落",
+      "method": "2026-10-29重新读取正文，声明GB2312按GB18030严格解码；逐字匹配连续短引，核对前后段与正文位置，不把编者注当作作者原话。 英文按所链MIA历史译本逐词核对，合并HTML换行空白；英文正文SHA-256：e7e096b4caaa07390e72e94472669cf3894e00453e1e5aca35ade488912f19d9。",
+      "errata": []
+    },
+    {
+      "id": "c-v2-manifesto-unite",
+      "quote_sha256": "568380966eb1092cc90516d803d76aab0235b631b9bb52ca83ee52acc310ebba",
+      "source_body_sha256": "188b8a8a7c23982d4d26ea68e95a761b296814fac72bc16b5ff14eca8e76533f",
+      "locator": "正文第四章最后一句；截取至叹号，未带电子文本末尾孤立引号",
+      "method": "2026-10-29重新读取正文，声明GB2312按GB18030严格解码；逐字匹配连续短引，核对前后段与正文位置，不把编者注当作作者原话。 英文按所链MIA历史译本逐词核对，合并HTML换行空白；英文正文SHA-256：178ca0473c35d97d6982efc32e61cc5dd768ac69bff58733333294f1a799de50。",
+      "errata": []
     }
   ],
   "works": [
@@ -377,17 +537,32 @@
     {
       "id": "capital-1",
       "characters": 236837,
-      "source_body_sha256": "a964cc4881f818a21fe0b4df90ab6cc94f99865daf19d3b8fa04439063b080cc",
-      "method": "按URL升序取本次引用源页面的完整原著正文（含作者自己的版次序言/独立稿本，排除导航、页标题、现代题注/编者出版记、sup及intr印刷注释），严格Unicode len相加；多页指纹按两LF拼接，连接分隔符不计字符。源页面中残存OCR不擅改。此为所引原著完整源章节/部件正文长度下限，不把它冒称为整部著作/整卷字数，也不以短引文的长度作分母。",
+      "source_body_sha256": "6cb624df0078537419fecbda997c5054e8b508164a98bf3634c05ca0d39ea292",
+      "method": "保留第一版已核原著正文长度下限236837字符，不把本轮含脚注的全部提取稿冒称正文总字数；本轮重新读取25章，所列正文指纹为25份解码提取稿依章序以LF连接，新增短引逐项核对出处。 第二版精读另核序和跋页面，指纹更新为00及01—25顺序拼接，长度仍沿用保守下界。",
       "urls": [
+        "https://www.marxists.org/chinese/marx/capital/00.htm",
         "https://www.marxists.org/chinese/marx/capital/01.htm",
         "https://www.marxists.org/chinese/marx/capital/02.htm",
         "https://www.marxists.org/chinese/marx/capital/03.htm",
         "https://www.marxists.org/chinese/marx/capital/04.htm",
+        "https://www.marxists.org/chinese/marx/capital/05.htm",
         "https://www.marxists.org/chinese/marx/capital/06.htm",
         "https://www.marxists.org/chinese/marx/capital/07.htm",
         "https://www.marxists.org/chinese/marx/capital/08.htm",
+        "https://www.marxists.org/chinese/marx/capital/09.htm",
         "https://www.marxists.org/chinese/marx/capital/10.htm",
+        "https://www.marxists.org/chinese/marx/capital/11.htm",
+        "https://www.marxists.org/chinese/marx/capital/12.htm",
+        "https://www.marxists.org/chinese/marx/capital/13.htm",
+        "https://www.marxists.org/chinese/marx/capital/14.htm",
+        "https://www.marxists.org/chinese/marx/capital/15.htm",
+        "https://www.marxists.org/chinese/marx/capital/16.htm",
+        "https://www.marxists.org/chinese/marx/capital/17.htm",
+        "https://www.marxists.org/chinese/marx/capital/18.htm",
+        "https://www.marxists.org/chinese/marx/capital/19.htm",
+        "https://www.marxists.org/chinese/marx/capital/20.htm",
+        "https://www.marxists.org/chinese/marx/capital/21.htm",
+        "https://www.marxists.org/chinese/marx/capital/22.htm",
         "https://www.marxists.org/chinese/marx/capital/23.htm",
         "https://www.marxists.org/chinese/marx/capital/24.htm",
         "https://www.marxists.org/chinese/marx/capital/25.htm"
@@ -544,6 +719,15 @@
       "method": "按URL升序取本次引用源页面的完整原著正文（含作者自己的版次序言/独立稿本，排除导航、页标题、现代题注/编者出版记、sup及intr印刷注释），严格Unicode len相加；多页指纹按两LF拼接，连接分隔符不计字符。源页面中残存OCR不擅改。此为所引原著完整源章节/部件正文长度下限，不把它冒称为整部著作/整卷字数，也不以短引文的长度作分母。",
       "urls": [
         "https://www.marxists.org/chinese/marx-engels2/01/21.htm"
+      ]
+    },
+    {
+      "id": "dialectics-nature",
+      "characters": 8221,
+      "source_body_sha256": "9bf24c754d20d4d94bd8485e88342f54dbf54591cb6c950fe4d2c90061ba1661",
+      "method": "仅以所引劳动篇正文汉字数作《自然辩证法》长度保守下界；从政治经济学家说起至写作说明之前，排除脚注标记与后附编者注，未以全书长度扩大预算。",
+      "urls": [
+        "https://www.marxists.org/chinese/marx-engels2/09/15.htm"
       ]
     }
   ]

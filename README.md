@@ -27,7 +27,7 @@ This repository contains the source and public content for my personal website, 
 | 个人主页 | [首页](https://xieyuqing.me/) | `home/index.template.html`；五块精简首页，保留「今天」轻量入口及文章、照片、作品和小游戏入口，数量由构建器生成 |
 | 今天 | [今天](https://xieyuqing.me/today/) | `home/today.template.html`、`home/brief/`；依次为地球、地图选点天气、历史上的今天、每日阅读、重点新闻 |
 | 学英语 | [学英语](https://xieyuqing.me/english/)、[数字转换器](https://xieyuqing.me/english/tools/numbers/) | `english-corner/`；词的身世、经典一页、中英之间与考据，仅做中文版 |
-| 读马恩 | [读马恩](https://xieyuqing.me/marx/) | `marx-engels/`；文集十卷、《资本论》目录、中文原著短引与43篇解读，仅做中文版 |
+| 读马恩 | [读马恩](https://xieyuqing.me/marx/) | `marx-engels/`；文集十卷、《资本论》目录、中文原著短引与77篇解读，另有实验室、测验、生平、书信及专题，仅做中文版 |
 | 中英文文章 | [文章](https://xieyuqing.me/articles/) | `中文文章/`、`English Articles/`、`blog/` |
 | 作品展示 | [作品](https://xieyuqing.me/projects/) | `home/projects.json`、`home/projects.template.html` |
 | 摄影相册 | [摄影](https://xieyuqing.me/photos/) | `photos/catalog.json`、`photos/images/`；只使用已选定的公开导出 |

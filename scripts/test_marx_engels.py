@@ -116,6 +116,27 @@ class ContentTests(unittest.TestCase):
         cls.data = load_marx_engels(ROOT)
         cls.bodies = {key: item['body'] for key, item in cls.data['items'].items()}
 
+    def test_second_edition_first_volume_is_complete(self):
+        guides = [i for i in self.data['items'].values() if i['kind'] == 'guides' and i['volume'] == 1]
+        self.assertEqual(sorted(i['chapter'] for i in guides), list(range(1, 26)))
+        for item in guides:
+            self.assertTrue(item['ai_assisted'])
+            self.assertTrue(600 <= item['prose_characters'] <= 1200)
+            self.assertEqual(item['route'], f"/marx/capital/1/ch{item['chapter']:02}/")
+            self.assertNotIn('问对录', render_content(self.data, item))
+
+    def test_second_edition_primitive_validation_boundaries(self):
+        from marx_v2 import number, precise_date, packet
+        for value in (-1, float('nan'), float('inf'), 10**13, True, '6'):
+            with self.subTest(value=value), self.assertRaises(ValueError): number(value)
+        for value, precision in [('1848-02-30', 'day'), ('1848-02-01', 'month'), ('1848-13', 'month'), ('1600', 'year')]:
+            with self.subTest(value=value), self.assertRaises(ValueError): precise_date(value, precision)
+        precise_date('1848-02-29', 'day')
+        precise_date('1848-02', 'month')
+        precise_date('1848', 'year')
+        self.assertEqual(packet({'version': 1, 'events': []}, 'events'), [])
+        with self.assertRaises(ValueError): packet({'version': 1, 'events': [], 'private': 'x'}, 'events')
+
     def test_complete_first_edition_scope(self):
         items = self.data['items'].values()
         counts = Counter(i['category'] for i in items if i['status'] == 'published')
@@ -293,7 +314,9 @@ class PublicationTests(unittest.TestCase):
         routes.update(f'/marx/wenji/{no}/' for no in range(1, 11))
         routes.update(f'/marx/capital/{no}/' for no in range(1, 4))
         routes.update(i['route'] for i in data['items'].values() if i['status'] == 'published')
-        self.assertGreaterEqual(len(routes), 62)
+        from marx_v2 import ROUTES
+        routes.update(ROUTES)
+        self.assertGreaterEqual(len(routes), 107)
         sitemap = {e.text for e in ET.parse(output / 'sitemap.xml').findall('.//{*}loc')}
         for route in routes:
             with self.subTest(route=route):

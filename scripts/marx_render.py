@@ -251,7 +251,8 @@ def render_routes(data):
         out += f'<section class="me-section" aria-labelledby="route-{route["id"]}"><h2 id="route-{route["id"]}">{escape(route["title"])}</h2><p>{escape(route["summary"])}</p><ol class="me-qa">'
         for step in route["steps"]:
             if "chapter" in step:
-                url = f'/marx/capital/{step["volume"]}/#ch{step["chapter"]:02}'
+                guide = next((i['route'] for i in data['items'].values() if i['kind'] == 'guides' and i['status'] == 'published' and i['volume'] == step['volume'] and i['chapter'] == step['chapter']), None)
+                url = guide or f'/marx/capital/{step["volume"]}/#ch{step["chapter"]:02}'
             else:
                 url = work_route(data, step["work"])
             out += '<li><strong>' + link(url, step["title"], url.startswith('https:')) + '</strong><p>' + escape(step["note"]) + '</p></li>'
@@ -342,7 +343,7 @@ def render_sources(data):
             '<section><h2>短引文与本站解读</h2><p>每条引文不超过150字，每页总引文不超过600字且不超过解读正文的一半；同一作品在本栏的累计引用不超过2500字及原文的十分之一，少于3000字的短作品以三分之一为限。《资本论》每卷累计上限为10000字，同时受原文比例限制。重复显示也累计计算。</p>'
             '<p>这些是本站的编辑限额，不是法律授权或适用所有作品的法律标准。短引文服务于讨论，完整作品请读原著。省略不改变主旨，不把多个版本拼成一句；引用作者转述他人的话时，注明是谁在说。下方校勘表的原字与正字另外统计，并保守计入来源页和相关作品的摘录额度；电子页的错字不当作作者原话。</p>'
             '<p>导读、概念解释和例子为本站编写，有AI辅助，所引中文逐字核对所链原文。现代例子只帮助理解，不充当马克思、恩格斯当年的例证；作品的题注、索引和年表只用于背景转述。现有问对录属于谢雨卿原有文章，保留原文和署名。</p></section>'
-            '<section><h2>和「马克思主义名句」的关系</h2><p>「今天」页每天一句的马克思主义名句是另一套资料：除马克思、恩格斯外，还收列宁、毛泽东等人的名句，有自己的选句和出处规则。读马恩只收马恩，引文以《文集》为准，所以同一句话在两边的版本或链接可能不同。</p><p>'
+            '<section><h2>和「马克思主义名句」的关系</h2><p>「今天」页每天一句的马克思主义名句是另一套资料：除马克思、恩格斯外，还收列宁、毛泽东等人的名句，有自己的选句和出处规则。读马恩的短引库只收马恩，以本页说明的中文版本为准，所以同一句话在两边的版本或链接可能不同。第二版的名句分组与出处测验直接读取共享库内的马恩记录，保留其原有文字、版本说明和链接；这些共享记录不改挂成文集引文，也不反写共享库。</p><p>'
             + link('/today/#daily-quotation-card', '去「今天」页读名句 →') + ' · ' + link('/assets/quotes-sources.md', '名句的逐条出处') + '</p></section>'
             '<section><h2>怎样核对与阅读</h2><p>每条引用保留作品、版本、定位和核查日期，核查记录与公开文字使用指纹对应。指纹能发现文字或记录变化，不能替代思想内容和语境的审读。关于社会历史的分析，可从恩格斯致布洛赫的书信进入，同时回到作品讨论的具体条件。</p><p>'
             + link('https://www.marxists.org/chinese/marx-engels2/10/240.htm', '恩格斯致约瑟夫·布洛赫（1890年9月21—22日）', True)
@@ -400,6 +401,8 @@ def render_index(data):
             out += link('/marx/capital/1/ch01/', '第一章导读') + ' · ' + link(data['capital']['volumes'][0]['mia'], '中文全卷', True) + ' · ' + link(data['works']['letter-099']['mia'], '推荐次序原信', True)
         out += '</p></article>'
     out += '</div><p class="me-meta">一周路线：' + ' → '.join(link(work_route(data, work), data['works'][work]['title'], work_route(data, work).startswith('https:')) for work in ('manifesto', 'wage-labour-capital', 'value-price-profit')) + '。</p></section>'
+    from marx_v2 import entrances
+    out += entrances()
     out += '<section class="me-section" aria-labelledby="directory"><h2 id="directory">带着问题读</h2><div class="me-filters" data-me-filters hidden><fieldset><legend>理论分支</legend><button type="button" data-me-branch="all" aria-pressed="true">全部</button>'
     out += ''.join(f'<button type="button" data-me-branch="{key}" aria-pressed="false">{label}</button>' for key, label in BRANCHES.items()) + '</fieldset><fieldset><legend>难度</legend><button type="button" data-me-level="all" aria-pressed="true">全部</button>'
     out += ''.join(f'<button type="button" data-me-level="{key}" aria-pressed="false">{label}</button>' for key, label in LEVELS.items()) + '</fieldset></div><p class="me-meta me-level-note">' + LEVEL_NOTE + '</p><p class="me-meta" data-me-count role="status"></p><p data-me-empty hidden>这个组合暂时没有卡片，试试其他分支或难度。</p><div class="me-directory">'
@@ -429,6 +432,8 @@ def build_pages(root, output, address, data):
     pages.extend((f'/marx/wenji/{v["no"]}/', f'文集第{v["no"]}卷', v['summary'], render_wenji_volume(data, v)) for v in data['wenji']['volumes'])
     pages.extend((f'/marx/capital/{v["no"]}/', f'资本论第{v["no"]}卷', v['title'], render_capital_volume(data, v)) for v in data['capital']['volumes'])
     pages.extend((item['route'], item['title'], item['summary'], render_content(data, item)) for item in data['items'].values() if item['status'] == 'published')
+    from marx_v2 import extra_pages
+    pages.extend(extra_pages(data))
     for route, title, description, content in pages:
         # The 问对录 directory only lists the author's own articles, so it carries no AI note.
         if route not in ('/marx/', '/marx/qa/') and AI_NOTE not in content:

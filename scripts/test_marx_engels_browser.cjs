@@ -3,7 +3,7 @@
 const assert=require('node:assert/strict'), fs=require('node:fs'), path=require('node:path'), os=require('node:os');
 const root=path.resolve(process.env.WEBSITE_ROOT||path.join(__dirname,'..'));
 const site=path.resolve(process.env.WEBSITE_SITE||path.join(root,'_site_unified'));
-const out=path.resolve(process.env.MARX_BROWSER_OUTPUT||path.join(root,'.local-checks/marx-engels-20261029/browser'));
+const out=path.resolve(process.env.MARX_BROWSER_OUTPUT||path.join(root,'.local-checks/marx-engels-v2-20261029/browser'));
 const temp=path.join(out,'temporary');fs.mkdirSync(temp,{recursive:true});process.env.TEMP=process.env.TMP=temp;
 const {chromium}=require(path.join(os.homedir(),'.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright'));
 const catalog=JSON.parse(fs.readFileSync(path.join(root,'marx-engels/catalog.json'),'utf8'));
@@ -79,7 +79,7 @@ async function contrasts(page,route,theme,width){
   await check('Chinese-only shell, complete bookcase and original source pointers',()=>using({},async page=>{
     await go(page,'/marx/');assert.equal((await page.locator('h1').textContent()).trim(),'读马恩');
     assert.equal(await page.locator('.me-bookcase>.me-spine').count(),10);assert.equal(await page.locator('.site-language-switch').count(),0);
-    assert.equal(await page.locator('[data-me-row]').count(),28);assert.equal(await page.locator('[data-me-next]').isVisible(),true);
+    assert.equal(await page.locator('[data-me-row]').count(),cards.length);assert.equal(await page.locator('[data-me-next]').isVisible(),true);
     for(const route of ['/marx/wenji/10/','/marx/capital/1/','/marx/capital/english/']){
       await go(page,route);for(const anchor of await page.locator('main a[href^="https://www.marxists.org/"]').all()){
         assert.equal(await anchor.getAttribute('target'),'_blank');assert.match(await anchor.getAttribute('rel'),/noopener/);
@@ -144,7 +144,7 @@ async function contrasts(page,route,theme,width){
   await check('without JavaScript, directories, chapter guides, sources and native menus remain usable',()=>using({width:320,javascript:false},async page=>{
     for(const route of ['/marx/','/marx/wenji/10/','/marx/capital/1/','/marx/capital/1/ch01/','/marx/works/manifesto/','/marx/commodity/','/marx/sources/']){
       await page.goto(origin+route);assert.equal(await page.locator('h1').count(),1);await geometry(page);
-      if(route==='/marx/'){assert.equal(await page.locator('[data-me-row]:visible').count(),28);assert.equal(await page.locator('[data-me-next]').isVisible(),false);assert.equal(await page.locator('[data-me-filters]').isVisible(),false);}
+      if(route==='/marx/'){assert.equal(await page.locator('[data-me-row]:visible').count(),cards.length);assert.equal(await page.locator('[data-me-next]').isVisible(),false);assert.equal(await page.locator('[data-me-filters]').isVisible(),false);}
       if(route==='/marx/wenji/10/')assert.equal(await page.locator('.me-letters li').count(),280);
     }
     await screenshot(page,'marx-sources-320-no-js');
@@ -162,8 +162,117 @@ async function contrasts(page,route,theme,width){
       await page.locator('.site-nav a[href="/about/"]').click();await ready(page);assert.equal(await page.locator('.site-language-switch').count(),1);
     }
   }));
+  await check('three laboratories accept keyboard input and preserve original-number fallbacks',()=>using({width:390},async page=>{
+    await go(page,'/marx/lab/value-form/');
+    assert.equal(await page.locator('[data-lab-step]:visible').count(),1);
+    for(let step=1;step<4;step++){
+      await page.locator('[data-lab-next]').focus();await page.locator('[data-lab-next]').press('Enter');
+      assert.equal((await page.locator('[data-lab-position]').textContent()).trim(),`第${step+1}步，共4步`);
+      assert.equal(await page.evaluate(()=>document.activeElement.matches('[data-lab-step] h2')),true);
+    }
+    assert.equal(await page.locator('[data-lab-next]').isDisabled(),true);
+    await go(page,'/marx/lab/working-day/');
+    const total=page.locator('input[name="total"]'),necessary=page.locator('input[name="necessary"]');
+    await total.focus();await total.press('ArrowRight');assert.equal(await total.inputValue(),'12.5');
+    for(const [preset,result] of [['7','16.667%'],['9','50%'],['12','100%']]){
+      await page.locator(`[data-lab-preset="${preset}"]`).click();assert.match(await page.locator('[data-lab-result]').textContent(),new RegExp(result.replace('.','\\.')));
+    }
+    await necessary.focus();await necessary.press('Home');assert.match(await page.locator('[data-lab-result]').textContent(),/大于0/);
+    await screenshot(page,'v2-working-day-390-viewport');
+    await go(page,'/marx/lab/reproduction/');
+    const inputs=page.locator('[data-lab-reproduction] input'),result=page.locator('[data-lab-result]');
+    assert.match(await result.textContent(),/合计9,000/);
+    await inputs.nth(2).fill('1001');assert.match(await result.textContent(),/不相等/);
+    await inputs.nth(1).fill('0');assert.match(await result.textContent(),/未定义/);
+    await inputs.first().fill('-1');assert.match(await result.textContent(),/有限非负数/);
+    await page.locator('[data-lab-reset]').focus();await page.locator('[data-lab-reset]').press('Enter');
+    assert.deepEqual(await inputs.evaluateAll(nodes=>nodes.map(n=>Number(n.value))),[4000,1000,1000,2000,500,500]);
+    assert.match(await result.textContent(),/数值交换条件相等/);await geometry(page);
+    await screenshot(page,'v2-reproduction-390-light');
+  }));
+  await check('all three quiz modes complete ten distinct questions, explain answers and review mistakes',()=>using({width:390},async page=>{
+    await go(page,'/marx/play/');
+    const pools=JSON.parse(await page.locator('[data-me-quiz-data]').textContent());
+    for(const mode of ['source','author','myth']){
+      await page.locator(`[data-quiz-mode="${mode}"]`).focus();await page.locator(`[data-quiz-mode="${mode}"]`).press('Enter');
+      const seen=[];
+      for(let i=0;i<10;i++){
+        const id=await page.locator('[data-me-quiz] form').getAttribute('data-question-id');seen.push(id);
+        const question=pools[mode].find(q=>q.id===id);assert(question);
+        const choices=await page.locator('[data-me-quiz] form label').allTextContents();
+        const choice=choices.findIndex(c=>c.trim()!==(question.answer));assert(choice>=0);
+        const input=page.locator('[data-me-quiz] form input').nth(choice);await input.focus();await input.press('Space');
+        await page.locator('[data-me-quiz] form button').press('Enter');
+        const explanation=page.locator('[data-me-quiz-explanation]');assert.equal(await explanation.isVisible(),true);
+        assert.equal(await explanation.getAttribute('aria-live'),'polite');assert.equal(await explanation.evaluate(n=>n===document.activeElement),true);
+        assert.equal(await explanation.locator('a').count(),2);
+        if(mode==='source'&&i===0)await screenshot(page,'v2-quiz-answer-390-light');
+        await page.locator('[data-quiz-next]').focus();await page.locator('[data-quiz-next]').press('Enter');
+      }
+      assert.equal(new Set(seen).size,10);assert.match(await page.locator('[data-me-quiz] form').textContent(),/答对0 \/ 10题/);
+      assert.equal(await page.locator('[data-me-quiz] form details').count(),10);
+      await page.locator('[data-quiz-restart]').click();assert.match(await page.locator('[data-me-quiz] form h2').textContent(),/第1 \/ 10题/);
+    }
+    assert.equal(await page.evaluate(()=>Object.keys(localStorage).filter(k=>/marx|quiz|score/i.test(k)).length),0);
+    await geometry(page);
+  }));
+  await check('quotation and letter decks traverse every item before repeating',()=>using({width:390},async page=>{
+    await go(page,'/marx/quotes/');
+    const groups=JSON.parse(await page.locator('[data-me-quotes-data]').textContent());
+    assert.equal(groups.reduce((sum,pool)=>sum+pool.length,0),250);
+    assert.equal(await page.locator('[data-me-quote-group]').count(),groups.length);
+    const index=groups.findIndex(pool=>pool.length>2),row=page.locator('[data-me-quote-group]').nth(index),seen=[];
+    for(let i=0;i<groups[index].length;i++){
+      seen.push(await row.getAttribute('data-quote-id'));if(i+1<groups[index].length)await row.locator('[data-me-quote-next]').click();
+    }
+    assert.equal(new Set(seen).size,groups[index].length);await geometry(page);
+    await go(page,'/marx/life/letters/');
+    const letters=JSON.parse(await page.locator('[data-me-letters-data]').textContent()),nos=[];
+    for(let i=0;i<letters.length;i++){
+      nos.push(await page.locator('[data-me-letter]').getAttribute('data-letter-no'));if(i+1<letters.length)await page.locator('[data-me-letter-next]').click();
+    }
+    assert.equal(new Set(nos).size,letters.length);assert.equal(letters.length,31);await geometry(page);
+  }));
+  await check('life filters preserve URL precision and clean up across SPA transitions',()=>using({width:320},async page=>{
+    await go(page,'/marx/life/?person=engels');
+    const visible=await page.locator('[data-me-event]:visible').evaluateAll(nodes=>nodes.map(n=>n.dataset.person));
+    assert(visible.every(p=>p==='engels'||p==='both'));assert(visible.length>0);
+    await page.locator('[data-me-person="both"]').focus();await page.locator('[data-me-person="both"]').press('Space');
+    assert.equal(new URL(page.url()).searchParams.get('person'),'both');
+    assert((await page.locator('[data-me-event]:visible').evaluateAll(nodes=>nodes.map(n=>n.dataset.person))).every(p=>p==='both'));
+    await page.reload();await ready(page);assert.equal(await page.locator('[data-me-person="both"]').getAttribute('aria-pressed'),'true');
+    for(let cycle=0;cycle<3;cycle++){
+      await page.locator('a[href="/marx/life/letters/"]').click();await ready(page);assert.equal(await page.locator('[data-me-letter-next]').count(),1);
+      await page.locator('.me-breadcrumb a[href="/marx/"]').click();await ready(page);
+      await page.locator('.me-other-ways a[href="/marx/life/"]').click();await ready(page);
+      assert.equal(await page.locator('[data-me-life-filters]').count(),1);await page.locator('[data-me-person="marx"]').click();
+      assert.equal(new URL(page.url()).searchParams.get('person'),'marx');
+    }
+    await geometry(page);
+  }));
+  await check('second-edition content stays readable without JavaScript',()=>using({width:320,javascript:false},async page=>{
+    for(const route of ['/marx/lab/value-form/','/marx/lab/working-day/','/marx/lab/reproduction/','/marx/play/','/marx/quotes/','/marx/life/','/marx/life/letters/','/marx/topics/china/','/marx/between-labour-power/']){
+      await page.goto(origin+route);assert.equal(await page.locator('h1').count(),1);await geometry(page);
+      if(route.endsWith('value-form/'))assert.equal(await page.locator('[data-lab-step]:visible').count(),4);
+      if(route.endsWith('working-day/'))assert.equal(await page.locator('table tbody tr').count(),3);
+      if(route==='/marx/life/')assert.equal(await page.locator('[data-me-event]:visible').count(),73);
+      if(route.endsWith('letters/')){await page.locator('.me-reading details > summary').click();assert.equal(await page.locator('details li').count(),31);}
+      if(route==='/marx/quotes/')assert.equal(await page.locator('[data-me-quote-group]').count(),40);
+      if(route.endsWith('china/'))assert.equal(await page.locator('li[id^="v02-"]').count(),12);
+      if(route==='/marx/play/')assert.equal(await page.locator('[data-me-quiz-controls]').isVisible(),false);
+    }
+  }));
+  await check('the reviewed Engels anniversary renders in Chinese and English Today',()=>using({width:390,now:Date.parse('2026-11-28T04:00:00Z')},async page=>{
+    await go(page,'/today/');assert.match(await page.locator('#daily-history-list').textContent(),/恩格斯/);
+    await page.locator('#today-history').scrollIntoViewIfNeeded();
+    const file=path.join(out,'v2-today-history-390-light.png');await page.screenshot({path:file});report.screenshots.push(file);
+    await page.locator('.site-language-switch').click();await ready(page);assert.match(await page.locator('#daily-history-list').textContent(),/Engels/);
+  }));
+
   await check('two themes and all required widths, with no overflow, clipped reading or inner scroll area',async()=>{
     const routes=['/marx/','/marx/sources/','/marx/qa/','/marx/wenji/','/marx/wenji/1/','/marx/wenji/5/','/marx/wenji/10/','/marx/capital/','/marx/capital/1/','/marx/capital/english/','/marx/capital/routes/','/marx/capital/1/ch01/','/marx/works/manifesto/','/marx/commodity/','/marx/human-essence/','/today/','/en/today/'];
+    const v2Routes=['/marx/lab/','/marx/lab/value-form/','/marx/lab/working-day/','/marx/lab/reproduction/','/marx/play/','/marx/quotes/','/marx/life/','/marx/life/letters/','/marx/topics/','/marx/topics/china/',...catalog.guides.filter(i=>i.chapter>=4).map(i=>`/marx/capital/1/ch${String(i.chapter).padStart(2,'0')}/`),...cards.filter(i=>['passage','between'].includes(i.column)).map(i=>`/marx/${i.slug}/`)];
+    routes.push(...v2Routes);
     for(const theme of ['light','dark'])for(const width of widths){
       await using({width,theme},async page=>{
         for(const route of routes){

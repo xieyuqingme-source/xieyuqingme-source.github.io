@@ -10,6 +10,16 @@
       "id": "myths",
       "title": "考据",
       "description": "找回流行说法的出处、版本和上下文。"
+    },
+    {
+      "id": "passage",
+      "title": "原著一段",
+      "description": "把一小段文字放回论证里，读清转折、比喻与问题。"
+    },
+    {
+      "id": "between",
+      "title": "中英之间",
+      "description": "对照约定的历史英译，辨认词语和句子的实际位置。"
     }
   ],
   "cards": [
@@ -879,6 +889,287 @@
       "column": "myths",
       "sources": [],
       "verdict": "部分正确"
+    },
+    {
+      "slug": "passage-manifesto-opening",
+      "title": "一个幽灵：怎样从传言走到公开说明",
+      "summary": "把《宣言》的开头读成一个论证过程：敌人的指责，怎样引出共产党人的自我说明。",
+      "column": "passage",
+      "branch": [
+        "socialism"
+      ],
+      "level": 2,
+      "tags": [
+        "原著精读"
+      ],
+      "citations": [
+        "c-v2-manifesto-spectre"
+      ],
+      "related": [
+        "between-spectre",
+        "manifesto-property"
+      ],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true
+    },
+    {
+      "slug": "passage-capital-abstraction",
+      "title": "经济的细胞形式，为什么要用抽象力研究",
+      "summary": "读第一版序言中的显微镜比喻，理解从商品开始并非因为商品最容易。",
+      "column": "passage",
+      "branch": [
+        "economics",
+        "philosophy"
+      ],
+      "level": 2,
+      "tags": [
+        "原著精读"
+      ],
+      "citations": [
+        "c-v2-capital-preface-abstract"
+      ],
+      "related": [
+        "commodity",
+        "value-form"
+      ],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true
+    },
+    {
+      "slug": "passage-dancing-table",
+      "title": "桌子为什么会倒立、会跳舞",
+      "summary": "第一章的奇异桌子没有变成神话生物；改变的是劳动产品作为商品出现的社会形式。",
+      "column": "passage",
+      "branch": [
+        "economics",
+        "philosophy"
+      ],
+      "level": 2,
+      "tags": [
+        "原著精读"
+      ],
+      "citations": [
+        "c-v2-capital-table"
+      ],
+      "related": [
+        "commodity-fetishism",
+        "value-form"
+      ],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true
+    },
+    {
+      "slug": "passage-working-day",
+      "title": "同样诉诸权利，工作日为何仍需争取",
+      "summary": "第八章开头把买者和卖者的主张并排摆出，再转向工作日的历史斗争。",
+      "column": "passage",
+      "branch": [
+        "economics",
+        "socialism"
+      ],
+      "level": 2,
+      "tags": [
+        "原著精读"
+      ],
+      "citations": [
+        "c-capital-1-ch08-right"
+      ],
+      "related": [
+        "working-day",
+        "labour-power"
+      ],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true
+    },
+    {
+      "slug": "passage-nature-consequences",
+      "title": "自然界的报复：把后果读得更长一些",
+      "summary": "在《自然辩证法》的劳动篇中，胜利之后的非预期后果改变了人支配自然的含义。",
+      "column": "passage",
+      "branch": [
+        "philosophy"
+      ],
+      "level": 2,
+      "tags": [
+        "原著精读"
+      ],
+      "citations": [
+        "c-v2-nature-consequences"
+      ],
+      "related": [
+        "practice",
+        "passage-capital-abstraction"
+      ],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true
+    },
+    {
+      "slug": "passage-two-discoveries",
+      "title": "两个发现，各自解释什么",
+      "summary": "恩格斯的墓前讲话先谈历史，再谈资本主义的特殊运动规律，两层概括不能混成一条。",
+      "column": "passage",
+      "branch": [
+        "philosophy",
+        "economics"
+      ],
+      "level": 2,
+      "tags": [
+        "原著精读"
+      ],
+      "citations": [
+        "c-funeral-speech-history",
+        "c-funeral-speech-surplus"
+      ],
+      "related": [
+        "base-superstructure",
+        "surplus-value"
+      ],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true
+    },
+    {
+      "slug": "between-labour-power",
+      "title": "labour-power：出售的是能力，还是已经完成的劳动",
+      "summary": "顺着复合词和原文定义，辨认劳动力与劳动的区别。",
+      "column": "between",
+      "branch": [
+        "economics"
+      ],
+      "level": 2,
+      "tags": [
+        "中英对照"
+      ],
+      "citations": [
+        "c-capital-1-ch04-labour-power"
+      ],
+      "related": [
+        "labour-power",
+        "surplus-value"
+      ],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true
+    },
+    {
+      "slug": "between-surplus-value",
+      "title": "surplus-value：连字符提醒了什么",
+      "summary": "看一八八七年英译的词形，也看它为什么不能直接替换成利润。",
+      "column": "between",
+      "branch": [
+        "economics"
+      ],
+      "level": 2,
+      "tags": [
+        "中英对照"
+      ],
+      "citations": [
+        "c-capital-1-ch07-surplus-rate"
+      ],
+      "related": [
+        "surplus-value",
+        "constant-variable-capital"
+      ],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true
+    },
+    {
+      "slug": "between-melts-into-air",
+      "title": "烟消云散与 melts into air",
+      "summary": "中文与穆尔英译的可见差别，能提示我们把比喻放回社会关系的变化。",
+      "column": "between",
+      "branch": [
+        "socialism"
+      ],
+      "level": 2,
+      "tags": [
+        "中英对照"
+      ],
+      "citations": [
+        "c-v2-manifesto-melts"
+      ],
+      "related": [
+        "passage-manifesto-opening",
+        "between-spectre"
+      ],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true
+    },
+    {
+      "slug": "between-unite",
+      "title": "联合起来：Unite! 的呼告对象",
+      "summary": "穆尔一八八八年英译写 Working Men of All Countries，读时保留历史译本的措辞。",
+      "column": "between",
+      "branch": [
+        "socialism"
+      ],
+      "level": 2,
+      "tags": [
+        "中英对照"
+      ],
+      "citations": [
+        "c-v2-manifesto-unite"
+      ],
+      "related": [
+        "passage-manifesto-opening",
+        "between-melts-into-air"
+      ],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true
+    },
+    {
+      "slug": "between-spectre",
+      "title": "spectre：幽灵怎样成为开场",
+      "summary": "haunting 与 spectre 的组合，服务于《宣言》从他人描述转向自我说明的开篇。",
+      "column": "between",
+      "branch": [
+        "socialism"
+      ],
+      "level": 2,
+      "tags": [
+        "中英对照"
+      ],
+      "citations": [
+        "c-v2-manifesto-spectre"
+      ],
+      "related": [
+        "passage-manifesto-opening",
+        "between-melts-into-air"
+      ],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true
+    },
+    {
+      "slug": "between-reserve-army",
+      "title": "产业后备军：army 是比喻，也是一种关系",
+      "summary": "industrial reserve army 不能按一支真正的军队理解，也不只是失业者的静态总数。",
+      "column": "between",
+      "branch": [
+        "economics"
+      ],
+      "level": 2,
+      "tags": [
+        "中英对照"
+      ],
+      "citations": [
+        "c-capital-1-ch23-reserve"
+      ],
+      "related": [
+        "reserve-army",
+        "primitive-accumulation"
+      ],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true
     }
   ],
   "works": [
@@ -1433,6 +1724,778 @@
       "ai_assisted": true,
       "volume": 1,
       "chapter": 3
+    },
+    {
+      "slug": "capital-1-ch04",
+      "title": "第4章：货币转化为资本",
+      "summary": "比较两种流通形式，沿增殖的矛盾走到劳动力商品。",
+      "level": 2,
+      "branch": [
+        "economics"
+      ],
+      "tags": [
+        "资本论",
+        "第一卷",
+        "章导读"
+      ],
+      "citations": [
+        "c-capital-1-ch04-labour-power"
+      ],
+      "related": [
+        "capital-relation",
+        "labour-power",
+        "surplus-value"
+      ],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true,
+      "volume": 1,
+      "chapter": 4,
+      "references": [
+        {
+          "level": 1,
+          "label": "《资本论》第一卷第4章中文原文（1972）",
+          "url": "https://www.marxists.org/chinese/marx/capital/04.htm",
+          "checked_on": "2026-10-29"
+        }
+      ]
+    },
+    {
+      "slug": "capital-1-ch05",
+      "title": "第5章：劳动过程和价值增殖过程",
+      "summary": "同一生产过程，为什么既要看有用产品，也要看价值增殖。",
+      "level": 2,
+      "branch": [
+        "economics"
+      ],
+      "tags": [
+        "资本论",
+        "第一卷",
+        "章导读"
+      ],
+      "citations": [
+        "c-v2-capital-1-ch05"
+      ],
+      "related": [
+        "labour-power",
+        "dual-character-labour",
+        "surplus-value"
+      ],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true,
+      "volume": 1,
+      "chapter": 5,
+      "references": [
+        {
+          "level": 1,
+          "label": "《资本论》第一卷第5章中文原文（1972）",
+          "url": "https://www.marxists.org/chinese/marx/capital/05.htm",
+          "checked_on": "2026-10-29"
+        }
+      ]
+    },
+    {
+      "slug": "capital-1-ch06",
+      "title": "第6章：不变资本和可变资本",
+      "summary": "按增殖中的作用区别资本部分，重新连接劳动二重性。",
+      "level": 2,
+      "branch": [
+        "economics"
+      ],
+      "tags": [
+        "资本论",
+        "第一卷",
+        "章导读"
+      ],
+      "citations": [
+        "c-capital-1-ch06-value-transfer"
+      ],
+      "related": [
+        "constant-variable-capital",
+        "dual-character-labour",
+        "surplus-value"
+      ],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true,
+      "volume": 1,
+      "chapter": 6,
+      "references": [
+        {
+          "level": 1,
+          "label": "《资本论》第一卷第6章中文原文（1972）",
+          "url": "https://www.marxists.org/chinese/marx/capital/06.htm",
+          "checked_on": "2026-10-29"
+        }
+      ]
+    },
+    {
+      "slug": "capital-1-ch07",
+      "title": "第7章：剩余价值率",
+      "summary": "把产品价值与新增价值分开，再看剩余价值率的分母。",
+      "level": 2,
+      "branch": [
+        "economics"
+      ],
+      "tags": [
+        "资本论",
+        "第一卷",
+        "章导读"
+      ],
+      "citations": [
+        "c-capital-1-ch07-surplus-rate"
+      ],
+      "related": [
+        "surplus-value",
+        "constant-variable-capital",
+        "working-day"
+      ],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true,
+      "volume": 1,
+      "chapter": 7,
+      "references": [
+        {
+          "level": 1,
+          "label": "《资本论》第一卷第7章中文原文（1972）",
+          "url": "https://www.marxists.org/chinese/marx/capital/07.htm",
+          "checked_on": "2026-10-29"
+        }
+      ]
+    },
+    {
+      "slug": "capital-1-ch08",
+      "title": "第8章：工作日",
+      "summary": "从一天究竟有多长的问题，读工作日的界限、历史冲突与法律限制。",
+      "level": 2,
+      "branch": [
+        "economics"
+      ],
+      "tags": [
+        "资本论",
+        "第一卷",
+        "章导读"
+      ],
+      "citations": [
+        "c-capital-1-ch08-right"
+      ],
+      "related": [
+        "working-day",
+        "surplus-value",
+        "labour-power"
+      ],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true,
+      "volume": 1,
+      "chapter": 8,
+      "references": [
+        {
+          "level": 1,
+          "label": "《资本论》第一卷第8章中文原文（1972）",
+          "url": "https://www.marxists.org/chinese/marx/capital/08.htm",
+          "checked_on": "2026-10-29"
+        }
+      ]
+    },
+    {
+      "slug": "capital-1-ch09",
+      "title": "第9章：剩余价值率和剩余价值量",
+      "summary": "把剥削程度与雇用规模同时放进剩余价值量的分析。",
+      "level": 2,
+      "branch": [
+        "economics"
+      ],
+      "tags": [
+        "资本论",
+        "第一卷",
+        "章导读"
+      ],
+      "citations": [
+        "c-v2-capital-1-ch09"
+      ],
+      "related": [
+        "surplus-value",
+        "labour-power",
+        "working-day"
+      ],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true,
+      "volume": 1,
+      "chapter": 9,
+      "references": [
+        {
+          "level": 1,
+          "label": "《资本论》第一卷第9章中文原文（1972）",
+          "url": "https://www.marxists.org/chinese/marx/capital/09.htm",
+          "checked_on": "2026-10-29"
+        }
+      ]
+    },
+    {
+      "slug": "capital-1-ch10",
+      "title": "第10章：相对剩余价值的概念",
+      "summary": "总时长不变时，必要劳动为什么可能缩短。",
+      "level": 2,
+      "branch": [
+        "economics"
+      ],
+      "tags": [
+        "资本论",
+        "第一卷",
+        "章导读"
+      ],
+      "citations": [
+        "c-capital-1-ch10-relative"
+      ],
+      "related": [
+        "relative-surplus-value",
+        "socially-necessary-labour",
+        "labour-power"
+      ],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true,
+      "volume": 1,
+      "chapter": 10,
+      "references": [
+        {
+          "level": 1,
+          "label": "《资本论》第一卷第10章中文原文（1972）",
+          "url": "https://www.marxists.org/chinese/marx/capital/10.htm",
+          "checked_on": "2026-10-29"
+        }
+      ]
+    },
+    {
+      "slug": "capital-1-ch11",
+      "title": "第11章：协作",
+      "summary": "许多人共同劳动带来的社会生产力，怎样在资本关系中表现为资本的力量。",
+      "level": 2,
+      "branch": [
+        "economics"
+      ],
+      "tags": [
+        "资本论",
+        "第一卷",
+        "章导读"
+      ],
+      "citations": [
+        "c-v2-capital-1-ch11"
+      ],
+      "related": [
+        "relative-surplus-value",
+        "capital-relation",
+        "constant-variable-capital"
+      ],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true,
+      "volume": 1,
+      "chapter": 11,
+      "references": [
+        {
+          "level": 1,
+          "label": "《资本论》第一卷第11章中文原文（1972）",
+          "url": "https://www.marxists.org/chinese/marx/capital/11.htm",
+          "checked_on": "2026-10-29"
+        }
+      ]
+    },
+    {
+      "slug": "capital-1-ch12",
+      "title": "第12章：分工和工场手工业",
+      "summary": "从工场手工业的两条起源，区别局部劳动、社会分工与工场内部组织。",
+      "level": 2,
+      "branch": [
+        "economics"
+      ],
+      "tags": [
+        "资本论",
+        "第一卷",
+        "章导读"
+      ],
+      "citations": [
+        "c-v2-capital-1-ch12"
+      ],
+      "related": [
+        "dual-character-labour",
+        "relative-surplus-value",
+        "capital-relation"
+      ],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true,
+      "volume": 1,
+      "chapter": 12,
+      "references": [
+        {
+          "level": 1,
+          "label": "《资本论》第一卷第12章中文原文（1972）",
+          "url": "https://www.marxists.org/chinese/marx/capital/12.htm",
+          "checked_on": "2026-10-29"
+        }
+      ]
+    },
+    {
+      "slug": "capital-1-ch13",
+      "title": "第13章：机器和大工业",
+      "summary": "从工具机的形成，读机器的价值转移、劳动组织、工厂法和农业变化。",
+      "level": 2,
+      "branch": [
+        "economics"
+      ],
+      "tags": [
+        "资本论",
+        "第一卷",
+        "章导读"
+      ],
+      "citations": [
+        "c-v2-capital-1-ch13"
+      ],
+      "related": [
+        "relative-surplus-value",
+        "constant-variable-capital",
+        "reserve-army",
+        "working-day"
+      ],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true,
+      "volume": 1,
+      "chapter": 13,
+      "references": [
+        {
+          "level": 1,
+          "label": "《资本论》第一卷第13章中文原文（1972）",
+          "url": "https://www.marxists.org/chinese/marx/capital/13.htm",
+          "checked_on": "2026-10-29"
+        }
+      ]
+    },
+    {
+      "slug": "capital-1-ch14",
+      "title": "第14章：绝对剩余价值和相对剩余价值",
+      "summary": "回看生产劳动的社会规定，辨认两种剩余价值生产方式的联系。",
+      "level": 2,
+      "branch": [
+        "economics"
+      ],
+      "tags": [
+        "资本论",
+        "第一卷",
+        "章导读"
+      ],
+      "citations": [
+        "c-v2-capital-1-ch14"
+      ],
+      "related": [
+        "surplus-value",
+        "relative-surplus-value",
+        "capital-relation"
+      ],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true,
+      "volume": 1,
+      "chapter": 14,
+      "references": [
+        {
+          "level": 1,
+          "label": "《资本论》第一卷第14章中文原文（1972）",
+          "url": "https://www.marxists.org/chinese/marx/capital/14.htm",
+          "checked_on": "2026-10-29"
+        }
+      ]
+    },
+    {
+      "slug": "capital-1-ch15",
+      "title": "第15章：劳动力价格和剩余价值的量的变化",
+      "summary": "把工时、劳动强度和生产率分开，逐种比较量的变化。",
+      "level": 2,
+      "branch": [
+        "economics"
+      ],
+      "tags": [
+        "资本论",
+        "第一卷",
+        "章导读"
+      ],
+      "citations": [
+        "c-v2-capital-1-ch15"
+      ],
+      "related": [
+        "labour-power",
+        "relative-surplus-value",
+        "working-day"
+      ],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true,
+      "volume": 1,
+      "chapter": 15,
+      "references": [
+        {
+          "level": 1,
+          "label": "《资本论》第一卷第15章中文原文（1972）",
+          "url": "https://www.marxists.org/chinese/marx/capital/15.htm",
+          "checked_on": "2026-10-29"
+        }
+      ]
+    },
+    {
+      "slug": "capital-1-ch16",
+      "title": "第16章：剩余价值率的各种公式",
+      "summary": "同一组数字换了分母，为什么就改变了所回答的问题。",
+      "level": 2,
+      "branch": [
+        "economics"
+      ],
+      "tags": [
+        "资本论",
+        "第一卷",
+        "章导读"
+      ],
+      "citations": [
+        "c-v2-capital-1-ch16"
+      ],
+      "related": [
+        "surplus-value",
+        "working-day",
+        "constant-variable-capital"
+      ],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true,
+      "volume": 1,
+      "chapter": 16,
+      "references": [
+        {
+          "level": 1,
+          "label": "《资本论》第一卷第16章中文原文（1972）",
+          "url": "https://www.marxists.org/chinese/marx/capital/16.htm",
+          "checked_on": "2026-10-29"
+        }
+      ]
+    },
+    {
+      "slug": "capital-1-ch17",
+      "title": "第17章：劳动力的价值或价格转化为工资",
+      "summary": "从劳动力价值到工资形式，理解全部劳动仿佛都已得到报酬的表现。",
+      "level": 2,
+      "branch": [
+        "economics"
+      ],
+      "tags": [
+        "资本论",
+        "第一卷",
+        "章导读"
+      ],
+      "citations": [
+        "c-v2-capital-1-ch17"
+      ],
+      "related": [
+        "labour-power",
+        "surplus-value",
+        "capital-relation"
+      ],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true,
+      "volume": 1,
+      "chapter": 17,
+      "references": [
+        {
+          "level": 1,
+          "label": "《资本论》第一卷第17章中文原文（1972）",
+          "url": "https://www.marxists.org/chinese/marx/capital/17.htm",
+          "checked_on": "2026-10-29"
+        }
+      ]
+    },
+    {
+      "slug": "capital-1-ch18",
+      "title": "第18章：计时工资",
+      "summary": "日薪、时薪与工作日长度，要放在同一张比较表里。",
+      "level": 2,
+      "branch": [
+        "economics"
+      ],
+      "tags": [
+        "资本论",
+        "第一卷",
+        "章导读"
+      ],
+      "citations": [
+        "c-v2-capital-1-ch18"
+      ],
+      "related": [
+        "labour-power",
+        "working-day",
+        "surplus-value"
+      ],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true,
+      "volume": 1,
+      "chapter": 18,
+      "references": [
+        {
+          "level": 1,
+          "label": "《资本论》第一卷第18章中文原文（1972）",
+          "url": "https://www.marxists.org/chinese/marx/capital/18.htm",
+          "checked_on": "2026-10-29"
+        }
+      ]
+    },
+    {
+      "slug": "capital-1-ch19",
+      "title": "第19章：计件工资",
+      "summary": "按件支付怎样从计时工资转化，并改变监督和劳动节奏。",
+      "level": 2,
+      "branch": [
+        "economics"
+      ],
+      "tags": [
+        "资本论",
+        "第一卷",
+        "章导读"
+      ],
+      "citations": [
+        "c-v2-capital-1-ch19"
+      ],
+      "related": [
+        "labour-power",
+        "surplus-value",
+        "socially-necessary-labour"
+      ],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true,
+      "volume": 1,
+      "chapter": 19,
+      "references": [
+        {
+          "level": 1,
+          "label": "《资本论》第一卷第19章中文原文（1972）",
+          "url": "https://www.marxists.org/chinese/marx/capital/19.htm",
+          "checked_on": "2026-10-29"
+        }
+      ]
+    },
+    {
+      "slug": "capital-1-ch20",
+      "title": "第20章：工资的国民差异",
+      "summary": "比较不同国家工资，先统一工时，再区分购买力与劳动条件。",
+      "level": 2,
+      "branch": [
+        "economics"
+      ],
+      "tags": [
+        "资本论",
+        "第一卷",
+        "章导读"
+      ],
+      "citations": [
+        "c-v2-capital-1-ch20"
+      ],
+      "related": [
+        "labour-power",
+        "socially-necessary-labour",
+        "relative-surplus-value"
+      ],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true,
+      "volume": 1,
+      "chapter": 20,
+      "references": [
+        {
+          "level": 1,
+          "label": "《资本论》第一卷第20章中文原文（1972）",
+          "url": "https://www.marxists.org/chinese/marx/capital/20.htm",
+          "checked_on": "2026-10-29"
+        }
+      ]
+    },
+    {
+      "slug": "capital-1-ch21",
+      "title": "第21章：简单再生产",
+      "summary": "把一次生产看成连续过程，理解生产条件与资本关系怎样被再生产。",
+      "level": 2,
+      "branch": [
+        "economics"
+      ],
+      "tags": [
+        "资本论",
+        "第一卷",
+        "章导读"
+      ],
+      "citations": [
+        "c-v2-capital-1-ch21"
+      ],
+      "related": [
+        "capital-relation",
+        "labour-power",
+        "surplus-value"
+      ],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true,
+      "volume": 1,
+      "chapter": 21,
+      "references": [
+        {
+          "level": 1,
+          "label": "《资本论》第一卷第21章中文原文（1972）",
+          "url": "https://www.marxists.org/chinese/marx/capital/21.htm",
+          "checked_on": "2026-10-29"
+        }
+      ]
+    },
+    {
+      "slug": "capital-1-ch22",
+      "title": "第22章：剩余价值转化为资本",
+      "summary": "剩余价值用于追加生产时，资本的来源与占有关系怎样继续展开。",
+      "level": 2,
+      "branch": [
+        "economics"
+      ],
+      "tags": [
+        "资本论",
+        "第一卷",
+        "章导读"
+      ],
+      "citations": [
+        "c-v2-capital-1-ch22"
+      ],
+      "related": [
+        "surplus-value",
+        "constant-variable-capital",
+        "capital-relation"
+      ],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true,
+      "volume": 1,
+      "chapter": 22,
+      "references": [
+        {
+          "level": 1,
+          "label": "《资本论》第一卷第22章中文原文（1972）",
+          "url": "https://www.marxists.org/chinese/marx/capital/22.htm",
+          "checked_on": "2026-10-29"
+        }
+      ]
+    },
+    {
+      "slug": "capital-1-ch23",
+      "title": "第23章：资本主义积累的一般规律",
+      "summary": "从资本构成变化，研究积累、劳动需求与相对过剩人口。",
+      "level": 2,
+      "branch": [
+        "economics"
+      ],
+      "tags": [
+        "资本论",
+        "第一卷",
+        "章导读"
+      ],
+      "citations": [
+        "c-capital-1-ch23-reserve"
+      ],
+      "related": [
+        "reserve-army",
+        "constant-variable-capital",
+        "labour-power"
+      ],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true,
+      "volume": 1,
+      "chapter": 23,
+      "references": [
+        {
+          "level": 1,
+          "label": "《资本论》第一卷第23章中文原文（1972）",
+          "url": "https://www.marxists.org/chinese/marx/capital/23.htm",
+          "checked_on": "2026-10-29"
+        }
+      ]
+    },
+    {
+      "slug": "capital-1-ch24",
+      "title": "第24章：所谓原始积累",
+      "summary": "追溯生产者同生产资料分离的历史，区别资本关系的起点与其后的积累。",
+      "level": 2,
+      "branch": [
+        "economics"
+      ],
+      "tags": [
+        "资本论",
+        "第一卷",
+        "章导读"
+      ],
+      "citations": [
+        "c-capital-1-ch24-primitive"
+      ],
+      "related": [
+        "primitive-accumulation",
+        "capital-relation",
+        "labour-power",
+        "reserve-army"
+      ],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true,
+      "volume": 1,
+      "chapter": 24,
+      "references": [
+        {
+          "level": 1,
+          "label": "《资本论》第一卷第24章中文原文（1972）",
+          "url": "https://www.marxists.org/chinese/marx/capital/24.htm",
+          "checked_on": "2026-10-29"
+        }
+      ]
+    },
+    {
+      "slug": "capital-1-ch25",
+      "title": "第25章：现代殖民理论",
+      "summary": "从殖民地的特殊条件，再看资本必须以怎样的社会关系为前提。",
+      "level": 2,
+      "branch": [
+        "economics"
+      ],
+      "tags": [
+        "资本论",
+        "第一卷",
+        "章导读"
+      ],
+      "citations": [
+        "c-capital-1-ch25-relation"
+      ],
+      "related": [
+        "capital-relation",
+        "primitive-accumulation",
+        "labour-power"
+      ],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true,
+      "volume": 1,
+      "chapter": 25,
+      "references": [
+        {
+          "level": 1,
+          "label": "《资本论》第一卷第25章中文原文（1972）",
+          "url": "https://www.marxists.org/chinese/marx/capital/25.htm",
+          "checked_on": "2026-10-29"
+        }
+      ]
     }
   ]
 }

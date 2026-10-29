@@ -3,7 +3,7 @@
   'use strict';
   const api = factory();
   if (typeof module === 'object' && module.exports) module.exports = api;
-  if (root && root.document) api.mount(root.document, root);
+  if (root && root.document) { root.ReadMarx = api; api.mount(root.document, root); }
 })(typeof window === 'undefined' ? globalThis : window, function () {
   'use strict';
   function beijingKey(now = Date.now()) {

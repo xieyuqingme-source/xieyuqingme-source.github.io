@@ -11,7 +11,7 @@ import re
 from markdown_it import MarkdownIt
 
 CHINA = timezone(timedelta(hours=8))
-ASSETS = ("marx.css", "marx.js")
+ASSETS = ("marx.css", "marx.js", "marx-lab.js", "marx-play.js")
 BRANCHES = {"philosophy": "哲学", "economics": "政治经济学", "socialism": "科学社会主义"}
 LEVELS = {1: "唯心主义", 2: "形而上学", 3: "修正主义"}
 VERDICTS = {"真", "假", "存疑", "部分正确", "张冠李戴"}
@@ -25,8 +25,9 @@ AI_NOTE = "本站解读由 AI 辅助起草，引文逐字核对过所链原文"
 HEADINGS = {"terms": ("白话", "例子", "身世", "常见误读"),
             "myths": ("流行说法", "证据", "结论"),
             "works": ("写作背景", "主要观点", "怎么读"),
-            "guides": ("一句话", "关键概念", "读的时候注意", "常见误读")}
-PROSE_LIMITS = {"terms": (400, 900), "myths": (300, 800), "works": (500, 1000), "guides": (600, 1200)}
+            "guides": ("一句话", "关键概念", "读的时候注意", "常见误读"),
+            "passage": ("导读", "逐句看", "可以接着读"), "between": ("对照", "为什么", "可以这样读")}
+PROSE_LIMITS = {"terms": (400, 900), "myths": (300, 800), "works": (500, 1000), "guides": (600, 1200), "passage": (300, 1000), "between": (250, 1000)}
 
 
 def fields(value, required, optional=()):
@@ -361,7 +362,7 @@ def markdown_sections(body):
                 raise ValueError("读马恩：第一版不嵌图片或原始HTML。")
             if child.type == "link_open":
                 href = child.attrGet("href") or ""
-                if not href.startswith("/marx/"):
+                if not href.startswith("/marx/") and href != "/english/":
                     source_url(href)
     if not starts or any(lines[:starts[0][1]]):
         raise ValueError("读马恩：正文应从小节标题开始。")
@@ -496,8 +497,8 @@ def validate_catalog(data, bodies, citations, works, chapters):
     fields(data, ("version", "columns", "cards", "works", "guides"))
     if type(data["version"]) is not int or data["version"] != 1 or not isinstance(data["columns"], list):
         raise ValueError("读马恩：栏目目录版本无效。")
-    if [column.get("id") for column in data["columns"]] != ["terms", "myths"]:
-        raise ValueError("读马恩：第一版仅有概念的身世与考据两类卡片。")
+    if [column.get("id") for column in data["columns"]] != ["terms", "myths", "passage", "between"]:
+        raise ValueError("读马恩：第二版须显式列出概念、考据、原著一段与中英之间四类卡片。")
     for column in data["columns"]:
         fields(column, ("id", "title", "description"))
         text(column["title"], 80)
@@ -523,6 +524,8 @@ def validate_catalog(data, bodies, citations, works, chapters):
                 text(item["term"], 100)
             if kind == "cards" and category == "myths" and (item.get("verdict") not in VERDICTS or "term" in item):
                 raise ValueError("读马恩：考据卡需要明确、合规的判定。")
+            if kind == "cards" and category in ("passage", "between") and ("term" in item or "verdict" in item):
+                raise ValueError("读马恩：新精读栏目不接受术语卡或考据卡专用字段。")
             text(item["title"], 160)
             text(item["summary"], 120)
             branches(item["branch"])
@@ -587,6 +590,8 @@ def validate_catalog(data, bodies, citations, works, chapters):
         if item["status"] == "published" and any(items[i]["status"] != "published" for i in item["related"]):
             raise ValueError("读马恩：已发布内容不能指向草稿。")
         known_routes = {"/marx/", "/marx/wenji/", "/marx/capital/", "/marx/capital/english/", "/marx/capital/routes/", "/marx/sources/", "/marx/qa/"}
+        from marx_v2 import ROUTES
+        known_routes.update(ROUTES)
         known_routes.update(f"/marx/wenji/{no}/" for no in range(1, 11))
         known_routes.update(f"/marx/capital/{no}/" for no in range(1, 4))
         known_routes.update(i["route"] for i in items.values() if i["status"] == "published" or item["status"] == "draft")
@@ -698,6 +703,8 @@ def load_marx_engels(root):
     result = {"intro": intro, "wenji": wenji, "capital": capital, "catalog": catalog, "works": works,
             "chapters": chapters, "citations": citations, "errata": corrections, "lengths": lengths,
             "items": items, "qa": qa["items"], "budgets": budgets}
+    from marx_v2 import load_v2
+    result["v2"] = load_v2(root, result)
     from marx_render import render_sources
     if budgets["errata_characters"] * 2 > html_prose_characters(render_sources(result)):
         raise ValueError("读马恩：来源页校勘对照不能超过本站说明的一半。")

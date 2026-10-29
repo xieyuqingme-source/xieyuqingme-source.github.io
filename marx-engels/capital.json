@@ -141,7 +141,8 @@
                   "title": "The Buying and Selling of Labour-Power",
                   "url": "https://www.marxists.org/archive/marx/works/1867-c1/ch06.htm"
                 }
-              ]
+              ],
+              "guide": "capital-1-ch04"
             }
           ]
         },
@@ -169,7 +170,8 @@
                   "title": "The Labour-Process and the Process of Producing Surplus-Value",
                   "url": "https://www.marxists.org/archive/marx/works/1867-c1/ch07.htm"
                 }
-              ]
+              ],
+              "guide": "capital-1-ch05"
             },
             {
               "no": 6,
@@ -182,7 +184,8 @@
                   "title": "Constant Capital and Variable Capital",
                   "url": "https://www.marxists.org/archive/marx/works/1867-c1/ch08.htm"
                 }
-              ]
+              ],
+              "guide": "capital-1-ch06"
             },
             {
               "no": 7,
@@ -212,7 +215,8 @@
                   "title": "The Rate of Surplus-Value",
                   "url": "https://www.marxists.org/archive/marx/works/1867-c1/ch09.htm"
                 }
-              ]
+              ],
+              "guide": "capital-1-ch07"
             },
             {
               "no": 8,
@@ -254,7 +258,8 @@
                   "title": "The Working-Day",
                   "url": "https://www.marxists.org/archive/marx/works/1867-c1/ch10.htm"
                 }
-              ]
+              ],
+              "guide": "capital-1-ch08"
             },
             {
               "no": 9,
@@ -267,7 +272,8 @@
                   "title": "Rate and Mass of Surplus-Value",
                   "url": "https://www.marxists.org/archive/marx/works/1867-c1/ch11.htm"
                 }
-              ]
+              ],
+              "guide": "capital-1-ch09"
             }
           ]
         },
@@ -286,7 +292,8 @@
                   "title": "The Concept of Relative Surplus-Value",
                   "url": "https://www.marxists.org/archive/marx/works/1867-c1/ch12.htm"
                 }
-              ]
+              ],
+              "guide": "capital-1-ch10"
             },
             {
               "no": 11,
@@ -299,7 +306,8 @@
                   "title": "Co-operation",
                   "url": "https://www.marxists.org/archive/marx/works/1867-c1/ch13.htm"
                 }
-              ]
+              ],
+              "guide": "capital-1-ch11"
             },
             {
               "no": 12,
@@ -333,7 +341,8 @@
                   "title": "Division of Labour and Manufacture",
                   "url": "https://www.marxists.org/archive/marx/works/1867-c1/ch14.htm"
                 }
-              ]
+              ],
+              "guide": "capital-1-ch12"
             },
             {
               "no": 13,
@@ -387,7 +396,8 @@
                   "title": "Machinery and Modern Industry",
                   "url": "https://www.marxists.org/archive/marx/works/1867-c1/ch15.htm"
                 }
-              ]
+              ],
+              "guide": "capital-1-ch13"
             }
           ]
         },
@@ -406,7 +416,8 @@
                   "title": "Absolute and Relative Surplus-Value",
                   "url": "https://www.marxists.org/archive/marx/works/1867-c1/ch16.htm"
                 }
-              ]
+              ],
+              "guide": "capital-1-ch14"
             },
             {
               "no": 15,
@@ -436,7 +447,8 @@
                   "title": "Changes of Magnitude in the Price of Labour-Power and in Surplus-Value",
                   "url": "https://www.marxists.org/archive/marx/works/1867-c1/ch17.htm"
                 }
-              ]
+              ],
+              "guide": "capital-1-ch15"
             },
             {
               "no": 16,
@@ -449,7 +461,8 @@
                   "title": "Various Formula for the Rate of Surplus-Value",
                   "url": "https://www.marxists.org/archive/marx/works/1867-c1/ch18.htm"
                 }
-              ]
+              ],
+              "guide": "capital-1-ch16"
             }
           ]
         },
@@ -468,7 +481,8 @@
                   "title": "The Transformation of the Value (and Respective Price) of Labour-Power into Wages",
                   "url": "https://www.marxists.org/archive/marx/works/1867-c1/ch19.htm"
                 }
-              ]
+              ],
+              "guide": "capital-1-ch17"
             },
             {
               "no": 18,
@@ -481,7 +495,8 @@
                   "title": "Time-Wages",
                   "url": "https://www.marxists.org/archive/marx/works/1867-c1/ch20.htm"
                 }
-              ]
+              ],
+              "guide": "capital-1-ch18"
             },
             {
               "no": 19,
@@ -494,7 +509,8 @@
                   "title": "Piece-Wages",
                   "url": "https://www.marxists.org/archive/marx/works/1867-c1/ch21.htm"
                 }
-              ]
+              ],
+              "guide": "capital-1-ch19"
             },
             {
               "no": 20,
@@ -507,7 +523,8 @@
                   "title": "National Differences of Wages",
                   "url": "https://www.marxists.org/archive/marx/works/1867-c1/ch22.htm"
                 }
-              ]
+              ],
+              "guide": "capital-1-ch20"
             }
           ]
         },
@@ -526,7 +543,8 @@
                   "title": "Simple Reproduction",
                   "url": "https://www.marxists.org/archive/marx/works/1867-c1/ch23.htm"
                 }
-              ]
+              ],
+              "guide": "capital-1-ch21"
             },
             {
               "no": 22,
@@ -560,7 +578,8 @@
                   "title": "Conversion of Surplus-Value into Capital",
                   "url": "https://www.marxists.org/archive/marx/works/1867-c1/ch24.htm"
                 }
-              ]
+              ],
+              "guide": "capital-1-ch22"
             },
             {
               "no": 23,
@@ -594,7 +613,8 @@
                   "title": "The General Law of Capitalist Accumulation",
                   "url": "https://www.marxists.org/archive/marx/works/1867-c1/ch25.htm"
                 }
-              ]
+              ],
+              "guide": "capital-1-ch23"
             },
             {
               "no": 24,
@@ -715,7 +735,8 @@
                   "title": "Historical Tendency of Capitalist Accumulation",
                   "url": "https://www.marxists.org/archive/marx/works/1867-c1/ch32.htm"
                 }
-              ]
+              ],
+              "guide": "capital-1-ch24"
             },
             {
               "no": 25,
@@ -728,7 +749,8 @@
                   "title": "The Modern Theory of Colonisation",
                   "url": "https://www.marxists.org/archive/marx/works/1867-c1/ch33.htm"
                 }
-              ]
+              ],
+              "guide": "capital-1-ch25"
             }
           ]
         }

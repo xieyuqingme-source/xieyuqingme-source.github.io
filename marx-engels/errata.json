@@ -108,6 +108,15 @@
       "basis": "同信另一中文本标题明确1890年8月5日；日期中的只不是合法月份单位。信是致施米特，所引段没有拉法格收话人信息。",
       "evidence_url": "https://www.marxists.org/chinese/engels/marxist.org-chinese-engels-1890-8-5.htm",
       "checked_on": "2026-10-29"
+    },
+    {
+      "id": "e-v2-reproduction-plus",
+      "url": "https://www.marxists.org/chinese/marx-engels2/06/20.htm",
+      "wrong": "2000c＋＋500v",
+      "right": "2000c＋500v",
+      "basis": "同页第Ⅱ节先前商品产品列式为2000c＋500v＋500m＝3000；两大部类汇总处多录一个加号。仅删除重复符号，不改数字。",
+      "evidence_url": "https://www.marxists.org/chinese/marx-engels2/06/20.htm",
+      "checked_on": "2026-10-29"
     }
   ]
 }

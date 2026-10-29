@@ -142,7 +142,12 @@
       "text": "同任何其他商品的价值一样，劳动力的价值也是由生产从而再生产这种特殊物品所必需的劳动时间决定的。",
       "url": "https://www.marxists.org/chinese/marx/capital/04.htm",
       "errata": [],
-      "checked_on": "2026-10-29"
+      "checked_on": "2026-10-29",
+      "en": {
+        "text": "By labour-power or capacity for labour is to be understood the aggregate of those mental and physical capabilities existing in a human being, which he exercises whenever he produces a use-value of any description.",
+        "url": "https://www.marxists.org/archive/marx/works/1867-c1/ch06.htm",
+        "translator": "Samuel Moore、Edward Aveling，1887；恩格斯编辑"
+      }
     },
     {
       "id": "c-capital-1-ch07-surplus-rate",
@@ -155,7 +160,12 @@
       "text": "因此，剩余价值率是劳动力受资本剥削的程度或工人受资本家剥削的程度的准确表现。",
       "url": "https://www.marxists.org/chinese/marx/capital/07.htm",
       "errata": [],
-      "checked_on": "2026-10-29"
+      "checked_on": "2026-10-29",
+      "en": {
+        "text": "The rate of surplus-value is therefore an exact expression for the degree of exploitation of labour-power by capital, or of the labourer by the capitalist.",
+        "url": "https://www.marxists.org/archive/marx/works/1867-c1/ch09.htm",
+        "translator": "Samuel Moore、Edward Aveling，1887；恩格斯编辑"
+      }
     },
     {
       "id": "c-capital-1-ch06-value-transfer",
@@ -220,7 +230,12 @@
       "text": "过剩的工人人口形成一支可供支配的产业后备军……",
       "url": "https://www.marxists.org/chinese/marx/capital/23.htm",
       "errata": [],
-      "checked_on": "2026-10-29"
+      "checked_on": "2026-10-29",
+      "en": {
+        "text": "industrial reserve army",
+        "url": "https://www.marxists.org/archive/marx/works/1867-c1/ch25.htm",
+        "translator": "Samuel Moore、Edward Aveling，1887；恩格斯编辑"
+      }
     },
     {
       "id": "c-capital-1-ch24-primitive",
@@ -587,6 +602,281 @@
       "url": "https://www.marxists.org/chinese/marx-engels2/02/09.htm",
       "errata": [],
       "checked_on": "2026-10-29"
+    },
+    {
+      "id": "c-v2-capital-1-ch11",
+      "vol": 5,
+      "work": "capital-1",
+      "locator": "第11章：协作结尾",
+      "page": null,
+      "page_kind": null,
+      "edition": "quanji-23-1972",
+      "text": "虽然协作的简单形态本身表现为同它的更发展的形式并存的一种特殊形式，协作仍然是资本主义生产方式的基本形式。",
+      "url": "https://www.marxists.org/chinese/marx/capital/11.htm",
+      "errata": [],
+      "checked_on": "2026-10-29"
+    },
+    {
+      "id": "c-v2-capital-1-ch12",
+      "vol": 5,
+      "work": "capital-1",
+      "locator": "第12章：本章正文；以分工为基础的协作，在工场手工业上取",
+      "page": null,
+      "page_kind": null,
+      "edition": "quanji-23-1972",
+      "text": "以分工为基础的协作，在工场手工业上取得了自己的典型形态。",
+      "url": "https://www.marxists.org/chinese/marx/capital/12.htm",
+      "errata": [],
+      "checked_on": "2026-10-29"
+    },
+    {
+      "id": "c-v2-capital-1-ch13",
+      "vol": 5,
+      "work": "capital-1",
+      "locator": "第13章：本章正文；机器是生产剩余价值的手段。",
+      "page": null,
+      "page_kind": null,
+      "edition": "quanji-23-1972",
+      "text": "机器是生产剩余价值的手段。",
+      "url": "https://www.marxists.org/chinese/marx/capital/13.htm",
+      "errata": [],
+      "checked_on": "2026-10-29"
+    },
+    {
+      "id": "c-v2-capital-1-ch05",
+      "vol": 5,
+      "work": "capital-1",
+      "locator": "第5章：劳动过程开头",
+      "page": null,
+      "page_kind": null,
+      "edition": "quanji-23-1972",
+      "text": "劳动力的使用就是劳动本身。",
+      "url": "https://www.marxists.org/chinese/marx/capital/05.htm",
+      "errata": [],
+      "checked_on": "2026-10-29"
+    },
+    {
+      "id": "c-v2-capital-1-ch09",
+      "vol": 5,
+      "work": "capital-1",
+      "locator": "第9章：本章正文；在这一章里，也同前面一样，假定劳动力",
+      "page": null,
+      "page_kind": null,
+      "edition": "quanji-23-1972",
+      "text": "在这一章里，也同前面一样，假定劳动力的价值，从而再生产或维持劳动力所必要的工作日部分，是一个已知的不变的量。",
+      "url": "https://www.marxists.org/chinese/marx/capital/09.htm",
+      "errata": [],
+      "checked_on": "2026-10-29"
+    },
+    {
+      "id": "c-v2-capital-1-ch14",
+      "vol": 5,
+      "work": "capital-1",
+      "locator": "第14章：本章正文；资本主义生产不仅是商品的生产，它实质",
+      "page": null,
+      "page_kind": null,
+      "edition": "quanji-23-1972",
+      "text": "资本主义生产不仅是商品的生产，它实质上是剩余价值的生产。",
+      "url": "https://www.marxists.org/chinese/marx/capital/14.htm",
+      "errata": [],
+      "checked_on": "2026-10-29"
+    },
+    {
+      "id": "c-v2-capital-1-ch15",
+      "vol": 5,
+      "work": "capital-1",
+      "locator": "第15章：本章正文；劳动力价值是由平均工人通常必需的生活",
+      "page": null,
+      "page_kind": null,
+      "edition": "quanji-23-1972",
+      "text": "劳动力价值是由平均工人通常必需的生活资料的价值决定的。",
+      "url": "https://www.marxists.org/chinese/marx/capital/15.htm",
+      "errata": [],
+      "checked_on": "2026-10-29"
+    },
+    {
+      "id": "c-v2-capital-1-ch16",
+      "vol": 5,
+      "work": "capital-1",
+      "locator": "第16章：本章正文；这些互相替代的公式在概念上是严格的。",
+      "page": null,
+      "page_kind": null,
+      "edition": "quanji-23-1972",
+      "text": "这些互相替代的公式在概念上是严格的。",
+      "url": "https://www.marxists.org/chinese/marx/capital/16.htm",
+      "errata": [],
+      "checked_on": "2026-10-29"
+    },
+    {
+      "id": "c-v2-capital-1-ch17",
+      "vol": 5,
+      "work": "capital-1",
+      "locator": "第17章：本章正文；实际上，在商品市场上同货币所有者直接",
+      "page": null,
+      "page_kind": null,
+      "edition": "quanji-23-1972",
+      "text": "实际上，在商品市场上同货币所有者直接对立的不是劳动，而是工人。",
+      "url": "https://www.marxists.org/chinese/marx/capital/17.htm",
+      "errata": [],
+      "checked_on": "2026-10-29"
+    },
+    {
+      "id": "c-v2-capital-1-ch18",
+      "vol": 5,
+      "work": "capital-1",
+      "locator": "第18章：本章正文；即使劳动价格不断下降，日工资、周工资",
+      "page": null,
+      "page_kind": null,
+      "edition": "quanji-23-1972",
+      "text": "即使劳动价格不断下降，日工资、周工资等等仍然可以保持不变。",
+      "url": "https://www.marxists.org/chinese/marx/capital/18.htm",
+      "errata": [],
+      "checked_on": "2026-10-29"
+    },
+    {
+      "id": "c-v2-capital-1-ch19",
+      "vol": 5,
+      "work": "capital-1",
+      "locator": "第19章：本章正文；计件工资无非是计时工资的转化形式，正",
+      "page": null,
+      "page_kind": null,
+      "edition": "quanji-23-1972",
+      "text": "计件工资无非是计时工资的转化形式，正如计时工资是劳动力的价值或价格的转化形式一样。",
+      "url": "https://www.marxists.org/chinese/marx/capital/19.htm",
+      "errata": [],
+      "checked_on": "2026-10-29"
+    },
+    {
+      "id": "c-v2-capital-1-ch20",
+      "vol": 5,
+      "work": "capital-1",
+      "locator": "第20章：本章正文；每一个国家都有一个中等的劳动强度",
+      "page": null,
+      "page_kind": null,
+      "edition": "quanji-23-1972",
+      "text": "每一个国家都有一个中等的劳动强度",
+      "url": "https://www.marxists.org/chinese/marx/capital/20.htm",
+      "errata": [],
+      "checked_on": "2026-10-29"
+    },
+    {
+      "id": "c-v2-capital-1-ch21",
+      "vol": 5,
+      "work": "capital-1",
+      "locator": "第21章：本章正文；每一个社会生产过程，从经常的联系和它",
+      "page": null,
+      "page_kind": null,
+      "edition": "quanji-23-1972",
+      "text": "每一个社会生产过程，从经常的联系和它不断更新来看，同时也就是再生产过程。",
+      "url": "https://www.marxists.org/chinese/marx/capital/21.htm",
+      "errata": [],
+      "checked_on": "2026-10-29"
+    },
+    {
+      "id": "c-v2-capital-1-ch22",
+      "vol": 5,
+      "work": "capital-1",
+      "locator": "第22章：本章正文；把剩余价值当作资本使用，或者说，把剩",
+      "page": null,
+      "page_kind": null,
+      "edition": "quanji-23-1972",
+      "text": "把剩余价值当作资本使用，或者说，把剩余价值再转化为资本，叫做资本积累。",
+      "url": "https://www.marxists.org/chinese/marx/capital/22.htm",
+      "errata": [],
+      "checked_on": "2026-10-29"
+    },
+    {
+      "id": "c-v2-manifesto-spectre",
+      "vol": 2,
+      "work": "manifesto",
+      "locator": "《共产党宣言》正文开头第一句；不是各版序言",
+      "page": null,
+      "page_kind": null,
+      "edition": "wenji-2009",
+      "text": "一个幽灵，共产主义的幽灵，在欧洲游荡。",
+      "url": "https://www.marxists.org/chinese/marx-engels2/02/01.htm",
+      "errata": [],
+      "checked_on": "2026-10-29",
+      "en": {
+        "text": "A spectre is haunting Europe — the spectre of communism.",
+        "url": "https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch01.htm",
+        "translator": "Samuel Moore，1888；恩格斯协作校订"
+      }
+    },
+    {
+      "id": "c-v2-capital-preface-abstract",
+      "vol": 5,
+      "work": "capital-1",
+      "locator": "第一版序言：商品价值形式分析与身体细胞比喻",
+      "page": null,
+      "page_kind": null,
+      "edition": "quanji-23-1972",
+      "text": "分析经济形式，既不能用显微镜，也不能用化学试剂。二者都必须用抽象力来代替。",
+      "url": "https://www.marxists.org/chinese/marx/capital/00.htm",
+      "errata": [],
+      "checked_on": "2026-10-29"
+    },
+    {
+      "id": "c-v2-capital-table",
+      "vol": 5,
+      "work": "capital-1",
+      "locator": "第一章第4节：木桌成为商品，随后排除使用价值等作为神秘性来源",
+      "page": null,
+      "page_kind": null,
+      "edition": "quanji-23-1972",
+      "text": "它不仅用它的脚站在地上，而且在对其他一切商品的关系上用头倒立着，从它的木脑袋里生出比它自动跳舞还奇怪得多的狂想。",
+      "url": "https://www.marxists.org/chinese/marx/capital/01.htm",
+      "errata": [],
+      "checked_on": "2026-10-29"
+    },
+    {
+      "id": "c-v2-nature-consequences",
+      "vol": 9,
+      "work": "dialectics-nature",
+      "locator": "［自然界和社会］·劳动在从猿到人的转变中的作用：人有目的地改变自然之后的转折",
+      "page": null,
+      "page_kind": null,
+      "edition": "wenji-2009",
+      "text": "但是我们不要过分陶醉于我们人类对自然界的胜利。对于每一次这样的胜利，自然界都对我们进行报复。",
+      "url": "https://www.marxists.org/chinese/marx-engels2/09/15.htm",
+      "errata": [],
+      "checked_on": "2026-10-29"
+    },
+    {
+      "id": "c-v2-manifesto-melts",
+      "vol": 2,
+      "work": "manifesto",
+      "locator": "正文第一章：生产与社会关系不断变动的段落",
+      "page": null,
+      "page_kind": null,
+      "edition": "wenji-2009",
+      "text": "一切等级的和固定的东西都烟消云散了，一切神圣的东西都被亵渎了。",
+      "url": "https://www.marxists.org/chinese/marx-engels2/02/01.htm",
+      "errata": [],
+      "checked_on": "2026-10-29",
+      "en": {
+        "text": "All that is solid melts into air, all that is holy is profaned",
+        "url": "https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch01.htm",
+        "translator": "Samuel Moore，1888；恩格斯协作校订"
+      }
+    },
+    {
+      "id": "c-v2-manifesto-unite",
+      "vol": 2,
+      "work": "manifesto",
+      "locator": "正文第四章最后一句；截取至叹号，未带电子文本末尾孤立引号",
+      "page": null,
+      "page_kind": null,
+      "edition": "wenji-2009",
+      "text": "全世界无产者，联合起来！",
+      "url": "https://www.marxists.org/chinese/marx-engels2/02/01.htm",
+      "errata": [],
+      "checked_on": "2026-10-29",
+      "en": {
+        "text": "Working Men of All Countries, Unite!",
+        "url": "https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch04.htm",
+        "translator": "Samuel Moore，1888；恩格斯协作校订"
+      }
     }
   ]
 }

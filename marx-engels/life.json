@@ -1,0 +1,1369 @@
+{
+  "version": 1,
+  "events": [
+    {
+      "id": "life-1818-05-05",
+      "date": "1818-05-05",
+      "precision": "day",
+      "people": "marx",
+      "title": "马克思出生",
+      "text": "马克思在特里尔出生。年表从这一日开始叙述他的生平。",
+      "tags": [
+        "生活"
+      ],
+      "work": null,
+      "source": {
+        "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+        "locator": "1818年条：马克思出生；原文日期精度日",
+        "checked_on": "2026-10-29"
+      },
+      "ai_assisted": true,
+      "history_id": "history-marx-v2-1818-05-05"
+    },
+    {
+      "id": "life-1820-11-28",
+      "date": "1820-11-28",
+      "precision": "day",
+      "people": "engels",
+      "title": "恩格斯出生",
+      "text": "恩格斯在巴门出生；这个城市是他早年生活的起点。",
+      "tags": [
+        "生活"
+      ],
+      "work": null,
+      "source": {
+        "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+        "locator": "1820年条：恩格斯出生；原文日期精度日",
+        "checked_on": "2026-10-29"
+      },
+      "ai_assisted": true,
+      "history_id": "history-11-28-1820-engels-born"
+    },
+    {
+      "id": "life-1830-10",
+      "date": "1830-10",
+      "precision": "month",
+      "people": "marx",
+      "title": "进入特里尔中学",
+      "text": "马克思开始在特里尔中学求学，年表只记到月份。",
+      "tags": [
+        "生活"
+      ],
+      "work": null,
+      "source": {
+        "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+        "locator": "1830年条：进入特里尔中学；原文日期精度月",
+        "checked_on": "2026-10-29"
+      },
+      "ai_assisted": true
+    },
+    {
+      "id": "life-1834-10",
+      "date": "1834-10",
+      "precision": "month",
+      "people": "engels",
+      "title": "进入埃尔伯费尔德中学",
+      "text": "此前在巴门上学的恩格斯转入埃尔伯费尔德中学。",
+      "tags": [
+        "生活"
+      ],
+      "work": null,
+      "source": {
+        "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+        "locator": "1834年条：进入埃尔伯费尔德中学；原文日期精度月",
+        "checked_on": "2026-10-29"
+      },
+      "ai_assisted": true
+    },
+    {
+      "id": "life-1835-10-15",
+      "date": "1835-10-15",
+      "precision": "day",
+      "people": "marx",
+      "title": "到波恩学习法律",
+      "text": "马克思进入波恩大学法律系，开始大学阶段的学习。",
+      "tags": [
+        "生活"
+      ],
+      "work": null,
+      "source": {
+        "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+        "locator": "1835年条：到波恩学习法律；原文日期精度日",
+        "checked_on": "2026-10-29"
+      },
+      "ai_assisted": true,
+      "history_id": "history-marx-v2-1835-10-15"
+    },
+    {
+      "id": "life-1836-10-22",
+      "date": "1836-10-22",
+      "precision": "day",
+      "people": "marx",
+      "title": "转往柏林大学",
+      "text": "马克思从波恩转入柏林大学法律系，后来在这里深入接触哲学问题。",
+      "tags": [
+        "生活"
+      ],
+      "work": null,
+      "source": {
+        "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+        "locator": "1836年条：转往柏林大学；原文日期精度日",
+        "checked_on": "2026-10-29"
+      },
+      "ai_assisted": true
+    },
+    {
+      "id": "life-1841-04-15",
+      "date": "1841-04-15",
+      "precision": "day",
+      "people": "marx",
+      "title": "获得博士学位",
+      "text": "耶拿大学哲学系授予马克思博士学位。学位授予不等于他本人到访耶拿。",
+      "tags": [
+        "生活"
+      ],
+      "work": null,
+      "source": {
+        "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+        "locator": "1841年条：获得博士学位；原文日期精度日",
+        "checked_on": "2026-10-29"
+      },
+      "ai_assisted": true,
+      "history_id": "history-marx-v2-1841-04-15"
+    },
+    {
+      "id": "life-1842-10-15",
+      "date": "1842-10-15",
+      "precision": "day",
+      "people": "marx",
+      "title": "承担《莱茵报》编辑工作",
+      "text": "马克思在科隆担任《莱茵报》编辑，理论研究与报刊活动在这一阶段交织。",
+      "tags": [
+        "著作"
+      ],
+      "work": null,
+      "source": {
+        "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+        "locator": "1842年条：承担《莱茵报》编辑工作；原文日期精度日",
+        "checked_on": "2026-10-29"
+      },
+      "ai_assisted": true,
+      "history_id": "history-marx-v2-1842-10-15"
+    },
+    {
+      "id": "life-1843-03-17",
+      "date": "1843-03-17",
+      "precision": "day",
+      "people": "marx",
+      "title": "退出《莱茵报》编辑部",
+      "text": "在书报检查的压力下，马克思离开《莱茵报》的编辑岗位。",
+      "tags": [
+        "著作"
+      ],
+      "work": null,
+      "source": {
+        "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+        "locator": "1843年条：退出《莱茵报》编辑部；原文日期精度日",
+        "checked_on": "2026-10-29"
+      },
+      "ai_assisted": true,
+      "history_id": "history-marx-v2-1843-03-17"
+    },
+    {
+      "id": "life-1843-06-19",
+      "date": "1843-06-19",
+      "precision": "day",
+      "people": "marx",
+      "title": "与燕妮结婚",
+      "text": "马克思和燕妮·冯·威斯特华伦在克罗伊茨纳赫举行婚礼。",
+      "tags": [
+        "生活"
+      ],
+      "work": null,
+      "source": {
+        "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+        "locator": "1843年条：与燕妮结婚；原文日期精度日",
+        "checked_on": "2026-10-29"
+      },
+      "ai_assisted": true,
+      "history_id": "history-marx-v2-1843-06-19"
+    },
+    {
+      "id": "life-1844",
+      "date": "1844",
+      "precision": "year",
+      "people": "both",
+      "title": "巴黎会面与合作",
+      "text": "恩格斯从英国回德国时经巴黎会见马克思；两人开始共同撰写《神圣家族》。",
+      "tags": [
+        "生活"
+      ],
+      "work": null,
+      "source": {
+        "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+        "locator": "1844年条：巴黎会面与合作；原文日期精度年",
+        "checked_on": "2026-10-29"
+      },
+      "ai_assisted": true
+    },
+    {
+      "id": "life-1844-02",
+      "date": "1844-02",
+      "precision": "month",
+      "people": "both",
+      "title": "《德法年鉴》合刊出版",
+      "text": "巴黎出版的合刊收入马恩各自的文章，两人的通信也与这一时期相连。",
+      "tags": [
+        "著作"
+      ],
+      "work": null,
+      "source": {
+        "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+        "locator": "1844年条：《德法年鉴》合刊出版；原文日期精度月",
+        "checked_on": "2026-10-29"
+      },
+      "ai_assisted": true
+    },
+    {
+      "id": "life-1845",
+      "date": "1845",
+      "precision": "year",
+      "people": "marx",
+      "title": "写下费尔巴哈提纲",
+      "text": "马克思在这一年春天写下《关于费尔巴哈的提纲》，没有在生前将它发表。",
+      "tags": [
+        "著作"
+      ],
+      "work": null,
+      "source": {
+        "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+        "locator": "1845年条：写下费尔巴哈提纲；原文日期精度年",
+        "checked_on": "2026-10-29"
+      },
+      "ai_assisted": true
+    },
+    {
+      "id": "life-1845-2",
+      "date": "1845",
+      "precision": "year",
+      "people": "both",
+      "title": "开始《德意志意识形态》",
+      "text": "马恩在秋天开始共同写作《德意志意识形态》。年表没有给出确切开笔日。",
+      "tags": [
+        "生活"
+      ],
+      "work": null,
+      "source": {
+        "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+        "locator": "1845年条：开始《德意志意识形态》；原文日期精度年",
+        "checked_on": "2026-10-29"
+      },
+      "ai_assisted": true
+    },
+    {
+      "id": "life-1845-02-03",
+      "date": "1845-02-03",
+      "precision": "day",
+      "people": "marx",
+      "title": "迁往布鲁塞尔",
+      "text": "被法国当局驱逐后，马克思把生活和研究基地移到布鲁塞尔。",
+      "tags": [
+        "生活"
+      ],
+      "work": null,
+      "source": {
+        "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+        "locator": "1845年条：迁往布鲁塞尔；原文日期精度日",
+        "checked_on": "2026-10-29"
+      },
+      "ai_assisted": true,
+      "history_id": "history-marx-v2-1845-02-03"
+    },
+    {
+      "id": "life-1846-08-15",
+      "date": "1846-08-15",
+      "precision": "day",
+      "people": "engels",
+      "title": "到巴黎从事组织活动",
+      "text": "恩格斯受布鲁塞尔共产主义通讯委员会委托来到巴黎，联系工人成员并开展宣传。",
+      "tags": [
+        "组织"
+      ],
+      "work": null,
+      "source": {
+        "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+        "locator": "1846年条：到巴黎从事组织活动；原文日期精度日",
+        "checked_on": "2026-10-29"
+      },
+      "ai_assisted": true
+    },
+    {
+      "id": "life-1846-12-28",
+      "date": "1846-12-28",
+      "precision": "day",
+      "people": "marx",
+      "title": "写信讨论蒲鲁东",
+      "text": "马克思致安年科夫的信从蒲鲁东著作出发，讨论社会关系与历史发展的研究方法。",
+      "tags": [
+        "生活"
+      ],
+      "work": "v03-02",
+      "source": {
+        "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+        "locator": "1846年条：写信讨论蒲鲁东；原文日期精度日",
+        "checked_on": "2026-10-29"
+      },
+      "ai_assisted": true,
+      "history_id": "history-marx-v2-1846-12-28"
+    },
+    {
+      "id": "life-1847-08-05",
+      "date": "1847-08-05",
+      "precision": "day",
+      "people": "marx",
+      "title": "布鲁塞尔同盟组织成立",
+      "text": "共产主义者同盟的布鲁塞尔支部和区部成立，马克思担任相关职务。",
+      "tags": [
+        "组织"
+      ],
+      "work": null,
+      "source": {
+        "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+        "locator": "1847年条：布鲁塞尔同盟组织成立；原文日期精度日",
+        "checked_on": "2026-10-29"
+      },
+      "ai_assisted": true,
+      "history_id": "history-marx-v2-1847-08-05"
+    },
+    {
+      "id": "life-1847-11-29",
+      "date": "1847-11-29",
+      "precision": "day",
+      "people": "both",
+      "title": "参加波兰纪念大会",
+      "text": "马恩在伦敦参加纪念波兰起义的国际大会，并发表演说。",
+      "tags": [
+        "组织"
+      ],
+      "work": null,
+      "source": {
+        "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+        "locator": "1847年条：参加波兰纪念大会；原文日期精度日",
+        "checked_on": "2026-10-29"
+      },
+      "ai_assisted": true,
+      "history_id": "history-marx-v2-1847-11-29"
+    },
+    {
+      "id": "life-1848-02",
+      "date": "1848-02",
+      "precision": "month",
+      "people": "both",
+      "title": "《共产党宣言》出版",
+      "text": "《共产党宣言》于二月底在伦敦问世；年表没有把出版日确定为某一天。",
+      "tags": [
+        "著作"
+      ],
+      "work": "manifesto",
+      "source": {
+        "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+        "locator": "1848年条：《共产党宣言》出版；原文日期精度月",
+        "checked_on": "2026-10-29"
+      },
+      "ai_assisted": true
+    },
+    {
+      "id": "life-1848-03-11",
+      "date": "1848-03-11",
+      "precision": "day",
+      "people": "both",
+      "title": "巴黎的同盟中央委员会",
+      "text": "共产主义者同盟中央委员会在巴黎组成，马克思任主席，恩格斯被缺席选入。",
+      "tags": [
+        "组织"
+      ],
+      "work": null,
+      "source": {
+        "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+        "locator": "1848年条：巴黎的同盟中央委员会；原文日期精度日",
+        "checked_on": "2026-10-29"
+      },
+      "ai_assisted": true,
+      "history_id": "history-marx-v2-1848-03-11"
+    },
+    {
+      "id": "life-1848-04-11",
+      "date": "1848-04-11",
+      "precision": "day",
+      "people": "both",
+      "title": "到科隆筹办新报",
+      "text": "马恩抵达科隆，开始为《新莱茵报》的出版作准备。",
+      "tags": [
+        "著作"
+      ],
+      "work": null,
+      "source": {
+        "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+        "locator": "1848年条：到科隆筹办新报；原文日期精度日",
+        "checked_on": "2026-10-29"
+      },
+      "ai_assisted": true,
+      "history_id": "history-marx-v2-1848-04-11"
+    },
+    {
+      "id": "life-1848-06-01",
+      "date": "1848-06-01",
+      "precision": "day",
+      "people": "marx",
+      "title": "《新莱茵报》创刊",
+      "text": "由马克思主编的《新莱茵报》第一号出版，办报成为这一时期的重要活动。",
+      "tags": [
+        "著作"
+      ],
+      "work": null,
+      "source": {
+        "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+        "locator": "1848年条：《新莱茵报》创刊；原文日期精度日",
+        "checked_on": "2026-10-29"
+      },
+      "ai_assisted": true
+    },
+    {
+      "id": "life-1849-02-07",
+      "date": "1849-02-07",
+      "precision": "day",
+      "people": "both",
+      "title": "《新莱茵报》案件开庭",
+      "text": "科隆陪审法庭审理报纸相关案件，马恩在庭上发言，并被陪审团宣告无罪。",
+      "tags": [
+        "著作"
+      ],
+      "work": null,
+      "source": {
+        "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+        "locator": "1849年条：《新莱茵报》案件开庭；原文日期精度日",
+        "checked_on": "2026-10-29"
+      },
+      "ai_assisted": true,
+      "history_id": "history-marx-v2-1849-02-07"
+    },
+    {
+      "id": "life-1849-05-19",
+      "date": "1849-05-19",
+      "precision": "day",
+      "people": "both",
+      "title": "报纸最后一号",
+      "text": "《新莱茵报》以红色油墨印出最后一期，号数为301。",
+      "tags": [
+        "著作"
+      ],
+      "work": null,
+      "source": {
+        "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+        "locator": "1849年条：报纸最后一号；原文日期精度日",
+        "checked_on": "2026-10-29"
+      },
+      "ai_assisted": true,
+      "history_id": "history-marx-v2-1849-05-19"
+    },
+    {
+      "id": "life-1849-08-24",
+      "date": "1849-08-24",
+      "precision": "day",
+      "people": "marx",
+      "title": "离开巴黎赴伦敦",
+      "text": "马克思因法国当局的迫害离开巴黎前往伦敦。这是出发日，不冒充抵达日。",
+      "tags": [
+        "生活"
+      ],
+      "work": null,
+      "source": {
+        "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+        "locator": "1849年条：离开巴黎赴伦敦；原文日期精度日",
+        "checked_on": "2026-10-29"
+      },
+      "ai_assisted": true,
+      "history_id": "history-marx-v2-1849-08-24"
+    },
+    {
+      "id": "life-1850-09-15",
+      "date": "1850-09-15",
+      "precision": "day",
+      "people": "both",
+      "title": "同盟中央委员会发生分裂",
+      "text": "马克思在同盟会议上批评维利希和沙佩尔的策略，会议发生分裂并决定迁移中央委员会。",
+      "tags": [
+        "组织"
+      ],
+      "work": null,
+      "source": {
+        "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+        "locator": "1850年条：同盟中央委员会发生分裂；原文日期精度日",
+        "checked_on": "2026-10-29"
+      },
+      "ai_assisted": true,
+      "history_id": "history-marx-v2-1850-09-15"
+    },
+    {
+      "id": "life-1850-11",
+      "date": "1850-11",
+      "precision": "month",
+      "people": "engels",
+      "title": "重返曼彻斯特工作",
+      "text": "恩格斯回到欧门—恩格斯公司，长期的商业工作与马恩通信由此并行。",
+      "tags": [
+        "生活"
+      ],
+      "work": null,
+      "source": {
+        "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+        "locator": "1850年条：重返曼彻斯特工作；原文日期精度月",
+        "checked_on": "2026-10-29"
+      },
+      "ai_assisted": true
+    },
+    {
+      "id": "life-1851-08-08",
+      "date": "1851-08-08",
+      "precision": "day",
+      "people": "marx",
+      "title": "收到《论坛报》邀稿",
+      "text": "马克思写信告诉恩格斯，他接受了为《纽约每日论坛报》撰稿的邀请。",
+      "tags": [
+        "著作"
+      ],
+      "work": null,
+      "source": {
+        "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+        "locator": "1851年条：收到《论坛报》邀稿；原文日期精度日",
+        "checked_on": "2026-10-29"
+      },
+      "ai_assisted": true,
+      "history_id": "history-marx-v2-1851-08-08"
+    },
+    {
+      "id": "life-1852-03-05",
+      "date": "1852-03-05",
+      "precision": "day",
+      "people": "marx",
+      "title": "致魏德迈论阶级问题",
+      "text": "马克思给魏德迈写信，说明自己关于阶级、阶级斗争和无产阶级专政的研究结论。",
+      "tags": [
+        "生活"
+      ],
+      "work": null,
+      "source": {
+        "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+        "locator": "1852年条：致魏德迈论阶级问题；原文日期精度日",
+        "checked_on": "2026-10-29"
+      },
+      "ai_assisted": true
+    },
+    {
+      "id": "life-1852-11-17",
+      "date": "1852-11-17",
+      "precision": "day",
+      "people": "marx",
+      "title": "提出解散同盟",
+      "text": "在组织已难以正常活动的情况下，马克思提出解散共产主义者同盟，会议接受了建议。",
+      "tags": [
+        "组织"
+      ],
+      "work": null,
+      "source": {
+        "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+        "locator": "1852年条：提出解散同盟；原文日期精度日",
+        "checked_on": "2026-10-29"
+      },
+      "ai_assisted": true,
+      "history_id": "history-marx-v2-1852-11-17"
+    },
+    {
+      "id": "life-1853-06-14",
+      "date": "1853-06-14",
+      "precision": "day",
+      "people": "marx",
+      "title": "论中国革命的文章发表",
+      "text": "《中国革命和欧洲革命》刊于《纽约每日论坛报》。这里采用发表日，写作时间原记为约数。",
+      "tags": [
+        "生活"
+      ],
+      "work": null,
+      "source": {
+        "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+        "locator": "1853年条：论中国革命的文章发表；原文日期精度日",
+        "checked_on": "2026-10-29"
+      },
+      "ai_assisted": true,
+      "history_id": "history-marx-v2-1853-06-14"
+    },
+    {
+      "id": "life-1856-04-14",
+      "date": "1856-04-14",
+      "precision": "day",
+      "people": "marx",
+      "title": "《人民报》纪念会演说",
+      "text": "马克思参加《人民报》创刊四周年纪念活动并发表演说，记录稍后刊出。",
+      "tags": [
+        "著作"
+      ],
+      "work": null,
+      "source": {
+        "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+        "locator": "1856年条：《人民报》纪念会演说；原文日期精度日",
+        "checked_on": "2026-10-29"
+      },
+      "ai_assisted": true,
+      "history_id": "history-marx-v2-1856-04-14"
+    },
+    {
+      "id": "life-1858-04-02",
+      "date": "1858-04-02",
+      "precision": "day",
+      "people": "marx",
+      "title": "说明经济学写作纲要",
+      "text": "马克思在致恩格斯的信中介绍经济学著作的结构计划，使通信成为观察研究过程的材料。",
+      "tags": [
+        "生活"
+      ],
+      "work": null,
+      "source": {
+        "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+        "locator": "1858年条：说明经济学写作纲要；原文日期精度日",
+        "checked_on": "2026-10-29"
+      },
+      "ai_assisted": true,
+      "history_id": "history-marx-v2-1858-04-02"
+    },
+    {
+      "id": "life-1859-02-23",
+      "date": "1859-02-23",
+      "precision": "day",
+      "people": "marx",
+      "title": "寄出《序言》",
+      "text": "马克思把《〈政治经济学批判〉序言》寄给柏林出版商敦克尔；寄稿与正式出版分别记载。",
+      "tags": [
+        "著作"
+      ],
+      "work": null,
+      "source": {
+        "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+        "locator": "1859年条：寄出《序言》；原文日期精度日",
+        "checked_on": "2026-10-29"
+      },
+      "ai_assisted": true,
+      "history_id": "history-marx-v2-1859-02-23"
+    },
+    {
+      "id": "life-1859-06-11",
+      "date": "1859-06-11",
+      "precision": "day",
+      "people": "marx",
+      "title": "《政治经济学批判》出版",
+      "text": "《政治经济学批判》第一分册在柏林出版，序言与书的出版过程有各自日期。",
+      "tags": [
+        "著作"
+      ],
+      "work": null,
+      "source": {
+        "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+        "locator": "1859年条：《政治经济学批判》出版；原文日期精度日",
+        "checked_on": "2026-10-29"
+      },
+      "ai_assisted": true
+    },
+    {
+      "id": "life-1859-12-12",
+      "date": "1859-12-12",
+      "precision": "day",
+      "people": "engels",
+      "title": "通信谈达尔文",
+      "text": "恩格斯告诉马克思自己正在阅读《物种起源》，并谈到这部书对自然发展史研究的意义。",
+      "tags": [
+        "生活"
+      ],
+      "work": null,
+      "source": {
+        "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+        "locator": "1859年条：通信谈达尔文；原文日期精度日",
+        "checked_on": "2026-10-29"
+      },
+      "ai_assisted": true,
+      "history_id": "history-marx-v2-1859-12-12"
+    },
+    {
+      "id": "life-1862-12-28",
+      "date": "1862-12-28",
+      "precision": "day",
+      "people": "marx",
+      "title": "确定《资本论》书名计划",
+      "text": "马克思致库格曼信中说明，拟把经济学著作下一部分以《资本论》为书名独立出版。",
+      "tags": [
+        "著作"
+      ],
+      "work": null,
+      "source": {
+        "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+        "locator": "1862年条：确定《资本论》书名计划；原文日期精度日",
+        "checked_on": "2026-10-29"
+      },
+      "ai_assisted": true,
+      "history_id": "history-marx-v2-1862-12-28"
+    },
+    {
+      "id": "life-1863-01-28",
+      "date": "1863-01-28",
+      "precision": "day",
+      "people": "marx",
+      "title": "通信讨论机器",
+      "text": "马克思致恩格斯信涉及机器的概念与发展，显示经济学研究同技术史问题的联系。",
+      "tags": [
+        "生活"
+      ],
+      "work": null,
+      "source": {
+        "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+        "locator": "1863年条：通信讨论机器；原文日期精度日",
+        "checked_on": "2026-10-29"
+      },
+      "ai_assisted": true,
+      "history_id": "history-marx-v2-1863-01-28"
+    },
+    {
+      "id": "life-1864-09-28",
+      "date": "1864-09-28",
+      "precision": "day",
+      "people": "marx",
+      "title": "第一国际成立会议",
+      "text": "马克思参加伦敦圣马丁堂的国际工人会议，并被选入新协会的临时委员会。",
+      "tags": [
+        "组织"
+      ],
+      "work": null,
+      "source": {
+        "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+        "locator": "1864年条：第一国际成立会议；原文日期精度日",
+        "checked_on": "2026-10-29"
+      },
+      "ai_assisted": true,
+      "history_id": "history-marx-v2-1864-09-28"
+    },
+    {
+      "id": "life-1864-11-01",
+      "date": "1864-11-01",
+      "precision": "day",
+      "people": "marx",
+      "title": "成立宣言与章程获通过",
+      "text": "马克思向临时委员会宣读国际工人协会成立宣言和临时章程，两个文件获一致通过。",
+      "tags": [
+        "生活"
+      ],
+      "work": null,
+      "source": {
+        "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+        "locator": "1864年条：成立宣言与章程获通过；原文日期精度日",
+        "checked_on": "2026-10-29"
+      },
+      "ai_assisted": true
+    },
+    {
+      "id": "life-1865-06-20",
+      "date": "1865-06-20",
+      "precision": "day",
+      "people": "marx",
+      "title": "开始工资问题报告",
+      "text": "马克思在总委员会会议上作关于工资、价格和利润的报告；年表还记载了6月27日的继续报告。",
+      "tags": [
+        "著作"
+      ],
+      "work": null,
+      "source": {
+        "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+        "locator": "1865年条：开始工资问题报告；原文日期精度日",
+        "checked_on": "2026-10-29"
+      },
+      "ai_assisted": true,
+      "history_id": "history-marx-v2-1865-06-20"
+    },
+    {
+      "id": "life-1867-07-25",
+      "date": "1867-07-25",
+      "precision": "day",
+      "people": "marx",
+      "title": "第一卷序言写成",
+      "text": "马克思完成《资本论》第一卷序言，随后把它寄给汉堡出版商。",
+      "tags": [
+        "著作"
+      ],
+      "work": null,
+      "source": {
+        "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+        "locator": "1867年条：第一卷序言写成；原文日期精度日",
+        "checked_on": "2026-10-29"
+      },
+      "ai_assisted": true,
+      "history_id": "history-marx-v2-1867-07-25"
+    },
+    {
+      "id": "life-1867-08-16",
+      "date": "1867-08-16",
+      "precision": "day",
+      "people": "marx",
+      "title": "校完第一卷最后印张",
+      "text": "马克思读完第一卷最后一份清样，并在深夜写信感谢恩格斯的支持。",
+      "tags": [
+        "生活"
+      ],
+      "work": null,
+      "source": {
+        "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+        "locator": "1867年条：校完第一卷最后印张；原文日期精度日",
+        "checked_on": "2026-10-29"
+      },
+      "ai_assisted": true,
+      "history_id": "history-marx-v2-1867-08-16"
+    },
+    {
+      "id": "life-1867-09",
+      "date": "1867-09",
+      "precision": "month",
+      "people": "marx",
+      "title": "《资本论》第一卷问世",
+      "text": "第一卷在九月中旬于汉堡出版，本站保留年表的月精度，不指定通行纪念日期。",
+      "tags": [
+        "著作"
+      ],
+      "work": null,
+      "source": {
+        "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+        "locator": "1867年条：《资本论》第一卷问世；原文日期精度月",
+        "checked_on": "2026-10-29"
+      },
+      "ai_assisted": true
+    },
+    {
+      "id": "life-1869-06-30",
+      "date": "1869-06-30",
+      "precision": "day",
+      "people": "engels",
+      "title": "结束公司的工作",
+      "text": "恩格斯结束在曼彻斯特公司的工作，但为了处理事务仍在当地居住了一段时间。",
+      "tags": [
+        "生活"
+      ],
+      "work": null,
+      "source": {
+        "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+        "locator": "1869年条：结束公司的工作；原文日期精度日",
+        "checked_on": "2026-10-29"
+      },
+      "ai_assisted": true,
+      "history_id": "history-marx-v2-1869-06-30"
+    },
+    {
+      "id": "life-1870-09-20",
+      "date": "1870-09-20",
+      "precision": "day",
+      "people": "engels",
+      "title": "迁居伦敦",
+      "text": "处理完公司事务后，恩格斯从曼彻斯特迁到伦敦，住在马克思附近。",
+      "tags": [
+        "生活"
+      ],
+      "work": null,
+      "source": {
+        "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+        "locator": "1870年条：迁居伦敦；原文日期精度日",
+        "checked_on": "2026-10-29"
+      },
+      "ai_assisted": true,
+      "history_id": "history-marx-v2-1870-09-20"
+    },
+    {
+      "id": "life-1870-10-04",
+      "date": "1870-10-04",
+      "precision": "day",
+      "people": "engels",
+      "title": "进入国际总委员会",
+      "text": "恩格斯当选为国际工人协会总委员会委员，直接参与其工作。",
+      "tags": [
+        "组织"
+      ],
+      "work": null,
+      "source": {
+        "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+        "locator": "1870年条：进入国际总委员会；原文日期精度日",
+        "checked_on": "2026-10-29"
+      },
+      "ai_assisted": true
+    },
+    {
+      "id": "life-1871-05-30",
+      "date": "1871-05-30",
+      "precision": "day",
+      "people": "marx",
+      "title": "《法兰西内战》获通过",
+      "text": "马克思宣读《法兰西内战》，国际总委员会批准了这份关于巴黎公社的宣言。",
+      "tags": [
+        "生活"
+      ],
+      "work": "civil-war-france",
+      "source": {
+        "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+        "locator": "1871年条：《法兰西内战》获通过；原文日期精度日",
+        "checked_on": "2026-10-29"
+      },
+      "ai_assisted": true,
+      "history_id": "history-marx-v2-1871-05-30"
+    },
+    {
+      "id": "life-1871-09-24",
+      "date": "1871-09-24",
+      "precision": "day",
+      "people": "marx",
+      "title": "国际成立七周年讲话",
+      "text": "马克思在伦敦的周年纪念会上讨论国际的任务和巴黎公社。",
+      "tags": [
+        "组织"
+      ],
+      "work": null,
+      "source": {
+        "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+        "locator": "1871年条：国际成立七周年讲话；原文日期精度日",
+        "checked_on": "2026-10-29"
+      },
+      "ai_assisted": true,
+      "history_id": "history-marx-v2-1871-09-24"
+    },
+    {
+      "id": "life-1872-06-24",
+      "date": "1872-06-24",
+      "precision": "day",
+      "people": "both",
+      "title": "重读《宣言》的序言",
+      "text": "马恩为新德文版《共产党宣言》合写序言，在后来的经验中回顾原有纲领。",
+      "tags": [
+        "著作"
+      ],
+      "work": null,
+      "source": {
+        "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+        "locator": "1872年条：重读《宣言》的序言；原文日期精度日",
+        "checked_on": "2026-10-29"
+      },
+      "ai_assisted": true,
+      "history_id": "history-marx-v2-1872-06-24"
+    },
+    {
+      "id": "life-1873-01-24",
+      "date": "1873-01-24",
+      "precision": "day",
+      "people": "marx",
+      "title": "第一卷第二版跋",
+      "text": "马克思写成《资本论》第一卷德文第二版跋，讨论版本及研究与叙述方法。",
+      "tags": [
+        "生活"
+      ],
+      "work": null,
+      "source": {
+        "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+        "locator": "1873年条：第一卷第二版跋；原文日期精度日",
+        "checked_on": "2026-10-29"
+      },
+      "ai_assisted": true,
+      "history_id": "history-marx-v2-1873-01-24"
+    },
+    {
+      "id": "life-1873-05-30",
+      "date": "1873-05-30",
+      "precision": "day",
+      "people": "engels",
+      "title": "讨论自然辩证法构思",
+      "text": "恩格斯写信给马克思，介绍准备写作《自然辩证法》的构想及相关问题。",
+      "tags": [
+        "著作"
+      ],
+      "work": null,
+      "source": {
+        "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+        "locator": "1873年条：讨论自然辩证法构思；原文日期精度日",
+        "checked_on": "2026-10-29"
+      },
+      "ai_assisted": true,
+      "history_id": "history-marx-v2-1873-05-30"
+    },
+    {
+      "id": "life-1875-05-05",
+      "date": "1875-05-05",
+      "precision": "day",
+      "people": "marx",
+      "title": "寄出哥达纲领批注",
+      "text": "马克思致白拉克信附上对纲领的批注，后来这些材料以《哥达纲领批判》为人熟知。",
+      "tags": [
+        "著作"
+      ],
+      "work": null,
+      "source": {
+        "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+        "locator": "1875年条：寄出哥达纲领批注；原文日期精度日",
+        "checked_on": "2026-10-29"
+      },
+      "ai_assisted": true
+    },
+    {
+      "id": "life-1876-05-28",
+      "date": "1876-05-28",
+      "precision": "day",
+      "people": "engels",
+      "title": "说明批判杜林的计划",
+      "text": "恩格斯在给马克思的信中说明批判杜林著作的总体安排，随后展开准备。",
+      "tags": [
+        "生活"
+      ],
+      "work": null,
+      "source": {
+        "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+        "locator": "1876年条：说明批判杜林的计划；原文日期精度日",
+        "checked_on": "2026-10-29"
+      },
+      "ai_assisted": true,
+      "history_id": "history-marx-v2-1876-05-28"
+    },
+    {
+      "id": "life-1878",
+      "date": "1878",
+      "precision": "year",
+      "people": "engels",
+      "title": "《反杜林论》单行本",
+      "text": "《反杜林论》在这一年年中以单行本出版，此前各部分曾在报刊连载。",
+      "tags": [
+        "生活"
+      ],
+      "work": "anti-duhring",
+      "source": {
+        "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+        "locator": "1878年条：《反杜林论》单行本；原文日期精度年",
+        "checked_on": "2026-10-29"
+      },
+      "ai_assisted": true
+    },
+    {
+      "id": "life-1880",
+      "date": "1880",
+      "precision": "year",
+      "people": "engels",
+      "title": "科学社会主义小册子",
+      "text": "恩格斯应拉法格请求改编《反杜林论》部分内容，先以法文传播独立小册子。",
+      "tags": [
+        "著作"
+      ],
+      "work": null,
+      "source": {
+        "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+        "locator": "1880年条：科学社会主义小册子；原文日期精度年",
+        "checked_on": "2026-10-29"
+      },
+      "ai_assisted": true
+    },
+    {
+      "id": "life-1881-03-08",
+      "date": "1881-03-08",
+      "precision": "day",
+      "people": "marx",
+      "title": "答复查苏利奇",
+      "text": "马克思在研究俄国农村公社资料并拟过多个草稿后，写信答复查苏利奇。",
+      "tags": [
+        "生活"
+      ],
+      "work": null,
+      "source": {
+        "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+        "locator": "1881年条：答复查苏利奇；原文日期精度日",
+        "checked_on": "2026-10-29"
+      },
+      "ai_assisted": true,
+      "history_id": "history-marx-v2-1881-03-08"
+    },
+    {
+      "id": "life-1881-12-02",
+      "date": "1881-12-02",
+      "precision": "day",
+      "people": "marx",
+      "title": "燕妮·马克思逝世",
+      "text": "燕妮·马克思在这一天去世；家庭生活也是年表记录的一部分。",
+      "tags": [
+        "生活"
+      ],
+      "work": null,
+      "source": {
+        "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+        "locator": "1881年条：燕妮·马克思逝世；原文日期精度日",
+        "checked_on": "2026-10-29"
+      },
+      "ai_assisted": true,
+      "history_id": "history-marx-v2-1881-12-02"
+    },
+    {
+      "id": "life-1882-01-21",
+      "date": "1882-01-21",
+      "precision": "day",
+      "people": "both",
+      "title": "《宣言》俄文版序言",
+      "text": "马恩为普列汉诺夫所译的《共产党宣言》俄文版共同撰写序言。",
+      "tags": [
+        "著作"
+      ],
+      "work": null,
+      "source": {
+        "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+        "locator": "1882年条：《宣言》俄文版序言；原文日期精度日",
+        "checked_on": "2026-10-29"
+      },
+      "ai_assisted": true,
+      "history_id": "history-marx-v2-1882-01-21"
+    },
+    {
+      "id": "life-1883-03-14",
+      "date": "1883-03-14",
+      "precision": "day",
+      "people": "marx",
+      "title": "马克思在伦敦逝世",
+      "text": "马克思在伦敦去世，恩格斯随后承担遗稿整理和多部著作出版的工作。",
+      "tags": [
+        "生活"
+      ],
+      "work": null,
+      "source": {
+        "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+        "locator": "1883年条：马克思在伦敦逝世；原文日期精度日",
+        "checked_on": "2026-10-29"
+      },
+      "ai_assisted": true,
+      "history_id": "history-marx-v2-1883-03-14"
+    },
+    {
+      "id": "life-1883-03-17",
+      "date": "1883-03-17",
+      "precision": "day",
+      "people": "engels",
+      "title": "墓前讲话",
+      "text": "马克思葬仪在海格特公墓举行，恩格斯发表了后来收入文集的讲话。",
+      "tags": [
+        "组织"
+      ],
+      "work": null,
+      "source": {
+        "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+        "locator": "1883年条：墓前讲话；原文日期精度日",
+        "checked_on": "2026-10-29"
+      },
+      "ai_assisted": true,
+      "history_id": "history-marx-v2-1883-03-17"
+    },
+    {
+      "id": "life-1885-05-05",
+      "date": "1885-05-05",
+      "precision": "day",
+      "people": "engels",
+      "title": "第二卷序言完成",
+      "text": "恩格斯在马克思诞辰这一天写完《资本论》第二卷序言。",
+      "tags": [
+        "著作"
+      ],
+      "work": null,
+      "source": {
+        "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+        "locator": "1885年条：第二卷序言完成；原文日期精度日",
+        "checked_on": "2026-10-29"
+      },
+      "ai_assisted": true,
+      "history_id": "history-marx-v2-1885-05-05"
+    },
+    {
+      "id": "life-1885-07",
+      "date": "1885-07",
+      "precision": "month",
+      "people": "engels",
+      "title": "《资本论》第二卷出版",
+      "text": "经恩格斯整理的《资本论》第二卷在汉堡出版。年表只确定到月。",
+      "tags": [
+        "著作"
+      ],
+      "work": null,
+      "source": {
+        "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+        "locator": "1885年条：《资本论》第二卷出版；原文日期精度月",
+        "checked_on": "2026-10-29"
+      },
+      "ai_assisted": true
+    },
+    {
+      "id": "life-1886-11-05",
+      "date": "1886-11-05",
+      "precision": "day",
+      "people": "engels",
+      "title": "第一卷英文版序言",
+      "text": "恩格斯写完《资本论》第一卷英文版序言，英译稿此前已由他持续审定。",
+      "tags": [
+        "著作"
+      ],
+      "work": null,
+      "source": {
+        "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+        "locator": "1886年条：第一卷英文版序言；原文日期精度日",
+        "checked_on": "2026-10-29"
+      },
+      "ai_assisted": true,
+      "history_id": "history-marx-v2-1886-11-05"
+    },
+    {
+      "id": "life-1887-01",
+      "date": "1887-01",
+      "precision": "month",
+      "people": "engels",
+      "title": "《资本论》英文版问世",
+      "text": "第一卷英文版在一月初出版；译者为穆尔和艾威林，恩格斯参与审定。",
+      "tags": [
+        "著作"
+      ],
+      "work": null,
+      "source": {
+        "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+        "locator": "1887年条：《资本论》英文版问世；原文日期精度月",
+        "checked_on": "2026-10-29"
+      },
+      "ai_assisted": true
+    },
+    {
+      "id": "life-1888-01-30",
+      "date": "1888-01-30",
+      "precision": "day",
+      "people": "engels",
+      "title": "《宣言》英文版序言",
+      "text": "恩格斯为穆尔英译本《共产党宣言》写序言，该版在伦敦出版。",
+      "tags": [
+        "著作"
+      ],
+      "work": null,
+      "source": {
+        "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+        "locator": "1888年条：《宣言》英文版序言；原文日期精度日",
+        "checked_on": "2026-10-29"
+      },
+      "ai_assisted": true,
+      "history_id": "history-marx-v2-1888-01-30"
+    },
+    {
+      "id": "life-1890-05-04",
+      "date": "1890-05-04",
+      "precision": "day",
+      "people": "engels",
+      "title": "参加伦敦五一活动",
+      "text": "恩格斯参加伦敦的五一示威和群众大会；这是当地活动日期，不改写为五月一日。",
+      "tags": [
+        "组织"
+      ],
+      "work": null,
+      "source": {
+        "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+        "locator": "1890年条：参加伦敦五一活动；原文日期精度日",
+        "checked_on": "2026-10-29"
+      },
+      "ai_assisted": true,
+      "history_id": "history-marx-v2-1890-05-04"
+    },
+    {
+      "id": "life-1891-04-30",
+      "date": "1891-04-30",
+      "precision": "day",
+      "people": "engels",
+      "title": "《雇佣劳动与资本》导言",
+      "text": "恩格斯为新版写导言，说明早期文本及后来理论发展之间的关系。",
+      "tags": [
+        "生活"
+      ],
+      "work": "wage-labour-capital",
+      "source": {
+        "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+        "locator": "1891年条：《雇佣劳动与资本》导言；原文日期精度日",
+        "checked_on": "2026-10-29"
+      },
+      "ai_assisted": true,
+      "history_id": "history-marx-v2-1891-04-30"
+    },
+    {
+      "id": "life-1893-08-12",
+      "date": "1893-08-12",
+      "precision": "day",
+      "people": "engels",
+      "title": "苏黎世大会讲话",
+      "text": "恩格斯在苏黎世国际社会主义工人代表大会最后一次会议上发言，并宣布闭幕。",
+      "tags": [
+        "组织"
+      ],
+      "work": null,
+      "source": {
+        "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+        "locator": "1893年条：苏黎世大会讲话；原文日期精度日",
+        "checked_on": "2026-10-29"
+      },
+      "ai_assisted": true
+    },
+    {
+      "id": "life-1894-10-04",
+      "date": "1894-10-04",
+      "precision": "day",
+      "people": "engels",
+      "title": "第三卷序言完成",
+      "text": "恩格斯写完《资本论》第三卷序言，这项整理工作已持续多年。",
+      "tags": [
+        "著作"
+      ],
+      "work": null,
+      "source": {
+        "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+        "locator": "1894年条：第三卷序言完成；原文日期精度日",
+        "checked_on": "2026-10-29"
+      },
+      "ai_assisted": true,
+      "history_id": "history-marx-v2-1894-10-04"
+    },
+    {
+      "id": "life-1894-12",
+      "date": "1894-12",
+      "precision": "month",
+      "people": "engels",
+      "title": "《资本论》第三卷出版",
+      "text": "第三卷在十二月初于汉堡问世。本站不把月内约数补成具体出版日。",
+      "tags": [
+        "著作"
+      ],
+      "work": null,
+      "source": {
+        "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+        "locator": "1894年条：《资本论》第三卷出版；原文日期精度月",
+        "checked_on": "2026-10-29"
+      },
+      "ai_assisted": true
+    },
+    {
+      "id": "life-1895-08-05",
+      "date": "1895-08-05",
+      "precision": "day",
+      "people": "engels",
+      "title": "恩格斯在伦敦逝世",
+      "text": "恩格斯在伦敦去世，结束了长期研究、编辑与工人运动活动。",
+      "tags": [
+        "生活"
+      ],
+      "work": null,
+      "source": {
+        "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+        "locator": "1895年条：恩格斯在伦敦逝世；原文日期精度日",
+        "checked_on": "2026-10-29"
+      },
+      "ai_assisted": true,
+      "history_id": "history-marx-v2-1895-08-05"
+    }
+  ]
+}

@@ -5,8 +5,8 @@
     "en": "Wikipedia contributors and the institutions cited in each entry. This collection and its adaptations are licensed under CC BY-SA 4.0; rights in the original sources remain with their holders."
   },
   "selection_policy": {
-    "zh-CN": "10月28日至11月30日已按具体机构资料、研究资料及百科事件页逐条编选和核对；其余日期保留首版日期页整理资料。中英文为本站简短转述。核对所引来源不等于逐条原始档案审定；各条来源和核查范围见完整说明。历史月日沿用所引来源的记法，必要时注明当地日期或历法；内容不是重要性排名。",
-    "en": "October 28–November 30 has been expanded through editorial reading of institutional, research and encyclopedic event sources; other dates retain the initial anniversary-page collection. Chinese and English are brief accounts prepared for this site. Checking the cited sources is not a claim of original-archive verification. Source notes explain coverage and calendar conventions; entries are not ranked by importance."
+    "zh-CN": "10月28日至11月30日已按具体机构资料、研究资料及百科事件页逐条编选和核对；其余日期保留首版日期页整理资料。中英文为本站简短转述。核对所引来源不等于逐条原始档案审定；各条来源和核查范围见完整说明。历史月日沿用所引来源的记法，必要时注明当地日期或历法；内容不是重要性排名。 第二版另选文集第10卷年表中50条精确到日的马恩事件，重复事件升级来源；英文为本站译文（AI辅助），不把编者年表核查冒称原始档案审定。",
+    "en": "October 28–November 30 has been expanded through editorial reading of institutional, research and encyclopedic event sources; other dates retain the initial anniversary-page collection. Chinese and English are brief accounts prepared for this site. Checking the cited sources is not a claim of original-archive verification. Source notes explain coverage and calendar conventions; entries are not ranked by importance. The second edition also selects 50 precisely dated Marx and Engels events from the chronology in Wenji volume 10, upgrading existing entries where duplicated. English is a site translation assisted by AI; source review is not original-archive verification."
   },
   "items": [
     {
@@ -9750,17 +9750,21 @@
       "month_day": "11-28",
       "year": 1820,
       "title": {
-        "zh-CN": "恩格斯诞生",
-        "en": "Friedrich Engels born"
+        "zh-CN": "恩格斯出生",
+        "en": "Engels is born"
       },
       "text": {
-        "zh-CN": "弗里德里希·恩格斯出生于普鲁士巴门，今属德国伍珀塔尔。他后来与马克思共同撰写《共产党宣言》，并整理出版《资本论》后两卷。",
-        "en": "Friedrich Engels was born in Barmen, Prussia, now part of Wuppertal. He later collaborated with Karl Marx and edited the second and third volumes of Capital."
+        "zh-CN": "恩格斯在巴门出生；这个城市是他早年生活的起点。",
+        "en": "Friedrich Engels was born in Barmen."
       },
-      "source": "维基百科：弗里德里希·恩格斯",
-      "url": "https://en.wikipedia.org/wiki/Friedrich_Engels",
+      "source": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+      "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
       "verification": "source_review",
       "references": [
+        {
+          "name": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+          "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm"
+        },
         {
           "name": "维基百科：弗里德里希·恩格斯",
           "url": "https://en.wikipedia.org/wiki/Friedrich_Engels"
@@ -10710,6 +10714,1084 @@
       "source_page": "https://en.wikipedia.org/wiki/Wikipedia:Selected_anniversaries/December_31",
       "source_revision": 1361658059,
       "verification": "automated_import"
+    },
+    {
+      "id": "history-marx-v2-1818-05-05",
+      "month_day": "05-05",
+      "year": 1818,
+      "title": {
+        "zh-CN": "马克思出生",
+        "en": "Marx is born"
+      },
+      "text": {
+        "zh-CN": "马克思在特里尔出生。年表从这一日开始叙述他的生平。",
+        "en": "Karl Marx was born in Trier."
+      },
+      "source": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+      "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+      "verification": "source_review",
+      "references": [
+        {
+          "name": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+          "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm"
+        }
+      ]
+    },
+    {
+      "id": "history-marx-v2-1835-10-15",
+      "month_day": "10-15",
+      "year": 1835,
+      "title": {
+        "zh-CN": "到波恩学习法律",
+        "en": "University in Bonn"
+      },
+      "text": {
+        "zh-CN": "马克思进入波恩大学法律系，开始大学阶段的学习。",
+        "en": "Marx entered the law faculty at the University of Bonn."
+      },
+      "source": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+      "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+      "verification": "source_review",
+      "references": [
+        {
+          "name": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+          "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm"
+        }
+      ]
+    },
+    {
+      "id": "history-marx-v2-1841-04-15",
+      "month_day": "04-15",
+      "year": 1841,
+      "title": {
+        "zh-CN": "获得博士学位",
+        "en": "Doctorate awarded"
+      },
+      "text": {
+        "zh-CN": "耶拿大学哲学系授予马克思博士学位。学位授予不等于他本人到访耶拿。",
+        "en": "Jena University awarded Marx a doctorate; the award does not establish a visit to Jena."
+      },
+      "source": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+      "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+      "verification": "source_review",
+      "references": [
+        {
+          "name": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+          "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm"
+        }
+      ]
+    },
+    {
+      "id": "history-marx-v2-1842-10-15",
+      "month_day": "10-15",
+      "year": 1842,
+      "title": {
+        "zh-CN": "承担《莱茵报》编辑工作",
+        "en": "Editing the Rheinische Zeitung"
+      },
+      "text": {
+        "zh-CN": "马克思在科隆担任《莱茵报》编辑，理论研究与报刊活动在这一阶段交织。",
+        "en": "Marx became an editor of the Rheinische Zeitung in Cologne."
+      },
+      "source": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+      "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+      "verification": "source_review",
+      "references": [
+        {
+          "name": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+          "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm"
+        }
+      ]
+    },
+    {
+      "id": "history-marx-v2-1843-03-17",
+      "month_day": "03-17",
+      "year": 1843,
+      "title": {
+        "zh-CN": "退出《莱茵报》编辑部",
+        "en": "Leaving the newspaper"
+      },
+      "text": {
+        "zh-CN": "在书报检查的压力下，马克思离开《莱茵报》的编辑岗位。",
+        "en": "Marx left the Rheinische Zeitung editorial office under censorship pressure."
+      },
+      "source": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+      "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+      "verification": "source_review",
+      "references": [
+        {
+          "name": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+          "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm"
+        }
+      ]
+    },
+    {
+      "id": "history-marx-v2-1843-06-19",
+      "month_day": "06-19",
+      "year": 1843,
+      "title": {
+        "zh-CN": "与燕妮结婚",
+        "en": "Marriage to Jenny"
+      },
+      "text": {
+        "zh-CN": "马克思和燕妮·冯·威斯特华伦在克罗伊茨纳赫举行婚礼。",
+        "en": "Marx and Jenny von Westphalen married in Kreuznach."
+      },
+      "source": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+      "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+      "verification": "source_review",
+      "references": [
+        {
+          "name": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+          "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm"
+        }
+      ]
+    },
+    {
+      "id": "history-marx-v2-1845-02-03",
+      "month_day": "02-03",
+      "year": 1845,
+      "title": {
+        "zh-CN": "迁往布鲁塞尔",
+        "en": "Move to Brussels"
+      },
+      "text": {
+        "zh-CN": "被法国当局驱逐后，马克思把生活和研究基地移到布鲁塞尔。",
+        "en": "After expulsion from France, Marx moved to Brussels."
+      },
+      "source": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+      "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+      "verification": "source_review",
+      "references": [
+        {
+          "name": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+          "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm"
+        }
+      ]
+    },
+    {
+      "id": "history-marx-v2-1846-12-28",
+      "month_day": "12-28",
+      "year": 1846,
+      "title": {
+        "zh-CN": "写信讨论蒲鲁东",
+        "en": "Letter to Annenkov"
+      },
+      "text": {
+        "zh-CN": "马克思致安年科夫的信从蒲鲁东著作出发，讨论社会关系与历史发展的研究方法。",
+        "en": "Marx wrote to Annenkov about Proudhon, social relations and historical explanation."
+      },
+      "source": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+      "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+      "verification": "source_review",
+      "references": [
+        {
+          "name": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+          "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm"
+        }
+      ]
+    },
+    {
+      "id": "history-marx-v2-1847-08-05",
+      "month_day": "08-05",
+      "year": 1847,
+      "title": {
+        "zh-CN": "布鲁塞尔同盟组织成立",
+        "en": "League organisation in Brussels"
+      },
+      "text": {
+        "zh-CN": "共产主义者同盟的布鲁塞尔支部和区部成立，马克思担任相关职务。",
+        "en": "The Communist League established a branch and district organisation in Brussels, with Marx taking office."
+      },
+      "source": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+      "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+      "verification": "source_review",
+      "references": [
+        {
+          "name": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+          "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm"
+        }
+      ]
+    },
+    {
+      "id": "history-marx-v2-1847-11-29",
+      "month_day": "11-29",
+      "year": 1847,
+      "title": {
+        "zh-CN": "参加波兰纪念大会",
+        "en": "A meeting for Poland"
+      },
+      "text": {
+        "zh-CN": "马恩在伦敦参加纪念波兰起义的国际大会，并发表演说。",
+        "en": "Marx and Engels addressed an international meeting in London commemorating the Polish uprising."
+      },
+      "source": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+      "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+      "verification": "source_review",
+      "references": [
+        {
+          "name": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+          "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm"
+        }
+      ]
+    },
+    {
+      "id": "history-marx-v2-1848-03-11",
+      "month_day": "03-11",
+      "year": 1848,
+      "title": {
+        "zh-CN": "巴黎的同盟中央委员会",
+        "en": "The League in Paris"
+      },
+      "text": {
+        "zh-CN": "共产主义者同盟中央委员会在巴黎组成，马克思任主席，恩格斯被缺席选入。",
+        "en": "The Communist League formed its Central Committee in Paris, with Marx as chair and Engels elected in his absence."
+      },
+      "source": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+      "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+      "verification": "source_review",
+      "references": [
+        {
+          "name": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+          "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm"
+        }
+      ]
+    },
+    {
+      "id": "history-marx-v2-1848-04-11",
+      "month_day": "04-11",
+      "year": 1848,
+      "title": {
+        "zh-CN": "到科隆筹办新报",
+        "en": "Preparing a newspaper"
+      },
+      "text": {
+        "zh-CN": "马恩抵达科隆，开始为《新莱茵报》的出版作准备。",
+        "en": "Marx and Engels arrived in Cologne and began preparations for the Neue Rheinische Zeitung."
+      },
+      "source": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+      "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+      "verification": "source_review",
+      "references": [
+        {
+          "name": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+          "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm"
+        }
+      ]
+    },
+    {
+      "id": "history-marx-v2-1849-02-07",
+      "month_day": "02-07",
+      "year": 1849,
+      "title": {
+        "zh-CN": "《新莱茵报》案件开庭",
+        "en": "The newspaper trial"
+      },
+      "text": {
+        "zh-CN": "科隆陪审法庭审理报纸相关案件，马恩在庭上发言，并被陪审团宣告无罪。",
+        "en": "Marx and Engels spoke at the Cologne newspaper trial and were acquitted by the jury."
+      },
+      "source": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+      "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+      "verification": "source_review",
+      "references": [
+        {
+          "name": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+          "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm"
+        }
+      ]
+    },
+    {
+      "id": "history-marx-v2-1849-05-19",
+      "month_day": "05-19",
+      "year": 1849,
+      "title": {
+        "zh-CN": "报纸最后一号",
+        "en": "The final red issue"
+      },
+      "text": {
+        "zh-CN": "《新莱茵报》以红色油墨印出最后一期，号数为301。",
+        "en": "The final issue of the Neue Rheinische Zeitung, number 301, appeared in red ink."
+      },
+      "source": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+      "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+      "verification": "source_review",
+      "references": [
+        {
+          "name": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+          "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm"
+        }
+      ]
+    },
+    {
+      "id": "history-marx-v2-1849-08-24",
+      "month_day": "08-24",
+      "year": 1849,
+      "title": {
+        "zh-CN": "离开巴黎赴伦敦",
+        "en": "Departure for London"
+      },
+      "text": {
+        "zh-CN": "马克思因法国当局的迫害离开巴黎前往伦敦。这是出发日，不冒充抵达日。",
+        "en": "Marx left Paris for London under pressure from the French authorities; this is the departure date."
+      },
+      "source": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+      "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+      "verification": "source_review",
+      "references": [
+        {
+          "name": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+          "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm"
+        }
+      ]
+    },
+    {
+      "id": "history-marx-v2-1850-09-15",
+      "month_day": "09-15",
+      "year": 1850,
+      "title": {
+        "zh-CN": "同盟中央委员会发生分裂",
+        "en": "A split in the League"
+      },
+      "text": {
+        "zh-CN": "马克思在同盟会议上批评维利希和沙佩尔的策略，会议发生分裂并决定迁移中央委员会。",
+        "en": "A Communist League meeting split over strategy and decided to move its Central Committee."
+      },
+      "source": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+      "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+      "verification": "source_review",
+      "references": [
+        {
+          "name": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+          "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm"
+        }
+      ]
+    },
+    {
+      "id": "history-marx-v2-1851-08-08",
+      "month_day": "08-08",
+      "year": 1851,
+      "title": {
+        "zh-CN": "收到《论坛报》邀稿",
+        "en": "An invitation to write"
+      },
+      "text": {
+        "zh-CN": "马克思写信告诉恩格斯，他接受了为《纽约每日论坛报》撰稿的邀请。",
+        "en": "Marx told Engels that he had accepted an invitation to write for the New-York Daily Tribune."
+      },
+      "source": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+      "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+      "verification": "source_review",
+      "references": [
+        {
+          "name": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+          "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm"
+        }
+      ]
+    },
+    {
+      "id": "history-marx-v2-1852-11-17",
+      "month_day": "11-17",
+      "year": 1852,
+      "title": {
+        "zh-CN": "提出解散同盟",
+        "en": "Dissolving the League"
+      },
+      "text": {
+        "zh-CN": "在组织已难以正常活动的情况下，马克思提出解散共产主义者同盟，会议接受了建议。",
+        "en": "Marx proposed dissolving the Communist League after repression had obstructed its work; the meeting agreed."
+      },
+      "source": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+      "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+      "verification": "source_review",
+      "references": [
+        {
+          "name": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+          "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm"
+        }
+      ]
+    },
+    {
+      "id": "history-marx-v2-1853-06-14",
+      "month_day": "06-14",
+      "year": 1853,
+      "title": {
+        "zh-CN": "论中国革命的文章发表",
+        "en": "An article on China"
+      },
+      "text": {
+        "zh-CN": "《中国革命和欧洲革命》刊于《纽约每日论坛报》。这里采用发表日，写作时间原记为约数。",
+        "en": "Revolution in China and in Europe appeared in the New-York Daily Tribune; this is its publication date."
+      },
+      "source": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+      "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+      "verification": "source_review",
+      "references": [
+        {
+          "name": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+          "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm"
+        }
+      ]
+    },
+    {
+      "id": "history-marx-v2-1856-04-14",
+      "month_day": "04-14",
+      "year": 1856,
+      "title": {
+        "zh-CN": "《人民报》纪念会演说",
+        "en": "Speech at a newspaper anniversary"
+      },
+      "text": {
+        "zh-CN": "马克思参加《人民报》创刊四周年纪念活动并发表演说，记录稍后刊出。",
+        "en": "Marx addressed the anniversary celebration of the People's Paper; a report was published later."
+      },
+      "source": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+      "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+      "verification": "source_review",
+      "references": [
+        {
+          "name": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+          "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm"
+        }
+      ]
+    },
+    {
+      "id": "history-marx-v2-1858-04-02",
+      "month_day": "04-02",
+      "year": 1858,
+      "title": {
+        "zh-CN": "说明经济学写作纲要",
+        "en": "An economic outline"
+      },
+      "text": {
+        "zh-CN": "马克思在致恩格斯的信中介绍经济学著作的结构计划，使通信成为观察研究过程的材料。",
+        "en": "Marx described the outline of his economic work in a letter to Engels."
+      },
+      "source": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+      "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+      "verification": "source_review",
+      "references": [
+        {
+          "name": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+          "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm"
+        }
+      ]
+    },
+    {
+      "id": "history-marx-v2-1859-02-23",
+      "month_day": "02-23",
+      "year": 1859,
+      "title": {
+        "zh-CN": "寄出《序言》",
+        "en": "The Preface is sent"
+      },
+      "text": {
+        "zh-CN": "马克思把《〈政治经济学批判〉序言》寄给柏林出版商敦克尔；寄稿与正式出版分别记载。",
+        "en": "Marx sent the Preface to A Contribution to the Critique of Political Economy to Duncker in Berlin."
+      },
+      "source": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+      "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+      "verification": "source_review",
+      "references": [
+        {
+          "name": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+          "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm"
+        }
+      ]
+    },
+    {
+      "id": "history-marx-v2-1859-12-12",
+      "month_day": "12-12",
+      "year": 1859,
+      "title": {
+        "zh-CN": "通信谈达尔文",
+        "en": "Reading Darwin"
+      },
+      "text": {
+        "zh-CN": "恩格斯告诉马克思自己正在阅读《物种起源》，并谈到这部书对自然发展史研究的意义。",
+        "en": "Engels told Marx that he was reading On the Origin of Species and discussed its significance."
+      },
+      "source": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+      "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+      "verification": "source_review",
+      "references": [
+        {
+          "name": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+          "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm"
+        }
+      ]
+    },
+    {
+      "id": "history-marx-v2-1862-12-28",
+      "month_day": "12-28",
+      "year": 1862,
+      "title": {
+        "zh-CN": "确定《资本论》书名计划",
+        "en": "The title Capital"
+      },
+      "text": {
+        "zh-CN": "马克思致库格曼信中说明，拟把经济学著作下一部分以《资本论》为书名独立出版。",
+        "en": "Marx told Kugelmann that he planned to publish the next part of his economic work under the title Capital."
+      },
+      "source": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+      "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+      "verification": "source_review",
+      "references": [
+        {
+          "name": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+          "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm"
+        }
+      ]
+    },
+    {
+      "id": "history-marx-v2-1863-01-28",
+      "month_day": "01-28",
+      "year": 1863,
+      "title": {
+        "zh-CN": "通信讨论机器",
+        "en": "A letter on machinery"
+      },
+      "text": {
+        "zh-CN": "马克思致恩格斯信涉及机器的概念与发展，显示经济学研究同技术史问题的联系。",
+        "en": "Marx discussed the concept and history of machinery in a letter to Engels."
+      },
+      "source": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+      "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+      "verification": "source_review",
+      "references": [
+        {
+          "name": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+          "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm"
+        }
+      ]
+    },
+    {
+      "id": "history-marx-v2-1864-09-28",
+      "month_day": "09-28",
+      "year": 1864,
+      "title": {
+        "zh-CN": "第一国际成立会议",
+        "en": "The International is founded"
+      },
+      "text": {
+        "zh-CN": "马克思参加伦敦圣马丁堂的国际工人会议，并被选入新协会的临时委员会。",
+        "en": "Marx attended the meeting at St Martin's Hall in London and joined the new International's provisional committee."
+      },
+      "source": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+      "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+      "verification": "source_review",
+      "references": [
+        {
+          "name": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+          "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm"
+        }
+      ]
+    },
+    {
+      "id": "history-marx-v2-1865-06-20",
+      "month_day": "06-20",
+      "year": 1865,
+      "title": {
+        "zh-CN": "开始工资问题报告",
+        "en": "A report on wages"
+      },
+      "text": {
+        "zh-CN": "马克思在总委员会会议上作关于工资、价格和利润的报告；年表还记载了6月27日的继续报告。",
+        "en": "Marx delivered a report on wages, prices and profit to the General Council, continuing it on 27 June."
+      },
+      "source": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+      "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+      "verification": "source_review",
+      "references": [
+        {
+          "name": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+          "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm"
+        }
+      ]
+    },
+    {
+      "id": "history-marx-v2-1867-07-25",
+      "month_day": "07-25",
+      "year": 1867,
+      "title": {
+        "zh-CN": "第一卷序言写成",
+        "en": "The first-volume Preface"
+      },
+      "text": {
+        "zh-CN": "马克思完成《资本论》第一卷序言，随后把它寄给汉堡出版商。",
+        "en": "Marx completed the Preface to the first volume of Capital and then sent it to the publisher."
+      },
+      "source": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+      "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+      "verification": "source_review",
+      "references": [
+        {
+          "name": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+          "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm"
+        }
+      ]
+    },
+    {
+      "id": "history-marx-v2-1867-08-16",
+      "month_day": "08-16",
+      "year": 1867,
+      "title": {
+        "zh-CN": "校完第一卷最后印张",
+        "en": "The final proof sheet"
+      },
+      "text": {
+        "zh-CN": "马克思读完第一卷最后一份清样，并在深夜写信感谢恩格斯的支持。",
+        "en": "Marx finished checking the last proof sheet of volume one and wrote to thank Engels."
+      },
+      "source": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+      "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+      "verification": "source_review",
+      "references": [
+        {
+          "name": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+          "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm"
+        }
+      ]
+    },
+    {
+      "id": "history-marx-v2-1869-06-30",
+      "month_day": "06-30",
+      "year": 1869,
+      "title": {
+        "zh-CN": "结束公司的工作",
+        "en": "Engels leaves business"
+      },
+      "text": {
+        "zh-CN": "恩格斯结束在曼彻斯特公司的工作，但为了处理事务仍在当地居住了一段时间。",
+        "en": "Engels ended his work at the Manchester firm, remaining in the city for a time to settle affairs."
+      },
+      "source": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+      "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+      "verification": "source_review",
+      "references": [
+        {
+          "name": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+          "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm"
+        }
+      ]
+    },
+    {
+      "id": "history-marx-v2-1870-09-20",
+      "month_day": "09-20",
+      "year": 1870,
+      "title": {
+        "zh-CN": "迁居伦敦",
+        "en": "Move to London"
+      },
+      "text": {
+        "zh-CN": "处理完公司事务后，恩格斯从曼彻斯特迁到伦敦，住在马克思附近。",
+        "en": "After settling his business affairs, Engels moved from Manchester to London near Marx."
+      },
+      "source": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+      "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+      "verification": "source_review",
+      "references": [
+        {
+          "name": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+          "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm"
+        }
+      ]
+    },
+    {
+      "id": "history-marx-v2-1871-05-30",
+      "month_day": "05-30",
+      "year": 1871,
+      "title": {
+        "zh-CN": "《法兰西内战》获通过",
+        "en": "The Civil War in France approved"
+      },
+      "text": {
+        "zh-CN": "马克思宣读《法兰西内战》，国际总委员会批准了这份关于巴黎公社的宣言。",
+        "en": "The General Council approved The Civil War in France after Marx read the text."
+      },
+      "source": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+      "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+      "verification": "source_review",
+      "references": [
+        {
+          "name": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+          "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm"
+        }
+      ]
+    },
+    {
+      "id": "history-marx-v2-1871-09-24",
+      "month_day": "09-24",
+      "year": 1871,
+      "title": {
+        "zh-CN": "国际成立七周年讲话",
+        "en": "The International's anniversary"
+      },
+      "text": {
+        "zh-CN": "马克思在伦敦的周年纪念会上讨论国际的任务和巴黎公社。",
+        "en": "Marx spoke in London about the International's tasks and the Paris Commune at its seventh anniversary."
+      },
+      "source": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+      "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+      "verification": "source_review",
+      "references": [
+        {
+          "name": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+          "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm"
+        }
+      ]
+    },
+    {
+      "id": "history-marx-v2-1872-06-24",
+      "month_day": "06-24",
+      "year": 1872,
+      "title": {
+        "zh-CN": "重读《宣言》的序言",
+        "en": "A new Manifesto Preface"
+      },
+      "text": {
+        "zh-CN": "马恩为新德文版《共产党宣言》合写序言，在后来的经验中回顾原有纲领。",
+        "en": "Marx and Engels wrote the Preface to a new German edition of the Communist Manifesto."
+      },
+      "source": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+      "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+      "verification": "source_review",
+      "references": [
+        {
+          "name": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+          "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm"
+        }
+      ]
+    },
+    {
+      "id": "history-marx-v2-1873-01-24",
+      "month_day": "01-24",
+      "year": 1873,
+      "title": {
+        "zh-CN": "第一卷第二版跋",
+        "en": "The second-edition Afterword"
+      },
+      "text": {
+        "zh-CN": "马克思写成《资本论》第一卷德文第二版跋，讨论版本及研究与叙述方法。",
+        "en": "Marx completed the Afterword to the second German edition of Capital volume one."
+      },
+      "source": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+      "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+      "verification": "source_review",
+      "references": [
+        {
+          "name": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+          "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm"
+        }
+      ]
+    },
+    {
+      "id": "history-marx-v2-1873-05-30",
+      "month_day": "05-30",
+      "year": 1873,
+      "title": {
+        "zh-CN": "讨论自然辩证法构思",
+        "en": "Planning Dialectics of Nature"
+      },
+      "text": {
+        "zh-CN": "恩格斯写信给马克思，介绍准备写作《自然辩证法》的构想及相关问题。",
+        "en": "Engels described his plans for Dialectics of Nature in a letter to Marx."
+      },
+      "source": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+      "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+      "verification": "source_review",
+      "references": [
+        {
+          "name": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+          "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm"
+        }
+      ]
+    },
+    {
+      "id": "history-marx-v2-1876-05-28",
+      "month_day": "05-28",
+      "year": 1876,
+      "title": {
+        "zh-CN": "说明批判杜林的计划",
+        "en": "Planning Anti-Dühring"
+      },
+      "text": {
+        "zh-CN": "恩格斯在给马克思的信中说明批判杜林著作的总体安排，随后展开准备。",
+        "en": "Engels explained the overall plan of his critique of Dühring in a letter to Marx."
+      },
+      "source": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+      "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+      "verification": "source_review",
+      "references": [
+        {
+          "name": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+          "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm"
+        }
+      ]
+    },
+    {
+      "id": "history-marx-v2-1881-03-08",
+      "month_day": "03-08",
+      "year": 1881,
+      "title": {
+        "zh-CN": "答复查苏利奇",
+        "en": "Reply to Zasulich"
+      },
+      "text": {
+        "zh-CN": "马克思在研究俄国农村公社资料并拟过多个草稿后，写信答复查苏利奇。",
+        "en": "After examining material on Russian rural communes and drafting several replies, Marx wrote to Zasulich."
+      },
+      "source": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+      "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+      "verification": "source_review",
+      "references": [
+        {
+          "name": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+          "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm"
+        }
+      ]
+    },
+    {
+      "id": "history-marx-v2-1881-12-02",
+      "month_day": "12-02",
+      "year": 1881,
+      "title": {
+        "zh-CN": "燕妮·马克思逝世",
+        "en": "Jenny Marx dies"
+      },
+      "text": {
+        "zh-CN": "燕妮·马克思在这一天去世；家庭生活也是年表记录的一部分。",
+        "en": "Jenny Marx died on this date."
+      },
+      "source": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+      "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+      "verification": "source_review",
+      "references": [
+        {
+          "name": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+          "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm"
+        }
+      ]
+    },
+    {
+      "id": "history-marx-v2-1882-01-21",
+      "month_day": "01-21",
+      "year": 1882,
+      "title": {
+        "zh-CN": "《宣言》俄文版序言",
+        "en": "Preface to the Russian Manifesto"
+      },
+      "text": {
+        "zh-CN": "马恩为普列汉诺夫所译的《共产党宣言》俄文版共同撰写序言。",
+        "en": "Marx and Engels wrote the Preface to Plekhanov's Russian translation of the Communist Manifesto."
+      },
+      "source": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+      "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+      "verification": "source_review",
+      "references": [
+        {
+          "name": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+          "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm"
+        }
+      ]
+    },
+    {
+      "id": "history-marx-v2-1883-03-14",
+      "month_day": "03-14",
+      "year": 1883,
+      "title": {
+        "zh-CN": "马克思在伦敦逝世",
+        "en": "Marx dies"
+      },
+      "text": {
+        "zh-CN": "马克思在伦敦去世，恩格斯随后承担遗稿整理和多部著作出版的工作。",
+        "en": "Marx died in London; Engels subsequently undertook extensive editorial work on his manuscripts."
+      },
+      "source": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+      "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+      "verification": "source_review",
+      "references": [
+        {
+          "name": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+          "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm"
+        }
+      ]
+    },
+    {
+      "id": "history-marx-v2-1885-05-05",
+      "month_day": "05-05",
+      "year": 1885,
+      "title": {
+        "zh-CN": "第二卷序言完成",
+        "en": "Preface to volume two"
+      },
+      "text": {
+        "zh-CN": "恩格斯在马克思诞辰这一天写完《资本论》第二卷序言。",
+        "en": "Engels completed the Preface to Capital volume two on Marx's birthday."
+      },
+      "source": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+      "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+      "verification": "source_review",
+      "references": [
+        {
+          "name": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+          "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm"
+        }
+      ]
+    },
+    {
+      "id": "history-marx-v2-1886-11-05",
+      "month_day": "11-05",
+      "year": 1886,
+      "title": {
+        "zh-CN": "第一卷英文版序言",
+        "en": "Preface to English Capital"
+      },
+      "text": {
+        "zh-CN": "恩格斯写完《资本论》第一卷英文版序言，英译稿此前已由他持续审定。",
+        "en": "Engels completed the Preface to the English edition of Capital volume one."
+      },
+      "source": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+      "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+      "verification": "source_review",
+      "references": [
+        {
+          "name": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+          "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm"
+        }
+      ]
+    },
+    {
+      "id": "history-marx-v2-1888-01-30",
+      "month_day": "01-30",
+      "year": 1888,
+      "title": {
+        "zh-CN": "《宣言》英文版序言",
+        "en": "Preface to the English Manifesto"
+      },
+      "text": {
+        "zh-CN": "恩格斯为穆尔英译本《共产党宣言》写序言，该版在伦敦出版。",
+        "en": "Engels wrote the Preface for Moore's English translation of the Communist Manifesto."
+      },
+      "source": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+      "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+      "verification": "source_review",
+      "references": [
+        {
+          "name": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+          "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm"
+        }
+      ]
+    },
+    {
+      "id": "history-marx-v2-1890-05-04",
+      "month_day": "05-04",
+      "year": 1890,
+      "title": {
+        "zh-CN": "参加伦敦五一活动",
+        "en": "May Day in London"
+      },
+      "text": {
+        "zh-CN": "恩格斯参加伦敦的五一示威和群众大会；这是当地活动日期，不改写为五月一日。",
+        "en": "Engels attended London's May Day demonstration and meeting on 4 May, the local event date."
+      },
+      "source": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+      "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+      "verification": "source_review",
+      "references": [
+        {
+          "name": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+          "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm"
+        }
+      ]
+    },
+    {
+      "id": "history-marx-v2-1891-04-30",
+      "month_day": "04-30",
+      "year": 1891,
+      "title": {
+        "zh-CN": "《雇佣劳动与资本》导言",
+        "en": "A Wage Labour and Capital introduction"
+      },
+      "text": {
+        "zh-CN": "恩格斯为新版写导言，说明早期文本及后来理论发展之间的关系。",
+        "en": "Engels wrote the Introduction to a new edition of Wage Labour and Capital."
+      },
+      "source": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+      "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+      "verification": "source_review",
+      "references": [
+        {
+          "name": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+          "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm"
+        }
+      ]
+    },
+    {
+      "id": "history-marx-v2-1894-10-04",
+      "month_day": "10-04",
+      "year": 1894,
+      "title": {
+        "zh-CN": "第三卷序言完成",
+        "en": "Preface to volume three"
+      },
+      "text": {
+        "zh-CN": "恩格斯写完《资本论》第三卷序言，这项整理工作已持续多年。",
+        "en": "Engels completed the Preface to Capital volume three after years of editorial work."
+      },
+      "source": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+      "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+      "verification": "source_review",
+      "references": [
+        {
+          "name": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+          "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm"
+        }
+      ]
+    },
+    {
+      "id": "history-marx-v2-1895-08-05",
+      "month_day": "08-05",
+      "year": 1895,
+      "title": {
+        "zh-CN": "恩格斯在伦敦逝世",
+        "en": "Engels dies"
+      },
+      "text": {
+        "zh-CN": "恩格斯在伦敦去世，结束了长期研究、编辑与工人运动活动。",
+        "en": "Engels died in London after decades of research, editorial work and political activity."
+      },
+      "source": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+      "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+      "verification": "source_review",
+      "references": [
+        {
+          "name": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+          "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm"
+        }
+      ]
+    },
+    {
+      "id": "history-marx-v2-1883-03-17",
+      "month_day": "03-17",
+      "year": 1883,
+      "title": {
+        "zh-CN": "墓前讲话",
+        "en": "Speech at Marx’s graveside"
+      },
+      "text": {
+        "zh-CN": "马克思葬仪在海格特公墓举行，恩格斯发表了后来收入文集的讲话。",
+        "en": "Marx was buried at Highgate Cemetery, where Engels delivered the speech later included in Wenji."
+      },
+      "source": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+      "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+      "verification": "source_review",
+      "references": [
+        {
+          "name": "《马克思恩格斯文集》第10卷生平年表 · Marx and Engels chronology",
+          "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm"
+        }
+      ]
     }
   ]
 }

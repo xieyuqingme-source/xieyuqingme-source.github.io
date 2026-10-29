@@ -119,8 +119,13 @@ jobs:
       - name: Check Read Marx and Engels public sources and reader
         run: |
           python scripts/test_marx_engels.py
+          python scripts/test_marx_v2.py
           node --test scripts/test_marx_engels_logic.cjs
           node --check home/assets/marx.js
+          node --check home/assets/marx-lab.js
+          node --test scripts/test_marx_lab.cjs
+          node --test scripts/test_marx_play.cjs
+          node --check home/assets/marx-play.js
           node --check scripts/test_marx_engels_browser.cjs
       - name: Check local game routes and navigation
         run: python scripts/test_game_routes.py

@@ -33,6 +33,11 @@ def copy_corner_fixture(root):
     for item in data['quotes']: item.pop('related',None)
     quotes.write_text(json.dumps(data,ensure_ascii=False),encoding='utf-8')
     shutil.copytree(ROOT/'marx-engels',root/'marx-engels')
+    # Second-edition life pages reuse only these two reviewed public profiles.
+    (root/'map/people').mkdir(parents=True,exist_ok=True)
+    for person in ('marx','engels'):
+        shutil.copy2(ROOT/'map/people'/(person+'.md'),root/'map/people'/(person+'.md'))
+
     # This fixture has two synthetic essays. Real QA targets are verified in
     # test_marx_engels; no link here should point to an absent real article.
     (root/'marx-engels/qa-index.json').write_text('{"version":1,"items":[]}',encoding='utf-8')

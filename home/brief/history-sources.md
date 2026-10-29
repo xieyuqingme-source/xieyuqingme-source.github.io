@@ -588,3 +588,63 @@
 | 12-29 | 1860 · 勇士号铁甲舰 | [版 91031788](https://zh.wikipedia.org/wiki/Special:PermanentLink/91031788) | [版 1379368503](https://en.wikipedia.org/wiki/Special:PermanentLink/1379368503) | [日期页原版](https://zh.wikipedia.org/wiki/Special:PermanentLink/91031788) | automated_import |
 | 12-30 | 1927 · 银座线 | [版 84604854](https://zh.wikipedia.org/wiki/Special:PermanentLink/84604854) | [版 1359422050](https://en.wikipedia.org/wiki/Special:PermanentLink/1359422050) | [日期页原版](https://zh.wikipedia.org/wiki/Special:PermanentLink/84604854) | automated_import |
 | 12-31 | 1857 · 渥太华 | [版 91601669](https://zh.wikipedia.org/wiki/Special:PermanentLink/91601669) | [版 1361658059](https://en.wikipedia.org/wiki/Special:PermanentLink/1361658059) | [日期页原版](https://en.wikipedia.org/wiki/Special:PermanentLink/1361658059) | automated_import |
+
+
+## 读马恩第二版的年表事件
+
+另选《马克思恩格斯文集》第10卷编者年表中50条精确到日的事件，涵盖生平、著作与组织活动。同一事件保留原ID并升级来源，不重复新增；月或年精度的出版资料不补成某一天。中文为本站转述，英文为本站译文（AI辅助）；核查编者年表不等于逐条原始档案审定。原有资料与署名继续保留。
+
+来源：[中马库生平大事年表](https://www.marxists.org/chinese/marx-engels2/10/287.htm)。逐条日期、定位和文字指纹见核对记录。
+
+- 1818-05-05：`history-marx-v2-1818-05-05`（新增）
+- 1820-11-28：`history-11-28-1820-engels-born`（升级原条目来源）
+- 1835-10-15：`history-marx-v2-1835-10-15`（新增）
+- 1841-04-15：`history-marx-v2-1841-04-15`（新增）
+- 1842-10-15：`history-marx-v2-1842-10-15`（新增）
+- 1843-03-17：`history-marx-v2-1843-03-17`（新增）
+- 1843-06-19：`history-marx-v2-1843-06-19`（新增）
+- 1845-02-03：`history-marx-v2-1845-02-03`（新增）
+- 1846-12-28：`history-marx-v2-1846-12-28`（新增）
+- 1847-08-05：`history-marx-v2-1847-08-05`（新增）
+- 1847-11-29：`history-marx-v2-1847-11-29`（新增）
+- 1848-03-11：`history-marx-v2-1848-03-11`（新增）
+- 1848-04-11：`history-marx-v2-1848-04-11`（新增）
+- 1849-02-07：`history-marx-v2-1849-02-07`（新增）
+- 1849-05-19：`history-marx-v2-1849-05-19`（新增）
+- 1849-08-24：`history-marx-v2-1849-08-24`（新增）
+- 1850-09-15：`history-marx-v2-1850-09-15`（新增）
+- 1851-08-08：`history-marx-v2-1851-08-08`（新增）
+- 1852-11-17：`history-marx-v2-1852-11-17`（新增）
+- 1853-06-14：`history-marx-v2-1853-06-14`（新增）
+- 1856-04-14：`history-marx-v2-1856-04-14`（新增）
+- 1858-04-02：`history-marx-v2-1858-04-02`（新增）
+- 1859-02-23：`history-marx-v2-1859-02-23`（新增）
+- 1859-12-12：`history-marx-v2-1859-12-12`（新增）
+- 1862-12-28：`history-marx-v2-1862-12-28`（新增）
+- 1863-01-28：`history-marx-v2-1863-01-28`（新增）
+- 1864-09-28：`history-marx-v2-1864-09-28`（新增）
+- 1865-06-20：`history-marx-v2-1865-06-20`（新增）
+- 1867-07-25：`history-marx-v2-1867-07-25`（新增）
+- 1867-08-16：`history-marx-v2-1867-08-16`（新增）
+- 1869-06-30：`history-marx-v2-1869-06-30`（新增）
+- 1870-09-20：`history-marx-v2-1870-09-20`（新增）
+- 1871-05-30：`history-marx-v2-1871-05-30`（新增）
+- 1871-09-24：`history-marx-v2-1871-09-24`（新增）
+- 1872-06-24：`history-marx-v2-1872-06-24`（新增）
+- 1873-01-24：`history-marx-v2-1873-01-24`（新增）
+- 1873-05-30：`history-marx-v2-1873-05-30`（新增）
+- 1876-05-28：`history-marx-v2-1876-05-28`（新增）
+- 1881-03-08：`history-marx-v2-1881-03-08`（新增）
+- 1881-12-02：`history-marx-v2-1881-12-02`（新增）
+- 1882-01-21：`history-marx-v2-1882-01-21`（新增）
+- 1883-03-14：`history-marx-v2-1883-03-14`（新增）
+- 1885-05-05：`history-marx-v2-1885-05-05`（新增）
+- 1886-11-05：`history-marx-v2-1886-11-05`（新增）
+- 1888-01-30：`history-marx-v2-1888-01-30`（新增）
+- 1890-05-04：`history-marx-v2-1890-05-04`（新增）
+- 1891-04-30：`history-marx-v2-1891-04-30`（新增）
+- 1894-10-04：`history-marx-v2-1894-10-04`（新增）
+- 1895-08-05：`history-marx-v2-1895-08-05`（新增）
+- 1883-03-17：`history-marx-v2-1883-03-17`（新增）
+
+通读时退出了骨灰投葬日期候选：文集电子年表作1895-09-27，布莱顿大学相关项目页面作1895-08-27；未取得纸本或更直接材料解决分歧，本版不把它收入年表或历史日期。原先研究稿中该条新增记录已移除，以1883-03-17墓前讲话替代；没有改动原先已发布的历史记录。

@@ -1,0 +1,6 @@
+const test=require('node:test'),assert=require('node:assert/strict');
+const {makeRound}=require('../home/assets/marx-play.js');
+const {createDeck}=require('../home/assets/marx.js');
+test('ten-question rounds have no repeats, preserve answers and leave inputs intact',()=>{const pool=Array.from({length:16},(_,i)=>({id:'q-'+i,choices:['a','b','c'],answer:'b'}));const before=JSON.stringify(pool);const round=makeRound(pool,()=>0.371);assert.equal(round.length,10);assert.equal(new Set(round.map(q=>q.id)).size,10);assert.ok(round.every(q=>q.choices.includes(q.answer)));assert.equal(JSON.stringify(pool),before);assert.deepEqual(round,makeRound(pool,()=>0.371));});
+test('duplicate IDs and invalid random sources fail',()=>{assert.throws(()=>makeRound([{id:'a'},{id:'a'}]));for(const bad of [-1,1,NaN,Infinity,'x'])assert.throws(()=>makeRound([{id:'a',choices:['a','b']},{id:'b',choices:['a','b']}],()=>bad));});
+test('quotation decks reuse the common complete-pool cycle',()=>{const deck=createDeck([1,2,3,4],'2026-10-29',()=>0.371);let last;for(let cycle=0;cycle<5;cycle++){const items=Array.from({length:4},()=>deck.next());assert.equal(new Set(items).size,4);if(last!==undefined)assert.notEqual(items[0],last);last=items[3];}});
