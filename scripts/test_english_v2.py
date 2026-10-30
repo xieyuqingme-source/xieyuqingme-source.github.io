@@ -121,9 +121,9 @@ class LearningReaderTests(unittest.TestCase):
         self.assertEqual(len(NAV_GROUPS), 4)
         self.assertFalse(any(group[0] in ("/english/", "/marx/") for group in NAV_GROUPS))
         projects = next(group for group in NAV_GROUPS if group[0] == "/projects/")
-        self.assertEqual(projects[2], [("/today/", "today"), ("/english/", "english"), ("/marx/", "marx"),
+        self.assertEqual(projects[2], [("/today/", "today"), ("/world/", "world"), ("/english/", "english"), ("/marx/", "marx"),
                                        ("/projects/", "aiApps"), ("/game/", "games")])
-        self.assertEqual(projects[3], ["/today/", "/english/", "/marx/", "/projects/", "/game/"])
+        self.assertEqual(projects[3], ["/today/", "/world/", "/english/", "/marx/", "/projects/", "/game/"])
         self.assertEqual([(path, key) for path, key in FOOTER_LINKS
                           if path in ("/english/", "/marx/")],
                          [("/english/", "english"), ("/marx/", "marx")])

@@ -80,6 +80,11 @@ jobs:
           python scripts/test_news_snapshot.py
           python scripts/test_news_archive.py
           python scripts/test_archive_collection.py
+          python scripts/test_world_sources.py
+          python scripts/test_world_archive.py
+          python scripts/test_world_pages.py
+          python scripts/test_world_calendar.py
+          python scripts/test_information_source_links.py
           python scripts/test_history_today.py
           python scripts/test_today_layout.py
           python scripts/test_daily_brief_reading.py
@@ -93,6 +98,10 @@ jobs:
           node --check home/assets/home-today.js
           node --check home/assets/home-today-visuals.js
           node --check scripts/test_today_a_browser.cjs
+          node --test scripts/test_world_ui.cjs
+          node --check home/assets/world.js
+          node --check scripts/test_world_browser.cjs
+          node --check scripts/world_calendar.cjs
           node --test scripts/test_home_daily.cjs
           node --test scripts/test_daily_reading.cjs
           node --test scripts/test_weather_map.cjs
@@ -182,10 +191,20 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: python scripts/news_snapshot.py restore --output "$RUNNER_TEMP/news-snapshot.json"
+      - name: Read optional headline archive without write credentials
+        id: news-archive
+        continue-on-error: true
+        uses: actions/checkout@v7
+        with:
+          ref: news-archive
+          path: .local-checks/news-archive
+          persist-credentials: false
+          fetch-depth: 1
       - name: Build and check personal site
         env:
           BLOG_SITE_URL: ${{ steps.pages.outputs.base_url }}
           NEWS_SNAPSHOT_PATH: ${{ runner.temp }}/news-snapshot.json
+          NEWS_ARCHIVE_PATH: ${{ github.workspace }}/.local-checks/news-archive
         run: |
           python scripts/build_site.py --site-url "$BLOG_SITE_URL"
           python scripts/check_site.py --site-url "$BLOG_SITE_URL"
@@ -195,6 +214,7 @@ jobs:
           python scripts/test_english_corner.py --publication
           python scripts/test_marx_engels.py --publication
           python scripts/test_today_layout.py --publication
+          python scripts/test_world_publication.py
       - name: Upload website
         uses: actions/upload-pages-artifact@v5
         with:

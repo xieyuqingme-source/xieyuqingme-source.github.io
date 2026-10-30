@@ -1,6 +1,6 @@
 """Bounded offline headline archive. Network publishing is an explicit Actions command.
 
-Archive captures are separate from the public eight-item Release snapshot. They
+Archive captures are separate from the bounded public Release snapshot. They
 contain only headlines, source metadata and times, never article bodies.
 """
 import argparse
@@ -78,7 +78,7 @@ def archive_item(item, source, collected, *, origin="rss"):
     """Convert a validated public title/link plus optional time to archive metadata."""
     observed = news._stamp(collected)
     title = news._text(item["title"])
-    url = news.public_url(item["url"], source["article_hosts"])
+    url = news.public_url(item["url"], news.article_hosts(source))
     canonical = news.url_key(url)
     published, basis = _published(item.get("published"), collected)
     bucket = beijing_day(published if basis == "published" else observed)
@@ -135,7 +135,7 @@ def _validate_item(item, config=None, *, stored=False):
     if not news.SLUG.fullmatch(item["source_id"]) or not news.SLUG.fullmatch(item["publisher"]):
         raise ValueError("Archive source and publisher need stable slugs.")
     categories = (*news.CATEGORIES, "business", "culture") if item["origin"] == "legacy-manual" else news.CATEGORIES
-    if item["category"] not in categories or item["lang"] not in {"zh-CN", "en"}:
+    if item["category"] not in categories or item["lang"] not in {"zh-CN", "zh-Hant", "en"}:
         raise ValueError("Unsupported archive category or language.")
     allowed = None
     if item["origin"] != "legacy-manual" and config is not None:
@@ -143,7 +143,7 @@ def _validate_item(item, config=None, *, stored=False):
         if source is None or (item["publisher"], item["source"], item["category"], item["lang"]) != (
                 source["publisher"], source["name"], source["category"], source["lang"]):
             raise ValueError("Archive source metadata does not match the allowlist.")
-        allowed = source["article_hosts"]
+        allowed = news.article_hosts(source)
     url = news.public_url(item["url"], allowed)
     if url != item["url"] or news.url_key(url) != item["canonical_url"]:
         raise ValueError("Archive URLs must use the reviewed canonical rule.")
@@ -188,9 +188,9 @@ def _validate_run(run):
     if ids is None:
         if run["display_status"] != "not-updated":
             raise ValueError("Unknown displayed IDs need an unchanged-snapshot state.")
-    elif (not isinstance(ids, list) or len(ids) > 8 or len(set(ids)) != len(ids)
+    elif (not isinstance(ids, list) or len(ids) > 24 or len(set(ids)) != len(ids)
           or any(not isinstance(value, str) or not re.fullmatch(r"news-[a-f0-9]{20}", value) for value in ids)):
-        raise ValueError("A run may reference at most eight displayed headlines.")
+        raise ValueError("A run may reference at most twenty-four displayed headlines.")
     if "archive_result" in run:
         result = run["archive_result"]
         if not isinstance(result, dict) or set(result) != {"stored_ids", "frozen_ids"}:
@@ -263,7 +263,8 @@ def validate_capture(capture, config=None):
         if report["status"] == "failed" and (report["received"] != 0 or report["eligible"] != 0 or counts[source_id]):
             raise ValueError("A failed source cannot invent received headlines.")
     if config is not None and capture["origin"] in {"rss", "release-import"}:
-        if set(reports) != {s["id"] for s in config["sources"]}:
+        expected_sources = news.active_sources(config) if capture['origin'] == 'rss' else config['sources']
+        if set(reports) != {s["id"] for s in expected_sources}:
             raise ValueError("A capture needs a result for every configured source.")
     return capture
 

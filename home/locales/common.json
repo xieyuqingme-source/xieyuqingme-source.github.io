@@ -114,7 +114,8 @@
     "common.nav.myFootprints": "我的足迹",
     "common.nav.myPhotos": "我的照片",
     "common.nav.footprints": "足迹",
-    "common.brandEnglish": "Xie Yuqing · Carl"
+    "common.brandEnglish": "Xie Yuqing · Carl",
+    "common.nav.world": "看世界"
   },
   "en": {
     "common.nav.home": "Home",
@@ -231,6 +232,7 @@
     "common.nav.myFootprints": "My footprints",
     "common.nav.myPhotos": "My photos",
     "common.nav.footprints": "Footprints",
-    "common.brandEnglish": "Xie Yuqing · Carl"
+    "common.brandEnglish": "Xie Yuqing · Carl",
+    "common.nav.world": "World (Chinese)"
   }
 }

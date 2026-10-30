@@ -176,15 +176,15 @@ async function headerStructure(page, language) {
   const prefix = language === 'en' ? '/en' : '';
   const brand = await page.locator('.site-header .brand').innerText();
   assert(brand.includes('谢雨卿') && brand.includes('Xie Yuqing · Carl'), brand);
-  const menus = { articles: ['/articles/', '/anthology/'], projects: ['/today/', '/english/', '/marx/', '/projects/', '/game/'], map: ['/map/', '/photos/'] };
-  const chineseOnly = new Set(['/english/', '/marx/']);
+  const menus = { articles: ['/articles/', '/anthology/'], projects: ['/today/', '/world/', '/english/', '/marx/', '/projects/', '/game/'], map: ['/map/', '/photos/'] };
+  const chineseOnly = new Set(['/world/', '/english/', '/marx/']);
   for (const [group, paths] of Object.entries(menus)) {
     const container = page.locator('.nav-item[data-nav-group="' + group + '"]');
     assert.equal(await container.locator('summary.nav-entry').count(), 1);
     assert.equal(await container.locator('summary.nav-entry').getAttribute('href'), null);
     assert.equal(await container.locator('summary.nav-entry a').count(), 0);
     assert.deepEqual(await container.locator('.nav-menu a').evaluateAll(nodes => nodes.map(n => n.getAttribute('href'))), paths.map(p => (chineseOnly.has(p) ? '' : prefix) + p));
-    if (language === 'zh-CN') assert.deepEqual(await container.locator('.nav-menu a').allTextContents(), { articles: ['我的文章', '古今名作'], projects: ['今天', '学英语', '读马恩', 'AI应用', '小游戏'], map: ['我的足迹', '我的照片'] }[group]);
+    if (language === 'zh-CN') assert.deepEqual(await container.locator('.nav-menu a').allTextContents(), { articles: ['我的文章', '古今名作'], projects: ['今天', '看世界', '学英语', '读马恩', 'AI应用', '小游戏'], map: ['我的足迹', '我的照片'] }[group]);
   }
   await noOverflow(page);
 }

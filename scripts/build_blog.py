@@ -716,7 +716,7 @@ class Blog:
                 from english_site import english_article_url
                 english_routes = {"/en/", "/en/today/", "/en/about/", "/en/projects/", "/en/articles/", "/en/photos/", "/en/map/", "/en/game/", "/en/anthology/",
                                   *[english_article_url(self, a) for a in self.translations.values()]}
-                if parsed.path in {"/", "/today/", "/english/", "/marx/", "/anthology/", "/projects/", "/photos/", "/map/", "/game/", "/about/", "/assets/favicon.svg", "/assets/favicon.ico", "/assets/site-i18n.js", "/assets/site-music.js", "/assets/site-music.css", "/assets/site-nav.css", "/assets/site-themes.css", "/game/ranking/", "/game/footprints/", "/en/game/ranking/", "/en/game/footprints/", "/assets/site-navigation.js", "/assets/portal.js", *english_routes}:
+                if parsed.path in {"/", "/today/", "/world/", "/english/", "/marx/", "/anthology/", "/projects/", "/photos/", "/map/", "/game/", "/about/", "/assets/favicon.svg", "/assets/favicon.ico", "/assets/site-i18n.js", "/assets/site-music.js", "/assets/site-music.css", "/assets/site-nav.css", "/assets/site-themes.css", "/game/ranking/", "/game/footprints/", "/en/game/ranking/", "/en/game/footprints/", "/assets/site-navigation.js", "/assets/portal.js", *english_routes}:
                     root_links += 1
                     continue
                 if not parsed.path.startswith(self.base_path):

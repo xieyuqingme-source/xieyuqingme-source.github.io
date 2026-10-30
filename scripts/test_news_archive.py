@@ -19,7 +19,7 @@ sys.path.insert(0, str(REPO / "scripts"))
 import news_snapshot as news
 import news_archive as archive
 
-CONFIG = news.load_sources(REPO)
+CONFIG = news.validate_sources(news._read_json(REPO / news.CONFIG_PATH))
 NOW = datetime(2026, 10, 30, 12, tzinfo=news.UTC)
 SOURCE = CONFIG["sources"][0]
 
@@ -314,7 +314,7 @@ class ArchiveTests(unittest.TestCase):
                 raise result
             return json.dumps(result).encode()
         env = dict(GITHUB_ACTIONS="true", GITHUB_REPOSITORY=news.REPOSITORY, GITHUB_REF="refs/heads/main")
-        with patch.dict(archive.os.environ, env):
+        with patch.dict(archive.os.environ, env), patch.object(news, 'load_sources', return_value=CONFIG):
             result = archive.publish_archive(capture(), REPO, git=git, gh=gh, now=NOW)
         self.assertEqual(result["attempts"], 2)
         self.assertEqual(len(pushes), 2)

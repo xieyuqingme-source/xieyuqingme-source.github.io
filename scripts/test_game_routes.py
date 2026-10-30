@@ -104,7 +104,7 @@ class GamePublicationTests(unittest.TestCase):
                            "/articles/index.html", "/articles/synthetic.html"} | english_routes
         self.assertIn("/marx/", report["marx_engels"]["routes"])
         self.assertEqual(report["marx_engels"]["language"], "zh-CN")
-        for module in (report["photography"], report["anthology"], report["marx_engels"]):
+        for module in (report["photography"], report["anthology"], report["marx_engels"], report["world"]):
             expected_routes.update("/" + route.strip("/") + "/" for route in module["routes"])
         self.assertEqual(set(report['english_corner']['routes']),{'/english/','/english/tools/numbers/','/english/play/','/english/quotes/','/english/map/'})
         expected_routes.update(report['english_corner']['routes'])
@@ -220,7 +220,7 @@ class GamePublicationTests(unittest.TestCase):
                 self.assertTrue(any(tag == "a" and attrs.get("class") == "brand" and attrs.get("href") == "/" for tag, attrs in Elements(html).elements))
                 self.assertEqual(nav.count('class="nav-item'), 4)
                 self.assertEqual(nav.count('class="nav-group'), 3)
-                self.assertCountEqual(links, ("/today/", "/articles/", "/english/", "/marx/", "/projects/", "/game/", "/about/", "/photos/", "/anthology/", "/map/"))
+                self.assertCountEqual(links, ("/today/", "/world/", "/articles/", "/english/", "/marx/", "/projects/", "/game/", "/about/", "/photos/", "/anthology/", "/map/"))
                 self.assertEqual(sum(tag == "summary" for tag, _ in Elements(nav).elements), 3)
                 footer = html.rsplit("<footer", 1)[1].split("</footer>", 1)[0]
                 self.assertEqual([attrs.get("href") for tag, attrs in Elements(footer).elements
@@ -230,7 +230,7 @@ class GamePublicationTests(unittest.TestCase):
                 html = (output / relative).read_text(encoding="utf-8")
                 nav = html.split('class="site-nav"', 1)[1].split("</nav>", 1)[0]
                 self.assertCountEqual([attrs.get("href") for tag, attrs in Elements(nav).elements if tag == "a"],
-                                      ("/en/today/", "/en/articles/", "/english/", "/marx/", "/en/projects/", "/en/game/",
+                                      ("/en/today/", "/world/", "/en/articles/", "/english/", "/marx/", "/en/projects/", "/en/game/",
                                        "/en/about/", "/en/photos/", "/en/anthology/", "/en/map/"))
                 self.assertIn('<span data-i18n="common.nav.marx">Reading Marx &amp; Engels (中文)</span>', nav)
                 footer = html.rsplit("<footer", 1)[1].split("</footer>", 1)[0]

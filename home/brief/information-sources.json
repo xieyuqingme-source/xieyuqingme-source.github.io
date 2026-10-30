@@ -1,0 +1,1615 @@
+{
+  "version": 1,
+  "sources": [
+    {
+      "id": "un-news",
+      "name": "联合国新闻",
+      "domain": "international",
+      "type": "official",
+      "url": "https://news.un.org/zh/",
+      "languages": [
+        "zh-CN",
+        "en"
+      ],
+      "region": "国际",
+      "reason": "联合国新闻网站，查阅联合国机构、人道事务和国际议题的报道与声明。",
+      "access": "未在中国大陆网络实测，也未逐项测试全部功能；具体登录、订阅与访问条件以原站为准。",
+      "checked": "2026-10-31",
+      "status": "approved",
+      "collect": true,
+      "official_links": [
+        {
+          "label": "news.un.org/zh",
+          "url": "https://news.un.org/zh/"
+        }
+      ],
+      "feeds": [
+        {
+          "id": "un-news-zh",
+          "publisher": "un",
+          "name": "联合国新闻",
+          "category": "world",
+          "lang": "zh-CN",
+          "feed_url": "https://news.un.org/feed/subscribe/zh/news/all/rss.xml",
+          "home_url": "https://news.un.org/zh/",
+          "docs_url": "https://news.un.org/zh/rss-feeds",
+          "article_hosts": [
+            "news.un.org"
+          ],
+          "collect": true,
+          "status": "approved",
+          "note": "联合国机构新闻，非综合头版；HTTP200仍可能gzip压缩，解压后RSS 2.0共30条。官方订阅说明页本次403。"
+        }
+      ]
+    },
+    {
+      "id": "mfa-china",
+      "name": "中国外交部",
+      "domain": "international",
+      "type": "official",
+      "url": "https://www.mfa.gov.cn/",
+      "languages": [
+        "zh-CN",
+        "en"
+      ],
+      "region": "中国",
+      "reason": "查阅外交部记者会、声明和双边文件，核对中国官方外交表述。",
+      "access": "未在中国大陆网络实测，也未逐项测试全部功能；具体登录、订阅与访问条件以原站为准。",
+      "checked": "2026-10-31",
+      "status": "approved",
+      "collect": false,
+      "official_links": [
+        {
+          "label": "mfa.gov.cn",
+          "url": "https://www.mfa.gov.cn/"
+        }
+      ],
+      "feeds": []
+    },
+    {
+      "id": "reuters",
+      "name": "路透社 Reuters",
+      "domain": "international",
+      "type": "media",
+      "url": "https://www.reuters.com/",
+      "languages": [
+        "en"
+      ],
+      "region": "国际",
+      "reason": "查阅路透社的国际与商业新闻；重要事实可继续核对报道引用的原始资料。",
+      "access": "本次自动访问返回401；未核实普通浏览器和不同地区的访问条件。部分内容可能要求账号或订阅，以原站为准。",
+      "checked": "2026-10-31",
+      "status": "approved",
+      "collect": false,
+      "official_links": [
+        {
+          "label": "reuters.com",
+          "url": "https://www.reuters.com/"
+        }
+      ],
+      "feeds": []
+    },
+    {
+      "id": "bbc",
+      "name": "BBC 新闻（中文与英文要闻）",
+      "domain": "international",
+      "type": "media",
+      "url": "https://www.bbc.com/zhongwen/simp",
+      "languages": [
+        "zh-CN",
+        "zh-Hant",
+        "en"
+      ],
+      "region": "英国",
+      "reason": "BBC中文入口与英文要闻订阅；标题保留各频道原有文字。",
+      "access": "BBC在部分地区可能受网络限制；本次中文网页与订阅可读不代表中国大陆可达。中文RSS实际为繁体，原题不转换。",
+      "checked": "2026-10-31",
+      "status": "approved",
+      "collect": true,
+      "official_links": [
+        {
+          "label": "bbc.com/zhongwen/simp",
+          "url": "https://www.bbc.com/zhongwen/simp"
+        },
+        {
+          "label": "BBC News英文",
+          "url": "https://www.bbc.com/news"
+        }
+      ],
+      "feeds": [
+        {
+          "id": "bbc-zh",
+          "publisher": "bbc",
+          "name": "BBC News 中文",
+          "category": "world",
+          "lang": "zh-Hant",
+          "feed_url": "https://feeds.bbci.co.uk/zhongwen/trad/rss.xml",
+          "home_url": "https://www.bbc.com/zhongwen/trad",
+          "docs_url": "https://www.bbc.co.uk/news/10628494",
+          "article_hosts": [
+            "www.bbc.com",
+            "www.bbc.co.uk",
+            "bbc.com",
+            "bbc.co.uk"
+          ],
+          "collect": true,
+          "status": "approved",
+          "note": "预选simp源实测重定向至此trad源，RSS 2.0共38条；繁体原标题不转简体、不翻译。"
+        },
+        {
+          "id": "bbc-top",
+          "publisher": "bbc",
+          "name": "BBC News · Top stories",
+          "category": "world",
+          "lang": "en",
+          "feed_url": "https://feeds.bbci.co.uk/news/rss.xml",
+          "home_url": "https://www.bbc.com/news",
+          "docs_url": "https://www.bbc.co.uk/news/10628494",
+          "article_hosts": [
+            "www.bbc.com",
+            "www.bbc.co.uk",
+            "bbc.com",
+            "bbc.co.uk"
+          ],
+          "collect": true,
+          "status": "approved",
+          "note": "BBC官方Top Stories头版；本次RSS 2.0共37条，官方News feeds说明列出此源。"
+        }
+      ]
+    },
+    {
+      "id": "zaobao",
+      "name": "联合早报",
+      "domain": "international",
+      "type": "media",
+      "url": "https://www.zaobao.com.sg/",
+      "languages": [
+        "zh-CN"
+      ],
+      "region": "新加坡",
+      "reason": "查阅联合早报对新加坡、东南亚、中国及国际事务的报道。",
+      "access": "部分内容需订阅；本次只核对官网入口，未逐篇测试付费或登录门槛。",
+      "checked": "2026-10-31",
+      "status": "approved",
+      "collect": false,
+      "official_links": [
+        {
+          "label": "zaobao.com.sg",
+          "url": "https://www.zaobao.com.sg/"
+        }
+      ],
+      "feeds": []
+    },
+    {
+      "id": "gov-china",
+      "name": "中国政府网",
+      "domain": "china-policy",
+      "type": "official",
+      "url": "https://www.gov.cn/",
+      "languages": [
+        "zh-CN",
+        "en"
+      ],
+      "region": "中国",
+      "reason": "查找国务院政策文件、会议消息和政府工作报告等公开原文。",
+      "access": "未在中国大陆网络实测，也未逐项测试全部功能；具体登录、订阅与访问条件以原站为准。",
+      "checked": "2026-10-31",
+      "status": "approved",
+      "collect": false,
+      "official_links": [
+        {
+          "label": "gov.cn",
+          "url": "https://www.gov.cn/"
+        }
+      ],
+      "feeds": []
+    },
+    {
+      "id": "npc-china",
+      "name": "中国人大网",
+      "domain": "china-policy",
+      "type": "official",
+      "url": "http://www.npc.gov.cn/",
+      "languages": [
+        "zh-CN"
+      ],
+      "region": "中国",
+      "reason": "查阅全国人大会议、立法动态和法律草案征求意见。",
+      "access": "HTTP入口可读取；HTTPS升级本次连接失败，保留HTTP官网，不绕过证书验证。",
+      "checked": "2026-10-31",
+      "status": "approved",
+      "collect": false,
+      "official_links": [
+        {
+          "label": "npc.gov.cn",
+          "url": "http://www.npc.gov.cn/"
+        }
+      ],
+      "feeds": []
+    },
+    {
+      "id": "xinhua",
+      "name": "新华社（新华网）",
+      "domain": "china-policy",
+      "type": "media",
+      "url": "https://www.news.cn/",
+      "languages": [
+        "zh-CN",
+        "en"
+      ],
+      "region": "中国",
+      "reason": "查阅新华社及新华网公开的时政与其他新闻。",
+      "access": "未在中国大陆网络实测，也未逐项测试全部功能；具体登录、订阅与访问条件以原站为准。",
+      "checked": "2026-10-31",
+      "status": "approved",
+      "collect": false,
+      "official_links": [
+        {
+          "label": "news.cn",
+          "url": "https://www.news.cn/"
+        }
+      ],
+      "feeds": []
+    },
+    {
+      "id": "thepaper",
+      "name": "澎湃新闻",
+      "domain": "china-policy",
+      "type": "media",
+      "url": "https://www.thepaper.cn/",
+      "languages": [
+        "zh-CN"
+      ],
+      "region": "中国",
+      "reason": "澎湃新闻的时政、社会及调查报道入口。",
+      "access": "本次自动访问返回403，未据此断言普通浏览器可用或确定为地区封锁。",
+      "checked": "2026-10-31",
+      "status": "approved",
+      "collect": false,
+      "official_links": [
+        {
+          "label": "thepaper.cn",
+          "url": "https://www.thepaper.cn/"
+        }
+      ],
+      "feeds": []
+    },
+    {
+      "id": "stats-china",
+      "name": "国家统计局",
+      "domain": "macro",
+      "type": "official",
+      "url": "https://www.stats.gov.cn/",
+      "languages": [
+        "zh-CN",
+        "en"
+      ],
+      "region": "中国",
+      "reason": "查询国家统计局公布的经济社会统计数据与统计说明。",
+      "access": "未在中国大陆网络实测，也未逐项测试全部功能；具体登录、订阅与访问条件以原站为准。",
+      "checked": "2026-10-31",
+      "status": "approved",
+      "collect": false,
+      "official_links": [
+        {
+          "label": "stats.gov.cn",
+          "url": "https://www.stats.gov.cn/"
+        }
+      ],
+      "feeds": []
+    },
+    {
+      "id": "pbc-china",
+      "name": "中国人民银行",
+      "domain": "macro",
+      "type": "official",
+      "url": "https://www.pbc.gov.cn/",
+      "languages": [
+        "zh-CN",
+        "en"
+      ],
+      "region": "中国",
+      "reason": "查阅中国人民银行的货币政策、利率与金融统计发布。",
+      "access": "未在中国大陆网络实测，也未逐项测试全部功能；具体登录、订阅与访问条件以原站为准。",
+      "checked": "2026-10-31",
+      "status": "approved",
+      "collect": false,
+      "official_links": [
+        {
+          "label": "pbc.gov.cn",
+          "url": "https://www.pbc.gov.cn/"
+        }
+      ],
+      "feeds": []
+    },
+    {
+      "id": "imf",
+      "name": "国际货币基金组织 IMF",
+      "domain": "macro",
+      "type": "professional",
+      "url": "https://www.imf.org/",
+      "languages": [
+        "en"
+      ],
+      "region": "国际",
+      "reason": "查找国际货币基金组织的宏观经济报告、国别资料与数据。",
+      "access": "本次官网自动访问返回403；机构身份另核官方介绍，不声称本机正文通畅。",
+      "checked": "2026-10-31",
+      "status": "approved",
+      "collect": false,
+      "official_links": [
+        {
+          "label": "imf.org",
+          "url": "https://www.imf.org/"
+        }
+      ],
+      "feeds": []
+    },
+    {
+      "id": "caixin",
+      "name": "财新",
+      "domain": "macro",
+      "type": "media",
+      "url": "https://www.caixin.com/",
+      "languages": [
+        "zh-CN",
+        "en"
+      ],
+      "region": "中国",
+      "reason": "财新财经与调查报道入口；原文访问条件以订阅方案为准。",
+      "access": "部分内容收费或需账号；本次只核对首页，具体权限以原站为准。",
+      "checked": "2026-10-31",
+      "status": "approved",
+      "collect": false,
+      "official_links": [
+        {
+          "label": "caixin.com",
+          "url": "https://www.caixin.com/"
+        }
+      ],
+      "feeds": []
+    },
+    {
+      "id": "economist",
+      "name": "经济学人 The Economist",
+      "domain": "macro",
+      "type": "media",
+      "url": "https://www.economist.com/",
+      "languages": [
+        "en"
+      ],
+      "region": "英国",
+      "reason": "查阅经济学人的国际、政治与商业报道，以及每周大事栏目。",
+      "access": "部分正文需订阅；本次主页及RSS说明页返回403，但官方栏目RSS可解析。",
+      "checked": "2026-10-31",
+      "status": "approved",
+      "collect": true,
+      "official_links": [
+        {
+          "label": "economist.com",
+          "url": "https://www.economist.com/"
+        }
+      ],
+      "feeds": [
+        {
+          "id": "economist-week",
+          "publisher": "economist",
+          "name": "The Economist · The world this week",
+          "category": "world",
+          "lang": "en",
+          "feed_url": "https://www.economist.com/the-world-this-week/rss.xml",
+          "home_url": "https://www.economist.com/",
+          "docs_url": "https://www.economist.com/rss",
+          "article_hosts": [
+            "www.economist.com",
+            "economist.com"
+          ],
+          "collect": true,
+          "status": "approved",
+          "note": "每周大事栏目，RSS 2.0共300条且包含多期；按world分类。官方RSS说明页本次403，不声称已读其订阅正文。"
+        }
+      ]
+    },
+    {
+      "id": "cninfo",
+      "name": "巨潮资讯网",
+      "domain": "finance",
+      "type": "official",
+      "url": "https://www.cninfo.com.cn/",
+      "languages": [
+        "zh-CN"
+      ],
+      "region": "中国",
+      "reason": "查找上市公司公开披露的公告和定期报告。",
+      "access": "未在中国大陆网络实测，也未逐项测试全部功能；具体登录、订阅与访问条件以原站为准。",
+      "checked": "2026-10-31",
+      "status": "approved",
+      "collect": false,
+      "official_links": [
+        {
+          "label": "cninfo.com.cn",
+          "url": "https://www.cninfo.com.cn/"
+        }
+      ],
+      "feeds": []
+    },
+    {
+      "id": "chinamoney",
+      "name": "中国货币网",
+      "domain": "finance",
+      "type": "official",
+      "url": "https://www.chinamoney.com.cn/",
+      "languages": [
+        "zh-CN",
+        "en"
+      ],
+      "region": "中国",
+      "reason": "中国外汇交易中心主办，查询汇率中间价、LPR和Shibor等公开资料。",
+      "access": "未在中国大陆网络实测，也未逐项测试全部功能；具体登录、订阅与访问条件以原站为准。",
+      "checked": "2026-10-31",
+      "status": "approved",
+      "collect": false,
+      "official_links": [
+        {
+          "label": "chinamoney.com.cn",
+          "url": "https://www.chinamoney.com.cn/"
+        }
+      ],
+      "feeds": []
+    },
+    {
+      "id": "sec-edgar",
+      "name": "美国证监会 EDGAR",
+      "domain": "finance",
+      "type": "official",
+      "url": "https://www.sec.gov/edgar/search/",
+      "languages": [
+        "en"
+      ],
+      "region": "美国",
+      "reason": "在美国证监会EDGAR入口检索公司申报和公开披露文件。",
+      "access": "本次入口自动访问返回403；自动请求应遵守SEC公平访问政策，不尝试规避限制。",
+      "checked": "2026-10-31",
+      "status": "approved",
+      "collect": false,
+      "official_links": [
+        {
+          "label": "sec.gov/edgar/search",
+          "url": "https://www.sec.gov/edgar/search/"
+        }
+      ],
+      "feeds": []
+    },
+    {
+      "id": "cls",
+      "name": "财联社",
+      "domain": "finance",
+      "type": "media",
+      "url": "https://www.cls.cn/",
+      "languages": [
+        "zh-CN"
+      ],
+      "region": "中国",
+      "reason": "财联社财经快讯与市场报道入口；消息应继续回到公告等原始出处核实。",
+      "access": "未在中国大陆网络实测，也未逐项测试全部功能；具体登录、订阅与访问条件以原站为准。",
+      "checked": "2026-10-31",
+      "status": "approved",
+      "collect": false,
+      "official_links": [
+        {
+          "label": "cls.cn",
+          "url": "https://www.cls.cn/"
+        }
+      ],
+      "feeds": []
+    },
+    {
+      "id": "arxiv-ai",
+      "name": "arXiv：人工智能新论文",
+      "domain": "technology",
+      "type": "official",
+      "url": "https://arxiv.org/list/cs.AI/recent",
+      "languages": [
+        "en"
+      ],
+      "region": "国际",
+      "reason": "检索cs.AI分类的预印本及更新；预印本不等于已经通过同行评审。",
+      "access": "公开检索；预印本的审稿及发表状态需要逐篇核对。",
+      "checked": "2026-10-31",
+      "status": "approved",
+      "collect": false,
+      "official_links": [
+        {
+          "label": "arxiv.org/list/cs.AI/recent",
+          "url": "https://arxiv.org/list/cs.AI/recent"
+        }
+      ],
+      "feeds": []
+    },
+    {
+      "id": "model-official",
+      "name": "模型公司官方发布",
+      "domain": "technology",
+      "type": "official",
+      "url": "https://openai.com/news/",
+      "languages": [
+        "zh-CN",
+        "en"
+      ],
+      "region": "多地区",
+      "reason": "查阅模型开发方的公告、博客及API文档，区分发布消息与使用说明。",
+      "access": "OpenAI新闻入口本次403；其余四个入口可读。DeepSeek链接是API文档，不是模型公告时间线。",
+      "checked": "2026-10-31",
+      "status": "approved",
+      "collect": false,
+      "official_links": [
+        {
+          "label": "OpenAI",
+          "url": "https://openai.com/news/"
+        },
+        {
+          "label": "Google DeepMind",
+          "url": "https://deepmind.google/blog/"
+        },
+        {
+          "label": "Anthropic",
+          "url": "https://www.anthropic.com/news"
+        },
+        {
+          "label": "DeepSeek",
+          "url": "https://api-docs.deepseek.com/"
+        },
+        {
+          "label": "通义千问",
+          "url": "https://qwenlm.github.io/blog/"
+        }
+      ],
+      "feeds": []
+    },
+    {
+      "id": "mit-tech-review",
+      "name": "麻省理工科技评论",
+      "domain": "technology",
+      "type": "media",
+      "url": "https://www.technologyreview.com/",
+      "languages": [
+        "en"
+      ],
+      "region": "美国",
+      "reason": "MIT Technology Review的技术新闻、评论和专题报道入口。",
+      "access": "部分文章或服务可能要求订阅；本次未进行付费或登录操作。",
+      "checked": "2026-10-31",
+      "status": "approved",
+      "collect": false,
+      "official_links": [
+        {
+          "label": "technologyreview.com",
+          "url": "https://www.technologyreview.com/"
+        }
+      ],
+      "feeds": []
+    },
+    {
+      "id": "jiqizhixin",
+      "name": "机器之心",
+      "domain": "technology",
+      "type": "media",
+      "url": "https://www.jiqizhixin.com/",
+      "languages": [
+        "zh-CN"
+      ],
+      "region": "中国",
+      "reason": "机器之心的人工智能研究、产业信息和数据服务入口。",
+      "access": "当前首页标题为“机器之心·数据服务”；不把本次落地页说成完整新闻时间线。",
+      "checked": "2026-10-31",
+      "status": "approved",
+      "collect": false,
+      "official_links": [
+        {
+          "label": "jiqizhixin.com",
+          "url": "https://www.jiqizhixin.com/"
+        }
+      ],
+      "feeds": []
+    },
+    {
+      "id": "hacker-news",
+      "name": "Hacker News",
+      "domain": "technology",
+      "type": "community",
+      "url": "https://news.ycombinator.com/",
+      "languages": [
+        "en"
+      ],
+      "region": "国际",
+      "reason": "技术社区投票排序的首页链接；外链观点和标题需回原站核实。",
+      "access": "未在中国大陆网络实测，也未逐项测试全部功能；具体登录、订阅与访问条件以原站为准。",
+      "checked": "2026-10-31",
+      "status": "approved",
+      "collect": true,
+      "official_links": [
+        {
+          "label": "news.ycombinator.com",
+          "url": "https://news.ycombinator.com/"
+        }
+      ],
+      "feeds": [
+        {
+          "id": "hacker-news",
+          "publisher": "hackernews",
+          "name": "Hacker News",
+          "category": "science",
+          "lang": "en",
+          "feed_url": "https://news.ycombinator.com/rss",
+          "home_url": "https://news.ycombinator.com/",
+          "docs_url": "https://news.ycombinator.com/newsfaq.html",
+          "article_hosts": [
+            "news.ycombinator.com"
+          ],
+          "collect": true,
+          "status": "approved",
+          "note": "社区票选首页RSS 2.0，本次200且30条；条目可直接指向不同作者的公网HTTPS原站，不代表HN编辑核实，本站不抓取外链网页。",
+          "link_policy": "public-https"
+        }
+      ]
+    },
+    {
+      "id": "nature",
+      "name": "Nature",
+      "domain": "science",
+      "type": "official",
+      "url": "https://www.nature.com/",
+      "languages": [
+        "en"
+      ],
+      "region": "国际",
+      "reason": "Nature期刊的研究、新闻与更正入口；原文权限以期刊为准。",
+      "access": "首页和订阅说明返回浏览器验证页。2026-10-31本机生产采集器遇303身份cookie跳转，按固定官方feed域规则拒绝，暂不采集；保留目录。初步RDF观察只有日期，不虚构精确发布时间。",
+      "checked": "2026-10-31",
+      "status": "approved",
+      "collect": false,
+      "official_links": [
+        {
+          "label": "nature.com",
+          "url": "https://www.nature.com/"
+        }
+      ],
+      "feeds": [
+        {
+          "id": "nature-latest",
+          "publisher": "nature",
+          "name": "Nature",
+          "category": "science",
+          "lang": "en",
+          "feed_url": "https://www.nature.com/nature.rss",
+          "home_url": "https://www.nature.com/",
+          "docs_url": "https://www.nature.com/nature/web-feeds",
+          "article_hosts": [
+            "www.nature.com",
+            "nature.com"
+          ],
+          "collect": false,
+          "status": "approved",
+          "note": "2026-10-31本机生产采集器遇303跳转至idp.nature.com/authorize（response_type=cookie），按固定官方feed域规则拒绝，暂不启用；不跟认证域、不放宽域名。初步通用HTTP曾读到RSS 1.0/RDF 75条，dc:date只有日期；若以后恢复，也不补造精确published或进入72小时今日池。"
+        }
+      ]
+    },
+    {
+      "id": "science",
+      "name": "Science",
+      "domain": "science",
+      "type": "official",
+      "url": "https://www.science.org/",
+      "languages": [
+        "en"
+      ],
+      "region": "美国",
+      "reason": "AAAS出版的Science期刊及相关科学新闻入口。",
+      "access": "本次主页和About返回403，未核实正文访问；刊物身份另核AAAS官方出版资料。",
+      "checked": "2026-10-31",
+      "status": "approved",
+      "collect": false,
+      "official_links": [
+        {
+          "label": "science.org",
+          "url": "https://www.science.org/"
+        }
+      ],
+      "feeds": []
+    },
+    {
+      "id": "nasa",
+      "name": "NASA",
+      "domain": "science",
+      "type": "official",
+      "url": "https://www.nasa.gov/",
+      "languages": [
+        "en"
+      ],
+      "region": "美国",
+      "reason": "查阅NASA任务、科研与航天活动的官方发布。",
+      "access": "未在中国大陆网络实测，也未逐项测试全部功能；具体登录、订阅与访问条件以原站为准。",
+      "checked": "2026-10-31",
+      "status": "approved",
+      "collect": true,
+      "official_links": [
+        {
+          "label": "nasa.gov",
+          "url": "https://www.nasa.gov/"
+        }
+      ],
+      "feeds": [
+        {
+          "id": "nasa-releases",
+          "publisher": "nasa",
+          "name": "NASA",
+          "category": "science",
+          "lang": "en",
+          "feed_url": "https://www.nasa.gov/news-release/feed/",
+          "home_url": "https://www.nasa.gov/news/all-news/",
+          "docs_url": "https://www.nasa.gov/rss-feeds/",
+          "article_hosts": [
+            "www.nasa.gov",
+            "science.nasa.gov"
+          ],
+          "collect": true,
+          "status": "approved",
+          "note": "NASA官方新闻稿专类，非综合头版；RSS 2.0共10条，官方订阅目录列出此源。"
+        }
+      ]
+    },
+    {
+      "id": "quanta",
+      "name": "Quanta Magazine",
+      "domain": "science",
+      "type": "media",
+      "url": "https://www.quantamagazine.org/",
+      "languages": [
+        "en"
+      ],
+      "region": "美国",
+      "reason": "Quanta Magazine的数学、物理及生命科学报道入口。",
+      "access": "未在中国大陆网络实测，也未逐项测试全部功能；具体登录、订阅与访问条件以原站为准。",
+      "checked": "2026-10-31",
+      "status": "approved",
+      "collect": false,
+      "official_links": [
+        {
+          "label": "quantamagazine.org",
+          "url": "https://www.quantamagazine.org/"
+        }
+      ],
+      "feeds": []
+    },
+    {
+      "id": "zhishifenzi",
+      "name": "知识分子",
+      "domain": "science",
+      "type": "media",
+      "url": "https://www.zhishifenzi.com/",
+      "languages": [
+        "zh-CN"
+      ],
+      "region": "中国",
+      "reason": "知识分子的科学、人文与思想相关报道入口。",
+      "access": "未在中国大陆网络实测，也未逐项测试全部功能；具体登录、订阅与访问条件以原站为准。",
+      "checked": "2026-10-31",
+      "status": "approved",
+      "collect": false,
+      "official_links": [
+        {
+          "label": "zhishifenzi.com",
+          "url": "https://www.zhishifenzi.com/"
+        }
+      ],
+      "feeds": []
+    },
+    {
+      "id": "who",
+      "name": "世界卫生组织",
+      "domain": "health",
+      "type": "official",
+      "url": "https://www.who.int/zh",
+      "languages": [
+        "zh-CN",
+        "en"
+      ],
+      "region": "国际",
+      "reason": "查阅世界卫生组织的疾病主题、公共卫生资料和机构报告。",
+      "access": "未在中国大陆网络实测，也未逐项测试全部功能；具体登录、订阅与访问条件以原站为准。",
+      "checked": "2026-10-31",
+      "status": "approved",
+      "collect": false,
+      "official_links": [
+        {
+          "label": "who.int/zh",
+          "url": "https://www.who.int/zh"
+        }
+      ],
+      "feeds": []
+    },
+    {
+      "id": "nhc",
+      "name": "国家卫生健康委员会",
+      "domain": "health",
+      "type": "official",
+      "url": "https://www.nhc.gov.cn/",
+      "languages": [
+        "zh-CN"
+      ],
+      "region": "中国",
+      "reason": "国家卫生健康委员会的卫生政策、规范与公开发布入口。",
+      "access": "HTTP和HTTPS入口本次均返回412；保留HTTPS官网，不声称正文已读或其他地区可达。",
+      "checked": "2026-10-31",
+      "status": "approved",
+      "collect": false,
+      "official_links": [
+        {
+          "label": "nhc.gov.cn",
+          "url": "https://www.nhc.gov.cn/"
+        }
+      ],
+      "feeds": []
+    },
+    {
+      "id": "china-cdc",
+      "name": "中国疾病预防控制中心",
+      "domain": "health",
+      "type": "official",
+      "url": "https://www.chinacdc.cn/",
+      "languages": [
+        "zh-CN",
+        "en"
+      ],
+      "region": "中国",
+      "reason": "中国疾病预防控制中心的疾病预防与公共卫生资料入口。",
+      "access": "未在中国大陆网络实测，也未逐项测试全部功能；具体登录、订阅与访问条件以原站为准。",
+      "checked": "2026-10-31",
+      "status": "approved",
+      "collect": false,
+      "official_links": [
+        {
+          "label": "chinacdc.cn",
+          "url": "https://www.chinacdc.cn/"
+        }
+      ],
+      "feeds": []
+    },
+    {
+      "id": "cochrane",
+      "name": "Cochrane Library",
+      "domain": "health",
+      "type": "professional",
+      "url": "https://www.cochranelibrary.com/",
+      "languages": [
+        "en"
+      ],
+      "region": "国际",
+      "reason": "查找系统综述的摘要与通俗摘要，了解研究证据如何归纳。",
+      "access": "摘要和通俗摘要免费；全文依开放获取、地区或机构许可。主页本次412，官方帮助另行核对。",
+      "checked": "2026-10-31",
+      "status": "approved",
+      "collect": false,
+      "official_links": [
+        {
+          "label": "cochranelibrary.com",
+          "url": "https://www.cochranelibrary.com/"
+        }
+      ],
+      "feeds": []
+    },
+    {
+      "id": "msd-manual",
+      "name": "默沙东诊疗手册（大众版）",
+      "domain": "health",
+      "type": "professional",
+      "url": "https://www.msdmanuals.cn/home",
+      "languages": [
+        "zh-CN"
+      ],
+      "region": "国际",
+      "reason": "查阅以大众语言整理的医学主题与术语说明。",
+      "access": "官方简介说明电子版免费且无需注册；本轮未测试全部工具功能。",
+      "checked": "2026-10-31",
+      "status": "approved",
+      "collect": false,
+      "official_links": [
+        {
+          "label": "msdmanuals.cn/home",
+          "url": "https://www.msdmanuals.cn/home"
+        }
+      ],
+      "feeds": []
+    },
+    {
+      "id": "dxy",
+      "name": "丁香医生",
+      "domain": "health",
+      "type": "community",
+      "url": "https://dxy.com/",
+      "languages": [
+        "zh-CN",
+        "en"
+      ],
+      "region": "中国",
+      "reason": "丁香医生相关机构和服务说明入口，区分健康内容与付费问诊。",
+      "access": "原地址本次跳到DXY英文集团主页，并非丁香医生科普文章列表；官方协议说明问诊咨询可收费。",
+      "checked": "2026-10-31",
+      "status": "approved",
+      "collect": false,
+      "official_links": [
+        {
+          "label": "dxy.com",
+          "url": "https://dxy.com/"
+        }
+      ],
+      "feeds": []
+    },
+    {
+      "id": "nmc",
+      "name": "中央气象台",
+      "domain": "disasters",
+      "type": "official",
+      "url": "https://www.nmc.cn/",
+      "languages": [
+        "zh-CN"
+      ],
+      "region": "中国",
+      "reason": "查阅中央气象台的天气预报、预警与台风相关资料。",
+      "access": "未在中国大陆网络实测，也未逐项测试全部功能；具体登录、订阅与访问条件以原站为准。",
+      "checked": "2026-10-31",
+      "status": "approved",
+      "collect": false,
+      "official_links": [
+        {
+          "label": "nmc.cn",
+          "url": "https://www.nmc.cn/"
+        }
+      ],
+      "feeds": []
+    },
+    {
+      "id": "ceic",
+      "name": "中国地震台网",
+      "domain": "disasters",
+      "type": "official",
+      "url": "https://news.ceic.ac.cn/",
+      "languages": [
+        "zh-CN"
+      ],
+      "region": "中国",
+      "reason": "中国地震台网地震速报候选入口；本次证书异常，访问前留意站点状态。",
+      "access": "本次HTTPS证书验证失败，原因为证书过期；未读取正文，不忽略TLS错误或声称访问通畅。",
+      "checked": "2026-10-31",
+      "status": "approved",
+      "collect": false,
+      "official_links": [
+        {
+          "label": "news.ceic.ac.cn",
+          "url": "https://news.ceic.ac.cn/"
+        }
+      ],
+      "feeds": []
+    },
+    {
+      "id": "usgs-earthquakes",
+      "name": "美国地质调查局地震",
+      "domain": "disasters",
+      "type": "official",
+      "url": "https://earthquake.usgs.gov/earthquakes/map/",
+      "languages": [
+        "en"
+      ],
+      "region": "美国",
+      "reason": "查询USGS公开的全球地震地图、事件与数据。",
+      "access": "未在中国大陆网络实测，也未逐项测试全部功能；具体登录、订阅与访问条件以原站为准。",
+      "checked": "2026-10-31",
+      "status": "approved",
+      "collect": true,
+      "official_links": [
+        {
+          "label": "earthquake.usgs.gov/earthquakes/map",
+          "url": "https://earthquake.usgs.gov/earthquakes/map/"
+        }
+      ],
+      "feeds": [
+        {
+          "id": "usgs-significant-week",
+          "publisher": "usgs",
+          "name": "USGS · Significant earthquakes",
+          "category": "science",
+          "lang": "en",
+          "feed_url": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/significant_week.atom",
+          "home_url": "https://earthquake.usgs.gov/earthquakes/map/",
+          "docs_url": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/",
+          "article_hosts": [
+            "earthquake.usgs.gov",
+            "www.usgs.gov"
+          ],
+          "collect": true,
+          "status": "approved",
+          "note": "USGS一周显著地震专类Atom，本次4项；只有updated而无published，不把更新时间当作发表或地震发生时刻。feed启用仅作归档，按发布时间缺失的first_seen回退，不进入72小时今日池。显著性是来源定义，不是本站添加重大标签。"
+        }
+      ]
+    },
+    {
+      "id": "hko",
+      "name": "香港天文台",
+      "domain": "disasters",
+      "type": "official",
+      "url": "https://www.hko.gov.hk/sc/",
+      "languages": [
+        "zh-CN",
+        "en"
+      ],
+      "region": "中国香港",
+      "reason": "查阅香港天文台的天气、台风及天文资料。",
+      "access": "未在中国大陆网络实测，也未逐项测试全部功能；具体登录、订阅与访问条件以原站为准。",
+      "checked": "2026-10-31",
+      "status": "approved",
+      "collect": false,
+      "official_links": [
+        {
+          "label": "hko.gov.hk/sc",
+          "url": "https://www.hko.gov.hk/sc/"
+        }
+      ],
+      "feeds": []
+    },
+    {
+      "id": "npc-laws",
+      "name": "国家法律法规数据库",
+      "domain": "law",
+      "type": "official",
+      "url": "https://flk.npc.gov.cn/",
+      "languages": [
+        "zh-CN"
+      ],
+      "region": "中国",
+      "reason": "查询国家法律法规数据库中的法律、法规与司法解释文本。",
+      "access": "未在中国大陆网络实测，也未逐项测试全部功能；具体登录、订阅与访问条件以原站为准。",
+      "checked": "2026-10-31",
+      "status": "approved",
+      "collect": false,
+      "official_links": [
+        {
+          "label": "flk.npc.gov.cn",
+          "url": "https://flk.npc.gov.cn/"
+        }
+      ],
+      "feeds": []
+    },
+    {
+      "id": "court-cases",
+      "name": "人民法院案例库",
+      "domain": "law",
+      "type": "official",
+      "url": "https://rmfyalk.court.gov.cn/",
+      "languages": [
+        "zh-CN"
+      ],
+      "region": "中国",
+      "reason": "检索最高人民法院建设的指导性案例和经审核入库的参考案例。",
+      "access": "部分检索或服务可能要求注册登录；本次未登录，不声称全部内容免账号可用。",
+      "checked": "2026-10-31",
+      "status": "approved",
+      "collect": false,
+      "official_links": [
+        {
+          "label": "rmfyalk.court.gov.cn",
+          "url": "https://rmfyalk.court.gov.cn/"
+        }
+      ],
+      "feeds": []
+    },
+    {
+      "id": "court-judgments",
+      "name": "中国裁判文书网",
+      "domain": "law",
+      "type": "official",
+      "url": "https://wenshu.court.gov.cn/",
+      "languages": [
+        "zh-CN"
+      ],
+      "region": "中国",
+      "reason": "查阅法院公开的裁判文书，具体检索与阅读按平台登录要求操作。",
+      "access": "检索和下载按平台注册登录要求使用；本次未登录，不绕过验证。",
+      "checked": "2026-10-31",
+      "status": "approved",
+      "collect": false,
+      "official_links": [
+        {
+          "label": "wenshu.court.gov.cn",
+          "url": "https://wenshu.court.gov.cn/"
+        }
+      ],
+      "feeds": []
+    },
+    {
+      "id": "cnki",
+      "name": "中国知网",
+      "domain": "academic",
+      "type": "professional",
+      "url": "https://www.cnki.net/",
+      "languages": [
+        "zh-CN"
+      ],
+      "region": "中国",
+      "reason": "中国知网的学术文献检索入口；下载权限依资源和机构授权而异。",
+      "access": "本机跳到oversea.cnki.net且仅显示Loading；未核实全部功能或具体收费范围，保留主域以便站方按地区路由。",
+      "checked": "2026-10-31",
+      "status": "approved",
+      "collect": false,
+      "official_links": [
+        {
+          "label": "cnki.net",
+          "url": "https://www.cnki.net/"
+        }
+      ],
+      "feeds": []
+    },
+    {
+      "id": "ncpssd",
+      "name": "国家哲学社会科学文献中心",
+      "domain": "academic",
+      "type": "professional",
+      "url": "https://www.ncpssd.cn/",
+      "languages": [
+        "zh-CN"
+      ],
+      "region": "中国",
+      "reason": "检索哲学社会科学期刊、古籍等文献资源。",
+      "access": "本次主页直接读取超时；官方指南说明注册登录流程，不据此声称失效或全站免登录。",
+      "checked": "2026-10-31",
+      "status": "approved",
+      "collect": false,
+      "official_links": [
+        {
+          "label": "ncpssd.cn",
+          "url": "https://www.ncpssd.cn/"
+        }
+      ],
+      "feeds": []
+    },
+    {
+      "id": "google-scholar",
+      "name": "Google 学术",
+      "domain": "academic",
+      "type": "professional",
+      "url": "https://scholar.google.com/",
+      "languages": [
+        "en"
+      ],
+      "region": "国际",
+      "reason": "搜索学术文献与引用关系，回到出版者或机构库核对原文。",
+      "access": "部分地区可能有网络限制；本机可读不代表中国大陆可达，检索结果不保证全文免费。",
+      "checked": "2026-10-31",
+      "status": "approved",
+      "collect": false,
+      "official_links": [
+        {
+          "label": "scholar.google.com",
+          "url": "https://scholar.google.com/"
+        }
+      ],
+      "feeds": []
+    },
+    {
+      "id": "unpaywall",
+      "name": "Unpaywall",
+      "domain": "academic",
+      "type": "professional",
+      "url": "https://unpaywall.org/",
+      "languages": [
+        "en"
+      ],
+      "region": "国际",
+      "reason": "寻找学术论文已有的合法开放获取版本，不保证每篇都有免费全文。",
+      "access": "多数功能免费且通常无需注册；主页有JavaScript界面，未做端到端功能测试。",
+      "checked": "2026-10-31",
+      "status": "approved",
+      "collect": false,
+      "official_links": [
+        {
+          "label": "unpaywall.org",
+          "url": "https://unpaywall.org/"
+        }
+      ],
+      "feeds": []
+    },
+    {
+      "id": "mia-chinese",
+      "name": "马克思主义文库（中文）",
+      "domain": "marxism",
+      "type": "official",
+      "url": "https://www.marxists.org/chinese/",
+      "languages": [
+        "zh-CN"
+      ],
+      "region": "国际",
+      "reason": "检索马克思主义文库中文原著与文献，结合篇名和版本核对引文。",
+      "access": "未在中国大陆网络实测，也未逐项测试全部功能；具体登录、订阅与访问条件以原站为准。",
+      "checked": "2026-10-31",
+      "status": "approved",
+      "collect": false,
+      "official_links": [
+        {
+          "label": "marxists.org/chinese",
+          "url": "https://www.marxists.org/chinese/"
+        }
+      ],
+      "feeds": []
+    },
+    {
+      "id": "site-marx",
+      "name": "本站「读马恩」",
+      "domain": "marxism",
+      "type": "official",
+      "url": "/marx/",
+      "languages": [
+        "zh-CN"
+      ],
+      "region": "本站",
+      "reason": "本站以原著和具体出处为线索的马克思恩格斯阅读入口。",
+      "access": "本站本地页面；原著外链另受来源网站的访问条件影响。",
+      "checked": "2026-10-31",
+      "status": "approved",
+      "collect": false,
+      "official_links": [
+        {
+          "label": "本站",
+          "url": "/marx/"
+        }
+      ],
+      "feeds": []
+    },
+    {
+      "id": "ctext",
+      "name": "中国哲学书电子化计划",
+      "domain": "marxism",
+      "type": "professional",
+      "url": "https://ctext.org/zh",
+      "languages": [
+        "zh-CN",
+        "en"
+      ],
+      "region": "国际",
+      "reason": "检索中国古籍文本，并在可用时对照原书影像。",
+      "access": "未在中国大陆网络实测，也未逐项测试全部功能；具体登录、订阅与访问条件以原站为准。",
+      "checked": "2026-10-31",
+      "status": "approved",
+      "collect": false,
+      "official_links": [
+        {
+          "label": "ctext.org/zh",
+          "url": "https://ctext.org/zh"
+        }
+      ],
+      "feeds": []
+    },
+    {
+      "id": "gutenberg",
+      "name": "古登堡计划 Project Gutenberg",
+      "domain": "english",
+      "type": "official",
+      "url": "https://www.gutenberg.org/",
+      "languages": [
+        "en"
+      ],
+      "region": "国际",
+      "reason": "查找古登堡计划的电子书；使用前按所在地法律核对作品权利状态。",
+      "access": "免费电子书的权利状态以所在地法律为准；不是对所有地区公版状态的保证。",
+      "checked": "2026-10-31",
+      "status": "approved",
+      "collect": false,
+      "official_links": [
+        {
+          "label": "gutenberg.org",
+          "url": "https://www.gutenberg.org/"
+        }
+      ],
+      "feeds": []
+    },
+    {
+      "id": "site-english",
+      "name": "本站「学英语」",
+      "domain": "english",
+      "type": "official",
+      "url": "/english/",
+      "languages": [
+        "zh-CN"
+      ],
+      "region": "本站",
+      "reason": "本站的名著片段、名句和英语知识阅读入口。",
+      "access": "本站本地页面；阅读标记等保存在当前浏览器。",
+      "checked": "2026-10-31",
+      "status": "approved",
+      "collect": false,
+      "official_links": [
+        {
+          "label": "本站",
+          "url": "/english/"
+        }
+      ],
+      "feeds": []
+    },
+    {
+      "id": "cambridge-dictionary",
+      "name": "剑桥词典",
+      "domain": "english",
+      "type": "professional",
+      "url": "https://dictionary.cambridge.org/zhs/",
+      "languages": [
+        "zh-CN",
+        "en"
+      ],
+      "region": "英国",
+      "reason": "查阅剑桥词典的释义、翻译和例句。",
+      "access": "未在中国大陆网络实测，也未逐项测试全部功能；具体登录、订阅与访问条件以原站为准。",
+      "checked": "2026-10-31",
+      "status": "approved",
+      "collect": false,
+      "official_links": [
+        {
+          "label": "dictionary.cambridge.org/zhs",
+          "url": "https://dictionary.cambridge.org/zhs/"
+        }
+      ],
+      "feeds": []
+    },
+    {
+      "id": "oxford-dictionary",
+      "name": "牛津高阶学习词典",
+      "domain": "english",
+      "type": "professional",
+      "url": "https://www.oxfordlearnersdictionaries.com/",
+      "languages": [
+        "en"
+      ],
+      "region": "英国",
+      "reason": "查阅牛津学习词典面向英语学习者的释义、发音与用法说明。",
+      "access": "未在中国大陆网络实测，也未逐项测试全部功能；具体登录、订阅与访问条件以原站为准。",
+      "checked": "2026-10-31",
+      "status": "approved",
+      "collect": false,
+      "official_links": [
+        {
+          "label": "oxfordlearnersdictionaries.com",
+          "url": "https://www.oxfordlearnersdictionaries.com/"
+        }
+      ],
+      "feeds": []
+    },
+    {
+      "id": "piyao",
+      "name": "中国互联网联合辟谣平台",
+      "domain": "verification",
+      "type": "official",
+      "url": "https://www.piyao.org.cn/",
+      "languages": [
+        "zh-CN"
+      ],
+      "region": "中国",
+      "reason": "寻找公开辟谣信息及相关发布平台，再回看具体发布方原文。",
+      "access": "未在中国大陆网络实测，也未逐项测试全部功能；具体登录、订阅与访问条件以原站为准。",
+      "checked": "2026-10-31",
+      "status": "approved",
+      "collect": false,
+      "official_links": [
+        {
+          "label": "piyao.org.cn",
+          "url": "https://www.piyao.org.cn/"
+        }
+      ],
+      "feeds": []
+    },
+    {
+      "id": "wayback",
+      "name": "互联网档案馆 Wayback Machine",
+      "domain": "verification",
+      "type": "professional",
+      "url": "https://web.archive.org/",
+      "languages": [
+        "en"
+      ],
+      "region": "国际",
+      "reason": "按网址和存档时间回看网页历史版本，辅助核对网页变化。",
+      "access": "存档可能不完整，部分链接或图片缺失，也可能跳往其他日期；未验证保存等账号功能。",
+      "checked": "2026-10-31",
+      "status": "approved",
+      "collect": false,
+      "official_links": [
+        {
+          "label": "web.archive.org",
+          "url": "https://web.archive.org/"
+        }
+      ],
+      "feeds": []
+    },
+    {
+      "id": "tineye",
+      "name": "TinEye 以图搜图",
+      "domain": "verification",
+      "type": "professional",
+      "url": "https://tineye.com/",
+      "languages": [
+        "en"
+      ],
+      "region": "国际",
+      "reason": "寻找图片出现过的网页和修改版本，辅助追溯图片线索。",
+      "access": "非商业使用免费，商业API收费；本轮不用该API。最早被发现时间不等于图片首次发布日，结果不授予使用权。",
+      "checked": "2026-10-31",
+      "status": "approved",
+      "collect": false,
+      "official_links": [
+        {
+          "label": "tineye.com",
+          "url": "https://tineye.com/"
+        }
+      ],
+      "feeds": []
+    },
+    {
+      "id": "chinanews",
+      "name": "中国新闻网",
+      "domain": "china-policy",
+      "type": "media",
+      "url": "https://www.chinanews.com.cn/",
+      "languages": [
+        "zh-CN"
+      ],
+      "region": "中国",
+      "reason": "查阅中国新闻网的要闻栏目和原文。",
+      "access": "未在中国大陆网络实测，也未逐项测试全部功能；具体登录、订阅与访问条件以原站为准。",
+      "checked": "2026-10-31",
+      "status": "approved",
+      "collect": true,
+      "official_links": [
+        {
+          "label": "中国新闻网",
+          "url": "https://www.chinanews.com.cn/"
+        }
+      ],
+      "feeds": [
+        {
+          "id": "chinanews-top",
+          "publisher": "chinanews",
+          "name": "中国新闻网 · 要闻",
+          "category": "domestic",
+          "lang": "zh-CN",
+          "feed_url": "https://www.chinanews.com.cn/rss/importnews.xml",
+          "home_url": "https://www.chinanews.com.cn/",
+          "docs_url": "https://www.chinanews.com.cn/rss/",
+          "article_hosts": [
+            "www.chinanews.com.cn"
+          ],
+          "collect": true,
+          "status": "approved",
+          "note": "官方要闻栏目RSS，不是本站独立重要性评分；本次RSS 2.0，30条，有精确发布时间。"
+        }
+      ]
+    },
+    {
+      "id": "guardian",
+      "name": "The Guardian",
+      "domain": "international",
+      "type": "media",
+      "url": "https://www.theguardian.com/international",
+      "languages": [
+        "en"
+      ],
+      "region": "英国",
+      "reason": "查阅卫报国际版头版和相关报道；保留其原标题。",
+      "access": "官方RSS及订阅说明本次可读；全文、账号或捐助等条件以原站为准。",
+      "checked": "2026-10-31",
+      "status": "approved",
+      "collect": true,
+      "official_links": [
+        {
+          "label": "The Guardian",
+          "url": "https://www.theguardian.com/international"
+        }
+      ],
+      "feeds": [
+        {
+          "id": "guardian-international",
+          "publisher": "guardian",
+          "name": "The Guardian · International",
+          "category": "world",
+          "lang": "en",
+          "feed_url": "https://www.theguardian.com/international/rss",
+          "home_url": "https://www.theguardian.com/international",
+          "docs_url": "https://www.theguardian.com/help/feeds",
+          "article_hosts": [
+            "www.theguardian.com"
+          ],
+          "collect": true,
+          "status": "approved",
+          "note": "国际版头版RSS 2.0共109条；官方说明支持栏目URL添加/rss，不是经济专类。"
+        }
+      ]
+    },
+    {
+      "id": "nyt",
+      "name": "The New York Times",
+      "domain": "international",
+      "type": "media",
+      "url": "https://www.nytimes.com/",
+      "languages": [
+        "en"
+      ],
+      "region": "美国",
+      "reason": "查阅纽约时报美国版首页订阅与原文。",
+      "access": "RSS可读不代表全文免费；部分正文可要求账号或订阅，具体以原站为准。",
+      "checked": "2026-10-31",
+      "status": "approved",
+      "collect": true,
+      "official_links": [
+        {
+          "label": "The New York Times",
+          "url": "https://www.nytimes.com/"
+        }
+      ],
+      "feeds": [
+        {
+          "id": "nyt-home",
+          "publisher": "nyt",
+          "name": "The New York Times · Home Page",
+          "category": "world",
+          "lang": "en",
+          "feed_url": "https://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml",
+          "home_url": "https://www.nytimes.com/",
+          "docs_url": "https://www.nytimes.com/rss",
+          "article_hosts": [
+            "www.nytimes.com",
+            "nytimes.com"
+          ],
+          "collect": true,
+          "status": "approved",
+          "note": "官方订阅目录的Home Page (U.S.)；RSS 2.0共22条，是美国版首页而非经济专类。"
+        }
+      ]
+    },
+    {
+      "id": "aljazeera",
+      "name": "Al Jazeera",
+      "domain": "international",
+      "type": "media",
+      "url": "https://www.aljazeera.com/",
+      "languages": [
+        "en"
+      ],
+      "region": "国际",
+      "reason": "查阅半岛电视台英文网站的综合国际新闻。",
+      "access": "未在中国大陆网络实测，也未逐项测试全部功能；具体登录、订阅与访问条件以原站为准。",
+      "checked": "2026-10-31",
+      "status": "approved",
+      "collect": true,
+      "official_links": [
+        {
+          "label": "Al Jazeera",
+          "url": "https://www.aljazeera.com/"
+        }
+      ],
+      "feeds": [
+        {
+          "id": "aljazeera-all",
+          "publisher": "aljazeera",
+          "name": "Al Jazeera",
+          "category": "world",
+          "lang": "en",
+          "feed_url": "https://www.aljazeera.com/xml/rss/all.xml",
+          "home_url": "https://www.aljazeera.com/",
+          "docs_url": "https://www.aljazeera.com/rss",
+          "article_hosts": [
+            "www.aljazeera.com",
+            "aljazeera.com"
+          ],
+          "collect": true,
+          "status": "approved",
+          "note": "官方/rss入口本次转向该XML；RSS 2.0共25条，为综合更新，不保证每条是编辑头条。"
+        }
+      ]
+    }
+  ]
+}

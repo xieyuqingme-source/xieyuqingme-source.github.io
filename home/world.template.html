@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{title}}</title>
+  <meta name="description" content="{{description}}">
+  <meta name="author" content="谢雨卿 Xie Yuqing">
+  <link rel="canonical" href="{{site_url}}{{route}}">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="{{title}}">
+  <meta property="og:description" content="{{description}}">
+  <meta property="og:url" content="{{site_url}}{{route}}">
+  <meta property="og:image" content="{{site_url}}/assets/share-cover.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="看世界 · 今日新闻、往日存档与信息源">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="/assets/favicon.ico?v=qinghuan-1" sizes="any">
+  <link rel="icon" href="/assets/favicon.svg?v=qinghuan-1" type="image/svg+xml">
+  <script>(()=>{let theme='light';try{const saved=localStorage.getItem('xieyuqing-blog-theme');if(saved==='light'||saved==='dark')theme=saved;else if(window.matchMedia('(prefers-color-scheme: dark)').matches)theme='dark';}catch(_){}document.documentElement.dataset.theme=theme;})();</script>
+  <link rel="stylesheet" href="/assets/portal.css">
+  <link rel="stylesheet" href="/assets/world.css">
+  <script src="/assets/portal.js" defer></script>
+  <script src="/assets/world.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">跳转到正文</a>
+  <header class="site-header container">
+    <a class="brand" href="/" aria-label="谢雨卿个人主页"><span><span lang="zh-CN">谢雨卿</span><small lang="en">Xie Yuqing · Carl</small></span></a>
+    <nav class="site-nav" aria-label="主导航"><a href="/today/">今天</a><a href="/articles/">文章</a><a href="/projects/">作品</a><a href="/about/">关于</a></nav>
+    <button class="theme-toggle" id="theme-toggle" type="button" aria-label="切换明暗" hidden><span class="theme-label">深色</span></button>
+  </header>
+  <main class="world-page container" id="main" data-world>
+{{content}}
+  </main>
+  <footer class="site-footer container"><p>谢雨卿 · Carl</p><nav><a href="/world/">看世界</a><a href="/today/">今天</a><a href="/about/">关于</a></nav></footer>
+</body>
+</html>

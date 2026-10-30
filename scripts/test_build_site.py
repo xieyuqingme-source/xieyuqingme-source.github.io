@@ -755,7 +755,7 @@ class ProjectPublicationTests(unittest.TestCase):
             output = root / "_site_unified"
             snapshot = load_snapshot(root)
             sources = load_sources(root)
-            public_sources = {"sources": [{"name": source["name"], "home_url": source["home_url"]} for source in sources["sources"]]}
+            public_sources = {"sources": [{"name": source["name"], "home_url": source["home_url"]} for source in sources["sources"] if source["id"] in sources.get("collect_ids", [s["id"] for s in sources["sources"]])]}
             news_now = timestamp(snapshot["collected_at"])
             with patch.object(build_site, "ROOT", root), patch.object(build_site, "OUTPUT", output), \
                  patch("news_snapshot._now", return_value=news_now), \
@@ -795,7 +795,7 @@ class ProjectPublicationTests(unittest.TestCase):
                 sitemap = [node.text for node in ET.parse(output / "sitemap.xml").findall(".//{*}loc")]
                 expected_routes = {'/', '/today/', '/en/today/', '/english/', '/english/tools/numbers/', '/english/play/', '/english/quotes/', '/english/map/', '/projects/', '/about/', '/map/', '/en/map/', '/en/', '/en/about/', '/en/projects/', '/en/articles/',
                                    '/game/', '/en/game/', '/game/ranking/', '/en/game/ranking/', '/game/footprints/', '/en/game/footprints/', '/articles/index.html', '/articles/synthetic.html'}
-                for feature in (report['anthology'], report['english_features']['anthology'], report['photography'], report['english_features']['photography'], report['marx_engels']):
+                for feature in (report['anthology'], report['english_features']['anthology'], report['photography'], report['english_features']['photography'], report['marx_engels'], report['world']):
                     expected_routes.update('/' + route.strip('/') + '/' for route in feature['routes'])
                 self.assertEqual(set(sitemap), {'https://xieyuqing.me' + route for route in expected_routes})
                 self.assertEqual(len(sitemap), len(set(sitemap)))
@@ -833,7 +833,10 @@ class ProjectPublicationTests(unittest.TestCase):
                     self.assertIn('data-brief-mode="full"', page)
                     feed = re.search(r'<div id="daily-feed"[^>]*>(.*?)</div>', page, re.S)[1]
                     feed_links = {attrs.get("href") for tag, attrs in Elements(feed).elements if tag == "a"}
-                    for item in visible_items(snapshot, sources, news_now):
+                    visible = visible_items(snapshot, sources, news_now)[:3]
+                    self.assertEqual(feed.count('class="news-row"'), len(visible))
+                    self.assertIn('href="/world/"', page)
+                    for item in visible:
                         self.assertIn(escape(item["title"]), feed)
                         self.assertIn(escape(item["source"]), feed)
                         self.assertIn(item["url"], feed_links)
@@ -1019,7 +1022,7 @@ class PublicBiographyTests(unittest.TestCase):
             self.assertIn("输入的城市名" if language == "zh-CN" else "the name you enter to its geocoding service", html)
             self.assertIn("所选坐标" if language == "zh-CN" else "sends its coordinates for weather", html)
             self.assertIn("不读取设备定位" if language == "zh-CN" else "never requests your device location", html)
-            self.assertIn("日、月、年、史，再到重点新闻与每日阅读" if language == "zh-CN" else "day to Moon, year and history, then source headlines and daily reading", html)
+            self.assertIn("年、月、日、史，再到三条新闻与每日阅读" if language == "zh-CN" else "year to Moon, day and history, then three source headlines and daily reading", html)
             self.assertIn("共用地球的时间滑块" if language == "zh-CN" else "share the Earth time slider", html)
             self.assertIn("在浏览器本地计算" if language == "zh-CN" else "calculations run locally in your browser", html)
             self.assertIn("地图、城市搜索和详情收在折叠区" if language == "zh-CN" else "the map, city search and details folded below it", html)

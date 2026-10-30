@@ -20,7 +20,9 @@ import news_snapshot as news
 
 ROOT = Path(__file__).resolve().parent.parent
 NOW = datetime(2026, 10, 28, 2, 0, 0, tzinfo=timezone.utc)
-CONFIG = news.load_sources(ROOT)
+# Preserve the v1 eight-item contract independently of the new live catalog.
+# test_world_sources exercises the v2 active/retired projection and 24-item cap.
+CONFIG = news.validate_sources(news._read_json(ROOT / news.CONFIG_PATH))
 
 
 def feed(source, count=8, *, title_prefix=None, published=None, link=None):

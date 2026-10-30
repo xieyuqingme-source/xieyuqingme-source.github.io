@@ -186,7 +186,7 @@ async function contrasts(page,route,theme,width){
       assert.equal(await page.locator('.site-nav .nav-entry').count(),4);
       await page.locator('.site-nav [data-nav-group="projects"]>details>summary').press('Enter');
       const entries=page.locator('.site-nav [data-nav-group="projects"] .nav-menu>a');
-      assert.deepEqual(await entries.evaluateAll(nodes=>nodes.map(node=>node.getAttribute('href'))),[prefix+'/today/','/english/','/marx/',prefix+'/projects/',prefix+'/game/']);
+      assert.deepEqual(await entries.evaluateAll(nodes=>nodes.map(node=>node.getAttribute('href'))),[prefix+'/today/','/world/','/english/','/marx/',prefix+'/projects/',prefix+'/game/']);
       assert.equal(await page.locator('main a.section-entry[href="/marx/"]').count(),1);
       assert.equal(await page.locator('.site-footer nav a[href="/marx/"]').count(),1);
       await go(page,prefix+'/today/');const entry=page.locator('#marx-reading-entry');

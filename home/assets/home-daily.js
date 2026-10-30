@@ -64,12 +64,19 @@
   }
   function renderFeed(date) {
     if (glance) return;
+    const anniversary = find('today-year-ago');
+    if (anniversary) {
+      const [year,month,day] = dayStamp(date).split('-').map(Number);
+      const previous = new Date(Date.UTC(year - 1,month - 1,day));
+      const exact = previous.getUTCMonth() === month - 1 && previous.getUTCDate() === day;
+      anniversary.hidden = !exact || anniversary.dataset.date !== previous.toISOString().slice(0,10);
+    }
     const feed = find('daily-feed'); if (!feed) return;
     const now = date.getTime(), maximumAge = 72 * 3600000;
     const entries = (Array.isArray(snapshot?.items) ? snapshot.items : []).filter(item => {
       const published = Date.parse(item.published);
       return Number.isFinite(published) && published <= now + 300000 && now - published <= maximumAge && /^https:\/\//.test(item.url || '');
-    }).slice(0,8);
+    }).slice(0,3);
     const version = JSON.stringify([lang(),snapshot?.collected_at,entries]);
     if (version === feedVersion) return; feedVersion = version;
     write('daily-news-title',word('重点新闻','News to know'));
@@ -84,7 +91,8 @@
       const article = node('article','news-row'), label = node('div','news-category',categories[item.category]?.[lang() === 'en' ? 1 : 0] || '');
       const heading = node('h3'), headline = link(item.url,item.title); headline.lang = item.lang || ''; heading.append(headline);
       const meta = node('div','news-meta'), published = node('time','',formatter.format(new Date(item.published))); published.dateTime = item.published;
-      meta.append(node('span','',item.source),published,node('span','news-language',(item.lang || '').toLowerCase().startsWith('zh') ? word('中文','Chinese') : word('英文','English')),link(item.url,word('阅读原文 ↗','Read source ↗')));
+      const languageLabel = item.lang === 'zh-Hant' ? word('中文（繁体）','Chinese (traditional)') : (item.lang || '').toLowerCase().startsWith('zh') ? word('中文','Chinese') : word('英文','English');
+      meta.append(node('span','',item.source),published,node('span','news-language',languageLabel),link(item.url,word('阅读原文 ↗','Read source ↗')));
       article.append(label,heading,meta); fragment.append(article);
     }
     if (!entries.length) fragment.append(node('p','news-empty',word('暂无符合时效的新条目。可以从下方新闻源入口继续阅读。','No current entries are available. Continue through the news source links below.')));

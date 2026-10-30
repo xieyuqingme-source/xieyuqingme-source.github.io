@@ -4,14 +4,14 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Today · Xie Yuqing</title>
-  <meta name="description" content="Day, Moon, year and history, followed by source headlines and daily reading.">
+  <meta name="description" content="Year, Moon, day and history, followed by source headlines and daily reading.">
   <meta name="author" content="Xie Yuqing">
   <link rel="canonical" href="{{site_url}}/en/today/">
   <link rel="alternate" hreflang="zh-CN" href="{{site_url}}/today/">
   <link rel="alternate" hreflang="en" href="{{site_url}}/en/today/">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Today · Xie Yuqing">
-  <meta property="og:description" content="Day, Moon, year and history, followed by source headlines and daily reading.">
+  <meta property="og:description" content="Year, Moon, day and history, followed by source headlines and daily reading.">
   <meta property="og:url" content="{{site_url}}/en/today/">
   <meta property="og:image" content="{{site_url}}/assets/share-cover.png">
   <meta property="og:image:width" content="1200">
@@ -46,7 +46,30 @@
           <div class="today-year-track" id="today-year-track" role="progressbar" aria-label="Year progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="{{today_year_progress_percent}}"><span class="today-year-fill" id="today-year-fill" style="width:{{today_year_progress_width}}%"></span></div>
         </figure>
       </header>
+      <nav class="today-jump-nav" aria-label="On this page"><a href="#today-year">Year</a> <a href="#today-month">Moon</a> <a href="#daily-earth">Day</a> <a href="#today-history">History</a> <a href="#today-news">News</a> <a href="#today-reading">Daily reading</a></nav>
       <div class="brief-body" id="brief-body">
+        <section class="today-cycle today-year" id="today-year" aria-labelledby="year-heading">
+          <div class="today-section-heading"><h2 id="year-heading"><span class="today-cycle-mark">Year</span>Around the Sun</h2><p class="yl-small" id="year-term-summary">One orbit, through the seasons.</p></div>
+          <div class="today-cycle-grid">
+            <figure class="today-cycle-figure"><svg data-today-visual="orbit" viewBox="0 0 480 480" role="img" aria-label="Earth’s orbit and the twenty-four solar terms"></svg><figcaption>Viewed from ecliptic north · Counterclockwise orbit · White dot: North Pole</figcaption></figure>
+            <div class="today-cycle-copy"><h3 class="today-chart-heading">The subsolar latitude through the year</h3><figure class="today-declination-figure"><svg data-today-visual="declination" viewBox="0 0 640 214" role="img" aria-label="Annual subsolar latitude: solid for elapsed time, dashed for the future"></svg><figcaption>Solid: elapsed time. Dashed: the future. The marker follows the Earth time slider.</figcaption></figure>
+              <dl class="today-cycle-readings" id="year-readings"></dl><p class="today-cycle-note" id="year-distance-note">Earth is closest to the Sun in early January and farthest in early July. Seasons come from Earth’s axial tilt.</p>
+            </div>
+          </div>
+          <p class="today-cycle-source">Approximate calculations · <a href="https://gml.noaa.gov/grad/solcalc/calcdetails.html" target="_blank" rel="noopener noreferrer">NOAA solar calculations</a> · <a href="https://aa.usno.navy.mil/data/Earth_Seasons" target="_blank" rel="noopener noreferrer">USNO equinoxes and solstices</a> · Solar-term dates share the header’s calendar</p>
+          <noscript><p class="yl-no-script">Enable JavaScript for the locally calculated orbit, solar-term dates and subsolar-latitude curve.</p></noscript>
+        </section>
+        <section class="today-cycle today-month" id="today-month" aria-labelledby="month-heading">
+          <div class="today-section-heading"><h2 id="month-heading"><span class="today-cycle-mark">Month</span>The Moon</h2><p class="yl-small">The Moon as seen from Earth.</p></div>
+          <div class="today-cycle-grid">
+            <figure class="today-cycle-figure"><svg data-today-visual="moon" viewBox="0 0 440 440" role="img" aria-label="The Moon around Earth and the direction of sunlight"></svg><figcaption>Viewed from ecliptic north · Counterclockwise orbit · Not to scale</figcaption></figure>
+            <div class="today-cycle-copy"><div class="today-phase-heading"><svg data-today-visual="phase" viewBox="0 0 80 80" role="img" aria-label="Moon phase as seen from the selected location"></svg><div><h3 id="moon-phase-name">The Moon and its phases</h3><p class="yl-small" id="moon-phase-subtitle"></p></div></div>
+              <dl class="today-cycle-readings" id="moon-readings"></dl><p class="today-cycle-note" id="moon-cycle-note">The Moon orbits Earth in about 27.3 days. Its phases repeat in about 29.5 days because Earth is also moving around the Sun.</p><p class="yl-small" id="moon-phase-caption"></p>
+            </div>
+          </div>
+          <p class="today-cycle-source">Approximate calculations · <a href="https://aa.usno.navy.mil/faq/moon_phases" target="_blank" rel="noopener noreferrer">Moon phases and illumination</a> · <a href="https://aa.usno.navy.mil/data/MoonPhases" target="_blank" rel="noopener noreferrer">USNO phase tables</a></p>
+          <noscript><p class="yl-no-script">Enable JavaScript for locally calculated phases, orbital diagrams and upcoming phase dates.</p></noscript>
+        </section>
         <section class="yl-earth" id="daily-earth" aria-labelledby="earth-heading"><div class="yl-earth-heading"><h2 id="earth-heading"><span class="today-cycle-mark">Day</span>Now</h2><p class="yl-small" id="today-astronomy-time">{{today_astronomy_time_en}}</p></div><div class="today-earth-grid"><div class="earth-visual"><div class="yl-globe-wrap"><canvas id="earth-canvas" width="560" height="570" role="img" aria-label="Earth day and night, showing the subsolar point and selected city"></canvas></div><p class="yl-earth-small">Drag the globe to explore another view</p></div><div class="earth-readings"><div class="yl-suntime"><div>Sunrise · local<strong id="daily-sunrise">—</strong></div><div>Sunset · local<strong id="daily-sunset">—</strong></div></div><div class="yl-earth-info" aria-live="polite"><div id="daily-local-time">—</div><div>Subsolar point <b id="daily-subsolar">—</b></div><div id="daily-daylength">—</div></div><div class="yl-world-clocks" id="daily-world-clocks"></div><div class="yl-earth-actions"><label class="yl-time-row" for="earth-hour"><span>Time · Beijing</span><output id="earth-hour-label">—</output></label><button type="button" class="yl-earth-now" id="earth-now" hidden>Back to now</button></div><input class="yl-time-slider" id="earth-hour" type="range" min="0" max="23.983333333333334" step="0.016666666666666666" value="12"><div class="yl-time-ends" aria-hidden="true"><span>00:00</span><span>12:00</span><span>23:59</span></div><p class="yl-earth-source">Axis ≈ 23.4° from the orbital normal · Approximate calculations<br><a href="https://gml.noaa.gov/grad/solcalc/calcdetails.html" target="_blank" rel="noopener noreferrer">Calculation reference</a> · Geography Natural Earth</p></div></div>
         <section class="today-weather" id="today-weather" aria-labelledby="today-heading">
           <div class="weather-compact"><h3 id="today-heading">Weather</h3><p id="daily-weather-summary" aria-live="polite">Beijing · Loading weather…</p></div>
@@ -67,30 +90,8 @@
         </details>
         </section>
         </section>
-        <section class="today-cycle today-month" id="today-month" aria-labelledby="month-heading">
-          <div class="today-section-heading"><h2 id="month-heading"><span class="today-cycle-mark">Month</span>The Moon</h2><p class="yl-small">The Moon as seen from Earth.</p></div>
-          <div class="today-cycle-grid">
-            <figure class="today-cycle-figure"><svg data-today-visual="moon" viewBox="0 0 440 440" role="img" aria-label="The Moon around Earth and the direction of sunlight"></svg><figcaption>Viewed from ecliptic north · Counterclockwise orbit · Not to scale</figcaption></figure>
-            <div class="today-cycle-copy"><div class="today-phase-heading"><svg data-today-visual="phase" viewBox="0 0 80 80" role="img" aria-label="Moon phase as seen from the selected location"></svg><div><h3 id="moon-phase-name">The Moon and its phases</h3><p class="yl-small" id="moon-phase-subtitle"></p></div></div>
-              <dl class="today-cycle-readings" id="moon-readings"></dl><p class="today-cycle-note" id="moon-cycle-note">The Moon orbits Earth in about 27.3 days. Its phases repeat in about 29.5 days because Earth is also moving around the Sun.</p><p class="yl-small" id="moon-phase-caption"></p>
-            </div>
-          </div>
-          <p class="today-cycle-source">Approximate calculations · <a href="https://aa.usno.navy.mil/faq/moon_phases" target="_blank" rel="noopener noreferrer">Moon phases and illumination</a> · <a href="https://aa.usno.navy.mil/data/MoonPhases" target="_blank" rel="noopener noreferrer">USNO phase tables</a></p>
-          <noscript><p class="yl-no-script">Enable JavaScript for locally calculated phases, orbital diagrams and upcoming phase dates.</p></noscript>
-        </section>
-        <section class="today-cycle today-year" id="today-year" aria-labelledby="year-heading">
-          <div class="today-section-heading"><h2 id="year-heading"><span class="today-cycle-mark">Year</span>Around the Sun</h2><p class="yl-small" id="year-term-summary">One orbit, through the seasons.</p></div>
-          <div class="today-cycle-grid">
-            <figure class="today-cycle-figure"><svg data-today-visual="orbit" viewBox="0 0 480 480" role="img" aria-label="Earth’s orbit and the twenty-four solar terms"></svg><figcaption>Viewed from ecliptic north · Counterclockwise orbit · White dot: North Pole</figcaption></figure>
-            <div class="today-cycle-copy"><h3 class="today-chart-heading">The subsolar latitude through the year</h3><figure class="today-declination-figure"><svg data-today-visual="declination" viewBox="0 0 640 214" role="img" aria-label="Annual subsolar latitude: solid for elapsed time, dashed for the future"></svg><figcaption>Solid: elapsed time. Dashed: the future. The marker follows the Earth time slider.</figcaption></figure>
-              <dl class="today-cycle-readings" id="year-readings"></dl><p class="today-cycle-note" id="year-distance-note">Earth is closest to the Sun in early January and farthest in early July. Seasons come from Earth’s axial tilt.</p>
-            </div>
-          </div>
-          <p class="today-cycle-source">Approximate calculations · <a href="https://gml.noaa.gov/grad/solcalc/calcdetails.html" target="_blank" rel="noopener noreferrer">NOAA solar calculations</a> · <a href="https://aa.usno.navy.mil/data/Earth_Seasons" target="_blank" rel="noopener noreferrer">USNO equinoxes and solstices</a> · Solar-term dates share the header’s calendar</p>
-          <noscript><p class="yl-no-script">Enable JavaScript for the locally calculated orbit, solar-term dates and subsolar-latitude curve.</p></noscript>
-        </section>
         <section class="today-history" id="today-history" aria-labelledby="history-heading"><div class="today-section-heading"><h2 class="brief-panel-heading" id="history-heading"><span class="today-cycle-mark">History</span>On this day</h2><p class="yl-small">Events from other years, selected by this calendar date.</p></div><div id="daily-history-list">{{history_today_en}}</div><p class="yl-small history-date-note" id="history-date-note"></p></section>
-        <section class="yl-news today-news" id="today-news" aria-labelledby="daily-news-title"><div class="today-section-heading"><h2 class="brief-panel-heading" id="daily-news-title">News to know</h2><p class="yl-small" id="daily-edition">{{news_checked_label_en}}</p></div><div id="daily-feed" aria-live="polite">{{news_snapshot_feed_en}}</div><p class="yl-note" id="daily-brief-notice">Headlines are gathered from source newsrooms. Choose a title to read the original.</p><details class="news-sources"><summary>News sources</summary><div id="news-source-links">{{news_source_links_en}}</div></details></section>
+        <section class="yl-news today-news" id="today-news" aria-labelledby="daily-news-title"><div class="today-section-heading"><h2 class="brief-panel-heading" id="daily-news-title">News to know</h2><p class="yl-small" id="daily-edition">{{news_checked_label_en}}</p></div><div id="daily-feed" aria-live="polite">{{news_snapshot_feed_en}}</div><p class="yl-note" id="daily-brief-notice">Headlines are gathered from source newsrooms. Choose a title to read the original.</p><p class="today-world-link"><a href="/world/" hreflang="zh-CN">World (Chinese) →</a></p>{{today_year_ago_en}}<details class="news-sources"><summary>News sources</summary><div id="news-source-links">{{news_source_links_en}}</div></details></section>
         <section class="today-reading" id="today-reading" aria-labelledby="reading-heading"><h2 class="brief-panel-heading" id="reading-heading">Daily reading</h2>{{brief_bottom_cards_en}}</section>
       </div>
       <noscript><style>.today-cycle-figure,.today-declination-figure,.today-phase-heading>svg{display:none}.today-cycle-grid{display:block}</style><p class="yl-no-script">Headlines, quotations and source links remain readable. The displayed historical date is the build date; enable JavaScript for the current date, weather and globe.</p></noscript>

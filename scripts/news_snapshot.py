@@ -5,6 +5,8 @@ restore reads Release assets, never the news sites. No summaries or translations
 are generated. Remote writes require the explicit publish command inside Actions.
 """
 import argparse
+import gzip
+from io import BytesIO
 from collections import Counter, deque
 from datetime import datetime, timedelta, timezone
 from email.utils import parsedate_to_datetime
@@ -23,6 +25,7 @@ import sys
 import tempfile
 import time
 import unicodedata
+import zlib
 from urllib.parse import parse_qsl, unquote, urlencode, urljoin, urlsplit, urlunsplit
 import xml.etree.ElementTree as ET
 
@@ -137,26 +140,33 @@ def _read_json(path, maximum=MAX_SNAPSHOT_BYTES):
 
 def validate_sources(config):
     expected = {"version", "max_items", "max_per_source", "max_per_publisher", "max_age_hours", "sources"}
-    if (not isinstance(config, dict) or set(config) != expected
-            or type(config["version"]) is not int or config["version"] != 1):
-        raise ValueError("News sources need schema version 1.")
-    for key, maximum in (("max_items", 8), ("max_per_source", 2), ("max_per_publisher", 2), ("max_age_hours", 72)):
+    version = config.get('version') if isinstance(config, dict) else None
+    if (type(version) is not int or version not in {1, 2}
+            or set(config) != (expected if version == 1 else expected | {'collect_ids'})):
+        raise ValueError("News sources need a supported exact public schema.")
+    for key, maximum in (("max_items", 8 if version == 1 else 24), ("max_per_source", 2), ("max_per_publisher", 2), ("max_age_hours", 72)):
         if type(config[key]) is not int or not 1 <= config[key] <= maximum:
             raise ValueError("News source limits cannot exceed reviewed bounds.")
-    if not isinstance(config["sources"], list) or not 1 <= len(config["sources"]) <= 6:
+    if not isinstance(config["sources"], list) or not 1 <= len(config["sources"]) <= (6 if version == 1 else 24):
         raise ValueError("News needs a small explicit source allowlist.")
     seen = set()
     fields = {"id", "publisher", "name", "category", "lang", "feed_url", "home_url", "docs_url", "article_hosts"}
     for source in config["sources"]:
-        if not isinstance(source, dict) or set(source) != fields:
+        if not isinstance(source, dict) or set(source) not in (fields, fields | {'link_policy'} if version == 2 else fields):
             raise ValueError("Incomplete news source.")
         if (not isinstance(source["id"], str) or not SLUG.fullmatch(source["id"]) or source["id"] in seen
                 or not isinstance(source["publisher"], str) or not SLUG.fullmatch(source["publisher"])):
             raise ValueError("News source IDs must be unique slugs.")
         seen.add(source["id"])
         _text(source["name"], 80)
-        if source["category"] not in CATEGORIES or source["lang"] not in {"zh-CN", "en"}:
+        if source["category"] not in CATEGORIES or source["lang"] not in ({"zh-CN", "en"} if version == 1 else {"zh-CN", "zh-Hant", "en"}):
             raise ValueError("Unsupported news category or language.")
+        policy = source.get('link_policy', 'publisher')
+        if policy not in {'publisher', 'public-https'} or (policy == 'public-https' and not (
+                version == 2 and source['id'] == 'hacker-news' and source['publisher'] == 'hackernews'
+                and isinstance(source['home_url'], str)
+                and urlsplit(source['home_url']).hostname == 'news.ycombinator.com')):
+            raise ValueError('External article links need the reviewed community-feed policy.')
         hosts = source["article_hosts"]
         if not isinstance(hosts, list) or not 1 <= len(hosts) <= 6 or len(set(hosts)) != len(hosts):
             raise ValueError("News article hosts must be a small unique allowlist.")
@@ -165,11 +175,30 @@ def validate_sources(config):
         public_url(source["feed_url"])
         public_url(source["home_url"], hosts)
         public_url(source["docs_url"])
+    if version == 2:
+        active = config['collect_ids']
+        if (not isinstance(active, list) or len(active) > 15
+                or any(not isinstance(value, str) or value not in seen for value in active)
+                or len(active) != len(set(active))):
+            raise ValueError('Active feeds must be an explicit bounded subset of known IDs.')
     return config
 
 
 def load_sources(root=ROOT):
-    return validate_sources(_read_json(Path(root) / CONFIG_PATH))
+    legacy = validate_sources(_read_json(Path(root) / CONFIG_PATH))
+    if (Path(root) / 'home/brief/information-sources.json').exists():
+        from world_sources import collection_config, load_catalog
+        return collection_config(load_catalog(root), legacy)
+    return legacy
+
+
+def active_sources(config):
+    return [source for source in config['sources']
+            if config['version'] == 1 or source['id'] in config['collect_ids']]
+
+
+def article_hosts(source):
+    return None if source.get('link_policy') == 'public-https' else source['article_hosts']
 
 
 def timestamp(value):
@@ -215,7 +244,7 @@ def validate_snapshot(data, config=None):
                 or item["lang"] != source["lang"]):
             raise ValueError("News source metadata must match the allowlist.")
         _text(item["title"])
-        url = public_url(item["url"], source["article_hosts"])
+        url = public_url(item["url"], article_hosts(source))
         if url != item["url"]:
             raise ValueError("Snapshot URLs must use the normalized public form.")
         key = url_key(url)
@@ -274,8 +303,9 @@ def fetch_feed(url, allowed_hosts):
             if response.status in {301, 302, 303, 307, 308}:
                 url = urljoin(url, response.getheader("Location", ""))
                 continue
-            if response.status != 200 or response.getheader("Content-Encoding", "identity").lower() not in {"", "identity"}:
-                raise ValueError("News source did not return an uncompressed successful feed.")
+            encoding = response.getheader('Content-Encoding', 'identity').lower()
+            if response.status != 200 or encoding not in {'', 'identity', 'gzip'}:
+                raise ValueError('News source did not return a supported successful feed.')
             length = response.getheader("Content-Length")
             if length is not None and (not length.isdigit() or int(length) > MAX_FEED_BYTES):
                 raise ValueError("News feed is too large.")
@@ -296,10 +326,27 @@ def fetch_feed(url, allowed_hosts):
             raw = b"".join(chunks)
             if len(raw) > MAX_FEED_BYTES:
                 raise ValueError("News feed is too large.")
-            return raw
+            return decode_feed_body(raw, encoding)
         finally:
             connection.close()
     raise ValueError("Too many news feed redirects.")
+
+
+def decode_feed_body(raw, encoding='identity'):
+    if not isinstance(raw, bytes) or len(raw) > MAX_FEED_BYTES:
+        raise ValueError('News feed is too large.')
+    if encoding in {'', 'identity'}:
+        return raw
+    if encoding != 'gzip':
+        raise ValueError('Unsupported news content encoding.')
+    try:
+        with gzip.GzipFile(fileobj=BytesIO(raw)) as stream:
+            expanded = stream.read(MAX_FEED_BYTES + 1)
+    except (OSError, EOFError, zlib.error) as error:
+        raise ValueError('Invalid compressed news feed.') from error
+    if len(expanded) > MAX_FEED_BYTES:
+        raise ValueError('Expanded news feed is too large.')
+    return expanded
 
 
 def parse_feed(raw, source, collected, *, archive_records=None):
@@ -312,7 +359,12 @@ def parse_feed(raw, source, collected, *, archive_records=None):
     if declaration and declaration[1].lower().replace("-", "") != "utf8":
         raise ValueError("News feeds must use UTF-8.")
     root = ET.fromstring(text)
-    entries = root.findall("./channel/item") if root.tag == "rss" else root.findall("{http://www.w3.org/2005/Atom}entry")
+    if root.tag == 'rss':
+        entries = root.findall('./channel/item')
+    elif root.tag == '{http://www.w3.org/1999/02/22-rdf-syntax-ns#}RDF':
+        entries = root.findall('{http://purl.org/rss/1.0/}item')
+    else:
+        entries = root.findall('{http://www.w3.org/2005/Atom}entry')
     if len(entries) > 1000:
         raise ValueError("News feed has too many entries.")
     result = []
@@ -321,10 +373,15 @@ def parse_feed(raw, source, collected, *, archive_records=None):
         try:
             title = " ".join(unescape(fields["title"].text or "").split())
             _text(title)
-            link = next((child.attrib.get("href") for child in entry
-                         if child.tag.endswith("}link") and child.attrib.get("rel", "alternate") == "alternate"), None)
-            link = link or (fields["link"].text or "").strip()
-            url = public_url(link, source["article_hosts"])
+            # Mixed RSS feeds (e.g. NYT) may also contain atom:link rel="standout".
+            # Keep the actual RSS article URL rather than overwriting it by local name.
+            link = next((child.text.strip() for child in entry
+                         if child.tag in {'link', '{http://purl.org/rss/1.0/}link'}
+                         and child.text and child.text.strip()), None)
+            link = link or next((child.attrib.get("href") for child in entry
+                                 if child.tag == '{http://www.w3.org/2005/Atom}link'
+                                 and child.attrib.get("rel", "alternate") == "alternate"), None)
+            url = public_url(link, article_hosts(source))
             date_text = next((fields[name].text for name in ("pubDate", "published", "date") if name in fields), None)
             record = dict(title=title, url=url, published=date_text)
             if archive_records is not None:
@@ -363,7 +420,7 @@ def _archive_capture(config, archive_pools, report, collected, selected):
     shown = {item["id"] for item in selected}
     archived, seen_ids, archive_report = [], set(), []
     source_reports = {r["id"]: r for r in report}
-    for source in config["sources"]:
+    for source in active_sources(config):
         candidates = [archive.archive_item(item, source, collected)
                       for item in archive_pools.get(source["id"], [])]
         candidates.sort(key=lambda item: item["id"] not in shown)
@@ -386,7 +443,7 @@ def collect_snapshot(config=None, *, fetch=fetch_feed, now=None, archive_sink=No
     config = validate_sources(config) if config is not None else load_sources()
     collected = (now or _now()).astimezone(UTC).replace(microsecond=0)
     pools, report, archive_pools = {}, [], {}
-    for source in config["sources"]:
+    for source in active_sources(config):
         try:
             raw = fetch(source["feed_url"], {urlsplit(source["feed_url"]).hostname})
             archive_records = [] if archive_sink is not None else None
@@ -402,7 +459,7 @@ def collect_snapshot(config=None, *, fetch=fetch_feed, now=None, archive_sink=No
     selected, urls, titles = [], set(), set()
     source_counts, publisher_counts = Counter(), Counter()
     # Category rotation keeps the feeds' own order; it makes no claim of importance.
-    queues = {category: deque(source for source in config["sources"] if source["category"] == category) for category in CATEGORIES}
+    queues = {category: deque(source for source in active_sources(config) if source["category"] == category) for category in CATEGORIES}
     while len(selected) < config["max_items"]:
         added = False
         for category in CATEGORIES:
@@ -451,11 +508,15 @@ def visible_items(data, config=None, now=None):
     return [item for item in data["items"] if current - timedelta(hours=config["max_age_hours"]) <= timestamp(item["published"]) <= current]
 
 
-def render_snapshot(data, language="zh-CN", config=None, *, now=None, include_sources=True, include_stamp=True):
+def render_snapshot(data, language="zh-CN", config=None, *, now=None, include_sources=True, include_stamp=True, limit=None):
     config = config or load_sources()
     language = "en" if language == "en" else "zh-CN"
     rows = []
     items = visible_items(data, config, now)
+    if limit is not None:
+        if type(limit) is not int or not 1 <= limit <= 24:
+            raise ValueError('Visible headline limit must be a reviewed positive integer.')
+        items = items[:limit]
     for item in items:
         published = timestamp(item["published"]).astimezone(CHINA)
         meta = " · ".join((item["source"], published.strftime("%Y-%m-%d %H:%M +08:00"), item["lang"]))

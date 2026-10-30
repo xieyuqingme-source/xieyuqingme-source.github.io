@@ -10,6 +10,7 @@ import sys
 import tempfile
 from tempfile import TemporaryDirectory
 import unittest
+import json
 from unittest.mock import patch
 
 REPO = next(p for p in Path(__file__).resolve().parents if (p / "home/brief/news-sources.json").is_file())
@@ -23,7 +24,7 @@ if os.environ.get("NEWS_ARCHIVE_TEST_TEMP"):
     tempfile.tempdir = os.environ["NEWS_ARCHIVE_TEST_TEMP"]
     Path(tempfile.tempdir).mkdir(parents=True, exist_ok=True)
 
-CONFIG = news.load_sources(REPO)
+CONFIG = news.validate_sources(news._read_json(REPO / news.CONFIG_PATH))
 NOW = datetime(2026, 10, 30, 12, tzinfo=news.UTC)
 
 
@@ -91,7 +92,11 @@ class ArchiveCollectionTests(unittest.TestCase):
         archive.write_capture(capture_path, old_captures[0], CONFIG)
         old_bytes = capture_path.read_bytes()
         snapshot_path, output_path = Path(root) / "snapshot.json", Path(root) / "step-output"
-        args = ["collect", "--root", str(REPO), "--output", str(snapshot_path),
+        fixture_root = Path(root) / 'legacy-root'
+        config_path = fixture_root / news.CONFIG_PATH
+        config_path.parent.mkdir(parents=True)
+        config_path.write_text(json.dumps(CONFIG), encoding='utf-8')
+        args = ["collect", "--root", str(fixture_root), "--output", str(snapshot_path),
                 "--archive-output", str(capture_path), "--github-output", str(output_path)]
         return collect, args, snapshot_path, capture_path, output_path, old_bytes
 

@@ -1,0 +1,35 @@
+name: Check information source links
+
+on:
+  schedule:
+    # Monday 01:40 UTC / Beijing 09:40; scheduled runs may be delayed.
+    - cron: '40 1 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: information-source-link-report
+  cancel-in-progress: false
+
+jobs:
+  report:
+    if: github.repository == 'xieyuqingme-source/xieyuqingme-source.github.io' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Read trusted main branch without stored credentials
+        uses: actions/checkout@v7
+        with:
+          ref: main
+          persist-credentials: false
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+      - name: Test link policy with mocked networking
+        run: python scripts/test_information_source_links.py
+      - name: Report approved catalog link observations
+        # Network failures are report rows, never automatic catalog edits.
+        run: python scripts/check_information_sources.py --output .local-checks/information-source-links/report.json --summaryMarkdown "$GITHUB_STEP_SUMMARY"

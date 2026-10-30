@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
     inputs:
       import_release_snapshots:
-        description: 'Import retained Release snapshots once (historical eight-item snapshots only)'
+        description: 'Import retained Release snapshots once (stored headlines only, not full feeds)'
         required: false
         type: boolean
         default: false
@@ -23,7 +23,7 @@ jobs:
   collect:
     if: github.repository == 'xieyuqingme-source/xieyuqingme-source.github.io' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
-    timeout-minutes: 8
+    timeout-minutes: 12
     permissions:
       contents: write
     steps:
@@ -41,6 +41,7 @@ jobs:
           python scripts/test_news_snapshot.py
           python scripts/test_news_archive.py
           python scripts/test_archive_collection.py
+          python scripts/test_world_sources.py
       - name: Collect original-source headlines
         id: collection
         run: python scripts/news_snapshot.py collect --output "$RUNNER_TEMP/news-snapshot.json" --archive-output "$RUNNER_TEMP/news-capture.json" --github-output "$GITHUB_OUTPUT"

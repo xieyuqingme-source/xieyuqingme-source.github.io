@@ -176,6 +176,7 @@ class EnglishPublicationTests(unittest.TestCase):
         # This fixture calls the English publisher directly, so supply the same
         # homepage inputs that the unified builder normally passes to it.
         values.update({
+            "today_year_ago": "", "today_year_ago_en": "",
             "today_date_title": "2026年10月28日 星期三", "today_date_title_en": "28 October 2026 Wednesday",
             "today_year_label": f"2026年 · 第{year_day}天",
             "today_year_label_en": f"2026 · day {year_day} of {year_days}",

@@ -92,11 +92,11 @@ test('glance uses the 1200ms fallback, cancels idle work on leave, and ignores l
 test('lunar failure preserves usable glance date and term fallbacks without divination UI',async () => {
   const h = harness({mode:'glance',language:'en',denied:true}); h.load(); h.runIdle(); h.failScript('lunar'); await settle(); assert.doesNotMatch(source,/getDayYi|getDayJi|getPengZu|getDayPosition|daily-almanac/); assert.equal(h.nodes['glance-date'].textContent,'Tuesday 27 October'); assert.equal(h.nodes['daily-calendar-term'].textContent,'Frost descent'); assert.equal(h.nodes['daily-calendar-next-term'].textContent,''); assert.equal(h.requests.length,0);
 });
-test('full mode shows at most eight snapshot headlines in source order with Beijing timestamps and immediate lunar loading',() => {
+test('full mode shows three snapshot headlines in source order with Beijing timestamps and immediate lunar loading',() => {
   const items=Array.from({length:12},(_,index)=>({id:'news-'+index,title:'Original headline '+index,source:'Newsroom',source_id:'source',published:'2026-10-26T16:00:00Z',category:'world',lang:'en',url:'https://news.example.org/'+index}));
   const snapshot={version:1,collected_at:'2026-10-26T16:15:00Z',items},h=harness({snapshot}),feed=h.nodes['daily-feed'];
-  assert.equal(feed.children.length,8);
-  for(let index=0;index<8;index++){
+  assert.equal(feed.children.length,3);
+  for(let index=0;index<3;index++){
     const article=feed.children[index],headline=article.children[1].children[0],published=article.children[2].children[1];
     assert.equal(article.className,'news-row'); assert.equal(article.children[0].textContent,'国际');
     assert.equal(headline.textContent,items[index].title); assert.equal(headline.href,items[index].url); assert.equal(headline.lang,'en');
