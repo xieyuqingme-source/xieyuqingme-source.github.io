@@ -22,7 +22,7 @@
     const text = (zh, en) => language() ? en : zh;
     const state = {city:'beijing',observer:CITIES.beijing,demo:false,hour:12,demoDay:null,viewLon:110,viewLat:16};
     const cleanup = [];
-    let disposed = false, paused = false, geography = null, weatherTicket = 0, weatherRequest = null, drawFrame = null, weatherResult = null;
+    let disposed = false, paused = false, geography = null, weatherTicket = 0, weatherRequest = null, drawFrame = null, weatherResult = null, sceneDate = null;
     const TIMEOUT = 8000, CACHE_AGE = 30 * 60000, STALE_AGE = 24 * 3600000;
     const cityKey = 'xieyuqing-home-city-v1', cacheKey = city => 'xieyuqing-weather-v1:' + city;
     if (!glance) {
@@ -54,8 +54,15 @@
     }
     function angle(value, north, south) { return (value < 0 ? south : north) + ' ' + Math.abs(value).toFixed(2) + '°'; }
     function renderFacts() {
-      if (disposed || paused) return;
-      const date = currentDate(), city = state.observer, solar = astro.position(date);
+      if (disposed) return;
+      const date = currentDate();
+      sceneDate = date;
+      root.dataset.selectedInstant = String(date.getTime());
+      // The Moon and year panels share this exact instant, even while the globe
+      // is offscreen. Pausing only skips the expensive globe and its readouts.
+      options.onInstant?.(date,{demo:state.demo});
+      if (paused) return;
+      const city = state.observer, solar = astro.position(date);
       const beijing = astro.dateParts(date, 'Asia/Shanghai');
       const above = astro.altitude(date, city.lat, city.lon) >= 0;
       write('daily-local-time', (language() ? city.en : city.name) + ' · ' + dateStamp(date, city.tz) + ' ' + clock(date, city.tz) + ' · ' + text(above ? '白昼' : '夜间', above ? 'Day' : 'Night'));
@@ -68,7 +75,6 @@
       const duration = Number.isFinite(events.daylightMinutes) ? Math.round(events.daylightMinutes) : null;
       write('daily-daylength', duration === null ? text('今日太阳事件需进一步计算', 'Solar events unavailable') : text('白昼约 ', 'Daylight ≈ ') + Math.floor(duration / 60) + text(' 时 ', ' h ') + String(duration % 60).padStart(2, '0') + text(' 分', ' min'));
       const actual = new Date();
-      write('daily-moon-phase', text('月相 · ', 'Moon phase · ') + astro.moonPhase(actual, language()).name);
       const clocks = find('daily-world-clocks');
       if (clocks) {
         clocks.replaceChildren();
@@ -85,6 +91,7 @@
         const hour = state.demo ? state.hour : Number(new Intl.DateTimeFormat('en-GB', {timeZone: 'Asia/Shanghai',hour: '2-digit',hourCycle: 'h23'}).format(date))
           + Number(new Intl.DateTimeFormat('en-GB', {timeZone: 'Asia/Shanghai',minute: '2-digit'}).format(date)) / 60;
         hourInput.value = String(hour);
+        hourInput.setAttribute?.('aria-valuetext',clock(date,'Asia/Shanghai') + text(' 北京时间',' Beijing time'));
       }
       write('earth-hour-label', (state.demo ? text('演示 · ', 'Demo · ') : text('实时 · ', 'Live · ')) + clock(date, 'Asia/Shanghai') + text(' 北京时间', ' Beijing time'));
       const now = find('earth-now');
@@ -120,7 +127,7 @@
         context.fillText(geography === false ? text('地球底图暂不可用', 'Map unavailable') : text('地球底图加载中', 'Loading Earth'), x, y);
         return;
       }
-      const sun = astro.position(currentDate()), city = state.observer;
+      const sun = astro.position(sceneDate || currentDate()), city = state.observer;
       const projection = d3.geoOrthographic().translate([x, y]).scale(radius).rotate([-state.viewLon, -state.viewLat, -11]).clipAngle(90);
       const path = d3.geoPath(projection, context);
       // Axis endpoints use exactly the map projection. Its screen angle depends on

@@ -43,7 +43,9 @@
       - 1.25 * eccentricity * eccentricity * Math.sin(2 * anomaly));
     const declination = Math.asin(Math.sin(obliquity) * Math.sin(longitude * RAD)) * DEG;
     const utcMinutes = date.getUTCHours() * 60 + date.getUTCMinutes() + date.getUTCSeconds() / 60 + date.getUTCMilliseconds() / 60000;
-    return {declination, longitude, obliquity: obliquity * DEG, equationMinutes,
+    return {declination, longitude, earthLongitude: (longitude + 180) % 360,
+      distanceAU: 1.000001018 * (1 - eccentricity * eccentricity) / (1 + eccentricity * Math.cos(anomaly + centre * RAD)),
+      obliquity: obliquity * DEG, equationMinutes,
       subsolarLongitude: normal((720 - utcMinutes - equationMinutes) / 4)};
   }
   function dateParts(value, timeZone = 'Asia/Shanghai') {
@@ -97,14 +99,81 @@
       return (field('yearName') || field('relatedYear')) + '年' + field('month') + (days[Number(field('day')) - 1] || field('day'));
     } catch (_) { return english ? 'Lunar calendar unavailable' : '农历暂不可用'; }
   }
+  // Low-precision lunar longitude and horizontal parallax for an educational display.
+  // Event timing is checked against USNO primary-phase fixtures:
+  // https://aa.usno.navy.mil/data/api.html
+  const BEIJING = 8 * 3600000;
+  const wrap = value => ((value % 360) + 360) % 360;
+  const signed = value => wrap(value + 180) - 180;
+  const keys = ['new','firstQuarter','full','lastQuarter'];
+  const targets = [0,90,180,270];
+  const namesZh = ['新月','上弦月','满月','下弦月'];
+  const namesEn = ['New moon','First quarter','Full moon','Last quarter'];
+  function millis(value) {
+    const ms = value instanceof Date ? value.getTime() : new Date(value).getTime();
+    if (!Number.isFinite(ms)) throw new TypeError('A valid date is required');
+    return ms;
+  }
+  function beijingDayIndex(value) { return Math.floor((millis(value) + BEIJING) / DAY); }
+  function moonPosition(value) {
+    const t = (millis(value) / DAY + 2440587.5 - 2451545) / 36525;
+    const sin = a => Math.sin(a * RAD), cos = a => Math.cos(a * RAD);
+    const longitude = wrap(218.32 + 481267.881 * t
+      + 6.29 * sin(135 + 477198.87 * t) - 1.27 * sin(259.3 - 413335.36 * t)
+      + .66 * sin(235.7 + 890534.22 * t) + .21 * sin(269.9 + 954397.74 * t)
+      - .19 * sin(357.5 + 35999.05 * t) - .11 * sin(186.5 + 966404.03 * t));
+    const horizontalParallax = .9508 + .0518 * cos(135 + 477198.87 * t)
+      + .0095 * cos(259.3 - 413335.36 * t) + .0078 * cos(235.7 + 890534.22 * t)
+      + .0028 * cos(269.9 + 954397.74 * t);
+    return {longitude,distanceKm:6378.14 / Math.sin(horizontalParallax * RAD)};
+  }
+  function elongation(value) { return wrap(moonPosition(value).longitude - position(value).longitude); }
+  function phaseIndex(target) {
+    const index = typeof target === 'string' ? keys.indexOf(target) : targets.indexOf(target);
+    if (index < 0) throw new RangeError('A principal phase key or angle is required');
+    return index;
+  }
+  function nextMoonPhase(value, target) {
+    const start = millis(value), index = phaseIndex(target), angle = targets[index];
+    const residual = at => signed(elongation(at) - angle);
+    let left = start, fl = residual(left);
+    // Inclusive at an already-computed root, otherwise the next future event.
+    if (Math.abs(fl) < 1e-8) return {key:keys[index],longitude:angle,atMs:left,dayIndex:beijingDayIndex(left)};
+    for (let step = 1; step <= 33 * 4; step++) {
+      let right = start + step * DAY / 4, fr = residual(right);
+      // A +180/-180 wrap is not an event; the phase crossing increases through 0.
+      if (fl <= 0 && fr >= 0 && fr - fl < 180) {
+        for (let iteration = 0; iteration < 48 && right - left > 1; iteration++) {
+          const middle = (left + right) / 2;
+          if (residual(middle) < 0) left = middle; else right = middle;
+        }
+        const atMs = (left + right) / 2;
+        return {key:keys[index],longitude:angle,atMs,dayIndex:beijingDayIndex(atMs)};
+      }
+      left = right; fl = fr;
+    }
+    throw new RangeError('A principal phase was not bracketed within 33 days');
+  }
+  function phaseEvents(value) {
+    const ms = millis(value), today = beijingDayIndex(ms);
+    return keys.map(key => nextMoonPhase(ms,key)).sort((a,b) => a.atMs - b.atMs)
+      .map(event => ({...event,days:event.dayIndex - today}));
+  }
   function moonPhase(value, english = false) {
-    // Mean synodic cycle, anchored to the 2000-01-06 new moon. Educational approximation.
-    // NASA: https://eclipse.gsfc.nasa.gov/LEsaros/LEperiodicity.html
-    const age = (((validDate(value).getTime() - Date.UTC(2000, 0, 6, 18, 14)) / DAY) % 29.530588853 + 29.530588853) % 29.530588853;
-    const fraction = age / 29.530588853, index = Math.floor(fraction * 8 + .5) % 8;
-    const names = english ? ['New moon','Waxing crescent','First quarter','Waxing gibbous','Full moon','Waning gibbous','Last quarter','Waning crescent']
-      : ['新月','蛾眉月','上弦月','盈凸月','满月','亏凸月','下弦月','残月'];
-    return {name: names[index],fraction,illumination: (1 - Math.cos(2 * Math.PI * fraction)) / 2};
+    const ms = millis(value), today = beijingDayIndex(ms), midnight = today * DAY - BEIJING;
+    const nextEvents = phaseEvents(ms);
+    const principalToday = keys.map(key => nextMoonPhase(midnight,key)).find(event => event.dayIndex === today) || null;
+    const angle = elongation(ms), fraction = angle / 360;
+    const quadrant = Math.floor(angle / 90);
+    const phaseKey = principalToday?.key || ['waxingCrescent','waxingGibbous','waningGibbous','waningCrescent'][quadrant];
+    const principalIndex = principalToday ? keys.indexOf(principalToday.key) : -1;
+    const name = principalIndex >= 0 ? (english ? namesEn : namesZh)[principalIndex]
+      : (english ? ['Waxing crescent','Waxing gibbous','Waning gibbous','Waning crescent'] : ['蛾眉月','盈凸月','亏凸月','残月'])[quadrant];
+    const withDays = event => ({...event,days:event.dayIndex - today});
+    return {...moonPosition(ms),elongation:angle,fraction,illumination:(1 - Math.cos(angle * RAD)) / 2,
+      phaseKey,name,principalToday,next:withDays(nextEvents[0]),
+      nextNew:withDays(nextEvents.find(event => event.key === 'new')),
+      nextFull:withDays(nextEvents.find(event => event.key === 'full'))};
   }
   // Public city data and validation are independent of the astronomical calculations.
   // Both the day card and the lazy globe use this one observer model.
@@ -178,5 +247,5 @@
     }
     return Object.freeze({presets,normalize,identity,fromResult,label,countryName,decode,samePlace,clockCities});
   })();
-  return Object.freeze({position, dateParts, riseSet, altitude, term, lunar, normal, moonPhase, cityModel});
+  return Object.freeze({position, dateParts, riseSet, altitude, term, lunar, normal, moonPhase, moonPosition, nextMoonPhase, phaseEvents, beijingDayIndex, cityModel});
 });

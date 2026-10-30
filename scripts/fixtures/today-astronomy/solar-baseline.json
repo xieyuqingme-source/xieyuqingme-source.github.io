@@ -1,0 +1,864 @@
+{
+  "source_commit": "4ebdb92fa2bf89f53778e1b17a723ee2db7a74cb",
+  "captured_at": "2026-10-30T16:06:07.642Z",
+  "apiNames": [
+    "position",
+    "dateParts",
+    "riseSet",
+    "altitude",
+    "term",
+    "lunar",
+    "normal",
+    "moonPhase",
+    "cityModel"
+  ],
+  "positions": [
+    {
+      "atMs": 1774017960000,
+      "value": {
+        "declination": 0.002267493288247552,
+        "longitude": 0.005700648666163488,
+        "obliquity": 23.43825565436789,
+        "equationMinutes": -7.3988501475061,
+        "subsolarLongitude": -39.650287463123504
+      }
+    },
+    {
+      "atMs": 1782030240000,
+      "value": {
+        "declination": 23.438131820110303,
+        "longitude": 90.00223926246974,
+        "obliquity": 23.43813183908066,
+        "equationMinutes": -1.7916562107067595,
+        "subsolarLongitude": 54.44791405267665
+      }
+    },
+    {
+      "atMs": 1790121900000,
+      "value": {
+        "declination": 0.0012721974778093362,
+        "longitude": 179.9968015656275,
+        "obliquity": 23.43798979115462,
+        "equationMinutes": 7.438315165632258,
+        "subsolarLongitude": 176.890421208592
+      }
+    },
+    {
+      "atMs": 1797886200000,
+      "value": {
+        "declination": -23.43783817358813,
+        "longitude": 270.0005630126233,
+        "obliquity": 23.437838174787338,
+        "equationMinutes": 1.7405512838775372,
+        "subsolarLongitude": -132.93513782096937
+      }
+    },
+    {
+      "atMs": 1805574300000,
+      "value": {
+        "declination": 0.00006014385606681656,
+        "longitude": 0.0001512097176714633,
+        "obliquity": 23.43767408750815,
+        "equationMinutes": -7.400175597057059,
+        "subsolarLongitude": -124.39995610073572
+      }
+    },
+    {
+      "atMs": 1813587060000,
+      "value": {
+        "declination": 23.437489226605813,
+        "longitude": 90.00290480899349,
+        "obliquity": 23.437489258527613,
+        "equationMinutes": -1.7937238790648644,
+        "subsolarLongitude": -32.30156903023379
+      }
+    },
+    {
+      "atMs": 1821679320000,
+      "value": {
+        "declination": -0.001504054702652802,
+        "longitude": 180.0037814537377,
+        "obliquity": 23.437289408125807,
+        "equationMinutes": 7.439700543016646,
+        "subsolarLongitude": 87.64007486424589
+      }
+    },
+    {
+      "atMs": 1829443320000,
+      "value": {
+        "declination": -23.437086315033746,
+        "longitude": 270.0034111548887,
+        "obliquity": 23.437086359053406,
+        "equationMinutes": 1.7418593975572134,
+        "subsolarLongitude": 139.0645351506107
+      }
+    },
+    {
+      "atMs": 1837131420000,
+      "value": {
+        "declination": 0.0012792224490726439,
+        "longitude": 0.003216240141682647,
+        "obliquity": 23.436875558872835,
+        "equationMinutes": -7.398827013431782,
+        "subsolarLongitude": 147.59970675335796
+      }
+    },
+    {
+      "atMs": 1845144120000,
+      "value": {
+        "declination": 23.436646730746844,
+        "longitude": 90.0058314325587,
+        "obliquity": 23.436646859389565,
+        "equationMinutes": -1.7963956343249439,
+        "subsolarLongitude": -120.05090109141878
+      }
+    },
+    {
+      "atMs": 1853235900000,
+      "value": {
+        "declination": -0.0003294828506405477,
+        "longitude": 180.00082840628545,
+        "obliquity": 23.43640802517826,
+        "equationMinutes": 7.4376626892035915,
+        "subsolarLongitude": 1.8905843276991163
+      }
+    },
+    {
+      "atMs": 1860999540000,
+      "value": {
+        "declination": -23.436172769648508,
+        "longitude": 269.99520452673437,
+        "obliquity": 23.43617285664221,
+        "equationMinutes": 1.748330631533108,
+        "subsolarLongitude": 54.81291734211675
+      }
+    },
+    {
+      "atMs": 1868688120000,
+      "value": {
+        "declination": 0.00038984133275080655,
+        "longitude": 0.000980181982981776,
+        "obliquity": 23.435935546693717,
+        "equationMinutes": -7.398918039586404,
+        "subsolarLongitude": 61.34972950989663
+      }
+    },
+    {
+      "atMs": 1876700880000,
+      "value": {
+        "declination": 23.43568496769243,
+        "longitude": 90.00495323057663,
+        "obliquity": 23.435685060501804,
+        "equationMinutes": -1.7983119362568245,
+        "subsolarLongitude": 153.44957798406426
+      }
+    },
+    {
+      "atMs": 1884793080000,
+      "value": {
+        "declination": -0.0016550958017354284,
+        "longitude": 180.00416150865783,
+        "obliquity": 23.43543041110286,
+        "equationMinutes": 7.438070187333275,
+        "subsolarLongitude": -86.35951754683333
+      }
+    },
+    {
+      "atMs": 1892556840000,
+      "value": {
+        "declination": -23.435186039572752,
+        "longitude": 269.99920547974307,
+        "obliquity": 23.435186041960645,
+        "equationMinutes": 1.7486058107234888,
+        "subsolarLongitude": -33.93715145268084
+      }
+    },
+    {
+      "atMs": 1900245120000,
+      "value": {
+        "declination": 0.0006614196600260985,
+        "longitude": 0.0016630803995099086,
+        "obliquity": 23.43494545363268,
+        "equationMinutes": -7.397980446705195,
+        "subsolarLongitude": -26.150504888323667
+      }
+    },
+    {
+      "atMs": 1908257460000,
+      "value": {
+        "declination": 23.434697731841933,
+        "longitude": 90.00154948361421,
+        "obliquity": 23.434697740923653,
+        "equationMinutes": -1.7997749446914175,
+        "subsolarLongitude": 67.69994373617283
+      }
+    },
+    {
+      "atMs": 1916350020000,
+      "value": {
+        "declination": -0.001685231451231512,
+        "longitude": 180.004237447455,
+        "obliquity": 23.434452256470085,
+        "equationMinutes": 7.437498916672692,
+        "subsolarLongitude": -173.60937472916817
+      }
+    },
+    {
+      "atMs": 1924114140000,
+      "value": {
+        "declination": -23.43422262429712,
+        "longitude": 270.002668777988,
+        "obliquity": 23.434222651237842,
+        "equationMinutes": 1.7488809884299865,
+        "subsolarLongitude": -122.68722024710746
+      }
+    }
+  ],
+  "cityPresets": {
+    "beijing": {
+      "id": "beijing",
+      "name": "北京",
+      "en": "Beijing",
+      "lat": 39.9042,
+      "lon": 116.4074,
+      "tz": "Asia/Shanghai",
+      "countryCode": "CN",
+      "country": "中国",
+      "region": "北京市"
+    },
+    "shanghai": {
+      "id": "shanghai",
+      "name": "上海",
+      "en": "Shanghai",
+      "lat": 31.2304,
+      "lon": 121.4737,
+      "tz": "Asia/Shanghai",
+      "countryCode": "CN",
+      "country": "中国",
+      "region": "上海市"
+    },
+    "kuala": {
+      "id": "kuala",
+      "name": "吉隆坡",
+      "en": "Kuala Lumpur",
+      "lat": 3.139,
+      "lon": 101.6869,
+      "tz": "Asia/Kuala_Lumpur",
+      "countryCode": "MY",
+      "country": "马来西亚",
+      "region": "吉隆坡"
+    },
+    "london": {
+      "id": "london",
+      "name": "伦敦",
+      "en": "London",
+      "lat": 51.5074,
+      "lon": -0.1278,
+      "tz": "Europe/London",
+      "countryCode": "GB",
+      "country": "英国",
+      "region": "England"
+    },
+    "newyork": {
+      "id": "newyork",
+      "name": "纽约",
+      "en": "New York",
+      "lat": 40.7128,
+      "lon": -74.006,
+      "tz": "America/New_York",
+      "countryCode": "US",
+      "country": "美国",
+      "region": "New York"
+    },
+    "moscow": {
+      "id": "moscow",
+      "name": "莫斯科",
+      "en": "Moscow",
+      "lat": 55.7558,
+      "lon": 37.6173,
+      "tz": "Europe/Moscow",
+      "countryCode": "RU",
+      "country": "俄罗斯",
+      "region": "Moscow"
+    },
+    "dubai": {
+      "id": "dubai",
+      "name": "迪拜",
+      "en": "Dubai",
+      "lat": 25.2048,
+      "lon": 55.2708,
+      "tz": "Asia/Dubai",
+      "countryCode": "AE",
+      "country": "阿联酋",
+      "region": "Dubai"
+    },
+    "guangzhou": {
+      "id": "guangzhou",
+      "name": "广州",
+      "en": "Guangzhou",
+      "lat": 23.1291,
+      "lon": 113.2644,
+      "tz": "Asia/Shanghai",
+      "countryCode": "CN",
+      "country": "中国",
+      "region": "广东"
+    },
+    "shenzhen": {
+      "id": "shenzhen",
+      "name": "深圳",
+      "en": "Shenzhen",
+      "lat": 22.5431,
+      "lon": 114.0579,
+      "tz": "Asia/Shanghai",
+      "countryCode": "CN",
+      "country": "中国",
+      "region": "广东"
+    },
+    "chengdu": {
+      "id": "chengdu",
+      "name": "成都",
+      "en": "Chengdu",
+      "lat": 30.5728,
+      "lon": 104.0668,
+      "tz": "Asia/Shanghai",
+      "countryCode": "CN",
+      "country": "中国",
+      "region": "四川"
+    },
+    "hangzhou": {
+      "id": "hangzhou",
+      "name": "杭州",
+      "en": "Hangzhou",
+      "lat": 30.2741,
+      "lon": 120.1551,
+      "tz": "Asia/Shanghai",
+      "countryCode": "CN",
+      "country": "中国",
+      "region": "浙江"
+    },
+    "nanjing": {
+      "id": "nanjing",
+      "name": "南京",
+      "en": "Nanjing",
+      "lat": 32.0603,
+      "lon": 118.7969,
+      "tz": "Asia/Shanghai",
+      "countryCode": "CN",
+      "country": "中国",
+      "region": "江苏"
+    },
+    "wuhan": {
+      "id": "wuhan",
+      "name": "武汉",
+      "en": "Wuhan",
+      "lat": 30.5928,
+      "lon": 114.3055,
+      "tz": "Asia/Shanghai",
+      "countryCode": "CN",
+      "country": "中国",
+      "region": "湖北"
+    },
+    "chongqing": {
+      "id": "chongqing",
+      "name": "重庆",
+      "en": "Chongqing",
+      "lat": 29.563,
+      "lon": 106.5516,
+      "tz": "Asia/Shanghai",
+      "countryCode": "CN",
+      "country": "中国",
+      "region": "重庆市"
+    },
+    "xian": {
+      "id": "xian",
+      "name": "西安",
+      "en": "Xi’an",
+      "lat": 34.3416,
+      "lon": 108.9398,
+      "tz": "Asia/Shanghai",
+      "countryCode": "CN",
+      "country": "中国",
+      "region": "陕西"
+    },
+    "tianjin": {
+      "id": "tianjin",
+      "name": "天津",
+      "en": "Tianjin",
+      "lat": 39.3434,
+      "lon": 117.3616,
+      "tz": "Asia/Shanghai",
+      "countryCode": "CN",
+      "country": "中国",
+      "region": "天津市"
+    },
+    "mianyang": {
+      "id": "mianyang",
+      "name": "绵阳",
+      "en": "Mianyang",
+      "lat": 31.4675,
+      "lon": 104.6796,
+      "tz": "Asia/Shanghai",
+      "countryCode": "CN",
+      "country": "中国",
+      "region": "四川"
+    }
+  },
+  "observers": [
+    {
+      "observer": {
+        "id": "beijing",
+        "name": "北京",
+        "en": "Beijing",
+        "lat": 39.9042,
+        "lon": 116.4074,
+        "tz": "Asia/Shanghai",
+        "countryCode": "CN",
+        "country": "中国",
+        "region": "北京市"
+      },
+      "atMs": 1793344200000,
+      "riseSet": {
+        "rise": "2026-10-29T22:40:28.748Z",
+        "set": "2026-10-30T09:14:59.814Z",
+        "daylightMinutes": 634.5177666666667,
+        "polar": null
+      },
+      "altitude": 20.20108825386864,
+      "dateParts": {
+        "year": 2026,
+        "month": 10,
+        "day": 30
+      }
+    },
+    {
+      "observer": {
+        "id": "shanghai",
+        "name": "上海",
+        "en": "Shanghai",
+        "lat": 31.2304,
+        "lon": 121.4737,
+        "tz": "Asia/Shanghai",
+        "countryCode": "CN",
+        "country": "中国",
+        "region": "上海市"
+      },
+      "atMs": 1793344200000,
+      "riseSet": {
+        "rise": "2026-10-29T22:07:39.604Z",
+        "set": "2026-10-30T09:07:25.121Z",
+        "daylightMinutes": 659.7586166666666,
+        "polar": null
+      },
+      "altitude": 22.035088830528142,
+      "dateParts": {
+        "year": 2026,
+        "month": 10,
+        "day": 30
+      }
+    },
+    {
+      "observer": {
+        "id": "kuala",
+        "name": "吉隆坡",
+        "en": "Kuala Lumpur",
+        "lat": 3.139,
+        "lon": 101.6869,
+        "tz": "Asia/Kuala_Lumpur",
+        "countryCode": "MY",
+        "country": "马来西亚",
+        "region": "吉隆坡"
+      },
+      "atMs": 1793344200000,
+      "riseSet": {
+        "rise": "2026-10-29T22:56:31.182Z",
+        "set": "2026-10-30T10:57:11.920Z",
+        "daylightMinutes": 720.6789666666666,
+        "polar": null
+      },
+      "altitude": 52.894493641086285,
+      "dateParts": {
+        "year": 2026,
+        "month": 10,
+        "day": 30
+      }
+    },
+    {
+      "observer": {
+        "id": "london",
+        "name": "伦敦",
+        "en": "London",
+        "lat": 51.5074,
+        "lon": -0.1278,
+        "tz": "Europe/London",
+        "countryCode": "GB",
+        "country": "英国",
+        "region": "England"
+      },
+      "atMs": 1793344200000,
+      "riseSet": {
+        "rise": "2026-10-30T06:50:21.091Z",
+        "set": "2026-10-30T16:37:09.066Z",
+        "daylightMinutes": 586.7995833333333,
+        "polar": null
+      },
+      "altitude": 1.9701303455128045,
+      "dateParts": {
+        "year": 2026,
+        "month": 10,
+        "day": 30
+      }
+    },
+    {
+      "observer": {
+        "id": "newyork",
+        "name": "纽约",
+        "en": "New York",
+        "lat": 40.7128,
+        "lon": -74.006,
+        "tz": "America/New_York",
+        "countryCode": "US",
+        "country": "美国",
+        "region": "New York"
+      },
+      "atMs": 1793344200000,
+      "riseSet": {
+        "rise": "2026-10-30T11:24:04.233Z",
+        "set": "2026-10-30T21:54:38.781Z",
+        "daylightMinutes": 630.5758,
+        "polar": null
+      },
+      "altitude": -47.643298316842,
+      "dateParts": {
+        "year": 2026,
+        "month": 10,
+        "day": 30
+      }
+    },
+    {
+      "observer": {
+        "id": "moscow",
+        "name": "莫斯科",
+        "en": "Moscow",
+        "lat": 55.7558,
+        "lon": 37.6173,
+        "tz": "Europe/Moscow",
+        "countryCode": "RU",
+        "country": "俄罗斯",
+        "region": "Moscow"
+      },
+      "atMs": 1793344200000,
+      "riseSet": {
+        "rise": "2026-10-30T04:31:04.887Z",
+        "set": "2026-10-30T13:54:22.010Z",
+        "daylightMinutes": 563.2853833333334,
+        "polar": null
+      },
+      "altitude": 15.790980549495627,
+      "dateParts": {
+        "year": 2026,
+        "month": 10,
+        "day": 30
+      }
+    },
+    {
+      "observer": {
+        "id": "dubai",
+        "name": "迪拜",
+        "en": "Dubai",
+        "lat": 25.2048,
+        "lon": 55.2708,
+        "tz": "Asia/Dubai",
+        "countryCode": "AE",
+        "country": "阿联酋",
+        "region": "Dubai"
+      },
+      "atMs": 1793344200000,
+      "riseSet": {
+        "rise": "2026-10-30T02:25:10.644Z",
+        "set": "2026-10-30T13:39:35.170Z",
+        "daylightMinutes": 674.4087666666667,
+        "polar": null
+      },
+      "altitude": 48.93850664527566,
+      "dateParts": {
+        "year": 2026,
+        "month": 10,
+        "day": 30
+      }
+    },
+    {
+      "observer": {
+        "id": "guangzhou",
+        "name": "广州",
+        "en": "Guangzhou",
+        "lat": 23.1291,
+        "lon": 113.2644,
+        "tz": "Asia/Shanghai",
+        "countryCode": "CN",
+        "country": "中国",
+        "region": "广东"
+      },
+      "atMs": 1793344200000,
+      "riseSet": {
+        "rise": "2026-10-29T22:30:43.600Z",
+        "set": "2026-10-30T09:50:07.932Z",
+        "daylightMinutes": 679.4055333333333,
+        "polar": null
+      },
+      "altitude": 32.63327624124451,
+      "dateParts": {
+        "year": 2026,
+        "month": 10,
+        "day": 30
+      }
+    },
+    {
+      "observer": {
+        "id": "shenzhen",
+        "name": "深圳",
+        "en": "Shenzhen",
+        "lat": 22.5431,
+        "lon": 114.0579,
+        "tz": "Asia/Shanghai",
+        "countryCode": "CN",
+        "country": "中国",
+        "region": "广东"
+      },
+      "atMs": 1793344200000,
+      "riseSet": {
+        "rise": "2026-10-29T22:26:53.554Z",
+        "set": "2026-10-30T09:47:37.560Z",
+        "daylightMinutes": 680.7334333333333,
+        "polar": null
+      },
+      "altitude": 32.37238846275747,
+      "dateParts": {
+        "year": 2026,
+        "month": 10,
+        "day": 30
+      }
+    },
+    {
+      "observer": {
+        "id": "chengdu",
+        "name": "成都",
+        "en": "Chengdu",
+        "lat": 30.5728,
+        "lon": 104.0668,
+        "tz": "Asia/Shanghai",
+        "countryCode": "CN",
+        "country": "中国",
+        "region": "四川"
+      },
+      "atMs": 1793344200000,
+      "riseSet": {
+        "rise": "2026-10-29T23:16:28.477Z",
+        "set": "2026-10-30T10:17:51.797Z",
+        "daylightMinutes": 661.3886666666667,
+        "polar": null
+      },
+      "altitude": 33.9104083797668,
+      "dateParts": {
+        "year": 2026,
+        "month": 10,
+        "day": 30
+      }
+    },
+    {
+      "observer": {
+        "id": "hangzhou",
+        "name": "杭州",
+        "en": "Hangzhou",
+        "lat": 30.2741,
+        "lon": 120.1551,
+        "tz": "Asia/Shanghai",
+        "countryCode": "CN",
+        "country": "中国",
+        "region": "浙江"
+      },
+      "atMs": 1793344200000,
+      "riseSet": {
+        "rise": "2026-10-29T22:11:42.292Z",
+        "set": "2026-10-30T09:13:56.139Z",
+        "daylightMinutes": 662.2307833333333,
+        "polar": null
+      },
+      "altitude": 23.50762902346994,
+      "dateParts": {
+        "year": 2026,
+        "month": 10,
+        "day": 30
+      }
+    },
+    {
+      "observer": {
+        "id": "nanjing",
+        "name": "南京",
+        "en": "Nanjing",
+        "lat": 32.0603,
+        "lon": 118.7969,
+        "tz": "Asia/Shanghai",
+        "countryCode": "CN",
+        "country": "中国",
+        "region": "江苏"
+      },
+      "atMs": 1793344200000,
+      "riseSet": {
+        "rise": "2026-10-29T22:19:27.783Z",
+        "set": "2026-10-30T09:17:01.053Z",
+        "daylightMinutes": 657.5545,
+        "polar": null
+      },
+      "altitude": 23.45202578706004,
+      "dateParts": {
+        "year": 2026,
+        "month": 10,
+        "day": 30
+      }
+    },
+    {
+      "observer": {
+        "id": "wuhan",
+        "name": "武汉",
+        "en": "Wuhan",
+        "lat": 30.5928,
+        "lon": 114.3055,
+        "tz": "Asia/Shanghai",
+        "countryCode": "CN",
+        "country": "中国",
+        "region": "湖北"
+      },
+      "atMs": 1793344200000,
+      "riseSet": {
+        "rise": "2026-10-29T22:35:31.426Z",
+        "set": "2026-10-30T09:36:54.441Z",
+        "daylightMinutes": 661.3835833333334,
+        "polar": null
+      },
+      "altitude": 27.40281259495131,
+      "dateParts": {
+        "year": 2026,
+        "month": 10,
+        "day": 30
+      }
+    },
+    {
+      "observer": {
+        "id": "chongqing",
+        "name": "重庆",
+        "en": "Chongqing",
+        "lat": 29.563,
+        "lon": 106.5516,
+        "tz": "Asia/Shanghai",
+        "countryCode": "CN",
+        "country": "中国",
+        "region": "重庆市"
+      },
+      "atMs": 1793344200000,
+      "riseSet": {
+        "rise": "2026-10-29T23:05:14.722Z",
+        "set": "2026-10-30T10:09:13.732Z",
+        "daylightMinutes": 663.9835,
+        "polar": null
+      },
+      "altitude": 33.127808166575974,
+      "dateParts": {
+        "year": 2026,
+        "month": 10,
+        "day": 30
+      }
+    },
+    {
+      "observer": {
+        "id": "xian",
+        "name": "西安",
+        "en": "Xi’an",
+        "lat": 34.3416,
+        "lon": 108.9398,
+        "tz": "Asia/Shanghai",
+        "countryCode": "CN",
+        "country": "中国",
+        "region": "陕西"
+      },
+      "atMs": 1793344200000,
+      "riseSet": {
+        "rise": "2026-10-29T23:02:01.062Z",
+        "set": "2026-10-30T09:53:17.018Z",
+        "daylightMinutes": 651.2659333333334,
+        "polar": null
+      },
+      "altitude": 28.34232024798965,
+      "dateParts": {
+        "year": 2026,
+        "month": 10,
+        "day": 30
+      }
+    },
+    {
+      "observer": {
+        "id": "tianjin",
+        "name": "天津",
+        "en": "Tianjin",
+        "lat": 39.3434,
+        "lon": 117.3616,
+        "tz": "Asia/Shanghai",
+        "countryCode": "CN",
+        "country": "中国",
+        "region": "天津市"
+      },
+      "atMs": 1793344200000,
+      "riseSet": {
+        "rise": "2026-10-29T22:35:45.508Z",
+        "set": "2026-10-30T09:12:05.606Z",
+        "daylightMinutes": 636.3349666666667,
+        "polar": null
+      },
+      "altitude": 19.987009521863936,
+      "dateParts": {
+        "year": 2026,
+        "month": 10,
+        "day": 30
+      }
+    },
+    {
+      "observer": {
+        "id": "mianyang",
+        "name": "绵阳",
+        "en": "Mianyang",
+        "lat": 31.4675,
+        "lon": 104.6796,
+        "tz": "Asia/Shanghai",
+        "countryCode": "CN",
+        "country": "中国",
+        "region": "四川"
+      },
+      "atMs": 1793344200000,
+      "riseSet": {
+        "rise": "2026-10-29T23:15:10.976Z",
+        "set": "2026-10-30T10:14:14.413Z",
+        "daylightMinutes": 659.0572833333333,
+        "polar": null
+      },
+      "altitude": 32.898294027175915,
+      "dateParts": {
+        "year": 2026,
+        "month": 10,
+        "day": 30
+      }
+    }
+  ],
+  "calendars": [
+    {
+      "atMs": 1793344200000,
+      "english": false,
+      "term": "霜降",
+      "lunar": "丙午年九月廿一"
+    },
+    {
+      "atMs": 1793344200000,
+      "english": true,
+      "term": "Frost descent",
+      "lunar": "Ninth Month 21, 2026(bing-wu)"
+    }
+  ]
+}

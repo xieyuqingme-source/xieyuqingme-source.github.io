@@ -5,6 +5,12 @@ on:
     # Beijing 08:20, 14:20 and 20:20. The schedule can be delayed by GitHub.
     - cron: '20 0,6,12 * * *'
   workflow_dispatch:
+    inputs:
+      import_release_snapshots:
+        description: 'Import retained Release snapshots once (historical eight-item snapshots only)'
+        required: false
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -31,9 +37,31 @@ jobs:
         with:
           python-version: '3.12'
       - name: Check collection, validation and failure isolation
-        run: python scripts/test_news_snapshot.py
+        run: |
+          python scripts/test_news_snapshot.py
+          python scripts/test_news_archive.py
+          python scripts/test_archive_collection.py
       - name: Collect original-source headlines
-        run: python scripts/news_snapshot.py collect --output "$RUNNER_TEMP/news-snapshot.json"
+        id: collection
+        run: python scripts/news_snapshot.py collect --output "$RUNNER_TEMP/news-snapshot.json" --archive-output "$RUNNER_TEMP/news-capture.json" --github-output "$GITHUB_OUTPUT"
+      - name: Archive all validated headlines and true source outcomes
+        # A failed collection still has a useful empty run record. Normal archive
+        # outages warn without disabling the established Release/Pages channel.
+        # Manual imports must succeed before Release pruning can proceed.
+        if: always() && !cancelled() && steps.collection.outcome != 'skipped'
+        continue-on-error: ${{ github.event_name != 'workflow_dispatch' || inputs.import_release_snapshots != true }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+          IMPORT_RELEASES: ${{ inputs.import_release_snapshots }}
+          CAPTURE_READY: ${{ steps.collection.outputs.archive_capture_ready }}
+        run: |
+          if [ "$CAPTURE_READY" != "true" ] || [ ! -f "$RUNNER_TEMP/news-capture.json" ]; then
+            echo "::warning::No newly validated capture was written; archive was not changed."
+            exit 1
+          fi
+          options=()
+          if [ "$IMPORT_RELEASES" = "true" ]; then options+=(--import-releases); fi
+          python scripts/news_archive.py publish --capture "$RUNNER_TEMP/news-capture.json" "${options[@]}"
       - name: Store a new validated snapshot before pruning old data
         env:
           GH_TOKEN: ${{ github.token }}

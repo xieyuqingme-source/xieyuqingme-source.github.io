@@ -4,14 +4,14 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>今天 · 谢雨卿</title>
-  <meta name="description" content="从此刻地球与天气，到历史、每日阅读和重点新闻。">
+  <meta name="description" content="从日、月、年到历史，再读重点新闻与每日阅读。">
   <meta name="author" content="谢雨卿 Xie Yuqing">
   <link rel="canonical" href="{{site_url}}/today/">
   <link rel="alternate" hreflang="zh-CN" href="{{site_url}}/today/">
   <link rel="alternate" hreflang="en" href="{{site_url}}/en/today/">
   <meta property="og:type" content="website">
   <meta property="og:title" content="今天 · 谢雨卿">
-  <meta property="og:description" content="从此刻地球与天气，到历史、每日阅读和重点新闻。">
+  <meta property="og:description" content="从日、月、年到历史，再读重点新闻与每日阅读。">
   <meta property="og:url" content="{{site_url}}/today/">
   <meta property="og:image" content="{{site_url}}/assets/share-cover.png">
   <meta property="og:image:width" content="1200">
@@ -23,6 +23,7 @@
   <script>(() => { let theme = "light", saved; try { saved = localStorage.getItem("xieyuqing-blog-theme"); } catch (_) {} if (saved === "light" || saved === "dark") theme = saved; else try { if (window.matchMedia("(prefers-color-scheme: dark)").matches) theme = "dark"; } catch (_) {} document.documentElement.dataset.theme = theme; })();</script>
   <link rel="stylesheet" href="/assets/portal.css">
   <link rel="stylesheet" href="/assets/home-daily.css">
+  <link rel="stylesheet" href="/assets/home-today-visuals.css">
   <link rel="stylesheet" href="/assets/weather-map.css">
   <script src="/assets/portal.js" defer></script>
 </head>
@@ -38,35 +39,61 @@
       <header class="page-intro today-intro">
         <div class="today-intro-copy"><h1 id="today-title">{{today_date_title}}</h1>
           <div class="today-dateline" aria-label="日历 · 北京时间"><span id="daily-calendar-lunar"></span><span id="daily-calendar-term"></span><span id="daily-calendar-festivals"></span><span id="daily-calendar-holiday" hidden></span></div>
+          <p class="today-position-sentence" id="today-position-sentence">太阳与月亮，共同标记今天的位置。</p>
         </div>
-        <figure class="today-timeline" aria-label="今天，位于过去与未来之间">
-          <svg class="today-timeline-svg" viewBox="0 0 440 40" role="img" aria-labelledby="timeline-title timeline-description"><title id="timeline-title">今天，位于过去与未来之间</title><desc id="timeline-description">一条静态细线连接过去与未来，圆点标记今天。</desc><path class="timeline-route" d="M12 20H428"/><circle class="timeline-today-point" cx="220" cy="20" r="4"/></svg>
-          <div class="timeline-labels" aria-hidden="true"><span>过去</span><strong>今天</strong><span>未来</span></div>
+        <figure class="today-year-progress" aria-labelledby="today-year-label">
+          <figcaption><span id="today-year-label">{{today_year_label}}</span><span id="today-year-left">{{today_year_left}}</span></figcaption>
+          <div class="today-year-track" id="today-year-track" role="progressbar" aria-label="这一年的进度" aria-valuemin="0" aria-valuemax="100" aria-valuenow="{{today_year_progress_percent}}"><span class="today-year-fill" id="today-year-fill" style="width:{{today_year_progress_width}}%"></span></div>
         </figure>
       </header>
       <div class="brief-body" id="brief-body">
-        <section class="yl-earth" id="daily-earth" aria-labelledby="earth-heading"><div class="yl-earth-heading"><h2 id="earth-heading">此刻地球</h2><span class="yl-small">EARTH / SOLAR TIME</span></div><div class="today-earth-grid"><div class="earth-visual"><div class="yl-globe-wrap"><canvas id="earth-canvas" width="560" height="570" role="img" aria-label="地球昼夜图，标出太阳直射点与所选城市"></canvas></div><p class="yl-earth-small">拖动地球，换个角度看世界</p></div><div class="earth-readings"><div class="yl-suntime"><div>日出 · 当地时间<strong id="daily-sunrise">—</strong></div><div>日落 · 当地时间<strong id="daily-sunset">—</strong></div></div><div class="yl-earth-info" aria-live="polite"><div id="daily-local-time">—</div><div>太阳直射 <b id="daily-subsolar">—</b></div><div id="daily-daylength">—</div></div><p class="yl-moon" id="daily-moon-phase"></p><div class="yl-world-clocks" id="daily-world-clocks"></div><div class="yl-earth-actions"><label class="yl-time-row" for="earth-hour"><span>时刻 · 北京时间</span><output id="earth-hour-label">—</output></label><button type="button" class="yl-earth-now" id="earth-now" hidden>回到此刻</button></div><input class="yl-time-slider" id="earth-hour" type="range" min="0" max="23.9833333" step="0.0166667" value="12"><div class="yl-time-ends" aria-hidden="true"><span>00:00</span><span>12:00</span><span>23:59</span></div><p class="yl-earth-source">地轴与公转轨道法线夹角约 23.4° · 近似计算<br><a href="https://gml.noaa.gov/grad/solcalc/calcdetails.html" target="_blank" rel="noopener noreferrer">计算依据</a> · 底图 Natural Earth</p></div></div></section>
+        <section class="yl-earth" id="daily-earth" aria-labelledby="earth-heading"><div class="yl-earth-heading"><h2 id="earth-heading"><span class="today-cycle-mark">日</span>此刻</h2><p class="yl-small" id="today-astronomy-time">{{today_astronomy_time}}</p></div><div class="today-earth-grid"><div class="earth-visual"><div class="yl-globe-wrap"><canvas id="earth-canvas" width="560" height="570" role="img" aria-label="地球昼夜图，标出太阳直射点与所选城市"></canvas></div><p class="yl-earth-small">拖动地球，换个角度看世界</p></div><div class="earth-readings"><div class="yl-suntime"><div>日出 · 当地时间<strong id="daily-sunrise">—</strong></div><div>日落 · 当地时间<strong id="daily-sunset">—</strong></div></div><div class="yl-earth-info" aria-live="polite"><div id="daily-local-time">—</div><div>太阳直射 <b id="daily-subsolar">—</b></div><div id="daily-daylength">—</div></div><div class="yl-world-clocks" id="daily-world-clocks"></div><div class="yl-earth-actions"><label class="yl-time-row" for="earth-hour"><span>时刻 · 北京时间</span><output id="earth-hour-label">—</output></label><button type="button" class="yl-earth-now" id="earth-now" hidden>回到此刻</button></div><input class="yl-time-slider" id="earth-hour" type="range" min="0" max="23.983333333333334" step="0.016666666666666666" value="12"><div class="yl-time-ends" aria-hidden="true"><span>00:00</span><span>12:00</span><span>23:59</span></div><p class="yl-earth-source">地轴与公转轨道法线夹角约 23.4° · 近似计算<br><a href="https://gml.noaa.gov/grad/solcalc/calcdetails.html" target="_blank" rel="noopener noreferrer">计算依据</a> · 底图 Natural Earth</p></div></div>
         <section class="today-weather" id="today-weather" aria-labelledby="today-heading">
-          <div class="today-section-heading"><h2 class="brief-panel-heading" id="today-heading">天气</h2><p class="yl-small">在地图上选个地方，看看那里的天气。</p></div>
+          <div class="weather-compact"><h3 id="today-heading">天气</h3><p id="daily-weather-summary" aria-live="polite">北京 · 天气加载中…</p></div>
+          <details class="weather-more weather-city-tools" id="weather-more"><summary>换个地方 · 天气详情</summary>
           <div class="weather-layout">
             <div class="weather-map-panel" id="weather-map"><canvas id="weather-map-canvas" width="800" height="420" tabindex="0" role="application" aria-label="天气选点地图；方向键移动，回车选择，正负号缩放。" aria-describedby="weather-map-help"></canvas>
               <div class="weather-map-toolbar"><output id="weather-map-coordinate"></output><div class="weather-map-controls" aria-label="地图视野"><button type="button" data-weather-map-zoom="in" aria-label="放大地图">+</button><button type="button" data-weather-map-zoom="out" aria-label="缩小地图">−</button><button type="button" data-weather-map-zoom="reset">全球</button></div></div>
               <p class="weather-map-note" id="weather-map-help">点选地点 · 拖动浏览 · 方向键移动，回车选择 · + / − 缩放</p><p id="weather-map-status" role="status" aria-live="polite"></p><p class="weather-map-source">Natural Earth</p>
             </div>
-            <div class="weather-detail-panel" id="daily-sidebar"><div class="weather-place-heading"><h3 id="daily-city-name">北京</h3>
-              <details class="weather-city-tools"><summary>换个地方</summary><div class="city-picker"><label class="sr-only" for="daily-city">选择城市</label><select class="yl-city" id="daily-city"><option value="beijing">北京</option></select>
+            <div class="weather-detail-panel" id="daily-sidebar"><div class="weather-place-heading"><h4 id="daily-city-name">北京</h4>
+              <div class="weather-city-controls"><div class="city-picker"><label class="sr-only" for="daily-city">选择城市</label><select class="yl-city" id="daily-city"><option value="beijing">北京</option></select>
                 <form id="city-search-form" role="search" aria-label="查找城市"><label class="sr-only" for="city-search-input">城市名称</label><div class="city-search-row"><input id="city-search-input" name="city" type="search" placeholder="查找城市…" minlength="2" maxlength="80" autocomplete="off" required><button class="city-search-submit" type="submit">查找</button></div><p class="yl-small city-search-status" id="city-search-status" role="status" aria-live="polite"></p><ul class="city-search-results" id="city-search-results" aria-label="匹配的城市" hidden></ul></form>
-                <p class="city-search-source"><a href="https://open-meteo.com/en/docs/geocoding-api" target="_blank" rel="noopener noreferrer">Open-Meteo</a> · <a href="https://www.geonames.org/" target="_blank" rel="noopener noreferrer">GeoNames</a></p></div></details></div>
+                <p class="city-search-source"><a href="https://open-meteo.com/en/docs/geocoding-api" target="_blank" rel="noopener noreferrer">Open-Meteo</a> · <a href="https://www.geonames.org/" target="_blank" rel="noopener noreferrer">GeoNames</a></p></div></div></div>
               <p class="yl-small" id="daily-city-label">Asia/Shanghai</p><p class="yl-small weather-selection-status" id="weather-selection-status" role="status" aria-live="polite"></p>
               <div class="yl-weather"><div class="yl-weather-readout" id="daily-weather" aria-live="polite">天气加载中…</div></div><dl class="weather-details" id="daily-weather-details"></dl><p class="yl-small weather-hint" id="daily-weather-hint" hidden></p>
             </div>
           </div>
+        </details>
         </section>
-        <section class="today-history" id="today-history" aria-labelledby="history-heading"><div class="today-section-heading"><h2 class="brief-panel-heading" id="history-heading">历史上的今天</h2><p class="yl-small">这一天，曾经发生过什么。</p></div><div id="daily-history-list">{{history_today}}</div><p class="yl-small history-date-note" id="history-date-note"></p></section>
-        <section class="today-reading" id="today-reading" aria-labelledby="reading-heading"><h2 class="brief-panel-heading" id="reading-heading">每日阅读</h2>{{brief_bottom_cards}}</section>
+        </section>
+        <section class="today-cycle today-month" id="today-month" aria-labelledby="month-heading">
+          <div class="today-section-heading"><h2 id="month-heading"><span class="today-cycle-mark">月</span>这个月</h2><p class="yl-small">从地球上看月亮。</p></div>
+          <div class="today-cycle-grid">
+            <figure class="today-cycle-figure"><svg data-today-visual="moon" viewBox="0 0 440 440" role="img" aria-label="月球绕地球的位置与太阳照射方向"></svg><figcaption>从黄道北极俯看 · 逆时针公转 · 大小与距离不按比例</figcaption></figure>
+            <div class="today-cycle-copy"><div class="today-phase-heading"><svg data-today-visual="phase" viewBox="0 0 80 80" role="img" aria-label="所选地点看到的月相"></svg><div><h3 id="moon-phase-name">月亮与月相</h3><p class="yl-small" id="moon-phase-subtitle"></p></div></div>
+              <dl class="today-cycle-readings" id="moon-readings"></dl><p class="today-cycle-note" id="moon-cycle-note">月亮绕地球一圈约27.3天，月相轮回约29.5天，因为地球同时在绕太阳走。</p><p class="yl-small" id="moon-phase-caption"></p>
+            </div>
+          </div>
+          <p class="today-cycle-source">近似计算 · <a href="https://aa.usno.navy.mil/faq/moon_phases" target="_blank" rel="noopener noreferrer">月相与照亮比例</a> · <a href="https://aa.usno.navy.mil/data/MoonPhases" target="_blank" rel="noopener noreferrer">USNO 月相年历</a></p>
+          <noscript><p class="yl-no-script">启用 JavaScript 后可查看本地计算的月相、轨道示意与下次月相日期。</p></noscript>
+        </section>
+        <section class="today-cycle today-year" id="today-year" aria-labelledby="year-heading">
+          <div class="today-section-heading"><h2 id="year-heading"><span class="today-cycle-mark">年</span>这一年</h2><p class="yl-small" id="year-term-summary">地球绕太阳一圈，走过四季。</p></div>
+          <div class="today-cycle-grid">
+            <figure class="today-cycle-figure"><svg data-today-visual="orbit" viewBox="0 0 480 480" role="img" aria-label="地球公转位置与二十四节气"></svg><figcaption>从黄道北极俯看 · 逆时针公转 · 白点标记地球北极</figcaption></figure>
+            <div class="today-cycle-copy"><h3 class="today-chart-heading">太阳直射点的这一年</h3><figure class="today-declination-figure"><svg data-today-visual="declination" viewBox="0 0 640 214" role="img" aria-label="太阳直射纬度全年变化，实线为已过，虚线为未来"></svg><figcaption>实线为已过，虚线为未来；标记的是地球滑块所选时刻。</figcaption></figure>
+              <dl class="today-cycle-readings" id="year-readings"></dl><p class="today-cycle-note" id="year-distance-note">地球每年1月初离太阳最近，7月初最远。季节来自地轴倾斜。</p>
+            </div>
+          </div>
+          <p class="today-cycle-source">近似计算 · <a href="https://gml.noaa.gov/grad/solcalc/calcdetails.html" target="_blank" rel="noopener noreferrer">NOAA 太阳计算</a> · <a href="https://aa.usno.navy.mil/data/Earth_Seasons" target="_blank" rel="noopener noreferrer">USNO 二分二至</a> · 节气日期与页首日历同源</p>
+          <noscript><p class="yl-no-script">启用 JavaScript 后可查看本地计算的公转位置、节气日期和太阳直射点曲线。</p></noscript>
+        </section>
+        <section class="today-history" id="today-history" aria-labelledby="history-heading"><div class="today-section-heading"><h2 class="brief-panel-heading" id="history-heading"><span class="today-cycle-mark">史</span>历史上的今天</h2><p class="yl-small">这一天，曾经发生过什么。</p></div><div id="daily-history-list">{{history_today}}</div><p class="yl-small history-date-note" id="history-date-note"></p></section>
         <section class="yl-news today-news" id="today-news" aria-labelledby="daily-news-title"><div class="today-section-heading"><h2 class="brief-panel-heading" id="daily-news-title">重点新闻</h2><p class="yl-small" id="daily-edition">{{news_checked_label}}</p></div><div id="daily-feed" aria-live="polite">{{news_snapshot_feed}}</div><p class="yl-note" id="daily-brief-notice">依据来源媒体选题与预设规则汇集；点击标题，直达原始报道。</p><details class="news-sources"><summary>新闻源入口</summary><div id="news-source-links">{{news_source_links}}</div></details></section>
+        <section class="today-reading" id="today-reading" aria-labelledby="reading-heading"><h2 class="brief-panel-heading" id="reading-heading">每日阅读</h2>{{brief_bottom_cards}}</section>
       </div>
-      <noscript><p class="yl-no-script">新闻、语录和来源链接可以直接阅读。历史事件显示明确标注的生成日期；启用 JavaScript 后按当天轮换，并显示实时天气与地球。</p></noscript>
+      <noscript><style>.today-cycle-figure,.today-declination-figure,.today-phase-heading>svg{display:none}.today-cycle-grid{display:block}</style><p class="yl-no-script">新闻、语录和来源链接可以直接阅读。历史事件显示明确标注的生成日期；启用 JavaScript 后按当天轮换，并显示实时天气与地球。</p></noscript>
     </section>
   </main>
   <footer class="site-footer container"><p>谢雨卿</p><div><a href="/articles/">文章</a><a href="/about/">关于</a><a href="/articles/feed.xml">RSS</a></div></footer>
@@ -79,6 +106,9 @@
   <script id="daily-holidays-data" type="application/json">{{brief_holidays_data}}</script>
   <script src="/assets/daily-reading.js" defer></script>
   <script src="/assets/astronomy-solar.js" defer></script>
+  <script src="/assets/astronomy-cycles.js" defer></script>
+  <script src="/assets/home-today-visuals.js" defer></script>
+  <script src="/assets/home-today.js" defer></script>
   <script src="/assets/weather-map.js" defer></script>
   <script src="/assets/home-daily.js" defer></script>
 </body>

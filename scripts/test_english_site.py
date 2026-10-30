@@ -1,6 +1,6 @@
 """Focused synthetic English publication tests; no private sources or network."""
 from copy import deepcopy
-from datetime import date
+from datetime import date, datetime
 from hashlib import sha256
 from html import escape
 from pathlib import Path
@@ -165,11 +165,26 @@ class EnglishPublicationTests(unittest.TestCase):
         self.news_now = timestamp(self.snapshot["collected_at"])
         self.history = load_history(self.root, build_site.linked_directory)
         self.history_day = date(2026, 10, 28)
+        fixture_now = datetime(2026, 10, 28, 12, tzinfo=CHINA)
+        year_start = fixture_now.replace(month=1, day=1, hour=0)
+        year_end = year_start.replace(year=year_start.year + 1)
+        year_days = (year_end - year_start).days
+        year_day = self.history_day.timetuple().tm_yday
+        year_progress = (fixture_now - year_start) / (year_end - year_start)
+        year_percent = int(year_progress * 100 + .5)
         projects = build_site.load_projects()
         # This fixture calls the English publisher directly, so supply the same
         # homepage inputs that the unified builder normally passes to it.
         values.update({
-            "today_date_title": "2026年10月28日", "today_date_title_en": "28 October 2026",
+            "today_date_title": "2026年10月28日 星期三", "today_date_title_en": "28 October 2026 Wednesday",
+            "today_year_label": f"2026年 · 第{year_day}天",
+            "today_year_label_en": f"2026 · day {year_day} of {year_days}",
+            "today_year_left": f"已过{year_percent}% · 还剩{year_days - year_day}天",
+            "today_year_left_en": f"{year_percent}% elapsed · {year_days - year_day} days left",
+            "today_year_progress_percent": str(year_percent),
+            "today_year_progress_width": f"{year_progress * 100:.3f}",
+            "today_astronomy_time": fixture_now.strftime("%Y-%m-%d %H:%M") + " 北京时间",
+            "today_astronomy_time_en": fixture_now.strftime("%Y-%m-%d %H:%M") + " Beijing time",
             "daily_content_data": safe_json(daily_content),
             "english_quotes_data": safe_json(self.english_quotes),
             "news_snapshot_data": safe_json(self.snapshot), "news_sources_data": safe_json(self.public_news_sources),

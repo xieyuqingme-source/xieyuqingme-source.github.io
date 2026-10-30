@@ -1,0 +1,60 @@
+{
+  "source": "U.S. Naval Observatory, Astronomical Applications Department",
+  "documentation": "https://aa.usno.navy.mil/data/api.html",
+  "time_scale": "Universal Time (UT); minute precision; treated as UTC for minute-level educational checks",
+  "tolerances_minutes": {
+    "solar": 10,
+    "moon": 60
+  },
+  "sources": [
+    {
+      "file": "raw/seasons-2026.json",
+      "url": "https://aa.usno.navy.mil/api/seasons?year=2026",
+      "retrieved_at": "2026-10-30T15:49:38.400686+00:00",
+      "sha256": "6d62dcd6de55cc5b9cf94df813844bda6750a2438098256e6826e56bcf5c22c4",
+      "apiversion": "4.0.1"
+    },
+    {
+      "file": "raw/seasons-2027.json",
+      "url": "https://aa.usno.navy.mil/api/seasons?year=2027",
+      "retrieved_at": "2026-10-30T15:49:41.954383+00:00",
+      "sha256": "1a0c001621026c30979abb78c5036f43b9234b1000640db588a12cffbc0f6310",
+      "apiversion": "4.0.1"
+    },
+    {
+      "file": "raw/seasons-2028.json",
+      "url": "https://aa.usno.navy.mil/api/seasons?year=2028",
+      "retrieved_at": "2026-10-30T15:49:41.888580+00:00",
+      "sha256": "5b021f3139ac79fca8e26e571faee646d6597bfa6093d188ebc580326a20d68f",
+      "apiversion": "4.0.1"
+    },
+    {
+      "file": "raw/seasons-2029.json",
+      "url": "https://aa.usno.navy.mil/api/seasons?year=2029",
+      "retrieved_at": "2026-10-30T15:49:39.855716+00:00",
+      "sha256": "49d8f8504ddf71c1dc38092f90dbbf98540fecef0b711972a8ee0f83817e740a",
+      "apiversion": "4.0.1"
+    },
+    {
+      "file": "raw/seasons-2030.json",
+      "url": "https://aa.usno.navy.mil/api/seasons?year=2030",
+      "retrieved_at": "2026-10-30T15:49:41.297673+00:00",
+      "sha256": "7f97ea94eafb66f72be327470c9df126476ab184f21cc5ab6a45462dc6fdc9a4",
+      "apiversion": "4.0.1"
+    },
+    {
+      "file": "raw/moon-2026.json",
+      "url": "https://aa.usno.navy.mil/api/moon/phases/date?date=2026-01-01&nump=50",
+      "retrieved_at": "2026-10-30T15:49:43.154789+00:00",
+      "sha256": "89175921fd591698e6de071fb13f342882c2c7bdc748b88473c1c2524575c720",
+      "apiversion": "4.0.1"
+    },
+    {
+      "file": "raw/moon-2027.json",
+      "url": "https://aa.usno.navy.mil/api/moon/phases/date?date=2027-01-01&nump=50",
+      "retrieved_at": "2026-10-30T15:49:43.276298+00:00",
+      "sha256": "59b330b68567772bfbcf5e8f577ae7c6dccc5d9b58b319f917d7914fa5b50fae",
+      "apiversion": "4.0.1"
+    }
+  ]
+}

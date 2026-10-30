@@ -49,14 +49,14 @@ PROJECT_FIELDS = {"id", "title", "english_title", "kind", "summary", "problem", 
 PROJECT_OPTIONAL_FIELDS = {"download_url", "download_label", "guide_label", "link_status", "demo_url"}
 PROJECT_DEMO_ROUTES = {"/map/", "/game/ranking/"}
 BRAND_ASSETS = ("share-cover.png", "favicon.svg", "favicon.ico", "favicon.png")
-HOME_DAILY_ASSETS = ("home-daily.css", "home-daily.js", "daily-reading.js", "weather-map.js", "weather-map.css", "home-earth.js", "astronomy-solar.js", "home-ink.webp",
+HOME_DAILY_ASSETS = ("home-daily.css", "home-daily.js", "daily-reading.js", "weather-map.js", "weather-map.css", "home-earth.js", "astronomy-solar.js", "astronomy-cycles.js", "home-today.js", "home-today-visuals.js", "home-today-visuals.css", "home-ink.webp",
                      "vendor/d3-7.9.0.min.js", "vendor/D3-LICENSE",
                      "vendor/lunar-javascript-1.7.7.js", "vendor/lunar-javascript-1.7.7.LICENSE")
 HOME_PHOTO = "/photos/images/p-71f77ab6511ec1ce656a58a3-18000666287e1d55-640.webp"
 TODAY_TITLES = {"zh-CN": "今天 · 谢雨卿", "en": "Today · Xie Yuqing"}
 TODAY_DESCRIPTIONS = {
-    "zh-CN": "从此刻地球与天气，到历史、每日阅读和重点新闻。",
-    "en": "Earth and weather, historical anniversaries, daily reading and source headlines.",
+    "zh-CN": "从日、月、年到历史，再读重点新闻与每日阅读。",
+    "en": "Day, Moon, year and history, followed by source headlines and daily reading.",
 }
 ABOUT_FIELDS = {"name", "english_name", "chinese_bio", "english_bio", "chinese_colophon", "english_colophon",
                 "written_note", "english_written_note", "wechat", "email", "zhihu", "x_handle"}
@@ -204,7 +204,7 @@ def render_site_notes(waline, repository, language="zh-CN"):
     database = escape(waline.get("databaseProvider", ""))
     if language == "en":
         items = ['Pages are generated with Python and use system fonts only, with no external font files.',
-                 'The Today page presents Earth, weather, history, reading and news, in that order. The calendar and globe are calculated live; historical events and reading rotate from local collections using Beijing time. Historical entries link to their sources, with selection and review coverage explained on the Today page. The homepage shows only the date, solar term and a small globe.',
+                 'The Today page moves from day to Moon, year and history, then source headlines and daily reading. The Earth, Moon and year diagrams share the Earth time slider; calculations run locally in your browser. Weather has a short readout, with the map, city search and details folded below it. Historical entries show elapsed years and link to their sources. The homepage retains its date, solar term and small globe.',
                  'Weather comes from Open-Meteo. City searches send the name you enter to its geocoding service; choosing a point on the map sends its coordinates for weather. The page never requests your device location, and saves your selected city or coordinates and the latest weather only in your browser. The homepage makes no weather request.',
                  'News follows source newsroom selections and preset rules, with original headlines, publication times and links. Chinese quotations from Marx, Engels, Lenin and Mao quote the Chinese Marxists Internet Archive texts; English quotations use independent English texts. Edition notes explicitly label the permitted AI translations of some Lei Feng English and Che Guevara Chinese entries. Other sources include the Lei Feng Memorial Hall and published translations of How the Steel Was Tempered. The reading collections are stored locally; browsing them makes no automatic request to the sources.',
                  'Learn English is written for Chinese readers: 64 knowledge cards, 200 public-domain English quotations with 12 editorial themes, four quiz modes, an illustrative map of 22 words and local number practice. Read marks stay in the current browser and can be cleared; unavailable storage hides those controls without blocking reading. The quotation library supports filters, random choices and copying, with sources, edition details and site-translation or AI-assistance labels. Both Today pages show the same English quotation and Chinese translation. Annotations share the anthology mechanism; optional reading voices are device-local. Reading and number conversion do not send your input to a service.',
@@ -215,7 +215,7 @@ def render_site_notes(waline, repository, language="zh-CN"):
         title = "About this site"
     else:
         items = ['页面用 Python 生成。全站使用设备自带的字体，不加载外部字体文件。',
-                 '「今天」页依次展示地球、天气、历史、阅读和新闻。日历和地球实时计算，历史事件与阅读内容从本地资料库按北京时间轮换。历史条目附具体出处，编选与核查范围见今天页资料说明。首页只放日期、节气和一个小地球。',
+                 '「今天」页依次为日、月、年、史，再到重点新闻与每日阅读。地球、月相与全年图共用地球的时间滑块，在浏览器本地计算；天气先显示一行简读，地图、城市搜索和详情收在折叠区。历史条目显示距今年数并附具体出处，历史与阅读按北京时间轮换。首页仍只放日期、节气和一个小地球。',
                  '天气来自 Open-Meteo；搜索城市会向其地名服务发送输入的城市名，地图选点会发送所选坐标以查询天气，不读取设备定位。页面仅在浏览器里保存所选城市或坐标及最近一次天气。首页不请求天气。',
                  '新闻按来源媒体选题和预设规则自动汇集，保留原题、原文发布时间与链接。马克思主义名句中，马恩列毛中文直接采用马克思主义者网（中马库）中文原文，英文分别采用英文文本；部分雷锋英文和切·格瓦拉中文按保留规则使用本站AI译文，并在版本说明中明确标注。其他来源包括雷锋纪念馆日记与《钢铁是怎样炼成的》出版译本。阅读资料随本站保存，浏览和换句时不自动请求来源网站。',
                  '「学英语」面向中文读者，包含64张知识卡片、带12类主题标签的200条公版英语名句、四种小测验、22词的分组示意地图和数字练习。已读记录只存当前浏览器，可清空；存储不可用时隐藏相关控件，不影响阅读。名句可筛选、随机与复制，来源、版本、本站译文和AI辅助标注保留；今天页中英文展示同一英文原句与中文译文。经典批注沿用文选机制，朗读只用设备本地英语语音；阅读和数字转换不向外部服务发送输入。',
@@ -699,10 +699,26 @@ def build_site(address, map_preview_source=None):
               "photo_album_total": str(photo_report["albums"]),
               "photo_total": str(photo_report["photos"])}
     has_home_photo = (ROOT / HOME_PHOTO.lstrip("/")).is_file()
-    beijing_today = datetime.now(CHINA).date()
+    beijing_now = datetime.now(CHINA)
+    beijing_today = beijing_now.date()
+    year_start = beijing_now.replace(month=1, day=1, hour=0, minute=0, second=0, microsecond=0)
+    year_end = year_start.replace(year=year_start.year + 1)
+    year_days = (year_end - year_start).days
+    year_day = beijing_today.timetuple().tm_yday
+    year_progress = (beijing_now - year_start) / (year_end - year_start)
+    year_percent = int(year_progress * 100 + .5)
+    weekdays = ("星期一", "星期二", "星期三", "星期四", "星期五", "星期六", "星期日")
     values.update({
-        "today_date_title": f"{beijing_today.year}年{beijing_today.month}月{beijing_today.day}日",
-        "today_date_title_en": f"{beijing_today.day} {beijing_today.strftime('%B')} {beijing_today.year}",
+        "today_date_title": f"{beijing_today.year}年{beijing_today.month}月{beijing_today.day}日 {weekdays[beijing_today.weekday()]}",
+        "today_date_title_en": f"{beijing_today.day} {beijing_today.strftime('%B')} {beijing_today.year} {beijing_today.strftime('%A')}",
+        "today_year_label": f"{beijing_today.year}年 · 第{year_day}天",
+        "today_year_label_en": f"{beijing_today.year} · day {year_day} of {year_days}",
+        "today_year_left": f"已过{year_percent}% · 还剩{year_days - year_day}天",
+        "today_year_left_en": f"{year_percent}% elapsed · {year_days - year_day} days left",
+        "today_year_progress_percent": str(year_percent),
+        "today_year_progress_width": f"{year_progress * 100:.3f}",
+        "today_astronomy_time": beijing_now.strftime("%Y-%m-%d %H:%M") + " 北京时间",
+        "today_astronomy_time_en": beijing_now.strftime("%Y-%m-%d %H:%M") + " Beijing time",
         "news_snapshot_data": safe_json(news_snapshot),
         "news_sources_data": safe_json({"sources": [{"name": item["name"], "home_url": item["home_url"]} for item in news_sources["sources"]]}),
         "news_snapshot_feed": render_snapshot(news_snapshot, "zh-CN", news_sources, include_sources=False, include_stamp=False),
@@ -712,7 +728,7 @@ def build_site(address, map_preview_source=None):
         "news_source_links": " ".join('<a href="' + escape(item["home_url"], quote=True) + '" target="_blank" rel="noopener noreferrer">' + escape(item["name"]) + '</a>' for item in news_sources["sources"]),
         "news_source_links_en": " ".join('<a href="' + escape(item["home_url"], quote=True) + '" target="_blank" rel="noopener noreferrer">' + escape(item["name"]) + '</a>' for item in news_sources["sources"]),
         "history_data": safe_json(history_data),
-        "history_today": render_history(history_data), "history_today_en": render_history(history_data, "en"),
+        "history_today": render_history(history_data, today=beijing_today), "history_today_en": render_history(history_data, "en", today=beijing_today),
         "daily_content_data": safe_json(daily_content),
         "english_quotes_data": safe_json(english_quotes),
         "brief_rules_data": safe_json(brief_extras["rules"]), "brief_holidays_data": safe_json(brief_extras["holidays"]),
@@ -729,8 +745,8 @@ def build_site(address, map_preview_source=None):
         "home_photo_caption_en": "Xiaoqinghe Park, about a kilometre east of my university in Beijing. I often walked here." if has_home_photo else "Explore at your own pace.",
     })
     values.update({
-        "brief_bottom_cards": render_brief_bottom(daily_content, brief_extras),
-        "brief_bottom_cards_en": render_brief_bottom(daily_content, brief_extras, "en"),
+        "brief_bottom_cards": render_brief_bottom(daily_content, brief_extras, today=beijing_today),
+        "brief_bottom_cards_en": render_brief_bottom(daily_content, brief_extras, "en", today=beijing_today),
         "site_notes_en": render_site_notes(blog.waline, blog.config["repository_url"], "en"),
     })
     for name, value in values.items(): home = home.replace("{{" + name + "}}", value)

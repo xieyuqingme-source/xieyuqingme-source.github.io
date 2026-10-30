@@ -78,11 +78,21 @@ jobs:
           python scripts/test_build_site.py
           python scripts/test_branding.py
           python scripts/test_news_snapshot.py
+          python scripts/test_news_archive.py
+          python scripts/test_archive_collection.py
           python scripts/test_history_today.py
+          python scripts/test_today_layout.py
           python scripts/test_daily_brief_reading.py
       - name: Check homepage astronomy and navigation history
         run: |
           node --test scripts/test_home_earth.cjs
+          node --test scripts/test_home_time_cycles.cjs
+          node --test scripts/test_home_today.cjs
+          node --test scripts/test_home_today_visuals.cjs
+          node --check home/assets/astronomy-cycles.js
+          node --check home/assets/home-today.js
+          node --check home/assets/home-today-visuals.js
+          node --check scripts/test_today_a_browser.cjs
           node --test scripts/test_home_daily.cjs
           node --test scripts/test_daily_reading.cjs
           node --test scripts/test_weather_map.cjs
@@ -184,6 +194,7 @@ jobs:
           python scripts/test_archive_pages.py
           python scripts/test_english_corner.py --publication
           python scripts/test_marx_engels.py --publication
+          python scripts/test_today_layout.py --publication
       - name: Upload website
         uses: actions/upload-pages-artifact@v5
         with:

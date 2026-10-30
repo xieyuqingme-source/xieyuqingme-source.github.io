@@ -20,7 +20,9 @@
   let weather = null, weatherRequest = null, weatherTicket = 0, earth = null, earthVisible = false, earthLoading = false;
   let festivalCache = null, searchRequest = null, searchTicket = 0, searchResults = [];
   let weatherMap = null, mapRequest = null, mapTicket = 0;
+  let selectedInstant = null, selectedDemo = false;
   const cleanup = [], pending = new Map();
+  const today = glance ? null : window.HomeToday?.create(document,window,{root,language:lang,scope:{own:fn => cleanup.push(fn)}});
   const pageId = window.crypto?.randomUUID?.() || Date.now().toString(36) + '-' + Math.random().toString(36).slice(2);
   window.HomeBriefPageId = pageId;
   if (!glance) try {
@@ -45,6 +47,21 @@
   function parts(date, zone = 'Asia/Shanghai') { return Object.fromEntries(new Intl.DateTimeFormat('en-GB', {timeZone: zone,year: 'numeric',month: '2-digit',day: '2-digit'}).formatToParts(date).map(part => [part.type, part.value])); }
   function dayIndex(date, zone) { const p = parts(date, zone); return Math.floor(Date.UTC(+p.year,+p.month - 1,+p.day) / 86400000); }
   function dayStamp(date, zone) { return new Date(dayIndex(date, zone) * 86400000).toISOString().slice(0,10); }
+  function elapsedYears(eventYear,currentYear) {
+    const astronomical = year => year < 0 ? year + 1 : year;
+    return astronomical(currentYear) - astronomical(eventYear);
+  }
+  function renderCycles(date,mode = {}) {
+    if (glance || disposed) return;
+    selectedInstant = date; selectedDemo = !!mode.demo;
+    root.dataset.selectedInstant = String(date.getTime());
+    for (const id of ['today-month','today-year']) {
+      const section = find(id); if (section) section.dataset.selectedInstant = String(date.getTime());
+    }
+    if (today && window.HomeTimeCycles && window.Solar) {
+      today.setState(window.HomeTimeCycles.snapshot(date,{Solar:window.Solar}),city,{demo:selectedDemo});
+    }
+  }
   function renderFeed(date) {
     if (glance) return;
     const feed = find('daily-feed'); if (!feed) return;
@@ -91,7 +108,10 @@
         const host = /^https:\/\/([a-z]+\.wikipedia\.org)\//.exec(item.source_page || '')?.[1];
         if (host && Number.isSafeInteger(item.source_revision)) source.append(document.createTextNode(' · '),link('https://' + host + '/wiki/Special:PermanentLink/' + item.source_revision,word('日期出处 ↗','Date source ↗')));
         body.append(source);
-        li.append(node('span','history-year',String(item.year)),body); ol.append(li);
+        const year = node('span','history-year'), ago = elapsedYears(item.year,Number(parts(date).year));
+        year.append(node('span','history-year-value',String(item.year)));
+        if (ago >= 0) year.append(node('small','history-ago',lang() === 'en' ? ago.toLocaleString('en-GB') + ' years ago' : ago + '年前'));
+        li.append(year,body); ol.append(li);
       }
       return ol;
     };
@@ -141,6 +161,13 @@
     if (glance) return;
     const target = find('daily-weather'), current = weather?.cityKey === cityModel.identity(city) ? weather : null;
     const condition = current && conditionCodes[current.code], english = lang() === 'en';
+    const compact = [cityModel.label(city,english,false)];
+    if (current) {
+      compact.push(Math.round(current.temperature) + '°C',condition?.label[english ? 1 : 0] || word('天气状况暂不可用','Weather condition unavailable'));
+      if (Number.isFinite(current.details?.apparent_temperature)) compact.push(word('体感 ','Feels like ') + current.details.apparent_temperature.toFixed(1) + '°C');
+      if (current.stale) compact.push(word('上次数据','Last data'));
+    } else compact.push(weather?.error ? word('天气暂不可用','Weather unavailable') : word('正在读取天气…','Loading weather…'));
+    write('daily-weather-summary',compact.join(' · '));
     if (target) {
       target.replaceChildren();
       if (current) {
@@ -185,7 +212,7 @@
       write('glance-date',english ? weekday + ' ' + stamp : stamp + ' ' + weekday);
     } else {
       const title = english ? new Intl.DateTimeFormat('en-GB',{timeZone:zone,year:'numeric',month:'long',day:'numeric'}).format(date) : `${local.year}年${+local.month}月${+local.day}日`;
-      write('today-title',title);
+      write('today-title',title + ' ' + weekday);
     }
     write('daily-calendar-lunar',(glance ? word('农历','Lunar · ') : '') + (astro?.lunar(date,zone,english) || ''));
     write('daily-calendar-term',astro?.term(date,english) || ''); write('daily-calendar-next-term','');
@@ -287,8 +314,7 @@
       if (cities[city.id] && cityModel.identity(cities[city.id]) === cityModel.identity(city)) window.localStorage.setItem('xieyuqing-home-city-v1',city.id);
       else window.localStorage.removeItem('xieyuqing-home-city-v1');
     } catch (_) {}
-    renderCityChoices(); renderCalendar(new Date()); earth?.setCity(city); weatherMap?.setCity(city); loadWeather(prefetched);
-    const tools = document.querySelector('.weather-city-tools'); if (tools) tools.open = false;
+    renderCityChoices(); renderCalendar(new Date()); earth?.setCity(city); if (!earth) renderCycles(new Date()); weatherMap?.setCity(city); loadWeather(prefetched);
   }
   async function selectMapPoint(point) {
     if (glance || disposed) return;
@@ -308,6 +334,12 @@
       selectCity(selected,data);
     } catch (_) { if (!disposed && ticket === mapTicket) write('weather-selection-status',word('暂时无法读取该地点，保留当前天气。可重试或搜索城市。','This location is unavailable for now. The current weather is kept; try again or search for a city.')); }
     finally { window.clearTimeout(timeout); }
+  }
+  function maybeCreateWeatherMap() {
+    if (glance || disposed || weatherMap || !find('weather-map-canvas')) return;
+    const details = find('weather-more'); if (details && !details.open) return;
+    weatherMap = window.HomeWeatherMap?.createWeatherMap(document,window,{city,onPick:selectMapPoint}) || null;
+    root.dataset.weatherMapReady = weatherMap ? 'true' : 'false';
   }
   function renderSearchResults() {
     const list = find('city-search-results'); if (!list) return;
@@ -352,14 +384,14 @@
     try {
       await loadAsset(root.dataset.d3Src); if (disposed || !assetsReady || !earthVisible) return;
       await loadAsset(root.dataset.earthSrc); if (disposed || !assetsReady || !earthVisible) return;
-      earth = window.HomeEarth?.createEarth(document,window,{globeOnly:true,city:glance ? cities.beijing : city});
+      earth = window.HomeEarth?.createEarth(document,window,{globeOnly:true,city:glance ? cities.beijing : city,...(glance ? {} : {onInstant:renderCycles})});
     } catch (_) {} finally { earthLoading = false; }
   }
   function loadLunar() {
     if (disposed || lunarAttempted) return;
     lunarAttempted = true;
-    if (window.Solar) { renderCalendar(new Date()); return; }
-    loadAsset(root.dataset.lunarSrc).then(() => { if (!disposed) { renderCalendar(new Date()); if (!glance) renderDaily(new Date()); } }).catch(() => {
+    if (window.Solar) { renderCalendar(new Date()); if (!glance) renderCycles(selectedInstant || new Date(),{demo:selectedDemo}); return; }
+    loadAsset(root.dataset.lunarSrc).then(() => { if (!disposed) { renderCalendar(new Date()); if (!glance) { renderDaily(new Date()); renderCycles(selectedInstant || new Date(),{demo:selectedDemo}); } } }).catch(() => {
       if (disposed) return;
       write('daily-calendar-next-term','');
     });
@@ -376,6 +408,7 @@
       renderCalendar(date); lastDay = currentDay; lastLanguage = currentLanguage;
     } else renderCalendar(date);
     if (!glance) renderFeed(date);
+    if (!glance) { if (earth?.refresh) earth.refresh(); else renderCycles(date); }
   }
   if (!glance) {
     listen(find('daily-city'),'change',() => { const value = find('daily-city').value; if (cities[value]) selectCity(cities[value]); });
@@ -389,14 +422,18 @@
   const articles = read('home-random-data'), randomButton = find('home-random-button'), english = lang() === 'en';
   const articleLinks = Array.isArray(articles) ? articles.filter(url => typeof url === 'string' && (english ? /^\/(?:en\/)?articles\/(?!\/)/ : /^\/articles\/(?!\/)/).test(url)) : [];
   if (randomButton && articleLinks.length) { randomButton.hidden = false; listen(randomButton,'click',() => { const url = articleLinks[Math.floor(Math.random() * articleLinks.length)]; if (window.SiteNavigation?.visit) window.SiteNavigation.visit(url); else window.location.assign(url); }); }
-  const earthTarget = find('daily-earth');
+  const earthTarget = glance ? find('daily-earth') : find('earth-canvas') || find('daily-earth');
   if (earthTarget && window.IntersectionObserver) {
     const observer = new window.IntersectionObserver(entries => { earthVisible = entries.some(entry => entry.isIntersecting); maybeLoadEarth(); },{threshold:0}); observer.observe(earthTarget); cleanup.push(() => observer.disconnect());
   } else if (earthTarget) {
     const check = () => { const rect = earthTarget.getBoundingClientRect?.(); earthVisible = !!rect && rect.bottom > 0 && rect.top < window.innerHeight; maybeLoadEarth(); };
     listen(window,'scroll',check,{passive:true}); listen(window,'resize',check); check();
   }
-  if (!glance && find('weather-map-canvas')) weatherMap = window.HomeWeatherMap?.createWeatherMap(document,window,{city,onPick:selectMapPoint});
+  if (!glance) {
+    root.dataset.weatherMapReady = 'false';
+    listen(find('weather-more'),'toggle',maybeCreateWeatherMap);
+    maybeCreateWeatherMap();
+  }
   refresh(true);
   if (glance) {
     let scheduled = false;

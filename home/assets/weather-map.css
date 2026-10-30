@@ -1,5 +1,10 @@
-/* One open weather row, with quiet city tools and a local selection map. */
+/* A compact weather line; the full local map is created only after expansion. */
 .today-weather{margin-top:36px;padding-top:28px;border-top:1px solid var(--line);min-width:0}
+.weather-compact{display:flex;align-items:baseline;gap:4px 16px;flex-wrap:wrap}
+.weather-compact h3{font-size:14px;line-height:1.8;font-weight:500;color:var(--muted)}
+.weather-compact p{font-size:14px;line-height:1.9;font-variant-numeric:tabular-nums}
+.weather-more>.weather-layout{margin-top:20px}
+.weather-city-controls{flex-basis:100%;margin:10px 0 8px}
 .weather-layout{display:grid;grid-template-columns:minmax(0,1.22fr) minmax(0,1fr);gap:32px;align-items:center}
 .weather-map-panel,.weather-detail-panel{min-width:0}
 #weather-map{--weather-map-water:#e4edef;--weather-map-land:#b8cdc7;--weather-map-coast:#97b3ac;min-width:0}
@@ -19,8 +24,6 @@
 .weather-place-heading{display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:2px 14px}
 .weather-detail-panel #daily-city-name{font-size:20px;line-height:1.6;font-weight:500;color:var(--ink);margin:0;overflow-wrap:anywhere;min-width:0}
 .weather-detail-panel #daily-city-label{font-size:12px;line-height:1.8;color:var(--muted);margin:0 0 4px;overflow-wrap:anywhere}
-.weather-place-heading .weather-city-tools{margin:0}
-.weather-place-heading .weather-city-tools[open]{flex-basis:100%;margin-bottom:8px}
 .weather-selection-status{font-size:12px!important;line-height:1.8!important;color:var(--muted);margin-top:5px!important}
 .weather-selection-status:empty{display:none}
 .weather-detail-panel .yl-weather{margin-top:8px}

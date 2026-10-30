@@ -302,7 +302,7 @@ def fetch_feed(url, allowed_hosts):
     raise ValueError("Too many news feed redirects.")
 
 
-def parse_feed(raw, source, collected):
+def parse_feed(raw, source, collected, *, archive_records=None):
     if not isinstance(raw, bytes) or len(raw) > MAX_FEED_BYTES:
         raise ValueError("News feed is too large.")
     text = raw.decode("utf-8-sig")
@@ -326,6 +326,9 @@ def parse_feed(raw, source, collected):
             link = link or (fields["link"].text or "").strip()
             url = public_url(link, source["article_hosts"])
             date_text = next((fields[name].text for name in ("pubDate", "published", "date") if name in fields), None)
+            record = dict(title=title, url=url, published=date_text)
+            if archive_records is not None:
+                archive_records.append(record)
             if not date_text:
                 continue
             try:
@@ -335,6 +338,7 @@ def parse_feed(raw, source, collected):
             if published.tzinfo is None or published.utcoffset() is None:
                 continue
             published = published.astimezone(UTC).replace(microsecond=0)
+            record["published"] = _stamp(published)
             if not collected - timedelta(hours=72) <= published <= collected:
                 continue
             result.append(dict(id="news-" + sha256(url_key(url).encode("utf-8")).hexdigest()[:20],
@@ -345,16 +349,52 @@ def parse_feed(raw, source, collected):
     return result
 
 
-def collect_snapshot(config=None, *, fetch=fetch_feed, now=None):
+def _archive_warning(error):
+    # Archive failures must not suppress an independently valid display snapshot.
+    # Never print upstream bodies, credentials, local paths or the error message.
+    print(f"News archive capture unavailable ({type(error).__name__}); display snapshot handling continues.", file=sys.stderr)
+
+
+def _archive_capture(config, archive_pools, report, collected, selected):
+    # The archive's larger pool never changes the existing display selection.
+    # Prefer displayed IDs so every new snapshot link is represented even when
+    # many earlier feed entries share a title with another source.
+    import news_archive as archive
+    shown = {item["id"] for item in selected}
+    archived, seen_ids, archive_report = [], set(), []
+    source_reports = {r["id"]: r for r in report}
+    for source in config["sources"]:
+        candidates = [archive.archive_item(item, source, collected)
+                      for item in archive_pools.get(source["id"], [])]
+        candidates.sort(key=lambda item: item["id"] not in shown)
+        accepted = []
+        for item in candidates:
+            if item["id"] not in seen_ids:
+                accepted.append(item)
+                seen_ids.add(item["id"])
+                if len(accepted) == archive.MAX_PER_SOURCE:
+                    break
+        archived.extend(accepted)
+        result = source_reports[source["id"]]
+        archive_report.append(dict(source_id=source["id"], status=result["status"], received=len(candidates),
+                                   archived=len(accepted), eligible=result.get("eligible", 0), reason=result.get("reason")))
+    capture = archive.make_capture(archived, archive_report, collected, [item["id"] for item in selected] if selected else None)
+    return archive.validate_capture(capture, config)
+
+
+def collect_snapshot(config=None, *, fetch=fetch_feed, now=None, archive_sink=None):
     config = validate_sources(config) if config is not None else load_sources()
     collected = (now or _now()).astimezone(UTC).replace(microsecond=0)
-    pools, report = {}, []
+    pools, report, archive_pools = {}, [], {}
     for source in config["sources"]:
         try:
             raw = fetch(source["feed_url"], {urlsplit(source["feed_url"]).hostname})
-            entries = parse_feed(raw, source, collected)
+            archive_records = [] if archive_sink is not None else None
+            entries = parse_feed(raw, source, collected, archive_records=archive_records)
             entries = [item for item in entries if timestamp(item["published"]) >= collected - timedelta(hours=config["max_age_hours"])]
             pools[source["id"]] = deque(entries)
+            if archive_records is not None:
+                archive_pools[source["id"]] = archive_records
             report.append({"id": source["id"], "status": "ok", "eligible": len(entries)})
         except (OSError, ValueError, ET.ParseError, http.client.HTTPException) as error:
             # Do not log upstream response bodies, URLs with queries, or credentials.
@@ -392,6 +432,13 @@ def collect_snapshot(config=None, *, fetch=fetch_feed, now=None):
                 break
         if not added:
             break
+    if archive_sink is not None:
+        try:
+            capture = _archive_capture(config, archive_pools, report, collected, selected)
+        except (OSError, ValueError, TypeError) as error:
+            _archive_warning(error)
+        else:
+            archive_sink.append(capture)
     if not selected:
         raise ValueError("No current, verifiable source entries; keep the last snapshot.")
     return validate_snapshot({"version": 1, "collected_at": _stamp(collected), "items": selected}, config), report
@@ -560,13 +607,31 @@ def main(argv=None):
     parser.add_argument("--root", type=Path, default=ROOT)
     parser.add_argument("--output", type=Path)
     parser.add_argument("--input", type=Path)
+    parser.add_argument("--archive-output", type=Path)
+    parser.add_argument("--github-output", type=Path,
+                        help="Append archive_capture_ready only after a successful archive write to the step's GITHUB_OUTPUT.")
     args = parser.parse_args(argv)
     config = load_sources(args.root)
     if args.command in {"collect", "restore"}:
         if args.output is None:
             parser.error("collect/restore require --output")
         if args.command == "collect":
-            data, report = collect_snapshot(config)
+            captured = []
+            try:
+                data, report = collect_snapshot(config, archive_sink=captured if args.archive_output else None)
+            finally:
+                if captured:
+                    try:
+                        import news_archive as archive
+                        archive.write_capture(args.archive_output, captured[0], config)
+                        if args.github_output:
+                            # This file is unique to the Actions step. A missing
+                            # flag means an old capture must not be consumed.
+                            output = _safe_path(args.github_output)
+                            with output.open("a", encoding="utf-8", newline="\n") as stream:
+                                stream.write("archive_capture_ready=true\n")
+                    except (OSError, ValueError, TypeError) as error:
+                        _archive_warning(error)
             for source in report:
                 print(json.dumps(source, ensure_ascii=False))
         else:

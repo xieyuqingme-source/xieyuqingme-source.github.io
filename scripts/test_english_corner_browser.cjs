@@ -308,7 +308,7 @@ async function screenshot(page,name,selector=null,fullPage=true) { const filenam
       await page.evaluate(()=>{window.__ecNow=Date.parse('2026-10-29T16:01:00Z');window.__ecMinute();});
       const day=reading.dayNumber(new Date('2026-10-29T16:01:00Z'));
       assert.equal((await quoteState(page)).id,english[day%english.length].id);assert.equal(await page.locator('#daily-quote').getAttribute('data-quote-id'),classic[day%classic.length].id);
-      assert.equal(await page.locator('#today-title').textContent(),'2026年10月30日');
+      assert.equal(await page.locator('#today-title').textContent(),'2026年10月30日 星期五');
     }finally{await ctx.close();}
   });
   await check('without JavaScript the whole directory, classic, number table and two daily quotations remain readable',async()=>{
@@ -349,10 +349,10 @@ async function screenshot(page,name,selector=null,fullPage=true) { const filenam
         await go(page,(language==='en'?'/en':'')+'/today/');
         const timeline=page.locator('#daily-history-list .history-timeline');
         assert.equal(await timeline.count(),1);
-        assert.deepEqual(await timeline.locator('.history-item:visible .history-year').allTextContents(),expected.slice(0,3).map(item=>String(item.year)));
+        assert.deepEqual(await timeline.locator('.history-item:visible .history-year-value').allTextContents(),expected.slice(0,3).map(item=>String(item.year)));
         const before=await timeline.boundingBox();
         await timeline.locator('.history-more>summary').press('Enter');
-        assert.deepEqual(await timeline.locator('.history-item:visible .history-year').allTextContents(),expected.map(item=>String(item.year)));
+        assert.deepEqual(await timeline.locator('.history-item:visible .history-year-value').allTextContents(),expected.map(item=>String(item.year)));
         const geometry=await timeline.evaluate(node=>{
           const box=node.getBoundingClientRect(),line=getComputedStyle(node,':before'),items=[...node.querySelectorAll('.history-item')];
           const dots=items.map(item=>{const r=item.getBoundingClientRect(),s=getComputedStyle(item,':before');return {x:r.x+parseFloat(s.left)+parseFloat(s.width)/2,y:r.y+parseFloat(s.top)+parseFloat(s.height)/2,after:getComputedStyle(item,':after').display};});

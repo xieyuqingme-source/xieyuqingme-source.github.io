@@ -208,13 +208,28 @@ class HistoryTodayTests(unittest.TestCase):
         expected = sorted(item["year"] for item in data["items"] if item["month_day"] == "01-01")
         for language in ("zh-CN", "en"):
             html = render_history(data, language, date(2026, 1, 1))
-            years = [int(value) for value in __import__("re").findall(r'class="history-year">(\d+)', html)]
+            years = [int(value) for value in __import__("re").findall(r'class="history-year-value">(-?\d+)', html)]
             self.assertEqual(years, expected)
             first, more = html.split('<details class="history-more">')
-            self.assertEqual([int(value) for value in __import__("re").findall(r'class="history-year">(\d+)',first)], expected[:3])
-            self.assertEqual([int(value) for value in __import__("re").findall(r'class="history-year">(\d+)',more)], expected[3:])
+            self.assertEqual([int(value) for value in __import__("re").findall(r'class="history-year-value">(-?\d+)',first)], expected[:3])
+            self.assertEqual([int(value) for value in __import__("re").findall(r'class="history-year-value">(-?\d+)',more)], expected[3:])
             self.assertEqual(html.count('class="history-timeline"'), 1)
         self.assertEqual(data["items"], original)
+
+    def test_elapsed_years_use_historical_years_without_year_zero(self):
+        from history_today import elapsed_years
+        for event, current, expected in ((1863,2026,163),(-539,2026,2564),(-1,2026,2026),(1,2026,2025),(-1,1,1),(-2,-1,1)):
+            with self.subTest(event=event,current=current):
+                self.assertEqual(elapsed_years(event,current),expected)
+        for event, current in ((0,2026),(1,0),(True,2026)):
+            with self.assertRaises(ValueError):
+                elapsed_years(event,current)
+        data=fixture()
+        # The collection's existing schema accepts CE years only. Keep that
+        # input contract; the conversion above also covers a future BCE import.
+        data['items'][0]['year']=1863
+        self.assertIn('<small class="history-ago">163年前</small>',render_history(data,today=date(2026,1,1)))
+        self.assertIn('<small class="history-ago">163 years ago</small>',render_history(data,'en',date(2026,1,1)))
 
     def test_loader_rejects_duplicate_json_keys_and_linked_paths(self):
         with TemporaryDirectory(prefix="history-test-", dir=ROOT) as temporary:

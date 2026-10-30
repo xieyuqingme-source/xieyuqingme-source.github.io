@@ -201,6 +201,14 @@ def _beijing_date(today):
     raise ValueError("History rendering needs a date or timezone-aware datetime.")
 
 
+def elapsed_years(event_year, current_year):
+    """Elapsed years across historical BCE/CE years, which have no year zero."""
+    if any(type(year) is not int or year == 0 for year in (event_year, current_year)):
+        raise ValueError("Historical years must be nonzero integers.")
+    astronomical = lambda year: year + 1 if year < 0 else year
+    return astronomical(current_year) - astronomical(event_year)
+
+
 def render_history(data, language="zh-CN", today=None):
     """Render section contents, leaving the surrounding section and h2 to its template."""
     validate_history(data)
@@ -228,7 +236,11 @@ def render_history(data, language="zh-CN", today=None):
                 revision_label = "Date source" if english else "日期出处"
                 sources += (f' · <a href="{escape(revision_url, quote=True)}" target="_blank" '
                             f'rel="noopener noreferrer">{revision_label} ↗</a>')
-            result.append(f'<li class="history-item"><span class="history-year">{item["year"]}</span>'
+            ago = elapsed_years(item["year"], day.year)
+            age = (f"{ago:,} years ago" if english else f"{ago}年前") if ago >= 0 else ""
+            year_label = (f'<span class="history-year"><span class="history-year-value">{item["year"]}</span>'
+                          + (f'<small class="history-ago">{age}</small>' if age else "") + '</span>')
+            result.append(f'<li class="history-item">{year_label}'
                           f'<div><h3><a href="{article}" target="_blank" rel="noopener noreferrer">{title}</a></h3>'
                           f'<p>{text}</p><p class="history-source">{sources}</p></div></li>')
         return '<ol class="history-list">' + "".join(result) + "</ol>"

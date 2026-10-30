@@ -183,9 +183,11 @@ test('glance and full templates keep their Earth contracts and declare heavy scr
     const html = read(file);
     const glance = !file.includes('today.template');
     const ids = glance ? ['daily-earth','earth-canvas','daily-local-time','daily-calendar-lunar','daily-calendar-term','glance-date','daily-calendar-next-term']
-      : ['daily-earth','earth-canvas','daily-city','earth-hour','earth-hour-label','earth-now','daily-local-time','daily-sunrise','daily-sunset','daily-daylength','daily-subsolar','daily-moon-phase','daily-world-clocks','today-title','daily-calendar-lunar','daily-calendar-term','daily-calendar-festivals','daily-weather'];
+      : ['daily-earth','earth-canvas','daily-city','earth-hour','earth-hour-label','earth-now','daily-local-time','daily-sunrise','daily-sunset','daily-daylength','daily-subsolar','daily-world-clocks','today-title','daily-calendar-lunar','daily-calendar-term','daily-calendar-festivals','daily-weather','today-month','today-year','moon-phase-name'];
     for (const id of ids) assert.equal((html.match(new RegExp('id="' + id + '"', 'g')) || []).length, 1, file + ' #' + id);
     if (!glance) {
+      assert.doesNotMatch(html,/id="daily-moon-phase"/,file + ' only the Moon section owns the phase readout');
+      assert.match(html,/max="23\.983333333333334" step="0\.016666666666666666"/,file + ' native range reaches the 23:59 endpoint');
       const title = file.startsWith('home/en/') ? 'today_date_title_en' : 'today_date_title';
       assert.ok(html.includes('<h1 id="today-title">{{' + title + '}}</h1>'),file + ' date title is supplied by the builder');
       for (const id of ['daily-calendar-month','daily-calendar-day','daily-calendar-weekday']) assert.doesNotMatch(html,new RegExp('id="' + id + '"'),file + ' obsolete calendar block stays removed');
@@ -200,11 +202,16 @@ test('glance and full templates keep their Earth contracts and declare heavy scr
   }
 });
 
-test('mean lunar phase follows the synodic cycle and rejects invalid dates',() => {
-  const zero = Date.UTC(2000,0,6,18,14), month = 29.530588853 * 86400000;
-  assert.equal(A.moonPhase(zero).name,'新月'); assert.ok(A.moonPhase(zero).illumination < 1e-9);
-  assert.equal(A.moonPhase(zero + month / 2,true).name,'Full moon'); assert.ok(Math.abs(A.moonPhase(zero + month / 2).illumination - 1) < 1e-9);
-  assert.equal(A.moonPhase(zero + month * .625).name,'亏凸月'); assert.equal(A.moonPhase(zero + month * .75,true).name,'Last quarter');
+test('the common phase API uses actual elongation and the Beijing principal-phase date',() => {
+  // USNO's 2026-10-26 full moon is 04:12 UT; all 99 fixture events have their
+  // independent 60-minute accuracy gate in test_home_time_cycles.cjs.
+  const phase = A.moonPhase('2026-10-26T04:12:00Z');
+  assert.equal(phase.name,'满月'); assert.equal(phase.phaseKey,'full');
+  assert.ok(phase.illumination > .999);
+  assert.equal(A.moonPhase('2026-10-26T00:00:00+08:00',true).name,'Full moon');
+  assert.notEqual(A.moonPhase('2026-10-25T23:59:59+08:00').phaseKey,'full');
+  assert.notEqual(A.moonPhase('2026-10-27T00:00:00+08:00').phaseKey,'full');
+  assert.equal(phase.fraction,phase.elongation / 360);
   assert.throws(() => A.moonPhase('invalid'),TypeError);
 });
 
@@ -214,13 +221,17 @@ test('lazy globe mode adds six world clocks without a second weather request and
   const context = {setTransform() {},clearRect() { draws++; },createRadialGradient:() => ({addColorStop() {}}),beginPath() {},arc() {},fill() {},fillText() {}};
   h.nodes['earth-canvas'] = new Element(); Object.assign(h.nodes['earth-canvas'],{getContext:() => context,getBoundingClientRect:() => ({width:160}),setAttribute() {}});
   h.window.getComputedStyle = () => ({getPropertyValue:() => ''});
-  const control = createEarth(h.document,h.window,{globeOnly:true});
+  const instants = [];
+  const control = createEarth(h.document,h.window,{globeOnly:true,onInstant:(date,mode) => instants.push({ms:date.getTime(),demo:mode.demo})});
   assert.equal(h.requests.length,0);
   assert.equal(h.nodes['daily-world-clocks'].children.length,6);
   assert.match(h.nodes['daily-world-clocks'].textContent,/北京.*吉隆坡.*伦敦.*纽约.*莫斯科.*迪拜/);
-  assert.match(h.nodes['daily-moon-phase'].textContent,/月相/);
-  const before = draws; control.setPaused(true); control.refresh(); assert.equal(draws,before); assert.equal(control.getState().paused,true);
+  assert.equal(h.nodes['daily-moon-phase'].textContent,'');
+  assert.equal(instants.at(-1).ms,Number(h.element.dataset.selectedInstant));
+  const before = draws, reports = instants.length; control.setPaused(true); control.refresh(); assert.equal(draws,before); assert.equal(control.getState().paused,true);
+  assert.equal(instants.length,reports + 1,'offscreen readouts still receive the shared instant');
   control.setPaused(false); assert.ok(draws > before); control.destroy(); await settle(); assert.equal(h.intervals.size,0);
+  const last = instants.length; control.refresh(); assert.equal(instants.length,last,'a departed page cannot publish a late instant');
 });
 
 test('homepage mini globe stays in Beijing without reading city preferences or weather caches',async () => {

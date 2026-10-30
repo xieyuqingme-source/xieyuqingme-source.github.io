@@ -1,0 +1,35 @@
+/* The caller owns all ordinary-text readouts. These styles only describe SVG. */
+.daily-home{--tv-sun:#cc8b30;--tv-earth:var(--yl-land,#6f8f9c);--tv-night:#263a43;--tv-moon:#e6dfcc;--tv-moon-night:#38434b;--tv-pole:#fff}
+:root[data-theme=dark] .daily-home{--tv-sun:#f0bc6a;--tv-night:#07121a;--tv-moon:#e9e2d2;--tv-moon-night:#26323c}
+[data-today-visual]{display:block;width:100%;max-width:100%;min-width:0;height:auto;overflow:hidden;font-family:var(--sans,system-ui,sans-serif)}
+[data-today-visual=phase]{width:80px;flex:none}
+.tv-track{fill:none;stroke:var(--line);stroke-width:1.5}
+.tv-tick{stroke:var(--muted);stroke-width:1;opacity:.7}
+.tv-tick.tv-major{stroke-width:2;opacity:1}
+.tv-tick.tv-current{stroke:var(--accent);opacity:1}
+.tv-label,.tv-month{fill:var(--muted);font-size:11px}
+.tv-month{font-size:10px}
+.tv-strong{fill:var(--ink);font-weight:600}
+.tv-term{fill:var(--muted);font-size:11px}
+.tv-term.tv-major{fill:var(--ink);font-weight:650}
+.tv-term.tv-current{fill:var(--accent);font-weight:750}
+.tv-season{fill:none;stroke:var(--accent);stroke-opacity:.16;stroke-width:8;stroke-linecap:round}
+.tv-travelled{fill:none;stroke:var(--accent);stroke-width:3;stroke-linecap:round}
+.tv-motion{fill:none;stroke:var(--accent);stroke-width:1.5}
+.tv-arrow-fill{fill:var(--accent)}
+.tv-light-ray{stroke:var(--tv-sun);stroke-width:1.5}
+.tv-sun{fill:var(--tv-sun)}
+.tv-body-night{fill:var(--tv-night)}
+.tv-earth-lit{fill:var(--tv-earth)}
+.tv-moon-lit{fill:var(--tv-moon)}
+.tv-moon-night{fill:var(--tv-moon-night)}
+.tv-body-outline{fill:none;stroke:var(--muted);stroke-opacity:.4;stroke-width:.7}
+.tv-pole{fill:var(--tv-pole);stroke:var(--tv-night);stroke-width:.8}
+.tv-grid{stroke:var(--line);stroke-width:1}
+.tv-equator{stroke-dasharray:4 4}
+.tv-curve-past{fill:none;stroke:var(--accent);stroke-width:2.5;stroke-linejoin:round}
+.tv-curve-future{fill:none;stroke:var(--muted);stroke-width:1.7;stroke-dasharray:4 5;stroke-linejoin:round}
+.tv-selected-line{stroke:var(--accent);stroke-width:1;stroke-dasharray:2 4;stroke-opacity:.6}
+.tv-selected-dot{fill:var(--accent);stroke:var(--paper);stroke-width:2}
+.tv-key-dot{fill:var(--paper);stroke:var(--muted);stroke-width:1.3}
+@media(prefers-reduced-motion:reduce){[data-today-visual]{animation:none;transition:none}}
