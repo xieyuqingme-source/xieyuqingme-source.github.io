@@ -1,0 +1,160 @@
+{
+  "version": 1,
+  "title": "恩格斯晚年的五封信",
+  "intro": "经济、政治与思想的关系，能否用一句公式说完？这五封回信面对不同的著作、疑问和研究工作，反复把读者带回条件、过程和相互作用。按写信先后读，再把几个常见说法放回各自的段落。",
+  "ai_assisted": true,
+  "sections": [
+    {
+      "id": "five-letters",
+      "title": "沿五封信读下去",
+      "intro": "以下按回信内容概述讨论背景；收信人的来信没有在此复原，日期范围也保留原文的写法。",
+      "items": [
+        {
+          "id": "late-letter237",
+          "title": "1890年8月5日：研究的指南",
+          "text": "这封信从巴尔特著作的评论谈起，又涉及未来社会的分配争论。恩格斯批评把唯物史观当成贴标签的捷径，要求具体研究社会形态的存在条件。他也说明思想领域有反作用，分配方式随生产和组织的发展而变化。信并未把未来社会画成一套永远不变的制度表。",
+          "source": {
+            "url": "https://www.marxists.org/chinese/marx-engels2/10/237.htm",
+            "locator": "《文集》第10卷第237封；页首月份字样见既有勘误",
+            "checked_on": "2026-10-30"
+          },
+          "citations": [
+            "c-v3-letter-237-guide"
+          ],
+          "related": [
+            "/marx/not-a-marxist/",
+            "/marx/base-superstructure/"
+          ],
+          "date": "1890-08-05",
+          "precision": "day"
+        },
+        {
+          "id": "late-letter240",
+          "title": "1890年9月21—22日：归根到底与合力",
+          "text": "布洛赫所关心的是唯物史观怎样解释历史。恩格斯把经济的决定作用同政治、法律、传统等因素的作用一起讨论，又以许多意志交错形成历史结果的图景说明个人行动。他最后建议收信人读原著，并指出《雾月十八日》是具体运用的例子。",
+          "source": {
+            "url": "https://www.marxists.org/chinese/marx-engels2/10/240.htm",
+            "locator": "《文集》第10卷第240封，页首1890年9月21［—22］日",
+            "checked_on": "2026-10-30"
+          },
+          "citations": [
+            "c-letter-240-history"
+          ],
+          "related": [
+            "/marx/economic-determinism/",
+            "/marx/works/eighteenth-brumaire/"
+          ],
+          "date": "1890-09",
+          "precision": "month"
+        },
+        {
+          "id": "late-letter241",
+          "title": "1890年10月27日：相对独立的领域怎样反作用",
+          "text": "施米特的新闻工作机会成为信的开场。恩格斯从商品贸易、货币市场谈到国家、法律和哲学，说明社会分工怎样形成具有自身活动方式的领域。理解这些领域对生产的反作用，还要看它们取得独立性的条件，以及相互作用的力量为何并不相等。",
+          "source": {
+            "url": "https://www.marxists.org/chinese/marx-engels2/10/241.htm",
+            "locator": "《文集》第10卷第241封，1890年10月27日",
+            "checked_on": "2026-10-30"
+          },
+          "citations": [
+            "c-v3-letter-241-interaction"
+          ],
+          "related": [
+            "/marx/base-superstructure/",
+            "/marx/economic-determinism/"
+          ],
+          "date": "1890-10-27",
+          "precision": "day"
+        },
+        {
+          "id": "late-letter263",
+          "title": "1893年7月14日：思想材料怎样形成自己的外观",
+          "text": "梅林寄来《莱辛传奇》，恩格斯从其中关于历史唯物主义的附录谈起。他肯定其主要论述，接着反省自己与马克思较少说明观念形成的方式。思想家继承已有材料，容易把思想内部的发展当成全部动力；追问这种外观怎样产生，是这封信留下的研究问题。",
+          "source": {
+            "url": "https://www.marxists.org/chinese/marx-engels2/10/263.htm",
+            "locator": "《文集》第10卷第263封，1893年7月14日",
+            "checked_on": "2026-10-30"
+          },
+          "citations": [
+            "c-v3-letter-263-form"
+          ],
+          "related": [
+            "/marx/base-superstructure/",
+            "/marx/productive-forces-relations/"
+          ],
+          "date": "1893-07-14",
+          "precision": "day"
+        },
+        {
+          "id": "late-letter266",
+          "title": "1894年1月25日：把经济关系与人的活动读在一起",
+          "text": "恩格斯在回信中先解释经济关系包括生产、交换、技术和历史条件，再讨论政治、思想、个人与偶然性。举例时，他比较科学研究与技术需要，也谈历史人物的出现。信末请对方把握总的联系；这与抽取一句话来替代具体历史研究的读法有很大距离。",
+          "source": {
+            "url": "https://www.marxists.org/chinese/marx-engels2/10/266.htm",
+            "locator": "《文集》第10卷第266封，1894年1月25日；作者和收信人据本版题名",
+            "checked_on": "2026-10-30"
+          },
+          "citations": [
+            "c-v3-letter-266-action"
+          ],
+          "related": [
+            "/marx/economic-determinism/",
+            "/marx/practice/"
+          ],
+          "date": "1894-01-25",
+          "precision": "day"
+        }
+      ]
+    },
+    {
+      "id": "read-together",
+      "title": "把三个说法放回各自的信",
+      "intro": "这些信互相照亮，也各有问题对象。",
+      "items": [
+        {
+          "id": "late-key-determination",
+          "title": "归根到底：先问讨论的是哪一个历史过程",
+          "text": "第240封把现实生活的生产与再生产放在决定性的地位，同时列出政治形式与思想等因素；第266封把这个判断放到更广的相互作用和历史条件中展开。这个说法要求研究长过程中的联系，具体事件仍要具体考察。",
+          "source": {
+            "url": "https://www.marxists.org/chinese/marx-engels2/10/240.htm",
+            "locator": "第240封首两段；并读第266封第2点（a）",
+            "checked_on": "2026-10-30"
+          },
+          "citations": [],
+          "related": [
+            "/marx/economic-determinism/"
+          ]
+        },
+        {
+          "id": "late-key-interaction",
+          "title": "相互作用：力量不必相等",
+          "text": "第241封从贸易、国家和法等领域展开反作用，并在末段强调各因素的力量有差别。第263封则从观念形成及其影响补充这一问题。把相互作用理解成每个因素平均分配同等作用，就会漏掉这些信实际辨认的关系。",
+          "source": {
+            "url": "https://www.marxists.org/chinese/marx-engels2/10/241.htm",
+            "locator": "第241封国家与法的段落及末段；并读第263封",
+            "checked_on": "2026-10-30"
+          },
+          "citations": [],
+          "related": [
+            "/marx/base-superstructure/"
+          ]
+        },
+        {
+          "id": "late-key-resultant",
+          "title": "合力：许多意志怎样形成并非人人预想的结果",
+          "text": "第240封用交错的力量说明历史结果：个人的意志参与其中，却往往得不到各自希望的结果。第266封关于人创造历史及其既定条件的讨论可以接着读。这幅图景同时提出两个问题：行动者希望什么，现实关系又怎样塑造其行动？",
+          "source": {
+            "url": "https://www.marxists.org/chinese/marx-engels2/10/240.htm",
+            "locator": "第240封第三段：单个意志、力的平行四边形与合力",
+            "checked_on": "2026-10-30"
+          },
+          "citations": [],
+          "related": [
+            "/marx/practice/",
+            "/marx/works/eighteenth-brumaire/"
+          ]
+        }
+      ]
+    }
+  ]
+}

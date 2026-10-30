@@ -70,6 +70,27 @@
     const remove=node('button','card-remove editor-only','×');remove.type='button';remove.dataset.removeItem=id;M.uiAttr(remove,'title','删除项目');M.uiAttr(remove,'aria-label','删除项目：'+itemName);
     entry.append(button,handle,remove);return entry;
   }
+  function refreshEconomistSources() {
+    const details = $('economist-sources'), list = $('economist-source-list');
+    if (!details || !list) return;
+    details.hidden = state.templateId !== 'economist';
+    if (details.hidden) return;
+    const language = window.SiteI18n?.lang?.() === 'en' ? 'en' : 'zh-CN';
+    const entries = [];
+    M.TEMPLATES.economist.rows.forEach(row => row.artKeys.forEach(key => {
+      const art = M.ECONOMIST_ART[key], entry = node('li'); entry.dataset.economistArt = key;
+      const name = language === 'en' ? art.name_en : art.name;
+      entry.append(node('h3', null, name + ' · ' + art.born + '–' + art.died));
+      entry.append(node('p', 'economist-default-tier', M.translate('默认分档') + '：' + M.displayRowName(row, {templateId:'economist'})));
+      entry.append(node('p', null, art.basis[language]));
+      const source = node('a', null, M.translate('中文原文') + ' ↗');
+      source.href = art.source.url; source.target = '_blank'; source.rel = 'noopener noreferrer'; source.hreflang = 'zh-CN';
+      entry.append(source);
+      const locator = node('p', 'economist-source-locator', art.source.locator); locator.lang = 'zh-CN'; entry.append(locator);
+      entries.push(entry);
+    }));
+    list.replaceChildren(...entries);
+  }
   function render() {
     const boardNodes = state.rows.map(row => {
       const section = node('div','tier-row'); section.dataset.rowId = row.id;
@@ -90,6 +111,7 @@
     M.uiText($('reset-ranking'),'恢复默认'+templateLabel());
     M.uiText($('template-note'),() => M.templateNote(state.templateId));
     const readingLink=$('book-reading-link');if(readingLink)readingLink.hidden=state.templateId!=='book';
+    refreshEconomistSources();
     $('add-row').disabled = state.rows.length >= M.LIMITS.rows;
     $('clear-items').disabled=Object.keys(state.items).length===0;$('undo-clear').hidden=!undoSnapshot;M.uiText($('undo-clear'),undoKind==='template'?'撤销切换模板':undoKind==='reset'?'撤销恢复默认':'撤销清空');
     view?.refresh(state.pool.length);
@@ -111,7 +133,7 @@
     });
     for(const option of $('item-target').options){const row=state.rows.find(row=>row.id===option.value);option.textContent=row?M.displayRowName(row,state):M.translate('待选区');}
     $('display-title').textContent=M.displayTitle(state);
-    autosizeTitle();imageEditor.refreshLanguage?.();view?.refresh(state.pool.length);
+    autosizeTitle();imageEditor.refreshLanguage?.();view?.refresh(state.pool.length);refreshEconomistSources();
   }
   window.SiteI18n?.onChange?.(refreshDisplayLanguage);
 

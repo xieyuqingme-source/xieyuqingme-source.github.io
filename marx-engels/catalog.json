@@ -20,6 +20,11 @@
       "id": "between",
       "title": "中英之间",
       "description": "对照约定的历史英译，辨认词语和句子的实际位置。"
+    },
+    {
+      "id": "shelf",
+      "title": "马恩的书架",
+      "description": "沿着文学典故，看看马恩怎样借故事和人物提出问题。"
     }
   ],
   "cards": [
@@ -54,7 +59,7 @@
       "slug": "use-value-and-value",
       "title": "东西好用，为什么还不能说明它的价值？",
       "summary": "使用价值回答能满足什么需要，价值涉及商品中凝结的社会劳动；交换价值则是价值的表现形式。",
-      "level": 1,
+      "level": 2,
       "branch": [
         "economics"
       ],
@@ -151,7 +156,7 @@
       "slug": "value-form",
       "title": "价值看不见，为什么能表现出来？",
       "summary": "价值形式研究商品怎样借另一商品表现自己的价值，从简单形式逐步展开到货币形式。",
-      "level": 2,
+      "level": 3,
       "branch": [
         "economics"
       ],
@@ -185,7 +190,7 @@
       "slug": "commodity-fetishism",
       "title": "商品拜物教，只是在说人爱买东西吗？",
       "summary": "它首先指生产者的社会关系采取了物与物的关系的形式，不能简单等同于购物欲。",
-      "level": 2,
+      "level": 3,
       "branch": [
         "economics",
         "philosophy"
@@ -253,7 +258,7 @@
       "slug": "capital-relation",
       "title": "资本是一笔钱，还是一种关系？",
       "summary": "资本不能只按物品外形辨认。第四章从价值增殖的运动入手，《雇佣劳动与资本》进一步强调社会关系。",
-      "level": 1,
+      "level": 2,
       "branch": [
         "economics"
       ],
@@ -289,7 +294,7 @@
       "slug": "labour-power",
       "title": "买的是劳动，还是劳动力？",
       "summary": "劳动力是人的劳动能力，劳动是这种能力的实际使用。区分两者，是理解剩余价值的关键。",
-      "level": 1,
+      "level": 2,
       "branch": [
         "economics"
       ],
@@ -371,7 +376,7 @@
       "slug": "constant-variable-capital",
       "title": "不变资本，难道永远不会涨价吗？",
       "summary": "不变与可变依据它们在价值增殖中的不同作用划分，不是依据市场价格是否波动，也不是固定资本与流动资本的另一套叫法。",
-      "level": 2,
+      "level": 3,
       "branch": [
         "economics"
       ],
@@ -461,7 +466,7 @@
       "slug": "reserve-army",
       "title": "产业后备军，是说人口绝对太多吗？",
       "summary": "相对过剩人口是相对于资本增殖所需要的劳动力而言，不能等同于人口相对自然资源的绝对过多。",
-      "level": 2,
+      "level": 3,
       "branch": [
         "economics"
       ],
@@ -488,7 +493,7 @@
       "slug": "primitive-accumulation",
       "title": "原始积累，就是先省下一笔本钱吗？",
       "summary": "第二十四章研究使资本关系成为可能的历史过程：生产者同生产资料分离，而不只是个人储蓄的故事。",
-      "level": 1,
+      "level": 2,
       "branch": [
         "economics"
       ],
@@ -515,7 +520,7 @@
       "slug": "practice",
       "title": "实践，只是亲身试过一次吗？",
       "summary": "《提纲》把实践理解为现实的、感性的人的活动，并把认识、环境与人的改变联系起来。",
-      "level": 1,
+      "level": 2,
       "branch": [
         "philosophy"
       ],
@@ -543,7 +548,7 @@
       "slug": "productive-forces-relations",
       "title": "生产力和生产关系，为什么要一起看？",
       "summary": "生产力涉及生产的能力与条件，生产关系涉及人们在社会生产中形成的关系；二者的矛盾是《序言》分析社会变革的重要线索。",
-      "level": 1,
+      "level": 3,
       "branch": [
         "philosophy",
         "economics"
@@ -578,7 +583,7 @@
       "slug": "base-superstructure",
       "title": "经济基础决定一切，就不用研究政治和思想了吗？",
       "summary": "《序言》把生产关系的总和称作经济结构；恩格斯致布洛赫信强调，归根到底的决定作用不等于经济是唯一因素。",
-      "level": 2,
+      "level": 3,
       "branch": [
         "philosophy"
       ],
@@ -613,7 +618,7 @@
       "slug": "alienated-labour",
       "title": "异化劳动，就是觉得工作不开心吗？",
       "summary": "《1844年经济学哲学手稿》分析劳动者同产品、活动、类本质和他人的关系，不能缩成一种个人心情。",
-      "level": 2,
+      "level": 3,
       "branch": [
         "philosophy",
         "economics"
@@ -642,7 +647,7 @@
       "slug": "necessity-freedom",
       "title": "自由王国，是再也不用劳动了吗？",
       "summary": "两部原著分别讨论社会关系的自觉控制与人的能力自由发展；自由并不意味着物质生活的必要条件消失。",
-      "level": 2,
+      "level": 3,
       "branch": [
         "philosophy",
         "socialism"
@@ -700,7 +705,7 @@
       "slug": "human-essence",
       "title": "原著说的是人，还是人的本质？",
       "summary": "《提纲》第六条的主语是人的本质，并有现实性上的限定；简写成关于个人的一条万能定义，会丢失论证对象。",
-      "level": 1,
+      "level": 2,
       "branch": [
         "philosophy"
       ],
@@ -782,7 +787,7 @@
       "slug": "thesis-eleven",
       "title": "《提纲》第十一条，真的只有一种写法吗？",
       "summary": "文集并列两个稿本，第十一条的措辞有差别；引用时应分清马克思原稿与恩格斯发表稿。",
-      "level": 1,
+      "level": 2,
       "branch": [
         "philosophy"
       ],
@@ -810,7 +815,7 @@
       "slug": "economic-determinism",
       "title": "唯物史观，只允许一个经济原因吗？",
       "summary": "恩格斯致布洛赫信明确反对把经济因素说成唯一决定因素，强调具体历史中的相互作用。",
-      "level": 1,
+      "level": 2,
       "branch": [
         "philosophy"
       ],
@@ -864,7 +869,7 @@
       "slug": "freedom-kingdom",
       "title": "必然王国和自由王国，只能署马克思吗？",
       "summary": "恩格斯《反杜林论》与马克思《资本论》第三卷都有相关论述，但常见的飞跃表述与各自论证应分别定位。",
-      "level": 1,
+      "level": 3,
       "branch": [
         "philosophy",
         "socialism"
@@ -898,7 +903,7 @@
       "branch": [
         "socialism"
       ],
-      "level": 2,
+      "level": 1,
       "tags": [
         "原著精读"
       ],
@@ -922,7 +927,7 @@
         "economics",
         "philosophy"
       ],
-      "level": 2,
+      "level": 3,
       "tags": [
         "原著精读"
       ],
@@ -970,7 +975,7 @@
         "economics",
         "socialism"
       ],
-      "level": 2,
+      "level": 1,
       "tags": [
         "原著精读"
       ],
@@ -1110,7 +1115,7 @@
       "branch": [
         "socialism"
       ],
-      "level": 2,
+      "level": 1,
       "tags": [
         "中英对照"
       ],
@@ -1133,7 +1138,7 @@
       "branch": [
         "socialism"
       ],
-      "level": 2,
+      "level": 1,
       "tags": [
         "中英对照"
       ],
@@ -1170,6 +1175,448 @@
       "added": "2026-10-29",
       "status": "published",
       "ai_assisted": true
+    },
+    {
+      "slug": "senior-last-hour",
+      "title": "利润真是最后一小时才产生的吗？",
+      "summary": "西尼耳把产品价值的份额当作工作时间的先后安排；马克思从价值转移与新价值的区别反驳了这笔账。",
+      "level": 3,
+      "verdict": "假",
+      "branch": [
+        "economics"
+      ],
+      "tags": [
+        "第七章",
+        "工作日"
+      ],
+      "citations": [
+        "c-capital-1-ch07-surplus-rate"
+      ],
+      "related": [
+        "surplus-value",
+        "constant-variable-capital",
+        "working-day"
+      ],
+      "added": "2026-10-30",
+      "status": "published",
+      "ai_assisted": true,
+      "column": "myths",
+      "sources": [],
+      "references": [
+        {
+          "level": 1,
+          "label": "《资本论》第一卷第七章第3节：西尼耳的最后一小时",
+          "url": "https://www.marxists.org/chinese/marx/capital/07.htm",
+          "checked_on": "2026-10-30"
+        }
+      ]
+    },
+    {
+      "slug": "capital-blood",
+      "title": "资本的每个毛孔滴着血：正文写了什么？",
+      "summary": "滴着血的句子出自第二十四章第六节正文，讨论产业资本家的历史形成；不要与脚注转引的利润百分比混成一句。",
+      "level": 1,
+      "verdict": "真",
+      "branch": [
+        "economics"
+      ],
+      "tags": [
+        "原始积累",
+        "引文出处"
+      ],
+      "citations": [
+        "c-v3-capital-blood"
+      ],
+      "related": [
+        "primitive-accumulation",
+        "capital-relation"
+      ],
+      "added": "2026-10-30",
+      "status": "published",
+      "ai_assisted": true,
+      "column": "myths",
+      "sources": [],
+      "references": []
+    },
+    {
+      "slug": "manifesto-english-slogan",
+      "title": "联合起来的英文，1888年译本怎样写？",
+      "summary": "1888年穆尔译本结尾是Working Men of All Countries, Unite!；流行说法可以表达近似意思，却不是该版本的逐字原句。",
+      "level": 1,
+      "verdict": "部分正确",
+      "branch": [
+        "socialism"
+      ],
+      "tags": [
+        "宣言",
+        "中英对照"
+      ],
+      "citations": [
+        "c-v2-manifesto-unite"
+      ],
+      "related": [
+        "between-unite",
+        "between-labour-power"
+      ],
+      "added": "2026-10-30",
+      "status": "published",
+      "ai_assisted": true,
+      "column": "myths",
+      "sources": [],
+      "references": []
+    },
+    {
+      "slug": "gotha-needs-conditions",
+      "title": "按需分配这句话，前面还有哪些条件？",
+      "summary": "《哥达纲领批判》把这个口号放在共产主义高级阶段的讨论中，先说明分工、劳动、个人发展和生产力的条件。",
+      "level": 2,
+      "verdict": "部分正确",
+      "branch": [
+        "socialism",
+        "economics"
+      ],
+      "tags": [
+        "哥达纲领批判",
+        "分配"
+      ],
+      "citations": [
+        "c-v3-gotha-needs"
+      ],
+      "related": [
+        "gotha-critique",
+        "productive-forces-relations"
+      ],
+      "added": "2026-10-30",
+      "status": "published",
+      "ai_assisted": true,
+      "column": "myths",
+      "sources": [],
+      "references": []
+    },
+    {
+      "slug": "manifesto-revolution-causation",
+      "title": "先出版，就能说它引发了革命吗？",
+      "summary": "1872年序言说明原稿在二月革命前几星期送印；这个先后关系本身不足以证明革命由这份文本引发。",
+      "level": 2,
+      "verdict": "存疑",
+      "branch": [
+        "socialism"
+      ],
+      "tags": [
+        "宣言",
+        "历史因果"
+      ],
+      "citations": [
+        "c-v3-manifesto-printing"
+      ],
+      "related": [
+        "manifesto",
+        "productive-forces-relations"
+      ],
+      "added": "2026-10-30",
+      "status": "published",
+      "ai_assisted": true,
+      "column": "myths",
+      "sources": [],
+      "references": []
+    },
+    {
+      "slug": "marx-mathematics",
+      "title": "墓前讲话为何特别提到数学？",
+      "summary": "恩格斯确实提到马克思在数学领域的研究，但一篇悼词不能代替对数学手稿及其学科贡献的具体考察。",
+      "level": 2,
+      "verdict": "部分正确",
+      "branch": [
+        "philosophy"
+      ],
+      "tags": [
+        "墓前讲话",
+        "数学"
+      ],
+      "citations": [
+        "c-v3-funeral-mathematics"
+      ],
+      "related": [
+        "passage-two-discoveries",
+        "funeral-speech"
+      ],
+      "added": "2026-10-30",
+      "status": "published",
+      "ai_assisted": true,
+      "column": "myths",
+      "sources": [],
+      "references": []
+    },
+    {
+      "slug": "shelf-timon-gold",
+      "title": "泰门眼里的金子，为什么能颠倒美丑？",
+      "summary": "一点金子，为什么能在诗句里把丑变美、把卑贱变成尊贵？《雅典的泰门》中的泰门面对黄金，说出一连串反常的变化。",
+      "level": 2,
+      "branch": [
+        "economics",
+        "philosophy"
+      ],
+      "tags": [
+        "文学典故",
+        "马恩的书架"
+      ],
+      "citations": [
+        "c-v3-shelf-timon-gold"
+      ],
+      "related": [
+        "alienated-labour",
+        "money"
+      ],
+      "references": [
+        {
+          "level": 3,
+          "label": "第1卷文学人物索引：泰门",
+          "url": "https://www.marxists.org/chinese/marx-engels2/01/25.htm",
+          "checked_on": "2026-10-30"
+        }
+      ],
+      "sources": [],
+      "added": "2026-10-30",
+      "status": "published",
+      "ai_assisted": true,
+      "column": "shelf"
+    },
+    {
+      "slug": "shelf-faust-horses",
+      "title": "买下六匹马，就等于长出二十四只脚吗？",
+      "summary": "付钱买下六匹骏马，一个人就好像有了二十四只脚。",
+      "level": 2,
+      "branch": [
+        "economics",
+        "philosophy"
+      ],
+      "tags": [
+        "文学典故",
+        "马恩的书架"
+      ],
+      "citations": [
+        "c-v3-shelf-faust-horses"
+      ],
+      "related": [
+        "shelf-timon-gold",
+        "alienated-labour"
+      ],
+      "references": [
+        {
+          "level": 3,
+          "label": "第1卷文学人物索引：浮士德与靡菲斯特斐勒司",
+          "url": "https://www.marxists.org/chinese/marx-engels2/01/25.htm",
+          "checked_on": "2026-10-30"
+        }
+      ],
+      "sources": [],
+      "added": "2026-10-30",
+      "status": "published",
+      "ai_assisted": true,
+      "column": "shelf"
+    },
+    {
+      "slug": "shelf-dante-road",
+      "title": "但丁的旅程，怎样变成科学研究的开场？",
+      "summary": "进入一个陌生世界时，要怎样对待犹豫、怯懦与旁人的话语？马克思两次借用了但丁《神曲》的诗句，却把它们放在科学研究的语境中。",
+      "level": 1,
+      "branch": [
+        "philosophy",
+        "economics"
+      ],
+      "tags": [
+        "文学典故",
+        "马恩的书架"
+      ],
+      "citations": [
+        "c-v3-shelf-dante-road"
+      ],
+      "related": [
+        "passage-capital-abstraction",
+        "critique-preface"
+      ],
+      "references": [
+        {
+          "level": 1,
+          "label": "《〈政治经济学批判〉序言》结尾及编者注",
+          "url": "https://www.marxists.org/chinese/marx-engels2/02/12.htm",
+          "checked_on": "2026-10-30"
+        }
+      ],
+      "sources": [],
+      "added": "2026-10-30",
+      "status": "published",
+      "ai_assisted": true,
+      "column": "shelf"
+    },
+    {
+      "slug": "shelf-robinson-account",
+      "title": "鲁滨逊为什么带着账本走进《资本论》？",
+      "summary": "孤岛上的鲁滨逊，要做工具、制家具，还要安排不同的谋生活动。",
+      "level": 2,
+      "branch": [
+        "economics"
+      ],
+      "tags": [
+        "文学典故",
+        "马恩的书架"
+      ],
+      "citations": [
+        "c-v3-shelf-robinson-account"
+      ],
+      "related": [
+        "commodity-fetishism",
+        "dual-character-labour"
+      ],
+      "references": [
+        {
+          "level": 3,
+          "label": "第10卷文学人物索引：鲁滨逊·克鲁索",
+          "url": "https://www.marxists.org/chinese/marx-engels2/10/283.htm",
+          "checked_on": "2026-10-30"
+        }
+      ],
+      "sources": [],
+      "added": "2026-10-30",
+      "status": "published",
+      "ai_assisted": true,
+      "column": "shelf"
+    },
+    {
+      "slug": "shelf-rhodes-jump",
+      "title": "这里就是罗陀斯：为什么必须当场跳一次？",
+      "summary": "一个人夸口，自己曾经在罗陀斯岛跳得很远。",
+      "level": 2,
+      "branch": [
+        "economics",
+        "socialism"
+      ],
+      "tags": [
+        "文学典故",
+        "马恩的书架"
+      ],
+      "citations": [
+        "c-v3-shelf-rhodes-jump"
+      ],
+      "related": [
+        "capital-relation",
+        "capital-1-ch04"
+      ],
+      "references": [
+        {
+          "level": 1,
+          "label": "《路易·波拿巴的雾月十八日》第一部分",
+          "url": "https://www.marxists.org/chinese/marx-engels2/02/09.htm",
+          "checked_on": "2026-10-30"
+        }
+      ],
+      "sources": [],
+      "added": "2026-10-30",
+      "status": "published",
+      "ai_assisted": true,
+      "column": "shelf"
+    },
+    {
+      "slug": "shelf-balzac-realism",
+      "title": "巴尔扎克的小说，为什么让恩格斯读到社会史？",
+      "summary": "小说家的政治好恶，是否总能决定小说最后呈现的世界？恩格斯给哈克奈斯评论《城市姑娘》时，举出了巴尔扎克《人间喜剧》的例子：他看重的，是人物、环境和社会变化怎样在具体描写中出现。",
+      "level": 2,
+      "branch": [
+        "philosophy",
+        "socialism"
+      ],
+      "tags": [
+        "文学典故",
+        "马恩的书架"
+      ],
+      "citations": [
+        "c-v3-shelf-balzac-realism"
+      ],
+      "related": [
+        "eighteenth-brumaire",
+        "base-superstructure"
+      ],
+      "references": [
+        {
+          "level": 3,
+          "label": "第10卷文学人物索引：《城市姑娘》的阿瑟·格兰特",
+          "url": "https://www.marxists.org/chinese/marx-engels2/10/283.htm",
+          "checked_on": "2026-10-30"
+        }
+      ],
+      "sources": [],
+      "added": "2026-10-30",
+      "status": "published",
+      "ai_assisted": true,
+      "column": "shelf"
+    },
+    {
+      "slug": "shelf-don-quixote-property",
+      "title": "堂吉诃德，怎么卷进了地产与资本的争论？",
+      "summary": "塞万提斯小说中的堂吉诃德，为什么会出现在私有财产关系的讨论里？文集第1卷的文学人物索引给出一个线索，回到《1844年经济学哲学手稿》的［私有财产的关系］片断，就能找到正文中唐·吉诃德这个名字。",
+      "level": 3,
+      "branch": [
+        "economics",
+        "philosophy"
+      ],
+      "tags": [
+        "文学典故",
+        "马恩的书架"
+      ],
+      "citations": [
+        "c-v3-shelf-don-quixote-property"
+      ],
+      "related": [
+        "alienated-labour",
+        "capital-relation"
+      ],
+      "references": [
+        {
+          "level": 3,
+          "label": "第1卷文学人物索引：唐·吉诃德",
+          "url": "https://www.marxists.org/chinese/marx-engels2/01/25.htm",
+          "checked_on": "2026-10-30"
+        }
+      ],
+      "sources": [],
+      "added": "2026-10-30",
+      "status": "published",
+      "ai_assisted": true,
+      "column": "shelf"
+    },
+    {
+      "slug": "shelf-achilles-expansion",
+      "title": "阿基里斯之踵：恩格斯在比喻哪一种弱点？",
+      "summary": "一位最勇敢的英雄，为什么又会成为致命弱点的比喻？文集的文学人物索引介绍了阿基里斯：他是荷马《伊利亚特》的主要人物，索引又另述脚踵未受保护、后来中箭的神话传说。",
+      "level": 2,
+      "branch": [
+        "economics",
+        "socialism"
+      ],
+      "tags": [
+        "文学典故",
+        "马恩的书架"
+      ],
+      "citations": [
+        "c-v3-shelf-achilles-expansion"
+      ],
+      "related": [
+        "reserve-army",
+        "capital-3-ch15"
+      ],
+      "references": [
+        {
+          "level": 3,
+          "label": "第1卷文学人物索引：阿基里斯",
+          "url": "https://www.marxists.org/chinese/marx-engels2/01/25.htm",
+          "checked_on": "2026-10-30"
+        }
+      ],
+      "sources": [],
+      "added": "2026-10-30",
+      "status": "published",
+      "ai_assisted": true,
+      "column": "shelf"
     }
   ],
   "works": [
@@ -1251,7 +1698,7 @@
       "slug": "theses-feuerbach",
       "title": "《关于费尔巴哈的提纲》",
       "summary": "十一条研究笔记，怎样把实践带进认识和历史。",
-      "level": 2,
+      "level": 3,
       "branch": [
         "philosophy"
       ],
@@ -1392,7 +1839,7 @@
       "slug": "critique-preface",
       "title": "《〈政治经济学批判〉序言》",
       "summary": "把高度浓缩的历史观，放回马克思的研究经历。",
-      "level": 2,
+      "level": 3,
       "branch": [
         "philosophy",
         "economics"
@@ -1471,7 +1918,7 @@
       "slug": "value-price-profit",
       "title": "《工资、价格和利润》",
       "summary": "从一次工资争论，读价值、劳动力和工人组织。",
-      "level": 1,
+      "level": 2,
       "branch": [
         "economics",
         "socialism"
@@ -1541,7 +1988,7 @@
       "slug": "gotha-critique",
       "title": "《哥达纲领批判》",
       "summary": "逐条检验漂亮词语背后的生产、分配和国家问题。",
-      "level": 2,
+      "level": 3,
       "branch": [
         "economics",
         "socialism"
@@ -1578,7 +2025,7 @@
       "slug": "utopian-scientific",
       "title": "《社会主义从空想到科学的发展》",
       "summary": "沿三章线索，理解思想来源、辩证法和资本主义矛盾。",
-      "level": 1,
+      "level": 2,
       "branch": [
         "philosophy",
         "socialism"
@@ -1692,7 +2139,7 @@
       "slug": "capital-1-ch03",
       "title": "第三章：货币或商品流通",
       "summary": "分清标价、买卖、贮藏和支付，顺着职能阅读货币。",
-      "level": 2,
+      "level": 3,
       "branch": [
         "economics"
       ],
@@ -1729,7 +2176,7 @@
       "slug": "capital-1-ch04",
       "title": "第4章：货币转化为资本",
       "summary": "比较两种流通形式，沿增殖的矛盾走到劳动力商品。",
-      "level": 2,
+      "level": 3,
       "branch": [
         "economics"
       ],
@@ -1869,7 +2316,7 @@
       "slug": "capital-1-ch08",
       "title": "第8章：工作日",
       "summary": "从一天究竟有多长的问题，读工作日的界限、历史冲突与法律限制。",
-      "level": 2,
+      "level": 1,
       "branch": [
         "economics"
       ],
@@ -1974,7 +2421,7 @@
       "slug": "capital-1-ch11",
       "title": "第11章：协作",
       "summary": "许多人共同劳动带来的社会生产力，怎样在资本关系中表现为资本的力量。",
-      "level": 2,
+      "level": 1,
       "branch": [
         "economics"
       ],
@@ -2044,7 +2491,7 @@
       "slug": "capital-1-ch13",
       "title": "第13章：机器和大工业",
       "summary": "从工具机的形成，读机器的价值转移、劳动组织、工厂法和农业变化。",
-      "level": 2,
+      "level": 3,
       "branch": [
         "economics"
       ],
@@ -2185,7 +2632,7 @@
       "slug": "capital-1-ch17",
       "title": "第17章：劳动力的价值或价格转化为工资",
       "summary": "从劳动力价值到工资形式，理解全部劳动仿佛都已得到报酬的表现。",
-      "level": 2,
+      "level": 3,
       "branch": [
         "economics"
       ],
@@ -2220,7 +2667,7 @@
       "slug": "capital-1-ch18",
       "title": "第18章：计时工资",
       "summary": "日薪、时薪与工作日长度，要放在同一张比较表里。",
-      "level": 2,
+      "level": 1,
       "branch": [
         "economics"
       ],
@@ -2255,7 +2702,7 @@
       "slug": "capital-1-ch19",
       "title": "第19章：计件工资",
       "summary": "按件支付怎样从计时工资转化，并改变监督和劳动节奏。",
-      "level": 2,
+      "level": 1,
       "branch": [
         "economics"
       ],
@@ -2360,7 +2807,7 @@
       "slug": "capital-1-ch22",
       "title": "第22章：剩余价值转化为资本",
       "summary": "剩余价值用于追加生产时，资本的来源与占有关系怎样继续展开。",
-      "level": 2,
+      "level": 3,
       "branch": [
         "economics"
       ],
@@ -2395,7 +2842,7 @@
       "slug": "capital-1-ch23",
       "title": "第23章：资本主义积累的一般规律",
       "summary": "从资本构成变化，研究积累、劳动需求与相对过剩人口。",
-      "level": 2,
+      "level": 3,
       "branch": [
         "economics"
       ],
@@ -2430,7 +2877,7 @@
       "slug": "capital-1-ch24",
       "title": "第24章：所谓原始积累",
       "summary": "追溯生产者同生产资料分离的历史，区别资本关系的起点与其后的积累。",
-      "level": 2,
+      "level": 1,
       "branch": [
         "economics"
       ],
@@ -2466,7 +2913,7 @@
       "slug": "capital-1-ch25",
       "title": "第25章：现代殖民理论",
       "summary": "从殖民地的特殊条件，再看资本必须以怎样的社会关系为前提。",
-      "level": 2,
+      "level": 1,
       "branch": [
         "economics"
       ],
@@ -2494,6 +2941,950 @@
           "label": "《资本论》第一卷第25章中文原文（1972）",
           "url": "https://www.marxists.org/chinese/marx/capital/25.htm",
           "checked_on": "2026-10-29"
+        }
+      ]
+    },
+    {
+      "slug": "capital-3-ch09",
+      "title": "第三卷第9章：一般利润率（平均利润率）的形成和商品价值转化为生产价格",
+      "summary": "同样预付一笔资本，雇用工人的比例不同，为什么还可能取得平均利润？本章把不同部门的资本合看，研究剩余价值怎样分配为平均利润，以及商品价值怎样在这一联系中取得生产价格的形式。",
+      "level": 3,
+      "branch": [
+        "economics"
+      ],
+      "tags": [
+        "资本论",
+        "第三卷",
+        "第9章"
+      ],
+      "citations": [
+        "v3-capital-3-ch09"
+      ],
+      "related": [
+        "surplus-value",
+        "capital-relation"
+      ],
+      "references": [
+        {
+          "level": 1,
+          "label": "《资本论》第三卷第9章",
+          "url": "https://www.marxists.org/chinese/marx-engels2/07/09.htm",
+          "checked_on": "2026-10-30"
+        }
+      ],
+      "added": "2026-10-30",
+      "status": "published",
+      "ai_assisted": true,
+      "sources": [],
+      "volume": 3,
+      "chapter": 9
+    },
+    {
+      "slug": "capital-3-ch13",
+      "title": "第三卷第13章：规律本身",
+      "summary": "一个工人使用更多设备、加工更多原料，生产能力提高了，利润率为什么可能下降？本章从资本构成变化出发，比较同一剩余价值率所表现的不同利润率，再说明利润率下降怎样同利润总量增长并存。",
+      "level": 3,
+      "branch": [
+        "economics"
+      ],
+      "tags": [
+        "资本论",
+        "第三卷",
+        "第13章"
+      ],
+      "citations": [
+        "v3-capital-3-ch13"
+      ],
+      "related": [
+        "surplus-value",
+        "capital-relation"
+      ],
+      "references": [
+        {
+          "level": 1,
+          "label": "《资本论》第三卷第13章",
+          "url": "https://www.marxists.org/chinese/marx-engels2/07/13.htm",
+          "checked_on": "2026-10-30"
+        }
+      ],
+      "added": "2026-10-30",
+      "status": "published",
+      "ai_assisted": true,
+      "sources": [],
+      "volume": 3,
+      "chapter": 13
+    },
+    {
+      "slug": "capital-3-ch14",
+      "title": "第三卷第14章：起反作用的各种原因",
+      "summary": "既然资本构成提高会使利润率趋向下降，为什么下降还会受到阻碍？本章集中分析同一发展过程中方向相反的作用，说明规律怎样表现为趋势，并把第一卷的劳动分析重新带入第三卷。",
+      "level": 3,
+      "branch": [
+        "economics"
+      ],
+      "tags": [
+        "资本论",
+        "第三卷",
+        "第14章"
+      ],
+      "citations": [
+        "v3-capital-3-ch14"
+      ],
+      "related": [
+        "surplus-value",
+        "capital-relation"
+      ],
+      "references": [
+        {
+          "level": 1,
+          "label": "《资本论》第三卷第14章",
+          "url": "https://www.marxists.org/chinese/marx-engels2/07/14.htm",
+          "checked_on": "2026-10-30"
+        }
+      ],
+      "added": "2026-10-30",
+      "status": "published",
+      "ai_assisted": true,
+      "sources": [],
+      "volume": 3,
+      "chapter": 14
+    },
+    {
+      "slug": "capital-3-ch15",
+      "title": "第三卷第15章：规律的内部矛盾的展开",
+      "summary": "生产越有能力扩大，为什么还会发生资本过剩和生产停顿？本章把利润率、积累与商品实现放进运动中，研究资本发展生产力的方式怎样同时造成限制，以及这些矛盾怎样在危机中表现。",
+      "level": 3,
+      "branch": [
+        "economics"
+      ],
+      "tags": [
+        "资本论",
+        "第三卷",
+        "第15章"
+      ],
+      "citations": [
+        "v3-capital-3-ch15"
+      ],
+      "related": [
+        "surplus-value",
+        "capital-relation"
+      ],
+      "references": [
+        {
+          "level": 1,
+          "label": "《资本论》第三卷第15章",
+          "url": "https://www.marxists.org/chinese/marx-engels2/07/15.htm",
+          "checked_on": "2026-10-30"
+        }
+      ],
+      "added": "2026-10-30",
+      "status": "published",
+      "ai_assisted": true,
+      "sources": [],
+      "volume": 3,
+      "chapter": 15
+    },
+    {
+      "slug": "capital-3-ch23",
+      "title": "第三卷第23章：利息和企业主收入",
+      "summary": "一家企业既有出资者又有实际经理，收入与工作怎样区分？本章由利润分为利息和企业主收入出发，再研究监督与指挥的双重性质，说明管理工资怎样同资本所有权和利润分割分别开来。",
+      "level": 3,
+      "branch": [
+        "economics"
+      ],
+      "tags": [
+        "资本论",
+        "第三卷",
+        "第23章"
+      ],
+      "citations": [
+        "v3-capital-3-ch23"
+      ],
+      "related": [
+        "surplus-value",
+        "capital-relation"
+      ],
+      "references": [
+        {
+          "level": 1,
+          "label": "《资本论》第三卷第23章",
+          "url": "https://www.marxists.org/chinese/marx-engels2/07/23.htm",
+          "checked_on": "2026-10-30"
+        }
+      ],
+      "added": "2026-10-30",
+      "status": "published",
+      "ai_assisted": true,
+      "sources": [],
+      "volume": 3,
+      "chapter": 23
+    },
+    {
+      "slug": "capital-3-ch25",
+      "title": "第三卷第25章：信用和虚拟资本",
+      "summary": "商品先交付、货款以后再付，怎样生长出互相连接的信用关系？本章从支付手段和定期凭证进入商业信用与银行信用，利用当时的材料观察借贷、货币流通和投机之间的联系。",
+      "level": 3,
+      "branch": [
+        "economics"
+      ],
+      "tags": [
+        "资本论",
+        "第三卷",
+        "第25章"
+      ],
+      "citations": [
+        "v3-capital-3-ch25"
+      ],
+      "related": [
+        "surplus-value",
+        "capital-relation"
+      ],
+      "references": [
+        {
+          "level": 1,
+          "label": "《资本论》第三卷第25章",
+          "url": "https://www.marxists.org/chinese/marx-engels2/07/25.htm",
+          "checked_on": "2026-10-30"
+        }
+      ],
+      "added": "2026-10-30",
+      "status": "published",
+      "ai_assisted": true,
+      "sources": [],
+      "volume": 3,
+      "chapter": 25
+    },
+    {
+      "slug": "capital-3-ch27",
+      "title": "第三卷第27章：信用在资本主义生产中的作用",
+      "summary": "信用能节约流通手段、扩大生产，为什么又会扩大投机与危机的联系？本章概括信用在资本总过程中的作用，进而研究股份公司、所有权与职能的分离，以及合作生产所显示的不同社会关系。",
+      "level": 3,
+      "branch": [
+        "economics"
+      ],
+      "tags": [
+        "资本论",
+        "第三卷",
+        "第27章"
+      ],
+      "citations": [
+        "v3-capital-3-ch27"
+      ],
+      "related": [
+        "surplus-value",
+        "capital-relation"
+      ],
+      "references": [
+        {
+          "level": 1,
+          "label": "《资本论》第三卷第27章",
+          "url": "https://www.marxists.org/chinese/marx-engels2/07/27.htm",
+          "checked_on": "2026-10-30"
+        }
+      ],
+      "added": "2026-10-30",
+      "status": "published",
+      "ai_assisted": true,
+      "sources": [],
+      "volume": 3,
+      "chapter": 27
+    },
+    {
+      "slug": "capital-3-ch48",
+      "title": "第三卷第48章：三位一体的公式",
+      "summary": "资本生利润、土地生地租、劳动生工资，这幅日常图景遮住了什么？本章把各种收入放回生产关系，研究自然条件、社会形式与价值的来源怎样被混为一谈，并由物质生产的条件进一步讨论自由发展的领域。",
+      "level": 3,
+      "branch": [
+        "economics"
+      ],
+      "tags": [
+        "资本论",
+        "第三卷",
+        "第48章"
+      ],
+      "citations": [
+        "v3-capital-3-ch48"
+      ],
+      "related": [
+        "surplus-value",
+        "capital-relation"
+      ],
+      "references": [
+        {
+          "level": 1,
+          "label": "《资本论》第三卷第48章",
+          "url": "https://www.marxists.org/chinese/marx-engels2/07/48.htm",
+          "checked_on": "2026-10-30"
+        }
+      ],
+      "added": "2026-10-30",
+      "status": "published",
+      "ai_assisted": true,
+      "sources": [],
+      "volume": 3,
+      "chapter": 48
+    }
+  ],
+  "parts": [
+    {
+      "slug": "capital-2-part1",
+      "title": "第2卷第1篇：资本形态变化及其循环",
+      "summary": "钱买来生产条件，产品做成以后还要卖出去，下一轮才能接上。本篇从货币、生产和商品三个起点观察同一个产业资本，研究它怎样转换形态并反复运行，把第一卷的生产过程放进完整的循环。",
+      "level": 3,
+      "branch": [
+        "economics"
+      ],
+      "tags": [
+        "资本论",
+        "第2卷",
+        "篇导读"
+      ],
+      "citations": [
+        "v3-capital-2-part1"
+      ],
+      "related": [
+        "capital-relation",
+        "surplus-value"
+      ],
+      "references": [
+        {
+          "level": 1,
+          "label": "《资本论》第2卷第4章",
+          "url": "https://www.marxists.org/chinese/marx-engels2/06/04.htm",
+          "checked_on": "2026-10-30"
+        }
+      ],
+      "added": "2026-10-30",
+      "status": "published",
+      "ai_assisted": true,
+      "sources": [],
+      "volume": 2,
+      "part": 1,
+      "chapter_notes": [
+        {
+          "no": 1,
+          "text": "从货币预付出发，追踪购买、生产和出售怎样构成增殖的循环。"
+        },
+        {
+          "no": 2,
+          "text": "以生产资本的重新出现为起终点，观察流通怎样中介再生产。"
+        },
+        {
+          "no": 3,
+          "text": "以商品产品为起点，联系它的实现、消费与其他资本的循环。"
+        },
+        {
+          "no": 4,
+          "text": "把三个公式合看，辨认连续运动怎样要求各形态同时存在。"
+        },
+        {
+          "no": 5,
+          "text": "分开劳动、生产与流通所占的时间，追踪资本在各阶段的停留。"
+        },
+        {
+          "no": 6,
+          "text": "按具体作用区分买卖等流通费用与保管、运输所涉及的活动。"
+        }
+      ]
+    },
+    {
+      "slug": "capital-2-part2",
+      "title": "第2卷第2篇：资本周转",
+      "summary": "同样预付一笔资本，一年回来一次和回来几次，会有什么差别？本篇把资本循环当作反复进行的过程，研究周转的期间、各组成部分的更新方式，以及这些时间差怎样影响预付规模和年剩余价值。",
+      "level": 3,
+      "branch": [
+        "economics"
+      ],
+      "tags": [
+        "资本论",
+        "第2卷",
+        "篇导读"
+      ],
+      "citations": [
+        "v3-capital-2-part2"
+      ],
+      "related": [
+        "capital-relation",
+        "surplus-value"
+      ],
+      "references": [
+        {
+          "level": 1,
+          "label": "《资本论》第2卷第7章",
+          "url": "https://www.marxists.org/chinese/marx-engels2/06/07.htm",
+          "checked_on": "2026-10-30"
+        }
+      ],
+      "added": "2026-10-30",
+      "status": "published",
+      "ai_assisted": true,
+      "sources": [],
+      "volume": 2,
+      "part": 2,
+      "chapter_notes": [
+        {
+          "no": 7,
+          "text": "把循环作为反复过程，规定周转时间与一年内的周转次数。"
+        },
+        {
+          "no": 8,
+          "text": "按价值转移和实物更新方式，区分固定资本与流动资本。"
+        },
+        {
+          "no": 9,
+          "text": "综合各部分不同的更新期间，研究预付资本的总周转与周期。"
+        },
+        {
+          "no": 10,
+          "text": "比较魁奈与斯密的分类，追问固定、流动概念怎样产生和混淆。"
+        },
+        {
+          "no": 11,
+          "text": "检查李嘉图怎样把周转分类与不变、可变资本的区别混在一起。"
+        },
+        {
+          "no": 12,
+          "text": "从连续工作日的数目，比较不同产品完成所需的劳动期间。"
+        },
+        {
+          "no": 13,
+          "text": "以发酵、生长等过程区分生产时间与实际劳动时间。"
+        },
+        {
+          "no": 14,
+          "text": "追踪出售与购买所需的时间怎样延长或缩短周转。"
+        },
+        {
+          "no": 15,
+          "text": "把生产与流通阶段并列，研究连续生产需要预付多少资本。"
+        },
+        {
+          "no": 16,
+          "text": "区分预付与一年耗费的可变资本，理解年剩余价值率。"
+        },
+        {
+          "no": 17,
+          "text": "继续追踪剩余价值实现后怎样进入消费或转为追加资本。"
+        }
+      ]
+    },
+    {
+      "slug": "capital-2-part3",
+      "title": "第2卷第3篇：社会总资本的再生产和流通",
+      "summary": "每家企业都卖出产品，还不足以说明整个社会怎样继续生产。本篇把各个资本放在相互联系中，研究年产品怎样同时补偿生产资料、满足消费，并为原有规模或扩大规模的再生产提供条件。",
+      "level": 3,
+      "branch": [
+        "economics"
+      ],
+      "tags": [
+        "资本论",
+        "第2卷",
+        "篇导读"
+      ],
+      "citations": [
+        "v3-capital-2-part3"
+      ],
+      "related": [
+        "capital-relation",
+        "surplus-value"
+      ],
+      "references": [
+        {
+          "level": 1,
+          "label": "《资本论》第2卷第18章",
+          "url": "https://www.marxists.org/chinese/marx-engels2/06/18.htm",
+          "checked_on": "2026-10-30"
+        }
+      ],
+      "added": "2026-10-30",
+      "status": "published",
+      "ai_assisted": true,
+      "sources": [],
+      "volume": 2,
+      "part": 3,
+      "chapter_notes": [
+        {
+          "no": 18,
+          "text": "由单个循环进入社会总资本，明确各部分运动的相互联系。"
+        },
+        {
+          "no": 19,
+          "text": "比较魁奈和斯密等人的说明，辨认年产品与收入分析的难点。"
+        },
+        {
+          "no": 20,
+          "text": "在原有规模反复的条件下，研究两大部类的价值与实物补偿。"
+        },
+        {
+          "no": 21,
+          "text": "改变剩余价值的用途，分析积累怎样要求两部类相互配合。"
+        }
+      ]
+    },
+    {
+      "slug": "capital-3-part1",
+      "title": "第3卷第1篇：剩余价值转化为利润和剩余价值率转化为利润率",
+      "summary": "资本家看见商品售价超过自己支出的余额，为什么把它叫作利润？本篇从成本价格与利润开始，研究剩余价值怎样表现为全部预付资本的产物，并把第一、二卷的生产与周转分析带入利润率的变化。",
+      "level": 3,
+      "branch": [
+        "economics"
+      ],
+      "tags": [
+        "资本论",
+        "第3卷",
+        "篇导读"
+      ],
+      "citations": [
+        "v3-capital-3-part1"
+      ],
+      "related": [
+        "capital-relation",
+        "surplus-value"
+      ],
+      "references": [
+        {
+          "level": 1,
+          "label": "《资本论》第3卷第1章",
+          "url": "https://www.marxists.org/chinese/marx-engels2/07/01.htm",
+          "checked_on": "2026-10-30"
+        }
+      ],
+      "added": "2026-10-30",
+      "status": "published",
+      "ai_assisted": true,
+      "sources": [],
+      "volume": 3,
+      "part": 1,
+      "chapter_notes": [
+        {
+          "no": 1,
+          "text": "由资本家的费用和余额，研究剩余价值怎样表现为利润。"
+        },
+        {
+          "no": 2,
+          "text": "以全部预付资本为分母，区分利润率和剩余价值率。"
+        },
+        {
+          "no": 3,
+          "text": "分别固定或改变各个量，比较两种比率的数量联系。"
+        },
+        {
+          "no": 4,
+          "text": "把第二卷周转的结果带入利润率，保留一年内反复使用的尺度。"
+        },
+        {
+          "no": 5,
+          "text": "研究生产资料使用上的节约怎样影响预付资本与利润率。"
+        },
+        {
+          "no": 6,
+          "text": "追踪原料等要素价格变化造成的资本增减与价值重估。"
+        },
+        {
+          "no": 7,
+          "text": "补充解释生产条件、经营活动和利润表面来源的关系。"
+        }
+      ]
+    },
+    {
+      "slug": "capital-3-part2",
+      "title": "第3卷第2篇：利润转化为平均利润",
+      "summary": "使用同量资本的不同部门，为什么会要求取得相近的利润，而不是只分得各自雇工生产的剩余价值？本篇从资本构成的差异进入平均利润，研究价值怎样转化为生产价格，以及竞争怎样把部门联系起来。",
+      "level": 3,
+      "branch": [
+        "economics"
+      ],
+      "tags": [
+        "资本论",
+        "第3卷",
+        "篇导读"
+      ],
+      "citations": [
+        "v3-capital-3-part2"
+      ],
+      "related": [
+        "capital-relation",
+        "surplus-value"
+      ],
+      "references": [
+        {
+          "level": 1,
+          "label": "《资本论》第3卷第9章",
+          "url": "https://www.marxists.org/chinese/marx-engels2/07/09.htm",
+          "checked_on": "2026-10-30"
+        }
+      ],
+      "added": "2026-10-30",
+      "status": "published",
+      "ai_assisted": true,
+      "sources": [],
+      "volume": 3,
+      "part": 2,
+      "chapter_notes": [
+        {
+          "no": 8,
+          "text": "比较不同部门的资本构成，说明相同剥削程度为何产生不同利润率。"
+        },
+        {
+          "no": 9,
+          "text": "从部门差异进入平均利润，再说明商品价值怎样转为生产价格。"
+        },
+        {
+          "no": 10,
+          "text": "研究竞争怎样形成平均化，并区分市场价值、市场价格与超额利润。"
+        },
+        {
+          "no": 11,
+          "text": "在不同资本构成条件下，比较工资普遍变动对生产价格的影响。"
+        },
+        {
+          "no": 12,
+          "text": "补充说明生产价格变化的原因，并回看平均构成资本。"
+        }
+      ]
+    },
+    {
+      "slug": "capital-3-part3",
+      "title": "第3卷第3篇：利润率趋向下降的规律",
+      "summary": "生产更多商品、积累更多资本，利润率为什么还可能趋向下降？本篇把规律、反作用和内部矛盾放在连续三章中，研究生产力发展怎样同时扩大生产、改变资本构成，并使价值增殖遇到自身造成的限制。",
+      "level": 3,
+      "branch": [
+        "economics"
+      ],
+      "tags": [
+        "资本论",
+        "第3卷",
+        "篇导读"
+      ],
+      "citations": [
+        "v3-capital-3-part3"
+      ],
+      "related": [
+        "capital-relation",
+        "surplus-value"
+      ],
+      "references": [
+        {
+          "level": 1,
+          "label": "《资本论》第3卷第13章",
+          "url": "https://www.marxists.org/chinese/marx-engels2/07/13.htm",
+          "checked_on": "2026-10-30"
+        }
+      ],
+      "added": "2026-10-30",
+      "status": "published",
+      "ai_assisted": true,
+      "sources": [],
+      "volume": 3,
+      "part": 3,
+      "chapter_notes": [
+        {
+          "no": 13,
+          "text": "固定剥削程度后考察资本构成变化，区分利润率与利润总量。"
+        },
+        {
+          "no": 14,
+          "text": "逐项分析阻碍和抵消下降的作用，理解规律为何以趋势表现。"
+        },
+        {
+          "no": 15,
+          "text": "追踪积累、生产扩张和实现的矛盾，研究危机怎样进入分析。"
+        }
+      ]
+    },
+    {
+      "slug": "capital-3-part4",
+      "title": "第3卷第4篇：商品资本和货币资本转化为商品经营资本和货币经营资本（商人资本）",
+      "summary": "商人承担买卖，怎样从产业资本生产的剩余价值中取得商业利润？本篇研究商品经营与货币经营怎样成为独立职能，把资本的流通环节放进社会分工，再考察这些形式的历史位置。",
+      "level": 3,
+      "branch": [
+        "economics"
+      ],
+      "tags": [
+        "资本论",
+        "第3卷",
+        "篇导读"
+      ],
+      "citations": [
+        "v3-capital-3-part4"
+      ],
+      "related": [
+        "capital-relation",
+        "surplus-value"
+      ],
+      "references": [
+        {
+          "level": 1,
+          "label": "《资本论》第3卷第17章",
+          "url": "https://www.marxists.org/chinese/marx-engels2/07/17.htm",
+          "checked_on": "2026-10-30"
+        }
+      ],
+      "added": "2026-10-30",
+      "status": "published",
+      "ai_assisted": true,
+      "sources": [],
+      "volume": 3,
+      "part": 4,
+      "chapter_notes": [
+        {
+          "no": 16,
+          "text": "由产业资本的商品流通职能，说明商品经营资本的独立形式。"
+        },
+        {
+          "no": 17,
+          "text": "从社会剩余价值的分配，解释商人怎样取得商业利润。"
+        },
+        {
+          "no": 18,
+          "text": "比较周转次数与每次交易的利润，保留年利润的统一尺度。"
+        },
+        {
+          "no": 19,
+          "text": "研究货币运动的技术性操作怎样形成专门经营的资本职能。"
+        },
+        {
+          "no": 20,
+          "text": "把商人资本放回不同历史条件，比较它与生产方式的联系。"
+        }
+      ]
+    },
+    {
+      "slug": "capital-3-part5",
+      "title": "第3卷第5篇：利润分为利息和企业主收入。生息资本",
+      "summary": "资本由一人所有、交给另一人使用，利润怎样分为利息和企业主收入？本篇从生息资本进入信用制度，考察借贷、银行、票据和证券怎样联系现实生产，并使资本关系取得仿佛自行生钱的外观。",
+      "level": 3,
+      "branch": [
+        "economics"
+      ],
+      "tags": [
+        "资本论",
+        "第3卷",
+        "篇导读"
+      ],
+      "citations": [
+        "v3-capital-3-part5"
+      ],
+      "related": [
+        "capital-relation",
+        "surplus-value"
+      ],
+      "references": [
+        {
+          "level": 1,
+          "label": "《资本论》第3卷第21章",
+          "url": "https://www.marxists.org/chinese/marx-engels2/07/21.htm",
+          "checked_on": "2026-10-30"
+        }
+      ],
+      "added": "2026-10-30",
+      "status": "published",
+      "ai_assisted": true,
+      "sources": [],
+      "volume": 3,
+      "part": 5,
+      "chapter_notes": [
+        {
+          "no": 21,
+          "text": "从资本的贷出和使用，说明资本怎样成为特殊商品。"
+        },
+        {
+          "no": 22,
+          "text": "研究利润怎样分割为利息，并区分利息率与一般利润率。"
+        },
+        {
+          "no": 23,
+          "text": "联系所有权、职能和管理工资，辨认企业主收入的特殊形式。"
+        },
+        {
+          "no": 24,
+          "text": "分析生息资本怎样使生产与流通的中介从外表中隐去。"
+        },
+        {
+          "no": 25,
+          "text": "从定期支付与票据进入商业信用、银行信用及相关调查材料。"
+        },
+        {
+          "no": 26,
+          "text": "结合利息率讨论货币资本积累，分辨材料与理论问题。"
+        },
+        {
+          "no": 27,
+          "text": "概括信用对流通、股份公司、合作生产和危机的多重作用。"
+        },
+        {
+          "no": 28,
+          "text": "检验图克、富拉顿等人怎样区分或混淆通货与资本。"
+        },
+        {
+          "no": 29,
+          "text": "区分银行的现金、证券和债权，并进入虚拟资本的分析。"
+        },
+        {
+          "no": 30,
+          "text": "提出借贷资本积累同现实积累怎样联系或分离的问题。"
+        },
+        {
+          "no": 31,
+          "text": "继续比较不同周期阶段的借贷资本供给与现实生产运动。"
+        },
+        {
+          "no": 32,
+          "text": "完成两种积累关系的讨论，并追踪收入、货币与资本的区别。"
+        },
+        {
+          "no": 33,
+          "text": "考察信用下的流通工具，区分流通需要与对资本的需求。"
+        },
+        {
+          "no": 34,
+          "text": "结合银行立法检查通货理论，辨认其假定与实施后果。"
+        },
+        {
+          "no": 35,
+          "text": "追踪贵金属运动、银行准备与汇兑的不同联系。"
+        },
+        {
+          "no": 36,
+          "text": "把高利贷资本放回资本主义以前的条件，比较其历史作用。"
+        }
+      ]
+    },
+    {
+      "slug": "capital-3-part6",
+      "title": "第3卷第6篇：超额利润转化为地租",
+      "summary": "农业资本取得平均利润以后，为什么还能有一部分余额付给土地所有者？本篇以资本主义农业为规定对象，从超额利润怎样转为地租入手，研究土地差异、追加投资、土地所有权和历史形式之间的联系。",
+      "level": 3,
+      "branch": [
+        "economics"
+      ],
+      "tags": [
+        "资本论",
+        "第3卷",
+        "篇导读"
+      ],
+      "citations": [
+        "v3-capital-3-part6"
+      ],
+      "related": [
+        "capital-relation",
+        "surplus-value"
+      ],
+      "references": [
+        {
+          "level": 1,
+          "label": "《资本论》第3卷第37章",
+          "url": "https://www.marxists.org/chinese/marx-engels2/07/37.htm",
+          "checked_on": "2026-10-30"
+        }
+      ],
+      "added": "2026-10-30",
+      "status": "published",
+      "ai_assisted": true,
+      "sources": [],
+      "volume": 3,
+      "part": 6,
+      "chapter_notes": [
+        {
+          "no": 37,
+          "text": "规定资本主义农业的研究前提，区分租地资本家与土地所有者。"
+        },
+        {
+          "no": 38,
+          "text": "以不同生产条件的超额利润，提出其转为地租的问题。"
+        },
+        {
+          "no": 39,
+          "text": "比较不同土地上等量资本的结果，研究级差地租第一形式。"
+        },
+        {
+          "no": 40,
+          "text": "考察同一土地的追加投资，进入级差地租第二形式。"
+        },
+        {
+          "no": 41,
+          "text": "在生产价格不变的条件下，比较追加资本的不同产出。"
+        },
+        {
+          "no": 42,
+          "text": "改变调节生产价格的条件，研究价格下降时的级差地租。"
+        },
+        {
+          "no": 43,
+          "text": "研究生产价格上涨的多种条件，再归纳第二形式的联系。"
+        },
+        {
+          "no": 44,
+          "text": "在追加投资的条件下，解释最坏耕地也有级差地租的情况。"
+        },
+        {
+          "no": 45,
+          "text": "由土地所有权的限制作用进入绝对地租，与级差地租分开。"
+        },
+        {
+          "no": 46,
+          "text": "延伸到建筑地段和矿山，并把土地价格同地租收入联系起来。"
+        },
+        {
+          "no": 47,
+          "text": "比较不同地租的历史形式，说明资本主义地租的特殊前提。"
+        }
+      ]
+    },
+    {
+      "slug": "capital-3-part7",
+      "title": "第3卷第7篇：各种收入及其源泉",
+      "summary": "工资、利润和地租，看起来各有自己的自然源泉，它们怎样同一个生产过程联系起来？本篇返回收入的表面形式，研究生产关系怎样在日常观念中表现，并以分配和阶级问题收束第三卷。",
+      "level": 3,
+      "branch": [
+        "economics"
+      ],
+      "tags": [
+        "资本论",
+        "第3卷",
+        "篇导读"
+      ],
+      "citations": [
+        "v3-capital-3-part7"
+      ],
+      "related": [
+        "capital-relation",
+        "surplus-value"
+      ],
+      "references": [
+        {
+          "level": 1,
+          "label": "《资本论》第3卷第51章",
+          "url": "https://www.marxists.org/chinese/marx-engels2/07/51.htm",
+          "checked_on": "2026-10-30"
+        }
+      ],
+      "added": "2026-10-30",
+      "status": "published",
+      "ai_assisted": true,
+      "sources": [],
+      "volume": 3,
+      "part": 7,
+      "chapter_notes": [
+        {
+          "no": 48,
+          "text": "返回收入的表面源泉，批判自然要素与社会形式的混同。"
+        },
+        {
+          "no": 49,
+          "text": "重新分析年产品的价值部分，说明各种收入与剩余价值的联系。"
+        },
+        {
+          "no": 50,
+          "text": "研究竞争为何使各项收入表现为商品价值的独立构成源泉。"
+        },
+        {
+          "no": 51,
+          "text": "把分配的方式同生产关系联系，强调这些形式的历史性质。"
+        },
+        {
+          "no": 52,
+          "text": "在未完稿中提出阶级形成的问题，保留中间阶层与研究的开放处。"
         }
       ]
     }

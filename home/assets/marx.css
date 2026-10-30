@@ -93,6 +93,26 @@ html[data-theme="dark"] .me-main { --me-red:#e9a89d; }
 .me-qa li { padding:8px 0; line-height:1.8; }
 .me-qa small { margin-left:.4em; white-space:nowrap; }
 .me-quote-entry { margin:14px 0 0; font-size:.92rem; }
+.me-work-index { margin:30px 0; padding:22px 0; border-block:1px solid var(--line); }
+.me-work-index h2 { font-size:1.1rem; }
+.me-work-index ul { display:flex; flex-wrap:wrap; gap:10px 22px; list-style:none; padding:0; margin:0; font-size:.85rem; line-height:1.8; }
+.me-work-index li { max-width:100%; }
+.me-main [id^="quote-work-"] { scroll-margin-top:28px; }
+.me-main .me-filters fieldset { border:0; padding:0; margin:0; }
+.me-column-more { grid-column:1/-1; font-size:.85rem; margin:15px 0 0; }
+.me-jump-index { margin:26px 0; }
+.me-jump-index h2 { font-size:1.1rem; }
+.me-jump-index ul { display:flex; flex-wrap:wrap; gap:10px 24px; list-style:none; padding:0; margin:0; font-size:.88rem; line-height:1.8; }
+.me-jump-index li { max-width:100%; }
+.me-period,.me-decade { margin:22px 0; border-top:1px solid var(--line); }
+.me-period>summary,.me-decade>summary,.me-footprint-list>summary { padding:19px 0; cursor:pointer; }
+.me-period>summary h2,.me-decade>summary h2,.me-footprint-list>summary h2 { display:inline; margin:0; font-size:1.1rem; line-height:1.8; }
+.me-period>summary h2 span { display:block; font-size:.85rem; color:var(--muted); font-weight:400; margin:4px 0 0 20px; }
+.me-period-body>.me-section:first-child { border-top:0; margin-top:0; padding-top:6px; }
+.me-decade>section { margin:28px 0; }
+.me-back-index { margin:24px 0; font-size:.85rem; }
+.me-footprint-list { padding-top:0; }
+.me-main :is([id^="life-period-"],[id^="year-"],#letter-year-index,#capital-parts,[id^="part-"]) { scroll-margin-top:28px; }
 .me-level-note { margin:4px 0 8px; }
 .me-minor-links { margin:44px 0 0; }
 .me-main .me-minor-link { display:inline-flex; align-items:center; min-height:30px; padding:4px 14px; border:1px solid var(--line); border-radius:999px; background:var(--surface); color:var(--muted); font-size:.82rem; text-decoration:none; }
@@ -113,6 +133,9 @@ html[data-theme="dark"] .me-main { --me-red:#e9a89d; }
   .me-comparison :is(th,td) { padding:14px 8px 14px 0; font-size:.88rem; }
   .me-citation { padding-left:16px; }
   .me-directory { gap:25px; }
+  .me-featured-directory { gap:16px; }
+  .me-featured-directory .me-row { padding-block:12px; }
+  .me-featured-directory .me-directory-group>h2 { margin-top:10px; margin-bottom:12px; }
 }
 @media (prefers-reduced-motion:reduce) { .me-main { scroll-behavior:auto; } }
 

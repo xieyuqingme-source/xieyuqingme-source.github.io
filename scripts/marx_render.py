@@ -22,6 +22,10 @@ def difficulty(level):
 
 
 def link(url, label, external=False, attrs=""):
+    if external:
+        label = label.rstrip(' →↗')
+    elif label.endswith('↗'):
+        label = label[:-1].rstrip() + ' →'
     extra = ' target="_blank" rel="noopener noreferrer"' if external else ""
     return f'<a href="{escape(url, quote=True)}"{extra}{attrs}>{escape(label)}' + (' <span aria-hidden="true">↗</span>' if external else "") + '</a>'
 
@@ -130,10 +134,16 @@ def render_wenji_volume(data, volume):
         grouped = defaultdict(list)
         for letter in volume.get("letters", []):
             grouped[letter["year"]].append(letter)
-        out += '<nav class="me-actions" aria-label="书信年份">' + ' '.join(link(f'#year-{year}', str(year)) for year in sorted(grouped)) + '</nav><div class="me-letters">'
-        for year, letters in sorted(grouped.items()):
-            out += f'<section aria-labelledby="year-{year}"><h2 id="year-{year}">{year}</h2><ol start="{letters[0]["no"]}">'
-            out += ''.join(f'<li id="letter-{letter["no"]:03}" value="{letter["no"]}">' + link(letter["mia"], letter["title"], True) + '</li>' for letter in letters) + '</ol></section>'
+        out += '<nav class="me-actions me-jump-index" id="letter-year-index" aria-label="书信年份">' + ' '.join(link(f'#year-{year}', str(year)) for year in sorted(grouped)) + '</nav><div class="me-letters">'
+        decades = sorted({year // 10 * 10 for year in grouped})
+        for index, decade in enumerate(decades):
+            out += '<details class="me-decade" data-me-collapsible' + (' open' if index == 0 else '') + '><summary><h2>' + str(decade) + '—' + str(decade + 9) + '年</h2></summary>'
+            for year, letters in sorted(grouped.items()):
+                if year // 10 * 10 != decade:
+                    continue
+                out += f'<section aria-labelledby="year-{year}"><h2 id="year-{year}">{year}</h2><ol start="{letters[0]["no"]}">'
+                out += ''.join(f'<li id="letter-{letter["no"]:03}" value="{letter["no"]}">' + link(letter["mia"], letter["title"], True) + '</li>' for letter in letters) + '</ol></section>'
+            out += '<p class="me-back-index">' + link('#letter-year-index', '↑ 回到年份索引') + '</p></details>'
         out += '</div>'
         if volume.get("timeline"):
             out += '<section class="me-section"><h2>年表</h2><p>' + link(volume["timeline"]["mia"], volume["timeline"]["title"], True) + '</p></section>'
@@ -144,11 +154,15 @@ def render_wenji_volume(data, volume):
 
 
 def render_capital_toc(data, volume):
-    out = ''
+    out = '<nav class="me-jump-index" id="capital-parts" aria-label="篇目"><h2>篇目</h2><ul>' + ''.join('<li>' + link('#part-' + str(part['no']), '第' + str(part['no']) + '篇 · ' + part['title']) + '</li>' for part in volume['parts']) + '</ul></nav>'
     if volume["front_matter"]:
         out += '<section class="me-section"><h2>序言与跋</h2>' + nested(volume["front_matter"]) + '</section>'
     for part in volume["parts"]:
-        out += f'<section class="me-section" aria-labelledby="part-{part["no"]}"><h2 id="part-{part["no"]}">第{part["no"]}篇 · {escape(part["title"])}</h2><ol class="me-toc">'
+        out += f'<section class="me-section" aria-labelledby="part-{part["no"]}"><h2 id="part-{part["no"]}">第{part["no"]}篇 · {escape(part["title"])}</h2>'
+        part_guide = next((item['route'] for item in data['items'].values() if item['kind'] == 'parts' and item['status'] == 'published' and item['volume'] == volume['no'] and item['part'] == part['no']), None)
+        if part_guide:
+            out += '<p>' + link(part_guide, '本篇导读 →') + '</p>'
+        out += '<ol class="me-toc">'
         for chapter in part["chapters"]:
             guide = next((i["route"] for i in data["items"].values() if i["kind"] == "guides" and i["status"] == "published" and i["volume"] == volume["no"] and i["chapter"] == chapter["no"]), None)
             out += f'<li id="ch{chapter["no"]:02}"><h3>第{chapter["no"]}章 · {escape(chapter["title"])}</h3><div class="me-actions">' + link(chapter["mia"], "中文原文", True)
@@ -165,7 +179,7 @@ def render_capital_toc(data, volume):
                     english.append(link(entry['url'], label, True, ' lang="en" aria-label="' + escape(f'Chapter {entry["no"]}: {entry["title"]}', quote=True) + '"'))
                 out += '<p class="me-meta">英文对应：' + ' · '.join(english) + '</p>'
             out += nested(chapter["sections"]) + '</li>'
-        out += '</ol></section>'
+        out += '</ol><p class="me-back-index">' + link('#capital-parts', '↑ 回到篇目') + '</p></section>'
     if volume.get("supplements"):
         out += '<section class="me-section"><h2>补充</h2>' + nested(volume["supplements"]) + '</section>'
     return out
@@ -261,7 +275,7 @@ def render_routes(data):
 
 
 def render_citations(data, identifiers, title="原著怎么说"):
-    out = '<section class="me-citations"><h2>' + escape(title) + '</h2>'
+    out = '<section class="me-citations">' + ('<h2>' + escape(title) + '</h2>' if title else '')
     for ident in identifiers:
         citation = data["citations"][ident]
         if citation["vol"] == 5:
@@ -288,9 +302,36 @@ def render_related(data, item):
     return '<section class="me-section"><h2>接着读</h2><ul class="me-qa">' + ''.join('<li>' + link(target["route"], target["title"]) + '</li>' for target in targets) + '</ul></section>'
 
 
+def part_chapter_list(data, item):
+    from marx_v3 import part_chapters
+    chapters = part_chapters(data['chapters'], item['volume'], item['part'])
+    notes = {row['no']: row['text'] for row in item['chapter_notes']}
+    out = '<ol class="me-toc">'
+    for chapter in chapters:
+        out += '<li><h3>' + link(chapter['mia'], '第' + str(chapter['no']) + '章 · ' + chapter['title'], True) + '</h3><p>' + escape(notes[chapter['no']]) + '</p>'
+        guide = next((row['route'] for row in data['items'].values() if row['kind'] == 'guides' and row['status'] == 'published' and row['volume'] == item['volume'] and row['chapter'] == chapter['no']), None)
+        if guide:
+            out += '<p>' + link(guide, '本章导读 →') + '</p>'
+        out += '</li>'
+    return out + '</ol>'
+
+
+def part_english_links(data, item):
+    from marx_v3 import part_chapters
+    out = '<ul class="me-qa">'
+    for chapter in part_chapters(data['chapters'], item['volume'], item['part']):
+        rows = chapter.get('en', [])
+        counts, seen = Counter(row['no'] for row in rows), Counter()
+        for row in rows:
+            seen[row['no']] += 1
+            split = ' (' + str(seen[row['no']]) + '/' + str(counts[row['no']]) + ')' if counts[row['no']] > 1 else ''
+            out += '<li lang="en">' + link(row['url'], 'Chapter ' + str(row['no']) + split + ': ' + row['title'], True) + '</li>'
+    return out + '</ul>'
+
+
 def render_content(data, item):
     category, kind = item["category"], item["kind"]
-    breadcrumb = [("/marx/capital/", "资本论")] if kind == "guides" else []
+    breadcrumb = [("/marx/capital/", "资本论"), (f'/marx/capital/{item["volume"]}/', f'第{item["volume"]}卷')] if kind in ("guides", "parts") else []
     out = '<div class="me-reading">' + header(item["title"], item["summary"], breadcrumb)
     out += '<p class="me-meta">' + escape(difficulty(item["level"]) + ' · ' + ' / '.join(BRANCHES[b] for b in item["branch"])) + '</p>'
     if category == "myths":
@@ -303,7 +344,15 @@ def render_content(data, item):
         out += '<section><h2>' + escape(title) + '</h2>'
         if title == "例子":
             out += '<p class="me-example-note">例子为本站编写，现代类比只帮助理解，不是原著中的实例。</p>'
-        out += parser.render(body) + '</section>'
+        out += parser.render(body)
+        if kind == 'parts':
+            if title == '各章怎么读':
+                out += part_chapter_list(data, item)
+            elif title == '原文片段':
+                out += render_citations(data, item['citations'], None)
+            elif title == '英文对应':
+                out += part_english_links(data, item)
+        out += '</section>'
         if kind == "guides" and title == "一句话":
             chapter = data["chapters"][(item["volume"], item["chapter"])]
             out += '<section><h2>本章结构</h2>' + nested(chapter["sections"]) + '</section>'
@@ -316,7 +365,8 @@ def render_content(data, item):
     if kind == "guides":
         chapter = data["chapters"][(item["volume"], item["chapter"])]
         out += '<section class="me-section"><h2>英文对应</h2><ul class="me-qa">' + ''.join('<li lang="en">' + link(e["url"], f'Chapter {e["no"]}: {e["title"]}', True) + '</li>' for e in chapter.get("en", [])) + '</ul></section>'
-        out += '<p>' + link(chapter["mia"], '读本章中文原文', True) + ' · ' + link('/marx/capital/english/', '完整中英章号对应 →') + '</p>'
+        matching = link('/marx/capital/english/', '完整中英章号对应 →') if item['volume'] == 1 else link('/marx/capital/' + str(item['volume']) + '/', '本卷目录与英文对应 →')
+        out += '<p>' + link(chapter["mia"], '读本章中文原文', True) + ' · ' + matching + '</p>'
     if item.get("sources"):
         out += '<section class="me-section"><h2>延伸阅读</h2><ul class="me-source-list">' + ''.join('<li>' + link(source["url"], source["label"], True) + '</li>' for source in item["sources"]) + '</ul></section>'
     for level, title in ((1, '原著参考'), (3, '题注与背景资料')):
@@ -326,8 +376,13 @@ def render_content(data, item):
     out += render_related(data, item)
     if item["ai_assisted"]:
         out += '<p class="me-editorial">' + AI_NOTE + '。' + link('/marx/sources/', '版本与引用说明') + '。</p>'
-    out += '<p>' + link('/marx/#directory', '返回读马恩目录 →', attrs=' data-me-return') + '</p></div>'
-    return out
+    if kind in ('parts', 'guides'):
+        anchor = '#part-' + str(item['part']) if kind == 'parts' else '#ch' + str(item['chapter']).zfill(2)
+        out += '<p>' + link('/marx/capital/' + str(item['volume']) + '/' + anchor, '返回本卷目录 →') + '</p>'
+    else:
+        return_route = '/marx/cards/#directory' if kind == 'cards' else '/marx/#directory'
+        out += '<p>' + link(return_route, '返回读马恩目录 →', attrs=' data-me-return data-me-columns="' + ' '.join(column['id'] for column in data['catalog']['columns']) + '"') + '</p>'
+    return out + '</div>'
 
 
 def render_sources(data):
@@ -347,7 +402,7 @@ def render_sources(data):
             + link('/today/#daily-quotation-card', '去「今天」页读名句 →') + ' · ' + link('/assets/quotes-sources.md', '名句的逐条出处') + '</p></section>'
             '<section><h2>怎样核对与阅读</h2><p>每条引用保留作品、版本、定位和核查日期，核查记录与公开文字使用指纹对应。指纹能发现文字或记录变化，不能替代思想内容和语境的审读。关于社会历史的分析，可从恩格斯致布洛赫的书信进入，同时回到作品讨论的具体条件。</p><p>'
             + link('https://www.marxists.org/chinese/marx-engels2/10/240.htm', '恩格斯致约瑟夫·布洛赫（1890年9月21—22日）', True)
-            + '</p><p>构建只读仓库内已整理的资料；浏览、换卡和筛选不会自动请求中马库。只有主动打开原文链接才会前往外站。本栏不保存阅读偏好，不需要账号。</p></section></div>')
+            + '</p><p>生平日期依年表写到年、月或日，不补出原文没有的日期，也不当作一项工作的全部起止时间。报刊专题按首次发表日排列，连载日期见各篇出处；写作日期和编者注随原文另查。生平的主要足迹列出生活与工作地点，学位授予地不直接当作本人到访地。</p><p>构建只读仓库内已整理的资料；浏览、换卡和筛选不会自动请求中马库。只有主动打开原文链接才会前往外站。本栏不保存阅读偏好，不需要账号。</p></section></div>')
     out += '<section class="me-section" aria-labelledby="errata"><h2 id="errata">电子录入校勘</h2><p>下面只列本轮已复核的改动。优先依据中马库另一份中文本；明显页眉混入或识别错误另说明上下文。拿不准的引文暂不选用。欢迎' + link('mailto:xieyuqing.me@gmail.com', '指出问题') + '。</p>'
     for correction in data["errata"].values():
         out += '<article class="me-errata" id="errata-' + correction["id"] + '"><h3>' + link(correction["url"], '原电子页面', True) + '</h3><p><del>' + escape(correction["wrong"]) + '</del> → <ins>' + escape(correction["right"]) + '</ins></p><p>' + escape(correction["basis"]) + '</p>'
@@ -370,6 +425,44 @@ def day_seed(key):
     return value
 
 
+def published_cards(data):
+    return [item for item in data['items'].values() if item['kind'] == 'cards' and item['status'] == 'published']
+
+
+def card_row(card, filterable=False):
+    attributes = (' data-me-row data-branch="' + ' '.join(card['branch']) + '" data-level="' + str(card['level']) + '"'
+                  if filterable else ' data-me-featured')
+    return ('<article class="me-row"' + attributes + ' data-column="' + escape(card['column'], quote=True) + '"><h3>'
+            + link(card['route'], card['title'], attrs=' data-me-card-link' if filterable else '') + '</h3><p>'
+            + escape(card['summary']) + '</p><p class="me-meta">'
+            + escape(difficulty(card['level']) + ' · ' + ' / '.join(card['tags'])) + '</p></article>')
+
+
+def render_directory(data):
+    cards = published_cards(data)
+    out = '<section aria-labelledby="directory"><h2 id="directory">带着问题读</h2><div class="me-filters" data-me-filters hidden><fieldset><legend>栏目</legend><button type="button" data-me-column="all" aria-pressed="true">全部</button>'
+    out += ''.join('<button type="button" data-me-column="' + escape(column['id'], quote=True) + '" aria-pressed="false">' + escape(column['title']) + '</button>' for column in data['catalog']['columns'])
+    out += '</fieldset><fieldset><legend>理论分支</legend><button type="button" data-me-branch="all" aria-pressed="true">全部</button>'
+    out += ''.join(f'<button type="button" data-me-branch="{key}" aria-pressed="false">{label}</button>' for key, label in BRANCHES.items()) + '</fieldset><fieldset><legend>难度</legend><button type="button" data-me-level="all" aria-pressed="true">全部</button>'
+    out += ''.join(f'<button type="button" data-me-level="{key}" aria-pressed="false">{label}</button>' for key, label in LEVELS.items()) + '</fieldset></div><p class="me-meta me-level-note">' + LEVEL_NOTE + '</p><p class="me-meta" data-me-count role="status"></p><p data-me-empty hidden>这个组合暂时没有卡片，试试其他栏目、分支或难度。</p><div class="me-directory">'
+    for column in data['catalog']['columns']:
+        out += '<section class="me-directory-group" data-me-group><h2>' + escape(column['title']) + '</h2><p class="me-meta">' + escape(column['description']) + '</p>'
+        out += ''.join(card_row(card, True) for card in cards if card['column'] == column['id'])
+        out += '</section>'
+    return out + '</div></section>'
+
+
+def render_featured_cards(data):
+    cards = published_cards(data)
+    out = '<section class="me-section" aria-labelledby="directory"><h2 id="directory">带着问题读</h2><p>' + link('/marx/cards/', '看全部 ' + str(len(cards)) + ' 张卡片 →') + '</p><div class="me-directory me-featured-directory">'
+    for column in data['catalog']['columns']:
+        chosen = [card for card in cards if card['column'] == column['id']][:2]
+        out += '<section class="me-directory-group" data-me-featured-group><h2>' + escape(column['title']) + '</h2><p class="me-meta">' + escape(column['description']) + '</p>'
+        out += ''.join(card_row(card) for card in chosen)
+        out += '<p class="me-column-more">' + link('/marx/cards/?column=' + column['id'], '看全部' + column['title'] + ' →') + '</p></section>'
+    return out + '</div></section>'
+
+
 def render_index(data):
     intro = data["intro"]
     out = ('<header class="me-intro"><p class="me-kicker">从原著出发</p><h1>' + escape(intro["name"]) + '</h1><p class="me-lead">' + escape(intro["intro"]) + '</p><p class="me-basis">' + escape(intro["basis"]) + '</p>'
@@ -379,7 +472,7 @@ def render_index(data):
             + link('/marx/capital/', '资本怎样增殖') + '</h3><p>从商品和劳动走向剩余价值，再看生产、流通与分配的联系。这扇门通向《资本论》。</p></article></div><p class="me-meta">两扇门的概括据恩格斯'
             + link(data['works']['funeral-speech']['mia'], '《在马克思墓前的讲话》', True) + '所概括的两个发现转述。</p></section>')
     out += '<section class="me-section">' + heading('books', '十卷书架', link('/marx/wenji/', '看完整目录 →')) + bookcase(data) + '</section>'
-    cards = [item for item in data["items"].values() if item["kind"] == 'cards' and item["status"] == 'published']
+    cards = published_cards(data)
     if cards:
         key = datetime.now(CHINA).date().isoformat()
         selected = cards[day_seed(key) % len(cards)]
@@ -403,17 +496,7 @@ def render_index(data):
     out += '</div><p class="me-meta">一周路线：' + ' → '.join(link(work_route(data, work), data['works'][work]['title'], work_route(data, work).startswith('https:')) for work in ('manifesto', 'wage-labour-capital', 'value-price-profit')) + '。</p></section>'
     from marx_v2 import entrances
     out += entrances()
-    out += '<section class="me-section" aria-labelledby="directory"><h2 id="directory">带着问题读</h2><div class="me-filters" data-me-filters hidden><fieldset><legend>理论分支</legend><button type="button" data-me-branch="all" aria-pressed="true">全部</button>'
-    out += ''.join(f'<button type="button" data-me-branch="{key}" aria-pressed="false">{label}</button>' for key, label in BRANCHES.items()) + '</fieldset><fieldset><legend>难度</legend><button type="button" data-me-level="all" aria-pressed="true">全部</button>'
-    out += ''.join(f'<button type="button" data-me-level="{key}" aria-pressed="false">{label}</button>' for key, label in LEVELS.items()) + '</fieldset></div><p class="me-meta me-level-note">' + LEVEL_NOTE + '</p><p class="me-meta" data-me-count role="status"></p><p data-me-empty hidden>这个组合暂时没有卡片，试试其他分支或难度。</p><div class="me-directory">'
-    for column in data['catalog']['columns']:
-        out += '<section class="me-directory-group" data-me-group><h2>' + escape(column['title']) + '</h2><p class="me-meta">' + escape(column['description']) + '</p>'
-        for card in cards:
-            if card['column'] != column['id']:
-                continue
-            out += '<article class="me-row" data-me-row data-branch="' + ' '.join(card['branch']) + '" data-level="' + str(card['level']) + '"><h3>' + link(card['route'], card['title'], attrs=' data-me-card-link') + '</h3><p>' + escape(card['summary']) + '</p><p class="me-meta">' + escape(difficulty(card['level']) + ' · ' + ' / '.join(card['tags'])) + '</p></article>'
-        out += '</section>'
-    out += '</div></section>'
+    out += render_featured_cards(data)
     # 问对录 stays low-key: one small button to its own directory page.
     out += '<p class="me-minor-links"><a class="me-minor-link" href="/marx/qa/">问对录</a></p>'
     return out + '<p class="me-editorial">本站整理与解读有AI辅助，中文引文逐字核对所链原文。' + link('/marx/sources/', '版本、引文与校勘说明 →') + '</p>'
@@ -434,6 +517,8 @@ def build_pages(root, output, address, data):
     pages.extend((item['route'], item['title'], item['summary'], render_content(data, item)) for item in data['items'].values() if item['status'] == 'published')
     from marx_v2 import extra_pages
     pages.extend(extra_pages(data))
+    from marx_topics import extra_pages as topic_pages
+    pages.extend(topic_pages(data))
     for route, title, description, content in pages:
         # The 问对录 directory only lists the author's own articles, so it carries no AI note.
         if route not in ('/marx/', '/marx/qa/') and AI_NOTE not in content:

@@ -522,6 +522,326 @@
       "locator": "正文第四章最后一句；截取至叹号，未带电子文本末尾孤立引号",
       "method": "2026-10-29重新读取正文，声明GB2312按GB18030严格解码；逐字匹配连续短引，核对前后段与正文位置，不把编者注当作作者原话。 英文按所链MIA历史译本逐词核对，合并HTML换行空白；英文正文SHA-256：178ca0473c35d97d6982efc32e61cc5dd768ac69bff58733333294f1a799de50。",
       "errata": []
+    },
+    {
+      "id": "v3-capital-2-part1",
+      "quote_sha256": "f696f1636fa52f590130ee9c9c4ce015b700f9f9f195cdb7ff92cc71c446febf",
+      "source_body_sha256": "a73350fe7ab1f67195430be89eca581cfb58699ceebcf7b97a1a2f9d18a6dc77",
+      "locator": "第四章开头：三个循环公式的概括",
+      "method": "原始HTML按声明gb2312以gbk严格解码，无替代字符；核句在作者正文连续出现，并核对相邻论证。指纹对应去标签提取稿；仅去排版空白比较，不回译、不拼句、不复制现代编者注。",
+      "errata": []
+    },
+    {
+      "id": "v3-capital-2-part2",
+      "quote_sha256": "f646ae6dce51cc905f0a9d207fdaee236ffebbb2803fbedd410830f980ecd07f",
+      "source_body_sha256": "24a8f52c72759d6a7bd05999cde45849a8ea7ece62398dfeaa19f338db3f9976",
+      "locator": "第七章开头：周转时间的规定",
+      "method": "原始HTML按声明gb2312以gbk严格解码，无替代字符；核句在作者正文连续出现，并核对相邻论证。指纹对应去标签提取稿；仅去排版空白比较，不回译、不拼句、不复制现代编者注。",
+      "errata": []
+    },
+    {
+      "id": "v3-capital-2-part3",
+      "quote_sha256": "3f31cc5da422c873cb68377c599ff3e50d02f6f6b3b14d4e3e02d9e03e358c87",
+      "source_body_sha256": "6b2345cf183e8c886cc05747081432e278fc5f33694f5b3f254b93b6d3e99604",
+      "locator": "第十八章第Ⅰ节：研究的对象",
+      "method": "原始HTML按声明gb2312以gbk严格解码，无替代字符；核句在作者正文连续出现，并核对相邻论证。指纹对应去标签提取稿；仅去排版空白比较，不回译、不拼句、不复制现代编者注。",
+      "errata": []
+    },
+    {
+      "id": "v3-capital-3-part1",
+      "quote_sha256": "e7baaa7b359496c18c7ea307308580281ddcd9668cdf50a9f4d0fc14b37b0fe7",
+      "source_body_sha256": "5ec032670070f7526600ab7dcba59b2b7895a3209fc1dcb966d3988013249029",
+      "locator": "第一章：剩余价值取得利润形式的段落",
+      "method": "原始HTML按声明gb2312以gbk严格解码，无替代字符；核句在作者正文连续出现，并核对相邻论证。指纹对应去标签提取稿；仅去排版空白比较，不回译、不拼句、不复制现代编者注。",
+      "errata": []
+    },
+    {
+      "id": "v3-capital-3-part2",
+      "quote_sha256": "1206744dbb0ba8e08ada74bc013200233e656edfc66200cebd78c2f81e566061",
+      "source_body_sha256": "a7b64488187381e4bb1347740e155768d89994e839c168f7e80afe12cd2e0870",
+      "locator": "第九章：由部门利润率进入生产价格的定义",
+      "method": "原始HTML按声明gb2312以gbk严格解码，无替代字符；核句在作者正文连续出现，并核对相邻论证。指纹对应去标签提取稿；仅去排版空白比较，不回译、不拼句、不复制现代编者注。",
+      "errata": []
+    },
+    {
+      "id": "v3-capital-3-part3",
+      "quote_sha256": "c820902c92a48d807c17929a3ac4a7b30f5b7d2ea146c4acbff396f48b34d5bc",
+      "source_body_sha256": "bf26ddd65e3d5d18c346169c943e3d30539ddc4d6d37fa1a905babd406afc494",
+      "locator": "第十三章开头：资本构成改变的数例之后",
+      "method": "原始HTML按声明gb2312以gbk严格解码，无替代字符；核句在作者正文连续出现，并核对相邻论证。指纹对应去标签提取稿；仅去排版空白比较，不回译、不拼句、不复制现代编者注。",
+      "errata": []
+    },
+    {
+      "id": "v3-capital-3-part4",
+      "quote_sha256": "690ac87c8e1741a12cdf61ff414acc034a30791959ce94d13009e88db81186cb",
+      "source_body_sha256": "b71356ffa1c755c5f6a7b7788cd56d2a1ab0558218a939ae02e764a6fddaba25",
+      "locator": "第十七章：提出商人资本怎样分得剩余价值的问题之后",
+      "method": "原始HTML按声明gb2312以gbk严格解码，无替代字符；核句在作者正文连续出现，并核对相邻论证。指纹对应去标签提取稿；仅去排版空白比较，不回译、不拼句、不复制现代编者注。",
+      "errata": []
+    },
+    {
+      "id": "v3-capital-3-part5",
+      "quote_sha256": "b0c35140c91a5b3d35feedcc8ef8556efc55eb764ab9e552bea04a358ce8340a",
+      "source_body_sha256": "84f6324e031ea5d4157f0fc0368b0977d865d689b2dca9643751ea74bda3c46e",
+      "locator": "第二十一章：货币取得作为资本发挥职能的使用价值",
+      "method": "原始HTML按声明gb2312以gbk严格解码，无替代字符；核句在作者正文连续出现，并核对相邻论证。指纹对应去标签提取稿；仅去排版空白比较，不回译、不拼句、不复制现代编者注。",
+      "errata": []
+    },
+    {
+      "id": "v3-capital-3-part6",
+      "quote_sha256": "214c3c195d76682ea4cfbb7bc9304b4b6988f08ab7c4aed4c5032256f3fc4ae7",
+      "source_body_sha256": "2b12c729d4eb671917c56dbceb93915b74ae58163ccddd485ed0f8f25a654a6a",
+      "locator": "第三十七章开头：本篇研究的范围",
+      "method": "原始HTML按声明gb2312以gbk严格解码，无替代字符；核句在作者正文连续出现，并核对相邻论证。指纹对应去标签提取稿；仅去排版空白比较，不回译、不拼句、不复制现代编者注。",
+      "errata": []
+    },
+    {
+      "id": "v3-capital-3-part7",
+      "quote_sha256": "cb6066281977e1308f29fd9fb64fe914dcca804987cab12f2975cc81dd7ee714",
+      "source_body_sha256": "8269f1c9b8564fbaf949acf722bdc0f768ff4ac381ef4ccf7f27c35903f487cd",
+      "locator": "第五十一章：生产关系与分配关系的历史性质",
+      "method": "原始HTML按声明gb2312以gbk严格解码，无替代字符；核句在作者正文连续出现，并核对相邻论证。指纹对应去标签提取稿；仅去排版空白比较，不回译、不拼句、不复制现代编者注。",
+      "errata": []
+    },
+    {
+      "id": "v3-capital-3-ch09",
+      "quote_sha256": "d9ad321e600e9c74d8a49d5c222c57031f75f489c234e6b4a99b4cb759f30005",
+      "source_body_sha256": "a7b64488187381e4bb1347740e155768d89994e839c168f7e80afe12cd2e0870",
+      "locator": "第九章：说明生产价格的定义",
+      "method": "原始HTML按声明gb2312以gbk严格解码，无替代字符；核句在作者正文连续出现，并核对相邻论证。指纹对应去标签提取稿；仅去排版空白比较，不回译、不拼句、不复制现代编者注。",
+      "errata": []
+    },
+    {
+      "id": "v3-capital-3-ch13",
+      "quote_sha256": "f082bc3c032aa7c81604870b2e773de1da2f435f25565fd3d81edcd838304f00",
+      "source_body_sha256": "bf26ddd65e3d5d18c346169c943e3d30539ddc4d6d37fa1a905babd406afc494",
+      "locator": "第十三章：资本构成、生产力与开头数例的联系",
+      "method": "原始HTML按声明gb2312以gbk严格解码，无替代字符；核句在作者正文连续出现，并核对相邻论证。指纹对应去标签提取稿；仅去排版空白比较，不回译、不拼句、不复制现代编者注。",
+      "errata": []
+    },
+    {
+      "id": "v3-capital-3-ch14",
+      "quote_sha256": "ef65d9bfedb548cc8d524445442227710bbfc4fef0d0a37a560b284fdbee00ee",
+      "source_body_sha256": "e63f0cb48addd4e95382640675bd99de1401873f37c85e6c0d91234a7aa7875b",
+      "locator": "第十四章开头：反作用与趋势",
+      "method": "原始HTML按声明gb2312以gbk严格解码，无替代字符；核句在作者正文连续出现，并核对相邻论证。指纹对应去标签提取稿；仅去排版空白比较，不回译、不拼句、不复制现代编者注。",
+      "errata": []
+    },
+    {
+      "id": "v3-capital-3-ch15",
+      "quote_sha256": "4d6eb3a67e7f27cd0a7ac23d5749d095919c5c21bf16570b1754f6efdc352c2e",
+      "source_body_sha256": "7af7bd1d3682c35ceda23deb54822431fd9d7ee11bafb30efd00538d6aa2cba2",
+      "locator": "第十五章：资本主义生产方式的限制",
+      "method": "原始HTML按声明gb2312以gbk严格解码，无替代字符；核句在作者正文连续出现，并核对相邻论证。指纹对应去标签提取稿；仅去排版空白比较，不回译、不拼句、不复制现代编者注。",
+      "errata": []
+    },
+    {
+      "id": "v3-capital-3-ch23",
+      "quote_sha256": "32fac42ae4639ed02c184342fcc4e6be0553c57a5d0470fa2abcc99382067eb9",
+      "source_body_sha256": "2b3fd85b9295e396c3428dce0b57d8c4cff0c125b76b69788e18770f0dcef773",
+      "locator": "第二十三章：合作工厂与股份企业的管理工资",
+      "method": "原始HTML按声明gb2312以gbk严格解码，无替代字符；核句在作者正文连续出现，并核对相邻论证。指纹对应去标签提取稿；仅去排版空白比较，不回译、不拼句、不复制现代编者注。",
+      "errata": []
+    },
+    {
+      "id": "v3-capital-3-ch25",
+      "quote_sha256": "f4ffceda92f1b88e8659a20b99bbb2e34798cf573e54943612a432648a9d7115",
+      "source_body_sha256": "d38a49441fb223ffb08fec33c92128dc0f62949258fab0e438391416e75ea7df",
+      "locator": "第二十五章开头：信用问题的研究范围",
+      "method": "原始HTML按声明gb2312以gbk严格解码，无替代字符；核句在作者正文连续出现，并核对相邻论证。指纹对应去标签提取稿；仅去排版空白比较，不回译、不拼句、不复制现代编者注。",
+      "errata": []
+    },
+    {
+      "id": "v3-capital-3-ch27",
+      "quote_sha256": "91b57632c80a3640b38c59cc2dcd1d9908e416941be1189bbc754bac7f58f3a6",
+      "source_body_sha256": "df4dc865f2f10e0492be647465f664f45d537d892d6847c9c268788eea6bd1ec",
+      "locator": "第二十七章后段：信用发展生产力同时加速矛盾爆发；接上文世界市场与生产力的论述",
+      "method": "原始HTML按声明gb2312以gbk严格解码，无替代字符；核句在作者正文连续出现，并核对相邻论证。指纹对应去标签提取稿；仅去排版空白比较，不回译、不拼句、不复制现代编者注。",
+      "errata": []
+    },
+    {
+      "id": "v3-capital-3-ch48",
+      "quote_sha256": "5905d3b68b43684cc4af509717a50ebb0b5bae46c242a4b091b329d642780103",
+      "source_body_sha256": "6b3bd485a93eeae280eebb276e73a590d691a2356a4bebd16d190de10a66c93e",
+      "locator": "第四十八章第Ⅰ部分：资本的社会形式",
+      "method": "原始HTML按声明gb2312以gbk严格解码，无替代字符；核句在作者正文连续出现，并核对相邻论证。指纹对应去标签提取稿；仅去排版空白比较，不回译、不拼句、不复制现代编者注。",
+      "errata": []
+    },
+    {
+      "id": "c-v3-letter-129-paris",
+      "quote_sha256": "a26856ed361d6895519486adc9eb34cf037f071ebfc86b116df80a4bc479824e",
+      "source_body_sha256": "c0352d63a29888eb34056f02aa7421a0b0ccc2251b7d219a261206b0e35404fe",
+      "locator": "第129封：马克思致库格曼，1871年4月12日；赞扬巴黎工人的奋斗",
+      "method": "逐字匹配按声明编码严格解码的中文原文，读前后段；只清理网页排版空白，未用英文回译。",
+      "errata": []
+    },
+    {
+      "id": "c-v3-letter-130-new-start",
+      "quote_sha256": "75af1c87621468680bda75051dfe026dd0fe00ad8e19b41a60c99671255afcff",
+      "source_body_sha256": "0b1722106837b06473eeb9c9fcf49fe6f8c88b9d1172491100efdd4899019c04",
+      "locator": "第130封：马克思致库格曼，1871年4月17日；信末关于巴黎斗争的新起点",
+      "method": "逐字匹配按声明编码严格解码的中文原文，读前后段；只清理网页排版空白，未用英文回译。",
+      "errata": []
+    },
+    {
+      "id": "c-v3-civil-war-engels-1891",
+      "quote_sha256": "8e005103ba0b164bcb2a8a4fb788803227fa49e287daf152740533b9f631520e",
+      "source_body_sha256": "74ceb6dc448c5cb96057f1a98cf96da16198caa5274f076bdd0386490ece4084",
+      "locator": "恩格斯《法兰西内战》1891年版导言末段；不要误署为马克思正文",
+      "method": "逐字匹配按声明编码严格解码的中文原文，读前后段；只清理网页排版空白，未用英文回译。",
+      "errata": []
+    },
+    {
+      "id": "c-v3-manifesto-1872-history",
+      "quote_sha256": "0d6d12e0b6a5c182825e4aa8734d2e3f21292a3c0b4a86ccc82eeeef0be4ec3a",
+      "source_body_sha256": "1c3d15c306c899bf9d455f5fb557b707b7ac0d694359659c62f5dc5c1cd68144",
+      "locator": "1872年德文版序言：讨论巴黎公社经验后，说明保留历史文件",
+      "method": "逐字匹配按声明编码严格解码的中文原文，读前后段；只清理网页排版空白，未用英文回译。",
+      "errata": []
+    },
+    {
+      "id": "c-v3-letter-237-guide",
+      "quote_sha256": "8a4a2251472a4ee9b7f063567fe2f3f7fd84b02cf74e9e3caa3722c4fefda7f4",
+      "source_body_sha256": "a275da29e8cf0c843e06aa5c79948b6d631c229396d9439cdb40af4bac7353b2",
+      "locator": "第237封：1890年8月5日致施米特；讨论历史研究的方法",
+      "method": "逐字匹配按声明编码严格解码的中文原文，读前后段；只清理网页排版空白，未用英文回译。",
+      "errata": []
+    },
+    {
+      "id": "c-v3-letter-241-interaction",
+      "quote_sha256": "73a3ba94c72a22b383d1bb3f4e61bcb390ba743cab0d4a6c679c0ecf67e05b9f",
+      "source_body_sha256": "71799dc72c6f837cdfc924655405ddda47f68ef2b4009817da1ada292df3e59b",
+      "locator": "第241封：1890年10月27日致施米特；末段谈发展过程与相互作用",
+      "method": "逐字匹配按声明编码严格解码的中文原文，读前后段；只清理网页排版空白，未用英文回译。",
+      "errata": []
+    },
+    {
+      "id": "c-v3-letter-263-form",
+      "quote_sha256": "244dc3e050eb72db0a696cde1216fef43321adb4979bed1ac0bf3cd9c1d8f981",
+      "source_body_sha256": "ed63131530884d614aad5c8f3df98743f0845feaeb37f8d07846abbb63c31b48",
+      "locator": "第263封：1893年7月14日致梅林；谈意识形态研究中的内容与形式",
+      "method": "逐字匹配按声明编码严格解码的中文原文，读前后段；只清理网页排版空白，未用英文回译。",
+      "errata": []
+    },
+    {
+      "id": "c-v3-letter-266-action",
+      "quote_sha256": "82eace430d4ac24d3e2863e4acfb4058473fcd1aa053f4778f614a7ecb63382d",
+      "source_body_sha256": "597e0d75286e39385568f5fa0fc1917dcbe45d687398579d02438e009a4fba19",
+      "locator": "第266封：1894年1月25日致博尔吉乌斯；第2点（a），现实条件与人的行动",
+      "method": "逐字匹配按声明编码严格解码的中文原文，读前后段；只清理网页排版空白，未用英文回译。",
+      "errata": []
+    },
+    {
+      "id": "c-v3-capital-3-manager",
+      "quote_sha256": "a3d54b3530c9aa97b9d8361193d127c6c9a40e8672bce3f30e99385a83de352c",
+      "source_body_sha256": "2b3fd85b9295e396c3428dce0b57d8c4cff0c125b76b69788e18770f0dcef773",
+      "locator": "第三卷第二十三章：讨论指挥劳动与资本所有权分离的段落",
+      "method": "逐字匹配按声明编码严格解码的中文原文，读前后段；只清理网页排版空白，未用英文回译。",
+      "errata": []
+    },
+    {
+      "id": "c-v3-capital-3-joint-stock",
+      "quote_sha256": "6cfb8a112f4d3059dfb70c401181147f600e7c17eabfc189b26c96ddb37a1482",
+      "source_body_sha256": "df4dc865f2f10e0492be647465f664f45d537d892d6847c9c268788eea6bd1ec",
+      "locator": "第三卷第二十七章第III部分第3点：股份公司的经理与所有者",
+      "method": "逐字匹配按声明编码严格解码的中文原文，读前后段；只清理网页排版空白，未用英文回译。",
+      "errata": []
+    },
+    {
+      "id": "c-v3-capital-blood",
+      "quote_sha256": "16eb730457c0f1affcf010b4133d0679478a397ad537bc84a10c10bf4685b39a",
+      "source_body_sha256": "f6f39297f0e654bb4c4f5c34a97755431df0b3654688fef7cbf2227cd0660f8f",
+      "locator": "第二十四章第6节末；奥日埃货币比喻之后的马克思正文",
+      "method": "原始中文HTML按声明gb2312以gbk严格解码，无替代字符；核对正文的连续原句及前后论证，仅去网页排版空白比较；不回译、不拼接、不采用未核的脚注段落。",
+      "errata": []
+    },
+    {
+      "id": "c-v3-gotha-needs",
+      "quote_sha256": "059833d03bf94f57f6ebc9c14fa98ab4029966325d8e9a0ea972bf0ec4d0b618",
+      "source_body_sha256": "ed95f17f173348c27414caf9f26bbb0b4b44c42e60fd23a081ab26b8a2aa8882",
+      "locator": "德国工人党纲领批注第一部分；共产主义高级阶段条件之后的口号",
+      "method": "原始中文HTML按声明gb2312以gbk严格解码，无替代字符；核对正文的连续原句及前后论证，仅去网页排版空白比较；不回译、不拼接、不采用未核的脚注段落。",
+      "errata": []
+    },
+    {
+      "id": "c-v3-manifesto-printing",
+      "quote_sha256": "4a9ad85de63bfea1b56b2eb1e1737369ee2d1c45ea764bae9d49f5e5c6b23c95",
+      "source_body_sha256": "1c3d15c306c899bf9d455f5fb557b707b7ac0d694359659c62f5dc5c1cd68144",
+      "locator": "1872年德文版序言首段；付印相对于二月革命的时间",
+      "method": "原始中文HTML按声明gb2312以gbk严格解码，无替代字符；核对正文的连续原句及前后论证，仅去网页排版空白比较；不回译、不拼接、不采用未核的脚注段落。",
+      "errata": []
+    },
+    {
+      "id": "c-v3-funeral-mathematics",
+      "quote_sha256": "8f805997b14e3a644c44b1e76f4552d2f7ba251d1943e66f94271eee81afa3a8",
+      "source_body_sha256": "add3fb47491fcdd3f18c7a0cebe0452781ccfe58fe8c0cf8ed1706cb9646bb76",
+      "locator": "恩格斯《在马克思墓前的讲话》：概括研究领域的完整句",
+      "method": "原始中文HTML按声明gb2312以gbk严格解码，无替代字符；核对正文的连续原句及前后论证，仅去网页排版空白比较；不回译、不拼接、不采用未核的脚注段落。",
+      "errata": []
+    },
+    {
+      "id": "c-v3-shelf-timon-gold",
+      "quote_sha256": "5264cfd8d53e994aebafde971d5549f92122bb5ffee6649830d13722537a1b05",
+      "source_body_sha256": "173e0507041989707d6f53f580f193d140ced6f60c50a1d05adbf210a980550e",
+      "locator": "［笔记本Ⅲ］［货币］：引莎士比亚诗句后，马克思归纳货币的两个特性",
+      "method": "按源HTML声明编码严格解码，逐字匹配去排版空白后的连续中文正文并读前后段；索引及编者典故注只作辅助线索，引文不出自现代注释，不回译、不拼句。",
+      "errata": []
+    },
+    {
+      "id": "c-v3-shelf-faust-horses",
+      "quote_sha256": "1a9999cbf266f9c11a32e00b485becf8343dba7baedf07a7ab27408504c79a0c",
+      "source_body_sha256": "173e0507041989707d6f53f580f193d140ced6f60c50a1d05adbf210a980550e",
+      "locator": "［笔记本Ⅲ］［货币］：歌德《浮士德》诗句之后，马克思解释货币占有者的力量",
+      "method": "按源HTML声明编码严格解码，逐字匹配去排版空白后的连续中文正文并读前后段；索引及编者典故注只作辅助线索，引文不出自现代注释，不回译、不拼句。",
+      "errata": []
+    },
+    {
+      "id": "c-v3-shelf-dante-road",
+      "quote_sha256": "6698ac96ac6b77a30b7d7c9b8c5ddfeb7b2a1df2e18a1c2f5d3eaf8136d6e0cb",
+      "source_body_sha256": "23d8eb782a1f607f20df555e0f353f2d4da0037715f93c63468a897b810ad964",
+      "locator": "第一版序言结尾：欢迎科学批评，随后套用佛罗伦萨诗人的格言；同页编者注定位《神曲·炼狱篇》第五首歌",
+      "method": "按源HTML声明编码严格解码，逐字匹配去排版空白后的连续中文正文并读前后段；索引及编者典故注只作辅助线索，引文不出自现代注释，不回译、不拼句。",
+      "errata": []
+    },
+    {
+      "id": "c-v3-shelf-robinson-account",
+      "quote_sha256": "32b3672606a33c1ee53b3b42c529b6a171851f9a68ea06a814a4e99e49e4f2eb",
+      "source_body_sha256": "f86d981172ea59874195f6f1d2453f65e4a0b9cfa671486ab34b5156abd700bf",
+      "locator": "第一章第4节：从商品世界转到孤岛上的鲁滨逊，记录多种有用劳动及时间分配",
+      "method": "按源HTML声明编码严格解码，逐字匹配去排版空白后的连续中文正文并读前后段；索引及编者典故注只作辅助线索，引文不出自现代注释，不回译、不拼句。",
+      "errata": []
+    },
+    {
+      "id": "c-v3-shelf-rhodes-jump",
+      "quote_sha256": "d1992e4106204d5c290466b1d4f5d33f088a0873622e2b9cb6e0dc4afec7eaf0",
+      "source_body_sha256": "9810bcc04809d5220b806900cb441900cbb7e92833f2938aa239250f8d520558",
+      "locator": "第四章第2节末：资本总公式矛盾之后，提出必须满足的解释条件；同页编者注说明伊索寓言《说大话的人》",
+      "method": "按源HTML声明编码严格解码，逐字匹配去排版空白后的连续中文正文并读前后段；索引及编者典故注只作辅助线索，引文不出自现代注释，不回译、不拼句。",
+      "errata": []
+    },
+    {
+      "id": "c-v3-shelf-balzac-realism",
+      "quote_sha256": "b83e11d7e3b8ddb0194586d03b80331dcf15b40046fe16609b1836aa949dbd02",
+      "source_body_sha256": "22c3b314c042a52ffe930e2f8324547e1d2bb5254c950778910cdf32083cbbf8",
+      "locator": "第230封：恩格斯致玛格丽特·哈克奈斯，1888年4月初草稿；由现实主义和作者见解转入巴尔扎克的例子",
+      "method": "按源HTML声明编码严格解码，逐字匹配去排版空白后的连续中文正文并读前后段；索引及编者典故注只作辅助线索，引文不出自现代注释，不回译、不拼句。",
+      "errata": []
+    },
+    {
+      "id": "c-v3-shelf-don-quixote-property",
+      "quote_sha256": "bc549d0de27567d73a4d94c08f151033bff43c0c93787d7c1689cb14f2630a0a",
+      "source_body_sha256": "173e0507041989707d6f53f580f193d140ced6f60c50a1d05adbf210a980550e",
+      "locator": "［笔记本Ⅱ］［私有财产的关系］：马克思转述动产对地产的批评，出现唐·吉诃德的比喻",
+      "method": "按源HTML声明编码严格解码，逐字匹配去排版空白后的连续中文正文并读前后段；索引及编者典故注只作辅助线索，引文不出自现代注释，不回译、不拼句。",
+      "errata": []
+    },
+    {
+      "id": "c-v3-shelf-achilles-expansion",
+      "quote_sha256": "de38ef7afb6d7039bc3b38fc13f375e2b416db5933ef3dca526aa4ba55aca834",
+      "source_body_sha256": "f660de12bddec0b3591820155c04e7703a9c69ec907491cb3c7fb4a549f697ea",
+      "locator": "《英国工人阶级状况》1892年德文第二版序言：转引1885年文章中关于英国工业、扩张和停滞的分析",
+      "method": "按源HTML声明编码严格解码，逐字匹配去排版空白后的连续中文正文并读前后段；索引及编者典故注只作辅助线索，引文不出自现代注释，不回译、不拼句。",
+      "errata": []
     }
   ],
   "works": [
@@ -570,20 +890,91 @@
     },
     {
       "id": "capital-2",
-      "characters": 18667,
-      "source_body_sha256": "a216f33ec55e673aa036e8aaad4ba8c6ba7c9d9d5aa4162b04c46e1691307a1c",
-      "method": "按URL升序取本次引用源页面的完整原著正文（含作者自己的版次序言/独立稿本，排除导航、页标题、现代题注/编者出版记、sup及intr印刷注释），严格Unicode len相加；多页指纹按两LF拼接，连接分隔符不计字符。源页面中残存OCR不擅改。此为所引原著完整源章节/部件正文长度下限，不把它冒称为整部著作/整卷字数，也不以短引文的长度作分母。",
+      "characters": 170160,
+      "source_body_sha256": "578233f775d24cbe43b6b690c40d6dcb59b8afc98b1a246a12de45197a9f060c",
+      "method": "按章节URL顺序核对所列各章，从章名之后取至首次页尾横线之前的作者正文；排除导航、章名、sup注号及intr编者说明。为压低下界，方括号包围的内容也全部不计，包括恩格斯补入的长段。只数剩余汉字，不计标点、公式与英文；不是整卷印本总字数。各章提取稿以两LF拼接计算指纹，分隔符不计长度。",
       "urls": [
-        "https://www.marxists.org/chinese/marx-engels2/06/08.htm"
+        "https://www.marxists.org/chinese/marx-engels2/06/01.htm",
+        "https://www.marxists.org/chinese/marx-engels2/06/02.htm",
+        "https://www.marxists.org/chinese/marx-engels2/06/03.htm",
+        "https://www.marxists.org/chinese/marx-engels2/06/04.htm",
+        "https://www.marxists.org/chinese/marx-engels2/06/05.htm",
+        "https://www.marxists.org/chinese/marx-engels2/06/06.htm",
+        "https://www.marxists.org/chinese/marx-engels2/06/07.htm",
+        "https://www.marxists.org/chinese/marx-engels2/06/08.htm",
+        "https://www.marxists.org/chinese/marx-engels2/06/09.htm",
+        "https://www.marxists.org/chinese/marx-engels2/06/10.htm",
+        "https://www.marxists.org/chinese/marx-engels2/06/11.htm",
+        "https://www.marxists.org/chinese/marx-engels2/06/12.htm",
+        "https://www.marxists.org/chinese/marx-engels2/06/13.htm",
+        "https://www.marxists.org/chinese/marx-engels2/06/14.htm",
+        "https://www.marxists.org/chinese/marx-engels2/06/15.htm",
+        "https://www.marxists.org/chinese/marx-engels2/06/16.htm",
+        "https://www.marxists.org/chinese/marx-engels2/06/17.htm",
+        "https://www.marxists.org/chinese/marx-engels2/06/18.htm",
+        "https://www.marxists.org/chinese/marx-engels2/06/19.htm",
+        "https://www.marxists.org/chinese/marx-engels2/06/20.htm",
+        "https://www.marxists.org/chinese/marx-engels2/06/21.htm"
       ]
     },
     {
       "id": "capital-3",
-      "characters": 13912,
-      "source_body_sha256": "4628efc8b33131e842fa57287d6e0a61b93e69f75890634a883efe7caab1059f",
-      "method": "按URL升序取本次引用源页面的完整原著正文（含作者自己的版次序言/独立稿本，排除导航、页标题、现代题注/编者出版记、sup及intr印刷注释），严格Unicode len相加；多页指纹按两LF拼接，连接分隔符不计字符。源页面中残存OCR不擅改。此为所引原著完整源章节/部件正文长度下限，不把它冒称为整部著作/整卷字数，也不以短引文的长度作分母。",
+      "characters": 336379,
+      "source_body_sha256": "9f8fe768cf3b36438f8446b7068b414829aede6f16f87875129474bc6928b479",
+      "method": "按章节URL顺序核对所列各章，从章名之后取至首次页尾横线之前的作者正文；排除导航、章名、sup注号及intr编者说明。为压低下界，方括号包围的内容也全部不计，包括恩格斯补入的长段。只数剩余汉字，不计标点、公式与英文；不是整卷印本总字数。各章提取稿以两LF拼接计算指纹，分隔符不计长度。",
       "urls": [
-        "https://www.marxists.org/chinese/marx-engels2/07/48.htm"
+        "https://www.marxists.org/chinese/marx-engels2/07/01.htm",
+        "https://www.marxists.org/chinese/marx-engels2/07/02.htm",
+        "https://www.marxists.org/chinese/marx-engels2/07/03.htm",
+        "https://www.marxists.org/chinese/marx-engels2/07/04.htm",
+        "https://www.marxists.org/chinese/marx-engels2/07/05.htm",
+        "https://www.marxists.org/chinese/marx-engels2/07/06.htm",
+        "https://www.marxists.org/chinese/marx-engels2/07/07.htm",
+        "https://www.marxists.org/chinese/marx-engels2/07/08.htm",
+        "https://www.marxists.org/chinese/marx-engels2/07/09.htm",
+        "https://www.marxists.org/chinese/marx-engels2/07/10.htm",
+        "https://www.marxists.org/chinese/marx-engels2/07/11.htm",
+        "https://www.marxists.org/chinese/marx-engels2/07/12.htm",
+        "https://www.marxists.org/chinese/marx-engels2/07/13.htm",
+        "https://www.marxists.org/chinese/marx-engels2/07/14.htm",
+        "https://www.marxists.org/chinese/marx-engels2/07/15.htm",
+        "https://www.marxists.org/chinese/marx-engels2/07/16.htm",
+        "https://www.marxists.org/chinese/marx-engels2/07/17.htm",
+        "https://www.marxists.org/chinese/marx-engels2/07/18.htm",
+        "https://www.marxists.org/chinese/marx-engels2/07/19.htm",
+        "https://www.marxists.org/chinese/marx-engels2/07/20.htm",
+        "https://www.marxists.org/chinese/marx-engels2/07/21.htm",
+        "https://www.marxists.org/chinese/marx-engels2/07/22.htm",
+        "https://www.marxists.org/chinese/marx-engels2/07/23.htm",
+        "https://www.marxists.org/chinese/marx-engels2/07/24.htm",
+        "https://www.marxists.org/chinese/marx-engels2/07/25.htm",
+        "https://www.marxists.org/chinese/marx-engels2/07/26.htm",
+        "https://www.marxists.org/chinese/marx-engels2/07/27.htm",
+        "https://www.marxists.org/chinese/marx-engels2/07/28.htm",
+        "https://www.marxists.org/chinese/marx-engels2/07/29.htm",
+        "https://www.marxists.org/chinese/marx-engels2/07/30.htm",
+        "https://www.marxists.org/chinese/marx-engels2/07/31.htm",
+        "https://www.marxists.org/chinese/marx-engels2/07/32.htm",
+        "https://www.marxists.org/chinese/marx-engels2/07/33.htm",
+        "https://www.marxists.org/chinese/marx-engels2/07/34.htm",
+        "https://www.marxists.org/chinese/marx-engels2/07/35.htm",
+        "https://www.marxists.org/chinese/marx-engels2/07/36.htm",
+        "https://www.marxists.org/chinese/marx-engels2/07/37.htm",
+        "https://www.marxists.org/chinese/marx-engels2/07/38.htm",
+        "https://www.marxists.org/chinese/marx-engels2/07/39.htm",
+        "https://www.marxists.org/chinese/marx-engels2/07/40.htm",
+        "https://www.marxists.org/chinese/marx-engels2/07/41.htm",
+        "https://www.marxists.org/chinese/marx-engels2/07/42.htm",
+        "https://www.marxists.org/chinese/marx-engels2/07/43.htm",
+        "https://www.marxists.org/chinese/marx-engels2/07/44.htm",
+        "https://www.marxists.org/chinese/marx-engels2/07/45.htm",
+        "https://www.marxists.org/chinese/marx-engels2/07/46.htm",
+        "https://www.marxists.org/chinese/marx-engels2/07/47.htm",
+        "https://www.marxists.org/chinese/marx-engels2/07/48.htm",
+        "https://www.marxists.org/chinese/marx-engels2/07/49.htm",
+        "https://www.marxists.org/chinese/marx-engels2/07/50.htm",
+        "https://www.marxists.org/chinese/marx-engels2/07/51.htm",
+        "https://www.marxists.org/chinese/marx-engels2/07/52.htm"
       ]
     },
     {
@@ -728,6 +1119,78 @@
       "method": "仅以所引劳动篇正文汉字数作《自然辩证法》长度保守下界；从政治经济学家说起至写作说明之前，排除脚注标记与后附编者注，未以全书长度扩大预算。",
       "urls": [
         "https://www.marxists.org/chinese/marx-engels2/09/15.htm"
+      ]
+    },
+    {
+      "id": "letter-062",
+      "characters": 145,
+      "source_body_sha256": "f2d933834bcc2bcc1a449fb3b7586ce5584cc61bdc555da27efc43631bee32f3",
+      "method": "仅数第62封所收完整作者段落的汉字作为保守长度下界；去除页首、落款、注号和导航；日期校勘依据《全集》第30卷同信，不改变文集所收段落译文。",
+      "urls": [
+        "https://www.marxists.org/chinese/marx-engels2/10/062.htm"
+      ]
+    },
+    {
+      "id": "letter-129",
+      "characters": 521,
+      "source_body_sha256": "2db10e737a04e38ec7b67ca984e4e612cc9bcdd2748de4e345865c4295c25982",
+      "method": "严格解码原始HTML后，从页首署名日期之后的首个缩进正文取到页尾注释横线之前；去sup注号和标签，方括号内容保守扣除。只数作者正文汉字作为下界，不计导航、页首、落款、标点或英文。",
+      "urls": [
+        "https://www.marxists.org/chinese/marx-engels2/10/129.htm"
+      ]
+    },
+    {
+      "id": "letter-130",
+      "characters": 454,
+      "source_body_sha256": "a37228fcadaeabd5a8f269b27f6d9857fc0345e7214e851dbdfb600324eb2a89",
+      "method": "严格解码原始HTML后，从页首署名日期之后的首个缩进正文取到页尾注释横线之前；去sup注号和标签，方括号内容保守扣除。只数作者正文汉字作为下界，不计导航、页首、落款、标点或英文。",
+      "urls": [
+        "https://www.marxists.org/chinese/marx-engels2/10/130.htm"
+      ]
+    },
+    {
+      "id": "letter-241",
+      "characters": 4294,
+      "source_body_sha256": "f6074415eb97353f9f126bf327d3a6e6f2041203a2bddcc25fad2e543f5c7e95",
+      "method": "严格解码原始HTML后，从页首署名日期之后的首个缩进正文取到页尾注释横线之前；去sup注号和标签，方括号内容保守扣除。只数作者正文汉字作为下界，不计导航、页首、落款、标点或英文。",
+      "urls": [
+        "https://www.marxists.org/chinese/marx-engels2/10/241.htm"
+      ]
+    },
+    {
+      "id": "letter-263",
+      "characters": 2856,
+      "source_body_sha256": "c18451df358946533bf5e53a77a301b3b207bc240a769b2a2040ffa9a8cfb984",
+      "method": "严格解码原始HTML后，从页首署名日期之后的首个缩进正文取到页尾注释横线之前；去sup注号和标签，方括号内容保守扣除。只数作者正文汉字作为下界，不计导航、页首、落款、标点或英文。",
+      "urls": [
+        "https://www.marxists.org/chinese/marx-engels2/10/263.htm"
+      ]
+    },
+    {
+      "id": "letter-266",
+      "characters": 1812,
+      "source_body_sha256": "28f591a1014cd247e5c6949e61b939a6f4694d0290bfa33e8c0c46b24b9f5cea",
+      "method": "严格解码原始HTML后，从页首署名日期之后的首个缩进正文取到页尾注释横线之前；去sup注号和标签，方括号内容保守扣除。只数作者正文汉字作为下界，不计导航、页首、落款、标点或英文。",
+      "urls": [
+        "https://www.marxists.org/chinese/marx-engels2/10/266.htm"
+      ]
+    },
+    {
+      "id": "v01-07",
+      "characters": 9882,
+      "source_body_sha256": "02a4004c021e662e829ad21019cd8d17f69f6f998ebb70d021e3cd125753dbbe",
+      "method": "从本轮GBK严格解码的正文提取明示起止间作者正文，剔除导航、标题、日期落款、现代编者注及方括号补注；字数仅计U+4E00—U+9FFF汉字，不计标点、数字、外文与空白，作为保守下界。另剔除帕尔格雷夫引语两行。 本次核定范围：《英国工人阶级状况》1892年德文第二版序言；含恩格斯本人旧文的自引，不冒称全书长度。",
+      "urls": [
+        "https://www.marxists.org/chinese/marx-engels2/01/07.htm"
+      ]
+    },
+    {
+      "id": "letter-230",
+      "characters": 1610,
+      "source_body_sha256": "eb298823f80547a9ae1eb2d313e0acad9d335ba85f1a7852cfa6083f67379463",
+      "method": "从本轮GBK严格解码的正文提取明示起止间作者正文，剔除导航、标题、日期落款、现代编者注及方括号补注；字数仅计U+4E00—U+9FFF汉字，不计标点、数字、外文与空白，作为保守下界。 本次核定范围：1888年4月初致哈克奈斯书信草稿的正文；不含称呼、页首地点、日期和现代注。",
+      "urls": [
+        "https://www.marxists.org/chinese/marx-engels2/10/230.htm"
       ]
     }
   ]

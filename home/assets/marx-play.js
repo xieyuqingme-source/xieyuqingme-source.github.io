@@ -14,6 +14,17 @@
     if(!Array.isArray(pool)||new Set(pool.map(q=>q.id)).size!==pool.length)throw new Error('Questions need unique IDs');
     return shuffle(pool,random).slice(0,10).map(question=>({...question,choices:shuffle(question.choices,random)}));
   }
+  function gradeAnswer(question,chosen){
+    if(!question||!Array.isArray(question.choices)||!question.choices.includes(chosen)||!question.choices.includes(question.answer))throw new Error('Choose one of the question answers');
+    const correct=chosen===question.answer;
+    return {correct,chosen,answer:question.answer,message:correct?'答对了。':'答错了。你选的是'+chosen+'，正确答案是'+question.answer+'。',
+      labels:question.choices.map(choice=>({choice,selected:choice===chosen,correct:choice===question.answer,
+        text:choice+(choice===question.answer?(correct?' ✓ 你的答案（正确）':' ✓ 正确答案'):choice===chosen?' ✗ 你的答案':'')}))};
+  }
+  function roundSummary(correct,total){
+    if(!Number.isInteger(correct)||!Number.isInteger(total)||total<1||correct<0||correct>total)throw new Error('Invalid round score');
+    return '本轮答对 '+correct+' / '+total;
+  }
   function mount(doc,win){
     const root=doc.querySelector('[data-marx-engels]');if(!root)return()=>{};
     const cleanups=[],listen=(node,type,fn)=>{node.addEventListener(type,fn);cleanups.push(()=>node.removeEventListener(type,fn));};
@@ -26,18 +37,23 @@
       const controls=quiz.querySelector('[data-me-quiz-controls]'),stage=quiz.querySelector('[data-me-quiz-stage]'),form=quiz.querySelector('form');
       const result=quiz.querySelector('[data-me-quiz-explanation]'),actions=quiz.querySelector('[data-me-quiz-actions]');
       let round=[],index=0,answered=false,wrong=[],correct=0;
+      function appendExplanation(node,question){
+        node.append(element('p',question.explanation),link(question.source,'原文出处',true),doc.createTextNode(' · '),link(question.reading,'接着读 →'));
+        if(question.version_note){const detail=element('details'),summary=element('summary','版本说明');detail.append(summary,element('p',question.version_note));node.append(detail);}
+      }
       function explain(question,chosen){
         result.replaceChildren();
-        const verdict=chosen===question.answer;
-        result.append(element('strong',verdict?'答对了。':'本题答案：'+question.answer+'。'),element('p',question.explanation),link(question.source,'原文出处',true),doc.createTextNode(' · '),link(question.reading,'接着读 →'));
+        const grade=gradeAnswer(question,chosen);
+        result.append(element('strong',grade.message));appendExplanation(result,question);
+        form.querySelectorAll('[data-me-choice]').forEach((label,i)=>{const choice=grade.labels[i];label.querySelector('[data-me-choice-label]').textContent=choice.text;label.dataset.answerState=choice.correct?'correct':choice.selected?'incorrect':'unselected';});
         result.hidden=false;result.focus();
-        return verdict;
+        return grade.correct;
       }
       function show(){
         answered=false;result.hidden=true;result.replaceChildren();actions.replaceChildren();form.replaceChildren();
         if(index>=round.length){
-          const summary=element('h2','这一轮读完了');summary.tabIndex=-1;form.append(summary,element('p','答对'+correct+' / '+round.length+'题。结果只在本页内存中，离开即结束。'));
-          if(wrong.length){const section=element('section');section.append(element('h3','错题回顾'));for(const item of wrong){const detail=element('details'),text=element('summary',item.question.quotation||item.question.text);detail.append(text,element('p','你的选择：'+item.chosen+'；答案：'+item.question.answer),element('p',item.question.explanation),link(item.question.source,'原文出处',true),doc.createTextNode(' · '),link(item.question.reading,'读解释 →'));section.append(detail);}form.append(section);}
+          const summary=element('h2','这一轮读完了');summary.tabIndex=-1;form.append(summary,element('p',roundSummary(correct,round.length)));
+          if(wrong.length){const section=element('section');section.append(element('h3','错题回顾'));for(const item of wrong){const detail=element('details'),text=element('summary',item.question.quotation||item.question.text);detail.dataset.meWrongReview='';detail.append(text,element('p','你的答案：'+item.chosen),element('p','正确答案：'+item.question.answer));appendExplanation(detail,item.question);section.append(detail);}form.append(section);}
           const again=element('button','再来一轮');again.type='button';again.dataset.quizRestart='';actions.append(again);summary.focus();return;
         }
         const question=round[index];form.dataset.questionId=question.id;
@@ -45,7 +61,7 @@
         form.append(title);
         if(question.quotation)form.append(element('p',question.quotation));
         const field=element('fieldset');field.append(element('legend','请选择一个答案'));
-        question.choices.forEach((choice,i)=>{const label=element('label'),input=doc.createElement('input');input.type='radio';input.name='marx-answer';input.value=String(i);input.required=true;label.append(input,doc.createTextNode(' '+choice));field.append(label);});
+        question.choices.forEach((choice,i)=>{const label=element('label'),input=doc.createElement('input'),text=element('span',' '+choice);label.dataset.meChoice='';text.dataset.meChoiceLabel='';input.type='radio';input.name='marx-answer';input.value=String(i);input.required=true;label.append(input,text);field.append(label);});
         const submit=element('button','看解释');submit.type='submit';form.append(field,submit);title.focus();
       }
       let active='source';
@@ -71,18 +87,26 @@
     const lifeFilters=root.querySelector('[data-me-life-filters]');
     if(lifeFilters){
       const rows=[...root.querySelectorAll('[data-me-event]')];
-      let person='all';
-      const read=()=>{const value=new URL(win.location.href).searchParams.get('person');person=['marx','engels','both'].includes(value)?value:'all';};
+      const validTags=['生活','著作','书信','组织'];
+      let person='all',tag='all';
+      const read=()=>{const params=new URL(win.location.href).searchParams;person=['marx','engels','both'].includes(params.get('person'))?params.get('person'):'all';tag=validTags.includes(params.get('tag'))?params.get('tag'):'all';};
       const show=update=>{
         let count=0;
-        rows.forEach(row=>{row.hidden=!(person==='all'||row.dataset.person===person||(person!=='both'&&row.dataset.person==='both'));if(!row.hidden)count++;});
+        rows.forEach(row=>{row.hidden=!(person==='all'||row.dataset.person===person||(person!=='both'&&row.dataset.person==='both'))||!(tag==='all'||(row.dataset.tag||'').split(' ').includes(tag));if(!row.hidden)count++;});
         root.querySelectorAll('[data-me-life-year]').forEach(group=>{group.hidden=![...group.querySelectorAll('[data-me-event]')].some(row=>!row.hidden);});
-        lifeFilters.querySelectorAll('button').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.mePerson===person)));
+        const periods=[...root.querySelectorAll('[data-me-life-period]')];
+        periods.forEach(period=>{period.hidden=![...period.querySelectorAll('[data-me-event]')].some(row=>!row.hidden);});
+        if(person!=='all'||tag!=='all'){
+          const first=periods.find(period=>!period.hidden),mobile=Number(win.innerWidth)<=768;
+          periods.forEach(period=>{period.open=!period.hidden&&(!mobile||period===first);});
+        }
+        lifeFilters.querySelectorAll('[data-me-person]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.mePerson===person)));
+        lifeFilters.querySelectorAll('[data-me-tag]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.meTag===tag)));
         root.querySelector('[data-me-life-count]').textContent='显示'+count+' / '+rows.length+'条';
-        if(update){const url=new URL(win.location.href);if(person==='all')url.searchParams.delete('person');else url.searchParams.set('person',person);win.history.replaceState(win.history.state,'',url.pathname+url.search+url.hash);}
+        if(update){const url=new URL(win.location.href);for(const [name,value] of [['person',person],['tag',tag]])if(value==='all')url.searchParams.delete(name);else url.searchParams.set(name,value);win.history.replaceState(win.history.state,'',url.pathname+url.search+url.hash);}
       };
       read();show(false);lifeFilters.hidden=false;
-      listen(lifeFilters,'click',event=>{const button=event.target.closest?.('[data-me-person]');if(button&&lifeFilters.contains(button)){person=button.dataset.mePerson;show(true);}});
+      listen(lifeFilters,'click',event=>{const button=event.target.closest?.('[data-me-person],[data-me-tag]');if(button&&lifeFilters.contains(button)){if(button.hasAttribute('data-me-person'))person=button.dataset.mePerson;if(button.hasAttribute('data-me-tag'))tag=button.dataset.meTag;show(true);}});
       listen(win,'popstate',()=>{read();show(false);});
     }
     const letterData=root.querySelector('[data-me-letters-data]');
@@ -95,8 +119,9 @@
       }
     }
 
-    let disposed=false;const dispose=()=>{if(!disposed){disposed=true;cleanups.splice(0).reverse().forEach(fn=>fn());}};
+    root.dataset.mePlayMounted='true';
+    let disposed=false;const dispose=()=>{if(!disposed){disposed=true;delete root.dataset.mePlayMounted;cleanups.splice(0).reverse().forEach(fn=>fn());}};
     win.SiteNavigation?.own?.(dispose);return dispose;
   }
-  return{shuffle,makeRound,mount};
+  return{shuffle,makeRound,gradeAnswer,roundSummary,mount};
 });

@@ -50,7 +50,7 @@
           "branch": [
             "philosophy"
           ],
-          "level": 2,
+          "level": 3,
           "mia": "https://www.marxists.org/chinese/marx-engels2/01/02.htm",
           "kind": "work",
           "sections": [
@@ -87,7 +87,7 @@
           "branch": [
             "economics"
           ],
-          "level": 2,
+          "level": 3,
           "mia": "https://www.marxists.org/chinese/marx-engels2/01/03.htm",
           "kind": "work",
           "sections": [],
@@ -107,7 +107,7 @@
           "branch": [
             "philosophy"
           ],
-          "level": 2,
+          "level": 1,
           "mia": "https://www.marxists.org/chinese/marx-engels2/01/04.htm",
           "kind": "work",
           "sections": [],
@@ -301,7 +301,7 @@
           "branch": [
             "philosophy"
           ],
-          "level": 2,
+          "level": 3,
           "mia": "https://www.marxists.org/chinese/marx-engels2/01/06.htm",
           "kind": "work",
           "sections": [
@@ -631,7 +631,7 @@
           "branch": [
             "philosophy"
           ],
-          "level": 2,
+          "level": 3,
           "mia": "https://www.marxists.org/chinese/marx-engels2/01/15.htm",
           "kind": "work",
           "sections": [
@@ -795,7 +795,7 @@
           "branch": [
             "philosophy"
           ],
-          "level": 2,
+          "level": 3,
           "mia": "https://www.marxists.org/chinese/marx-engels2/01/17.htm",
           "kind": "work",
           "sections": [
@@ -940,7 +940,7 @@
           "branch": [
             "socialism"
           ],
-          "level": 2,
+          "level": 1,
           "mia": "https://www.marxists.org/chinese/marx-engels2/01/19.htm",
           "kind": "work",
           "sections": [],
@@ -960,7 +960,7 @@
           "branch": [
             "socialism"
           ],
-          "level": 2,
+          "level": 1,
           "mia": "https://www.marxists.org/chinese/marx-engels2/01/20.htm",
           "kind": "work",
           "sections": [
@@ -1035,7 +1035,7 @@
           "branch": [
             "economics"
           ],
-          "level": 2,
+          "level": 1,
           "mia": "https://www.marxists.org/chinese/marx-engels2/01/22.htm",
           "kind": "work",
           "sections": [],
@@ -1230,7 +1230,7 @@
           "branch": [
             "socialism"
           ],
-          "level": 2,
+          "level": 1,
           "mia": "https://www.marxists.org/chinese/marx-engels2/02/02.htm",
           "kind": "work",
           "sections": [],
@@ -1250,7 +1250,7 @@
           "branch": [
             "socialism"
           ],
-          "level": 2,
+          "level": 1,
           "mia": "https://www.marxists.org/chinese/marx-engels2/02/03.htm",
           "kind": "work",
           "sections": [],
@@ -1780,7 +1780,7 @@
           "branch": [
             "socialism"
           ],
-          "level": 2,
+          "level": 1,
           "mia": "https://www.marxists.org/chinese/marx-engels2/02/10.htm",
           "kind": "work",
           "sections": [],
@@ -1800,7 +1800,7 @@
           "branch": [
             "economics"
           ],
-          "level": 2,
+          "level": 3,
           "mia": "https://www.marxists.org/chinese/marx-engels2/02/11.htm",
           "kind": "work",
           "sections": [],
@@ -1820,7 +1820,7 @@
           "branch": [
             "economics"
           ],
-          "level": 2,
+          "level": 3,
           "mia": "https://www.marxists.org/chinese/marx-engels2/02/12.htm",
           "kind": "work",
           "sections": [],
@@ -1841,7 +1841,7 @@
           "branch": [
             "economics"
           ],
-          "level": 2,
+          "level": 3,
           "mia": "https://www.marxists.org/chinese/marx-engels2/02/13.htm",
           "kind": "work",
           "sections": [
@@ -1918,7 +1918,7 @@
           "branch": [
             "socialism"
           ],
-          "level": 2,
+          "level": 1,
           "mia": "https://www.marxists.org/chinese/marx-engels2/02/16.htm",
           "kind": "work",
           "sections": [],
@@ -1938,7 +1938,7 @@
           "branch": [
             "socialism"
           ],
-          "level": 2,
+          "level": 1,
           "mia": "https://www.marxists.org/chinese/marx-engels2/02/17.htm",
           "kind": "work",
           "sections": [],
@@ -2035,7 +2035,7 @@
           "branch": [
             "socialism"
           ],
-          "level": 2,
+          "level": 1,
           "mia": "https://www.marxists.org/chinese/marx-engels2/02/21.htm",
           "kind": "work",
           "sections": [],
@@ -2055,7 +2055,7 @@
           "branch": [
             "socialism"
           ],
-          "level": 2,
+          "level": 1,
           "mia": "https://www.marxists.org/chinese/marx-engels2/02/22.htm",
           "kind": "work",
           "sections": [
@@ -2177,7 +2177,7 @@
           "branch": [
             "socialism"
           ],
-          "level": 2,
+          "level": 1,
           "mia": "https://www.marxists.org/chinese/marx-engels2/03/01.htm",
           "kind": "work",
           "sections": [],
@@ -2359,7 +2359,7 @@
           "branch": [
             "socialism"
           ],
-          "level": 2,
+          "level": 1,
           "mia": "https://www.marxists.org/chinese/marx-engels2/03/04.htm",
           "kind": "work",
           "sections": [
@@ -2416,7 +2416,7 @@
           "branch": [
             "socialism"
           ],
-          "level": 2,
+          "level": 1,
           "mia": "https://www.marxists.org/chinese/marx-engels2/03/06.htm",
           "kind": "work",
           "sections": [],
@@ -2658,7 +2658,7 @@
           "branch": [
             "socialism"
           ],
-          "level": 2,
+          "level": 1,
           "mia": "https://www.marxists.org/chinese/marx-engels2/03/08.htm",
           "kind": "work",
           "sections": [],
@@ -2678,7 +2678,7 @@
           "branch": [
             "socialism"
           ],
-          "level": 2,
+          "level": 1,
           "mia": "https://www.marxists.org/chinese/marx-engels2/03/09.htm",
           "kind": "work",
           "sections": [],
@@ -2936,7 +2936,7 @@
           "branch": [
             "socialism"
           ],
-          "level": 2,
+          "level": 3,
           "mia": "https://www.marxists.org/chinese/marx-engels2/03/15.htm",
           "kind": "work",
           "sections": [],
@@ -2976,7 +2976,7 @@
           "branch": [
             "socialism"
           ],
-          "level": 2,
+          "level": 3,
           "mia": "https://www.marxists.org/chinese/marx-engels2/03/17.htm",
           "kind": "work",
           "sections": [
@@ -3054,7 +3054,7 @@
           "branch": [
             "socialism"
           ],
-          "level": 2,
+          "level": 1,
           "mia": "https://www.marxists.org/chinese/marx-engels2/03/18.htm",
           "kind": "work",
           "sections": [],
@@ -3148,7 +3148,7 @@
           "branch": [
             "socialism"
           ],
-          "level": 1,
+          "level": 2,
           "mia": "https://www.marxists.org/chinese/marx-engels2/03/21.htm",
           "kind": "work",
           "sections": [
@@ -3234,7 +3234,7 @@
           "branch": [
             "socialism"
           ],
-          "level": 2,
+          "level": 1,
           "mia": "https://www.marxists.org/chinese/marx-engels2/03/22.htm",
           "kind": "work",
           "sections": [],
@@ -3254,7 +3254,7 @@
           "branch": [
             "socialism"
           ],
-          "level": 2,
+          "level": 3,
           "mia": "https://www.marxists.org/chinese/marx-engels2/03/23.htm",
           "kind": "work",
           "sections": [
@@ -3340,7 +3340,7 @@
           "branch": [
             "socialism"
           ],
-          "level": 2,
+          "level": 1,
           "mia": "https://www.marxists.org/chinese/marx-engels2/03/26.htm",
           "kind": "appendix",
           "sections": [],
@@ -3360,7 +3360,7 @@
           "branch": [
             "socialism"
           ],
-          "level": 2,
+          "level": 1,
           "mia": "https://www.marxists.org/chinese/marx-engels2/03/27.htm",
           "kind": "appendix",
           "sections": [],
@@ -3380,7 +3380,7 @@
           "branch": [
             "socialism"
           ],
-          "level": 2,
+          "level": 1,
           "mia": "https://www.marxists.org/chinese/marx-engels2/03/28.htm",
           "kind": "appendix",
           "sections": [],
@@ -3409,7 +3409,7 @@
           "branch": [
             "socialism"
           ],
-          "level": 2,
+          "level": 1,
           "mia": "https://www.marxists.org/chinese/marx-engels2/04/01.htm",
           "kind": "work",
           "sections": [],
@@ -3429,7 +3429,7 @@
           "branch": [
             "socialism"
           ],
-          "level": 2,
+          "level": 3,
           "mia": "https://www.marxists.org/chinese/marx-engels2/04/02.htm",
           "kind": "work",
           "sections": [
@@ -3644,7 +3644,7 @@
             "philosophy",
             "socialism"
           ],
-          "level": 2,
+          "level": 3,
           "mia": "https://www.marxists.org/chinese/marx-engels2/04/07.htm",
           "kind": "work",
           "sections": [
@@ -3713,7 +3713,7 @@
           "branch": [
             "socialism"
           ],
-          "level": 2,
+          "level": 1,
           "mia": "https://www.marxists.org/chinese/marx-engels2/04/08.htm",
           "kind": "work",
           "sections": [],
@@ -3838,7 +3838,7 @@
           "branch": [
             "socialism"
           ],
-          "level": 2,
+          "level": 1,
           "mia": "https://www.marxists.org/chinese/marx-engels2/04/13.htm",
           "kind": "work",
           "sections": [],
@@ -3858,7 +3858,7 @@
           "branch": [
             "socialism"
           ],
-          "level": 2,
+          "level": 1,
           "mia": "https://www.marxists.org/chinese/marx-engels2/04/14.htm",
           "kind": "work",
           "sections": [],
@@ -3968,7 +3968,7 @@
           "branch": [
             "socialism"
           ],
-          "level": 2,
+          "level": 1,
           "mia": "https://www.marxists.org/chinese/marx-engels2/04/17.htm",
           "kind": "work",
           "sections": [],
@@ -3988,7 +3988,7 @@
           "branch": [
             "socialism"
           ],
-          "level": 2,
+          "level": 1,
           "mia": "https://www.marxists.org/chinese/marx-engels2/04/18.htm",
           "kind": "work",
           "sections": [],
@@ -4008,7 +4008,7 @@
           "branch": [
             "socialism"
           ],
-          "level": 2,
+          "level": 1,
           "mia": "https://www.marxists.org/chinese/marx-engels2/04/19.htm",
           "kind": "work",
           "sections": [],
@@ -4028,7 +4028,7 @@
           "branch": [
             "socialism"
           ],
-          "level": 2,
+          "level": 3,
           "mia": "https://www.marxists.org/chinese/marx-engels2/04/20.htm",
           "kind": "work",
           "sections": [],
@@ -4190,7 +4190,7 @@
           "branch": [
             "socialism"
           ],
-          "level": 2,
+          "level": 1,
           "mia": "https://www.marxists.org/chinese/marx-engels2/04/26.htm",
           "kind": "appendix",
           "sections": [],

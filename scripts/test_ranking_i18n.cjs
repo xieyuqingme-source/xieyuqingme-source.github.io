@@ -122,3 +122,14 @@ test('book display names, scene alternatives and PNG layouts translate without c
  assert.match(M.localize('恢复默认名著排行'),/Reset books example/);
  assert.match(M.localize('导入“名著排行”备份？将替换此模板的内容，其他模板内容保留。请先导出 JSON 备份。'),/Import the books example backup/);
 });
+
+test('economist names and defaults translate as a view without rewriting custom items or serialized state',()=>{
+  change('zh-CN');const state=M.createDefaultState('economist'),bytes=M.serialize(state),first=state.rows[0].itemIds[0];
+  change('en');assert.equal(M.displayTitle(state),'Economists through Marx’s Eyes');assert.equal(M.displayItemName(state.items[first]),'William Petty');
+  assert.equal(M.localize('恢复默认经济学家排行'),'Reset economist ranking');assert.match(M.localize(M.templateNote('economist')),/entertainment example/);
+  for(const [key,art] of Object.entries(M.ECONOMIST_ART))assert.equal(M.displayItemName(state.items['economist-'+key]),art.name_en);
+  assert.equal(M.serialize(state),bytes);
+  const ownName={...state.items[first],name:'我的配第'};assert.equal(M.displayItemName(ownName),'我的配第');
+  const custom={...state.items[first],id:'custom-economist'};assert.equal(M.displayItemName(custom),'威廉·配第');
+  for(const lang of ['zh-CN','en','zh-CN']){change(lang);M.displayState(state);assert.equal(M.serialize(state),bytes);}
+});

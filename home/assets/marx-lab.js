@@ -10,6 +10,11 @@
   function valueFormStep(index) {
     return Number.isInteger(index) && index >= 0 && index < 4 ? index : null;
   }
+  function percent(value) {
+    const rounded = Math.round(value * 10) / 10;
+    const approximate = Math.abs(value - rounded) > Number.EPSILON * 16 * Math.max(1, Math.abs(value));
+    return (approximate ? '约' : '') + new Intl.NumberFormat('zh-CN', {maximumFractionDigits: 1}).format(rounded) + '%';
+  }
   function workingDay(total, necessary) {
     if (!valid(total) || !valid(necessary) || total > 24 || necessary <= 0 || necessary > total) {
       return {valid: false, message: '必要劳动须大于0，且不超过工作日；工作日不超过24小时。'};
@@ -63,7 +68,7 @@
         day.querySelector('[data-lab-total]').textContent = total.value;
         day.querySelector('[data-lab-necessary]').textContent = necessary.value;
         const result = workingDay(total.valueAsNumber, necessary.valueAsNumber);
-        output.textContent = result.valid ? '本站计算：剩余劳动' + format(result.surplus) + '小时；剩余价值率' + format(result.rate) + '%。' : result.message;
+        output.textContent = result.valid ? '本站计算：剩余劳动' + format(result.surplus) + '小时；剩余价值率' + percent(result.rate) + '。' : result.message;
         const bar = day.querySelector('[data-lab-bar]');
         bar.hidden = !result.valid;
         if (result.valid) {
@@ -86,8 +91,8 @@
         output.textContent = '本站计算：Ⅰ总额' + format(result.first) + '，Ⅱ总额' + format(result.second) + '，合计' + format(result.total)
           + '。Ⅰ(v＋m)＝' + format(result.outward) + '，Ⅱc＝' + format(result.inward) + '；'
           + (result.balanced ? '数值交换条件相等。' : '两边不相等，差额为' + format(result.difference) + '。')
-          + 'Ⅰ的m/v：' + (result.firstRate === null ? '未定义（v为0）' : format(result.firstRate) + '%')
-          + '；Ⅱ的m/v：' + (result.secondRate === null ? '未定义（v为0）' : format(result.secondRate) + '%') + '。';
+          + 'Ⅰ的m/v：' + (result.firstRate === null ? '未定义（v为0）' : percent(result.firstRate))
+          + '；Ⅱ的m/v：' + (result.secondRate === null ? '未定义（v为0）' : percent(result.secondRate)) + '。';
       };
       diagram.hidden = false;
       inputs.forEach(input => listen(input, 'input', show));
@@ -99,5 +104,5 @@
     win.SiteNavigation?.own?.(dispose);
     return dispose;
   }
-  return {valueFormStep, workingDay, reproduction, mount};
+  return {valueFormStep, workingDay, reproduction, percent, mount};
 });

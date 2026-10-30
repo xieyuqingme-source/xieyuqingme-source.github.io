@@ -17,7 +17,7 @@ from marx_engels import (AI_NOTE, ASSETS, BASIS, INTRO, HEADINGS, BRANCHES, load
                         markdown_sections, build_marx_engels)
 from marx_engels import LEVELS, RESERVED
 from marx_render import (LEVEL_NOTE, bookcase, day_seed, render_capital_index, render_capital_volume, render_content,
-                         render_index, render_qa_index, render_sources, render_wenji_volume)
+                         render_index, render_directory, render_qa_index, render_sources, render_wenji_volume)
 from site_i18n import FEATURES, localized_path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -222,6 +222,7 @@ class ContentTests(unittest.TestCase):
         self.assertEqual(budget['errata_characters'],correction_total)
         self.assertEqual(budget['pages']['/marx/sources/'],correction_total)
         citation_total=sum(len(data['citations'][cid]['text']) for i in data['items'].values() if i['status']=='published' for cid in i['citations'])
+        citation_total += sum(len(data['citations'][cid]['text']) for topic in data['topics'].values() for section in topic['sections'] for item in section['items'] for cid in item['citations'])
         self.assertEqual(budget['citation_characters'],citation_total)
         self.assertEqual(budget['total_characters'],citation_total+correction_total)
         for record in budget['works'].values():
@@ -287,9 +288,10 @@ class ContentTests(unittest.TestCase):
     def test_joke_difficulty_names_are_always_marked_as_difficulty(self):
         self.assertEqual(LEVELS, {1: '唯心主义', 2: '形而上学', 3: '修正主义'})
         index = render_index(self.data)
-        self.assertIn(LEVEL_NOTE, index)
+        directory = render_directory(self.data)
+        self.assertIn(LEVEL_NOTE, directory)
         for label in LEVELS.values():
-            self.assertIn(f'aria-pressed="false">{label}</button>', index)
+            self.assertIn(f'aria-pressed="false">{label}</button>', directory)
             self.assertNotIn('<p class="me-meta">' + label, index)
         for item in self.data['items'].values():
             self.assertIn('<p class="me-meta">难度：' + LEVELS[item['level']] + ' · ', render_content(self.data, item))

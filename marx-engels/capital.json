@@ -961,7 +961,8 @@
                 }
               ]
             }
-          ]
+          ],
+          "guide": "capital-2-part1"
         },
         {
           "no": 2,
@@ -1162,7 +1163,8 @@
                 }
               ]
             }
-          ]
+          ],
+          "guide": "capital-2-part2"
         },
         {
           "no": 3,
@@ -1396,7 +1398,8 @@
                 }
               ]
             }
-          ]
+          ],
+          "guide": "capital-2-part3"
         }
       ],
       "front_matter": [
@@ -1568,7 +1571,8 @@
                 }
               ]
             }
-          ]
+          ],
+          "guide": "capital-3-part1"
         },
         {
           "no": 2,
@@ -1598,7 +1602,8 @@
                   "title": "Formation of a General Rate of Profit (Average Rate of Profit) and Transformation of the Values of Commodities into Prices of Production",
                   "url": "https://www.marxists.org/archive/marx/works/1894-c3/ch09.htm"
                 }
-              ]
+              ],
+              "guide": "capital-3-ch09"
             },
             {
               "no": 10,
@@ -1652,7 +1657,8 @@
                 }
               ]
             }
-          ]
+          ],
+          "guide": "capital-3-part2"
         },
         {
           "no": 3,
@@ -1669,7 +1675,8 @@
                   "title": "The Law as Such",
                   "url": "https://www.marxists.org/archive/marx/works/1894-c3/ch13.htm"
                 }
-              ]
+              ],
+              "guide": "capital-3-ch13"
             },
             {
               "no": 14,
@@ -1707,7 +1714,8 @@
                   "title": "Counteracting Influences",
                   "url": "https://www.marxists.org/archive/marx/works/1894-c3/ch14.htm"
                 }
-              ]
+              ],
+              "guide": "capital-3-ch14"
             },
             {
               "no": 15,
@@ -1737,9 +1745,11 @@
                   "title": "Exposition of the Internal Contradictions of the Law",
                   "url": "https://www.marxists.org/archive/marx/works/1894-c3/ch15.htm"
                 }
-              ]
+              ],
+              "guide": "capital-3-ch15"
             }
-          ]
+          ],
+          "guide": "capital-3-part3"
         },
         {
           "no": 4,
@@ -1810,7 +1820,8 @@
                 }
               ]
             }
-          ]
+          ],
+          "guide": "capital-3-part4"
         },
         {
           "no": 5,
@@ -1853,7 +1864,8 @@
                   "title": "Interest and Profit of Enterprise",
                   "url": "https://www.marxists.org/archive/marx/works/1894-c3/ch23.htm"
                 }
-              ]
+              ],
+              "guide": "capital-3-ch23"
             },
             {
               "no": 24,
@@ -1879,7 +1891,8 @@
                   "title": "Credit and Fictitious Capital",
                   "url": "https://www.marxists.org/archive/marx/works/1894-c3/ch25.htm"
                 }
-              ]
+              ],
+              "guide": "capital-3-ch25"
             },
             {
               "no": 26,
@@ -1905,7 +1918,8 @@
                   "title": "The Role of Credit in Capitalist Production",
                   "url": "https://www.marxists.org/archive/marx/works/1894-c3/ch27.htm"
                 }
-              ]
+              ],
+              "guide": "capital-3-ch27"
             },
             {
               "no": 28,
@@ -2059,7 +2073,8 @@
                 }
               ]
             }
-          ]
+          ],
+          "guide": "capital-3-part5"
         },
         {
           "no": 6,
@@ -2242,7 +2257,8 @@
                 }
               ]
             }
-          ]
+          ],
+          "guide": "capital-3-part6"
         },
         {
           "no": 7,
@@ -2272,7 +2288,8 @@
                   "title": "The Trinity Formula",
                   "url": "https://www.marxists.org/archive/marx/works/1894-c3/ch48.htm"
                 }
-              ]
+              ],
+              "guide": "capital-3-ch48"
             },
             {
               "no": 49,
@@ -2326,7 +2343,8 @@
                 }
               ]
             }
-          ]
+          ],
+          "guide": "capital-3-part7"
         }
       ],
       "front_matter": [

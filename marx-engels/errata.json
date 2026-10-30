@@ -117,6 +117,24 @@
       "basis": "同页第Ⅱ节先前商品产品列式为2000c＋500v＋500m＝3000；两大部类汇总处多录一个加号。仅删除重复符号，不改数字。",
       "evidence_url": "https://www.marxists.org/chinese/marx-engels2/06/20.htm",
       "checked_on": "2026-10-29"
+    },
+    {
+      "id": "letter-062-date",
+      "url": "https://www.marxists.org/chinese/marx-engels2/10/062.htm",
+      "wrong": "1861年1月16日",
+      "right": "1862年4月28日",
+      "basis": "文集第61封和第62封的网页页首重复。对照《全集》第30卷所收1862年4月28日致拉萨尔信，关于经济学写作进度、谋生和重写的段落与第62封同文；第61封另谈达尔文。按中文同信核定日期，不以相邻编号推算；未声称核过2009年印本。",
+      "evidence_url": "https://www.marxists.org/chinese/marx-engels/30/316.htm",
+      "checked_on": "2026-10-30"
+    },
+    {
+      "id": "engels-ashes-date",
+      "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+      "wrong": "9月27日",
+      "right": "8月27日",
+      "basis": "《全集》第22卷恩格斯生平事业年表1895年末条明确为8月27日；列斯纳《一个工人对弗里德里希·恩格斯的回忆》也把自己参与执行遗嘱的日期记为8月27日。以两份中马库中文资料交叉核定，保留文集电子年表原页供对读；未声称查过2009年印本。",
+      "evidence_url": "https://www.marxists.org/chinese/marx-engels/22/089.htm",
+      "checked_on": "2026-10-30"
     }
   ]
 }

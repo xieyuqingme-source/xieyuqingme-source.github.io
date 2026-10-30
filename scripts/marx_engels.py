@@ -18,7 +18,7 @@ VERDICTS = {"真", "假", "存疑", "部分正确", "张冠李戴"}
 SLUG = re.compile(r"[a-z][a-z0-9-]{1,79}")
 HEX = re.compile(r"[a-f0-9]{64}")
 PRIVATE = re.compile(r"(?<![A-Za-z0-9])[A-Za-z]:[\\/]|\\\\[^\s\\]+[\\/]|Obsidian Vault|/(?:Users|mnt)/", re.I)
-RESERVED = {"wenji", "works", "capital", "sources", "qa", "tools", "play", "read", "quotes", "life", "lab", "topics"}
+RESERVED = {"wenji", "works", "capital", "sources", "qa", "tools", "play", "read", "quotes", "life", "lab", "topics", "cards"}
 INTRO = "原著好啊，原著得读，我也想读原著。"
 BASIS = "以《马克思恩格斯文集》（人民出版社，2009）为准；《资本论》第一卷在线文本据《马克思恩格斯全集》第23卷（1972）。"
 AI_NOTE = "本站解读由 AI 辅助起草，引文逐字核对过所链原文"
@@ -26,8 +26,10 @@ HEADINGS = {"terms": ("白话", "例子", "身世", "常见误读"),
             "myths": ("流行说法", "证据", "结论"),
             "works": ("写作背景", "主要观点", "怎么读"),
             "guides": ("一句话", "关键概念", "读的时候注意", "常见误读"),
-            "passage": ("导读", "逐句看", "可以接着读"), "between": ("对照", "为什么", "可以这样读")}
-PROSE_LIMITS = {"terms": (400, 900), "myths": (300, 800), "works": (500, 1000), "guides": (600, 1200), "passage": (300, 1000), "between": (250, 1000)}
+            "passage": ("导读", "逐句看", "可以接着读"), "between": ("对照", "为什么", "可以这样读"),
+            "shelf": ("典故", "马恩怎样用", "可以接着读"),
+            "parts": ("一句话", "这一篇在全书中的位置", "各章怎么读", "关键概念", "常见误读", "原文片段", "英文对应")}
+PROSE_LIMITS = {"terms": (400, 900), "myths": (300, 800), "works": (500, 1000), "guides": (600, 1200), "passage": (300, 1000), "between": (250, 1000), "parts": (700, 1300), "shelf": (300, 1000)}
 
 
 def fields(value, required, optional=()):
@@ -287,10 +289,12 @@ def validate_capital(data, works):
             raise ValueError("读马恩：资本论篇数或次序不符。")
         chapters, en_numbers = [], []
         for part in volume["parts"]:
-            fields(part, ("no", "title", "chapters"))
+            fields(part, ("no", "title", "chapters"), ("guide",))
             if type(part["no"]) is not int:
                 raise ValueError("读马恩：篇号须为整数。")
             text(part["title"], 300)
+            if "guide" in part:
+                slug(part["guide"])
             if not isinstance(part["chapters"], list) or not part["chapters"]:
                 raise ValueError("读马恩：篇的章节不能留空。")
             for chapter in part["chapters"]:
@@ -310,7 +314,7 @@ def validate_capital(data, works):
                 if "guide" in chapter:
                     slug(chapter["guide"])
                 chapters.append(chapter["no"])
-                all_chapters[(volume["no"], chapter["no"])] = chapter
+                all_chapters[(volume["no"], chapter["no"])] = {**chapter, "part_no": part["no"], "part_guide": part.get("guide")}
         if chapters != list(range(1, (25, 21, 52)[volume["no"] - 1] + 1)):
             raise ValueError("读马恩：资本论章节缺少、重复或倒序。")
         if volume["no"] == 1 and en_numbers != list(range(1, 34)):
@@ -362,7 +366,11 @@ def markdown_sections(body):
                 raise ValueError("读马恩：第一版不嵌图片或原始HTML。")
             if child.type == "link_open":
                 href = child.attrGet("href") or ""
-                if not href.startswith("/marx/") and href != "/english/":
+                if href.startswith(("/marx/", "/english/", "/anthology/")):
+                    decoded = unquote(href)
+                    if any(part in (".", "..") for part in urlsplit(decoded).path.split("/")) or re.search(r"[<>\\\x00-\x20\x7f]", decoded):
+                        raise ValueError("读马恩：站内阅读链接不能包含路径跳转或控制字符。")
+                else:
                     source_url(href)
     if not starts or any(lines[:starts[0][1]]):
         raise ValueError("读马恩：正文应从小节标题开始。")
@@ -387,6 +395,8 @@ def content_route(item, kind="cards"):
         return "/marx/works/" + item["slug"] + "/"
     if kind == "guides":
         return f'/marx/capital/{item["volume"]}/ch{item["chapter"]:02}/'
+    if kind == "parts":
+        return f'/marx/capital/{item["volume"]}/part{item["part"]}/'
     return "/marx/" + item["slug"] + "/"
 
 
@@ -494,22 +504,22 @@ def validate_citations(data, review, errata, works):
 
 
 def validate_catalog(data, bodies, citations, works, chapters):
-    fields(data, ("version", "columns", "cards", "works", "guides"))
+    fields(data, ("version", "columns", "cards", "works", "guides", "parts"))
     if type(data["version"]) is not int or data["version"] != 1 or not isinstance(data["columns"], list):
         raise ValueError("读马恩：栏目目录版本无效。")
-    if [column.get("id") for column in data["columns"]] != ["terms", "myths", "passage", "between"]:
+    if [column.get("id") for column in data["columns"]] != ["terms", "myths", "passage", "between", "shelf"]:
         raise ValueError("读马恩：第二版须显式列出概念、考据、原著一段与中英之间四类卡片。")
     for column in data["columns"]:
         fields(column, ("id", "title", "description"))
         text(column["title"], 80)
         text(column["description"], 500)
     items = {}
-    for kind in ("cards", "works", "guides"):
+    for kind in ("cards", "works", "guides", "parts"):
         if not isinstance(data[kind], list):
             raise ValueError("读马恩：卡片和导读须明确列出。")
         for item in data[kind]:
             required = ("slug", "title", "summary", "level", "branch", "tags", "citations", "related", "added", "status", "ai_assisted")
-            required += ("column",) if kind == "cards" else (("work",) if kind == "works" else ("volume", "chapter"))
+            required += {"cards": ("column",), "works": ("work",), "guides": ("volume", "chapter"), "parts": ("volume", "part", "chapter_notes")}[kind]
             optional = ("sources", "references") + (("term", "verdict") if kind == "cards" else ())
             fields(item, required, optional)
             ident = slug(item["slug"])
@@ -564,24 +574,33 @@ def validate_catalog(data, bodies, citations, works, chapters):
                 raise ValueError("读马恩：作品导读引用未知作品。")
             if kind == "guides" and (type(item["volume"]) is not int or type(item["chapter"]) is not int or (item["volume"], item["chapter"]) not in chapters):
                 raise ValueError("读马恩：章节导读引用未知章节。")
+            chapter_note_characters = 0
+            if kind == "parts":
+                from marx_v3 import validate_part_metadata
+                chapter_note_characters = validate_part_metadata(item, chapters)
             body = bodies.get(ident)
             if body is None:
                 raise ValueError("读马恩：缺少显式登记的Markdown正文。")
             found = markdown_sections(body)
             if tuple(found) != HEADINGS[category]:
                 raise ValueError(f"读马恩：{ident}小节缺少、倒序或混入流程说明。")
-            count = prose_characters(body)
+            count = prose_characters(body) + chapter_note_characters
             low, high = PROSE_LIMITS[category]
             if not low <= count <= high:
                 raise ValueError(f"读马恩：{ident}正文汉字数{count}，应为{low}–{high}。")
             originals = [citations[c]["text"] for c in item["citations"]]
-            for value in (item["title"], item["summary"], body):
+            quotation_inputs = [item["title"], item["summary"], body]
+            if kind == "parts":
+                quotation_inputs.extend(note["text"] for note in item["chapter_notes"])
+            for value in quotation_inputs:
                 for pair in re.findall(r"“([^”]+)”|‘([^’]+)’", value):
                     quoted = next(part for part in pair if part)
                     if len(quoted) > 6 and not any(quoted in original for original in originals):
                         raise ValueError(f"读马恩：{ident}中的长引号文字不属于所引原文：{quoted}")
             items[ident] = {**item, "kind": kind, "category": category, "body": body, "sections": found,
                             "prose_characters": count, "route": content_route(item, kind)}
+    from marx_v3 import validate_part_links
+    validate_part_links(items, chapters)
     if set(bodies) != items.keys():
         raise ValueError("读马恩：正文与登记清单须一一对应。")
     for item in items.values():
@@ -592,6 +611,8 @@ def validate_catalog(data, bodies, citations, works, chapters):
         known_routes = {"/marx/", "/marx/wenji/", "/marx/capital/", "/marx/capital/english/", "/marx/capital/routes/", "/marx/sources/", "/marx/qa/"}
         from marx_v2 import ROUTES
         known_routes.update(ROUTES)
+        from marx_topics import ROUTES as TOPIC_ROUTES
+        known_routes.update(TOPIC_ROUTES)
         known_routes.update(f"/marx/wenji/{no}/" for no in range(1, 11))
         known_routes.update(f"/marx/capital/{no}/" for no in range(1, 4))
         known_routes.update(i["route"] for i in items.values() if i["status"] == "published" or item["status"] == "draft")
@@ -685,7 +706,7 @@ def load_marx_engels(root):
     citations, corrections, lengths = validate_citations(citations_data, review, errata, works)
     catalog = read("marx-engels/catalog.json")
     bodies = {}
-    for kind in ("cards", "works", "guides"):
+    for kind in ("cards", "works", "guides", "parts"):
         for item in catalog.get(kind, []):
             ident = slug(item.get("slug"))
             if ident in bodies:
@@ -705,6 +726,9 @@ def load_marx_engels(root):
             "items": items, "qa": qa["items"], "budgets": budgets}
     from marx_v2 import load_v2
     result["v2"] = load_v2(root, result)
+    from marx_topics import load_topics, quotation_items
+    result["topics"] = load_topics(root, result)
+    result["budgets"] = quotation_budgets({**items, **quotation_items(result["topics"])}, citations, lengths, corrections, works)
     from marx_render import render_sources
     if budgets["errata_characters"] * 2 > html_prose_characters(render_sources(result)):
         raise ValueError("读马恩：来源页校勘对照不能超过本站说明的一半。")

@@ -37,9 +37,37 @@
       }
     };
   }
+  function filterState(search, columns) {
+    const params = new URLSearchParams(search);
+    return {
+      branch: ['philosophy', 'economics', 'socialism'].includes(params.get('branch')) ? params.get('branch') : 'all',
+      level: ['1', '2', '3'].includes(params.get('level')) ? params.get('level') : 'all',
+      column: columns.includes(params.get('column')) ? params.get('column') : 'all'
+    };
+  }
+  function filterQuery(state) {
+    const params = new URLSearchParams();
+    for (const key of ['branch', 'level', 'column']) if (state[key] !== 'all') params.set(key, state[key]);
+    return params.size ? '?' + params.toString() : '';
+  }
+  function matchesFilters(row, state) {
+    return (state.branch === 'all' || (row.branch || '').split(' ').includes(state.branch))
+      && (state.level === 'all' || row.level === state.level)
+      && (state.column === 'all' || row.column === state.column);
+  }
+  function legacyDirectory(pathname, search, hash = '') {
+    const params = new URLSearchParams(search);
+    return pathname === '/marx/' && ['branch', 'level', 'column'].some(key => params.has(key)) ? '/marx/cards/' + search + hash : null;
+  }
   function mount(doc, win) {
     const root = doc.querySelector('[data-marx-engels]');
     if (!root) return () => {};
+    const legacy = legacyDirectory(win.location.pathname, win.location.search, win.location.hash);
+    if (legacy) {
+      if (win.SiteNavigation?.visit) void win.SiteNavigation.visit(legacy, {replace: true});
+      else win.location.href = legacy;
+      return () => {};
+    }
     const cleanups = [];
     const listen = (node, type, handler) => {
       node.addEventListener(type, handler);
@@ -47,28 +75,25 @@
     };
     const rows = [...root.querySelectorAll('[data-me-row]')];
     const controls = root.querySelector('[data-me-filters]');
-    const validBranches = new Set(['philosophy', 'economics', 'socialism']);
-    let branch = 'all', level = 'all';
+    const returnLink = root.querySelector('[data-me-return]');
+    const columns = [...new Set([...root.querySelectorAll('[data-me-column]')].map(button => button.dataset.meColumn).filter(value => value !== 'all').concat((returnLink?.dataset.meColumns || '').split(' ').filter(Boolean)))];
+    let selection;
     function readQuery() {
-      const params = new URLSearchParams(win.location.search);
-      branch = validBranches.has(params.get('branch')) ? params.get('branch') : 'all';
-      level = ['1', '2', '3'].includes(params.get('level')) ? params.get('level') : 'all';
+      selection = filterState(win.location.search, columns);
     }
     function query() {
-      const params = new URLSearchParams();
-      if (branch !== 'all') params.set('branch', branch);
-      if (level !== 'all') params.set('level', level);
-      return params.size ? '?' + params.toString() : '';
+      return filterQuery(selection);
     }
     function renderFilters(update) {
       let count = 0;
       for (const row of rows) {
-        row.hidden = !(branch === 'all' || (row.dataset.branch || '').split(' ').includes(branch)) || !(level === 'all' || row.dataset.level === level);
+        row.hidden = !matchesFilters(row.dataset, selection);
         if (!row.hidden) count++;
       }
       root.querySelectorAll('[data-me-group]').forEach(group => { group.hidden = ![...group.querySelectorAll('[data-me-row]')].some(row => !row.hidden); });
-      root.querySelectorAll('[data-me-branch]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.meBranch === branch)));
-      root.querySelectorAll('[data-me-level]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.meLevel === level)));
+      root.querySelectorAll('[data-me-branch]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.meBranch === selection.branch)));
+      root.querySelectorAll('[data-me-level]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.meLevel === selection.level)));
+      root.querySelectorAll('[data-me-column]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.meColumn === selection.column)));
       const counter = root.querySelector('[data-me-count]');
       if (counter) counter.textContent = '显示 ' + count + ' / ' + rows.length + ' 张';
       const empty = root.querySelector('[data-me-empty]');
@@ -81,15 +106,48 @@
     if (rows.length && controls) {
       controls.hidden = false;
       listen(controls, 'click', event => {
-        const button = event.target.closest?.('[data-me-branch],[data-me-level]');
+        const button = event.target.closest?.('[data-me-branch],[data-me-level],[data-me-column]');
         if (!button || !controls.contains(button)) return;
-        if (button.hasAttribute('data-me-branch')) branch = button.dataset.meBranch;
-        if (button.hasAttribute('data-me-level')) level = button.dataset.meLevel;
+        if (button.hasAttribute('data-me-branch')) selection.branch = button.dataset.meBranch;
+        if (button.hasAttribute('data-me-level')) selection.level = button.dataset.meLevel;
+        if (button.hasAttribute('data-me-column')) selection.column = button.dataset.meColumn;
         renderFilters(true);
       });
       listen(win, 'popstate', () => { readQuery(); renderFilters(false); });
       renderFilters(false);
     }
+    const periods = [...root.querySelectorAll('[data-me-life-period]')];
+    const desktop = win.matchMedia?.('(min-width: 769px)');
+    function revealHash(hash = win.location.hash) {
+      let target;
+      try { target = doc.getElementById(decodeURIComponent(hash.slice(1))); } catch (_) { return; }
+      if (!target || !root.contains(target)) return;
+      let parent = target.closest('details[data-me-collapsible]');
+      while (parent) {
+        if (parent.hasAttribute('data-me-life-period') && !desktop?.matches) periods.forEach(other => { if (other !== parent) other.open = false; });
+        parent.open = true;
+        parent = parent.parentElement?.closest('details[data-me-collapsible]');
+      }
+    }
+    function syncPeriods() {
+      const active = periods.find(period => period.open && !period.hidden) || periods.find(period => !period.hidden);
+      periods.forEach(period => { period.open = Boolean(desktop?.matches || period === active); });
+      revealHash();
+    }
+    if (periods.length) {
+      syncPeriods();
+      periods.forEach(period => listen(period, 'toggle', () => {
+        if (period.open && !desktop?.matches) periods.forEach(other => { if (other !== period) other.open = false; });
+      }));
+      if (desktop?.addEventListener) listen(desktop, 'change', syncPeriods);
+      else if (desktop?.addListener) { desktop.addListener(syncPeriods); cleanups.push(() => desktop.removeListener(syncPeriods)); }
+    }
+    listen(root, 'click', event => {
+      const anchor = event.target.closest?.('a[href^="#"]');
+      if (anchor && root.contains(anchor)) revealHash(anchor.getAttribute('href'));
+    });
+    listen(win, 'hashchange', () => revealHash());
+    revealHash();
     const pool = root.querySelector('[data-me-deck-data]');
     const button = root.querySelector('[data-me-next]');
     if (pool && button) {
@@ -125,10 +183,11 @@
         }
       }
     }
+    root.dataset.meMounted = 'true';
     let disposed = false;
-    const dispose = () => { if (!disposed) { disposed = true; cleanups.splice(0).reverse().forEach(fn => fn()); } };
+    const dispose = () => { if (!disposed) { disposed = true; delete root.dataset.meMounted; cleanups.splice(0).reverse().forEach(fn => fn()); } };
     win.SiteNavigation?.own?.(dispose);
     return dispose;
   }
-  return { beijingKey, daySeed, createDeck, mount };
+  return { beijingKey, daySeed, createDeck, filterState, filterQuery, matchesFilters, legacyDirectory, mount };
 });

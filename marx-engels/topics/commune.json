@@ -1,0 +1,202 @@
+{
+  "version": 1,
+  "title": "巴黎公社：七十二天与后来的总结",
+  "intro": "同一场公社，既留下进行中的通信，也留下事后的宣言和二十年后的回顾。沿着起义、选举、战斗和再版序言读下去，观察马恩怎样把制度尝试、成败经验与理论问题连在一起。以下概述为本站转述；短引各自标明作者与文献。",
+  "ai_assisted": true,
+  "sections": [
+    {
+      "id": "timeline",
+      "title": "公社七十二天",
+      "intro": "先分清事件日期；起义日、选举日和宣告成立日各有含义。",
+      "items": [
+        {
+          "id": "commune-march18",
+          "title": "3月18日：夺炮行动失败，巴黎起义",
+          "text": "梯也尔政府企图夺取国民自卫军的大炮，行动失败后退出巴黎。恩格斯的导言把这一日作为巴黎与凡尔赛政府之间战争公开展开的节点。它与随后选举公社、正式宣告成立是不同的日子。",
+          "source": {
+            "url": "https://www.marxists.org/chinese/marx-engels2/03/07.htm",
+            "locator": "恩格斯1891年版导言：3月18日夺炮行动与起义段",
+            "checked_on": "2026-10-30"
+          },
+          "citations": [],
+          "related": [],
+          "date": "1871-03-18",
+          "precision": "day"
+        },
+        {
+          "id": "commune-march26",
+          "title": "3月26日：公社选举",
+          "text": "公社通过选举产生。把选举日单列出来，可以看清国民自卫军中央委员会同后来公社之间的交接，也能把起义与新机构的形成分开理解。",
+          "source": {
+            "url": "https://www.marxists.org/chinese/marx-engels2/03/07.htm",
+            "locator": "恩格斯1891年版导言：3月26日公社选举",
+            "checked_on": "2026-10-30"
+          },
+          "citations": [],
+          "related": [],
+          "date": "1871-03-26",
+          "precision": "day"
+        },
+        {
+          "id": "commune-march28",
+          "title": "3月28日：正式宣告成立",
+          "text": "恩格斯记载，公社于这一天正式宣告成立，中央委员会向公社交出全权。此后读取消常备军、公职报酬和教会与国家分离等措施时，可以继续追问：公共事务准备由谁负责，又如何接受监督？",
+          "source": {
+            "url": "https://www.marxists.org/chinese/marx-engels2/03/07.htm",
+            "locator": "恩格斯1891年版导言：3月28日宣告与权力交接",
+            "checked_on": "2026-10-30"
+          },
+          "citations": [],
+          "related": [],
+          "date": "1871-03-28",
+          "precision": "day"
+        },
+        {
+          "id": "commune-may21",
+          "title": "5月21日：凡尔赛军队进入巴黎",
+          "text": "凡尔赛军队从西线进入城内，街垒战与镇压随之展开。导言叙述了战线从富人区推进到工人区、抵抗逐步加剧的过程；阅读时留意战争进程怎样压缩了公社实行社会措施的时间。",
+          "source": {
+            "url": "https://www.marxists.org/chinese/marx-engels2/03/07.htm",
+            "locator": "恩格斯1891年版导言：5月21日入城及其后的街垒战",
+            "checked_on": "2026-10-30"
+          },
+          "citations": [],
+          "related": [],
+          "date": "1871-05-21",
+          "precision": "day"
+        },
+        {
+          "id": "commune-may28",
+          "title": "5月28日：最后的抵抗",
+          "text": "按恩格斯导言的记述，最后一批公社战士在贝尔维尔一带战斗至这一天。从3月18日至5月28日，是通常所说的公社七十二天；这条时间线着重区分起义、机构成立和战斗结束三个层次。",
+          "source": {
+            "url": "https://www.marxists.org/chinese/marx-engels2/03/07.htm",
+            "locator": "恩格斯1891年版导言开头：5月28日最后一批战士殉难",
+            "checked_on": "2026-10-30"
+          },
+          "citations": [],
+          "related": [],
+          "date": "1871-05-28",
+          "precision": "day"
+        }
+      ]
+    },
+    {
+      "id": "letters",
+      "title": "马克思当时说了什么",
+      "intro": "这两封信写在胜负尚未确定的时候，保留当时的处境和争论。",
+      "items": [
+        {
+          "id": "commune-letter129",
+          "title": "4月12日：支持巴黎，也直说判断",
+          "text": "库格曼收到的这封信，写在公社仍在斗争时。马克思一面赞扬巴黎工人的主动精神，一面批评未及时向凡尔赛进军、中央委员会过早交权。他把这场尝试同《雾月十八日》中关于官僚军事机器的分析联系起来。支持与具体批评在同一封信中出现。",
+          "source": {
+            "url": "https://www.marxists.org/chinese/marx-engels2/10/129.htm",
+            "locator": "《文集》第10卷第129封，1871年4月12日",
+            "checked_on": "2026-10-30"
+          },
+          "citations": [
+            "c-v3-letter-129-paris"
+          ],
+          "related": [
+            "/marx/works/civil-war-france/"
+          ],
+          "date": "1871-04-12",
+          "precision": "day"
+        },
+        {
+          "id": "commune-letter130",
+          "title": "4月17日：条件、偶然与历史起点",
+          "text": "马克思回应库格曼对巴黎斗争的看法，讨论行动条件与偶然因素。他既谈普鲁士军队盘踞法国造成的不利处境，也谈战斗对工人阶级运动的意义。信里的判断以正在发生的斗争为对象，读者可以同几天前的信比较：哪些是战术判断，哪些是对长期历史作用的判断？",
+          "source": {
+            "url": "https://www.marxists.org/chinese/marx-engels2/10/130.htm",
+            "locator": "《文集》第10卷第130封，1871年4月17日",
+            "checked_on": "2026-10-30"
+          },
+          "citations": [
+            "c-v3-letter-130-new-start"
+          ],
+          "related": [
+            "/marx/life/letters/"
+          ],
+          "date": "1871-04-17",
+          "precision": "day"
+        }
+      ]
+    },
+    {
+      "id": "summaries",
+      "title": "事后怎样总结",
+      "intro": "1871年的正式宣言与恩格斯1891年的导言，分别承担不同的总结任务。",
+      "items": [
+        {
+          "id": "commune-address",
+          "title": "5月30日：《法兰西内战》的总结",
+          "text": "公社最后战斗结束两天后，马克思向国际总委员会宣读《法兰西内战》。正式文本第三部分从旧国家机关转向公社的制度尝试，讨论选举、罢免、公职报酬等具体安排。读这些段落，可以把改变国家机器的问题同公共权力怎样运作联系起来。",
+          "source": {
+            "url": "https://www.marxists.org/chinese/marx-engels2/03/07.htm",
+            "locator": "《法兰西内战》第三部分；1871年5月30日宣读，日期另见年表。",
+            "checked_on": "2026-10-30"
+          },
+          "citations": [
+            "c-civil-war-france-machine"
+          ],
+          "related": [
+            "/marx/works/civil-war-france/"
+          ],
+          "date": "1871-05-30",
+          "precision": "day",
+          "date_source": {
+            "url": "https://www.marxists.org/chinese/marx-engels2/10/287.htm",
+            "locator": "《文集》第10卷年表1871年条：5月30日宣读并通过《法兰西内战》",
+            "checked_on": "2026-10-30"
+          }
+        },
+        {
+          "id": "commune-engels1891",
+          "title": "1891年：恩格斯重新介绍公社",
+          "text": "二十周年时，恩格斯写导言，回顾法国革命、公社措施及其失败。他特别讨论社会公职怎样从公仆变成主人，并把随时撤换代表与官吏同防范这种转化联系起来。导言结尾对无产阶级专政的说明出自恩格斯，位置与马克思1871年的正式宣言不同。",
+          "source": {
+            "url": "https://www.marxists.org/chinese/marx-engels2/03/07.htm",
+            "locator": "恩格斯1891年版导言：公共权力、撤换与末段",
+            "checked_on": "2026-10-30"
+          },
+          "citations": [
+            "c-v3-civil-war-engels-1891"
+          ],
+          "related": [
+            "/marx/base-superstructure/"
+          ],
+          "date": "1891",
+          "precision": "year"
+        }
+      ]
+    },
+    {
+      "id": "manifesto-preface",
+      "title": "一个教训怎样进入《宣言》",
+      "intro": "从后来的序言回看1848年文本，也回到公社的新经验。",
+      "items": [
+        {
+          "id": "commune-manifesto1872",
+          "title": "1872年：经验写进《宣言》序言",
+          "text": "马克思和恩格斯在1872年德文版序言中引述《法兰西内战》的国家机器结论，把公社经验带回对1848年纲领的重新审视。他们说明原理的实际运用取决于历史条件，同时保留《宣言》作为历史文件的正文。把两份文本并读，可以看到新经验怎样影响旧文的阅读。",
+          "source": {
+            "url": "https://www.marxists.org/chinese/marx-engels2/02/01.htm#1",
+            "locator": "《共产党宣言》1872年德文版序言，署1872年6月24日",
+            "checked_on": "2026-10-30"
+          },
+          "citations": [
+            "c-v3-manifesto-1872-history"
+          ],
+          "related": [
+            "/marx/works/manifesto/",
+            "/marx/works/civil-war-france/"
+          ],
+          "date": "1872-06-24",
+          "precision": "day"
+        }
+      ]
+    }
+  ]
+}

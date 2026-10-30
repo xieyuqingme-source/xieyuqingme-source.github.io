@@ -1,0 +1,131 @@
+{
+  "version": 1,
+  "title": "MBA读《资本论》：从熟悉的企业问题进去",
+  "intro": "协作、分工、工资、经理与股份，都是读管理学时常见的话题。把它们带进《资本论》，会遇到另一组追问：共同劳动怎样组织，价值怎样增殖，所有权与职能怎样分开？这里介绍马克思的分析与所用条件，不提供企业管理、投资建议，也不评价今天的具体企业。",
+  "ai_assisted": true,
+  "sections": [
+    {
+      "id": "enterprise",
+      "title": "七个入口",
+      "intro": "每条从一个熟悉的概念进入，再说明原著的问题与两种观察的区别。",
+      "items": [
+        {
+          "id": "mba-cooperation",
+          "title": "协作：一个乐队为什么需要指挥",
+          "text": "管理学里常谈协同和组织协调。第一卷第十一章先分析许多人共同劳动所形成的社会生产力，再区分协调共同过程的职能与资本借此组织价值增殖的职能。两者都出现在同一个工厂里。把问题从怎样配合做事推进到谁规定共同劳动的目的，便能看到这里对管理的分析为什么带有二重性。",
+          "source": {
+            "url": "https://www.marxists.org/chinese/marx/capital/11.htm",
+            "locator": "第一卷第十一章：协作中管理、监督和调节的职能",
+            "checked_on": "2026-10-30"
+          },
+          "citations": [
+            "c-v2-capital-1-ch11"
+          ],
+          "related": [
+            "/marx/capital/1/ch11/",
+            "/marx/capital/3/ch23/"
+          ]
+        },
+        {
+          "id": "mba-division",
+          "title": "分工：整体的熟练与局部的片面",
+          "text": "专业化和流程拆分常被用来说明效率。第一卷第十二章考察手工业怎样被拆成局部操作，又怎样结合成一个总体工人。分析同时涉及工序联系、工具专门化以及劳动者能力的片面发展。这里的工场内分工还有资本统一指挥的条件，须同社会中独立生产者之间的分工分别理解。",
+          "source": {
+            "url": "https://www.marxists.org/chinese/marx/capital/12.htm",
+            "locator": "第一卷第十二章：局部工人、总体工人及工场内外分工",
+            "checked_on": "2026-10-30"
+          },
+          "citations": [
+            "c-v2-capital-1-ch12"
+          ],
+          "related": [
+            "/marx/capital/1/ch12/"
+          ]
+        },
+        {
+          "id": "mba-machinery",
+          "title": "机器：省力的潜能怎样成为延长劳动的手段",
+          "text": "谈自动化时，读者容易先想到技术提高产出的能力。第一卷第十三章沿工具、机器体系和工厂制度展开，也研究工作日、劳动强度与工人处境的变化。机器在技术上可能节约劳动时间，特定社会关系中的采用方式却有另一套动力。读这一章，需要同时辨认机器的结构及其被使用的社会条件。",
+          "source": {
+            "url": "https://www.marxists.org/chinese/marx/capital/13.htm",
+            "locator": "第一卷第十三章：机器体系、工厂与机器的资本主义应用",
+            "checked_on": "2026-10-30"
+          },
+          "citations": [
+            "c-v2-capital-1-ch13"
+          ],
+          "related": [
+            "/marx/capital/1/ch13/",
+            "/marx/relative-surplus-value/"
+          ]
+        },
+        {
+          "id": "mba-piece-wage",
+          "title": "计件工资：报酬形式怎样组织劳动",
+          "text": "激励与绩效指标关心报酬怎样同结果挂钩。第一卷第十九章把计件工资同计时工资联系起来，分析产品质量、劳动强度、平均效率和监督方式。按件计量改变的是工资表现与劳动控制的方式，劳动力被购买的关系仍在。这里可以追问工资形式怎样影响劳动过程，而非只比较两张工资表。",
+          "source": {
+            "url": "https://www.marxists.org/chinese/marx/capital/19.htm",
+            "locator": "第一卷第十九章：计件工资的形式、质量与强度",
+            "checked_on": "2026-10-30"
+          },
+          "citations": [
+            "c-v2-capital-1-ch19"
+          ],
+          "related": [
+            "/marx/capital/1/ch19/",
+            "/marx/labour-power/"
+          ]
+        },
+        {
+          "id": "mba-management",
+          "title": "经理劳动：指挥的报酬就是全部利润吗",
+          "text": "职业经理人与所有者的分离，为理解这一章提供一个熟悉的入口。第三卷第二十三章研究企业主收入与利息的分开，以及管理劳动怎样以工资形式独立出来。马克思承认共同劳动需要协调，也考察由生产者与所有者对立而来的监督。辨认这些关系后，管理劳动的报酬与凭资本取得的利润便有了各自的分析位置。",
+          "source": {
+            "url": "https://www.marxists.org/chinese/marx-engels2/07/23.htm",
+            "locator": "第三卷第二十三章：利息、企业主收入与监督和指挥劳动",
+            "checked_on": "2026-10-30"
+          },
+          "citations": [
+            "c-v3-capital-3-manager"
+          ],
+          "related": [
+            "/marx/capital/3/ch23/",
+            "/marx/capital/1/ch11/"
+          ]
+        },
+        {
+          "id": "mba-shares",
+          "title": "股份公司：所有与经营分开之后",
+          "text": "公司治理常讨论股东、经理和控制权。第三卷第二十七章把股份公司放到信用制度中，考察个人资本怎样取得社会资本形式，以及经理职能同所有权的分离。马克思在这里讨论资本主义生产内部形成的过渡因素，也讨论垄断、投机等矛盾；股份这一法律和组织形式本身并不能独自说明社会关系的性质。",
+          "source": {
+            "url": "https://www.marxists.org/chinese/marx-engels2/07/27.htm",
+            "locator": "第三卷第二十七章第III部分：股份公司的成立及其矛盾",
+            "checked_on": "2026-10-30"
+          },
+          "citations": [
+            "c-v3-capital-3-joint-stock"
+          ],
+          "related": [
+            "/marx/capital/3/ch27/",
+            "/marx/capital/3/part5/"
+          ]
+        },
+        {
+          "id": "mba-commerce",
+          "title": "商人资本：商品卖出去与价值怎样形成",
+          "text": "销售、渠道与周转把注意力引向商品怎样实现出售。第三卷第四篇先把纯粹买卖的职能同运输、保管等相联系又有所区别的活动分开，再研究商人资本怎样参与总资本的运动与利润分配。缩短流通时间能影响再生产效率；把商品的价值实现与价值生产逐层辨认，才能看清这篇划出的不同职能。",
+          "source": {
+            "url": "https://www.marxists.org/chinese/marx-engels2/07/16.htm",
+            "locator": "第三卷第四篇第十六章：商品经营资本与流通职能",
+            "checked_on": "2026-10-30"
+          },
+          "citations": [],
+          "related": [
+            "/marx/capital/3/part4/",
+            "/marx/capital/2/part1/"
+          ]
+        }
+      ]
+    }
+  ]
+}

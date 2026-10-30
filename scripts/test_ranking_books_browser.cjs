@@ -29,7 +29,7 @@ CanvasRenderingContext2D.prototype.drawImage=function(image,...args){
  const result=__qaDraw.call(this,image,...args);
  if(window.__qaActiveExport&&image instanceof HTMLImageElement){
   const transform=this.getTransform(),samples=[];
-  if(args.length===8)for(const fx of [.2,.5,.8])for(const fy of [.2,.5,.8]){
+  if(args.length===8)for(const fx of [.2,.35,.5,.65,.8])for(const fy of [.2,.35,.5,.65,.8]){
    const x=Math.round(args[4]*transform.a+transform.e)+Math.floor(args[6]*transform.a*fx),y=Math.round(args[5]*transform.d+transform.f)+Math.floor(args[7]*transform.d*fy);
    samples.push({x,y,rgba:Array.from(this.getImageData(x,y,1,1).data)});
   }
@@ -91,7 +91,7 @@ async function title(page,text,id){
 async function actionSave(page,selector,id){const before=await page.evaluate(()=>__qaSaves);await page.locator(selector).click();return savedAfter(page,before,id);}
 async function records(page){return page.evaluate(()=>new Promise((resolve,reject)=>{
   const request=indexedDB.open('xieyuqing-ranking-v1',1);request.onerror=()=>reject(request.error);
-  request.onsuccess=()=>{const db=request.result,tx=db.transaction('rankings','readonly'),values={};for(const key of ['current','template:food','template:sport','template:book']){const get=tx.objectStore('rankings').get(key);get.onsuccess=()=>{values[key]=get.result??null;};}tx.oncomplete=()=>{db.close();resolve(values);};tx.onerror=()=>reject(tx.error);};
+  request.onsuccess=()=>{const db=request.result,tx=db.transaction('rankings','readonly'),values={};for(const key of ['current','template:food','template:sport','template:book','template:economist']){const get=tx.objectStore('rankings').get(key);get.onsuccess=()=>{values[key]=get.result??null;};}tx.oncomplete=()=>{db.close();resolve(values);};tx.onerror=()=>reject(tx.error);};
 }));}
 async function decoded(page){return page.locator('#ranking-board img').evaluateAll(async images=>{
   for(const image of images)image.loading='eager';await Promise.all(images.map(image=>image.decode()));
@@ -100,9 +100,9 @@ async function decoded(page){return page.locator('#ranking-board img').evaluateA
 async function screenshot(page,name){await decoded(page);await page.screenshot({path:path.join(output,name),fullPage:true,animations:'disabled'});report.screenshots.push(name);}
 async function presentationNotes(page,id){
   assert.equal(await page.locator('body').evaluate(body=>body.classList.contains('presentation')),true);
-  assert.equal(await page.locator('#template-note').isVisible(),id==='book',id+' presentation disclaimer visibility');
+  assert.equal(await page.locator('#template-note').isVisible(),['book','economist'].includes(id),id+' presentation disclaimer visibility');
   assert.equal(await page.locator('#book-reading-link').isVisible(),id==='book',id+' presentation learning-link visibility');
-  if(id==='book')assert.equal(await page.locator('#candidate-pool').isVisible(),false,'An empty book pool should not occupy a blank panel');
+  if(['book','economist'].includes(id))assert.equal(await page.locator('#candidate-pool').isVisible(),false,'An empty book pool should not occupy a blank panel');
 }
 async function wholeBookWords(page,detail){
   const words=await page.evaluate(()=>[
@@ -125,13 +125,13 @@ async function wholeBookWords(page,detail){
   }
   for(const word of words){assert.equal(word.error,undefined,JSON.stringify(word));assert.equal(word.lineTops.length,1,'The complete word must stay on one line: '+JSON.stringify({...detail,...word}));}
 }
-async function geometry(page,detail){
+async function geometry(page,detail,templateId='book'){
   const result=await page.evaluate(()=>({width:innerWidth,documentWidth:document.documentElement.scrollWidth,bodyWidth:document.body.scrollWidth,template:document.body.dataset.rankingTemplate,skin:document.body.dataset.rankingSkin,mode:document.body.classList.contains('presentation')?'presentation':'editing',cards:document.querySelectorAll('#ranking-board .rank-card').length}));
-  assert(result.documentWidth<=result.width+1,JSON.stringify(result));assert(result.bodyWidth<=result.width+1,JSON.stringify(result));assert.equal(result.cards,20);report.layouts.push({...detail,...result});
-  if(result.mode==='presentation')await presentationNotes(page,'book');
-  if(result.width===390)await wholeBookWords(page,{...detail,...result});return result;
+  assert(result.documentWidth<=result.width+1,JSON.stringify(result));assert(result.bodyWidth<=result.width+1,JSON.stringify(result));assert.equal(result.cards,Object.keys(templateId==='economist'?Model.ECONOMIST_ART:Model.BOOK_ART).length);report.layouts.push({...detail,...result});
+  if(result.mode==='presentation')await presentationNotes(page,templateId);
+  if(result.width===390&&templateId==='book')await wholeBookWords(page,{...detail,...result});return result;
 }
-async function png(page,name){
+async function png(page,name,templateId='book'){
   await editing(page);const before=await records(page),exportCount=await page.evaluate(()=>__qaExports.length);
   const promise=page.waitForEvent('download');await page.locator('#png-export').click();const download=await promise;
   assert.equal(await download.failure(),null,'Native PNG download must complete');const filename=path.join(output,name);await download.saveAs(filename);
@@ -155,9 +155,9 @@ async function png(page,name){
       return {width,height,scale,draws:entry.draws,paintings};
     }finally{URL.revokeObjectURL(pngURL);}
   });
-  const expected=Object.values(Model.BOOK_ART).map(art=>art.photo).sort();
-  assert.deepEqual(evidence.draws.map(draw=>draw.src).sort(),expected);assert.equal(evidence.paintings.length,20);
-  for(const painting of evidence.paintings)assert(painting.meanError<=4&&painting.maxError<=12&&painting.colours>=3,JSON.stringify(painting));
+  const expected=Object.values(templateId==='economist'?Model.ECONOMIST_ART:Model.BOOK_ART).map(art=>art.photo).sort();
+  assert.deepEqual(evidence.draws.map(draw=>draw.src).sort(),expected);assert.equal(evidence.paintings.length,expected.length);
+  for(const painting of evidence.paintings)assert(painting.meanError<=4&&painting.maxError<=12&&painting.colours>=(templateId==='economist'?2:3),JSON.stringify(painting));
   assert.equal(data.readUInt32BE(16),evidence.width);assert.equal(data.readUInt32BE(20),evidence.height);assert.deepEqual(await records(page),before,'PNG never modifies current or another template archive');
   report.downloads.push(name);report.exports.push({name,bytes:data.length,...evidence});
 }
@@ -168,7 +168,7 @@ async function run(){
   browser=await playwright.chromium.launch({headless:true,downloadsPath:path.join(output,'native-downloads'),executablePath:process.env.CHROME_PATH||(process.platform==='win32'?'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe':undefined)});
   const {page,ctx}=await context();
   await check('book, food and sports retain independent editable drafts',async()=>{
-    assert.deepEqual(await page.locator('#ranking-template option').evaluateAll(options=>options.map(option=>option.value)),['food','sport','book']);
+    assert.deepEqual(await page.locator('#ranking-template option').evaluateAll(options=>options.map(option=>option.value)),['food','sport','book','economist']);
     await presentationNotes(page,'food');await title(page,'P1 保留的美食','food');await template(page,'sport');await presentationNotes(page,'sport');await title(page,'P1 保留的运动','sport');
     await template(page,'book');await presentationNotes(page,'book');await title(page,'P1 名著阅读草稿','book');
     let count=await page.evaluate(()=>__qaSaves);await page.locator('#ranking-skin').selectOption('tech');await savedAfter(page,count,'book');
@@ -233,6 +233,35 @@ async function run(){
     const {page,ctx}=await context({language:'en',width:390});await template(page,'book');
     for(const skin of ['classic','tech']){await editing(page);if(await page.locator('#ranking-skin').inputValue()!==skin){const count=await page.evaluate(()=>__qaSaves);await page.locator('#ranking-skin').selectOption(skin);await savedAfter(page,count,'book');}await geometry(page,{theme:'light',language:'en'});await editing(page,false);await geometry(page,{theme:'light',language:'en'});await screenshot(page,'books-en-'+skin+'-390.png');}
     await ctx.close();
+  });
+  await check('economist template has sixteen decoded nameplates, readable sources and in-place bilingual display',async()=>{
+    const {page,ctx}=await context({width:390});await template(page,'economist');await presentationNotes(page,'economist');
+    assert.equal(await page.locator('#economist-sources').isVisible(),true);assert.equal(await page.locator('#economist-source-list>li').count(),16);
+    assert.equal((await page.locator('#template-note').textContent()).trim(),'按马克思、恩格斯的评价排的娱乐示例，不是经济学史结论');
+    const images=await decoded(page);assert.equal(images.length,16);assert.deepEqual(images.map(image=>image.src).sort(),Object.values(Model.ECONOMIST_ART).map(art=>art.photo).sort());
+    for(const image of images){assert.equal(image.width,640);assert.equal(image.height,640);}
+    const summary=page.locator('#economist-sources>summary');await summary.focus();await summary.press('Enter');assert.equal(await page.locator('#economist-sources').getAttribute('open'),'');
+    for(const source of await page.locator('#economist-source-list a').all()){
+      assert.match(await source.getAttribute('href'),/^https:\/\/www\.marxists\.org\/chinese\//);assert.equal(await source.getAttribute('target'),'_blank');assert.match(await source.getAttribute('rel'),/noopener/);
+    }
+    const bytes=await records(page),saves=await page.evaluate(()=>__qaSaves),token=await page.evaluate(()=>__qaDocumentToken);
+    await page.evaluate(()=>SiteI18n.setLanguage('en'));assert.equal(await page.locator('#display-title').textContent(),'Economists through Marx’s Eyes');
+    const names=await page.locator('#ranking-board .card-name').allTextContents();assert.deepEqual(new Set(names),new Set(Object.values(Model.ECONOMIST_ART).map(art=>art.name_en)));
+    assert.match(await summary.textContent(),/Sources for the default example/);assert.match(await page.locator('#economist-source-list').textContent(),/William Petty/);
+    assert.equal(await page.locator('#economist-sources').getAttribute('open'),'');assert.equal(await page.evaluate(()=>__qaDocumentToken),token);assert.equal(await page.evaluate(()=>__qaSaves),saves);assert.deepEqual(await records(page),bytes);
+    await page.evaluate(()=>SiteI18n.setLanguage('zh-CN'));await summary.press('Enter');await screenshot(page,'economists-390.png');
+    for(const skin of ['classic','tech']){await editing(page);if(await page.locator('#ranking-skin').inputValue()!==skin){const before=await page.evaluate(()=>__qaSaves);await page.locator('#ranking-skin').selectOption(skin);await savedAfter(page,before,'economist');}await png(page,'economists-'+skin+'.png','economist');}
+    await template(page,'book');assert.equal(await page.locator('#economist-sources').isVisible(),false);
+    await template(page,'economist');assert.equal(await page.locator('#economist-source-list>li').count(),16);await ctx.close();
+  });
+  await check('economist layouts fit five widths, both themes and skins with sources outside the board',async()=>{
+    for(const theme of ['light','dark']){
+      const {page,ctx}=await context({theme});await template(page,'economist');
+      for(const skin of ['classic','tech']){
+        await editing(page);if(await page.locator('#ranking-skin').inputValue()!==skin){const count=await page.evaluate(()=>__qaSaves);await page.locator('#ranking-skin').selectOption(skin);await savedAfter(page,count,'economist');}
+        for(const width of widths){await page.setViewportSize({width,height:width<500?844:1000});await editing(page);await geometry(page,{theme},'economist');await editing(page,false);await geometry(page,{theme},'economist');if(width===1440||width===390)await screenshot(page,`economists-${theme}-${skin}-${width}.png`);}
+      }await ctx.close();
+    }
   });
   await check('acceptance uses only complete local assets without browser exceptions',async()=>{assert.deepEqual(report.pageErrors,[]);assert.deepEqual(report.externalRequests,[]);assert.deepEqual(report.missing,[]);});
 }

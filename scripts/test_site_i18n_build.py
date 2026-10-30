@@ -8,6 +8,7 @@ from tempfile import TemporaryDirectory
 from unittest.mock import patch
 import json
 import os
+import re
 import shutil
 import unittest
 from xml.etree import ElementTree as ET
@@ -41,6 +42,12 @@ def copy_corner_fixture(root):
     # This fixture has two synthetic essays. Real QA targets are verified in
     # test_marx_engels; no link here should point to an absent real article.
     (root/'marx-engels/qa-index.json').write_text('{"version":1,"items":[]}',encoding='utf-8')
+    # This contract stubs the anthology and keeps the English catalog empty.
+    # Normalize only these copied reading links to the published stub indexes;
+    # real cross-links remain unchanged and are tested against the real corpus.
+    for card in (root/'marx-engels/cards').glob('*.md'):
+        body = card.read_text(encoding='utf-8')
+        card.write_text(re.sub(r'(?<=\]\()/(english|anthology)/[^)]+(?=\))', lambda match: '/' + match[1] + '/', body), encoding='utf-8')
 
 
 class BilingualBuildContractTests(unittest.TestCase):

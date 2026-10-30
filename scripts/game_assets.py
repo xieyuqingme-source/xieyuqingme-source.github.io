@@ -11,3 +11,23 @@ GAME_BOOK_ASSETS = (
 )
 
 LEARNING_IMAGE_PATHS = frozenset("/assets/books/" + name for name in GAME_BOOK_ASSETS)
+
+# Original typographic nameplates; no external or generated portraits.
+GAME_ECONOMIST_ASSETS = (
+    'economist-petty.webp',
+    'economist-smith.webp',
+    'economist-ricardo.webp',
+    'economist-quesnay.webp',
+    'economist-turgot.webp',
+    'economist-sismondi.webp',
+    'economist-mill.webp',
+    'economist-say.webp',
+    'economist-mcculloch.webp',
+    'economist-roscher.webp',
+    'economist-rodbertus.webp',
+    'economist-malthus.webp',
+    'economist-senior.webp',
+    'economist-bastiat.webp',
+    'economist-proudhon.webp',
+    'economist-duhring.webp',
+)

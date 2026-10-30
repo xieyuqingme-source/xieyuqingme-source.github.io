@@ -12,7 +12,7 @@ import re
 import shutil
 
 from PIL import Image
-from game_assets import GAME_BOOK_ASSETS
+from game_assets import GAME_BOOK_ASSETS, GAME_ECONOMIST_ASSETS
 
 from build_blog import Blog, ROOT
 from photo_pages import build_photos, validate_catalog as validate_photo_catalog, _safe_path as safe_photo_path
@@ -620,6 +620,16 @@ def game_book_sources():
     return sources
 
 
+def game_economist_sources():
+    sources = game_photo_sources("economists", GAME_ECONOMIST_ASSETS, "economist")
+    for source in sources:
+        with Image.open(source) as image:
+            if image.format != "WEBP" or image.width != image.height or not 256 <= image.width <= 1024:
+                raise ValueError("Economist nameplate must be a registered square local WebP: " + source.name)
+            image.verify()
+    return sources
+
+
 def copy_game_photo_assets(photo_sets):
     if linked_directory(OUTPUT / "assets"):
         raise ValueError("Generated game asset directory symlinks or junctions are not supported.")
@@ -647,7 +657,7 @@ def build_site(address, map_preview_source=None):
     daily_sources = daily_asset_sources()
     # Every template's complete photo set must pass before any output is generated.
     photo_sets = (("foods", "food", game_food_sources()), ("sports", "sport", game_sport_sources()),
-                  ("books", "book", game_book_sources()))
+                  ("books", "book", game_book_sources()), ("economists", "economist", game_economist_sources()))
     news_sources = load_sources(ROOT)
     news_snapshot = load_snapshot(ROOT)
     history_data = load_history(ROOT, linked_directory)

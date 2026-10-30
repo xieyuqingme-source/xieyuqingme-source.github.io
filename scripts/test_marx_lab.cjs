@@ -1,7 +1,13 @@
 'use strict';
 const test = require('node:test');
 const assert = require('node:assert/strict');
-const {workingDay, reproduction, valueFormStep} = require('../home/assets/marx-lab.js');
+const {workingDay, reproduction, valueFormStep, percent} = require('../home/assets/marx-lab.js');
+test('percentage text marks a rounded value and leaves exact examples readable', () => {
+  assert.equal(percent(workingDay(7, 6).rate), '约16.7%');
+  assert.equal(percent(workingDay(9, 6).rate), '50%');
+  assert.equal(percent(workingDay(12, 6).rate), '100%');
+  assert.equal(percent(12.5), '12.5%');
+});
 test('the original working-day examples retain six necessary hours', () => {
   for (const [total, surplus, rate] of [[7,1,100/6],[9,3,50],[12,6,100]]) {
     const value=workingDay(total,6); assert.equal(value.valid,true); assert.equal(value.surplus,surplus); assert.ok(Math.abs(value.rate-rate)<1e-10);

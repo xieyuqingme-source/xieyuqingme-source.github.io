@@ -256,8 +256,8 @@ def unified_footer(page, route, language="zh-CN"):
     # Preserve word boundaries when a browser cannot load the layout stylesheet.
     links = ' '.join(link(path, key) for path, key in FOOTER_LINKS)
     footer = (f'<footer class="site-footer container" lang="{language}">'
-              '<div class="footer-sign"><p class="footer-brand"><span data-i18n="common.brandName">谢雨卿</span>'
-              '<img class="footer-mark" src="/assets/favicon.svg?v=qinghuan-1" alt="" width="20" height="20" decoding="async"></p>'
+              '<div class="footer-sign"><p class="footer-brand"><img class="footer-mark" src="/assets/favicon.svg?v=qinghuan-1" alt="" width="20" height="20" decoding="async">'
+              '<span data-i18n="common.brandName">谢雨卿</span></p>'
               '<p class="footer-note" data-i18n="common.signature.2"></p></div>'
               f'<nav class="footer-links" aria-label="页脚导航" data-i18n-aria-label="common.footer.label">{links}</nav>'
               '<p class="footer-meta"><span data-i18n="common.footer.wechat"></span>'

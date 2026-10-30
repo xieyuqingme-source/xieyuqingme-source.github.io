@@ -206,3 +206,10 @@ test('cancelling a local replacement before its read finishes stops decode and p
   assert.deepEqual(JSON.parse(JSON.stringify(mocked.editor.getValue())), { image: null, crop: null, art: null });
   assert.deepEqual(mocked.failures, []); mocked.editor.close();
 });
+
+test('all economist nameplates use their exact trusted raster paths without opening SVG or remote input',()=>{
+  const Model=require('../home/assets/ranking-model.js');
+  for(const [key,art] of Object.entries(Model.ECONOMIST_ART))assert.equal(Images.builtinPhotoPath(key),art.photo);
+  const art='economist-petty';
+  for(const photo of ['/assets/economists/economist-petty.svg','/assets/economists/../economist-petty.webp','/assets/economists/other.webp','https://example.com/economist-petty.webp','/assets/economists/economist-petty.webp?x=1'])assert.throws(()=>Images.builtinPhotoPath(art,{[art]:{photo}}),/路径无效/);
+});

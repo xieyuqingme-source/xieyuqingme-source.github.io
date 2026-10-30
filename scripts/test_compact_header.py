@@ -118,6 +118,7 @@ class CompactHeaderTests(unittest.TestCase):
                 self.assertNotIn("Old footer", footers[0]["text"])
                 brand = tree.find(lambda node: node["attrs"].get("class") == "footer-brand", footers[0])[0]
                 self.assertEqual(brand["text"], "谢雨卿")
+                self.assertEqual([child["tag"] for child in brand["children"]], ["img", "span"])
                 marks = tree.find(lambda node: node["tag"] == "img", brand)
                 self.assertEqual([(mark["attrs"].get("class"), mark["attrs"].get("src"), mark["attrs"].get("alt")) for mark in marks],
                                  [("footer-mark", "/assets/favicon.svg?v=qinghuan-1", "")])

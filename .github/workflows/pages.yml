@@ -120,6 +120,8 @@ jobs:
         run: |
           python scripts/test_marx_engels.py
           python scripts/test_marx_v2.py
+          python scripts/test_marx_v3.py
+          python scripts/test_marx_topics.py
           node --test scripts/test_marx_engels_logic.cjs
           node --check home/assets/marx.js
           node --check home/assets/marx-lab.js

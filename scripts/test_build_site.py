@@ -47,6 +47,13 @@ def copy_corner_fixture(root):
     # test_marx_engels instead of pointing this isolated build at absent essays.
     shutil.copytree(ROOT / "marx-engels", root / "marx-engels")
     (root / "marx-engels/qa-index.json").write_text('{"version":1,"items":[]}', encoding="utf-8")
+    # This isolated project/cache fixture intentionally publishes an empty
+    # English catalog. Keep the shared reading entry here; the real shelf-to-
+    # English destinations are checked against the public catalog separately
+    # and by the full site build, without modifying the source documents.
+    for card in (root / "marx-engels/cards").glob("*.md"):
+        body = card.read_text(encoding="utf-8")
+        card.write_text(re.sub(r"(?<=\]\()/english/[^)]+(?=\))", "/english/", body), encoding="utf-8")
 
 
 class UnifiedPublicationTests(unittest.TestCase):

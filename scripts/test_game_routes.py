@@ -49,10 +49,13 @@ EXPECTED_BOOKS = tuple("book-" + slug + ".webp" for slug in (
     "the-great-gatsby", "hamlet", "romeo-and-juliet", "walden"))
 
 
+EXPECTED_ECONOMISTS = ('economist-petty.webp', 'economist-smith.webp', 'economist-ricardo.webp', 'economist-quesnay.webp', 'economist-turgot.webp', 'economist-sismondi.webp', 'economist-mill.webp', 'economist-say.webp', 'economist-mcculloch.webp', 'economist-roscher.webp', 'economist-rodbertus.webp', 'economist-malthus.webp', 'economist-senior.webp', 'economist-bastiat.webp', 'economist-proudhon.webp', 'economist-duhring.webp')
+
+
 def art_registries(source):
     """Read the actual exported model registries without evaluating them as Python or HTML."""
     result = subprocess.run(["node", "-e",
-        "const m=require(process.argv[1]);process.stdout.write(JSON.stringify({food:m.FOOD_ART,sport:m.SPORT_ART,book:m.BOOK_ART,builtin:m.BUILTIN_ART}));",
+        "const m=require(process.argv[1]);process.stdout.write(JSON.stringify({food:m.FOOD_ART,sport:m.SPORT_ART,book:m.BOOK_ART,economist:m.ECONOMIST_ART,builtin:m.BUILTIN_ART}));",
         str(source)], check=True, capture_output=True, text=True, encoding="utf-8", timeout=10)
     return json.loads(result.stdout)
 
@@ -188,7 +191,7 @@ class GamePublicationTests(unittest.TestCase):
         self.assertEqual(build_site.GAME_SPORT_ASSETS, EXPECTED_SPORTS)
         registries = art_registries(output / "assets/ranking-model.js")
         self.assertEqual(build_site.GAME_BOOK_ASSETS, EXPECTED_BOOKS)
-        for directory, registry, expected in (("foods", "food", EXPECTED_FOODS), ("sports", "sport", EXPECTED_SPORTS), ("books", "book", EXPECTED_BOOKS)):
+        for directory, registry, expected in (("foods", "food", EXPECTED_FOODS), ("sports", "sport", EXPECTED_SPORTS), ("books", "book", EXPECTED_BOOKS), ("economists", "economist", EXPECTED_ECONOMISTS)):
             self.assertEqual({path.name for path in (output / "assets" / directory).iterdir()}, set(expected),
                              "Only fixed public photos should be copied; source notes and previews stay out.")
             photo_paths = [entry["photo"] for entry in registries[registry].values()]
@@ -200,7 +203,7 @@ class GamePublicationTests(unittest.TestCase):
                     self.assertEqual(photo.read_bytes(), (ROOT / "home/assets" / directory / name).read_bytes())
                     header = photo.read_bytes()[:12]
                     self.assertEqual((header[:4], header[8:12]), (b"RIFF", b"WEBP"))
-        self.assertEqual(registries["builtin"], {**registries["food"], **registries["sport"], **registries["book"]})
+        self.assertEqual(registries["builtin"], {**registries["food"], **registries["sport"], **registries["book"], **registries["economist"]})
 
     def test_new_and_existing_navigation_preserve_public_entries(self):
         output, _ = self.build_fixture()
@@ -458,11 +461,33 @@ class GameArtRegistryTests(unittest.TestCase):
         self.assertTrue(set(food).isdisjoint(sport))
         self.assertEqual(set(book), {Path(name).stem for name in EXPECTED_BOOKS})
         self.assertTrue(set(book).isdisjoint({*food, *sport}))
-        self.assertEqual(registries["builtin"], {**food, **sport, **book})
-        self.assertEqual(len(registries["builtin"]), 76)
-        for directory, registry in (("foods", food), ("sports", sport), ("books", book)):
+        self.assertEqual(registries["builtin"], {**food, **sport, **book, **registries["economist"]})
+        self.assertEqual(set(registries["economist"]), {Path(name).stem for name in EXPECTED_ECONOMISTS})
+        self.assertEqual(build_site.GAME_ECONOMIST_ASSETS, EXPECTED_ECONOMISTS)
+        self.assertEqual(len(registries["builtin"]), 92)
+        for directory, registry in (("foods", food), ("sports", sport), ("books", book), ("economists", registries["economist"])):
             for key, entry in registry.items():
                 self.assertEqual(entry["photo"], "/assets/" + directory + "/" + key + ".webp")
+
+
+class EconomistNameplateTests(unittest.TestCase):
+    def test_fixed_nameplates_are_checked_before_any_copy(self):
+        with TemporaryDirectory(prefix="economist-nameplates-", dir=ROOT) as temporary:
+            root=Path(temporary);folder=root/"home/assets/economists";folder.mkdir(parents=True)
+            for name in EXPECTED_ECONOMISTS:
+                shutil.copy2(ROOT/"home/assets/economists"/name,folder/name)
+            with patch.object(build_site,"ROOT",root):
+                self.assertEqual([p.name for p in build_site.game_economist_sources()],list(EXPECTED_ECONOMISTS))
+                for name in EXPECTED_ECONOMISTS:
+                    stored=(folder/name).read_bytes();(folder/name).unlink()
+                    with self.subTest(name=name),self.assertRaisesRegex(ValueError,"Missing required game economist photo"):
+                        build_site.game_economist_sources()
+                    (folder/name).write_bytes(stored)
+                with Image.new("RGB",(640,500)) as invalid:
+                    invalid.save(folder/EXPECTED_ECONOMISTS[-1],format="WEBP")
+                with self.assertRaisesRegex(ValueError,"registered square local WebP"):
+                    build_site.game_economist_sources()
+            self.assertFalse((root/"_site_unified").exists())
 
 
 if __name__ == "__main__":

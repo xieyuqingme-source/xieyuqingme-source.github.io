@@ -14,7 +14,7 @@
     if (!entry || !entry.photo) return null;
     // This allowlist is independent of the item and cannot turn imported data into a URL fetch.
     const validName = /^[a-z][a-z0-9-]*$/.test(art);
-    const allowed = validName ? ['/assets/foods/' + art + '.webp', '/assets/sports/' + art + '.webp', '/assets/books/' + art + '.webp'] : [];
+    const allowed = validName ? ['/assets/foods/' + art + '.webp', '/assets/sports/' + art + '.webp', '/assets/books/' + art + '.webp', '/assets/economists/' + art + '.webp'] : [];
     if (!allowed.includes(entry.photo)) throw new Error('内置图片路径无效，请刷新页面或选择本地图片。');
     return entry.photo;
   }

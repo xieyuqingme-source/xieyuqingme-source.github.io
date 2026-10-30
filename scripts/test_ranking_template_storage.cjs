@@ -244,3 +244,16 @@ test('a damaged book archive stays protected until its own explicit repair, incl
   assert.equal(driver.values.get('template:food'),food);assert.equal(driver.values.get('template:sport'),sport);
   assert.deepEqual(driver.transactions.filter(entry=>entry.mode==='readwrite').map(entry=>entry.keys),[['template:book']]);
 });
+
+test('economist archive is independent and target-only repair leaves every prior archive untouched',async()=>{
+  const driver=atomicIndexedDB(),store=Storage.createStore({indexedDB:driver}),saved=new Map();
+  for(const id of ['food','sport','book']){await store.save(Model.createDefaultState(id));saved.set('template:'+id,driver.values.get('template:'+id));}
+  const economists=Model.createDefaultState('economist');Model.setTitle(economists,'我的经济学家');Model.moveItem(economists,economists.rows[0].itemIds[0],'pool');
+  await store.save(economists);assert.deepEqual(await store.loadTemplate('economist'),economists);assert.equal(driver.values.get('current'),driver.values.get('template:economist'));
+  for(const [key,bytes] of saved)assert.equal(driver.values.get(key),bytes);
+  const backup=Model.serialize(economists);await store.save(Model.createDefaultState('food'));await store.save(Model.deserialize(backup));assert.deepEqual(await store.load(),economists);
+  driver.values.set('current','{damaged-current');driver.values.set('template:economist','{damaged-economist');
+  await assert.rejects(store.loadTemplate('economist'),error=>error.code==='corrupt');assert.equal(driver.values.get('template:economist'),'{damaged-economist');
+  await store.saveTemplate(Model.createDefaultState('economist'));assert.equal(driver.values.get('current'),'{damaged-current');
+  for(const [key,bytes] of saved)assert.equal(driver.values.get(key),bytes);
+});

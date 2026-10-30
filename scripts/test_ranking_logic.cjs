@@ -404,7 +404,7 @@ test('template and art registries are deeply frozen and fresh states remain inde
   assertFrozen(Model.BUILTIN_ART);
   assertFrozen(Model.SPORT_ART);
   assertFrozen(Model.BOOK_ART);
-  assert.equal(Object.keys(Model.BUILTIN_ART).length, 76);
+  assert.equal(Object.keys(Model.BUILTIN_ART).length, 92);
   assert.equal(Model.TEMPLATES.food.label, '美食排行');
   assert.equal(Model.TEMPLATES.sport.label, '运动排行');
   Object.keys(Model.FOOD_ART).forEach(key => assert.equal(Model.BUILTIN_ART[key], Model.FOOD_ART[key]));
@@ -1206,4 +1206,24 @@ test('PNG sizing rejects unsupported scales or impossibly long content', async (
   assert.throws(() => Export.outputSize({ width: 1200, height: 50000 }, 2), /过长/);
   assert.throws(() => Export.planLayout(Model.createDefaultState(), { width: 320 }));
   await assert.rejects(Export.exportRanking(Model.createDefaultState()), /Canvas/);
+});
+
+test('economist template preserves sixteen reviewed identities and its explicit entertainment tiers', () => {
+  const state=Model.createDefaultState('economist');
+  assert.equal(state.version,3);assert.equal(state.templateId,'economist');assert.equal(state.title,'马克思眼中的经济学家');
+  assert.deepEqual(state.rows.map(row=>row.itemIds.length),[3,2,1,5,5]);assert.deepEqual(state.pool,[]);
+  assert.equal(Object.keys(Model.ECONOMIST_ART).length,16);
+  assert.deepEqual(state.rows[0].itemIds,['economist-economist-petty','economist-economist-smith','economist-economist-ricardo']);
+  const all=state.rows.flatMap(row=>row.itemIds);assert.equal(new Set(all).size,16);assert.deepEqual(new Set(all),new Set(Object.keys(state.items)));
+  assert.equal(Model.templateNote('economist'),'按马克思、恩格斯的评价排的娱乐示例，不是经济学史结论');
+  for(const [key,art] of Object.entries(Model.ECONOMIST_ART)){
+    assert.equal(art.photo,'/assets/economists/'+key+'.webp');assert.ok(art.name&&art.name_en&&art.alt_zh&&art.alt_en);
+    assert.ok(Number.isInteger(art.born)&&Number.isInteger(art.died)&&art.born<art.died);
+    assert.match(art.source.url,/^https:\/\/www\.marxists\.org\/chinese\//);assert.ok(art.source.locator);assert.match(art.source.checked_on,/^\d{4}-\d{2}-\d{2}$/);
+    assert.ok(art.basis['zh-CN']&&art.basis.en);assert.ok(Object.isFrozen(art.basis)&&Object.isFrozen(art.source));
+    assert.equal(state.items['economist-'+key].art,key);
+  }
+  const bytes=Model.serialize(state);assert.equal(bytes.includes('/assets/economists/'),false);assert.equal(bytes.includes('checked_on'),false);assert.equal(bytes.includes('basis'),false);
+  assert.deepEqual(Model.deserialize(bytes),state);
+  const injected=JSON.parse(bytes);injected.items[all[0]].source='not a user state field';assert.throws(()=>Model.validateState(injected),/不支持的字段/);
 });

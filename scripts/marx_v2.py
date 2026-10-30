@@ -8,6 +8,7 @@ import re
 from marx_engels import fields, text, slug, source_path, source_url, iso
 
 ROUTES = {
+    '/marx/cards/': ('卡片目录', '按问题、理论分支与难度，找一张卡片读起。'),
     '/marx/lab/': ('实验室', '用原著里的例子，把关系算清楚。'),
     '/marx/lab/value-form/': ('价值形式', '从麻布与上衣，读到货币形式。'),
     '/marx/lab/working-day/': ('工作日', '必要劳动和剩余劳动怎样组成一个工作日。'),
@@ -19,6 +20,22 @@ ROUTES = {
     '/marx/topics/': ('专题', '围绕一个问题，把几篇原著连起来。'),
     '/marx/topics/china/': ('马克思眼中的中国', '读1853—1859年的报刊文章，保留当时的材料与语境。'),
 }
+
+LIFE_TAGS = ('生活', '著作', '书信', '组织')
+LIFE_PERIODS = ((1818, 1843, '求学与早年工作'), (1844, 1848, '合作与革命'),
+                (1849, 1864, '流亡、研究与组织'), (1865, 1883, '《资本论》与晚年工作'),
+                (1884, 1895, '恩格斯整理遗稿的岁月'))
+
+
+def chinese_date(value):
+    """Keep the source's year/month/day boundary in natural Chinese typography."""
+    pieces = value.split('-')
+    return str(int(pieces[0])) + '年' + (str(int(pieces[1])) + '月' if len(pieces) > 1 else '') + (str(int(pieces[2])) + '日' if len(pieces) > 2 else '')
+
+
+def publication_source(locator):
+    """The publication reference is reader text; curation instructions stay in data."""
+    return locator.split('；', 1)[0].replace('第 ', '第')
 
 
 def packet(value, name):
@@ -115,18 +132,18 @@ def validate_v2(raw, data):
         raise ValueError('读马恩：名句归类须覆盖共享库里的全部马恩名句。')
     questions = packet(raw['quiz'], 'questions')
     for row in questions:
-        fields(row, ('id', 'text', 'answer', 'explanation', 'card'))
+        fields(row, ('id', 'text', 'answer', 'explanation', 'card'), ('source',))
         slug(row['id']); text(row['text'], 400); text(row['explanation'], 1200)
         if row['answer'] not in ('真', '假', '存疑', '部分正确', '张冠李戴'):
             raise ValueError('读马恩：考据答案无效。')
         if row['card'] not in data['items'] or data['items'][row['card']]['category'] != 'myths' or data['items'][row['card']]['status'] != 'published':
             raise ValueError('读马恩：考据题必须关联已发布的考据卡。')
     unique(questions, 'id')
-    if questions and len(questions)<16:
-        raise ValueError('读马恩：真假题开放前需要至少16题；不足时保留空列表。')
+    from marx_v3 import validate_truth_quiz
+    validate_truth_quiz(questions, data)
     events = packet(raw['life'], 'events')
     for row in events:
-        fields(row, ('id', 'date', 'precision', 'people', 'title', 'text', 'tags', 'work', 'source', 'ai_assisted'), ('history_id',))
+        fields(row, ('id', 'date', 'precision', 'people', 'title', 'text', 'tags', 'work', 'source', 'ai_assisted'), ('history_id', 'errata'))
         slug(row['id']); precise_date(row['date'], row['precision'])
         if 'history_id' in row:
             slug(row['history_id'])
@@ -137,7 +154,11 @@ def validate_v2(raw, data):
             raise ValueError('读马恩：人物或AI标记无效。')
         if not isinstance(row['tags'], list) or not row['tags']:
             raise ValueError('读马恩：生平条目需要标签。')
-        for tag in row['tags']: text(tag, 40)
+        if len(set(row['tags'])) != len(row['tags']) or any(tag not in LIFE_TAGS for tag in row['tags']):
+            raise ValueError('读马恩：生平标签须为生活、著作、书信或组织，且不能重复。')
+        if 'errata' in row:
+            if not isinstance(row['errata'], list) or not row['errata'] or len(set(row['errata'])) != len(row['errata']) or any(ident not in data['errata'] for ident in row['errata']):
+                raise ValueError('读马恩：生平日期校勘必须对应已核勘误。')
         if row['work'] is not None and row['work'] not in data['works']:
             raise ValueError('读马恩：生平条目关联未知作品。')
         source(row['source'])
@@ -197,7 +218,7 @@ def load_v2(root, data):
 
 def entrances():
     from marx_render import link
-    paths = ('lab/', 'play/', 'quotes/', 'life/', 'life/letters/', 'topics/china/')
+    paths = ('lab/', 'play/', 'quotes/', 'life/', 'life/letters/', 'topics/')
     return '<section class="me-section" aria-labelledby="other-ways"><h2 id="other-ways">换个方式读</h2><div class="me-route-grid me-other-ways">' + ''.join('<article class="me-route-card"><h3>' + link('/marx/' + path, ROUTES['/marx/' + path][0]) + '</h3><p>' + ROUTES['/marx/' + path][1] + '</p></article>' for path in paths) + '</div></section>'
 
 
@@ -206,7 +227,10 @@ def extra_pages(data):
     pages = []
     for route, (title, description) in ROUTES.items():
         content = header(title, description)
-        if route == '/marx/lab/':
+        if route == '/marx/cards/':
+            from marx_render import render_directory
+            content += render_directory(data)
+        elif route == '/marx/lab/':
             content += '<ul class="me-toc">' + ''.join('<li><h2>' + link('/marx/lab/' + ident + '/', ROUTES['/marx/lab/' + ident + '/'][0]) + '</h2><p>' + ROUTES['/marx/lab/' + ident + '/'][1] + '</p></li>' for ident in ('value-form', 'working-day', 'reproduction')) + '</ul>'
         elif route.startswith('/marx/lab/'):
             content += render_tool(data, route.strip('/').split('/')[-1])
@@ -220,6 +244,8 @@ def extra_pages(data):
             content += render_letters(data)
         elif route == '/marx/topics/':
             content += '<p>' + link('/marx/topics/china/', '马克思眼中的中国 →') + '</p>'
+            from marx_topics import index_entries
+            content += index_entries(data)
         elif route == '/marx/topics/china/':
             content += render_china(data)
         pages.append((route, title, description, content))
@@ -236,8 +262,11 @@ def render_tool(data, ident):
     out += '<p class="me-prose">' + escape(tool['notes']) + '</p>'
     if ident == 'value-form':
         out += '<div data-lab-step-controls hidden><button type="button" data-lab-previous>上一步</button> <span role="status" data-lab-position></span> <button type="button" data-lab-next>下一步</button></div>'
-        for preset in tool['presets']:
-            out += '<section class="me-section" data-lab-step><h2 tabindex="-1">' + escape(preset['label']) + '</h2><ul class="me-formulas">' + ''.join('<li>' + escape(value) + '</li>' for value in preset['values']) + '</ul><p class="me-meta">' + escape(preset['locator']) + '</p></section>'
+        for index, preset in enumerate(tool['presets']):
+            out += '<section class="me-section" data-lab-step><h2 tabindex="-1">' + escape(preset['label']) + '</h2><ul class="me-formulas">' + ''.join('<li>' + escape(value) + '</li>' for value in preset['values']) + '</ul>'
+            if index in (2, 3):
+                out += '<p class="me-meta">原文用大括号合写为一组等式，这里逐行展开。</p>'
+            out += '<p class="me-meta">' + escape(preset['locator']) + '</p></section>'
         out += '<p>相对价值形式与等价形式的角色不同。倒转等式时，表现的方向改变；一般等价物取得社会共同形式，也不只是等号左右换位。</p><p>' + link('/marx/value-form/', '价值形式概念卡') + ' · ' + link('/marx/capital/1/ch01/', '第一章导读') + '</p>'
     elif ident == 'working-day':
         out += '<div data-lab-day hidden><fieldset><legend>改动时间（本站计算）</legend><label>工作日 <output data-lab-total>12</output>小时<input type="range" name="total" min="1" max="24" step="0.5" value="12"></label><label>必要劳动 <output data-lab-necessary>6</output>小时<input type="range" name="necessary" min="0" max="24" step="0.5" value="6"></label></fieldset><div class="me-actions">'
@@ -247,7 +276,8 @@ def render_tool(data, ident):
         for preset in tool['presets']:
             total, necessary = preset['values']
             rate = (total - necessary) / necessary * 100
-            out += f'<tr><th>{total}小时</th><td>{necessary}小时</td><td>{total-necessary}小时</td><td>{rate:.3f}%</td></tr>'
+            label = f'{rate:g}%' if rate.is_integer() else f'约{rate:.1f}%'
+            out += f'<tr><th>{total}小时</th><td>{necessary}小时</td><td>{total-necessary}小时</td><td>{label}</td></tr>'
         out += '</tbody></table><p>a—b 为必要劳动，b—c 为剩余劳动。第七章第1节还给出：500镑＝410c＋90v；剩余价值90镑，m/v＝100%。这是一组用于说明比例的原著数字，不是今天企业的财务测算。</p>'
         out += '<section class="me-section"><h2>工厂立法的几个节点</h2><ol class="me-toc">' + ''.join('<li><h3>' + escape(row['year']) + '</h3><p>' + escape(row['text']) + '</p><p class="me-meta">' + escape(row['locator']) + '</p></li>' for row in tool.get('timeline', [])) + '</ol></section><p>' + link('/marx/capital/1/ch08/', '第八章导读') + '</p>'
     elif ident == 'reproduction':
@@ -256,7 +286,7 @@ def render_tool(data, ident):
         out += '<p>c 为不变资本价值，v 为可变资本价值，m 为剩余价值。原例合计9000，两部类的m/v均为100%。Ⅰ(v＋m)＝Ⅱc＝2000：Ⅰ部类的工人和资本家需要消费资料，Ⅱ部类需要补偿生产资料。</p><div data-lab-reproduction hidden><fieldset class="me-number-grid"><legend>改动六个数（本站计算）</legend>'
         for index, (label, value) in enumerate(zip(('Ⅰ c','Ⅰ v','Ⅰ m','Ⅱ c','Ⅱ v','Ⅱ m'), values)):
             out += f'<label for="reproduction-{index}">{label}<input id="reproduction-{index}" type="number" min="0" max="1000000000000" step="any" value="{value}" inputmode="decimal"></label>'
-        out += '</fieldset><button type="button" data-lab-reset>恢复马克思的数字</button><p role="status" aria-live="polite" aria-atomic="true" data-lab-result></p></div><p>相等只表示这里检验的价值交换条件成立，不是对全部经济均衡的证明。实物构成、资本更新、交换时间等条件没有由这六个数自动得到保证。零值可以参与算术，但不代表原著描述了一个空无生产的经济。</p><p>电子页有一个重复加号，本站按同页前后两部类的正确列式显示数字，详见' + link('/marx/sources/#errata-e-v2-reproduction-plus', '电子录入勘误') + '。</p>'
+        out += '</fieldset><button type="button" data-lab-reset>恢复马克思的数字</button><p role="status" aria-live="polite" aria-atomic="true" data-lab-result></p></div><p>相等只表示这里检验的价值交换条件成立，不是对全部经济均衡的证明。实物构成、资本更新、交换时间等条件没有由这六个数自动得到保证。零值可以参与算术，但不代表原著描述了一个空无生产的经济。</p><p>网页原文有一个重复加号，本站按同页前后两部类的列式显示数字，详见' + link('/marx/sources/#errata-e-v2-reproduction-plus', '原文校勘') + '。</p>'
     out += '<section class="me-section"><h2>这个工具怎么来的</h2><p>' + escape(tool['source']['locator']) + '。' + link(tool['source']['url'], '核对原著', True) + '</p><p>预设来自上述原著；自行输入及根据输入产生的结果均标为本站计算。这个工具只保留所说明的关系，不替代原著的论证或现实资料调查。</p></section></div>'
     return out
 
@@ -272,9 +302,9 @@ def render_play(data):
     from marx_render import link
     from marx_quiz import build_pools
     pools=build_pools(data)
-    out='<div class="me-reading" data-me-quiz><p>题目与解释为本站编写，有AI辅助。每轮10题，同轮不重复；不计时、不保存成绩，也没有排行榜。先选题型，再用方向键选择答案、回车查看解释。</p><p>名句题直接使用「今天」页的另一套已核名句资料，版本与出处随原记录保留，不复制为读马恩的引文库。</p><div class="me-actions" data-me-quiz-controls hidden>'
+    out='<div class="me-reading" data-me-quiz><p>题目与解释为本站编写，有AI辅助。每轮10题，同轮不重复；答完可以看本轮分数和错题，离开页面就结束。先选题型，再用方向键选择答案、回车查看解释。</p><p>名句题和「今天」页使用相同的原句，每题都能循出处接着读。</p><div class="me-actions" data-me-quiz-controls hidden>'
     for mode,label in [('source','名句出处'),('author','作者'),('myth','真假马克思')]:
-        count=len(pools[mode]); ready=count >= (16 if mode=='myth' else 10)
+        count=len(pools[mode]); ready=count >= (32 if mode=='myth' else 10)
         out+='<button type="button" data-quiz-mode="'+mode+'"'+('' if ready else ' disabled')+'>'+label+' · '+str(count)+'题'+('' if ready else '（即将开放）')+'</button>'
     out+='</div><div data-me-quiz-stage hidden><form></form><div class="me-quiz-explanation" data-me-quiz-explanation role="status" aria-live="polite" tabindex="-1" hidden></div><div class="me-actions" data-me-quiz-actions></div></div><p>没有脚本时，可以沿'+link('/marx/quotes/','名句从哪来')+'或'+link('/marx/#directory','概念与考据卡')+'继续阅读。</p>'+json_script(pools,'data-me-quiz-data')+'</div>'
     return out
@@ -287,10 +317,16 @@ def render_quotes(data):
     from datetime import datetime
     from marx_engels import CHINA
     groups=quote_groups(data); key=datetime.now(CHINA).date().isoformat()
-    out='<div class="me-reading"><p>这些名句直接来自「今天」页的独立资料库。每部著作一次只显示一句，保留原记录的中文、版本说明与出处；此处的归类只统一著作名称，不把名句改挂到不同译本。</p><p>'+link('/today/#daily-quotation-card','今天页的马克思主义名句')+' · '+link('/assets/quotes-sources.md','逐条来源与版本说明')+'</p>'
+    out='<div class="me-reading"><p>沿著作的写作年代往下读，每部一次抽一句。原句和「今天」页相同，出处与版本说明随句保留。</p><p>'+link('/today/#daily-quotation-card','今天页的马克思主义名句')+' · '+link('/assets/quotes-sources.md','逐条来源与版本说明')+'</p>'
+    out += '<nav class="me-work-index" aria-label="著作索引"><h2>按著作找</h2><ul>'
+    for number, (work, pool) in enumerate(groups.items()):
+        out += '<li>' + link('#quote-work-' + str(number), work + ' · ' + str(len(pool)) + '句') + '</li>'
+    out += '</ul></nav>'
     for number,(work,pool) in enumerate(groups.items()):
         selected=pool[day_seed(key)%len(pool)]
-        out+='<section class="me-section" data-me-quote-group id="quote-work-'+str(number)+'"><div class="me-section-head"><h2>'+escape(work)+'</h2><span>'+str(len(pool))+'句 <button type="button" data-me-quote-next hidden>抽一句</button></span></div><figure><blockquote data-me-quote-text aria-live="polite">'+escape(selected['text'])+'</blockquote><figcaption>'+link(selected['url'],'本句原文出处',True,attrs=' data-me-quote-source')+'</figcaption></figure><details><summary>版本与语境</summary><p data-me-quote-note>'+escape(selected['note'])+'</p></details>'
+        years = [row['year'] for row in data['v2']['quote_works'] if row['work'] == work and row['year'] is not None]
+        year_label = chinese_date(str(min(years))) + ' · ' if years else ''
+        out+='<section class="me-section" data-me-quote-group id="quote-work-'+str(number)+'"><div class="me-section-head"><h2>'+escape(work)+'</h2><span>'+year_label+str(len(pool))+'句 <button type="button" data-me-quote-next hidden>抽一句</button></span></div><figure><blockquote data-me-quote-text aria-live="polite">'+escape(selected['text'])+'</blockquote><figcaption>'+link(selected['url'],'本句原文出处',True,attrs=' data-me-quote-source')+'</figcaption></figure><details><summary>版本与语境</summary><p data-me-quote-note>'+escape(selected['note'])+'</p></details>'
         guide=next((q['guide'] for q in pool if q['guide']),None)
         if guide: out+='<p>'+link(guide,'读马恩导读 →')+'</p>'
         out+='</section>'
@@ -304,27 +340,38 @@ def render_life(data):
     from collections import defaultdict
     events=data['v2']['events']; grouped=defaultdict(list)
     for event in events: grouped[event['date'][:4]].append(event)
-    out='<div class="me-reading"><p>以下条目据《文集》第10卷生平年表转述，包含AI辅助。原文只记年或月时，本站保留原精度；日期不是每项工作的完整起止范围。人物筛选只影响本页显示，不保存个人偏好。</p><div class="me-actions" data-me-life-filters hidden>'
+    out='<div class="me-reading"><p>从求学、谋生到写作与组织活动，沿《文集》第10卷年表读马恩的一生。以下为本站转述，包含AI辅助。</p><div class="me-filters" data-me-life-filters hidden><fieldset><legend>人物</legend>'
     for value,label in [('all','全部'),('marx','马克思'),('engels','恩格斯'),('both','两人共同')]:
         out+='<button type="button" data-me-person="'+value+'" aria-pressed="'+str(value=='all').lower()+'">'+label+'</button>'
-    out+='</div><p class="me-meta" data-me-life-count role="status"></p>'
-    for year,rows in sorted(grouped.items()):
-        out+='<section class="me-section" data-me-life-year><h2>'+year+'年</h2><ol class="me-toc">'
-        for event in rows:
-            date_label=event['date']+{'year':'（年）','month':'（月）','day':'（日）'}[event['precision']]
-            out+='<li data-me-event data-person="'+event['people']+'" id="'+event['id']+'"><h3>'+escape(event['title'])+'</h3><p class="me-meta"><time datetime="'+event['date']+'">'+date_label+'</time> · '+escape(' / '.join(event['tags']))+'</p><p>'+escape(event['text'])+'</p><p class="me-meta">'+link(event['source']['url'],event['source']['locator'],True)+'</p>'
-            if event['work']:
-                route=work_route(data,event['work']);out+='<p>'+link(route,'沿作品接着读 →',route.startswith('https:'))+'</p>'
-            out+='</li>'
-        out+='</ol></section>'
-    out+='<section class="me-section"><h2>主要足迹</h2><p>复用现有公开足迹资料，保留原来的年、月精度。这是主要生平地点，不能视为完整行程或精确地址；学位授予地也不等于本人到访地。</p>'
+    out+='</fieldset><fieldset><legend>标签</legend><button type="button" data-me-tag="all" aria-pressed="true">全部</button>'
+    out+=''.join('<button type="button" data-me-tag="'+tag+'" aria-pressed="false">'+tag+'</button>' for tag in LIFE_TAGS)
+    out+='</fieldset></div><p class="me-meta" data-me-life-count role="status"></p>'
+    out+='<nav class="me-jump-index" aria-label="生平时期"><h2>沿时期读</h2><ul>'
+    out+=''.join('<li>'+link('#life-period-'+str(start),str(start)+'—'+str(end)+' · '+title)+'</li>' for start,end,title in LIFE_PERIODS)+'</ul></nav>'
+    for index,(start,end,title) in enumerate(LIFE_PERIODS):
+        out+='<details class="me-period" data-me-life-period data-me-collapsible id="life-period-'+str(start)+'"'+(' open' if index==0 else '')+'><summary><h2>'+str(start)+'—'+str(end)+' <span>'+title+'</span></h2></summary><div class="me-period-body">'
+        for year,rows in sorted(grouped.items()):
+            if not start <= int(year) <= end:
+                continue
+            out+='<section class="me-section" data-me-life-year><h2>'+year+'年</h2><ol class="me-toc">'
+            for event in rows:
+                date_label=chinese_date(event['date'])
+                out+='<li data-me-event data-person="'+event['people']+'" data-tag="'+escape(' '.join(event['tags']),quote=True)+'" id="'+event['id']+'"><h3>'+escape(event['title'])+'</h3><p class="me-meta"><time datetime="'+event['date']+'">'+date_label+'</time> · '+escape(' / '.join(event['tags']))+'</p><p>'+escape(event['text'])+'</p><p class="me-meta">'+link(event['source']['url'],'据年表'+event['date'][:4]+'年条',True)+'</p>'
+                if event.get('errata'):
+                    out += '<p class="me-meta">' + ' · '.join(link('/marx/sources/#errata-' + ident, '日期见勘误 →') for ident in event['errata']) + '</p>'
+                if event['work']:
+                    route=work_route(data,event['work']);out+='<p>'+link(route,'沿作品接着读 →',route.startswith('https:'))+'</p>'
+                out+='</li>'
+            out+='</ol></section>'
+        out+='</div></details>'
+    out+='<details class="me-section me-footprint-list" data-me-collapsible><summary><h2>主要足迹</h2></summary><p>从特里尔、巴门到伦敦，下面列出两人曾生活和工作的主要城市。可以到地图工具里，把这些地点连起来看。</p>'
     for person,rows in data['life_footprints'].items():
         out+='<h3>'+('马克思' if person=='marx' else '恩格斯')+'</h3><ul class="me-qa">'
         for row in rows:
-            period=row['start']+('—'+row['end'] if row['end'] and row['end']!=row['start'] else '')
+            period=chinese_date(row['start'])+('—'+chinese_date(row['end']) if row['end'] and row['end']!=row['start'] else '')
             out+='<li>'+escape(period+' · '+row['city'])+'</li>'
         out+='</ul>'
-    out+='<p>'+link('/game/footprints/','打开足迹地图工具 →')+'，在人物资料中选择马克思或恩格斯。本轮不改动地图工具。</p></section><p>'+link('/marx/life/letters/','书信盲盒 →')+'</p></div>'
+    out+='<p>'+link('/game/footprints/','打开足迹地图工具 →')+'，在人物资料中选择马克思或恩格斯。</p></details><p>'+link('/marx/life/letters/','书信盲盒 →')+'</p></div>'
     return out
 
 
@@ -341,7 +388,7 @@ def render_letters(data):
     letters=letter_projection(data)
     if not letters:return '<p>书信摘要正在核对。</p>'
     selected=letters[day_seed(datetime.now(CHINA).date().isoformat())%len(letters)]
-    out='<div class="me-reading"><p>从文集书信中精选，每段为本站转述并有AI辅助，未增录书信原句。原文是节录或草稿时，摘要保留其身份；同一封信往往还谈别的问题，完整内容请循原文阅读。</p><section class="me-section" data-me-letter><div class="me-section-head"><h2 data-me-letter-title>'+escape(selected['title'])+'</h2><button type="button" data-me-letter-next hidden>换一封</button></div><p class="me-meta" data-me-letter-year>'+str(selected['year'])+'年 · 第'+str(selected['no'])+'封</p><p data-me-letter-summary aria-live="polite">'+escape(selected['summary'])+'</p><p>'+link(selected['url'],'读这封信的原文',True,attrs=' data-me-letter-source')+'</p></section><details class="me-section"><summary>全部精选书信（'+str(len(letters))+'封）</summary><ol class="me-toc">'
+    out='<div class="me-reading"><p>这里精选文集中的书信，围绕每封信的问题作简短转述，包含AI辅助。摘要之外，原信还谈了什么，可以循链接继续读。</p><section class="me-section" data-me-letter><div class="me-section-head"><h2 data-me-letter-title>'+escape(selected['title'])+'</h2><button type="button" data-me-letter-next hidden>换一封</button></div><p class="me-meta" data-me-letter-year>'+str(selected['year'])+'年 · 第'+str(selected['no'])+'封</p><p data-me-letter-summary aria-live="polite">'+escape(selected['summary'])+'</p><p>'+link(selected['url'],'读这封信的原文',True,attrs=' data-me-letter-source')+'</p></section><details class="me-section"><summary>全部精选书信（'+str(len(letters))+'封）</summary><ol class="me-toc">'
     for row in letters:
         out+='<li id="letter-'+str(row['no'])+'"><h3>'+escape(row['title'])+'</h3><p class="me-meta">'+str(row['year'])+'年 · 第'+str(row['no'])+'封</p><p>'+escape(row['summary'])+'</p><p>'+link(row['url'],'原文出处',True)+'</p></li>'
     return out+'</ol></details>'+json_script(letters,'data-me-letters-data')+'</div>'
@@ -350,9 +397,9 @@ def render_letters(data):
 def render_china(data):
     from html import escape
     from marx_render import AUTHOR,link,page_range
-    out='<div class="me-reading"><section class="me-section"><h2>先放回当时</h2><p>第一次鸦片战争在本专题所引文集正文及编者注中记为1840—1842年；有些史学资料从1839年的禁烟冲突算起。第二次鸦片战争发生于1856—1860年，1858年签订天津条约，1860年又有北京条约。本专题的报刊文章发表于1853—1859年，处在第一次战争之后，以及第二次战争进行之中，不能用它们替代后来对战争全程的历史研究。</p><p>标题沿用马克思眼中的中国，指定十二篇中十篇论中国、两篇论印度；其中《波斯和中国》《俄国在远东的成功》由恩格斯署名，逐篇注明作者。下列概述为本站转述，包含AI辅助；按首次发表时间排序，多次连载在出处中列明。作者的报道、推论和预测须分辨阅读，十九世纪语汇也不直接用来概括今天的国家与人民。</p></section><ol class="me-toc">'
+    out='<div class="me-reading"><section class="me-section"><h2>先放回当时</h2><p>第一次鸦片战争在本专题所引文集正文及编者注中记为1840—1842年；有些史学资料从1839年的禁烟冲突算起。第二次鸦片战争发生于1856—1860年，1858年签订天津条约，1860年又有北京条约。本专题的报刊文章发表于1853—1859年，处在第一次战争之后，以及第二次战争进行之中，不能用它们替代后来对战争全程的历史研究。</p><p>十二篇中十篇论中国、两篇论印度；其中《波斯和中国》《俄国在远东的成功》由恩格斯署名，逐篇注明作者。下列概述为本站转述，包含AI辅助，按报刊刊载时间排列；多次连载的日期也列在出处中。作者的报道、推论和预测须分辨阅读，十九世纪语汇也不直接用来概括今天的国家与人民。</p></section><ol class="me-toc">'
     for row in data['v2']['china']:
         work=data['works'][row['work']]
-        out+='<li id="'+row['work']+'"><h2>'+escape(work['title'])+'</h2><p class="me-meta"><time datetime="'+row['date']+'">'+row['date']+'</time> 首次发表 · '+AUTHOR[work['author']]+' · 文集第2卷 · '+page_range(work['pages'])+'</p><p>'+escape(row['summary'])+'</p><p class="me-meta">'+escape(row['source']['locator'])+'</p><p>'+link(row['source']['url'],'读原文与编者注',True)+'</p></li>'
+        out+='<li id="'+row['work']+'"><h2>'+escape(work['title'])+'</h2><p class="me-meta"><time datetime="'+row['date']+'">'+chinese_date(row['date'])+'</time> · '+AUTHOR[work['author']]+' · 文集第2卷 · '+page_range(work['pages'])+'</p><p>'+escape(row['summary'])+'</p><p class="me-meta">'+link(row['source']['url'],publication_source(row['source']['locator']),True)+'</p></li>'
     out+='</ol><section class="me-section"><h2>延伸阅读</h2><ul><li>'+link('https://www.marxists.org/chinese/marx-engels2/02/17.htm','《波斯和中国》及编者注：1840—1842年战争的标记',True)+'</li><li>'+link('https://www.polyu.edu.hk/cus/nationaleducation/hk/resource-library/gallery/understanding-modern-chinese-history/','香港理工大学：认识中国近代史（两次战争及条约年表）',True)+'。背景资料，2026-10-29核对；其第一次战争分期始于1839年，本页已说明差别。</li><li>'+link('/marx/wenji/2/','文集第二卷完整目录')+'</li></ul></section></div>'
     return out

@@ -1,19 +1,239 @@
-{"version":1,"questions":[
-{"id":"myth-property-all","text":"《宣言》主张取消任何个人对生活物品的占有。","answer":"假","explanation":"第二章区分一般所有制、资产阶级所有制和个人占有社会产品。把特定社会关系的批判扩成一切个人物品的禁令，会改变原文的对象。","card":"manifesto-property"},
-{"id":"myth-property-target","text":"《宣言》把废除资产阶级所有制作为自己的特征。","answer":"真","explanation":"原文明确作出这个区分。它不是对所有现实财产形式作永久担保，而是在论战中规定所批判的关系；还应继续读关于个人占有和支配他人劳动的段落。","card":"manifesto-property"},
-{"id":"myth-essence-subject","text":"《提纲》第六条的主语是人的本质，而非对一个人的全部属性下定义。","answer":"真","explanation":"原句的主语和现实性上的限定都应保留。它批评抽象的孤立个人，要求研究现实社会关系，不是取消人的身体、个性或差异。","card":"human-essence"},
-{"id":"myth-essence-shortened","text":"把第六条简写成人是一切社会关系的总和，可以不加说明地当作逐字引文。","answer":"假","explanation":"这种概括有原著线索，但删去了主语与限定，不能当成原句。转述可以存在，前提是明确其身份，并回到第六、七条的论证中理解。","card":"human-essence"},
-{"id":"myth-opium-exists","text":"宗教与人民的鸦片这一表述，在马克思的《〈黑格尔法哲学批判〉导言》中确有出处。","answer":"真","explanation":"原文可以直接定位，但存在检查只是第一步。相邻段落还讨论苦难的表现、抗议以及对现实幸福的要求，需要一起阅读。","card":"opium-context"},
-{"id":"myth-opium-context","text":"鸦片的比喻可以替代原著对现实苦难和宗教需要产生条件的分析。","answer":"假","explanation":"导言把观念批判进一步转向产生观念需要的现实社会。抽出比喻来评价所有时代的具体宗教，会遗漏原文要求研究的条件与联系。","card":"opium-context"},
-{"id":"myth-marxist-recorder","text":"文集第237封中，那句自己不是马克思主义者的话，是恩格斯转述马克思的。","answer":"真","explanation":"证据是恩格斯致施米特的书信。记录者、转述身份和十九世纪七十年代末法国语境应保留，不能包装成已经找到马克思本人同样措辞的自述信。","card":"not-a-marxist"},
-{"id":"myth-marxist-rejection","text":"仅凭恩格斯转述的那句话，就能证明马克思否定了自己的全部研究。","answer":"假","explanation":"信中批评以术语标签代替历史研究，要求详细考察社会形态。把特定语境中的称号问题扩成全部理论的撤销，超出原文所支持的结论。","card":"not-a-marxist"},
-{"id":"myth-thesis-one","text":"《提纲》第十一条只存在一种措辞，两个稿本完全相同。","answer":"假","explanation":"文集并列马克思1845年稿与恩格斯1888年发表稿。第十一条的连接词有所不同，引用应分别注明，不能任意混接两个稿本。","card":"thesis-eleven"},
-{"id":"myth-thesis-ban","text":"第十一条要求改变世界，所以整篇提纲禁止认识和解释世界。","answer":"假","explanation":"第二条已经讨论思维真理性与实践，第八条也联系实践及对它的理解。末条应放回前面的理论批判中，不能从短句推出禁止思考。","card":"thesis-eleven"},
-{"id":"myth-economic-only","text":"恩格斯致布洛赫信把经济因素说成每件历史事件唯一的直接原因。","answer":"假","explanation":"归根到底的决定作用不等于唯一因素。信中分析政治、法律、理论与传统的相互作用，也要求具体研究历史材料。","card":"economic-determinism"},
-{"id":"myth-economic-wills","text":"致布洛赫信讨论许多个别意志相互交错形成历史结果。","answer":"真","explanation":"信中保留个别意志的作用，并没有把它们等同于零。理解社会制约与相互作用，需要具体说明联系，不能只把一个经济术语放进句子就结束解释。","card":"economic-determinism"},
-{"id":"myth-lazy-value","text":"按劳动价值论，个人做得越慢、实际耗时越多，产品就一定越有价值。","answer":"假","explanation":"第一章第一节主动提出并反驳了这种推论。价值量涉及社会正常生产条件、平均熟练程度和强度，个人耗时不能直接替代社会尺度。","card":"labour-time-myth"},
-{"id":"myth-social-time","text":"技术推广改变社会必要劳动时间后，手工生产者即使耗时未变，其产品代表的社会劳动也可能变化。","answer":"真","explanation":"原著用蒸汽织布机的例子说明这一关系。技术变化影响社会生产条件；个人付出的感觉真实，却不能独自决定商品的社会价值量。","card":"labour-time-myth"},
-{"id":"myth-freedom-author","text":"从必然王国进入自由王国的飞跃这一具体表述，应定位到恩格斯《反杜林论》。","answer":"真","explanation":"具体表述与作品应分别定位。马克思《资本论》第三卷也讨论自由王国，但两处论述重心不同，不能把不同作品的句子拼成同一引文。","card":"freedom-kingdom"},
-{"id":"myth-freedom-no-labour","text":"《资本论》第三卷谈自由王国，意味着物质生活的必要劳动从此可以完全忽略。","answer":"假","explanation":"相关段落仍讨论人与自然的物质变换，并把工作日缩短作为根本条件。自由发展的领域建立在物质生活条件之上，不是对这些条件的取消。","card":"freedom-kingdom"}
-]}
-
+{
+  "version": 1,
+  "questions": [
+    {
+      "id": "myth-property-all",
+      "text": "《宣言》主张取消任何个人对生活物品的占有。",
+      "answer": "假",
+      "explanation": "第二章区分一般所有制、资产阶级所有制和个人占有社会产品。把特定社会关系的批判扩成一切个人物品的禁令，会改变原文的对象。",
+      "card": "manifesto-property"
+    },
+    {
+      "id": "myth-property-target",
+      "text": "《宣言》把废除资产阶级所有制作为自己的特征。",
+      "answer": "真",
+      "explanation": "原文明确作出这个区分。它不是对所有现实财产形式作永久担保，而是在论战中规定所批判的关系；还应继续读关于个人占有和支配他人劳动的段落。",
+      "card": "manifesto-property"
+    },
+    {
+      "id": "myth-essence-subject",
+      "text": "《提纲》第六条的主语是人的本质，而非对一个人的全部属性下定义。",
+      "answer": "真",
+      "explanation": "原句的主语和现实性上的限定都应保留。它批评抽象的孤立个人，要求研究现实社会关系，不是取消人的身体、个性或差异。",
+      "card": "human-essence"
+    },
+    {
+      "id": "myth-essence-shortened",
+      "text": "把第六条简写成人是一切社会关系的总和，可以不加说明地当作逐字引文。",
+      "answer": "假",
+      "explanation": "这种概括有原著线索，但删去了主语与限定，不能当成原句。转述可以存在，前提是明确其身份，并回到第六、七条的论证中理解。",
+      "card": "human-essence"
+    },
+    {
+      "id": "myth-opium-exists",
+      "text": "宗教与人民的鸦片这一表述，在马克思的《〈黑格尔法哲学批判〉导言》中确有出处。",
+      "answer": "真",
+      "explanation": "原文可以直接定位，但存在检查只是第一步。相邻段落还讨论苦难的表现、抗议以及对现实幸福的要求，需要一起阅读。",
+      "card": "opium-context"
+    },
+    {
+      "id": "myth-opium-context",
+      "text": "鸦片的比喻可以替代原著对现实苦难和宗教需要产生条件的分析。",
+      "answer": "假",
+      "explanation": "导言把观念批判进一步转向产生观念需要的现实社会。抽出比喻来评价所有时代的具体宗教，会遗漏原文要求研究的条件与联系。",
+      "card": "opium-context"
+    },
+    {
+      "id": "myth-marxist-recorder",
+      "text": "文集第237封中，那句自己不是马克思主义者的话，是恩格斯转述马克思的。",
+      "answer": "真",
+      "explanation": "证据是恩格斯致施米特的书信。记录者、转述身份和十九世纪七十年代末法国语境应保留，不能包装成已经找到马克思本人同样措辞的自述信。",
+      "card": "not-a-marxist"
+    },
+    {
+      "id": "myth-marxist-rejection",
+      "text": "仅凭恩格斯转述的那句话，就能证明马克思否定了自己的全部研究。",
+      "answer": "假",
+      "explanation": "信中批评以术语标签代替历史研究，要求详细考察社会形态。把特定语境中的称号问题扩成全部理论的撤销，超出原文所支持的结论。",
+      "card": "not-a-marxist"
+    },
+    {
+      "id": "myth-thesis-one",
+      "text": "《提纲》第十一条只存在一种措辞，两个稿本完全相同。",
+      "answer": "假",
+      "explanation": "文集并列马克思1845年稿与恩格斯1888年发表稿。第十一条的连接词有所不同，引用应分别注明，不能任意混接两个稿本。",
+      "card": "thesis-eleven"
+    },
+    {
+      "id": "myth-thesis-ban",
+      "text": "第十一条要求改变世界，所以整篇提纲禁止认识和解释世界。",
+      "answer": "假",
+      "explanation": "第二条已经讨论思维真理性与实践，第八条也联系实践及对它的理解。末条应放回前面的理论批判中，不能从短句推出禁止思考。",
+      "card": "thesis-eleven"
+    },
+    {
+      "id": "myth-economic-only",
+      "text": "恩格斯致布洛赫信把经济因素说成每件历史事件唯一的直接原因。",
+      "answer": "假",
+      "explanation": "归根到底的决定作用不等于唯一因素。信中分析政治、法律、理论与传统的相互作用，也要求具体研究历史材料。",
+      "card": "economic-determinism"
+    },
+    {
+      "id": "myth-economic-wills",
+      "text": "致布洛赫信讨论许多个别意志相互交错形成历史结果。",
+      "answer": "真",
+      "explanation": "信中保留个别意志的作用，并没有把它们等同于零。理解社会制约与相互作用，需要具体说明联系，不能只把一个经济术语放进句子就结束解释。",
+      "card": "economic-determinism"
+    },
+    {
+      "id": "myth-lazy-value",
+      "text": "按劳动价值论，个人做得越慢、实际耗时越多，产品就一定越有价值。",
+      "answer": "假",
+      "explanation": "第一章第一节主动提出并反驳了这种推论。价值量涉及社会正常生产条件、平均熟练程度和强度，个人耗时不能直接替代社会尺度。",
+      "card": "labour-time-myth"
+    },
+    {
+      "id": "myth-social-time",
+      "text": "技术推广改变社会必要劳动时间后，手工生产者即使耗时未变，其产品代表的社会劳动也可能变化。",
+      "answer": "真",
+      "explanation": "原著用蒸汽织布机的例子说明这一关系。技术变化影响社会生产条件；个人付出的感觉真实，却不能独自决定商品的社会价值量。",
+      "card": "labour-time-myth"
+    },
+    {
+      "id": "myth-freedom-author",
+      "text": "从必然王国进入自由王国的飞跃这一具体表述，应定位到恩格斯《反杜林论》。",
+      "answer": "真",
+      "explanation": "具体表述与作品应分别定位。马克思《资本论》第三卷也讨论自由王国，但两处论述重心不同，不能把不同作品的句子拼成同一引文。",
+      "card": "freedom-kingdom"
+    },
+    {
+      "id": "myth-freedom-no-labour",
+      "text": "《资本论》第三卷谈自由王国，意味着物质生活的必要劳动从此可以完全忽略。",
+      "answer": "假",
+      "explanation": "相关段落仍讨论人与自然的物质变换，并把工作日缩短作为根本条件。自由发展的领域建立在物质生活条件之上，不是对这些条件的取消。",
+      "card": "freedom-kingdom"
+    },
+    {
+      "id": "v3-senior-clock",
+      "text": "马克思赞同西尼耳把全部纯利润归给最后一个钟点的算法。",
+      "answer": "假",
+      "explanation": "第七章第三节是在反驳这一算法；产品价值的份额与一天中先后经过的钟点，不能直接等同。",
+      "card": "senior-last-hour"
+    },
+    {
+      "id": "v3-senior-distinction",
+      "text": "马克思的反驳要求区分生产资料价值的转移和当天新创造的价值。",
+      "answer": "真",
+      "explanation": "第三节以这个区别重新计算西尼耳的例子，再比较必要劳动与剩余劳动。",
+      "card": "senior-last-hour"
+    },
+    {
+      "id": "v3-blood-author",
+      "text": "资本从头到脚滴着血的句子确实见于马克思的正文。",
+      "answer": "真",
+      "explanation": "第一卷第二十四章第六节末尾可定位。它总结产业资本家产生的历史讨论。",
+      "card": "capital-blood"
+    },
+    {
+      "id": "v3-blood-augier",
+      "text": "马克思注明转述奥日埃的货币血斑比喻，可以改署为马克思自己创作。",
+      "answer": "张冠李戴",
+      "explanation": "节末先转述奥日埃，再写关于资本的比喻。两层声音与出处需要分开。",
+      "card": "capital-blood"
+    },
+    {
+      "id": "v3-slogan-version",
+      "text": "Workers of the world, unite!表达口号的近似意思，所以可视为1888年译本逐字原句。",
+      "answer": "部分正确",
+      "explanation": "前半涉及意思，后半涉及版本原文。1888年译本采用Working Men of All Countries, Unite!。",
+      "card": "manifesto-english-slogan",
+      "source": {
+        "url": "https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch04.htm",
+        "locator": "1888年穆尔英译本第四章结尾；版本身份依所列译本信息核对，译者与协作校订人另核恩格斯1888年英译本序言。",
+        "checked_on": "2026-10-30"
+      }
+    },
+    {
+      "id": "v3-slogan-translator",
+      "text": "1888年穆尔译本的那句英语，可以标成马克思本人写下的英文原句。",
+      "answer": "张冠李戴",
+      "explanation": "这是一条英译文。应保留穆尔翻译、恩格斯协作校订的译本身份，不能抹去翻译环节。",
+      "card": "manifesto-english-slogan",
+      "source": {
+        "url": "https://www.marxists.org/archive/marx/works/1848/communist-manifesto/ch04.htm",
+        "locator": "1888年穆尔英译本第四章结尾；版本身份依所列译本信息核对，译者与协作校订人另核恩格斯1888年英译本序言。",
+        "checked_on": "2026-10-30"
+      }
+    },
+    {
+      "id": "v3-gotha-unconditional",
+      "text": "按需分配有马克思原著出处，因此也可直接用作任何发展条件下的分配办法。",
+      "answer": "部分正确",
+      "explanation": "出处存在，适用范围却扩大了。纲领批注先说明更高阶段关于劳动、个人发展和生产力的条件。",
+      "card": "gotha-needs-conditions"
+    },
+    {
+      "id": "v3-gotha-stages",
+      "text": "《哥达纲领批判》在不同发展阶段的比较中谈到按需分配。",
+      "answer": "真",
+      "explanation": "口号接在高级阶段的条件讨论之后；阅读应连同低级阶段的分析一起进行。",
+      "card": "gotha-needs-conditions"
+    },
+    {
+      "id": "v3-manifesto-cause",
+      "text": "仅凭1872年序言所记的送印先后，就能确定《宣言》引发了1848年欧洲革命。",
+      "answer": "存疑",
+      "explanation": "这份材料确认先后与组织背景，尚未独自提供传播、读者行动到革命爆发的因果证据。",
+      "card": "manifesto-revolution-causation"
+    },
+    {
+      "id": "v3-manifesto-before",
+      "text": "1872年德文版序言说，原稿在二月革命前几星期送到伦敦付印。",
+      "answer": "真",
+      "explanation": "序言明确记载这一相对时间。它不是一份给出具体送印日的记录。",
+      "card": "manifesto-revolution-causation"
+    },
+    {
+      "id": "v3-math-label",
+      "text": "墓前讲话提到数学研究，所以不必再考察专门材料就能评定马克思的数学家身份。",
+      "answer": "部分正确",
+      "explanation": "数学研究的评价有据，身份与学科贡献的具体判断仍需手稿等材料；两者不能省成一步。",
+      "card": "marx-mathematics"
+    },
+    {
+      "id": "v3-math-impact",
+      "text": "仅凭墓前讲话，就能确定马克思的数学研究在微积分史上造成了怎样的影响。",
+      "answer": "存疑",
+      "explanation": "讲话没有展示数学演算或传播史。判断具体影响需要另外的专门研究材料。",
+      "card": "marx-mathematics"
+    },
+    {
+      "id": "v3-essence-paraphrase",
+      "text": "把第六条概括为人由社会关系形成，抓到了一部分意思，但遗漏了原句的主语与限定。",
+      "answer": "部分正确",
+      "explanation": "原文讨论人的本质，并限定在其现实性上；概括有线索，逐字引用仍须回到原句。",
+      "card": "human-essence"
+    },
+    {
+      "id": "v3-marxist-miscredit",
+      "text": "致施米特信转述的不是马克思主义者，可以当作恩格斯对自己的直接表白。",
+      "answer": "张冠李戴",
+      "explanation": "信的作者是恩格斯，但他在这里转述马克思的话。写信者与话语归属并不相同。",
+      "card": "not-a-marxist"
+    },
+    {
+      "id": "v3-leap-miscredit",
+      "text": "从必然王国进入自由王国的飞跃这句，可以标作马克思《资本论》第三卷逐字原句。",
+      "answer": "张冠李戴",
+      "explanation": "本卡分别定位恩格斯《反杜林论》的飞跃表述与马克思第三卷第四十八章的论述。",
+      "card": "freedom-kingdom"
+    },
+    {
+      "id": "v3-opium-short-summary",
+      "text": "把鸦片比喻说成宗教批判的一个要点，有原文线索，但还没有概括出前后的全部论证。",
+      "answer": "部分正确",
+      "explanation": "导言同时讨论苦难的表现、抗议与现实幸福。抓到比喻的存在，还应继续读它的论证位置。",
+      "card": "opium-context"
+    }
+  ]
+}
