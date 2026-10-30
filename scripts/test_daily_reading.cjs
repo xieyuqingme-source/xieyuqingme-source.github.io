@@ -149,3 +149,24 @@ test('invalid English display data preserves its static fallback without disabli
 test('the production English pool is source-backed, complete and traversable before repetition',()=>{
   const english=JSON.parse(fs.readFileSync(path.join(__dirname,'../home/brief/english-quotes.json'),'utf8'));assert(english.quotes.length>=100);assert.equal(R.englishQuotations(english,new Date('2026-10-29')).length,english.quotes.length);const h=harness({english}),seen=new Set([h.elements['english-quote'].dataset.quoteId]);for(let i=1;i<english.quotes.length;i++){h.elements['english-quote-button'].fire('click');seen.add(h.elements['english-quote'].dataset.quoteId);}assert.equal(seen.size,english.quotes.length);const last=h.elements['english-quote'].dataset.quoteId;h.elements['english-quote-button'].fire('click');assert.notEqual(h.elements['english-quote'].dataset.quoteId,last);h.cleanups[0]();
 });
+
+test('theme metadata has the same finite vocabulary and strict shape as the Python quotation validator',()=>{
+  const date=new Date('2026-10-30'),quote=englishFixture().quotes[0];
+  const accepted=themes=>R.englishQuotations({version:1,quotes:[{...quote,themes}]},date);
+  for(const theme of ['learning','life','love','courage','freedom','time','nature','friendship','hope','humor','society','art'])assert.equal(accepted([theme]).length,1,theme);
+  assert.equal(accepted(['learning','freedom']).length,1);
+  for(const themes of [[],['unknown'],['Learning'],['life','life'],['life','time','hope'],null,'life',true,{},[1],[{}],[[]]])assert.equal(accepted(themes).length,0,JSON.stringify(themes));
+  assert.equal(R.englishQuotations({version:1,quotes:[quote,{...quote,id:'second-synthetic',text:'Another invented sentence.',themes:['life']}]},date).length,1,'Once themes are present, unclassified items cannot silently enter the deck');
+});
+test('adding themes leaves bilingual Today cards, shuffle bags, buttons and source links unchanged',()=>{
+  const original=englishFixture(),classified=JSON.parse(JSON.stringify(original));classified.quotes.forEach((quote,index)=>{quote.themes=index%2?['life','hope']:['learning'];});
+  const plain=harness({english:original}),themed=harness({english:classified});
+  const ids=['english-quote-text','english-quote-translation','english-quote-work','english-quote-note','english-quote-related','english-quote-translation-source','english-quote-button'];
+  for(let index=0;index<original.quotes.length*2;index++){
+    assert.equal(plain.elements['english-quote'].dataset.quoteId,themed.elements['english-quote'].dataset.quoteId);
+    for(const id of ids){assert.equal(plain.elements[id].textContent,themed.elements[id].textContent,id);assert.equal(plain.elements[id].hidden,themed.elements[id].hidden,id);assert.equal(plain.elements[id].href,themed.elements[id].href,id);assert.deepEqual(plain.elements[id].attributes,themed.elements[id].attributes,id);}
+    plain.elements['english-quote-button'].fire('click');themed.elements['english-quote-button'].fire('click');
+  }
+  plain.language('en');themed.language('en');for(const id of ids)assert.equal(plain.elements[id].textContent,themed.elements[id].textContent,id);
+  plain.cleanups[0]();themed.cleanups[0]();
+});

@@ -1,13 +1,15 @@
 # 学英语小测验：知识题来源
 
-核对日期：2026-10-29。首批知识题共24道：真假词源与来源语言各12道。题干、干扰选项和解释为编写内容，整理与措辞有 AI 辅助；来源链接指向相应知识卡已经列明的材料。
+更新核对日期：2026-10-30。知识题共40道：真假词源与来源语言各12道，新增用法选择16道。题干、干扰选项和解释为编写内容，整理与措辞有 AI 辅助；来源链接指向相应知识卡已经列明的材料。旧24题保留原核对记录；新增用法题所用的原卡Cambridge来源已再次核读。
 
 ## 数据与派生规则
 
-- `quiz.json` 只维护知识题，不复制英语名句或作者题。每题必须指向已发布卡片，来源 URL 必须属于该卡。
+- `quiz.json` 维护知识题及可选`warmup_quotes`手选ID，不复制英语名句或作者题。每题必须指向已发布卡片，来源 URL 必须属于该卡。
 - 真假词源的选项固定为真、假、存疑、部分正确；浏览器可以重新排列呈现。证据不足的说法保留“存疑”，不把词源争议强行判成唯一来源。
 - 来源语言题定位一个明确词形或传播阶段。祖先形式、中转形式与现代英语形式不是同一个问题；例如 ketchup 题干保留“可能中介”的限定。
-- 作者题只从 `home/brief/english-quotes.json` 派生，使用其中同一条原文、译文、出处和阅读提示。干扰项按作者卒年距离取其他三位作家，近似同一时代；不把后出的选集、节录或修订版年份当作作者所属时代。同一作者的卒年必须一致。
+- 作者题只从 `home/brief/english-quotes.json` 派生，使用其中同一条原文、译文、出处和阅读提示。干扰项优先按作者卒年接近选择；若三位都未落入手选易认作者范围，则将距离最远的一位换为最近的易认作者。至少保留两位接近时代的干扰项，全部作者均来自真实共享库；后出的选集、节录或修订版年份不用于移动作者时代。
+- 用法题为两至三个选项，必须指向已发布的“别说错”卡片，场景和要表达的意思写清楚，每题只有一个符合该目标的答案。
+- 默认先玩来源语言。作者题每轮前三题从手选句子中抽取三位不同作者，其他题也尽量跨作者；可以在作答前查看中文或作品/所引版本年份提示。使用帮助不扣分，帮助记录只存在本轮内存，在结束回顾中标注。
 - 作者题优先链接该名句已经关联的卡片，否则链接名句库中该句的锚点。不凭空添加核对日期，也不另编第二套名句。
 - 构建只读取仓库资料，不请求词典或作品网站。外部来源由读者自行点击。
 
@@ -58,8 +60,47 @@
 
 `scripts/english_quiz.py` 提供：
 
-- `validate_quiz(data, cards)`：严格校验版本、题目字段、四个唯一选项、答案、已发布卡片、真实来源归属和公开文本/链接边界，返回独立复制的题目数组。
+- `validate_quiz(data, cards)`：严格校验版本、题目字段、唯一选项、答案、已发布卡片、真实来源归属和公开文本/链接边界；原词源/来源题仍为四选项，用法题为两至三个，且须来自别说错卡，返回独立复制的题目数组。
 - `load_quiz(root, cards)`：只读仓库中显式的 `english-corner/quiz.json`，返回同样的已校验数组。
-- `build_quiz_pools(english_quotes, knowledge)`：名句可传版本1包装对象或其中的 quotes 数组，knowledge 使用上一步的数组；输出 authors、etymology、origins 三池。小型构建测试不足四位作者时，作者池为空，不捏造作者。
+- `load_quiz_options(root)`：返回可选的手选名句ID数组，旧清单/小夹具没有该字段时返回空数组。
+- `build_quiz_pools(english_quotes, knowledge, warmup_quotes=())`：名句可传版本1包装对象或其中的quotes数组，knowledge使用上一步的数组；输出origins、etymology、usage、authors四池。手选ID须属于实际共享库且覆盖至少三位作者；此检查在写输出前完成。小型测试不足四位作者时，作者池为空，不捏造作者。
 
-`scripts/test_english_quiz.py` 核对 schema、非法私有链接、来源归属、作者去重和年代相近的干扰项、共用原文及其换行、生产数量。通用校验允许空知识题用于小型构建 fixture；生产 inventory 检查要求24题以上，两个知识模式各至少10题。
+`scripts/test_english_quiz.py`核对schema、非法私有链接、来源归属、用法题类型、手选ID与跨作者范围、兼顾熟悉作者和时代的干扰项、共用原文及换行、生产数量。通用校验允许空知识题和无手选列表的小型fixture；生产inventory要求40题以上，三类知识模式各至少10题。
+
+## 手选入门句子
+
+手选属于编辑分类，不是知名度排名；只登记共享ID。作品/所引版本年份用于提示位置，不一律称为原作写作年或首刊年。
+
+| 共享ID | 作者 | 作品/所引版本 | 年份 |
+| --- | --- | --- | --- |
+| `shakespeare-04` | 莎士比亚 | 《威尼斯商人》 | 1600 |
+| `dickens-01` | 查尔斯·狄更斯 | 《双城记》 | 1859 |
+| `austen-06` | 简·奥斯汀 | 《傲慢与偏见》 | 1813 |
+| `shelley-01` | 珀西·比希·雪莱 | 《雪莱诗集》第二卷 | 1820 |
+| `wordsworth-01` | 威廉·华兹华斯 | 《诗二卷集》第二卷 | 1807 |
+| `bronte-01` | 夏洛蒂·勃朗特 | 《简·爱》 | 1847 |
+| `wilde-03` | 奥斯卡·王尔德 | 《道林·格雷的画像》 | 1891 |
+| `melville-01` | 赫尔曼·梅尔维尔 | 《白鲸》 | 1851 |
+
+## 用法选择题核对
+
+所有场景和备选句为编写内容，不复制学习词典的题目。每张原有别说错卡派生两题，详见所链用法说明。
+
+| id | 目标场景 | 卡片 | 词典依据 |
+| --- | --- | --- | --- |
+| `usage-very-like-verb` | 想说“很喜欢这个结尾”，哪句是标准而自然的说法？ | [very-like](/english/very-like/) | [Cambridge English Grammar Today：Like](https://dictionary.cambridge.org/grammar/british-grammar/like)、[Cambridge English Grammar Today：Very](https://dictionary.cambridge.org/us/grammar/british-grammar/very)、[Cambridge Dictionary：really](https://dictionary.cambridge.org/us/dictionary/essential-american-english/really) |
+| `usage-very-like-position` | 想说“非常喜欢这座城市”，哪句的程度词位置合适？ | [very-like](/english/very-like/) | [Cambridge English Grammar Today：Like](https://dictionary.cambridge.org/grammar/british-grammar/like)、[Cambridge English Grammar Today：Very](https://dictionary.cambridge.org/us/grammar/british-grammar/very)、[Cambridge Dictionary：really](https://dictionary.cambridge.org/us/dictionary/essential-american-english/really) |
+| `usage-light-power` | 房间暗了，想请人按开关让台灯发光。哪句表达了这个动作？ | [turn-on-light](/english/turn-on-light/) | [Cambridge Learner's Dictionary：switch (sth) on](https://dictionary.cambridge.org/dictionary/learner-english/switch-sth-on)、[Cambridge English–Malay Dictionary：switch on/off](https://dictionary.cambridge.org/us/dictionary/english-malaysian/switch-on-off) |
+| `usage-light-off` | 离开房间前，想请人按开关让台灯熄灭。哪句表达了这个动作？ | [turn-on-light](/english/turn-on-light/) | [Cambridge Learner's Dictionary：switch (sth) on](https://dictionary.cambridge.org/dictionary/learner-english/switch-sth-on)、[Cambridge English–Malay Dictionary：switch on/off](https://dictionary.cambridge.org/us/dictionary/english-malaysian/switch-on-off) |
+| `usage-bored-feeling` | 火车晚点，等车的人觉得无聊。哪句表达的是等车人的感受？ | [bored-boring](/english/bored-boring/) | [Cambridge English Grammar Today：bored or boring](https://dictionary.cambridge.org/grammar/british-grammar/word-choice-bored-or-boring) |
+| `usage-boring-cause` | 想说“这个故事令人无聊”，哪句符合所要表达的意思？ | [bored-boring](/english/bored-boring/) | [Cambridge English Grammar Today：bored or boring](https://dictionary.cambridge.org/grammar/british-grammar/word-choice-bored-or-boring) |
+| `usage-discuss-object` | 想提议“讨论一下明天的计划”，哪句搭配正确？ | [discuss-about](/english/discuss-about/) | [Cambridge English Grammar Today：About](https://dictionary.cambridge.org/us/grammar/british-grammar/about)、[Cambridge English Grammar Today：Verb patterns, with and without objects](https://dictionary.cambridge.org/grammar/british-grammar/verb-patterns-with-and-without-objects) |
+| `usage-discuss-person` | 想问“能和你讨论一下路线吗”，哪句把讨论对象和参与者放对了？ | [discuss-about](/english/discuss-about/) | [Cambridge English Grammar Today：About](https://dictionary.cambridge.org/us/grammar/british-grammar/about)、[Cambridge English Grammar Today：Verb patterns, with and without objects](https://dictionary.cambridge.org/grammar/british-grammar/verb-patterns-with-and-without-objects) |
+| `usage-news-unit` | 想说“有一条好消息”，哪句符合 news 的常用语法？ | [good-news](/english/good-news/) | [Cambridge English Grammar Today：News](https://dictionary.cambridge.org/grammar/british-grammar/news) |
+| `usage-news-agreement` | 把 news 作主语，哪句的谓语形式正确？ | [good-news](/english/good-news/) | [Cambridge English Grammar Today：News](https://dictionary.cambridge.org/grammar/british-grammar/news) |
+| `usage-how-direct-question` | 直接向别人询问“这个词用英语怎么说”，哪句是完整的标准问句？ | [how-do-you-say](/english/how-do-you-say/) | [Cambridge English Grammar Today：Word order, how](https://dictionary.cambridge.org/us/grammar/british-grammar/word-order-how)、[Cambridge English Grammar Today：Questions, typical errors](https://dictionary.cambridge.org/uk/grammar/british-grammar/questions-typical-errors)、[Cambridge Dictionary：how](https://dictionary.cambridge.org/us/dictionary/english/how) |
+| `usage-how-embedded` | 表达“不知道怎样描述它”，哪句适合接在 I don’t know 后面？ | [how-do-you-say](/english/how-do-you-say/) | [Cambridge English Grammar Today：Word order, how](https://dictionary.cambridge.org/us/grammar/british-grammar/word-order-how)、[Cambridge English Grammar Today：Questions, typical errors](https://dictionary.cambridge.org/uk/grammar/british-grammar/questions-typical-errors)、[Cambridge Dictionary：how](https://dictionary.cambridge.org/us/dictionary/english/how) |
+| `usage-computer-game` | “大家晚饭后玩电脑游戏”，哪句把实际活动说完整了？ | [play-computer-games](/english/play-computer-games/) | [Cambridge Dictionary：game](https://dictionary.cambridge.org/dictionary/english/game)、[Cambridge University Press：Step Up to IELTS 官方摘页](https://assets.cambridge.org/97805215/32983/excerpt/9780521532983_excerpt.pdf) |
+| `usage-computer-use` | 现在只想说“用电脑写邮件”，哪句符合这个场景？ | [play-computer-games](/english/play-computer-games/) | [Cambridge Dictionary：game](https://dictionary.cambridge.org/dictionary/english/game)、[Cambridge University Press：Step Up to IELTS 官方摘页](https://assets.cambridge.org/97805215/32983/excerpt/9780521532983_excerpt.pdf) |
+| `usage-forward-action` | 想说“期待与大家见面”，哪句接在 look forward to 后的形式合适？ | [look-forward-to](/english/look-forward-to/) | [Cambridge English Grammar Today：Look forward to](https://dictionary.cambridge.org/grammar/british-grammar/look-forward-to)、[Cambridge Dictionary：look forward to something](https://dictionary.cambridge.org/dictionary/english/look-forward-to) |
+| `usage-forward-noun` | 想表达“期待这次假期”，哪句的介词搭配正确？ | [look-forward-to](/english/look-forward-to/) | [Cambridge English Grammar Today：Look forward to](https://dictionary.cambridge.org/grammar/british-grammar/look-forward-to)、[Cambridge Dictionary：look forward to something](https://dictionary.cambridge.org/dictionary/english/look-forward-to) |

@@ -6,9 +6,15 @@
 })(function(){
   'use strict';
   const NS='http://www.w3.org/2000/svg',INSTANCE=Symbol.for('english-word-map.mount');
+  const REGION_ID=/^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$/,OTHER_REGION=Object.freeze({id:'other',title:'其他地区'});
   class WordMapError extends Error{constructor(message){super(message);this.name='WordMapError';}}
   function fail(message){throw new WordMapError(message);}
   function text(value,label,max=300,empty=false){if(typeof value!=='string'||(!empty&&!value.trim())||value.length>max||/[\u0000-\u001f\u007f]/.test(value))fail(label+'不是有效文字。');return value;}
+  function regionID(value){const id=text(value,'地区标识',64);if(!REGION_ID.test(id))fail('地区标识格式有误。');return id;}
+  function normalizeRegion(value){
+    if(!value||typeof value!=='object'||Array.isArray(value))fail('地区资料格式有误。');
+    return Object.freeze({id:regionID(value.id),title:text(value.title,'地区名称',80)});
+  }
   function normalizeWord(value){
     if(!value||typeof value!=='object'||Array.isArray(value))fail('单词路线格式有误。');
     const slug=text(value.slug,'词卡标识',64);if(!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug))fail('词卡标识格式有误。');
@@ -20,12 +26,23 @@
       if(!stop||typeof stop!=='object'||Array.isArray(stop)||typeof stop.lon!=='number'||typeof stop.lat!=='number'||!Number.isFinite(stop.lon)||!Number.isFinite(stop.lat)||Math.abs(stop.lon)>180||Math.abs(stop.lat)>90||stop.approximate!==true)fail('地图节点须使用有效的示意经纬度。');
       return Object.freeze({language:text(stop.language,'语言或故事节点',60),form:text(stop.form,'词形',80),period:text(stop.period,'已有时期',100,true),place_zh:text(stop.place_zh,'代表地区',160),lon:stop.lon,lat:stop.lat,approximate:true});
     });
-    return Object.freeze({slug,headword:text(value.headword,'单词',80),title:text(value.title,'词卡标题',300),reading,summary:text(value.summary,'词卡摘要',1600),journey:Object.freeze(journey)});
+    return Object.freeze({slug,headword:text(value.headword,'单词',80),title:text(value.title,'词卡标题',300),reading,summary:text(value.summary,'词卡摘要',1600),region:value.region===undefined?'other':regionID(value.region),journey:Object.freeze(journey)});
   }
   function validateData(value){
     if(!value||typeof value!=='object'||Array.isArray(value)||value.version!==1||!Array.isArray(value.words)||!value.words.length||value.words.length>500)fail('单词地图资料格式有误。');
     const words=value.words.map(normalizeWord);if(new Set(words.map(word=>word.slug)).size!==words.length)fail('单词地图出现重复词卡。');
-    return Object.freeze({version:1,words:Object.freeze(words)});
+    let regions;
+    if(value.regions===undefined)regions=[OTHER_REGION];
+    else{
+      if(!Array.isArray(value.regions)||!value.regions.length||value.regions.length>32)fail('单词地图地区资料格式有误。');
+      regions=Array.from(value.regions,normalizeRegion);
+    }
+    const regionIDs=new Set(regions.map(region=>region.id));if(regionIDs.size!==regions.length)fail('单词地图出现重复地区。');
+    if(value.words.some(word=>word.region===undefined)&&!regionIDs.has('other')){
+      if(regions.length>=32)fail('单词地图地区过多。');regions.push(OTHER_REGION);regionIDs.add('other');
+    }
+    if(words.some(word=>!regionIDs.has(word.region)))fail('单词地图出现未登记地区。');
+    return Object.freeze({version:1,regions:Object.freeze(regions),words:Object.freeze(words)});
   }
   function geometryAPI(d3){if(!d3||!['geoNaturalEarth1','geoPath','geoInterpolate'].every(key=>typeof d3[key]==='function'))fail('本地地图几何模块不可用。');return d3;}
   function segmentsFor(value,d3,samples=32){

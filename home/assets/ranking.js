@@ -8,6 +8,8 @@
   let revision = 0, savedRevision = 0, initialized = false, busy = false, suppressClick = false, protectedSave = false, saveTimer;
   let lastTap = null, editBlockedUntil = 0;
   const templateDrafts = new Map();
+  const pendingDrafts = new Map(), handoffKey = '__rankingPendingDraftsV1';
+  let pendingNotice = false;
   const storage = Store.createStore();
   const app = $('ranking-app'), board = $('ranking-board'), pool = $('candidate-pool');
   const title = $('ranking-title'), saveStatus = $('save-status');
@@ -23,10 +25,26 @@
     return element;
   }
   function message(text, error = false) {
+    pendingNotice = false;
     const area = $('tool-message'); M.uiText(area,text); area.dataset.error = String(error); area.hidden = !text;
   }
   function failure(error) { message(error.message || '操作未完成，请重试或导出 JSON 备份。', true); }
   function itemFailure(error) { M.uiText($('item-error'),error.message||'图片编辑未完成，请重试。');$('item-error').hidden=false; }
+  function savedTemplate(templateId, current) {
+    if (pendingDrafts.get(templateId)?.revision === current) pendingDrafts.delete(templateId);
+  }
+  function takePendingDrafts() {
+    const value = document[handoffKey]; delete document[handoffKey];
+    if (value === undefined) return null;
+    if (!value || typeof value !== 'object' || Array.isArray(value) ||
+      ![Object.prototype,null].includes(Object.getPrototypeOf(value)) || value.version !== 1 || typeof value.active !== 'string' ||
+      Object.keys(value).length !== 3 || !['version','active','drafts'].every(key => Object.prototype.hasOwnProperty.call(value,key)) ||
+      !Object.prototype.hasOwnProperty.call(M.TEMPLATES,value.active) || !Array.isArray(value.drafts) ||
+      !value.drafts.length || value.drafts.length > Object.keys(M.TEMPLATES).length) throw new Error('临时草稿无法读取，原存档仍保留。');
+    const drafts = value.drafts.map(draft => M.validateState(draft));
+    if (new Set(drafts.map(draft => draft.templateId)).size !== drafts.length) throw new Error('临时草稿无法读取，原存档仍保留。');
+    return {active:value.active,drafts};
+  }
   const imageEditor=Images.createEditor({canvas:$('crop-preview'),zoomInput:$('crop-zoom'),zoomValue:$('crop-zoom-value'),status:$('crop-status'),resetButton:$('crop-reset'),replaceInput:$('item-image-file'),removeButton:$('item-image-remove'),onBusy(value){imageBusy=value;$('item-save').disabled=value;$('item-delete').disabled=value;$('item-target').disabled=value;updateOrderButtons();},onError:itemFailure});
   const view = window.RankingView?.create({enterPresentation(){presentation(true);}});
   function autosizeTitle() { title.style.height = 'auto'; title.style.height = title.scrollHeight + 'px'; }
@@ -43,15 +61,30 @@
     }
     M.uiText(saveStatus,'正在保存…'); saveStatus.dataset.failed = 'false';
     try {
-      await storage.save(state);
+      const snapshot = M.validateState(state);
+      await storage.save(snapshot);
+      savedTemplate(snapshot.templateId,current);
       savedRevision=current;
-      if (current === revision) { M.uiText(saveStatus,'已自动保存到本机'); saveStatus.dataset.failed = 'false'; }
+      if (current === revision) { M.uiText(saveStatus,'已自动保存到本机'); saveStatus.dataset.failed = 'false';if(pendingNotice&&!pendingDrafts.size)message(''); }
     } catch (error) {
       if (current === revision) { M.uiText(saveStatus,'自动保存失败 · 请导出 JSON'); saveStatus.dataset.failed = 'true'; failure(error); }
     }
   }
-  window.SiteNavigation?.onLeave(() => { clearTimeout(saveTimer); return persist(); });
-  function scheduleSave() { revision++; clearTimeout(saveTimer); M.uiText(saveStatus,'正在保存…'); saveTimer=setTimeout(persist,350); }
+  window.SiteNavigation?.onLeave(async () => {
+    clearTimeout(saveTimer);
+    const editors = [$('item-dialog'), $('row-dialog')].filter(dialog => dialog.open);
+    if (editors.length) {
+      message('请先保存或取消当前编辑，再继续。');
+      await Promise.all(editors.map(dialog => new Promise(resolve => dialog.addEventListener('close', resolve, {once:true}))));
+    }
+    await persist();
+    // Transfer only validated data, never DOM, listeners or storage connections.
+    // This Document survives same-document navigation, but not a refresh.
+    if (pendingDrafts.size) document[handoffKey] = {version:1,active:state.templateId,
+      drafts:Array.from(pendingDrafts.values(),entry => M.validateState(entry.state))};
+    else delete document[handoffKey];
+  });
+  function scheduleSave() { revision++; pendingDrafts.set(state.templateId,{state,revision});clearTimeout(saveTimer); M.uiText(saveStatus,'正在保存…'); saveTimer=setTimeout(persist,350); }
   document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden'){clearTimeout(saveTimer);persist();}});
   function invalidateClearUndo() { undoSnapshot=null;undoKind=null;$('undo-clear').hidden=true; }
   function changed(text,options={}) { if(!options.preserveUndo)invalidateClearUndo();render();scheduleSave();if(text)message(text); }
@@ -224,17 +257,17 @@
       const imported=M.deserialize(await file.text());
       if(confirm(M.localize('导入“'+templateLabel(imported.templateId)+'”备份？将替换此模板的内容，其他模板内容保留。请先导出 JSON 备份。'))){
         const before=M.validateState(state);
-        if(before.templateId!==imported.templateId&&!protectedSave)await storage.save(before);
+        if(before.templateId!==imported.templateId&&!protectedSave){await storage.save(before);savedTemplate(before.templateId,revision);}
         templateDrafts.set(before.templateId,before);state=imported;templateDrafts.set(state.templateId,M.validateState(state));protectedSave=false;changed('备份已导入。');
       }
     }catch(error){failure(error);}finally{event.target.value='';setBusy(false);render();}
   });
   $('reset-ranking').addEventListener('click',()=>{if(busy)return;const label=templateLabel();if(confirm(M.localize('恢复默认'+label+'？只替换当前模板的标题、等级和项目，皮肤与主题选择保留。继续编辑前可撤销；需要留档请先导出 JSON 备份。')))run(()=>{const skin=state.skin,templateId=state.templateId;undoSnapshot=M.validateState(state);undoKind='reset';state=M.createDefaultState(templateId);M.setSkin(state,skin);protectedSave=false;changed('已恢复默认'+label+'。继续编辑前可撤销恢复。',{preserveUndo:true});presentation(true);});});
   $('clear-items').addEventListener('click',()=>{if(busy||!Object.keys(state.items).length)return;if(confirm(M.localize('清空全部项目（含待选区）？标题和等级会保留，本页继续编辑前可撤销。')))run(()=>{undoSnapshot=M.validateState(state);undoKind='clear';M.clearItems(state);changed('全部项目已清空。继续编辑前，可点「撤销清空」恢复。',{preserveUndo:true});});});
-  $('undo-clear').addEventListener('click',()=>{if(busy||!undoSnapshot)return;const skin=state.skin,kind=undoKind,leaving=M.validateState(state);templateDrafts.set(leaving.templateId,leaving);if(kind==='template')storage.saveTemplate(leaving).catch(failure);state=M.validateState(undoSnapshot);if(kind!=='template')M.setSkin(state,skin);templateDrafts.set(state.templateId,M.validateState(state));changed(kind==='template'?'已撤销切换，原模板内容已还原。':kind==='reset'?'已撤销恢复默认，原有排行和图片已还原。':'已恢复清空前的全部项目。');});
+  $('undo-clear').addEventListener('click',()=>{if(busy||!undoSnapshot)return;const skin=state.skin,kind=undoKind,leaving=M.validateState(state),leavingRevision=revision;templateDrafts.set(leaving.templateId,leaving);if(kind==='template')storage.saveTemplate(leaving).then(()=>savedTemplate(leaving.templateId,leavingRevision)).catch(failure);state=M.validateState(undoSnapshot);if(kind!=='template')M.setSkin(state,skin);templateDrafts.set(state.templateId,M.validateState(state));changed(kind==='template'?'已撤销切换，原模板内容已还原。':kind==='reset'?'已撤销恢复默认，原有排行和图片已还原。':'已恢复清空前的全部项目。');});
   $('ranking-template').addEventListener('change',async()=>{
     const target=$('ranking-template').value;$('ranking-template').value=state.templateId;
-    if(busy||target===state.templateId||!Object.prototype.hasOwnProperty.call(M.TEMPLATES,target))return;
+    if(busy||$('item-dialog').open||$('row-dialog').open||target===state.templateId||!Object.prototype.hasOwnProperty.call(M.TEMPLATES,target))return;
     if(!confirm(M.localize('切换到“'+templateLabel(target)+'”？当前模板内容将分别保留，可切回继续，也可在继续编辑前撤销切换。重要内容建议先导出 JSON 备份。')))return;
     const before=M.validateState(state),oldRevision=revision;templateDrafts.set(before.templateId,before);
     setBusy(true);clearTimeout(saveTimer);let warning='';
@@ -248,7 +281,7 @@
         else throw error;
       }}
       if(!next){next=M.createDefaultState(target);M.setSkin(next,before.skin);}
-      if(!protectedSave){try{await storage.save(before);savedRevision=oldRevision;}catch(error){warning=error.message||'离开模板前保存失败，本次内容已保留在当前页面，请导出 JSON 备份。';}}
+      if(!protectedSave){try{await storage.save(before);savedRevision=oldRevision;savedTemplate(before.templateId,oldRevision);}catch(error){warning=error.message||'离开模板前保存失败，本次内容已保留在当前页面，请导出 JSON 备份。';}}
       undoSnapshot=before;undoKind='template';state=next;
       if(protectedSave)warning='原存档仍受保护，切换内容暂存当前页面。请导出 JSON 备份，确认恢复默认或导入备份后再覆盖保存。';
       changed('已切换到'+templateLabel()+'；各模板内容分别保留，继续编辑前可撤销切换。',{preserveUndo:true});presentation(true);
@@ -346,9 +379,58 @@
   document.addEventListener('pointerup',event=>endDrag(event));document.addEventListener('pointercancel',event=>endDrag(event,true));
   window.addEventListener('blur',()=>endDrag(null,true));
   document.addEventListener('keydown',event=>{if(event.key==='Escape'&&drag){endDrag(null,true);event.preventDefault();}});
+  async function openRequestedTemplate(restored) {
+    const target = M.templateFromSearch(window.location.search);
+    if (!target || target === state.templateId) return;
+    const before = M.validateState(state);
+    try {
+      let next = templateDrafts.has(target) ? M.validateState(templateDrafts.get(target)) : await storage.loadTemplate(target);
+      // An old installation can have only "current". Archive that actual draft
+      // before a later edit to the linked template can replace the current key.
+      if (!protectedSave) {
+        const pending = pendingDrafts.get(before.templateId);
+        if (pending) { await storage.save(before); savedTemplate(before.templateId,pending.revision); }
+        else if (restored) {
+          const archived = await storage.loadTemplate(before.templateId);
+          if (!archived || M.serialize(archived) !== M.serialize(before)) await storage.saveTemplate(before);
+        }
+      }
+      if (!next) { next = M.createDefaultState(target); M.setSkin(next, before.skin); }
+      templateDrafts.set(before.templateId, before);
+      state = next;
+      templateDrafts.set(target, M.validateState(next));
+    } catch (error) {
+      if (error.code === 'unavailable' && !restored) {
+        templateDrafts.set(before.templateId, before);
+        state = M.createDefaultState(target); M.setSkin(state, before.skin);
+        templateDrafts.set(target, M.validateState(state));
+        protectedSave = true;
+      }
+      failure(error);
+    }
+  }
   (async()=>{
-    try{const restored=await storage.load();if(restored){state=restored;M.uiText(saveStatus,'已恢复本机排行');}else M.uiText(saveStatus,'修改后自动保存到本机');}
+    let restored = null;
+    try{restored=await storage.load();if(restored){state=restored;M.uiText(saveStatus,'已恢复本机排行');}else M.uiText(saveStatus,'修改后自动保存到本机');}
     catch(error){protectedSave=true;M.uiText(saveStatus,'无法恢复存档 · 请备份');saveStatus.dataset.failed='true';failure(error);}
+    try {
+      const handoff = takePendingDrafts();
+      if (handoff) {
+        for (const draft of handoff.drafts) { pendingDrafts.set(draft.templateId,{state:draft,revision:0});templateDrafts.set(draft.templateId,draft); }
+        const target = M.templateFromSearch(window.location.search), preferred = pendingDrafts.has(target) ? target : handoff.active;
+        if (pendingDrafts.has(preferred)) state = M.validateState(pendingDrafts.get(preferred).state);
+      }
+    } catch (error) { failure(error); }
+    await openRequestedTemplate(restored);
+    if (pendingDrafts.has(state.templateId)) {
+      revision = 1;pendingDrafts.set(state.templateId,{state,revision});
+      M.uiText(saveStatus,'尚未保存的修改已恢复');saveStatus.dataset.failed='true';
+    }
+    if (pendingDrafts.size) {
+      message(() => M.translate('尚未保存的修改仍在当前页面，请切回相应模板导出 JSON 备份；刷新后临时内容会丢失。') + ' ' +
+        Array.from(pendingDrafts.keys(),id => M.translate(templateLabel(id))).join(' / '),true);
+      pendingNotice = true;
+    }
     render();app.hidden=false;initialized=true;presentation(true);
   })();
 })();

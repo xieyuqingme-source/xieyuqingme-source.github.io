@@ -524,6 +524,400 @@
           "checked_on": "2026-10-29"
         }
       ]
+    },
+    {
+      "id": "usage-very-like-verb",
+      "mode": "usage",
+      "text": "想说“很喜欢这个结尾”，哪句是标准而自然的说法？",
+      "choices": [
+        "I really like this ending.",
+        "I very like this ending."
+      ],
+      "answer": "I really like this ending.",
+      "explanation": "表示喜欢时，like 是动词，可以用 really 强调这个动作。very 常修饰形容词或副词，不能按中文“很喜欢”的位置直接放在这里的 like 前。也可以把 very much 放在宾语后；选择程度词时，要连它修饰的内容一起看。",
+      "card": "very-like",
+      "sources": [
+        {
+          "label": "Cambridge English Grammar Today：Like",
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/like",
+          "checked_on": "2026-10-29"
+        },
+        {
+          "label": "Cambridge English Grammar Today：Very",
+          "url": "https://dictionary.cambridge.org/us/grammar/british-grammar/very",
+          "checked_on": "2026-10-29"
+        },
+        {
+          "label": "Cambridge Dictionary：really",
+          "url": "https://dictionary.cambridge.org/us/dictionary/essential-american-english/really",
+          "checked_on": "2026-10-29"
+        }
+      ]
+    },
+    {
+      "id": "usage-very-like-position",
+      "mode": "usage",
+      "text": "想说“非常喜欢这座城市”，哪句的程度词位置合适？",
+      "choices": [
+        "I like very this city.",
+        "I like this city very much."
+      ],
+      "answer": "I like this city very much.",
+      "explanation": "这里的 very much 修饰喜欢的程度，放在 like 的宾语 this city 后。very 不能单独插在动词与宾语之间来对应中文的“很”。把 like something very much 当作一整段搭配记住，会比临时安排每个单词的位置更方便。",
+      "card": "very-like",
+      "sources": [
+        {
+          "label": "Cambridge English Grammar Today：Like",
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/like",
+          "checked_on": "2026-10-29"
+        },
+        {
+          "label": "Cambridge English Grammar Today：Very",
+          "url": "https://dictionary.cambridge.org/us/grammar/british-grammar/very",
+          "checked_on": "2026-10-29"
+        },
+        {
+          "label": "Cambridge Dictionary：really",
+          "url": "https://dictionary.cambridge.org/us/dictionary/essential-american-english/really",
+          "checked_on": "2026-10-29"
+        }
+      ]
+    },
+    {
+      "id": "usage-light-power",
+      "mode": "usage",
+      "text": "房间暗了，想请人按开关让台灯发光。哪句表达了这个动作？",
+      "choices": [
+        "Please turn on the desk lamp.",
+        "Please open the desk lamp."
+      ],
+      "answer": "Please turn on the desk lamp.",
+      "explanation": "在这个场景里，动作是接通电源，使灯工作，常用 turn on 或 switch on。open 更容易让人想到打开物体或空间。汉语的“开”可以管好几种动作，英语这里应跟着电灯和开关的实际动作选择搭配。",
+      "card": "turn-on-light",
+      "sources": [
+        {
+          "label": "Cambridge Learner's Dictionary：switch (sth) on",
+          "url": "https://dictionary.cambridge.org/dictionary/learner-english/switch-sth-on",
+          "checked_on": "2026-10-29"
+        },
+        {
+          "label": "Cambridge English–Malay Dictionary：switch on/off",
+          "url": "https://dictionary.cambridge.org/us/dictionary/english-malaysian/switch-on-off",
+          "checked_on": "2026-10-29"
+        }
+      ]
+    },
+    {
+      "id": "usage-light-off",
+      "mode": "usage",
+      "text": "离开房间前，想请人按开关让台灯熄灭。哪句表达了这个动作？",
+      "choices": [
+        "Please switch off the desk lamp.",
+        "Please close the desk lamp."
+      ],
+      "answer": "Please switch off the desk lamp.",
+      "explanation": "这里要让电灯停止工作，用 switch off 或 turn off。close 常说把门、窗口等关上，不是这个按电器开关的动作。把灯亮起来和熄灭配成一组来记：switch on the light，switch off the light；英语选词跟着实际动作走。",
+      "card": "turn-on-light",
+      "sources": [
+        {
+          "label": "Cambridge Learner's Dictionary：switch (sth) on",
+          "url": "https://dictionary.cambridge.org/dictionary/learner-english/switch-sth-on",
+          "checked_on": "2026-10-29"
+        },
+        {
+          "label": "Cambridge English–Malay Dictionary：switch on/off",
+          "url": "https://dictionary.cambridge.org/us/dictionary/english-malaysian/switch-on-off",
+          "checked_on": "2026-10-29"
+        }
+      ]
+    },
+    {
+      "id": "usage-bored-feeling",
+      "mode": "usage",
+      "text": "火车晚点，等车的人觉得无聊。哪句表达的是等车人的感受？",
+      "choices": [
+        "I am bored while waiting.",
+        "I am boring while waiting."
+      ],
+      "answer": "I am bored while waiting.",
+      "explanation": "bored 表示感到无聊；boring 描述令人无聊的性质。想交代自己的感受，选 bored；选 boring 会变成在描述自己给人的印象。判断时问“谁感到怎样”，比背成“人只能用 -ed、物只能用 -ing”更准确。",
+      "card": "bored-boring",
+      "sources": [
+        {
+          "label": "Cambridge English Grammar Today：bored or boring",
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/word-choice-bored-or-boring",
+          "checked_on": "2026-10-29"
+        }
+      ]
+    },
+    {
+      "id": "usage-boring-cause",
+      "mode": "usage",
+      "text": "想说“这个故事令人无聊”，哪句符合所要表达的意思？",
+      "choices": [
+        "This story is bored.",
+        "This story is boring."
+      ],
+      "answer": "This story is boring.",
+      "explanation": "这里说的是故事具有令人无聊的性质，所以用 boring。听故事的人才可能感到 bored。把引起感受的东西与体验感受的人分开，两种形式就能接到合适的位置；类似的关系也出现在 interesting 和 interested 等词中。",
+      "card": "bored-boring",
+      "sources": [
+        {
+          "label": "Cambridge English Grammar Today：bored or boring",
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/word-choice-bored-or-boring",
+          "checked_on": "2026-10-29"
+        }
+      ]
+    },
+    {
+      "id": "usage-discuss-object",
+      "mode": "usage",
+      "text": "想提议“讨论一下明天的计划”，哪句搭配正确？",
+      "choices": [
+        "Let's discuss about tomorrow's plan.",
+        "Let's discuss tomorrow's plan."
+      ],
+      "answer": "Let's discuss tomorrow's plan.",
+      "explanation": "discuss 直接接讨论对象，所以后面可以跟 tomorrow’s plan。talk about 是另一套常用搭配，不能把它的 about 再移到 discuss 后面。先记 discuss something 和 talk about something，开口时就能少装一个介词。",
+      "card": "discuss-about",
+      "sources": [
+        {
+          "label": "Cambridge English Grammar Today：About",
+          "url": "https://dictionary.cambridge.org/us/grammar/british-grammar/about",
+          "checked_on": "2026-10-29"
+        },
+        {
+          "label": "Cambridge English Grammar Today：Verb patterns, with and without objects",
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/verb-patterns-with-and-without-objects",
+          "checked_on": "2026-10-29"
+        }
+      ]
+    },
+    {
+      "id": "usage-discuss-person",
+      "mode": "usage",
+      "text": "想问“能和你讨论一下路线吗”，哪句把讨论对象和参与者放对了？",
+      "choices": [
+        "Can we discuss the route with you?",
+        "Can we discuss you the route?"
+      ],
+      "answer": "Can we discuss the route with you?",
+      "explanation": "讨论对象 the route 直接跟在 discuss 后；与谁讨论则用 with you。这两部分承担不同工作，不能按“向某人讲某事”的中文顺序挤成两个宾语。保留 discuss something，再加 with someone，就能同时说清事情和参与者。",
+      "card": "discuss-about",
+      "sources": [
+        {
+          "label": "Cambridge English Grammar Today：About",
+          "url": "https://dictionary.cambridge.org/us/grammar/british-grammar/about",
+          "checked_on": "2026-10-29"
+        },
+        {
+          "label": "Cambridge English Grammar Today：Verb patterns, with and without objects",
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/verb-patterns-with-and-without-objects",
+          "checked_on": "2026-10-29"
+        }
+      ]
+    },
+    {
+      "id": "usage-news-unit",
+      "mode": "usage",
+      "text": "想说“有一条好消息”，哪句符合 news 的常用语法？",
+      "choices": [
+        "There is a good news.",
+        "There is a piece of good news."
+      ],
+      "answer": "There is a piece of good news.",
+      "explanation": "news 在这种用法里不可数，不能直接加 a。要把一条消息单独数出来，可借助 a piece of news；不强调数量时直接说 good news。中文“一个消息”的量词习惯不能机械换成英语冠词，要看名词自己的语法身份。",
+      "card": "good-news",
+      "sources": [
+        {
+          "label": "Cambridge English Grammar Today：News",
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/news",
+          "checked_on": "2026-10-29"
+        }
+      ]
+    },
+    {
+      "id": "usage-news-agreement",
+      "mode": "usage",
+      "text": "把 news 作主语，哪句的谓语形式正确？",
+      "choices": [
+        "The news is encouraging.",
+        "The news are encouraging."
+      ],
+      "answer": "The news is encouraging.",
+      "explanation": "news 看起来以 s 结尾，这里仍然是不可数名词，作主语时配单数动词 is。不能只看词尾就决定用 are。把 good news、a piece of news、the news is 连在一起记，能同时处理冠词、数量与主谓一致这几个常见小陷阱。",
+      "card": "good-news",
+      "sources": [
+        {
+          "label": "Cambridge English Grammar Today：News",
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/news",
+          "checked_on": "2026-10-29"
+        }
+      ]
+    },
+    {
+      "id": "usage-how-direct-question",
+      "mode": "usage",
+      "text": "直接向别人询问“这个词用英语怎么说”，哪句是完整的标准问句？",
+      "choices": [
+        "How to say this word in English?",
+        "How do you say this word in English?"
+      ],
+      "answer": "How do you say this word in English?",
+      "explanation": "这里直接提问，需要主语 you 和助动词 do，组成 How do you say ...?。how to 可以出现在方法标题或 know how to 等结构里，但那与这个完整求助问句的任务不同。明确是在直接问别人，疑问句的架子就容易搭完整。",
+      "card": "how-do-you-say",
+      "sources": [
+        {
+          "label": "Cambridge English Grammar Today：Word order, how",
+          "url": "https://dictionary.cambridge.org/us/grammar/british-grammar/word-order-how",
+          "checked_on": "2026-10-29"
+        },
+        {
+          "label": "Cambridge English Grammar Today：Questions, typical errors",
+          "url": "https://dictionary.cambridge.org/uk/grammar/british-grammar/questions-typical-errors",
+          "checked_on": "2026-10-29"
+        },
+        {
+          "label": "Cambridge Dictionary：how",
+          "url": "https://dictionary.cambridge.org/us/dictionary/english/how",
+          "checked_on": "2026-10-29"
+        }
+      ]
+    },
+    {
+      "id": "usage-how-embedded",
+      "mode": "usage",
+      "text": "表达“不知道怎样描述它”，哪句适合接在 I don’t know 后面？",
+      "choices": [
+        "I don't know how to describe it.",
+        "I don't know how do I describe it."
+      ],
+      "answer": "I don't know how to describe it.",
+      "explanation": "how to 加动词原形可以接在 know 后，表示做某事的方法。这里是说不知道如何描述，整个句子没有在直接向对方提问，不能再拼进 how do I 的问句语序。认清 how 所在的小结构，就能把直接求助问句与句子里的方法表达分开。",
+      "card": "how-do-you-say",
+      "sources": [
+        {
+          "label": "Cambridge English Grammar Today：Word order, how",
+          "url": "https://dictionary.cambridge.org/us/grammar/british-grammar/word-order-how",
+          "checked_on": "2026-10-29"
+        },
+        {
+          "label": "Cambridge English Grammar Today：Questions, typical errors",
+          "url": "https://dictionary.cambridge.org/uk/grammar/british-grammar/questions-typical-errors",
+          "checked_on": "2026-10-29"
+        },
+        {
+          "label": "Cambridge Dictionary：how",
+          "url": "https://dictionary.cambridge.org/us/dictionary/english/how",
+          "checked_on": "2026-10-29"
+        }
+      ]
+    },
+    {
+      "id": "usage-computer-game",
+      "mode": "usage",
+      "text": "“大家晚饭后玩电脑游戏”，哪句把实际活动说完整了？",
+      "choices": [
+        "We play computer games after dinner.",
+        "We play computer after dinner."
+      ],
+      "answer": "We play computer games after dinner.",
+      "explanation": "这里玩的是 computer games，电脑本身是设备。把 games 补进宾语，句子就交代了活动；也可以说 play games on the computer。中文“玩电脑”包含的事情很多，英语表达先说清做什么，动词与宾语就容易搭配。",
+      "card": "play-computer-games",
+      "sources": [
+        {
+          "label": "Cambridge Dictionary：game",
+          "url": "https://dictionary.cambridge.org/dictionary/english/game",
+          "checked_on": "2026-10-29"
+        },
+        {
+          "label": "Cambridge University Press：Step Up to IELTS 官方摘页",
+          "url": "https://assets.cambridge.org/97805215/32983/excerpt/9780521532983_excerpt.pdf",
+          "checked_on": "2026-10-29"
+        }
+      ]
+    },
+    {
+      "id": "usage-computer-use",
+      "mode": "usage",
+      "text": "现在只想说“用电脑写邮件”，哪句符合这个场景？",
+      "choices": [
+        "We play the computer to write emails.",
+        "We use the computer to write emails."
+      ],
+      "answer": "We use the computer to write emails.",
+      "explanation": "写邮件这个场景需要表达使用设备，用 use the computer；若说玩游戏，才用 play computer games 等搭配。不要让中文“玩电脑”的宽泛说法替代具体动作。电脑没有变，人在上面做的事情变了，英语动词也会跟着改变。",
+      "card": "play-computer-games",
+      "sources": [
+        {
+          "label": "Cambridge Dictionary：game",
+          "url": "https://dictionary.cambridge.org/dictionary/english/game",
+          "checked_on": "2026-10-29"
+        },
+        {
+          "label": "Cambridge University Press：Step Up to IELTS 官方摘页",
+          "url": "https://assets.cambridge.org/97805215/32983/excerpt/9780521532983_excerpt.pdf",
+          "checked_on": "2026-10-29"
+        }
+      ]
+    },
+    {
+      "id": "usage-forward-action",
+      "mode": "usage",
+      "text": "想说“期待与大家见面”，哪句接在 look forward to 后的形式合适？",
+      "choices": [
+        "I'm looking forward to meet everyone.",
+        "I'm looking forward to meeting everyone."
+      ],
+      "answer": "I'm looking forward to meeting everyone.",
+      "explanation": "look forward to 里的 to 是介词。后面要接见面这个动作时，用 meeting 这样的 -ing 形式，而不是看见 to 就接动词原形。把整个 look forward to 当作一个搭配识别，再决定后面的形式，就不会与 want to meet 的结构混在一起。",
+      "card": "look-forward-to",
+      "sources": [
+        {
+          "label": "Cambridge English Grammar Today：Look forward to",
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/look-forward-to",
+          "checked_on": "2026-10-29"
+        },
+        {
+          "label": "Cambridge Dictionary：look forward to something",
+          "url": "https://dictionary.cambridge.org/dictionary/english/look-forward-to",
+          "checked_on": "2026-10-29"
+        }
+      ]
+    },
+    {
+      "id": "usage-forward-noun",
+      "mode": "usage",
+      "text": "想表达“期待这次假期”，哪句的介词搭配正确？",
+      "choices": [
+        "We look forward to the holiday.",
+        "We look forward for the holiday."
+      ],
+      "answer": "We look forward to the holiday.",
+      "explanation": "这里的完整搭配是 look forward to，可以直接接 the holiday 这样的名词短语。说动作时再接动词的 -ing 形式。for 虽然也常出现在表示等待或目的的句子中，却不能因此替换这个搭配里的 to；要连着整个表达来记。",
+      "card": "look-forward-to",
+      "sources": [
+        {
+          "label": "Cambridge English Grammar Today：Look forward to",
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/look-forward-to",
+          "checked_on": "2026-10-29"
+        },
+        {
+          "label": "Cambridge Dictionary：look forward to something",
+          "url": "https://dictionary.cambridge.org/dictionary/english/look-forward-to",
+          "checked_on": "2026-10-29"
+        }
+      ]
     }
+  ],
+  "warmup_quotes": [
+    "shakespeare-04",
+    "dickens-01",
+    "austen-06",
+    "shelley-01",
+    "wordsworth-01",
+    "bronte-01",
+    "wilde-03",
+    "melville-01"
   ]
 }

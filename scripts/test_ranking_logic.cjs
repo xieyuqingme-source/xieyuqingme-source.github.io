@@ -23,6 +23,20 @@ const BOOK_ART_ORDER = ['alice-in-wonderland','tom-sawyer','treasure-island','sh
   'a-tale-of-two-cities','gullivers-travels','huckleberry-finn','wuthering-heights','moby-dick','walden','hamlet','romeo-and-juliet'].map(slug=>'book-'+slug);
 const LEGACY_SPORT_ORDER = ['walking', 'hiking', 'running', 'weight-training', 'swimming', 'badminton', 'cycling', 'football'];
 const clone = state => JSON.parse(JSON.stringify(state));
+test('entry query selects only one known template and preserves unrelated parameters', () => {
+  for (const id of ['food', 'sport', 'book', 'economist']) {
+    assert.equal(Model.templateFromSearch('?template=' + id), id);
+    assert.equal(Model.templateFromSearch('?from=english&template=' + id + '&view=list'), id);
+  }
+  assert.equal(Model.templateFromSearch('?template=%62ook'), 'book');
+});
+test('invalid and ambiguous template queries are ignored instead of selecting or executing them', () => {
+  for (const search of ['', '?other=book', '?template=', '?template=BOOK', '?template=unknown',
+    '?template=__proto__', '?template=constructor', '?template=book%00',
+    '?template=book&template=food', '?template=book&template=book', null, {}, 1]) {
+    assert.equal(Model.templateFromSearch(search), null);
+  }
+});
 function asVersion1(state) {
   const value = clone(state);
   value.version = 1;

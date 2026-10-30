@@ -135,3 +135,45 @@ test('missing geometry or bad data reveal safe fallback outside the UI with no o
 test('HTML-looking station text is inserted literally into native SVG/HTML without interpreting markup',async()=>{
   const input=data();input.words[0].journey[0].form='<img onerror=x>';input.words[0].summary='<script>literal</script>';const f=fixture(input),api=MapModel.mount(f);await tick();f.flush();assert.match(f.route.textContent,/<img onerror=x>/);assert.match(f.route.textContent,/<script>literal<\/script>/);assert.equal(nodes(f.route).some(node=>node.tagName==='script'||node.tagName==='img'),false);assert.equal(api.getState().land,'ready');
 });
+
+
+test('legacy word payloads normalize to the other region without changing their routes or source objects',()=>{
+  const input=data(),before=JSON.stringify(input),actual=MapModel.validateData(input);
+  assert.equal(JSON.stringify(input),before);assert.deepEqual(actual.regions,[{id:'other',title:'其他地区'}]);
+  assert(actual.words.every(word=>word.region==='other'));assert(Object.isFrozen(actual.regions));assert(Object.isFrozen(actual.regions[0]));
+  assert.deepEqual(actual.words.map(word=>word.journey),input.words.map(word=>word.journey));
+});
+function groupedData(){const input=data();input.regions=[{id:'americas',title:'美洲'},{id:'east-southeast-asia',title:'东亚与东南亚'},{id:'uncertain',title:'来源有争议'}];input.words[0].region='east-southeast-asia';input.words[1].region='uncertain';input.words[2].region='americas';return input;}
+test('declared regions keep reviewed labels, metadata order and word order while every journey stays identical',()=>{
+  const input=groupedData(),before=JSON.stringify(input),actual=MapModel.validateData(input);
+  assert.equal(JSON.stringify(input),before);assert.deepEqual(actual.regions,input.regions);assert.deepEqual(actual.words.map(word=>word.slug),input.words.map(word=>word.slug));
+  assert.deepEqual(actual.words.map(word=>word.region),input.words.map(word=>word.region));assert.deepEqual(actual.words.map(word=>word.journey),input.words.map(word=>word.journey));
+  assert.deepEqual(MapModel.segmentsFor(actual.words[0],D3),MapModel.segmentsFor(data().words[0],D3));input.regions[0].title='changed';assert.equal(actual.regions[0].title,'美洲');
+});
+test('a mixed old payload gains an other group only for missing word region fields',()=>{
+  const input=data();input.regions=[{id:'east-southeast-asia',title:'东亚与东南亚'}];input.words[0].region='east-southeast-asia';
+  const before=JSON.stringify(input),actual=MapModel.validateData(input);assert.equal(JSON.stringify(input),before);
+  assert.deepEqual(actual.regions,[{id:'east-southeast-asia',title:'东亚与东南亚'},{id:'other',title:'其他地区'}]);assert.deepEqual(actual.words.map(word=>word.region),['east-southeast-asia','other','other']);
+  delete input.regions;assert.throws(()=>MapModel.validateData(input),MapModel.WordMapError);
+});
+for(const [label,change]of[
+  ['null regions',d=>{d.regions=null;}],['object regions',d=>{d.regions={};}],['empty regions',d=>{d.regions=[];}],
+  ['too many regions',d=>{d.regions=Array.from({length:33},(_,i)=>({id:'region-'+i,title:'示意地区'}));}],
+  ['duplicate IDs',d=>{d.regions[1].id=d.regions[0].id;}],['uppercase ID',d=>{d.regions[0].id='Americas';}],
+  ['unsafe ID',d=>{d.regions[0].id='../americas';}],['empty title',d=>{d.regions[0].title='';}],
+  ['control title',d=>{d.regions[0].title='北\n美洲';}],['long title',d=>{d.regions[0].title='x'.repeat(81);}],
+  ['sparse regions',d=>{d.regions=new Array(2);}],['unknown region',d=>{d.words[0].region='unknown';}],
+  ['empty word region',d=>{d.words[0].region='';}],['null word region',d=>{d.words[0].region=null;}],
+  ['wrong region type',d=>{d.words[0].region={id:'americas'};}],['undeclared explicit other',d=>{d.words[0].region='other';}],
+])test('malformed region metadata is rejected: '+label,()=>{const input=groupedData();change(input);assert.throws(()=>MapModel.validateData(input),MapModel.WordMapError);});
+test('group wrappers, native button focus and exact routes survive cross-region selections without client-side regrouping',async()=>{
+  const input=groupedData(),f=fixture(input),groups=input.regions.map(region=>{const node=new Element('section',f.document);node.setAttribute('data-word-map-group',region.id);const heading=new Element('h3',f.document);heading.textContent=region.title;node.append(heading);return node;});
+  f.words.replaceChildren(...groups);for(let i=0;i<input.words.length;i++)groups.find(group=>group.getAttribute('data-word-map-group')===input.words[i].region).append(f.buttons[i]);
+  const before=f.words.children.slice(),api=MapModel.mount(f);await tick();f.flush();assert.equal(api.getState().land,'ready');
+  for(const index of[2,1,0]){const button=f.buttons[index];button.focus();click(f,button);f.flush();assert.equal(api.getState().selected,input.words[index].slug);assert.equal(f.document.activeElement,button);assert.equal(button.getAttribute('aria-pressed'),'true');assert.deepEqual(f.words.children,before);assert.equal(button.parentElement.getAttribute('data-word-map-group'),input.words[index].region);}
+  assert.equal(f.svg.children.filter(node=>node.getAttribute('class')==='ec-word-map-segment').length,2);api.destroy();assert.equal(listeners(f),0);
+});
+test('invalid declared regions reveal complete server text and leave no map listeners',()=>{
+  const input=groupedData();input.words[1].region='not-reviewed';const f=fixture(input),before=f.fallback.textContent,api=MapModel.mount(f);
+  assert.equal(f.ui.hidden,true);assert.equal(f.fallback.hidden,false);assert.equal(f.fallback.textContent,before);assert.equal(f.status.hidden,false);assert.equal(listeners(f),0);api.destroy();
+});

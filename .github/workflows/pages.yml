@@ -101,6 +101,9 @@ jobs:
         run: |
           python scripts/test_english_corner.py
           python scripts/test_english_v2.py
+          python scripts/test_english_v3.py
+          python scripts/test_english_quote_themes.py
+          node --test scripts/test_english_corner.cjs
           python scripts/test_english_quiz.py
           node --test scripts/test_english_play.cjs
           node --test scripts/test_english_quotes.cjs
@@ -114,6 +117,12 @@ jobs:
           node scripts/test_english_numbers.cjs
           node --check home/assets/english-corner.js
           node --check home/assets/english-numbers.js
+          node --check scripts/test_english_corner_browser.cjs
+          node --check scripts/test_english_learning_browser.cjs
+          node --check scripts/test_english_enhancements_browser.cjs
+          node --check scripts/test_english_word_map_browser.cjs
+          node --check scripts/test_english_v3_quotes_browser.cjs
+          node --check scripts/test_english_v3_quiz_browser.cjs
       - name: Check local about routes
         run: python scripts/test_about_routes.py
       - name: Check Read Marx and Engels public sources and reader

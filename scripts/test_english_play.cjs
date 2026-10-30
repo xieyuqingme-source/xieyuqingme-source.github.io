@@ -3,10 +3,10 @@ const test=require('node:test'),assert=require('node:assert/strict');
 const Play=require('../home/assets/english-play.js');
 function rng(seed=29){let state=seed>>>0;return()=>{state=(Math.imul(state,1664525)+1013904223)>>>0;return state/4294967296;};}
 function question(mode,index){
-  const choices=[0,1,2,3].map(offset=>mode==='authors'?'作者'+((index+offset)%12)+'（Author '+((index+offset)%12)+'）':mode+'选项'+index+'-'+offset);
-  return {id:mode+'-'+index,mode,text:'测试题干 '+index,choices,answer:choices[0],explanation:'这是第 '+index+' 题的解释。\n请查看来源。',reading:'/english/fixture-'+index+'/',sources:[{label:'测试用来源 '+index,url:'https://example.org/fixture/'+index}],...(mode==='authors'?{english:'A first line.\nA second line.',translation:'第一行。\n第二行。'}:{})};
+  const choices=[0,1,2,3].slice(0,mode==='usage'?2+index%2:4).map(offset=>mode==='authors'?'作者'+((index+offset)%12)+'（Author '+((index+offset)%12)+'）':mode+'选项'+index+'-'+offset);
+  return {id:mode+'-'+index,mode,text:'测试题干 '+index,choices,answer:choices[0],explanation:'这是第 '+index+' 题的解释。\n请查看来源。',reading:'/english/fixture-'+index+'/',sources:[{label:'测试用来源 '+index,url:'https://example.org/fixture/'+index}],...(mode==='authors'?{english:'A first line.\nA second line.',translation:'第一行。\n第二行。',warmup:index<6,hint:'《测试作品》 · 作品/所引版本 1900年'}:{})};
 }
-function data(){return {authors:Array.from({length:24},(_,i)=>question('authors',i)),etymology:Array.from({length:12},(_,i)=>question('etymology',i)),origins:Array.from({length:12},(_,i)=>question('origins',i))};}
+function data(){return {authors:Array.from({length:24},(_,i)=>question('authors',i)),etymology:Array.from({length:12},(_,i)=>question('etymology',i)),origins:Array.from({length:12},(_,i)=>question('origins',i)),usage:Array.from({length:12},(_,i)=>question('usage',i))};}
 function clone(value){return JSON.parse(JSON.stringify(value));}
 
 test('a seeded round is reproducible, samples ten unique questions and shuffles choices',()=>{
@@ -78,7 +78,7 @@ class Element{
 }
 function fixture(input=data()){
   const document={activeElement:null},root=new Element('section',document),elements={};
-  const tags={ui:'div',prompt:'h2',english:'blockquote',choices:'div',feedback:'section',progress:'p',next:'button',results:'section',restart:'button',error:'p'};
+  const tags={ui:'div',prompt:'h2',english:'blockquote',choices:'div',feedback:'section',progress:'p',next:'button',results:'section',restart:'button',error:'p',assistance:'div','show-translation':'button','show-hint':'button','preview-translation':'p','preview-hint':'p','change-mode':'button'};
   for(const [name,tag] of Object.entries(tags)){const node=new Element(tag,document);if(tag==='button')node.type='button';elements[name]=node;}
   elements.ui.hidden=true;const buttons=Play.MODES.map(mode=>{const node=new Element('button',document);node.type='button';node.setAttribute('data-quiz-mode',mode);return node;});
   root.querySelector=selector=>elements[selector.replace(/^\[data-quiz-|\]$/g,'')]||null;root.querySelectorAll=()=>buttons;
@@ -88,10 +88,11 @@ function fixture(input=data()){
   return {document,root,window,owned,buttons,script,...elements};
 }
 function clickChoice(f,index){f.choices.emit('click',{target:f.choices.children[index]});}
-function listenerCount(f){return [...f.buttons,f.choices,f.next,f.restart].reduce((sum,node)=>sum+Array.from(node.listeners.values()).reduce((n,set)=>n+set.size,0),0);}
+function clickMode(f,mode){f.buttons.find(button=>button.getAttribute('data-quiz-mode')===mode).emit('click');}
+function listenerCount(f){return [...f.buttons,f.choices,f.next,f.restart,f['show-translation'],f['show-hint'],f['change-mode']].reduce((sum,node)=>sum+Array.from(node.listeners.values()).reduce((n,set)=>n+set.size,0),0);}
 
 test('mount uses native buttons, preserves poetry LF, reveals translation only after answering and manages focus',()=>{
-  const f=fixture(),mounted=Play.mount({...f,rng:rng(7)});assert.equal(f.ui.hidden,false);assert.equal(f.english.textContent,'A first line.\nA second line.');assert.equal(f.feedback.textContent,'');assert.equal(f.next.hidden,true);
+  const f=fixture(),mounted=Play.mount({...f,rng:rng(7)});clickMode(f,'authors');assert.equal(f.ui.hidden,false);assert.equal(f.english.textContent,'A first line.\nA second line.');assert.equal(f.feedback.textContent,'');assert.equal(f.next.hidden,true);
   assert.equal(f.choices.children.length,4);assert.ok(f.choices.children.every(button=>button.tagName==='button'&&button.type==='button'));assert.equal(f.feedback.getAttribute('aria-live'),'polite');assert.equal(f.prompt.getAttribute('tabindex'),'-1');
   f.next.emit('click');assert.equal(mounted.getState().index,0);
   const correct=mounted.getState().question.answer,index=mounted.getState().question.choices.indexOf(correct);clickChoice(f,index);
@@ -100,12 +101,12 @@ test('mount uses native buttons, preserves poetry LF, reveals translation only a
 });
 test('mount builds safe source links and treats HTML-looking quote text as literal content',()=>{
   const input=data();input.authors.forEach(q=>{q.text='<img src=x onerror=alert(1)>';q.english='<script>test</script>\nLine two.';q.sources.push({label:'内部链接',url:'/english/source/'});});
-  const f=fixture(input),mounted=Play.mount({...f,rng:rng()});assert.equal(f.prompt.textContent,'<img src=x onerror=alert(1)>');assert.match(f.english.textContent,/<script>test<\/script>/);
+  const f=fixture(input),mounted=Play.mount({...f,rng:rng()});clickMode(f,'authors');assert.equal(f.prompt.textContent,'<img src=x onerror=alert(1)>');assert.match(f.english.textContent,/<script>test<\/script>/);
   clickChoice(f,0);const list=f.feedback.children.find(child=>child.className==='ec-quiz-sources'),external=list.children[0].children[0],internal=list.children[1].children[0];
   assert.equal(external.tagName,'a');assert.equal(external.getAttribute('target'),'_blank');assert.equal(external.getAttribute('rel'),'noopener noreferrer');assert.equal(internal.getAttribute('href'),'/english/source/');assert.equal(internal.getAttribute('target'),null);assert.equal(mounted.getState().answered,true);
 });
 test('finished UI contains all wrong answers with explanations and replay resets the selected mode',()=>{
-  const f=fixture(),mounted=Play.mount({...f,rng:rng(34)});f.buttons[2].emit('click');assert.equal(mounted.getState().mode,'origins');assert.equal(f.english.hidden,true);
+  const f=fixture(),mounted=Play.mount({...f,rng:rng(34)});clickMode(f,'origins');assert.equal(mounted.getState().mode,'origins');assert.equal(f.english.hidden,true);
   for(let index=0;index<10;index++){const state=mounted.getState(),wrong=state.question.choices.findIndex(choice=>choice!==state.question.answer);clickChoice(f,wrong);f.next.emit('click');}
   assert.equal(mounted.getState().finished,true);assert.equal(f.document.activeElement,f.results);assert.equal(f.results.hidden,false);assert.equal(f.restart.hidden,false);assert.equal(f.choices.hidden,true);
   const review=f.results.children.find(child=>child.className==='ec-quiz-review');assert.equal(review.children.length,10);for(const item of review.children){assert.match(item.textContent,/你的选择/);assert.match(item.textContent,/正确答案/);assert.match(item.textContent,/解释/);assert.ok(item.children.some(child=>child.className==='ec-quiz-sources'));}
@@ -115,25 +116,77 @@ test('changing modes clears the previous answer and does not mix question banks'
   const f=fixture(),mounted=Play.mount({...f,rng:rng()});clickChoice(f,0);f.buttons[1].emit('click');assert.equal(mounted.getState().mode,'etymology');assert.equal(mounted.getState().answered,false);assert.equal(mounted.getState().score,0);assert.equal(f.feedback.hidden,true);assert.equal(f.buttons[1].getAttribute('aria-pressed'),'true');assert.equal(f.buttons[0].getAttribute('aria-pressed'),'false');
 });
 test('answers and wrong-answer reviews include a small library entry without duplicating a direct quotation link',()=>{
-  const nodes=root=>[root,...root.children.flatMap(nodes)],f=fixture(),mounted=Play.mount({...f,rng:rng()});f.buttons[2].emit('click');
+  const nodes=root=>[root,...root.children.flatMap(nodes)],f=fixture(),mounted=Play.mount({...f,rng:rng()});clickMode(f,'origins');
   for(let index=0;index<10;index++){
     const q=mounted.getState().question;clickChoice(f,q.choices.findIndex(choice=>choice!==q.answer));
     const entries=nodes(f.feedback).filter(node=>node.className==='ec-quiz-library');assert.equal(entries.length,1);assert.equal(entries[0].getAttribute('href'),'/english/quotes/');assert.equal(entries[0].textContent,'完整英语名句库 →');
     assert.ok(nodes(f.feedback).some(node=>node.tagName==='a'&&node.getAttribute('href')===q.reading),'The original card reading link stays present');f.next.emit('click');
   }
   assert.equal(nodes(f.results).filter(node=>node.className==='ec-quiz-library').length,10);
-  const direct=data();direct.authors.forEach(q=>{q.reading='/english/quotes/#quote-'+q.id;});const d=fixture(direct);Play.mount({...d,rng:rng()});clickChoice(d,0);
+  const direct=data();direct.authors.forEach(q=>{q.reading='/english/quotes/#quote-'+q.id;});const d=fixture(direct);Play.mount({...d,rng:rng()});clickMode(d,'authors');clickChoice(d,0);
   assert.equal(nodes(d.feedback).filter(node=>node.className==='ec-quiz-library').length,0);assert.equal(nodes(d.feedback).filter(node=>node.tagName==='a'&&node.getAttribute('href')?.startsWith('/english/quotes/')).length,1);
 });
 test('empty author fixtures disable that mode rather than invent authors or block other games',()=>{
-  const input=data();input.authors=[];const f=fixture(input),mounted=Play.mount({...f,rng:rng()});assert.equal(f.ui.hidden,false);assert.equal(f.buttons[0].disabled,true);assert.equal(mounted.getState().mode,'etymology');f.buttons[0].emit('click');assert.equal(mounted.getState().mode,'etymology');
+  const input=data();input.authors=[];const f=fixture(input),mounted=Play.mount({...f,rng:rng()});const authors=f.buttons.find(button=>button.getAttribute('data-quiz-mode')==='authors');assert.equal(f.ui.hidden,false);assert.equal(authors.disabled,true);assert.equal(mounted.getState().mode,'origins');authors.emit('click');assert.equal(mounted.getState().mode,'origins');
 });
 test('PageScope removes every delegated listener; repeated cleanup and captured late callbacks are safe',()=>{
-  const f=fixture(),mounted=Play.mount({...f,rng:rng()});assert.equal(listenerCount(f),6);assert.equal(f.owned.length,1);
+  const f=fixture(),mounted=Play.mount({...f,rng:rng()});assert.equal(listenerCount(f),10);assert.equal(f.owned.length,1);
   const late=Array.from(f.buttons[1].listeners.get('click'))[0],before=mounted.getState();f.owned[0]();mounted.destroy();assert.equal(listenerCount(f),0);late();f.next.emit('click');assert.deepEqual(mounted.getState(),before);
-  const nextMount=Play.mount({...f,rng:rng(19)});assert.equal(listenerCount(f),6);nextMount.destroy();assert.equal(listenerCount(f),0);
+  const nextMount=Play.mount({...f,rng:rng(19)});assert.equal(listenerCount(f),10);nextMount.destroy();assert.equal(listenerCount(f),0);
 });
 test('invalid/missing enhancement fails safely and leaves no active listeners',()=>{
   const f=fixture();f.script.textContent='{invalid JSON';const mounted=Play.mount(f);assert.equal(f.ui.hidden,true);assert.equal(f.error.hidden,false);assert.equal(listenerCount(f),0);assert.equal(mounted.getState(),null);mounted.destroy();
   assert.doesNotThrow(()=>Play.mount().destroy());assert.doesNotThrow(()=>Play.mount({window:{},document:{querySelector:()=>null}}).destroy());
+});
+
+test('the initial mode is origins and every author round starts with three handpicked authors',()=>{
+  const f=fixture(),mounted=Play.mount({...f,rng:rng()});assert.equal(mounted.getState().mode,'origins');assert.equal(f.assistance.hidden,true);
+  for(let seed=0;seed<40;seed++){
+    const round=Play.createRound(data(),'authors',{rng:rng(seed)});
+    assert.ok(round.slice(0,3).every(question=>question.warmup));
+    assert.equal(new Set(round.slice(0,3).map(question=>question.answer)).size,3);
+    assert.equal(new Set(round.map(question=>question.answer)).size,10);
+  }
+});
+
+test('usage has two or three real choices and retains the original four-choice rules elsewhere',()=>{
+  const f=fixture(),mounted=Play.mount({...f,rng:rng()});clickMode(f,'usage');
+  assert.ok([2,3].includes(f.choices.children.length));assert.equal(f.assistance.hidden,true);
+  const q=mounted.getState().question;clickChoice(f,q.choices.indexOf(q.answer));assert.equal(mounted.getState().score,1);
+  for(const count of [0,1,4]){const invalid=data();invalid.usage[0].choices=Array.from({length:count},(_,i)=>'choice '+i);invalid.usage[0].answer='choice 0';assert.throws(()=>Play.validateData(invalid),Play.QuizDataError);}
+  const invalid=data();invalid.origins[0].choices=invalid.origins[0].choices.slice(0,3);assert.throws(()=>Play.validateData(invalid),Play.QuizDataError);
+});
+
+test('assistance is recorded once per question without score loss or state aliasing',()=>{
+  const game=Play.createGame(data(),'authors',{rng:rng()});
+  const before=game.state();before.assistance.hint=true;assert.equal(game.state().assistance.hint,false);
+  assert.equal(game.reveal('hint'),true);assert.equal(game.reveal('hint'),false);assert.equal(game.reveal('translation'),true);assert.equal(game.reveal('__proto__'),false);
+  const answer=game.state().question.answer;assert.equal(game.answer(answer),true);assert.equal(game.state().score,1);assert.equal(game.reveal('hint'),false);
+  const result=game.state();assert.deepEqual(result.result.assistance,{translation:true,hint:true});result.review[0].assistance.hint=false;assert.equal(game.state().review[0].assistance.hint,true);
+  game.next();assert.deepEqual(game.state().assistance,{translation:false,hint:false});
+  const origins=Play.createGame(data(),'origins',{rng:rng()});assert.equal(origins.reveal('translation'),false);
+});
+
+test('translation and work hints are optional before answering and appear in end-of-round review',()=>{
+  const f=fixture(),mounted=Play.mount({...f,rng:rng()});clickMode(f,'authors');
+  assert.equal(f.assistance.hidden,false);assert.equal(f['preview-translation'].hidden,true);assert.equal(f['preview-hint'].hidden,true);
+  f['show-translation'].emit('click');f['show-hint'].emit('click');
+  assert.equal(f['preview-translation'].textContent,'第一行。\n第二行。');assert.match(f['preview-hint'].textContent,/作品\/所引版本 1900年/);assert.equal(f['preview-translation'].hidden,false);assert.equal(f['preview-hint'].hidden,false);
+  assert.equal(f['show-translation'].getAttribute('aria-expanded'),'true');assert.equal(f['preview-translation'].getAttribute('aria-live'),'polite');
+  for(let index=0;index<10;index++){
+    const q=mounted.getState().question;clickChoice(f,q.choices.indexOf(q.answer));f.next.emit('click');
+  }
+  assert.equal(mounted.getState().score,10);assert.match(f.results.textContent,/用过的帮助 · 不扣分/);assert.match(f.results.textContent,/第 1 题：看过中文、用过作品提示/);assert.equal(f.assistance.hidden,true);
+});
+
+test('the finished change-mode control starts another available game and resets assistance',()=>{
+  const f=fixture(),mounted=Play.mount({...f,rng:rng()});
+  for(let index=0;index<10;index++){const q=mounted.getState().question;clickChoice(f,q.choices.indexOf(q.answer));f.next.emit('click');}
+  assert.equal(f['change-mode'].hidden,false);f['change-mode'].emit('click');assert.equal(mounted.getState().mode,'etymology');assert.equal(mounted.getState().index,0);assert.equal(mounted.getState().score,0);assert.equal(f.results.hidden,true);assert.equal(f['change-mode'].hidden,true);
+  assert.equal(f.document.activeElement,f.prompt);
+});
+
+test('malformed hint fields and all new captured handlers respect cleanup',()=>{
+  for(const change of [q=>q.warmup='yes',q=>q.hint='',q=>q.hint='a'.repeat(501)]){const v=data();change(v.authors[0]);assert.throws(()=>Play.validateData(v),Play.QuizDataError);}
+  const f=fixture(),mounted=Play.mount({...f,rng:rng()});clickMode(f,'authors');const callback=Array.from(f['show-hint'].listeners.get('click'))[0];mounted.destroy();callback();assert.equal(mounted.getState().assistance.hint,false);assert.equal(listenerCount(f),0);
 });

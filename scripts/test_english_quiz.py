@@ -8,7 +8,7 @@ import json
 import unittest
 
 from english_corner import load_english_corner
-from english_quiz import build_quiz_pools, load_quiz, validate_quiz
+from english_quiz import build_quiz_pools, load_quiz, load_quiz_options, validate_quiz
 
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -127,6 +127,39 @@ class QuizValidationTests(unittest.TestCase):
             (root / "private.json").write_text("Not a public quiz", encoding="utf-8")
             self.assertEqual(load_quiz(root, cards), data["questions"])
 
+    def test_usage_requires_two_or_three_choices_and_a_published_mistake_card(self):
+        data,cards=fixture()
+        cards[0]['column']='mistakes'
+        question=data['questions'][0]
+        question.update(mode='usage',choices=['Correct form.','Incorrect form.'],answer='Correct form.')
+        self.assertEqual(validate_quiz(data,cards)[0]['mode'],'usage')
+        question['choices'].append('Another incorrect form.')
+        self.assertEqual(len(validate_quiz(data,cards)[0]['choices']),3)
+        for choices in [[],['one'],['one','two','three','four']]:
+            with self.subTest(choices=choices),self.assertRaises(ValueError):
+                bad=deepcopy(data);bad['questions'][0].update(choices=choices,answer=choices[0] if choices else '')
+                validate_quiz(bad,cards)
+        for column in ['words','classics',None]:
+            cards[0]['column']=column
+            with self.subTest(column=column),self.assertRaises(ValueError):validate_quiz(data,cards)
+
+    def test_optional_warmup_ids_are_bounded_unique_public_shared_ids(self):
+        data,cards=fixture()
+        for values in [None,True,'quote-id',{},['first-id'],['first-id','second-id'],['same-id']*3,['../bad','first-id','second-id'],['quote-'+str(i) for i in range(41)]]:
+            with self.subTest(values=values),self.assertRaises(ValueError):
+                bad=deepcopy(data);bad['warmup_quotes']=values;validate_quiz(bad,cards)
+        for values in [[],['first-id','second-id','third-id']]:
+            valid=deepcopy(data);valid['warmup_quotes']=values
+            self.assertEqual(len(validate_quiz(valid,cards)),1)
+        with TemporaryDirectory() as temporary:
+            root=Path(temporary);(root/'english-corner').mkdir()
+            source=root/'english-corner/quiz.json'
+            source.write_text(json.dumps(data),encoding='utf-8')
+            self.assertEqual(load_quiz_options(root),[])
+            data['warmup_quotes']=['first-id','second-id','third-id']
+            source.write_text(json.dumps(data),encoding='utf-8')
+            self.assertEqual(load_quiz_options(root),data['warmup_quotes'])
+
 
 class DerivedAuthorTests(unittest.TestCase):
     def setUp(self):
@@ -138,7 +171,7 @@ class DerivedAuthorTests(unittest.TestCase):
 
     def test_each_author_question_is_derived_once_with_three_nearest_distinct_authors(self):
         pools = build_quiz_pools(self.quotes, [])
-        self.assertEqual(set(pools), {"authors", "etymology", "origins"})
+        self.assertEqual(set(pools), {"authors", "etymology", "origins", "usage"})
         self.assertEqual(len(pools["authors"]), len(self.quotes))
         question = next(q for q in pools["authors"] if q["id"] == "author-target-quote")
         self.assertEqual(question["choices"], [label(self.quotes[i]) for i in [0, 2, 4, 3]])
@@ -210,6 +243,23 @@ class DerivedAuthorTests(unittest.TestCase):
         pool[0]["sources"][0]["label"] = "Change output only"
         self.assertEqual(knowledge, before)
 
+    def test_beginner_ids_are_resolved_against_the_same_corpus_and_at_least_three_authors(self):
+        ids=['target-quote','a-near','b-near']
+        pool=build_quiz_pools(self.quotes,[],ids)['authors']
+        self.assertEqual({q['id'].removeprefix('author-') for q in pool if q['warmup']},set(ids))
+        self.assertTrue(all('作品/所引版本 ' in q['hint'] for q in pool))
+        self.assertTrue(all(q['hint'].startswith(source['work_zh']) for source,q in zip(self.quotes,pool)))
+        for values in [None,'target-quote',['target-quote','a-near','missing-id'],['target-quote','a-old','a-near']]:
+            with self.subTest(values=values),self.assertRaises(ValueError):build_quiz_pools(self.quotes,[],values)
+
+    def test_one_familiar_distractor_can_replace_the_farthest_nearby_choice(self):
+        ids=['target-quote','d-far','e-far']
+        pool=build_quiz_pools(self.quotes,[],ids)['authors']
+        familiar={label(self.quotes[i]) for i in (0,5,6)}
+        for question in pool:
+            self.assertTrue((set(question['choices'])-{question['answer']}) & familiar)
+            self.assertEqual(len(set(question['choices'])),4)
+
 
 class ProductionQuizTests(unittest.TestCase):
     @classmethod
@@ -217,17 +267,22 @@ class ProductionQuizTests(unittest.TestCase):
         cls.cards = load_english_corner(ROOT, today=TODAY)["cards"]
         cls.knowledge = load_quiz(ROOT, cls.cards)
         cls.quotes = json.loads((ROOT / "home/brief/english-quotes.json").read_text(encoding="utf-8"))
-        cls.pools = build_quiz_pools(cls.quotes, cls.knowledge)
+        cls.warmups = load_quiz_options(ROOT)
+        cls.pools = build_quiz_pools(cls.quotes, cls.knowledge, cls.warmups)
 
     def test_inventory_has_ten_or_more_per_knowledge_mode_and_real_card_sources(self):
         counts = Counter(item["mode"] for item in self.knowledge)
-        self.assertGreaterEqual(len(self.knowledge), 24)
-        for mode in ["etymology", "origins"]:
+        self.assertGreaterEqual(len(self.knowledge), 40)
+        for mode in ["etymology", "origins", "usage"]:
             self.assertGreaterEqual(counts[mode], 10)
         cards = {card["slug"]: card for card in self.cards}
         for item in self.knowledge:
             self.assertTrue(item["sources"])
             self.assertTrue({source["url"] for source in item["sources"]}.issubset({source["url"] for source in cards[item["card"]]["sources"]}))
+            if item['mode']=='usage':
+                self.assertEqual(cards[item['card']]['column'],'mistakes')
+                self.assertIn(len(item['choices']),(2,3))
+        self.assertGreaterEqual(len(self.warmups),3)
 
     def test_every_shared_quote_has_one_derived_question_with_valid_reading_and_proximity(self):
         authors = self.pools["authors"]
@@ -242,14 +297,18 @@ class ProductionQuizTests(unittest.TestCase):
             years = {label(item): min(abs(other["author_died"] - quote["author_died"]) for other in self.quotes["quotes"] if label(other) == label(item))
                      for item in self.quotes["quotes"] if label(item) != label(quote)}
             chosen = set(question["choices"]) - {question["answer"]}
-            self.assertLessEqual(max(years[author] for author in chosen), min(years[author] for author in years.keys() - chosen))
+            self.assertEqual(sorted(years[author] for author in chosen)[:2],sorted(years.values())[:2])
+            familiar={label(item) for item in self.quotes['quotes'] if item['id'] in self.warmups}
+            self.assertTrue(chosen & familiar)
+            self.assertEqual(question['warmup'],quote['id'] in self.warmups)
+            self.assertEqual(question['hint'],quote['work_zh']+' · 作品/所引版本 '+str(quote['first_published'])+'年')
 
     def test_every_pool_has_unique_ids_safe_sources_and_the_uniform_display_fields(self):
         required = {"id", "mode", "text", "choices", "answer", "explanation", "reading", "sources"}
         for mode, pool in self.pools.items():
             self.assertEqual(len({item["id"] for item in pool}), len(pool))
             for item in pool:
-                self.assertEqual(set(item), required | ({"english", "translation"} if mode == "authors" else set()))
+                self.assertEqual(set(item), required | ({"english", "translation", "hint", "warmup"} if mode == "authors" else set()))
                 self.assertEqual(item["mode"], mode)
                 self.assertIn(item["answer"], item["choices"])
                 self.assertTrue(all(source["url"].startswith("https://") for source in item["sources"]))

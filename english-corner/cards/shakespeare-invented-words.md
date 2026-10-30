@@ -16,4 +16,6 @@ British Council 的介绍也保留了这个区别：准确创造了多少，无�
 
 ## 可以这样用
 
-- The earliest record we have is not always the first use ever. —— 现有的最早记录，不一定就是历史上的第一次使用。
+可以先学一个用得上的词：gloomy。它既能形容昏暗、阴沉的景物，也能形容低落的心情或不乐观的前景。这里借它练习现义，不把词典的首见年份当作谁创造了它的证明。
+
+- The sky looks gloomy, but the picnic is still on. —— 天空阴沉沉，不过野餐仍照常进行。

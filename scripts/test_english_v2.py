@@ -92,7 +92,9 @@ class LearningReaderTests(unittest.TestCase):
         self.assertTrue(all(len(pools[mode])>=10 for mode in ['authors','etymology','origins']))
         self.assertIn('<noscript>',html)
         self.assertIn('data-quiz-feedback tabindex="-1" aria-live="polite"',html)
-        self.assertIn('data-quiz-restart hidden>再来一轮</button></div><p data-quiz-error',html)
+        self.assertIn('data-quiz-restart hidden>再来一轮</button>',html)
+        self.assertIn('data-quiz-change-mode hidden>换一种玩法</button>',html)
+        self.assertIn('<p data-quiz-error role="status" hidden>',html)
 
     def test_intro_is_data_and_matches_the_requested_copy(self):
         intro = load_intro(ROOT)
@@ -112,7 +114,8 @@ class LearningReaderTests(unittest.TestCase):
         for retired in ("入门", "进阶", "挑战"):
             self.assertNotIn(f'>{retired}</button>', html)
         card = corner["cards"][0]
-        self.assertIn(" · " + LEVELS[card["level"]] + " · ", render_card(card, corner))
+        visible = re.sub(r'<[^>]+>', '', render_card(card, corner))
+        self.assertIn(" · " + LEVELS[card["level"]] + " · ", visible)
 
     def test_works_menu_owns_the_learning_entrance(self):
         self.assertEqual(len(NAV_GROUPS), 4)

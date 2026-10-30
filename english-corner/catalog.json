@@ -208,6 +208,58 @@
       ]
     },
     {
+      "slug": "tycoon",
+      "column": "words",
+      "title": "商界大亨的头衔，借自日本“大君”",
+      "level": 1,
+      "tags": [
+        "借词",
+        "日本",
+        "商业"
+      ],
+      "summary": "tycoon 借自日语 taikun，早期用于称呼日本将军。进入英语后，称号里的权势色彩转到了商界：oil tycoon 就是石油大亨。",
+      "sources": [
+        {
+          "label": "Merriam-Webster：tycoon",
+          "url": "https://www.merriam-webster.com/dictionary/tycoon",
+          "checked_on": "2026-10-29"
+        },
+        {
+          "label": "Etymonline：tycoon",
+          "url": "https://www.etymonline.com/word/tycoon",
+          "checked_on": "2026-10-29"
+        }
+      ],
+      "related": [
+        "gung-ho",
+        "serendipity"
+      ],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true,
+      "headword": "tycoon",
+      "journey": [
+        {
+          "language": "日语",
+          "form": "大君 taikun",
+          "period": "",
+          "place_zh": "日语代表点 · 东京",
+          "lon": 139.7495,
+          "lat": 35.687,
+          "approximate": true
+        },
+        {
+          "language": "英语",
+          "form": "tycoon",
+          "period": "1857年已有记录",
+          "place_zh": "英语代表点 · 伦敦",
+          "lon": -0.1187,
+          "lat": 51.5019,
+          "approximate": true
+        }
+      ]
+    },
+    {
       "slug": "kowtow",
       "column": "words",
       "title": "英语里的 kowtow，一定要跪下来吗？",
@@ -260,68 +312,16 @@
       ]
     },
     {
-      "slug": "tycoon",
-      "column": "words",
-      "title": "tycoon 为什么从日本“大君”变成了大亨？",
-      "level": 1,
-      "tags": [
-        "借词",
-        "日本",
-        "商业"
-      ],
-      "summary": "这个词借自日语 taikun，早期用于称呼日本将军。进入英语后，称号里的权势色彩转到了商界：oil tycoon 就是石油大亨。",
-      "sources": [
-        {
-          "label": "Merriam-Webster：tycoon",
-          "url": "https://www.merriam-webster.com/dictionary/tycoon",
-          "checked_on": "2026-10-29"
-        },
-        {
-          "label": "Etymonline：tycoon",
-          "url": "https://www.etymonline.com/word/tycoon",
-          "checked_on": "2026-10-29"
-        }
-      ],
-      "related": [
-        "gung-ho",
-        "serendipity"
-      ],
-      "added": "2026-10-29",
-      "status": "published",
-      "ai_assisted": true,
-      "headword": "tycoon",
-      "journey": [
-        {
-          "language": "日语",
-          "form": "大君 taikun",
-          "period": "",
-          "place_zh": "日语代表点 · 东京",
-          "lon": 139.7495,
-          "lat": 35.687,
-          "approximate": true
-        },
-        {
-          "language": "英语",
-          "form": "tycoon",
-          "period": "1857年已有记录",
-          "place_zh": "英语代表点 · 伦敦",
-          "lon": -0.1187,
-          "lat": 51.5019,
-          "approximate": true
-        }
-      ]
-    },
-    {
       "slug": "amok",
       "column": "words",
-      "title": "run amok 里的 run，真是在跑吗？",
+      "title": "没有腿的谣言，也会 run amok",
       "level": 2,
       "tags": [
         "借词",
         "马来语",
         "习语"
       ],
-      "summary": "未必。amok 来自马来语，run amok 今天也能形容谣言、活动等不受控制。看见 rumours run amok，不用替谣言想象一双跑鞋。",
+      "summary": "run amok 今天也能形容谣言、活动等不受控制。amok 来自马来语；看见 rumours run amok，不必替谣言想象一双跑鞋。",
       "sources": [
         {
           "label": "Merriam-Webster：amok",
@@ -364,16 +364,148 @@
       ]
     },
     {
+      "slug": "chop-chop",
+      "column": "words",
+      "title": "chop-chop 是催人快一点，不是在切两刀？",
+      "level": 2,
+      "tags": [
+        "接触英语",
+        "重叠",
+        "搭配"
+      ],
+      "summary": "是的，这里指赶快、不要耽搁。韦氏词典把它连到中国洋泾浜英语里表示快的chop的重叠；不能因为今天熟悉chop的砍切义，就拿两刀解释它的来历。",
+      "sources": [
+        {
+          "label": "Merriam-Webster：chop-chop",
+          "url": "https://www.merriam-webster.com/dictionary/chop-chop",
+          "checked_on": "2026-10-29"
+        }
+      ],
+      "related": [
+        "gung-ho",
+        "typhoon"
+      ],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true,
+      "headword": "chop-chop"
+    },
+    {
+      "slug": "brainwashing",
+      "column": "words",
+      "title": "brainwashing 的“洗脑”，是按声音借的吗？",
+      "level": 2,
+      "tags": [
+        "译借",
+        "中国",
+        "语义变化"
+      ],
+      "summary": "不是按汉语读音搬过去，而是把“洗脑”的意思译成brain与washing。韦氏词典把现代词义连到汉语xǐnǎo；词拼得像英语，身后仍可能有另一种语言的表达。",
+      "sources": [
+        {
+          "label": "Merriam-Webster：brainwashing",
+          "url": "https://www.merriam-webster.com/dictionary/brainwashing",
+          "checked_on": "2026-10-29"
+        },
+        {
+          "label": "Merriam-Webster：'Brainwashing', A History",
+          "url": "https://www.merriam-webster.com/wordplay/brainwashing-word-history",
+          "checked_on": "2026-10-29"
+        }
+      ],
+      "related": [
+        "lose-face",
+        "chop-chop"
+      ],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true,
+      "headword": "brainwashing",
+      "journey": [
+        {
+          "language": "汉语",
+          "form": "洗脑 xǐnǎo",
+          "period": "",
+          "place_zh": "汉语代表点 · 北京",
+          "lon": 116.3942,
+          "lat": 39.9017,
+          "approximate": true
+        },
+        {
+          "language": "英语",
+          "form": "brainwashing",
+          "period": "",
+          "place_zh": "英语（美式语境）代表点 · 纽约",
+          "lon": -73.9957,
+          "lat": 40.7216,
+          "approximate": true
+        }
+      ]
+    },
+    {
+      "slug": "lose-face",
+      "column": "words",
+      "title": "lose face 丢的不是脸，是什么？",
+      "level": 2,
+      "tags": [
+        "译借",
+        "中国",
+        "比喻"
+      ],
+      "summary": "丢的是他人的尊重，也就是“丢脸、失面子”的比喻义。相关研究把英语表达与19世纪的汉英接触联系起来；这个身体部位，后来承担了社会评价的意思。",
+      "sources": [
+        {
+          "label": "Merriam-Webster：lose face",
+          "url": "https://www.merriam-webster.com/dictionary/lose%20face",
+          "checked_on": "2026-10-29"
+        },
+        {
+          "label": "James St. André：How the Chinese lost ‘face’（2013，摘要与章节说明）",
+          "url": "https://www.sciencedirect.com/science/article/abs/pii/S0378216613001379",
+          "checked_on": "2026-10-29"
+        }
+      ],
+      "related": [
+        "kowtow",
+        "brainwashing",
+        "paper-tiger"
+      ],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true,
+      "headword": "lose face",
+      "journey": [
+        {
+          "language": "汉语",
+          "form": "丢脸",
+          "period": "",
+          "place_zh": "汉语代表点 · 北京",
+          "lon": 116.3942,
+          "lat": 39.9017,
+          "approximate": true
+        },
+        {
+          "language": "英语",
+          "form": "lose face",
+          "period": "",
+          "place_zh": "英语代表点 · 伦敦",
+          "lon": -0.1187,
+          "lat": 51.5019,
+          "approximate": true
+        }
+      ]
+    },
+    {
       "slug": "serendipity",
       "column": "words",
-      "title": "中了奖就算 serendipity 吗？",
+      "title": "serendipity：故事里的意外发现",
       "level": 2,
       "tags": [
         "造词",
         "文学",
         "发现"
       ],
-      "summary": "未必。serendipity 强调没有刻意寻找，却意外发现了有价值的东西。这个词由霍勒斯·沃波尔借《塞伦迪普三王子》的故事造出；Serendip 是与斯里兰卡相联系的旧称。",
+      "summary": "serendipity 强调没有刻意寻找，却意外发现有价值的东西。霍勒斯·沃波尔借《塞伦迪普三王子》的故事造出这个词；Serendip 与斯里兰卡的旧称相联系。",
       "sources": [
         {
           "label": "Merriam-Webster：serendipity",
@@ -416,16 +548,646 @@
       ]
     },
     {
+      "slug": "algebra",
+      "column": "words",
+      "title": "代数的名字，带着一截阿拉伯语",
+      "level": 2,
+      "tags": [
+        "借词",
+        "数学",
+        "阿拉伯语"
+      ],
+      "summary": "algebra 经中世纪拉丁语追到阿拉伯语 al-jabr。这个名字又连着一部讨论方程的九世纪著作；今天熟悉的字母算式，带着跨语言的身世。",
+      "sources": [
+        {
+          "label": "Merriam-Webster：algebra",
+          "url": "https://www.merriam-webster.com/dictionary/algebra",
+          "checked_on": "2026-10-30"
+        },
+        {
+          "label": "Etymonline：algebra",
+          "url": "https://www.etymonline.com/word/algebra",
+          "checked_on": "2026-10-30"
+        }
+      ],
+      "related": [
+        "qian-and-wan"
+      ],
+      "added": "2026-10-30",
+      "status": "published",
+      "ai_assisted": true,
+      "headword": "algebra",
+      "journey": [
+        {
+          "language": "阿拉伯语",
+          "form": "al-jabr",
+          "period": "",
+          "place_zh": "阿拉伯语代表点 · 巴格达",
+          "lon": 44.3919,
+          "lat": 33.3406,
+          "approximate": true
+        },
+        {
+          "language": "中世纪拉丁语",
+          "form": "algebra",
+          "period": "",
+          "place_zh": "中世纪拉丁语示意点 · 罗马",
+          "lon": 12.4813,
+          "lat": 41.8979,
+          "approximate": true
+        },
+        {
+          "language": "英语",
+          "form": "algebra",
+          "period": "",
+          "place_zh": "英语代表点 · 伦敦",
+          "lon": -0.1187,
+          "lat": 51.5019,
+          "approximate": true
+        }
+      ]
+    },
+    {
+      "slug": "coffee",
+      "column": "words",
+      "title": "一杯 coffee，连着几种语言的咖啡馆",
+      "level": 1,
+      "tags": [
+        "借词",
+        "饮食",
+        "阿拉伯语"
+      ],
+      "summary": "coffee 的词源能追到阿拉伯语 qahwa。韦氏词典列出意大利语和土耳其语来源；今天点 two coffees，还能顺便看到一个词怎样从饮料变成“两杯”。",
+      "sources": [
+        {
+          "label": "Merriam-Webster：coffee",
+          "url": "https://www.merriam-webster.com/dictionary/coffee",
+          "checked_on": "2026-10-30"
+        }
+      ],
+      "related": [
+        "tea-and-cha",
+        "ketchup"
+      ],
+      "added": "2026-10-30",
+      "status": "published",
+      "ai_assisted": true,
+      "headword": "coffee",
+      "journey": [
+        {
+          "language": "阿拉伯语",
+          "form": "qahwa",
+          "period": "",
+          "place_zh": "阿拉伯语代表点 · 巴格达",
+          "lon": 44.3919,
+          "lat": 33.3406,
+          "approximate": true
+        },
+        {
+          "language": "土耳其语（所列支线）",
+          "form": "kahve",
+          "period": "",
+          "place_zh": "土耳其语代表点 · 伊斯坦布尔",
+          "lon": 28.9743,
+          "lat": 41.0176,
+          "approximate": true
+        },
+        {
+          "language": "英语",
+          "form": "coffee",
+          "period": "",
+          "place_zh": "英语代表点 · 伦敦",
+          "lon": -0.1187,
+          "lat": 51.5019,
+          "approximate": true
+        }
+      ]
+    },
+    {
+      "slug": "robot",
+      "column": "words",
+      "title": "robot 这个名字，从一出捷克戏剧出发",
+      "level": 2,
+      "tags": [
+        "借词",
+        "科幻",
+        "捷克语"
+      ],
+      "summary": "robot 随捷克作家卡雷尔·恰佩克的戏剧 R.U.R. 走进世界。韦氏词典说明，他的兄弟约瑟夫提出这个名字，背后连着表示强制劳动的捷克语 robota。",
+      "sources": [
+        {
+          "label": "Merriam-Webster：robot",
+          "url": "https://www.merriam-webster.com/dictionary/robot",
+          "checked_on": "2026-10-30"
+        }
+      ],
+      "related": [
+        "shakespeare-invented-words"
+      ],
+      "added": "2026-10-30",
+      "status": "published",
+      "ai_assisted": true,
+      "headword": "robot",
+      "journey": [
+        {
+          "language": "捷克语",
+          "form": "robota → robot",
+          "period": "",
+          "place_zh": "捷克语代表点 · 布拉格",
+          "lon": 14.4229,
+          "lat": 50.087,
+          "approximate": true
+        },
+        {
+          "language": "英语",
+          "form": "robot",
+          "period": "",
+          "place_zh": "英语代表点 · 伦敦",
+          "lon": -0.1187,
+          "lat": 51.5019,
+          "approximate": true
+        }
+      ]
+    },
+    {
+      "slug": "tomato",
+      "column": "words",
+      "title": "tomato 穿过西班牙语，带来一个美洲名字",
+      "level": 1,
+      "tags": [
+        "借词",
+        "饮食",
+        "美洲"
+      ],
+      "summary": "tomato 经西班牙语 tomate，向前连到纳瓦特尔语 tomatl。这个日常蔬果名，留着美洲语言的痕迹；它的英语复数则是 tomatoes。",
+      "sources": [
+        {
+          "label": "Merriam-Webster：tomato",
+          "url": "https://www.merriam-webster.com/dictionary/tomato",
+          "checked_on": "2026-10-30"
+        }
+      ],
+      "related": [
+        "ketchup"
+      ],
+      "added": "2026-10-30",
+      "status": "published",
+      "ai_assisted": true,
+      "headword": "tomato",
+      "journey": [
+        {
+          "language": "纳瓦特尔语",
+          "form": "tomatl",
+          "period": "",
+          "place_zh": "纳瓦特尔语区域示意点 · 墨西哥城",
+          "lon": -99.1329,
+          "lat": 19.4444,
+          "approximate": true
+        },
+        {
+          "language": "西班牙语",
+          "form": "tomate",
+          "period": "",
+          "place_zh": "西班牙语代表点 · 马德里",
+          "lon": -3.6853,
+          "lat": 40.402,
+          "approximate": true
+        },
+        {
+          "language": "英语",
+          "form": "tomato",
+          "period": "",
+          "place_zh": "英语代表点 · 伦敦",
+          "lon": -0.1187,
+          "lat": 51.5019,
+          "approximate": true
+        }
+      ]
+    },
+    {
+      "slug": "kindergarten",
+      "column": "words",
+      "title": "kindergarten：把儿童和花园放进一个词",
+      "level": 1,
+      "tags": [
+        "借词",
+        "教育",
+        "德语"
+      ],
+      "summary": "kindergarten 从德语借来，Kinder 是儿童，Garten 是花园。英语用它称幼儿学校或班级，一个教育名称里保留了一幅“儿童花园”的画面。",
+      "sources": [
+        {
+          "label": "Merriam-Webster：kindergarten",
+          "url": "https://www.merriam-webster.com/dictionary/kindergarten",
+          "checked_on": "2026-10-30"
+        }
+      ],
+      "related": [],
+      "added": "2026-10-30",
+      "status": "published",
+      "ai_assisted": true,
+      "headword": "kindergarten",
+      "journey": [
+        {
+          "language": "德语",
+          "form": "Kindergarten",
+          "period": "",
+          "place_zh": "德语代表点 · 柏林",
+          "lon": 13.3996,
+          "lat": 52.5238,
+          "approximate": true
+        },
+        {
+          "language": "英语",
+          "form": "kindergarten",
+          "period": "",
+          "place_zh": "英语代表点 · 伦敦",
+          "lon": -0.1187,
+          "lat": 51.5019,
+          "approximate": true
+        }
+      ]
+    },
+    {
+      "slug": "tsunami",
+      "column": "words",
+      "title": "tsunami：日语的“港”和“浪”，合成一个英语词",
+      "level": 1,
+      "tags": [
+        "借词",
+        "自然",
+        "日语"
+      ],
+      "summary": "tsunami 来自日语，tsu 是港，nami 是浪。英语把它用作海啸的名称，日语的词形与构成也一起留在了这个借词里。",
+      "sources": [
+        {
+          "label": "Merriam-Webster：tsunami",
+          "url": "https://www.merriam-webster.com/dictionary/tsunami",
+          "checked_on": "2026-10-30"
+        }
+      ],
+      "related": [
+        "typhoon",
+        "tycoon"
+      ],
+      "added": "2026-10-30",
+      "status": "published",
+      "ai_assisted": true,
+      "headword": "tsunami",
+      "journey": [
+        {
+          "language": "日语",
+          "form": "tsunami（津波）",
+          "period": "",
+          "place_zh": "日语代表点 · 东京",
+          "lon": 139.7495,
+          "lat": 35.687,
+          "approximate": true
+        },
+        {
+          "language": "英语",
+          "form": "tsunami",
+          "period": "",
+          "place_zh": "英语代表点 · 伦敦",
+          "lon": -0.1187,
+          "lat": 51.5019,
+          "approximate": true
+        }
+      ]
+    },
+    {
+      "slug": "safari",
+      "column": "words",
+      "title": "safari：望远镜背后的斯瓦希里语“旅程”",
+      "level": 1,
+      "tags": [
+        "借词",
+        "旅行",
+        "非洲"
+      ],
+      "summary": "safari 从斯瓦希里语借来，原意是旅程，更早又与阿拉伯语有关。现代英语里，去观察野生动物的旅行也可以叫 safari。",
+      "sources": [
+        {
+          "label": "Merriam-Webster：safari",
+          "url": "https://www.merriam-webster.com/dictionary/safari",
+          "checked_on": "2026-10-30"
+        },
+        {
+          "label": "Collins COBUILD：safari",
+          "url": "https://www.collinsdictionary.com/dictionary/english/safari",
+          "checked_on": "2026-10-30"
+        }
+      ],
+      "related": [
+        "serendipity"
+      ],
+      "added": "2026-10-30",
+      "status": "published",
+      "ai_assisted": true,
+      "headword": "safari",
+      "journey": [
+        {
+          "language": "斯瓦希里语",
+          "form": "safari",
+          "period": "",
+          "place_zh": "斯瓦希里语代表点 · 达累斯萨拉姆",
+          "lon": 39.2664,
+          "lat": -6.7981,
+          "approximate": true
+        },
+        {
+          "language": "英语",
+          "form": "safari",
+          "period": "",
+          "place_zh": "英语代表点 · 伦敦",
+          "lon": -0.1187,
+          "lat": 51.5019,
+          "approximate": true
+        }
+      ]
+    },
+    {
+      "slug": "shampoo",
+      "column": "words",
+      "title": "shampoo 瓶里，藏着一声“按一按”",
+      "level": 1,
+      "tags": [
+        "借词",
+        "日常",
+        "南亚"
+      ],
+      "summary": "shampoo 的源头是印地语和乌尔都语里表示按压、按摩的动词形式。英语早期也用它说按摩，后来熟悉的洗头动作和洗发用品，继续用了这个名字。",
+      "sources": [
+        {
+          "label": "Merriam-Webster：shampoo",
+          "url": "https://www.merriam-webster.com/dictionary/shampoo",
+          "checked_on": "2026-10-30"
+        }
+      ],
+      "related": [],
+      "added": "2026-10-30",
+      "status": "published",
+      "ai_assisted": true,
+      "headword": "shampoo",
+      "journey": [
+        {
+          "language": "印地语／乌尔都语",
+          "form": "cā̃po",
+          "period": "",
+          "place_zh": "印地语／乌尔都语区域示意点 · 新德里",
+          "lon": 77.2,
+          "lat": 28.6,
+          "approximate": true
+        },
+        {
+          "language": "英语",
+          "form": "shampoo",
+          "period": "",
+          "place_zh": "英语代表点 · 伦敦",
+          "lon": -0.1187,
+          "lat": 51.5019,
+          "approximate": true
+        }
+      ]
+    },
+    {
+      "slug": "pyjamas",
+      "column": "words",
+      "title": "pyjamas 和 pajamas，睡衣的两个拼法",
+      "level": 1,
+      "tags": [
+        "借词",
+        "日常",
+        "南亚"
+      ],
+      "summary": "pyjamas 是主要用于英式英语的拼法，pajamas 在美式英语中常见。这个词经南亚语言连到波斯语，把“腿”和“衣物”的线索带进了英语。",
+      "sources": [
+        {
+          "label": "Merriam-Webster：pajamas",
+          "url": "https://www.merriam-webster.com/dictionary/pajamas",
+          "checked_on": "2026-10-30"
+        },
+        {
+          "label": "Merriam-Webster：pyjamas（英式拼法）",
+          "url": "https://www.merriam-webster.com/dictionary/pyjamas",
+          "checked_on": "2026-10-30"
+        },
+        {
+          "label": "Oxford Learner’s Dictionaries：pyjamas",
+          "url": "https://www.oxfordlearnersdictionaries.com/definition/english/pyjamas",
+          "checked_on": "2026-10-30"
+        }
+      ],
+      "related": [
+        "shampoo"
+      ],
+      "added": "2026-10-30",
+      "status": "published",
+      "ai_assisted": true,
+      "headword": "pyjamas",
+      "journey": [
+        {
+          "language": "波斯语",
+          "form": "pā + jāma",
+          "period": "",
+          "place_zh": "波斯语代表点 · 德黑兰",
+          "lon": 51.4224,
+          "lat": 35.6739,
+          "approximate": true
+        },
+        {
+          "language": "印地语",
+          "form": "pājāma",
+          "period": "",
+          "place_zh": "印地语／乌尔都语区域示意点 · 新德里",
+          "lon": 77.2,
+          "lat": 28.6,
+          "approximate": true
+        },
+        {
+          "language": "英语",
+          "form": "pyjamas / pajamas",
+          "period": "",
+          "place_zh": "英语代表点 · 伦敦",
+          "lon": -0.1187,
+          "lat": 51.5019,
+          "approximate": true
+        }
+      ]
+    },
+    {
+      "slug": "cookie",
+      "column": "words",
+      "title": "烤箱里的 cookie，也住进了浏览器",
+      "level": 1,
+      "tags": [
+        "借词",
+        "饮食",
+        "荷兰语"
+      ],
+      "summary": "cookie 从荷兰语 koekje 借来，名字里带着“小蛋糕”的意思。今天它既能指小点心，也能出现在浏览器提示里；复数写作 cookies。",
+      "sources": [
+        {
+          "label": "Merriam-Webster：cookie",
+          "url": "https://www.merriam-webster.com/dictionary/cookie",
+          "checked_on": "2026-10-30"
+        }
+      ],
+      "related": [
+        "ketchup"
+      ],
+      "added": "2026-10-30",
+      "status": "published",
+      "ai_assisted": true,
+      "headword": "cookie",
+      "journey": [
+        {
+          "language": "荷兰语",
+          "form": "koekje",
+          "period": "",
+          "place_zh": "荷兰语代表点 · 阿姆斯特丹",
+          "lon": 4.9147,
+          "lat": 52.3519,
+          "approximate": true
+        },
+        {
+          "language": "英语",
+          "form": "cookie",
+          "period": "",
+          "place_zh": "英语代表点 · 伦敦",
+          "lon": -0.1187,
+          "lat": 51.5019,
+          "approximate": true
+        }
+      ]
+    },
+    {
+      "slug": "sauna",
+      "column": "words",
+      "title": "sauna：一个芬兰名字，走进酒店说明",
+      "level": 1,
+      "tags": [
+        "借词",
+        "日常",
+        "芬兰语"
+      ],
+      "summary": "sauna 从芬兰语进入英语。英语既用它说桑拿浴，也用来指进行这种浴的房间；酒店设施表上的一个短词，就连着芬兰语的名字。",
+      "sources": [
+        {
+          "label": "Merriam-Webster：sauna",
+          "url": "https://www.merriam-webster.com/dictionary/sauna",
+          "checked_on": "2026-10-30"
+        }
+      ],
+      "related": [],
+      "added": "2026-10-30",
+      "status": "published",
+      "ai_assisted": true,
+      "headword": "sauna",
+      "journey": [
+        {
+          "language": "芬兰语",
+          "form": "sauna",
+          "period": "",
+          "place_zh": "芬兰语代表点 · 赫尔辛基",
+          "lon": 24.9325,
+          "lat": 60.1638,
+          "approximate": true
+        },
+        {
+          "language": "英语",
+          "form": "sauna",
+          "period": "",
+          "place_zh": "英语代表点 · 伦敦",
+          "lon": -0.1187,
+          "lat": 51.5019,
+          "approximate": true
+        }
+      ]
+    },
+    {
+      "slug": "ski",
+      "column": "words",
+      "title": "三字母 ski，连着挪威语里的木板",
+      "level": 1,
+      "tags": [
+        "借词",
+        "运动",
+        "挪威语"
+      ],
+      "summary": "ski 从挪威语借来，更早连到表示木条、滑雪板的古诺尔斯语。它在英语里既能指滑雪板，也能做动词；skiing 的两个 i 就是一个好记的线索。",
+      "sources": [
+        {
+          "label": "Merriam-Webster：ski",
+          "url": "https://www.merriam-webster.com/dictionary/ski",
+          "checked_on": "2026-10-30"
+        }
+      ],
+      "related": [],
+      "added": "2026-10-30",
+      "status": "published",
+      "ai_assisted": true,
+      "headword": "ski",
+      "journey": [
+        {
+          "language": "挪威语",
+          "form": "ski",
+          "period": "",
+          "place_zh": "挪威语代表点 · 奥斯陆",
+          "lon": 10.748,
+          "lat": 59.9186,
+          "approximate": true
+        },
+        {
+          "language": "英语",
+          "form": "ski",
+          "period": "",
+          "place_zh": "英语代表点 · 伦敦",
+          "lon": -0.1187,
+          "lat": 51.5019,
+          "approximate": true
+        }
+      ]
+    },
+    {
+      "slug": "typhoon",
+      "column": "words",
+      "title": "typhoon 听着像“大风”，词源就这么简单吗？",
+      "level": 3,
+      "tags": [
+        "词源",
+        "语言接触",
+        "天气"
+      ],
+      "summary": "没这么简单。韦氏词典列出较早词形与阿拉伯语、希腊语的联系，也说明现代形态受到粤语“大风”影响。声音相似是一条线索，不能单独变成唯一路线。",
+      "sources": [
+        {
+          "label": "Merriam-Webster：typhoon",
+          "url": "https://www.merriam-webster.com/dictionary/typhoon",
+          "checked_on": "2026-10-29"
+        }
+      ],
+      "related": [
+        "amok",
+        "long-time-no-see",
+        "chop-chop"
+      ],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true,
+      "headword": "typhoon"
+    },
+    {
       "slug": "long-time-no-see",
       "column": "words",
-      "title": "long time no see 一定来自“好久不见”吗？",
+      "title": "Long time no see：熟悉的问候，未定的来路",
       "level": 1,
       "tags": [
         "借词",
         "证据",
         "问候"
       ],
-      "summary": "还不能这样断定。汉语仿译说和北美相关早期记录都值得看；旧书里模仿某种口语的对白，也不能直接证明现实中是谁最先说出了这句话。",
+      "summary": "Long time no see 是久别重逢时的非正式问候，今天完全可以使用。它最早怎样形成仍有不同线索，旧书对白不足以单独确定传播路径。",
       "sources": [
         {
           "label": "British Council：Phrase-ology，第27页的来源讨论",
@@ -436,6 +1198,11 @@
           "label": "David Crystal：On long time no see",
           "url": "https://david-crystal.blogspot.com/2010/07/on-long-time-no-see.html",
           "checked_on": "2026-10-29"
+        },
+        {
+          "label": "Merriam-Webster：long time no see",
+          "url": "https://www.merriam-webster.com/dictionary/long%20time%20no%20see",
+          "checked_on": "2026-10-30"
         }
       ],
       "related": [
@@ -549,14 +1316,14 @@
     {
       "slug": "chesterton-hat",
       "column": "classics",
-      "title": "抽屉拉不开，切斯特顿怎么把它写成冒险？",
+      "title": "抽屉拉不开，也能写成一场冒险",
       "level": 3,
       "tags": [
         "散文",
         "幽默",
         "日常"
       ],
-      "summary": "他把拉抽屉想成与强敌拔河，把日常不便换成壮举的场面。事情依然很小，写法却越来越英勇，反差就是笑点。",
+      "summary": "切斯特顿把拉抽屉想成与强敌拔河，把日常不便换成壮举的场面。事情依然很小，写法却越来越英勇，反差就是笑点。",
       "sources": [
         {
           "label": "Project Gutenberg #11505：所据1915年版本正文",
@@ -598,14 +1365,14 @@
     {
       "slug": "twain-corn-pone",
       "column": "classics",
-      "title": "一条裙子，为什么先被笑话，后来又被追捧？",
+      "title": "一条裙子，半年间从笑柄变成潮流",
       "level": 2,
       "tags": [
         "散文",
         "群体",
         "时尚"
       ],
-      "summary": "马克·吐温的答案是：人常常希望与别人一致。新裙式刚来时惹人笑，半年后又赢得欣赏；衣服之外，改变的也许还有人们寻找认可的方式。",
+      "summary": "新裙式刚来时惹人笑，半年后又赢得欣赏。马克·吐温借这种变化写人们对一致与认可的需要；衣服之外，改变的也许还有观看它的方式。",
       "sources": [
         {
           "label": "Project Gutenberg #68604：原书电子文本",
@@ -686,14 +1453,14 @@
     {
       "slug": "yeats-when-you-are-old",
       "column": "classics",
-      "title": "《当你老了》的原诗，只是在赞美容貌吗？",
+      "title": "叶芝写爱，也写“行旅的灵魂”",
       "level": 2,
       "tags": [
         "诗歌",
         "爱尔兰",
         "和中国有关"
       ],
-      "summary": "不只。叶芝把容貌、不断变化的面容和“行旅的灵魂”放在一起，又让年老时的回忆提前出现。这首中文听众熟悉的诗，比一句甜蜜告白更有回味。",
+      "summary": "叶芝把容貌、不断变化的面容和“行旅的灵魂”放在一起，让年老时的回忆提前出现。《当你老了》这首中文听众熟悉的诗，比一句甜蜜告白更有回味。",
       "sources": [
         {
           "label": "Project Gutenberg #49608：1908年版原诗及扉页",
@@ -836,16 +1603,78 @@
       }
     },
     {
+      "slug": "september",
+      "column": "between",
+      "title": "九月里的“七”，是一个没有改掉的旧编号",
+      "level": 1,
+      "tags": [
+        "历法",
+        "月份",
+        "拉丁语"
+      ],
+      "summary": "September 与拉丁语的“七”有关。放回以三月开年的古罗马历法背景，它排在第七；月份的位置变了，名字却保留了旧编号。",
+      "sources": [
+        {
+          "label": "Merriam-Webster：September",
+          "url": "https://www.merriam-webster.com/dictionary/September",
+          "checked_on": "2026-10-29"
+        },
+        {
+          "label": "Etymonline：September",
+          "url": "https://www.etymonline.com/word/September",
+          "checked_on": "2026-10-29"
+        }
+      ],
+      "related": [
+        "weekdays",
+        "qian-and-wan"
+      ],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true
+    },
+    {
+      "slug": "weekdays",
+      "column": "between",
+      "title": "每周三，日历都在提起 Woden",
+      "level": 2,
+      "tags": [
+        "历法",
+        "词源",
+        "拼写"
+      ],
+      "summary": "Wednesday 的古英语祖先意为“沃登之日”，Woden 与北欧传统的 Odin 相联系。每天看的日历，留着一小段古老的命名史。",
+      "sources": [
+        {
+          "label": "Merriam-Webster：Wednesday",
+          "url": "https://www.merriam-webster.com/dictionary/Wednesday",
+          "checked_on": "2026-10-29"
+        },
+        {
+          "label": "Etymonline：Wednesday",
+          "url": "https://www.etymonline.com/word/Wednesday",
+          "checked_on": "2026-10-29"
+        }
+      ],
+      "related": [
+        "september",
+        "tea-and-cha"
+      ],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true
+    },
+    {
       "slug": "qian-and-wan",
       "column": "between",
-      "title": "14亿为什么是 1.4 billion？",
+      "title": "14亿，换一个台阶就成了1.4 billion",
       "level": 1,
       "tags": [
         "数字",
         "表达",
         "小工具"
       ],
-      "summary": "因为一个 billion 等于十亿。把14亿写成1,400,000,000，再按英语三位一组看，就是1.4 billion。汉语的万、亿，与英语的thousand、million、billion，踩的是不同台阶。",
+      "summary": "一个 billion 等于十亿，所以14亿是1.4 billion。把14亿写成1,400,000,000，再按英语三位一组读，汉语万、亿与英语大单位的台阶就看得清了。",
       "sources": [
         {
           "label": "NIST：Metric (SI) Prefixes（英语数量级对照）",
@@ -869,14 +1698,14 @@
     {
       "slug": "uncle",
       "column": "between",
-      "title": "叔伯舅都叫 uncle，英语就分不清了吗？",
+      "title": "uncle：一个词，几种亲属关系",
       "level": 1,
       "tags": [
         "亲属",
         "翻译",
         "语境"
       ],
-      "summary": "分得清，只是需要时会多说几个词。my mother’s brother 是母亲的兄弟，my father’s older brother 是伯父；一个宽泛的称呼，仍能展开成具体的亲属关系。",
+      "summary": "uncle 能涵盖叔、伯、舅等亲属，需要讲具体时，再加几个词说明是父亲还是母亲的兄弟。一个宽泛称呼，仍能展开成清楚的亲属关系。",
       "sources": [
         {
           "label": "Merriam-Webster：uncle",
@@ -887,449 +1716,6 @@
       "related": [
         "qian-and-wan",
         "weekdays"
-      ],
-      "added": "2026-10-29",
-      "status": "published",
-      "ai_assisted": true
-    },
-    {
-      "slug": "weekdays",
-      "column": "between",
-      "title": "Wednesday 里藏着谁的名字？",
-      "level": 2,
-      "tags": [
-        "历法",
-        "词源",
-        "拼写"
-      ],
-      "summary": "藏着 Woden。Wednesday 的古英语祖先意为“沃登之日”，Woden 又与北欧传统的 Odin 相联系；每天看的日历，留着一小段古老命名史。",
-      "sources": [
-        {
-          "label": "Merriam-Webster：Wednesday",
-          "url": "https://www.merriam-webster.com/dictionary/Wednesday",
-          "checked_on": "2026-10-29"
-        },
-        {
-          "label": "Etymonline：Wednesday",
-          "url": "https://www.etymonline.com/word/Wednesday",
-          "checked_on": "2026-10-29"
-        }
-      ],
-      "related": [
-        "september",
-        "tea-and-cha"
-      ],
-      "added": "2026-10-29",
-      "status": "published",
-      "ai_assisted": true
-    },
-    {
-      "slug": "september",
-      "column": "between",
-      "title": "September 是九月，名字里为什么有“七”？",
-      "level": 1,
-      "tags": [
-        "历法",
-        "月份",
-        "拉丁语"
-      ],
-      "summary": "名字留下了旧编号。它与拉丁语的“七”有关，在以三月开年的古罗马历法背景里排第七；月份的位置变了，旧名字却一直沿用。",
-      "sources": [
-        {
-          "label": "Merriam-Webster：September",
-          "url": "https://www.merriam-webster.com/dictionary/September",
-          "checked_on": "2026-10-29"
-        },
-        {
-          "label": "Etymonline：September",
-          "url": "https://www.etymonline.com/word/September",
-          "checked_on": "2026-10-29"
-        }
-      ],
-      "related": [
-        "weekdays",
-        "qian-and-wan"
-      ],
-      "added": "2026-10-29",
-      "status": "published",
-      "ai_assisted": true
-    },
-    {
-      "slug": "sos",
-      "column": "myths",
-      "title": "SOS 真是 Save Our Souls 的缩写吗？",
-      "level": 1,
-      "tags": [
-        "缩写",
-        "航海",
-        "民间词源"
-      ],
-      "summary": "不是。这句话是后来配上的记忆法。求救信号选择这组字母，是因为摩尔斯码的三短、三长、三短容易发送和识别。",
-      "sources": [
-        {
-          "label": "Oxford Learner’s Dictionaries：SOS，Word Origin",
-          "url": "https://www.oxfordlearnersdictionaries.com/definition/english/sos",
-          "checked_on": "2026-10-29"
-        },
-        {
-          "label": "ITU：Overview of ITU’s History，Radio",
-          "url": "https://www.itu.int/en/history/pages/itushistory-page-2.aspx",
-          "checked_on": "2026-10-29"
-        }
-      ],
-      "related": [
-        "posh",
-        "ok"
-      ],
-      "added": "2026-10-29",
-      "status": "published",
-      "ai_assisted": true,
-      "verdict": "假"
-    },
-    {
-      "slug": "posh",
-      "column": "myths",
-      "title": "posh 真是“去程左舷，回程右舷”的缩写吗？",
-      "level": 2,
-      "tags": [
-        "民间词源",
-        "缩写",
-        "证据"
-      ],
-      "summary": "这个船舱故事缺乏证据。韦氏词典仍把 posh 的来历标为不明；怀疑一个流行解释，并不等于已经找到了真正答案。",
-      "sources": [
-        {
-          "label": "Merriam-Webster：posh",
-          "url": "https://www.merriam-webster.com/dictionary/posh",
-          "checked_on": "2026-10-29"
-        },
-        {
-          "label": "Etymonline：posh",
-          "url": "https://www.etymonline.com/word/posh",
-          "checked_on": "2026-10-29"
-        }
-      ],
-      "related": [
-        "sos",
-        "salary-salt"
-      ],
-      "added": "2026-10-29",
-      "status": "published",
-      "ai_assisted": true,
-      "verdict": "存疑"
-    },
-    {
-      "slug": "ok",
-      "column": "myths",
-      "title": "OK 最早的线索，真是一场拼写玩笑？",
-      "level": 1,
-      "tags": [
-        "缩写",
-        "美国",
-        "词源"
-      ],
-      "summary": "现有早期记录支持这个解释。1839年波士顿报纸里的 oll korrect，是故意拼错的 all correct；次年的 Old Kinderhook 竞选口号又帮助它传开。",
-      "sources": [
-        {
-          "label": "Merriam-Webster：OK",
-          "url": "https://www.merriam-webster.com/dictionary/OK",
-          "checked_on": "2026-10-29"
-        },
-        {
-          "label": "Cambridge Dictionary Blog：It’s All OK（里德考证与传播）",
-          "url": "https://dictionaryblog.cambridge.org/2011/02/11/its-all-ok/",
-          "checked_on": "2026-10-29"
-        }
-      ],
-      "related": [
-        "posh",
-        "sos"
-      ],
-      "added": "2026-10-29",
-      "status": "published",
-      "ai_assisted": true,
-      "verdict": "真"
-    },
-    {
-      "slug": "salary-salt",
-      "column": "myths",
-      "title": "salary 跟盐有关，罗马士兵就领盐当工资吗？",
-      "level": 2,
-      "tags": [
-        "拉丁语",
-        "证据",
-        "工作"
-      ],
-      "summary": "词源与盐有关，发薪制度却不能只靠词根来证明。“直接发盐”或“专门发购盐钱”的细节，都不宜当作已经坐实的历史。",
-      "sources": [
-        {
-          "label": "Merriam-Webster：salary",
-          "url": "https://www.merriam-webster.com/dictionary/salary",
-          "checked_on": "2026-10-29"
-        },
-        {
-          "label": "Etymonline：salary",
-          "url": "https://www.etymonline.com/word/salary",
-          "checked_on": "2026-10-29"
-        }
-      ],
-      "related": [
-        "posh",
-        "qian-and-wan"
-      ],
-      "added": "2026-10-29",
-      "status": "published",
-      "ai_assisted": true,
-      "verdict": "部分正确"
-    },
-    {
-      "slug": "very-like",
-      "column": "mistakes",
-      "title": "“很喜欢”，为什么不说 I very like it？",
-      "level": 1,
-      "tags": [
-        "程度",
-        "动词",
-        "搭配"
-      ],
-      "summary": "表示“很喜欢”，可以说 I really like it 或 I like it very much。very 常修饰形容词、副词，不能照着中文的位置直接放在喜欢义的动词 like 前面。",
-      "sources": [
-        {
-          "label": "Cambridge English Grammar Today：Like",
-          "url": "https://dictionary.cambridge.org/grammar/british-grammar/like",
-          "checked_on": "2026-10-29"
-        },
-        {
-          "label": "Cambridge English Grammar Today：Very",
-          "url": "https://dictionary.cambridge.org/us/grammar/british-grammar/very",
-          "checked_on": "2026-10-29"
-        },
-        {
-          "label": "Cambridge Dictionary：really",
-          "url": "https://dictionary.cambridge.org/us/dictionary/essential-american-english/really",
-          "checked_on": "2026-10-29"
-        }
-      ],
-      "related": [
-        "bored-boring",
-        "look-forward-to"
-      ],
-      "added": "2026-10-29",
-      "status": "published",
-      "ai_assisted": true
-    },
-    {
-      "slug": "turn-on-light",
-      "column": "mistakes",
-      "title": "开的是灯，为什么不直接说 open the light？",
-      "level": 1,
-      "tags": [
-        "搭配",
-        "日常生活",
-        "动词"
-      ],
-      "summary": "让电灯通电发光，说 turn on 或 switch on；关闭则说 turn off 或 switch off。汉语一个“开”能管灯和门，英语常把这两个动作分开。",
-      "sources": [
-        {
-          "label": "Cambridge Learner's Dictionary：switch (sth) on",
-          "url": "https://dictionary.cambridge.org/dictionary/learner-english/switch-sth-on",
-          "checked_on": "2026-10-29"
-        },
-        {
-          "label": "Cambridge English–Malay Dictionary：switch on/off",
-          "url": "https://dictionary.cambridge.org/us/dictionary/english-malaysian/switch-on-off",
-          "checked_on": "2026-10-29"
-        }
-      ],
-      "related": [
-        "play-computer-games",
-        "very-like"
-      ],
-      "added": "2026-10-29",
-      "status": "published",
-      "ai_assisted": true
-    },
-    {
-      "slug": "bored-boring",
-      "column": "mistakes",
-      "title": "说 I am boring，是无聊还是把别人聊无聊？",
-      "level": 1,
-      "tags": [
-        "形容词",
-        "感受",
-        "近形词"
-      ],
-      "summary": "想说自己感到无聊，用 I am bored。I am boring 本身语法成立，却是在说自己令人无聊。区别是感受与造成感受，不是“人用-ed、物用-ing”。",
-      "sources": [
-        {
-          "label": "Cambridge English Grammar Today：bored or boring",
-          "url": "https://dictionary.cambridge.org/grammar/british-grammar/word-choice-bored-or-boring",
-          "checked_on": "2026-10-29"
-        },
-        {
-          "label": "British Council LearnEnglish：Adjectives ending in -ed and -ing（正文）",
-          "url": "https://learnenglish.britishcouncil.org/comment/207743",
-          "checked_on": "2026-10-29"
-        }
-      ],
-      "related": [
-        "very-like",
-        "black-tea"
-      ],
-      "added": "2026-10-29",
-      "status": "published",
-      "ai_assisted": true
-    },
-    {
-      "slug": "discuss-about",
-      "column": "mistakes",
-      "title": "discuss 后面，为什么不用再加 about？",
-      "level": 1,
-      "tags": [
-        "动词",
-        "介词",
-        "讨论"
-      ],
-      "summary": "discuss 直接接讨论对象：discuss the route。也可以说 talk about the route。把 discuss 和 talk about 拼在一起，就容易多出一个 about。",
-      "sources": [
-        {
-          "label": "Cambridge English Grammar Today：About",
-          "url": "https://dictionary.cambridge.org/us/grammar/british-grammar/about",
-          "checked_on": "2026-10-29"
-        },
-        {
-          "label": "Cambridge English Grammar Today：Verb patterns, with and without objects",
-          "url": "https://dictionary.cambridge.org/grammar/british-grammar/verb-patterns-with-and-without-objects",
-          "checked_on": "2026-10-29"
-        }
-      ],
-      "related": [
-        "how-do-you-say",
-        "look-forward-to"
-      ],
-      "added": "2026-10-29",
-      "status": "published",
-      "ai_assisted": true
-    },
-    {
-      "slug": "good-news",
-      "column": "mistakes",
-      "title": "有好消息了，为什么不是 a good news？",
-      "level": 1,
-      "tags": [
-        "不可数名词",
-        "消息",
-        "主谓一致"
-      ],
-      "summary": "news 是不可数名词，说 good news 或 a piece of good news；作主语时配单数动词。末尾虽然有s，也不能据此写成 news are。",
-      "sources": [
-        {
-          "label": "Cambridge English Grammar Today：News",
-          "url": "https://dictionary.cambridge.org/grammar/british-grammar/news",
-          "checked_on": "2026-10-29"
-        }
-      ],
-      "related": [
-        "uncle",
-        "very-like"
-      ],
-      "added": "2026-10-29",
-      "status": "published",
-      "ai_assisted": true
-    },
-    {
-      "slug": "how-do-you-say",
-      "column": "mistakes",
-      "title": "想问“这用英语怎么说”，How to say it? 少了什么？",
-      "level": 1,
-      "tags": [
-        "问句",
-        "语序",
-        "表达方法"
-      ],
-      "summary": "向人询问一个表达，完整标准问句可说 How do you say ... in English?。how to 并非到处都错，它能放在 know how to ... 等结构里，也常见于方法类标题。",
-      "sources": [
-        {
-          "label": "Cambridge English Grammar Today：Word order, how",
-          "url": "https://dictionary.cambridge.org/us/grammar/british-grammar/word-order-how",
-          "checked_on": "2026-10-29"
-        },
-        {
-          "label": "Cambridge English Grammar Today：Questions, typical errors",
-          "url": "https://dictionary.cambridge.org/uk/grammar/british-grammar/questions-typical-errors",
-          "checked_on": "2026-10-29"
-        },
-        {
-          "label": "Cambridge Dictionary：how",
-          "url": "https://dictionary.cambridge.org/us/dictionary/english/how",
-          "checked_on": "2026-10-29"
-        }
-      ],
-      "related": [
-        "discuss-about",
-        "play-computer-games"
-      ],
-      "added": "2026-10-29",
-      "status": "published",
-      "ai_assisted": true
-    },
-    {
-      "slug": "play-computer-games",
-      "column": "mistakes",
-      "title": "“玩电脑”想说的是游戏，还是使用电脑？",
-      "level": 1,
-      "tags": [
-        "搭配",
-        "电脑",
-        "活动"
-      ],
-      "summary": "如果指玩电脑游戏，说 play computer games 或 play games on the computer。泛指使用电脑，可说 use a computer；先说清做什么，动词和宾语就容易接对。",
-      "sources": [
-        {
-          "label": "Cambridge Dictionary：game",
-          "url": "https://dictionary.cambridge.org/dictionary/english/game",
-          "checked_on": "2026-10-29"
-        },
-        {
-          "label": "Cambridge University Press：Step Up to IELTS 官方摘页",
-          "url": "https://assets.cambridge.org/97805215/32983/excerpt/9780521532983_excerpt.pdf",
-          "checked_on": "2026-10-29"
-        }
-      ],
-      "related": [
-        "turn-on-light",
-        "how-do-you-say"
-      ],
-      "added": "2026-10-29",
-      "status": "published",
-      "ai_assisted": true
-    },
-    {
-      "slug": "look-forward-to",
-      "column": "mistakes",
-      "title": "look forward to 后面，为什么是 seeing？",
-      "level": 2,
-      "tags": [
-        "介词",
-        "动词形式",
-        "期待"
-      ],
-      "summary": "look forward to 里的to是介词，后接名词或动词-ing形式：look forward to the trip，look forward to seeing you。不是每一个to都在带动词原形。",
-      "sources": [
-        {
-          "label": "Cambridge English Grammar Today：Look forward to",
-          "url": "https://dictionary.cambridge.org/grammar/british-grammar/look-forward-to",
-          "checked_on": "2026-10-29"
-        },
-        {
-          "label": "Cambridge Dictionary：look forward to something",
-          "url": "https://dictionary.cambridge.org/dictionary/english/look-forward-to",
-          "checked_on": "2026-10-29"
-        }
-      ],
-      "related": [
-        "discuss-about",
-        "very-like"
       ],
       "added": "2026-10-29",
       "status": "published",
@@ -1363,170 +1749,30 @@
       "ai_assisted": true
     },
     {
-      "slug": "brainwashing",
-      "column": "words",
-      "title": "brainwashing 的“洗脑”，是按声音借的吗？",
+      "slug": "paper-tiger",
+      "column": "between",
+      "title": "paper tiger 是纸做的虎，还是看着厉害的规则？",
       "level": 2,
       "tags": [
-        "译借",
-        "中国",
-        "语义变化"
+        "比喻",
+        "动物",
+        "词义"
       ],
-      "summary": "不是按汉语读音搬过去，而是把“洗脑”的意思译成brain与washing。韦氏词典把现代词义连到汉语xǐnǎo；词拼得像英语，身后仍可能有另一种语言的表达。",
+      "summary": "作比喻时，它指外表强大、实际缺少力量的人或事物，也能说没有执行办法的规则。看见tiger，先别急着找动物园；这个短语的重点是“看起来”与“实际上”的落差。",
       "sources": [
         {
-          "label": "Merriam-Webster：brainwashing",
-          "url": "https://www.merriam-webster.com/dictionary/brainwashing",
-          "checked_on": "2026-10-29"
-        },
-        {
-          "label": "Merriam-Webster：'Brainwashing', A History",
-          "url": "https://www.merriam-webster.com/wordplay/brainwashing-word-history",
+          "label": "Merriam-Webster：paper tiger",
+          "url": "https://www.merriam-webster.com/dictionary/paper%20tiger",
           "checked_on": "2026-10-29"
         }
       ],
       "related": [
         "lose-face",
-        "chop-chop"
+        "brainwashing"
       ],
       "added": "2026-10-29",
       "status": "published",
-      "ai_assisted": true,
-      "headword": "brainwashing",
-      "journey": [
-        {
-          "language": "汉语",
-          "form": "洗脑 xǐnǎo",
-          "period": "",
-          "place_zh": "汉语代表点 · 北京",
-          "lon": 116.3942,
-          "lat": 39.9017,
-          "approximate": true
-        },
-        {
-          "language": "英语",
-          "form": "brainwashing",
-          "period": "",
-          "place_zh": "英语（美式语境）代表点 · 纽约",
-          "lon": -73.9957,
-          "lat": 40.7216,
-          "approximate": true
-        }
-      ]
-    },
-    {
-      "slug": "lose-face",
-      "column": "words",
-      "title": "lose face 丢的不是脸，是什么？",
-      "level": 2,
-      "tags": [
-        "译借",
-        "中国",
-        "比喻"
-      ],
-      "summary": "丢的是他人的尊重，也就是“丢脸、失面子”的比喻义。相关研究把英语表达与19世纪的汉英接触联系起来；这个身体部位，后来承担了社会评价的意思。",
-      "sources": [
-        {
-          "label": "Merriam-Webster：lose face",
-          "url": "https://www.merriam-webster.com/dictionary/lose%20face",
-          "checked_on": "2026-10-29"
-        },
-        {
-          "label": "James St. André：How the Chinese lost ‘face’（2013，摘要与章节说明）",
-          "url": "https://www.sciencedirect.com/science/article/abs/pii/S0378216613001379",
-          "checked_on": "2026-10-29"
-        }
-      ],
-      "related": [
-        "kowtow",
-        "brainwashing",
-        "paper-tiger"
-      ],
-      "added": "2026-10-29",
-      "status": "published",
-      "ai_assisted": true,
-      "headword": "lose face",
-      "journey": [
-        {
-          "language": "汉语",
-          "form": "丢脸",
-          "period": "",
-          "place_zh": "汉语代表点 · 北京",
-          "lon": 116.3942,
-          "lat": 39.9017,
-          "approximate": true
-        },
-        {
-          "language": "英语",
-          "form": "lose face",
-          "period": "",
-          "place_zh": "英语代表点 · 伦敦",
-          "lon": -0.1187,
-          "lat": 51.5019,
-          "approximate": true
-        }
-      ]
-    },
-    {
-      "slug": "typhoon",
-      "column": "words",
-      "title": "typhoon 听着像“大风”，词源就这么简单吗？",
-      "level": 3,
-      "tags": [
-        "词源",
-        "语言接触",
-        "天气"
-      ],
-      "summary": "没这么简单。韦氏词典列出较早词形与阿拉伯语、希腊语的联系，也说明现代形态受到粤语“大风”影响。声音相似是一条线索，不能单独变成唯一路线。",
-      "sources": [
-        {
-          "label": "Merriam-Webster：typhoon",
-          "url": "https://www.merriam-webster.com/dictionary/typhoon",
-          "checked_on": "2026-10-29"
-        }
-      ],
-      "related": [
-        "amok",
-        "long-time-no-see",
-        "chop-chop"
-      ],
-      "added": "2026-10-29",
-      "status": "published",
-      "ai_assisted": true,
-      "headword": "typhoon"
-    },
-    {
-      "slug": "shakespeare-invented-words",
-      "column": "myths",
-      "title": "莎士比亚“发明1700个词”，能照单全收吗？",
-      "level": 3,
-      "tags": [
-        "莎士比亚",
-        "语言史",
-        "证据"
-      ],
-      "summary": "不宜把1700直接当作已确认的个人发明数。作品里的已知早期记录，与某人第一次创造一个词，是两种证据要求；数字背后的“发明”定义和检索范围也需要辨认。",
-      "sources": [
-        {
-          "label": "British Council English Online：Words Shakespeare invented",
-          "url": "https://englishonline.britishcouncil.org/blog/articles/a-closer-look-at-everyday-words-shakespeare-invented/",
-          "checked_on": "2026-10-29"
-        },
-        {
-          "label": "Jonathan Hope：Who invented ‘gloomy’?（作者高校研究存档）",
-          "url": "https://pureportal.strath.ac.uk/en/publications/who-invented-gloomy-lies-people-want-to-believe-about-shakespeare/",
-          "checked_on": "2026-10-29"
-        }
-      ],
-      "related": [
-        "ok",
-        "posh",
-        "long-time-no-see"
-      ],
-      "added": "2026-10-29",
-      "status": "published",
-      "ai_assisted": true,
-      "verdict": "存疑"
+      "ai_assisted": true
     },
     {
       "slug": "singlish-lah",
@@ -1561,57 +1807,735 @@
       "ai_assisted": true
     },
     {
-      "slug": "paper-tiger",
-      "column": "between",
-      "title": "paper tiger 是纸做的虎，还是看着厉害的规则？",
-      "level": 2,
+      "slug": "ok",
+      "column": "myths",
+      "title": "两个故意拼错的词，留下了 OK",
+      "level": 1,
       "tags": [
-        "比喻",
-        "动物",
-        "词义"
+        "缩写",
+        "美国",
+        "词源"
       ],
-      "summary": "作比喻时，它指外表强大、实际缺少力量的人或事物，也能说没有执行办法的规则。看见tiger，先别急着找动物园；这个短语的重点是“看起来”与“实际上”的落差。",
+      "summary": "1839年波士顿报纸里的 oll korrect，是故意拼错的 all correct。现有早期记录支持这条线索；次年的 Old Kinderhook 竞选口号又帮助 OK 传开。",
       "sources": [
         {
-          "label": "Merriam-Webster：paper tiger",
-          "url": "https://www.merriam-webster.com/dictionary/paper%20tiger",
+          "label": "Merriam-Webster：OK",
+          "url": "https://www.merriam-webster.com/dictionary/OK",
+          "checked_on": "2026-10-29"
+        },
+        {
+          "label": "Cambridge Dictionary Blog：It’s All OK（里德考证与传播）",
+          "url": "https://dictionaryblog.cambridge.org/2011/02/11/its-all-ok/",
           "checked_on": "2026-10-29"
         }
       ],
       "related": [
-        "lose-face",
-        "brainwashing"
+        "posh",
+        "sos"
+      ],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true,
+      "verdict": "真"
+    },
+    {
+      "slug": "sos",
+      "column": "myths",
+      "title": "三短、三长、三短，先有信号后有附会",
+      "level": 1,
+      "tags": [
+        "缩写",
+        "航海",
+        "民间词源"
+      ],
+      "summary": "SOS 不是 Save Our Souls 的原始缩写。这句话是后配的记忆法；摩尔斯码的三短、三长、三短容易发送和识别，才是选择这组信号的关键。",
+      "sources": [
+        {
+          "label": "Oxford Learner’s Dictionaries：SOS，Word Origin",
+          "url": "https://www.oxfordlearnersdictionaries.com/definition/english/sos",
+          "checked_on": "2026-10-29"
+        },
+        {
+          "label": "ITU：Overview of ITU’s History，Radio",
+          "url": "https://www.itu.int/en/history/pages/itushistory-page-2.aspx",
+          "checked_on": "2026-10-29"
+        }
+      ],
+      "related": [
+        "posh",
+        "ok"
+      ],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true,
+      "verdict": "假"
+    },
+    {
+      "slug": "shakespeare-invented-words",
+      "column": "myths",
+      "title": "莎士比亚与1700个词：最早记录和个人发明",
+      "level": 3,
+      "tags": [
+        "莎士比亚",
+        "语言史",
+        "证据"
+      ],
+      "summary": "1700 不宜直接当作已确认的个人发明数：现存早期记录与创造者身份是两件事。可以先学 gloomy，它既能形容昏暗，也能形容心情或前景低沉。",
+      "sources": [
+        {
+          "label": "British Council English Online：Words Shakespeare invented",
+          "url": "https://englishonline.britishcouncil.org/blog/articles/a-closer-look-at-everyday-words-shakespeare-invented/",
+          "checked_on": "2026-10-29"
+        },
+        {
+          "label": "Jonathan Hope：Who invented ‘gloomy’?（作者高校研究存档）",
+          "url": "https://pureportal.strath.ac.uk/en/publications/who-invented-gloomy-lies-people-want-to-believe-about-shakespeare/",
+          "checked_on": "2026-10-29"
+        },
+        {
+          "label": "Merriam-Webster：gloomy（现代词义）",
+          "url": "https://www.merriam-webster.com/dictionary/gloomy",
+          "checked_on": "2026-10-30"
+        }
+      ],
+      "related": [
+        "ok",
+        "posh",
+        "long-time-no-see"
+      ],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true,
+      "verdict": "存疑"
+    },
+    {
+      "slug": "salary-salt",
+      "column": "myths",
+      "title": "salary 与盐：词根留下线索，工资袋还缺证据",
+      "level": 2,
+      "tags": [
+        "拉丁语",
+        "证据",
+        "工作"
+      ],
+      "summary": "salary 的词源确实与盐有关，罗马士兵怎样领薪却还要看历史材料。今天它表示定期支付的固定薪酬，annual salary 就是年薪。",
+      "sources": [
+        {
+          "label": "Merriam-Webster：salary",
+          "url": "https://www.merriam-webster.com/dictionary/salary",
+          "checked_on": "2026-10-30"
+        },
+        {
+          "label": "Etymonline：salary",
+          "url": "https://www.etymonline.com/word/salary",
+          "checked_on": "2026-10-29"
+        }
+      ],
+      "related": [
+        "posh",
+        "qian-and-wan"
+      ],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true,
+      "verdict": "部分正确"
+    },
+    {
+      "slug": "posh",
+      "column": "myths",
+      "title": "posh：船舱故事之外，先记住今天的意思",
+      "level": 2,
+      "tags": [
+        "民间词源",
+        "缩写",
+        "证据"
+      ],
+      "summary": "posh 今天可以形容高档、时髦，英式英语里还带上流社会的意味。把它解释成船舱缩写的故事仍缺乏证据；a posh restaurant 是能直接用的搭配。",
+      "sources": [
+        {
+          "label": "Merriam-Webster：posh",
+          "url": "https://www.merriam-webster.com/dictionary/posh",
+          "checked_on": "2026-10-30"
+        },
+        {
+          "label": "Etymonline：posh",
+          "url": "https://www.etymonline.com/word/posh",
+          "checked_on": "2026-10-29"
+        }
+      ],
+      "related": [
+        "sos",
+        "salary-salt"
+      ],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true,
+      "verdict": "存疑"
+    },
+    {
+      "slug": "bored-boring",
+      "column": "mistakes",
+      "title": "boring 的事，让人感到 bored",
+      "level": 1,
+      "tags": [
+        "形容词",
+        "感受",
+        "近形词"
+      ],
+      "summary": "想说自己感到无聊，用 I am bored。I am boring 则是在说自己令人无聊。关键是感受与造成感受，不是“人用-ed、物用-ing”。",
+      "sources": [
+        {
+          "label": "Cambridge English Grammar Today：bored or boring",
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/word-choice-bored-or-boring",
+          "checked_on": "2026-10-29"
+        },
+        {
+          "label": "British Council LearnEnglish：Adjectives ending in -ed and -ing（正文）",
+          "url": "https://learnenglish.britishcouncil.org/comment/207743",
+          "checked_on": "2026-10-29"
+        }
+      ],
+      "related": [
+        "very-like",
+        "black-tea"
       ],
       "added": "2026-10-29",
       "status": "published",
       "ai_assisted": true
     },
     {
-      "slug": "chop-chop",
-      "column": "words",
-      "title": "chop-chop 是催人快一点，不是在切两刀？",
-      "level": 2,
+      "slug": "very-like",
+      "column": "mistakes",
+      "title": "很喜欢：I really like it",
+      "level": 1,
       "tags": [
-        "接触英语",
-        "重叠",
+        "程度",
+        "动词",
         "搭配"
       ],
-      "summary": "是的，这里指赶快、不要耽搁。韦氏词典把它连到中国洋泾浜英语里表示快的chop的重叠；不能因为今天熟悉chop的砍切义，就拿两刀解释它的来历。",
+      "summary": "表示“很喜欢”，可说 I really like it 或 I like it very much。very 常修饰形容词、副词，不能按中文的位置直接放在表示喜欢的动词 like 前面。",
       "sources": [
         {
-          "label": "Merriam-Webster：chop-chop",
-          "url": "https://www.merriam-webster.com/dictionary/chop-chop",
+          "label": "Cambridge English Grammar Today：Like",
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/like",
+          "checked_on": "2026-10-29"
+        },
+        {
+          "label": "Cambridge English Grammar Today：Very",
+          "url": "https://dictionary.cambridge.org/us/grammar/british-grammar/very",
+          "checked_on": "2026-10-29"
+        },
+        {
+          "label": "Cambridge Dictionary：really",
+          "url": "https://dictionary.cambridge.org/us/dictionary/essential-american-english/really",
           "checked_on": "2026-10-29"
         }
       ],
       "related": [
-        "gung-ho",
-        "typhoon"
+        "bored-boring",
+        "look-forward-to"
       ],
       "added": "2026-10-29",
       "status": "published",
-      "ai_assisted": true,
-      "headword": "chop-chop"
+      "ai_assisted": true
+    },
+    {
+      "slug": "turn-on-light",
+      "column": "mistakes",
+      "title": "开灯用 turn on，打开门用 open",
+      "level": 1,
+      "tags": [
+        "搭配",
+        "日常生活",
+        "动词"
+      ],
+      "summary": "让电灯通电发光，用 turn on 或 switch on；关闭则用 turn off 或 switch off。汉语一个“开”能管灯和门，英语常把这两种动作分开。",
+      "sources": [
+        {
+          "label": "Cambridge Learner's Dictionary：switch (sth) on",
+          "url": "https://dictionary.cambridge.org/dictionary/learner-english/switch-sth-on",
+          "checked_on": "2026-10-29"
+        },
+        {
+          "label": "Cambridge English–Malay Dictionary：switch on/off",
+          "url": "https://dictionary.cambridge.org/us/dictionary/english-malaysian/switch-on-off",
+          "checked_on": "2026-10-29"
+        }
+      ],
+      "related": [
+        "play-computer-games",
+        "very-like"
+      ],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true
+    },
+    {
+      "slug": "good-news",
+      "column": "mistakes",
+      "title": "news：词尾有 s，仍按单数用",
+      "level": 1,
+      "tags": [
+        "不可数名词",
+        "消息",
+        "主谓一致"
+      ],
+      "summary": "news 是不可数名词，作主语时配单数动词。说好消息用 good news，要数一条可用 a piece of news；词尾的s不能直接当成复数标志。",
+      "sources": [
+        {
+          "label": "Cambridge English Grammar Today：News",
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/news",
+          "checked_on": "2026-10-29"
+        }
+      ],
+      "related": [
+        "uncle",
+        "very-like"
+      ],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true
+    },
+    {
+      "slug": "discuss-about",
+      "column": "mistakes",
+      "title": "discuss 直接接讨论对象",
+      "level": 1,
+      "tags": [
+        "动词",
+        "介词",
+        "讨论"
+      ],
+      "summary": "讨论的对象可以直接跟在 discuss 后面：discuss the route。也可以说 talk about the route；把两种搭配拼在一起，容易多出一个 about。",
+      "sources": [
+        {
+          "label": "Cambridge English Grammar Today：About",
+          "url": "https://dictionary.cambridge.org/us/grammar/british-grammar/about",
+          "checked_on": "2026-10-29"
+        },
+        {
+          "label": "Cambridge English Grammar Today：Verb patterns, with and without objects",
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/verb-patterns-with-and-without-objects",
+          "checked_on": "2026-10-29"
+        }
+      ],
+      "related": [
+        "how-do-you-say",
+        "look-forward-to"
+      ],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true
+    },
+    {
+      "slug": "how-do-you-say",
+      "column": "mistakes",
+      "title": "向人问一句：How do you say ...?",
+      "level": 1,
+      "tags": [
+        "问句",
+        "语序",
+        "表达方法"
+      ],
+      "summary": "直接向人询问表达时，完整标准问句可说 How do you say ... in English?。how to 仍可用于方法标题和 know how to 等结构，场景不同，句子架子也不同。",
+      "sources": [
+        {
+          "label": "Cambridge English Grammar Today：Word order, how",
+          "url": "https://dictionary.cambridge.org/us/grammar/british-grammar/word-order-how",
+          "checked_on": "2026-10-29"
+        },
+        {
+          "label": "Cambridge English Grammar Today：Questions, typical errors",
+          "url": "https://dictionary.cambridge.org/uk/grammar/british-grammar/questions-typical-errors",
+          "checked_on": "2026-10-29"
+        },
+        {
+          "label": "Cambridge Dictionary：how",
+          "url": "https://dictionary.cambridge.org/us/dictionary/english/how",
+          "checked_on": "2026-10-29"
+        }
+      ],
+      "related": [
+        "discuss-about",
+        "play-computer-games"
+      ],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true
+    },
+    {
+      "slug": "play-computer-games",
+      "column": "mistakes",
+      "title": "电脑只是设备，玩的是 games",
+      "level": 1,
+      "tags": [
+        "搭配",
+        "电脑",
+        "活动"
+      ],
+      "summary": "如果指玩电脑游戏，说 play computer games 或 play games on the computer；泛指使用设备，可用 use a computer。先说清在做什么，动词和宾语就容易接对。",
+      "sources": [
+        {
+          "label": "Cambridge Dictionary：game",
+          "url": "https://dictionary.cambridge.org/dictionary/english/game",
+          "checked_on": "2026-10-29"
+        },
+        {
+          "label": "Cambridge University Press：Step Up to IELTS 官方摘页",
+          "url": "https://assets.cambridge.org/97805215/32983/excerpt/9780521532983_excerpt.pdf",
+          "checked_on": "2026-10-29"
+        }
+      ],
+      "related": [
+        "turn-on-light",
+        "how-do-you-say"
+      ],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true
+    },
+    {
+      "slug": "look-forward-to",
+      "column": "mistakes",
+      "title": "look forward to：接动作时，用 -ing",
+      "level": 2,
+      "tags": [
+        "介词",
+        "动词形式",
+        "期待"
+      ],
+      "summary": "look forward to 里的to是介词。后面可以接名词，也可接动词-ing形式：look forward to the trip，look forward to seeing you。",
+      "sources": [
+        {
+          "label": "Cambridge English Grammar Today：Look forward to",
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/look-forward-to",
+          "checked_on": "2026-10-29"
+        },
+        {
+          "label": "Cambridge Dictionary：look forward to something",
+          "url": "https://dictionary.cambridge.org/dictionary/english/look-forward-to",
+          "checked_on": "2026-10-29"
+        }
+      ],
+      "related": [
+        "discuss-about",
+        "very-like"
+      ],
+      "added": "2026-10-29",
+      "status": "published",
+      "ai_assisted": true
+    },
+    {
+      "slug": "agree-with",
+      "column": "mistakes",
+      "title": "同意就说 I agree，am 可以歇一歇",
+      "level": 1,
+      "tags": [
+        "动词",
+        "同意",
+        "句子结构"
+      ],
+      "summary": "直接表示“同意”，说 I agree 或 I agree with you。agree 本身是动词，表达现在的意见时不用再在前面加 am；否定可以说 I don’t agree。",
+      "sources": [
+        {
+          "label": "Cambridge Dictionary：agree",
+          "url": "https://dictionary.cambridge.org/dictionary/english/agree",
+          "checked_on": "2026-10-30"
+        }
+      ],
+      "related": [
+        "very-like",
+        "suggest-doing"
+      ],
+      "added": "2026-10-30",
+      "status": "published",
+      "ai_assisted": true
+    },
+    {
+      "slug": "borrow-and-lend",
+      "column": "mistakes",
+      "title": "同一把伞，两个人各有一个“借”",
+      "level": 1,
+      "tags": [
+        "易混词",
+        "借还",
+        "动作方向"
+      ],
+      "summary": "把东西暂时拿来用，用 borrow；把东西暂时交给别人用，用 lend。一把伞的移动没有变，动词取决于从借入者还是借出者的方向说。",
+      "sources": [
+        {
+          "label": "Cambridge English Grammar Today：Lend or borrow?",
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/borrow-or-lend",
+          "checked_on": "2026-10-30"
+        }
+      ],
+      "related": [
+        "explain-to",
+        "say-and-tell"
+      ],
+      "added": "2026-10-30",
+      "status": "published",
+      "ai_assisted": true
+    },
+    {
+      "slug": "say-and-tell",
+      "column": "mistakes",
+      "title": "把话告诉谁：tell 后面让人先出场",
+      "level": 1,
+      "tags": [
+        "转述",
+        "动词",
+        "宾语"
+      ],
+      "summary": "转述消息时，可说 She told me the news，也可说 She said something to me。say 后面不能直接塞进接收消息的人；tell 则常先接人，再接所告诉的内容。",
+      "sources": [
+        {
+          "label": "Cambridge English Grammar Today：Say or tell?",
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/say-or-tell",
+          "checked_on": "2026-10-30"
+        }
+      ],
+      "related": [
+        "explain-to",
+        "discuss-about"
+      ],
+      "added": "2026-10-30",
+      "status": "published",
+      "ai_assisted": true
+    },
+    {
+      "slug": "fun-and-funny",
+      "column": "mistakes",
+      "title": "好玩不一定好笑：fun 和 funny 各管一件事",
+      "level": 1,
+      "tags": [
+        "易混词",
+        "感受",
+        "形容词"
+      ],
+      "summary": "形容活动愉快、好玩，可用 fun；说某件事逗得人笑，才用 funny。funny 还可能表示奇怪，所以夸旅行很开心时，a fun trip 往往比 a funny trip 更贴切。",
+      "sources": [
+        {
+          "label": "Cambridge English Grammar Today：Fun or funny?",
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/fun-or-funny",
+          "checked_on": "2026-10-30"
+        }
+      ],
+      "related": [
+        "bored-boring",
+        "very-like"
+      ],
+      "added": "2026-10-30",
+      "status": "published",
+      "ai_assisted": true
+    },
+    {
+      "slug": "do-or-make",
+      "column": "mistakes",
+      "title": "作业用 do，错误却用 make",
+      "level": 1,
+      "tags": [
+        "搭配",
+        "任务",
+        "易混词"
+      ],
+      "summary": "完成作业常说 do homework，犯错却说 make a mistake。do 常与执行任务搭配，make 常与结果或产物搭配；这些线索好记，但仍要把具体搭配一组组积累。",
+      "sources": [
+        {
+          "label": "Cambridge English Grammar Today：Do or make?",
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/make-or-do",
+          "checked_on": "2026-10-30"
+        }
+      ],
+      "related": [
+        "homework-uncountable",
+        "play-computer-games"
+      ],
+      "added": "2026-10-30",
+      "status": "published",
+      "ai_assisted": true
+    },
+    {
+      "slug": "go-shopping",
+      "column": "mistakes",
+      "title": "去逛街，直接 go shopping",
+      "level": 1,
+      "tags": [
+        "搭配",
+        "日常活动",
+        "动词形式"
+      ],
+      "summary": "表示去购物这个活动，常说 go shopping，不在 go 和 shopping 中间插入 to。要说去某个具体地方，再用 go to the supermarket 这样的结构。",
+      "sources": [
+        {
+          "label": "Cambridge English Grammar Today：Go（Go + -ing）",
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/go",
+          "checked_on": "2026-10-30"
+        }
+      ],
+      "related": [
+        "do-or-make",
+        "look-forward-to"
+      ],
+      "added": "2026-10-30",
+      "status": "published",
+      "ai_assisted": true
+    },
+    {
+      "slug": "explain-to",
+      "column": "mistakes",
+      "title": "路线要 explain，听的人放在 to 后面",
+      "level": 1,
+      "tags": [
+        "动词",
+        "宾语",
+        "介词"
+      ],
+      "summary": "解释某件事给某人听，常用 explain something to someone。事情直接跟在 explain 后，听的人用 to 引出；不能照 tell me the story 的结构写成 explain me the route。",
+      "sources": [
+        {
+          "label": "Cambridge English Grammar Today：Explain",
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/explain",
+          "checked_on": "2026-10-30"
+        }
+      ],
+      "related": [
+        "say-and-tell",
+        "discuss-about"
+      ],
+      "added": "2026-10-30",
+      "status": "published",
+      "ai_assisted": true
+    },
+    {
+      "slug": "suggest-doing",
+      "column": "mistakes",
+      "title": "提建议的 suggest，有自己的接法",
+      "level": 2,
+      "tags": [
+        "动词形式",
+        "建议",
+        "句型"
+      ],
+      "summary": "提议活动用 suggest doing；明确建议谁做什么，可用 suggest that someone should do。这里不采用 suggest someone to do 的接法。",
+      "sources": [
+        {
+          "label": "Cambridge English Grammar Today：Suggest",
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/suggest.",
+          "checked_on": "2026-10-30"
+        }
+      ],
+      "related": [
+        "look-forward-to",
+        "agree-with"
+      ],
+      "added": "2026-10-30",
+      "status": "published",
+      "ai_assisted": true
+    },
+    {
+      "slug": "homework-uncountable",
+      "column": "mistakes",
+      "title": "三份作业，homework 仍不加 s",
+      "level": 1,
+      "tags": [
+        "不可数名词",
+        "作业",
+        "数量"
+      ],
+      "summary": "表示家庭作业，homework 通常是不可数名词：a lot of homework，而不是 many homeworks。需要数具体任务，可换用可数的任务名称；不要把中文“几份”直接变成 homework 的复数。",
+      "sources": [
+        {
+          "label": "Cambridge English Grammar Today：Nouns: countable and uncountable",
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/nouns-countable-and-uncountable",
+          "checked_on": "2026-10-30"
+        }
+      ],
+      "related": [
+        "good-news",
+        "do-or-make"
+      ],
+      "added": "2026-10-30",
+      "status": "published",
+      "ai_assisted": true
+    },
+    {
+      "slug": "advice-uncountable",
+      "column": "mistakes",
+      "title": "两条建议：数的是 pieces，还是 advice？",
+      "level": 1,
+      "tags": [
+        "不可数名词",
+        "易混词",
+        "建议"
+      ],
+      "summary": "advice 是不可数名词，可以说 some advice 或 two pieces of advice。advise 则是动词：advise someone to do something。先认清是在说建议本身，还是给出建议这个动作。",
+      "sources": [
+        {
+          "label": "Cambridge English Grammar Today：Advice or advise?",
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/advice-or-advise",
+          "checked_on": "2026-10-30"
+        }
+      ],
+      "related": [
+        "good-news",
+        "suggest-doing"
+      ],
+      "added": "2026-10-30",
+      "status": "published",
+      "ai_assisted": true
+    },
+    {
+      "slug": "listen-to",
+      "column": "mistakes",
+      "title": "想认真听，listen 后面接一个 to",
+      "level": 1,
+      "tags": [
+        "听力",
+        "介词",
+        "易混词"
+      ],
+      "summary": "listen 后面提到所听的对象时，用 listen to：listen to the story。只说“听！”或语境已经清楚时，可以单用 listen。hear 更着重声音被听到，listen 更着重主动去听。",
+      "sources": [
+        {
+          "label": "Cambridge English Grammar Today：Hear or listen (to)?",
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/hear-or-listen",
+          "checked_on": "2026-10-30"
+        }
+      ],
+      "related": [
+        "turn-on-light",
+        "discuss-about"
+      ],
+      "added": "2026-10-30",
+      "status": "published",
+      "ai_assisted": true
+    },
+    {
+      "slug": "married-to",
+      "column": "mistakes",
+      "title": "结婚那天用 marry，婚后状态用 be married",
+      "level": 1,
+      "tags": [
+        "动词",
+        "婚姻",
+        "介词"
+      ],
+      "summary": "说与某人结婚，marry 可以直接接那个人；描述已婚状态并指出配偶，则用 be married to someone。不要把两种结构拼成 marry with someone。",
+      "sources": [
+        {
+          "label": "Cambridge English Grammar Today：Marry and divorce",
+          "url": "https://dictionary.cambridge.org/us/grammar/british-grammar/marry-and-divorce",
+          "checked_on": "2026-10-30"
+        }
+      ],
+      "related": [
+        "look-forward-to",
+        "explain-to"
+      ],
+      "added": "2026-10-30",
+      "status": "published",
+      "ai_assisted": true
     }
   ]
 }

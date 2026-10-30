@@ -15,13 +15,15 @@ function resource(url){
   let target=file;if(fs.statSync(target).isDirectory())target=path.join(target,'index.html');
   return {contentType:mime[path.extname(target)]||'application/octet-stream',body:fs.readFileSync(target)};
 }
-const hook=`
+const hook=`(() => {
 window.__qaSaves=0;window.__qaLastSaved=null;window.__qaDocumentToken=Math.random();window.__qaExports=[];
 const __qaCreateStore=RankingStorage.createStore;
 RankingStorage.createStore=function(...args){
  const store=__qaCreateStore(...args),save=store.save.bind(store),load=store.load.bind(store);window.__qaStore=store;
  store.load=async()=>{await window.__qaSeedReady;return load();};
- store.save=async state=>{const snapshot=RankingModel.serialize(state);await save(state);window.__qaLastSaved=JSON.parse(snapshot);window.__qaSaves++;};
+ store.save=async state=>{if(window.__qaFailSave)throw Object.assign(new Error('Injected pending-save quota failure'),{code:'quota'});const snapshot=RankingModel.serialize(state);await save(state);window.__qaLastSaved=JSON.parse(snapshot);window.__qaSaves++;};
+ const archive=store.saveTemplate.bind(store);
+ store.saveTemplate=async state=>{if(window.__qaFailArchive||window.__qaFailSave)throw Object.assign(new Error('Injected archive quota failure'),{code:'quota'});return archive(state);};
  return store;
 };
 const __qaDraw=CanvasRenderingContext2D.prototype.drawImage;
@@ -43,22 +45,26 @@ RankingExport.exportRanking=async function(state,options){
  try{const result=await __qaExport(state,options);record.result=result;window.__qaExports.push(record);return result;}
  finally{window.__qaActiveExport=null;}
 };
-`;
+})();`;
 async function check(name,fn){
   const start=Date.now();console.log('CHECK '+name);
   try{const detail=await fn();report.checks.push({name,passed:true,ms:Date.now()-start,detail});console.log('PASS '+name);}
   catch(error){report.checks.push({name,passed:false,ms:Date.now()-start,error:error.stack});throw error;}
 }
-async function context({theme='light',width=1440,language='zh-CN',seed}={}){
+async function context({theme='light',width=1440,language='zh-CN',seed,seedRecords,query='',failArchive=false,storageUnavailable=false,handoff}={}){
   const ctx=await browser.newContext({viewport:{width,height:1000},deviceScaleFactor:1,colorScheme:theme,acceptDownloads:true});contexts.push(ctx);ctx.setDefaultTimeout(18000);
-  await ctx.addInitScript(({theme,seed})=>{
+  await ctx.addInitScript(({theme,seed,seedRecords,failArchive,storageUnavailable,handoff})=>{
     try{localStorage.setItem('xieyuqing-blog-theme',theme);}catch(_){}
-    window.__qaSeedReady=seed===undefined||location.origin==='null'?Promise.resolve():new Promise((resolve,reject)=>{
+    window.__qaFailArchive=failArchive;
+    if(handoff!==undefined)document.__rankingPendingDraftsV1=handoff;
+    if(storageUnavailable)Object.defineProperty(window,'indexedDB',{configurable:true,value:null});
+    const entries=seedRecords===undefined?(seed===undefined?undefined:{current:seed}):seedRecords;
+    window.__qaSeedReady=entries===undefined||location.origin==='null'?Promise.resolve():new Promise((resolve,reject)=>{
       const request=indexedDB.open('xieyuqing-ranking-v1',1);
       request.onupgradeneeded=()=>request.result.createObjectStore('rankings');request.onerror=()=>reject(request.error);
-      request.onsuccess=()=>{const db=request.result,tx=db.transaction('rankings','readwrite');tx.objectStore('rankings').put(seed,'current');tx.oncomplete=()=>{db.close();resolve();};tx.onerror=()=>reject(tx.error);};
+      request.onsuccess=()=>{const db=request.result,tx=db.transaction('rankings','readwrite');for(const [key,value] of Object.entries(entries))tx.objectStore('rankings').put(value,key);tx.oncomplete=()=>{db.close();resolve();};tx.onerror=()=>reject(tx.error);};
     });
-  },{theme,seed});
+  },{theme,seed,seedRecords,failArchive,storageUnavailable,handoff});
   await ctx.route('**/*',async route=>{
     const url=route.request().url();if(/^(?:data|blob):/.test(url))return route.continue();
     if(!url.startsWith(origin+'/')){report.externalRequests.push(url);return route.abort();}
@@ -67,7 +73,7 @@ async function context({theme='light',width=1440,language='zh-CN',seed}={}){
   });
   const page=await ctx.newPage();page.on('pageerror',error=>report.pageErrors.push(error.stack||error.message));
   page.on('dialog',async dialog=>{report.dialogs.push(dialog.message());await dialog.accept();});
-  await page.goto(origin+(language==='en'?'/en/game/ranking/':'/game/ranking/'));
+  await page.goto(origin+(language==='en'?'/en/game/ranking/':'/game/ranking/')+query);
   await page.waitForFunction(()=>document.querySelector('#ranking-app')?.hidden===false&&window.__qaStore);
   await page.evaluate(()=>document.fonts.ready);return {page,ctx};
 }
@@ -166,6 +172,116 @@ async function run(){
   let playwright;for(const candidate of [process.env.PLAYWRIGHT_MODULE,'playwright',path.join(os.homedir(),'.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright')].filter(Boolean)){try{playwright=require(candidate);break;}catch(error){if(error.code!=='MODULE_NOT_FOUND')throw error;}}
   assert(playwright,'Existing Playwright required; set PLAYWRIGHT_MODULE.');Model=require(path.join(site,'assets/ranking-model.js'));assert.equal(Object.keys(Model.BOOK_ART).length,20,'Build the completed book assets first');
   browser=await playwright.chromium.launch({headless:true,downloadsPath:path.join(output,'native-downloads'),executablePath:process.env.CHROME_PATH||(process.platform==='win32'?'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe':undefined)});
+  await check('template entry links open all four examples silently in presentation and ignore invalid queries',async()=>{
+    for(const id of ['food','sport','book','economist']){
+      const before=report.dialogs.length,query='?from=learning&template='+id,{page,ctx}=await context({query,width:390});
+      assert.equal(await page.locator('#ranking-template').inputValue(),id);await presentationNotes(page,id);
+      assert.equal(new URL(page.url()).search,query);assert.equal(report.dialogs.length,before);
+      assert.equal(await page.evaluate(()=>__qaSaves),0);assert.deepEqual(await records(page),{current:null,'template:food':null,'template:sport':null,'template:book':null,'template:economist':null});
+      if(id==='book')await screenshot(page,'book-entry-390.png');await ctx.close();
+    }
+    for(const query of ['?template=unknown','?template=constructor','?template=book&template=food']){
+      const before=report.dialogs.length,{page,ctx}=await context({query});
+      assert.equal(await page.locator('#ranking-template').inputValue(),'food');assert.equal(new URL(page.url()).search,query);assert.equal(report.dialogs.length,before);await ctx.close();
+    }
+    const before=report.dialogs.length,{page,ctx}=await context({query:'?template=book',language:'en'});
+    assert.equal(await page.locator('#display-title').textContent(),'Classic Books: Rank It Your Way');assert.equal(report.dialogs.length,before);await screenshot(page,'book-entry-en-1440.png');await ctx.close();
+  });
+  await check('entry restores its own draft without rewriting current or the other three archives',async()=>{
+    const entries={};for(const id of ['food','sport','book','economist']){const value=Model.createDefaultState(id);value.title='Entry preserved '+id;entries['template:'+id]=Model.serialize(value);}entries.current=entries['template:food'];
+    const before=report.dialogs.length,{page,ctx}=await context({query:'?template=book',seedRecords:entries});
+    assert.equal(await page.locator('#display-title').textContent(),'Entry preserved book');assert.equal(report.dialogs.length,before);assert.deepEqual(await records(page),entries);assert.equal(await page.evaluate(()=>__qaSaves),0);
+    await title(page,'Entry edited books','book');const after=await records(page);
+    for(const id of ['food','sport','economist'])assert.equal(after['template:'+id],entries['template:'+id]);
+    await template(page,'food');assert.equal(await page.locator('#display-title').textContent(),'Entry preserved food');assert(report.dialogs.length>before,'Interactive template changes retain their confirmation');await ctx.close();
+  });
+  await check('entry preserves a legacy current-only draft before the linked template is edited',async()=>{
+    for(const version of [1,2]){
+      const old=Model.createDefaultState('food');old.title='Entry legacy '+version;old.version=version;delete old.templateId;
+      if(version===1){delete old.skin;Object.values(old.items).forEach(item=>delete item.crop);}
+      const raw=JSON.stringify(old),before=report.dialogs.length,{page,ctx}=await context({query:'?template=book',seed:raw});
+      const initial=await records(page);assert.equal(initial.current,raw);assert.deepEqual(Model.deserialize(initial['template:food']),Model.deserialize(raw));assert.equal(initial['template:book'],null);assert.equal(report.dialogs.length,before);
+      await title(page,'Entry new book draft','book');assert.equal((await records(page))['template:food'],initial['template:food']);
+      await template(page,'food');assert.equal(await page.locator('#display-title').textContent(),old.title);await ctx.close();
+    }
+  });
+  await check('entry protects corrupt targets and failed archives, and remains usable without storage',async()=>{
+    const food=Model.createDefaultState('food');food.title='Entry protected food';const raw=Model.serialize(food),entries={current:raw,'template:food':raw,'template:book':'{damaged entry book'};
+    let count=report.dialogs.length,{page,ctx}=await context({query:'?template=book',seedRecords:entries});
+    assert.equal(await page.locator('#ranking-template').inputValue(),'food');assert.deepEqual(await records(page),{...entries,'template:sport':null,'template:economist':null});assert.equal(report.dialogs.length,count);assert.equal(await page.locator('#tool-message').isVisible(),true);await ctx.close();
+    count=report.dialogs.length;({page,ctx}=await context({query:'?template=book',seed:raw,failArchive:true}));
+    assert.equal(await page.locator('#display-title').textContent(),food.title);const failed=await records(page);assert.equal(failed.current,raw);assert.equal(failed['template:food'],null);assert.equal(failed['template:book'],null);assert.equal(report.dialogs.length,count);await ctx.close();
+    count=report.dialogs.length;({page,ctx}=await context({query:'?template=book',storageUnavailable:true}));
+    assert.equal(await page.locator('#ranking-template').inputValue(),'book');assert.equal(await page.locator('#ranking-board .rank-card').count(),20);assert.equal(report.dialogs.length,count);assert.equal(await page.locator('#tool-message').isVisible(),true);await ctx.close();
+  });
+  await check('SPA query entries flush pending edits and defer while an item draft is awaiting save or cancel',async()=>{
+    const {page,ctx}=await context();await editing(page);await page.locator('#ranking-title').fill('Entry pending food title');
+    await page.evaluate(()=>{window.__qaNavigation=SiteNavigation.visit('/game/ranking/?template=book');});
+    await page.waitForFunction(()=>document.body.dataset.rankingTemplate==='book'&&!SiteNavigation.state().transition);
+    assert.equal(JSON.parse((await records(page))['template:food']).title,'Entry pending food title');
+    await editing(page);await decoded(page);const item=await page.locator('#ranking-board .rank-card').first().getAttribute('data-item-id');
+    const imageURL=origin+Model.BOOK_ART[item.slice('book-'.length)].photo;let releaseImage;
+    const imageGate=new Promise(resolve=>{releaseImage=resolve;});
+    await page.route(imageURL,async route=>{await imageGate;await route.fulfill(resource(route.request().url()));});
+    try{
+      await page.locator('#ranking-board .card-main').first().click();await page.locator('#item-name').fill('Entry unsaved book name');
+      await page.waitForFunction(()=>document.querySelector('#item-dialog').open&&document.querySelector('#item-save').disabled);
+      const zoom=await page.locator('#crop-zoom').inputValue(),dialogCount=report.dialogs.length;
+      await page.evaluate(()=>{const select=document.querySelector('#ranking-template');select.value='food';select.dispatchEvent(new Event('change',{bubbles:true}));});
+      assert.equal(await page.locator('#ranking-template').inputValue(),'book');assert.equal(report.dialogs.length,dialogCount);
+      await page.evaluate(()=>{window.__qaNavigation=SiteNavigation.visit('/game/ranking/?template=sport');});
+      await page.waitForFunction(()=>SiteNavigation.state().transition);
+      assert.equal(await page.locator('#item-dialog').evaluate(dialog=>dialog.open),true);assert.equal(await page.locator('#item-name').inputValue(),'Entry unsaved book name');assert.equal(await page.locator('#crop-zoom').inputValue(),zoom);assert.equal(await page.locator('#ranking-template').inputValue(),'book');
+      assert.match(await page.locator('#tool-message').textContent(),/请先保存或取消当前编辑/);
+    }finally{releaseImage();}
+    await page.waitForFunction(()=>!document.querySelector('#item-save').disabled);await page.unroute(imageURL);
+    await page.locator('#item-save').click();await page.waitForFunction(()=>document.body.dataset.rankingTemplate==='sport'&&!SiteNavigation.state().transition);
+    assert.equal(JSON.parse((await records(page))['template:book']).items[item].name,'Entry unsaved book name');
+    await editing(page);await page.locator('#ranking-board .card-main').first().click();await page.locator('#item-name').fill('Entry cancelled sport draft');await page.waitForFunction(()=>!document.querySelector('#item-save').disabled);
+    await page.evaluate(()=>{window.__qaNavigation=SiteNavigation.visit('/game/ranking/?template=book');});await page.waitForFunction(()=>SiteNavigation.state().transition);
+    assert.equal(await page.locator('#item-name').inputValue(),'Entry cancelled sport draft');await page.locator('#item-cancel').click();
+    await page.waitForFunction(()=>document.body.dataset.rankingTemplate==='book'&&!SiteNavigation.state().transition);
+    assert.equal(await page.locator('#ranking-board .rank-card').first().getAttribute('data-item-id'),item);assert.equal(await page.locator('#ranking-board .card-name').first().textContent(),'Entry unsaved book name');
+    assert.equal((await records(page))['template:sport'],null);await ctx.close();
+  });
+  await check('quota-failed edits survive SPA navigation, export intact and clear their pending handoff after recovery',async()=>{
+    const entries={};for(const id of ['food','sport','book','economist']){const draft=Model.createDefaultState(id);draft.title='Saved archive '+id;entries['template:'+id]=Model.serialize(draft);}entries.current=entries['template:food'];
+    const {page,ctx}=await context({seedRecords:entries});await editing(page);await page.evaluate(()=>{window.__qaFailSave=true;});
+    const pending='Quota pending food draft';await page.locator('#ranking-title').fill(pending);
+    await page.evaluate(()=>SiteNavigation.visit('/game/ranking/?template=book'));
+    await page.waitForFunction(()=>!SiteNavigation.state().transition&&!document.querySelector('#ranking-app').hidden);
+    assert.equal(await page.locator('#display-title').textContent(),pending,'Unsaved recovery takes priority over the requested example');assert.deepEqual(await records(page),entries);
+    assert.equal(await page.evaluate(()=>document.__rankingPendingDraftsV1===undefined),true);assert.match(await page.locator('#tool-message').textContent(),/刷新后临时内容会丢失/);
+    await page.evaluate(()=>SiteNavigation.visit('/english/'));assert.equal(await page.evaluate(()=>document.__rankingPendingDraftsV1.drafts.length),1);
+    await page.evaluate(()=>SiteNavigation.visit('/game/ranking/?template=food'));await page.waitForFunction(()=>!document.querySelector('#ranking-app').hidden);
+    assert.equal(await page.locator('#display-title').textContent(),pending);assert.deepEqual(await records(page),entries);
+    await editing(page);if(!await page.locator('.backup-panel').evaluate(panel=>panel.open))await page.locator('.backup-panel>summary').click();
+    const [file]=await Promise.all([page.waitForEvent('download'),page.locator('#json-export').click()]);
+    assert.equal(await file.failure(),null);await file.saveAs(path.join(output,'unsaved-entry-backup.json'));report.downloads.push('unsaved-entry-backup.json');
+    assert.equal(Model.deserialize(fs.readFileSync(path.join(output,'unsaved-entry-backup.json'),'utf8')).title,pending);
+    await page.evaluate(()=>{window.__qaFailSave=false;});await title(page,pending+' recovered','food');
+    await page.evaluate(()=>SiteNavigation.visit('/english/'));assert.equal(await page.evaluate(()=>document.__rankingPendingDraftsV1===undefined),true);
+    await page.evaluate(()=>SiteNavigation.visit('/game/ranking/?template=book'));await page.waitForFunction(()=>document.body.dataset.rankingTemplate==='book'&&!SiteNavigation.state().transition);
+    assert.equal(await page.locator('#display-title').textContent(),'Saved archive book');const after=await records(page);
+    assert.equal(JSON.parse(after['template:food']).title,pending+' recovered');for(const id of ['sport','book','economist'])assert.equal(after['template:'+id],entries['template:'+id]);await ctx.close();
+  });
+  await check('temporary handoffs are bounded, validated once and never overwrite damaged database records',async()=>{
+    const food=Model.createDefaultState('food'),raw=Model.serialize(food),bad=[
+      {version:1,active:'constructor',drafts:[food]},
+      {version:1,active:'food',drafts:[food,food]},
+      {version:1,active:'food',drafts:[food,food,food,food,food]},
+      {version:1,active:'food',drafts:[{...food,templateId:'unknown'}]},
+      {version:1,active:'food',drafts:[food],unexpected:true}
+    ];
+    for(const handoff of bad){const {page,ctx}=await context({seedRecords:{current:raw,'template:food':raw},query:'?template=book',handoff});assert.equal(await page.locator('#ranking-template').inputValue(),'book');assert.equal(await page.evaluate(()=>document.__rankingPendingDraftsV1===undefined),true);assert.equal(await page.locator('#tool-message').isVisible(),true);assert((await page.locator('#tool-message').textContent()).trim());assert.equal((await records(page)).current,raw);assert.equal(await page.evaluate(()=>__qaSaves),0);await ctx.close();}
+    const book=Model.createDefaultState('book');book.title='Protected unsaved books';const damaged={current:'{damaged current','template:food':raw,'template:book':'{damaged books','template:sport':null,'template:economist':null};
+    const {page,ctx}=await context({query:'?template=book',seedRecords:Object.fromEntries(Object.entries(damaged).filter(([,v])=>v!==null)),handoff:{version:1,active:'book',drafts:[book]}});
+    assert.equal(await page.locator('#display-title').textContent(),book.title);assert.deepEqual(await records(page),damaged);assert.equal(await page.evaluate(()=>__qaSaves),0);await ctx.close();
+    const drafts=Object.keys(Model.TEMPLATES).map(id=>{const value=Model.createDefaultState(id);value.title='Four pending '+id;return value;});
+    const all=await context({query:'?template=book',handoff:{version:1,active:'food',drafts}});assert.equal(await all.page.locator('#display-title').textContent(),'Four pending book');
+    await all.page.evaluate(()=>{window.__qaFailSave=true;});await all.page.evaluate(()=>SiteNavigation.visit('/english/'));
+    const carried=await all.page.evaluate(()=>document.__rankingPendingDraftsV1);assert.equal(carried.drafts.length,4);assert.deepEqual(new Set(carried.drafts.map(x=>x.templateId)),new Set(Object.keys(Model.TEMPLATES)));await all.ctx.close();
+  });
   const {page,ctx}=await context();
   await check('book, food and sports retain independent editable drafts',async()=>{
     assert.deepEqual(await page.locator('#ranking-template option').evaluateAll(options=>options.map(option=>option.value)),['food','sport','book','economist']);

@@ -2,7 +2,7 @@
 'use strict';
 const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path'),os=require('node:os');
 const root=path.resolve(__dirname,'..'),site=path.resolve(process.argv[2]||path.join(root,'_site_unified'));
-const output=path.resolve(process.argv[3]||path.join(root,'.local-checks/english-v2-20261029/word-map-browser-p4'));
+const output=path.resolve(process.argv[3]||path.join(root,'.local-checks/english-word-map-browser'));
 const Model=require('../home/assets/english-word-map.js');
 const cards=JSON.parse(fs.readFileSync(path.join(root,'english-corner/catalog.json'),'utf8')).cards.filter(card=>card.journey?.length);
 const origin='http://english-word-map.test',widths=[1440,1024,768,390,320],epoch=Date.parse('2026-10-29T04:00:00Z');
@@ -75,10 +75,10 @@ async function swipe(cdp,start,end){
 }
 async function alignMap(page){await page.locator('[data-word-map-svg]').evaluate(svg=>{const rect=svg.getBoundingClientRect();scrollTo({top:scrollY+rect.top-100,left:0,behavior:'instant'});});await page.waitForTimeout(150);return page.locator('[data-word-map-svg]').boundingBox();}
 async function run(){
-  fs.mkdirSync(output,{recursive:true});const temporary=path.join(output,'temporary');fs.mkdirSync(temporary,{recursive:true});process.env.TEMP=temporary;process.env.TMP=temporary;
+  fs.mkdirSync(output,{recursive:true});const temporary=path.join(output,'temporary');fs.mkdirSync(temporary,{recursive:true});process.env.TEMP=temporary;process.env.TMP=temporary;process.env.TMPDIR=temporary;
   const source=fs.readFileSync(path.join(root,'home/assets/english-word-map.js'),'utf8').replace(/\r\n/g,'\n'),published=fs.readFileSync(path.join(site,'assets/english-word-map.js'),'utf8').replace(/\r\n/g,'\n');assert(published.includes(source),'Rebuild required: published map module differs from current source');
   let playwright;for(const candidate of [process.env.PLAYWRIGHT_MODULE,'playwright',path.join(os.homedir(),'.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright')].filter(Boolean)){try{playwright=require(candidate);break;}catch(error){if(error.code!=='MODULE_NOT_FOUND')throw error;}}
-  assert(playwright,'Existing Playwright required');browser=await playwright.chromium.launch({headless:true,executablePath:process.env.CHROME_PATH||(process.platform==='win32'?'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe':undefined)});report.browserVersion=browser.version();
+  assert(playwright,'Existing Playwright required');report.launchArgs=['--disable-gpu'];browser=await playwright.chromium.launch({headless:true,args:report.launchArgs,executablePath:process.env.CHROME_PATH||(process.platform==='win32'?'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe':undefined)});report.browserVersion=browser.version();
   await check('every public journey is selectable with complete stations, finite SVG arcs and exact card links',async()=>{
     const {ctx}=await context(),page=await ctx.newPage();await go(page,'/english/map/');await mapReady(page);const bank=Model.validateData(await data(page));assert.equal(bank.words.length,cards.length);assert.equal(await page.locator('[data-word-map-slug]').count(),cards.length);
     assert.equal(await page.locator('[data-word-map-notice]').isVisible(),true);assert.match(await page.locator('[data-word-map-notice]').textContent(),/示意/);assert.equal(await page.locator('[data-word-map-fallback]').isVisible(),false);
@@ -129,6 +129,24 @@ async function run(){
   });
   await check('five widths in both themes preserve readable notices, stations and full-width map layout',async()=>{
     for(const theme of ['light','dark']){const {ctx}=await context({theme}),page=await ctx.newPage();for(const width of widths){await page.setViewportSize({width,height:width<500?844:1000});await go(page,'/english/map/');await mapReady(page);await noOverflow(page,{width,theme,state:'default'});const bank=await data(page);await choose(page,bank.words.at(-1));await routeMatches(page,bank.words.at(-1));await noOverflow(page,{width,theme,state:'last-word'});if(width===1440||width===390)await screenshot(page,'word-map-'+theme+'-'+width+'.png');}await ctx.close();}return {widths,themes:2};
+  });
+
+  await check('all reviewed region groups retain exact native word buttons, complete fallback groups and a one-line top notice',async()=>{
+    for(const width of[1024,375]){const {ctx}=await context({width}),page=await ctx.newPage();await go(page,'/english/map/?word=pyjamas');await mapReady(page);const bank=Model.validateData(await data(page)),expected=bank.regions.filter(region=>bank.words.some(word=>word.region===region.id));
+      assert.equal(bank.words.find(word=>word.slug==='pyjamas').region,'west-asia-north-africa');assert.equal(bank.words.find(word=>word.slug==='long-time-no-see').region,'uncertain');
+      const groups=page.locator('[data-word-map-words] [data-word-map-group]');assert.deepEqual(await groups.evaluateAll(nodes=>nodes.map(node=>node.getAttribute('data-word-map-group'))),expected.map(region=>region.id));
+      for(const region of expected){const group=page.locator('[data-word-map-words] [data-word-map-group="'+region.id+'"]');assert((await group.innerText()).includes(region.title));assert.deepEqual(await group.locator('[data-word-map-slug]').evaluateAll(nodes=>nodes.map(node=>node.getAttribute('data-word-map-slug'))),bank.words.filter(word=>word.region===region.id).map(word=>word.slug));}
+      const notice=page.locator('[data-word-map-notice]');const noticeText=(await notice.textContent()).trim();assert.match(noticeText,/示意/);assert(noticeText.length<=32,'The top note must stay short');assert.equal(await notice.locator('a[href="#word-map-notes"]').count(),1);const metrics=await notice.evaluate(node=>({height:node.getBoundingClientRect().height,line:parseFloat(getComputedStyle(node).lineHeight)}));assert(metrics.height<=metrics.line*1.5);
+      const footer=(await page.locator('main .ec-editorial').allTextContents()).join('\n');assert.match(footer,/不能据此推断/);assert.match(footer,/真实旅行/);assert.match(footer,/Natural Earth/);await notice.locator('a').click();const notes=page.locator('#word-map-notes');assert.equal(await notes.evaluate(node=>node.tagName),'DETAILS');const notesSummary=notes.locator('summary');await notesSummary.focus();await notesSummary.press(' ');assert.equal(await notes.evaluate(node=>node.open),true);assert.equal(await notes.locator('p').first().isVisible(),true);await notesSummary.press('Enter');assert.equal(await notes.evaluate(node=>node.open),false);
+      const last=bank.words.find(word=>word.region==='uncertain'),button=page.locator('[data-word-map-slug="'+last.slug+'"]');await button.focus();await button.press('Enter');await page.waitForFunction(slug=>document.querySelector('[data-english-word-map]')?.getAttribute('data-word-map-selected')===slug,last.slug);await page.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));await routeMatches(page,last);assert.equal(await button.evaluate(node=>document.activeElement===node),true);
+      await noOverflow(page,{width,theme:'light',state:'region-groups'});await screenshot(page,'word-map-regions-'+width+'.png');await ctx.close();
+    }
+  });
+  await check('without JavaScript each region heading encloses exactly its complete reviewed word articles',async()=>{
+    const {ctx}=await context({javascript:false,width:375}),page=await ctx.newPage();await page.goto(origin+'/english/map/');const bank=Model.validateData(await data(page)),expected=bank.regions.filter(region=>bank.words.some(word=>word.region===region.id));
+    const groups=page.locator('[data-word-map-fallback] [data-word-map-group]');assert.deepEqual(await groups.evaluateAll(nodes=>nodes.map(node=>node.getAttribute('data-word-map-group'))),expected.map(region=>region.id));
+    for(const region of expected){const group=page.locator('[data-word-map-fallback] [data-word-map-group="'+region.id+'"]');assert((await group.innerText()).includes(region.title));const expectedWords=bank.words.filter(word=>word.region===region.id);assert.equal(await group.locator('article').count(),expectedWords.length);for(const word of expectedWords){const article=group.locator('article').filter({has:page.locator('a[href="'+word.reading+'"]')});assert.equal(await article.count(),1);const text=await article.innerText();for(const stop of word.journey)for(const value of[stop.language,stop.form,stop.place_zh])assert(text.includes(value));}}
+    assert.equal(await page.locator('[data-word-map-ui]').isVisible(),false);await noOverflow(page,{width:375,theme:'light',state:'no-js-region-groups'});await screenshot(page,'word-map-regions-no-js-375.png');await ctx.close();
   });
   await check('no console errors, missing assets, CDN calls or automatically fetched external sources occur',async()=>{assert.deepEqual(report.pageErrors,[]);assert.deepEqual(report.consoleErrors,[]);assert.deepEqual(report.missing,[]);assert.deepEqual(report.external,[]);});
 }

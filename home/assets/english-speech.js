@@ -45,11 +45,17 @@
     for(const button of buttons){button.hidden=true;button.setAttribute('aria-pressed','false');}
     if(notice)notice.hidden=true;
     const synth=win.speechSynthesis,Utterance=win.SpeechSynthesisUtterance;
-    if(!buttons.length || typeof Utterance!=='function' || !synth
-      || !['speak','cancel','getVoices','addEventListener','removeEventListener'].every(key=>typeof synth[key]==='function'))return idle;
+    if(!buttons.length)return idle;
+    const supported=typeof Utterance==='function' && !!synth
+      && ['speak','cancel','getVoices','addEventListener','removeEventListener'].every(key=>typeof synth[key]==='function');
     const listeners=[];
     let current=null,disposed=false,failed=false,available=false;
     function listen(target,type,handler){target.addEventListener(type,handler);listeners.push(()=>target.removeEventListener(type,handler));}
+    function feedback(message='') {
+      if(!notice)return;
+      notice.setAttribute('role','status');notice.setAttribute('aria-live','polite');notice.setAttribute('aria-atomic','true');
+      notice.textContent=message;notice.hidden=!message;
+    }
     function voices(){try{return Array.from(synth.getVoices() || []);}catch(_){return [];}}
     const voiceKey=voice=>[voice?.voiceURI,voice?.name,voice?.lang].join('|');
     function reset(record) {
@@ -63,14 +69,17 @@
     }
     function refresh() {
       if(disposed)return;
-      const local=voices().filter(voice=>voice?.localService===true && /^en(?:-|$)/i.test(voice.lang || ''));
+      const local=supported?voices().filter(voice=>voice?.localService===true && /^en(?:-|$)/i.test(voice.lang || '')):[];
       const voice=failed?null:selectVoice(local);available=false;
       for(const button of buttons) {
         const usable=!!voice && !!speechText(button,root,doc);button.hidden=!usable;available ||= usable;
         if(!usable && current?.button===button)stop();
       }
       if(current && !local.some(item=>voiceKey(item)===voiceKey(current.voice)))stop();
-      if(notice)notice.hidden=!available;
+      feedback(!supported?'此浏览器暂不支持本地英语朗读。'
+        :failed?'朗读未能完成，请稍后重新打开本页再试。'
+        :!voice?'此设备暂没有可用的本地英语语音。'
+        :!available?'这段内容暂时无法朗读。':'');
     }
     function speak(button) {
       if(disposed || failed)return;
@@ -96,13 +105,15 @@
     function destroy() {
       if(disposed)return;disposed=true;stop();listeners.splice(0).reverse().forEach(fn=>fn());available=false;
       for(const button of buttons){button.hidden=true;button.setAttribute('aria-pressed','false');}
-      if(notice)notice.hidden=true;
+      feedback();
       if(root[INSTANCE]===api)delete root[INSTANCE];
     }
     const api={stop,refresh,destroy,available:()=>available};root[INSTANCE]=api;
-    for(const button of buttons)listen(button,'click',()=>speak(button));
-    listen(synth,'voiceschanged',()=>{failed=false;refresh();});
-    listen(win,'pagehide',stop);
+    if(supported) {
+      for(const button of buttons)listen(button,'click',()=>speak(button));
+      listen(synth,'voiceschanged',()=>{failed=false;refresh();});
+      listen(win,'pagehide',stop);
+    }
     win.SiteNavigation?.own?.(destroy);refresh();
     return api;
   }

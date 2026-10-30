@@ -56,6 +56,7 @@
     });
   }
   function englishQuotations(value, date = new Date()) {
+    const themes = new Set(["learning", "life", "love", "courage", "freedom", "time", "nature", "friendship", "hope", "humor", "society", "art"]);
     const required = ['id','text','translation','translation_source','author_zh','author_en','work_zh','work_en','locator_zh','first_published','author_died','url','note'];
     const sameKeys = (item,keys,optional=[]) => item && typeof item==='object' && !Array.isArray(item) && keys.every(key=>Object.hasOwn(item,key)) && Object.keys(item).every(key=>keys.includes(key)||optional.includes(key));
     const publicText = (text,maximum,multiline=false) => typeof text==='string' && text.trim() && text.length<=maximum && !/[\u0000-\u001f\u007f]|(?<![A-Za-z0-9])[A-Za-z]:[\\/]|Obsidian Vault/i.test(multiline?text.replace(/\n/g,''):text);
@@ -73,8 +74,10 @@
     }
     if (!sameKeys(value,['version','quotes']) || value.version!==1 || !Array.isArray(value.quotes) || value.quotes.length>1000) return [];
     const year=Number(new Intl.DateTimeFormat('en-GB',{timeZone:'Asia/Shanghai',year:'numeric'}).format(date)),ids=new Set(),texts=new Set();
+    const themedPayload = value.quotes.some(item => item && typeof item === 'object' && Object.hasOwn(item,'themes'));
     return value.quotes.filter(item=>{
-      if(!sameKeys(item,required,['related'])||!required.filter(key=>!['translation_source','first_published','author_died','url'].includes(key)).every(key=>publicText(item[key],2000,['text','translation'].includes(key))))return false;
+      if(!sameKeys(item,required,['related','themes'])||!required.filter(key=>!['translation_source','first_published','author_died','url'].includes(key)).every(key=>publicText(item[key],2000,['text','translation'].includes(key))))return false;
+      if(themedPayload && (!Array.isArray(item.themes)||item.themes.length<1||item.themes.length>2||item.themes.some(theme=>!themes.has(theme))||new Set(item.themes).size!==item.themes.length))return false;
       if(item.text!==item.text.trim()||!/[A-Z“‘"'…]/.test(item.text[0])||!/[.!?…“”‘’"']$/.test(item.text)||['text','translation'].some(key=>item[key].split('\n').length>4||item[key].split('\n').some(line=>!line.trim())))return false;
       const normalized=item.text.replace(/[^\p{L}\p{N}]+/gu,'').toLowerCase();
       if(!/^[a-z][a-z0-9-]{1,63}$/.test(item.id)||ids.has(item.id)||!normalized||texts.has(normalized)||item.text.length>300||(item.text.match(/[A-Za-z]+(?:[’'-][A-Za-z]+)*/g)||[]).length>45||item.translation.length>120||item.note.length>160||!publicSource(item.url))return false;

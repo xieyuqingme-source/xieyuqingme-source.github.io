@@ -2,7 +2,8 @@
 const assert = require('node:assert/strict');
 const {test} = require('node:test');
 const fs = require('node:fs'),path = require('node:path'),vm = require('node:vm');
-const quotes = require('../home/assets/english-quotes.js');
+const moduleFile = process.env.ENGLISH_QUOTES_MODULE || path.join(__dirname,'../home/assets/english-quotes.js');
+const quotes = require(moduleFile);
 
 class Element {
   constructor() { this.listeners=new Map();this.hidden=false;this.value='all';this.textContent='';this.dataset={}; }
@@ -121,8 +122,92 @@ test('missing hooks leave the complete server fallback untouched',()=>{
 test('the browser UMD path mounts and the CommonJS path remains inert until requested',()=>{
   const f=fixture('?period=1700'),context=vm.createContext({window:f.window,document:f.document,URLSearchParams,Symbol});
   f.window.document=f.document;
-  vm.runInContext(fs.readFileSync(path.join(__dirname,'../home/assets/english-quotes.js'),'utf8'),context);
+  vm.runInContext(fs.readFileSync(moduleFile,'utf8'),context);
   assert.equal(typeof f.window.EnglishQuotes.mount,'function');assert.equal(f.visible().length,1);assert.equal(f.controls.hidden,false);
-  vm.runInContext(fs.readFileSync(path.join(__dirname,'../home/assets/english-quotes.js'),'utf8'),context);
+  vm.runInContext(fs.readFileSync(moduleFile,'utf8'),context);
   assert.equal(f.listeners(),5);assert.equal(f.cleanups.length,1,'Reevaluating the script reuses the live root instance');f.cleanups[0]();assert.equal(f.listeners(),0);
+});
+
+function enhancedFixture(search='',size=65) {
+  const records=Array.from({length:size},(_,index)=>({author:index%2?'乙':'甲',period:index%3?'1800':'1600',themes:index%2?'life humor':'learning life'}));
+  const f=fixture(search,records),theme=new Element(),more=new Element(),random=new Element();
+  more.hidden=true;more.textContent='再看 20 句';random.hidden=true;
+  const oldQuery=f.root.querySelector;
+  f.root.querySelector=selector=>({'#ec-quote-theme':theme,'#ec-quote-more':more,'#ec-quote-random':random}[selector]||oldQuery(selector));
+  f.rows.forEach((row,index)=>{
+    row.id='quote-test-'+index;row.dataset.copySource='作者'+index+' · 《作品》';
+    const button=new Element(),status=new Element(),original=new Element(),translation=new Element();
+    button.hidden=true;status.hidden=true;original.textContent='First line,Second line.';translation.textContent='第一行，第二行。';
+    original.childNodes=[{nodeName:'#text',textContent:'First line,'},{nodeName:'BR'},{nodeName:'SPAN',childNodes:[{nodeName:'#text',textContent:'Second line.'}]}];
+    translation.childNodes=[{nodeName:'#text',textContent:'第一行，'},{nodeName:'BR'},{nodeName:'#text',textContent:'第二行。'}];
+    row.copyButton=button;row.copyStatus=status;
+    row.querySelector=selector=>({'[data-english-quote-copy]':button,'[data-english-quote-copy-status]':status,'.ec-library-original':original,'.ec-library-translation':translation}[selector]||null);
+    row.scrollIntoView=()=>{row.scrolled=(row.scrolled||0)+1;};row.focus=()=>{row.focused=true;};
+  });
+  return {...f,theme,more,random,visible:()=>f.rows.filter(row=>!row.hidden),get url(){return f.url;},allListeners:()=>{
+    const elements=[f.window,f.author,f.period,f.controls,theme,more,random,...f.rows.map(row=>row.copyButton)];
+    return elements.reduce((sum,node)=>sum+[...node.listeners.values()].reduce((n,set)=>n+set.size,0),0);
+  }};
+}
+
+test('theme filters restore, combine with author/period and sanitize duplicate or unknown parameters',()=>{
+  const known=new Set(['learning','life','humor']),authors=new Set(['甲','乙']),periods=new Set(['1800','1600']);
+  assert.deepEqual(quotes.readFilters('?theme=humor&author=甲&period=1800',authors,periods,known),{author:'甲',period:'1800',theme:'humor'});
+  for(const search of ['?theme=unknown','?theme=humor&theme=humor','?theme=','?theme=<script>'])assert.equal(quotes.readFilters(search,authors,periods,known).theme,'all');
+  assert.equal(quotes.matches({author:'甲',period:'1800',themes:'learning life'},{author:'甲',period:'1800',theme:'life'}),true);
+  assert.equal(quotes.matches({author:'甲',period:'1800',themes:'learning life'},{author:'甲',period:'1800',theme:'humor'}),false);
+  assert.equal(quotes.queryString('?source=reading&theme=old',{author:'all',period:'all',theme:'life'}),'?source=reading&theme=life');
+  const f=enhancedFixture('?from=today&theme=unknown&author=甲');quotes.mount(f);
+  assert.equal(f.theme.value,'all');assert.equal(f.url.searchParams.get('from'),'today');assert.equal(f.url.searchParams.has('theme'),false);
+  f.theme.value='humor';f.theme.fire('change');assert.equal(f.visible().length,0);assert.equal(f.empty.hidden,false);assert.equal(f.random.disabled,true);
+  f.author.value='乙';f.author.fire('change');assert.equal(f.visible().length,20);assert(f.visible().every(row=>row.dataset.author==='乙'));
+  f.period.value='1600';f.period.fire('change');assert(f.visible().every(row=>row.dataset.period==='1600'));assert.equal(f.more.hidden,true);
+  f.controls.fire('reset');assert.deepEqual([f.author.value,f.period.value,f.theme.value],['all','all','all']);assert.equal(f.visible().length,20);assert.equal(f.url.search,'?from=today');
+});
+
+test('all server rows survive no-JS fallback; enhancement shows 20 and next controls add unseen rows in source order',()=>{
+  const f=enhancedFixture();assert.equal(f.visible().length,65);assert.equal(f.more.hidden,true);
+  const mounted=quotes.mount(f);assert.equal(f.visible().length,20);assert.equal(f.count.textContent,'显示 20 / 65 条');
+  assert.equal(f.more.hidden,false);assert.equal(f.random.hidden,false);assert(f.rows.every(row=>row.copyButton.hidden===false));
+  f.more.fire('click');assert.equal(f.visible().length,40);f.more.fire('click');assert.equal(f.visible().length,60);
+  assert.equal(f.more.textContent,'再看 5 句');f.more.fire('click');assert.equal(f.visible().length,65);assert.equal(f.more.hidden,true);
+  f.theme.value='learning';f.theme.fire('change');assert.equal(f.visible().length,20);assert(f.visible().every(row=>row.dataset.themes.includes('learning')));
+  mounted.destroy();assert.equal(f.visible().length,65);assert.equal(f.controls.hidden,true);assert.equal(f.more.hidden,true);assert.equal(f.random.hidden,true);assert(f.rows.every(row=>row.copyButton.hidden));assert.equal(f.allListeners(),0);
+});
+
+test('deep permalinks reveal only their target beyond the first batch and clear only conflicting filters',()=>{
+  const f=enhancedFixture('?author=甲&period=1800&theme=life#from=ignored',200);
+  f.goto('?author=甲&period=1800&theme=life#quote-test-199');quotes.mount(f);
+  assert.equal(f.author.value,'all');assert.equal(f.period.value,'1800');assert.equal(f.theme.value,'life');
+  assert.equal(f.rows[199].hidden,false);assert.equal(f.visible().length,21);assert(f.rows[199].scrolled);assert.equal(f.rows[198].hidden,true);
+  const shown=new Set(f.visible());f.more.fire('click');assert.equal(f.visible().length,41);assert([...shown].every(row=>!row.hidden));
+  assert.deepEqual(f.visible(),f.rows.filter(row=>!row.hidden));
+  f.goto('#quote-test-196');assert.equal(f.rows[196].hidden,false);assert.equal(f.visible().length,21);
+  f.theme.value='learning';f.theme.fire('change');assert.equal(f.visible().length,20);assert.equal(f.url.hash,'');
+});
+
+test('random selection reveals one eligible target without making a tall backlog and supports a single remaining match',()=>{
+  const f=enhancedFixture('?theme=humor',200);quotes.mount({...f,random:()=>.999});
+  f.random.fire('click');assert.equal(f.rows[199].hidden,false);assert.equal(f.visible().length,21);assert(f.rows[199].focused);assert.equal(f.url.hash,'#quote-test-199');
+  assert.equal(f.rows[197].hidden,true);assert.equal(f.rows[198].hidden,true);f.random.fire('click');assert.equal(f.url.hash,'#quote-test-197');assert.equal(f.visible().length,22);
+  const one=enhancedFixture('',1);quotes.mount({...one,random:()=>.5});one.random.fire('click');assert.equal(one.visible().length,1);assert.equal(one.url.hash,'#quote-test-0');
+  const empty=enhancedFixture('',0);quotes.mount(empty);assert.equal(empty.empty.hidden,false);assert.equal(empty.random.disabled,true);assert.doesNotThrow(()=>empty.random.fire('click'));
+});
+
+const settle=()=>new Promise(resolve=>setImmediate(resolve));
+test('copy preserves real BR poetry lines, translations and author/work; missing or denied Clipboard prompts manual selection',async()=>{
+  const f=enhancedFixture('',1),copied=[];f.window.navigator={clipboard:{writeText:async text=>{copied.push(text);}}};quotes.mount(f);
+  assert.equal(quotes.copyText(f.rows[0]),'First line,\nSecond line.\n\n第一行，\n第二行。\n\n作者0 · 《作品》');
+  f.rows[0].copyButton.fire('click');await settle();assert.deepEqual(copied,[quotes.copyText(f.rows[0])]);assert.equal(f.rows[0].copyStatus.hidden,false);assert.match(f.rows[0].copyStatus.textContent,/已复制/);
+  for(const navigator of [{},{clipboard:{writeText:async()=>{throw new Error('Permission denied');}}}]){
+    f.window.navigator=navigator;f.rows[0].copyButton.fire('click');await settle();assert.match(f.rows[0].copyStatus.textContent,/手动选中/);
+  }
+  Object.defineProperty(f.window.navigator,'clipboard',{get(){throw new Error('Security error');}});f.rows[0].copyButton.fire('click');await settle();assert.match(f.rows[0].copyStatus.textContent,/手动选中/);
+});
+
+test('leaving during an asynchronous copy does not alter the departed page and removes every added listener',async()=>{
+  const f=enhancedFixture('',1);let finish;f.window.navigator={clipboard:{writeText:()=>new Promise(resolve=>{finish=resolve;})}};
+  const first=quotes.mount(f);assert.equal(first,quotes.mount(f));assert.equal(f.cleanups.length,1);f.rows[0].copyButton.fire('click');
+  f.cleanups[0]();assert.equal(f.allListeners(),0);finish();await settle();assert.equal(f.rows[0].copyStatus.hidden,true);assert.equal(f.rows[0].copyStatus.textContent,'');
+  const before=f.replacements.length;f.more.fire('click');f.random.fire('click');assert.equal(f.replacements.length,before);
 });

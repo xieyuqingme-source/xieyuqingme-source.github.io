@@ -9,6 +9,8 @@ from english_corner import (public_url, public_domain, word_count, text_hash, pu
                             exact_fields, source_path, iso_date, RESERVED_SLUGS)
 
 
+ENGLISH_QUOTE_THEMES = {'learning': '学习', 'life': '人生', 'love': '爱情', 'courage': '勇气', 'freedom': '自由', 'time': '时间', 'nature': '自然', 'friendship': '友谊', 'hope': '希望', 'humor': '幽默', 'society': '社会', 'art': '艺术'}
+
 LANGUAGES = {"zh-CN", "en"}
 CHINA = timezone(timedelta(hours=8))
 CATEGORY_ORDER = ("domestic", "world", "economy", "science", "culture")
@@ -181,11 +183,18 @@ def validate_english_quotes(data, card_routes=None, today=None):
     if type(data["version"]) is not int or data["version"] != 1:
         raise ValueError("Unsupported English quotation version.")
     required = {"id", "text", "translation", "translation_source", "author_zh", "author_en", "work_zh", "work_en", "locator_zh", "first_published", "author_died", "url", "note"}
-    _entries(data["quotes"], required, {"related"}, maximum=1000)
+    _entries(data["quotes"], required, {"related", "themes"}, maximum=1000)
+    themed_payload = any("themes" in item for item in data["quotes"])
     seen = set()
     for item in data["quotes"]:
         for key in required - {"translation_source", "first_published", "author_died", "url"}:
             public_text(item[key], 2000, multiline=key in {"text", "translation"})
+        if themed_payload:
+            themes = item.get("themes")
+            if (not isinstance(themes, list) or not 1 <= len(themes) <= 2
+                    or any(not isinstance(theme, str) or theme not in ENGLISH_QUOTE_THEMES for theme in themes)
+                    or len(themes) != len(set(themes))):
+                raise ValueError("English quotation themes require one or two distinct known theme IDs for every entry.")
         validate_english_quote_display(item["text"])
         validate_english_quote_lines(item["translation"])
         if len(item["text"]) > 300 or word_count(item["text"]) > 45 or len(item["translation"]) > 120 or len(item["note"]) > 160:

@@ -1,9 +1,11 @@
 // Build first. Uses existing Playwright/Chrome and a fresh, intercepted local origin.
 'use strict';
 const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path'),os=require('node:os');
-const root=path.resolve(__dirname,'..'),site=path.resolve(process.argv[2]||path.join(root,'_site_unified'));
+const root=path.resolve(process.env.WEBSITE_ROOT||path.resolve(__dirname,'..')),site=path.resolve(process.env.WEBSITE_SITE||process.argv[2]||path.join(root,'_site_unified'));
 const output=path.resolve(process.argv[3]||path.join(root,'.local-checks/english-v2-20261029/learning-browser-p2'));
 const quotes=JSON.parse(fs.readFileSync(path.join(root,'home/brief/english-quotes.json'),'utf8')).quotes;
+const modes=['origins','etymology','usage','authors'],compare=(a,b)=>a<b?-1:a>b?1:0;
+const orderedQuotes=quotes.slice().sort((a,b)=>a.first_published-b.first_published||compare(a.author_en,b.author_en)||compare(a.id,b.id));
 const origin='http://english-learning.test',widths=[1440,1024,768,390,320],epoch=Date.parse('2026-10-29T04:00:00Z');
 const mime={'.html':'text/html; charset=utf-8','.js':'application/javascript','.css':'text/css','.json':'application/json','.svg':'image/svg+xml','.png':'image/png','.jpg':'image/jpeg','.webp':'image/webp','.ico':'image/x-icon','.woff2':'font/woff2','.mp3':'audio/mpeg','.wav':'audio/wav'};
 const report={startedAt:new Date().toISOString(),quoteCount:quotes.length,checks:[],rounds:[],layouts:[],listeners:[],screenshots:[],pageErrors:[],consoleErrors:[],missing:[],external:[],weatherFixtures:[],notes:['Chrome uses fresh nonpersistent contexts, never an existing user profile.','All site files are served by local request interception. Original external sources are checked as links, never automatically fetched.','The Today weather request is intercepted as a deterministic local fixture. Counts and author/period expectations come from the current shared quotation corpus.']};
@@ -42,14 +44,15 @@ async function noOverflow(page,detail={}){
   assert(result.scroll<=result.width+1&&result.body<=result.width+1,JSON.stringify({...detail,...result}));assert.deepEqual(result.clipped,[]);report.layouts.push({...detail,...result});return result;
 }
 async function pools(page){return page.locator('#english-quiz-data').evaluate(node=>JSON.parse(node.textContent));}
-async function quizReady(page){await page.waitForFunction(()=>document.querySelector('[data-quiz-ui]')?.hidden===false&&document.querySelectorAll('[data-quiz-choice]').length===4);}
+async function quizReady(page){await page.waitForFunction(()=>{const count=document.querySelectorAll('[data-quiz-choice]').length,mode=document.querySelector('[data-english-play]')?.getAttribute('data-quiz-current-mode');return document.querySelector('[data-quiz-ui]')?.hidden===false&&(mode==='usage'?[2,3].includes(count):count===4);});}
+async function currentQuestion(page){const game=page.locator('[data-english-play]'),id=await game.getAttribute('data-quiz-question-id'),mode=await game.getAttribute('data-quiz-current-mode'),question=(await pools(page))[mode]?.find(q=>q.id===id);assert(question,'Displayed question must belong to the active mode');return question;}
 async function answer(page,question,correct,index=0){
   const options=await page.locator('[data-quiz-choice]').allTextContents();assert.deepEqual(options.slice().sort(),question.choices.slice().sort());
   const value=correct?question.answer:question.choices.find(choice=>choice!==question.answer),choice=page.locator('[data-quiz-choice]').nth(options.indexOf(value));
   await choice.focus();await choice.press(index%2?'Space':'Enter');
   assert.equal(await page.locator('[data-quiz-feedback]').isVisible(),true);assert.equal(await page.evaluate(()=>document.activeElement.hasAttribute('data-quiz-feedback')),true);
   assert.equal(await page.locator('[data-quiz-feedback]').getAttribute('aria-live'),'polite');assert.equal(await page.locator('[data-quiz-feedback] .ec-quiz-explanation').textContent(),question.explanation);
-  assert.equal(await page.locator('[data-quiz-choice]:disabled').count(),4);
+  assert.equal(await page.locator('[data-quiz-choice]:disabled').count(),question.choices.length);
   const links=await page.locator('[data-quiz-feedback] a').evaluateAll(nodes=>nodes.map(node=>({href:node.getAttribute('href'),label:node.textContent,target:node.getAttribute('target'),rel:node.getAttribute('rel')})));
   assert(links.some(link=>link.href===question.reading));localTarget(question.reading);assert(links.some(link=>link.href.startsWith('/english/quotes/')),'Every answer must link to the complete quotation library');
   for(const source of question.sources){const link=links.find(link=>link.href===source.url&&link.label===source.label);assert(link,'Missing exact source link: '+source.url);if(source.url.startsWith('https://')){assert.equal(link.target,'_blank');assert.match(link.rel,/noopener/);assert.match(link.rel,/noreferrer/);}else localTarget(source.url);}
@@ -77,9 +80,11 @@ async function finishRound(page,mode){
 }
 async function listenerSnapshot(page,label){
   const state=await page.evaluate(()=>{
-    const relevant=target=>target instanceof Element&&(target.matches('[data-quiz-mode],[data-quiz-choices],[data-quiz-next],[data-quiz-restart]')||target.matches('#ec-quote-author,#ec-quote-period,[data-english-quote-filters]'));
+    const quizControls='[data-quiz-mode],[data-quiz-choices],[data-quiz-next],[data-quiz-restart],[data-quiz-change-mode],[data-quiz-show-translation],[data-quiz-show-hint]';
+    const libraryControls='#ec-quote-author,#ec-quote-period,#ec-quote-theme,#ec-quote-more,#ec-quote-random,[data-english-quote-copy],[data-english-quote-filters]';
+    const relevant=target=>target instanceof Element&&(target.matches(quizControls)||target.matches(libraryControls));
     const active=__learningEvents.filter(entry=>entry.active);
-    return {quiz:active.filter(entry=>entry.target instanceof Element&&entry.target.matches('[data-quiz-mode],[data-quiz-choices],[data-quiz-next],[data-quiz-restart]')).length,library:active.filter(entry=>entry.target instanceof Element&&entry.target.matches('#ec-quote-author,#ec-quote-period,[data-english-quote-filters]')).length,detached:active.filter(entry=>relevant(entry.target)&&!entry.target.isConnected).length,popstate:active.filter(entry=>entry.target===window&&entry.type==='popstate').length};
+    return {quiz:active.filter(entry=>entry.target instanceof Element&&entry.target.matches(quizControls)).length,library:active.filter(entry=>entry.target instanceof Element&&entry.target.matches(libraryControls)).length,detached:active.filter(entry=>relevant(entry.target)&&!entry.target.isConnected).length,popstate:active.filter(entry=>entry.target===window&&entry.type==='popstate').length};
   });report.listeners.push({label,...state});assert.equal(state.detached,0,'Leaving a learning page must remove its old element listeners');return state;
 }
 function filterCase(){
@@ -89,12 +94,14 @@ function filterCase(){
 }
 async function visibleQuoteIDs(page){return page.locator('[data-english-quote-row]:visible').evaluateAll(rows=>rows.map(row=>row.id).sort());}
 async function run(){
-  fs.mkdirSync(output,{recursive:true});const temporary=path.join(output,'temporary');fs.mkdirSync(temporary,{recursive:true});process.env.TEMP=temporary;process.env.TMP=temporary;
+  fs.mkdirSync(output,{recursive:true});const temporary=path.join(output,'temporary');fs.mkdirSync(temporary,{recursive:true});process.env.TEMP=temporary;process.env.TMP=temporary;process.env.TMPDIR=temporary;
   let playwright;for(const candidate of [process.env.PLAYWRIGHT_MODULE,'playwright',path.join(os.homedir(),'.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright')].filter(Boolean)){try{playwright=require(candidate);break;}catch(error){if(error.code!=='MODULE_NOT_FOUND')throw error;}}
-  assert(playwright,'Existing Playwright required.');browser=await playwright.chromium.launch({headless:true,executablePath:process.env.CHROME_PATH||(process.platform==='win32'?'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe':undefined)});
-  await check('all three quiz modes complete ten unique questions with correct scoring, source links and review',async()=>{
+  assert(playwright,'Existing Playwright required.');browser=await playwright.chromium.launch({headless:true,executablePath:process.env.CHROME_PATH||(process.platform==='win32'?'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe':undefined),args:['--disable-gpu','--disable-gpu-compositing'],downloadsPath:path.join(temporary,'downloads'),env:{...process.env,TEMP:temporary,TMP:temporary,TMPDIR:temporary}});
+  await check('all four quiz modes complete ten unique questions with correct scoring, source links and review',async()=>{
     const ctx=await context(),page=await ctx.newPage();await go(page,'/english/play/');await quizReady(page);
-    for(const mode of ['authors','etymology','origins'])await finishRound(page,mode);await ctx.close();
+    assert.equal(await page.locator('[data-english-play]').getAttribute('data-quiz-current-mode'),'origins');
+    assert.deepEqual(await page.locator('[data-quiz-mode]').evaluateAll(buttons=>buttons.map(button=>button.getAttribute('data-quiz-mode'))),modes);
+    for(const mode of modes)await finishRound(page,mode);await ctx.close();
   });
   await check('native quiz controls have 44px targets and LF poems keep their line breaks',async()=>{
     const ctx=await context({width:390}),page=await ctx.newPage();await go(page,'/english/play/');await quizReady(page);
@@ -102,8 +109,10 @@ async function run(){
     assert.match(await page.locator('[data-quiz-english]').evaluate(node=>getComputedStyle(node).whiteSpace),/pre-line|pre-wrap|break-spaces/);await ctx.close();
   });
   await check('quotation library combines author/period filters, shows empty results and restores query state',async()=>{
-    const pair=filterCase(),query='?keep=1&author='+encodeURIComponent(pair.author)+'&period='+pair.period,ctx=await context(),page=await ctx.newPage();await go(page,'/english/quotes/'+query);
-    const expected=quotes.filter(q=>q.author_zh===pair.author&&String(Math.floor(q.first_published/100)*100)===pair.period).map(q=>'quote-'+q.id).sort();assert(expected.length);assert.equal(await page.locator('[data-english-quote-row]').count(),quotes.length);assert.deepEqual(await visibleQuoteIDs(page),expected);
+    const pair=filterCase(),query='?keep=1&author='+encodeURIComponent(pair.author)+'&period='+pair.period,ctx=await context(),page=await ctx.newPage();await go(page,'/english/quotes/?keep=1');
+    assert.deepEqual(await visibleQuoteIDs(page),orderedQuotes.slice(0,20).map(q=>'quote-'+q.id).sort());await page.locator('#ec-quote-more').click();assert.deepEqual(await visibleQuoteIDs(page),orderedQuotes.slice(0,40).map(q=>'quote-'+q.id).sort());
+    await go(page,'/english/quotes/'+query);
+    const expected=orderedQuotes.filter(q=>q.author_zh===pair.author&&String(Math.floor(q.first_published/100)*100)===pair.period).slice(0,20).map(q=>'quote-'+q.id).sort();assert(expected.length);assert.equal(await page.locator('[data-english-quote-row]').count(),quotes.length);assert.deepEqual(await visibleQuoteIDs(page),expected);
     assert.equal(await page.locator('#ec-quote-author').inputValue(),pair.author);assert.equal(await page.locator('#ec-quote-period').inputValue(),pair.period);
     await page.locator('#ec-quote-period').selectOption(pair.empty);assert.equal(await page.locator('#ec-quote-empty').isVisible(),true);assert.deepEqual(await visibleQuoteIDs(page),[]);assert.equal(new URL(page.url()).searchParams.get('keep'),'1');
     await page.reload();await ready(page);assert.equal(await page.locator('#ec-quote-period').inputValue(),pair.empty);assert.equal(await page.locator('#ec-quote-empty').isVisible(),true);
@@ -124,20 +133,20 @@ async function run(){
   await check('SPA reading loops clean quiz/library listeners and history returns without reloading',async()=>{
     const ctx=await context(),page=await ctx.newPage();await go(page,'/english/');const documentToken=await page.evaluate(()=>__learningDocumentToken);let popstate;
     for(let loop=0;loop<3;loop++){
-      await clickRoute(page,'/english/play/');await quizReady(page);const quiz=await listenerSnapshot(page,'quiz-'+loop);assert.equal(quiz.quiz,6);assert.equal(quiz.library,0);if(popstate===undefined)popstate=quiz.popstate;else assert.equal(quiz.popstate,popstate);
-      const questionId=await page.locator('[data-english-play]').getAttribute('data-quiz-question-id'),q=(await pools(page)).authors.find(q=>q.id===questionId);
+      await clickRoute(page,'/english/play/');await quizReady(page);const quiz=await listenerSnapshot(page,'quiz-'+loop);assert.equal(quiz.quiz,modes.length+6);assert.equal(quiz.library,0);if(popstate===undefined)popstate=quiz.popstate;else assert.equal(quiz.popstate,popstate);
+      assert.equal(await page.locator('[data-english-play]').getAttribute('data-quiz-current-mode'),'origins');const q=await currentQuestion(page);
       await answer(page,q,true);const libraryLink=page.locator('[data-quiz-feedback] a:visible');let href;for(const anchor of await libraryLink.all()){const candidate=await anchor.getAttribute('href');if(candidate.startsWith('/english/quotes/')){href=candidate;break;}}assert(href);await clickRoute(page,href);
-      const library=await listenerSnapshot(page,'library-'+loop);assert.equal(library.quiz,0);assert.equal(library.library,4);
+      const library=await listenerSnapshot(page,'library-'+loop);assert.equal(library.quiz,0);assert.equal(library.library,quotes.length+7);
       await clickRoute(page,'/articles/');const article=await page.locator('main a').evaluateAll(links=>links.map(link=>link.getAttribute('href')).find(href=>href&&href.startsWith('/articles/')&&href.endsWith('.html')&&href.split('/').length>3));assert(article);await clickRoute(page,article);assert((await listenerSnapshot(page,'article-'+loop)).quiz===0);
-      await page.goBack();await ready(page,'/articles/');await page.goBack();await ready(page,'/english/quotes/');assert.equal(new URL(page.url()).pathname,'/english/quotes/');assert.equal((await listenerSnapshot(page,'back-library-'+loop)).library,4);
+      await page.goBack();await ready(page,'/articles/');await page.goBack();await ready(page,'/english/quotes/');assert.equal(new URL(page.url()).pathname,'/english/quotes/');assert.equal((await listenerSnapshot(page,'back-library-'+loop)).library,quotes.length+7);
       await clickRoute(page,'/english/');assert.equal(await page.evaluate(()=>__learningDocumentToken),documentToken);
     }await ctx.close();
   });
   await check('five widths and both themes keep quiz, library and learning entrances in normal reading flow',async()=>{
     const pair=filterCase();for(const theme of ['light','dark']){const ctx=await context({theme}),page=await ctx.newPage();for(const width of widths){await page.setViewportSize({width,height:width<500?844:1000});for(const route of ['/english/','/english/play/','/english/quotes/']){
-      await go(page,route);await noOverflow(page,{route,theme,width});if(route==='/english/play/'){await quizReady(page);const questionId=await page.locator('[data-english-play]').getAttribute('data-quiz-question-id'),q=(await pools(page)).authors.find(q=>q.id===questionId);await answer(page,q,false);await noOverflow(page,{route,theme,width,state:'feedback'});if(width===1440&&theme==='light'||width===390)await screenshot(page,`quiz-${theme}-${width}.png`);}
+      await go(page,route);await noOverflow(page,{route,theme,width});if(route==='/english/play/'){await quizReady(page);const q=await currentQuestion(page);await answer(page,q,false);await noOverflow(page,{route,theme,width,state:'feedback'});if(width===1440&&theme==='light'||width===390)await screenshot(page,`quiz-${theme}-${width}.png`);}
       if(route==='/english/quotes/'&&width===390){await page.locator('#ec-quote-author').selectOption(pair.author);await page.locator('#ec-quote-period').selectOption(pair.period);await screenshot(page,`library-${theme}-390.png`,false);}
-      if(route==='/english/'&&width===390&&theme==='light'){await page.locator('.ec-play-entry').scrollIntoViewIfNeeded();await screenshot(page,'learning-entries-390.png',false);}
+      if(route==='/english/'&&width===390&&theme==='light'){await page.locator('[data-ec-quick]').scrollIntoViewIfNeeded();await screenshot(page,'learning-entries-390.png',false);}
     }}await ctx.close();}return {layouts:report.layouts.length,widths,themes:2};
   });
   await check('no console errors, missing resources or automatic external source requests occur',async()=>{assert.deepEqual(report.pageErrors,[]);assert.deepEqual(report.consoleErrors,[]);assert.deepEqual(report.missing,[]);assert.deepEqual(report.external,[]);});

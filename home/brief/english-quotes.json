@@ -16,7 +16,10 @@
       "first_published": 1603,
       "author_died": 1616,
       "url": "https://www.gutenberg.org/cache/epub/100/pg100-images.html#sceneII_8.2",
-      "note": "这是哈姆雷特对丹麦如同牢狱的感受；理解为人物在此刻的判断，不当作客观伦理定律。"
+      "note": "这是哈姆雷特对丹麦如同牢狱的感受；理解为人物在此刻的判断，不当作客观伦理定律。",
+      "themes": [
+        "life"
+      ]
     },
     {
       "id": "austen-01",
@@ -33,7 +36,11 @@
       "first_published": 1813,
       "author_died": 1817,
       "url": "https://www.gutenberg.org/cache/epub/1342/pg1342-images.html#CHAPTER_V",
-      "note": "mortify在此是伤害自尊；反事实条件句把两人的“傲慢”巧妙地接在一起。"
+      "note": "mortify在此是伤害自尊；反事实条件句把两人的“傲慢”巧妙地接在一起。",
+      "themes": [
+        "love",
+        "humor"
+      ]
     },
     {
       "id": "dickens-01",
@@ -50,7 +57,11 @@
       "first_published": 1859,
       "author_died": 1870,
       "url": "https://www.gutenberg.org/cache/epub/98/pg98-images.html#link2H_4_0002",
-      "note": "best与worst并列，把同一个时代的矛盾评价放在一起；这种反复句式贯穿小说开篇。"
+      "note": "best与worst并列，把同一个时代的矛盾评价放在一起；这种反复句式贯穿小说开篇。",
+      "themes": [
+        "society",
+        "time"
+      ]
     },
     {
       "id": "bronte-01",
@@ -67,7 +78,11 @@
       "first_published": 1847,
       "author_died": 1855,
       "url": "https://www.gutenberg.org/cache/epub/1260/pg1260-images.html#id-7050114306024519729",
-      "note": "这是简拒绝被人摆布的声明；ensnare指用网捕获，也可比喻使人陷入束缚。"
+      "note": "这是简拒绝被人摆布的声明；ensnare指用网捕获，也可比喻使人陷入束缚。",
+      "themes": [
+        "freedom",
+        "courage"
+      ]
     },
     {
       "id": "eliot-01",
@@ -84,7 +99,11 @@
       "first_published": 1871,
       "author_died": 1880,
       "url": "https://www.gutenberg.org/cache/epub/145/pg145-images.html#chap72",
-      "note": "这里的to each other接在less difficult后，表达彼此相待的关系。"
+      "note": "这里的to each other接在less difficult后，表达彼此相待的关系。",
+      "themes": [
+        "friendship",
+        "life"
+      ]
     },
     {
       "id": "carroll-01",
@@ -101,7 +120,11 @@
       "first_published": 1865,
       "author_died": 1898,
       "url": "https://www.gutenberg.org/cache/epub/11/pg11-images.html#chap02",
-      "note": "in the world在疑问句中加强语气，类似中文“到底”。"
+      "note": "in the world在疑问句中加强语气，类似中文“到底”。",
+      "themes": [
+        "life",
+        "humor"
+      ]
     },
     {
       "id": "wilde-01",
@@ -118,7 +141,10 @@
       "first_published": 1891,
       "author_died": 1900,
       "url": "https://www.gutenberg.org/cache/epub/174/pg174-images.html#chap00",
-      "note": "这是关于艺术独立性的悖论式宣言；useless在这里不是说艺术没有价值。"
+      "note": "这是关于艺术独立性的悖论式宣言；useless在这里不是说艺术没有价值。",
+      "themes": [
+        "art"
+      ]
     },
     {
       "id": "stevenson-01",
@@ -135,7 +161,11 @@
       "first_published": 1877,
       "author_died": 1894,
       "url": "https://www.gutenberg.org/cache/epub/69825/pg69825-images.html",
-      "note": "kirk是苏格兰语中的教堂；catholic在这里表示广泛、不狭隘，与宗教身份无关。作者故意逆转了“越忙越好”的常识。"
+      "note": "kirk是苏格兰语中的教堂；catholic在这里表示广泛、不狭隘，与宗教身份无关。作者故意逆转了“越忙越好”的常识。",
+      "themes": [
+        "life",
+        "humor"
+      ]
     },
     {
       "id": "blake-01",
@@ -152,7 +182,10 @@
       "first_published": 1790,
       "author_died": 1827,
       "url": "https://www.gutenberg.org/cache/epub/45315/pg45315-images.html#Page_16",
-      "note": "三个并列短语都省略动词，以最短的结构把友谊写成人的栖身之所。"
+      "note": "三个并列短语都省略动词，以最短的结构把友谊写成人的栖身之所。",
+      "themes": [
+        "friendship"
+      ]
     },
     {
       "id": "wordsworth-01",
@@ -169,7 +202,10 @@
       "first_published": 1807,
       "author_died": 1850,
       "url": "https://www.gutenberg.org/cache/epub/8824/pg8824-images.html#id00116",
-      "note": "as引出明喻：人像一片高处的云。Cloud、Vales、Hills在1807年版中都以大写开头。"
+      "note": "as引出明喻：人像一片高处的云。Cloud、Vales、Hills在1807年版中都以大写开头。",
+      "themes": [
+        "nature"
+      ]
     },
     {
       "id": "coleridge-01",
@@ -187,7 +223,10 @@
       "author_died": 1834,
       "url": "https://www.gutenberg.org/cache/epub/11101/pg11101-images.html#id00417",
       "note": "did ... decree是诗句倒装，现代常用语序为Kubla Khan decreed；Xanadu指向元上都。",
-      "related": "/english/coleridge-kubla-khan/"
+      "related": "/english/coleridge-kubla-khan/",
+      "themes": [
+        "art"
+      ]
     },
     {
       "id": "shelley-01",
@@ -204,7 +243,11 @@
       "first_published": 1820,
       "author_died": 1822,
       "url": "https://www.gutenberg.org/cache/epub/4798/pg4798-images.html#id00805",
-      "note": "Winter与Spring以季节更替表达希望；这句反问收束了整首《西风颂》。"
+      "note": "Winter与Spring以季节更替表达希望；这句反问收束了整首《西风颂》。",
+      "themes": [
+        "hope",
+        "nature"
+      ]
     },
     {
       "id": "keats-01",
@@ -221,7 +264,10 @@
       "first_published": 1820,
       "author_died": 1821,
       "url": "https://www.gutenberg.org/cache/epub/23684/pg23684-images.html#id-4987274095954744633",
-      "note": "诗的结尾让古瓮向人说话；最后两行的声音归属和含义历来有解释分歧。"
+      "note": "诗的结尾让古瓮向人说话；最后两行的声音归属和含义历来有解释分歧。",
+      "themes": [
+        "art"
+      ]
     },
     {
       "id": "dickinson-01",
@@ -238,7 +284,10 @@
       "first_published": 1891,
       "author_died": 1886,
       "url": "https://www.gutenberg.org/cache/epub/12242/pg12242-images.html#Hope_is_the_thing_with_feathers",
-      "note": "perch是鸟停栖；希望被写成一只住在灵魂里的鸟。这里采用1891年第二辑的文字。"
+      "note": "perch是鸟停栖；希望被写成一只住在灵魂里的鸟。这里采用1891年第二辑的文字。",
+      "themes": [
+        "hope"
+      ]
     },
     {
       "id": "whitman-01",
@@ -255,7 +304,10 @@
       "first_published": 1855,
       "author_died": 1892,
       "url": "https://www.gutenberg.org/cache/epub/1322/pg1322-images.html#link2H_4_0027",
-      "note": "multitudes本义为众多的人；诗人用它表达自我也能容纳复杂、矛盾的面向。"
+      "note": "multitudes本义为众多的人；诗人用它表达自我也能容纳复杂、矛盾的面向。",
+      "themes": [
+        "life"
+      ]
     },
     {
       "id": "yeats-01",
@@ -273,7 +325,11 @@
       "author_died": 1939,
       "url": "https://www.gutenberg.org/cache/epub/49608/pg49608-images.html#Page_158",
       "note": "nodding既有点头之意，也能表示打瞌睡；诗让年老的读者从炉边的书中回望青春。",
-      "related": "/english/yeats-when-you-are-old/"
+      "related": "/english/yeats-when-you-are-old/",
+      "themes": [
+        "time",
+        "love"
+      ]
     },
     {
       "id": "franklin-01",
@@ -290,7 +346,10 @@
       "first_published": 1818,
       "author_died": 1790,
       "url": "https://www.gutenberg.org/cache/epub/20203/pg20203-images.html#IX",
-      "note": "ought与resolve两次呼应，把判断、决心和行动连在一起。"
+      "note": "ought与resolve两次呼应，把判断、决心和行动连在一起。",
+      "themes": [
+        "life"
+      ]
     },
     {
       "id": "emerson-01",
@@ -307,7 +366,11 @@
       "first_published": 1841,
       "author_died": 1882,
       "url": "https://www.gutenberg.org/cache/epub/16643/pg16643-images.html#Page_81",
-      "note": "thyself是yourself的古式；铁弦的比喻使抽象的自信变得可以听见。"
+      "note": "thyself是yourself的古式；铁弦的比喻使抽象的自信变得可以听见。",
+      "themes": [
+        "courage",
+        "life"
+      ]
     },
     {
       "id": "thoreau-01",
@@ -324,7 +387,11 @@
       "first_published": 1854,
       "author_died": 1862,
       "url": "https://www.gutenberg.org/cache/epub/205/pg205-images.html#chap02",
-      "note": "lead a life表示过某种生活；quiet在此写出外表平静与内心困境的落差。"
+      "note": "lead a life表示过某种生活；quiet在此写出外表平静与内心困境的落差。",
+      "themes": [
+        "life",
+        "society"
+      ]
     },
     {
       "id": "douglass-01",
@@ -341,7 +408,11 @@
       "first_published": 1845,
       "author_died": 1895,
       "url": "https://www.gutenberg.org/cache/epub/23/pg23-images.html#link2HCH0006",
-      "note": "禁止他学习的言论，反使他看清读写能力的意义；pathway在此为道路的比喻。"
+      "note": "禁止他学习的言论，反使他看清读写能力的意义；pathway在此为道路的比喻。",
+      "themes": [
+        "freedom",
+        "learning"
+      ]
     },
     {
       "id": "keller-01",
@@ -359,7 +430,11 @@
       "author_died": 1968,
       "url": "https://www.gutenberg.org/cache/epub/2397/pg2397-images.html#link2HCH0004",
       "note": "that living word指water；这是她把手指拼写与流水联系起来的回忆。",
-      "related": "/english/keller-water/"
+      "related": "/english/keller-water/",
+      "themes": [
+        "learning",
+        "hope"
+      ]
     },
     {
       "id": "chesterton-01",
@@ -377,7 +452,11 @@
       "author_died": 1936,
       "url": "https://www.gutenberg.org/cache/epub/11505/pg11505-images.html#chap04",
       "note": "rightly considered是过去分词短语，修饰inconvenience；幽默来自观察角度的倒转。",
-      "related": "/english/chesterton-hat/"
+      "related": "/english/chesterton-hat/",
+      "themes": [
+        "humor",
+        "life"
+      ]
     },
     {
       "id": "twain-01",
@@ -395,7 +474,11 @@
       "author_died": 1910,
       "url": "https://www.gutenberg.org/cache/epub/68604/pg68604-images.html#Page_402",
       "note": "as a rule表示通常；文章讽刺从众，不是说人完全不可能独立思考。",
-      "related": "/english/twain-corn-pone/"
+      "related": "/english/twain-corn-pone/",
+      "themes": [
+        "society",
+        "learning"
+      ]
     },
     {
       "id": "lamb-01",
@@ -412,7 +495,11 @@
       "first_published": 1821,
       "author_died": 1834,
       "url": "https://www.gutenberg.org/cache/epub/10343/pg10343-images.html#id00326",
-      "note": "轻轻一句I suppose，把严肃的职业形象拉回童年；这不是对职业能力的贬低。"
+      "note": "轻轻一句I suppose，把严肃的职业形象拉回童年；这不是对职业能力的贬低。",
+      "themes": [
+        "humor",
+        "society"
+      ]
     },
     {
       "id": "mary-shelley-01",
@@ -429,7 +516,11 @@
       "first_published": 1831,
       "author_died": 1851,
       "url": "https://www.gutenberg.org/cache/epub/42324/pg42324-images.html",
-      "note": "thy、thou是古旧的第二人称形式。造物用亚当与堕落天使的典故，向创造者申诉遭弃的命运。"
+      "note": "thy、thou是古旧的第二人称形式。造物用亚当与堕落天使的典故，向创造者申诉遭弃的命运。",
+      "themes": [
+        "life",
+        "society"
+      ]
     },
     {
       "id": "stoker-01",
@@ -446,7 +537,10 @@
       "first_published": 1897,
       "author_died": 1912,
       "url": "https://www.gutenberg.org/cache/epub/345/pg345-images.html#chap02",
-      "note": "children of the night指山谷中的狼；What music they make!用感叹句，让普通狼嚎在伯爵耳中变成音乐。"
+      "note": "children of the night指山谷中的狼；What music they make!用感叹句，让普通狼嚎在伯爵耳中变成音乐。",
+      "themes": [
+        "nature"
+      ]
     },
     {
       "id": "doyle-01",
@@ -463,7 +557,10 @@
       "first_published": 1892,
       "author_died": 1930,
       "url": "https://www.gutenberg.org/cache/epub/1661/pg1661-images.html#chap01",
-      "note": "capital在这里表示重大的；theorise是英式拼写。福尔摩斯接着批评为了迎合理论而扭曲事实的做法。"
+      "note": "capital在这里表示重大的；theorise是英式拼写。福尔摩斯接着批评为了迎合理论而扭曲事实的做法。",
+      "themes": [
+        "learning"
+      ]
     },
     {
       "id": "melville-01",
@@ -480,7 +577,10 @@
       "first_published": 1851,
       "author_died": 1891,
       "url": "https://www.gutenberg.org/cache/epub/15/pg15-images.html#chap01",
-      "note": "Call me ...是请对方这样称呼自己的祈使句；小说以一个声音和一个名字，直接把读者拉到叙述者面前。"
+      "note": "Call me ...是请对方这样称呼自己的祈使句；小说以一个声音和一个名字，直接把读者拉到叙述者面前。",
+      "themes": [
+        "art"
+      ]
     },
     {
       "id": "hawthorne-01",
@@ -497,7 +597,11 @@
       "first_published": 1850,
       "author_died": 1864,
       "url": "https://www.gutenberg.org/cache/epub/33/pg33-images.html#chap20",
-      "note": "wear a face把不同身份写成可以戴上的面具；叙述者在这里追问丁梅斯代尔的隐瞒如何改变了他自己。"
+      "note": "wear a face把不同身份写成可以戴上的面具；叙述者在这里追问丁梅斯代尔的隐瞒如何改变了他自己。",
+      "themes": [
+        "life",
+        "society"
+      ]
     },
     {
       "id": "maugham-01",
@@ -514,7 +618,11 @@
       "first_published": 1919,
       "author_died": 1965,
       "url": "https://www.gutenberg.org/cache/epub/222/pg222-images.html#chap41",
-      "note": "be concerned to do表示关注做某事；叙述者对斯特里克兰既厌恶又好奇，想知道他的动机。"
+      "note": "be concerned to do表示关注做某事；叙述者对斯特里克兰既厌恶又好奇，想知道他的动机。",
+      "themes": [
+        "art",
+        "learning"
+      ]
     },
     {
       "id": "forster-01",
@@ -531,7 +639,10 @@
       "first_published": 1910,
       "author_died": 1970,
       "url": "https://www.gutenberg.org/cache/epub/2946/pg2946-images.html#link2HCH0022",
-      "note": "sermon本指布道；玛格丽特希望日常理性与内心激情相连，connect在这里连的是人的不同面向。"
+      "note": "sermon本指布道；玛格丽特希望日常理性与内心激情相连，connect在这里连的是人的不同面向。",
+      "themes": [
+        "life"
+      ]
     },
     {
       "id": "alcott-01",
@@ -548,7 +659,11 @@
       "first_published": 1869,
       "author_died": 1888,
       "url": "https://www.gutenberg.org/cache/epub/514/pg514-images.html#chap44",
-      "note": "艾米谈起新婚生活，把天气与驾船都化成生活的比喻；for在这里解释为什么不怕风暴。"
+      "note": "艾米谈起新婚生活，把天气与驾船都化成生活的比喻；for在这里解释为什么不怕风暴。",
+      "themes": [
+        "courage",
+        "love"
+      ]
     },
     {
       "id": "shakespeare-02",
@@ -565,7 +680,11 @@
       "first_published": 1623,
       "author_died": 1616,
       "url": "https://www.gutenberg.org/cache/epub/100/pg100-images.html#sceneIV_32.1",
-      "note": "stuff在这里是“材料”；made on是此处旧式表达，现代英语常说made of。"
+      "note": "stuff在这里是“材料”；made on是此处旧式表达，现代英语常说made of。",
+      "themes": [
+        "life",
+        "time"
+      ]
     },
     {
       "id": "austen-02",
@@ -582,7 +701,11 @@
       "first_published": 1813,
       "author_died": 1817,
       "url": "https://www.gutenberg.org/cache/epub/1342/pg1342-images.html#page_11",
-      "note": "这是叙述者带讽刺意味的社交观察；be fond of表示喜欢，不能把玩笑读成规律。"
+      "note": "这是叙述者带讽刺意味的社交观察；be fond of表示喜欢，不能把玩笑读成规律。",
+      "themes": [
+        "love",
+        "humor"
+      ]
     },
     {
       "id": "dickens-02",
@@ -599,7 +722,10 @@
       "first_published": 1859,
       "author_died": 1870,
       "url": "https://www.gutenberg.org/cache/epub/98/pg98-images.html#link2H_4_0004",
-      "note": "reflect upon表示思考；叙述者由夜间城市转向人与人之间无法完全看透的内心。"
+      "note": "reflect upon表示思考；叙述者由夜间城市转向人与人之间无法完全看透的内心。",
+      "themes": [
+        "life"
+      ]
     },
     {
       "id": "bronte-02",
@@ -616,7 +742,11 @@
       "first_published": 1847,
       "author_died": 1855,
       "url": "https://www.gutenberg.org/cache/epub/1260/pg1260-images.html#id-5447535297528119587",
-      "note": "nurse在这里作动词，指怀着、滋长某种情绪；这是海伦的处世态度。"
+      "note": "nurse在这里作动词，指怀着、滋长某种情绪；这是海伦的处世态度。",
+      "themes": [
+        "life",
+        "time"
+      ]
     },
     {
       "id": "eliot-02",
@@ -633,7 +763,11 @@
       "first_published": 1871,
       "author_died": 1880,
       "url": "https://www.gutenberg.org/cache/epub/145/pg145-images.html#chap07",
-      "note": "point of view是看问题的角度；结合布鲁克先生的自我辩解阅读，能看出讽刺。"
+      "note": "point of view是看问题的角度；结合布鲁克先生的自我辩解阅读，能看出讽刺。",
+      "themes": [
+        "learning",
+        "humor"
+      ]
     },
     {
       "id": "carroll-02",
@@ -650,7 +784,11 @@
       "first_published": 1865,
       "author_died": 1898,
       "url": "https://www.gutenberg.org/cache/epub/11/pg11-images.html#chap10",
-      "note": "It’s no use doing ...表示做某事没有用；爱丽丝把“我已经改变了”说成了回不到昨天的理由。"
+      "note": "It’s no use doing ...表示做某事没有用；爱丽丝把“我已经改变了”说成了回不到昨天的理由。",
+      "themes": [
+        "time",
+        "life"
+      ]
     },
     {
       "id": "wilde-02",
@@ -667,7 +805,11 @@
       "first_published": 1891,
       "author_died": 1900,
       "url": "https://www.gutenberg.org/cache/epub/174/pg174-images.html#chap00",
-      "note": "cultivated可形容人有教养、有修养，和土地“被耕作”的本义相呼应。"
+      "note": "cultivated可形容人有教养、有修养，和土地“被耕作”的本义相呼应。",
+      "themes": [
+        "art",
+        "hope"
+      ]
     },
     {
       "id": "stevenson-02",
@@ -684,7 +826,11 @@
       "first_published": 1877,
       "author_died": 1894,
       "url": "https://www.gutenberg.org/cache/epub/69825/pg69825-images.html#page_26",
-      "note": "underrate是低估；这篇随笔重新衡量快乐给周围人的益处。"
+      "note": "underrate是低估；这篇随笔重新衡量快乐给周围人的益处。",
+      "themes": [
+        "life",
+        "friendship"
+      ]
     },
     {
       "id": "blake-02",
@@ -701,7 +847,11 @@
       "first_published": 1790,
       "author_died": 1827,
       "url": "https://www.gutenberg.org/cache/epub/45315/pg45315-images.html#Page_14",
-      "note": "soar指高飞；这是借鸟写独立力量的格言，不是鸟类学判断。"
+      "note": "soar指高飞；这是借鸟写独立力量的格言，不是鸟类学判断。",
+      "themes": [
+        "freedom",
+        "courage"
+      ]
     },
     {
       "id": "wordsworth-02",
@@ -718,7 +868,10 @@
       "first_published": 1807,
       "author_died": 1850,
       "url": "https://www.gutenberg.org/cache/epub/8774/pg8774-images.html#id00315",
-      "note": "shew是show的旧拼写；any thing按本版分写。诗人此处描写清晨的伦敦。"
+      "note": "shew是show的旧拼写；any thing按本版分写。诗人此处描写清晨的伦敦。",
+      "themes": [
+        "nature"
+      ]
     },
     {
       "id": "coleridge-02",
@@ -735,7 +888,10 @@
       "first_published": 1798,
       "author_died": 1834,
       "url": "https://www.gutenberg.org/cache/epub/11101/pg11101-images.html#id00177",
-      "note": "every where按本版分写；海水围绕却无法饮用，产生了强烈反差。"
+      "note": "every where按本版分写；海水围绕却无法饮用，产生了强烈反差。",
+      "themes": [
+        "nature"
+      ]
     },
     {
       "id": "shelley-02",
@@ -752,7 +908,11 @@
       "first_published": 1818,
       "author_died": 1822,
       "url": "https://www.gutenberg.org/cache/epub/4798/pg4798-images.html#id00495",
-      "note": "这是残破雕像上君王夸耀的铭文；四周荒沙使夸口反过来成为讽刺。"
+      "note": "这是残破雕像上君王夸耀的铭文；四周荒沙使夸口反过来成为讽刺。",
+      "themes": [
+        "society",
+        "time"
+      ]
     },
     {
       "id": "keats-02",
@@ -769,7 +929,10 @@
       "first_published": 1820,
       "author_died": 1821,
       "url": "https://www.gutenberg.org/cache/epub/23684/pg23684-images.html#id-6628757086229031098",
-      "note": "诗中描绘器物上静止的吹奏者；unheard把想象中的音乐与真实听觉相对照。"
+      "note": "诗中描绘器物上静止的吹奏者；unheard把想象中的音乐与真实听觉相对照。",
+      "themes": [
+        "art"
+      ]
     },
     {
       "id": "dickinson-02",
@@ -786,7 +949,11 @@
       "first_published": 1890,
       "author_died": 1886,
       "url": "https://www.gutenberg.org/cache/epub/12242/pg12242-images.html#If_I_can_stop_one_heart_from_breaking",
-      "note": "in vain表示徒劳；诗把不白活的标准落在帮助一个具体的人上。"
+      "note": "in vain表示徒劳；诗把不白活的标准落在帮助一个具体的人上。",
+      "themes": [
+        "friendship",
+        "life"
+      ]
     },
     {
       "id": "whitman-02",
@@ -803,7 +970,10 @@
       "first_published": 1855,
       "author_died": 1892,
       "url": "https://www.gutenberg.org/cache/epub/1322/pg1322-images.html#link2H_4_0027",
-      "note": "that is enough把存在本身作为肯定；后两行以相同的sit content回应无人知晓与人人知晓。"
+      "note": "that is enough把存在本身作为肯定；后两行以相同的sit content回应无人知晓与人人知晓。",
+      "themes": [
+        "life"
+      ]
     },
     {
       "id": "yeats-02",
@@ -821,7 +991,11 @@
       "author_died": 1939,
       "url": "https://www.gutenberg.org/cache/epub/49608/pg49608-images.html#Page_158",
       "note": "pilgrim soul是诗的比喻；many与one的对照，把短暂的美貌与长久的理解区分开来。",
-      "related": "/english/yeats-when-you-are-old/"
+      "related": "/english/yeats-when-you-are-old/",
+      "themes": [
+        "love",
+        "time"
+      ]
     },
     {
       "id": "franklin-02",
@@ -838,7 +1012,11 @@
       "first_published": 1818,
       "author_died": 1790,
       "url": "https://www.gutenberg.org/cache/epub/20203/pg20203-images.html#IX",
-      "note": "but在这里相当于except；trifling指无足轻重的。"
+      "note": "but在这里相当于except；trifling指无足轻重的。",
+      "themes": [
+        "friendship",
+        "life"
+      ]
     },
     {
       "id": "emerson-02",
@@ -855,7 +1033,11 @@
       "first_published": 1841,
       "author_died": 1882,
       "url": "https://www.gutenberg.org/cache/epub/16643/pg16643-images.html#Page_83",
-      "note": "Whoso是whoever的旧式；nonconformist指不盲从通行规则的人。"
+      "note": "Whoso是whoever的旧式；nonconformist指不盲从通行规则的人。",
+      "themes": [
+        "freedom",
+        "courage"
+      ]
     },
     {
       "id": "thoreau-02",
@@ -872,7 +1054,11 @@
       "first_published": 1854,
       "author_died": 1862,
       "url": "https://www.gutenberg.org/cache/epub/205/pg205-images.html#chap03",
-      "note": "fritter away表示一点点挥霍掉，常接时间、金钱等。"
+      "note": "fritter away表示一点点挥霍掉，常接时间、金钱等。",
+      "themes": [
+        "time",
+        "life"
+      ]
     },
     {
       "id": "douglass-02",
@@ -890,7 +1076,11 @@
       "author_died": 1895,
       "url": "https://www.gutenberg.org/cache/epub/23/pg23-images.html#link2HCH0007",
       "note": "the more ... the more ...是递进比较结构；两种近义动词强调认识改变后的愤怒。",
-      "related": "/english/douglass-reading/"
+      "related": "/english/douglass-reading/",
+      "themes": [
+        "learning",
+        "freedom"
+      ]
     },
     {
       "id": "keller-02",
@@ -908,7 +1098,11 @@
       "author_died": 1968,
       "url": "https://www.gutenberg.org/cache/epub/2397/pg2397-images.html#link2HCH0004",
       "note": "it is true先承认现实困难，再以but转向希望；in time表示终有一天。",
-      "related": "/english/keller-water/"
+      "related": "/english/keller-water/",
+      "themes": [
+        "hope",
+        "courage"
+      ]
     },
     {
       "id": "chesterton-02",
@@ -926,7 +1120,11 @@
       "author_died": 1936,
       "url": "https://www.gutenberg.org/cache/epub/11505/pg11505-images.html#chap04",
       "note": "与前句形成回环，把adventure和inconvenience互换位置。",
-      "related": "/english/chesterton-hat/"
+      "related": "/english/chesterton-hat/",
+      "themes": [
+        "humor",
+        "life"
+      ]
     },
     {
       "id": "twain-02",
@@ -944,7 +1142,11 @@
       "author_died": 1910,
       "url": "https://www.gutenberg.org/cache/epub/68604/pg68604-images.html#Page_406",
       "note": "no end of表示许多、无穷无尽；mistake A for B表示把A错当作B。",
-      "related": "/english/twain-corn-pone/"
+      "related": "/english/twain-corn-pone/",
+      "themes": [
+        "learning",
+        "humor"
+      ]
     },
     {
       "id": "lamb-02",
@@ -961,7 +1163,11 @@
       "first_published": 1822,
       "author_died": 1834,
       "url": "https://www.gutenberg.org/cache/epub/10343/pg10343-images.html#id00611",
-      "note": "lose oneself in表示沉浸于；此文1822年先刊杂志，1833年收入《最后的伊利亚随笔》。"
+      "note": "lose oneself in表示沉浸于；此文1822年先刊杂志，1833年收入《最后的伊利亚随笔》。",
+      "themes": [
+        "learning",
+        "art"
+      ]
     },
     {
       "id": "mary-shelley-02",
@@ -978,7 +1184,11 @@
       "first_published": 1831,
       "author_died": 1851,
       "url": "https://www.gutenberg.org/cache/epub/42324/pg42324-images.html",
-      "note": "nothing ... so ... as把比较推到极致；叙述者刚经历丧失，熟悉的湖水也不再像从前。"
+      "note": "nothing ... so ... as把比较推到极致；叙述者刚经历丧失，熟悉的湖水也不再像从前。",
+      "themes": [
+        "life",
+        "time"
+      ]
     },
     {
       "id": "stoker-02",
@@ -995,7 +1205,11 @@
       "first_published": 1897,
       "author_died": 1912,
       "url": "https://www.gutenberg.org/cache/epub/345/pg345-images.html#chap14",
-      "note": "darknesses和lights都用了复数，将人生中的阴影与光亮写成可以数出的一种种经历；这里是对米娜的赞许。"
+      "note": "darknesses和lights都用了复数，将人生中的阴影与光亮写成可以数出的一种种经历；这里是对米娜的赞许。",
+      "themes": [
+        "friendship",
+        "hope"
+      ]
     },
     {
       "id": "doyle-02",
@@ -1012,7 +1226,10 @@
       "first_published": 1892,
       "author_died": 1930,
       "url": "https://www.gutenberg.org/cache/epub/1661/pg1661-images.html#chap01",
-      "note": "see与observe拉开了无意看见和留心观察的距离；例子是华生天天经过却数不出的楼梯台阶。"
+      "note": "see与observe拉开了无意看见和留心观察的距离；例子是华生天天经过却数不出的楼梯台阶。",
+      "themes": [
+        "learning"
+      ]
     },
     {
       "id": "melville-02",
@@ -1029,7 +1246,11 @@
       "first_published": 1851,
       "author_died": 1891,
       "url": "https://www.gutenberg.org/cache/epub/15/pg15-images.html#chap12",
-      "note": "down在这里指被记录下来；叙述者讲一个遥远的岛屿，让地图之外的故乡显得格外真实。"
+      "note": "down在这里指被记录下来；叙述者讲一个遥远的岛屿，让地图之外的故乡显得格外真实。",
+      "themes": [
+        "life",
+        "art"
+      ]
     },
     {
       "id": "hawthorne-02",
@@ -1046,7 +1267,11 @@
       "first_published": 1850,
       "author_died": 1864,
       "url": "https://www.gutenberg.org/cache/epub/33/pg33-images.html#chap24",
-      "note": "at bottom表示在本质上；叙述者接着比较爱与恨都需要亲密了解、也都可能使人依赖另一个人。"
+      "note": "at bottom表示在本质上；叙述者接着比较爱与恨都需要亲密了解、也都可能使人依赖另一个人。",
+      "themes": [
+        "love",
+        "life"
+      ]
     },
     {
       "id": "maugham-02",
@@ -1063,7 +1288,10 @@
       "first_published": 1919,
       "author_died": 1965,
       "url": "https://www.gutenberg.org/cache/epub/222/pg222-images.html#chap17",
-      "note": "ennoble是使高尚，vindictive是怀恨报复的；句中的does that代替前面“使品格高尚”的动作。"
+      "note": "ennoble是使高尚，vindictive是怀恨报复的；句中的does that代替前面“使品格高尚”的动作。",
+      "themes": [
+        "life"
+      ]
     },
     {
       "id": "forster-02",
@@ -1080,7 +1308,11 @@
       "first_published": 1910,
       "author_died": 1970,
       "url": "https://www.gutenberg.org/cache/epub/2946/pg2946-images.html#link2HCH0027",
-      "note": "同一个Death出现两次，前者指死亡本身，后者指人对死亡的意识；冒号把两种相反的作用连成悖论。"
+      "note": "同一个Death出现两次，前者指死亡本身，后者指人对死亡的意识；冒号把两种相反的作用连成悖论。",
+      "themes": [
+        "life",
+        "time"
+      ]
     },
     {
       "id": "alcott-02",
@@ -1097,7 +1329,11 @@
       "first_published": 1868,
       "author_died": 1888,
       "url": "https://www.gutenberg.org/cache/epub/514/pg514-images.html#chap04",
-      "note": "good strong words形容措辞有力；帽子“跳起”的小动作，也让乔的回答带上活泼而不端庄的节奏。"
+      "note": "good strong words形容措辞有力；帽子“跳起”的小动作，也让乔的回答带上活泼而不端庄的节奏。",
+      "themes": [
+        "art",
+        "humor"
+      ]
     },
     {
       "id": "shakespeare-03",
@@ -1114,7 +1350,10 @@
       "first_published": 1600,
       "author_died": 1616,
       "url": "https://www.gutenberg.org/cache/epub/100/pg100-images.html#sceneI_24.1",
-      "note": "course在此指进程；never did run用助动词加强否定语气。"
+      "note": "course在此指进程；never did run用助动词加强否定语气。",
+      "themes": [
+        "love"
+      ]
     },
     {
       "id": "austen-03",
@@ -1131,7 +1370,11 @@
       "first_published": 1813,
       "author_died": 1817,
       "url": "https://www.gutenberg.org/cache/epub/1342/pg1342-images.html#page_71",
-      "note": "宾利小姐此时想吸引达西注意，随后便搁下书；这句有名的“读书宣言”带着反讽。"
+      "note": "宾利小姐此时想吸引达西注意，随后便搁下书；这句有名的“读书宣言”带着反讽。",
+      "themes": [
+        "learning",
+        "humor"
+      ]
     },
     {
       "id": "dickens-03",
@@ -1148,7 +1391,11 @@
       "first_published": 1859,
       "author_died": 1870,
       "url": "https://www.gutenberg.org/cache/epub/98/pg98-images.html#link2H_4_0014",
-      "note": "multitude与solitude押尾韵；达尔奈听见街上的人群脚步声，却看不见一个人。"
+      "note": "multitude与solitude押尾韵；达尔奈听见街上的人群脚步声，却看不见一个人。",
+      "themes": [
+        "life",
+        "society"
+      ]
     },
     {
       "id": "bronte-03",
@@ -1165,7 +1412,11 @@
       "first_published": 1847,
       "author_died": 1855,
       "url": "https://www.gutenberg.org/cache/epub/1260/pg1260-images.html#id-9112509753362559240",
-      "note": "would rather ... than ...表示宁愿；dignified在这里强调端着尊严和体面。"
+      "note": "would rather ... than ...表示宁愿；dignified在这里强调端着尊严和体面。",
+      "themes": [
+        "love",
+        "life"
+      ]
     },
     {
       "id": "eliot-03",
@@ -1182,7 +1433,11 @@
       "first_published": 1871,
       "author_died": 1880,
       "url": "https://www.gutenberg.org/cache/epub/145/pg145-images.html#chap44",
-      "note": "distrust不是一个人独处，而是亲近的人之间失去信任；这个反问把两者的孤独作了比较。"
+      "note": "distrust不是一个人独处，而是亲近的人之间失去信任；这个反问把两者的孤独作了比较。",
+      "themes": [
+        "friendship",
+        "life"
+      ]
     },
     {
       "id": "carroll-03",
@@ -1199,7 +1454,10 @@
       "first_published": 1865,
       "author_died": 1898,
       "url": "https://www.gutenberg.org/cache/epub/11/pg11-images.html#chap06",
-      "note": "mad在这里是发疯；柴郡猫用一个颠倒常理的判断，把爱丽丝也圈进了故事世界。"
+      "note": "mad在这里是发疯；柴郡猫用一个颠倒常理的判断，把爱丽丝也圈进了故事世界。",
+      "themes": [
+        "humor"
+      ]
     },
     {
       "id": "wilde-03",
@@ -1216,7 +1474,11 @@
       "first_published": 1891,
       "author_died": 1900,
       "url": "https://www.gutenberg.org/cache/epub/174/pg174-images.html#chap04",
-      "note": "price与value构成对比；这是角色的机智讽刺，不能把他的每句话都当作作者赞同的主张。"
+      "note": "price与value构成对比；这是角色的机智讽刺，不能把他的每句话都当作作者赞同的主张。",
+      "themes": [
+        "society",
+        "humor"
+      ]
     },
     {
       "id": "stevenson-03",
@@ -1233,7 +1495,11 @@
       "first_published": 1877,
       "author_died": 1894,
       "url": "https://www.gutenberg.org/cache/epub/69825/pg69825-images.html#page_27",
-      "note": "这是幽默的价值比较；a ... note是某面额的纸币，注意pound用单数作定语。"
+      "note": "这是幽默的价值比较；a ... note是某面额的纸币，注意pound用单数作定语。",
+      "themes": [
+        "humor",
+        "friendship"
+      ]
     },
     {
       "id": "blake-03",
@@ -1250,7 +1516,11 @@
       "first_published": 1790,
       "author_died": 1827,
       "url": "https://www.gutenberg.org/cache/epub/45315/pg45315-images.html#Page_16",
-      "note": "proved与imagined把证明和想象接起来；这不意味着凡是想象过的事都能获得证明。"
+      "note": "proved与imagined把证明和想象接起来；这不意味着凡是想象过的事都能获得证明。",
+      "themes": [
+        "learning",
+        "art"
+      ]
     },
     {
       "id": "wordsworth-03",
@@ -1267,7 +1537,11 @@
       "first_published": 1807,
       "author_died": 1850,
       "url": "https://www.gutenberg.org/cache/epub/8774/pg8774-images.html#id00323",
-      "note": "lay waste表示摧残、耗尽；getting and spending把消费生活压缩成两个动作。"
+      "note": "lay waste表示摧残、耗尽；getting and spending把消费生活压缩成两个动作。",
+      "themes": [
+        "life",
+        "society"
+      ]
     },
     {
       "id": "coleridge-03",
@@ -1284,7 +1558,11 @@
       "first_published": 1798,
       "author_died": 1834,
       "url": "https://www.gutenberg.org/cache/epub/11101/pg11101-images.html#id00222",
-      "note": "反复的alone和wide使孤立感成为听得见的节奏。"
+      "note": "反复的alone和wide使孤立感成为听得见的节奏。",
+      "themes": [
+        "nature",
+        "life"
+      ]
     },
     {
       "id": "shelley-03",
@@ -1301,7 +1579,10 @@
       "first_published": 1820,
       "author_died": 1822,
       "url": "https://www.gutenberg.org/cache/epub/4798/pg4798-images.html#id01084",
-      "note": "sweetest与saddest构成鲜明对照：最动人的歌，也可能传达最深的悲伤。"
+      "note": "sweetest与saddest构成鲜明对照：最动人的歌，也可能传达最深的悲伤。",
+      "themes": [
+        "art"
+      ]
     },
     {
       "id": "keats-03",
@@ -1318,7 +1599,11 @@
       "first_published": 1820,
       "author_died": 1821,
       "url": "https://www.gutenberg.org/cache/epub/23684/pg23684-images.html#id-2659893139361286649",
-      "note": "mellow写成熟、柔润；maturing sun指催熟果实的太阳。bosom-friend是知心朋友，以此将秋与太阳人格化。"
+      "note": "mellow写成熟、柔润；maturing sun指催熟果实的太阳。bosom-friend是知心朋友，以此将秋与太阳人格化。",
+      "themes": [
+        "nature",
+        "time"
+      ]
     },
     {
       "id": "dickinson-03",
@@ -1335,7 +1620,10 @@
       "first_published": 1864,
       "author_died": 1886,
       "url": "https://www.gutenberg.org/cache/epub/12242/pg12242-images.html#Success_is_counted_sweetest",
-      "note": "counted在这里是被认为；诗从未成功者的渴望反观成功的滋味。"
+      "note": "counted在这里是被认为；诗从未成功者的渴望反观成功的滋味。",
+      "themes": [
+        "life"
+      ]
     },
     {
       "id": "whitman-03",
@@ -1352,7 +1640,11 @@
       "first_published": 1855,
       "author_died": 1892,
       "url": "https://www.gutenberg.org/cache/epub/1322/pg1322-images.html#link2H_4_0027",
-      "note": "for yourself在此是亲自、为自己；这是一段面向读者的旅途比喻。"
+      "note": "for yourself在此是亲自、为自己；这是一段面向读者的旅途比喻。",
+      "themes": [
+        "life",
+        "courage"
+      ]
     },
     {
       "id": "yeats-03",
@@ -1369,7 +1661,11 @@
       "first_published": 1899,
       "author_died": 1939,
       "url": "https://www.gutenberg.org/cache/epub/32233/pg32233-images.html#Page_60",
-      "note": "tread是踩、踏；诗人没有天国的锦缎可赠，只能铺开自己的梦，请对方珍惜。"
+      "note": "tread是踩、踏；诗人没有天国的锦缎可赠，只能铺开自己的梦，请对方珍惜。",
+      "themes": [
+        "love",
+        "art"
+      ]
     },
     {
       "id": "franklin-03",
@@ -1386,7 +1682,11 @@
       "first_published": 1818,
       "author_died": 1790,
       "url": "https://www.gutenberg.org/cache/epub/20203/pg20203-images.html#IX",
-      "note": "两个let祈使结构平行；business在这里是事务，不只指商业。"
+      "note": "两个let祈使结构平行；business在这里是事务，不只指商业。",
+      "themes": [
+        "time",
+        "life"
+      ]
     },
     {
       "id": "emerson-03",
@@ -1403,7 +1703,11 @@
       "first_published": 1841,
       "author_died": 1882,
       "url": "https://www.gutenberg.org/cache/epub/16643/pg16643-images.html#Page_83",
-      "note": "integrity兼有正直、完整之意；这里强调保持独立判断。"
+      "note": "integrity兼有正直、完整之意；这里强调保持独立判断。",
+      "themes": [
+        "freedom",
+        "learning"
+      ]
     },
     {
       "id": "thoreau-03",
@@ -1420,7 +1724,11 @@
       "first_published": 1854,
       "author_died": 1862,
       "url": "https://www.gutenberg.org/cache/epub/205/pg205-images.html#chap19",
-      "note": "rather than表示取舍；三个than并列加强了比较的力度。"
+      "note": "rather than表示取舍；三个than并列加强了比较的力度。",
+      "themes": [
+        "life",
+        "learning"
+      ]
     },
     {
       "id": "douglass-03",
@@ -1438,7 +1746,11 @@
       "author_died": 1895,
       "url": "https://www.gutenberg.org/cache/epub/23/pg23-images.html#link2HCH0007",
       "note": "下文说明知识让他看清困境，却暂时看不到出路；这不是劝人放弃阅读。",
-      "related": "/english/douglass-reading/"
+      "related": "/english/douglass-reading/",
+      "themes": [
+        "learning",
+        "freedom"
+      ]
     },
     {
       "id": "keller-03",
@@ -1456,7 +1768,10 @@
       "author_died": 1968,
       "url": "https://www.gutenberg.org/cache/epub/2397/pg2397-images.html#link2HCH0004",
       "note": "give birth to除生育外，也可表示产生、孕育；这里写语言开启新认知。",
-      "related": "/english/keller-water/"
+      "related": "/english/keller-water/",
+      "themes": [
+        "learning"
+      ]
     },
     {
       "id": "chesterton-03",
@@ -1474,7 +1789,11 @@
       "author_died": 1936,
       "url": "https://www.gutenberg.org/cache/epub/11505/pg11505-images.html#chap04",
       "note": "作者谈等车、追帽子等小麻烦，不是把所有现实困境都归结为心态。",
-      "related": "/english/chesterton-hat/"
+      "related": "/english/chesterton-hat/",
+      "themes": [
+        "life",
+        "humor"
+      ]
     },
     {
       "id": "twain-03",
@@ -1492,7 +1811,11 @@
       "author_died": 1910,
       "url": "https://www.gutenberg.org/cache/epub/68604/pg68604-images.html#Page_404",
       "note": "approval两次出现，显出“自我”判断也可能来自他人的悖论。",
-      "related": "/english/twain-corn-pone/"
+      "related": "/english/twain-corn-pone/",
+      "themes": [
+        "society",
+        "life"
+      ]
     },
     {
       "id": "lamb-03",
@@ -1509,7 +1832,10 @@
       "first_published": 1821,
       "author_died": 1834,
       "url": "https://www.gutenberg.org/cache/epub/10343/pg10343-images.html#id00127",
-      "note": "be in love with也可用于热爱某种事物；乡野的solitudes与街道的security并置。"
+      "note": "be in love with也可用于热爱某种事物；乡野的solitudes与街道的security并置。",
+      "themes": [
+        "nature"
+      ]
     },
     {
       "id": "mary-shelley-03",
@@ -1526,7 +1852,11 @@
       "first_published": 1831,
       "author_died": 1851,
       "url": "https://www.gutenberg.org/cache/epub/42324/pg42324-images.html",
-      "note": "for在这里解释原因，therefore引出结果。这是造物遭到再次拒绝后发出的威胁，带着人物的愤怒。"
+      "note": "for在这里解释原因，therefore引出结果。这是造物遭到再次拒绝后发出的威胁，带着人物的愤怒。",
+      "themes": [
+        "life",
+        "society"
+      ]
     },
     {
       "id": "stoker-03",
@@ -1543,7 +1873,10 @@
       "first_published": 1897,
       "author_died": 1912,
       "url": "https://www.gutenberg.org/cache/epub/345/pg345-images.html#chap10",
-      "note": "learn from表示从……中学习；范海辛请医生把疑问和猜测记下来，以便事后回看。"
+      "note": "learn from表示从……中学习；范海辛请医生把疑问和猜测记下来，以便事后回看。",
+      "themes": [
+        "learning"
+      ]
     },
     {
       "id": "doyle-03",
@@ -1560,7 +1893,11 @@
       "first_published": 1892,
       "author_died": 1930,
       "url": "https://www.gutenberg.org/cache/epub/1661/pg1661-images.html#chap04",
-      "note": "deceptive是会误导人的；福尔摩斯用这句反话回应华生，以为案件显而易见时反而需要追问。"
+      "note": "deceptive是会误导人的；福尔摩斯用这句反话回应华生，以为案件显而易见时反而需要追问。",
+      "themes": [
+        "learning",
+        "humor"
+      ]
     },
     {
       "id": "melville-03",
@@ -1577,7 +1914,11 @@
       "first_published": 1851,
       "author_died": 1891,
       "url": "https://www.gutenberg.org/cache/epub/15/pg15-images.html#chap87",
-      "note": "gallied在捕鲸语境中指受惊，outdo表示超过；鲸群的惊乱反过来成了嘲弄人类疯狂的一面镜子。"
+      "note": "gallied在捕鲸语境中指受惊，outdo表示超过；鲸群的惊乱反过来成了嘲弄人类疯狂的一面镜子。",
+      "themes": [
+        "society",
+        "humor"
+      ]
     },
     {
       "id": "hawthorne-03",
@@ -1594,7 +1935,11 @@
       "first_published": 1850,
       "author_died": 1864,
       "url": "https://www.gutenberg.org/cache/epub/33/pg33-images.html#chap18",
-      "note": "radiance与sunshine把心情写成可见的光；海丝特和丁梅斯代尔在林间重燃希望，森林也仿佛明亮起来。"
+      "note": "radiance与sunshine把心情写成可见的光；海丝特和丁梅斯代尔在林间重燃希望，森林也仿佛明亮起来。",
+      "themes": [
+        "love",
+        "hope"
+      ]
     },
     {
       "id": "maugham-03",
@@ -1611,7 +1956,10 @@
       "first_published": 1919,
       "author_died": 1965,
       "url": "https://www.gutenberg.org/cache/epub/222/pg222-images.html#chap01",
-      "note": "craft与craftsman由技艺接到行家；叙述者随后也承认，懂技法的评论者才更有可能言之有物。"
+      "note": "craft与craftsman由技艺接到行家；叙述者随后也承认，懂技法的评论者才更有可能言之有物。",
+      "themes": [
+        "art"
+      ]
     },
     {
       "id": "forster-03",
@@ -1628,7 +1976,10 @@
       "first_published": 1910,
       "author_died": 1970,
       "url": "https://www.gutenberg.org/cache/epub/2946/pg2946-images.html#link2HCH0012",
-      "note": "would have us believe表示想让我们相信；这段议论接着把人生写成一场难以掌控的浪漫经历。"
+      "note": "would have us believe表示想让我们相信；这段议论接着把人生写成一场难以掌控的浪漫经历。",
+      "themes": [
+        "life"
+      ]
     },
     {
       "id": "alcott-03",
@@ -1645,7 +1996,11 @@
       "first_published": 1869,
       "author_died": 1888,
       "url": "https://www.gutenberg.org/cache/epub/514/pg514-images.html#chap24",
-      "note": "as well as连接working与waiting，beautifier是从beauty派生的名词；这段写梅格筹备婚礼时的变化。"
+      "note": "as well as连接working与waiting，beautifier是从beauty派生的名词；这段写梅格筹备婚礼时的变化。",
+      "themes": [
+        "love",
+        "time"
+      ]
     },
     {
       "id": "shakespeare-04",
@@ -1662,7 +2017,11 @@
       "first_published": 1600,
       "author_died": 1616,
       "url": "https://www.gutenberg.org/cache/epub/100/pg100-images.html#sceneII_22.7",
-      "note": "glister是glitter的旧形式；all ... not在这里表示“不全是”，金匣的外表尤其容易误导人。"
+      "note": "glister是glitter的旧形式；all ... not在这里表示“不全是”，金匣的外表尤其容易误导人。",
+      "themes": [
+        "life",
+        "learning"
+      ]
     },
     {
       "id": "austen-04",
@@ -1679,7 +2038,11 @@
       "first_published": 1813,
       "author_died": 1817,
       "url": "https://www.gutenberg.org/cache/epub/1342/pg1342-images.html#page_259",
-      "note": "读信后，她重新审视自己的成见。till this moment把理解发生的时刻突出出来。"
+      "note": "读信后，她重新审视自己的成见。till this moment把理解发生的时刻突出出来。",
+      "themes": [
+        "learning",
+        "life"
+      ]
     },
     {
       "id": "dickens-04",
@@ -1696,7 +2059,10 @@
       "first_published": 1859,
       "author_died": 1870,
       "url": "https://www.gutenberg.org/cache/epub/98/pg98-images.html#link2H_4_0021",
-      "note": "wish someone to know是较正式的表达；这句话属于卡顿的告白，具有特定人物关系。"
+      "note": "wish someone to know是较正式的表达；这句话属于卡顿的告白，具有特定人物关系。",
+      "themes": [
+        "love"
+      ]
     },
     {
       "id": "bronte-04",
@@ -1713,7 +2079,11 @@
       "first_published": 1847,
       "author_died": 1855,
       "url": "https://www.gutenberg.org/cache/epub/1260/pg1260-images.html#id-5219489442405865509",
-      "note": "the more ... the more ...表达“越……越……”；unsustained在此指没有支持。"
+      "note": "the more ... the more ...表达“越……越……”；unsustained在此指没有支持。",
+      "themes": [
+        "courage",
+        "life"
+      ]
     },
     {
       "id": "eliot-04",
@@ -1730,7 +2100,11 @@
       "first_published": 1871,
       "author_died": 1880,
       "url": "https://www.gutenberg.org/cache/epub/145/pg145-images.html#chap21",
-      "note": "udder本义为乳房；这是对自我中心的尖锐比喻，随后写多萝西娅逐渐超越它。"
+      "note": "udder本义为乳房；这是对自我中心的尖锐比喻，随后写多萝西娅逐渐超越它。",
+      "themes": [
+        "life",
+        "society"
+      ]
     },
     {
       "id": "carroll-04",
@@ -1747,7 +2121,11 @@
       "first_published": 1865,
       "author_died": 1898,
       "url": "https://www.gutenberg.org/cache/epub/11/pg11-images.html#chap09",
-      "note": "moral作名词指寓意；公爵夫人强行讲道理的习惯本身也是笑料。"
+      "note": "moral作名词指寓意；公爵夫人强行讲道理的习惯本身也是笑料。",
+      "themes": [
+        "humor",
+        "learning"
+      ]
     },
     {
       "id": "wilde-04",
@@ -1764,7 +2142,11 @@
       "first_published": 1891,
       "author_died": 1900,
       "url": "https://www.gutenberg.org/cache/epub/174/pg174-images.html#chap19",
-      "note": "两个that从句分别修饰books；注意这是亨利的辩论式口吻。"
+      "note": "两个that从句分别修饰books；注意这是亨利的辩论式口吻。",
+      "themes": [
+        "art",
+        "society"
+      ]
     },
     {
       "id": "stevenson-04",
@@ -1781,7 +2163,11 @@
       "first_published": 1877,
       "author_died": 1894,
       "url": "https://www.gutenberg.org/cache/epub/69825/pg69825-images.html#page_12",
-      "note": "in their own way先承认另一面的价值；substitute for表示某物的替代品。"
+      "note": "in their own way先承认另一面的价值；substitute for表示某物的替代品。",
+      "themes": [
+        "learning",
+        "life"
+      ]
     },
     {
       "id": "blake-04",
@@ -1798,7 +2184,10 @@
       "first_published": 1794,
       "author_died": 1827,
       "url": "https://www.gutenberg.org/cache/epub/574/pg574-images.html#id00214",
-      "note": "wrath比anger更强烈；后文转向对敌人隐藏怒气的危险，诗题提示了这一比喻。"
+      "note": "wrath比anger更强烈；后文转向对敌人隐藏怒气的危险，诗题提示了这一比喻。",
+      "themes": [
+        "friendship"
+      ]
     },
     {
       "id": "wordsworth-04",
@@ -1815,7 +2204,10 @@
       "first_published": 1807,
       "author_died": 1850,
       "url": "https://www.gutenberg.org/cache/epub/8774/pg8774-images.html#id00114",
-      "note": "phantom在这里是诗意的幻影；并不是恐怖故事中的鬼魂。"
+      "note": "phantom在这里是诗意的幻影；并不是恐怖故事中的鬼魂。",
+      "themes": [
+        "love"
+      ]
     },
     {
       "id": "coleridge-04",
@@ -1832,7 +2224,11 @@
       "first_published": 1798,
       "author_died": 1834,
       "url": "https://www.gutenberg.org/cache/epub/11101/pg11101-images.html#id00346",
-      "note": "morrow morn是古旧的“第二天早晨”；这里写的是听完故事的婚宴客人。"
+      "note": "morrow morn是古旧的“第二天早晨”；这里写的是听完故事的婚宴客人。",
+      "themes": [
+        "life",
+        "learning"
+      ]
     },
     {
       "id": "shelley-04",
@@ -1849,7 +2245,11 @@
       "first_published": 1819,
       "author_died": 1822,
       "url": "https://www.gutenberg.org/cache/epub/4798/pg4798-images.html#id00862",
-      "note": "mingle with表示交融；诗以自然界的相融展开求爱辩说。"
+      "note": "mingle with表示交融；诗以自然界的相融展开求爱辩说。",
+      "themes": [
+        "love",
+        "nature"
+      ]
     },
     {
       "id": "keats-04",
@@ -1866,7 +2266,11 @@
       "first_published": 1819,
       "author_died": 1821,
       "url": "https://www.gutenberg.org/cache/epub/23684/pg23684-images.html#Nightingale_ln60",
-      "note": "Thou wast是you were的古式；“不朽”指向歌声与诗的想象，不是鸟类个体不会死亡。"
+      "note": "Thou wast是you were的古式；“不朽”指向歌声与诗的想象，不是鸟类个体不会死亡。",
+      "themes": [
+        "art",
+        "nature"
+      ]
     },
     {
       "id": "dickinson-04",
@@ -1883,7 +2287,11 @@
       "first_published": 1896,
       "author_died": 1886,
       "url": "https://www.gutenberg.org/cache/epub/12242/pg12242-images.html#There_is_no_frigate_like_a_book",
-      "note": "frigate是军舰，courser是骏马；书页与诗句成了比船与马更自在的旅行工具。"
+      "note": "frigate是军舰，courser是骏马；书页与诗句成了比船与马更自在的旅行工具。",
+      "themes": [
+        "learning",
+        "art"
+      ]
     },
     {
       "id": "whitman-04",
@@ -1900,7 +2308,11 @@
       "first_published": 1867,
       "author_died": 1892,
       "url": "https://www.gutenberg.org/cache/epub/1322/pg1322-images.html#link2H_4_0121",
-      "note": "这两行回应诗中对人生意义的追问；play与verse让每个人的参与成为生活大戏里的一行诗。"
+      "note": "这两行回应诗中对人生意义的追问；play与verse让每个人的参与成为生活大戏里的一行诗。",
+      "themes": [
+        "life",
+        "hope"
+      ]
     },
     {
       "id": "yeats-04",
@@ -1917,7 +2329,11 @@
       "first_published": 1890,
       "author_died": 1939,
       "url": "https://www.gutenberg.org/cache/epub/49608/pg49608-images.html#Page_154",
-      "note": "arise比rise更有书面色彩；重复go把离开城市、返回小岛的愿望化为节奏。"
+      "note": "arise比rise更有书面色彩；重复go把离开城市、返回小岛的愿望化为节奏。",
+      "themes": [
+        "nature",
+        "life"
+      ]
     },
     {
       "id": "franklin-04",
@@ -1934,7 +2350,10 @@
       "first_published": 1818,
       "author_died": 1790,
       "url": "https://www.gutenberg.org/cache/epub/20203/pg20203-images.html",
-      "note": "expense是花费；i. e.表示“也就是说”，引出对节俭原则的直接解释。"
+      "note": "expense是花费；i. e.表示“也就是说”，引出对节俭原则的直接解释。",
+      "themes": [
+        "life"
+      ]
     },
     {
       "id": "emerson-04",
@@ -1951,7 +2370,11 @@
       "first_published": 1841,
       "author_died": 1882,
       "url": "https://www.gutenberg.org/cache/epub/16643/pg16643-images.html#Page_89",
-      "note": "限定词foolish不可删：作者反对的是僵化的一贯性，而不是任何言行一致。"
+      "note": "限定词foolish不可删：作者反对的是僵化的一贯性，而不是任何言行一致。",
+      "themes": [
+        "learning",
+        "freedom"
+      ]
     },
     {
       "id": "thoreau-04",
@@ -1968,7 +2391,11 @@
       "first_published": 1854,
       "author_died": 1862,
       "url": "https://www.gutenberg.org/cache/epub/205/pg205-images.html#chap19",
-      "note": "keep pace with表示与……并驾齐驱；different drummer后来成为独立行事的常见意象。"
+      "note": "keep pace with表示与……并驾齐驱；different drummer后来成为独立行事的常见意象。",
+      "themes": [
+        "freedom",
+        "life"
+      ]
     },
     {
       "id": "douglass-04",
@@ -1986,7 +2413,10 @@
       "author_died": 1895,
       "url": "https://www.gutenberg.org/cache/epub/23/pg23-images.html#link2HCH0007",
       "note": "trump在这里是trumpet的诗性旧用法；自由觉醒后再也无法回到无知。",
-      "related": "/english/douglass-reading/"
+      "related": "/english/douglass-reading/",
+      "themes": [
+        "freedom"
+      ]
     },
     {
       "id": "keller-04",
@@ -2003,7 +2433,11 @@
       "first_published": 1903,
       "author_died": 1968,
       "url": "https://www.gutenberg.org/cache/epub/2397/pg2397-images.html#link2HCH0021",
-      "note": "Utopia指理想国；作者下文写自己在书中不受感官障碍阻隔，能够自由地与书中朋友交谈。"
+      "note": "Utopia指理想国；作者下文写自己在书中不受感官障碍阻隔，能够自由地与书中朋友交谈。",
+      "themes": [
+        "art",
+        "learning"
+      ]
     },
     {
       "id": "chesterton-04",
@@ -2021,7 +2455,11 @@
       "author_died": 1936,
       "url": "https://www.gutenberg.org/cache/epub/11505/pg11505-images.html#chap04",
       "note": "run after指追逐；将运动和追帽子并置，让所谓“丢脸”的感觉显得可笑。",
-      "related": "/english/chesterton-hat/"
+      "related": "/english/chesterton-hat/",
+      "themes": [
+        "humor",
+        "life"
+      ]
     },
     {
       "id": "twain-04",
@@ -2039,7 +2477,11 @@
       "author_died": 1910,
       "url": "https://www.gutenberg.org/cache/epub/68604/pg68604-images.html#Page_401",
       "note": "conform是遵从、随众；文章在检视从众的机制，不是在鼓励放弃独立判断。",
-      "related": "/english/twain-corn-pone/"
+      "related": "/english/twain-corn-pone/",
+      "themes": [
+        "society",
+        "freedom"
+      ]
     },
     {
       "id": "lamb-04",
@@ -2057,7 +2499,11 @@
       "author_died": 1834,
       "url": "https://www.gutenberg.org/cache/epub/10343/pg10343-images.html#id00451",
       "note": "Presents与Absents构成声音和意义的双关；后者在此是“不在场的人”，话题由美食转到分享。",
-      "related": "/english/lamb-roast-pig/"
+      "related": "/english/lamb-roast-pig/",
+      "themes": [
+        "friendship",
+        "humor"
+      ]
     },
     {
       "id": "shakespeare-05",
@@ -2074,7 +2520,10 @@
       "first_published": 1603,
       "author_died": 1616,
       "url": "https://www.gutenberg.org/cache/epub/100/pg100-images.html#sceneI_8.3",
-      "note": "thine是thy在元音前的旧式形式；这是角色给儿子的劝告，保留其戏剧语境。"
+      "note": "thine是thy在元音前的旧式形式；这是角色给儿子的劝告，保留其戏剧语境。",
+      "themes": [
+        "life"
+      ]
     },
     {
       "id": "austen-05",
@@ -2091,7 +2540,11 @@
       "first_published": 1813,
       "author_died": 1817,
       "url": "https://www.gutenberg.org/cache/epub/1342/pg1342-images.html#page_447",
-      "note": "make sport for在此是供人取笑；班纳特先生以挖苦回应社交传闻，不是作者提出的人生准则。"
+      "note": "make sport for在此是供人取笑；班纳特先生以挖苦回应社交传闻，不是作者提出的人生准则。",
+      "themes": [
+        "humor",
+        "society"
+      ]
     },
     {
       "id": "dickens-05",
@@ -2108,7 +2561,11 @@
       "first_published": 1859,
       "author_died": 1870,
       "url": "https://www.gutenberg.org/cache/epub/98/pg98-images.html#link2H_4_0048",
-      "note": "小说以假想的临终感言收尾；rest在此指死亡后的安息，far加强比较级。"
+      "note": "小说以假想的临终感言收尾；rest在此指死亡后的安息，far加强比较级。",
+      "themes": [
+        "courage",
+        "life"
+      ]
     },
     {
       "id": "bronte-05",
@@ -2125,7 +2582,11 @@
       "first_published": 1848,
       "author_died": 1855,
       "url": "https://www.gutenberg.org/cache/epub/1260/pg1260-images.html#id-6588747706750457341",
-      "note": "此处是作者的序言，不是简的台词；self-righteousness带有自以为道德高尚的贬义。"
+      "note": "此处是作者的序言，不是简的台词；self-righteousness带有自以为道德高尚的贬义。",
+      "themes": [
+        "society",
+        "freedom"
+      ]
     },
     {
       "id": "eliot-05",
@@ -2142,7 +2603,11 @@
       "first_published": 1871,
       "author_died": 1880,
       "url": "https://www.gutenberg.org/cache/epub/145/pg145-images.html#chap20",
-      "note": "听见草生长是夸张：作者用听觉比喻说明，对他人生活的完整感受可能超出人的承受力。"
+      "note": "听见草生长是夸张：作者用听觉比喻说明，对他人生活的完整感受可能超出人的承受力。",
+      "themes": [
+        "life",
+        "friendship"
+      ]
     },
     {
       "id": "carroll-05",
@@ -2159,7 +2624,11 @@
       "first_published": 1865,
       "author_died": 1898,
       "url": "https://www.gutenberg.org/cache/epub/11/pg11-images.html#chap09",
-      "note": "这句改写了节约小钱的英语谚语；sense与sounds的近音让劝告变成文字游戏。"
+      "note": "这句改写了节约小钱的英语谚语；sense与sounds的近音让劝告变成文字游戏。",
+      "themes": [
+        "humor",
+        "art"
+      ]
     },
     {
       "id": "wilde-05",
@@ -2176,7 +2645,11 @@
       "first_published": 1891,
       "author_died": 1900,
       "url": "https://www.gutenberg.org/cache/epub/174/pg174-images.html#chap06",
-      "note": "sheer加强名词，表示纯粹、十足；句子的妙处在于把optimism与terror意外相连。"
+      "note": "sheer加强名词，表示纯粹、十足；句子的妙处在于把optimism与terror意外相连。",
+      "themes": [
+        "humor",
+        "life"
+      ]
     },
     {
       "id": "stevenson-05",
@@ -2193,7 +2666,11 @@
       "first_published": 1877,
       "author_died": 1894,
       "url": "https://www.gutenberg.org/cache/epub/69825/pg69825-images.html#page_23",
-      "note": "devotion与neglect相对；作者在这里提醒人们，忙碌也意味着注意力的取舍。"
+      "note": "devotion与neglect相对；作者在这里提醒人们，忙碌也意味着注意力的取舍。",
+      "themes": [
+        "time",
+        "life"
+      ]
     },
     {
       "id": "blake-05",
@@ -2210,7 +2687,11 @@
       "first_published": 1789,
       "author_died": 1827,
       "url": "https://www.gutenberg.org/cache/epub/574/pg574-images.html#id00237",
-      "note": "鸟笼比喻压抑儿童的教育；born for joy与in a cage把天性和束缚对照起来。"
+      "note": "鸟笼比喻压抑儿童的教育；born for joy与in a cage把天性和束缚对照起来。",
+      "themes": [
+        "learning",
+        "freedom"
+      ]
     },
     {
       "id": "wordsworth-05",
@@ -2227,7 +2708,11 @@
       "first_published": 1807,
       "author_died": 1850,
       "url": "https://www.gutenberg.org/cache/epub/8774/pg8774-images.html#id00148",
-      "note": "persevering表示坚持不懈；前进的勇士不只守住已有的品格，还要不断超越过去。"
+      "note": "persevering表示坚持不懈；前进的勇士不只守住已有的品格，还要不断超越过去。",
+      "themes": [
+        "courage",
+        "life"
+      ]
     },
     {
       "id": "coleridge-05",
@@ -2244,7 +2729,11 @@
       "first_published": 1798,
       "author_died": 1834,
       "url": "https://www.gutenberg.org/cache/epub/11101/pg11101-images.html#id00171",
-      "note": "b、f音密集重复，示范头韵；furrow本义为犁沟，在此写船划开的水路。"
+      "note": "b、f音密集重复，示范头韵；furrow本义为犁沟，在此写船划开的水路。",
+      "themes": [
+        "nature",
+        "art"
+      ]
     },
     {
       "id": "shelley-05",
@@ -2261,7 +2750,11 @@
       "first_published": 1824,
       "author_died": 1822,
       "url": "https://www.gutenberg.org/cache/epub/4798/pg4798-images.html#id01426",
-      "note": "quicken在这里是唤醒、使活跃；音乐与花香都被写成外物消逝后仍在心中存留的感受。"
+      "note": "quicken在这里是唤醒、使活跃；音乐与花香都被写成外物消逝后仍在心中存留的感受。",
+      "themes": [
+        "time",
+        "art"
+      ]
     },
     {
       "id": "keats-05",
@@ -2278,7 +2771,11 @@
       "first_published": 1819,
       "author_died": 1821,
       "url": "https://www.gutenberg.org/cache/epub/23684/pg23684-images.html#Nightingale_ln30",
-      "note": "haply是“或许”的旧词；Queen-Moon把月亮拟人为女王，tender is the night后来被借作小说题名。"
+      "note": "haply是“或许”的旧词；Queen-Moon把月亮拟人为女王，tender is the night后来被借作小说题名。",
+      "themes": [
+        "nature",
+        "art"
+      ]
     },
     {
       "id": "dickinson-05",
@@ -2295,7 +2792,11 @@
       "first_published": 1891,
       "author_died": 1886,
       "url": "https://www.gutenberg.org/cache/epub/12242/pg12242-images.html#Im_nobody_Who_are_you",
-      "note": "nobody既可指没有人，也可指无名小卒；诗把不出名写成一种可以共享的自在。"
+      "note": "nobody既可指没有人，也可指无名小卒；诗把不出名写成一种可以共享的自在。",
+      "themes": [
+        "humor",
+        "freedom"
+      ]
     },
     {
       "id": "whitman-05",
@@ -2312,7 +2813,11 @@
       "first_published": 1855,
       "author_died": 1892,
       "url": "https://www.gutenberg.org/cache/epub/1322/pg1322-images.html#link2H_4_0027",
-      "note": "bequeath指遗赠；草把个体生命与自然循环连在一起。"
+      "note": "bequeath指遗赠；草把个体生命与自然循环连在一起。",
+      "themes": [
+        "nature",
+        "life"
+      ]
     },
     {
       "id": "yeats-05",
@@ -2329,7 +2834,11 @@
       "first_published": 1890,
       "author_died": 1939,
       "url": "https://www.gutenberg.org/cache/epub/49608/pg49608-images.html#Page_154",
-      "note": "把peace写成一点点滴下来的东西，是具体而柔缓的诗性比喻。"
+      "note": "把peace写成一点点滴下来的东西，是具体而柔缓的诗性比喻。",
+      "themes": [
+        "nature",
+        "life"
+      ]
     },
     {
       "id": "franklin-05",
@@ -2347,7 +2856,11 @@
       "author_died": 1790,
       "url": "https://www.gutenberg.org/cache/epub/78663/pg78663-images.html",
       "note": "“哨子”指人们付出过高代价追逐的东西；本文源自富兰克林1779年致布里永夫人的信。",
-      "related": "/english/franklin-whistle/"
+      "related": "/english/franklin-whistle/",
+      "themes": [
+        "life",
+        "learning"
+      ]
     },
     {
       "id": "emerson-05",
@@ -2364,7 +2877,11 @@
       "first_published": 1841,
       "author_died": 1882,
       "url": "https://www.gutenberg.org/cache/epub/16643/pg16643-images.html#Page_90",
-      "note": "这是鼓励独立思考的修辞性概括，不能反推凡被误解的人都伟大。"
+      "note": "这是鼓励独立思考的修辞性概括，不能反推凡被误解的人都伟大。",
+      "themes": [
+        "freedom",
+        "courage"
+      ]
     },
     {
       "id": "thoreau-05",
@@ -2381,7 +2898,11 @@
       "first_published": 1854,
       "author_died": 1862,
       "url": "https://www.gutenberg.org/cache/epub/205/pg205-images.html#chap04",
-      "note": "date ... from ...在这里表示以某时为开端；many a后接单数名词。"
+      "note": "date ... from ...在这里表示以某时为开端；many a后接单数名词。",
+      "themes": [
+        "learning",
+        "life"
+      ]
     },
     {
       "id": "douglass-05",
@@ -2398,7 +2919,11 @@
       "first_published": 1845,
       "author_died": 1895,
       "url": "https://www.gutenberg.org/cache/epub/23/pg23-images.html#fnref-1",
-      "note": "contented表示满足于现状；作者揭露奴役制度如何通过压制思考来维持统治。"
+      "note": "contented表示满足于现状；作者揭露奴役制度如何通过压制思考来维持统治。",
+      "themes": [
+        "society",
+        "freedom"
+      ]
     },
     {
       "id": "keller-05",
@@ -2415,7 +2940,11 @@
       "first_published": 1903,
       "author_died": 1968,
       "url": "https://www.gutenberg.org/cache/epub/2397/pg2397-images.html#link2HCH0023",
-      "note": "they指帮助作者的朋友；turn A into B表示把A转变成B。privileges在此写朋友所提供的珍贵机会。"
+      "note": "they指帮助作者的朋友；turn A into B表示把A转变成B。privileges在此写朋友所提供的珍贵机会。",
+      "themes": [
+        "friendship",
+        "hope"
+      ]
     },
     {
       "id": "chesterton-05",
@@ -2432,7 +2961,11 @@
       "first_published": 1908,
       "author_died": 1936,
       "url": "https://www.gutenberg.org/cache/epub/11505/pg11505-images.html#chap31",
-      "note": "hang upon a thread即悬于一线；下文用灰姑娘必须按时回家等条件解释童话的规则。"
+      "note": "hang upon a thread即悬于一线；下文用灰姑娘必须按时回家等条件解释童话的规则。",
+      "themes": [
+        "art",
+        "life"
+      ]
     },
     {
       "id": "twain-05",
@@ -2450,7 +2983,11 @@
       "author_died": 1910,
       "url": "https://www.gutenberg.org/cache/epub/68604/pg68604-images.html#Page_406",
       "note": "held in reverence表示受到敬畏；这是讽刺从众的总结，不能反读成作者鼓吹盲从。",
-      "related": "/english/twain-corn-pone/"
+      "related": "/english/twain-corn-pone/",
+      "themes": [
+        "society",
+        "humor"
+      ]
     },
     {
       "id": "lamb-05",
@@ -2468,7 +3005,11 @@
       "author_died": 1834,
       "url": "https://www.gutenberg.org/cache/epub/10343/pg10343-images.html#id00438",
       "note": "兰姆假托古代中国的手稿，戏说人们为烤猪而烧房子；这是讽刺性虚构故事，不能当中国历史。",
-      "related": "/english/lamb-roast-pig/"
+      "related": "/english/lamb-roast-pig/",
+      "themes": [
+        "humor",
+        "society"
+      ]
     },
     {
       "id": "shakespeare-06",
@@ -2485,7 +3026,11 @@
       "first_published": 1603,
       "author_died": 1616,
       "url": "https://www.gutenberg.org/cache/epub/100/pg100-images.html#sceneII_8.2",
-      "note": "brevity是简洁，tediousness是冗长乏味；波洛涅斯一边许诺简短，一边卖弄修辞，场面颇有反讽。"
+      "note": "brevity是简洁，tediousness是冗长乏味；波洛涅斯一边许诺简短，一边卖弄修辞，场面颇有反讽。",
+      "themes": [
+        "art",
+        "humor"
+      ]
     },
     {
       "id": "austen-06",
@@ -2502,7 +3047,11 @@
       "first_published": 1813,
       "author_died": 1817,
       "url": "https://www.gutenberg.org/cache/epub/1342/pg1342-images.html",
-      "note": "in possession of是拥有，in want of是缺少；这个煞有介事的开场，首先讽刺的是周围家庭的婚姻盘算。"
+      "note": "in possession of是拥有，in want of是缺少；这个煞有介事的开场，首先讽刺的是周围家庭的婚姻盘算。",
+      "themes": [
+        "love",
+        "humor"
+      ]
     },
     {
       "id": "bronte-06",
@@ -2519,7 +3068,11 @@
       "first_published": 1847,
       "author_died": 1855,
       "url": "https://www.gutenberg.org/cache/epub/1260/pg1260-images.html",
-      "note": "expect是期待，exact还可指强求；简刚说过自己不是天使，用这番话拒绝被恋人理想化。"
+      "note": "expect是期待，exact还可指强求；简刚说过自己不是天使，用这番话拒绝被恋人理想化。",
+      "themes": [
+        "love",
+        "freedom"
+      ]
     },
     {
       "id": "carroll-06",
@@ -2536,7 +3089,10 @@
       "first_published": 1865,
       "author_died": 1898,
       "url": "https://www.gutenberg.org/cache/epub/11/pg11-images.html#chap12",
-      "note": "beginning与end把一条本来毫无帮助的指令包装得郑重其事；gravely在这里是严肃地，而非严重地。"
+      "note": "beginning与end把一条本来毫无帮助的指令包装得郑重其事；gravely在这里是严肃地，而非严重地。",
+      "themes": [
+        "humor"
+      ]
     },
     {
       "id": "wilde-06",
@@ -2553,7 +3109,11 @@
       "first_published": 1891,
       "author_died": 1900,
       "url": "https://www.gutenberg.org/cache/epub/174/pg174-images.html#chap02",
-      "note": "yield to是向某事屈服；这是亨利用悖论诱导道连的说法，并非小说替读者制定的行为准则。"
+      "note": "yield to是向某事屈服；这是亨利用悖论诱导道连的说法，并非小说替读者制定的行为准则。",
+      "themes": [
+        "humor",
+        "life"
+      ]
     },
     {
       "id": "blake-06",
@@ -2570,7 +3130,11 @@
       "first_published": 1790,
       "author_died": 1827,
       "url": "https://www.gutenberg.org/cache/epub/45315/pg45315-images.html#PROVERBS_OF_HELL",
-      "note": "road与palace把抽象经验化成旅程；“地狱的箴言”有意反转通常的道德格言，不宜直接当作生活指令。"
+      "note": "road与palace把抽象经验化成旅程；“地狱的箴言”有意反转通常的道德格言，不宜直接当作生活指令。",
+      "themes": [
+        "learning",
+        "life"
+      ]
     },
     {
       "id": "keats-06",
@@ -2587,7 +3151,11 @@
       "first_published": 1820,
       "author_died": 1821,
       "url": "https://www.gutenberg.org/cache/epub/23684/pg23684-images.html#Page_41",
-      "note": "charms兼有魅力与魔法之意；这段诗把分析和拆解写成驱散幻象的力量，是诗的辩论语境。"
+      "note": "charms兼有魅力与魔法之意；这段诗把分析和拆解写成驱散幻象的力量，是诗的辩论语境。",
+      "themes": [
+        "art",
+        "learning"
+      ]
     },
     {
       "id": "whitman-06",
@@ -2604,7 +3172,11 @@
       "first_published": 1855,
       "author_died": 1892,
       "url": "https://www.gutenberg.org/cache/epub/1322/pg1322-images.html#link2H_4_0027",
-      "note": "这里的assume偏向接受、认领；开篇的自我赞歌立即通过you与every atom把读者也连接进来。"
+      "note": "这里的assume偏向接受、认领；开篇的自我赞歌立即通过you与every atom把读者也连接进来。",
+      "themes": [
+        "life",
+        "friendship"
+      ]
     },
     {
       "id": "franklin-06",
@@ -2621,7 +3193,10 @@
       "first_published": 1818,
       "author_died": 1790,
       "url": "https://www.gutenberg.org/cache/epub/20203/pg20203-images.html#IX",
-      "note": "两个not to省略了导致某种程度的含义；elevation在这里借升高写酒意上头，并非地理海拔。"
+      "note": "两个not to省略了导致某种程度的含义；elevation在这里借升高写酒意上头，并非地理海拔。",
+      "themes": [
+        "life"
+      ]
     },
     {
       "id": "emerson-06",
@@ -2638,7 +3213,11 @@
       "first_published": 1841,
       "author_died": 1882,
       "url": "https://www.gutenberg.org/cache/epub/16643/pg16643-images.html#SELF-RELIANCE",
-      "note": "这里的but相当于except；反复的Nothing ... but把安宁的根基从外部好运转回自身与原则。"
+      "note": "这里的but相当于except；反复的Nothing ... but把安宁的根基从外部好运转回自身与原则。",
+      "themes": [
+        "life",
+        "courage"
+      ]
     },
     {
       "id": "thoreau-06",
@@ -2655,7 +3234,11 @@
       "first_published": 1854,
       "author_died": 1862,
       "url": "https://www.gutenberg.org/cache/epub/205/pg205-images.html#chap03",
-      "note": "deliberately在这里是有意识地、经过思考地；front作动词是面对，长句由几个并列目的逐层展开。"
+      "note": "deliberately在这里是有意识地、经过思考地；front作动词是面对，长句由几个并列目的逐层展开。",
+      "themes": [
+        "life",
+        "nature"
+      ]
     },
     {
       "id": "shakespeare-07",
@@ -2672,7 +3255,10 @@
       "first_published": 1623,
       "author_died": 1616,
       "url": "https://www.gutenberg.org/cache/epub/100/pg100-images.html#sceneI_32.2",
-      "note": "这是暴风雨中惊恐的喊话；empty与all的对照把眼前险境夸张成了地狱。"
+      "note": "这是暴风雨中惊恐的喊话；empty与all的对照把眼前险境夸张成了地狱。",
+      "themes": [
+        "life"
+      ]
     },
     {
       "id": "austen-07",
@@ -2689,7 +3275,11 @@
       "first_published": 1813,
       "author_died": 1817,
       "url": "https://www.gutenberg.org/cache/epub/1342/pg1342-images.html#CHAPTER_LVIII",
-      "note": "in practice与in principle把实际行为和自认的原则并置；达西此时在反省自己的傲慢。"
+      "note": "in practice与in principle把实际行为和自认的原则并置；达西此时在反省自己的傲慢。",
+      "themes": [
+        "life",
+        "learning"
+      ]
     },
     {
       "id": "bronte-07",
@@ -2706,7 +3296,10 @@
       "first_published": 1847,
       "author_died": 1855,
       "url": "https://www.gutenberg.org/cache/epub/1260/pg1260-images.html",
-      "note": "布罗克赫斯特问怎样避免下地狱，简给出了这个直截了当的回答；笑点来自她对问题的字面理解。"
+      "note": "布罗克赫斯特问怎样避免下地狱，简给出了这个直截了当的回答；笑点来自她对问题的字面理解。",
+      "themes": [
+        "humor"
+      ]
     },
     {
       "id": "carroll-07",
@@ -2723,7 +3316,10 @@
       "first_published": 1865,
       "author_died": 1898,
       "url": "https://www.gutenberg.org/cache/epub/11/pg11-images.html#chap12",
-      "note": "nothing but是只不过；pack既指纸牌的一副，也让眼前聚在一起的角色与纸牌本身重叠。"
+      "note": "nothing but是只不过；pack既指纸牌的一副，也让眼前聚在一起的角色与纸牌本身重叠。",
+      "themes": [
+        "humor"
+      ]
     },
     {
       "id": "wilde-07",
@@ -2740,7 +3336,11 @@
       "first_published": 1891,
       "author_died": 1900,
       "url": "https://www.gutenberg.org/cache/epub/174/pg174-images.html#chap01",
-      "note": "being talked about是被动动名词；亨利拿它劝画家出名，夸张地把名声放在了评价好坏之前。"
+      "note": "being talked about是被动动名词；亨利拿它劝画家出名，夸张地把名声放在了评价好坏之前。",
+      "themes": [
+        "humor",
+        "society"
+      ]
     },
     {
       "id": "blake-07",
@@ -2757,7 +3357,11 @@
       "first_published": 1790,
       "author_died": 1827,
       "url": "https://www.gutenberg.org/cache/epub/45315/pg45315-images.html#Page_17",
-      "note": "unless是除非；enough与more than enough在反复中把分寸写成经验形成的判断。"
+      "note": "unless是除非；enough与more than enough在反复中把分寸写成经验形成的判断。",
+      "themes": [
+        "life",
+        "learning"
+      ]
     },
     {
       "id": "keats-07",
@@ -2774,7 +3378,10 @@
       "first_published": 1819,
       "author_died": 1821,
       "url": "https://www.gutenberg.org/cache/epub/23684/pg23684-images.html#Nightingale_ln70",
-      "note": "Fled is that music把表语提前，写出乐声突然远去；两个问句保留了想象与现实之间的恍惚。"
+      "note": "Fled is that music把表语提前，写出乐声突然远去；两个问句保留了想象与现实之间的恍惚。",
+      "themes": [
+        "art"
+      ]
     },
     {
       "id": "whitman-07",
@@ -2791,7 +3398,11 @@
       "first_published": 1855,
       "author_died": 1892,
       "url": "https://www.gutenberg.org/cache/epub/1322/pg1322-images.html#link2H_4_0027",
-      "note": "yawp是粗哑响亮的喊叫；I too的反复与untranslatable，让声音本身成了不受驯服的个性。"
+      "note": "yawp是粗哑响亮的喊叫；I too的反复与untranslatable，让声音本身成了不受驯服的个性。",
+      "themes": [
+        "freedom",
+        "art"
+      ]
     },
     {
       "id": "franklin-07",
@@ -2808,7 +3419,11 @@
       "first_published": 1818,
       "author_died": 1790,
       "url": "https://www.gutenberg.org/cache/epub/20203/pg20203-images.html#IX",
-      "note": "accordingly在这里是依照前面所说的原则；三个祈使分句从行为写到思想，再写到言语。"
+      "note": "accordingly在这里是依照前面所说的原则；三个祈使分句从行为写到思想，再写到言语。",
+      "themes": [
+        "friendship",
+        "life"
+      ]
     },
     {
       "id": "emerson-07",
@@ -2825,7 +3440,11 @@
       "first_published": 1841,
       "author_died": 1882,
       "url": "https://www.gutenberg.org/cache/epub/16643/pg16643-images.html#SELF-RELIANCE",
-      "note": "insist on通常是坚持某事，这里直接接yourself；后文谈的是个人天赋与长期培养的力量。"
+      "note": "insist on通常是坚持某事，这里直接接yourself；后文谈的是个人天赋与长期培养的力量。",
+      "themes": [
+        "freedom",
+        "courage"
+      ]
     },
     {
       "id": "thoreau-07",
@@ -2842,7 +3461,11 @@
       "first_published": 1854,
       "author_died": 1862,
       "url": "https://www.gutenberg.org/cache/epub/205/pg205-images.html#chap19",
-      "note": "advance是前进，endeavor是努力；unexpected后置修饰success，把成功写成日常经验之外的收获。"
+      "note": "advance是前进，endeavor是努力；unexpected后置修饰success，把成功写成日常经验之外的收获。",
+      "themes": [
+        "courage",
+        "hope"
+      ]
     },
     {
       "id": "shakespeare-08",
@@ -2859,7 +3482,11 @@
       "first_published": 1623,
       "author_died": 1616,
       "url": "https://www.gutenberg.org/cache/epub/100/pg100-images.html#sceneII_32.2",
-      "note": "gaberdine是宽大的粗斗篷；strange bed-fellows后来也用来形容因处境或利益而结伴的奇怪组合。"
+      "note": "gaberdine是宽大的粗斗篷；strange bed-fellows后来也用来形容因处境或利益而结伴的奇怪组合。",
+      "themes": [
+        "humor",
+        "society"
+      ]
     },
     {
       "id": "austen-08",
@@ -2876,7 +3503,11 @@
       "first_published": 1813,
       "author_died": 1817,
       "url": "https://www.gutenberg.org/cache/epub/1342/pg1342-images.html#CHAPTER_XXXI",
-      "note": "bear在这里是忍受；at the will of others指听任别人的意愿支配。"
+      "note": "bear在这里是忍受；at the will of others指听任别人的意愿支配。",
+      "themes": [
+        "courage",
+        "freedom"
+      ]
     },
     {
       "id": "bronte-08",
@@ -2893,7 +3524,11 @@
       "first_published": 1847,
       "author_died": 1855,
       "url": "https://www.gutenberg.org/cache/epub/1260/pg1260-images.html",
-      "note": "Reader是对读者的直接称呼；短短一句，把叙述权和婚姻的决定都握在简自己手里。"
+      "note": "Reader是对读者的直接称呼；短短一句，把叙述权和婚姻的决定都握在简自己手里。",
+      "themes": [
+        "love",
+        "freedom"
+      ]
     },
     {
       "id": "carroll-08",
@@ -2910,7 +3545,11 @@
       "first_published": 1865,
       "author_died": 1898,
       "url": "https://www.gutenberg.org/cache/epub/11/pg11-images.html#chap06",
-      "note": "depend on后面接where引导的从句；猫没有先给路线，而是先问目的地。"
+      "note": "depend on后面接where引导的从句；猫没有先给路线，而是先问目的地。",
+      "themes": [
+        "life",
+        "learning"
+      ]
     },
     {
       "id": "wilde-08",
@@ -2927,7 +3566,11 @@
       "first_published": 1891,
       "author_died": 1900,
       "url": "https://www.gutenberg.org/cache/epub/174/pg174-images.html#chap02",
-      "note": "这句Because回答道连的Why；亨利把影响写成灵魂的移交，接着讨论人怎样失去自己的思想。"
+      "note": "这句Because回答道连的Why；亨利把影响写成灵魂的移交，接着讨论人怎样失去自己的思想。",
+      "themes": [
+        "freedom",
+        "life"
+      ]
     },
     {
       "id": "blake-08",
@@ -2944,7 +3587,11 @@
       "first_published": 1790,
       "author_died": 1827,
       "url": "https://www.gutenberg.org/cache/epub/45315/pg45315-images.html#Page_9",
-      "note": "三个实词都以大写字母开头；Energy在这篇诗性论辩中与身体、欲望和创造力相关，而不是物理学里的能量定义。"
+      "note": "三个实词都以大写字母开头；Energy在这篇诗性论辩中与身体、欲望和创造力相关，而不是物理学里的能量定义。",
+      "themes": [
+        "life",
+        "art"
+      ]
     },
     {
       "id": "franklin-08",
@@ -2961,7 +3608,11 @@
       "first_published": 1818,
       "author_died": 1790,
       "url": "https://www.gutenberg.org/cache/epub/20203/pg20203-images.html#IX",
-      "note": "wrong在这里作动词，表示不公正地对待；句子同时考虑做了坏事与没有尽到应尽的责任。"
+      "note": "wrong在这里作动词，表示不公正地对待；句子同时考虑做了坏事与没有尽到应尽的责任。",
+      "themes": [
+        "friendship",
+        "society"
+      ]
     },
     {
       "id": "emerson-08",
@@ -2978,7 +3629,11 @@
       "first_published": 1841,
       "author_died": 1882,
       "url": "https://www.gutenberg.org/cache/epub/16643/pg16643-images.html#SELF-RELIANCE",
-      "note": "gleam是一线微光，firmament是文学性的苍穹；比喻把内心的直觉与受人崇敬的文化名人相对照。"
+      "note": "gleam是一线微光，firmament是文学性的苍穹；比喻把内心的直觉与受人崇敬的文化名人相对照。",
+      "themes": [
+        "learning",
+        "freedom"
+      ]
     },
     {
       "id": "thoreau-08",
@@ -2995,7 +3650,11 @@
       "first_published": 1854,
       "author_died": 1862,
       "url": "https://www.gutenberg.org/cache/epub/205/pg205-images.html#chap19",
-      "note": "同一个change反复两次，主语从things换成we；上下文谈的是不必一味追逐新物与新朋友。"
+      "note": "同一个change反复两次，主语从things换成we；上下文谈的是不必一味追逐新物与新朋友。",
+      "themes": [
+        "time",
+        "life"
+      ]
     },
     {
       "id": "shakespeare-09",
@@ -3012,7 +3671,11 @@
       "first_published": 1623,
       "author_died": 1616,
       "url": "https://www.gutenberg.org/cache/epub/100/pg100-images.html#sceneV_32.1",
-      "note": "brave在这里偏向美好、华丽，in ’t即in it；米兰达的惊叹带着初见人群的天真。"
+      "note": "brave在这里偏向美好、华丽，in ’t即in it；米兰达的惊叹带着初见人群的天真。",
+      "themes": [
+        "hope",
+        "society"
+      ]
     },
     {
       "id": "austen-09",
@@ -3029,7 +3692,11 @@
       "first_published": 1813,
       "author_died": 1817,
       "url": "https://www.gutenberg.org/cache/epub/1342/pg1342-images.html#CHAPTER_V",
-      "note": "synonymously意为当作同义词地；玛丽煞有介事地区分两个近义词，也是小说对谈吐姿态的描写。"
+      "note": "synonymously意为当作同义词地；玛丽煞有介事地区分两个近义词，也是小说对谈吐姿态的描写。",
+      "themes": [
+        "learning",
+        "humor"
+      ]
     },
     {
       "id": "bronte-09",
@@ -3046,7 +3713,11 @@
       "first_published": 1847,
       "author_died": 1855,
       "url": "https://www.gutenberg.org/cache/epub/1260/pg1260-images.html",
-      "note": "in vain是徒劳；后文把这种对行动的需要，明确延伸到与男性有同样感受的女性身上。"
+      "note": "in vain是徒劳；后文把这种对行动的需要，明确延伸到与男性有同样感受的女性身上。",
+      "themes": [
+        "freedom",
+        "courage"
+      ]
     },
     {
       "id": "wilde-09",
@@ -3063,7 +3734,11 @@
       "first_published": 1891,
       "author_died": 1900,
       "url": "https://www.gutenberg.org/cache/epub/174/pg174-images.html#chap04",
-      "note": "merely把经验的庄重名声降为给错误起名；这是小说中的怀疑论式悖论，要与人物的价值观一起阅读。"
+      "note": "merely把经验的庄重名声降为给错误起名；这是小说中的怀疑论式悖论，要与人物的价值观一起阅读。",
+      "themes": [
+        "humor",
+        "learning"
+      ]
     },
     {
       "id": "franklin-09",
@@ -3080,7 +3755,10 @@
       "first_published": 1818,
       "author_died": 1790,
       "url": "https://www.gutenberg.org/cache/epub/20203/pg20203-images.html#IX",
-      "note": "trifle是琐事；common or unavoidable放在accidents之后作后置修饰。"
+      "note": "trifle是琐事；common or unavoidable放在accidents之后作后置修饰。",
+      "themes": [
+        "life"
+      ]
     },
     {
       "id": "emerson-09",
@@ -3097,7 +3775,11 @@
       "first_published": 1841,
       "author_died": 1882,
       "url": "https://www.gutenberg.org/cache/epub/16643/pg16643-images.html#SELF-RELIANCE",
-      "note": "conspiracy在这里是夸张的社会比喻；后文把社会写成一家公司，人为了安全而交出独立性。"
+      "note": "conspiracy在这里是夸张的社会比喻；后文把社会写成一家公司，人为了安全而交出独立性。",
+      "themes": [
+        "freedom",
+        "society"
+      ]
     },
     {
       "id": "thoreau-09",
@@ -3114,7 +3796,11 @@
       "first_published": 1854,
       "author_died": 1862,
       "url": "https://www.gutenberg.org/cache/epub/205/pg205-images.html#chap02",
-      "note": "kill time是消磨时间；作者把习以为常的说法重新按字面理解，于是时间像生命一样可能受伤。"
+      "note": "kill time是消磨时间；作者把习以为常的说法重新按字面理解，于是时间像生命一样可能受伤。",
+      "themes": [
+        "time",
+        "life"
+      ]
     },
     {
       "id": "shakespeare-10",
@@ -3131,7 +3817,11 @@
       "first_published": 1600,
       "author_died": 1616,
       "url": "https://www.gutenberg.org/cache/epub/100/pg100-images.html#sceneI_24.1",
-      "note": "not ... but ...构成对照；Cupid是爱神丘比特，painted blind指图像中被画成看不见的样子。"
+      "note": "not ... but ...构成对照；Cupid是爱神丘比特，painted blind指图像中被画成看不见的样子。",
+      "themes": [
+        "love",
+        "art"
+      ]
     },
     {
       "id": "austen-10",
@@ -3148,7 +3838,10 @@
       "first_published": 1813,
       "author_died": 1817,
       "url": "https://www.gutenberg.org/cache/epub/1342/pg1342-images.html#CHAPTER_XXXIV",
-      "note": "ardently是热切地；这次求婚虽有热情，也夹着达西的优越感，伊丽莎白并未因此答应。"
+      "note": "ardently是热切地；这次求婚虽有热情，也夹着达西的优越感，伊丽莎白并未因此答应。",
+      "themes": [
+        "love"
+      ]
     },
     {
       "id": "bronte-10",
@@ -3165,7 +3858,11 @@
       "first_published": 1847,
       "author_died": 1855,
       "url": "https://www.gutenberg.org/cache/epub/1260/pg1260-images.html",
-      "note": "await是及物动词，后面直接接等待的对象；长长的those who ...描写敢于离开熟悉环境的人。"
+      "note": "await是及物动词，后面直接接等待的对象；长长的those who ...描写敢于离开熟悉环境的人。",
+      "themes": [
+        "courage",
+        "learning"
+      ]
     },
     {
       "id": "wilde-10",
@@ -3182,7 +3879,11 @@
       "first_published": 1891,
       "author_died": 1900,
       "url": "https://www.gutenberg.org/cache/epub/174/pg174-images.html#chap02",
-      "note": "caprice是反复无常的兴致；lifelong与a little longer的倒错，是这句话的机锋所在。"
+      "note": "caprice是反复无常的兴致；lifelong与a little longer的倒错，是这句话的机锋所在。",
+      "themes": [
+        "humor",
+        "love"
+      ]
     },
     {
       "id": "emerson-10",
@@ -3199,7 +3900,11 @@
       "first_published": 1841,
       "author_died": 1882,
       "url": "https://www.gutenberg.org/cache/epub/16643/pg16643-images.html#SELF-RELIANCE",
-      "note": "edge由刀刃引申为锋芒；这里反对把善良变成取悦他人的软弱姿态。"
+      "note": "edge由刀刃引申为锋芒；这里反对把善良变成取悦他人的软弱姿态。",
+      "themes": [
+        "courage",
+        "life"
+      ]
     },
     {
       "id": "thoreau-10",
@@ -3216,7 +3921,11 @@
       "first_published": 1854,
       "author_died": 1862,
       "url": "https://www.gutenberg.org/cache/epub/205/pg205-images.html#chap02",
-      "note": "cost不仅用金钱衡量，也可用为了赚钱而投入的生命衡量；in the long run表示从长远来看。"
+      "note": "cost不仅用金钱衡量，也可用为了赚钱而投入的生命衡量；in the long run表示从长远来看。",
+      "themes": [
+        "time",
+        "life"
+      ]
     },
     {
       "id": "shakespeare-11",
@@ -3233,7 +3942,11 @@
       "first_published": 1623,
       "author_died": 1616,
       "url": "https://www.gutenberg.org/cache/epub/100/pg100-images.html#sceneIII_32.2",
-      "note": "afeard是afraid的古式；air在这里是曲调，而非空气。卡利班对岛上声音的感受，与别人眼中的怪物形象形成反差。"
+      "note": "afeard是afraid的古式；air在这里是曲调，而非空气。卡利班对岛上声音的感受，与别人眼中的怪物形象形成反差。",
+      "themes": [
+        "nature",
+        "art"
+      ]
     },
     {
       "id": "austen-11",
@@ -3250,7 +3963,11 @@
       "first_published": 1813,
       "author_died": 1817,
       "url": "https://www.gutenberg.org/cache/epub/1342/pg1342-images.html#CHAPTER_XLV",
-      "note": "nettled是被激怒的；开头Persuaded as ... was表示让步，叙述者借她的嫉妒写出社交策略的失败。"
+      "note": "nettled是被激怒的；开头Persuaded as ... was表示让步，叙述者借她的嫉妒写出社交策略的失败。",
+      "themes": [
+        "love",
+        "humor"
+      ]
     },
     {
       "id": "bronte-11",
@@ -3267,7 +3984,11 @@
       "first_published": 1847,
       "author_died": 1855,
       "url": "https://www.gutenberg.org/cache/epub/1260/pg1260-images.html",
-      "note": "eradicate是根除；soil、loosen、fertilise与weeds把教育和偏见连成了一整套园艺比喻。"
+      "note": "eradicate是根除；soil、loosen、fertilise与weeds把教育和偏见连成了一整套园艺比喻。",
+      "themes": [
+        "learning",
+        "society"
+      ]
     },
     {
       "id": "wilde-11",
@@ -3284,7 +4005,11 @@
       "first_published": 1891,
       "author_died": 1900,
       "url": "https://www.gutenberg.org/cache/epub/174/pg174-images.html#chap04",
-      "note": "begin by与end by结构平行，后面都接动名词；亨利用尖刻的概括取代了通常的爱情赞语。"
+      "note": "begin by与end by结构平行，后面都接动名词；亨利用尖刻的概括取代了通常的爱情赞语。",
+      "themes": [
+        "love",
+        "humor"
+      ]
     },
     {
       "id": "emerson-11",
@@ -3301,7 +4026,11 @@
       "first_published": 1841,
       "author_died": 1882,
       "url": "https://www.gutenberg.org/cache/epub/16643/pg16643-images.html#SELF-RELIANCE",
-      "note": "hard words在这里强调直率、坚定；作者鼓励保留重新判断的自由，而不是为了前后一致而拒绝改变。"
+      "note": "hard words在这里强调直率、坚定；作者鼓励保留重新判断的自由，而不是为了前后一致而拒绝改变。",
+      "themes": [
+        "freedom",
+        "learning"
+      ]
     },
     {
       "id": "thoreau-11",
@@ -3318,7 +4047,11 @@
       "first_published": 1854,
       "author_died": 1862,
       "url": "https://www.gutenberg.org/cache/epub/205/pg205-images.html#chap04",
-      "note": "inheritance是遗产，fit在这里是合适、相称的；作者把读书写成跨越世代的继承。"
+      "note": "inheritance是遗产，fit在这里是合适、相称的；作者把读书写成跨越世代的继承。",
+      "themes": [
+        "learning",
+        "time"
+      ]
     },
     {
       "id": "shakespeare-12",
@@ -3335,7 +4068,11 @@
       "first_published": 1623,
       "author_died": 1616,
       "url": "https://www.gutenberg.org/cache/epub/100/pg100-images.html#sceneIV_32.1",
-      "note": "revels是欢庆、娱乐；幻象刚刚消失，普洛斯彼罗在安抚斐迪南，并转向对戏剧与人生的思考。"
+      "note": "revels是欢庆、娱乐；幻象刚刚消失，普洛斯彼罗在安抚斐迪南，并转向对戏剧与人生的思考。",
+      "themes": [
+        "art",
+        "life"
+      ]
     },
     {
       "id": "austen-12",
@@ -3352,7 +4089,11 @@
       "first_published": 1813,
       "author_died": 1817,
       "url": "https://www.gutenberg.org/cache/epub/1342/pg1342-images.html#CHAPTER_XI",
-      "note": "once在这里引出一旦发生的条件；伊丽莎白紧接着指出，这也可能是记恨过深的缺点。"
+      "note": "once在这里引出一旦发生的条件；伊丽莎白紧接着指出，这也可能是记恨过深的缺点。",
+      "themes": [
+        "life",
+        "love"
+      ]
     },
     {
       "id": "bronte-12",
@@ -3369,7 +4110,11 @@
       "first_published": 1847,
       "author_died": 1855,
       "url": "https://www.gutenberg.org/cache/epub/1260/pg1260-images.html",
-      "note": "两个to prolong平行；简重返旧地，迟迟不敢确认消息，疑问便也暂时保留了希望。"
+      "note": "两个to prolong平行；简重返旧地，迟迟不敢确认消息，疑问便也暂时保留了希望。",
+      "themes": [
+        "hope",
+        "love"
+      ]
     },
     {
       "id": "wilde-12",
@@ -3386,7 +4131,10 @@
       "first_published": 1891,
       "author_died": 1900,
       "url": "https://www.gutenberg.org/cache/epub/174/pg174-images.html#chap02",
-      "note": "aim是目标，self-development是自我发展；这番诱人的言说属于亨利，小说也展现了他的影响带来的后果。"
+      "note": "aim是目标，self-development是自我发展；这番诱人的言说属于亨利，小说也展现了他的影响带来的后果。",
+      "themes": [
+        "life"
+      ]
     },
     {
       "id": "emerson-12",
@@ -3403,7 +4151,11 @@
       "first_published": 1841,
       "author_died": 1882,
       "url": "https://www.gutenberg.org/cache/epub/16643/pg16643-images.html#SELF-RELIANCE",
-      "note": "avail作动词是有用、有效；the having lived把完成式动名词当名词使用，突出过去的经历与此刻的生命力。"
+      "note": "avail作动词是有用、有效；the having lived把完成式动名词当名词使用，突出过去的经历与此刻的生命力。",
+      "themes": [
+        "life",
+        "time"
+      ]
     },
     {
       "id": "thoreau-12",
@@ -3420,7 +4172,10 @@
       "first_published": 1854,
       "author_died": 1862,
       "url": "https://www.gutenberg.org/cache/epub/205/pg205-images.html#chap17",
-      "note": "as well as连接两处位置；冬日湖面的描写让heaven从遥远的上空回到了脚下的自然。"
+      "note": "as well as连接两处位置；冬日湖面的描写让heaven从遥远的上空回到了脚下的自然。",
+      "themes": [
+        "nature"
+      ]
     }
   ]
 }

@@ -145,6 +145,11 @@ class GamePublicationTests(unittest.TestCase):
                 self.assertNotIn("xieyuqing.me", html.replace("xieyuqing.me@gmail.com", ""), "Game metadata must follow the requested build origin.")
                 self.assertNotIn("{{", html)
                 self.assertEqual(sum(tag == "h1" for tag, _ in elements), 1)
+                if page_key == "game":
+                    book_entries = [attrs.get("href") for tag, attrs in elements
+                                    if tag == "a" and attrs.get("data-i18n") == "games.book.entry"]
+                    prefix = "/en" if language == "en" else ""
+                    self.assertEqual(book_entries, [prefix + "/game/ranking/?template=book"])
                 resources = [attrs.get("src", attrs.get("href", "")) for tag, attrs in elements
                              if tag == "script" or tag == "link" and attrs.get("rel") == "stylesheet"]
                 self.assertTrue(all(resource.startswith("/assets/") for resource in resources if resource))

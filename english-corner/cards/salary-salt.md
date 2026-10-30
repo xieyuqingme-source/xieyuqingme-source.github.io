@@ -14,4 +14,6 @@
 
 ## 可以这样用
 
-- The words are related, but the story needs more evidence. —— 这些词彼此相关，不过这个故事还需要更多证据。
+今天最实用的意思很明确：salary 是定期支付的固定薪酬，annual salary 就是年薪。读招聘说明时，先看清数字按月还是按年计算。
+
+- The job offers an annual salary of forty thousand dollars. —— 这份工作的年薪为4万美元。

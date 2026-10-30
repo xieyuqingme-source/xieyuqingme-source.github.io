@@ -7,6 +7,7 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 from urllib.parse import urlsplit
 import json
+import re
 import sys
 import unittest
 import xml.etree.ElementTree as ET
@@ -312,6 +313,15 @@ class CornerProductionTests(unittest.TestCase):
             self.assertFalse(any(t == 'a' and 'site-language-switch' in a.get('class','') for t,a in tags))
             self.assertEqual(sum(t == 'h1' for t,a in tags),1)
             self.assertNotIn('data-article-path',html)
+            if route == '/english/':
+                expected = corner['intro'].get('title',corner['intro']['name'])
+                self.assertTrue(re.search(r'<title>(.*?)</title>',html)[1].startswith(expected))
+                og = [a['content'] for t,a in tags if t == 'meta' and a.get('property') == 'og:title']
+                self.assertEqual(len(og),1)
+                self.assertTrue(og[0].startswith(expected))
+            matching = next((card for card in corner['cards'] if route == '/english/'+card['slug']+'/'),None)
+            if matching:
+                self.assertEqual([a['content'] for t,a in tags if t == 'meta' and a.get('name') == 'description'],[matching['summary']])
         for route in ['/','/en/','/today/','/en/today/','/about/']:
             html = (output/route.strip('/')/'index.html').read_text(encoding='utf-8')
             self.assertGreaterEqual(sum(t == 'a' and a.get('href') == '/english/' for t,a in Tags(html).nodes),2,route)

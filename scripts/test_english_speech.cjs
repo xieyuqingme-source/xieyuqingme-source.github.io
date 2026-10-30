@@ -4,7 +4,8 @@ const assert=require('node:assert/strict');
 const fs=require('node:fs');
 const path=require('node:path');
 const vm=require('node:vm');
-const speech=require('../home/assets/english-speech.js');
+const moduleFile=process.env.ENGLISH_SPEECH_MODULE||path.join(__dirname,'../home/assets/english-speech.js');
+const speech=require(moduleFile);
 class Events {
   constructor(){this.events=new Map();}
   addEventListener(type,fn){if(!this.events.has(type))this.events.set(type,new Set());this.events.get(type).add(fn);}
@@ -50,15 +51,15 @@ test('only learning pages are scanned; Today is not changed or listened to',()=>
   const f=fixture();f.buttons[0].hidden=false;f.doc.querySelector=()=>null;mount(f);
   assert.equal(f.buttons[0].hidden,false);assert.equal(f.listeners(),0);assert.equal(f.owned.length,0);assert.equal(f.utterances.length,0);
 });
-test('unsupported devices and remote-only voices leave all controls hidden',()=>{
+test('unsupported devices and remote-only voices hide controls and expose concise dynamic feedback',()=>{
   const unsupported=fixture();delete unsupported.win.speechSynthesis;assert.equal(mount(unsupported).available(),false);
-  assert.equal(unsupported.buttons.every(button=>button.hidden),true);assert.equal(unsupported.notice.hidden,true);
+  assert.equal(unsupported.buttons.every(button=>button.hidden),true);assert.equal(unsupported.notice.hidden,false);assert.match(unsupported.notice.textContent,/不支持/);
   const remote=fixture([{...local(),localService:false}]);assert.equal(mount(remote).available(),false);
-  assert.equal(remote.buttons.every(button=>button.hidden),true);assert.equal(remote.notice.hidden,true);assert.equal(remote.utterances.length,0);
+  assert.equal(remote.buttons.every(button=>button.hidden),true);assert.equal(remote.notice.hidden,false);assert.match(remote.notice.textContent,/没有可用/);assert.equal(remote.utterances.length,0);
 });
-test('a later voiceschanged event reveals local controls and one device notice',()=>{
+test('a later voiceschanged event reveals local controls and clears temporary feedback',()=>{
   const f=fixture([]),api=mount(f);assert.equal(api.available(),false);f.synth.voices=[local('en-US')];f.synth.fire('voiceschanged');
-  assert.equal(api.available(),true);assert.equal(f.buttons.every(button=>!button.hidden),true);assert.equal(f.notice.hidden,false);
+  assert.equal(api.available(),true);assert.equal(f.buttons.every(button=>!button.hidden),true);assert.equal(f.notice.hidden,true);assert.equal(f.notice.textContent,'');
   assert.equal(f.utterances.length,0);assert.equal(f.cancellations(),0);
 });
 test('click uses the chosen local voice, language, and reviewed English text',()=>{
@@ -77,7 +78,7 @@ test('repeated click stops; a different button stops the previous utterance',()=
 });
 test('current voices are checked again at click time; never use a remote default',()=>{
   const f=fixture();mount(f);f.synth.voices=[{...local(),localService:false}];f.buttons[0].fire('click');
-  assert.equal(f.utterances.length,0);assert.equal(f.buttons.every(button=>button.hidden),true);assert.equal(f.notice.hidden,true);
+  assert.equal(f.utterances.length,0);assert.equal(f.buttons.every(button=>button.hidden),true);assert.equal(f.notice.hidden,false);assert.match(f.notice.textContent,/没有可用/);
 });
 test('removing the active local voice cancels reading, and can show another local voice',()=>{
   const f=fixture();mount(f);f.buttons[0].fire('click');f.synth.voices=[local('en-US')];f.synth.fire('voiceschanged');
@@ -113,7 +114,7 @@ test('invalid, oversized, markup, and targets outside the learning page are neve
 });
 test('native failures hide unusable reading controls and never fall back to default speech',()=>{
   const f=fixture();f.synth.speak=()=>{throw new Error('unavailable');};mount(f);f.buttons[0].fire('click');
-  assert.equal(f.cancellations(),1);assert.equal(f.buttons.every(button=>button.hidden),true);assert.equal(f.notice.hidden,true);
+  assert.equal(f.cancellations(),1);assert.equal(f.buttons.every(button=>button.hidden),true);assert.equal(f.notice.hidden,false);assert.match(f.notice.textContent,/未能完成/);
   const g=fixture();mount(g);g.buttons[0].fire('click');g.utterances[0].onerror({error:'voice-unavailable'});
   assert.equal(g.buttons.every(button=>button.hidden),true);assert.equal(g.buttons[0].getAttribute('aria-pressed'),'false');
   g.synth.fire('voiceschanged');assert.equal(g.buttons[0].hidden,false);
@@ -122,8 +123,30 @@ test('device list failures are treated as unavailable voices',()=>{
   const f=fixture();f.synth.getVoices=()=>{throw new Error('blocked');};assert.equal(mount(f).available(),false);assert.equal(f.buttons.every(button=>button.hidden),true);
 });
 test('browser reevaluation cannot stack click handlers or native listeners',()=>{
-  const f=fixture(),source=fs.readFileSync(path.join(__dirname,'../home/assets/english-speech.js'),'utf8'),context=vm.createContext({window:f.win});
+  const f=fixture(),source=fs.readFileSync(moduleFile,'utf8'),context=vm.createContext({window:f.win});
   vm.runInContext(source,context);const count=f.listeners();vm.runInContext(source,context);
   assert.equal(f.listeners(),count);assert.equal(f.owned.length,1);f.buttons[0].fire('click');assert.equal(f.utterances.length,1);
   assert.doesNotMatch(source,/\b(?:fetch|XMLHttpRequest|sendBeacon|localStorage|sessionStorage)\b/);
+});
+
+test('normal local reading keeps the feedback region empty and hidden with accessible status semantics',()=>{
+  const f=fixture(),api=mount(f);assert.equal(api.available(),true);assert.equal(f.notice.hidden,true);assert.equal(f.notice.textContent,'');
+  assert.equal(f.notice.getAttribute('role'),'status');assert.equal(f.notice.getAttribute('aria-live'),'polite');assert.equal(f.notice.getAttribute('aria-atomic'),'true');
+  f.buttons[0].fire('click');f.buttons[0].fire('click');assert.equal(f.cancellations(),1);assert.equal(f.notice.hidden,true);assert.equal(f.notice.textContent,'');
+});
+test('unsupported mounts own their empty-state cleanup without adding native listeners or invoking speech',()=>{
+  const f=fixture();delete f.win.SpeechSynthesisUtterance;const api=mount(f);assert.equal(api.available(),false);assert.equal(f.listeners(),0);assert.equal(f.owned.length,1);assert.match(f.notice.textContent,/不支持/);
+  assert.equal(mount(f),api);assert.equal(f.owned.length,1);f.owned[0]();assert.equal(f.notice.hidden,true);assert.equal(f.notice.textContent,'');assert.equal(f.utterances.length,0);assert.equal(f.cancellations(),0);
+});
+test('native errors expose concise feedback, voice recovery clears it, and cancellation is not a failure',()=>{
+  const f=fixture();mount(f);f.buttons[0].fire('click');f.utterances[0].onerror({error:'canceled'});assert.equal(f.notice.hidden,true);assert.equal(f.notice.textContent,'');
+  f.buttons[0].fire('click');f.utterances[1].onerror({error:'voice-unavailable'});assert.equal(f.notice.hidden,false);assert.match(f.notice.textContent,/未能完成/);assert.equal(f.buttons.every(button=>button.hidden),true);
+  f.synth.fire('voiceschanged');assert.equal(f.notice.hidden,true);assert.equal(f.notice.textContent,'');assert.equal(f.buttons.every(button=>!button.hidden),true);
+});
+test('disposed speech cannot revive feedback through a previously captured voiceschanged callback',()=>{
+  const f=fixture(),api=mount(f),stale=[...f.synth.events.get('voiceschanged')][0];f.buttons[0].fire('click');api.destroy();assert.equal(f.cancellations(),1);assert.equal(f.listeners(),0);
+  f.synth.voices=[];stale();api.refresh();assert.equal(f.notice.hidden,true);assert.equal(f.notice.textContent,'');assert.equal(f.buttons.every(button=>button.hidden),true);
+});
+test('a missing optional feedback node never disables local reading or PageScope cleanup',()=>{
+  const f=fixture();f.root.querySelector=()=>null;const api=mount(f);assert.equal(api.available(),true);f.buttons[0].fire('click');assert.equal(f.utterances.length,1);f.owned[0]();assert.equal(f.cancellations(),1);assert.equal(f.listeners(),0);
 });

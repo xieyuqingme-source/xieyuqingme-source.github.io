@@ -87,7 +87,7 @@ PNG 由校验后的 state 直接绘制，只包括标题和所有等级中的项
 
 ## 展示入口与导航
 
-默认展示模式保留无编辑图标的榜单；「制作我的榜单」进入现有编辑模式，Esc 与双击卡片仍可进入编辑。按钮的可访问名称明确说明模式变化；切回展示时恢复此入口。「返回小游戏」为始终可用的轻量返回链接，全屏查看仍保留它与退出控制。工具栏可换行，页面水平滚动只限放大后的榜单区域。页面头部在编辑模式使用与全站一致的品牌及七个栏目链接；默认展示和直播视图继续隐藏页头页尾。
+默认展示模式保留无编辑图标的榜单；「制作我的榜单」进入现有编辑模式，Esc 与双击卡片仍可进入编辑。按钮的可访问名称明确说明模式变化；切回展示时恢复此入口。「返回小游戏」为始终可用的轻量返回链接，全屏查看仍保留它与退出控制。工具栏可换行，页面水平滚动只限放大后的榜单区域。页面头部在编辑模式使用与全站一致的品牌及共享导航；默认展示和直播视图继续隐藏页头页尾。
 
 游戏入口与排行页使用共享 `/assets/share-cover.png` 和 SVG favicon。共享页脚由`site_i18n.unified_footer()`生成，品牌顺序为装饰图像在前、姓名文字在后；这项DOM顺序调整不修改IndexedDB、用户存档、PNG输出或默认示例内容。
 
@@ -99,9 +99,19 @@ PNG 由校验后的 state 直接绘制，只包括标题和所有等级中的项
 
 20张图片均为本轮AI生成、逐张检查的写实油画风格作品意象，640×640 WebP，合计约2.05 MiB。生成说明、书目和提示词摘要见`assets/books/SOURCES.md`。`scripts/game_assets.py`显式登记固定名单，`build_site.py`在写任何输出前检查完整性和WebP方形尺寸；运行时图片编辑路径名单也只接受这些固定文件。学习正文共享同一名单，不接受外链图片或任意路径。图片原稿、总览拼图和生成日志仅在`.local-checks/english-v2-20261029/`与生成工具默认目录，构建不读取它们。
 
-相关验证：ranking逻辑、i18n、images、template_storage、dark五个Node文件；`test_game_routes.py`检查20图预检及复制；`test_ranking_books_browser.cjs`检查三模板、旧备份、双语、44项布局和PNG中每张图片的实际像素。英语首页「玩一会儿」、小游戏页和排行模板选择器均可进入。
+相关验证：ranking逻辑、i18n、images、template_storage、dark五个Node文件；`test_game_routes.py`检查固定图片预检及复制；`test_ranking_books_browser.cjs`检查当前四模板、旧备份、双语、布局和PNG实际图片。学英语名著入口、小游戏页和排行模板选择器均可进入；进入名著的直接链接使用`/game/ranking/?template=book`，详见下节。
 
 手机专项可重跑：`node scripts/test_ranking_mobile.cjs _site_unified .local-checks/ranking-mobile-final --strict`。覆盖 320/360/390/430 竖屏、对应横屏与 DPR 2/3、CDP 触摸滚动/排序、两皮肤矮视口弹窗、44px 命中区、无拖动选级、故障注入与恢复。修改前冻结证据保存在 `.local-checks/ranking-mobile-before-site/` 与相应 before 报告目录，后续构建不覆盖。
+
+## 带模板链接与未保存内容（2026年10月30日）
+
+学英语的名著入口使用`/game/ranking/?template=book`；`/en/game/ranking/?template=book`同样可用。`RankingModel.templateFromSearch()`只接受单个且在模板白名单内的template参数；重复、未知或原型属性名会被忽略，不改变正常恢复逻辑。正常情况下显式book入口恢复`template:book`，没有目标归档才用名著默认，不再被已有food/current抢回美食。
+
+旧安装可能只有current而没有对应模板归档。进入另一模板前先把实际旧内容归档，v1/v2只在内存迁移并保持原始current字节，不能仅为打开链接就回写成v3。目标损坏或旧稿归档/保存失败时不自动重建目标、不替换原记录，并给出错误提示。若存储完全不可用且没有从库中恢复已保存内容，可以目标默认进入内存模式；已有未保存草稿继续按模板留在同文档内存，而非伪装成已保存。
+
+同一文档的SPA导航会先等待已打开的项目/图片或等级编辑保存、取消，然后尝试保存。仍未保存的有效模板草稿通过当前Document内存临时交接，按模板分别保留，回到对应链接可继续导出；存储恢复并成功写入后清除相应未保存状态。它不是持久备份：刷新、硬跳转、新标签或关闭页面不能依赖这份内存，失败提示会要求及时导出JSON。数据库、对象仓库、JSON版本、四个模板键及图片裁切边界不变。
+
+维护时重跑既有ranking逻辑/模板存储/i18n检查与`node scripts/test_ranking_books_browser.cjs _site_unified .local-checks/ranking-books-browser`。真实浏览器脚本覆盖中英文模板query、旧版仅current保护、保存/归档失败、SPA未提交编辑与内存草稿交接；命令列在这里表示维护要求，实际通过情况另写本轮交接。
 
 ## 经济学家模板（2026年10月30日）
 

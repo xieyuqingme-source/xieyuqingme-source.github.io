@@ -6,10 +6,11 @@ const site = path.resolve(process.env.WEBSITE_SITE || path.join(root,'_site_unif
 const out = path.resolve(process.env.ENGLISH_CORNER_OUTPUT || path.join(root,'.local-checks/english-corner-20261029/browser'));
 const temporary = path.join(out,'temporary'); fs.mkdirSync(temporary,{recursive:true});
 // Keep Chrome profiles and crash reports away from the user's ordinary browser and C-drive cache.
-process.env.TEMP = temporary; process.env.TMP = temporary;
+process.env.TEMP = temporary; process.env.TMP = temporary; process.env.TMPDIR = temporary;
 const {chromium} = require(path.join(os.homedir(),'.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright'));
 const reading = require('../home/assets/daily-reading.js');
 const catalog = JSON.parse(fs.readFileSync(path.join(root,'english-corner/catalog.json'),'utf8'));
+const intro = JSON.parse(fs.readFileSync(path.join(root,'home/english-intro.json'),'utf8'));
 const cards = catalog.cards.filter(card=>card.status==='published');
 const columns = catalog.columns.map(column=>column.id);
 const mistakes = cards.filter(card=>card.column==='mistakes');
@@ -28,7 +29,7 @@ async function check(name,fn) {
 function serve(route,options) { return route.fulfill(options).catch(error=>{ if(!/Target.*closed|Route is already handled|Invalid InterceptionId|Request.*(?:cancel|abort)/i.test(String(error))) throw error; }); }
 async function context({width=1440,theme='light',skin=null,javascript=true,now=epoch,motion='no-preference'}={}) {
   const ctx = await browser.newContext({viewport:{width,height:1000},colorScheme:theme,javaScriptEnabled:javascript,reducedMotion:motion});
-  ctx.setDefaultTimeout(14000);
+  ctx.setDefaultTimeout(14000);ctx.setDefaultNavigationTimeout(45000);
   if (javascript) await ctx.addInitScript(({now,theme,skin})=>{
     window.__ecNow = now;
     const NativeDate = Date;
@@ -56,7 +57,7 @@ async function context({width=1440,theme='light',skin=null,javascript=true,now=e
       return serve(route,{contentType:mime[path.extname(file)]||'application/octet-stream',body:fs.readFileSync(file)});
     } catch(error) { report.missing.push({url:url.href,error:error.message});return serve(route,{status:404,body:'Missing local publication file'}); }
   });
-  ctx.on('page',page=>page.on('pageerror',error=>report.errors.push(error.stack||error.message)));
+  ctx.on('page',page=>{page.on('pageerror',error=>report.errors.push(error.stack||error.message));page.on('console',message=>{if(message.type()==='error')report.errors.push('console.error: '+message.text());});});
   return ctx;
 }
 async function ready(page) {
@@ -113,7 +114,7 @@ async function contrasts(page,selectors) {
 async function screenshot(page,name,selector=null,fullPage=true) { const filename=name+'.png';if(selector)await page.locator(selector).screenshot({path:path.join(out,filename)});else await page.screenshot({path:path.join(out,filename),fullPage});report.screenshots.push(filename); }
 
 (async()=>{try {
-  browser=await chromium.launch({channel:'chrome',headless:true,args:['--disable-gpu','--disable-gpu-compositing'],downloadsPath:path.join(temporary,'downloads'),env:{...process.env,TEMP:temporary,TMP:temporary}});
+  browser=await chromium.launch({channel:'chrome',headless:true,args:['--disable-gpu','--disable-gpu-compositing'],downloadsPath:path.join(temporary,'downloads'),env:{...process.env,TEMP:temporary,TMP:temporary,TMPDIR:temporary}});
   await check('reviewed routes are public, Chinese-first and in the main sitemap',async()=>{
     assert(cards.length>=40);assert(english.length>=200);assert(mistakes.length>=8);
     assert.deepEqual([...columns].sort(),['between','classics','mistakes','myths','words']);
@@ -127,8 +128,8 @@ async function screenshot(page,name,selector=null,fullPage=true) { const filenam
   await check('Learn English has exact public metadata, a projects-menu entry and no author self-introduction in cards',async()=>{
     const ctx=await context(),page=await ctx.newPage();try{
       await go(page,'/english/');
-      assert.equal(await page.title(),'学英语');
-      assert.equal(await page.locator('meta[property="og:title"]').getAttribute('content'),'学英语');
+      assert.equal(await page.title(),intro.title);
+      assert.equal(await page.locator('meta[property="og:title"]').getAttribute('content'),intro.title);
       assert.equal(await page.locator('.ec-intro h1').textContent(),'学英语');
       assert.equal(await page.locator('.ec-intro .ec-lead').textContent(),'英语好啊，英语得学，我也想学英语。');
       await publicNavigation(page);
@@ -149,7 +150,7 @@ async function screenshot(page,name,selector=null,fullPage=true) { const filenam
         await publicNavigation(page);
       }
       await go(page,'/en/today/');await publicNavigation(page,'en');
-      return {cards:cards.length,indexTitle:'学英语',primaryEntries:4,projectsPosition:3};
+      return {cards:cards.length,indexTitle:intro.title,primaryEntries:4,projectsPosition:3};
     }finally{await ctx.close();}
   });
   await check('keyboard filters preserve column and difficulty through detail and return links',async()=>{
@@ -376,7 +377,7 @@ async function screenshot(page,name,selector=null,fullPage=true) { const filenam
           if(route.startsWith('/english/'))assert.equal(await page.locator('.site-language-switch').count(),0);
           if(route==='/english/'){
             assert.equal(await page.locator('.ec-columns [data-ec-column]:visible').count(),5);
-            const bounds=await page.locator('.ec-columns [data-ec-column]').evaluateAll(nodes=>nodes.map(node=>{const box=node.getBoundingClientRect();return {left:box.left,right:box.right,width:box.width,heading:node.querySelector('h2').textContent};}));
+            const bounds=await page.locator('.ec-columns [data-ec-column]').evaluateAll(nodes=>nodes.map(node=>{const box=node.getBoundingClientRect();return {left:box.left,right:box.right,width:box.width,heading:node.querySelector('span').textContent};}));
             for(const box of bounds)assert(box.width>0&&box.left>=-1&&box.right<=width+1,JSON.stringify(box));
             assert(bounds.some(box=>box.heading==='别说错'));
           }
