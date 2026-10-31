@@ -302,11 +302,18 @@
 @media(max-width:380px){.today-cycle-readings{grid-template-columns:minmax(0,1fr);gap:3px}.today-cycle-readings dd{margin-bottom:10px}.today-cycle .today-section-heading h2{font-size:20px}}
 
 /* Quiet native anchors, usable before scripts and without smooth motion. */
-.today-jump-nav{display:flex;flex-wrap:wrap;align-items:center;gap:2px 18px;margin:0 0 24px;font-size:12px;line-height:2.6}
-.today-jump-nav a{display:inline-block;color:var(--muted);text-decoration:none}
+.today-jump-nav{display:flex;flex-wrap:wrap;align-items:center;gap:2px 4px;margin:0 0 24px;font-size:12px;line-height:2.6}
+.today-jump-nav a{display:inline-flex;align-items:center;justify-content:center;min-width:40px;min-height:40px;color:var(--muted);text-decoration:none}
 .today-jump-nav a:hover,.today-jump-nav a:focus-visible{color:var(--accent);text-decoration:underline;text-underline-offset:4px}
 .today-river .brief-body>section{scroll-margin-top:24px}
 .today-world-link{margin-top:16px;font-size:13px}
 .today-year-ago{margin-top:22px;font-size:13px;line-height:1.9}
 .today-year-ago h3{font-size:14px;margin-bottom:8px}
 .today-year-ago ul{padding-left:20px}
+.hero-intro{font:400 15px/1.7 var(--sans);color:var(--muted);overflow-wrap:anywhere}
+.home-latest{list-style:none;margin:18px 0 0;padding:0}
+.home-latest li{display:flex;align-items:baseline;justify-content:space-between;gap:8px 20px;padding:9px 0}
+.home-latest a{min-width:0;overflow-wrap:anywhere;text-decoration:none}
+.home-latest a:hover,.home-latest a:focus-visible{text-decoration:underline;text-underline-offset:4px}
+.home-latest time{flex-shrink:0;color:var(--muted);font-size:var(--fs-small)}
+@media(max-width:600px){.hero-intro{font-size:14px}.home-latest li{flex-wrap:wrap}}

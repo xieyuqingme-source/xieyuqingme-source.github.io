@@ -22,7 +22,7 @@ CATEGORY_LABELS = {
 BRIEF_NOTICE = {"zh-CN": "新闻由人工挑选，标题和摘要依据原文；点「阅读原文」看全文。",
                 "en": "News is selected by hand; titles and summaries follow the sources. Select “Read source” for the full text."}
 SOLAR_TERMS = set("冬至 小寒 大寒 立春 雨水 惊蛰 春分 清明 谷雨 立夏 小满 芒种 夏至 小暑 大暑 立秋 处暑 白露 秋分 寒露 霜降 立冬 小雪 大雪".split())
-PRIVATE_PATH = re.compile(r"(?<![A-Za-z0-9])[A-Za-z]:[\\/]|\\\\[^\s\\]+[\\/]|/(?:Users|home|mnt)/", re.I)
+from site_safety import PRIVATE_PATH
 
 
 def _text(value, *, allow_empty=False):

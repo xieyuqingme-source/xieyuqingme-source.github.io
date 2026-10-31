@@ -1,7 +1,7 @@
 'use strict';
 // Installed Chrome against a local publication. Interact through rendered controls;
 // the emitted public JSON is the answer oracle, never a replacement game model.
-// Usage: node scripts/test_english_v3_quiz_browser.cjs [output-directory]
+// Usage: node scripts/test_english_quiz_browser.cjs [output-directory]
 // WEBSITE_ROOT defaults to cwd; WEBSITE_SITE defaults to _site_unified.
 const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path'),os=require('node:os'),crypto=require('node:crypto');
 const root=path.resolve(process.env.WEBSITE_ROOT||process.cwd());

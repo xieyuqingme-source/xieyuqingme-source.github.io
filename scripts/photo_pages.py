@@ -15,7 +15,7 @@ PHOTO_FIELDS = {"id", "title", "caption", "date", "date_text", "time", "location
 TEXT_FIELDS = {"title", "caption", "date", "date_text", "time", "location", "description"}
 IMAGE_URL = re.compile(r"/photos/images/(p-[0-9a-f]{24})-([0-9a-f]{12,64})-([1-9][0-9]{0,4})\.webp\Z")
 SLUG = re.compile(r"[a-z][a-z0-9]*(?:-[a-z0-9]+)*\Z")
-PRIVATE_PATH = re.compile(r"(?<![A-Za-z0-9])[A-Za-z]:[\\/]|\\\\[^\s\\]+[\\/]|/(?:Users|home|mnt)/", re.I)
+from site_safety import PRIVATE_PATH
 OWNED_FILE = re.compile(r"(?:index\.html|[a-z][a-z0-9]*(?:-[a-z0-9]+)*/index\.html|images/p-[0-9a-f]{24}-[0-9a-f]{12,64}-[1-9][0-9]{0,4}\.webp)\Z")
 MARKER = ".generated-by-photo-pages"
 MANIFEST = ".photo-files.json"

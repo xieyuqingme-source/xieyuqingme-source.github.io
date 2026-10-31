@@ -11,6 +11,7 @@ import shutil
 import unicodedata
 
 from markdown_it import MarkdownIt
+from site_safety import PRIVATE_PATH
 from reading_annotations import mark_reviewed_terms
 
 LANGUAGES = {"zh-CN": "中文", "en": "English", "fr": "Français"}
@@ -120,7 +121,7 @@ def load_glossary(root, works):
             if entry['verification'] not in {'verified', 'pending'}:
                 raise ValueError('Unknown glossary verification status.')
             if any(not isinstance(value, str) or len(value) > 2000 or any(ord(c) < 32 for c in value)
-                   or (key != 'source_url' and re.search(r'[A-Za-z]:[\\/]|Obsidian Vault', value)) for key, value in entry.items()):
+                   or (key != 'source_url' and PRIVATE_PATH.search(value)) for key, value in entry.items()):
                 raise ValueError('Invalid public glossary text.')
             key = unicodedata.normalize('NFKC', entry['term']).strip().lower()
             if not key or len(entry['term']) > 80 or key in seen:

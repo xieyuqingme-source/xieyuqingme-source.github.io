@@ -125,6 +125,7 @@ main { padding-block: 68px 74px; }
 .project-details summary { width: fit-content; color: var(--accent); cursor: pointer; }
 .project-details summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 5px; }
 .project-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: auto; }
+.error-links { display:flex; flex-wrap:wrap; gap:12px 24px; }
 .project-actions a { display: inline-flex; align-items: center; justify-content: center; min-height: 42px; padding: 8px 14px; border: 1px solid var(--line); border-radius: 6px; font-size: .8rem; font-weight: 500; text-decoration: none; }
 .project-actions a:first-child { border-color: var(--accent); color: var(--paper); background: var(--accent); }
 .project-actions a span { margin-left: 6px; font-size: .85em; }

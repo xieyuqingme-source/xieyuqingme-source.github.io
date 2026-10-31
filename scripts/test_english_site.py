@@ -438,28 +438,20 @@ class EnglishPublicationTests(unittest.TestCase):
         self.assertEqual(ET.parse(self.output / 'articles/feed.xml').findall('./channel/item').__len__(), 3)
         self.assertNotIn('/en/', (self.output / 'articles/feed.xml').read_text(encoding="utf-8"))
 
-    def test_article_statistics_notice_follows_body_before_comments_in_both_languages(self):
+    def test_comment_policy_links_to_localized_privacy_without_statistics_notice(self):
         blog = self.build_fixture()
         translated = blog.translations[self.key]
-        original = translated.original
         english_original = next(a for a in blog.articles if a.language == "en")
-        pages = ((self.output / "articles" / original.destination, "浏览与评论统计请求"),
-                 (self.output / "en/articles" / translated.destination, "View and comment counts"),
-                 (self.output / "articles" / english_original.destination, "View and comment counts"))
-        for page, label in pages:
+        for page, target in ((self.output / "articles" / translated.original.destination, "/about/#site"),
+                             (self.output / "en/articles" / translated.destination, "/en/about/#site"),
+                             (self.output / "articles" / english_original.destination, "/en/about/#site")):
             with self.subTest(page=page.name):
                 text = page.read_text(encoding="utf-8")
-                notice = text.index('<p class="statistics-notice"')
-                body = text.index('<div class="article-body" id="article-content">')
-                comments = text.index('<section class="article-comments"')
-                self.assertEqual(text.count('<p class="statistics-notice"'), 1)
-                self.assertGreater(notice, body)
-                self.assertLess(notice, comments)
-                self.assertEqual(text[notice - len("</div>\n"):notice], "</div>\n")
-                self.assertIn(label, text[notice:comments])
-                self.assertIn("Test host", text[notice:comments])
-                self.assertIn("Test database", text[notice:comments])
-                self.assertNotIn('class="statistics-notice"', text[:body])
+                self.assertNotIn('class="statistics-notice"', text)
+                self.assertNotIn('data-counter="views"', text)
+                self.assertIn('class="comment-policy"', text)
+                self.assertIn('href="' + target + '"', text)
+                self.assertGreater(text.index('<section class="article-comments"'), text.index('id="article-content"'))
 
     def test_existing_english_original_has_english_ui_at_only_its_old_url(self):
         blog = self.build_fixture()
@@ -469,8 +461,9 @@ class EnglishPublicationTests(unittest.TestCase):
         self.assertIn('Originally written in English.', text)
         self.assertIn('id="theme-toggle"', text)
         footer = text.split("<footer", 1)[1].split("</footer>", 1)[0]
-        self.assertNotIn('I’m putting my energy into English.', footer)
-        self.assertIn('I’m working hard on a few questions.', footer)
+        self.assertNotIn('data-i18n="common.signature.1"', footer)
+        catalogue = json.loads((ROOT / 'home/locales/common.json').read_text(encoding='utf-8'))
+        self.assertIn(catalogue['en']['common.signature.2'], footer)
         self.assertNotIn('data-skin-choice', text)
         self.assertIn('An original English essay.', text)
         elements = build_site.Elements(text).elements

@@ -131,7 +131,7 @@ async function screenshot(page,name,selector=null,fullPage=true) { const filenam
       assert.equal(await page.title(),intro.title);
       assert.equal(await page.locator('meta[property="og:title"]').getAttribute('content'),intro.title);
       assert.equal(await page.locator('.ec-intro h1').textContent(),'学英语');
-      assert.equal(await page.locator('.ec-intro .ec-lead').textContent(),'英语好啊，英语得学，我也想学英语。');
+      assert.equal(await page.locator('.ec-intro .ec-lead').textContent(),JSON.parse(fs.readFileSync(path.join(root,'home/english-intro.json'),'utf8')).intro);
       await publicNavigation(page);
       const projects=page.locator('.site-nav [data-nav-group="projects"]');
       assert(await projects.evaluate(node=>node.classList.contains('is-current')));
@@ -143,7 +143,8 @@ async function screenshot(page,name,selector=null,fullPage=true) { const filenam
         const expected=card.title+' · 学英语';
         assert.equal(await page.title(),expected);
         assert.equal(await page.locator('meta[property="og:title"]').getAttribute('content'),expected);
-        const main=await page.locator('main').textContent();
+        const authored=await page.locator('main').textContent();
+        const main=Object.values(intro).filter(value=>typeof value==='string').reduce((text,allowed)=>text.replaceAll(allowed,''),authored);
         assert.doesNotMatch(main,/中国钩子|钩子|本站编写|雨聊英语角|英语角|English Corner/);
         // Literary first-person text and authored teaching examples remain legitimate.
         assert.doesNotMatch(main,/谢雨卿|站长|我的文章|英语专业|补课/);

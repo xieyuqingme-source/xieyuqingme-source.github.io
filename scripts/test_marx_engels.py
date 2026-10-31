@@ -11,7 +11,7 @@ import sys
 import unittest
 import xml.etree.ElementTree as ET
 
-from marx_engels import (AI_NOTE, ASSETS, BASIS, INTRO, HEADINGS, BRANCHES, load_marx_engels,
+from marx_engels import (AI_NOTE, ASSETS, BASIS, HEADINGS, BRANCHES, load_marx_engels,
                         validate_wenji, validate_capital, validate_citations, validate_catalog,
                         validate_qa, quotation_budgets, source_url, source_path, text_hash,
                         markdown_sections, build_marx_engels)
@@ -126,7 +126,7 @@ class ContentTests(unittest.TestCase):
             self.assertNotIn('问对录', render_content(self.data, item))
 
     def test_second_edition_primitive_validation_boundaries(self):
-        from marx_v2 import number, precise_date, packet
+        from marx_extras import number, precise_date, packet
         for value in (-1, float('nan'), float('inf'), 10**13, True, '6'):
             with self.subTest(value=value), self.assertRaises(ValueError): number(value)
         for value, precision in [('1848-02-30', 'day'), ('1848-02-01', 'month'), ('1848-13', 'month'), ('1600', 'year')]:
@@ -142,7 +142,7 @@ class ContentTests(unittest.TestCase):
         counts = Counter(i['category'] for i in items if i['status'] == 'published')
         for kind, minimum in {'terms': 20, 'myths': 8, 'works': 12, 'guides': 3}.items():
             self.assertGreaterEqual(counts[kind], minimum)
-        self.assertEqual(self.data['intro']['intro'], INTRO)
+        self.assertEqual(self.data['intro']['intro'], json.loads((ROOT / 'home/marx-intro.json').read_text(encoding='utf-8'))['intro'])
         self.assertEqual(self.data['intro']['basis'], BASIS)
         self.assertGreaterEqual(len(self.data['qa']), 11)
         self.assertTrue({1, 2, 3} <= {i['chapter'] for i in items if i['kind'] == 'guides'})
@@ -232,11 +232,13 @@ class ContentTests(unittest.TestCase):
     def test_private_research_cache_is_not_a_build_input(self):
         original = Path.read_text
         def public_only(path, *args, **kwargs):
-            if '.local-checks' in path.parts:
+            if path.is_relative_to(ROOT) and '.local-checks' in path.relative_to(ROOT).parts:
                 raise AssertionError('Research cache accessed by public loader')
             return original(path, *args, **kwargs)
         with patch.object(Path, 'read_text', public_only):
             data = load_marx_engels(ROOT)
+            with self.assertRaisesRegex(AssertionError, 'Research cache accessed'):
+                (ROOT / '.local-checks/not-public.md').read_text(encoding='utf-8')
         self.assertEqual(set(data['items']), set(self.data['items']))
 
     def test_render_is_escaped_and_contains_notes_and_real_sources(self):
@@ -316,7 +318,7 @@ class PublicationTests(unittest.TestCase):
         routes.update(f'/marx/wenji/{no}/' for no in range(1, 11))
         routes.update(f'/marx/capital/{no}/' for no in range(1, 4))
         routes.update(i['route'] for i in data['items'].values() if i['status'] == 'published')
-        from marx_v2 import ROUTES
+        from marx_extras import ROUTES
         routes.update(ROUTES)
         self.assertGreaterEqual(len(routes), 107)
         sitemap = {e.text for e in ET.parse(output / 'sitemap.xml').findall('.//{*}loc')}

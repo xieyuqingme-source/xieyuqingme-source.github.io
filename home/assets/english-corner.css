@@ -65,3 +65,4 @@
 @media(max-width:760px){.ec-word-map-words{display:block}.ec-word-map-group+.ec-word-map-group{margin-top:14px}.ec-word-map-notice{font-size:12px}}
 
 .ec-level-help{margin:8px 0 0}
+.ec-lead{text-wrap:balance}

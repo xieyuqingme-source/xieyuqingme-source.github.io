@@ -303,7 +303,7 @@ def render_related(data, item):
 
 
 def part_chapter_list(data, item):
-    from marx_v3 import part_chapters
+    from marx_checks import part_chapters
     chapters = part_chapters(data['chapters'], item['volume'], item['part'])
     notes = {row['no']: row['text'] for row in item['chapter_notes']}
     out = '<ol class="me-toc">'
@@ -317,7 +317,7 @@ def part_chapter_list(data, item):
 
 
 def part_english_links(data, item):
-    from marx_v3 import part_chapters
+    from marx_checks import part_chapters
     out = '<ul class="me-qa">'
     for chapter in part_chapters(data['chapters'], item['volume'], item['part']):
         rows = chapter.get('en', [])
@@ -465,7 +465,8 @@ def render_featured_cards(data):
 
 def render_index(data):
     intro = data["intro"]
-    out = ('<header class="me-intro"><p class="me-kicker">从原著出发</p><h1>' + escape(intro["name"]) + '</h1><p class="me-lead">' + escape(intro["intro"]) + '</p><p class="me-basis">' + escape(intro["basis"]) + '</p>'
+    lead = ''.join('<span>' + escape(part) + '</span>' for part in re.findall(r'[^，。！？；]+[，。！？；]*|[，。！？；]+', intro["intro"]))
+    out = ('<header class="me-intro"><p class="me-kicker">从原著出发</p><h1>' + escape(intro["name"]) + '</h1><p class="me-lead me-lead-phrases">' + lead + '</p><p class="me-basis">' + escape(intro["basis"]) + '</p>'
            + '<p class="me-quote-entry">' + link('/today/#daily-quotation-card', '每天一句马克思主义名句，在「今天」页 →') + '</p></header>')
     out += ('<section aria-labelledby="two-doors"><h2 id="two-doors">从两扇门进去</h2><div class="me-doors"><article class="me-door"><h3>'
             + link(work_route(data, 'german-ideology'), '人们怎样生活，怎样创造历史') + '</h3><p>先从现实的人怎样生产、交往和生活读起，再看制度与观念的变化。这扇门通向唯物史观。</p></article><article class="me-door"><h3>'
@@ -494,7 +495,7 @@ def render_index(data):
             out += link('/marx/capital/1/ch01/', '第一章导读') + ' · ' + link(data['capital']['volumes'][0]['mia'], '中文全卷', True) + ' · ' + link(data['works']['letter-099']['mia'], '推荐次序原信', True)
         out += '</p></article>'
     out += '</div><p class="me-meta">一周路线：' + ' → '.join(link(work_route(data, work), data['works'][work]['title'], work_route(data, work).startswith('https:')) for work in ('manifesto', 'wage-labour-capital', 'value-price-profit')) + '。</p></section>'
-    from marx_v2 import entrances
+    from marx_extras import entrances
     out += entrances()
     out += render_featured_cards(data)
     # 问对录 stays low-key: one small button to its own directory page.
@@ -515,7 +516,7 @@ def build_pages(root, output, address, data):
     pages.extend((f'/marx/wenji/{v["no"]}/', f'文集第{v["no"]}卷', v['summary'], render_wenji_volume(data, v)) for v in data['wenji']['volumes'])
     pages.extend((f'/marx/capital/{v["no"]}/', f'资本论第{v["no"]}卷', v['title'], render_capital_volume(data, v)) for v in data['capital']['volumes'])
     pages.extend((item['route'], item['title'], item['summary'], render_content(data, item)) for item in data['items'].values() if item['status'] == 'published')
-    from marx_v2 import extra_pages
+    from marx_extras import extra_pages
     pages.extend(extra_pages(data))
     from marx_topics import extra_pages as topic_pages
     pages.extend(topic_pages(data))

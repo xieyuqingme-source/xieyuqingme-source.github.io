@@ -16,7 +16,7 @@ async function setup(preview = false, list = false) {
   const comments = list ? null : node();
   if (comments) comments.dataset.articlePath = original;
   const settings = { enabled: true, backendVerified: true, serverURL: 'https://comments.test', hostingProvider: 'Test host', databaseProvider: 'Test database', siteOrigin: 'https://site.test', clientJS: '/articles/assets/waline/waline.js', clientCSS: '/articles/assets/waline/waline.css' };
-  const document = { documentElement: { lang: 'en' }, querySelector: selector => selector === '#waline-settings' ? { textContent: JSON.stringify(settings) } : selector === '#article-comments' ? comments : null, querySelectorAll: () => [stats] };
+  const document = { documentElement: { lang: 'en' }, querySelector: selector => selector === '#waline-settings' ? { textContent: JSON.stringify(settings) } : selector === '#article-comments' ? comments : null, querySelectorAll: () => list ? [] : [stats] };
   const calls = [], mounted = [];
   await startWaline({ document, location: new URL((preview ? 'http://127.0.0.1:8767' : 'https://site.test') + '/en/articles/test%20%26%20title.html?tracking=1#section'),
     fetch: async (address, request) => {
@@ -41,6 +41,6 @@ assert.equal(article.comments.hidden, false);
 const preview = await setup(true);
 assert(preview.calls.every(call => call.method === 'GET'));
 const directory = await setup(false, true);
-assert(directory.calls.every(call => call.method === 'GET'));
+assert.equal(directory.calls.length, 0);
 assert.equal(directory.mounted.length, 0);
-console.log(JSON.stringify({ success: true, checks: ['One English visit increments the exact original path once', 'English client and API locale', 'No English discussion identity or duplicate client counters', 'Local previews and directories only read counts'] }, null, 2));
+console.log(JSON.stringify({ success: true, checks: ['One English visit increments the exact original path once', 'English client and API locale', 'No English discussion identity or duplicate client counters', 'Local previews do not increment; directories make no requests'] }, null, 2));

@@ -156,10 +156,10 @@ async function appearance(page, theme, language, full) {
   const prefix = language === 'en' ? '/en' : '';
   assert.equal(await page.locator('footer .footer-links > a').first().getAttribute('href'), prefix + '/today/');
   assert.equal(await page.locator('footer .footer-links > a').first().innerText(), language === 'en' ? 'Today in history' : '历史中的今天');
-  assert.equal(await page.locator('footer .footer-note').innerText(), language === 'en' ? 'I’m working hard on a few questions.' : '努力研究一些问题。');
+  assert.equal(await page.locator('footer .footer-note').innerText(), JSON.parse(fs.readFileSync(path.join(root,'home/locales/common.json'),'utf8'))[language === 'en' ? 'en' : 'zh-CN']['common.signature.2']);
   assert.equal(await page.locator('footer [data-i18n="common.signature.1"]').count(), 0);
   if (!full) {
-    assert.equal(await page.locator('.hero-signature').innerText(), language === 'en' ? 'I’m putting my energy into English.' : '我要把精力放到英语上。');
+    assert.equal(await page.locator('.hero-signature').innerText(), JSON.parse(fs.readFileSync(path.join(root,'home/locales/common.json'),'utf8'))[language === 'en' ? 'en' : 'zh-CN']['common.signature.1']);
     assert.equal(await page.locator('#home-title').textContent(), language === 'en' ? 'Xie Yuqing' : '谢雨卿');
     assert.equal(await page.locator('.home-avatar').getAttribute('role'), 'img');
     assert.equal(await page.locator('.home-avatar').getAttribute('aria-label'), language === 'en' ? 'Line drawing of Xie Yuqing' : '谢雨卿的简笔头像');
@@ -398,7 +398,6 @@ async function clickFull(page, language) { const route = language === 'en' ? '/e
         assert.deepEqual(await page.locator('.about-colophon > p').allTextContents(), biography[language === 'en' ? 'english_colophon' : 'chinese_colophon']);
         assert.equal(await page.locator('.about-written-note').count(), 1);
         assert.equal(await page.locator('.about-written-note').innerText(), biography[language === 'en' ? 'english_written_note' : 'written_note']);
-        assert((await page.locator('main').innerText()).includes(language === 'en' ? 'Actual date of writing' : '真实写作日期'));
         assert.equal(await page.locator('#site a[href*="github.com"]').count(), 0); await noOverflow(page);
         await capture(page, `about-${language}-390-light`);
         await go(page, prefix + '/anthology/');

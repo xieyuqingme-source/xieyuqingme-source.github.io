@@ -28,7 +28,7 @@ def reference(value):
 
 def load_topics(root, core):
     from marx_engels import fields, slug, iso, source_path, prose_characters
-    from marx_v2 import ROUTES as EXISTING_ROUTES
+    from marx_extras import ROUTES as EXISTING_ROUTES
     known = set(EXISTING_ROUTES) | set(ROUTES) | {i['route'] for i in core['items'].values() if i['status'] == 'published'}
     known.update('/marx/wenji/' + str(no) + '/' for no in range(1, 11))
     known.update('/marx/capital/' + str(no) + '/' for no in (1, 2, 3))
@@ -106,7 +106,7 @@ def render_topic(core, name):
             if 'date_source' in item:
                 out += '<p class="me-meta">' + link(item['date_source']['url'], '日期依据', True) + ' · ' + escape(item['date_source']['locator']) + '</p>'
             if item['related']:
-                from marx_v2 import ROUTES as page_titles
+                from marx_extras import ROUTES as page_titles
                 labels = {i['route']: i['title'] for i in core['items'].values()}
                 labels.update({route: values[0] for route, values in page_titles.items()})
                 labels.update({t['route']: t['title'] for t in core['topics'].values()})

@@ -33,7 +33,6 @@ class AnthologyLocalizationTests(unittest.TestCase):
             self.assertEqual((len(zh['routes']),len(en['routes'])),(14,14))
             self.assertEqual(en['routes'],['/en'+r for r in zh['routes']])
             catalogue = json.loads((ROOT/'home/locales/anthology.json').read_text(encoding='utf8'))
-            self.assertEqual(catalogue['zh-CN']['anthology.tagline'], '这些是谢雨卿推崇的名篇，涵盖古今中外各种文学体裁，他已倒背如流，也推荐你们阅读')
             for code, route in (('zh-CN', 'anthology/index.html'), ('en', 'en/anthology/index.html')):
                 self.assertIn(catalogue[code]['anthology.tagline'], (out/route).read_text(encoding='utf8'))
             for work in load_anthology(ROOT):

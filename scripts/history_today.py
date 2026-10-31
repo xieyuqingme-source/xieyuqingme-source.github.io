@@ -14,7 +14,7 @@ MONTHS = ("January", "February", "March", "April", "May", "June", "July", "Augus
 ALL_DAYS = frozenset((date(2000, 1, 1) + timedelta(days=n)).strftime("%m-%d") for n in range(366))
 ITEM_FIELDS = {"id", "month_day", "year", "title", "text", "source", "url", "verification"}
 ANNIVERSARY_FIELDS = {"source_page", "source_revision"}
-PRIVATE_PATH = re.compile(r"(?<![A-Za-z0-9])[A-Za-z]:[\\/]|\\\\[^\s\\]+[\\/]|/(?:Users|home|mnt)/", re.I)
+from site_safety import PRIVATE_PATH
 
 
 def _text(value, maximum=1200):

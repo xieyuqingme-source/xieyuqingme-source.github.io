@@ -67,11 +67,9 @@ assert.equal((await setup({ noSettings: true })).calls.length, 0); checks.push('
 assert.equal(stablePath('/articles/%E4%B8%AD%E6%96%87/test.html?a=1#top', 'https://site.test'), '/articles/中文/test.html');
 assert.equal(stablePath('/articles/a%2Cb.html?x=1', 'https://site.test'), '/articles/a%2Cb.html');
 checks.push('stable paths remove query/hash and preserve reserved encoded commas');
-const list = await setup({ list: true, paths: Array.from({ length: 23 }, (_, i) => `/articles/${i}.html`) });
-assert(list.calls.every(x => x.method === 'GET')); assert.equal(list.calls.length, 6);
-assert.equal(list.loads.length, 0); assert.equal(list.init.length, 0);
-assert(list.stats.every(x => !x.hidden && x.counters.views.value.textContent === '12' && x.counters.comments.value.textContent === '2'));
-checks.push('list batches 23 article counts with GET only and no widget/client');
+const list = await setup({ list: true, paths: [] });
+assert.equal(list.calls.length, 0); assert.equal(list.loads.length, 0); assert.equal(list.init.length, 0);
+checks.push('directories without statistics markers emit no Waline requests');
 const article = await setup();
 assert.equal(article.calls.filter(x => x.method === 'POST').length, 1);
 const post = article.calls.find(x => x.method === 'POST');
@@ -91,11 +89,13 @@ checks.push('different tracking parameters share the same comment identity');
 const preview = await setup({ url: 'http://127.0.0.1:8765/articles/%E4%B8%AD%E6%96%87/test.html' });
 assert(preview.calls.every(x => x.method === 'GET')); checks.push('local preview does not increase production views');
 const duplicate = await setup({ list: true, paths: ['/articles/test.html', '/articles/test.html'] });
-assert.equal(duplicate.calls.length, 2); assert(duplicate.stats.every(x => !x.hidden));
+assert.equal(duplicate.calls.length, 1); assert(duplicate.stats.every(x => !x.hidden));
 checks.push('duplicate references share one query result');
 const zero = await setup({ zero: true });
-assert.equal(zero.stats[0].counters.views.value.textContent, '0'); assert.equal(zero.stats[0].hidden, false);
-checks.push('valid successful zero is displayed');
+assert.equal(zero.stats[0].counters.comments.hidden, true); assert.equal(zero.stats[0].hidden, true);
+assert.equal(article.stats[0].counters.comments.value.textContent, '2');
+assert.equal(article.stats[0].counters.views.hidden, true);
+checks.push('zero comments are hidden; positive comments appear; views stay hidden');
 for (const fail of ['network', 'http', 'api', 'shape', 'invalid']) {
   const ui = await setup({ fail });
   assert.equal(ui.stats[0].hidden, true); assert.equal(ui.stats[0].counters.views.value.textContent, '');
@@ -112,8 +112,9 @@ for (const fail of ['client', 'css']) {
 }
 const uncertain = await setup({ fail: 'increment' });
 assert.equal(uncertain.calls.filter(x => x.method === 'POST').length, 1);
-assert.equal(uncertain.stats[0].counters.views.value.textContent, '12');
-checks.push('uncertain increment is not retried; GET can still recover its count');
+assert.equal(uncertain.stats[0].counters.views.value.textContent, '');
+assert.equal(uncertain.calls.filter(x => x.url.pathname.endsWith('/article') && x.method === 'GET').length, 0);
+checks.push('uncertain increment is not retried and never queries a visible view count');
 assert(article.calls.every(x => x.credentials === 'omit' && x.signal && x.cache === 'no-store'));
 checks.push('counter requests omit cookies and carry timeout signals');
 // The real public settings are only inputs to dependency-injected mocks; no live request is made.

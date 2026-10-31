@@ -7,7 +7,7 @@ import re
 import unittest
 
 from marx_engels import load_marx_engels, validate_catalog
-from marx_v2 import ROUTES, LIFE_TAGS, LIFE_PERIODS, validate_v2, render_tool, render_life, render_letters, render_china, render_quotes, chinese_date
+from marx_extras import ROUTES, LIFE_TAGS, LIFE_PERIODS, validate_extras, render_tool, render_life, render_letters, render_china, render_quotes, chinese_date
 from marx_quiz import build_pools, quote_groups
 
 ROOT=Path(__file__).resolve().parent.parent
@@ -198,7 +198,7 @@ class SecondEditionTests(unittest.TestCase):
     def test_second_and_third_volume_part_guides_render_real_chapters_once(self):
         from html import escape
         from marx_render import render_content, render_capital_volume
-        from marx_v3 import part_chapters
+        from marx_checks import part_chapters
         expected = {(volume, part['no']) for volume in (2, 3) for part in self.data['capital']['volumes'][volume - 1]['parts']}
         guides = [item for item in self.data['items'].values() if item['kind'] == 'parts' and item['status'] == 'published']
         self.assertEqual({(item['volume'], item['part']) for item in guides}, expected)
@@ -233,7 +233,7 @@ class SecondEditionTests(unittest.TestCase):
             self.assertNotIn('完整中英章号对应', html)
             self.assertEqual(html.count('data-citation='), len(item['citations']))
 
-    def test_negative_schema_does_not_accept_partial_or_mislinked_v2_inputs(self):
+    def test_negative_schema_does_not_accept_partial_or_mislinked_extra_inputs(self):
         cases=['tool-missing','original-numbers','bad-date','missing-quotes','wrong-author','fake-letter','short-letter','topic-missing','wrong-topic-source','bad-history-id','unknown-field','too-few-myths','unknown-life-tag','repeated-life-tag','unknown-life-errata']
         for case in cases:
             raw=deepcopy(self.raw)
@@ -252,7 +252,7 @@ class SecondEditionTests(unittest.TestCase):
             elif case=='unknown-life-tag':raw['life']['events'][0]['tags']=['杂项']
             elif case=='repeated-life-tag':raw['life']['events'][0]['tags']=['生活','生活']
             elif case=='unknown-life-errata':raw['life']['events'][0]['errata']=['not-reviewed']
-            with self.subTest(case=case),self.assertRaises(ValueError):validate_v2(raw,self.data)
+            with self.subTest(case=case),self.assertRaises(ValueError):validate_extras(raw,self.data)
 
 
 if __name__=='__main__':unittest.main()

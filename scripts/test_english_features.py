@@ -1,4 +1,4 @@
-"""Reader-facing third-version learning contracts and data boundaries."""
+"""Check quotation, quiz, speech and word-map behavior and public data boundaries."""
 from html.parser import HTMLParser
 from pathlib import Path
 import re
@@ -218,8 +218,8 @@ class LearningThirdVersionTests(unittest.TestCase):
         corner = load_english_corner(ROOT)
         intro = load_intro(ROOT)
         self.assertEqual(intro['name'], '学英语')
-        self.assertEqual(intro['intro'], '英语好啊，英语得学，我也想学英语。')
-        self.assertEqual(intro['title'], '学英语 · 词源、名著和英语冷知识')
+        self.assertIn(intro['intro'], render_index(corner))
+        self.assertTrue(intro['title'])
         index = render_index(corner)
         self.assertIn('id="ec-level-help">按读懂所需的词汇量大致分级', index)
         self.assertIn('aria-describedby="ec-level-help"', index)

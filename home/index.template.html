@@ -4,14 +4,14 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>谢雨卿个人网站</title>
-  <meta name="description" content="谢雨卿的个人网站：文章、照片、小游戏和今天。">
+  <meta name="description" content="谢雨卿的个人网站：文章、照片、小游戏、学英语、读马恩和今天。">
   <meta name="author" content="谢雨卿 Xie Yuqing">
   <link rel="canonical" href="{{site_url}}/">
   <link rel="alternate" hreflang="zh-CN" href="{{site_url}}/">
   <link rel="alternate" hreflang="en" href="{{site_url}}/en/">
   <meta property="og:type" content="website">
   <meta property="og:title" content="谢雨卿个人网站">
-  <meta property="og:description" content="谢雨卿的个人网站：文章、照片、小游戏和今天。">
+  <meta property="og:description" content="谢雨卿的个人网站：文章、照片、小游戏、学英语、读马恩和今天。">
   <meta property="og:url" content="{{site_url}}/">
   <meta property="og:image" content="{{site_url}}/assets/share-cover.png">
   <meta property="og:image:width" content="1200">
@@ -39,6 +39,7 @@
       <div class="hero-copy">
         <h1 id="home-title">谢雨卿</h1>
         <p class="hero-signature"><a href="/english/"><span data-i18n="common.signature.1"></span></a></p>
+        <p class="hero-intro" data-i18n="common.home.intro"></p>
       </div>
     </section>
     <section id="brief" class="daily-home home-glance" data-brief-mode="glance" aria-labelledby="glance-title" data-lunar-src="/assets/vendor/lunar-javascript-1.7.7.js" data-d3-src="/assets/vendor/d3-7.9.0.min.js" data-earth-src="/assets/home-earth.js">
@@ -57,13 +58,14 @@
     <section class="home-section home-writing" id="writing" aria-labelledby="writing-title">
       <div class="section-head"><h2 id="writing-title">文章</h2></div>
       <div class="article-entries"><a class="article-entry" href="/articles/"><strong>全部文章</strong><span>{{chinese_total}} 篇中文 · {{english_total}} 篇英文练习</span></a><a class="article-entry" href="/anthology/"><strong>雨聊文选</strong><span>选录的中外文学原文 · {{anthology_total}} 篇</span></a><button class="article-entry home-random" id="home-random-button" type="button" hidden><strong>随便看一篇</strong><span>从全部文章里随机挑一篇</span></button></div>
+      <ul class="home-latest">{{home_recent_articles}}</ul>
     </section>
     <section class="home-section home-photos" id="home-photos" aria-labelledby="home-photos-title">
       <div class="section-head"><h2 id="home-photos-title">照片</h2><a href="/photos/">全部照片 <span aria-hidden="true">→</span></a></div>
       <div class="home-photo-grid">{{home_photos}}</div>
     </section>
     <section class="home-section" id="projects" aria-labelledby="projects-title">
-      <div class="section-head"><h2 id="projects-title">作品和小游戏</h2><div class="section-actions"><a href="/projects/">全部作品 <span aria-hidden="true">→</span></a><a href="/game/">小游戏 <span aria-hidden="true">→</span></a></div></div>
+      <div class="section-head"><h2 id="projects-title">作品和小游戏</h2><div class="section-actions"><a href="/projects/">全部作品 <span aria-hidden="true">→</span></a><a href="/game/">小游戏 <span aria-hidden="true">→</span></a><a href="/english/">学英语 <span aria-hidden="true">→</span></a><a href="/marx/">读马恩 <span aria-hidden="true">→</span></a></div></div>
       <div class="yl-project-grid">{{home_project_cards}}</div>
     </section>
   </main>

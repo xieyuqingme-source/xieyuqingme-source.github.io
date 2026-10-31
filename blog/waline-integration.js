@@ -21,6 +21,7 @@ export async function startWaline(deps = {}) {
   } catch (_) { return; }
   const prefix = server.href.replace(/\/?$/, '/') + 'api/';
   const stats = [...doc.querySelectorAll('[data-stats-path]')];
+  if (!stats.length) return;
   const comments = doc.querySelector('#article-comments');
   const articlePath = comments ? stablePath(comments.dataset.articlePath, current.href) : null;
   const paths = [...new Set(stats.map(node => stablePath(node.dataset.statsPath, current.href)))];
@@ -43,43 +44,34 @@ export async function startWaline(deps = {}) {
   }
 
   function render(path, kind, value) {
-    if (!Number.isSafeInteger(value) || value < 0) return;
+    if (kind !== 'comments' || !Number.isSafeInteger(value) || value < 1) return;
     for (const node of stats.filter(node => stablePath(node.dataset.statsPath, current.href) === path)) {
       const counter = node.querySelector(`[data-counter="${kind}"]`);
+      if (!counter) continue;
       counter.querySelector('b').textContent = String(value);
       counter.hidden = false;
       node.hidden = false;
     }
   }
 
-  async function getCounts(batch, kind) {
+  async function getCounts(batch) {
     try {
-      const values = kind === 'views'
-        ? await api('article', { path: batch.join(','), type: 'time', lang })
-        : await api('comment', { type: 'count', url: batch.join(','), lang });
+      const values = await api('comment', { type: 'count', url: batch.join(','), lang });
       if (!Array.isArray(values) || values.length !== batch.length) return;
-      batch.forEach((path, i) => render(path, kind, kind === 'views' ? values[i]?.time : values[i]));
-    } catch (_) { /* Missing counts stay hidden; an outage never becomes a false zero. */ }
+      batch.forEach((path, i) => render(path, 'comments', values[i]));
+    } catch (_) { /* Missing counts stay hidden. */ }
   }
 
-  // Lists only read counts. Only the published article origin increments a view.
+  // Only an article on the published origin increments a view, once, without retry.
   async function countViews() {
-    let incremented = false;
-    if (articlePath && current.origin === settings.siteOrigin) {
-      try {
-        const values = await api('article', { lang }, { path: articlePath, type: 'time', action: 'inc' });
-        if (Array.isArray(values) && values.length === 1 && Number.isSafeInteger(values[0]?.time) && values[0].time >= 0) {
-          render(articlePath, 'views', values[0].time);
-          incremented = true;
-        }
-      } catch (_) { /* Do not retry increments: the first request may already have succeeded. */ }
-    }
-    const toRead = incremented ? paths.filter(path => path !== articlePath) : paths;
-    for (let i = 0; i < toRead.length; i += 10) await getCounts(toRead.slice(i, i + 10), 'views');
+    if (!articlePath || !paths.length || current.origin !== settings.siteOrigin) return;
+    try {
+      await api('article', { lang }, { path: articlePath, type: 'time', action: 'inc' });
+    } catch (_) { /* The first request may already have succeeded. */ }
   }
 
   async function countComments() {
-    for (let i = 0; i < paths.length; i += 10) await getCounts(paths.slice(i, i + 10), 'comments');
+    for (let i = 0; i < paths.length; i += 10) await getCounts(paths.slice(i, i + 10));
   }
 
   async function loadStyle() {

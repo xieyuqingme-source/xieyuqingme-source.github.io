@@ -6,7 +6,7 @@ import unittest
 
 from marx_engels import (load_marx_engels, prose_characters, validate_capital,
                         validate_catalog)
-from marx_v3 import part_chapters, validate_part_links, validate_part_metadata
+from marx_checks import part_chapters, validate_part_links, validate_part_metadata
 
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -125,7 +125,7 @@ class ThirdEditionTruthQuizTests(unittest.TestCase):
     def test_the_full_deck_has_five_verdicts_and_follow_up_for_every_card(self):
         from collections import Counter
         from marx_engels import VERDICTS
-        from marx_v3 import validate_truth_quiz
+        from marx_checks import validate_truth_quiz
         validate_truth_quiz(self.questions, self.data)
         self.assertGreaterEqual(len(self.questions), 32)
         self.assertEqual(len({question['id'] for question in self.questions}), len(self.questions))
@@ -138,14 +138,14 @@ class ThirdEditionTruthQuizTests(unittest.TestCase):
         self.assertTrue(all(coverage[item['slug']] >= 2 for item in myths))
 
     def test_a_thirty_one_question_deck_cannot_open(self):
-        from marx_v3 import validate_truth_quiz
+        from marx_checks import validate_truth_quiz
         for questions in ([], self.questions[:31]):
             with self.subTest(count=len(questions)), self.assertRaisesRegex(ValueError, '至少32题'):
                 validate_truth_quiz(questions, self.data)
 
     def test_each_verdict_is_required_and_seven_nonbinary_questions_are_not_enough(self):
         from collections import Counter
-        from marx_v3 import validate_truth_quiz
+        from marx_checks import validate_truth_quiz
         questions = deepcopy(self.questions)
         for question in questions:
             if question['answer'] == '存疑': question['answer'] = '真'
@@ -161,7 +161,7 @@ class ThirdEditionTruthQuizTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, '至少8题'): validate_truth_quiz(questions, self.data)
 
     def test_one_question_cannot_stand_in_for_a_new_card(self):
-        from marx_v3 import validate_truth_quiz
+        from marx_checks import validate_truth_quiz
         questions = deepcopy(self.questions)
         rows = [question for question in questions if question['card'] == 'senior-last-hour']
         self.assertEqual(len(rows), 2)
@@ -170,11 +170,11 @@ class ThirdEditionTruthQuizTests(unittest.TestCase):
 
     def test_registered_english_sources_reach_the_pool_and_original_questions_keep_their_sources(self):
         from marx_quiz import build_pools
-        from marx_v2 import validate_v2
-        from marx_v3 import validate_question_source
+        from marx_extras import validate_extras
+        from marx_checks import validate_question_source
         raw = {name: json.loads((ROOT/'marx-engels'/('topics/china.json' if name == 'china' else name+'.json')).read_text(encoding='utf-8'))
                for name in ('lab', 'quiz', 'quote-works', 'life', 'letters', 'china')}
-        validate_v2(raw, self.data)
+        validate_extras(raw, self.data)
         pools = {question['id']: question for question in build_pools(self.data)['myth']}
         english = self.data['citations']['c-v2-manifesto-unite']['en']['url']
         overrides = {'v3-slogan-version', 'v3-slogan-translator'}
@@ -189,7 +189,7 @@ class ThirdEditionTruthQuizTests(unittest.TestCase):
             self.assertEqual(pools[question['id']]['choices'], ['真', '假', '存疑', '部分正确', '张冠李戴'])
 
     def test_source_overrides_cannot_use_arbitrary_links_or_private_review_notes(self):
-        from marx_v3 import validate_question_source
+        from marx_checks import validate_question_source
         original = next(question for question in self.questions if question['id'] == 'v3-slogan-version')
         for mutation in ('unbound-mia', 'foreign-host', 'bad-date', 'unknown-field', 'private-locator', 'long-locator'):
             question = deepcopy(original)
@@ -204,7 +204,7 @@ class ThirdEditionTruthQuizTests(unittest.TestCase):
                 validate_question_source(question, self.data)
 
     def test_registered_chinese_citations_and_references_are_allowed_without_opening_other_links(self):
-        from marx_v3 import validate_question_source
+        from marx_checks import validate_question_source
         question = deepcopy(self.questions[0])
         card = self.data['items'][question['card']]
         question['source'] = {'url': self.data['citations'][card['citations'][0]]['url'], 'locator': '已核原文位置', 'checked_on': '2026-10-30'}

@@ -1,4 +1,4 @@
-"""Strict public inputs for the second edition. Loading never uses research files."""
+"""Public inputs and rendering for labs, quizzes, quotations, life, letters and topics."""
 from datetime import date
 from pathlib import Path
 import json
@@ -71,7 +71,7 @@ def unique(rows, key):
         raise ValueError('读马恩：第二版稳定ID重复。')
 
 
-def validate_v2(raw, data):
+def validate_extras(raw, data):
     tools = packet(raw['lab'], 'tools')
     for tool in tools:
         fields(tool, ('id', 'title', 'source', 'presets', 'notes'), ('timeline',))
@@ -139,7 +139,7 @@ def validate_v2(raw, data):
         if row['card'] not in data['items'] or data['items'][row['card']]['category'] != 'myths' or data['items'][row['card']]['status'] != 'published':
             raise ValueError('读马恩：考据题必须关联已发布的考据卡。')
     unique(questions, 'id')
-    from marx_v3 import validate_truth_quiz
+    from marx_checks import validate_truth_quiz
     validate_truth_quiz(questions, data)
     events = packet(raw['life'], 'events')
     for row in events:
@@ -198,7 +198,7 @@ def validate_v2(raw, data):
     return dict(tools=tools, quote_works=mappings, questions=questions, events=events, letters=letters, china=china)
 
 
-def load_v2(root, data):
+def load_extras(root, data):
     from daily_brief import validate_content
     data['daily_quotes'] = validate_content(json.loads(source_path(root, 'home/daily-content.json').read_text(encoding='utf-8')))['quotes']
     names = ('lab', 'quiz', 'quote-works', 'life', 'letters', 'china')
@@ -206,7 +206,7 @@ def load_v2(root, data):
     from footprints_people import compile_markdown
     from history_today import load_history
     data['life_footprints'] = {person: compile_markdown(source_path(root, 'map/people/' + person + '.md').read_text(encoding='utf-8'), person)['payload']['documents']['zh-CN']['records'] for person in ('marx', 'engels')}
-    result = validate_v2(raw, data)
+    result = validate_extras(raw, data)
     history = {item['id']: item for item in load_history(root)['items']}
     for event in result['events']:
         if 'history_id' not in event: continue
@@ -302,11 +302,11 @@ def render_play(data):
     from marx_render import link
     from marx_quiz import build_pools
     pools=build_pools(data)
-    out='<div class="me-reading" data-me-quiz><p>题目与解释为本站编写，有AI辅助。每轮10题，同轮不重复；答完可以看本轮分数和错题，离开页面就结束。先选题型，再用方向键选择答案、回车查看解释。</p><p>名句题和「今天」页使用相同的原句，每题都能循出处接着读。</p><div class="me-actions" data-me-quiz-controls hidden>'
+    out='<div class="me-reading" data-me-quiz><p>每轮 10 题，答完可以看分数和错题。题目和解释由本站编写，有 AI 辅助。</p><div class="me-actions" data-me-quiz-controls hidden>'
     for mode,label in [('source','名句出处'),('author','作者'),('myth','真假马克思')]:
         count=len(pools[mode]); ready=count >= (32 if mode=='myth' else 10)
         out+='<button type="button" data-quiz-mode="'+mode+'"'+('' if ready else ' disabled')+'>'+label+' · '+str(count)+'题'+('' if ready else '（即将开放）')+'</button>'
-    out+='</div><div data-me-quiz-stage hidden><form></form><div class="me-quiz-explanation" data-me-quiz-explanation role="status" aria-live="polite" tabindex="-1" hidden></div><div class="me-actions" data-me-quiz-actions></div></div><p>没有脚本时，可以沿'+link('/marx/quotes/','名句从哪来')+'或'+link('/marx/#directory','概念与考据卡')+'继续阅读。</p>'+json_script(pools,'data-me-quiz-data')+'</div>'
+    out+='</div><div data-me-quiz-stage hidden><form></form><div class="me-quiz-explanation" data-me-quiz-explanation role="status" aria-live="polite" tabindex="-1" hidden></div><div class="me-actions" data-me-quiz-actions></div></div><noscript><p>没有脚本时，可以沿'+link('/marx/quotes/','名句从哪来')+'或'+link('/marx/#directory','概念与考据卡')+'继续阅读。</p></noscript>'+json_script(pools,'data-me-quiz-data')+'</div>'
     return out
 
 

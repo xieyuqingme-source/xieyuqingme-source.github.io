@@ -95,6 +95,7 @@ class Blog:
         self.parser.use(footnote_plugin)
         self.parser.inline.ruler.before("html_inline", "safe_line_break", safe_line_break)
         self.articles: list[Article] = []
+        self.hidden_articles = set()
         self.translations = {}
         self.translation_states = {}
         self.pages = {(ROOT / "README.md").resolve(): "/about/"}
@@ -128,9 +129,21 @@ class Blog:
 
     def collect(self):
         self.source_root = ROOT
+        hidden_file = ROOT / "blog/hidden-articles.json"
+        if hidden_file.is_file():
+            raw = hidden_file.read_text(encoding="utf-8")
+            for index, entry in enumerate(json.loads(raw)["articles"], 1):
+                name = entry["file"]
+                if not (ROOT / name).is_file():
+                    line = next((n for n, text in enumerate(raw.splitlines(), 1)
+                                 if json.dumps(name, ensure_ascii=False) in text), "?")
+                    raise ValueError(f"hidden-articles.json line {line} (entry {index}): missing article: {name}")
+                self.hidden_articles.add(name)
         for folder, (language, category, listing) in FOLDERS.items():
             for source in sorted((ROOT / folder).rglob("*.md")):
                 relative = source.relative_to(ROOT)
+                if relative.as_posix() in self.hidden_articles:
+                    continue
                 if any(part.startswith(".") for part in relative.parts):
                     continue
                 if source.is_symlink():
@@ -376,35 +389,21 @@ class Blog:
         if not self.waline["enabled"]:
             return ""
         return (f'<span class="article-stat" data-stats-path="{escape(self.original_href(article))}" lang="{language}" hidden>'
-                f'<span data-counter="views" hidden>{"Views" if language == "en" else "浏览"} <b></b></span>'
                 f'<span data-counter="comments" hidden>{"Comments" if language == "en" else "评论"} <b></b></span></span>')
-
-    def provider_notice(self, language="zh-CN") -> str:
-        if language == "en":
-            return f'Hosting: {escape(self.waline["hostingProvider"])}; database: {escape(self.waline["databaseProvider"])}.'
-        return f'服务托管：{escape(self.waline["hostingProvider"])}；数据库：{escape(self.waline["databaseProvider"])}。'
-
-    def statistics_notice(self, language="zh-CN") -> str:
-        if not self.waline["enabled"]:
-            return ""
-        if language == "en":
-            return ('<p class="statistics-notice">View and comment counts send IP and browser information to the selected Waline backend and its hosting provider. '
-                    + self.provider_notice(language) + '</p>')
-        return ('<p class="statistics-notice" lang="zh-CN">浏览与评论统计请求会向所选Waline后端及其托管商发送IP和浏览器信息。'
-                + self.provider_notice() + '</p>')
 
     def comments(self, article: Article) -> str:
         if not self.waline["enabled"]:
             return ""
-        if article.language == "en":
-            return (f'<section class="article-comments" id="article-comments" data-article-path="{escape(self.original_href(article))}" aria-labelledby="comments-heading" lang="en" hidden>'
-                    '<h2 id="comments-heading">Comments</h2><p class="comment-policy">No account needed. A nickname is required; email is optional. Successful submissions appear publicly without manual pre-moderation.</p>'
-                    '<p class="comment-privacy">Comments and nicknames are public. Optional email addresses are not displayed. The selected Waline backend and its hosting provider process comments, nicknames, optional email, IP and browser information. Comments show IP region, without the full IP address or browser and operating system labels. '
-                    + self.provider_notice('en') + '</p><label class="sr-only" for="wl-edit">Your comment</label><div id="waline"></div></section>')
-        return (f'<section class="article-comments" id="article-comments" data-article-path="{escape(self.original_href(article))}" aria-labelledby="comments-heading" lang="zh-CN" hidden>'
-                '<h2 id="comments-heading">留言</h2><p class="comment-policy">无需注册；昵称必填，邮箱选填。提交成功后直接公开，无需人工预审。</p>'
-                '<p class="comment-privacy">评论和昵称会公开；邮箱为选填且不公开。评论、昵称、可选邮箱及请求中的IP和浏览器信息会由所选Waline后端及其托管商处理；评论区显示IP属地，不公开完整IP；不显示浏览器和操作系统标签。'
-                + self.provider_notice() + '</p><label class="sr-only" for="wl-edit">留言内容</label><div id="waline"></div></section>')
+        from site_i18n import load_catalogues
+        catalogue = load_catalogues(ROOT)[article.language]
+        policy = escape(catalogue["common.comments.policy"])
+        target = "/en/about/#site" if article.language == "en" else "/about/#site"
+        policy = policy.replace("{site}", f'<a href="{target}">{escape(catalogue["common.footer.site"])}</a>')
+        title = "Comments" if article.language == "en" else "留言"
+        label = "Your comment" if article.language == "en" else "留言内容"
+        return (f'<section class="article-comments" id="article-comments" data-article-path="{escape(self.original_href(article))}" aria-labelledby="comments-heading" lang="{article.language}" hidden>'
+                f'<h2 id="comments-heading">{title}</h2><p class="comment-policy">{policy}</p>'
+                f'<label class="sr-only" for="wl-edit">{label}</label><div id="waline"></div></section>')
 
     def excerpt(self, article: Article) -> str:
         tokens = self.parser.parse(article.markdown)
@@ -468,7 +467,7 @@ class Blog:
             cards.append(f'''<li class="article-card">
 <span class="article-number" aria-hidden="true">{index:02d}</span>
 <div class="article-card-content" data-topic="{escape(topic)}" data-year="{article.published[:4]}" data-search="{searchable}">
-<p class="article-meta"><span class="topic-tag">{escape(topic)}</span>{self.publication(article)}<span>{article.category}</span>{self.metrics(article)}</p>
+<p class="article-meta"><span class="topic-tag">{escape(topic)}</span>{self.publication(article)}<span>{article.category}</span></p>
 <h2 class="article-title"><a href="{escape(self.href(article.destination))}" lang="{article.language}">{escape(article.title)}</a></h2>
 <p class="article-excerpt" lang="{article.language}">{escape(excerpt)}</p>
 <p class="article-read"><span>约 {self.reading_minutes(article)} 分钟阅读</span><a href="{escape(self.href(article.destination))}" aria-label="阅读：{escape(article.title)}">阅读全文 <span aria-hidden="true">→</span></a></p>
@@ -477,8 +476,6 @@ class Blog:
         return '<ul class="article-list">' + "\n".join(cards) + '</ul>' if cards else '<p class="empty-state">文章即将更新。</p>'
 
     def archive(self, articles: list[Article], title="全部文章", subtitle="从一篇文章开始，慢慢读。") -> str:
-        notice = ('<p class="statistics-notice">浏览与评论统计请求会向所选Waline后端及其托管商发送IP和浏览器信息。'
-                  + self.provider_notice() + '</p>') if self.waline["enabled"] else ""
         topics = sorted({self.topic(article) for article in articles})
         filters = ['<button type="button" class="filter-button active" data-filter="all" aria-pressed="true">全部<span>' + str(len(articles)) + '</span></button>']
         for topic in topics:
@@ -504,7 +501,7 @@ class Blog:
 <p id="page-jump-message" class="page-jump-message" role="status" aria-live="polite" hidden></p>
 </nav>
 <div class="search-empty" hidden><p>没有找到符合条件的文章。</p><button type="button" class="reset-search">清除搜索与筛选</button></div>
-{notice}</section>'''
+</section>'''
 
     def toc(self, rendered: str, language="zh-CN") -> str:
         class Headings(HTMLParser):
@@ -587,7 +584,7 @@ class Blog:
 <p class="eyebrow">{escape(topic)}</p><h1>{escape(article.title)}</h1>
 <p class="article-meta">{self.publication(article, language)}<span>{"Xie Yuqing" if english else "谢雨卿"}</span><span>{str(self.reading_minutes(article)) + " min read" if english else "约 " + str(self.reading_minutes(article)) + " 分钟阅读"}</span>{self.metrics(article, language)}</p>{translation_note}</header>
 {controls}<div {layout}><div class="reading-content"><div class="article-body" id="article-content">{rendered}</div>
-{self.statistics_notice(language)}{self.comments(article)}<div class="article-end"><span aria-hidden="true">◆</span><p>{"Thanks for reading." if english else "谢谢你读到这里。"}</p><a href="{escape(back_url)}#archive">{"Back to articles" if english else "返回文章归档"} →</a></div>{next_reading}</div>{directory}</div></article>
+{self.comments(article)}<div class="article-end"><span aria-hidden="true">◆</span><p>{"Thanks for reading." if english else "谢谢你读到这里。"}</p><a href="{escape(back_url)}#archive">{"Back to articles" if english else "返回文章归档"} →</a></div>{next_reading}</div>{directory}</div></article>
 <dialog class="article-image-viewer" id="article-image-viewer" aria-label="{"Article image" if english else "文章图片大图"}"><div class="image-viewer-actions"><a href="#" target="_blank" rel="noopener">{"View original image" if english else "查看原图"} {ARROW_ICON}</a><button type="button">{"Close" if english else "关闭"}</button></div><img alt=""><p></p></dialog>'''
         return self.document(article.title, body, article.destination, language, article.listing,
                              self.excerpt(article), alternates=alternates, switch_href=switch_href,
@@ -639,6 +636,12 @@ class Blog:
             raise ValueError("Unsafe obsolete generated asset path.")
         if obsolete_copy_asset.is_file():
             obsolete_copy_asset.unlink()
+        for name in self.hidden_articles:
+            obsolete = self.output / Path(name).with_suffix(".html")
+            if obsolete.is_symlink() or not obsolete.resolve().is_relative_to(self.output.resolve()):
+                raise ValueError("Unsafe withdrawn article output path.")
+            if obsolete.is_file():
+                obsolete.unlink()
         shutil.copy2(ROOT / "blog/style.css", self.output / "assets/style.css")
         shutil.copy2(ROOT / "blog/site.js", self.output / "assets/site.js")
         # Publish the ordinary avatar asset before enabling the backend widget.
@@ -650,6 +653,8 @@ class Blog:
         for folder in ASSETS:
             for source in sorted((ROOT / folder).rglob("*")):
                 relative = source.relative_to(ROOT)
+                if relative.as_posix() in self.hidden_articles:
+                    continue
                 if any(part.startswith(".") for part in relative.parts):
                     continue
                 if source.is_symlink():

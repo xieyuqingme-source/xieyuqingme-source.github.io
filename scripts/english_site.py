@@ -89,6 +89,8 @@ def collect_translations(blog):
     if not isinstance(data, dict) or set(data) != {"version", "translations"} or data["version"] != 1 or not isinstance(data["translations"], dict):
         raise ValueError("Translation manifest needs version 1 and a translations object.")
     for key, entry in data["translations"].items():
+        if key in getattr(blog, "hidden_articles", set()):
+            continue
         if key not in originals:
             raise ValueError(f"Translation has no Chinese original: {key}")
         if not isinstance(entry, dict) or set(entry) - {"file", "source_sha256", "title", "status", "method", "notes"}:
@@ -185,7 +187,7 @@ def english_archive(blog):
         kind = "original" if original.language == "en" else "translation"
         cards.append(f'''<li class="article-card"><span class="article-number" aria-hidden="true">{index:02d}</span>
 <div class="article-card-content" data-topic="{escape(topic)}" data-year="{original.published[:4]}" data-language="{kind}" data-search="{searchable}">
-<p class="article-meta"><span class="topic-tag">{escape(topic)}</span>{blog.publication(article, 'en')}<span class="translation-status" data-translation-status="{state}">{label}</span>{blog.metrics(article, 'en')}</p>
+<p class="article-meta"><span class="topic-tag">{escape(topic)}</span>{blog.publication(article, 'en')}<span class="translation-status" data-translation-status="{state}">{label}</span></p>
 <h2 class="article-title"><a href="{escape(url)}" lang="{'en' if ready else 'zh-CN'}">{escape(article.title)}</a></h2>
 <p class="article-excerpt">{escape(excerpt)}</p><p class="article-read"><span>{str(blog.reading_minutes(article)) + ' min read' if ready else 'Chinese original available'}</span><a href="{escape(url)}">{action} →</a></p></div></li>''')
     filters = '<button type="button" class="filter-button active" data-filter="all" aria-pressed="true">All<span>' + str(len(cards)) + '</span></button>'
@@ -201,7 +203,7 @@ def english_archive(blog):
 <section class="archive" id="archive" aria-labelledby="archive-heading"><div class="section-heading"><h2 id="archive-heading">All articles</h2><span class="archive-total">{len(cards)} <small>original articles</small></span></div>
 <div class="archive-controls" hidden><div class="language-filters" role="group" aria-label="Filter article language"><button type="button" data-language-filter="all" aria-pressed="true">All</button><button type="button" data-language-filter="translation" aria-pressed="false">Translations from Chinese</button><button type="button" data-language-filter="original" aria-pressed="false">English originals</button></div>
 <div class="topic-filters" role="group" aria-label="Filter topic">{filters}</div><div class="archive-query"><label class="year-filter"><span class="sr-only">Publication year</span><select id="article-year" aria-label="Publication year"><option value="all">All years</option>{options}</select></label><label class="search-box"><span class="search-icon" aria-hidden="true"></span><span class="sr-only">Search titles or excerpts</span><input type="search" id="article-search" placeholder="Search titles or excerpts…" autocomplete="off" aria-controls="archive-results"><span class="search-key" aria-hidden="true">/</span></label></div></div>
-{blog.statistics_notice('en')}<p class="search-status" id="archive-results" role="status" aria-live="polite" hidden></p><ul class="article-list">{''.join(cards)}</ul>
+<p class="search-status" id="archive-results" role="status" aria-live="polite" hidden></p><ul class="article-list">{''.join(cards)}</ul>
 <nav class="archive-pagination" aria-label="Article pages" hidden><button type="button" data-page="prev">← Previous</button><span class="pagination-position"></span><button type="button" data-page="next">Next →</button><form class="page-jump" novalidate><label for="article-page">Page</label><input id="article-page" name="page" type="text" inputmode="numeric" autocomplete="off" aria-label="Go to page" aria-describedby="page-jump-message"><span></span><button type="submit">Go</button></form><p id="page-jump-message" class="page-jump-message" role="status" aria-live="polite" hidden></p></nav><div class="search-empty" hidden><p>No matching articles.</p><button type="button" class="reset-search">Clear search and filters</button></div></section>'''
 
 
@@ -245,22 +247,12 @@ def build_english_site(blog, output, address, projects, about_data, values):
         raise ValueError("English project descriptions must cover exactly the current projects.")
     merged = []
     fields = {"id", "title", "english_title", "kind", "summary", "problem", "features", "contribution", "usage", "license", "screenshot_alt", "screenshot_caption", "guide_label", "download_label"}
-    for item in english_projects:
+    for item in sorted(english_projects, key=lambda item: tuple(originals).index(item["id"])):
         if not isinstance(item, dict) or set(item) - fields:
             raise ValueError("English project data must contain only translated public descriptions.")
         merged.append({**originals[item["id"]], **item})
     english_values = {**values, "project_cards": render_projects(merged, language="en"),
                       "english_available": str(len(blog.translations) + sum(a.language == "en" for a in blog.articles))}
-    recent = []
-    for original in blog.articles:
-        article = blog.translations.get(original.source.relative_to(blog.source_root).as_posix(), original)
-        if article.language != "en":
-            continue
-        url = english_article_url(blog, original) if article.original else blog.href(article.destination)
-        recent.append(f'<li><div class="article-meta">{blog.publication(article, "en")}<span>{escape(TOPICS[blog.topic(original)])}</span></div><h3><a href="{escape(url)}">{escape(article.title)}</a></h3></li>')
-        if len(recent) == 3:
-            break
-    english_values["recent_articles"] = ''.join(recent) or '<li>English translations are being prepared.</li>'
     english_values["about_content_en"] = render_about(about_data, "en")
     english_values["about_name"] = escape(about_data["english_name"])
     english_values["about_email"] = escape(about_data["email"], quote=True)

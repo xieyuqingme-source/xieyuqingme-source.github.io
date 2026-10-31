@@ -275,6 +275,7 @@ class MarkdownRenderingTests(unittest.TestCase):
                             "backendVerified": True, "hostingProvider": "Host", "databaseProvider": "DB"}
         article = Article(self.source, "中文文章/2026-01-01-中文 标题.html", "测试", "2026-01-01",
                           "zh-CN", "中文文章", "chinese.html", "正文")
+        self.assertNotIn('data-counter="views"', self.blog.metrics(article))
         metric = Elements(self.blog.metrics(article)).elements
         widget = Elements(self.blog.comments(article)).elements
         metric_path = next(a["data-stats-path"] for _, a in metric if "data-stats-path" in a)
@@ -364,6 +365,8 @@ class MarkdownRenderingTests(unittest.TestCase):
         with TemporaryDirectory(prefix=".blog-test-", dir=ROOT) as temporary:
             root = Path(temporary)
             (root / "blog").mkdir()
+            (root / "home/locales").mkdir(parents=True)
+            (root / "home/locales/common.json").write_bytes((ROOT / "home/locales/common.json").read_bytes())
             (root / "blog/style.css").write_text("body{}", encoding="utf-8")
             (root / "blog/site.js").write_text("", encoding="utf-8")
             (root / "blog/comment-avatar.svg").write_text("<svg/>", encoding="utf-8")
@@ -446,7 +449,7 @@ class MarkdownRenderingTests(unittest.TestCase):
         self.assertEqual(unquote(widget_path), "/articles/中文文章/short.html")
         self.assertTrue(any(attrs.get("data-stats-path") == widget_path for _, attrs in article))
         listing = Elements(result["pages"]["index.html"]).elements
-        self.assertTrue(any(attrs.get("data-stats-path") == widget_path for _, attrs in listing))
+        self.assertFalse(any("data-stats-path" in attrs for _, attrs in listing))
         self.assertNotIn("waline-settings", result["pages"]["about.html"])
 
     def test_build_shows_toc_controls_only_for_articles_with_headings(self):
@@ -472,8 +475,9 @@ class MarkdownRenderingTests(unittest.TestCase):
         self.assertIn('id="theme-toggle"', page)
         self.assertNotIn('data-skin-choice', page)
         footer = page.split("<footer", 1)[1].split("</footer>", 1)[0]
-        self.assertNotIn("I’m putting my energy into English.", footer)
-        self.assertIn("I’m working hard on a few questions.", footer)
+        self.assertNotIn('data-i18n="common.signature.1"', footer)
+        catalogue = json.loads((ROOT / "home/locales/common.json").read_text(encoding="utf-8"))
+        self.assertIn(catalogue["en"]["common.signature.2"], footer)
         self.assertIn('href="/en/projects/"', page)
         headings = self.blog.toc(self.blog.render("## English heading", self.source), "en")
         self.assertTrue(any(tag == "a" and attrs.get("href") == "#english-heading"

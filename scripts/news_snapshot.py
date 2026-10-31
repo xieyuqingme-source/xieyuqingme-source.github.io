@@ -50,7 +50,7 @@ CATEGORY_LABELS = {
 }
 SLUG = re.compile(r"[a-z][a-z0-9-]{1,63}\Z")
 ASSET = re.compile(r"news-(\d{8}T\d{6}Z)-([a-f0-9]{12})\.json\Z")
-PRIVATE_PATH = re.compile(r"(?<![A-Za-z0-9])[A-Za-z]:[\\/]|\\\\[^\s\\]+[\\/]|/(?:Users|home|mnt)/", re.I)
+from site_safety import PRIVATE_PATH
 TRACKING = {"at_medium", "at_campaign", "fbclid", "gclid"}
 
 

@@ -17,9 +17,8 @@ LEVELS = {1: "唯心主义", 2: "形而上学", 3: "修正主义"}
 VERDICTS = {"真", "假", "存疑", "部分正确", "张冠李戴"}
 SLUG = re.compile(r"[a-z][a-z0-9-]{1,79}")
 HEX = re.compile(r"[a-f0-9]{64}")
-PRIVATE = re.compile(r"(?<![A-Za-z0-9])[A-Za-z]:[\\/]|\\\\[^\s\\]+[\\/]|Obsidian Vault|/(?:Users|mnt)/", re.I)
+from site_safety import PRIVATE_PATH as PRIVATE
 RESERVED = {"wenji", "works", "capital", "sources", "qa", "tools", "play", "read", "quotes", "life", "lab", "topics", "cards"}
-INTRO = "原著好啊，原著得读，我也想读原著。"
 BASIS = "以《马克思恩格斯文集》（人民出版社，2009）为准；《资本论》第一卷在线文本据《马克思恩格斯全集》第23卷（1972）。"
 AI_NOTE = "本站解读由 AI 辅助起草，引文逐字核对过所链原文"
 HEADINGS = {"terms": ("白话", "例子", "身世", "常见误读"),
@@ -576,7 +575,7 @@ def validate_catalog(data, bodies, citations, works, chapters):
                 raise ValueError("读马恩：章节导读引用未知章节。")
             chapter_note_characters = 0
             if kind == "parts":
-                from marx_v3 import validate_part_metadata
+                from marx_checks import validate_part_metadata
                 chapter_note_characters = validate_part_metadata(item, chapters)
             body = bodies.get(ident)
             if body is None:
@@ -599,7 +598,7 @@ def validate_catalog(data, bodies, citations, works, chapters):
                         raise ValueError(f"读马恩：{ident}中的长引号文字不属于所引原文：{quoted}")
             items[ident] = {**item, "kind": kind, "category": category, "body": body, "sections": found,
                             "prose_characters": count, "route": content_route(item, kind)}
-    from marx_v3 import validate_part_links
+    from marx_checks import validate_part_links
     validate_part_links(items, chapters)
     if set(bodies) != items.keys():
         raise ValueError("读马恩：正文与登记清单须一一对应。")
@@ -609,7 +608,7 @@ def validate_catalog(data, bodies, citations, works, chapters):
         if item["status"] == "published" and any(items[i]["status"] != "published" for i in item["related"]):
             raise ValueError("读马恩：已发布内容不能指向草稿。")
         known_routes = {"/marx/", "/marx/wenji/", "/marx/capital/", "/marx/capital/english/", "/marx/capital/routes/", "/marx/sources/", "/marx/qa/"}
-        from marx_v2 import ROUTES
+        from marx_extras import ROUTES
         known_routes.update(ROUTES)
         from marx_topics import ROUTES as TOPIC_ROUTES
         known_routes.update(TOPIC_ROUTES)
@@ -696,8 +695,9 @@ def load_marx_engels(root):
             raise ValueError("读马恩：缺少模板或本地资源。")
     intro = read("home/marx-intro.json")
     fields(intro, ("version", "name", "intro", "basis", "description"))
-    if type(intro["version"]) is not int or intro["version"] != 1 or intro["name"] != "读马恩" or intro["intro"] != INTRO or intro["basis"] != BASIS:
+    if type(intro["version"]) is not int or intro["version"] != 1 or intro["name"] != "读马恩" or intro["basis"] != BASIS:
         raise ValueError("读马恩：栏目名称、简介或版本依据不符合约定。")
+    text(intro["intro"], 500)
     text(intro["description"], 500)
     wenji, capital = read("marx-engels/wenji.json"), read("marx-engels/capital.json")
     works = validate_wenji(wenji)
@@ -724,8 +724,8 @@ def load_marx_engels(root):
     result = {"intro": intro, "wenji": wenji, "capital": capital, "catalog": catalog, "works": works,
             "chapters": chapters, "citations": citations, "errata": corrections, "lengths": lengths,
             "items": items, "qa": qa["items"], "budgets": budgets}
-    from marx_v2 import load_v2
-    result["v2"] = load_v2(root, result)
+    from marx_extras import load_extras
+    result["v2"] = load_extras(root, result)
     from marx_topics import load_topics, quotation_items
     result["topics"] = load_topics(root, result)
     result["budgets"] = quotation_budgets({**items, **quotation_items(result["topics"])}, citations, lengths, corrections, works)

@@ -1,4 +1,4 @@
-"""Validated third-edition projections; no research cache or remote reads."""
+"""Validate Capital part guides, question coverage and source bindings offline."""
 from marx_engels import fields, text, prose_characters
 
 

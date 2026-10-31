@@ -100,7 +100,6 @@ class LearningReaderTests(unittest.TestCase):
         intro = load_intro(ROOT)
         self.assertEqual(intro["name"], "学英语")
         self.assertEqual(intro["english_name"], "Learn English")
-        self.assertEqual(intro["intro"], "英语好啊，英语得学，我也想学英语。")
         self.assertNotIn(intro["intro"], inspect.getsource(render_index))
         self.assertIn(intro["intro"], render_index(load_english_corner(ROOT)))
 

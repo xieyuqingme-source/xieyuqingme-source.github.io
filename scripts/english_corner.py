@@ -25,7 +25,7 @@ SECTIONS = {"words": ("故事", "可以这样用"), "classics": ("导读", "原�
             "mistakes": ("错句", "对句", "为什么")}
 SLUG = re.compile(r"[a-z][a-z0-9-]{1,63}")
 RESERVED_SLUGS = {"tools", "play", "quotes", "map"}
-PRIVATE = re.compile(r"(?<![A-Za-z0-9])[A-Za-z]:[\\/]|\\\\[^\s\\]+[\\/]|Obsidian Vault|/(?:Users|mnt)/", re.I)
+from site_safety import PRIVATE_PATH as PRIVATE
 ASSETS = ("english-corner.css", "english-corner.js", "english-numbers.js", "english-play.js", "english-quotes.js", "english-word-map.js", "reading-annotations.css", "reading-annotations.js", "english-speech.js")
 MAP_ASSETS = ("map-land.json", "vendor/d3-7.9.0.min.js", "vendor/D3-LICENSE")
 

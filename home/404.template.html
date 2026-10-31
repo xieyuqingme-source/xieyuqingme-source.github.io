@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>这个页面不存在</title>
+  <link rel="icon" href="/assets/favicon.ico?v=qinghuan-1" sizes="any">
+  <link rel="icon" href="/assets/favicon.svg?v=qinghuan-1" type="image/svg+xml">
+  <script>(() => { let theme = "light", saved; try { saved = localStorage.getItem("xieyuqing-blog-theme"); } catch (_) {} if (saved === "light" || saved === "dark") theme = saved; else try { if (window.matchMedia("(prefers-color-scheme: dark)").matches) theme = "dark"; } catch (_) {} document.documentElement.dataset.theme = theme; })();</script>
+  <link rel="stylesheet" href="/assets/portal.css">
+</head>
+<body>
+  <header class="site-header container"><a class="brand" href="/" aria-label="谢雨卿个人主页"><span><span lang="zh-CN">谢雨卿</span><small lang="en">Xie Yuqing · Carl</small></span></a><nav class="site-nav"></nav><button class="theme-toggle" id="theme-toggle" type="button" hidden></button></header>
+  <main id="main" class="container"><section class="projects-intro">
+    <h1 data-i18n="common.notFound.title"></h1>
+    <p data-i18n="common.notFound.body"></p>
+    <p class="error-links"><a href="/" data-i18n="common.notFound.home"></a><a href="/articles/" data-i18n="common.notFound.articles"></a><a href="/today/" data-i18n="common.notFound.today"></a><a href="/about/" data-i18n="common.notFound.about"></a></p>
+    <p lang="en"><span data-i18n="common.notFound.english"></span> <a href="/en/" data-i18n="common.notFound.englishHome"></a></p>
+  </section></main>
+  <footer class="site-footer container"></footer>
+</body>
+</html>

@@ -61,7 +61,7 @@ TODAY_DESCRIPTIONS = {
 }
 ABOUT_FIELDS = {"name", "english_name", "chinese_bio", "english_bio", "chinese_colophon", "english_colophon",
                 "written_note", "english_written_note", "wechat", "email", "zhihu", "x_handle"}
-PRIVATE_PATH = re.compile(r"(?<![A-Za-z0-9])[A-Za-z]:[\\/]|\\\\[^\s\\]+[\\/]|/(?:Users|home|mnt)/", re.I)
+from site_safety import PRIVATE_PATH
 EXTERNAL_ICON = '''<svg class="external-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 17 17 7M7 7h10v10"/></svg>'''
 
 
@@ -200,37 +200,18 @@ def render_about(data, language="zh-CN"):
 
 
 def render_site_notes(waline, repository, language="zh-CN"):
-    """Technical and privacy notes, gathered on /about/#site instead of scattered across pages."""
-    host = escape(waline.get("hostingProvider", ""))
-    database = escape(waline.get("databaseProvider", ""))
-    if language == "en":
-        items = ['Pages are generated with Python and use system fonts only, with no external font files.',
-                 'The Today page moves from year to Moon, day and history, then three source headlines and daily reading. Its small page navigation jumps directly to each section. The Earth, Moon and year diagrams share the Earth time slider; calculations run locally in your browser. Weather has a short readout, with the map, city search and details folded below it. Historical entries show elapsed years and link to their sources. The homepage retains its date, solar term and small globe.',
-                 'Weather comes from Open-Meteo. City searches send the name you enter to its geocoding service; choosing a point on the map sends its coordinates for weather. The page never requests your device location, and saves your selected city or coordinates and the latest weather only in your browser. The homepage makes no weather request.',
-                 'World is a Chinese-language section for current headlines, dated archives and a first-hand-first source directory. It keeps original links and distinguishes publication, collection and missing records. Title searches request only the selected month index from this site; keywords are not sent to news sites.',
-                 'News follows source newsroom selections and preset rules, with original headlines, publication times and links. Chinese quotations from Marx, Engels, Lenin and Mao quote the Chinese Marxists Internet Archive texts; English quotations use independent English texts. Edition notes explicitly label the permitted AI translations of some Lei Feng English and Che Guevara Chinese entries. Other sources include the Lei Feng Memorial Hall and published translations of How the Steel Was Tempered. The reading collections are stored locally; browsing them makes no automatic request to the sources.',
-                 'Learn English is written for Chinese readers: 64 knowledge cards, 200 public-domain English quotations with 12 editorial themes, four quiz modes, an illustrative map of 22 words and local number practice. Read marks stay in the current browser and can be cleared; unavailable storage hides those controls without blocking reading. The quotation library supports filters, random choices and copying, with sources, edition details and site-translation or AI-assistance labels. Both Today pages show the same English quotation and Chinese translation. Annotations share the anthology mechanism; optional reading voices are device-local. Reading and number conversion do not send your input to a service.',
-                 'Reading Marx & Engels is a Chinese-only section based on the 2009 ten-volume collection. Its Capital Volume I links use the 1972 Chinese collected-works text. Short quotations link directly to Chinese originals; AI-assisted reading guides, edition notes and verified transcription corrections are identified separately. Reading, filtering and changing cards use local files, with no automatic request to the archive.',
-                 'Article view counts and comments use Waline. These requests send your IP address and browser information to the Waline backend and its providers'
-                 + (f' (hosting: {host}; database: {database})' if host and database else '') + '. The comment area explains what is shown publicly.',
-                 'Map geography comes from Natural Earth (public domain). Project screenshots and other third-party sources are credited in each project.']
-        title = "About this site"
-    else:
-        items = ['页面用 Python 生成。全站使用设备自带的字体，不加载外部字体文件。',
-                 '「今天」页依次为年、月、日、史，再到三条新闻与每日阅读；页首的小导航可直达各节。地球、月相与全年图共用地球的时间滑块，在浏览器本地计算；天气先显示一行简读，地图、城市搜索和详情收在折叠区。历史条目显示距今年数并附具体出处，历史与阅读按北京时间轮换。首页仍只放日期、节气和一个小地球。',
-                 '天气来自 Open-Meteo；搜索城市会向其地名服务发送输入的城市名，地图选点会发送所选坐标以查询天气，不读取设备定位。页面仅在浏览器里保存所选城市或坐标及最近一次天气。首页不请求天气。',
-                 '「看世界」面向中文读者，提供当前标题、按北京日期查阅的存档和一手优先的信息源，不做权威排名。原文时间、采集时间与缺失状态分别注明；标题搜索仅按需读取本站月索引，关键词不发送给新闻网站。',
-                 '新闻按来源媒体选题和预设规则自动汇集，保留原题、原文发布时间与链接。马克思主义名句中，马恩列毛中文直接采用马克思主义者网（中马库）中文原文，英文分别采用英文文本；部分雷锋英文和切·格瓦拉中文按保留规则使用本站AI译文，并在版本说明中明确标注。其他来源包括雷锋纪念馆日记与《钢铁是怎样炼成的》出版译本。阅读资料随本站保存，浏览和换句时不自动请求来源网站。',
-                 '「学英语」面向中文读者，包含64张知识卡片、带12类主题标签的200条公版英语名句、四种小测验、22词的分组示意地图和数字练习。已读记录只存当前浏览器，可清空；存储不可用时隐藏相关控件，不影响阅读。名句可筛选、随机与复制，来源、版本、本站译文和AI辅助标注保留；今天页中英文展示同一英文原句与中文译文。经典批注沿用文选机制，朗读只用设备本地英语语音；阅读和数字转换不向外部服务发送输入。',
-                 '「读马恩」为中文原著阅读栏目，以2009年《马克思恩格斯文集》为准；《资本论》第一卷链接1972年《全集》第23卷中文本。短引文附中文原著出处，本站导读与解读标明AI辅助，版本与已核电子录入校勘另有说明。目录、筛选和换卡只使用本地资料，浏览时不自动请求中马库。',
-                 '文章的浏览量和留言由 Waline 提供：相关请求会把 IP 和浏览器信息发送给 Waline 后端及其托管商'
-                 + (f'（服务托管：{host}；数据库：{database}）' if host and database else '') + '。留言区另有说明。',
-                 '足迹地图的底图来自 Natural Earth（公有领域）；作品截图与其他第三方来源见各项目说明。']
-        title = "关于本站"
-    if not waline.get("enabled"):
-        items = [item for item in items if "Waline" not in item]
-    lis = "".join(f"<li>{item}</li>" for item in items)
-    return f'<section class="about-site" id="site" aria-labelledby="site-title"><h2 id="site-title">{title}</h2><ul>{lis}</ul></section>'
+    """Approved privacy and source copy lives in the shared bilingual catalogue."""
+    catalogue = load_catalogues(ROOT)[language]
+    def copy(key):
+        return escape(catalogue["common.site." + key].format(
+            host=waline.get("hostingProvider", ""), database=waline.get("databaseProvider", "")))
+    privacy = ''.join('<li>' + copy(f"privacy.{i}") + '</li>'
+                      for i in range(1, 4) if i != 2 or waline.get("enabled"))
+    sources = ''.join('<li>' + copy(f"sources.{i}") + '</li>' for i in range(1, 7))
+    title = catalogue.get("common.footer.site", "")
+    return (f'<section class="about-site" id="site" aria-labelledby="site-title"><h2 id="site-title">{escape(title)}</h2>'
+            f'<p>{copy("intro")}</p><h3>{copy("privacy")}</h3><ul>{privacy}</ul>'
+            f'<h3>{copy("sources")}</h3><ul>{sources}</ul></section>')
 
 
 def project_asset_sources(projects):
@@ -357,20 +338,13 @@ def render_home_avatar(language="zh-CN"):
     return f'<span class="home-avatar {modifier}" role="img" aria-label="{label}">{text}</span>'
 
 
-def render_home_recent(blog, language="zh-CN", limit=5):
-    """List actual writing by original publication date, with direct article links."""
-    from english_site import TOPICS
+def render_home_recent(blog, language="zh-CN", limit=3):
+    """Titles and dates from the same published selection as random reading."""
     rows = []
     for original, article, url in home_articles(blog, language):
-        topic = blog.topic(article) if article.language == "zh-CN" or article.original else "English"
-        if language == "en":
-            topic = TOPICS.get(topic, topic)
-        published = (f'<time datetime="{escape(original.published, quote=True)}">{escape(original.published.replace("-", "."))}</time>'
-                     if original.published else '<span class="yl-date">' + ("Date unconfirmed" if language == "en" else "发表时间待确认") + '</span>')
-        excerpt = blog.excerpt(article)
-        if len(excerpt) > 100:
-            excerpt = excerpt[:100].rstrip() + "…"
-        rows.append(f'<li>{published}<div><h3 lang="{escape(article.language, quote=True)}"><a href="{escape(url, quote=True)}">{escape(article.title)}</a></h3><p lang="{escape(article.language, quote=True)}">{escape(excerpt)}</p></div><span class="yl-article-topic">{escape(topic)}</span></li>')
+        published = (f'<time datetime="{escape(original.published, quote=True)}">{escape(original.published)}</time>'
+                     if original.published else '')
+        rows.append(f'<li><a href="{escape(url, quote=True)}" lang="{escape(article.language, quote=True)}">{escape(article.title)}</a>{published}</li>')
         if len(rows) == limit:
             break
     return "\n".join(rows)
@@ -529,6 +503,11 @@ def check_publication_metadata(address):
         raise ValueError("Build the unified site before checking publication metadata.")
     for page in pages:
         elements = Elements(page.read_text(encoding="utf-8")).elements
+        if page.resolve() == (OUTPUT / "404.html").resolve():
+            if not any(tag == "meta" and attrs.get("name") == "robots" and attrs.get("content") == "noindex"
+                       for tag, attrs in elements):
+                raise ValueError("The 404 page must be noindex.")
+            continue
         canonical = [attrs.get("href") for tag, attrs in elements
                      if tag == "link" and attrs.get("rel") == "canonical"]
         og = [attrs.get("content") for tag, attrs in elements
@@ -698,14 +677,8 @@ def build_site(address, map_preview_source=None):
     # Keep the legacy _site and every pre-existing file; CI starts from a clean checkout.
     blog.build(clean=False)
     home = (ROOT / "home/index.template.html").read_text(encoding="utf-8")
-    recent = []
-    for article in blog.articles[:3]:
-        published = (f'<time datetime="{escape(article.published)}">{escape(article.published)}</time>'
-                     if article.published else '<time>发表时间待确认</time>')
-        topic = blog.topic(article) if article.language == "zh-CN" else "English"
-        recent.append(f'        <li><div class="article-meta">{published}<span>{escape(topic)}</span></div><h3 lang="{article.language}"><a href="{escape(blog.href(article.destination))}">{escape(article.title)}{EXTERNAL_ICON}</a></h3></li>')
     values = {"article_total": str(len(blog.articles)), "chinese_total": str(sum(a.language == "zh-CN" for a in blog.articles)),
-              "english_total": str(sum(a.language != "zh-CN" for a in blog.articles)), "recent_articles": "\n".join(recent), "site_url": escape(address, quote=True),
+              "english_total": str(sum(a.language != "zh-CN" for a in blog.articles)), "site_url": escape(address, quote=True),
               "project_total": str(len(projects)), "anthology_total": str(len(anthology_works)),
               "photo_album_total": str(photo_report["albums"]),
               "photo_total": str(photo_report["photos"])}
@@ -773,6 +746,9 @@ def build_site(address, map_preview_source=None):
     for name, value in values.items(): home = home.replace("{{" + name + "}}", value)
     if "{{" in home: raise ValueError("Unresolved home template placeholder.")
     (OUTPUT / "index.html").write_text(localize_page(home, ROOT, address, "/"), encoding="utf-8")
+    not_found = ROOT / "home/404.template.html"
+    if not_found.is_file():
+        (OUTPUT / "404.html").write_text(localize_page(not_found.read_text(encoding="utf-8"), ROOT, address, "/404.html"), encoding="utf-8")
     today_page = (ROOT / "home/today.template.html").read_text(encoding="utf-8")
     for name, value in values.items():
         today_page = today_page.replace("{{" + name + "}}", value)

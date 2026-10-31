@@ -39,7 +39,7 @@ CACHE_TEXT = "PhotoExporter private source and stable-ID cache, version 1.\n"
 NAME = re.compile(r"p-[a-f0-9]{24}-[a-f0-9]{16}-(?:[1-9][0-9]*)\.webp\Z")
 PHOTO_ID = re.compile(r"p-[a-f0-9]{24}\Z")
 ALBUM_ID = re.compile(r"[a-z][a-z0-9]*(?:-[a-z0-9]+)*\Z")
-PRIVATE_PATH = re.compile(r"(?<![A-Za-z0-9])[A-Za-z]:[\\/]|\\\\[^\s\\]+[\\/]|/(?:Users|home|mnt)/|file://", re.I)
+from site_safety import PRIVATE_PATH
 COMMENT = re.compile(r"^\s*<!--\s*photo:\s*(.*?)\s*-->\s*$", re.I)
 PHOTO_FIELDS = ("id", "title", "caption", "date", "date_text", "time", "location",
                 "width", "height", "src", "thumbnail", "thumbnail_width", "thumbnail_height")

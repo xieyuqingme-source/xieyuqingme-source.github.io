@@ -10,6 +10,7 @@ import json
 import re
 import shutil
 import sys
+from site_i18n import load_catalogues
 import unittest
 from unittest.mock import patch
 
@@ -138,17 +139,19 @@ class PublicProjectTests(unittest.TestCase):
         self.projects = load_projects()
 
     def test_two_verified_projects_have_source_and_usage_links(self):
-        self.assertEqual([p["id"] for p in self.projects[:2]],
-                         ["yuliao-wechat-editor", "coze-paper-quick-reference"])
-        for item in self.projects[:2]:
+        by_id = {p["id"]: p for p in self.projects}
+        editor = by_id["yuliao-wechat-editor"]
+        workflow = by_id["coze-paper-quick-reference"]
+        self.assertEqual([p["id"] for p in self.projects[:2]], ["footprints-map", "tier-ranking"])
+        for item in (editor, workflow):
             with self.subTest(project=item["id"]):
                 self.assertEqual(item["source_url"],
                                  "https://github.com/xieyuqingme-source/" + item["id"])
                 self.assertEqual(item["guide_url"], item["source_url"] + "/blob/main/README.md")
                 self.assertTrue(item["problem"] and item["features"] and item["contribution"] and item["usage"])
-        self.assertIn("Raphael", self.projects[0]["contribution"])
-        self.assertIn("markdown-it", self.projects[0]["contribution"])
-        self.assertTrue(self.projects[1]["download_url"].endswith(
+        self.assertIn("Raphael", editor["contribution"])
+        self.assertIn("markdown-it", editor["contribution"])
+        self.assertTrue(workflow["download_url"].endswith(
             "/blob/main/Workflow-thesis_1-draft-9128.zip"))
 
     def test_markup_is_displayed_as_text_without_html_or_attribute_injection(self):
@@ -230,7 +233,7 @@ class PublicProjectTests(unittest.TestCase):
             load_projects()
 
     def test_wallpaper_beta_has_an_honest_pending_card_without_guessed_links(self):
-        item = self.projects[2]
+        item = next(project for project in self.projects if project["id"] == "yuliao-wallpaper")
         self.assertEqual(item["id"], "yuliao-wallpaper")
         self.assertIn("v0.2.0", item["kind"])
         self.assertIn("测试版", item["kind"])
@@ -776,7 +779,8 @@ class ProjectPublicationTests(unittest.TestCase):
                 english_home = (output / 'en/index.html').read_text(encoding='utf-8')
                 random_data = re.search(r'<script id="home-random-data" type="application/json">(.*?)</script>', english_home, re.S)[1]
                 self.assertIn("/articles/synthetic.html", json.loads(random_data))
-                self.assertNotIn("Synthetic article", english_home)
+                latest = re.search(r'<ul class="home-latest">(.*?)</ul>', english_home, re.S)[1]
+                self.assertIn("Synthetic article", latest)
                 self.assertNotIn("recent-list", home)
                 self.assertNotIn('id="own-quote"', home)
                 self.assertNotIn('id="picks"', home)
@@ -806,7 +810,7 @@ class ProjectPublicationTests(unittest.TestCase):
                 self.assertIn(load_about()["chinese_bio"][0], about)
                 self.assertNotIn(load_about()["english_bio"][0], about)
                 self.assertIn(load_about()["written_note"], about)
-                self.assertNotIn("Actual date of writing", about)
+                self.assertNotIn(escape(load_about()["english_written_note"]), about)
                 self.assertIn('class="about-written-note"', about)
                 self.assertIn("走过的地方", about)
                 qr = [attrs for tag, attrs in Elements(about).elements if tag == "img" and attrs.get("src") == "/assets/wechat-qrcode.jpg"]
@@ -823,7 +827,7 @@ class ProjectPublicationTests(unittest.TestCase):
                 self.assertIn('<h2 id="glance-title"><a href="/today/">今天</a></h2>', home)
                 self.assertIn('<h2 id="glance-title"><a href="/en/today/">Today</a></h2>', english_home)
                 self.assertIn('id="home-title">谢雨卿</h1>', home)
-                self.assertIn('我要把精力放到英语上。', home)
+                self.assertIn(load_catalogues(root)['zh-CN']['common.signature.1'], home)
                 self.assertNotIn('id="now"', home)
                 self.assertNotIn("选读样刊", home)
                 expected_brief, expected_content = load_daily(root, build_site.linked_directory)
@@ -987,13 +991,9 @@ class PublicBiographyTests(unittest.TestCase):
             self.assertIn('<hr>', html)
             self.assertIn('class="about-colophon"', html)
             self.assertNotIn('class="about-english"', html)
-        self.assertIn("遗嘱", render_about(data))
 
     def test_author_requested_written_note_is_published_verbatim_in_both_languages(self):
         data = load_about()
-        self.assertEqual(data["chinese_colophon"], ["AI统治地球后，浏览完谢雨卿所有遗作，有感而发，生成此文", "2126年10月26日"])
-        self.assertEqual(data["written_note"], "真实写作日期：2026年10月26日晚（这句话不要上传到网站）")
-        self.assertEqual(data["english_written_note"], "Actual date of writing: the evening of 26 October 2026 (do not upload this sentence to the website)")
         for language, note, other in (("zh-CN", "written_note", "english_written_note"),
                                       ("en", "english_written_note", "written_note")):
             html = render_about(data, language)
@@ -1018,24 +1018,20 @@ class PublicBiographyTests(unittest.TestCase):
             self.assertNotIn("source code is public", html)
             self.assertNotIn("黄历", html)
             self.assertNotIn("almanac", html)
-            self.assertIn("「今天」页" if language == "zh-CN" else "The Today page", html)
-            self.assertIn("输入的城市名" if language == "zh-CN" else "the name you enter to its geocoding service", html)
-            self.assertIn("所选坐标" if language == "zh-CN" else "sends its coordinates for weather", html)
-            self.assertIn("不读取设备定位" if language == "zh-CN" else "never requests your device location", html)
-            self.assertIn("年、月、日、史，再到三条新闻与每日阅读" if language == "zh-CN" else "year to Moon, day and history, then three source headlines and daily reading", html)
-            self.assertIn("共用地球的时间滑块" if language == "zh-CN" else "share the Earth time slider", html)
-            self.assertIn("在浏览器本地计算" if language == "zh-CN" else "calculations run locally in your browser", html)
-            self.assertIn("地图、城市搜索和详情收在折叠区" if language == "zh-CN" else "the map, city search and details folded below it", html)
-            self.assertIn("浏览和换句时不自动请求来源网站" if language == "zh-CN" else "no automatic request to the sources", html)
-            self.assertIn("雷锋纪念馆" if language == "zh-CN" else "Lei Feng Memorial Hall", html)
-            self.assertIn("钢铁是怎样炼成的" if language == "zh-CN" else "How the Steel Was Tempered", html)
-            self.assertIn("中文原文" if language == "zh-CN" else "independent English texts", html)
-            self.assertIn("本站AI译文" if language == "zh-CN" else "permitted AI translations", html)
-            self.assertIn("雷锋英文" if language == "zh-CN" else "Lei Feng English", html)
-            self.assertIn("切·格瓦拉中文" if language == "zh-CN" else "Che Guevara Chinese", html)
+            catalogue = load_catalogues(ROOT)[language]
+            for key in ['intro', 'privacy', 'sources', 'privacy.1', 'privacy.3', *('sources.' + str(i) for i in range(1, 7))]:
+                self.assertIn(escape(catalogue['common.site.' + key]), html)
+            self.assertEqual(sum(tag == 'h3' for tag, _ in Elements(html).elements), 2)
+            self.assertEqual(sum(tag == 'li' for tag, _ in Elements(html).elements), 8)
+            self.assertNotIn('Waline', html)
+            for source in ['Python', 'Open-Meteo', 'Natural Earth', '2009', '1972']:
+                self.assertIn(source, html)
             self.assertIn("首页不请求天气" if language == "zh-CN" else "The homepage makes no weather request", html)
-            self.assertIn("Python", html)
-            self.assertIn("设备自带的字体" if language == "zh-CN" else "system fonts only", html)
+            enabled = build_site.render_site_notes({'enabled': True, 'hostingProvider': 'Host', 'databaseProvider': 'Database'}, '', language)
+            self.assertIn('Waline', enabled)
+            self.assertIn('Host', enabled)
+            self.assertIn('Database', enabled)
+            self.assertEqual(sum(tag == 'li' for tag, _ in Elements(enabled).elements), 9)
 
     def test_data_symlinks_are_rejected(self):
         with patch.object(Path, "is_symlink", return_value=True), self.assertRaisesRegex(ValueError, "symlinks"):
