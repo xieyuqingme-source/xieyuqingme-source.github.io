@@ -78,7 +78,13 @@
   const url=new URL(value,location.href);if(url.origin!==location.origin||!/^https?:$/.test(url.protocol)){location.assign(url.href);return;}
   if(!options.pop&&cleanPath(url)===cleanPath(rendered)&&url.search===new URL(rendered).search){if(options.replace)history.replaceState(history.state,'',url);else if(location.href!==url.href){saveScroll();history.pushState(null,'',url);}rendered=url.href;scrollFragment(url,true);return;}
   const ticket=++revision;request?.abort();request=new AbortController();let next;
-  try{const response=await native.fetch(url.href,{signal:request.signal,credentials:'same-origin',headers:{'X-Site-Navigation':'1'}});if(!response.ok||!response.headers.get('content-type')?.includes('text/html'))throw new Error('Not a site page');next=new DOMParser().parseFromString(await response.text(),'text/html');if(!next.querySelector('.site-header')||!next.querySelector('#site-i18n-data'))throw new Error('Unsupported page');}catch(error){if(ticket!==revision||error.name==='AbortError')return;location.assign(url.href);return;}
+  try{
+   const response=await native.fetch(url.href,{signal:request.signal,credentials:'same-origin',headers:{'X-Site-Navigation':'1'}});if(!response.ok||!response.headers.get('content-type')?.includes('text/html'))throw new Error('Not a site page');next=new DOMParser().parseFromString(await response.text(),'text/html');
+   // DOMParser parses with scripting disabled. Its noscript children must not
+   // become active styles or other fallback content in this scripted document.
+   for(const fallback of next.querySelectorAll('noscript'))fallback.remove();
+   if(!next.querySelector('.site-header')||!next.querySelector('#site-i18n-data'))throw new Error('Unsupported page');
+  }catch(error){if(ticket!==revision||error.name==='AbortError')return;location.assign(url.href);return;}
   if(ticket!==revision)return;
   transition=true;document.documentElement.setAttribute('aria-busy','true');
   try{

@@ -4,7 +4,7 @@ const fs=require('node:fs'),path=require('node:path'),vm=require('node:vm'),asse
 const {test}=require('node:test');
 const source=fs.readFileSync(path.join(__dirname,'../home/assets/site-navigation.js'),'utf8');
 
-function harness({initial='/articles/example.html',bodyId='top',feature=false,languageSwitcher=false}={}){
+function harness({initial='/articles/example.html',bodyId='top',feature=false,languageSwitcher=false,noscriptFallback=false}={}){
  const windowEvents=new Map(),documentEvents=new Map(),timers=new Map(),requests=[],assigned=[];
  let timerId=0,currentURL=new URL(initial,'https://example.test'),position=[0,0],document;
  const listen=(events,type,fn,options)=>{if(!events.has(type))events.set(type,[]);events.get(type).push({fn,once:!!options?.once});};
@@ -33,6 +33,10 @@ function harness({initial='/articles/example.html',bodyId='top',feature=false,la
   const header=new Element('header',{class:'site-header'}),main=new Element('main',{id:'main'}),a=new Element('h2',{id:'section-a'}),b=new Element('h2',{id:'section-b'}),data=new Element('script',{id:'site-i18n-data'});
   if(languageSwitcher){const tools=new Element('div',{class:'header-tools'});tools.append(new Element('button',{id:'theme-toggle'}));header.append(tools);if(!url.startsWith('/marx/')&&!url.startsWith('/english/'))tools.prepend(new Element('a',{class:'site-language-switch',href:'/en/about/'}));}
   a.y=1200;b.y=2400;main.append(a);main.append(b);data.textContent=JSON.stringify({page:{route:url,switchMode:'navigate'}});doc.body.append(header);doc.body.append(main);doc.body.append(data);
+  if(noscriptFallback&&/\/(?:en\/)?today\//.test(url)){
+   const fallback=new Element('noscript'),style=new Element('style'),message=new Element('p',{id:'no-script-message'});
+   style.textContent='.today-cycle-figure{display:none}';message.textContent='Synthetic no-script fallback';fallback.append(style);fallback.append(message);main.append(fallback);
+  }
   doc.querySelectorAll=selector=>[...doc.head.querySelectorAll(selector),...doc.body.querySelectorAll(selector)];doc.querySelector=selector=>doc.querySelectorAll(selector)[0]||null;
   doc.getElementById=id=>doc.body.id===id?doc.body:doc.querySelector('#'+id);
   doc.createElement=tag=>new Element(tag);doc.importNode=(node,deep)=>node.cloneNode(deep);doc.implementation={createHTMLDocument:()=>page()};
@@ -84,4 +88,14 @@ test('a Chinese-only reader removes the prior switch, and returning restores exa
  assert.equal(ui.document.querySelectorAll('#theme-toggle').length,1);
  await ui.visit('/english/');assert.equal(ui.document.querySelectorAll('.site-language-switch').length,0);
  await ui.visit('/about/');assert.equal(ui.document.querySelectorAll('.site-language-switch').length,1);
+});
+test('scripted navigation omits parsed noscript fallbacks and their active descendant styles',async()=>{
+ const ui=harness({initial:'/',bodyId:'',noscriptFallback:true});
+ for(const route of ['/today/','/en/today/','/today/']){
+  await ui.visit(route);
+  assert.equal(ui.document.querySelectorAll('noscript').length,0);
+  assert.equal(ui.document.querySelectorAll('style').length,0);
+  assert.equal(ui.document.getElementById('no-script-message'),null);
+  assert(ui.document.getElementById('section-a'),'Ordinary page content must remain');
+ }
 });
