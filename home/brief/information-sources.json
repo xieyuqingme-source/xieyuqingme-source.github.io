@@ -1610,6 +1610,159 @@
           "note": "官方/rss入口本次转向该XML；RSS 2.0共25条，为综合更新，不保证每条是编辑头条。"
         }
       ]
+    },
+    {
+      "id": "scmp",
+      "name": "南华早报 South China Morning Post",
+      "domain": "china-policy",
+      "type": "media",
+      "url": "https://www.scmp.com/",
+      "languages": [
+        "en"
+      ],
+      "region": "中国香港",
+      "reason": "查阅南华早报的中国报道和中国经济报道；香港英文报纸，可与内地媒体的报道对照阅读。",
+      "access": "计量付费墙，部分正文需账号或订阅；未在中国大陆网络实测，大陆可能无法访问；具体条件以原站为准。",
+      "checked": "2026-11-08",
+      "status": "approved",
+      "collect": true,
+      "official_links": [
+        {
+          "label": "South China Morning Post",
+          "url": "https://www.scmp.com/"
+        },
+        {
+          "label": "SCMP RSS",
+          "url": "https://www.scmp.com/rss"
+        }
+      ],
+      "feeds": [
+        {
+          "id": "scmp-china",
+          "publisher": "scmp",
+          "name": "South China Morning Post · China",
+          "category": "domestic",
+          "lang": "en",
+          "feed_url": "https://www.scmp.com/rss/4/feed/",
+          "home_url": "https://www.scmp.com/",
+          "docs_url": "https://www.scmp.com/rss",
+          "article_hosts": [
+            "www.scmp.com"
+          ],
+          "collect": true,
+          "status": "approved",
+          "note": "官方RSS目录列出的China栏目；2026-11-08实测RSS 2.0共50条，均有精确发布时间。与China Economy共用南华早报每次最多2条的上限。"
+        },
+        {
+          "id": "scmp-china-economy",
+          "publisher": "scmp",
+          "name": "South China Morning Post · China Economy",
+          "category": "economy",
+          "lang": "en",
+          "feed_url": "https://www.scmp.com/rss/318421/feed/",
+          "home_url": "https://www.scmp.com/",
+          "docs_url": "https://www.scmp.com/rss",
+          "article_hosts": [
+            "www.scmp.com"
+          ],
+          "collect": true,
+          "status": "approved",
+          "note": "官方RSS目录列出的China Economy栏目；2026-11-08实测RSS 2.0共50条，均有精确发布时间。与China共用南华早报的2条上限。"
+        }
+      ]
+    },
+    {
+      "id": "cgtn",
+      "name": "CGTN 中国国际电视台",
+      "domain": "macro",
+      "type": "media",
+      "url": "https://www.cgtn.com/",
+      "languages": [
+        "en"
+      ],
+      "region": "中国",
+      "reason": "查阅中央广播电视总台英文台的财经报道，包括官方经济数据和政策消息；口径为官方媒体。",
+      "access": "财经栏目里也有访谈和节目稿，不全是数据新闻；未在中国大陆网络实测，具体访问条件以原站为准。",
+      "checked": "2026-11-08",
+      "status": "approved",
+      "collect": true,
+      "official_links": [
+        {
+          "label": "CGTN",
+          "url": "https://www.cgtn.com/"
+        },
+        {
+          "label": "CGTN RSS",
+          "url": "https://www.cgtn.com/subscribe/rss.html"
+        }
+      ],
+      "feeds": [
+        {
+          "id": "cgtn-business",
+          "publisher": "cgtn",
+          "name": "CGTN · Business",
+          "category": "economy",
+          "lang": "en",
+          "feed_url": "https://www.cgtn.com/subscribe/rss/section/business.xml",
+          "home_url": "https://www.cgtn.com/",
+          "docs_url": "https://www.cgtn.com/subscribe/rss.html",
+          "article_hosts": [
+            "www.cgtn.com",
+            "news.cgtn.com",
+            "newsus.cgtn.com",
+            "newseu.cgtn.com",
+            "newsaf.cgtn.com",
+            "newsasia.cgtn.com"
+          ],
+          "collect": true,
+          "status": "approved",
+          "note": "官方RSS订阅页列出的Business栏目；2026-11-08实测RSS 2.0共50条，均有精确发布时间。文章链接分布在CGTN的几个地区子域名。"
+        }
+      ]
+    },
+    {
+      "id": "cnbc",
+      "name": "CNBC",
+      "domain": "macro",
+      "type": "media",
+      "url": "https://www.cnbc.com/",
+      "languages": [
+        "en"
+      ],
+      "region": "美国",
+      "reason": "查阅美国财经电视台的宏观经济报道，美国就业、通胀和美联储消息更新快；偏美国视角。",
+      "access": "多数文章可免费阅读，部分内容需订阅；未在中国大陆网络实测，具体访问条件以原站为准。",
+      "checked": "2026-11-08",
+      "status": "approved",
+      "collect": true,
+      "official_links": [
+        {
+          "label": "CNBC",
+          "url": "https://www.cnbc.com/"
+        },
+        {
+          "label": "CNBC RSS",
+          "url": "https://www.cnbc.com/rss-feeds/"
+        }
+      ],
+      "feeds": [
+        {
+          "id": "cnbc-economy",
+          "publisher": "cnbc",
+          "name": "CNBC · Economy",
+          "category": "economy",
+          "lang": "en",
+          "feed_url": "https://www.cnbc.com/id/20910258/device/rss/rss.html",
+          "home_url": "https://www.cnbc.com/",
+          "docs_url": "https://www.cnbc.com/rss-feeds/",
+          "article_hosts": [
+            "www.cnbc.com"
+          ],
+          "collect": true,
+          "status": "approved",
+          "note": "官方RSS页列出的Economy栏目（ID 20910258）；2026-11-08实测RSS 2.0共30条，均有精确发布时间。"
+        }
+      ]
     }
   ]
 }

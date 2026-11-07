@@ -1,6 +1,27 @@
 # 信息源目录与订阅核对记录
 
-最后核对：2026年10月31日（北京时间）。本记录区分目录收录授权、官网身份/用途和本次技术访问结果，不把它们混为可靠性排名。
+最后核对：2026年10月31日；2026年11月8日增补国内与经济订阅（北京时间）。本记录区分目录收录授权、官网身份/用途和本次技术访问结果，不把它们混为可靠性排名。
+
+## 2026-11-08 增补：国内与经济订阅
+
+**授权：** 站主在《看世界新增采集源提议》（2026-11-08）中逐项打勾，同意新增南华早报 China、南华早报 China Economy、CGTN Business、CNBC Economy四个订阅，并每天采集。原因是今日汇集此前经济类没有订阅，国内只有中国新闻网一家。
+
+**为什么是新媒体：** 每个publisher所有订阅合计每次最多2条。试跑显示，中国新闻网的财经或国内栏目会被「要闻」占满上限而一条也进不来；纽约时报、卫报、BBC、经济学人的经济栏目只会挤掉它们在国际里的位置。
+
+**结果：** 目录62项，approved订阅16个，其中15个启用，已达采集器`collect_ids`上限15；以后再加订阅需先停用一个。已知来源身份19个。2026-11-08北京时间约03:00用`news.fetch_feed`、`parse_feed`和真实目录试采集（不写快照或存档）：四个订阅全部取得、链接无一被域名白名单丢弃，今日汇集为国内3、国际12、经济5、科技4，共24条。
+
+| feed ID | 订阅URL | 格式 / 当次条数 | 精确时间 / 72小时内 | 官方订阅说明 |
+| --- | --- | --- | --- | --- |
+| scmp-china | [订阅](https://www.scmp.com/rss/4/feed/) | RSS 2.0 / 50 | 50 / 50 | [官方入口](https://www.scmp.com/rss) |
+| scmp-china-economy | [订阅](https://www.scmp.com/rss/318421/feed/) | RSS 2.0 / 50 | 50 / 19 | [官方入口](https://www.scmp.com/rss) |
+| cgtn-business | [订阅](https://www.cgtn.com/subscribe/rss/section/business.xml) | RSS 2.0 / 50 | 50 / 14 | [官方入口](https://www.cgtn.com/subscribe/rss.html) |
+| cnbc-economy | [订阅](https://www.cnbc.com/id/20910258/device/rss/rss.html) | RSS 2.0 / 30 | 30 / 7 | [官方入口](https://www.cnbc.com/rss-feeds/) |
+
+- **南华早报**：香港英文报纸。两个栏目共用publisher `scmp`的2条上限，所以通常国内、经济各1条。官方RSS页列出`/rss/4/feed`和`/rss/318421/feed`，请求时跳到带斜杠的地址，配置直接写最终地址。有计量付费墙；大陆可能无法访问，未实测。
+- **CGTN · Business**：中央广播电视总台英文台的财经栏目，官方口径。栏目里既有PMI、工业利润等数据新闻，也有访谈和节目稿，本站不筛选。文章链接本次分布在`news.cgtn.com`（49条）和`newsaf.cgtn.com`（1条）；白名单另列`www`、`newsus`、`newseu`、`newsasia`等地区子域名，共6个，到上限。若以后出现新的子域名，相关条目会被静默丢弃，链接周报或采集记录里条数异常时先查这里。
+- **CNBC · Economy**：美国财经电视台的经济栏目，偏美国宏观。官方RSS页由脚本渲染，页面源码中可见ID 20910258与Economy对应。周末更新少，本次72小时内只有7条。
+
+**试过但没有采用的**（详见提议文档）：FT中文网的时间全部是北京时间00:00，实际只有日期，不符合精确发布时间规则；FT英文为硬付费墙；美联储新闻稿只有日期；IMF、财新英文版返回403；中国日报、中国政府网的猜测地址404；新华网英文、人民网英文、华尔街日报订阅已停更；财新、第一财经、联合早报没有可用RSS。
 
 第一版依据站主**明确授权采用的预选候选名单**整理；这不表示站主逐项亲自勾选，也不表示长期阅读偏好。范围为55个预选目录条目与12个预选订阅候选的并集。合并同一BBC的中文与英文要闻后，另加入四个仅在订阅候选中的提供方（中国新闻网、The Guardian、The New York Times、Al Jazeera），共59个目录条目、12个订阅候选，其中11个启用；Nature保留目录但暂不采集。未预选的“站主常看”全部不发布，不猜账号、不代称站主偏好。
 
@@ -16,7 +37,7 @@
 
 `information-sources.json`为目录和当前采集的唯一活配置。各目录条目可有多个官方入口和多个订阅；采集只投影其中启用的feed。旧`news-sources.json`五源冻结为第一轮历史快照/归档的明确映射，不再维护第二份活配置。旧snapshot仍是v1；旧BBC World、Guardian Business及中国新闻网国内源ID只保留作历史兼容。
 
-当前collect_ids为11个活ID；全部approved订阅候选与不重名的旧映射合并后共15个已知来源。Nature仍为approved目录及approved候选feed，但目录与feed的collect均为false；保留其身份用于验证已有快照，不参与fetch。
+（以下为2026-10-31第一版状态；当前数字见上方2026-11-08增补。）第一版collect_ids为11个活ID；全部approved订阅候选与不重名的旧映射合并后共15个已知来源。Nature仍为approved目录及approved候选feed，但目录与feed的collect均为false；保留其身份用于验证已有快照，不参与fetch。
 
 UN的`un-news-zh`、NASA的`nasa-releases`沿用原name/category/lang及相关字段。新ID区分新栏目，避免把旧源改名冒充新头版。四类继续为domestic/world/economy/science；《The world this week》归world，USGS和Hacker News归science。本轮预选没有经济专类订阅，不把政治头版塞进economy，也不加未选来源补位。每源、每publisher仍有条数上限，最多24条不是每次必须凑足的数量。
 

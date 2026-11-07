@@ -21,14 +21,16 @@ class WorldSourcesTests(unittest.TestCase):
         self.catalog = sources.load_catalog(ROOT)
         self.legacy = news.validate_sources(news._read_json(ROOT / news.CONFIG_PATH))
 
-    def test_one_catalog_drives_directory_and_eleven_active_feeds(self):
+    def test_one_catalog_drives_directory_and_fifteen_active_feeds(self):
         config = news.load_sources(ROOT)
         actual = {f['id'] for s in self.catalog['sources'] for f in s['feeds'] if s['status'] == 'approved' and f['collect']}
         self.assertEqual(set(config['collect_ids']), actual)
-        self.assertEqual(len(actual), 11)
-        self.assertEqual(len(sources.approved_sources(self.catalog)), 59)
+        self.assertEqual(len(actual), 15)  # The reviewed collector bound; adding a feed now means retiring one.
+        self.assertEqual(len(sources.approved_sources(self.catalog)), 62)
         self.assertFalse(any(s['type'] == 'personal' for s in self.catalog['sources']))
-        self.assertEqual(len(config['sources']), 15)
+        self.assertEqual(len(config['sources']), 19)
+        categories = {s['category'] for s in news.active_sources(config)}
+        self.assertEqual(categories, set(news.CATEGORIES))  # Every 今日汇集 group has at least one feed.
 
     def test_old_seed_and_release_metadata_stay_valid(self):
         config = news.load_sources(ROOT)
@@ -74,7 +76,7 @@ class WorldSourcesTests(unittest.TestCase):
         with self.assertRaises(ValueError): news.collect_snapshot(config, fetch=fetch, now=NOW, archive_sink=captures)
         self.assertEqual(fetched, [s['feed_url'] for s in news.active_sources(config)])
         self.assertEqual(len(captures), 1)
-        self.assertEqual(len(captures[0]['run']['sources']), 11)
+        self.assertEqual(len(captures[0]['run']['sources']), 15)
         self.assertIsNone(captures[0]['run']['displayed_ids'])
 
     def test_expanded_display_and_archive_survive_the_same_collection(self):
@@ -89,16 +91,19 @@ class WorldSourcesTests(unittest.TestCase):
             return ('<rss><channel>' + items + '</channel></rss>').encode()
         captures = []
         snapshot, report = news.collect_snapshot(config, fetch=fetch, now=NOW, archive_sink=captures)
-        self.assertEqual(len(report), 11)
-        self.assertEqual(len(snapshot['items']), 20)  # The two BBC feeds share one publisher cap.
+        self.assertEqual(len(report), 15)
+        # 13 publishers (BBC and SCMP each share one cap across two feeds) could give 26; display stops at 24.
+        self.assertEqual(len(snapshot['items']), 24)
+        self.assertEqual({item['category'] for item in snapshot['items']}, set(news.CATEGORIES))
+        self.assertLessEqual(sum(item['source_id'].startswith('scmp-') for item in snapshot['items']), 2)
         self.assertEqual(len(captures), 1)
         capture = archive.validate_capture(captures[0], config)
-        self.assertEqual(len(capture['items']), 22)
-        self.assertEqual(len(capture['run']['displayed_ids']), 20)
+        self.assertEqual(len(capture['items']), 30)
+        self.assertEqual(len(capture['run']['displayed_ids']), 24)
         with TemporaryDirectory() as temporary:
             archive.merge_captures(temporary, [capture], config=config, now=NOW)
             data = news._read_json(Path(temporary) / archive.relative_path('2026-10-31'), archive.MAX_DAY_BYTES)
-            self.assertEqual(len(archive.validate_day(data)['items']), 22)
+            self.assertEqual(len(archive.validate_day(data)['items']), 30)
 
     def test_rss_article_link_is_not_overwritten_by_an_atom_standout_link(self):
         source = next(s for s in news.load_sources(ROOT)['sources'] if s['id'] == 'nyt-home')

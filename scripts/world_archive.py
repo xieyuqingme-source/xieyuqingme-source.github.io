@@ -187,12 +187,82 @@ def _item_view(item, frozen):
     }}
 
 
+def item_instant(item):
+    """Original publication time when it is exact, otherwise the first observation."""
+    for key in ("published", "first_seen"):
+        try:
+            return news.timestamp(item.get(key))
+        except (TypeError, ValueError):
+            continue
+    return datetime.min.replace(tzinfo=news.UTC)
+
+
+def newest_first(items):
+    return sorted(items, key=lambda item: (item_instant(item), item["id"]), reverse=True)
+
+
+def category_rank(item):
+    try:
+        return news.CATEGORIES.index(item["category"])
+    except ValueError:
+        return len(news.CATEGORIES)
+
+
+def by_category(items):
+    """Fixed category order; newest first inside each category (stable sort)."""
+    return sorted(newest_first(items), key=category_rank)
+
+
+def _balanced(items, count):
+    """Take titles in turn from each category so a preview is not one desk only."""
+    groups = {}
+    for item in by_category(items):
+        groups.setdefault(item["category"], []).append(item)
+    queues, chosen = list(groups.values()), []
+    while len(chosen) < count and any(queues):
+        for queue in queues:
+            if queue and len(chosen) < count:
+                chosen.append(queue.pop(0))
+    return chosen
+
+
+def _shown_that_day(store, stamp):
+    """(archive day, item) pairs that the live 今日汇集 snapshot showed on this Beijing day.
+
+    Only RSS runs recorded on that day count. Their displayed IDs can point to
+    titles archived under an earlier publication day, so every day file is read.
+    """
+    data = store["days"].get(stamp)
+    if data is None:
+        return []
+    wanted = []
+    for run in data["runs"]:
+        if run["origin"] != "rss" or not run.get("displayed_ids") or archive.beijing_day(run["collected_at"]) != stamp:
+            continue
+        wanted.extend(identifier for identifier in run["displayed_ids"] if identifier not in wanted)
+    if not wanted:
+        return []
+    wanted = set(wanted)
+    return [(day, item) for day, values in store["days"].items() for item in values["items"] if item["id"] in wanted]
+
+
+def day_headlines(store, value):
+    """Headlines shown on the World front page during one Beijing day, by category."""
+    stamp = _day(value).isoformat()
+    if not store["available"]:
+        return []
+    found = _shown_that_day(store, stamp)
+    location = {item["id"]: day for day, item in found}
+    return [{**deepcopy(item), "day_url": day_url(location[item["id"]])} for item in by_category([item for _, item in found])]
+
+
 def _summary(store, stamp, preview=3):
     data = store["days"][stamp]
+    pool = [item for _, item in _shown_that_day(store, stamp)] or data["items"]
     return {"date": stamp, "url": day_url(stamp), "item_count": len(data["items"]),
             "preview": [{"id": item["id"], "title": item["title"], "source": item["source"], "url": item["url"], "lang": item["lang"],
                          "origin": item["origin"], "origin_label": ORIGIN_LABELS[item["origin"]], "date_basis": item["date_basis"]}
-                        for item in data["items"][:preview]], "collection": _collection(data)}
+                        for item in _balanced(pool, preview)], "collection": _collection(data)}
 
 
 def day_view(store, value):

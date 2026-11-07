@@ -649,7 +649,8 @@ def build_site(address, map_preview_source=None):
     world_catalog = load_catalog(ROOT, required=False)
     archive_path = os.environ.get('NEWS_ARCHIVE_PATH') or ROOT / '.local-checks/news-archive'
     world_store = load_archive(archive_path)
-    world_calendars = calendar_metadata(world_store['dates'])
+    # Today is added so the World front page keeps its lunar line before the first collection of the day.
+    world_calendars = calendar_metadata([*world_store['dates'], world_store['today']])
     history_data = load_history(ROOT, linked_directory)
     brief_extras["history"] = history_data
     project_sources = project_asset_sources(projects)

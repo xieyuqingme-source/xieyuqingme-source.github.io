@@ -26,7 +26,7 @@ This repository contains the source and public content for my personal website, 
 | --- | --- | --- |
 | 个人主页 | [首页](https://xieyuqing.me/) | `home/index.template.html`；五块精简首页，保留「今天」轻量入口；文章块列最新3篇，数量与标题由构建器生成 |
 | 今天 | [今天](https://xieyuqing.me/today/) | `home/today.template.html`、`home/brief/`；「年 · 月 · 日 · 史」、新闻与阅读六节页内导航，新闻最多3条，中英文同步 |
-| 看世界 | [看世界](https://xieyuqing.me/world/)、[信息源](https://xieyuqing.me/world/sources/) | `home/world.template.html`、`home/brief/information-sources.json`；今日汇集、逐日存档、月历、按月标题检索及59项信息源目录，仅做中文版 |
+| 看世界 | [看世界](https://xieyuqing.me/world/)、[信息源](https://xieyuqing.me/world/sources/) | `home/world.template.html`、`home/brief/information-sources.json`；今日汇集、逐日存档、月历、按月标题检索及62项信息源目录，仅做中文版 |
 | 学英语 | [学英语](https://xieyuqing.me/english/)、[数字转换器](https://xieyuqing.me/english/tools/numbers/) | `english-corner/`；词的身世、经典一页、中英之间、考据与别说错，另有名句库、四种小测验及工具，仅做中文版 |
 | 读马恩 | [读马恩](https://xieyuqing.me/marx/) | `marx-engels/`；文集十卷、《资本论》目录与篇章导读、五类阅读卡片、中文原著短引，另有实验室、测验、生平、书信及专题，仅做中文版 |
 | 中英文文章 | [文章](https://xieyuqing.me/articles/) | `中文文章/`、`English Articles/`、`blog/` |
@@ -42,7 +42,7 @@ This repository contains the source and public content for my personal website, 
 - **从夯到拉排行**：美食、运动、名著和经济学家四个示例模板，自定义图片、等级与排序编辑、展示模式、PNG 导出及 JSON 备份。经济学家模板的16人默认分档为依据马恩评论制作的娱乐示例，正文依据折叠显示，使用原创文字名牌；来源说明不进入访客JSON或PNG。榜单与图片保存在当前浏览器的 IndexedDB 中，不提供跨设备同步；清理浏览器数据前请导出备份。小游戏入口同时提供排行与足迹地图制作工具。
 - **读马恩**：从作品下拉菜单、页脚或今天页马克思主义名句卡片进入，首页显示栏目精选，完整卡片可在独立目录组合筛选。提供十卷书架、资本论三卷目录和阅读路线、核心篇目导读、概念与考据卡、原著一段、中英之间及马恩的书架；第一卷25章导读保留，第二、三卷新增10篇篇导读和第三卷8篇章导读。中国专题之外增设巴黎公社、晚年恩格斯和企业阅读3个专题，真假题32道，另有按章节归类的问对录目录。中文直接引用中文原著，解读与出处分开，普通构建和阅读不联网采集。增改与核文方法见[读马恩维护](blog/读马恩维护.md)。
 - **今天**：以「年 · 月 · 日 · 史」提醒自己在时间中的位置，页内导航可跳到年、月、日、史、新闻与阅读。页首显示北京时间日期、星期、年进度与一句当天读数；地球昼夜、地月位置、地球公转和太阳直射点共用时间滑块。天气保留一行简读，地图选点、城市搜索与详情收在默认折叠区；历史之后只留最多3条新闻与「看世界」入口，再到两张每日阅读卡片，原有换句与学英语、读马恩入口沿用。普通构建不访问新闻源，首页轻量入口不请求天气。来源、计算边界与维护方法见[今天页维护](blog/今日简报维护.md)。
-- **看世界**：中文版提供最多24条来源标题、真实逐日存档、月历和按需加载的本地月标题检索，关键词不发送到后端。59项目录与12个订阅候选共用 `home/brief/information-sources.json`，其中11个启用，Nature保留目录但因身份跳转暂不采集；旧五源文件只作历史兼容。采集每天三次，每源、每媒体最多2条，今日池只接收72小时内具有精确发布时间的条目；存档另保留每源最多30条通过校验的标题与运行记录。构建只读显式本地存档目录，缺失时显示不可用，不借当前快照补历史。每周链接检查只出报告、不删除来源。来源审定、存档与维护入口见[看世界维护](blog/看世界维护.md)。
+- **看世界**：中文版提供最多24条来源标题、真实逐日存档、月历和按需加载的本地月标题检索，关键词不发送到后端。62项目录与16个订阅共用 `home/brief/information-sources.json`，其中15个启用（采集器上限），国内、国际、经济、科技四类都有来源；Nature保留目录但因身份跳转暂不采集；旧五源文件只作历史兼容。采集每天三次，每源、每媒体最多2条，今日池只接收72小时内具有精确发布时间的条目；存档另保留每源最多30条通过校验的标题与运行记录。构建只读显式本地存档目录，缺失时显示不可用，不借当前快照补历史。每周链接检查只出报告、不删除来源。来源审定、存档与维护入口见[看世界维护](blog/看世界维护.md)。
 - **学英语**：面向中文读者，现有64张知识卡片：词的身世24、经典一页8、中英之间7、考据5、别说错20。首页支持难度与栏目筛选，打开详情可在当前浏览器记录已读、清空记录，随机阅读优先未读；存储不可用时隐藏记录相关控件，正文仍能阅读。200条公版英语名句与今天页共用，带12类主题标签，可筛选、随机、复制，先看20句、再逐批展开；无脚本时完整内容仍可读。小测验有猜来源语言、辨词源、试用法、认作家四种玩法；单词地图含22词、7组关联地区，地点与连线仅为示意。名著排行入口使用`/game/ranking/?template=book`，恢复对应模板并保护旧存档；数字工具、批注和设备本地朗读沿用现有功能。来源、数据边界与检查命令见[学英语维护](blog/学英语维护.md)。
 - **独立仓库工具**：作品页中的[雨聊公众号排版](https://github.com/xieyuqingme-source/yuliao-wechat-editor)、[Coze 论文速记工作流](https://github.com/xieyuqingme-source/coze-paper-quick-reference)和[雨聊壁纸](https://github.com/xieyuqingme-source/yuliao-wallpaper)分别在各自仓库维护。本仓库保存其展示资料、截图与链接，不包含这些工具的完整源码，也不代表它们都能在本站在线运行。公众号排版为本地工具，Coze 工作流需导入平台配置，壁纸为 Windows 测试版；具体使用方法和限制以各项目说明为准。
 
@@ -75,7 +75,7 @@ python scripts/preview_site.py
 
 `blog/hidden-articles.json` 是网站的不发布名单。构建跳过其中的原文和对应英文译文，列表、数量、RSS、站点地图及随机阅读同步排除；旧网址返回自定义404页。名单中的路径不存在会报出行号并停止构建。要撤下文章，在名单中加一条再按既有流程提交、推送；文章文件仍在公开仓库及历史中，这只影响网站。当前网站发布115篇原作（114篇中文、1篇英文练习），完整英文译文114篇。
 
-首页短介绍使用 `home/locales/common.json` 的 `common.home.intro`；「关于本站」的隐私与来源说明也集中在该语言文件中。维护检查以 `.github/workflows/pages.yml` 的本地命令为准；读马恩扩展与校验分别为 `scripts/marx_extras.py`、`scripts/marx_checks.py`，学英语阅读与功能回归分别为 `scripts/test_english_reader.py`、`scripts/test_english_features.py`。
+首页头像旁只显示签名 `common.signature.1`（`home/locales/common.json`）；「关于本站」的隐私与来源说明也集中在该语言文件中。维护检查以 `.github/workflows/pages.yml` 的本地命令为准；读马恩扩展与校验分别为 `scripts/marx_extras.py`、`scripts/marx_checks.py`，学英语阅读与功能回归分别为 `scripts/test_english_reader.py`、`scripts/test_english_features.py`。
 
 ## 文章索引 · Article Index
 

@@ -221,7 +221,7 @@
           results.insertAdjacentElement('afterend',more);createdMore=true;
         } else { hideLater(more);restoreText(more); }
         if(createdMore)restores.push(()=>more.remove());
-        month.value=config.defaultMonth; form.hidden=false;
+        month.value=config.defaultMonth; form.hidden=false; status.replaceChildren();
         searchState={month:month.value,query:'',shown:0,total:0,loading:false,status:'idle'};
         function clear() {hits=[];shown=0;results.replaceChildren();more.hidden=true;results.removeAttribute('aria-busy');searchState.shown=0;searchState.total=0;}
         function message(value,fallback=false) {

@@ -311,6 +311,19 @@ class WorldArchiveTests(unittest.TestCase):
             self.assertIsNone(world.year_ago(store, today="2028-02-29"))
             self.assertEqual(len(world.month_view(store, "2028-02")["days"]), 29)
 
+    def test_day_headlines_follow_that_days_runs_across_publication_days(self):
+        with TemporaryDirectory() as root:
+            old, new = item("2026-10-29", "old"), item("2026-10-30", "new")
+            write_day(root, day_data("2026-10-29", entries=[old], runs=[]))
+            write_day(root, day_data("2026-10-30", entries=[new], runs=[run("2026-10-30", [old, new])]))
+            store = world.load_archive(root, now=NOW)
+            headlines = world.day_headlines(store, "2026-10-30")
+            self.assertEqual([entry["id"] for entry in headlines], [new["id"], old["id"]])
+            self.assertEqual([entry["day_url"] for entry in headlines], ["/world/2026/10/30/", "/world/2026/10/29/"])
+            self.assertEqual(world.day_headlines(store, "2026-10-29"), [])
+            self.assertEqual({entry["id"] for entry in world.month_view(store, "2026-10")["days"][29]["preview"]}, {old["id"], new["id"]})
+            json.dumps(headlines, ensure_ascii=False)
+
     def test_views_are_independent_json_data_and_all_read_paths_remain_offline(self):
         with TemporaryDirectory() as root:
             write_day(root, day_data("2026-10-30"))

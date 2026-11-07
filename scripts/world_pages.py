@@ -16,6 +16,10 @@ from world_sources import DOMAINS, TYPES, LANGUAGES, approved_sources, validate_
 
 MAX_SEARCH_BYTES = 32 * 1024 * 1024
 CATEGORIES = {"domestic": "国内", "world": "国际", "economy": "经济", "science": "科技", "business": "商业", "culture": "文化"}
+WEEKDAYS = "一二三四五六日"
+# Shown next to a date only when something differs from a normal, fully successful day.
+SHORT_STATUS = {"ok": "", "partial": "部分来源失败", "failed": "采集失败", "imported": "历史导入", "manual": "人工样刊",
+                "historical-mixed": "历史资料", "unrecorded": "采集情况未记录", "empty": "空存档"}
 
 
 def source_path(root, relative):
@@ -58,13 +62,38 @@ def _time(value):
     return news.timestamp(value).astimezone(news.CHINA).strftime("%Y-%m-%d %H:%M +08:00")
 
 
-def _calendar(stamp, metadata):
+def _readings(stamp, metadata):
     data = (metadata or {}).get(stamp, {})
     if not isinstance(data, dict):
         data = {}
     readings = [data.get(key) for key in ("lunar", "term", "moon")]
-    readings = [value for value in readings if isinstance(value, str) and value.strip()]
+    return [value for value in readings if isinstance(value, str) and value.strip()]
+
+
+def _calendar(stamp, metadata):
+    readings = _readings(stamp, metadata)
     return '<p class="world-news-meta">' + escape(" · ".join(readings) if readings else "历法读数暂不可用。") + '</p>'
+
+
+def _date_label(stamp, *, year=True, short=False):
+    day = world._day(stamp)
+    return (f'{day.year}年' if year else '') + f'{day.month}月{day.day}日 ' + ('周' if short else '星期') + WEEKDAYS[day.weekday()]
+
+
+def _month_label(month):
+    year, number = map(int, month.split('-'))
+    return f'{year}年{number}月'
+
+
+def _clock(item, stamp):
+    """Beijing time of a headline; the day is added when it differs from stamp."""
+    exact = item.get("published")
+    try:
+        instant = news.timestamp(exact or item.get("first_seen")).astimezone(news.CHINA)
+    except (TypeError, ValueError):
+        return ''
+    text = instant.strftime('%H:%M' if instant.date().isoformat() == stamp else '%m-%d %H:%M')
+    return '<time datetime="' + escape(news._stamp(instant), quote=True) + '">' + ('' if exact else '首次见到 ') + text + '</time>'
 
 
 def _nav(route):
@@ -72,16 +101,33 @@ def _nav(route):
     return '<nav class="world-nav" aria-label="看世界页内导航">' + ''.join(_link(url, title) for url, title in links) + '</nav>'
 
 
-def _heading(title, intro, route):
-    return '<header class="world-intro"><p class="world-kicker">看世界</p><h1>' + escape(title) + '</h1><p>' + escape(intro) + '</p></header>' + _nav(route)
+def _heading(title, intro, route, *, kicker=True):
+    return ('<header class="world-intro">' + ('<p class="world-kicker">看世界</p>' if kicker else '') + '<h1>' + escape(title)
+            + '</h1><p>' + escape(intro) + '</p></header>' + _nav(route))
+
+
+def _headline_groups(items, stamp, row_class):
+    """Headlines by category in the site's fixed order, newest first in each group."""
+    content = ''
+    ordered = world.by_category(items)
+    for category in dict.fromkeys(item["category"] for item in ordered):
+        content += '<section class="world-news-group"><h3>' + escape(CATEGORIES.get(category, category)) + '</h3><ul class="world-day-list">'
+        for item in (value for value in ordered if value["category"] == category):
+            clock = _clock(item, stamp)
+            meta = escape(item["source"]) + (' · ' + clock if clock else '')
+            content += ('<li class="' + row_class + '"><h4>' + _link(item["url"], item["title"], language=item["lang"]) + '</h4>'
+                        + '<p class="world-news-meta">' + meta + '</p></li>')
+        content += '</ul></section>'
+    return content
 
 
 def _preview(summary):
     values = []
     for item in summary["preview"]:
+        source = item["source"] + ('' if item["origin"] == 'rss' else ' · ' + item["origin_label"])
         values.append('<li>' + _link(item["url"], item["title"], language=item["lang"])
-                      + '<p class="world-news-meta">' + escape(item["source"] + ' · ' + item["origin_label"]) + '</p></li>')
-    return '<ul class="world-day-list">' + ''.join(values) + '</ul>' if values else ''
+                      + '<p class="world-news-meta">' + escape(source) + '</p></li>')
+    return '<ul class="world-day-list world-preview">' + ''.join(values) + '</ul>' if values else ''
 
 
 def _legacy(item):
@@ -98,22 +144,47 @@ def _legacy(item):
     return '<h4>旧人工样刊旁证</h4><p>以下是旧样刊的编辑标题与原日期字段，不改写主条目的来源身份，也不冒充RSS原题或精确发布时间。</p><ul>' + ''.join(entries) + '</ul>'
 
 
-def _archive_item(item):
+def _archive_item(item, stamp):
     provenance = item["provenance"]
     title = _link(item["url"], item["title"], language=item["lang"])
-    metadata = [item["source"], CATEGORIES.get(item["category"], item["category"]), LANGUAGES.get(item["lang"], item["lang"]), provenance["origin_label"]]
-    if item["published"] is not None:
-        metadata.append('原文时间 ' + _time(item["published"]))
+    metadata = []
+    if item["origin"] == 'rss' or item["published"] is not None:
+        metadata.append(_clock(item, stamp))
+    if item["origin"] != 'rss':
+        metadata.append(escape(provenance["origin_label"]))
+    metadata = [value for value in metadata if value]
+    html = '<li class="world-news" id="item-' + item["id"] + '"><h3>' + title + '</h3>'
+    if metadata:
+        html += '<p class="world-news-meta">' + ' · '.join(metadata) + '</p>'
+    # A normal RSS title dated by its own publication time needs no explanation;
+    # imports, legacy editions and fallback dates keep the full record.
+    if item["origin"] == 'rss' and item["date_basis"] == 'published' and not provenance["has_legacy_annotation"]:
+        return html + '</li>'
     details = [('归档日', item["archive_date"]), ('原文发布时间', _time(item["published"])),
                ('首次观测', _time(item["first_seen"])), ('末次观测', _time(item["last_seen"])),
                ('日期状态', '按当前北京日期已冻结' if provenance["frozen"] else '仍在可补写日期窗口')]
     explanation = '<dl>' + ''.join('<dt>' + escape(label) + '</dt><dd>' + escape(value) + '</dd>' for label, value in details) + '</dl>'
     explanation += '<p>' + escape(provenance["date_basis_label"]) + '。' + escape(provenance["bucket_note"]) + '。</p>' + _legacy(item)
-    return '<li class="world-news" id="item-' + item["id"] + '"><h3>' + title + '</h3><p class="world-news-meta">' + escape(' · '.join(metadata)) + '</p><details class="world-provenance"><summary>时间与存档说明</summary>' + explanation + '</details></li>'
+    return html + '<details class="world-provenance"><summary>时间与存档说明</summary>' + explanation + '</details></li>'
+
+
+def _source_groups(items, stamp, open_groups):
+    """One block per source, sources in category order, titles newest first."""
+    groups = {}
+    for item in world.by_category(items):
+        groups.setdefault(item["source"], []).append(item)
+    content = ''
+    for name, values in sorted(groups.items(), key=lambda pair: (world.category_rank(pair[1][0]), -len(pair[1]), pair[0])):
+        label = CATEGORIES.get(values[0]["category"], values[0]["category"]) + ' · ' + str(len(values)) + ' 条'
+        content += ('<details class="world-source-group"' + (' open' if open_groups else '') + '><summary><span class="world-source-name">'
+                    + escape(name) + '</span> <span class="world-news-meta">' + escape(label) + '</span></summary><ol class="world-day-list">'
+                    + ''.join(_archive_item(item, stamp) for item in values) + '</ol></details>')
+    return content
 
 
 def _runs(view, lookup):
-    blocks = ['<section class="world-section"><h2>本日文件的运行记录</h2><p>' + escape(view["collection"]["label"]) + '。</p>']
+    blocks = ['<section class="world-section" id="runs"><h2>采集记录</h2><p class="world-news-meta">' + escape(view["collection"]["label"]) + '。</p>']
+    blocks.append('<details class="world-runs"><summary>每次采集、每个来源的结果</summary>')
     blocks.append('<p class="world-news-meta">运行中的条数是采集观测计数，可能含其他发布日的条目，不等于本页标题数；未知结果不记为成功。</p>')
     if not view["runs"]:
         blocks.append('<p>没有该日运行记录，不能推断当日采集成败；请结合条目的首次观测与来源类型阅读。</p>')
@@ -139,25 +210,33 @@ def _runs(view, lookup):
                 blocks.append('<li>' + text + '</li>')
             blocks.append('</ul></details>')
         blocks.append('</article>')
-    return ''.join(blocks) + '</section>'
+    return ''.join(blocks) + '</details></section>'
 
 
-def render_day(view, metadata, lookup):
+def render_day(view, metadata, lookup, headlines=()):
     stamp = view["date"]
-    content = _heading(stamp + ' · 当天存档', '按北京日期保存的全部标题与来源记录。', view["url"]) + _calendar(stamp, metadata)
+    intro = '先看当天头条，再按来源翻全部标题。' if headlines else '这一天按北京日期保存的全部标题。'
+    content = _heading(_date_label(stamp), intro, view["url"]) + _calendar(stamp, metadata)
     content += '<nav class="world-nav" aria-label="前后日">'
     for key, label in (("previous", "前一天"), ("next", "后一天")):
         neighbor = view[key]
         content += _link(neighbor["url"], label + ' ' + neighbor["date"]) if neighbor else '<span aria-disabled="true">' + label + '暂无存档</span>'
     content += _link(view["month_url"], '返回月历') + '</nav>'
-    content += '<section class="world-section"><h2>全部标题</h2><p>共' + str(len(view["items"])) + '个归档条目。</p>'
-    content += '<ol class="world-day-list">' + ''.join(_archive_item(item) for item in view["items"]) + '</ol>' if view["items"] else '<p>' + escape(view["collection"]["label"]) + '，本日文件没有标题。不借用别日新闻补空。</p>'
+    if headlines:
+        content += ('<section class="world-section" id="headlines"><h2>当天头条</h2><p class="world-news-meta">这一天本页「今日汇集」里出现过的'
+                    + str(len(headlines)) + '条标题，按领域分组，从新到旧。</p>' + _headline_groups(headlines, stamp, 'world-headline') + '</section>')
+    content += '<section class="world-section" id="all"><h2>全部标题</h2>'
+    if view["items"]:
+        content += ('<p class="world-news-meta">共' + str(len(view["items"])) + '条，按来源分组，从新到旧' + ('；点来源名展开' if headlines else '') + '。</p>'
+                    + _source_groups(view["items"], stamp, not headlines))
+    else:
+        content += '<p>' + escape(view["collection"]["label"]) + '，本日文件没有标题。不借用别日新闻补空。</p>'
     return content + '</section>' + _runs(view, lookup)
 
 
 def render_month(view):
-    content = _heading(view["month"] + ' · 月历', '破折号表示缺日；0表示确有日文件但没有标题。', view["url"])
-    content += '<section class="world-section"><h2>逐日存档</h2><p>' + str(view["recorded_days"]) + '个已记录日期，' + str(view["item_count"]) + '个归档条目。</p><div class="world-calendar-wrap"><table class="world-calendar"><caption>' + escape(view["month"]) + '北京日期</caption><thead><tr>'
+    content = _heading(_month_label(view["month"]), '每天保存的标题数，点日期看当天头条和全部标题；「—」表示那天没有存档。', view["url"])
+    content += '<section class="world-section"><h2>逐日存档</h2><p class="world-news-meta">' + str(view["recorded_days"]) + '天有存档，共' + str(view["item_count"]) + '条标题。</p><div class="world-calendar-wrap"><table class="world-calendar"><caption>' + escape(_month_label(view["month"])) + '（北京日期）</caption><thead><tr>'
     content += ''.join('<th scope="col">' + label + '</th>' for label in ('一', '二', '三', '四', '五', '六', '日')) + '</tr></thead><tbody>'
     year, month = map(int, view["month"].split('-'))
     for week in monthcalendar(year, month):
@@ -170,8 +249,9 @@ def render_month(view):
             label = _link(day["url"], str(number)) if day["exists"] else '<span>' + str(number) + '</span>'
             content += '<td><div class="world-day" data-archive-date="' + day["date"] + '"><div class="world-day-heading">' + label + '<span class="world-day-count">' + (str(day["item_count"]) if day["exists"] else '—') + '</span></div>'
             if day["exists"]:
-                short = {"ok": "采集成功", "partial": "部分失败", "failed": "采集失败", "imported": "历史导入", "manual": "人工样刊", "historical-mixed": "历史资料", "unrecorded": "无完整记录", "empty": "空存档"}[day["collection"]["status"]]
-                content += '<small title="' + escape(day["collection"]["label"], quote=True) + '">' + short + '</small>'
+                short = SHORT_STATUS[day["collection"]["status"]]
+                if short:
+                    content += '<small title="' + escape(day["collection"]["label"], quote=True) + '">' + short + '</small>'
                 content += ''.join(_link(item["url"], item["title"], language=item["lang"], class_name='world-calendar-title') for item in day['preview'])
             else:
                 content += '<p class="world-news-meta">未存档</p>'
@@ -181,7 +261,7 @@ def render_month(view):
 
 
 def _search(manifest, unavailable):
-    content = '<section class="world-section" id="search"><h2>按月检索标题</h2><p>只搜索已保存的标题和旧样刊旁证标题，不搜索报道正文；提交时才读取本站所选月份的索引。</p>'
+    content = '<section class="world-section" id="search"><h2>按月检索标题</h2><p class="world-news-meta">在已保存的标题里查找，不搜正文。</p>'
     options = ''.join('<option value="' + item["month"] + '">' + item["month"] + '</option>' for item in manifest["months"])
     content += '<form data-world-search hidden><label>月份<select name="month">' + options + '</select></label><label>标题关键词<input name="q" type="search" maxlength="160" required></label><button type="submit">检索</button></form>'
     content += '<p data-world-search-status role="status">' + ('启用JavaScript后可检索；无脚本时可按下方月历浏览完整标题。' if options else '尚无可检索的月份，可按月历查看已有存档。') + '</p><ol data-world-search-results class="world-day-list"></ol>'
@@ -191,38 +271,42 @@ def _search(manifest, unavailable):
 
 
 def render_index(snapshot, config, store, metadata, now, manifest, unavailable):
-    content = _heading('看世界', '今天发生了什么，往日保存了什么，去哪里找一手信息。', '/world/')
+    content = _heading('看世界', '今天发生了什么，往日保存了什么，去哪里找一手信息。', '/world/', kicker=False)
     today = now.astimezone(news.CHINA).date().isoformat()
-    civil = world._day(today)
-    content += '<section class="world-section" id="today"><h2>今日汇集</h2><p class="world-news-meta">页面日期：<time id="world-today-date" datetime="' + today + '">' + f'{civil.year}年{civil.month}月{civil.day}日 · 北京时间' + '</time></p>' + _calendar(today, metadata)
-    content += '<p class="world-news-meta">' + ('最近检查：' + escape(_time(snapshot["collected_at"])) if snapshot["collected_at"] else '尚无可用新闻快照。') + '</p>'
+    content += ('<section class="world-section" id="today"><h2>今日汇集</h2><p class="world-news-meta"><time id="world-today-date" datetime="' + today + '">'
+                + _date_label(today) + '</time>' + ''.join(' · ' + escape(value) for value in _readings(today, metadata)) + '</p>')
+    if snapshot["collected_at"]:
+        checked = news.timestamp(snapshot["collected_at"]).astimezone(news.CHINA)
+        when = checked.strftime('%H:%M' if checked.date().isoformat() == today else '%m-%d %H:%M')
+        content += '<p class="world-news-meta">北京时间 <time datetime="' + escape(snapshot["collected_at"], quote=True) + '">' + when + '</time> 更新。各家编辑选出的头条，每家最多两条；标题保留原文，不做重要性排名。</p>'
+    else:
+        content += '<p class="world-news-meta">尚无可用新闻快照。</p>'
     active_ids = {source["id"] for source in news.active_sources(config)}
     if any(item["source_id"] not in active_ids for item in snapshot["items"]):
         content += '<p class="world-note">当前保留旧来源配置的快照；新采集成功后会替换。</p>'
-    content += '<p>按来源编辑选题与四类轮取规则汇集，每源、每媒体设上限，合计最多24条；标题保留原文语言。此处展示规则选出的最新条目，不作全网重要性排名。</p>'
     items = news.visible_items(snapshot, config, now=now)[:24]
-    for category in news.CATEGORIES:
-        selected = [item for item in items if item["category"] == category]
-        if selected:
-            content += '<section class="world-news-group"><h3>' + CATEGORIES[category] + '</h3><ul class="world-day-list">'
-            for item in selected:
-                content += '<li class="world-news"><h4>' + _link(item["url"], item["title"], language=item["lang"]) + '</h4><p class="world-news-meta">' + escape(item["source"] + ' · 原文时间 ' + _time(item["published"])) + '</p></li>'
-            content += '</ul></section>'
+    content += _headline_groups(items, today, 'world-news')
     if not items:
         content += '<p>暂无72小时内的合格标题。' + _link('/world/sources/', '可从信息源继续阅读') + '。</p>'
     content += '</section><section class="world-section" id="archive"><h2>往日</h2>'
     if not store["available"] or not store["has_data"]:
         content += '<p>' + escape(store["message"]) + '</p>'
     else:
-        content += '<h3>最近7个北京日</h3><ul class="world-day-list">'
         recent = world.recent_days(store, end=today)
-        for day in recent:
-            content += '<li>' + _link(day["url"], day["date"]) + ' · ' + str(day["item_count"]) + '条<p class="world-news-meta">' + escape(day["collection"]["label"]) + '</p>' + _preview(day) + '</li>'
-        content += '</ul>' if recent else '</ul><p>最近7个北京日尚无存档，不拿更老日期填充。</p>'
+        if recent:
+            content += '<ul class="world-recent">'
+            for day in recent:
+                status = SHORT_STATUS[day["collection"]["status"]]
+                content += ('<li><p class="world-recent-day">' + _link(day["url"], _date_label(day["date"], year=False, short=True))
+                            + '<span class="world-news-meta"> · ' + str(day["item_count"]) + '条' + (' · ' + escape(status) if status else '') + '</span></p>'
+                            + _preview(day) + '</li>')
+            content += '</ul>'
+        else:
+            content += '<p>最近7天还没有存档，不拿更早的日子补。</p>'
         previous = world.year_ago(store, today=today)
         if previous is not None:
-            content += '<section class="world-section"><h3>一年前的今天</h3>' + _link(previous["url"], previous["date"]) + _preview(previous) + '</section>'
-    content += '<h3>按月浏览</h3><ul class="world-month-list">' + ''.join('<li>' + _link(world.month_url(month), month) + '</li>' for month in reversed(store["months"])) + '</ul></section>'
+            content += '<section class="world-section"><h3>一年前的今天</h3>' + _link(previous["url"], _date_label(previous["date"])) + _preview(previous) + '</section>'
+    content += '<h3>按月浏览</h3><ul class="world-month-list">' + ''.join('<li>' + _link(world.month_url(month), _month_label(month)) + '</li>' for month in reversed(store["months"])) + '</ul></section>'
     return content + _search(manifest, unavailable) + '<section class="world-section"><h2>信息源</h2><p>一手优先，按领域与来源类型浏览；不排名。' + _link('/world/sources/', '打开信息源网格') + '。</p></section>'
 
 
@@ -299,12 +383,12 @@ def build_world(root, output, address, snapshot, config, catalog, store, calenda
         target = _destination(output, 'world/search/' + month + '.json')
         target.parent.mkdir(parents=True, exist_ok=True)
         target.write_bytes(raw)
-        publish(world.month_url(month), month + ' · 月历 · 看世界', month + '逐日标题数量与存档入口。', render_month(world.month_view(store, month)))
+        publish(world.month_url(month), _month_label(month) + ' · 看世界', month + '逐日标题数量与存档入口。', render_month(world.month_view(store, month)))
     manifest['months'].reverse()
     manifest['default_month'] = manifest['months'][0]['month'] if manifest['months'] else ''
     for stamp in store['dates']:
         view = world.day_view(store, stamp)
-        publish(view['url'], stamp + ' · 当天存档 · 看世界', stamp + '全部存档标题、来源与真实采集记录。', render_day(view, calendar_meta, lookup))
+        publish(view['url'], _date_label(stamp) + ' · 看世界', stamp + '当天头条、全部存档标题与采集记录。', render_day(view, calendar_meta, lookup, world.day_headlines(store, stamp)))
     publish('/world/', '看世界 · 谢雨卿', '今日来源标题、往日存档与一手优先的信息源。', render_index(snapshot, config, store, calendar_meta, current, manifest, unavailable))
     publish('/world/sources/', '信息源 · 看世界', '按领域、类型与语言查找一手优先的信息源。', render_sources(catalog))
     for name, source in assets.items():

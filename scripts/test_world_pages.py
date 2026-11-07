@@ -145,9 +145,9 @@ class WorldPageTests(unittest.TestCase):
             self.assertIn(escape(item['title']), html)
             self.assertIn(escape(item['url'], quote=True), html)
         self.assertEqual(html.count('class="world-news-group"'), 4)
-        self.assertIn('最近检查：2026-10-31 08:00 +08:00', html)
-        self.assertIn('页面日期：<time id="world-today-date" datetime="2026-10-31">2026年10月31日 · 北京时间</time>', html)
-        self.assertIn('合计最多24条', html)
+        self.assertIn('北京时间 <time datetime="2026-10-31T00:00:00Z">08:00</time> 更新', html)
+        self.assertIn('<time id="world-today-date" datetime="2026-10-31">2026年10月31日 星期六</time>', html)
+        self.assertIn('每家最多两条', html)
         self.assertNotIn('最重要的', html)
         self.assertNotIn('当前保留旧来源配置的快照', html)
         self.config = deepcopy(self.config)
@@ -158,7 +158,7 @@ class WorldPageTests(unittest.TestCase):
         for item in self.snapshot['items']:
             self.assertIn(escape(item['title']), historical)
             self.assertIn(escape(item['url'], quote=True), historical)
-        self.assertIn('最近检查：2026-10-31 08:00 +08:00', historical)
+        self.assertIn('北京时间 <time datetime="2026-10-31T00:00:00Z">08:00</time> 更新', historical)
 
     def test_missing_archive_does_not_fabricate_daily_or_monthly_pages(self):
         report = self.build()
@@ -195,6 +195,35 @@ class WorldPageTests(unittest.TestCase):
         self.assertEqual(report['search_months'], 1)
         self.assertIn('这些ID只记录生成的显示快照，不代表页面实际部署', daily)
         self.assertIn('当次生成快照的关联条目', daily)
+
+    def test_day_page_leads_with_that_days_front_page_and_folds_the_full_list_by_source(self):
+        data = self.write_day('2026-10-30', 20)
+        shown = {item['title'] for item in data['items'][:8]}
+        self.build()
+        daily = self.read('/world/2026/10/30/')
+        self.assertIn('<h2>当天头条</h2>', daily)
+        self.assertEqual(daily.count('class="world-headline"'), 8)
+        self.assertEqual(daily.count('class="world-news"'), 20)
+        self.assertLess(daily.index('当天头条'), daily.index('全部标题'))
+        self.assertIn('<details class="world-source-group"><summary>', daily)
+        self.assertIn('<details class="world-runs">', daily)
+        self.assertNotIn('<details class="world-provenance">', daily)
+        index = self.read('/world/')
+        preview = index[index.index('id="archive"'):index.index('id="search"')]
+        previewed = [title for title in (item['title'] for item in data['items']) if escape(title) + '</a>' in preview]
+        self.assertEqual(len(previewed), 3)
+        self.assertTrue(set(previewed) <= shown)
+
+    def test_day_without_recorded_runs_opens_the_full_list(self):
+        self.write_day('2026-10-30', 3)
+        target = self.archive_root / archive.relative_path('2026-10-30')
+        data = json.loads(target.read_text(encoding='utf-8'))
+        data['runs'] = []
+        target.write_bytes(archive.day_bytes(data))
+        self.build()
+        daily = self.read('/world/2026/10/30/')
+        self.assertNotIn('<h2>当天头条</h2>', daily)
+        self.assertIn('<details class="world-source-group" open>', daily)
 
     def test_oversize_month_only_disables_its_search_and_preserves_all_day_titles(self):
         self.write_day('2026-10-30', 10)
@@ -238,7 +267,7 @@ class WorldPageTests(unittest.TestCase):
         self.build()
         html = self.read('/world/')
         self.assertIn('<h3>一年前的今天</h3>', html)
-        self.assertIn('最近7个北京日尚无存档', html)
+        self.assertIn('最近7天还没有存档', html)
         self.assertNotIn('/world/2026/10/01/', html)
 
     def test_legacy_annotation_and_fallback_are_readable_without_scripts_and_do_not_replace_primary_title(self):
