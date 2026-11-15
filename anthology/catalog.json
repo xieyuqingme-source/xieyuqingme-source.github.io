@@ -73,11 +73,67 @@
       "file": "英语文学作品.md",
       "category": "英语文学作品",
       "language": "en",
-      "sha256_lf": "007e817adb3ba0a8e9a8447066101773e979a7f190b3e8db460fa0e46b68e2b1",
+      "sha256_lf": "0a7fdd0488ce7675f61e82fb7876ba9b0c21192ab4b995a7e9815c38f8cc5f10",
       "works": [
         {
           "title": "Gettysburg Address",
           "slug": "gettysburg-address"
+        },
+        {
+          "title": "Dust of Snow",
+          "slug": "dust-of-snow"
+        },
+        {
+          "title": "The Constitution of the United States: A Transcription",
+          "slug": "us-constitution-preamble"
+        },
+        {
+          "title": "Stopping by Woods on a Snowy Evening",
+          "slug": "stopping-by-woods"
+        },
+        {
+          "title": "The Road Not Taken",
+          "slug": "the-road-not-taken"
+        },
+        {
+          "title": "O Captain! My Captain!",
+          "slug": "o-captain-my-captain"
+        },
+        {
+          "title": "Declaration of Independence: A Transcription",
+          "slug": "declaration-of-independence"
+        },
+        {
+          "title": "Give me liberty or give me death!",
+          "slug": "give-me-liberty"
+        },
+        {
+          "title": "Second Inaugural Address",
+          "slug": "lincoln-second-inaugural"
+        },
+        {
+          "title": "Inaugural Address",
+          "slug": "kennedy-inaugural-address"
+        },
+        {
+          "title": "Mending Wall",
+          "slug": "mending-wall"
+        },
+        {
+          "title": "Walden: Where I Lived, and What I Lived For",
+          "slug": "walden-where-i-lived"
+        },
+        {
+          "title": "Because I could not stop for Death",
+          "slug": "because-i-could-not-stop-for-death"
+        },
+        {
+          "title": "Macbeth: Tomorrow, and tomorrow, and tomorrow",
+          "slug": "macbeth-tomorrow"
+        },
+        {
+          "title": "Hamlet: To be, or not to be",
+          "slug": "hamlet-to-be-or-not-to-be"
         }
       ]
     },

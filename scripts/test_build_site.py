@@ -797,7 +797,7 @@ class ProjectPublicationTests(unittest.TestCase):
                 self.assertTrue(any(tag == "meta" and attrs.get("property") == "og:url"
                                     and attrs.get("content") == "https://xieyuqing.me/projects/" for tag, attrs in tags))
                 sitemap = [node.text for node in ET.parse(output / "sitemap.xml").findall(".//{*}loc")]
-                expected_routes = {'/', '/today/', '/en/today/', '/english/', '/english/tools/numbers/', '/english/play/', '/english/quotes/', '/english/map/', '/projects/', '/about/', '/map/', '/en/map/', '/en/', '/en/about/', '/en/projects/', '/en/articles/',
+                expected_routes = {'/', '/today/', '/en/today/', '/english/', '/english/tools/numbers/', '/english/play/', '/english/quotes/', '/english/marx-quotes/', '/english/map/', '/projects/', '/about/', '/map/', '/en/map/', '/en/', '/en/about/', '/en/projects/', '/en/articles/',
                                    '/game/', '/en/game/', '/game/ranking/', '/en/game/ranking/', '/game/footprints/', '/en/game/footprints/', '/articles/index.html', '/articles/synthetic.html'}
                 for feature in (report['anthology'], report['english_features']['anthology'], report['photography'], report['english_features']['photography'], report['marx_engels'], report['world']):
                     expected_routes.update('/' + route.strip('/') + '/' for route in feature['routes'])

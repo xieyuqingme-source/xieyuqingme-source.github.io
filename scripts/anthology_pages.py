@@ -33,8 +33,13 @@ def parse_source(text):
         body = re.sub(r"(?:\s*\n[ \t]*---[ \t]*)+\s*$", "", body).strip()
         lines = body.splitlines()
         credit = lines[-1].strip() if lines else ""
+        byline = re.fullmatch(r"\*([^*\n]{1,60})\*", lines[0].strip()) if lines else None
         if re.fullmatch(r"[^\n·。！？]{1,12}·[^\n。！？]{1,20}", credit):
             body = "\n".join(lines[:-1]).rstrip()
+        elif byline:
+            # A single italic line directly under the title is the work's byline.
+            credit = byline.group(1).strip()
+            body = "\n".join(lines[1:]).strip()
         else:
             credit = ""
         if not body:

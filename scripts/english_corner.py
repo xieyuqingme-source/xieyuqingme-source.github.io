@@ -24,7 +24,7 @@ SECTIONS = {"words": ("故事", "可以这样用"), "classics": ("导读", "原�
             "between": ("对照", "为什么", "可以这样用"), "myths": ("流行说法", "证据", "结论"),
             "mistakes": ("错句", "对句", "为什么")}
 SLUG = re.compile(r"[a-z][a-z0-9-]{1,63}")
-RESERVED_SLUGS = {"tools", "play", "quotes", "map"}
+RESERVED_SLUGS = {"tools", "play", "quotes", "map", "marx-quotes"}
 from site_safety import PRIVATE_PATH as PRIVATE
 ASSETS = ("english-corner.css", "english-corner.js", "english-numbers.js", "english-play.js", "english-quotes.js", "english-word-map.js", "reading-annotations.css", "reading-annotations.js", "english-speech.js")
 MAP_ASSETS = ("map-land.json", "vendor/d3-7.9.0.min.js", "vendor/D3-LICENSE")
@@ -288,6 +288,7 @@ def render_index(corner):
         ("/english/play/", "英语小测验", "词源、用法、作家，每轮十题。"),
         ("/game/ranking/?template=book", "名著从夯到拉", "排一排阅读偏好，随手玩一局。"),
         ("/english/quotes/", "英语名句库", "找一句想读、想记住的话。"),
+        ("/english/marx-quotes/", "马克思主义名句", "同一句话，中文和英文对照着读。"),
         ("/english/map/", "单词足迹地图", "跟着词语，看看世界。"),
     )
     quick = '<nav class="ec-quick-links" data-ec-quick aria-label="先玩一会儿">' + ''.join(
@@ -433,6 +434,42 @@ def render_quote_library(data):
         '<div class="ec-quote-list">'+''.join(rows)+'</div><button type="button" id="ec-quote-more" hidden>再看20句</button>'+speech_notice()+'</section>')
 
 
+MARX_AUTHOR_ORDER = ("马克思", "恩格斯", "马恩", "列宁", "毛泽东", "雷锋", "切·格瓦拉", "尼古拉·奥斯特洛夫斯基")
+
+
+def marx_quote_anchor(author):
+    return "author-" + str(MARX_AUTHOR_ORDER.index(author) + 1 if author in MARX_AUTHOR_ORDER else len(MARX_AUTHOR_ORDER) + 1)
+
+
+def render_marx_quotes(data):
+    """Chinese and English texts side by side; both come from the reviewed today-page dataset."""
+    groups = {}
+    for q in data["quotes"]:
+        groups.setdefault(q["author"]["zh-CN"], []).append(q)
+    authors = sorted(groups, key=lambda name: (MARX_AUTHOR_ORDER.index(name) if name in MARX_AUTHOR_ORDER else len(MARX_AUTHOR_ORDER), name))
+    nav = '<nav class="ec-columns" aria-label="按作者跳转">' + ''.join(
+        '<a class="ec-column" href="#' + marx_quote_anchor(name) + '"><span>' + escape(name) + '</span><small>' + str(len(groups[name])) + ' 句</small></a>'
+        for name in authors) + '</nav>'
+    sections = []
+    for name in authors:
+        rows = []
+        for q in groups[name]:
+            urls = q["url"] if isinstance(q["url"], dict) else {"zh-CN": q["url"], "en": q["url"]}
+            target = "marx-quote-en-" + q["id"]
+            rows.append('<article class="ec-library-quote" id="marx-' + escape(q["id"], quote=True) + '"><blockquote>'
+                '<p class="ec-library-translation ec-marx-zh" lang="zh-CN">' + quote_lines(q["text"]["zh-CN"]) + '</p>'
+                '<p class="ec-library-original" id="' + escape(target, quote=True) + '" lang="en">' + quote_lines(q["text"]["en"]) + '</p>' + speech_button(target=target) + '</blockquote>'
+                '<p class="ec-meta">中文：' + external(urls["zh-CN"], q["author"]["zh-CN"] + " · " + q["work"]["zh-CN"]) + '</p>'
+                '<p class="ec-meta" lang="en">English: ' + external(urls["en"], q["author"]["en"] + " · " + q["work"]["en"]) + '</p>'
+                '<details class="ec-library-note"><summary>版本说明</summary><p>' + escape(q["translation_note"]["zh-CN"]) + '</p></details></article>')
+        sections.append('<section id="' + marx_quote_anchor(name) + '"><h2>' + escape(name) + ' <small class="ec-meta">' + str(len(groups[name])) + ' 句</small></h2>' + ''.join(rows) + '</section>')
+    return ('<nav class="ec-breadcrumb" aria-label="面包屑"><a href="/english/">学英语</a> / 中英对照</nav>'
+        '<header class="ec-card-intro"><p class="ec-eyebrow" lang="en">Same words, two languages</p><h1>马克思主义名句 · 中英对照</h1>'
+        '<p class="ec-lead">「今天」页每天一句的马克思主义名句，在这里一次看全。中文和英文各自摘自现成的译本或原文，措辞跟着各自的版本走。</p>'
+        '<a href="/today/#today-reading">回到「今天」页，读今天这一句 →</a></header>'
+        '<p class="ec-meta" role="status">共' + str(len(data["quotes"])) + '句</p>' + nav + ''.join(sections) + speech_notice())
+
+
 def render_play(corner, quotes):
     from english_quiz import build_quiz_pools
     from daily_brief import safe_json
@@ -550,18 +587,22 @@ def render_word_map(corner):
         '<p>底图为 Natural Earth 公版陆地轮廓；代表地点坐标取自其居民点数据，仅作制图示意。<a href="https://github.com/nvkelso/natural-earth-vector/blob/master/geojson/ne_10m_populated_places_simple.geojson" target="_blank" rel="noopener noreferrer">坐标来源 ↗</a>。词源整理有 AI 辅助，事实依据见各词卡。</p></details>')
 
 
-def build_english_corner(root, output, address, corner, english_quotes=None):
+def build_english_corner(root, output, address, corner, english_quotes=None, marx_quotes=None):
     root, output = Path(root), Path(output)
     corner = {**corner, "intro": load_intro(root)}
     intro = corner["intro"]
     if english_quotes is None:
         from daily_brief import load_english_quotes
         english_quotes = load_english_quotes(root,None)
+    if marx_quotes is None:
+        from daily_brief import validate_content
+        marx_quotes = validate_content(json.loads(source_path(root, "home/daily-content.json").read_text(encoding="utf-8")))
     template = source_path(root, "home/english-corner.template.html").read_text(encoding="utf-8")
     pages = [("/english/", intro.get("title", intro["name"]), intro["description"], render_index(corner)),
              ("/english/tools/numbers/", "中英数字转换器", "用万、亿和 thousand、million、billion 看同一个数。", render_numbers().replace('/english/qian-and-wan/', '/english/qian-and-wan/' if any(c['slug'] == 'qian-and-wan' for c in corner['cards']) else '/english/'))]
     pages.extend(("/english/" + card["slug"] + "/", card["title"], card["summary"], render_card(card,corner)) for card in corner["cards"])
     pages.extend([("/english/quotes/", "英语名句库", "按作者和作品版本浏览英语名句。", render_quote_library(english_quotes)),
+                  ("/english/marx-quotes/", "马克思主义名句 · 中英对照", "马克思主义名句的中文与英文对照，按作者分组，附两种语言的出处。", render_marx_quotes(marx_quotes)),
                   ("/english/play/", "英语小测验", "猜词源、辨用法、认作家；每轮十题，不计时。", render_play(corner,english_quotes)),
                   ("/english/map/", "单词足迹地图", "语言与故事关联地区的示意地图。", render_word_map(corner))])
     routes = []

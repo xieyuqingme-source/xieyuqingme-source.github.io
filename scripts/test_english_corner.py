@@ -260,7 +260,7 @@ class CornerValidationTests(unittest.TestCase):
             output = Path(directory)
             report = build_english_corner(ROOT,output,'https://public.test',corner)
             self.assertEqual(report['cards'],4)
-            self.assertEqual(set(report['routes']),{'/english/','/english/tools/numbers/','/english/play/','/english/quotes/','/english/map/',*('/english/'+c['slug']+'/' for c in corner['cards'])})
+            self.assertEqual(set(report['routes']),{'/english/','/english/tools/numbers/','/english/play/','/english/quotes/','/english/marx-quotes/','/english/map/',*('/english/'+c['slug']+'/' for c in corner['cards'])})
             for route in report['routes']:
                 html = (output/route.strip('/')/'index.html').read_text(encoding='utf-8')
                 tags = Tags(html).nodes
@@ -301,7 +301,7 @@ class CornerProductionTests(unittest.TestCase):
     @unittest.skipUnless(PUBLICATION,'Use --publication after the final local build.')
     def test_final_publication_sitemap_metadata_and_navigation(self):
         output = ROOT/'_site_unified'; corner = load_english_corner(ROOT)
-        routes = ['/english/','/english/tools/numbers/','/english/play/','/english/quotes/','/english/map/',*('/english/'+c['slug']+'/' for c in corner['cards'])]
+        routes = ['/english/','/english/tools/numbers/','/english/play/','/english/quotes/','/english/marx-quotes/','/english/map/',*('/english/'+c['slug']+'/' for c in corner['cards'])]
         locations = {urlsplit(loc.text).path for loc in ET.parse(output/'sitemap.xml').findall('.//{*}loc')}
         self.assertTrue(set(routes).issubset(locations))
         self.assertFalse(any(route.startswith('/en/english') for route in locations))

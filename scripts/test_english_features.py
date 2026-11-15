@@ -40,7 +40,7 @@ class LearningThirdVersionTests(unittest.TestCase):
         html = render_index(load_english_corner(ROOT))
         match = re.search(r'<nav class="ec-quick-links".*?</nav>', html, re.S)
         self.assertIsNotNone(match)
-        expected = ['/english/play/', '/game/ranking/?template=book', '/english/quotes/', '/english/map/']
+        expected = ['/english/play/', '/game/ranking/?template=book', '/english/quotes/', '/english/marx-quotes/', '/english/map/']
         self.assertEqual([link['href'] for link in Links(match[0]).links], expected)
         self.assertLess(html.index(match[0]), html.index('class="ec-columns"'))
         self.assertLess(html.index(match[0]), html.index('data-ec-row'))

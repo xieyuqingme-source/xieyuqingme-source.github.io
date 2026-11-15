@@ -27,7 +27,7 @@ This repository contains the source and public content for my personal website, 
 | 个人主页 | [首页](https://xieyuqing.me/) | `home/index.template.html`；五块精简首页，保留「今天」轻量入口；文章块列最新3篇，数量与标题由构建器生成 |
 | 今天 | [今天](https://xieyuqing.me/today/) | `home/today.template.html`、`home/brief/`；「年 · 月 · 日 · 史」、新闻与阅读六节页内导航，新闻最多3条，中英文同步 |
 | 看世界 | [看世界](https://xieyuqing.me/world/)、[信息源](https://xieyuqing.me/world/sources/) | `home/world.template.html`、`home/brief/information-sources.json`；今日汇集、逐日存档、月历、按月标题检索及62项信息源目录，仅做中文版 |
-| 学英语 | [学英语](https://xieyuqing.me/english/)、[数字转换器](https://xieyuqing.me/english/tools/numbers/) | `english-corner/`；词的身世、经典一页、中英之间、考据与别说错，另有名句库、四种小测验及工具，仅做中文版 |
+| 学英语 | [学英语](https://xieyuqing.me/english/)、[数字转换器](https://xieyuqing.me/english/tools/numbers/)、[马克思主义名句中英对照](https://xieyuqing.me/english/marx-quotes/) | `english-corner/`；词的身世、经典一页、中英之间、考据与别说错，另有名句库、马克思主义名句中英对照、四种小测验及工具，仅做中文版 |
 | 读马恩 | [读马恩](https://xieyuqing.me/marx/) | `marx-engels/`；文集十卷、《资本论》目录与篇章导读、五类阅读卡片、中文原著短引，另有实验室、测验、生平、书信及专题，仅做中文版 |
 | 中英文文章 | [文章](https://xieyuqing.me/articles/) | `中文文章/`、`English Articles/`、`blog/` |
 | 作品展示 | [作品](https://xieyuqing.me/projects/) | `home/projects.json`、`home/projects.template.html` |

@@ -30,7 +30,7 @@ class AnthologyLocalizationTests(unittest.TestCase):
             out=Path(tmp)
             zh=build_anthology(ROOT,out,'https://example.test')
             en=build_anthology(ROOT,out,'https://example.test',language='en')
-            self.assertEqual((len(zh['routes']),len(en['routes'])),(14,14))
+            self.assertEqual((len(zh['routes']),len(en['routes'])),(28,28))
             self.assertEqual(en['routes'],['/en'+r for r in zh['routes']])
             catalogue = json.loads((ROOT/'home/locales/anthology.json').read_text(encoding='utf8'))
             for code, route in (('zh-CN', 'anthology/index.html'), ('en', 'en/anthology/index.html')):

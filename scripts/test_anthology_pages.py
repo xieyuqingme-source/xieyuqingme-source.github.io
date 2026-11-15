@@ -3,6 +3,7 @@ from pathlib import Path
 from html.parser import HTMLParser
 from tempfile import TemporaryDirectory
 import json
+import re
 import shutil
 import unittest
 
@@ -15,11 +16,20 @@ ROOT = Path(__file__).resolve().parent.parent
 class AnthologyTests(unittest.TestCase):
     def test_source_inventory_and_only_explicit_credits(self):
         works = load_anthology(ROOT)
-        self.assertEqual(len(works), 13)
+        self.assertEqual(len(works), 27)
         self.assertEqual(len({w['source'] for w in works}), 5)
-        self.assertEqual([w['title'] for w in works if not w['credit']], ['原毁', 'Gettysburg Address', 'La Marseillaise'])
+        self.assertEqual(len([w for w in works if w['language'] == 'en']), 15)
+        self.assertEqual([w['title'] for w in works if not w['credit']], ['原毁', 'La Marseillaise'])
+        self.assertEqual(next(w['credit'] for w in works if w['title'] == 'Gettysburg Address'), 'Abraham Lincoln')
+        self.assertTrue(all(w['credit'] and not re.fullmatch(r'\*[^*]+\*', w['body'].splitlines()[0]) for w in works if w['language'] == 'en'))
         self.assertEqual(next(w['credit'] for w in works if w['title'] == '与朱元思书'), '南朝·梁 吴均')
         self.assertEqual({w['language'] for w in works}, {'zh-CN', 'en', 'fr'})
+
+    def test_leading_italic_byline_becomes_the_credit(self):
+        work = parse_source('## Poem\n\n*Some Poet*\n\nFirst line  \nSecond line\n\n---\n')[0]
+        self.assertEqual((work['credit'], work['body']), ('Some Poet', 'First line  \nSecond line'))
+        plain = parse_source('## Poem\n\n**We the People** begin\n')[0]
+        self.assertEqual((plain['credit'], plain['body']), ('', '**We the People** begin'))
 
     def test_lf_and_crlf_have_identical_meaning_and_review_hash(self):
         for path in (ROOT/'anthology/content').glob('*.md'):
@@ -98,10 +108,10 @@ class AnthologyTests(unittest.TestCase):
         with TemporaryDirectory() as temporary:
             output = Path(temporary)
             report = build_anthology(ROOT, output, 'https://public.test')
-            self.assertEqual((report['works'], len(report['routes'])), (13, 14))
-            self.assertEqual(len(list(output.rglob('*.html'))), 14)
+            self.assertEqual((report['works'], len(report['routes'])), (27, 28))
+            self.assertEqual(len(list(output.rglob('*.html'))), 28)
             index = (output/'anthology/index.html').read_text(encoding='utf-8')
-            self.assertEqual(index.count(' data-work '), 13)
+            self.assertEqual(index.count(' data-work '), 27)
             self.assertIn('落霞与孤鹜齐飞', index)
             for route in report['routes']:
                 text = (output/route.lstrip('/')/'index.html').read_text(encoding='utf-8')
