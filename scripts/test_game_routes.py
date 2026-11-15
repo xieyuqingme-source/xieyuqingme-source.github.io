@@ -86,7 +86,7 @@ class GamePublicationTests(unittest.TestCase):
         origin = "https://preview.example"
         output, report = self.build_fixture(origin)
         self.assertTrue(report["success"])
-        self.assertEqual(len(report["anthology"]["routes"]), 14)
+        self.assertEqual(len(report["anthology"]["routes"]), 28)
         sitemap = [node.text for node in ET.parse(output / "sitemap.xml").findall(".//{*}loc")]
         profiles = {"/en/", "/en/today/", "/en/about/", "/en/projects/", "/en/articles/"}
         self.assertEqual(set(report["english"]["routes"]), profiles)
@@ -106,7 +106,7 @@ class GamePublicationTests(unittest.TestCase):
         self.assertEqual(report["marx_engels"]["language"], "zh-CN")
         for module in (report["photography"], report["anthology"], report["marx_engels"], report["world"]):
             expected_routes.update("/" + route.strip("/") + "/" for route in module["routes"])
-        self.assertEqual(set(report['english_corner']['routes']),{'/english/','/english/tools/numbers/','/english/play/','/english/quotes/','/english/map/'})
+        self.assertEqual(set(report['english_corner']['routes']),{'/english/','/english/tools/numbers/','/english/play/','/english/quotes/','/english/marx-quotes/','/english/map/'})
         expected_routes.update(report['english_corner']['routes'])
         self.assertEqual(set(sitemap), {origin + route for route in expected_routes})
         self.assertEqual(len(sitemap), len(expected_routes), "Every canonical route must occur exactly once.")
